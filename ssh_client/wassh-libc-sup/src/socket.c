@@ -14,7 +14,9 @@ int socket(int domain, int c_type, int protocol) {
   _ENTER("domain=%i type=%i protocol=%i", domain, c_type, protocol);
 
   // We don't support anything here currently.
-  if (protocol) {
+  // 0: The default for most things.
+  // -1: Our fake delayed hostname logic from getaddrinfo.
+  if (protocol != 0 && protocol != -1) {
     _EXIT("|protocol| unknown");
     errno = EINVAL;
     return -1;
@@ -52,7 +54,7 @@ int socket(int domain, int c_type, int protocol) {
     return -1;
   }
 
-  int ret = sock_create(domain, sys_type);
+  int ret = sock_create(domain, sys_type, protocol);
   _EXIT("ret = %i", ret);
   return ret;
 }

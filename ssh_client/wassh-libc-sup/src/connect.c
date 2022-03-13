@@ -24,6 +24,7 @@ int connect(int sock, const struct sockaddr* addr, socklen_t addrlen) {
     const struct sockaddr_in* sin = (void*)addr;
     sys_addr = (const uint8_t*)&sin->sin_addr.s_addr;
     sys_port = ntohs(sin->sin_port);
+    _MID("IPv4 addr=%p port=%i", sys_addr, sys_port);
     break;
   }
 
@@ -42,6 +43,7 @@ int connect(int sock, const struct sockaddr* addr, socklen_t addrlen) {
     }
     sys_addr = (const uint8_t*)&sin6->sin6_addr.s6_addr;
     sys_port = ntohs(sin6->sin6_port);
+    _MID("IPv6 addr=%p port=%i", sys_addr, sys_port);
     break;
   }
 
@@ -49,6 +51,7 @@ int connect(int sock, const struct sockaddr* addr, socklen_t addrlen) {
     const struct sockaddr_un* sun = (void*)addr;
     sys_addr = (const uint8_t*)&sun->sun_path;
     sys_port = sizeof(sun->sun_path);
+    _MID("UNIX addr=%p port=%i", sys_addr, sys_port);
     break;
   }
 
@@ -58,7 +61,6 @@ int connect(int sock, const struct sockaddr* addr, socklen_t addrlen) {
     return -1;
   }
 
-  _MID("IPv4 addr=%p port=%i", sys_addr, sys_port);
   int ret = sock_connect(sock, sys_domain, sys_addr, sys_port);
   _EXIT("ret = %i", ret);
   return ret;

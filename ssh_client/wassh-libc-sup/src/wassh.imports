@@ -5,4 +5,5 @@ __wassh_readpassphrase
 __wassh_sock_create
 __wassh_sock_connect
 __wassh_sock_get_opt
+__wassh_sock_register_fake_addr
 __wassh_sock_set_opt

@@ -55,6 +55,7 @@ struct addrinfo {
 
 // The new API.
 const char* gai_strerror(int);
+void freeaddrinfo(struct addrinfo*);
 int getaddrinfo(const char*, const char*, const struct addrinfo*,
                 struct addrinfo**);
 int getnameinfo(const struct sockaddr*, socklen_t, char*, socklen_t, char*,

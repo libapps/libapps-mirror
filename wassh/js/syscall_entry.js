@@ -9,11 +9,7 @@
  */
 
 import {SyscallEntry, WASI} from '../../wasi-js-bindings/index.js';
-
-// const AF_UNSPEC = 0;
-const AF_INET = 1;
-const AF_INET6 = 2;
-const AF_UNIX = 3;
+import * as Sockets from './sockets.js';
 
 /**
  * WASSH syscall extensions.
@@ -24,9 +20,18 @@ export class WasshExperimental extends SyscallEntry.Base {
     this.namespace = 'wassh_experimental';
   }
 
-  sys_sock_create(sock_ptr, domain, type) {
+  sys_sock_register_fake_addr(idx, name_ptr, namelen) {
+    const td = new TextDecoder();
+    const buf = this.getMem_(name_ptr, name_ptr + namelen);
+    const name = td.decode(buf);
+    this.handle_sock_register_fake_addr(idx, name);
+    return WASI.errno.ESUCCESS;
+  }
+
+  sys_sock_create(sock_ptr, domain, type, protocol) {
     switch (domain) {
-      case AF_INET:
+      case Sockets.AF_INET:
+      case Sockets.AF_INET6:
         switch (type) {
           case WASI.filetype.SOCKET_STREAM:
           case WASI.filetype.SOCKET_DGRAM:
@@ -35,11 +40,13 @@ export class WasshExperimental extends SyscallEntry.Base {
             return WASI.errno.EPROTONOSUPPORT;
         }
         break;
+      case Sockets.AF_UNIX:
+        // TODO(vapier): Implement UNIX sockets.
       default:
         return WASI.errno.EAFNOSUPPORT;
     }
 
-    const ret = this.handle_sock_create(domain, type);
+    const ret = this.handle_sock_create(domain, type, protocol);
     if (typeof ret === 'number') {
       return ret;
     }
@@ -53,7 +60,7 @@ export class WasshExperimental extends SyscallEntry.Base {
     let address;
     const td = new TextDecoder();
     switch (domain) {
-      case AF_UNIX: {
+      case Sockets.AF_UNIX: {
         // NB: We use port to pass the max length of the UNIX path buffer.
         let sun_path = this.getMem_(addr_ptr, addr_ptr + port);
         let nul = sun_path.indexOf(0);
@@ -67,18 +74,30 @@ export class WasshExperimental extends SyscallEntry.Base {
         break;
       }
 
-      case AF_INET: {
+      case Sockets.AF_INET: {
+        const dv = this.getView_(addr_ptr, 4);
         const bytes = this.getMem_(addr_ptr, addr_ptr + 4);
-        address = bytes.join('.');
+        // If address is within the fake range (0.0.0.0/8), pass it as an
+        // integer to look up the real host later.
+        address = dv.getUint32(0, true);
+        if (address >= 0x1000000) {
+          address = bytes.join('.');
+        }
         break;
       }
 
-      case AF_INET6: {
-        // TODO(vapier): Check endianness.  Might need DataView via getView_().
+      case Sockets.AF_INET6: {
         const bytes = this.getMem_(addr_ptr, addr_ptr + 16);
-        const u16 = new Uint16Array(bytes.buffer, bytes.bytesOffset, 8);
-        address = Array.from(u16).map(
-            (b) => b.toString(16).padStart(4, '0')).join(':');
+        if (bytes[0] === 1) {
+          // If address is within the fake range (100::/64), pass it as an
+          // integer to look up the real host later.
+          address = bytes[15];
+        } else {
+          // TODO(vapier): Check endianness; might need DataView via getView_().
+          const u16 = new Uint16Array(bytes.buffer, bytes.bytesOffset, 8);
+          address = Array.from(u16).map(
+              (b) => b.toString(16).padStart(4, '0')).join(':');
+        }
         break;
       }
 

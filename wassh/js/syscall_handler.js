@@ -87,6 +87,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     this.socketTcpRecv_ = null;
     this.socketUdpRecv_ = null;
     this.socketMap_ = new Map();
+    this.fakeAddrMap_ = new Map();
   }
 
   async init() {
@@ -413,13 +414,38 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return {events};
   }
 
+  handle_sock_register_fake_addr(idx, name) {
+    this.fakeAddrMap_.set(idx, name);
+    return WASI.errno.ESUCCESS;
+  }
+
   /**
    * @param {number} domain
    * @param {number} type
+   * @param {number} protocol
    * @return {!WASI_t.errno|{socket: !WASI_t.fd}}
    */
-  async handle_sock_create(domain, type) {
-    const handle = new Sockets.TcpSocket(domain, type);
+  async handle_sock_create(domain, type, protocol) {
+    let handle;
+    switch (domain) {
+      case Sockets.AF_INET:
+      case Sockets.AF_INET6:
+        switch (type) {
+          case WASI.filetype.SOCKET_STREAM:
+            handle = new Sockets.TcpSocket(domain, type, protocol);
+            break;
+          case WASI.filetype.SOCKET_DGRAM:
+            // TODO(vapier): Implement UDP support.
+          default:
+            return WASI.errno.EPROTONOSUPPORT;
+        }
+        break;
+      case Sockets.AF_UNIX:
+        // TODO(vapier): Implement UNIX sockets.
+      default:
+        return WASI.errno.EAFNOSUPPORT;
+    }
+
     if (await handle.init() === false) {
       return WASI.errno.ENOSYS;
     }
@@ -448,12 +474,20 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       chrome.sockets.tcp.onReceive.addListener(this.socketTcpRecv_);
     }
 
-    /*
+    /* TODO(vapier): Implement UDP support.
     if (this.socketUdpRecv_ === null) {
       this.socketUdpRecv_ = this.onSocketUdpRecv.bind(this);
       chrome.sockets.Udp.onReceive.addListener(this.socketUdpRecv_);
     }
     */
+
+    // The getaddrinfo function used -1 to register a delayed hostname lookup.
+    if (handle.protocol === -1) {
+      address = this.fakeAddrMap_.get(address);
+      if (address === undefined) {
+        return WASI.errno.EFAULT;
+      }
+    }
 
     return handle.connect(address, port);
   }

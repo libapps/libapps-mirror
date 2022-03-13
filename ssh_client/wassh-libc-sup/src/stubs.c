@@ -93,63 +93,6 @@ int gethostname(char* name, size_t len) {
   return 0;
 }
 
-const char* gai_strerror(int errcode) {
-  _ENTER("errcode=%i", errcode);
-  _EXIT("<stub gai_strerror>");
-  return "<stub gai_strerror>";
-}
-int getaddrinfo(const char* node, const char* service,
-                const struct addrinfo* hints, struct addrinfo** res) {
-  _ENTER("node={%s} service={%s} hints=%p res=%p", node, service, hints, res);
-
-  char* endptr;
-  long sin_port = strtol(service, &endptr, 10);
-  if (*endptr != '\0' || sin_port < 1 || sin_port > 0xffff) {
-    _EXIT("EAI_FAIL: bad service");
-    return EAI_FAIL;
-  }
-
-  uint32_t s_addr;
-  if (!strcmp(node, "localhost")) {
-    s_addr = htonl(0x7f000001);
-  } else if (inet_pton(AF_INET, node, &s_addr) != 1) {
-    _EXIT("EAI_FAIL: bad IPv4 addr");
-    return EAI_FAIL;
-  }
-
-  struct addrinfo* ret = malloc(sizeof(*ret));
-  memset(ret, 0, sizeof(*ret));
-  ret->ai_flags = 0;  // ???
-  ret->ai_family = AF_INET;
-  ret->ai_socktype = SOCK_STREAM;
-  ret->ai_protocol = 0;
-  union {
-    struct sockaddr_storage storage;
-    struct sockaddr sa;
-    struct sockaddr_in sin;
-  }* sa = malloc(sizeof(*sa));
-  memset(sa, 0, sizeof(*sa));
-  struct sockaddr_in* sin = &sa->sin;
-  sin->sin_family = AF_INET;
-  sin->sin_port = htons(sin_port);
-  sin->sin_addr.s_addr = s_addr;
-  ret->ai_addrlen = sizeof(*sa);
-  ret->ai_addr = &sa->sa;
-  ret->ai_canonname = NULL;
-  ret->ai_next = NULL;
-  *res = ret;
-  _EXIT("return 0");
-  return 0;
-}
-int getnameinfo(const struct sockaddr* addr, socklen_t addrlen, char* host,
-                socklen_t hostlen, char* serv, socklen_t servlen, int flags) {
-  _ENTER("STUB");
-  strcpy(host, "localhost");  // NOLINT(runtime/printf)
-  strcpy(serv, "22");  // NOLINT(runtime/printf)
-  _EXIT("host=localhost serv=22");
-  return 0;
-}
-
 void openlog(const char* ident, int option, int facility) {}
 void syslog(int priority, const char* format, ...) {
   va_list ap;
