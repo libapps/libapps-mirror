@@ -49,8 +49,7 @@ override CXXFLAGS+=-pthread -std=gnu++0x $(WARNINGS) -I$(TOPDIR)/include \
         -I$(NACL_SDK_ROOT)/include -I$(NACL_SDK_ROOT)/le32-nacl/include \
         -fno-rtti -fno-exceptions
 
-OSNAME:=$(shell python $(NACL_SDK_ROOT)/tools/getos.py)
-PNACL_TC_ROOT:=$(NACL_SDK_ROOT)/toolchain/$(OSNAME)_pnacl
+PNACL_TC_ROOT:=$(NACL_SDK_ROOT)/toolchain/linux_pnacl
 PNACL_CXX:=$(PNACL_TC_ROOT)/bin/pnacl-clang++
 PNACL_STRIP:=$(PNACL_TC_ROOT)/bin/pnacl-strip
 PNACL_FINALIZE:=$(PNACL_TC_ROOT)/bin/pnacl-finalize
