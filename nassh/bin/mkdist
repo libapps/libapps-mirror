@@ -34,6 +34,11 @@ INCLUDE_PATTERNS = (
     '_locales',
     '_platform_specific',
     'plugin/*',
+    'wasi-js-bindings/*',
+    'wassh/js/*',
+    # TODO(vapier): Delete these once nassh runs wasm directly.
+    'wassh/test.html',
+    'wassh/test.js',
 )
 
 # List of files to be excluded from the zip as fnmatch globs.
