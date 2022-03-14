@@ -79,9 +79,16 @@ done
 # much longer but don't produce singificnatly larger/smaller files.  -Os/-Oz
 # also aren't that much smaller than -O2.  So use this pending more testing.
 #
-# Only use single core here due to known bug in 89 release:
+# Only use single core because versions <102 are known to segfault, and upstream
+# doesn't seem to have any idea if they actually fixed it, or if it just happens
+# to mostly work now.
 # https://github.com/WebAssembly/binaryen/issues/2273
+#
+# Also force single core because it significantly outperforms multicore runs due
+# to some extreme internal threading overhead.
+# https://github.com/WebAssembly/binaryen/issues/2740
 export BINARYEN_CORES=1
+
 PATH+=":${PWD}/output/bin"
 
 WASM_OPTS=()
