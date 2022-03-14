@@ -16,7 +16,7 @@ describe('lib_storage_terminal_private_tests.js', () => {
 class StorageAreaFake {
   constructor() {
     /** @private {!Object<string, *>} */
-    this.storage_ = {};
+    this.storage_ = {'test.path': {}};
 
     /** @const @private {!Array<function(!Object)>} */
     this.listeners_ = [];
@@ -25,31 +25,35 @@ class StorageAreaFake {
      * @type {!ChromeEvent}
      * @suppress {checkTypes} The mock is not an exact match.
      */
-    this.onSettingsChanged = {
+    this.onPrefChanged = {
       addListener: (listener) => this.listeners_.push(listener),
     };
   }
 
   /**
+   * @param {!Array<string>} paths
    * @param {function(!Object<string,*>)} callback
    */
-  getSettings(callback) {
-    assert.equal(arguments.length, 1);
+  getPrefs(paths, callback) {
+    assert.equal(arguments.length, 2);
+    assert.isArray(paths);
+    assert.equal(1, paths.length);
+    assert.equal('test.path', paths[0]);
     assert.equal('function', typeof callback);
 
     setTimeout(() => callback(Object.assign({}, this.storage_)));
   }
 
   /**
-   * @param {!Object<string, *>} items
+   * @param {!Object<string, *>} prefs
    * @param {function()=} callback
    */
-  setSettings(items, callback = () => {}) {
+  setPrefs(prefs, callback = () => {}) {
     assert.equal(arguments.length, 2);
-    assert.equal('object', typeof items);
+    assert.equal('object', typeof prefs);
     assert.equal('function', typeof callback);
 
-    this.storage_ = Object.assign({}, items);
+    this.storage_ = Object.assign({}, prefs);
     this.listeners_.forEach((listener) => listener(this.storage_));
     setTimeout(callback);
   }
@@ -60,7 +64,7 @@ class StorageAreaFake {
  */
 beforeEach(function() {
   this.fake = new StorageAreaFake();
-  this.storage = new lib.Storage.TerminalPrivate(this.fake);
+  this.storage = new lib.Storage.TerminalPrivate('test.path', this.fake);
 });
 
 lib.Storage.ApiTest();
@@ -72,7 +76,7 @@ it('coalesce-writes', function(done) {
   const storage = this.storage;
 
   let called = 0;
-  this.fake.setSettings = (items, callback = () => {}) => {
+  this.fake.setPrefs = (prefs, callback = () => {}) => {
     ++called;
     callback();
   };
@@ -94,7 +98,7 @@ it('recursive-writes', function(done) {
 
   let recursive_called = false;
   let called = 0;
-  this.fake.setSettings = (items, callback = () => {}) => {
+  this.fake.setPrefs = (prefs, callback = () => {}) => {
     ++called;
     callback();
   };

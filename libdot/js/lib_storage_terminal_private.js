@@ -5,17 +5,27 @@
 'use strict';
 
 /**
- * Storage implementation using chrome.settingsPrivate.
+ * Storage implementation using chrome.terminalPrivate.
  *
+ * @param {string=} prefPath Path of pref to read and update.  Uses
+ *  'crostini.terminal_settings' by default.
  * @param {{
- *  getSettings: function(function(?Object)),
- *  setSettings: function(!Object, function()),
- *  onSettingsChanged: !ChromeEvent,
+ *  getPrefs: function(!Array<string>, function(?Object)),
+ *  setPrefs: function(!Object, function()),
+ *  onPrefChanged: !ChromeEvent,
  * }=} storage
  * @constructor
  * @implements {lib.Storage}
  */
-lib.Storage.TerminalPrivate = function(storage = chrome.terminalPrivate) {
+lib.Storage.TerminalPrivate = function(
+    prefPath = 'crostini.terminal_settings',
+    storage = chrome.terminalPrivate) {
+  /**
+   * @const
+   * @private
+   */
+  this.prefPath_ = lib.notUndefined(prefPath);
+
   /**
    * @const
    * @private
@@ -23,7 +33,7 @@ lib.Storage.TerminalPrivate = function(storage = chrome.terminalPrivate) {
   this.observers_ = [];
 
   /**
-   * Local cache of terminalPrivate.getSettings.
+   * Local cache of terminalPrivate.getPrefs().
    *
    * @private {!Object<string, *>}
    */
@@ -44,8 +54,8 @@ lib.Storage.TerminalPrivate = function(storage = chrome.terminalPrivate) {
   /** @const */
   this.storage_ = storage;
 
-  this.storage_.onSettingsChanged.addListener(
-      this.onSettingsChanged_.bind(this));
+  this.storage_.onPrefChanged.addListener(
+      this.onPrefChanged_.bind(this));
 };
 
 /**
@@ -62,12 +72,12 @@ lib.Storage.TerminalPrivate.prototype.initCache_ = function() {
       return;
     }
 
-    this.storage_.getSettings((settings) => {
+    this.storage_.getPrefs([this.prefPath_], (prefs) => {
       const err = lib.f.lastError();
       if (err) {
         console.error(err);
       } else {
-        this.prefValue_ = lib.notNull(settings);
+        this.prefValue_ = lib.notNull(prefs[this.prefPath_]);
       }
       this.prefsLoaded_ = true;
       resolve();
@@ -76,15 +86,19 @@ lib.Storage.TerminalPrivate.prototype.initCache_ = function() {
 };
 
 /**
- * Called when settings change.
+ * Called when pref changes.
  *
- * @param {!Object<string, *>} settings
+ * @param {!Object<string, *>} prefs
  * @private
  */
-lib.Storage.TerminalPrivate.prototype.onSettingsChanged_ = function(settings) {
+lib.Storage.TerminalPrivate.prototype.onPrefChanged_ = function(prefs) {
+  const pref = /** @type {?Object<string, *>} */(prefs[this.prefPath_]);
+  if (!pref || typeof pref !== 'object') {
+    return;
+  }
   // Check what is deleted.
-  const changes = lib.Storage.generateStorageChanges(this.prefValue_, settings);
-  this.prefValue_ = settings;
+  const changes = lib.Storage.generateStorageChanges(this.prefValue_, pref);
+  this.prefValue_ = pref;
 
   // Don't bother notifying if there are no changes.
   if (Object.keys(changes).length) {
@@ -112,7 +126,7 @@ lib.Storage.TerminalPrivate.prototype.setPref_ = function() {
 
     // Force deferment to help coalesce.
     setTimeout(() => {
-      this.storage_.setSettings(this.prefValue_, () => {
+      this.storage_.setPrefs({[this.prefPath_]: this.prefValue_}, () => {
         const err = lib.f.lastError();
         if (err) {
           console.error(err);
