@@ -11,7 +11,10 @@ import * as WASI from '../../wasi-js-bindings/js/wasi.js';
 import * as VFS from './vfs.js';
 
 const SOL_SOCKET = 0x7fffffff;
+// const SO_RCVBUF sets bufferSize.
 const SO_KEEPALIVE = 9;
+const IPPROTO_IP = 0;
+const IP_TOS = 1;
 const IPPROTO_TCP = 6;
 const TCP_NODELAY = 1;
 
@@ -186,6 +189,17 @@ export class TcpSocket extends Socket {
               return WASI.errno.EINVAL;
             }
             this.tcpKeepAlive_ = value;
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+
+      case IPPROTO_IP: {
+        switch (name) {
+          case IP_TOS: {
+            // TODO(vapier): Try and extend Chrome sockets API to support this.
+            console.warn(`Ignoring IP_TOS=${value}`);
             return WASI.errno.ESUCCESS;
           }
         }
