@@ -128,6 +128,7 @@ nassh.Stream.RelayCorpv4WS = function(fd) {
   // The relay connection settings.
   this.io_ = null;
   this.relayServerSocket_ = null;
+  this.relayUser_ = null;
 
   // The remote ssh server settings.
   this.host_ = null;
@@ -217,6 +218,7 @@ nassh.Stream.RelayCorpv4WS.prototype.asyncOpen =
     async function(settings, onComplete) {
   this.io_ = settings.io;
   this.relayServerSocket_ = settings.relayServerSocket;
+  this.relayUser_ = settings.relayUser;
   this.resume_ = settings.resume;
   this.host_ = settings.host;
   this.port_ = settings.port;
@@ -242,7 +244,8 @@ nassh.Stream.RelayCorpv4WS.prototype.maxDataWriteLength = 16 * 1024;
 nassh.Stream.RelayCorpv4WS.prototype.connectTemplate_ =
     `%(relay)v4/connect` +
     `?host=%encodeURIComponent(host)` +
-    `&port=%encodeURIComponent(port)`;
+    `&port=%encodeURIComponent(port)` +
+    `&dstUsername=%encodeURIComponent(user)`;
 
 /**
  * Start a new connection to the proxy server.
@@ -257,6 +260,7 @@ nassh.Stream.RelayCorpv4WS.prototype.connect_ = function() {
     host: this.host_,
     port: this.port_,
     relay: this.relayServerSocket_,
+    user: this.relayUser_,
   });
 
   this.socket_ = new WebSocket(uri, ['ssh']);

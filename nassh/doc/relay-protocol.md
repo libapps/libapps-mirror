@@ -222,6 +222,8 @@ The fields specified in the [query string]:
     the last write ack the client received.  New connections start at `0`.
 *   `try=TRY`: For relays that support connection attempt reporting, the number
     of times we've tried to connect.  New connections start at `1`.
+*   `dstUsername=SSH_REMOTE_USER`: Largely for informational purposes to help
+    the relay server with logging.
 
 The `SESSION_ID` allows the relay server to validate the connection.
 This is why you should always use `wss` instead of `ws` to avoid spoofing.

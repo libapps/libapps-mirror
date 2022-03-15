@@ -158,6 +158,7 @@ export class Corp extends Relay {
       io: this.io_,
       relayServer: this.relayServer,
       relayServerSocket: this.relayServerSocket,
+      relayUser: this.username,
       reportConnectAttempts: this.reportConnectAttempts,
       reportAckLatency: this.reportAckLatency,
       host: host,
