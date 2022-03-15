@@ -11,6 +11,7 @@ window.onload = async function() {
 
   const term = new hterm.Terminal();
   term.onTerminalReady = run;
+  term.setAutoCarriageReturn(true);
   term.decorate(document.querySelector('#terminal'));
   term.installKeyboard();
   window.term_ = term;
@@ -27,11 +28,17 @@ const run = async function() {
   // Path is relative to the worker.js file below.
   const prefix = foreground ? '.' : '..';
 //  const prog = 'test.wasm';
-  const prog = '../ssh_client/output/plugin/wasm/ssh-keygen.wasm';
+//  const prog = '../ssh_client/output/plugin/wasm/ssh-keygen.wasm';
 //  const prog = '../ssh_client/output/plugin/wasm/ssh.wasm';
+//  const prog = '../ssh_client/output/build/wasm/openssh-8.8p1/work/openssh-8.8p1/ssh';
+  const prog = '../plugin/wasm/ssh.wasm';
+//  const prog = '../wassh/test/socket.wasm';
   const argv = [
 //    prog, '--help',
-    prog, '-t', 'ed25519', '-f', 'id_ed25519', '-N', '',
+//    prog, '-t', 'ed25519', '-f', 'id_ed25519', '-N', '',
+//    prog, '-vvv', 'root@127.0.0.1',
+    prog, '-vvv', 'vapier@100.115.92.194',
+//    prog, '100.115.92.194',
   ];
   const environ = {
     'HOME': '/',
