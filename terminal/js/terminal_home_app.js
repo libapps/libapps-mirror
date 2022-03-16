@@ -9,6 +9,7 @@
  */
 
 import {css, html, LitElement} from './lit_element.js';
+import {DEFAULT_CONTAINER_NAME, DEFAULT_VM_NAME} from './terminal_common.js';
 
 /**
  * Path for pref with list of crostini CONTAINERS_PATH.
@@ -147,10 +148,16 @@ export class TerminalHomeApp extends LitElement {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
     const containerHref = (c) => {
       return `terminal.html?command=vmshell&args[]=${
-          encodeURIComponent(`--vm_name=${c['vm_name']}`)}&args[]=${
-          encodeURIComponent(`--target_container=${c['container_name']}`)}`;
+          encodeURIComponent(`--vm_name=${c.vm_name}`)}&args[]=${
+          encodeURIComponent(`--target_container=${c.container_name}`)}`;
     };
-    const containerText = (c) => `${c['vm_name']}:${c['container_name']}`;
+    const containerText = (c) => {
+      if (this.containers.length === 1 && c.vm_name === DEFAULT_VM_NAME &&
+          c.container_name === DEFAULT_CONTAINER_NAME) {
+        return msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL');
+      }
+      return `${c.vm_name}:${c.container_name}`;
+    };
 
     return html`
         <ul>
