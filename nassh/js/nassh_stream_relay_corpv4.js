@@ -214,7 +214,7 @@ nassh.Stream.RelayCorpv4WS.constructor = nassh.Stream.RelayCorpv4WS;
  * @override
  */
 nassh.Stream.RelayCorpv4WS.prototype.asyncOpen =
-    function(settings, onComplete) {
+    async function(settings, onComplete) {
   this.io_ = settings.io;
   this.relayServerSocket_ = settings.relayServerSocket;
   this.resume_ = settings.resume;

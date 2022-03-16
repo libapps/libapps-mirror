@@ -58,7 +58,7 @@ nassh.Stream.prototype.maxWebSocketBufferLength = 64 * 1024;
  *     set of properties to be included in settings.
  * @param {function(boolean, ?string=)} onOpen
  */
-nassh.Stream.prototype.asyncOpen = function(settings, onOpen) {
+nassh.Stream.prototype.asyncOpen = async function(settings, onOpen) {
   setTimeout(() => onOpen(false, 'nassh.Stream.ERR_NOT_IMPLEMENTED'), 0);
 };
 

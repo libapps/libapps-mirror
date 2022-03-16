@@ -34,7 +34,7 @@ nassh.Stream.Sftp.constructor = nassh.Stream.Sftp;
  * @param {function(boolean)} onOpen
  * @override
  */
-nassh.Stream.Sftp.prototype.asyncOpen = function(settings, onOpen) {
+nassh.Stream.Sftp.prototype.asyncOpen = async function(settings, onOpen) {
   this.acknowledgeCount_ = 0;
 
   setTimeout(() => onOpen(true), 0);

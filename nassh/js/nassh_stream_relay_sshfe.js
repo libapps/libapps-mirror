@@ -65,7 +65,8 @@ nassh.Stream.RelaySshfeWS.constructor = nassh.Stream.RelaySshfeWS;
  * @param {function(boolean, string=)} onComplete
  * @override
  */
-nassh.Stream.RelaySshfeWS.prototype.asyncOpen = function(settings, onComplete) {
+nassh.Stream.RelaySshfeWS.prototype.asyncOpen =
+    async function(settings, onComplete) {
   this.io_ = settings.io;
   this.relayHost_ = settings.relayHost;
   this.relayPort_ = settings.relayPort;

@@ -59,7 +59,8 @@ nassh.Stream.RelayCorp.constructor = nassh.Stream.RelayCorp;
  * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-nassh.Stream.RelayCorp.prototype.asyncOpen = function(settings, onComplete) {
+nassh.Stream.RelayCorp.prototype.asyncOpen =
+    async function(settings, onComplete) {
   this.io_ = settings.io;
   this.relayServer_ = settings.relayServer;
   this.relayServerSocket_ = settings.relayServerSocket;

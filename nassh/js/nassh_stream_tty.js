@@ -132,7 +132,7 @@ nassh.Stream.Tty.constructor = nassh.Stream.Tty;
  * @param {function(boolean)} onOpen
  * @override
  */
-nassh.Stream.Tty.prototype.asyncOpen = function(settings, onOpen) {
+nassh.Stream.Tty.prototype.asyncOpen = async function(settings, onOpen) {
   this.allowRead_ = settings.allowRead;
   this.allowWrite_ = settings.allowWrite;
   this.inputBuffer_ = settings.inputBuffer;

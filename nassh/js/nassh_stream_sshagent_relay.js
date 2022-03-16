@@ -34,8 +34,8 @@ nassh.Stream.SSHAgentRelay.constructor = nassh.Stream.SSHAgentRelay;
  * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-nassh.Stream.SSHAgentRelay.prototype.asyncOpen = function(
-    settings, onComplete) {
+nassh.Stream.SSHAgentRelay.prototype.asyncOpen =
+    async function(settings, onComplete) {
   this.authAgentAppID_ = settings.authAgentAppID;
   this.port_ = chrome.runtime.connect(this.authAgentAppID_);
 
