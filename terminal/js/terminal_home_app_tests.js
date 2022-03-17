@@ -33,6 +33,7 @@ describe('terminal_home_app_tests.js', () => {
       '/nassh/profile-ids': ['p1', 'p2'],
       '/nassh/profiles/p1/description': 'ssh-connection-1',
       '/nassh/profiles/p2/description': 'ssh-connection-2',
+      'crostini.enabled': true,
       'crostini.containers': [
         {vm_name: 'termina', container_name:'penguin'},
         {vm_name: 'termina', container_name:'c2'},
@@ -50,6 +51,7 @@ describe('terminal_home_app_tests.js', () => {
 
   it('shows-linux-label-if-only-default-container', async function() {
     hterm.defaultStorage.setItems({
+      'crostini.enabled': true,
       'crostini.containers': [
         {vm_name: 'termina', container_name:'penguin'},
       ],
@@ -60,5 +62,19 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_MANAGE_SSH', rows[0].innerText);
     assert.equal(
       'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[1].innerText);
+  });
+
+  it('shows-manage-developer-settings-if-crostini-disabled', async function() {
+    hterm.defaultStorage.setItems({
+      'crostini.enabled': false,
+      'crostini.containers': [
+        {vm_name: 'termina', container_name:'penguin'},
+      ],
+    });
+
+    const rows = await this.getRowText();
+    assert.equal(2, rows.length);
+    assert.equal('TERMINAL_HOME_MANAGE_SSH', rows[0].innerText);
+    assert.equal('TERMINAL_HOME_MANAGE_DEVELOPER_SETTINGS', rows[1].innerText);
   });
 });
