@@ -12,6 +12,8 @@
 #include <unistd.h>
 #include <sys/random.h>
 
+#include "test-utils.h"
+
 int main(int argc, char *argv[]) {
   if (argc != 2) {
     fprintf(stderr, "Usage: random <mode>\n");
@@ -24,12 +26,12 @@ int main(int argc, char *argv[]) {
   // Output in JSON format for easier test runner parsing.
   printf("[");
 
-  if (!strcmp(mode, "getentropy")) {
+  if (streq(mode, "getentropy")) {
     // There is a max length of 256 with the API.
     assert(sizeof(buf) <= 256);
     int ret = getentropy(buf, sizeof(buf));
     assert(ret == 0);
-  } else if (!strcmp(mode, "arc4random")) {
+  } else if (streq(mode, "arc4random")) {
     for (size_t i = 0; i < 12; ++i) {
         if (i)
           printf(", ");
@@ -37,7 +39,7 @@ int main(int argc, char *argv[]) {
     }
     printf("]\n");
     return 0;
-  } else if (!strcmp(mode, "arc4random_buf")) {
+  } else if (streq(mode, "arc4random_buf")) {
     arc4random_buf(buf, sizeof(buf));
   } else {
     fprintf(stderr, "unknown mode '%s'\n", mode);

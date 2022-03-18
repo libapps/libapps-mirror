@@ -11,6 +11,8 @@
 #include <time.h>
 #include <unistd.h>
 
+#include "test-utils.h"
+
 static void dump_clock(const char* name, clockid_t clk_id) {
   struct timespec ts;
   int ret;
@@ -48,9 +50,9 @@ int main(int argc, char *argv[]) {
   // Output in JSON format for easier test runner parsing.
   printf("{\n");
 
-  if (!strcmp(mode, "realtime")) {
+  if (streq(mode, "realtime")) {
     dump_clock("realtime", CLOCK_REALTIME);
-  } else if (!strcmp(mode, "monotonic")) {
+  } else if (streq(mode, "monotonic")) {
     dump_clock("monotonic", CLOCK_MONOTONIC);
   } else {
     fprintf(stderr, "unknown mode '%s'\n", mode);

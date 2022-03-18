@@ -8,8 +8,6 @@
 
 #include <wasi/api.h>
 
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof(*(x)))
-
 #define START(name) \
   fields = 0; \
   if (types++) printf(",\n"); \

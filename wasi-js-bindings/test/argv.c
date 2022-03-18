@@ -8,22 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Print a string with special JSON chars escaped.
-static void prints(const char* str) {
-  for (size_t i = 0; str[i]; ++i) {
-    switch (str[i]) {
-      case '\n':
-        printf("\\n");
-        break;
-      case '\t':
-        printf("\\t");
-        break;
-      default:
-        printf("%c", str[i]);
-        break;
-    }
-  }
-}
+#include "test-utils.h"
 
 int main(int argc, char *argv[]) {
   // Output in JSON format for easier test runner parsing.
@@ -35,7 +20,7 @@ int main(int argc, char *argv[]) {
     // We shouldn't really see NULL's here, but better to be safe.
     if (argv[i]) {
       printf("    \"");
-      prints(argv[i]);
+      json_prints(argv[i]);
       printf("\"");
     } else {
       printf("    null");

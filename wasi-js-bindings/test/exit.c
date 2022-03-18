@@ -9,6 +9,8 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "test-utils.h"
+
 int main(int argc, char *argv[]) {
   if (argc < 2) {
     fprintf(stderr, "Usage: exit <mode> [value]\n");
@@ -17,13 +19,13 @@ int main(int argc, char *argv[]) {
 
   const char* mode = argv[1];
 
-  if (!strcmp(mode, "ret")) {
+  if (streq(mode, "ret")) {
     int value = atoi(argv[2]);
     return value;
-  } else if (!strcmp(mode, "exit")) {
+  } else if (streq(mode, "exit")) {
     int value = atoi(argv[2]);
     exit(value);
-  } else if (!strcmp(mode, "abort")) {
+  } else if (streq(mode, "abort")) {
     abort();
   } else {
     fprintf(stderr, "unknown mode '%s'\n", mode);

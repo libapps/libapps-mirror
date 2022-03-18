@@ -9,22 +9,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-// Print a string with special JSON chars escaped.
-static void prints(const char* str) {
-  for (size_t i = 0; str[i]; ++i) {
-    switch (str[i]) {
-      case '\n':
-        printf("\\n");
-        break;
-      case '\t':
-        printf("\\t");
-        break;
-      default:
-        printf("%c", str[i]);
-        break;
-    }
-  }
-}
+#include "test-utils.h"
 
 int main(int argc, char* argv[]) {
   // Output in JSON format for easier test runner parsing.
@@ -40,7 +25,7 @@ int main(int argc, char* argv[]) {
   for (int i = 0; i < envc; ++i) {
     if (environ[i]) {
       printf("    \"");
-      prints(environ[i]);
+      json_prints(environ[i]);
       printf("\"");
     } else {
       printf("    null");
