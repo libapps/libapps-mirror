@@ -229,7 +229,6 @@ def _toolchain_wasm_env():
         'PKG_CONFIG_LIBDIR': pcdir,
         'SYSROOT': sysroot,
         'CPPFLAGS': ' '.join((
-            '-D_WASI_EMULATED_SIGNAL',
             f'-isystem {os.path.join(incdir, "wassh-libc-sup")}',
         )),
         'LDFLAGS': ' '.join([

@@ -10,6 +10,9 @@
 // Force sigset/etc... definition ourselves as wasi-sdk elides it atm.
 #include <sys/types.h>
 
+// wasi-sdk provides basic signal support currently.
+#define _WASI_EMULATED_SIGNAL
+
 #include_next <signal.h>
 
 #include <sys/cdefs.h>
