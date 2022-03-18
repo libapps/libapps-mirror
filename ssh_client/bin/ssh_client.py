@@ -65,7 +65,7 @@ def copy(source, dest):
     # In case the dest perms are broken, remove the file.
     if os.path.exists(dest):
         unlink(dest)
-    shutil.copy(source, dest)
+    shutil.copy2(source, dest)
 
 
 def emake(*args, **kwargs):
