@@ -21,6 +21,12 @@ window.onload = async function() {
  * Callback by terminal init.
  */
 const run = async function() {
+  const params = new URLSearchParams(document.location.search);
+  const trace = (params.get('trace') ?? 'false') === 'true';
+  const user = params.get('user') ?? 'vapier';
+  const host = params.get('host') ?? 'penguin.linux.test';
+  const port = params.get('port') ?? '22';
+
   const io = this.io.push();
 
   const foreground = false;
@@ -37,7 +43,11 @@ const run = async function() {
 //    prog, '--help',
 //    prog, '-t', 'ed25519', '-f', 'id_ed25519', '-N', '',
 //    prog, '-vvv', 'root@127.0.0.1',
-    prog, '-vvv', 'vapier@100.115.92.194',
+//    prog, '-vvv', 'root@localhost',
+//    prog, '-vvv', 'root@localhost.localdomain',
+//    prog, '-vvv', 'vapier@100.115.92.194',
+    prog, '-vvv', '-6', `-p${port}`, `${user}@${host}`,
+//    prog, '-vvv', '-6', 'root@localhost',
 //    prog, '100.115.92.194',
   ];
   const environ = {
@@ -60,7 +70,7 @@ const run = async function() {
     ];
     settings.sys_handlers = sys_handlers;
     settings.sys_entries = [
-      new SyscallEntry.WasiPreview1({sys_handlers, trace: true}),
+      new SyscallEntry.WasiPreview1({sys_handlers, trace}),
       new WasshSyscallEntry.WasshExperimental({}),
     ];
     proc = new Process.Foreground(settings);
@@ -69,9 +79,10 @@ const run = async function() {
       term: this,
     });
     await settings.handler.init();
-    proc = new Process.Background('./js/worker.js', settings);
+    proc = new Process.Background(
+        `./js/worker.js?trace=${trace}`, settings);
   }
-  io.println(`> Running ${prog}`);
+  io.println(`> Running ${prog} ${argv.slice(1).join(' ')}`);
   const ret = await proc.run();
   io.println(`\n> finished: ret = ${ret}`);
 };
