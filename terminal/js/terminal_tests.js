@@ -68,18 +68,19 @@ it('opens-process-in-init', async function() {
 });
 
 [true, false].map((value) => it(`set-a11y-in-init-to-${value}`, async () => {
-  mockTerminalPrivate.a11yStatus = value;
+  mockTerminalPrivate.prefs = {'settings.accessibility': value};
   const term = terminal.init(div, newFakeLaunchInfo());
-  await mockTerminalPrivateController.on('getA11yStatus');
+  await mockTerminalPrivateController.on('getPrefs');
   assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
 }));
 
 [true, false].map((value) => it(`set-a11y-to-${value}-on-changed`, async () => {
-  mockTerminalPrivate.a11yStatus = !value;
+  mockTerminalPrivate.prefs = {'settings.accessibility': !value};
   const term = terminal.init(div, newFakeLaunchInfo());
-  await mockTerminalPrivateController.on('getA11yStatus');
+  await mockTerminalPrivateController.on('getPrefs');
 
-  await mockTerminalPrivate.onA11yStatusChanged.dispatch(value);
+  await mockTerminalPrivate.onPrefChanged.dispatch(
+      {'settings.accessibility': value});
   assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
 }));
 

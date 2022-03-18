@@ -56,12 +56,12 @@ export function MockTerminalPrivate() {
    */
   this.observers_ = {};
   this.onProcessOutput = new MockEvent();
-  this.onA11yStatusChanged = new MockEvent();
+  this.onPrefChanged = new MockEvent();
 
   /** @type {string} */
   this.openVmshellProcessId = '';
   this.croshSettings = {};
-  this.a11yStatus = false;
+  this.prefs = {};
 }
 
 /**
@@ -217,15 +217,16 @@ MockTerminalPrivate.prototype.onTerminalResize = function(
 };
 
 /**
- * Returns the current a11y status.
+ * Returns the specified prefs.
  *
- * @param {function(boolean)} callback Callback that will be called
- *     with the current a11y status.
+ * @param {!Array<string>} prefPaths paths of prefs to fetch.
+ * @param {function(!Object)} callback Callback that will be called
+ *     with prefs.
  */
-MockTerminalPrivate.prototype.getA11yStatus = function(callback) {
+MockTerminalPrivate.prototype.getPrefs = function(prefPaths, callback) {
   setTimeout(() => {
-    callback(this.a11yStatus);
-    this.notifyObservers_('getA11yStatus', [callback]);
+    callback(this.prefs);
+    this.notifyObservers_('getPrefs', [prefPaths, callback]);
   }, 0);
 };
 

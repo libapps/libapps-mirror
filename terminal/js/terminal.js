@@ -212,10 +212,15 @@ terminal.init = function(element, launchInfo) {
     onFontFamilyChanged(prefs.get('font-family'));
     prefs.addObserver('font-family', onFontFamilyChanged);
 
-    chrome.terminalPrivate.onA11yStatusChanged.addListener(
-        (enabled) => term.setAccessibilityEnabled(enabled));
-    chrome.terminalPrivate.getA11yStatus((enabled) => {
-      term.setAccessibilityEnabled(enabled);
+    const prefKey = 'settings.accessibility';
+    const prefChanged = (prefs) => {
+      if (prefs.hasOwnProperty(prefKey)) {
+        term.setAccessibilityEnabled(prefs[prefKey]);
+      }
+    };
+    chrome.terminalPrivate.onPrefChanged.addListener(prefChanged);
+    chrome.terminalPrivate.getPrefs([prefKey], (prefs) => {
+      prefChanged(prefs);
       runTerminal();
     });
   };

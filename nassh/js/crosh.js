@@ -134,10 +134,23 @@ Crosh.init = function() {
   };
   terminal.onTerminalReady = function() {
     nassh.loadWebFonts(terminal.getDocument());
-    chrome.terminalPrivate.onA11yStatusChanged.addListener(
-        (enabled) => terminal.setAccessibilityEnabled(enabled));
-    chrome.terminalPrivate.getA11yStatus((enabled) => {
-      terminal.setAccessibilityEnabled(enabled);
+
+    // TODO(b/223076712): Avoid errors for nassh-crosh running on pre-M101.
+    // Can be removed when stable is M101+.
+    if (!chrome.terminalPrivate.getPrefs) {
+      runCrosh();
+      return;
+    }
+
+    const prefKey = 'settings.accessibility';
+    const prefChanged = (prefs) => {
+      if (prefs.hasOwnProperty(prefKey)) {
+        terminal.setAccessibilityEnabled(prefs[prefKey]);
+      }
+    };
+    chrome.terminalPrivate.onPrefChanged.addListener(prefChanged);
+    chrome.terminalPrivate.getPrefs([prefKey], (prefs) => {
+      prefChanged(prefs);
       runCrosh();
     });
   };
