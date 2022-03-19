@@ -237,7 +237,7 @@ def _toolchain_wasm_env():
             '-lwasi-emulated-signal',
             '-Wl,--allow-undefined-file=%s' % (
                 os.path.join(libdir, 'wassh-libc-sup.imports'),),
-            '-Wl,--export=__wassh_signal_handlers',
+            '-Wl,--export=__wassh_signal_deliver',
         ]),
     }
 

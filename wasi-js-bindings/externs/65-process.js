@@ -23,6 +23,8 @@ class Process {
     this.argv = [];
     /** @type {!Object<string, string>} */
     this.environ = {};
+    /** @type {?WebAssembly.Instance} */
+    this.instance_ = null;
   }
 
   /** @param {*} args */

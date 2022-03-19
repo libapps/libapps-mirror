@@ -86,6 +86,7 @@ export class Foreground extends Base {
     super({executable, argv, environ});
     this.sys_handlers = sys_handlers;
     this.sys_entries = sys_entries;
+    /** @type {?WebAssembly.Instance} */
     this.instance_ = null;
 
     sys_handlers.forEach((ele) => ele.setProcess(this));

@@ -278,7 +278,9 @@ class SyscallHandler {
 
   /**
    * @param {!Array<!WASI_t.subscription>} subscriptions
-   * @return {!WASI_t.errno|{events: !Array<!WASI_t.event>}}
+   * @return {!WASI_t.errno|
+   *          {events: !Array<!WASI_t.event>,
+   *           signals: (undefined|!Array<number>)}}
    */
   handle_poll_oneoff(subscriptions) {}
 

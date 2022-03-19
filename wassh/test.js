@@ -2,7 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {Process, SyscallEntry} from '../wasi-js-bindings/index.js';
+import {SyscallEntry} from '../wasi-js-bindings/index.js';
+import * as WasshProcess from './js/process.js';
 import * as WasshSyscallEntry from './js/syscall_entry.js';
 import * as WasshSyscallHandler from './js/syscall_handler.js';
 
@@ -28,6 +29,10 @@ const run = async function() {
   const port = params.get('port') ?? '22';
 
   const io = this.io.push();
+  io.onTerminalResize = (width, height) => {
+    // https://github.com/WebAssembly/wasi-libc/issues/272
+    proc.send_signal(28 /* musl SIGWINCH */);
+  };
 
   const foreground = false;
 
@@ -79,7 +84,7 @@ const run = async function() {
       term: this,
     });
     await settings.handler.init();
-    proc = new Process.Background(
+    proc = new WasshProcess.Background(
         `./js/worker.js?trace=${trace}`, settings);
   }
   io.println(`> Running ${prog} ${argv.slice(1).join(' ')}`);

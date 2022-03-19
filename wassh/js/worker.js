@@ -8,8 +8,10 @@
  * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
  */
 
-import {BackgroundWorker, Process, SyscallEntry,
-        SyscallHandler} from '../../wasi-js-bindings/index.js';
+import {
+  BackgroundWorker, SyscallEntry, SyscallHandler,
+} from '../../wasi-js-bindings/index.js';
+import * as WasshProcess from './process.js';
 import * as WasshSyscallEntry from './syscall_entry.js';
 import * as WasshSyscallHandler from './syscall_handler.js';
 
@@ -25,7 +27,7 @@ class WasshWorker extends BackgroundWorker.Base {
       new SyscallEntry.WasiPreview1({sys_handlers, trace}),
       new WasshSyscallEntry.WasshExperimental({sys_handlers, trace}),
     ];
-    return new Process.Foreground(
+    return new WasshProcess.Foreground(
         {executable, argv, environ, sys_handlers, sys_entries});
   }
 }

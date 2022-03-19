@@ -346,7 +346,15 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       if (delay > 0) {
         await sleep(delay);
       }
-      return {events: [timeoutEvent]};
+
+      // If signals came in, return them too.
+      let signals;
+      if (this.process_.signal_queue.length) {
+        signals = Array.from(this.process_.signal_queue);
+        this.process_.signal_queue.length = 0;
+      }
+
+      return {events: [timeoutEvent], signals};
     }
 
     // Poll for a while.
@@ -405,13 +413,26 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
           }
         }
       } else {
+        // If a signal came in, don't keep waiting for events.
+        if (this.process_.signal_queue.length) {
+          break;
+        }
+
         // If we still have work to do, wait for a wakeup.
         if (events.length === 0) {
           await sleep(30000);
         }
       }
     }
-    return {events};
+
+    // If signals came in, return them too.
+    let signals;
+    if (this.process_.signal_queue.length) {
+      signals = Array.from(this.process_.signal_queue);
+      this.process_.signal_queue.length = 0;
+    }
+
+    return {events, signals};
   }
 
   handle_sock_register_fake_addr(idx, name) {
