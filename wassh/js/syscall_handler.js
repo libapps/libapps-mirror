@@ -502,7 +502,6 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
    * @return {{pass: string}} The user input.
    */
   async handle_readpassphrase(prompt, max_len, echo) {
-    this.term_.io.print(prompt);
     let pass = '';
     const node = document.createElement('p');
     node.textContent = prompt;
@@ -510,7 +509,6 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     node.style.fontWeight = 'bold';
     node.style.fontSize = 'larger';
     const io = this.term_.io.push();
-    io.println(prompt);
     this.term_.showOverlay(node, null);
     io.sendString = (str) => {
       pass += str;
@@ -527,10 +525,6 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
             resolve({pass});
             io.hideOverlay();
             io.pop();
-            if (echo) {
-              this.term_.io.print(pass);
-            }
-            this.term_.io.println('');
             break;
           default:
             pass += str;
