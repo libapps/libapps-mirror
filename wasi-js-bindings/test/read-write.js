@@ -192,7 +192,7 @@ async function run(prog, argv) {
     argv: ['read-write.wasm', ...argv],
     sys_handlers: sys_handlers,
     sys_entries: [
-      new SyscallEntry.WasiPreview1({sys_handlers, trace: true}),
+      new SyscallEntry.WasiPreview1({sys_handlers}),
     ],
   });
   let ret;
