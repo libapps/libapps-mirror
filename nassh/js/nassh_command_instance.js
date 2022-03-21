@@ -18,6 +18,8 @@ import {SftpStream} from './nassh_stream_sftp.js';
 import {SshAgentStream} from './nassh_stream_sshagent.js';
 import {SshAgentRelayStream} from './nassh_stream_sshagent_relay.js';
 import {InputBuffer, TtyStream} from './nassh_stream_tty.js';
+import * as WasshProcess from '../wassh/js/process.js';
+import * as WasshSyscallHandler from '../wassh/js/syscall_handler.js';
 
 /**
  * The NaCl-ssh-powered terminal command.
@@ -1244,7 +1246,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
         backendIDs, this.io.terminal_, forwardAgent);
   }
 
-  this.initPlugin_(async () => {
+  this.initPlugin_(argv, async () => {
     this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
     this.io.println(nassh.msg('CONNECTING',
@@ -1404,8 +1406,27 @@ nassh.CommandInstance.prototype.dispatchMessage_ = function(
   }
 };
 
+/**
+ * @param {!Array<string>} argv SSH command line arguments.
+ * @param {!Object<string, string>} environ SSH environment variables.
+ * @return {!Promise<void>}
+ * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
+ */
+nassh.CommandInstance.prototype.initWasmPlugin_ =
+    async function(argv, environ) {
+  const executable = `../../plugin/${this.sshClientVersion_}/ssh.wasm`;
+  const settings = {executable, argv, environ};
+
+  settings.handler = new WasshSyscallHandler.RemoteReceiverWasiPreview1({
+    term: this.io.terminal_,
+  });
+  await settings.handler.init();
+  this.proc_ = new WasshProcess.Background('../wassh/js/worker.js', settings);
+  this.proc_.run();
+};
+
 /** @param {function()} onComplete */
-nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
+nassh.CommandInstance.prototype.initNaclPlugin_ = function(onComplete) {
   const onPluginLoaded = () => {
     this.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
     onComplete();
@@ -1442,6 +1463,20 @@ nassh.CommandInstance.prototype.initPlugin_ = function(onComplete) {
   // Force a relayout. Workaround for load event not being called on <embed>
   // for a NaCl module. https://crbug.com/699930
   this.plugin_.style.height = '0';
+};
+
+/**
+ * @param {!Object} argv Plugin arguments.
+ * @param {function()} onComplete
+ * @return {!Promise<void>}
+ */
+nassh.CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
+  if (this.sshClientVersion_.startsWith('pnacl')) {
+    return this.initNaclPlugin_(onComplete);
+  } else {
+    await this.initWasmPlugin_(argv.arguments, argv.environment);
+    onComplete();
+  }
 };
 
 /**
