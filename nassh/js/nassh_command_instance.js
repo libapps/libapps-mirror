@@ -10,14 +10,10 @@
 import {punycode} from './nassh_deps.rollup.js';
 import {Cli as nasftpCli} from './nasftp_cli.js';
 import {gcseRefreshCert, getGnubbyExtension} from './nassh_google.js';
+import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
 import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
-import {StreamSet} from './nassh_stream_set.js';
-import {SftpStream} from './nassh_stream_sftp.js';
-import {SshAgentStream} from './nassh_stream_sshagent.js';
-import {SshAgentRelayStream} from './nassh_stream_sshagent_relay.js';
-import {InputBuffer, TtyStream} from './nassh_stream_tty.js';
 import * as WasshProcess from '../wassh/js/process.js';
 import * as WasshSyscallHandler from '../wassh/js/syscall_handler.js';
 
@@ -53,9 +49,6 @@ nassh.CommandInstance = function({io, ...argv}) {
 
   // The HTML5 persistent FileSystem instance for this extension.
   this.fileSystem_ = null;
-
-  // A set of open streams for this instance.
-  this.streams_ = new StreamSet();
 
   // The version of the ssh client to load.
   this.sshClientVersion_ = 'pnacl';
@@ -98,9 +91,6 @@ nassh.CommandInstance = function({io, ...argv}) {
 
   // Prevent us from reporting an exit twice.
   this.exited_ = false;
-
-  // Buffer for data coming from the terminal.
-  this.inputBuffer_ = new InputBuffer();
 };
 
 /**
@@ -1175,10 +1165,6 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
     disp_hostname += ' (' + idn_hostname + ')';
   }
 
-  this.io.onVTKeystroke = this.onVTKeystroke_.bind(this);
-  this.io.sendString = this.sendString_.bind(this);
-  this.io.onTerminalResize = this.onTerminalResize_.bind(this);
-
   const argv = {};
   argv.terminalWidth = this.io.terminal_.screenSize.width;
   argv.terminalHeight = this.io.terminal_.screenSize.height;
@@ -1252,7 +1238,9 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
     this.io.println(nassh.msg('CONNECTING',
                               [`${params.username}@${disp_hostname}`]));
 
-    this.sendToPlugin_('startSession', [argv]);
+    if (this.plugin_ instanceof NaclPlugin) {
+      this.plugin_.send('startSession', [argv]);
+    }
     if (this.isSftp) {
       try {
         await this.sftpClient.initConnection(this.plugin_);
@@ -1421,48 +1409,28 @@ nassh.CommandInstance.prototype.initWasmPlugin_ =
     term: this.io.terminal_,
   });
   await settings.handler.init();
-  this.proc_ = new WasshProcess.Background('../wassh/js/worker.js', settings);
-  this.proc_.run();
+  this.plugin_ = new WasshProcess.Background('../wassh/js/worker.js', settings);
+  this.plugin_.run();
 };
 
-/** @param {function()} onComplete */
-nassh.CommandInstance.prototype.initNaclPlugin_ = function(onComplete) {
-  const onPluginLoaded = () => {
-    this.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
-    onComplete();
-  };
-
-  this.io.print(nassh.msg('PLUGIN_LOADING'));
-
-  this.plugin_ = window.document.createElement('embed');
-  // Height starts at 1px, and is changed to 0 below after inserting into body.
-  // This modification to the plugin ensures that the 'load' event fires
-  // when it is running in the background page.
-  this.plugin_.style.cssText =
-      ('position: absolute;' +
-       'top: -99px' +
-       'width: 0;' +
-       'height: 1px;');
-
-  const pluginURL = `../plugin/${this.sshClientVersion_}/ssh_client.nmf`;
-
-  this.plugin_.setAttribute('src', pluginURL);
-  this.plugin_.setAttribute('type', 'application/x-nacl');
-  this.plugin_.addEventListener('load', onPluginLoaded);
-  this.plugin_.addEventListener('message', this.onPluginMessage_.bind(this));
-
-  const errorHandler = (ev) => {
-    this.io.println(nassh.msg('PLUGIN_LOADING_FAILED'));
-    console.error('loading plugin failed', ev);
-    this.exit(nassh.CommandInstance.EXIT_INTERNAL_ERROR, false);
-  };
-  this.plugin_.addEventListener('crash', errorHandler);
-  this.plugin_.addEventListener('error', errorHandler);
-
-  document.body.insertBefore(this.plugin_, document.body.firstChild);
-  // Force a relayout. Workaround for load event not being called on <embed>
-  // for a NaCl module. https://crbug.com/699930
-  this.plugin_.style.height = '0';
+/**
+ * @param {!Object} argv Plugin arguments.
+ * @param {function()} onComplete
+ */
+nassh.CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
+  this.plugin_ = new NaclPlugin({
+    io: this.io,
+    sshClientVersion: this.sshClientVersion_,
+    onExit: (code) => {
+      this.onPluginExit(code);
+      this.exit(code, /* noReconnect= */ false);
+    },
+    secureInput: (...args) => this.secureInput(...args),
+    authAgent: this.authAgent_,
+    authAgentAppID: this.authAgentAppID_,
+    relay: this.relay_,
+  });
+  this.plugin_.init(onComplete);
 };
 
 /**
@@ -1472,7 +1440,7 @@ nassh.CommandInstance.prototype.initNaclPlugin_ = function(onComplete) {
  */
 nassh.CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
   if (this.sshClientVersion_.startsWith('pnacl')) {
-    return this.initNaclPlugin_(onComplete);
+    this.initNaclPlugin_(argv, onComplete);
   } else {
     await this.initWasmPlugin_(argv.arguments, argv.environment);
     onComplete();
@@ -1490,92 +1458,6 @@ nassh.CommandInstance.prototype.removePlugin_ = function() {
 };
 
 /**
- * Callback when the user types into the terminal.
- *
- * @param {string} data The input from the terminal.
- */
-nassh.CommandInstance.prototype.onVTKeystroke_ = function(data) {
-  this.inputBuffer_.write(data);
-};
-
-/**
- * Helper function to create a TTY stream.
- *
- * @param {number} fd The file descriptor index.
- * @param {boolean} allowRead True if this stream can be read from.
- * @param {boolean} allowWrite True if this stream can be written to.
- * @param {function(boolean, ?string=)} onOpen Callback to call when the
- *     stream is opened.
- * @return {!Object} The newly created stream.
- * @suppress {missingProperties} https://github.com/google/closure-compiler/issues/946
- */
-nassh.CommandInstance.prototype.createTtyStream = function(
-    fd, allowRead, allowWrite, onOpen) {
-  const arg = {
-    fd: fd,
-    allowRead: allowRead,
-    allowWrite: allowWrite,
-    inputBuffer: this.inputBuffer_,
-    io: this.io,
-  };
-
-  const stream = this.streams_.openStream(TtyStream, fd, arg, onOpen);
-  if (allowRead) {
-    const onDataAvailable = (isAvailable) => {
-      // Send current read status to plugin.
-      this.sendToPlugin_('onReadReady', [fd, isAvailable]);
-    };
-
-    this.inputBuffer_.onDataAvailable.addListener(onDataAvailable);
-
-    stream.onClose = () => {
-      this.inputBuffer_.onDataAvailable.removeListener(onDataAvailable);
-      this.sendToPlugin_('onClose', [fd]);
-    };
-  }
-
-  return stream;
-};
-
-/**
- * Send a message to the nassh plugin.
- *
- * @param {string} name The name of the message to send.
- * @param {!Array} args The message arguments.
- */
-nassh.CommandInstance.prototype.sendToPlugin_ = function(name, args) {
-  try {
-    this.plugin_.postMessage({name: name, arguments: args});
-  } catch (e) {
-    // When we tear down the plugin, we sometimes have a tail of pending calls.
-    // Rather than try and chase all of those down, swallow errors when the
-    // plugin doesn't exist.
-    if (!this.exited_) {
-      console.error(e);
-    }
-  }
-};
-
-/**
- * Send a string to the remote host.
- *
- * @param {string} string The string to send.
- */
-nassh.CommandInstance.prototype.sendString_ = function(string) {
-  this.inputBuffer_.write(string);
-};
-
-/**
- * Notify plugin about new terminal size.
- *
- * @param {string|number} width The new terminal width.
- * @param {string|number} height The new terminal height.
- */
-nassh.CommandInstance.prototype.onTerminalResize_ = function(width, height) {
-  this.sendToPlugin_('onResize', [Number(width), Number(height)]);
-};
-
-/**
  * Exit the nassh command.
  *
  * @param {number} code Exit code, 0 for success.
@@ -1589,9 +1471,6 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
   this.exited_ = true;
 
   this.terminalWindow.removeEventListener('beforeunload', this.onBeforeUnload_);
-
-  // Close all streams upon exit.
-  this.streams_.closeAllStreams();
 
   // Hard destroy the plugin object.  In the past, we'd send onExitAcknowledge
   // to the plugin and let it exit/cleanup itself.  The NaCl runtime seems to
@@ -1664,21 +1543,6 @@ nassh.CommandInstance.prototype.onBeforeUnload_ = function(e) {
 };
 
 /**
- * Called when the plugin sends us a message.
- *
- * Plugin messages are JSON strings rather than arbitrary JS values.  They
- * also use "arguments" instead of "argv".  This function translates the
- * plugin message into something dispatchMessage_ can digest.
- *
- * @param {!Object} e
- */
-nassh.CommandInstance.prototype.onPluginMessage_ = function(e) {
-  // TODO: We should adjust all our callees to avoid this.
-  e.data.argv = e.data.arguments;
-  this.dispatchMessage_('plugin', this.onPlugin_, e.data);
-};
-
-/**
  * Connect dialog message handlers.
  *
  * @suppress {lintChecks} Allow non-primitive prototype property.
@@ -1742,155 +1606,6 @@ nassh.CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
 };
 
 /**
- * Plugin message handlers.
- *
- * @suppress {lintChecks} Allow non-primitive prototype property.
- */
-nassh.CommandInstance.prototype.onPlugin_ = {};
-
-/**
- * Log a message from the plugin.
- *
- * @param {string} str Message to log to the console.
- */
-nassh.CommandInstance.prototype.onPlugin_.printLog = function(str) {
-  console.log('plugin log: ' + str);
-};
-
-/**
- * Plugin has exited.
- *
- * @this {nassh.CommandInstance}
- * @param {number} code Exit code, 0 for success.
- */
-nassh.CommandInstance.prototype.onPlugin_.exit = function(code) {
-  console.log('plugin exit: ' + code);
-  this.onPluginExit(code);
-  this.exit(code, /* noReconnect= */ false);
-};
-
-/**
- * Plugin wants to open a file.
- *
- * The plugin leans on JS to provide a persistent filesystem, which we do via
- * the HTML5 Filesystem API.
- *
- * In the future, the plugin may handle its own files.
- *
- * @this {nassh.CommandInstance}
- * @param {number} fd The integer to associate with this request.
- * @param {string} path The path to the file to open.
- * @param {number} mode The mode to open the path.
- */
-nassh.CommandInstance.prototype.onPlugin_.openFile = function(fd, path, mode) {
-  let isAtty;
-  const onOpen = (success) => {
-    this.sendToPlugin_('onOpenFile', [fd, success, isAtty]);
-  };
-
-  const DEV_STDIN = '/dev/stdin';
-  const DEV_STDOUT = '/dev/stdout';
-  const DEV_STDERR = '/dev/stderr';
-
-  if (path == '/dev/tty') {
-    isAtty = true;
-    this.createTtyStream(fd, true, true, onOpen);
-  } else if (this.isSftp && path == DEV_STDOUT) {
-    isAtty = false;
-    const info = {
-      client: this.sftpClient,
-    };
-    this.streams_.openStream(SftpStream, fd, info, onOpen);
-  } else if (path == DEV_STDIN || path == DEV_STDOUT || path == DEV_STDERR) {
-    isAtty = !this.isSftp;
-    const allowRead = path == DEV_STDIN;
-    const allowWrite = path == DEV_STDOUT || path == DEV_STDERR;
-    this.createTtyStream(fd, allowRead, allowWrite, onOpen);
-  } else {
-    this.sendToPlugin_('onOpenFile', [fd, false, false]);
-  }
-};
-
-/**
- * @this {nassh.CommandInstance}
- * @param {number} fd
- * @param {string} host
- * @param {number} port
- */
-nassh.CommandInstance.prototype.onPlugin_.openSocket = function(
-    fd, host, port) {
-  let stream = null;
-
-  /**
-   * @param {boolean} success
-   * @param {?string=} error
-   */
-  const onOpen = (success, error) => {
-    if (!success) {
-      this.io.println(nassh.msg('STREAM_OPEN_ERROR', ['socket', error]));
-    }
-    this.sendToPlugin_('onOpenSocket', [fd, success, false]);
-  };
-
-  if (port == 0 && host == this.authAgentAppID_) {
-    // Request for auth-agent connection.
-    if (this.authAgent_) {
-      stream = this.streams_.openStream(
-          SshAgentStream, fd, {authAgent: this.authAgent_}, onOpen);
-    } else {
-      stream = this.streams_.openStream(
-          SshAgentRelayStream, fd,
-          {authAgentAppID: this.authAgentAppID_}, onOpen);
-    }
-  } else {
-    // Regular relay connection request.
-    if (!this.relay_) {
-      onOpen(false, '!this.relay_');
-      return;
-    }
-
-    stream = this.relay_.openSocket(fd, host, port, this.streams_, onOpen);
-  }
-
-  stream.onDataAvailable = (data) => {
-    this.sendToPlugin_('onRead', [fd, data]);
-  };
-
-  stream.onClose = () => {
-    this.sendToPlugin_('onClose', [fd]);
-  };
-};
-
-/**
- * Plugin wants to write some data to a file descriptor.
- *
- * This is used to write to HTML5 Filesystem files.
- *
- * @this {nassh.CommandInstance}
- * @param {number} fd The file handle to write to.
- * @param {!ArrayBuffer} data The content to write.
- */
-nassh.CommandInstance.prototype.onPlugin_.write = function(fd, data) {
-  const stream = this.streams_.getStreamByFd(fd);
-
-  if (!stream) {
-    console.warn('Attempt to write to unknown fd: ' + fd);
-    return;
-  }
-
-  stream.asyncWrite(data, (writeCount) => {
-    if (!stream.open) {
-      // If the stream was closed before we got a chance to ack, then skip it.
-      // We don't want to update the state of the plugin in case it re-opens
-      // the same fd and we end up acking to a new fd.
-      return;
-    }
-
-    this.sendToPlugin_('onWriteAcknowledge', [fd, writeCount]);
-  });
-};
-
-/**
  * SFTP Initialization handler. Mounts the SFTP connection as a file system.
  *
  * @param {function()=} callback Callback when initialization finishes.
@@ -1918,43 +1633,6 @@ nassh.CommandInstance.prototype.onSftpInitialised = function(callback) {
   if (callback) {
     callback();
   }
-};
-
-/**
- * Plugin wants to read from a fd.
- *
- * @this {nassh.CommandInstance}
- * @param {number} fd The file handle to read from.
- * @param {number} size How many bytes to read.
- */
-nassh.CommandInstance.prototype.onPlugin_.read = function(fd, size) {
-  const stream = this.streams_.getStreamByFd(fd);
-
-  if (!stream) {
-    console.warn('Attempt to read from unknown fd: ' + fd);
-    return;
-  }
-
-  stream.asyncRead(size, (b64bytes) => {
-    this.sendToPlugin_('onRead', [fd, b64bytes]);
-  });
-};
-
-/**
- * Plugin wants to close a file descriptor.
- *
- * @this {nassh.CommandInstance}
- * @param {number} fd The file handle to close.
- */
-nassh.CommandInstance.prototype.onPlugin_.close = function(fd) {
-  const stream = this.streams_.getStreamByFd(fd);
-
-  if (!stream) {
-    console.warn('Attempt to close unknown fd: ' + fd);
-    return;
-  }
-
-  this.streams_.closeStream(fd);
 };
 
 /**
@@ -2063,21 +1741,6 @@ nassh.CommandInstance.prototype.secureInput_ = function(
 nassh.CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
   return new Promise((resolve) => {
     this.secureInput_(prompt, buf_len, echo, resolve);
-  });
-};
-
-/**
- * Plugin wants to read a password, or some other secured user input.
- *
- * @this {nassh.CommandInstance}
- * @param {string} prompt The prompt for the user.
- * @param {number} buf_len Max length of user input.
- * @param {boolean} echo Whether to echo the user input.
- */
-nassh.CommandInstance.prototype.onPlugin_.readPass = function(
-    prompt, buf_len, echo) {
-  this.secureInput(prompt, buf_len, echo).then((pass) => {
-    this.sendToPlugin_('onReadPass', [pass]);
   });
 };
 

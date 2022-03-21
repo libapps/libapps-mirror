@@ -217,24 +217,13 @@ nassh.sftp.Client.prototype.onPacket = function(packet) {
 /**
  * Initializes SFTP connection.
  *
- * @param {!HTMLEmbedElement} plugin
+ * @param {!Object} plugin
  * @return {!Promise<void>} Resolves when connection is ready to use.
  */
 nassh.sftp.Client.prototype.initConnection = async function(plugin) {
   this.plugin_ = plugin;
   return this.init();
 };
-
-/**
- * Send a message to the nassh plugin.
- *
- * @param {string} name The name of the message to send.
- * @param {!Array} args The message arguments.
- */
-nassh.sftp.Client.prototype.sendToPlugin_ = function(name, args) {
-  this.plugin_.postMessage({name: name, arguments: args});
-};
-
 
 /**
  * Sends a SFTP request and awaits the response.
@@ -275,7 +264,7 @@ nassh.sftp.Client.prototype.sendRequest_ = function(type, data) {
 
   return new Promise((resolve) => {
     this.pendingRequests_[requestId] = resolve;
-    this.sendToPlugin_('onRead', [0, packet.toArrayBuffer()]);
+    this.plugin_.send('onRead', [0, packet.toArrayBuffer()]);
   });
 };
 
@@ -379,7 +368,7 @@ nassh.sftp.Client.prototype.init = async function() {
       resolve();
     };
 
-    this.sendToPlugin_('onRead', [0, packet.toArrayBuffer()]);
+    this.plugin_.send('onRead', [0, packet.toArrayBuffer()]);
   });
 
   // See the comments for these class constants for details.
