@@ -246,7 +246,7 @@ def mkcrosh(enable_minify, enable_gzip):
 
     # Copy over the Terminal project.
     terminal = libdot.LIBAPPS_DIR / 'terminal'
-    for subdir in ('css', 'html', 'js'):
+    for subdir in ('css', 'html', 'images', 'js'):
         for path in (terminal / subdir).glob('*'):
             if not fnmatch.fnmatch(path, '*_test*'):
                 shutil.copy(path, tmpdir / subdir)

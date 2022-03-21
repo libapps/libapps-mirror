@@ -2003,13 +2003,17 @@
 		"description": "Label for default Linux container. Note to translators: 'Linux' is a well known operating system name and should likely not be translated.",
 		"message": "Linux"
 	},
-	"TERMINAL_HOME_MANAGE_DEVELOPER_SETTINGS": {
+	"TERMINAL_HOME_DEVELOPER_SETTINGS": {
 		"description": "Label to open system settings at Developer (crostini) subpage.",
-		"message": "Manage Developer Settings"
+		"message": "Developer Settings"
 	},
 	"TERMINAL_HOME_MANAGE_SSH": {
 		"description": "Label to manage SSH connections",
 		"message": "Manage SSH connections"
+	},
+	"TERMINAL_HOME_TERMINAL_SETTINGS": {
+		"description": "Label to open Terminal settings page.",
+		"message": "Terminal Settings"
 	},
 	"TERMINAL_NAME_PREF_ANSI_COLORS": {
 		"description": "Label text shown for the preference to set ANSI colors.  ANSI is an acronym for American National Standards Institute.  Terminals specify a default 16 colors for their display, this configuration allows users to override the default colors.",

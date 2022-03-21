@@ -41,12 +41,13 @@ describe('terminal_home_app_tests.js', () => {
     });
 
     const rows = await this.getRowText();
-    assert.equal(5, rows.length);
+    assert.equal(6, rows.length);
     assert.equal('TERMINAL_HOME_MANAGE_SSH', rows[0].innerText);
     assert.equal('ssh-connection-1', rows[1].innerText);
     assert.equal('ssh-connection-2', rows[2].innerText);
     assert.equal('termina:penguin', rows[3].innerText);
     assert.equal('termina:c2', rows[4].innerText);
+    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[5].innerText);
   });
 
   it('shows-linux-label-if-only-default-container', async function() {
@@ -58,10 +59,11 @@ describe('terminal_home_app_tests.js', () => {
     });
 
     const rows = await this.getRowText();
-    assert.equal(2, rows.length);
+    assert.equal(3, rows.length);
     assert.equal('TERMINAL_HOME_MANAGE_SSH', rows[0].innerText);
     assert.equal(
       'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[1].innerText);
+    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[2].innerText);
   });
 
   it('shows-manage-developer-settings-if-crostini-disabled', async function() {
@@ -73,8 +75,9 @@ describe('terminal_home_app_tests.js', () => {
     });
 
     const rows = await this.getRowText();
-    assert.equal(2, rows.length);
+    assert.equal(3, rows.length);
     assert.equal('TERMINAL_HOME_MANAGE_SSH', rows[0].innerText);
-    assert.equal('TERMINAL_HOME_MANAGE_DEVELOPER_SETTINGS', rows[1].innerText);
+    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[1].innerText);
+    assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[2].innerText);
   });
 });

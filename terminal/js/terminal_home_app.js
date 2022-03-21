@@ -164,14 +164,14 @@ export class TerminalHomeApp extends LitElement {
     return html`
         <ul>
           <li>
-            <a href="terminal_ssh.html">
+            <a target="_blank" href="terminal_ssh.html">
               <span class="icon-fill-svg">${ICON_PLUS}</span>
               <span class="text">${msg('TERMINAL_HOME_MANAGE_SSH')}</span>
             </a>
           </li>
           ${this.sshConnections.map((c) => html`
               <li>
-                <a href="terminal_ssh.html#profile-id:${c.id}">
+                <a target="_blank" href="terminal_ssh.html#profile-id:${c.id}">
                   <span class="icon-fill-svg">${ICON_SSH}</span>
                   <span class="text">${c.description}</span>
                 </a>
@@ -179,18 +179,26 @@ export class TerminalHomeApp extends LitElement {
           `)}
           ${containers.map((c) => html`
               <li>
-                <a href="${containerHref(c)}">
+                <a target="_blank" href="${containerHref(c)}">
                   <span class="icon-fill-path">${ICON_LINUX}</span>
                   <span class="text">${containerText(c)}</span>
                 </a>
               </li>
           `)}
+          <li>
+            <a href="" @click="${this.onOpenTerminalSettings}">
+              <span class="icon-fill-svg">${ICON_SETTINGS}</span>
+              <span class="text">
+                ${msg('TERMINAL_HOME_TERMINAL_SETTINGS')}
+              </span>
+            </a>
+          </li>
           ${this.crostiniEnabled ? undefined : html`
               <li>
                 <a href="" @click="${this.onOpenSystemSettings}">
                   <span class="icon-fill-svg">${ICON_SETTINGS}</span>
                   <span class="text">
-                    ${msg('TERMINAL_HOME_MANAGE_DEVELOPER_SETTINGS')}
+                    ${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}
                   </span>
                 </a>
               </li>
@@ -231,6 +239,13 @@ export class TerminalHomeApp extends LitElement {
     if (prefs.hasOwnProperty(PREF_PATH_ENABLED)) {
       this.crostiniEnabled = prefs[PREF_PATH_ENABLED];
     }
+  }
+
+  /**
+   * Open terminal settings page.
+   */
+  onOpenTerminalSettings() {
+    chrome.terminalPrivate?.openOptionsPage(() => {});
   }
 
   /**
