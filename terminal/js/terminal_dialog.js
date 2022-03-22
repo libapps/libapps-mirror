@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html, LitElement} from './lit_element.js';
+import {css, html, LitElement} from './lit.js';
 import './terminal_settings_button.js';
 
 // A dialog with an accept and a cancel button. When a button is clicked, the
