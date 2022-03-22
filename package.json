@@ -37,7 +37,7 @@
     "http-server": "~0",
     "jsdoc-to-markdown": "~7",
     "license-checker": "~25",
-    "lit": "^2.2.1",
+    "lit-element": "^2.3.1",
     "markdownlint-cli": "~0",
     "mocha": "~8",
     "mocha-headless-chrome": "~3",

@@ -8,7 +8,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {LitElement, css} from './lit.js';
+import {LitElement, css} from './lit_element.js';
 
 export class TerminalKnob extends LitElement {
   /** @override */

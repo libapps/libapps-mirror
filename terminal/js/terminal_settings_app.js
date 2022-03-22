@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {css, html, LitElement, unsafeCSS} from './lit.js';
+import {css, html, LitElement, unsafeCSS} from './lit_element.js';
 import {SUPPORTED_FONT_SIZES,
   SUPPORTED_LINE_HEIGHT_PADDINGS} from './terminal_common.js';
 import {stylesVars} from './terminal_settings_styles.js';

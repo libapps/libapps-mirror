@@ -9,7 +9,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {LitElement} from './lit.js';
+import {LitElement} from './lit_element.js';
 
 export class TerminalSettingsElement extends LitElement {
   constructor() {

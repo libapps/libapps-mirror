@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {LitElement, css, html} from './lit.js';
+import {LitElement, css, html} from './lit_element.js';
 import {stylesVars} from './terminal_settings_styles.js';
 
 export class TerminalSettingsButtonElement extends LitElement {

@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {LitElement, css, html} from './lit.js';
+import {LitElement, css, html} from './lit_element.js';
 import {CHROME_VERSION} from './terminal_common.js';
 
 export const ARROW_KEY_OFFSET = 0.01;

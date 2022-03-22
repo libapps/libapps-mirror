@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {html, LitElement} from './lit.js';
+import {html, LitElement} from './lit_element.js';
 import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS} from './terminal_common.js';
 import './terminal_settings_dropdown.js';
 

@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, LitElement, html} from './lit.js';
+import {css, LitElement, html} from './lit_element.js';
 
 export class TerminalSettingsCategorySelectorElement extends LitElement {
   static get is() { return 'terminal-settings-category-selector'; }

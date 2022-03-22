@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html, LitElement, live} from './lit.js';
+import {css, html, LitElement, live} from './lit_element.js';
 import {redispatchEvent} from './terminal_common.js';
 
 export class TerminalTextfieldElement extends LitElement {

@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {LitElement, css, html, unsafeCSS} from './lit.js';
+import {LitElement, css, html, unsafeCSS} from './lit_element.js';
 import {DEFAULT_THEME, DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR,
     DEFAULT_CURSOR_COLOR, DEFAULT_FOREGROUND_COLOR} from './terminal_common.js';
 import {stylesVars} from './terminal_settings_styles.js';

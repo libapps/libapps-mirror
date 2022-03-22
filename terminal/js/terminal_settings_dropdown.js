@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html} from './lit.js';
+import {css, html} from './lit_element.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 /**

@@ -15,7 +15,7 @@ class TemplateResult {}
 class CSSResult {}
 
 /** @extends {HTMLElement} */
-class LitElement$$module$js$lit{
+class LitElement$$module$js$lit_element{
   /**
    * @return {!Object<string, PropertyDeclaration>}
    * @protected
@@ -65,22 +65,28 @@ class LitElement$$module$js$lit{
  * @param {ITemplateArray} strings
  * @param {...*} values
  */
-function css$$module$js$lit(strings, ...values) {}
+function css$$module$js$lit_element(strings, ...values) {}
 
 /**
  * @param {ITemplateArray} strings
  * @param {...*} values
 * @return {!TemplateResult}
  */
-function html$$module$js$lit(strings, ...values) {}
+function html$$module$js$lit_element(strings, ...values) {}
+
+/**
+ * @param {!TemplateResult} template
+ * @param {!Element|!ShadowRoot|!DocumentFragment} element
+ */
+function render$$module$js$lit_element(template, element) {}
 
 /**
  * @param {*} value
  * @return {CSSResult}
  */
-function unsafeCSS$$module$js$lit(value) {}
+function unsafeCSS$$module$js$lit_element(value) {}
 
 /**
  * @param {*} value
  */
-function live$$module$js$lit(value) {}
+function live$$module$js$lit_element(value) {}

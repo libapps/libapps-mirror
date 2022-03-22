@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {css} from './lit.js';
+import {css} from './lit_element.js';
 
 export const stylesVars = css`
   :host {

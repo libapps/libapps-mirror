@@ -50,8 +50,8 @@ export {punycode};
  * accomplish this though, as the terminal app currently does not manage its
  * own dependencies, but instead includes nassh's.
  */
-import {LitElement, html, css, unsafeCSS} from 'lit';
-import {live} from 'lit/directives/live.js';
-const lit = {LitElement, html, css, unsafeCSS, live};
-export {lit};
-
+import {render} from 'lit-html/lit-html';
+import {live} from 'lit-html/directives/live.js';
+import {LitElement, html, css, unsafeCSS} from 'lit-element/lit-element';
+const litelement = {LitElement, render, html, css, unsafeCSS, live}
+export {litelement};

@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html, LitElement} from './lit.js';
+import {css, html, LitElement} from './lit_element.js';
 import './terminal_settings_button.js';
 
 const PREFERENCE = 'background-image';
