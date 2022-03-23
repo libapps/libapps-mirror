@@ -11,9 +11,9 @@
  *
  * @suppress {moduleLoad}
  */
-import {litelement} from './nassh_deps.rollup.js';
+import {lit} from './nassh_deps.rollup.js';
 
 /** @suppress {undefinedVars} */
-const {LitElement, render, html, css, unsafeCSS, live} = litelement;
+const {LitElement, html, css, unsafeCSS, live} = lit;
 
-export {LitElement, render, html, css, unsafeCSS, live};
+export {LitElement, html, css, unsafeCSS, live};

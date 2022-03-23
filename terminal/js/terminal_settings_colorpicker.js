@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {LitElement, css, html} from './lit_element.js';
+import {LitElement, css, html} from './lit.js';
 import {CHROME_VERSION} from './terminal_common.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 import './terminal_settings_button.js';

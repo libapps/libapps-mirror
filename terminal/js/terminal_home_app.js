@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {css, html, LitElement} from './lit_element.js';
+import {css, html, LitElement} from './lit.js';
 import {DEFAULT_CONTAINER_NAME, DEFAULT_VM_NAME} from './terminal_common.js';
 
 /**

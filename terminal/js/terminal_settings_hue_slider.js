@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {LitElement, css, html} from './lit_element.js';
+import {LitElement, css, html} from './lit.js';
 import {redispatchEvent} from './terminal_common.js';
 import './terminal_knob.js';
 import './terminal_slider.js';

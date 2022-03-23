@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {LitElement, css, html} from './lit_element.js';
+import {LitElement, css, html} from './lit.js';
 import './terminal_knob.js';
 
 export const ARROW_KEY_OFFSET = 1;
