@@ -78,19 +78,6 @@ done
 # We use -O2 as that seems to provide good enough shrinkage.  -O3/-O4 take
 # much longer but don't produce singificnatly larger/smaller files.  -Os/-Oz
 # also aren't that much smaller than -O2.  So use this pending more testing.
-#
-# Only use single core because versions <102 are known to segfault, and upstream
-# doesn't seem to have any idea if they actually fixed it, or if it just happens
-# to mostly work now.
-# https://github.com/WebAssembly/binaryen/issues/2273
-#
-# Also force single core because it significantly outperforms multicore runs due
-# to some extreme internal threading overhead.
-# https://github.com/WebAssembly/binaryen/issues/2740
-export BINARYEN_CORES=1
-
-PATH+=":${PWD}/output/bin"
-
 WASM_OPTS=()
 if [[ ${DEBUG} == 1 ]]; then
   WASM_OPTS+=( -O0 )
@@ -99,23 +86,47 @@ else
 fi
 
 pushd output >/dev/null
+cat <<EOF >Makefile.wasm-opt
+# Only use single core because versions <102 are known to segfault, and upstream
+# doesn't seem to have any idea if they actually fixed it, or if it just happens
+# to mostly work now.
+# https://github.com/WebAssembly/binaryen/issues/2273
+#
+# Also force single core because it significantly outperforms multicore runs due
+# to some extreme internal threading overhead.
+# https://github.com/WebAssembly/binaryen/issues/2740
+export BINARYEN_CORES = 1
+
+# Disable implicit rules we don't need.
+MAKEFLAGS += --no-builtin-rules
+.SUFFIXES:
+
+WASM_OPTS = ${WASM_OPTS[*]}
+
+WASM_OPT = ${PWD}/bin/wasm-opt
+
+all:
+EOF
 first="true"
 for version in "${SSH_VERSIONS[@]}"; do
-  dir="plugin/wasm"
   if [[ "${first}" == "true" ]]; then
     first=
+    dir="plugin/wasm"
   else
     dir+="-openssh-${version}"
   fi
   mkdir -p "${dir}"
 
   for prog in scp sftp ssh ssh-keygen; do
-    wasm-opt \
-      "${WASM_OPTS[@]}" \
-      build/wasm/openssh-${version}*/work/openssh-*/${prog} \
-      -o "${dir}/${prog}.wasm"
+    (
+      echo "all: ${dir}/${prog}.wasm"
+      echo "${dir}/${prog}.wasm:" \
+        build/wasm/openssh-${version}*/work/openssh-*/${prog}
+      printf '\t$(WASM_OPT) ${WASM_OPTS} $< -o $@\n'
+    ) >>Makefile.wasm-opt
   done
 done
+make -f Makefile.wasm-opt -j${ncpus} -O
 popd >/dev/null
 
 # Build the PNaCl programs.
