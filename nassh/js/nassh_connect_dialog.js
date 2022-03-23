@@ -745,26 +745,6 @@ ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
     selectedName = identitySelect.value;
   }
 
-  const onReadError = () => {
-    const option = document.createElement('option');
-    option.textContent = 'Error!';
-    identitySelect.appendChild(option);
-  };
-
-  const onReadSuccess = (entries) => {
-    // Create a set of the filenames which is all we care about.
-    const fileNames = new Set(
-        entries.filter((entry) => entry.isFile).map((entry) => entry.name));
-    fileNames.forEach((name) => {
-      const ary = name.match(/^(.*)\.pub/);
-      if (ary && fileNames.has(ary[1])) {
-        keyfileNames.add(ary[1]);
-      } else if (name.startsWith('id_') && !name.endsWith('.pub')) {
-        keyfileNames.add(name);
-      }
-    });
-  };
-
   const onFinalLoad = () => {
     // Reset the list with the current set of keys.
     while (identitySelect.firstChild) {
@@ -796,13 +776,7 @@ ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
   };
 
   return Promise.all([
-    // Load legacy/filtered keys from /.ssh/.
-    // TODO: Delete this at some point after Aug 2019.  Jan 2021 should be long
-    // enough for users to migrate.
-    lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/')
-      .then(onReadSuccess).catch(onReadError),
-
-    // Load new keys from /.ssh/identity/.
+    // Load keys from /.ssh/identity/.
     lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/identity/')
       .then((entries) => {
         entries.forEach((entry) => {
@@ -830,14 +804,6 @@ ConnectDialog.prototype.deleteIdentity_ = function(identityName) {
   };
 
   const files = [
-    // Delete the private & public key halves for this identity from the .ssh/
-    // and .ssh/identity/ dirs.  We used to require importing the pub file in
-    // order to update the display, but that's no longer required.  We used to
-    // import keys into .ssh/, but that made enumeration messy.  To migrate from
-    // the old world state to the new world state, delete all the files!  We can
-    // delete after Jan 2021.
-    `/.ssh/${identityName}`,
-    `/.ssh/${identityName}.pub`,
     `/.ssh/identity/${identityName}`,
     `/.ssh/identity/${identityName}.pub`,
     `/.ssh/identity/${identityName}-cert.pub`,

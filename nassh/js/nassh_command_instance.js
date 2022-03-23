@@ -1205,11 +1205,6 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
   }
 
   if (params.identity) {
-    // Load legacy/filtered keys from /.ssh/.
-    // TODO: Delete this at some point after Aug 2019.  Jan 2021 should be long
-    // enough for users to migrate.
-    argv.arguments.push(`-i/.ssh/${params.identity}`);
-
     argv.arguments.push(`-i/.ssh/identity/${params.identity}`);
   }
   if (params.port) {
