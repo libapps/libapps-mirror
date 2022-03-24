@@ -1187,7 +1187,7 @@
 	},
 	"NASFTP_CMD_COPY_HELP": {
 		"description": "Help text for the 'copy' command.",
-		"message": "Copy source to destination"
+		"message": "Copy a remote path to a different remote path"
 	},
 	"NASFTP_CMD_DEL": {
 		"description": "Name of the 'del' command which deletes files on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
@@ -1635,7 +1635,7 @@
 	},
 	"NASFTP_ERROR_MISSING_PROTOCOL_EXTENSION": {
 		"description": "Error message shown when a protocol extension is unavailable during this session. The extension shown is the internet standards identifier that the client/server used to communicate.",
-		"message": "$CMD$: '$EXT$' extension unavailable",
+		"message": "$CMD$: required '$EXT$' extension unavailable with this server",
 		"placeholders": {
 			"CMD": {
 				"content": "$1",
