@@ -6,6 +6,7 @@
  * @fileoverview Stream for connecting to a ssh server via a Corp v4 relay.
  */
 
+import {GoogMetricsReporter} from './nassh_goog_metrics_reporter.js';
 import {Stream} from './nassh_stream.js';
 
 /**
@@ -193,7 +194,7 @@ export function RelayCorpv4WsStream(fd) {
   /**
    * Sends metrics to designated storage.
    *
-   * @type {?nassh.GoogMetricsReporter}
+   * @type {?GoogMetricsReporter}
    */
    this.googMetricsReporter_ = null;
 }
@@ -220,7 +221,7 @@ RelayCorpv4WsStream.prototype.asyncOpen = async function(settings, onComplete) {
   this.host_ = settings.host;
   this.port_ = settings.port;
   if (settings.reportAckLatency) {
-    this.googMetricsReporter_ = new nassh.GoogMetricsReporter();
+    this.googMetricsReporter_ = new GoogMetricsReporter();
   }
   this.openCallback_ = onComplete;
   this.connect_();

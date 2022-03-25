@@ -2,18 +2,19 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {Distribution, GoogMetricsReporter}
+    from './nassh_goog_metrics_reporter.js';
 
 /**
- * @fileoverview `nassh.GoogMetricsReporter` unit tests.
+ * @fileoverview `GoogMetricsReporter` unit tests.
  */
 
-describe('nassh.metrics_reporter_tests.js', () => {
+describe('nassh_goog_metrics_reporter_tests.js', () => {
   describe('reportLatency', () => {
     let reporter;
 
     beforeEach(() => {
-      reporter = new nassh.GoogMetricsReporter();
+      reporter = new GoogMetricsReporter();
     });
 
     it('increments underflow bucket for sample less than lower bound', () => {
@@ -91,7 +92,7 @@ describe('nassh.metrics_reporter_tests.js', () => {
     let distribution;
 
     beforeEach(() => {
-      distribution = new nassh.Distribution();
+      distribution = new Distribution();
     });
 
     it('finds index for value equal to first element', () => {

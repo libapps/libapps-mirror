@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Manages and reports Google session metrics.
  */
@@ -11,10 +9,10 @@
 /**
  * Reports Google session metrics.
  */
-nassh.GoogMetricsReporter = class {
+export class GoogMetricsReporter {
   constructor() {
-    /** @type {!nassh.Distribution} */
-    this.distribution = new nassh.Distribution();
+    /** @type {!Distribution} */
+    this.distribution = new Distribution();
   }
 
   /**
@@ -26,13 +24,13 @@ nassh.GoogMetricsReporter = class {
     this.distribution.addSample_(latency);
     // TODO(eizihirwe): Send distribution with go/monapi every 30s.
   }
-};
+}
 
 /**
  * Stores and manages latency data in the form of a distribution.
  * Based on this implementation of a distribution: http://shortn/_apyKoGGwAn.
  */
-nassh.Distribution = class {
+export class Distribution {
   constructor() {
     /**
      * Bucket incremented when sample is less than lower bound.
@@ -180,4 +178,4 @@ nassh.Distribution = class {
     }
     return low - 1;
   }
-};
+}
