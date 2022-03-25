@@ -31,11 +31,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
   lib.init().then(() => {
     const prefs = window.preferenceManager = new hterm.PreferenceManager();
     definePrefs(prefs);
-    ['cursor-color', 'foreground-color'].forEach((p) => {
-      prefs.addObserver(p, (color) => {
-        document.body.style.setProperty(
-            `--hterm-${p}`, /** @type {string} */ (color));
-      });
+    // Dynamically change colors if settings change.
+    const setColorRgbCssVar = (name, color) => {
+      const css = lib.notNull(lib.colors.normalizeCSS(color));
+      const rgb = lib.colors.crackRGB(css).slice(0, 3).join(',');
+      document.body.style.setProperty(`--${name}-rgb`, rgb);
+    };
+    ['background-color', 'cursor-color', 'foreground-color'].forEach((p) => {
+      prefs.addObserver(p, setColorRgbCssVar.bind(null, p));
+    });
+    prefs.addObserver('color-palette-overrides', (v) => {
+      // Use ANSI bright blue (12) for buttons.
+      const c = lib.colors.normalizeCSS(v[12] || lib.colors.stockPalette[12]);
+      setColorRgbCssVar('button-color', c);
     });
     terminal.watchBackgroundColor(prefs);
     prefs.readStorage(() => {

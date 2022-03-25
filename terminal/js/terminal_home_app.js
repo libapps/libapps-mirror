@@ -53,9 +53,21 @@ const ICON_LINUX = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 
  */
 const ICON_SETTINGS = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>`;
 
-export class TerminalHomeApp extends LitElement {
-  static get is() { return 'terminal-home-app'; }
+/**
+ * More Vert (3 dot menu) svg icon.
+ *
+ * @type {!TemplateResult}
+ */
+const ICON_MORE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>`;
 
+/**
+ * North east arrow open svg icon.
+ *
+ * @type {!TemplateResult}
+ */
+const ICON_OPEN = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect fill="none" height="24" width="24"/><path d="M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z"/></svg>`;
+
+export class TerminalHomeApp extends LitElement {
   /** @override */
   async performUpdate() {
     // A lot of elements in this page assume libdot has finished initialization.
@@ -81,41 +93,85 @@ export class TerminalHomeApp extends LitElement {
   /** @override */
   static get styles() {
     return css`
+      :host {
+        font-family: 'Roboto';
+      }
+
       a {
-        align-items: center;
-        display: flex;
-        height: 100%;
-        padding: 0 20px;
         text-decoration: none;
-        width: 100%;
       }
 
-      a:hover {
-        background-color: var(--hterm-cursor-color);
+      button {
+        background-color: rgba(var(--button-color-rgb), 0.08);
+        border: 1px solid rgb(var(--button-color-rgb));
+        border-radius: 4px;
+        color: rgb(var(--button-color-rgb));
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+        outline: none;
+        padding: 7px 15px;
       }
 
-      li {
-        height: 50px;
+      button:hover {
+        background-color: rgba(var(--button-color-rgb), 0.2));
+      }
+
+      h3 {
+        color: rgb(var(--foreground-color-rgb));
+        flex-grow: 1;
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      h4 {
+        color: rgb(var(--foreground-color-rgb));
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      section {
+        max-width: 800px;
+        padding: 0 32px;
       }
 
       ul {
         list-style-type: none;
-        padding-inline-start: unset;
+        padding: 0;
       }
 
-      svg {
-        height: 32px;
-        padding-right: 16px;
+      .button-icon > svg {
+        fill: rgb(var(--button-color-rgb));
+        height: 22px;
+        margin: -6px 0;
+        padding-right: 8px;
       }
 
       .icon-fill-path > svg > path, .icon-fill-svg > svg {
-        fill: var(--hterm-foreground-color);
+        fill: rgb(var(--foreground-color-rgb));
       }
 
-      .text {
-        color: var(--hterm-foreground-color);
-        font-family: 'Roboto';
-        font-size: 18px;
+      .row {
+        align-items: center;
+        display: flex;
+      }
+
+      .row-border {
+        border-bottom: 1px solid rgb(var(--foreground-color-rgb), 0.2);
+      }
+
+      .row-header {
+        height: 60px;
+        margin: 20px 0 0;
+      }
+
+      .row-full-width {
+        width: 100%;
+      }
+
+      .row-icon > svg {
+        height: 24px;
+        padding-right: 16px;
       }
     `;
   }
@@ -162,48 +218,65 @@ export class TerminalHomeApp extends LitElement {
     };
 
     return html`
+      <section>
+        <div class="row row-border row-header">
+          <h3>${msg('TERMINAL_HOME_SSH')}</h3>
+          <a target="_blank" href="terminal_ssh.html">
+            <button>
+              <span class="button-icon">${ICON_PLUS}</span>
+              ${msg('TERMINAL_HOME_ADD_SSH')}
+            </button>
+          </a>
+        </div>
         <ul>
-          <li>
+        ${this.sshConnections.map((c) => html`
+          <li class="row row-border">
+            <a class="row row-full-width" target="_blank"
+                href="terminal_ssh.html#profile-id:${c.id}">
+              <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
+              <h4>${c.description}</h4>
+            </a>
             <a target="_blank" href="terminal_ssh.html">
-              <span class="icon-fill-svg">${ICON_PLUS}</span>
-              <span class="text">${msg('TERMINAL_HOME_MANAGE_SSH')}</span>
+              <span class="row-icon icon-fill-svg">${ICON_MORE}</span>
             </a>
           </li>
-          ${this.sshConnections.map((c) => html`
-              <li>
-                <a target="_blank" href="terminal_ssh.html#profile-id:${c.id}">
-                  <span class="icon-fill-svg">${ICON_SSH}</span>
-                  <span class="text">${c.description}</span>
-                </a>
-              </li>
-          `)}
-          ${containers.map((c) => html`
-              <li>
-                <a target="_blank" href="${containerHref(c)}">
-                  <span class="icon-fill-path">${ICON_LINUX}</span>
-                  <span class="text">${containerText(c)}</span>
-                </a>
-              </li>
-          `)}
-          <li>
-            <a href="" @click="${this.onOpenTerminalSettings}">
-              <span class="icon-fill-svg">${ICON_SETTINGS}</span>
-              <span class="text">
-                ${msg('TERMINAL_HOME_TERMINAL_SETTINGS')}
-              </span>
-            </a>
-          </li>
-          ${this.crostiniEnabled ? undefined : html`
-              <li>
-                <a href="" @click="${this.onOpenSystemSettings}">
-                  <span class="icon-fill-svg">${ICON_SETTINGS}</span>
-                  <span class="text">
-                    ${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}
-                  </span>
-                </a>
-              </li>
-          `}
+        `)}
         </ul>
+      </section>
+      ${containers.length == 0 ? undefined : html`
+        <section>
+          <h3 class="row row-border row-header">
+            ${msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL')}
+          </h3>
+          <ul>
+          ${containers.map((c) => html`
+            <li class="row-border">
+              <a class="row" target="_blank"
+                  href="${containerHref(c)}">
+                <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
+                <h4>${containerText(c)}</h4>
+              </a>
+            </li>
+          `)}
+          </ul>
+        </section>
+      `}
+      <section>
+        <ul>
+          <li class="row-header">
+            <a class="row" href="" @click="${this.onOpenTerminalSettings}">
+              <span class="row-icon icon-fill-svg">${ICON_SETTINGS}</span>
+              <h4>${msg('TERMINAL_HOME_TERMINAL_SETTINGS')}</h4>
+            </a>
+          </li>
+          <li>
+            <a class="row" href="" @click="${this.onOpenSystemSettings}">
+              <span class="row-icon icon-fill-svg">${ICON_OPEN}</span>
+              <h4>${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}</h4>
+            </a>
+          </li>
+        </ul>
+      </section>
     `;
   }
 
@@ -256,4 +329,4 @@ export class TerminalHomeApp extends LitElement {
   }
 }
 
-customElements.define(TerminalHomeApp.is, TerminalHomeApp);
+customElements.define('terminal-home-app', TerminalHomeApp);

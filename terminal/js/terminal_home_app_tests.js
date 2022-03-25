@@ -6,13 +6,13 @@
  * @fileoverview Terminal Home App Element unit tests.
  */
 
-import {TerminalHomeApp} from './terminal_home_app.js';
+import './terminal_home_app.js';
 
 describe('terminal_home_app_tests.js', () => {
   beforeEach(function() {
     hterm.defaultStorage.clear();
     this.el = /** @type {!Element} */ (
-      document.createElement(TerminalHomeApp.is));
+      document.createElement('terminal-home-app'));
     document.body.appendChild(this.el);
 
     // Returns 'li .text' nodes after waiting for all updates to complete.
@@ -20,7 +20,7 @@ describe('terminal_home_app_tests.js', () => {
       for (let i = 0; i < 3; i++) {
         await this.el.updateComplete;
       }
-      return this.el.shadowRoot.querySelectorAll('li .text');
+      return this.el.shadowRoot.querySelectorAll('h3, h4');
     };
   });
 
@@ -41,13 +41,16 @@ describe('terminal_home_app_tests.js', () => {
     });
 
     const rows = await this.getRowText();
-    assert.equal(6, rows.length);
-    assert.equal('TERMINAL_HOME_MANAGE_SSH', rows[0].innerText);
+    assert.equal(8, rows.length);
+    assert.equal('TERMINAL_HOME_SSH', rows[0].innerText);
     assert.equal('ssh-connection-1', rows[1].innerText);
     assert.equal('ssh-connection-2', rows[2].innerText);
-    assert.equal('termina:penguin', rows[3].innerText);
-    assert.equal('termina:c2', rows[4].innerText);
-    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[5].innerText);
+    assert.equal(
+      'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[3].innerText);
+    assert.equal('termina:penguin', rows[4].innerText);
+    assert.equal('termina:c2', rows[5].innerText);
+    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[6].innerText);
+    assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[7].innerText);
   });
 
   it('shows-linux-label-if-only-default-container', async function() {
@@ -59,14 +62,17 @@ describe('terminal_home_app_tests.js', () => {
     });
 
     const rows = await this.getRowText();
-    assert.equal(3, rows.length);
-    assert.equal('TERMINAL_HOME_MANAGE_SSH', rows[0].innerText);
+    assert.equal(5, rows.length);
+    assert.equal('TERMINAL_HOME_SSH', rows[0].innerText);
     assert.equal(
       'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[1].innerText);
-    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[2].innerText);
+    assert.equal(
+      'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[2].innerText);
+    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[3].innerText);
+    assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[4].innerText);
   });
 
-  it('shows-manage-developer-settings-if-crostini-disabled', async function() {
+  it('hides-containers-if-crostini-disabled', async function() {
     hterm.defaultStorage.setItems({
       'crostini.enabled': false,
       'crostini.containers': [
@@ -76,7 +82,7 @@ describe('terminal_home_app_tests.js', () => {
 
     const rows = await this.getRowText();
     assert.equal(3, rows.length);
-    assert.equal('TERMINAL_HOME_MANAGE_SSH', rows[0].innerText);
+    assert.equal('TERMINAL_HOME_SSH', rows[0].innerText);
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[1].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[2].innerText);
   });
