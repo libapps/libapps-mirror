@@ -1,3 +1,43 @@
+# 0.46, 2022-03-25, ES6 modules & WASM work.
+
+* nassh: Integrate wassh.
+* wassh: Implement basic signal delivery.
+* goog: Change GoogMetricsReporter to ES6.
+* wassh-libc-sup: Require wasi-sdk signal logic.
+* wassh: Support tty window size ioctls.
+* streamset: Convert to ES6 class.
+* wassh: Implement getpeername & getsockname.
+* ssh_client: Optimize wasm optimization step.
+* nasftp: Simplify main input loop with async/await.
+* streams: Convert to ES6 modules.
+* identity: Drop old key paths.
+* wassh: Flesh out GAI APIs a bit more.
+* corpv4: Include ssh username in /connect call.
+* background page: Add new metrics code to background page too.
+* ssh_client: Preserve timestamps when copying files.
+* ssh_client: Drop use of nacl getos.py.
+* dist: Include wasi-js-bindings & wassh in release.
+* wassh-libc-sup: Add err APIs.
+* goog: Convert to ES6 module.
+* streamset: Convert to ES6 module.
+* crosh: Change from getA11yStatus() to getPrefs().
+* relay: Add 'async' keyword to 'asyncOpen' functions.
+* relay: Return false from relay reconnect if no connection.
+* ssh_client: Make pnacl use python2 instead of python.
+* relays: Convert to ES6 modules.
+* nasftp: Convert to ES6 modules.
+* manifest: Enable wasm eval CSP.
+* mkdeps: Setup wassh paths for development.
+* relay: Take into account partial ACKs when measuring ACK latency.
+* nassh: Remove $i18n{themeColor} replacement.
+* wassh: Flesh out readpassphrase & tty interface more.
+* background page: Convert main App to ES6 modules.
+* wassh: Flesh out termios APIs.
+* wassh: Switch to hterm for output.
+* wassh-libc-sup: Build with C17.
+* wassh: Implement readpassphrase.
+* wassh: Flesh out socket emulation a bit.
+
 # 0.45, 2022-03-04, Minor bug fixes.
 
 * Roll hterm fixes.
