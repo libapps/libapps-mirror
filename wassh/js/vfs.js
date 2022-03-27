@@ -86,24 +86,24 @@ export class PathHandle {
 
   /**
    * @param {number} length
-   * @return {!WASI_t.errno|
-   *          {buf: !Uint8Array, nread: number}|
-   *          {buf: !Uint8Array}|
-   *          {nread: number}}
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
    */
-  read(length) {
+  async read(length) {
     return WASI.errno.EBADF;
   }
 
   /**
    * @param {number} length
    * @param {number|bigint} offset
-   * @return {!WASI_t.errno|
-   *          {buf: !Uint8Array, nread: number}|
-   *          {buf: !Uint8Array}|
-   *          {nread: number}}
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
    */
-  pread(length, offset) {
+  async pread(length, offset) {
     return WASI.errno.EBADF;
   }
 
@@ -165,14 +165,14 @@ export class FileHandle extends PathHandle {
   }
 
   /** @override */
-  read(length) {
-    const ret = this.pread(length, this.pos);
+  async read(length) {
+    const ret = await this.pread(length, this.pos);
     this.pos += BigInt(ret.buf.length);
     return ret;
   }
 
   /** @override */
-  pread(length, offset) {
+  async pread(length, offset) {
     length = Number(length);
     offset = Number(offset);
     return {buf: this.data.subarray(offset, offset + length)};
@@ -250,7 +250,7 @@ export class DirectoryHandle extends PathHandle {
   }
 
   /** @override */
-  read(length) {
+  async read(length) {
     return WASI.errno.EISDIR;
   }
 }
@@ -371,12 +371,12 @@ export class DevNullHandle extends PathHandle {
   }
 
   /** @override */
-  read(length) {
+  async read(length) {
     return {nread: 0};
   }
 
   /** @override */
-  pread(length, offset) {
+  async pread(length, offset) {
     return {nread: 0};
   }
 

@@ -44,7 +44,7 @@ class Tty extends VFS.FileHandle {
   }
 
   /** @override */
-  read(length) {
+  async read(length) {
     const buf = Array.from(this.data.slice(0, length));
     this.data = this.data.subarray(length);
     return {buf};

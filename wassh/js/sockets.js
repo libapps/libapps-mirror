@@ -145,7 +145,7 @@ export class TcpSocket extends Socket {
   }
 
   /** @override */
-  read(length) {
+  async read(length) {
     const buf = this.data.slice(0, length);
     this.data = this.data.subarray(length);
     return {buf};
