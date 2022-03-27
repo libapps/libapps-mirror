@@ -526,6 +526,10 @@ export class WasiPreview1 extends Base {
       } else {
         if (ret.buf !== undefined) {
           const u8 = new Uint8Array(ret.buf);
+          if (u8.length > iovec.buf_len) {
+            this.logError('handle_fd_read returned too many bytes: ' +
+                          `${u8.length} > ${iovec.buf_len}`);
+          }
           buf.set(u8);
           if (ret.nread === undefined) {
             ret.nread = u8.length;
