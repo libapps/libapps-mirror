@@ -79,9 +79,10 @@ export class DirectWasiPreview1 extends SyscallHandler.DirectWasiPreview1 {
  * These may be asynchronous.
  */
 export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
-  constructor({term} = {}) {
+  constructor({term, unixSocketsOpen} = {}) {
     super();
     this.term_ = term;
+    this.unixSocketsOpen_ = unixSocketsOpen;
     this.notify_ = null;
     this.vfs = new VFS.VFS({stdio: false});
     this.socketTcpRecv_ = null;
@@ -461,8 +462,18 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
             return WASI.errno.EPROTONOSUPPORT;
         }
         break;
+
       case Sockets.AF_UNIX:
-        // TODO(vapier): Implement UNIX sockets.
+        switch (type) {
+          case WASI.filetype.SOCKET_STREAM:
+          case WASI.filetype.SOCKET_DGRAM:
+            handle = Sockets.UnixSocket(
+                domain, type, protocol, this.unixSocketsOpen_);
+            break;
+          default:
+            return WASI.errno.EPROTONOSUPPORT;
+        }
+
       default:
         return WASI.errno.EAFNOSUPPORT;
     }
@@ -470,6 +481,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     if (await handle.init() === false) {
       return WASI.errno.ENOSYS;
     }
+    // TODO(vapier): Missing socketMap_.delete call on close.
     this.socketMap_.set(handle.socketId, handle);
     const socket = this.vfs.openHandle(handle);
     return {socket};

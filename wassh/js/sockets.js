@@ -23,7 +23,74 @@ const IP_TOS = 1;
 const IPPROTO_TCP = 6;
 const TCP_NODELAY = 1;
 
+/**
+ * Base class for all socket types.
+ *
+ * This should support TCP/UDP/UNIX/etc... fundamentals without having any
+ * family or protocol specific logic in it.
+ */
 export class Socket extends VFS.PathHandle {
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   */
+  constructor(domain, type, protocol) {
+    super('socket', type);
+    /** @const {number} */
+    this.domain = domain;
+    /** @const {number} */
+    this.protocol = protocol;
+    /** @type {?string} */
+    this.address = null;
+    /** @type {?number} */
+    this.port = null;
+
+    // TODO(vapier): Make this into a stream.
+    this.data = new Uint8Array(0);
+
+    // Callback when the read is blocking.
+    this.reader_ = null;
+  }
+
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async connect(address, port) {
+    throw new Error('connect(): unimplemented');
+  }
+
+  /**
+   * @param {!ArrayBuffer} data
+   */
+  onRecv(data) {
+    const u8 = new Uint8Array(data);
+    const newData = new Uint8Array(this.data.length + u8.length);
+    newData.set(this.data);
+    newData.set(u8, this.data.length);
+    this.data = newData;
+
+    // If there are any readers waiting, wake them up.
+    if (this.reader_) {
+      this.reader_();
+      this.reader_ = null;
+    }
+  }
+
+  /** @override */
+  async read(length) {
+    // TODO(vapier): Support O_NONBLOCK.
+    if (this.data.length === 0) {
+      await new Promise((resolve) => this.reader_ = resolve);
+    }
+
+    const buf = this.data.slice(0, length);
+    this.data = this.data.subarray(length);
+    return {buf};
+  }
+
   /** @override */
   stat() {
     return /** @type {!WASI_t.filestat} */ ({
@@ -37,6 +104,9 @@ export class Socket extends VFS.PathHandle {
   }
 }
 
+/**
+ * A TCP/IP based socket.
+ */
 export class TcpSocket extends Socket {
   /**
    * @param {number} domain
@@ -44,19 +114,11 @@ export class TcpSocket extends Socket {
    * @param {number} protocol
    */
   constructor(domain, type, protocol) {
-    super('tcp socket', type);
+    super(domain, type, protocol);
+
     /** @type {number} */
     this.socketId = -1;
-    /** @const {number} */
-    this.domain = domain;
-    /** @const {number} */
-    this.protocol = protocol;
-    /** @type {?string} */
-    this.address = null;
-    /** @type {?number} */
-    this.port = null;
-    // TODO(vapier): Make this into a stream.
-    this.data = new Uint8Array(0);
+
     this.tcpKeepAlive_ = false;
     this.tcpNoDelay_ = false;
   }
@@ -74,11 +136,7 @@ export class TcpSocket extends Socket {
     this.socketId = info.socketId;
   }
 
-  /**
-   * @param {string} address
-   * @param {number} port
-   * @return {!Promise<!WASI_t.errno>}
-   */
+  /** @override */
   async connect(address, port) {
     if (this.address !== null) {
       return WASI.errno.EISCONN;
@@ -131,24 +189,6 @@ export class TcpSocket extends Socket {
     }
 
     return {nwritten: bytesSent};
-  }
-
-  /**
-   * @param {!ArrayBuffer} data
-   */
-  onRecv(data) {
-    const u8 = new Uint8Array(data);
-    const newData = new Uint8Array(this.data.length + u8.length);
-    newData.set(this.data);
-    newData.set(u8, this.data.length);
-    this.data = newData;
-  }
-
-  /** @override */
-  async read(length) {
-    const buf = this.data.slice(0, length);
-    this.data = this.data.subarray(length);
-    return {buf};
   }
 
   /**
@@ -242,5 +282,65 @@ export class TcpSocket extends Socket {
     }
 
     return WASI.errno.ENOPROTOOPT;
+  }
+}
+
+/**
+ * A local/UNIX socket.
+ */
+export class UnixSocket extends Socket {
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @param {function(string, number)} open
+   */
+  constructor(domain, type, protocol, open) {
+    super(domain, type, protocol);
+    this.open_ = open;
+    /**
+     * @type {?{
+     *   asyncWrite: function(!TypedArray),
+     *   close: function(),
+     * }}
+     */
+    this.callback_ = null;
+  }
+
+  /** @override */
+  async connect(address, port) {
+    if (this.address !== null) {
+      return WASI.errno.EISCONN;
+    }
+
+    this.callback_ = await this.open_(address, port);
+    if (!this.callback_) {
+      return WASI.errno.ECONNREFUSED;
+    }
+
+    this.address = address;
+    this.port = port;
+    this.callback_.onDataAvailable = (data) => this.onRecv(data);
+    return WASI.errno.ESUCCESS;
+  }
+
+  /** @override */
+  async close() {
+    // In the *NIX world, close must never fail.  That's why we don't return
+    // any errors here.
+    if (this.address === null) {
+      return;
+    }
+
+    this.callback_.close();
+    this.address = null;
+    this.port = null;
+    this.callback_ = null;
+  }
+
+  /** @override */
+  async write(buf) {
+    this.callback_.asyncWrite(buf);
+    return {nwritten: buf.length};
   }
 }

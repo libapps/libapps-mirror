@@ -32,6 +32,7 @@ export class WasshExperimental extends SyscallEntry.Base {
     switch (domain) {
       case Sockets.AF_INET:
       case Sockets.AF_INET6:
+      case Sockets.AF_UNIX:
         switch (type) {
           case WASI.filetype.SOCKET_STREAM:
           case WASI.filetype.SOCKET_DGRAM:
@@ -40,8 +41,6 @@ export class WasshExperimental extends SyscallEntry.Base {
             return WASI.errno.EPROTONOSUPPORT;
         }
         break;
-      case Sockets.AF_UNIX:
-        // TODO(vapier): Implement UNIX sockets.
       default:
         return WASI.errno.EAFNOSUPPORT;
     }
