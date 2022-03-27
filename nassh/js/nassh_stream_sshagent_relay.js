@@ -74,13 +74,17 @@ SshAgentRelayStream.prototype.asyncOpen = async function(settings, onComplete) {
     this.port_.onDisconnect.removeListener(initialDisconnect);
     this.port_.onMessage.addListener(normalOnMessage);
     this.port_.onDisconnect.addListener(normalDisconnect);
-    onComplete(true);
+    if (onComplete) {
+      onComplete(true);
+    }
   };
 
   const initialDisconnect = () => {
     this.port_.onMessage.removeListener(initialOnMessage);
     this.port_.onDisconnect.removeListener(initialDisconnect);
-    onComplete(false, lib.f.lastError());
+    if (onComplete) {
+      onComplete(false, lib.f.lastError());
+    }
   };
 
   this.port_.onMessage.addListener(initialOnMessage);
@@ -154,5 +158,7 @@ SshAgentRelayStream.prototype.asyncWrite = function(data, onSuccess) {
   setTimeout(this.trySendPacket_.bind(this), 0);
 
   // Note: report binary length written.
-  onSuccess(data.byteLength);
+  if (onSuccess) {
+    onSuccess(data.byteLength);
+  }
 };
