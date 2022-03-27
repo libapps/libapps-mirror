@@ -5,6 +5,7 @@
 // Implementation for connect().
 
 #include <errno.h>
+#include <string.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -62,6 +63,6 @@ int connect(int sock, const struct sockaddr* addr, socklen_t addrlen) {
   }
 
   int ret = sock_connect(sock, sys_domain, sys_addr, sys_port);
-  _EXIT("ret = %i", ret);
+  _EXIT_ERRNO(ret, "");
   return ret;
 }
