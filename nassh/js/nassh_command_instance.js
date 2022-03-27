@@ -1412,6 +1412,7 @@ nassh.CommandInstance.prototype.initWasmPlugin_ =
     terminal: this.io.terminal_,
     authAgent: this.authAgent_,
     authAgentAppID: this.authAgentAppID_,
+    relay: this.relay_,
   });
   return this.plugin_.init();
 };

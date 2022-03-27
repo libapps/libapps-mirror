@@ -8,7 +8,9 @@
  */
 
 import {Agent} from './nassh_agent.js';
+import {Relay} from './nassh_relay.js';
 import {Stream} from './nassh_stream.js';
+import {StreamSet} from './nassh_stream_set.js';
 import {SshAgentStream} from './nassh_stream_sshagent.js';
 import {SshAgentRelayStream} from './nassh_stream_sshagent_relay.js';
 
@@ -28,10 +30,11 @@ export class Plugin {
    *   trace: (boolean|undefined),
    *   authAgent: ?Agent,
    *   authAgentAppID: string,
+   *   relay: ?Relay,
    * }} opts
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
-               authAgentAppID}) {
+               authAgentAppID, relay}) {
     this.executable_ = executable;
     this.argv_ = argv;
     this.environ_ = environ;
@@ -39,6 +42,8 @@ export class Plugin {
     this.trace_ = trace === undefined ? false : trace;
     this.authAgent_ = authAgent;
     this.authAgentAppID_ = authAgentAppID;
+    this.relay_ = relay;
+    this.firstTcpConnect_ = true;
   }
 
   /**
@@ -59,6 +64,7 @@ export class Plugin {
       environ: this.environ_,
       handler: new WasshSyscallHandler.RemoteReceiverWasiPreview1({
         term: this.terminal_,
+        tcpSocketsOpen: (address, port) => this.openTcpSocket_(address, port),
         unixSocketsOpen: (address, port) => this.openUnixSocket_(address, port),
       }),
     };
@@ -66,6 +72,33 @@ export class Plugin {
     this.plugin_ = new WasshProcess.Background(
         `../wassh/js/worker.js?trace=${this.trace_}`, settings);
     this.plugin_.run();
+  }
+
+  /**
+   * Hijack initial TCP connection if relay is requested.
+   *
+   * @param {string} address The remote server to connect to.
+   * @param {number} port The remote port to connect to.
+   * @return {!Promise<?Stream>} The new relay socket stream if available.
+   */
+  async openTcpSocket_(address, port) {
+    if (!this.firstTcpConnect_) {
+      return null;
+    }
+    this.firstTcpConnect_ = false;
+    if (!this.relay_) {
+      return null;
+    }
+
+    // We're only ever going to have one relay, so construct the stream set &
+    // use a fake fd below in it.  After we turn down the NaCl code, we can
+    // refactor the stream APIs entirely to avoid this.
+    const streams = new StreamSet();
+    let stream;
+    await new Promise((resolve) => {
+      stream = this.relay_.openSocket(9, address, port, streams, resolve);
+    });
+    return stream;
   }
 
   /**

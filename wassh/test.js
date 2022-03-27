@@ -82,6 +82,8 @@ const run = async function() {
   } else {
     settings.handler = new WasshSyscallHandler.RemoteReceiverWasiPreview1({
       term: this,
+      tcpSocketsOpen: (address, port) => null,
+      unixSocketsOpen: (address, port) => null,
     });
     await settings.handler.init();
     proc = new WasshProcess.Background(

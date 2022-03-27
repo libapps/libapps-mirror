@@ -112,9 +112,13 @@ export class TcpSocket extends Socket {
    * @param {number} domain
    * @param {number} type
    * @param {number} protocol
+   * @param {function(string, number)} open
    */
-  constructor(domain, type, protocol) {
+  constructor(domain, type, protocol, open) {
     super(domain, type, protocol);
+
+    this.open_ = open;
+    this.callback_ = null;
 
     /** @type {number} */
     this.socketId = -1;
@@ -142,6 +146,14 @@ export class TcpSocket extends Socket {
       return WASI.errno.EISCONN;
     }
 
+    this.callback_ = await this.open_(address, port);
+    if (this.callback_) {
+      this.callback_.onDataAvailable = (data) => this.onRecv(data);
+      this.address = address;
+      this.port = port;
+      return WASI.errno.ESUCCESS;
+    }
+
     const result = await new Promise((resolve) => {
       chrome.sockets.tcp.connect(this.socketId, address, port, resolve);
     });
@@ -163,6 +175,12 @@ export class TcpSocket extends Socket {
   async close() {
     // In the *NIX world, close must never fail.  That's why we don't return
     // any errors here.
+
+    if (this.callback_) {
+      this.callback_.close();
+      this.callback_ = null;
+    }
+
     if (this.socketId === -1) {
       return;
     }
@@ -185,6 +203,11 @@ export class TcpSocket extends Socket {
 
   /** @override */
   async write(buf) {
+    if (this.callback_) {
+      this.callback_.asyncWrite(buf);
+      return {nwritten: buf.length};
+    }
+
     const {result, bytesSent} = await new Promise((resolve) => {
       // TODO(vapier): Double check whether send accepts TypedArrays directly.
       // Or if we have to respect buf.byteOffset & buf.byteLength ourself.

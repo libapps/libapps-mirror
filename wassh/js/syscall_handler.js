@@ -79,9 +79,10 @@ export class DirectWasiPreview1 extends SyscallHandler.DirectWasiPreview1 {
  * These may be asynchronous.
  */
 export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
-  constructor({term, unixSocketsOpen} = {}) {
+  constructor({term, tcpSocketsOpen, unixSocketsOpen} = {}) {
     super();
     this.term_ = term;
+    this.tcpSocketsOpen_ = tcpSocketsOpen;
     this.unixSocketsOpen_ = unixSocketsOpen;
     this.notify_ = null;
     this.vfs = new VFS.VFS({stdio: false});
@@ -454,7 +455,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       case Sockets.AF_INET6:
         switch (type) {
           case WASI.filetype.SOCKET_STREAM:
-            handle = new Sockets.TcpSocket(domain, type, protocol);
+            handle = new Sockets.TcpSocket(
+                domain, type, protocol, this.tcpSocketsOpen_);
             break;
           case WASI.filetype.SOCKET_DGRAM:
             // TODO(vapier): Implement UDP support.
@@ -535,7 +537,14 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       return unixHandle.connect(address, port);
     }
 
-    return handle.connect(address, port);
+    const ret = await handle.connect(address, port);
+    if (handle.callback_) {
+      const socketId = handle.socketId;
+      handle.callback_.onDataAvailable = (data) => {
+        this.onSocketTcpRecv({socketId, data});
+      };
+    }
+    return ret;
   }
 
   /**
