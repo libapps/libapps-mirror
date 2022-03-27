@@ -162,17 +162,25 @@ export class TcpSocket extends Socket {
   /** @override */
   async close() {
     // In the *NIX world, close must never fail.  That's why we don't return
-    // any errors here.  We wait for the disconnect only so that we can reset
-    // the internal state, but we could probably hoist that out if we wanted.
-    await new Promise((resolve) => {
-      chrome.sockets.tcp.disconnect(this.socketId, () => {
-        chrome.sockets.tcp.close(this.socketId);
-        this.socketId = -1;
-        this.address = null;
-        this.port = null;
-        resolve();
+    // any errors here.
+    if (this.socketId === -1) {
+      return;
+    }
+
+    // If a socket was created but not connected, we can't disconnect it, but we
+    // need to stiil close it.
+    if (this.address) {
+      // We wait for the disconnect only so that we can reset the internal
+      // state below, but we could probably wait for the close too if needed.
+      await new Promise((resolve) => {
+        chrome.sockets.tcp.disconnect(this.socketId, resolve);
       });
-    });
+    }
+
+    chrome.sockets.tcp.close(this.socketId);
+    this.socketId = -1;
+    this.address = null;
+    this.port = null;
   }
 
   /** @override */
