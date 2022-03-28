@@ -35,7 +35,7 @@ static int get_socket_info(
     case AF_INET: {
       struct sockaddr_in sin = {
         .sin_family = family,
-        .sin_port = port,
+        .sin_port = htons(port),
         .sin_addr = in_addr.in,
       };
       *addrlen = sizeof(sin);
@@ -53,7 +53,7 @@ static int get_socket_info(
     case AF_INET6: {
       struct sockaddr_in6 sin = {
         .sin6_family = family,
-        .sin6_port = port,
+        .sin6_port = htons(port),
         .sin6_addr = in_addr.in6,
       };
       *addrlen = sizeof(sin);
