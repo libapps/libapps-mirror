@@ -1429,6 +1429,8 @@ nassh.CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
     authAgent: this.authAgent_,
     authAgentAppID: this.authAgentAppID_,
     relay: this.relay_,
+    isSftp: this.isSftp,
+    sftpClient: this.sftpClient,
   });
   this.plugin_.init(onComplete);
 };
