@@ -11,13 +11,13 @@
 import {css, html, LitElement, unsafeCSS} from './lit.js';
 import {SUPPORTED_FONT_SIZES,
   SUPPORTED_LINE_HEIGHT_PADDINGS} from './terminal_common.js';
+import './terminal_dropdown.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_background_image.js';
 import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
 import './terminal_settings_colorpicker.js';
-import './terminal_settings_dropdown.js';
 import './terminal_settings_fonts.js';
 import './terminal_settings_textfield.js';
 import './terminal_settings_theme.js';

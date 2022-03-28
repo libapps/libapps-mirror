@@ -6,10 +6,10 @@
  * @fileoverview Terminal Settings Dropdown Element unit tests.
  */
 
-import {TerminalSettingsDropdownElement} from './terminal_settings_dropdown.js';
+import {TerminalSettingsDropdownElement} from './terminal_dropdown.js';
 
-describe('terminal_settings_dropdown_tests.js', () => {
-  const preference = 'terminal_settings_dropdown_tests_preference';
+describe('terminal_dropdown_tests.js', () => {
+  const preference = 'terminal_dropdown_tests_preference';
   const createOptions = () => [
     {value: 'opt1'},
     {value: 'opt2'},
@@ -114,20 +114,18 @@ describe('terminal_settings_dropdown_tests.js', () => {
     newOptions[0].disabled = true;
     this.el.options = newOptions;
     await this.el.updateComplete;
-
-    let uiChangedCalledCount = 0;
-    this.el.uiChanged_ = () => uiChangedCalledCount += 1;
+    this.el.value = 'opt3';
 
     this.el.expanded = true;
 
     // Clicking a disabled item should do nothing.
     this.el.onItemClickedHandler_(0)(new MouseEvent('click'));
-    assert.equal(uiChangedCalledCount, 0);
+    assert.equal(this.el.value, 'opt3');
     assert.equal(this.el.expanded, true, 'dropdown should not be closed');
 
     // Clicking a enabled item should do the thing.
     this.el.onItemClickedHandler_(1)(new MouseEvent('click'));
-    assert.equal(uiChangedCalledCount, 1);
+    assert.equal(this.el.value, 'opt2');
     assert.equal(this.el.expanded, false);
   });
 
@@ -386,6 +384,7 @@ describe('terminal_settings_dropdown_tests.js', () => {
       {value: 2},
       {value: 3},
     ];
+    await this.el.updateComplete;
 
     assert.strictEqual(window.preferenceManager.get(preference), 1);
     assert.strictEqual(this.el.value, 1);

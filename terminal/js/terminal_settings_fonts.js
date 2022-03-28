@@ -9,7 +9,7 @@
  */
 import {html, LitElement} from './lit.js';
 import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS} from './terminal_common.js';
-import './terminal_settings_dropdown.js';
+import './terminal_dropdown.js';
 
 export class TerminalSettingsFonts extends LitElement {
   /** @override */

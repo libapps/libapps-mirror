@@ -7,23 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html} from './lit.js';
-import {TerminalSettingsElement} from './terminal_settings_element.js';
-
-/**
- * This is equivalent to |value ?? fallback|, which closure-compiler does not
- * support yet.
- *
- * @param {*} value
- * @param {*} fallback
- * @return {*} value ?? fallback
- */
-function nullishCoalescing(value, fallback) {
-  if (value === undefined || value === null) {
-    return fallback;
-  }
-  return value;
-}
+import {css, html, LitElement} from './lit.js';
 
 /**
  * If |label| is nullish, |value| is used as the label.
@@ -37,15 +21,10 @@ function nullishCoalescing(value, fallback) {
  */
 let OptionType;
 
-export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
-  static get is() { return 'terminal-settings-dropdown'; }
-
+export class TerminalDropdownElement extends LitElement {
   /** @override */
   static get properties() {
     return {
-      preference: {
-        type: String,
-      },
       expanded: {
         type: Boolean,
       },
@@ -138,6 +117,8 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   constructor() {
     super();
 
+    /** @public {*} */
+    this.value;
     this.expanded = false;
     /** @public {!Array<!OptionType>} */
     this.options = [];
@@ -150,10 +131,10 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     const renderOption = (option, index) => html`
         <li class="option" role="option" tab-index="-1"
             aria-selected="${index === selectedIndex}"
-            style="${nullishCoalescing(option.style, '')}"
+            style="${option.style ?? ''}"
             ?disabled="${option.disabled === true}"
             @click="${this.onItemClickedHandler_(index)}">
-          ${nullishCoalescing(option.label, option.value)}
+          ${option.label ?? option.value}
         </li>
     `;
 
@@ -161,7 +142,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     let selectedDisabled = false;
     if (selectedIndex !== -1) {
       const option = this.options[selectedIndex];
-      selectedLabel = nullishCoalescing(option.label, option.value);
+      selectedLabel = option.label ?? option.value;
       selectedDisabled = option.disabled === true;
     }
     return html`
@@ -207,7 +188,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   selectFirstEnabled_(options) {
     for (const option of options) {
       if (option.disabled !== true) {
-        this.uiChanged_(option.value);
+        this.value = option.value;
         return true;
       }
     }
@@ -295,7 +276,7 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
     return (event) => {
       const option = this.options[index];
       if (option.disabled !== true) {
-        this.uiChanged_(option.value);
+        this.value = option.value;
         this.expanded = false;
       }
       event.stopPropagation();
@@ -303,5 +284,61 @@ export class TerminalSettingsDropdownElement extends TerminalSettingsElement {
   }
 }
 
-customElements.define(TerminalSettingsDropdownElement.is,
+customElements.define('terminal-dropdown', TerminalDropdownElement);
+
+
+// TODO: The logic here is pretty much a duplicate of `TerminalSettingsElement`,
+// but we cannot inherit it because JS does not support multi-inheritance. Maybe
+// we should extract the logic to a mixin and replace `TerminalSettingsElement`
+// with it.
+export class TerminalSettingsDropdownElement extends TerminalDropdownElement {
+  /** @override */
+  static get properties() {
+    return {
+      preference: {
+        type: String,
+      },
+    };
+  }
+
+  constructor() {
+    super();
+
+    /** @public {string} */
+    this.preference = '';
+
+    this.onPrefChanged_ = (value) => this.value = value;
+  }
+
+  /** @override */
+  connectedCallback() {
+    super.connectedCallback();
+
+    this.onPrefChanged_(
+        window.preferenceManager.get(this.preference));
+    window.preferenceManager.addObserver(
+        this.preference,
+        this.onPrefChanged_);
+  }
+
+  /** @override */
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    window.preferenceManager.removeObserver(
+        this.preference,
+        this.onPrefChanged_);
+  }
+
+  /** @override */
+  updated(changedProperties) {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('value')) {
+      window.preferenceManager.set(this.preference, this.value);
+    }
+  }
+}
+
+customElements.define('terminal-settings-dropdown',
     TerminalSettingsDropdownElement);

@@ -59,6 +59,9 @@ class LitElement$$module$js$lit{
 
   /* @param {!Map<string,*>} changedProperties */
   firstUpdated(changedProperties) {}
+
+  /* @param {!Map<string,*>} changedProperties */
+  updated(changedProperties) {}
 }
 
 /**
