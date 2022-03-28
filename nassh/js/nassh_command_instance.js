@@ -12,22 +12,20 @@ import {Agent} from './nassh_agent.js';
 import {Cli as nasftpCli} from './nasftp_cli.js';
 import {gcseRefreshCert, getGnubbyExtension} from './nassh_google.js';
 import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
+import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
 import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
-import * as WasshProcess from '../wassh/js/process.js';
-import * as WasshSyscallHandler from '../wassh/js/syscall_handler.js';
 
 /**
- * The NaCl-ssh-powered terminal command.
+ * The ssh terminal command.
  *
  * This class defines a command that can be run in an hterm.Terminal instance.
- * This command creates an instance of the NaCl-ssh plugin and uses it to
- * communicate with an ssh daemon.
+ * This command creates an instance of the ssh plugin and uses it to communicate
+ * with an ssh daemon.
  *
- * If you want to use something other than this NaCl plugin to connect to a
- * remote host (like a shellinaboxd, etc), you'll want to create a brand new
- * command.
+ * If you want to use something other than this plugin to connect to a remote
+ * host (like a shellinaboxd, etc), you'll want to create a brand new command.
  *
  * @param {!Object} argv The argument object passed in from the Terminal.
  * @constructor
@@ -80,6 +78,11 @@ nassh.CommandInstance = function({io, ...argv}) {
 
   // Terminal Window reference (can accept another hterm tab's window).
   this.terminalWindow = argv.terminalWindow || window;
+
+  /**
+   * @type {?Object} The current plugin (WASM/NaCl/etc...).
+   */
+  this.plugin_ = null;
 
   /**
    * @type {?string} The current connection profile.
@@ -1238,6 +1241,7 @@ nassh.CommandInstance.prototype.connectToFinalize_ = async function(
     this.io.println(nassh.msg('CONNECTING',
                               [`${params.username}@${disp_hostname}`]));
 
+    lib.notNull(this.plugin_);
     if (this.plugin_ instanceof NaclPlugin) {
       this.plugin_.send('startSession', [argv]);
     }
@@ -1398,19 +1402,16 @@ nassh.CommandInstance.prototype.dispatchMessage_ = function(
  * @param {!Array<string>} argv SSH command line arguments.
  * @param {!Object<string, string>} environ SSH environment variables.
  * @return {!Promise<void>}
- * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
  */
 nassh.CommandInstance.prototype.initWasmPlugin_ =
     async function(argv, environ) {
-  const executable = `../../plugin/${this.sshClientVersion_}/ssh.wasm`;
-  const settings = {executable, argv, environ};
-
-  settings.handler = new WasshSyscallHandler.RemoteReceiverWasiPreview1({
-    term: this.io.terminal_,
+  this.plugin_ = new WasmPlugin({
+    executable: `../../plugin/${this.sshClientVersion_}/ssh.wasm`,
+    argv: argv,
+    environ: environ,
+    terminal: this.io.terminal_,
   });
-  await settings.handler.init();
-  this.plugin_ = new WasshProcess.Background('../wassh/js/worker.js', settings);
-  this.plugin_.run();
+  return this.plugin_.init();
 };
 
 /**
