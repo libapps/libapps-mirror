@@ -222,7 +222,7 @@ export class TerminalHomeApp extends LitElement {
         <div class="row row-border row-header">
           <h3>${msg('TERMINAL_HOME_SSH')}</h3>
           <a target="_blank" href="terminal_ssh.html">
-            <button>
+            <button tabindex="-1">
               <span class="button-icon">${ICON_PLUS}</span>
               ${msg('TERMINAL_HOME_ADD_SSH')}
             </button>
@@ -236,7 +236,8 @@ export class TerminalHomeApp extends LitElement {
               <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
               <h4>${c.description}</h4>
             </a>
-            <a target="_blank" href="terminal_ssh.html">
+            <a target="_blank" href="terminal_ssh.html"
+                aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}">
               <span class="row-icon icon-fill-svg">${ICON_MORE}</span>
             </a>
           </li>

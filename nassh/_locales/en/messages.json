@@ -2011,6 +2011,10 @@
 		"description": "Label to open system settings at Developer (crostini) subpage.",
 		"message": "Developer Settings"
 	},
+	"TERMINAL_HOME_EDIT_SSH": {
+		"description": "Label to edit an SSH (Secure SHell) connection.",
+		"message": "Edit SSH"
+	},
 	"TERMINAL_HOME_SSH": {
 		"description": "Label for SSH (Secure SHell) connections section.",
 		"message": "SSH"
