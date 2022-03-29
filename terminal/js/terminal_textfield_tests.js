@@ -11,46 +11,45 @@ import './terminal_textfield.js';
 describe('terminal_textfield_tests.js', () => {
   beforeEach(async function() {
     this.el = document.createElement('terminal-textfield');
+    this.el.fitContent = true;
+    this.el.value = 'hello';
     document.body.appendChild(this.el);
     await this.el.updateComplete;
     this.input = this.el.shadowRoot.querySelector('input');
-    this.underline = this.el.shadowRoot.querySelector('#underline');
+
+    this.rulers = ['hello', 'hello world'].map((text) => {
+      const span = document.createElement('span');
+      span.textContent = text + 'XXX';
+      document.body.appendChild(span);
+      return span;
+    });
   });
 
   afterEach(function() {
     document.body.removeChild(this.el);
+    for (const el of this.rulers) {
+      document.body.removeChild(el);
+    }
   });
 
-  // 'change' event is tested separately. When we have more than one event to
-  // test, we can turn this to a parametrized test.
-  it('pass-through-keydown', async function() {
-    const eventName = 'keydown';
-    await new Promise((resolve) => {
-      this.el.addEventListener(eventName, resolve);
-      this.input.dispatchEvent(new Event(eventName));
-    });
-  });
-
-  it('set-underline-focused', async function() {
+  it('set-focused', async function() {
     // By default the input is not focused.
-    assert.isFalse(this.underline.hasAttribute('data-focused'));
+    assert.isFalse(this.el.hasAttribute('focused_'));
 
     this.input.focus();
     await this.el.updateComplete;
-    assert.isTrue(this.underline.hasAttribute('data-focused'));
+    assert.isTrue(this.el.hasAttribute('focused_'));
 
     this.input.blur();
     await this.el.updateComplete;
-    assert.isFalse(this.underline.hasAttribute('data-focused'));
+    assert.isFalse(this.el.hasAttribute('focused_'));
   });
 
-  it('set-value-and-pass-through-event-on-input-change', async function() {
+  it('pass-through-change-event', async function() {
     await new Promise((resolve) => {
       this.el.addEventListener('change', () => {
-        assert.equal(this.el.value, 'hello world');
         resolve();
       });
-      this.input.value = 'hello world';
       this.input.dispatchEvent(new Event('change'));
     });
   });
@@ -60,4 +59,12 @@ describe('terminal_textfield_tests.js', () => {
     await this.el.updateComplete;
     assert.equal(this.input.value, 'hello world');
   });
+
+  it('fit-content', async function() {
+    assert.equal(this.el.style.maxWidth, `${this.rulers[0].offsetWidth}px`);
+    this.el.value = 'hello world';
+    await this.el.updateComplete;
+    assert.equal(this.el.style.maxWidth, `${this.rulers[1].offsetWidth}px`);
+  });
+
 });

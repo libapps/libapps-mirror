@@ -252,7 +252,10 @@ export function composeTmuxUrl({windowChannelName, driverChannelName}) {
 }
 
 /**
- * Re-dispatch an event on the element.
+ * Re-dispatch an event on the element. Note that some events are "composed" and
+ * can cross shadow boundary [1], so you don't need this for them.
+ *
+ * [1] https://developers.google.com/web/fundamentals/web-components/shadowdom#events
  *
  * @param {!HTMLElement} element
  * @param {!Event} event

@@ -19,7 +19,6 @@ import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
 import './terminal_settings_colorpicker.js';
 import './terminal_settings_fonts.js';
-import './terminal_settings_textfield.js';
 import './terminal_settings_theme.js';
 
 export const BELL_SOUND_CONVERTER = {

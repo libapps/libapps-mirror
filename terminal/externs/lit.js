@@ -28,11 +28,27 @@ class LitElement$$module$js$lit{
    */
   static get styles() {};
 
+  /** @param {!Map<string,*>} changedProperties */
+  firstUpdated(changedProperties) {}
+
   /**
    * @return {?Promise}
    * @protected
    */
   performUpdate() {}
+
+  /**
+   * @param {(string|Array<(string|number)>)} path
+   * @param {*} value
+   * @param {Object=} root
+   */
+  set(path, value, root) {}
+
+  /**
+   * @param {!Map<string,*>} changedProperties
+   * @return {boolean}
+   */
+  shouldUpdate(changedProperties) {}
 
   /**
    * @return {!TemplateResult}
@@ -47,20 +63,10 @@ class LitElement$$module$js$lit{
    */
   requestUpdate(propertyName, oldValue) {}
 
-  /**
-   * @param {(string|Array<(string|number)>)} path
-   * @param {*} value
-   * @param {Object=} root
-   */
-  set(path, value, root) {}
-
   /** @return {!Promise<boolean>} */
   updateComplete() {}
 
-  /* @param {!Map<string,*>} changedProperties */
-  firstUpdated(changedProperties) {}
-
-  /* @param {!Map<string,*>} changedProperties */
+  /** @param {!Map<string,*>} changedProperties */
   updated(changedProperties) {}
 }
 

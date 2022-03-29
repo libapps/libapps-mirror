@@ -23,26 +23,3 @@ export const stylesVars = css`
     --font: 'Roboto';
   }
 `;
-
-export const stylesDialog = css`
-  dialog {
-    border: 0;
-    border-radius: 8px;
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.12),
-                0 16px 16px rgba(0, 0, 0, 0.24);
-    color: var(--cr-secondary-text-color);
-    padding: 20px 20px 16px 20px;
-  }
-
-  .dialog-title {
-    color: var(--cr-primary-text-color);
-    font-size: calc(15 / 13 * 100%);
-    padding-bottom: 16px;
-  }
-
-  .dialog-button-container {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 24px;
-  }
-`;

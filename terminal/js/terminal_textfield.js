@@ -7,22 +7,44 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html, LitElement, live} from './lit.js';
+import {LitElement, createRef, css, html, live, ref} from './lit.js';
 import {redispatchEvent} from './terminal_common.js';
+import './terminal_label.js';
 
 export class TerminalTextfieldElement extends LitElement {
   /** @override */
   static get properties() {
     return {
+      label: {
+        type: String,
+      },
       placeholder: {
         type: String,
       },
       value: {
         type: String,
       },
+      // If true, use the blend-in style, which
+      //
+      // - inherits styles such as font and background color from the
+      //   environment
+      // - when focus (and hover), displays an border instead of the underline
+      //   effect
+      blendIn: {
+        type: Boolean,
+      },
+      // If true, the (max-)width of the element will fit the content.
+      fitContent: {
+        type: Boolean,
+      },
       // For styling.
+      //
+      // TODO: It might be better to use `ShadowRoot.delegatesFocus` instead .
+      // See
+      // https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/delegatesFocus
       focused_: {
         type: Boolean,
+        reflect: true,
       },
     };
   }
@@ -70,10 +92,38 @@ export class TerminalTextfieldElement extends LitElement {
         width: 0;
       }
 
-      #underline[data-focused] {
+      :host([focused_]) #underline {
         opacity: 1;
         transition: width 180ms ease-out, opacity 120ms ease-in;
         width: 100%;
+      }
+
+      #input-container {
+        align-items: baseline;
+        display: flex;
+      }
+
+      :host([blendIn]) #container {
+        background-color: inherit;
+      }
+
+      :host([blendIn]:hover) #container {
+        box-shadow: 0 0 0 1px #E5E5E5;
+      }
+
+      :host([blendIn][focused_]) #container {
+        box-shadow: 0 0 0 2px #1a73e8;
+      }
+
+      :host([blendIn]) input {
+        font: inherit;
+      }
+
+      /* Note that "absolute" position does not work because the ruler size will
+       * be restricted by the host size. */
+      #ruler {
+        position: fixed;
+        visibility: hidden;
       }
     `;
   }
@@ -81,31 +131,93 @@ export class TerminalTextfieldElement extends LitElement {
   constructor() {
     super();
 
+    this.label = '';
     this.placeholder = '';
     this.value = '';
+    this.blendIn = false;
+    this.fitContent = false;
     this.focused_ = false;
+
+    this.rulerRef_ = createRef();
+    this.inputRef_ = createRef();
+  }
+
+  /** @override */
+  shouldUpdate(changedProperties) {
+    if (changedProperties.size === 1 && changedProperties.has('value')) {
+      return this.value !== this.inputRef_.value?.value;
+    }
+    return true;
   }
 
   /** @override */
   render() {
+    let label;
+    if (this.label) {
+      label = html`
+          <terminal-label ?focused="${this.focused_}">
+              ${this.label}
+          </terminal-label>
+      `;
+    }
+
+    let ruler;
+    if (this.fitContent) {
+      ruler = html`<span ${ref(this.rulerRef_)} id="ruler"></span>`;
+    }
+
     return html`
+        ${label}
         <div id="container">
-          <input type="text"
-              .placeholder="${this.placeholder}"
-              .value="${live(this.value)}"
-              @blur=${() => this.focused_ = false}
-              @focus=${() => this.focused_ = true}
-              @change=${this.onChange_}
-              @keydown=${(e) => redispatchEvent(this, e)}
-          />
-          <div id="underline" ?data-focused="${this.focused_}"></div>
+          <div id="input-container">
+            <slot name="inline-prefix"></slot>
+            <input ${ref(this.inputRef_)} type="text"
+                .placeholder="${this.placeholder}"
+                .value="${live(this.value)}"
+                @blur=${() => this.focused_ = false}
+                @focus=${() => this.focused_ = true}
+                @change=${(e) => redispatchEvent(this, e)}
+                @input=${this.onInput_}
+                spellcheck="false"
+            />
+          </div>
+          ${this.blendIn ? '' : html`<div id="underline"></div>`}
         </div>
+        ${ruler}
     `;
   }
 
-  onChange_(event) {
+  /** @override */
+  updated(changedProperties) {
+    if (changedProperties.has('value')) {
+      this.maybeFitContent_();
+    }
+  }
+
+  /** @param {!Event} event */
+  onInput_(event) {
     this.value = event.target.value;
-    redispatchEvent(this, event);
+    this.maybeFitContent_();
+  }
+
+  maybeFitContent_() {
+    if (!this.fitContent) {
+      return;
+    }
+    const ruler = this.rulerRef_.value;
+    const newContent = this.inputRef_.value.value + 'XXX';
+    if (ruler.textContent !== newContent) {
+      ruler.textContent = newContent;
+      /**
+       * Depending on how this function is called, `ruler.offsetWidth` might not
+       * be available immedately. Using `setTimeout()` does not work very well
+       * when the user types fast. Using microtask seems to work pretty well in
+       * all cases.
+       */
+      window.queueMicrotask(() => {
+        this.style.maxWidth = `${ruler.offsetWidth}px`;
+      });
+    }
   }
 }
 

@@ -52,6 +52,7 @@ export {punycode};
  */
 import {LitElement, html, css, unsafeCSS} from 'lit';
 import {live} from 'lit/directives/live.js';
-const lit = {LitElement, html, css, unsafeCSS, live};
+import {createRef, ref} from 'lit/directives/ref.js';
+const lit = {LitElement, css, createRef, html, live, ref, unsafeCSS};
 export {lit};
 

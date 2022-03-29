@@ -76,3 +76,6 @@ function SVGSVGElement() {}
 
 /** @type {number} */
 SVGSVGElement.prototype.currentScale;
+
+/** @param {function()} task */
+window.queueMicrotask = function(task) {};
