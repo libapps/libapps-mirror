@@ -2015,9 +2015,21 @@
 		"description": "Label to edit an SSH (Secure SHell) connection.",
 		"message": "Edit SSH"
 	},
+	"TERMINAL_HOME_IMPORT_IDENTITY": {
+		"description": "Label to the button to import SSH identity files",
+		"message": "Import"
+	},
+	"TERMINAL_HOME_NEW_SSH_CONNECTION": {
+		"description": "Title for a dialog to create a New SSH (Secure SHell) connection",
+		"message": "New SSH connection"
+	},
 	"TERMINAL_HOME_SSH": {
 		"description": "Label for SSH (Secure SHell) connections section.",
 		"message": "SSH"
+	},
+	"TERMINAL_HOME_SSH_COMMAND": {
+		"description": "Label for the SSH (Secure SHell) command input.",
+		"message": "Command"
 	},
 	"TERMINAL_HOME_TERMINAL_SETTINGS": {
 		"description": "Label to open Terminal settings page.",
