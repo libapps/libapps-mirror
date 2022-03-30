@@ -21,7 +21,7 @@ describe('terminal_dialog.js', () => {
 
   function clickButton(el, classAttr) {
     el.shadowRoot.querySelector(
-        `terminal-settings-button.${classAttr}`).click();
+        `terminal-button.${classAttr}`).click();
   }
 
   it('shows-dialog', async function() {

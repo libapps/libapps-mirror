@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 import {css, html, LitElement} from './lit.js';
-import './terminal_settings_button.js';
+import './terminal_button.js';
 
 // A dialog with an accept and a cancel button. When a button is clicked, the
 // dialog is closed and a "close" event is sent with detail `{accept:
@@ -74,13 +74,13 @@ export class TerminalDialog extends LitElement {
           <slot name="title"></slot>
           <slot></slot>
           <div id="button-container">
-            <terminal-settings-button class="cancel"
+            <terminal-button class="cancel"
                 @click="${this.cancel}">
               ${this.cancelText}
-            </terminal-settings-button>
-            <terminal-settings-button class="action" @click="${this.accept}">
+            </terminal-button>
+            <terminal-button class="action" @click="${this.accept}">
               ${this.acceptText}
-            </terminal-settings-button>
+            </terminal-button>
           </div>
         </dialog>
     `;

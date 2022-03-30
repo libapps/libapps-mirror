@@ -10,7 +10,7 @@
 import {LitElement, css, html} from './lit.js';
 import {CHROME_VERSION} from './terminal_common.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
-import './terminal_settings_button.js';
+import './terminal_button.js';
 import './terminal_settings_hue_slider.js';
 import './terminal_settings_saturation_value_picker.js';
 import './terminal_settings_transparency_slider.js';

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Exports an element: terminal-settings-button.
+ * @fileoverview Exports an element: terminal-button.
  *
  * @suppress {moduleLoad}
  */
@@ -11,9 +11,7 @@
 import {LitElement, css, html} from './lit.js';
 import {stylesVars} from './terminal_settings_styles.js';
 
-export class TerminalSettingsButtonElement extends LitElement {
-  static get is() { return 'terminal-settings-button'; }
-
+export class TerminalButtonElement extends LitElement {
   /** @override */
   static get styles() {
     return [stylesVars, css`
@@ -69,5 +67,4 @@ export class TerminalSettingsButtonElement extends LitElement {
   }
 }
 
-customElements.define(TerminalSettingsButtonElement.is,
-    TerminalSettingsButtonElement);
+customElements.define('terminal-button', TerminalButtonElement);

@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 import {css, html, LitElement} from './lit.js';
-import './terminal_settings_button.js';
+import './terminal_button.js';
 
 const PREFERENCE = 'background-image';
 
@@ -72,18 +72,18 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
 
     const select = html`
-      <terminal-settings-button id='bg-select' class="button-left-margin"
+      <terminal-button id='bg-select' class="button-left-margin"
         aria-description="${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP')}"
         @click="${this.onOpenFile_}">
         ${msg('SELECT_LABEL')}
-      </terminal-settings-button>
+      </terminal-button>
     `;
     const previewRemove = html`
       <img src="${this.imagePreviewSrc_}" @click="${this.onOpenFile_}">
-      <terminal-settings-button id="bg-remove" class="button-left-margin"
+      <terminal-button id="bg-remove" class="button-left-margin"
          @click="${this.onRemove_}">
         ${msg('REMOVE_LABEL')}
-      </terminal-settings-button>
+      </terminal-button>
     `;
     return html`
       <div class="error">${this.errorMsg_}</div>

@@ -11,7 +11,7 @@ import {LitElement, css, html, unsafeCSS} from './lit.js';
 import {DEFAULT_THEME, DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR,
     DEFAULT_CURSOR_COLOR, DEFAULT_FOREGROUND_COLOR} from './terminal_common.js';
 import {stylesVars} from './terminal_settings_styles.js';
-import './terminal_settings_button.js';
+import './terminal_button.js';
 import './terminal_dialog.js';
 
 /** @typedef {!Object<string, *>} */
