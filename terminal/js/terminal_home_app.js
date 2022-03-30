@@ -104,7 +104,7 @@ export class TerminalHomeApp extends LitElement {
         display: flex;
         flex-wrap: wrap;
         font-family: 'Roboto';
-        padding: 24px;
+        padding: 24px 16px;
       }
 
       a {
@@ -149,7 +149,7 @@ export class TerminalHomeApp extends LitElement {
       section {
         background-color: rgba(var(--foreground-color-rgb), 0.05);
         border-radius: 8px;
-        margin: 0 0 16px 0;
+        margin: 0 8px 16px 8px;
       }
 
       ul {
