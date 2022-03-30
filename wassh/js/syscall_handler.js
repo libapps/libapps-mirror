@@ -179,6 +179,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
 
   /** @override */
   handle_fd_fdstat_set_flags(fd, fdflags) {
+    const fh = this.vfs.getFileHandle(fd);
+    if (fh === undefined) {
+      return WASI.errno.EBADF;
+    }
+
     // Ignore sync flags as we always sync storage.
     fdflags &= ~(WASI.fdflags.DSYNC | WASI.fdflags.RSYNC | WASI.fdflags.SYNC);
 
