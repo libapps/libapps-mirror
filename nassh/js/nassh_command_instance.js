@@ -374,6 +374,22 @@ nassh.CommandInstance.prototype.promptForDestination_ = function() {
   connectDialog.show();
 };
 
+/**
+ * Navigate to new page without updating history.
+ *
+ * Nassh uses the `#hash` part of the query string to control which connection
+ * profile is used.  If we set the location's .hash directly, this causes the
+ * history to be updated which we don't want.  This helper jumps through all the
+ * hoops to switch pages without updating history.
+ *
+ * @param {string} hash The new subpage to navigate to.
+ */
+nassh.CommandInstance.prototype.navigate_ = function(hash) {
+  const url = new URL(this.terminalLocation);
+  url.hash = hash;
+  this.terminalLocation.replace(url);
+};
+
 /** @param {string} argstr */
 nassh.CommandInstance.prototype.connectToArgString = function(argstr) {
   const isMount = (this.storage.getItem('nassh.isMount') == 'true');
@@ -425,7 +441,7 @@ nassh.CommandInstance.prototype.commonProfileSetup_ = function(
     this.profileId_ = profileID;
     document.querySelector('#terminal').focus();
 
-    this.terminalLocation.hash = 'profile-id:' + profileID;
+    this.navigate_(`profile-id:${profileID}`);
     document.title = prefs.get('description') + ' - ' +
       this.manifest_.name + ' ' + this.manifest_.version;
 
@@ -512,8 +528,7 @@ nassh.CommandInstance.prototype.mountProfile = function(profileID) {
           switch (ch) {
             case 'c':
             case '\x12': // ctrl-r
-              this.terminalLocation.hash = '';
-              this.terminalLocation.reload();
+              this.navigate_('');
               break;
 
             case 'e':
@@ -813,7 +828,7 @@ nassh.CommandInstance.prototype.connectToDestination = function(destination) {
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = destination;
+  this.navigate_(destination);
 
   this.connectTo(rv);
 };
@@ -895,7 +910,7 @@ nassh.CommandInstance.prototype.sftpConnectToDestination = function(
 
   // We have to set the url here rather than in connectToArgString, because
   // some callers may come directly to connectToDestination.
-  this.terminalLocation.hash = destination;
+  this.navigate_(destination);
 
   this.isSftp = true;
   this.sftpClient = new nassh.sftp.Client();
@@ -1508,8 +1523,7 @@ nassh.CommandInstance.prototype.exit = function(code, noReconnect) {
     switch (ch) {
       case 'c':
       case '\x12': // ctrl-r
-        document.location.hash = '';
-        document.location.reload();
+        this.navigate_('');
         break;
 
       case 'e':

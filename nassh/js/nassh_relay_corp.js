@@ -72,7 +72,7 @@ export class Corp extends Relay {
       return false;
     }
 
-    this.location.href = uri;
+    this.location.replace(uri);
     return true;
   }
 

@@ -84,5 +84,5 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
   window.sessionStorage.setItem('googleRelay.redirectCount', count.toString());
 
-  document.location = url;
+  document.location.replace(url);
 });
