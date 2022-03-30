@@ -31,10 +31,11 @@ export class Plugin {
    *   authAgent: ?Agent,
    *   authAgentAppID: string,
    *   relay: ?Relay,
+   *   secureInput: function(string, number, boolean),
    * }} opts
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
-               authAgentAppID, relay}) {
+               authAgentAppID, relay, secureInput}) {
     this.executable_ = executable;
     this.argv_ = argv;
     this.environ_ = environ;
@@ -44,6 +45,7 @@ export class Plugin {
     this.authAgentAppID_ = authAgentAppID;
     this.relay_ = relay;
     this.firstTcpConnect_ = true;
+    this.secureInput_ = secureInput;
   }
 
   /**
@@ -66,6 +68,7 @@ export class Plugin {
         term: this.terminal_,
         tcpSocketsOpen: (address, port) => this.openTcpSocket_(address, port),
         unixSocketsOpen: (address, port) => this.openUnixSocket_(address, port),
+        secureInput: this.secureInput_,
       }),
     };
     await settings.handler.init();

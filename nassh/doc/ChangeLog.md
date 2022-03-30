@@ -1,5 +1,16 @@
 # 0.46, 2022-03-25, ES6 modules & WASM work.
 
+* wassh: Connect relay streams through.
+* wassh: Connect ssh-agent streams through.
+* wasm: Move plugin to dedicated file too.
+* wassh-libc-sup: getsockname: Fix port return value.
+* agent: Convert to ES6 modules.
+* wassh: sockets: Fix closing unconnected TCP sockets
+* wassh: Initial UNIX socket support
+* wassh: vfs: Convert read/pread to async methods.
+* wasi-js-bindings: check read handle return length
+* wassh-libc-sup: connect: Decode errno on failure.
+* nacl: Rip out integration into a dedicated module.
 * nassh: Integrate wassh.
 * wassh: Implement basic signal delivery.
 * goog: Change GoogMetricsReporter to ES6.

@@ -84,6 +84,7 @@ const run = async function() {
       term: this,
       tcpSocketsOpen: (address, port) => null,
       unixSocketsOpen: (address, port) => null,
+      secureInput: (prompt, max_len, echo) => secureInput(io),
     });
     await settings.handler.init();
     proc = new WasshProcess.Background(
@@ -93,3 +94,27 @@ const run = async function() {
   const ret = await proc.run();
   io.println(`\n> finished: ret = ${ret}`);
 };
+
+function secureInput(io) {
+  return new Promise((resolve) => {
+    io = io.push();
+    let pass = '';
+    io.onVTKeystroke = (str) => {
+      io.print(str);
+      switch (str) {
+        case '\x7f':
+        case '\x08':
+          pass = pass.slice(0, -1);
+          break;
+          case '\n':
+          case '\r':
+            resolve(pass);
+            io.pop();
+            break;
+          default:
+            pass += str;
+            break;
+      }
+    };
+  });
+}

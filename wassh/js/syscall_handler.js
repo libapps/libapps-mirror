@@ -79,11 +79,12 @@ export class DirectWasiPreview1 extends SyscallHandler.DirectWasiPreview1 {
  * These may be asynchronous.
  */
 export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
-  constructor({term, tcpSocketsOpen, unixSocketsOpen} = {}) {
+  constructor({term, tcpSocketsOpen, unixSocketsOpen, secureInput} = {}) {
     super();
     this.term_ = term;
     this.tcpSocketsOpen_ = tcpSocketsOpen;
     this.unixSocketsOpen_ = unixSocketsOpen;
+    this.secureInput_ = secureInput;
     this.notify_ = null;
     this.vfs = new VFS.VFS({stdio: false});
     this.socketTcpRecv_ = null;
@@ -646,35 +647,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
    * @return {{pass: string}} The user input.
    */
   async handle_readpassphrase(prompt, max_len, echo) {
-    let pass = '';
-    const node = document.createElement('p');
-    node.textContent = prompt;
-    node.style.whiteSpace = 'pre-wrap';
-    node.style.fontWeight = 'bold';
-    node.style.fontSize = 'larger';
-    const io = this.term_.io.push();
-    this.term_.showOverlay(node, null);
-    io.sendString = (str) => {
-      pass += str;
+    return {
+      pass: await this.secureInput_(prompt, max_len, echo),
     };
-    return new Promise((resolve) => {
-      io.onVTKeystroke = (str) => {
-        switch (str) {
-          case '\x7f':
-          case '\x08':
-            pass = pass.slice(0, -1);
-            break;
-          case '\n':
-          case '\r':
-            resolve({pass});
-            io.hideOverlay();
-            io.pop();
-            break;
-          default:
-            pass += str;
-            break;
-        }
-      };
-    });
   }
 }
