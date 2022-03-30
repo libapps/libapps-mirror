@@ -61,11 +61,18 @@ const ICON_SETTINGS = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 
 const ICON_MORE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>`;
 
 /**
- * North east arrow open svg icon.
+ * Code / Developers svg icon.
  *
  * @type {!TemplateResult}
  */
-const ICON_OPEN = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect fill="none" height="24" width="24"/><path d="M9,5v2h6.59L4,18.59L5.41,20L17,8.41V15h2V5H9z"/></svg>`;
+const ICON_CODE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>`;
+
+/**
+ * Open in new window svg icon.
+ *
+ * @type {!TemplateResult}
+ */
+const ICON_OPEN_IN_NEW = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>`;
 
 export class TerminalHomeApp extends LitElement {
   /** @override */
@@ -94,7 +101,10 @@ export class TerminalHomeApp extends LitElement {
   static get styles() {
     return css`
       :host {
+        display: flex;
+        flex-wrap: wrap;
         font-family: 'Roboto';
+        padding: 24px;
       }
 
       a {
@@ -119,32 +129,49 @@ export class TerminalHomeApp extends LitElement {
 
       h3 {
         color: rgb(var(--foreground-color-rgb));
-        flex-grow: 1;
-        font-size: 13px;
+        flex: 1;
+        font-size: 14px;
         font-weight: 500;
+        margin: 0;
       }
 
       h4 {
         color: rgb(var(--foreground-color-rgb));
         font-size: 16px;
         font-weight: 400;
+        padding-right: 16px;
+      }
+
+      li:not(:last-child), .line {
+        border-bottom: 1px solid rgb(var(--foreground-color-rgb), 0.2);
       }
 
       section {
-        max-width: 800px;
-        padding: 0 32px;
+        background-color: rgba(var(--foreground-color-rgb), 0.05);
+        border-radius: 8px;
+        margin: 0 0 16px 0;
       }
 
       ul {
         list-style-type: none;
-        padding: 0;
+        margin: 0;
+        padding: 0 0 0 24px;
       }
 
       .button-icon > svg {
         fill: rgb(var(--button-color-rgb));
         height: 22px;
         margin: -6px 0;
-        padding-right: 8px;
+        padding: 0 8px 0 0;
+      }
+
+      .column {
+        max-width: 700px;
+      }
+
+      .header {
+        height: 60px;
+        padding: 0 16px;
       }
 
       .icon-fill-path > svg > path, .icon-fill-svg > svg {
@@ -156,22 +183,21 @@ export class TerminalHomeApp extends LitElement {
         display: flex;
       }
 
-      .row-border {
-        border-bottom: 1px solid rgb(var(--foreground-color-rgb), 0.2);
-      }
-
-      .row-header {
-        height: 60px;
-        margin: 20px 0 0;
-      }
-
-      .row-full-width {
+      .full-width {
         width: 100%;
+      }
+
+      .nowrap {
+        white-space: nowrap;
       }
 
       .row-icon > svg {
         height: 24px;
-        padding-right: 16px;
+        padding: 0 16px 0 0;
+      }
+
+      .settings {
+        flex: 1;
       }
     `;
   }
@@ -218,66 +244,75 @@ export class TerminalHomeApp extends LitElement {
     };
 
     return html`
-      <section>
-        <div class="row row-border row-header">
-          <h3>${msg('TERMINAL_HOME_SSH')}</h3>
-          <a target="_blank" href="terminal_ssh.html">
-            <button tabindex="-1">
-              <span class="button-icon">${ICON_PLUS}</span>
-              ${msg('TERMINAL_HOME_ADD_SSH')}
-            </button>
-          </a>
-        </div>
-        <ul>
-        ${this.sshConnections.map((c) => html`
-          <li class="row row-border">
-            <a class="row row-full-width" target="_blank"
-                href="terminal_ssh.html#profile-id:${c.id}">
-              <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
-              <h4>${c.description}</h4>
-            </a>
-            <a target="_blank" href="terminal_ssh.html"
-                aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}">
-              <span class="row-icon icon-fill-svg">${ICON_MORE}</span>
-            </a>
-          </li>
-        `)}
-        </ul>
-      </section>
-      ${containers.length == 0 ? undefined : html`
+      <div class="column full-width">
         <section>
-          <h3 class="row row-border row-header">
-            ${msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL')}
-          </h3>
+          <div class="header row ${this.sshConnections.length ? 'line' : ''}">
+            <h3>${msg('TERMINAL_HOME_SSH')}</h3>
+            <a target="_blank" href="terminal_ssh.html">
+              <button tabindex="-1">
+                <span class="button-icon">${ICON_PLUS}</span>
+                ${msg('TERMINAL_HOME_ADD_SSH')}
+              </button>
+            </a>
+          </div>
           <ul>
-          ${containers.map((c) => html`
-            <li class="row-border">
-              <a class="row" target="_blank"
-                  href="${containerHref(c)}">
-                <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
-                <h4>${containerText(c)}</h4>
+          ${this.sshConnections.map((c) => html`
+            <li class="row">
+              <a class="row full-width" target="_blank"
+                  href="terminal_ssh.html#profile-id:${c.id}">
+                <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
+                <h4>${c.description}</h4>
+              </a>
+              <a target="_blank" href="terminal_ssh.html"
+                  aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}">
+                <span class="row-icon icon-fill-svg">${ICON_MORE}</span>
               </a>
             </li>
           `)}
           </ul>
         </section>
-      `}
-      <section>
-        <ul>
-          <li class="row-header">
-            <a class="row" href="" @click="${this.onOpenTerminalSettings}">
+        ${containers.length == 0 ? undefined : html`
+          <section>
+            <h3 class="header row line">
+              ${msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL')}
+            </h3>
+            <ul>
+            ${containers.map((c) => html`
+              <li>
+                <a class="row" target="_blank" href="${containerHref(c)}">
+                  <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
+                  <h4>${containerText(c)}</h4>
+                </a>
+              </li>
+            `)}
+            </ul>
+          </section>
+        `}
+      </div>
+      <div class="column settings">
+        <section>
+          <ul>
+            <li class="row">
               <span class="row-icon icon-fill-svg">${ICON_SETTINGS}</span>
-              <h4>${msg('TERMINAL_HOME_TERMINAL_SETTINGS')}</h4>
-            </a>
-          </li>
-          <li>
-            <a class="row" href="" @click="${this.onOpenSystemSettings}">
-              <span class="row-icon icon-fill-svg">${ICON_OPEN}</span>
-              <h4>${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}</h4>
-            </a>
-          </li>
-        </ul>
-      </section>
+              <h4 class="full-width nowrap">
+                ${msg('TERMINAL_HOME_TERMINAL_SETTINGS')}
+              </h4>
+              <a href="" @click="${this.onOpenTerminalSettings}">
+                <span class="row-icon icon-fill-svg">${ICON_OPEN_IN_NEW}</span>
+              </a>
+            </li>
+            <li class="row">
+              <span class="row-icon icon-fill-svg">${ICON_CODE}</span>
+              <h4 class="full-width nowrap">
+                ${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}
+              </h4>
+              <a href="" @click="${this.onOpenSystemSettings}">
+                <span class="row-icon icon-fill-svg">${ICON_OPEN_IN_NEW}</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
     `;
   }
 
