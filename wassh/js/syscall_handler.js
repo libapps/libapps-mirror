@@ -109,6 +109,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     await this.vfs.open('.');
 
     this.vfs.addHandler(new VFS.DevNullHandler());
+
+    this.term_.io.onTerminalResize = (width, height) => {
+      // https://github.com/WebAssembly/wasi-libc/issues/272
+      this.process_.send_signal(28 /* musl SIGWINCH */);
+    };
   }
 
   /** @override */
