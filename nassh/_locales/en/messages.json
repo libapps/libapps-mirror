@@ -2011,8 +2011,18 @@
 		"description": "Label to open system settings at Developer (crostini) subpage.",
 		"message": "Developer Settings"
 	},
+	"TERMINAL_HOME_DISABLED_BY_POLICY": {
+		"description": "Help text shown when Linux or SSH has been disabled by policy.",
+		"message": "$FEATURE$ is disabled by your administrator.",
+		"placeholders": {
+			"FEATURE": {
+				"content": "$1",
+				"example": "SSH"
+			}
+		}
+	},
 	"TERMINAL_HOME_EDIT_SSH": {
-		"description": "Label to edit an SSH (Secure SHell) connection.",
+		"description": "Label to edit an existing SSH (Secure SHell) connection.",
 		"message": "Edit SSH"
 	},
 	"TERMINAL_HOME_IMPORT_IDENTITY": {

@@ -38,6 +38,7 @@ describe('terminal_home_app_tests.js', () => {
         {vm_name: 'termina', container_name:'penguin'},
         {vm_name: 'termina', container_name:'c2'},
       ],
+      'crostini.terminal_ssh_allowed_by_policy': true,
     });
 
     const rows = await this.getRowText();
@@ -51,6 +52,10 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('termina:c2', rows[5].innerText);
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[6].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[7].innerText);
+
+    // All 4 rows are links.
+    const links = this.el.shadowRoot.querySelectorAll('li a h4');
+    assert.equal(4, links.length);
   });
 
   it('shows-linux-label-if-only-default-container', async function() {
@@ -59,6 +64,7 @@ describe('terminal_home_app_tests.js', () => {
       'crostini.containers': [
         {vm_name: 'termina', container_name:'penguin'},
       ],
+      'crostini.terminal_ssh_allowed_by_policy': true,
     });
 
     const rows = await this.getRowText();
@@ -72,18 +78,32 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[4].innerText);
   });
 
-  it('hides-containers-if-crostini-disabled', async function() {
+  it('removes-links-if-policy-disabled', async function() {
     hterm.defaultStorage.setItems({
+      '/nassh/profile-ids': ['p1', 'p2'],
+      '/nassh/profiles/p1/description': 'ssh-connection-1',
+      '/nassh/profiles/p2/description': 'ssh-connection-2',
       'crostini.enabled': false,
       'crostini.containers': [
         {vm_name: 'termina', container_name:'penguin'},
       ],
+      'crostini.terminal_ssh_allowed_by_policy': false,
     });
 
     const rows = await this.getRowText();
-    assert.equal(3, rows.length);
+    assert.equal(7, rows.length);
     assert.equal('TERMINAL_HOME_SSH', rows[0].innerText);
-    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[1].innerText);
-    assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[2].innerText);
-  });
+    assert.equal('ssh-connection-1', rows[1].innerText);
+    assert.equal('ssh-connection-2', rows[2].innerText);
+    assert.equal(
+      'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[3].innerText);
+    assert.equal(
+      'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[4].innerText);
+    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[5].innerText);
+    assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[6].innerText);
+
+    // No rows are links.
+    const links = this.el.shadowRoot.querySelectorAll('li a h4');
+    assert.equal(0, links.length);
+});
 });

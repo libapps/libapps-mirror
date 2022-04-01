@@ -19,6 +19,13 @@ import {DEFAULT_CONTAINER_NAME, DEFAULT_VM_NAME} from './terminal_common.js';
 const PREF_PATH_ENABLED = 'crostini.enabled';
 
 /**
+ * Path for pref with boolean ssh allowed.
+ *
+ * @type {string}
+ */
+const PREF_PATH_SSH_ALLOWED = 'crostini.terminal_ssh_allowed_by_policy';
+
+/**
  * Path for pref with list of crostini containers.
  *
  * @type {string}
@@ -74,6 +81,13 @@ const ICON_CODE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 2
  */
 const ICON_OPEN_IN_NEW = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>`;
 
+/**
+ * Domain (enterprise policy) svg icon.
+ *
+ * @type {function(string):!TemplateResult}
+ */
+const domainIcon = (title) => html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>${title}</title><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>`;
+
 export class TerminalHomeApp extends LitElement {
   /** @override */
   async performUpdate() {
@@ -85,15 +99,10 @@ export class TerminalHomeApp extends LitElement {
   /** @override */
   static get properties() {
     return {
-      sshConnections: {
-        type: Array,
-      },
-      containers: {
-        type: Array,
-      },
-      crostiniEnabled: {
-        type: Boolean,
-      },
+      sshConnections: {state: true},
+      containers: {state: true},
+      crostiniEnabled: {state: true},
+      sshAllowed: {state: true},
     };
   }
 
@@ -137,6 +146,7 @@ export class TerminalHomeApp extends LitElement {
 
       h4 {
         color: rgb(var(--foreground-color-rgb));
+        flex: 1;
         font-size: 16px;
         font-weight: 400;
         padding-right: 16px;
@@ -148,6 +158,8 @@ export class TerminalHomeApp extends LitElement {
 
       section {
         background-color: rgba(var(--foreground-color-rgb), 0.05);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         border-radius: 8px;
         margin: 0 8px 16px 8px;
       }
@@ -207,20 +219,22 @@ export class TerminalHomeApp extends LitElement {
     this.sshConnections = [];
     this.containers = [];
     this.crostiniEnabled = true;
+    this.sshAllowed = true;
 
     hterm.defaultStorage.addObserver(this.onSettingsChanged.bind(this));
     this.onSettingsChanged({});
 
     const prefsChanged = this.onPrefsChanged.bind(this);
+    const paths =
+        [PREF_PATH_ENABLED, PREF_PATH_CONTAINERS, PREF_PATH_SSH_ALLOWED];
     if (chrome.terminalPrivate) {
       chrome.terminalPrivate.onPrefChanged.addListener(prefsChanged);
-      chrome.terminalPrivate.getPrefs(
-          [PREF_PATH_ENABLED, PREF_PATH_CONTAINERS], prefsChanged);
+      chrome.terminalPrivate.getPrefs(paths, prefsChanged);
     } else {
       // Fallback for dev / testing.
       console.warn('chrome.terminalPrivate API not found.');
       const changed = () => hterm.defaultStorage.getItems(
-        [PREF_PATH_ENABLED, PREF_PATH_CONTAINERS]).then(prefsChanged);
+        paths).then(prefsChanged);
       hterm.defaultStorage.addObserver(changed);
       changed();
     }
@@ -229,25 +243,57 @@ export class TerminalHomeApp extends LitElement {
   /** @override */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
-    const containers = this.crostiniEnabled ? this.containers : [];
-    const containerHref = (c) => {
-      return `terminal.html?command=vmshell&args[]=${
-          encodeURIComponent(`--vm_name=${c.vm_name}`)}&args[]=${
-          encodeURIComponent(`--target_container=${c.container_name}`)}`;
-    };
-    const containerText = (c) => {
+    const sshLabel = msg('TERMINAL_HOME_SSH');
+    const linuxLabel = msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL');
+
+    const disabledIcon = (feature) => html`
+      <span class="row-icon icon-fill-svg">
+        ${domainIcon(msg('TERMINAL_HOME_DISABLED_BY_POLICY', [feature]))}
+      </span>
+    `;
+
+    const sshText = (c) => html`
+      <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
+      <h4>${c.description}</h4>
+   `;
+    const sshLink = (c) => html`
+      <a class="row full-width" target="_blank"
+          href="terminal_ssh.html#profile-id:${c.id}">
+        ${sshText(c)}
+      </a>
+    `;
+
+    const containerLabel = (c) => {
       if (this.containers.length === 1 && c.vm_name === DEFAULT_VM_NAME &&
           c.container_name === DEFAULT_CONTAINER_NAME) {
         return msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL');
       }
       return `${c.vm_name}:${c.container_name}`;
     };
+    const containerText = (c) => html`
+      <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
+      <h4>${containerLabel(c)}</h4>
+   `;
+    const containerHref = (c) => {
+      if (!this.crostiniEnabled) {
+        return '';
+      }
+      return `terminal.html?command=vmshell&args[]=${
+          encodeURIComponent(`--vm_name=${c.vm_name}`)}&args[]=${
+          encodeURIComponent(`--target_container=${c.container_name}`)}`;
+    };
+    const containerLink = (c) => html`
+      <a class="row" target="_blank" href="${containerHref(c)}">
+        ${containerText(c)}
+      </a>
+    `;
 
     return html`
       <div class="column full-width">
         <section>
           <div class="header row ${this.sshConnections.length ? 'line' : ''}">
-            <h3>${msg('TERMINAL_HOME_SSH')}</h3>
+            <h3>${sshLabel}</h3>
+            ${this.sshAllowed ? undefined : disabledIcon(sshLabel)}
             <a target="_blank" href="terminal_ssh.html">
               <button tabindex="-1">
                 <span class="button-icon">${ICON_PLUS}</span>
@@ -258,11 +304,7 @@ export class TerminalHomeApp extends LitElement {
           <ul>
           ${this.sshConnections.map((c) => html`
             <li class="row">
-              <a class="row full-width" target="_blank"
-                  href="terminal_ssh.html#profile-id:${c.id}">
-                <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
-                <h4>${c.description}</h4>
-              </a>
+              ${this.sshAllowed ? sshLink(c) : sshText(c)}
               <a target="_blank" href="terminal_ssh.html"
                   aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}">
                 <span class="row-icon icon-fill-svg">${ICON_MORE}</span>
@@ -271,23 +313,19 @@ export class TerminalHomeApp extends LitElement {
           `)}
           </ul>
         </section>
-        ${containers.length == 0 ? undefined : html`
-          <section>
-            <h3 class="header row line">
-              ${msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL')}
-            </h3>
-            <ul>
-            ${containers.map((c) => html`
-              <li>
-                <a class="row" target="_blank" href="${containerHref(c)}">
-                  <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
-                  <h4>${containerText(c)}</h4>
-                </a>
-              </li>
-            `)}
-            </ul>
-          </section>
-        `}
+        <section>
+          <div class="header row ${this.containers.length ? 'line' : ''}">
+            <h3>${linuxLabel}</h3>
+            ${this.crostiniEnabled ? undefined : disabledIcon(linuxLabel)}
+          </div>
+          <ul>
+          ${this.containers.map((c) => html`
+            <li class="row">
+              ${this.crostiniEnabled ? containerLink(c) : containerText(c)}
+            </li>
+          `)}
+          </ul>
+        </section>
       </div>
       <div class="column settings">
         <section>
@@ -347,6 +385,9 @@ export class TerminalHomeApp extends LitElement {
     }
     if (prefs.hasOwnProperty(PREF_PATH_ENABLED)) {
       this.crostiniEnabled = prefs[PREF_PATH_ENABLED];
+    }
+    if (prefs.hasOwnProperty(PREF_PATH_SSH_ALLOWED)) {
+      this.sshAllowed = prefs[PREF_PATH_SSH_ALLOWED];
     }
   }
 
