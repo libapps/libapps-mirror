@@ -30,6 +30,8 @@ if (nassh.browserAction) {
  * reached from the background page's JS console.
  */
 lib.init(console.log.bind(console)).then(() => {
+  nassh.External.initApi();
+
   const app = new App();
 
   // Register our context menus.

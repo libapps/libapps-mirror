@@ -737,8 +737,12 @@ nassh.External.onConnect_ = (port) => {
   nassh.External.dispatchConnect_.call(this, true, port);
 };
 
-// Initialize nassh.External.
-lib.registerInit('external api', () => {
+/**
+ * Initialize nassh.External.
+ *
+ * @return {!Promise<void>} When init has finished.
+ */
+nassh.External.initApi = function() {
   // Create hterm.Terminal.IO required for SFTP using a mock hterm.Terminal.
   // External API calls will not require user IO to enter password, etc.
   /** @private */
@@ -764,7 +768,7 @@ lib.registerInit('external api', () => {
       handlersReady = true;
     });
   });
-});
+};
 
 /**
  * Register listeners to receive messages.
