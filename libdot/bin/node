@@ -22,10 +22,10 @@ NODE_MODULES_HASH = '50a933e09257e1f586db44434d81a3cc6b6e7d1c7506a92f3d33a644462
 # In sync with Chromium's DEPS file because it's easier to use something that
 # already exists than maintain our own.
 # Run `./node_sync_with_chromium` to update these settings.
-NODE_VER = '14.15.4'
-NODE_LINUX_HASH = 'b2e40ddbac04d05baafbb007f203c6663c9d4ca9'
-NODE_MAC_HASH = '17ba7216e09de1bffb9dc80b7ec617a1cee40330'
-NODE_WIN_HASH = '58bca4fea5196d856e41f928c02f6d6af2421865'
+NODE_VER = '16.13.0'
+NODE_LINUX_HASH = 'ab9544e24e752d3d17f335fb7b2055062e582d11'
+NODE_MAC_HASH = '16dfd094763b71988933a31735f9dea966f9abd6'
+NODE_WIN_HASH = '5ef847033c517c499f56f9d136d159b663bab717'
 
 # Bucket maintained by Chromium.
 # gsutil ls gs://chromium-nodejs/

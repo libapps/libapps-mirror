@@ -180,8 +180,8 @@ def test_unittests():
     for pkg in ('libdot', 'hterm', 'nassh', 'terminal', 'wasi-js-bindings'):
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         if os.path.exists(os.path.join(pkg_dir, 'package.json')):
-            cmd = ['npm', 'test', '--'] + test_args
-            run = libdot.node.run
+            cmd = ['test', '--'] + test_args
+            run = libdot.npm.run
         else:
             cmd = ['./bin/load_tests'] + test_args
             run = libdot.run

@@ -5,14 +5,41 @@
 
 """Run npm with the right settings."""
 
+import contextlib
+import os
+from pathlib import Path
 import sys
 
 import libdot
 
 
+@contextlib.contextmanager
+def temp_switch_path_owner(path: os.PathLike):
+    """Change |path| owner to root temporarily.
+
+    Starting with node-16, npm will automatically change uid/gid when the
+    current user is root.  It determines that target uid/gid based on the
+    owner of the cwd.  To defeat that logic, we have to temporarily change
+    the cwd ownership to root.
+    """
+    switch = os.getuid() == 0
+    if switch:
+        st = path.stat()
+        uid = st.st_uid
+        gid = st.st_gid
+        os.chown(path, 0, 0)
+    try:
+        yield
+    finally:
+        if switch:
+            os.chown(path, uid, gid)
+
+
 def run(cmd, **kwargs):
     """Run the npm |cmd|."""
-    libdot.node.run(['npm'] + cmd, **kwargs)
+    cwd = Path(kwargs.get('cwd', '.'))
+    with temp_switch_path_owner(cwd):
+        return libdot.node.run(['npm'] + cmd, **kwargs)
 
 
 def main(argv):
