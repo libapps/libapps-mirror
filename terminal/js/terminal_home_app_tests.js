@@ -53,9 +53,9 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[6].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[7].innerText);
 
-    // All 4 rows are links.
+    // All 6 rows are links.
     const links = this.el.shadowRoot.querySelectorAll('li a h4');
-    assert.equal(4, links.length);
+    assert.equal(6, links.length);
   });
 
   it('shows-linux-label-if-only-default-container', async function() {
@@ -102,8 +102,8 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[5].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[6].innerText);
 
-    // No rows are links.
+    // Only last 2 settings rows are links.
     const links = this.el.shadowRoot.querySelectorAll('li a h4');
-    assert.equal(0, links.length);
+    assert.equal(2, links.length);
 });
 });

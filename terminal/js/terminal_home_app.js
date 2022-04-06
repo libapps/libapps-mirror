@@ -44,7 +44,7 @@ const ICON_PLUS = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 2
  *
  * @type {!TemplateResult}
  */
-const ICON_SSH = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z"/></svg>`;
+const ICON_SSH = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.5 3H2.5C1.6 3 1 3.7 1 4.55556V13.5C1 14.3556 1.6 15 2.5 15H7H8V16H6V18H14V16H12V15H13H17.5C18.4 15 19 14.3556 19 13.5V4.5C19 3.64444 18.4 3 17.5 3ZM17 13H3V5H17V13Z"/></svg>`;
 
 /**
  * Linux crostini penguin svg icon.
@@ -58,28 +58,28 @@ const ICON_LINUX = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 
  *
  * @type {!TemplateResult}
  */
-const ICON_SETTINGS = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>`;
+const ICON_SETTINGS = html`<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11.5 18.0H8.5C7.9 18.0 7.4 17.6 7.4 17.0L7.1 15.5C6.9 15.4 6.7 15.3 6.5 15.2L5.1 15.7C4.5 15.9 3.9 15.7 3.6 15.2L2.2 12.8C1.9 12.2 2.0 11.6 2.4 11.3L3.7 10.4C3.7 10.2 3.7 10.1 3.7 10.0C3.7 9.9 3.7 9.8 3.7 9.6L2.5 8.7C2.0 8.4 1.9 7.7 2.2 7.2L3.6 4.7C3.9 4.3 4.5 4.0 5.1 4.3L6.5 4.8C6.7 4.7 6.9 4.6 7.1 4.5L7.4 3.0C7.4 2.4 7.9 2.0 8.5 2.0H11.5C12.1 2.0 12.6 2.4 12.6 3.0L12.8 4.5C13.1 4.6 13.3 4.7 13.5 4.8L14.9 4.3C15.5 4.1 16.1 4.3 16.4 4.8L17.8 7.3C18.1 7.8 18.0 8.4 17.6 8.7L16.3 9.7C16.3 9.8 16.4 9.9 16.4 10.0C16.4 10.1 16.3 10.3 16.3 10.4L17.6 11.3C18.0 11.7 18.1 12.3 17.9 12.8L16.4 15.3C16.1 15.8 15.5 16.0 14.9 15.8L13.5 15.2C13.3 15.3 13.1 15.4 12.9 15.6L12.6 17.0C12.6 17.6 12.1 18.0 11.5 18.0ZM8.9 16.0H11.1L11.3 14.1L11.7 14.0C12.1 13.9 12.4 13.7 12.8 13.4L13.1 13.2L14.9 13.9L16.0 12.1L14.4 11.0L14.5 10.6C14.5 10.4 14.5 10.2 14.5 10.0C14.5 9.8 14.5 9.6 14.5 9.4L14.4 9.0L16.0 7.9L14.9 6.1L13.1 6.8L12.8 6.6C12.4 6.3 12.1 6.2 11.7 6.0L11.3 5.9L11.1 4.0H8.9L8.7 5.9L8.3 6.0C7.9 6.1 7.6 6.3 7.2 6.6L6.9 6.8L5.1 6.1L4.0 7.9L5.6 9.0L5.5 9.4C5.5 9.6 5.5 9.8 5.5 10.0C5.5 10.2 5.5 10.4 5.5 10.6L5.6 11.0L4.0 12.1L5.1 13.9L6.9 13.2L7.2 13.4C7.6 13.7 7.9 13.8 8.3 14.0L8.7 14.1L8.9 16.0ZM10.0 12.5C11.4 12.5 12.5 11.4 12.5 10.0C12.5 8.6 11.4 7.5 10.0 7.5C8.6 7.5 7.5 8.6 7.5 10.0C7.5 11.4 8.6 12.5 10.0 12.5Z"/></svg>`;
 
 /**
- * More Vert (3 dot menu) svg icon.
+ * Edit svg icon.
  *
  * @type {!TemplateResult}
  */
-const ICON_MORE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>`;
+const ICON_EDIT = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.4 3.9L16 2.6C15.3 1.8 14 1.8 13.2 2.6L10.4 5.4L2 13.8V18H6.2L17.4 6.8C18.2 6 18.2 4.7 17.4 3.9ZM4 16V14.6L11.8 6.8L13.2 8.2L5.4 16L4 16Z"/></svg>`;
 
 /**
  * Code / Developers svg icon.
  *
  * @type {!TemplateResult}
  */
-const ICON_CODE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>`;
+const ICON_CODE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M8.2 6.2L4.4 10L8.2 13.8L6.8 15.2L1.6 10L6.8 4.8L8.2 6.2Z M11.3 13.8L15.1 10L11.3 6.2L12.7 4.8L17.9 10L12.7 15.2L11.3 13.8Z"/></svg>`;
 
 /**
  * Open in new window svg icon.
  *
  * @type {!TemplateResult}
  */
-const ICON_OPEN_IN_NEW = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>`;
+const ICON_OPEN_IN_NEW = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M15 15H5V5H9V3H5C4 3 3 4 3 5C3 6 3 15 3 15C3 16 4 17 5 17H15C16 17 17 16 17 15V11H15V15ZM11 3V5H13.5L7 11.5L8.5 13L15 6.5V9H17V3H11Z"/></svg>`;
 
 /**
  * Domain (enterprise policy) svg icon.
@@ -113,7 +113,8 @@ export class TerminalHomeApp extends LitElement {
         display: flex;
         flex-wrap: wrap;
         font-family: 'Roboto';
-        padding: 24px 16px;
+        padding: 40px 0 0 0;
+        justify-content: center;
       }
 
       a {
@@ -121,8 +122,8 @@ export class TerminalHomeApp extends LitElement {
       }
 
       button {
-        background-color: rgba(var(--button-color-rgb), 0.08);
-        border: 1px solid rgb(var(--button-color-rgb));
+        background-color: inherit;
+        border: 1px solid rgb(var(--foreground-color-rgb), 0.14);
         border-radius: 4px;
         color: rgb(var(--button-color-rgb));
         cursor: pointer;
@@ -133,13 +134,13 @@ export class TerminalHomeApp extends LitElement {
       }
 
       button:hover {
-        background-color: rgba(var(--button-color-rgb), 0.2));
+        background-color: rgba(var(--button-color-rgb), 0.2);
       }
 
       h3 {
         color: rgb(var(--foreground-color-rgb));
         flex: 1;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         margin: 0;
       }
@@ -147,27 +148,26 @@ export class TerminalHomeApp extends LitElement {
       h4 {
         color: rgb(var(--foreground-color-rgb));
         flex: 1;
-        font-size: 16px;
+        font-size: 13px;
         font-weight: 400;
         padding-right: 16px;
       }
 
       li:not(:last-child), .line {
-        border-bottom: 1px solid rgb(var(--foreground-color-rgb), 0.2);
+        border-bottom: 1px solid rgb(var(--foreground-color-rgb), 0.14);
       }
 
       section {
-        background-color: rgba(var(--foreground-color-rgb), 0.05);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        background-color: rgba(var(--foreground-color-rgb), 0.06);
         border-radius: 8px;
         margin: 0 8px 16px 8px;
+        min-width: 256px;
       }
 
       ul {
         list-style-type: none;
         margin: 0;
-        padding: 0 0 0 24px;
+        padding: 0 0 0 20px;
       }
 
       .button-icon > svg {
@@ -178,12 +178,13 @@ export class TerminalHomeApp extends LitElement {
       }
 
       .column {
+        margin: 0 12px;
         max-width: 700px;
       }
 
       .header {
-        height: 60px;
-        padding: 0 16px;
+        height: 64px;
+        padding: 0 20px;
       }
 
       .icon-fill-path > svg > path, .icon-fill-svg > svg {
@@ -204,12 +205,18 @@ export class TerminalHomeApp extends LitElement {
       }
 
       .row-icon > svg {
-        height: 24px;
+        height: 20px;
         padding: 0 16px 0 0;
       }
 
       .settings {
         flex: 1;
+      }
+
+      @media (min-width: 1036px) {
+        .settings {
+          max-width: 256px;
+        }
       }
     `;
   }
@@ -307,7 +314,7 @@ export class TerminalHomeApp extends LitElement {
               ${this.sshAllowed ? sshLink(c) : sshText(c)}
               <a target="_blank" href="terminal_ssh.html"
                   aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}">
-                <span class="row-icon icon-fill-svg">${ICON_MORE}</span>
+                <span class="row-icon icon-fill-svg">${ICON_EDIT}</span>
               </a>
             </li>
           `)}
@@ -330,21 +337,22 @@ export class TerminalHomeApp extends LitElement {
       <div class="column settings">
         <section>
           <ul>
-            <li class="row">
-              <span class="row-icon icon-fill-svg">${ICON_SETTINGS}</span>
-              <h4 class="full-width nowrap">
-                ${msg('TERMINAL_HOME_TERMINAL_SETTINGS')}
-              </h4>
-              <a href="" @click="${this.onOpenTerminalSettings}">
-                <span class="row-icon icon-fill-svg">${ICON_OPEN_IN_NEW}</span>
+            <li>
+              <a class="row full-width" href=""
+                    @click="${this.onOpenTerminalSettings}">
+                <span class="row-icon icon-fill-svg">${ICON_SETTINGS}</span>
+                <h4 class="full-width nowrap">
+                  ${msg('TERMINAL_HOME_TERMINAL_SETTINGS')}
+                </h4>
               </a>
             </li>
-            <li class="row">
-              <span class="row-icon icon-fill-svg">${ICON_CODE}</span>
-              <h4 class="full-width nowrap">
-                ${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}
-              </h4>
-              <a href="" @click="${this.onOpenSystemSettings}">
+            <li>
+              <a class="row full-width" href=""
+                    @click="${this.onOpenSystemSettings}">
+                <span class="row-icon icon-fill-svg">${ICON_CODE}</span>
+                <h4 class="full-width nowrap">
+                  ${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}
+                </h4>
                 <span class="row-icon icon-fill-svg">${ICON_OPEN_IN_NEW}</span>
               </a>
             </li>
