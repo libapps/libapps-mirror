@@ -103,6 +103,8 @@ nassh.msg = function(name, args) {
  *
  * This will also create the /.ssh/ directory if it does not exits.
  *
+ * TODO: moved to 'nassh_fs.js' once all callers migrate to ES6 modules.
+ *
  * @return {!Promise<!FileSystem>} The root filesystem handle.
  */
 nassh.getFileSystem = function() {

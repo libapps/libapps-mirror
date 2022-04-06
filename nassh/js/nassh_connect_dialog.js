@@ -3,6 +3,8 @@
 // found in the LICENSE file.
 
 import {ColumnList} from './nassh_column_list.js';
+import {deleteIdentityFiles, getIdentityFileNames, importIdentityFiles} from
+    './nassh_fs.js';
 
 /**
  * Constructor a new ConnectDialog instance.
@@ -734,8 +736,7 @@ ConnectDialog.prototype.syncButtons_ = function() {
  * @param {function()=} onSuccess
  * @return {!Promise}
  */
-ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
-  const keyfileNames = new Set();
+ConnectDialog.prototype.syncIdentityDropdown_ = async function(onSuccess) {
   const identitySelect = this.$f('identity');
 
   let selectedName;
@@ -745,49 +746,40 @@ ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
     selectedName = identitySelect.value;
   }
 
-  const onFinalLoad = () => {
-    // Reset the list with the current set of keys.
-    while (identitySelect.firstChild) {
-      identitySelect.removeChild(identitySelect.firstChild);
-    }
+  let keyfileNames = [];
+  try {
+    keyfileNames = await getIdentityFileNames(this.fileSystem_);
+  } catch (e) {
+    console.error('Loading keys failed', e);
+  }
 
+  // Reset the list with the current set of keys.
+  while (identitySelect.firstChild) {
+    identitySelect.removeChild(identitySelect.firstChild);
+  }
+
+  const option = document.createElement('option');
+  option.textContent = '[default]';
+  option.value = '';
+  identitySelect.appendChild(option);
+
+  keyfileNames.sort().forEach((keyfileName) => {
     const option = document.createElement('option');
-    option.textContent = '[default]';
-    option.value = '';
+    const idx = keyfileName.lastIndexOf('/');
+    const key = keyfileName.substr(idx + 1);
+    option.textContent = key;
+    option.value = keyfileName;
     identitySelect.appendChild(option);
-
-    Array.from(keyfileNames).sort().forEach((keyfileName) => {
-      const option = document.createElement('option');
-      const idx = keyfileName.lastIndexOf('/');
-      const key = keyfileName.substr(idx + 1);
-      option.textContent = key;
-      option.value = keyfileName;
-      identitySelect.appendChild(option);
-      if (keyfileName == selectedName) {
-        identitySelect.selectedIndex = identitySelect.length - 1;
-      }
-    });
-
-    this.syncForm_();
-
-    if (onSuccess) {
-      onSuccess();
+    if (keyfileName == selectedName) {
+      identitySelect.selectedIndex = identitySelect.length - 1;
     }
-  };
+  });
 
-  return Promise.all([
-    // Load keys from /.ssh/identity/.
-    lib.fs.readDirectory(this.fileSystem_.root, '/.ssh/identity/')
-      .then((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isFile && !entry.name.endsWith('-cert.pub')) {
-            keyfileNames.add(entry.name);
-          }
-        });
-      }),
-  ])
-  .catch((e) => console.error('Loading keys failed', e))
-  .finally(onFinalLoad);
+  this.syncForm_();
+
+  if (onSuccess) {
+    onSuccess();
+  }
 };
 
 /**
@@ -797,18 +789,7 @@ ConnectDialog.prototype.syncIdentityDropdown_ = function(onSuccess) {
  * @return {!Promise}
  */
 ConnectDialog.prototype.deleteIdentity_ = function(identityName) {
-  const removeFile = (file) => {
-    // We swallow the rejection because we try to delete paths that are
-    // often not there (e.g. missing .pub file).
-    return lib.fs.removeFile(this.fileSystem_.root, file).catch(() => {});
-  };
-
-  const files = [
-    `/.ssh/identity/${identityName}`,
-    `/.ssh/identity/${identityName}.pub`,
-    `/.ssh/identity/${identityName}-cert.pub`,
-  ];
-  return Promise.all(files.map(removeFile))
+  return deleteIdentityFiles(this.fileSystem_, identityName)
     .finally(() => this.syncIdentityDropdown_());
 };
 
@@ -954,26 +935,10 @@ ConnectDialog.prototype.onFileSystemFound_ = function(fileSystem) {
  * @return {boolean}
  */
 ConnectDialog.prototype.onImportFiles_ = function(e) {
-  const promises = [];
   const input = this.importFileInput_;
 
-  // Create promises for all the file imports.
-  for (let i = 0; i < input.files.length; ++i) {
-    const file = input.files[i];
-
-    // Skip pub key halves as we don't need/use them.
-    // Except ssh has a naming convention for certificate files.
-    if (file.name.endsWith('.pub') && !file.name.endsWith('-cert.pub')) {
-      continue;
-    }
-
-    const targetPath = `/.ssh/identity/${file.name}`;
-    promises.push(lib.fs.overwriteFile(
-        this.fileSystem_.root, targetPath, file));
-  }
-
   // Resolve all the imports before syncing the UI.
-  Promise.all(promises)
+  importIdentityFiles(this.fileSystem_, input.files)
     .finally(() => {
       // If the import doesn't fully work (skip files/etc...), reset the UI
       // back to whatever the user has currently selected.
