@@ -138,12 +138,15 @@ export class TerminalDropdownElement extends LitElement {
         </li>
     `;
 
-    let selectedLabel = '';
-    let selectedDisabled = false;
+    let selectedLabel;
+    let selectedDisabled;
     if (selectedIndex !== -1) {
       const option = this.options[selectedIndex];
       selectedLabel = option.label ?? option.value;
       selectedDisabled = option.disabled === true;
+    } else {
+      selectedLabel = `${this.value}`;
+      selectedDisabled = true;
     }
     return html`
         <div id="container" role="button" aria-expanded="${this.expanded}">

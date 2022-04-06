@@ -17,7 +17,7 @@ describe('terminal_dropdown_tests.js', () => {
   ];
   const options = createOptions();
 
-  beforeEach(function() {
+  beforeEach(async function() {
     window.preferenceManager =
       new lib.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(preference, options[0].value);
@@ -35,7 +35,9 @@ describe('terminal_dropdown_tests.js', () => {
     };
 
     // The element renders asynchronously.
-    return this.el.updateComplete;
+    await this.el.updateComplete;
+
+    this.currentValueDiv = this.el.shadowRoot.querySelector('#current-value');
   });
 
   afterEach(function() {
@@ -349,8 +351,7 @@ describe('terminal_dropdown_tests.js', () => {
 
     // Style does not apply to the "current value" <div>, only the <li>.
     assert.equal(this.el.value, newOptions[0].value);
-    const currentValue = this.el.shadowRoot.querySelector('#current-value');
-    assert.isNull(currentValue.getAttribute('style'));
+    assert.isNull(this.currentValueDiv.getAttribute('style'));
   });
 
   // This only test that the attr is set. The behavior for disabled <li> element
@@ -364,17 +365,20 @@ describe('terminal_dropdown_tests.js', () => {
     assert.isTrue(this.getNthLiElement(0).hasAttribute('disabled'));
     assert.isFalse(this.getNthLiElement(1).hasAttribute('disabled'));
 
-    // The current value <div> should also be set.
-    const isCurrentValueDisabled = () => this.el.shadowRoot.querySelector(
-        '#current-value').hasAttribute('data-disabled');
-
     await window.preferenceManager.set(preference, options[0].value);
     await this.el.updateComplete;
-    assert.isTrue(isCurrentValueDisabled());
+    assert.isTrue(this.currentValueDiv.hasAttribute('data-disabled'));
 
     await window.preferenceManager.set(preference, options[1].value);
     await this.el.updateComplete;
-    assert.isFalse(isCurrentValueDisabled());
+    assert.isFalse(this.currentValueDiv.hasAttribute('data-disabled'));
+  });
+
+  it('shows invalid current value in disabled styling', async function() {
+    this.el.value = 'invalid option';
+    await this.el.updateComplete;
+    assert.equal(this.currentValueDiv.textContent.trim(), 'invalid option');
+    assert.isTrue(this.currentValueDiv.hasAttribute('data-disabled'));
   });
 
   it('allows-type-coercion-for-value-matching', async function() {
