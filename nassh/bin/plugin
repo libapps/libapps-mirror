@@ -12,14 +12,14 @@ import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 
-# The hash of the plugin that we maintain.
+# The sha256sum hash of the plugin archive that we maintain.
 # Allow a long line for easy automated updating.
 # pylint: disable=line-too-long
-PLUGIN_HASH = 'd3f2c65de66cfb785b89de1e857c912897923ffd7205b78f806c5e31650743a1'
+PLUGIN_HASH = '95def436ce42177238e11fd4fc03cb40721e282f7d5e63152aa1420edb84815b'
 # pylint: enable=line-too-long
 
 # Bucket maintained by us.
-PLUGIN_VERSION = 0.42
+PLUGIN_VERSION = 0.46
 PLUGIN_GS_FRAGMENT = 'chromeos-localmirror/secureshell/releases'
 PLUGIN_BASE_URI = f'https://storage.googleapis.com/{PLUGIN_GS_FRAGMENT}'
 
