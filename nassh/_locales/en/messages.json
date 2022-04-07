@@ -2011,16 +2011,6 @@
 		"description": "Label to open system settings at Developer (crostini) subpage.",
 		"message": "Developer Settings"
 	},
-	"TERMINAL_HOME_DISABLED_BY_POLICY": {
-		"description": "Help text shown when Linux or SSH has been disabled by policy.",
-		"message": "$FEATURE$ is disabled by your administrator.",
-		"placeholders": {
-			"FEATURE": {
-				"content": "$1",
-				"example": "SSH"
-			}
-		}
-	},
 	"TERMINAL_HOME_EDIT_SSH": {
 		"description": "Label to edit an existing SSH (Secure SHell) connection.",
 		"message": "Edit SSH"
@@ -2028,6 +2018,10 @@
 	"TERMINAL_HOME_IMPORT_IDENTITY": {
 		"description": "Label to the button to import SSH identity files",
 		"message": "Import"
+	},
+	"TERMINAL_HOME_LINUX_NOT_ENABLED": {
+		"description": "Help text shown when Linux is not enabled.",
+		"message": "Linux is not enabled, check Developer Settings."
 	},
 	"TERMINAL_HOME_NEW_SSH_CONNECTION": {
 		"description": "Title for a dialog to create a New SSH (Secure SHell) connection",
@@ -2040,6 +2034,10 @@
 	"TERMINAL_HOME_SSH_COMMAND": {
 		"description": "Label for the SSH (Secure SHell) command input.",
 		"message": "Command"
+	},
+	"TERMINAL_HOME_SSH_DISABLED_BY_POLICY": {
+		"description": "Help text shown when SSH (Secure SHell) has been disabled by policy.",
+		"message": "SSH is disabled by your administrator."
 	},
 	"TERMINAL_HOME_TERMINAL_SETTINGS": {
 		"description": "Label to open Terminal settings page.",

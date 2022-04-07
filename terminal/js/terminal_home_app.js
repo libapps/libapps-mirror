@@ -253,11 +253,13 @@ export class TerminalHomeApp extends LitElement {
     const sshLabel = msg('TERMINAL_HOME_SSH');
     const linuxLabel = msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL');
 
-    const disabledIcon = (feature) => html`
+    const disabledIcon = (msgname) => html`
       <span class="row-icon icon-fill-svg">
-        ${domainIcon(msg('TERMINAL_HOME_DISABLED_BY_POLICY', [feature]))}
+        ${domainIcon(msg(msgname))}
       </span>
     `;
+    const sshDisabled = disabledIcon('TERMINAL_HOME_SSH_DISABLED_BY_POLICY');
+    const linuxDisabled = disabledIcon('TERMINAL_HOME_LINUX_NOT_ENABLED');
 
     const sshText = (c) => html`
       <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
@@ -300,8 +302,8 @@ export class TerminalHomeApp extends LitElement {
         <section>
           <div class="header row ${this.sshConnections.length ? 'line' : ''}">
             <h3>${sshLabel}</h3>
-            ${this.sshAllowed ? undefined : disabledIcon(sshLabel)}
-            <a target="_blank" href="terminal_ssh.html">
+            ${this.sshAllowed ? undefined : sshDisabled}
+            <a target="_blank" href="terminal_ssh.html" autofocus>
               <button tabindex="-1">
                 <span class="button-icon">${ICON_PLUS}</span>
                 ${msg('TERMINAL_HOME_ADD_SSH')}
@@ -323,7 +325,7 @@ export class TerminalHomeApp extends LitElement {
         <section>
           <div class="header row ${this.containers.length ? 'line' : ''}">
             <h3>${linuxLabel}</h3>
-            ${this.crostiniEnabled ? undefined : disabledIcon(linuxLabel)}
+            ${this.crostiniEnabled ? undefined : linuxDisabled}
           </div>
           <ul>
           ${this.containers.map((c) => html`
