@@ -11,8 +11,8 @@ WASI_SDK = $(SRCDIR)/../../ssh_client/output/wasi-sdk
 SYSROOT = $(WASI_SDK)/share/wasi-sysroot
 CC = $(WASI_SDK)/bin/clang
 CXX = $(WASI_SDK)/bin/clang++
-CFLAGS ?= -O2
-CXXFLAGS ?= -O2
+CFLAGS ?= -O2 -g
+CXXFLAGS ?= -O2 -g
 COMMON_FLAGS = --sysroot $(SYSROOT) -Wall -Werror
 CFLAGS += $(COMMON_FLAGS) -std=gnu17
 CXXFLAGS += $(COMMON_FLAGS) -std=gnu++17
