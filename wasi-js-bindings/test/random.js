@@ -70,6 +70,15 @@ async function run(prog, argv) {
  */
 before(async function() {
   /**
+   * If running on a web page, SharedArrayBuffers might not work.
+   */
+  if (window.SharedArrayBuffer === undefined) {
+    console.warn('SharedArrayBuffer API not available');
+    this.skip();
+    return;
+  }
+
+  /**
    * Fetch & read the body once to speed up the tests.
    *
    * @type {!ArrayBuffer}

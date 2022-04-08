@@ -11,6 +11,16 @@ import {SyscallLock} from '../js/syscall_lock.js';
 describe('syscall_lock.js', () => {
 
 /**
+ * If running on a web page, SharedArrayBuffers might not work.
+ */
+before(function() {
+  if (window.SharedArrayBuffer === undefined) {
+    console.warn('SharedArrayBuffer API not available');
+    this.skip();
+  }
+});
+
+/**
  * Check BigInt is correctly serialized and deserialized.
  */
 it('setData and getData BigInt', () => {
