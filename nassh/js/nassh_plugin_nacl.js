@@ -65,13 +65,6 @@ export class Plugin {
     this.io.sendString = this.sendString_.bind(this);
     this.io.onTerminalResize = this.onTerminalResize_.bind(this);
 
-    const onPluginLoaded = () => {
-      this.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
-      onComplete();
-    };
-
-    this.io.print(nassh.msg('PLUGIN_LOADING'));
-
     this.plugin_ = window.document.createElement('embed');
     // Height starts at 1px, and is changed to 0 after inserting into body.
     // This modification to the plugin ensures that the 'load' event fires
@@ -86,7 +79,7 @@ export class Plugin {
 
     this.plugin_.setAttribute('src', pluginURL);
     this.plugin_.setAttribute('type', 'application/x-nacl');
-    this.plugin_.addEventListener('load', onPluginLoaded);
+    this.plugin_.addEventListener('load', onComplete);
     this.plugin_.addEventListener('message', this.onMessage_.bind(this));
 
     const errorHandler = (ev) => {
@@ -102,6 +95,15 @@ export class Plugin {
     // for a NaCl module. https://crbug.com/699930
     this.plugin_.style.height = '0';
   }
+
+  /**
+   * Run the plugin.
+   *
+   * TODO(vapier): Move the startSession call here out of CommandInstance.
+   *
+   * @return {!Promise<void>}
+   */
+  async run() {}
 
   /**
    * Remove the plugin from the page.

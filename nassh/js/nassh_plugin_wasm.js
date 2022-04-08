@@ -46,6 +46,7 @@ export class Plugin {
     this.relay_ = relay;
     this.firstTcpConnect_ = true;
     this.secureInput_ = secureInput;
+    this.plugin_ = null;
   }
 
   /**
@@ -74,7 +75,15 @@ export class Plugin {
     await settings.handler.init();
     this.plugin_ = new WasshProcess.Background(
         `../wassh/js/worker.js?trace=${this.trace_}`, settings);
-    this.plugin_.run();
+  }
+
+  /**
+   * Run the plugin.
+   *
+   * @return {!Promise<number>} The exit status of the program.
+   */
+  async run() {
+    return this.plugin_.run();
   }
 
   /**

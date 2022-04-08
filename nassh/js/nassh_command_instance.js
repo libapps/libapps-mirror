@@ -83,7 +83,7 @@ nassh.CommandInstance = function({io, ...argv}) {
   this.terminalWindow = argv.terminalWindow || window;
 
   /**
-   * @type {?Object} The current plugin (WASM/NaCl/etc...).
+   * @type {(?NaclPlugin|?WasmPlugin)} The current plugin (WASM/NaCl/etc...).
    */
   this.plugin_ = null;
 
@@ -1467,10 +1467,16 @@ nassh.CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
  * @return {!Promise<void>}
  */
 nassh.CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
+  this.io.print(nassh.msg('PLUGIN_LOADING', [this.sshClientVersion_]));
   if (this.sshClientVersion_.startsWith('pnacl')) {
-    this.initNaclPlugin_(argv, onComplete);
+    this.initNaclPlugin_(argv, () => {
+      this.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
+      onComplete();
+    });
   } else {
     await this.initWasmPlugin_(argv.arguments, argv.environment);
+    this.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
+    this.plugin_.run();
     onComplete();
   }
 };

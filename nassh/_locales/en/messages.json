@@ -146,8 +146,8 @@
 		"message": "[DEL]"
 	},
 	"DISCONNECT_MESSAGE": {
-		"description": "Message displayed after the plugin exits, but before the reconnect message.",
-		"message": "NaCl plugin exited with status code $CODE$.",
+		"description": "Message displayed after the program exits, but before the reconnect message.",
+		"message": "Program exited with status code $CODE$.",
 		"placeholders": {
 			"CODE": {
 				"content": "$1",
@@ -1799,7 +1799,13 @@
 	},
 	"PLUGIN_LOADING": {
 		"description": "Status message displayed while loading the plugin.",
-		"message": "Loading NaCl plugin..."
+		"message": "Loading $NAME$ program...",
+		"placeholders": {
+			"NAME": {
+				"content": "$1",
+				"example": "wasm"
+			}
+		}
 	},
 	"PLUGIN_LOADING_COMPLETE": {
 		"description": "Appended to PLUGIN_LOADING message when loading is complete. The spacing should be retained, but it is not required.",
