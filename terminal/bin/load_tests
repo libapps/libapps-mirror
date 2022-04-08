@@ -5,33 +5,22 @@
 
 """Run unittests in a new browser."""
 
-import os
-import shutil
 import sys
 
 import terminal  # pylint: disable=wrong-import-order
 import libdot
 
 
-NASSH_DIR = os.path.join(terminal.LIBAPPS_DIR, 'nassh')
-NASSH_DEPS_CONCAT = os.path.join(NASSH_DIR, 'js', 'nassh_deps.concat.js')
-NASSH_DEPS_ROLLUP = os.path.join(NASSH_DIR, 'js', 'nassh_deps.rollup.js')
 # Path to our html test page.
-TEST_PAGE = os.path.join('terminal', 'html', 'terminal_test.html')
-
-
-def mkdeps(_opts):
-    """Build the required deps for the test suite."""
-    libdot.run([os.path.join(NASSH_DIR, 'bin', 'mkdeps')])
-    shutil.copy(NASSH_DEPS_CONCAT, os.path.join(terminal.DIR, 'js'))
-    shutil.copy(NASSH_DEPS_ROLLUP, os.path.join(terminal.DIR, 'js'))
+TEST_PAGE = 'terminal/html/terminal_test.html'
 
 
 def main(argv):
     """The main func!"""
     return libdot.load_tests.test_runner_main(
-        argv, TEST_PAGE, serve=True, mkdeps=mkdeps)
+        argv, TEST_PAGE, serve=True, mkdeps=terminal.mkdeps)
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    with terminal.SymlinkNasshFiles():
+        sys.exit(main(sys.argv[1:]))

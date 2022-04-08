@@ -253,7 +253,9 @@ def mkcrosh(enable_minify, enable_gzip):
     terminal = libdot.LIBAPPS_DIR / 'terminal'
     for subdir in ('css', 'html', 'images', 'js'):
         for path in (terminal / subdir).glob('*'):
-            if not fnmatch.fnmatch(path, '*_test*'):
+            # terminal/js might have temporary symlink files from nassh for
+            # linting and testing.
+            if not path.is_symlink() and not path.match('*_test*'):
                 shutil.copy(path, tmpdir / subdir)
 
     if enable_minify:

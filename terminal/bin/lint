@@ -5,19 +5,12 @@
 
 """Lint our source files."""
 
-import glob
 import os
 import sys
+from itertools import chain
 
 import terminal  # pylint: disable=wrong-import-order
 import libdot
-
-
-JS_DIR = terminal.DIR / 'js'
-
-# Path to generated deps file that terminal uses for libdot/hterm/etc...
-NASSH_DIR = os.path.join(libdot.LIBAPPS_DIR, 'nassh')
-DEPS_FILE = os.path.join(NASSH_DIR, 'js', 'nassh_deps.concat.js')
 
 
 def _get_default_paths(basedir):
@@ -28,15 +21,10 @@ def _get_default_paths(basedir):
     # All files in js/*.js.
     # Use relpath for nicer default output.
     # Sort to ensure consistent order.
-    js_files = sorted(x for x in JS_DIR.glob('*.js')
+    js_files = sorted(x for x in terminal.JS_DIR.glob('*.js')
                       if not x.name.startswith('nassh_deps'))
 
     return [os.path.relpath(x) for x in most_files + js_files]
-
-
-def mkdeps(_opts):
-    """Build the deps we might use when linting."""
-    libdot.run([os.path.join(NASSH_DIR, 'bin', 'mkdeps')])
 
 
 def main(argv):
@@ -48,17 +36,21 @@ def main(argv):
             argv[i] = os.path.relpath(os.path.realpath(arg), terminal.DIR)
     os.chdir(terminal.DIR)
 
-    externs = ['--js_module_root', JS_DIR] + [
-        '--externs=%s' % os.path.relpath(x) for x in
-        sorted(glob.glob(os.path.join(terminal.DIR, 'externs', '*.js')))]
+    externs = ['--js_module_root', terminal.JS_DIR]
+    for path in sorted(chain((terminal.DIR / 'externs').glob('*.js'),
+                             (terminal.NASSH_DIR / 'externs').glob('*.js'))):
+        externs.append(f'--externs={os.path.relpath(path)}')
+
     closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + externs + [
         # TODO(vapier): We want to turn this on at some point.
         '--jscomp_off=strictMissingProperties',
-        os.path.relpath(DEPS_FILE)]
+        'js/nassh_deps.concat.js']
     return libdot.lint.main(argv, basedir=terminal.DIR,
-                            get_default_paths=_get_default_paths, mkdeps=mkdeps,
+                            get_default_paths=_get_default_paths,
+                            mkdeps=terminal.mkdeps,
                             closure_args=closure_args)
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    with terminal.SymlinkNasshFiles():
+        sys.exit(main(sys.argv[1:]))
