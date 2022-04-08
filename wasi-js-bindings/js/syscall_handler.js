@@ -185,6 +185,7 @@ export class DirectWasiPreview1 extends Base {
 
   /** @override */
   handle_proc_exit(status) {
+    this.process_.exit(status);
     throw new util.CompletedProcessError({status});
   }
 

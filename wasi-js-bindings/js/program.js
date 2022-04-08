@@ -81,6 +81,12 @@ export class Program {
    * @return {number} The program exit code.
    */
   run() {
-    return this.instance.exports['_start']();
+    // WASI libc will return here only if the program *returns* 0 from its main
+    // function.  If it *returns* non-zero, WASI libc will call exit() with that
+    // value which triggers the exit syscall, and this point never returns.  If
+    // the program calls exit() itself, then it too runs the exit syscall.  If
+    // the program aborts, WASM will throw an exception which our Program class
+    // will catch & process.  This seems more complicated than it should be.
+    return this.instance.exports['_start']() ?? 0;
   }
 }

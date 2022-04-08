@@ -51,4 +51,22 @@ class Process {
    * @return {!WasiView}
    */
   getView(base, length = undefined) {}
+
+  /**
+   * Mark the program as exited.
+   *
+   * This is largely a callback from the respective syscall.
+   *
+   * @param {number} status The program's exit code.  This is not the same thing
+   *     as process exit status (which is a bit field of exit/signal/etc...).
+   */
+  exit(status) {}
+
+  /**
+   * Mark the program as aborted.
+   *
+   * This is when the program exits abnormally, either through an abort() call,
+   * or via __builtin_trap(), or other "unreachable" code point.
+   */
+  abort() {}
 }

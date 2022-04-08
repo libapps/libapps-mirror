@@ -58,6 +58,7 @@ async function run(prog, argv) {
   const ret = await proc.run();
   return {
     returncode: ret,
+    aborted: proc.aborted,
     stdout: handler.stdout,
     stderr: handler.stderr,
   };
@@ -74,25 +75,28 @@ before(async function() {
 
 describe('return', () => {
   for (const status of [0, 1, 126, 127, 255]) {
-    it.skip(`${status}`, async function() {
+    it(`${status}`, async function() {
       const result = await run(this.prog, ['ret', `${status}`]);
       assert.equal(result.returncode, status);
+      assert.isFalse(result.aborted);
     });
   }
 });
 
 describe('exit', () => {
   for (const status of [0, 1, 126, 127, 255]) {
-    it.skip(`${status}`, async function() {
+    it(`${status}`, async function() {
       const result = await run(this.prog, ['exit', `${status}`]);
       assert.equal(result.returncode, status);
+      assert.isFalse(result.aborted);
     });
   }
 });
 
-it.skip('abort', async function() {
+it('abort', async function() {
   const result = await run(this.prog, ['abort']);
-  assert.equal(result.returncode, 1);
+  assert.equal(result.returncode, 134);
+  assert.isTrue(result.aborted);
 });
 
 });

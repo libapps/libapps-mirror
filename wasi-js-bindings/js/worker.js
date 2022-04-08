@@ -123,6 +123,7 @@ export class Base {
    */
   async onMessage_run(executable, argv, environ, sab, handlers) {
     const proc = this.newProcess(executable, argv, environ, sab, handlers);
-    await proc.run();
+    const ret = await proc.run();
+    this.postMessage('exit', ret);
   }
 }

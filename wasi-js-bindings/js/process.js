@@ -48,6 +48,10 @@ class Base {
       this.argv = argv;
     }
     this.environ = environ || {};
+    /** @type {?number} The program exit code. */
+    this.exit_status = null;
+    /** @type {boolean} Whether the program was aborted. */
+    this.aborted = false;
   }
 
   /** @override */
@@ -64,6 +68,30 @@ class Base {
   logError(...args) {
     console.error(...args);
   }
+
+  /** @override */
+  exit(status) {
+    this.exit_status = status;
+    this.onExit(status);
+  }
+
+  /**
+   * Callback event for when the program exits.
+   *
+   * @param {number} status The program's exit code.
+   */
+  onExit(status) {}
+
+  /** @override */
+  abort() {
+    this.aborted = true;
+    this.onAbort();
+  }
+
+  /**
+   * Callback event for when the program is aborted.
+   */
+  onAbort() {}
 }
 
 /**
@@ -88,6 +116,8 @@ export class Foreground extends Base {
     this.sys_entries = sys_entries;
     /** @type {?WebAssembly.Instance} */
     this.instance_ = null;
+    /** @type {?function(number)} Callback when the process finishes. */
+    this.process_finish_ = null;
 
     sys_handlers.forEach((ele) => ele.setProcess(this));
     sys_entries.forEach((ele) => ele.setProcess(this));
@@ -96,7 +126,46 @@ export class Foreground extends Base {
   async run() {
     const program = new Program(this.executable);
     this.instance_ = await program.instantiate(this.getImports_());
-    return program.run();
+    return new Promise((resolve) => {
+      this.process_finish_ = resolve;
+      try {
+        const ret = program.run();
+        resolve(ret);
+      } catch (e) {
+        if (e instanceof WebAssembly.RuntimeError) {
+          if (e.message === 'unreachable') {
+            // This shows up with abort() & exit() calls.  If this was an exit,
+            // then exit status should be set (via the exit syscall).
+            if (this.exit_status === null) {
+              this.abort();
+            }
+            return;
+          }
+
+          // Not sure how else this would show up.  Fallthru.
+        }
+        throw e;
+      }
+    });
+  }
+
+  /** @override */
+  onExit(status) {
+    if (this.process_finish_) {
+      this.process_finish_(status);
+      this.process_finish_ = null;
+    }
+  }
+
+  /** @override */
+  onAbort() {
+    if (this.process_finish_) {
+      // Emulate common shell behavior where the exit code is 128+signum.
+      // If we ever switch to more fine-grained POSIX "is signalled" values,
+      // we can convert this over.
+      this.process_finish_(134);
+      this.process_finish_ = null;
+    }
   }
 
   /**
@@ -244,7 +313,10 @@ export class Background extends Base {
   }
 
   terminate(reason) {
-    this.resolve_(reason);
+    if (this.resolve_) {
+      this.resolve_(reason);
+      this.resolve_ = null;
+    }
     this.worker.terminate();
   }
 
