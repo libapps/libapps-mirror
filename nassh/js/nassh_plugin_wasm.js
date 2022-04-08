@@ -87,6 +87,15 @@ export class Plugin {
   }
 
   /**
+   * Remove the plugin from the page.
+   */
+  remove() {
+    // TODO(vapier): Should close all streams upon exit.
+    this.plugin_.terminate();
+    this.plugin_ = null;
+  }
+
+  /**
    * Hijack initial TCP connection if relay is requested.
    *
    * @param {string} address The remote server to connect to.

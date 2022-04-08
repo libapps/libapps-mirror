@@ -1476,7 +1476,10 @@ nassh.CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
   } else {
     await this.initWasmPlugin_(argv.arguments, argv.environment);
     this.io.println(nassh.msg('PLUGIN_LOADING_COMPLETE'));
-    this.plugin_.run();
+    this.plugin_.run().then((code) => {
+      this.onPluginExit(code);
+      this.exit(code, /* noReconnect= */ false);
+    });
     onComplete();
   }
 };
