@@ -214,3 +214,52 @@ the newer releases.
  			options->update_hostkeys = SSH_UPDATE_HOSTKEYS_NO;
  	}
  	if (options->num_user_hostfiles == 0) {
+
+https://crbug.com/1312256
+https://github.com/WebAssembly/wasi-libc/issues/283
+
+Do not assume internal fd_set implementation details.  Just allocate the full
+structure once and call it a day.  NaCl (glibc/newlib)'s fd_set happen to be
+implemented the way OpenSSH assumes, but WASI libc's is not which causes memory
+errors when building for that.
+
+OpenSSH-8.9+ doesn't have this problem because it replaced all of the select()
+code with poll() which doesn't manage fd_set's like this.
+
+--- a/channels.c
++++ b/channels.c
+@@ -2465,25 +2465,20 @@
+ channel_prepare_select(struct ssh *ssh, fd_set **readsetp, fd_set **writesetp,
+     int *maxfdp, u_int *nallocp, time_t *minwait_secs)
+ {
+-	u_int n, sz, nfdset;
++	u_int sz;
+ 
+ 	channel_before_prepare_select(ssh); /* might update channel_max_fd */
+ 
+-	n = MAXIMUM(*maxfdp, ssh->chanctxt->channel_max_fd);
+-
+-	nfdset = howmany(n+1, NFDBITS);
+-	/* Explicitly test here, because xrealloc isn't always called */
+-	if (nfdset && SIZE_MAX / nfdset < sizeof(fd_mask))
+-		fatal("channel_prepare_select: max_fd (%d) is too large", n);
+-	sz = nfdset * sizeof(fd_mask);
+-
+-	/* perhaps check sz < nalloc/2 and shrink? */
+-	if (*readsetp == NULL || sz > *nallocp) {
+-		*readsetp = xreallocarray(*readsetp, nfdset, sizeof(fd_mask));
+-		*writesetp = xreallocarray(*writesetp, nfdset, sizeof(fd_mask));
++	sz = sizeof(fd_set);
++	if (*readsetp == NULL) {
++		*readsetp = malloc(sz);
++		*writesetp = malloc(sz);
+ 		*nallocp = sz;
+ 	}
+-	*maxfdp = n;
++
++	*maxfdp = MAXIMUM(*maxfdp, ssh->chanctxt->channel_max_fd);
++	if (*maxfdp >= FD_SETSIZE)
++		fatal("channel_prepare_select: max_fd (%d) is too large for FD_SETSIZE (%d)", *maxfdp, FD_SETSIZE);
+ 	memset(*readsetp, 0, sz);
+ 	memset(*writesetp, 0, sz);
+ 
