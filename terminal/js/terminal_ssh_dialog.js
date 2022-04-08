@@ -325,6 +325,8 @@ export class TerminalSSHDialog extends LitElement {
     this.shadowRoot.querySelector('terminal-dialog').show();
     this.shadowRoot.querySelector('terminal-textfield[fitContent]')
         .updateFitContentWidth();
+
+    this.commandRef_.value.focus();
   }
 
   /**

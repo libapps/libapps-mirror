@@ -37,15 +37,17 @@ export class TerminalTextfieldElement extends LitElement {
       fitContent: {
         type: Boolean,
       },
-      // For styling.
-      //
-      // TODO: It might be better to use `ShadowRoot.delegatesFocus` instead .
-      // See
-      // https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/delegatesFocus
       focused_: {
-        type: Boolean,
-        reflect: true,
+        state: true,
       },
+    };
+  }
+
+  /** @override */
+  static get shadowRootOptions() {
+    return {
+      ...super.shadowRootOptions,
+      delegatesFocus: true,
     };
   }
 
@@ -92,7 +94,7 @@ export class TerminalTextfieldElement extends LitElement {
         width: 0;
       }
 
-      :host([focused_]) #underline {
+      :host(:focus) #underline {
         opacity: 1;
         transition: width 180ms ease-out, opacity 120ms ease-in;
         width: 100%;
@@ -111,7 +113,7 @@ export class TerminalTextfieldElement extends LitElement {
         box-shadow: 0 0 0 1px #E5E5E5;
       }
 
-      :host([blendIn][focused_]) #container {
+      :host([blendIn]:focus) #container {
         box-shadow: 0 0 0 2px #1a73e8;
       }
 
@@ -140,6 +142,9 @@ export class TerminalTextfieldElement extends LitElement {
 
     this.rulerRef_ = createRef();
     this.inputRef_ = createRef();
+
+    this.addEventListener('focus', () => this.focused_ = true);
+    this.addEventListener('blur', () => this.focused_ = false);
   }
 
   /** @override */
@@ -174,8 +179,6 @@ export class TerminalTextfieldElement extends LitElement {
             <input ${ref(this.inputRef_)} type="text"
                 .placeholder="${this.placeholder}"
                 .value="${live(this.value)}"
-                @blur=${() => this.focused_ = false}
-                @focus=${() => this.focused_ = true}
                 @change=${(e) => redispatchEvent(this, e)}
                 @input=${this.onInput_}
                 spellcheck="false"

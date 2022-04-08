@@ -34,15 +34,15 @@ describe('terminal_textfield_tests.js', () => {
 
   it('set-focused', async function() {
     // By default the input is not focused.
-    assert.isFalse(this.el.hasAttribute('focused_'));
+    assert.isFalse(this.el.focused_);
 
-    this.input.focus();
+    this.el.focus();
     await this.el.updateComplete;
-    assert.isTrue(this.el.hasAttribute('focused_'));
+    assert.isTrue(this.el.focused_);
 
-    this.input.blur();
+    this.el.blur();
     await this.el.updateComplete;
-    assert.isFalse(this.el.hasAttribute('focused_'));
+    assert.isFalse(this.el.focused_);
   });
 
   it('pass-through-change-event', async function() {

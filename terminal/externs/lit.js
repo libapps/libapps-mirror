@@ -23,6 +23,12 @@ class LitElement$$module$js$lit{
   static get properties() {};
 
   /**
+   * @return {!Object}
+   * @protected
+   */
+  static get shadowRootOptions() {};
+
+  /**
    * @return {!CSSResult|!Array<CSSResult>}
    * @protected
    */
