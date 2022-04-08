@@ -10,6 +10,8 @@
 
 import {css, html, LitElement} from './lit.js';
 import {DEFAULT_CONTAINER_NAME, DEFAULT_VM_NAME} from './terminal_common.js';
+import {stylesVars} from './terminal_settings_styles.js';
+import './terminal_ssh_dialog.js';
 
 /**
  * Path for pref with boolean crostini enabled.
@@ -108,7 +110,7 @@ export class TerminalHomeApp extends LitElement {
 
   /** @override */
   static get styles() {
-    return css`
+    return [stylesVars, css`
       :host {
         display: flex;
         flex-wrap: wrap;
@@ -218,7 +220,7 @@ export class TerminalHomeApp extends LitElement {
           max-width: 256px;
         }
       }
-    `;
+    `];
   }
 
   constructor() {
@@ -303,18 +305,16 @@ export class TerminalHomeApp extends LitElement {
           <div class="header row ${this.sshConnections.length ? 'line' : ''}">
             <h3>${sshLabel}</h3>
             ${this.sshAllowed ? undefined : sshDisabled}
-            <a target="_blank" href="terminal_ssh.html" autofocus>
-              <button tabindex="-1">
-                <span class="button-icon">${ICON_PLUS}</span>
-                ${msg('TERMINAL_HOME_ADD_SSH')}
-              </button>
-            </a>
+            <button autofocus @click="${(e) => this.openSSHDialog()}">
+              <span class="button-icon">${ICON_PLUS}</span>
+              ${msg('TERMINAL_HOME_ADD_SSH')}
+            </button>
           </div>
           <ul>
           ${this.sshConnections.map((c) => html`
             <li class="row">
               ${this.sshAllowed ? sshLink(c) : sshText(c)}
-              <a target="_blank" href="terminal_ssh.html"
+              <a @click="${(e) => this.openSSHDialog(c.id)}"
                   aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}">
                 <span class="row-icon icon-fill-svg">${ICON_EDIT}</span>
               </a>
@@ -361,6 +361,7 @@ export class TerminalHomeApp extends LitElement {
           </ul>
         </section>
       </div>
+      <terminal-ssh-dialog></terminal-ssh-dialog>
     `;
   }
 
@@ -413,6 +414,15 @@ export class TerminalHomeApp extends LitElement {
    */
   onOpenSystemSettings() {
     chrome.terminalPrivate?.openSettingsSubpage('crostini', () => {});
+  }
+
+  /**
+   * Open the ssh dialog to add new connection or edit existing ones.
+   *
+   * @param {string=} nasshProfileId
+   */
+  openSSHDialog(nasshProfileId = '') {
+    this.shadowRoot.querySelector('terminal-ssh-dialog').show(nasshProfileId);
   }
 }
 
