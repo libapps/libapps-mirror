@@ -540,7 +540,17 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       this.socketMap_.delete(handle.socketId);
       handle.close();
       this.vfs.fds_.set(socket, unixHandle);
-      return unixHandle.connect(address, port);
+      const ret = await unixHandle.connect(address, port);
+      if (unixHandle.callback_) {
+        unixHandle.callback_.onDataAvailable = (data) => {
+          unixHandle.onRecv(data);
+          // TODO(crbug.com/1311909): Do better.
+          if (this.notify_) {
+            this.notify_();
+          }
+        };
+      }
+      return ret;
     }
 
     const ret = await handle.connect(address, port);
@@ -619,6 +629,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       return;
     }
 
+    // TODO(crbug.com/1311909): Do better.
     handle.onRecv(data);
     if (this.notify_) {
       this.notify_();
