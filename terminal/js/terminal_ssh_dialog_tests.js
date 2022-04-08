@@ -2,44 +2,84 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {TerminalSSHDialog, extractSSHDestination, parseSSHDestination,
-  splitCommandLine} from './terminal_ssh_dialog.js';
+import {TerminalSSHDialog, parseCommand, parseSSHDestination}
+    from './terminal_ssh_dialog.js';
 
 describe('terminal_ssh_dialog.js', function() {
-  it('splitCommandLine', function() {
-    assert.deepEqual(splitCommandLine('abc'), ['abc']);
-    assert.deepEqual(splitCommandLine('"abc"'), ['abc']);
-    assert.deepEqual(splitCommandLine('" a b c "'), [' a b c ']);
-    assert.deepEqual(splitCommandLine('abc de efg " hij   kl " mno'),
-        ['abc', 'de', 'efg', ' hij   kl ', 'mno']);
-  });
-
-  it('extractSSHDestination', function() {
-    const check = (argString, destination) => {
-      assert.equal(extractSSHDestination(splitCommandLine(argString)),
-         destination);
+  it('parseCommand', function() {
+    const check = (argString, expectation) => {
+      assert.deepEqual(parseCommand(argString), expectation);
     };
-    check('abc@localhost', 'abc@localhost');
-    check('ssh://abc@localhost:123', 'ssh://abc@localhost:123');
-    check('-4 abc@localhost', 'abc@localhost');
-    check('abc@localhost -4', 'abc@localhost');
-    check('-o xxx=yyy abc@localhost', 'abc@localhost');
-    check('-oxxx=yyy abc@localhost', 'abc@localhost');
-    check('-4 -o xxx=yyy abc@localhost', 'abc@localhost');
-    check('-4Ao xxx=yyy abc@localhost', 'abc@localhost');
-    check('-4Aoxxx=yyy abc@localhost', 'abc@localhost');
+    check('abc@localhost', {
+      destination: 'abc@localhost',
+      argstr: '',
+    });
+    check('ssh://abc@localhost:123', {
+      destination: 'ssh://abc@localhost:123',
+      argstr: '',
+    });
+    check('-4 abc@localhost', {
+      destination: 'abc@localhost',
+      argstr: '-4',
+    });
+    check('abc@localhost -4', {
+      destination: 'abc@localhost',
+      argstr: '-4',
+    });
+    check('-o xxx=yyy abc@localhost', {
+      destination: 'abc@localhost',
+      argstr: '-o xxx=yyy',
+    });
+    check('-oxxx=yyy abc@localhost', {
+      destination: 'abc@localhost',
+      argstr: '-oxxx=yyy',
+    });
+    check('-4 -o xxx=yyy abc@localhost', {
+      destination: 'abc@localhost',
+      argstr: '-4 -o xxx=yyy',
+    });
+    check('-4Ao xxx=yyy abc@localhost', {
+      destination: 'abc@localhost',
+      argstr: '-4Ao xxx=yyy',
+    });
+    check('-4Aoxxx=yyy abc@localhost', {
+      destination: 'abc@localhost',
+      argstr: '-4Aoxxx=yyy',
+    });
+    check('-4Ao xxx=yyy abc@localhost -o zzz=yyy', {
+      destination: 'abc@localhost',
+      argstr: '-4Ao xxx=yyy  -o zzz=yyy',
+    });
 
-    check('-o abc@localhost', null);
-    check('-4Ao abc@localhost', null);
+    // Username with special characters
+    check('-4Ao xxx=yyy "abc@a b c@localhost" -o zzz=yyy', {
+      destination: 'abc@a b c@localhost',
+      argstr: '-4Ao xxx=yyy  -o zzz=yyy',
+    });
+
+    check('-o abc@localhost', {
+      destination: null,
+      argstr: '-o abc@localhost',
+    });
+    check('-4Ao abc@localhost', {
+      destination: null,
+      argstr: '-4Ao abc@localhost',
+    });
   });
 
   it('parseSSHDestination', function() {
     assert.deepEqual(parseSSHDestination('abc@def'),
-        {user: 'abc', hostname: 'def', port: null});
+        {username: 'abc', hostname: 'def', port: null});
     assert.deepEqual(parseSSHDestination('ssh://abc@def'),
-        {user: 'abc', hostname: 'def', port: null});
+        {username: 'abc', hostname: 'def', port: null});
     assert.deepEqual(parseSSHDestination('ssh://abc@def:100'),
-        {user: 'abc', hostname: 'def', port: 100});
+        {username: 'abc', hostname: 'def', port: 100});
+
+    // With exotic usernames.
+    assert.deepEqual(parseSSHDestination('abc@a b c@def'),
+        {username: 'abc@a b c', hostname: 'def', port: null});
+    assert.deepEqual(parseSSHDestination('ssh://abc@a b c@def:100'),
+        {username: 'abc@a b c', hostname: 'def', port: 100});
   });
 
   describe('dialog', function() {
@@ -50,7 +90,7 @@ describe('terminal_ssh_dialog.js', function() {
       await this.el.updateComplete;
       this.titleEl = this.el.shadowRoot.querySelector(
           '[slot="title"] terminal-textfield');
-      this.commandEl = this.el.shadowRoot.querySelector('#ssh-command');
+      this.commandEl = this.el.commandRef_.value;
       this.relayArgsEl = this.el.relayArgsRef_.value;
       this.inputCommand = (command) => {
         this.commandEl.value = command;
@@ -98,4 +138,7 @@ describe('terminal_ssh_dialog.js', function() {
       assert.equal(this.relayArgsEl.value, '--config=google --proxy-host=xxx');
     });
   });
+
+  // TODO(b/223076712): test identity files logic and load/save nassh profile
+  // logic.
 });

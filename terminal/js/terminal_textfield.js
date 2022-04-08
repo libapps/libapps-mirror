@@ -208,12 +208,27 @@ export class TerminalTextfieldElement extends LitElement {
     const newContent = this.inputRef_.value.value + 'XXX';
     if (ruler.textContent !== newContent) {
       ruler.textContent = newContent;
-      /**
-       * Depending on how this function is called, `ruler.offsetWidth` might not
-       * be available immedately. Using `setTimeout()` does not work very well
-       * when the user types fast. Using microtask seems to work pretty well in
-       * all cases.
-       */
+      this.updateFitContentWidth();
+    }
+  }
+
+  /**
+   * Update the element width to fit the content. You don't normally need to
+   * call this by yourself unless this element is transiting from hidden to
+   * visible (e.g. when the element is in a dialog and the `dialog.showModal()`
+   * is called).
+   */
+  updateFitContentWidth() {
+    const ruler = this.rulerRef_.value;
+    if (!ruler) {
+      return;
+    }
+    if (ruler.offsetWidth !== 0) {
+      this.style.maxWidth = `${ruler.offsetWidth}px`;
+    } else {
+      // We are not able to get the ruler size synchronously. It seems that this
+      // can happen when this function is called inside a microtask. Schedule
+      // another microtask to get the size.
       window.queueMicrotask(() => {
         this.style.maxWidth = `${ruler.offsetWidth}px`;
       });

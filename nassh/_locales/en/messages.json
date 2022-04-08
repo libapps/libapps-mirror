@@ -2003,6 +2003,10 @@
 		"description": "Label to add a new SSH (Secure SHell) connection.",
 		"message": "Add SSH"
 	},
+	"TERMINAL_HOME_DEFAULT_IDENTITY": {
+		"description": "Label for the default SSH (Secure SHell) identity file option.",
+		"message": "[Default]"
+	},
 	"TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL": {
 		"description": "Label for default Linux container. Note to translators: 'Linux' is a well known operating system name and should likely not be translated.",
 		"message": "Linux"

@@ -53,7 +53,6 @@ export class TerminalDialog extends LitElement {
 
         #button-container {
           display: flex;
-          justify-content: flex-end;
           padding-top: 24px;
         }
     `;
@@ -75,6 +74,8 @@ export class TerminalDialog extends LitElement {
           <slot name="title"></slot>
           <slot></slot>
           <div id="button-container">
+            <slot name="extra-buttons"></slot>
+            <span style="flex-grow: 1;"></span>
             <terminal-button class="cancel"
                 @click="${this.cancel}">
               ${this.cancelText}

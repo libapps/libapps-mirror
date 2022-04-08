@@ -6,7 +6,9 @@
  * @fileoverview Export an element: terminal-ssh-dialog
  */
 
-import {LitElement, createRef, css, html, ref} from './lit.js';
+import {getIdentityFileNames, importIdentityFiles} from './nassh_fs.js';
+
+import {LitElement, createRef, css, html, live, ref} from './lit.js';
 import './terminal_button.js';
 import './terminal_dialog.js';
 import './terminal_dropdown.js';
@@ -26,106 +28,125 @@ const GOOGLE_HOST_REGEXP = new RegExp(
 const SSH_FLAG_OPTIONS = '46AaCfGgKkMNnqsTtVvXxYy@';
 
 /**
- * Split a cmd string to an array of arguments. We do some very simple
- * dequoting here, similar to nassh.CommandInstance.splitCommandLine().
+ * This represents a parsed SSH command. If the SSH command has a destination
+ * argument, it should be stored in the `destination` field. All other arguments
+ * should be stored in `argstr`.
  *
- * @param {string} cmd
- * @return {!Array<string>}
+ * @typedef {{
+ *   destination: ?string,
+ *   argstr: string,
+ * }}
  */
-export function splitCommandLine(cmd) {
-  const args = cmd.match(/("[^"]*"|\S+)/g) ?? [];
-  // Remove double quotes at the beginning and end.
-  return args.map((x) => x.replace(/(^"|"$)/g, ''));
-}
+export let ParsedCommand;
 
 /**
- * Extract the ssh destination from ssh arguments.
+ * Parse the ssh command string.
  *
- * @param {!Array<string>} sshArgs
- * @return {?string} The destination or null if it failed.
+ * @param {string} command
+ * @return {!ParsedCommand} The parsed command.
  */
-export function extractSSHDestination(sshArgs) {
+export function parseCommand(command) {
+  // Split the command into tokens. Like nassh, we (only) support simple
+  // quoting with double quote symbols.
+  const matches = command.matchAll(/(?:"[^"]*"|\S+)/g);
   let skipNext = false;
-  for (const arg of sshArgs) {
+  for (const match of matches) {
     if (skipNext) {
       skipNext = false;
       continue;
     }
+
+    // Remove the the double quotes if they are there.
+    const arg = match[0].replace(/(^"|"$)/g, '');
     if (!arg.startsWith('-')) {
-      return arg;
+      // Found the destination argument.
+      return {
+        destination: arg,
+        argstr: (command.slice(0, match.index) +
+            command.slice(match.index + match[0].length)).trim(),
+      };
     }
 
     // `arg` is an option. We needs to handle all these situations:
     //
     // - a flag option: e.g. '-4'
-    // - an option that take a value in the next item in `sshArgs`: e.g. '-p'
+    // - an option that take a value in the next item: e.g. '-p'
     // - an option that take a value inplace: e.g. '-p22'
     // - a combination of flags, where the last one might take a value either
     //   inplace or not: e.g. '-4A', `-4Ap22`, or `-4Ap`  with the port number
-    //   in the next value in `sshArgs`.
-    for (let i = 1; i < arg.length; ++i) {
-      if (SSH_FLAG_OPTIONS.includes(arg[i])) {
+    //   in the next item.
+    for (let j = 1; j < arg.length; ++j) {
+      if (SSH_FLAG_OPTIONS.includes(arg[j])) {
         continue;
       }
       // The option takes a value. If we have nothing left in `arg`, then the
-      // value is in the next item in `sshArgs`.
+      // value is in the next item.
       //
       // TODO(lxj): be stricter and check it against a list of known options?
-      skipNext = i === (arg.length - 1);
+      skipNext = j === (arg.length - 1);
       break;
     }
   }
 
-  return null;
+  return {
+    destination: null,
+    argstr: command.trim(),
+  };
 }
 
 /**
  * @typedef {{
- *            user: string,
- *            hostname: string,
- *            port: ?number,
- *          }}
+ *   username: string,
+ *   hostname: string,
+ *   port: ?number,
+ * }}
  */
 export let ParsedDestination;
 
 /**
- * @param {string} destination Either 'user@hostname' or
- *     'ssh://user@hostname[:port]'.
+ * @param {?string} destination Either 'username@hostname' or
+ *     'ssh://username@hostname[:port]'.
  * @return {?ParsedDestination} Return null if it failed.
  */
 export function parseSSHDestination(destination) {
-  // Match ssh://user@hostname[:port].
+  if (!destination) {
+    return null;
+  }
+
+  // Match ssh://username@hostname[:port].
   const sshUrlMatch =
-      destination.match(/^ssh:\/\/([^@]+)@([^:]+)(?::(\d+))?$/i);
+      destination.match(/^ssh:\/\/(.+)@([^:@]+)(?::(\d+))?$/i);
   if (sshUrlMatch) {
-    const [user, hostname, port] = sshUrlMatch.slice(1);
+    const [username, hostname, port] = sshUrlMatch.slice(1);
     return {
-      user,
+      username,
       hostname,
       port: port ? Number.parseInt(port, 10) : null,
     };
   }
 
-  // Match user@hostname
-  const match = destination.match(/^([^@]+)@([^:]+)$/);
+  // Match username@hostname
+  const match = destination.match(/^(.+)@([^:@]+)$/);
   if (match) {
-    const [user, hostname] = match.slice(1);
-    return {user, hostname, port: null};
+    const [username, hostname] = match.slice(1);
+    return {username, hostname, port: null};
   }
 
   return null;
 }
 
+/**
+ * The terminal ssh dialog for creating new ssh connections or modify existing
+ * ones. Use method `show()` to set the nassh profile id and show the dialog.
+ */
 export class TerminalSSHDialog extends LitElement {
   /** @override */
   static get properties() {
     return {
-      userTitle_: {
-        attribute: false,
-      },
-      destination_: {
-        attribute: false,
-      },
+      nasshProfileId_: {state: true},
+      userTitle_: {state: true},
+      parsedCommand_: {state: true},
+      identities_: {state: true},
     };
   }
 
@@ -149,6 +170,10 @@ export class TerminalSSHDialog extends LitElement {
           flex-grow: 1;
           margin-right: 8px;
         }
+
+        #identity-input {
+          display: none;
+        }
     `;
   }
 
@@ -158,21 +183,35 @@ export class TerminalSSHDialog extends LitElement {
     // The title manually set by the user.
     this.userTitle_ = '';
     /**
-     * The ssh destination.
+     * This should be in sync with `this.commandRef_.value.value`.
      *
-     * @private {?string}
+     * @private {!ParsedCommand}
      */
-    this.destination_ = null;
+    this.parsedCommand_ = {argstr: '', destination: null};
+    // This is set in Show(). Empty string means we are creating a new SSH
+    // connection.
+    this.nasshProfileId_ = '';
 
+    this.DEFAULT_IDENTITY = {
+      label: hterm.messageManager.get('TERMINAL_HOME_DEFAULT_IDENTITY'),
+      value: '',
+    };
+    this.identities_ = [this.DEFAULT_IDENTITY];
+    /** @private {?FileSystem} */
+    this.fileSystem_;
+
+    this.commandRef_ = createRef();
     this.relayArgsRef_ = createRef();
+    this.identityDropdownRef_ = createRef();
   }
 
+  /** @return {string} */
   getTitle_() {
     if (this.userTitle_) {
       return this.userTitle_;
     }
-    if (this.destination_) {
-      return this.destination_;
+    if (this.parsedCommand_.destination) {
+      return this.parsedCommand_.destination;
     }
     return hterm.messageManager.get('TERMINAL_HOME_NEW_SSH_CONNECTION');
   }
@@ -181,16 +220,23 @@ export class TerminalSSHDialog extends LitElement {
   render() {
     const msg = (id) => hterm.messageManager.get(id);
 
-    // TODO(b/223076712): grab the actual identities.
-    const identities = [{value: '[default]'}];
+    let deleteButton;
+    if (this.nasshProfileId_) {
+      deleteButton = html`
+          <terminal-button slot="extra-buttons" @click=${this.onDeleteClick_}>
+            ${msg('DELETE_BUTTON_LABEL')}
+          </terminal-button>
+      `;
+    }
     return html`
-        <terminal-dialog id="dialog">
+        <terminal-dialog @close="${this.onDialogClose_}">
           <div slot="title">
-            <terminal-textfield blendIn fitContent value="${this.getTitle_()}"
+            <terminal-textfield blendIn fitContent
+                value="${live(this.getTitle_())}"
                 @change="${(e) => this.userTitle_ = e.target.value}">
             </terminal-textfield>
           </div>
-          <terminal-textfield id="ssh-command"
+          <terminal-textfield ${ref(this.commandRef_)}
               label="${msg('TERMINAL_HOME_SSH_COMMAND')}"
               @input="${this.onCommandUpdated_}"
               placeholder="username@hostname -p <port> -R 1234:localhost:5678">
@@ -199,29 +245,106 @@ export class TerminalSSHDialog extends LitElement {
           <terminal-label>${msg('IDENTITY_LABEL')}</terminal-label>
           <div id="identity-container">
             <terminal-dropdown
+                ${ref(this.identityDropdownRef_)}
                 id="identity-dropdown"
-                .options="${identities}"
-                .value="${identities[0].value}"></terminal-dropdown>
-            <terminal-button>
+                .options="${this.identities_}">
+            </terminal-dropdown>
+            <terminal-button @click=${this.onImportButtonClick_}>
               ${msg('TERMINAL_HOME_IMPORT_IDENTITY')}
             </terminal-button>
+            <input id="identity-input" type="file" multiple
+                @change=${this.onIdentityInputChange_}>
           </div>
           <terminal-textfield ${ref(this.relayArgsRef_)} id="relay-args"
               label="${msg('FIELD_NASSH_OPTIONS_PLACEHOLDER')}">
           </terminal-textfield>
+          ${deleteButton}
         </terminal-dialog>
     `;
   }
 
-  /** @param {!Event} e */
-  onCommandUpdated_(e) {
-    this.destination_ = extractSSHDestination(splitCommandLine(e.target.value));
+  /**
+   * Show the dialog. All content in the dialog will be refreshed automatically.
+   *
+   * @param {string=} nasshProfileId A non-empty value means editing an existing
+   *     connection with the id. An empty value means creating a new connection.
+   */
+  async show(nasshProfileId = '') {
+    // Since this dialog can be reused, we need to be careful here and make sure
+    // we update all state (including member variables and also child HTML
+    // elements that have internal state (e.g. `terminal-textfield`)).
 
-    if (this.destination_) {
+    if (!this.fileSystem_) {
+      this.fileSystem_ = await nassh.getFileSystem();
+    }
+    this.loadIdentities_();
+
+    this.nasshProfileId_ = nasshProfileId;
+
+    let command = '';
+    let relayArgs = '';
+    let identity = this.DEFAULT_IDENTITY.value;
+    this.userTitle_ = '';
+
+    if (this.nasshProfileId_) {
+      [command, this.userTitle_, relayArgs, identity] =
+          await this.getNasshProfileValues_([
+            'terminalSSHDialogCommand',
+            'description',
+            'nassh-options',
+            'identity',
+          ], '');
+
+      // We might have some old SSH profile without the "command". In this case,
+      // we construct it from the other profile values.
+      if (!command) {
+        console.warn('Construct command string from other profile values.');
+        const [username, hostname, port, argstr] =
+            await this.getNasshProfileValues_([
+              'username',
+              'hostname',
+              'port',
+              'argstr',
+            ], '');
+        command = `${username}@${hostname}`;
+        if (port) {
+          command += ` -p ${port}`;
+        }
+
+        if (argstr) {
+          command += ' ' + argstr;
+        }
+      }
+    }
+
+    this.commandRef_.value.value = command;
+    this.parsedCommand_ = parseCommand(/** @type {string} */(command));
+    this.relayArgsRef_.value.value = relayArgs;
+    this.identityDropdownRef_.value.value = identity;
+
+    this.shadowRoot.querySelector('terminal-dialog').show();
+    this.shadowRoot.querySelector('terminal-textfield[fitContent]')
+        .updateFitContentWidth();
+  }
+
+  /**
+   * @param {!Event} event
+   */
+  onDeleteClick_(event) {
+    this.shadowRoot.querySelector('terminal-dialog').cancel();
+    this.deleteNasshProfile_();
+  }
+
+  /** @param {!Event} event */
+  onCommandUpdated_(event) {
+    this.parsedCommand_ = parseCommand(event.target.value);
+
+    if (this.parsedCommand_.destination) {
       // TODO(b/223076712): if we fail to parse the destination, maybe we should
       // show an error in the textfield.
-      const parsed = parseSSHDestination(this.destination_);
-      if (parsed && parsed.hostname.match(GOOGLE_HOST_REGEXP)) {
+      const parsedDestination = parseSSHDestination(
+          this.parsedCommand_.destination);
+      if (parsedDestination?.hostname.match(GOOGLE_HOST_REGEXP)) {
         const relayArgs = this.relayArgsRef_.value;
         // Add the google relay arg if it is not there already.
         if (!/(^|\s)--config=google\b/.test(relayArgs.value)) {
@@ -229,6 +352,135 @@ export class TerminalSSHDialog extends LitElement {
         }
       }
     }
+  }
+
+  /** @param {!Event} event */
+  onImportButtonClick_(event) {
+    this.shadowRoot.querySelector('#identity-input').click();
+  }
+
+  /** @param {!Event} event */
+  async onIdentityInputChange_(event) {
+    await importIdentityFiles(lib.notNull(this.fileSystem_),
+        event.target.files);
+    this.loadIdentities_();
+  }
+
+  /** @param {!Event} event */
+  async onDialogClose_(event) {
+    if (event.detail.accept) {
+      // Save the connection.
+
+      const parsedDestination = parseSSHDestination(
+          this.parsedCommand_.destination);
+      if (!parsedDestination) {
+        // This should not happen since we should have prevented the user from
+        // clicking the ok button.
+        throw new Error('Unable to parse destination from {}',
+            this.parsedCommand_.destination);
+      }
+
+      if (this.nasshProfileId_) {
+        // Remove the profile first to ensure a clean state.
+        await this.deleteNasshProfile_(false);
+      } else {
+        const profileIds = await this.getNasshProfileIds_();
+        this.nasshProfileId_ = lib.PreferenceManager.newRandomId(profileIds);
+        await this.setNasshProfileIds_([
+            ...profileIds,
+            this.nasshProfileId_,
+        ]);
+      }
+      this.setNasshProfileValues_({
+        'terminalSSHDialogCommand': this.commandRef_.value.value,
+        'description': this.getTitle_(),
+        'username': parsedDestination.username,
+        'hostname': parsedDestination.hostname,
+        // We only save the port number if it appears in the destination. If the
+        // user specify it with `-p`, then it will go into 'argstr'.
+        'port': parsedDestination.port,
+        'argstr': this.parsedCommand_.argstr,
+        'nassh-options': this.relayArgsRef_.value.value,
+        'identity': this.identityDropdownRef_.value.value,
+      });
+    }
+
+    this.dispatchEvent(new CustomEvent('close'));
+  }
+
+  /**
+   * @param {string} name
+   * @return {string}
+   */
+  getNasshProfileKey_(name) {
+    if (!this.nasshProfileId_) {
+      throw new Error('nasshProfileId is empty');
+    }
+    return `/nassh/profiles/${this.nasshProfileId_}/${name}`;
+  }
+
+  /**
+   * Get nassh ssh profile values. The return value is an array in the same
+   * order as the param `names`.
+   *
+   * @param {!Array<string>} names
+   * @param {*} defaultValue Missing value is replaced with this.
+   * @return {!Promise<!Array<*>>}
+   */
+  async getNasshProfileValues_(names, defaultValue) {
+    const keys = names.map((x) => this.getNasshProfileKey_(x));
+    const rv = await hterm.defaultStorage.getItems(keys);
+    return keys.map((k) => rv[k] ?? defaultValue);
+  }
+
+  /**
+   * Set nassh profile values from an object.
+   *
+   * @param {!Object} values
+   */
+  async setNasshProfileValues_(values) {
+    const values2 = {};
+    for (const [name, value] of Object.entries(values)) {
+      values2[this.getNasshProfileKey_(name)] = value;
+    }
+    await hterm.defaultStorage.setItems(values2);
+  }
+
+  async loadIdentities_() {
+    this.identities_ = [
+        this.DEFAULT_IDENTITY,
+        ...(await getIdentityFileNames(lib.notNull(this.fileSystem_)))
+            .map((value) => ({value})),
+    ];
+  }
+
+  /** @return {!Promise<!Array<string>>} */
+  async getNasshProfileIds_() {
+    const profileIds = /** @type {?Array<string>}*/(
+        await hterm.defaultStorage.getItem('/nassh/profile-ids'));
+    return profileIds ?? [];
+  }
+
+  /**
+   * @param {!Array<string>} profileIds
+   * @return {!Promise<void>}
+   */
+  async setNasshProfileIds_(profileIds) {
+    await hterm.defaultStorage.setItem('/nassh/profile-ids', profileIds);
+  }
+
+  async deleteNasshProfile_(deleteFromProfileIds = true) {
+    if (deleteFromProfileIds) {
+      await this.setNasshProfileIds_(
+          (await this.getNasshProfileIds_())
+              .filter((id) => id !== this.nasshProfileId_),
+      );
+    }
+    const prefix = `/nassh/profiles/${this.nasshProfileId_}`;
+    hterm.defaultStorage.removeItems(
+        Object.keys(await hterm.defaultStorage.getItems(null))
+            .filter((key) => key.startsWith(prefix)),
+    );
   }
 }
 

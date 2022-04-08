@@ -399,6 +399,28 @@ lib.PreferenceManager.prototype.notifyChange_ = function(name) {
 };
 
 /**
+ * Generate a random, 4-digit hex identifier.
+ *
+ * @param {!Array<string>=} existingIds A list of existing ids to avoid.
+ * @param {?string=} prefix Optional prefix to include in the id.
+ * @return {string} The id.
+ */
+lib.PreferenceManager.newRandomId = function(
+    existingIds = [], prefix = undefined) {
+  // Pick a random, unique 4-digit hex identifier for the new profile.
+  while (true) {
+    let id = lib.f.randomInt(1, 0xffff).toString(16);
+    id = lib.f.zpad(id, 4);
+    if (prefix) {
+      id = `${prefix}:${id}`;
+    }
+    if (existingIds.indexOf(id) === -1) {
+      return id;
+    }
+  }
+};
+
+/**
  * Create a new child PreferenceManager for the given child list.
  *
  * The optional hint parameter is an opaque prefix added to the auto-generated
@@ -406,12 +428,12 @@ lib.PreferenceManager.prototype.notifyChange_ = function(name) {
  * and use it.
  *
  * @param {string} listName The child list to create the new instance from.
- * @param {?string=} hint Optional hint to include in the child id.
+ * @param {?string=} prefix Optional prefix to include in the child id.
  * @param {string=} id Optional id to override the generated id.
  * @return {!lib.PreferenceManager} The new child preference manager.
  */
 lib.PreferenceManager.prototype.createChild = function(
-    listName, hint = undefined, id = undefined) {
+    listName, prefix = undefined, id = undefined) {
   const ids = /** @type {!Array<string>} */ (this.get(listName));
 
   if (id) {
@@ -420,14 +442,7 @@ lib.PreferenceManager.prototype.createChild = function(
     }
 
   } else {
-    // Pick a random, unique 4-digit hex identifier for the new profile.
-    while (!id || ids.indexOf(id) != -1) {
-      id = lib.f.randomInt(1, 0xffff).toString(16);
-      id = lib.f.zpad(id, 4);
-      if (hint) {
-        id = `${hint}:${id}`;
-      }
-    }
+    id = lib.PreferenceManager.newRandomId(ids, prefix);
   }
 
   const childManager = this.childFactories_[listName](this, id);
