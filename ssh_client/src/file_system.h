@@ -151,7 +151,7 @@ class FileSystem {
               bool apply);
   bool IsInterrupted();
 
-  static const int kFileIDOffset = 100;
+  static const int kFileIDOffset = 16;
   static const unsigned long kFirstAddr = 0x00000000;
 
   static FileSystem* file_system_;
