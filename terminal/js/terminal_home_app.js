@@ -294,7 +294,7 @@ export class TerminalHomeApp extends LitElement {
           encodeURIComponent(`--target_container=${c.container_name}`)}`;
     };
     const containerLink = (c) => html`
-      <a class="row" target="_blank" href="${containerHref(c)}">
+      <a class="row full-width" target="_blank" href="${containerHref(c)}">
         ${containerText(c)}
       </a>
     `;
