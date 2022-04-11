@@ -50,8 +50,10 @@ it('gets-sets', async function() {
   let value = await storage.getItems(null);
   assert.deepEqual(value, {});
 
-  value = await storage.getItems(['foo']);
+  const key = ['foo'];
+  value = await storage.getItems(key);
   assert.deepEqual(value, {});
+  assert.deepEqual(key, ['foo']);
 
   await storage.setItems({'foo': 1, 'bar': 2, 'cow': 3});
   value = await storage.getItems(['foo']);

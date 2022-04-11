@@ -121,13 +121,10 @@ lib.Storage.Local.prototype.getItems = async function(keys) {
     }
   }
 
-  for (let i = keys.length - 1; i >= 0; i--) {
-    const key = keys[i];
+  for (const key of keys) {
     const value = this.storage_.getItem(key);
     if (typeof value == 'string') {
       rv[key] = this.parseJson_(value);
-    } else {
-      keys.splice(i, 1);
     }
   }
 
