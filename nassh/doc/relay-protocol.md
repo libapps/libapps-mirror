@@ -483,6 +483,34 @@ supporting stream logic in [nassh_stream_relay_sshfe.js].
 
 TODO
 
+## Websockify
+
+This uses the id `websockify` (e.g. when using `--proxy-mode=`).
+
+The main implementation for this can be found in [nassh_relay_websockify.js]
+with supporting stream logic in [nassh_stream_relay_websockify.js].
+
+### Protocol Overview
+
+The [websockify](https://github.com/novnc/websockify) just wraps SSH traffic in
+WebSocket frames.  There is no other wrapping logic in play.
+
+Insecure WebSockets (`ws://`) is used by default.  This isn't actually insecure
+because the SSH traffic is still encrypted.  Getting properly signed certs that
+the browser recognizes can be challenging.  If you really want to use encrypted
+WebSockets, then `--use-ssl` to force `wss://`.
+
+### Example Server
+
+You can test on a Debian-based system with something like:
+
+```
+$ sudo apt-get install websockify
+$ websockify 8080 localhost:22
+```
+
+Then use connect to the server on port `8080` with `--proxy-mode=websockify`.
+
 
 [Corp Relay]: #corp-relay
 [method field]: #corp-relay-method

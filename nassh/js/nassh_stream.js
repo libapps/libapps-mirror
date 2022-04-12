@@ -96,3 +96,8 @@ Stream.prototype.close = function() {
     this.onClose();
   }
 };
+
+/**
+ * Notification interface for when data is available for reading.
+ */
+Stream.prototype.onDataAvailable = undefined;

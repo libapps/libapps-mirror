@@ -16,6 +16,7 @@ import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
 import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
+import {Websockify as RelayWebsockify} from './nassh_relay_websockify.js';
 
 /**
  * The ssh terminal command.
@@ -1072,7 +1073,10 @@ nassh.CommandInstance.prototype.connectTo = async function(params, finalize) {
   }
 
   // If the user has requested a proxy relay, load it up.
-  if (!options['--proxy-host']) {
+  if (options['--proxy-mode'] === 'websockify') {
+    this.relay_ = new RelayWebsockify(
+        this.io, options, this.terminalLocation, this.storage);
+  } else if (!options['--proxy-host']) {
     // Do nothing when disabled.  We check this first to avoid excessive
     // indentation or redundant checking of the proxy-host setting below.
   } else if (options['--proxy-mode'] == 'ssh-fe@google.com') {
