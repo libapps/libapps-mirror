@@ -147,6 +147,7 @@ export class TerminalSSHDialog extends LitElement {
       userTitle_: {state: true},
       parsedCommand_: {state: true},
       identities_: {state: true},
+      suppressCommandError_: {state: true},
     };
   }
 
@@ -155,10 +156,6 @@ export class TerminalSSHDialog extends LitElement {
     return css`
         :host {
           --terminal-dialog-min-width: 500px;
-        }
-
-        terminal-textfield {
-          margin-bottom: 16px;
         }
 
         #identity-container {
@@ -174,6 +171,14 @@ export class TerminalSSHDialog extends LitElement {
         #identity-input {
           display: none;
         }
+
+        div[slot="buttons"] {
+          display: flex;
+        }
+
+        div[slot="buttons"] > span {
+          flex-grow: 1;
+        }
     `;
   }
 
@@ -188,6 +193,10 @@ export class TerminalSSHDialog extends LitElement {
      * @private {!ParsedCommand}
      */
     this.parsedCommand_ = {argstr: '', destination: null};
+    // We suppress the command error for new ssh connection at the beginning
+    // because we don't want to show the error immediately when (or before) the
+    // user just start typing.
+    this.suppressCommandError_ = true;
     // This is set in Show(). Empty string means we are creating a new SSH
     // connection.
     this.nasshProfileId_ = '';
@@ -200,6 +209,7 @@ export class TerminalSSHDialog extends LitElement {
     /** @private {?FileSystem} */
     this.fileSystem_;
 
+    this.dialogRef_ = createRef();
     this.commandRef_ = createRef();
     this.relayArgsRef_ = createRef();
     this.identityDropdownRef_ = createRef();
@@ -220,16 +230,25 @@ export class TerminalSSHDialog extends LitElement {
   render() {
     const msg = (id) => hterm.messageManager.get(id);
 
+    let commandError = '';
+    if (!parseSSHDestination(this.parsedCommand_.destination)) {
+      commandError = msg('TERMINAL_HOME_SSH_SPECIFY_DESTINATION');
+    } else {
+      this.suppressCommandError_ = false;
+    }
+
     let deleteButton;
     if (this.nasshProfileId_) {
       deleteButton = html`
-          <terminal-button slot="extra-buttons" @click=${this.onDeleteClick_}>
+          <terminal-button @click=${this.onDeleteClick_}>
             ${msg('DELETE_BUTTON_LABEL')}
           </terminal-button>
       `;
     }
+
     return html`
-        <terminal-dialog @close="${this.onDialogClose_}">
+        <terminal-dialog ${ref(this.dialogRef_)}
+            @close="${this.onDialogClose_}">
           <div slot="title">
             <terminal-textfield blendIn fitContent
                 value="${live(this.getTitle_())}"
@@ -237,7 +256,9 @@ export class TerminalSSHDialog extends LitElement {
             </terminal-textfield>
           </div>
           <terminal-textfield ${ref(this.commandRef_)}
+              error="${this.suppressCommandError_ ? '' : commandError}"
               label="${msg('TERMINAL_HOME_SSH_COMMAND')}"
+              @change="${() => this.suppressCommandError_ = false}"
               @input="${this.onCommandUpdated_}"
               placeholder="username@hostname -p <port> -R 1234:localhost:5678">
             <span slot="inline-prefix">ssh&nbsp</span>
@@ -258,7 +279,18 @@ export class TerminalSSHDialog extends LitElement {
           <terminal-textfield ${ref(this.relayArgsRef_)} id="relay-args"
               label="${msg('FIELD_NASSH_OPTIONS_PLACEHOLDER')}">
           </terminal-textfield>
-          ${deleteButton}
+          <div slot="buttons">
+            ${deleteButton}
+            <span></span>
+            <terminal-button class="cancel"
+                @click="${(e) => this.dialogRef_.value.cancel()}">
+              ${msg('CANCEL_BUTTON_LABEL')}
+            </terminal-button>
+            <terminal-button class="action" ?disabled="${commandError}"
+                @click="${this.onOkClick_}">
+              ${msg('OK_BUTTON_LABEL')}
+            </terminal-button>
+          </div>
         </terminal-dialog>
     `;
   }
@@ -321,6 +353,7 @@ export class TerminalSSHDialog extends LitElement {
     this.parsedCommand_ = parseCommand(/** @type {string} */(command));
     this.relayArgsRef_.value.value = relayArgs;
     this.identityDropdownRef_.value.value = identity;
+    this.suppressCommandError_ = !this.nasshProfileId_;
 
     this.shadowRoot.querySelector('terminal-dialog').show();
     this.shadowRoot.querySelector('terminal-textfield[fitContent]')
@@ -332,8 +365,17 @@ export class TerminalSSHDialog extends LitElement {
   /**
    * @param {!Event} event
    */
+  onOkClick_(event) {
+    if (!event.target.hasAttribute('disabled')) {
+      this.dialogRef_.value.accept();
+    }
+  }
+
+  /**
+   * @param {!Event} event
+   */
   onDeleteClick_(event) {
-    this.shadowRoot.querySelector('terminal-dialog').cancel();
+    this.dialogRef_.value.cancel();
     this.deleteNasshProfile_();
   }
 
@@ -342,8 +384,6 @@ export class TerminalSSHDialog extends LitElement {
     this.parsedCommand_ = parseCommand(event.target.value);
 
     if (this.parsedCommand_.destination) {
-      // TODO(b/223076712): if we fail to parse the destination, maybe we should
-      // show an error in the textfield.
       const parsedDestination = parseSSHDestination(
           this.parsedCommand_.destination);
       if (parsedDestination?.hostname.match(GOOGLE_HOST_REGEXP)) {

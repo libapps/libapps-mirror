@@ -28,6 +28,10 @@ export class TerminalLabelElement extends LitElement {
       :host([focused]) > div {
         color: var(--google-blue-600);
       }
+
+      :host([invalid]) > div {
+        color: var(--cr-input-error-color);
+      }
     `;
   }
 

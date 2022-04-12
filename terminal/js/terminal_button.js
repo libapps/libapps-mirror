@@ -14,6 +14,7 @@ import {stylesVars} from './terminal_settings_styles.js';
 export class TerminalButtonElement extends LitElement {
   /** @override */
   static get styles() {
+    // The styling follows chrome's <cr-button>
     return [stylesVars, css`
         :host {
           --button-bg: white;
@@ -23,6 +24,10 @@ export class TerminalButtonElement extends LitElement {
           --button-hover-bg-action: rgba(var(--google-blue-600-rgb), .9);
           --button-text-color: var(--google-blue-600);
           --button-text-color-action: white;
+          --button-disabled-bg-action: var(--google-grey-100);
+          --button-disabled-bg: white;
+          --button-disabled-border-color: var(--google-grey-100);
+          --button-disabled-text-color: var(--google-grey-600);
         }
 
         button {
@@ -46,17 +51,30 @@ export class TerminalButtonElement extends LitElement {
           background-color: var(--button-hover-bg);
         }
 
-        :host(.action) button {
+        :host(.action) > button {
           background-color: var(--button-bg-action);
           color: var(--button-text-color-action);
         }
 
-        :host(.action) button:hover {
+        :host(.action) > button:hover {
           background-color: var(--button-hover-bg-action);
         }
 
         :host(.cancel) {
           margin-inline-end: 8px;
+        }
+
+        :host([disabled]) > button {
+          background-color: var(--button-disabled-bg);
+          border-color: var(--button-disabled-border-color);
+          color: var(--button-disabled-text-color);
+          cursor: auto;
+          pointer-events: none;
+        }
+
+        :host(.action[disabled]) > button {
+          background-color: var(--button-disabled-bg-action);
+          border-color: transparent;
         }
     `];
   }

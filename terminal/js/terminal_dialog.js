@@ -51,9 +51,13 @@ export class TerminalDialog extends LitElement {
           padding-bottom: 16px;
         }
 
+        #content {
+          padding-bottom: 24px;
+        }
+
         #button-container {
           display: flex;
-          padding-top: 24px;
+          justify-content: flex-end;
         }
     `;
   }
@@ -72,18 +76,20 @@ export class TerminalDialog extends LitElement {
     return html`
         <dialog @close=${this.onNativeClose_}>
           <slot name="title"></slot>
-          <slot></slot>
-          <div id="button-container">
-            <slot name="extra-buttons"></slot>
-            <span style="flex-grow: 1;"></span>
-            <terminal-button class="cancel"
-                @click="${this.cancel}">
-              ${this.cancelText}
-            </terminal-button>
-            <terminal-button class="action" @click="${this.accept}">
-              ${this.acceptText}
-            </terminal-button>
+          <div id="content">
+            <slot></slot>
           </div>
+          <slot name="buttons">
+            <div id="button-container">
+              <terminal-button class="cancel"
+                  @click="${this.cancel}">
+                ${this.cancelText}
+              </terminal-button>
+              <terminal-button class="action" @click="${this.accept}">
+                ${this.acceptText}
+              </terminal-button>
+            </div>
+          </slot>
         </dialog>
     `;
   }

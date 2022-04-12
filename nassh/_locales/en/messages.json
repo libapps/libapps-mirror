@@ -2043,6 +2043,10 @@
 		"description": "Help text shown when SSH (Secure SHell) has been disabled by policy.",
 		"message": "SSH is disabled by your administrator."
 	},
+	"TERMINAL_HOME_SSH_SPECIFY_DESTINATION": {
+		"description": "An error message shown under the command testfield when the user didn't input the destiniation for SSH",
+		"message": "Specify the destination with \"username@hostname\""
+	},
 	"TERMINAL_HOME_TERMINAL_SETTINGS": {
 		"description": "Label to open Terminal settings page.",
 		"message": "Terminal Settings"

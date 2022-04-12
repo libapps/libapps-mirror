@@ -37,6 +37,11 @@ export class TerminalTextfieldElement extends LitElement {
       fitContent: {
         type: Boolean,
       },
+      // An empty string does not trigger the error styling, but it will reserve
+      // the space for the error message.
+      error: {
+        type: String,
+      },
       focused_: {
         state: true,
       },
@@ -100,6 +105,12 @@ export class TerminalTextfieldElement extends LitElement {
         width: 100%;
       }
 
+      #underline[invalid] {
+        border-bottom-color: var(--cr-input-error-color);
+        opacity: 1;
+        width: 100%;
+      }
+
       #input-container {
         align-items: baseline;
         display: flex;
@@ -121,6 +132,15 @@ export class TerminalTextfieldElement extends LitElement {
         font: inherit;
       }
 
+      /* The sizes are copied from chrome's <cr-input>. */
+      #error {
+        color: var(--cr-input-error-color);
+        font-size: .625rem;
+        line-height: 1em;
+        height: 1em;
+        margin: 8px 0;
+      }
+
       /* Note that "absolute" position does not work because the ruler size will
        * be restricted by the host size. */
       #ruler {
@@ -138,6 +158,8 @@ export class TerminalTextfieldElement extends LitElement {
     this.value = '';
     this.blendIn = false;
     this.fitContent = false;
+    /** @type {string|undefined} */
+    this.error;
     this.focused_ = false;
 
     this.rulerRef_ = createRef();
@@ -160,7 +182,7 @@ export class TerminalTextfieldElement extends LitElement {
     let label;
     if (this.label) {
       label = html`
-          <terminal-label ?focused="${this.focused_}">
+          <terminal-label ?focused="${this.focused_}" ?invalid="${this.error}">
               ${this.label}
           </terminal-label>
       `;
@@ -169,6 +191,11 @@ export class TerminalTextfieldElement extends LitElement {
     let ruler;
     if (this.fitContent) {
       ruler = html`<span ${ref(this.rulerRef_)} id="ruler"></span>`;
+    }
+
+    let error;
+    if (this.error !== undefined) {
+      error = html`<div id="error" aria-live="assertive">${this.error}</div>`;
     }
 
     return html`
@@ -184,8 +211,10 @@ export class TerminalTextfieldElement extends LitElement {
                 spellcheck="false"
             />
           </div>
-          ${this.blendIn ? '' : html`<div id="underline"></div>`}
+          ${this.blendIn ? '' :
+            html`<div id="underline" ?invalid="${this.error}"></div>`}
         </div>
+        ${error}
         ${ruler}
     `;
   }
