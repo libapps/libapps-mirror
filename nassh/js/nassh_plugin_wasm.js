@@ -63,7 +63,7 @@ export class Plugin {
 
     const settings = {
       executable: this.executable_,
-      argv: this.argv_,
+      argv: [this.executable_, ...this.argv_],
       environ: this.environ_,
       handler: new WasshSyscallHandler.RemoteReceiverWasiPreview1({
         term: this.terminal_,
