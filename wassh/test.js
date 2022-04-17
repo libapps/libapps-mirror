@@ -88,7 +88,7 @@ const run = async function() {
       term: this,
       tcpSocketsOpen: (address, port) => null,
       unixSocketsOpen: (address, port) => null,
-      secureInput: (prompt, max_len, echo) => secureInput(io),
+      secureInput: (prompt, max_len, echo) => secureInput(io, echo),
     });
     await settings.handler.init();
     proc = new WasshProcess.Background(
@@ -99,12 +99,14 @@ const run = async function() {
   io.println(`\n> finished: ret = ${ret}`);
 };
 
-function secureInput(io) {
+function secureInput(io, echo) {
   return new Promise((resolve) => {
     io = io.push();
     let pass = '';
     io.onVTKeystroke = (str) => {
-      io.print(str);
+      if (echo) {
+        io.print(str);
+      }
       switch (str) {
         case '\x7f':
         case '\x08':
