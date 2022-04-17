@@ -82,7 +82,7 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
         server = subprocess.Popen(
             [libdot.node.NODE,
              os.path.join(libdot.node.NODE_BIN_DIR, 'http-server'),
-             '-a', 'localhost', '-c-1', '--cors'],
+             '--cors', '-a', 'localhost', '-c-1'],
             cwd=libdot.LIBAPPS_DIR)
         path = 'http://localhost:8080/%s' % path
 
