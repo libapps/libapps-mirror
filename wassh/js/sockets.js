@@ -204,7 +204,7 @@ export class TcpSocket extends Socket {
   /** @override */
   async write(buf) {
     if (this.callback_) {
-      this.callback_.asyncWrite(buf);
+      await this.callback_.asyncWrite(buf);
       return {nwritten: buf.length};
     }
 
@@ -371,7 +371,7 @@ export class UnixSocket extends Socket {
 
   /** @override */
   async write(buf) {
-    this.callback_.asyncWrite(buf);
+    await this.callback_.asyncWrite(buf);
     return {nwritten: buf.length};
   }
 }

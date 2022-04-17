@@ -86,7 +86,17 @@ const run = async function() {
   } else {
     settings.handler = new WasshSyscallHandler.RemoteReceiverWasiPreview1({
       term: this,
-      tcpSocketsOpen: (address, port) => null,
+      tcpSocketsOpen: async (address, port) => {
+        // If running in the extension, assume raw TCP connection.
+        if (window?.chrome?.sockets) {
+          return false;
+        }
+
+        // For all others, fallback to using a WebSocket proxy.
+        const stream = new WebsockifyStream(address, port);
+        await stream.connect_();
+        return stream;
+      },
       unixSocketsOpen: (address, port) => null,
       secureInput: (prompt, max_len, echo) => secureInput(io, echo),
     });
@@ -123,4 +133,120 @@ function secureInput(io, echo) {
       }
     };
   });
+}
+
+/**
+ * Promise wrapper for setTimeout.
+ *
+ * @param {number} timeout How long (in milliseconds) to sleep.
+ */
+function sleep(timeout = 1) {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+}
+
+/**
+ * Simple buffer on top of WebSockets.
+ */
+class WebsockifyStream {
+  /**
+   * @param {host} string
+   * @param {port} number
+   */
+  constructor(host, port, protocol = 'ws') {
+    this.host_ = host;
+    this.port_ = port;
+    this.protocol_ = protocol;
+
+    // The actual WebSocket connected to the ssh server.
+    this.socket_ = null;
+
+    // How much data we'll let queue in the websocket before we hold off.
+    this.maxWebSocketBufferLength = 64 * 1024;
+  }
+
+  /**
+   * Start a new connection to the proxy server.
+   */
+  async connect_() {
+    if (this.socket_) {
+      throw new Error('stream already connected');
+    }
+
+    const uri = `${this.protocol_}://${this.host_}:${this.port_}`;
+    this.socket_ = new WebSocket(uri);
+    this.socket_.binaryType = 'arraybuffer';
+    this.socket_.onmessage = this.onSocketData_.bind(this);
+    this.socket_.onclose = this.onSocketClose_.bind(this);
+    this.socket_.onerror = this.onSocketError_.bind(this);
+
+    await new Promise((resolve) => {
+      this.socket_.onopen = resolve;
+    });
+  }
+
+  /**
+   * Close the connection to the proxy server and clean up.
+   *
+   * @param {string} reason A short message explaining the reason for closing.
+   */
+  close(reason = '???') {
+    // If we aren't open, there's nothing to do.  This allows us to call it
+    // multiple times, perhaps from cascading events (write error/close/etc...).
+    if (!this.socket_) {
+      return;
+    }
+
+    console.log(`Closing socket due to ${reason}`);
+    this.socket_.close();
+    this.socket_ = null;
+  }
+
+  /**
+   * Callback when the socket closes when the connection is finished.
+   *
+   * @param {!CloseEvent} e The event details.
+   */
+  onSocketClose_(e) {
+    this.close(`server closed socket: [${e.code}] ${e.reason}`);
+  }
+
+  /**
+   * Callback when the socket closes due to an error.
+   *
+   * @param {!Event} e The event details.
+   */
+  onSocketError_(e) {
+    this.close(`server sent an error: ${e}`);
+  }
+
+  /**
+   * Callback when new data is available from the server.
+   *
+   * @param {!MessageEvent} e The message with data to read.
+   */
+  onSocketData_(e) {
+    this.onDataAvailable(e.data);
+  }
+
+  /**
+   * Queue up some data to write asynchronously.
+   *
+   * @param {!ArrayBuffer} data The SSH data.
+   * @param {function(number)=} onSuccess Optional callback.
+   * @override
+   */
+  async asyncWrite(data) {
+    if (!data.byteLength) {
+      return;
+    }
+
+    // If we've queued too much already, go back to sleep.
+    // NB: This check is fuzzy at best, so we don't need to include the size of
+    // the data we're about to write below into the calculation.
+    while (this.socket_.bufferedAmount >= this.maxWebSocketBufferLength) {
+      await sleep(10);
+    }
+
+    this.socket_.send(data);
+  }
 }
