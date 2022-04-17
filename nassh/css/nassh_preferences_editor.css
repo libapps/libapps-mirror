@@ -79,6 +79,15 @@ body {
   margin-left: 18px;
 }
 
+/*
+ * The terminal container container.  Make sure extreme terminal settings (e.g.
+ * height) don't make the rest of the settings inaccessible.
+ */
+#terminal-container {
+  max-height: 140px;
+  overflow: hidden;
+}
+
 #current-profile {
   margin-left: 18px;
 }
