@@ -23,11 +23,13 @@ export class Base {
    * @param {{
    *   sys_handlers: (!Array<!Object>|undefined),
    *   process: !Process,
-   *   trace: boolean,
-   * }} param1
+   *   trace: (boolean|undefined),
+   *   debug: (boolean|undefined),
+   * }} options
    */
-  constructor({sys_handlers, process, trace}) {
+  constructor({sys_handlers, process, trace, debug}) {
     this.enableTrace_ = trace;
+    this.enableDebug_ = debug;
     this.process_ = process;
     this.bindHandlers_(sys_handlers);
     /** @type {string} */
@@ -64,6 +66,10 @@ export class Base {
    * @param {*} args The message to log.
    */
   debug(...args) {
+    if (!this.enableDebug_) {
+      return;
+    }
+
     this.process_.debug(...args);
   }
 

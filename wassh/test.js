@@ -24,6 +24,7 @@ window.onload = async function() {
 const run = async function() {
   const params = new URLSearchParams(document.location.search);
   const trace = (params.get('trace') ?? 'false') === 'true';
+  const debug = trace;
   const user = params.get('user') ?? 'vapier';
   const host = params.get('host') ?? 'penguin.linux.test';
   const port = params.get('port') ?? '22';
@@ -47,12 +48,12 @@ const run = async function() {
   const argv = [
 //    prog, '--help',
 //    prog, '-t', 'ed25519', '-f', 'id_ed25519', '-N', '',
-//    prog, '-vvv', 'root@127.0.0.1',
-//    prog, '-vvv', 'root@localhost',
-//    prog, '-vvv', 'root@localhost.localdomain',
-//    prog, '-vvv', 'vapier@100.115.92.194',
-    prog, '-vvv', '-6', `-p${port}`, `${user}@${host}`,
-//    prog, '-vvv', '-6', 'root@localhost',
+//    prog, 'root@127.0.0.1',
+//    prog, 'root@localhost',
+//    prog, 'root@localhost.localdomain',
+//    prog, 'vapier@100.115.92.194',
+    prog, `-p${port}`, `${user}@${host}`,
+//    prog, '-6', 'root@localhost',
 //    prog, '100.115.92.194',
   ];
   const environ = {
@@ -60,6 +61,9 @@ const run = async function() {
     'USER': 'wassh',
     'TERM': 'xterm',
   };
+  if (debug) {
+    argv.splice(1, 0, '-vvv');
+  }
 
   const settings = {
     executable: `${prefix}/${prog}`,
@@ -75,7 +79,7 @@ const run = async function() {
     ];
     settings.sys_handlers = sys_handlers;
     settings.sys_entries = [
-      new SyscallEntry.WasiPreview1({sys_handlers, trace}),
+      new SyscallEntry.WasiPreview1({sys_handlers, trace, debug}),
       new WasshSyscallEntry.WasshExperimental({}),
     ];
     proc = new Process.Foreground(settings);

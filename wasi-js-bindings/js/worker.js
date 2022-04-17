@@ -18,9 +18,13 @@ import * as Process from './process.js';
 export class Base {
   /**
    * @param {!Worker} worker The WebWorker to bind to.
+   * @param {{
+   *   debug: (boolean|undefined),
+   * }=} options
    */
-  constructor(worker) {
+  constructor(worker, {debug} = {}) {
     this.worker = worker;
+    this.enableDebug_ = debug;
   }
 
   /**
@@ -57,6 +61,10 @@ export class Base {
    * @param {*} args The message to log.
    */
   debug(...args) {
+    if (!this.enableDebug_) {
+      return;
+    }
+
     console.debug(...args);
   }
 

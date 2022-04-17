@@ -23,9 +23,10 @@ class Base {
    *   executable: (string|!Promise<!Response>|!Response|!ArrayBuffer),
    *   argv: (!Array<string>|undefined),
    *   environ: (!Object<string, string>|undefined),
-   * }} param1
+   *   debug: (boolean|undefined)
+   * }} options
    */
-  constructor({executable, argv, environ}) {
+  constructor({executable, argv, environ, debug}) {
     this.executable = executable;
     if (argv === undefined) {
       if (typeof executable === 'string') {
@@ -52,10 +53,15 @@ class Base {
     this.exit_status = null;
     /** @type {boolean} Whether the program was aborted. */
     this.aborted = false;
+    this.enableDebug_ = debug;
   }
 
   /** @override */
   debug(...args) {
+    if (!this.enableDebug_) {
+      return;
+    }
+
     console.log(...args);
   }
 

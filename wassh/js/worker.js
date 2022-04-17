@@ -18,6 +18,7 @@ import * as WasshSyscallHandler from './syscall_handler.js';
 class WasshWorker extends BackgroundWorker.Base {
   newProcess(executable, argv, environ, sab, handler_ids) {
     const trace = (params.get('trace') ?? 'false') === 'true';
+    const debug = trace;
 
     const sys_handlers = [
       new SyscallHandler.ProxyWasiPreview1(this, sab, handler_ids),
@@ -28,7 +29,7 @@ class WasshWorker extends BackgroundWorker.Base {
       new WasshSyscallEntry.WasshExperimental({sys_handlers, trace}),
     ];
     return new WasshProcess.Foreground(
-        {executable, argv, environ, sys_handlers, sys_entries});
+        {executable, argv, environ, sys_handlers, sys_entries, debug});
   }
 }
 
