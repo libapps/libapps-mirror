@@ -112,7 +112,11 @@ export class GoogMetricsReporter {
       origins: [CLOUDTOP_API_ORIGIN, UBERPROXY_DEBUG_ORIGIN],
     };
     return new Promise((resolve) => {
-      chrome.permissions.contains(permissions, resolve);
+      if (window?.chrome?.permissions !== undefined) {
+        chrome.permissions.contains(permissions, resolve);
+      } else {
+        resolve(false);
+      }
     });
   }
 
@@ -157,7 +161,11 @@ export class GoogMetricsReporter {
           permissions: [],
           origins: [CLOUDTOP_API_ORIGIN, UBERPROXY_DEBUG_ORIGIN],
         };
-        chrome.permissions.request(permissions, resolve);
+        if (window?.chrome?.permissions !== undefined) {
+          chrome.permissions.request(permissions, resolve);
+        } else {
+          resolve(false);
+        }
       });
 
       noButton.addEventListener('click', () => {

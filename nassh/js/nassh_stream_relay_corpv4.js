@@ -222,12 +222,16 @@ RelayCorpv4WsStream.prototype.asyncOpen = async function(settings, onComplete) {
   this.port_ = settings.port;
 
   if (settings.reportAckLatency) {
-    this.googMetricsReporter_ = new GoogMetricsReporter(this.io_, this.host_);
-    const hasPermissions = await this.googMetricsReporter_.checkPermissions();
-    if (!hasPermissions) {
-      await this.googMetricsReporter_.requestPermissions();
+    try {
+      this.googMetricsReporter_ = new GoogMetricsReporter(this.io_, this.host_);
+      const hasPermissions = await this.googMetricsReporter_.checkPermissions();
+      if (!hasPermissions) {
+        await this.googMetricsReporter_.requestPermissions();
+      }
+      await this.googMetricsReporter_.initClientMetadata();
+    } catch (e) {
+      console.error('Error configuring GoogMetricsReporter', e);
     }
-    await this.googMetricsReporter_.initClientMetadata();
   }
 
   this.openCallback_ = onComplete;
