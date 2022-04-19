@@ -123,9 +123,19 @@ export function gcseRefreshCert(io) {
   return nassh.runtimeSendMessage(defaultGcseExtension,
                                   {'action': 'certificate_expiry'})
     .then((result) => {
+      const now = new Date().getTime() / 1000;
+
+      // GCSE doesn't return a structured response, so sniff the error message.
+      // It's terrible, but it works well enough.  And if it's "wrong", then
+      // there's not really much harm here as it just means we refresh sooner.
+      if (result.status === 'error' &&
+          result.error === 'Unable to determine expiry undefined') {
+        result.status = 'OK';
+        result.expires = now;
+      }
+
       if (result.status === 'OK') {
         // Refresh the certificate if it expires in the next hour.
-        const now = new Date().getTime() / 1000;
         const hoursLeft = Math.floor((result.expires - now) / 60 / 60);
         io.println(nassh.msg('SSH_CERT_CHECK_RESULT', [hoursLeft]));
         if (hoursLeft < 1) {
