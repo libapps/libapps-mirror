@@ -180,6 +180,11 @@ export class GoogMetricsReporter {
    * Gathers all metadata associated with the host and client.
    */
   async initClientMetadata() {
+    if (!await this.checkPermissions()) {
+      throw new Error(`Permission to access ${CLOUDTOP_API_ORIGIN} and ` +
+                      `${UBERPROXY_DEBUG_ORIGIN} is missing.`);
+    }
+
     if (this.getInfraProvider_() === 'cloud') {
       this.metadata = {
         host_zone: await this.getHostZone_(),
