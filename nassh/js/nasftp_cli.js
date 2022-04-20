@@ -2083,7 +2083,8 @@ Cli.addCommand_(['mkdir'], 1, null, '', '<paths...>',
 Cli.commandMove_ = function(args) {
   const src = args.shift();
   const dst = args.shift();
-  return this.client.renameFile(this.makePath_(src), this.makePath_(dst));
+  return this.client.renameFile(this.makePath_(src), this.makePath_(dst))
+    .then(() => {});
 };
 /**
  * Complete the command.
@@ -2611,7 +2612,8 @@ Cli.commandSymlink_ = function(args) {
   const target = args.shift();
   const path = args.shift();
 
-  return this.client.symLink(this.makePath_(target), this.makePath_(path));
+  return this.client.symLink(this.makePath_(target), this.makePath_(path))
+    .then(() => {});
 };
 /**
  * Complete the command.
