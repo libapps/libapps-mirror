@@ -1344,7 +1344,11 @@ Cli.addCommand_(['chdir', 'cd'], 0, 1, '', '[path]',
  * @return {!Promise<void>}
  */
 Cli.commandChmod_ = function(args) {
-  const mode = parseInt(args.shift(), 8);
+  const mode = this.parseInt_(args.cmd, 'mode', args.shift(), 0, 8);
+
+  if (mode === null) {
+    return Promise.resolve();
+  }
 
   const attrs = {
     'flags': nassh.sftp.packets.FileXferAttrs.PERMISSIONS,
