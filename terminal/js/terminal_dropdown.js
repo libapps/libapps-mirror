@@ -21,12 +21,15 @@ import {css, html, LitElement} from './lit.js';
  */
 let OptionType;
 
+// A dropdown element. The a11y behavior follows
+// https://www.w3.org/TR/wai-aria-practices-1.1/examples/listbox/listbox-collapsible.html.
 export class TerminalDropdownElement extends LitElement {
   /** @override */
   static get properties() {
     return {
       expanded: {
         type: Boolean,
+        reflect: true,
       },
       // Array of |OptionType| objects.
       options: {
@@ -43,26 +46,36 @@ export class TerminalDropdownElement extends LitElement {
   static get styles() {
     return css`
         :host {
+          display: block;
           line-height: 32px;
           outline: none;
+          position: relative;
         }
 
-        #container {
+        button {
           background-color: rgb(241, 243, 244);
+          border: none;
           border-radius: 6px;
-          color: #202124;
+          color: var(--cr-primary-text-color);
           cursor: pointer;
           min-width: 40px;
-          padding: 0 32px 0 8px;
-          position: relative;
-          user-select: none;
+          outline: none;
+          padding: 9px 32px 9px 8px;
+          text-align: left;
+          width: 100%;
         }
 
-        :host(:focus-visible) #container {
+        button:focus-visible {
           box-shadow: 0 0 0 2px var(--focus-shadow-color);
         }
 
-        #container:after {
+        button[data-invalid] {
+          color: var(--google-grey-600);
+        }
+
+        button:after {
+          /* Set color to avoid being affected by button's invalid styling */
+          color: var(--cr-primary-text-color);
           content: "⯆";
           position: absolute;
           right: 9px;
@@ -70,11 +83,11 @@ export class TerminalDropdownElement extends LitElement {
           transform: translateY(-50%);
         }
 
-        #container[aria-expanded="true"]:after {
+        :host([expanded]) button:after {
           content: "⯅";
         }
 
-        #options {
+        ul {
           background-color: white;
           border-radius: 4px;
           box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
@@ -91,24 +104,24 @@ export class TerminalDropdownElement extends LitElement {
           z-index: 1;
         }
 
-        #container[aria-expanded="true"] > #options {
+        :host([expanded]) ul {
           display: initial;
         }
 
-        .option {
+        li {
           cursor: pointer;
           padding: 1px 9px;
         }
 
-        #current-value[data-disabled], .option[disabled] {
+        li[disabled] {
           opacity: .38;
         }
 
-        .option[aria-selected="true"] {
+        li[aria-selected="true"] {
           background-color: rgb(232, 240, 254);
         }
 
-        .option:not([disabled]):hover {
+        li:not([disabled]):hover {
           background-color: lightgrey;
         }
     `;
@@ -129,7 +142,8 @@ export class TerminalDropdownElement extends LitElement {
     const selectedIndex = this.findSelectedIndex_();
 
     const renderOption = (option, index) => html`
-        <li class="option" role="option" tab-index="-1"
+        <li id="option-${index}"
+            role="option"
             aria-selected="${index === selectedIndex}"
             style="${option.style ?? ''}"
             ?disabled="${option.disabled === true}"
@@ -139,47 +153,48 @@ export class TerminalDropdownElement extends LitElement {
     `;
 
     let selectedLabel;
-    let selectedDisabled;
+    let selectedInvalid;
     if (selectedIndex !== -1) {
       const option = this.options[selectedIndex];
       selectedLabel = option.label ?? option.value;
-      selectedDisabled = option.disabled === true;
+      selectedInvalid = option.disabled === true;
     } else {
       selectedLabel = `${this.value}`;
-      selectedDisabled = true;
+      selectedInvalid = true;
     }
+
+    // We listen to "mousedown" instead of "click" on the button element because
+    // if the <ul> is expanded and focused, "click" will be fired after the <ul>
+    // received a "blur" event. The "blur" event sets `this.expanded = false`,
+    // and the "click" event will then incorrectly toggle it to true again.
     return html`
-        <div id="container" role="button" aria-expanded="${this.expanded}">
-          <div id="current-value" ?data-disabled="${selectedDisabled}">
-            ${selectedLabel}
-          </div>
-          <ul id="options" role="listbox">
-            ${this.options.map(renderOption)}
-          </ul>
-        </div>
+        <button
+            aria-haspopup="listbox"
+            aria-expanded="${this.expanded}"
+            ?data-invalid="${selectedInvalid}"
+            @keydown="${this.onButtonKeyDown_}"
+            @mousedown="${this.onButtonMouseDown_}">
+          ${selectedLabel}
+        </button>
+        <ul
+            tabindex="-1"
+            role="listbox"
+            aria-activedescendant="option-${selectedIndex}"
+            @keydown="${this.onUlKeyDown_}"
+            @blur=${() => this.expanded = false}>
+          ${this.options.map(renderOption)}
+        </ul>
     `;
   }
 
   /** @override */
-  connectedCallback() {
-    super.connectedCallback();
-
-    if (!this.hasAttribute('tabindex')) {
-      this.tabIndex = 0;
+  updated(changedProperties) {
+    if (changedProperties.has('expanded') && this.expanded) {
+      // Focus the <ul> when it is expaned. We use `setTimeout()` here.
+      // Otherwise mousedown on the button does not expand the dropdown because
+      // of some race condition.
+      setTimeout(() => this.shadowRoot.querySelector('ul').focus());
     }
-
-    this.addEventListener('blur', this.onBlur_);
-    this.addEventListener('click', this.onClick_);
-    this.addEventListener('keydown', this.onKeyDown_);
-  }
-
-  /** @override */
-  disconnectedCallback() {
-    super.disconnectedCallback();
-
-    this.removeEventListener('blur', this.onBlur_);
-    this.removeEventListener('click', this.onClick_);
-    this.removeEventListener('keydown', this.onKeyDown_);
   }
 
   /**
@@ -224,27 +239,40 @@ export class TerminalDropdownElement extends LitElement {
   }
 
   /** @param {!Event} event */
-  onBlur_(event) {
-    this.expanded = false;
-  }
-
-  /** @param {!Event} event */
-  onClick_(event) {
+  onButtonMouseDown_(event) {
     this.expanded = !this.expanded;
   }
 
   /** @param {!Event} event */
-  onKeyDown_(event) {
+  onButtonKeyDown_(event) {
+    switch (event.code) {
+      case 'Enter':
+      case 'Space':
+        this.expanded = !this.expanded;
+        break;
+      case 'PageUp':
+      case 'Home':
+      case 'PageDown':
+      case 'End':
+      case 'ArrowLeft':
+      case 'ArrowUp':
+      case 'ArrowRight':
+      case 'ArrowDown':
+        this.expanded = true;
+        this.onUlKeyDown_(event);
+        break;
+    }
+  }
+
+  /** @param {!Event} event */
+  onUlKeyDown_(event) {
     let preventDefault = false;
     switch (event.code) {
       case 'Enter':
-        this.expanded = !this.expanded;
-        break;
+      case 'Space':
       case 'Escape':
         this.expanded = false;
-        break;
-      case 'Space':
-        this.expanded = true;
+        this.shadowRoot.querySelector('button').focus();
         break;
       case 'PageUp':
       case 'Home':
@@ -281,6 +309,7 @@ export class TerminalDropdownElement extends LitElement {
       if (option.disabled !== true) {
         this.value = option.value;
         this.expanded = false;
+        this.shadowRoot.querySelector('button').focus();
       }
       event.stopPropagation();
     };

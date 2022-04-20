@@ -48,6 +48,7 @@ export class TerminalSettingsFonts extends LitElement {
     );
     return html`
         <terminal-settings-dropdown preference="font-family"
+            title="${hterm.messageManager.get('HTERM_PREF_FONT_FAMILY')}"
             .options="${options}">
         </terminal-settings-dropdown>
     `;

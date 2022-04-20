@@ -236,9 +236,7 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container">
                 <h4>${msg('TERMINAL_NAME_PREF_FONT')}</h4>
-                <terminal-settings-fonts
-                    title="${msg('HTERM_PREF_FONT_FAMILY')}">
-                </terminal-settings-fonts
+                <terminal-settings-fonts></terminal-settings-fonts>
                 <!-- TODO(lxj@google.com): We should allow user to input a
                     text size not in the list. -->
                 <terminal-settings-dropdown preference="font-size"

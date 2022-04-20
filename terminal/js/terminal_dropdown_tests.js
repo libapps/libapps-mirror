@@ -29,15 +29,21 @@ describe('terminal_dropdown_tests.js', () => {
     document.body.appendChild(this.el);
 
     this.getNthLiElement = function(index) {
-      return this.el.shadowRoot.querySelector(
-          // CSS use 1-based index.
-          `.option:nth-of-type(${index + 1})`);
+      return this.el.shadowRoot.querySelector(`#option-${index}`);
     };
 
     // The element renders asynchronously.
     await this.el.updateComplete;
 
-    this.currentValueDiv = this.el.shadowRoot.querySelector('#current-value');
+    this.button = this.el.shadowRoot.querySelector('button');
+    this.ul = this.el.shadowRoot.querySelector('ul');
+
+    this.waitAndCheckFocusAfterExpaneded = async () => {
+      // We focus the `ul` element using `setTimeout()`, so here we need to wait
+      // a bit.
+      await new Promise((resolve) => setTimeout(resolve));
+      assert.equal(this.el.shadowRoot.activeElement, this.ul);
+    };
   });
 
   afterEach(function() {
@@ -74,38 +80,28 @@ describe('terminal_dropdown_tests.js', () => {
     assert.equal(window.preferenceManager.get(preference), options[2].value);
   });
 
-  it('expands-and-collapses-options-list-when-clicked', async function() {
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
+  it('toggles-options-list-when-mousedown-on-button', async function() {
+    assert.isFalse(this.el.expanded);
 
-    this.el.click();
+    this.button.dispatchEvent(new MouseEvent('mousedown'));
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
+    assert.isTrue(this.el.expanded);
 
-    this.el.click();
+    this.button.dispatchEvent(new MouseEvent('mousedown'));
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
+    assert.isFalse(this.el.expanded);
   });
 
   it('closes-options-list-when-option-clicked', async function() {
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-
-    this.el.click();
+    this.el.expanded = true;
     await this.el.updateComplete;
-
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
 
     this.getNthLiElement(1).click();
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
+    assert.isFalse(this.el.expanded);
   });
 
   // Unlike other tests that can wait for something to happen after a click, we
@@ -132,91 +128,78 @@ describe('terminal_dropdown_tests.js', () => {
   });
 
   it('closes-options-list-when-element-looses-focus', async function() {
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
+    assert.isFalse(this.el.expanded);
 
-    // Programmatically clicking the element doesn't focus it. So explicitly
-    // focus it to get it into the correct state.
-    this.el.focus();
-    this.el.click();
+    this.button.dispatchEvent(new MouseEvent('mousedown'));
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
+    assert.isTrue(this.el.expanded);
+    await this.waitAndCheckFocusAfterExpaneded();
 
-    this.el.blur();
+    this.ul.blur();
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
+    assert.isFalse(this.el.expanded);
   });
 
-  it('expands-and-collapses-options-list-when-enter-pressed', async function() {
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
+  ['Enter', 'Space'].forEach((key) => it(
+      `toggle-list-when-${key}-pressed-on-button`, async function() {
+    assert.isFalse(this.el.expanded);
 
-    this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'Enter'}));
+    this.button.dispatchEvent(new KeyboardEvent('keydown', {code: key}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
+    assert.isTrue(this.el.expanded);
+    await this.waitAndCheckFocusAfterExpaneded();
 
-    this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'Enter'}));
+    this.button.dispatchEvent(new KeyboardEvent('keydown', {code: key}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-  });
+    assert.isFalse(this.el.expanded);
+  }));
 
-  it('collapses-options-list-when-escape-pressed', async function() {
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
+  ['PageUp', 'Home', 'PageDown', 'End', 'ArrowLeft', 'ArrowUp', 'ArrowRight',
+  'ArrowDown'].forEach((key) => it(
+      `key ${key} on <button> is passed to <ul>`, async function() {
+    const ulKeyDownPromise = new Promise((resolve) => {
+      this.el.onUlKeyDown_ = resolve;
+    });
 
-    this.el.click();
+    const keyboardEvent = new KeyboardEvent('keydown', {code: key});
+    this.button.dispatchEvent(keyboardEvent);
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
+    // The <ul> should also be expanded and focused automatically.
+    assert.isTrue(this.el.expanded);
+    await this.waitAndCheckFocusAfterExpaneded();
 
-    this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'Escape'}));
+    assert.equal(await ulKeyDownPromise, keyboardEvent);
+  }));
+
+  ['Enter', 'Space', 'Escape'].forEach((key) => it(
+      `collapses-options-list-when-${key}-pressed`, async function() {
+    this.el.expanded = true;
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-
-    this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'Escape'}));
+    this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: key}));
     await this.el.updateComplete;
 
-    // Escape on a contracted dropdown has no affect.
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-  });
+    assert.isFalse(this.el.expanded);
 
-  it('expands-options-list-when-space-pressed', async function() {
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'false');
-
-    this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'Space'}));
+    this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: key}));
     await this.el.updateComplete;
 
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
-
-    this.el.dispatchEvent(new KeyboardEvent('keydown', {code: 'Space'}));
-    await this.el.updateComplete;
-
-    // Space on an expanded dropdown has no affect.
-    assert.equal(this.el.shadowRoot.querySelector('#container')
-        .getAttribute('aria-expanded'), 'true');
-  });
+    // Pressing the key on a contracted dropdown has no affect.
+    assert.isFalse(this.el.expanded);
+  }));
 
   ['PageUp', 'Home'].forEach((keyCode) => it(
-      `selects-first-enabled-option-when-${keyCode}-pressed`,
+      `selects-first-enabled-option-when-${keyCode}-pressed-on-ul`,
       async function() {
         await window.preferenceManager.set(preference, options[2].value);
         assert.equal(this.el.value, options[2].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
 
         assert.equal(this.el.value, options[0].value);
@@ -228,7 +211,7 @@ describe('terminal_dropdown_tests.js', () => {
         this.el.options = newOptions;
         await this.el.updateComplete;
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
 
         assert.equal(this.el.value, newOptions[1].value);
@@ -236,11 +219,11 @@ describe('terminal_dropdown_tests.js', () => {
   ));
 
   ['PageDown', 'End'].forEach((keyCode) => it(
-      `selects-last-enabled-option-when-${keyCode}-pressed`,
+      `selects-last-enabled-option-when-${keyCode}-pressed-on-ul`,
       async function() {
         assert.equal(this.el.value, options[0].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
 
         assert.equal(this.el.value, options[2].value);
@@ -252,7 +235,7 @@ describe('terminal_dropdown_tests.js', () => {
         this.el.options = newOptions;
         await this.el.updateComplete;
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
 
         assert.equal(this.el.value, newOptions[1].value);
@@ -260,20 +243,20 @@ describe('terminal_dropdown_tests.js', () => {
   ));
 
   ['ArrowLeft', 'ArrowUp'].forEach((keyCode) => it(
-      `selects-previous-enabled-option-when-${keyCode}-pressed`,
+      `selects-previous-enabled-option-when-${keyCode}-pressed-on-ul`,
       async function() {
         await window.preferenceManager.set(preference, options[2].value);
         assert.equal(this.el.value, options[2].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
         assert.equal(this.el.value, options[1].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
         assert.equal(this.el.value, options[0].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
         // There is not previous option.
         assert.equal(this.el.value, options[0].value);
@@ -287,26 +270,26 @@ describe('terminal_dropdown_tests.js', () => {
         await window.preferenceManager.set(preference, options[2].value);
         assert.equal(this.el.value, options[2].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
         assert.equal(this.el.value, options[0].value);
       },
   ));
 
   ['ArrowRight', 'ArrowDown'].forEach((keyCode) => it(
-      `selects-next-enabled-option-when-${keyCode}-pressed`,
+      `selects-next-enabled-option-when-${keyCode}-pressed-on-ul`,
       async function() {
         assert.equal(this.el.value, options[0].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
         assert.equal(this.el.value, options[1].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
         assert.equal(this.el.value, options[2].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
         // There is no next option.
         assert.equal(this.el.value, options[2].value);
@@ -320,7 +303,7 @@ describe('terminal_dropdown_tests.js', () => {
         await window.preferenceManager.set(preference, options[0].value);
         assert.equal(this.el.value, options[0].value);
 
-        this.el.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
         assert.equal(this.el.value, options[2].value);
       },
@@ -349,14 +332,14 @@ describe('terminal_dropdown_tests.js', () => {
     assert.equal(this.getNthLiElement(0).getAttribute('style'), style);
     assert.equal(this.getNthLiElement(1).getAttribute('style'), '');
 
-    // Style does not apply to the "current value" <div>, only the <li>.
+    // Style does not apply to the button, only the <li>.
     assert.equal(this.el.value, newOptions[0].value);
-    assert.isNull(this.currentValueDiv.getAttribute('style'));
+    assert.isNull(this.button.getAttribute('style'));
   });
 
   // This only test that the attr is set. The behavior for disabled <li> element
   // (e.g. click, arrow keys) is tested in other test cases.
-  it('sets-disabled-attr-for-disabled-option', async function() {
+  it('sets-invalid-attr', async function() {
     const newOptions = createOptions();
     newOptions[0].disabled = true;
     this.el.options = newOptions;
@@ -367,18 +350,16 @@ describe('terminal_dropdown_tests.js', () => {
 
     await window.preferenceManager.set(preference, options[0].value);
     await this.el.updateComplete;
-    assert.isTrue(this.currentValueDiv.hasAttribute('data-disabled'));
+    assert.isTrue(this.button.hasAttribute('data-invalid'));
 
     await window.preferenceManager.set(preference, options[1].value);
     await this.el.updateComplete;
-    assert.isFalse(this.currentValueDiv.hasAttribute('data-disabled'));
-  });
+    assert.isFalse(this.button.hasAttribute('data-invalid'));
 
-  it('shows invalid current value in disabled styling', async function() {
-    this.el.value = 'invalid option';
+    // For value not in the options, the invalid attribute should also be set.
+    await window.preferenceManager.set(preference, 'opt4');
     await this.el.updateComplete;
-    assert.equal(this.currentValueDiv.textContent.trim(), 'invalid option');
-    assert.isTrue(this.currentValueDiv.hasAttribute('data-disabled'));
+    assert.isTrue(this.button.hasAttribute('data-invalid'));
   });
 
   it('allows-type-coercion-for-value-matching', async function() {
@@ -396,7 +377,6 @@ describe('terminal_dropdown_tests.js', () => {
     // Update prefs with a string, and make sure the current value is updated.
     await window.preferenceManager.set(preference, '2');
     assert.strictEqual(this.el.value, '2');  // This is still a string.
-    assert.strictEqual(
-        this.el.shadowRoot.querySelector('#current-value').innerText, '2');
+    assert.strictEqual(this.button.innerText, '2');
   });
 });
