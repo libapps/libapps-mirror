@@ -48,8 +48,8 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('ssh-connection-2', rows[2].innerText);
     assert.equal(
       'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[3].innerText);
-    assert.equal('termina:penguin', rows[4].innerText);
-    assert.equal('termina:c2', rows[5].innerText);
+    assert.equal('penguin', rows[4].innerText);
+    assert.equal('c2', rows[5].innerText);
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[6].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[7].innerText);
 
@@ -72,8 +72,7 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_SSH', rows[0].innerText);
     assert.equal(
       'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[1].innerText);
-    assert.equal(
-      'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[2].innerText);
+    assert.equal('penguin', rows[2].innerText);
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[3].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[4].innerText);
   });
@@ -97,8 +96,7 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('ssh-connection-2', rows[2].innerText);
     assert.equal(
       'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[3].innerText);
-    assert.equal(
-      'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[4].innerText);
+    assert.equal('penguin', rows[4].innerText);
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[5].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[6].innerText);
 

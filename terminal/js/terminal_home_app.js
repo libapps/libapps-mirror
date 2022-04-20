@@ -9,7 +9,7 @@
  */
 
 import {css, html, LitElement} from './lit.js';
-import {DEFAULT_CONTAINER_NAME, DEFAULT_VM_NAME} from './terminal_common.js';
+import {DEFAULT_VM_NAME} from './terminal_common.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_ssh_dialog.js';
 
@@ -275,9 +275,8 @@ export class TerminalHomeApp extends LitElement {
     `;
 
     const containerLabel = (c) => {
-      if (this.containers.length === 1 && c.vm_name === DEFAULT_VM_NAME &&
-          c.container_name === DEFAULT_CONTAINER_NAME) {
-        return msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL');
+      if (c.vm_name === DEFAULT_VM_NAME) {
+        return c.container_name;
       }
       return `${c.vm_name}:${c.container_name}`;
     };
