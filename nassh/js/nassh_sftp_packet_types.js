@@ -291,10 +291,10 @@ nassh.sftp.packets.PermissionBits = {
  *
  * The output will look similar to `ls -l`.  e.g. "drwxr-xr-x".
  *
- * @param {number} bits The permission bits to convert.
+ * @param {number=} bits The permission bits to convert.
  * @return {string} The short `ls -l`-like summary.
  */
-nassh.sftp.packets.bitsToUnixModeLine = function(bits) {
+nassh.sftp.packets.bitsToUnixModeLine = function(bits = 0) {
   let ret = '';
 
   // First handle the file type.
@@ -422,10 +422,10 @@ nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
  * Typically used in conjunction with AttrsPacket and the lastAccessed &
  * lastModified fields.  This is the same thing as "UNIX time".
  *
- * @param {number} epoch The epoch time to convert.
+ * @param {number=} epoch The epoch time to convert.
  * @return {!Date} A standard Date object.
  */
-nassh.sftp.packets.epochToLocal = function(epoch) {
+nassh.sftp.packets.epochToLocal = function(epoch = 0) {
   const date = new Date(0);
   date.setUTCSeconds(epoch);
   return date;
