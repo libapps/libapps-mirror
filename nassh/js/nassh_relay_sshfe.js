@@ -15,8 +15,8 @@ import {RelaySshfeWsStream} from './nassh_stream_relay_sshfe.js';
  */
 export class Sshfe extends Relay {
   /** @inheritDoc */
-  constructor(io, options, location, storage) {
-    super(io, options, location, storage);
+  constructor(io, options, location, storage, localPrefs) {
+    super(io, options, location, storage, localPrefs);
     this.sshAgent_ = options['--ssh-agent'] || getGnubbyExtension();
     this.relayServer = `wss://${this.proxyHost}:${this.proxyPort}`;
   }

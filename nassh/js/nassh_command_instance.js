@@ -1069,14 +1069,14 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
 
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] === 'websockify') {
-    this.relay_ = new RelayWebsockify(
-        this.io, options, this.terminalLocation, this.storage);
+    this.relay_ = new RelayWebsockify(this.io, options, this.terminalLocation,
+                                      this.storage, this.localPrefs_);
   } else if (!options['--proxy-host']) {
     // Do nothing when disabled.  We check this first to avoid excessive
     // indentation or redundant checking of the proxy-host setting below.
   } else if (options['--proxy-mode'] == 'ssh-fe@google.com') {
-    this.relay_ = new RelaySshfe(
-        this.io, options, this.terminalLocation, this.storage);
+      this.relay_ = new RelaySshfe(this.io, options, this.terminalLocation,
+                                   this.storage, this.localPrefs_);
     this.io.println(nassh.msg(
         'FOUND_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
@@ -1085,10 +1085,10 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
              options['--proxy-mode'] == 'corp-relay-v4@google.com') {
     if (options['--proxy-mode'] == 'corp-relay@google.com') {
       this.relay_ = new RelayCorp(this.io, options, this.terminalLocation,
-                                  this.storage);
+                                  this.storage, this.localPrefs_);
     } else {
       this.relay_ = new RelayCorpv4(this.io, options, this.terminalLocation,
-                                    this.storage);
+                                    this.storage, this.localPrefs_);
     }
 
     this.io.println(nassh.msg(

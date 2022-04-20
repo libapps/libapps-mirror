@@ -16,8 +16,8 @@ import {RelayCorpWsStream,
  */
 export class Corp extends Relay {
   /** @inheritDoc */
-  constructor(io, options, location, storage) {
-    super(io, options, location, storage);
+  constructor(io, options, location, storage, localPrefs) {
+    super(io, options, location, storage, localPrefs);
     this.useSecure = options['--use-ssl'];
     this.useWebsocket = !options['--use-xhr'];
     this.reportAckLatency = options['--report-ack-latency'];
@@ -166,6 +166,7 @@ export class Corp extends Relay {
       host: host,
       port: port,
       resume: this.resumeConnection,
+      localPrefs: this.localPrefs,
     };
     return streams.openStream(this.getStreamClass(), fd, options, onOpen);
   }

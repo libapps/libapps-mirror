@@ -155,6 +155,12 @@ nassh.LocalPreferenceManager = function(storage = undefined) {
 
     /* How many times we've shown the migration message. */
     ['migrate/showCount', 0],
+
+    /**
+     * Whether permission to track performance metrics was granted (true) or
+     * or denied (false). Null if user has not been prompted.
+     */
+    ['goog-metrics-reporter-permission', null],
   ]);
 
   this.defineChildren('profile-ids', function(parent, id) {

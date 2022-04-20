@@ -20,8 +20,8 @@ import {RelayWebsockifyStream} from './nassh_stream_relay_websockify.js';
  */
 export class Websockify extends Relay {
   /** @inheritDoc */
-  constructor(io, options, location, storage) {
-    super(io, options, location, storage);
+  constructor(io, options, location, storage, localPrefs) {
+    super(io, options, location, storage, localPrefs);
     this.useSecure = options['--use-ssl'];
   }
 

@@ -22,8 +22,10 @@ export class Relay {
    * @param {!Location} location Interface for redirecting to auth pages.
    * @param {!Storage} storage Temporary storage for relays when redirecting.
    *     Should be sessionStorage or equiv lifespan & isolation.
+   * @param {!nassh.LocalPreferenceManager} localPrefs Manager of nassh
+   *     preferences that are not synced between systems.
    */
-  constructor(io, options, location, storage) {
+  constructor(io, options, location, storage, localPrefs) {
     /** @type {!hterm.Terminal.IO} */
     this.io_ = io;
     /** @type {string} */
@@ -38,6 +40,8 @@ export class Relay {
     this.location = location;
     /** @type {!Storage} */
     this.storage = storage;
+    /** @type {!nassh.LocalPreferenceManager} */
+    this.localPrefs = localPrefs;
   }
 
   /**

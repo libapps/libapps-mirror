@@ -16,6 +16,7 @@ import {Distribution, GoogMetricsReporter}
  */
 beforeEach(function() {
   this.terminalIO = new hterm.Terminal.IO(this);
+  this.localPrefs = new nassh.LocalPreferenceManager();
 });
 
 describe('nassh_goog_metrics_reporter_tests.js', () => {
@@ -23,7 +24,7 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
     let reporter;
 
     beforeEach(function() {
-      reporter = new GoogMetricsReporter(this.terminalIO, '');
+      reporter = new GoogMetricsReporter(this.terminalIO, '', this.localPrefs);
       reporter.metadata = {
         client_corp_status: '',
         client_os: '',
@@ -117,7 +118,8 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
     let reporter;
 
     beforeEach(function() {
-      reporter = new GoogMetricsReporter(this.terminalIO, 'host');
+      reporter =
+          new GoogMetricsReporter(this.terminalIO, 'host', this.localPrefs);
     });
 
     it('returns "unknown" when instances array is undefined', () => {

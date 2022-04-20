@@ -224,10 +224,12 @@ RelayCorpv4WsStream.prototype.asyncOpen = async function(settings, onComplete) {
 
   if (settings.reportAckLatency) {
     try {
-      this.googMetricsReporter_ = new GoogMetricsReporter(this.io_, this.host_);
-      const hasPermissions = await this.googMetricsReporter_.checkPermissions();
-      if (!hasPermissions) {
-        await this.googMetricsReporter_.requestPermissions();
+      this.googMetricsReporter_ =
+          new GoogMetricsReporter(this.io_, this.host_, settings.localPrefs);
+      const hasChromePermissions =
+          await this.googMetricsReporter_.checkChromePermissions();
+      if (!hasChromePermissions) {
+        await this.googMetricsReporter_.requestChromePermissions();
       }
       await this.googMetricsReporter_.initClientMetadata();
     } catch (e) {

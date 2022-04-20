@@ -76,8 +76,10 @@ export class GoogMetricsReporter {
   /**
    * @param {!hterm.Terminal.IO} io Interface to display prompts to users.
    * @param {string} hostname Name of remote host.
+   * @param {!nassh.LocalPreferenceManager} localPrefs Manager of nassh
+   *     preferences that are not synced between systems.
    */
-  constructor(io, hostname) {
+  constructor(io, hostname, localPrefs) {
     /**
      * Contains metadata to attach to each report sent via go/monapi.
      *
@@ -99,6 +101,8 @@ export class GoogMetricsReporter {
      * @type {string}
      */
     this.hostname = hostname;
+
+    this.localPrefs = localPrefs;
   }
 
   /**
@@ -106,7 +110,7 @@ export class GoogMetricsReporter {
    *
    * @return {!Promise<boolean>}
    */
-  async checkPermissions() {
+  async checkChromePermissions() {
     const permissions = {
       permissions: [],
       origins: [CLOUDTOP_API_ORIGIN, UBERPROXY_DEBUG_ORIGIN],
@@ -121,11 +125,20 @@ export class GoogMetricsReporter {
   }
 
   /**
-   * Gets permissions to access API endpoints.
+   * Gets permissions to access API endpoints, unless the user has opted out of
+   * metrics collection.
    *
    * @return {!Promise<void>}
    */
-  async requestPermissions() {
+  async requestChromePermissions() {
+    if (await this.checkChromePermissions()
+        || this.localPrefs.get('goog-metrics-reporter-permission') === false) {
+      // If 'goog-metrics-reporter-permission' is null the user has yet to be
+      // prompted, if yes the user has opted in, but Chrome permissions were
+      // lost. In both cases, the prompt below should be displayed.
+      return;
+    }
+
     // Construct prompt.
     const io = this.io.push();
 
@@ -162,13 +175,17 @@ export class GoogMetricsReporter {
           origins: [CLOUDTOP_API_ORIGIN, UBERPROXY_DEBUG_ORIGIN],
         };
         if (window?.chrome?.permissions !== undefined) {
-          chrome.permissions.request(permissions, resolve);
+          chrome.permissions.request(permissions, (granted) => {
+            this.localPrefs.set('goog-metrics-reporter-permission', granted);
+            resolve();
+          });
         } else {
-          resolve(false);
+          resolve();
         }
       });
 
       noButton.addEventListener('click', () => {
+        this.localPrefs.set('goog-metrics-reporter-permission', false);
         io.hideOverlay();
         io.pop();
         resolve();
@@ -180,7 +197,7 @@ export class GoogMetricsReporter {
    * Gathers all metadata associated with the host and client.
    */
   async initClientMetadata() {
-    if (!await this.checkPermissions()) {
+    if (!await this.checkChromePermissions()) {
       throw new Error(`Permission to access ${CLOUDTOP_API_ORIGIN} and ` +
                       `${UBERPROXY_DEBUG_ORIGIN} is missing.`);
     }
