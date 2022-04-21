@@ -8,6 +8,7 @@
  *                JS API only.
  */
 
+import {Client as sftpClient} from './nassh_sftp_client.js';
 // Normally the FSP code is only in the background page, so load it on demand
 // so we can run our FSP tests against the APIs.  We can't use import() as
 // closure-compiler doesn't support it yet.
@@ -625,7 +626,7 @@ Cli.prototype.completeCommandOptions_ = function(args, opts) {
  * Complete paths against the remote system.
  *
  * @param {!Array<string>} args The current command line arguments.
- * @param {function(!chrome.fileSystemProvider.EntryMetadata)=} filter Optional
+ * @param {function((!nassh.sftp.File|!nassh.sftp.FileAttrs))=} filter Optional
  *     callback to filter possible matches.
  * @return {!Promise<!Cli.Completion>} The remote paths that match.
  */
@@ -1395,16 +1396,13 @@ Cli.commandChown_ = function(args) {
   return args.reduce((chain, path) => chain.then(() => {
     return this.client.fileStatus(this.makePath_(path))
       .then((attrs) => {
-        const newAttrs = {
+        // Need the lib.notNull again as closure compiler is unable to handle
+        // the check above for some reason.
+        const /** @type {!nassh.sftp.FileAttrs} */ newAttrs = {
           'flags': nassh.sftp.packets.FileXferAttrs.UIDGID,
-          'uid': attrs.uid,
-          'gid': attrs.gid,
+          'uid': args.cmd === 'chown' ? lib.notNull(account) : attrs.uid,
+          'gid': args.cmd !== 'chown' ? lib.notNull(account) : attrs.gid,
         };
-        if (args.cmd == 'chown') {
-          newAttrs.uid = account;
-        } else {
-          newAttrs.gid = account;
-        }
         return this.client.setFileStatus(this.makePath_(path), newAttrs);
       });
   }), Promise.resolve());
@@ -2750,7 +2748,7 @@ Cli.commandTestFsp_ = function(_args) {
 
     // Initialize fsp state.
     fsp.sftpInstances[fsid] = {
-      sftpClient: this.client,
+      sftpClient: /** @type {!sftpClient} */ (this.client),
     };
 
     // Use smaller read/write sizes.  We just need to fragment requests.

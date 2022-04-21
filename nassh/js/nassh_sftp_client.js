@@ -509,13 +509,13 @@ Client.prototype.readDirectory = function(handle) {
  * filtering on each result.
  *
  * @param {string} handle The handle of the remote directory.
- * @param {function(!nassh.sftp.File)=} filter A callback function
- *     to filter results. The return value controls behavior: false will skip
- *     the entry, true will keep the entry, undefined will abort processing, a
- *     Promise will resolve (and its return will replace the entry if not
- *     falsy), and all other return values will replace the entry.
- * @return {!Array<!nassh.sftp.File>} A list of all the entries in
- *     this directory.
+ * @param {function((!nassh.sftp.File|!nassh.sftp.FileAttrs))=} filter A
+ *     callback function to filter results. The return value controls behavior:
+ *     false will skip the entry, true will keep the entry, undefined will
+ *     abort processing, a Promise will resolve (and its return will replace the
+ *     entry if not falsy), and all other return values will replace the entry.
+ * @return {!Array<(!nassh.sftp.File|!nassh.sftp.FileAttrs)>} A list of all the
+ *     entries in this directory.
  */
 Client.prototype.scanDirectory = function(handle, filter) {
   let entries = [];
@@ -941,7 +941,7 @@ Client.prototype.makeDirectory = function(path) {
  * Canonicalize a path.
  *
  * @param {string} path The path to canonicalize.
- * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
+ * @return {!Promise<!nassh.sftp.packets.NamePacket>} A Promise that resolves
  *     with the remote path, or rejects (usually with a StatusError).
  */
 Client.prototype.realPath = function(path) {
@@ -1019,8 +1019,8 @@ Client.prototype.hardLink = function(oldpath, newpath) {
  * This requires the statvfs@openssh.com extension.
  *
  * @param {string} path The path to stat the underlying filesystem.
- * @return {!Promise<!nassh.sftp.packets.StatusPacket>} A Promise that resolves
- *     or rejects with a StatusError.
+ * @return {!Promise<!nassh.sftp.packets.DiskFreePacket>} A Promise that
+ *     resolves or rejects with a StatusError.
  */
 Client.prototype.statvfs = function(path) {
   if (this.protocolServerExtensions['statvfs@openssh.com'] != '2') {

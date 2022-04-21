@@ -339,7 +339,7 @@ nassh.sftp.packets.bitsToUnixModeLine = function(bits = 0) {
  * Given a packet (at the correct offset), will read one file's attributes.
  *
  * @param {!nassh.sftp.Packet} packet
- * @return {!Object}
+ * @return {!nassh.sftp.FileAttrs}
  */
 nassh.sftp.packets.getFileAttrs = function(packet) {
   const attrs = {};
@@ -389,7 +389,7 @@ nassh.sftp.packets.getFileAttrs = function(packet) {
  * Serialize an attribute object back into a packet.
  *
  * @param {!nassh.sftp.Packet} packet
- * @param {!Object} attrs
+ * @param {!nassh.sftp.FileAttrs} attrs
  */
 nassh.sftp.packets.setFileAttrs = function(packet, attrs) {
   // We only add fields we know how to handle.
