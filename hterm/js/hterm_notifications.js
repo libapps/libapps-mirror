@@ -31,6 +31,7 @@ hterm.NotificationCenter = class {
   /** @return {!Element} */
   newContainer_() {
     const ele = this.parent_.ownerDocument.createElement('div');
+    ele.setAttribute('role', 'dialog');
     ele.style.cssText =
         'color: rgb(var(--hterm-background-color));' +
         'background-color: rgb(var(--hterm-foreground-color));' +

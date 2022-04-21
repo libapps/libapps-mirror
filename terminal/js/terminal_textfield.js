@@ -182,8 +182,9 @@ export class TerminalTextfieldElement extends LitElement {
     let label;
     if (this.label) {
       label = html`
-          <terminal-label ?focused="${this.focused_}" ?invalid="${this.error}">
-              ${this.label}
+          <terminal-label id="label" ?focused="${this.focused_}"
+              ?invalid="${this.error}">
+            ${this.label}
           </terminal-label>
       `;
     }
@@ -209,6 +210,7 @@ export class TerminalTextfieldElement extends LitElement {
                 @change=${(e) => redispatchEvent(this, e)}
                 @input=${this.onInput_}
                 spellcheck="false"
+                aria-labelledby="label"
             />
           </div>
           ${this.blendIn ? '' :

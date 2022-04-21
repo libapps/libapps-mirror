@@ -1704,6 +1704,7 @@ CommandInstance.prototype.secureInput_ = function(
   // normal text editing & viewing.
   const input = document.createElement('input');
   input.type = echo ? 'text' : 'password';
+  input.ariaLabel = prompt;
   input.maxLength = buf_len - 1;
   input.style.width = echo ? '100%' : '90%';
   span.appendChild(input);

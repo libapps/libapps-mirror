@@ -307,6 +307,7 @@ UserIO.prototype.promptUser = async function(backendID, promptMessage) {
   container.appendChild(prompt);
   const input = document.createElement('input');
   input.type = 'password';
+  input.ariaLabel = promptMessage;
   container.appendChild(input);
 
   const visibilityUri = lib.resource.getDataUrl('nassh/images/visibility');
