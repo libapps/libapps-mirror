@@ -176,7 +176,9 @@ module.exports = {
 
     'jsdoc/check-access': 'error',
     'jsdoc/check-alignment': 'error',
-    'jsdoc/check-examples': 'error',
+    // Disabled pending https://github.com/eslint/eslint/issues/14745 although
+    // we don't use @example anywhere in the tree currently.
+    // 'jsdoc/check-examples': 'error',
     // We want hanging indentation, but this check requires none everywhere.
     'jsdoc/check-indentation': 'off',
     'jsdoc/check-param-names': 'error',
