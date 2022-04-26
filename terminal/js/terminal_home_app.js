@@ -36,13 +36,6 @@ const PREF_PATH_SSH_ALLOWED = 'crostini.terminal_ssh_allowed_by_policy';
  */
 const PREF_PATH_CONTAINERS = 'crostini.containers';
 
-/**
- * Domain (enterprise policy) svg icon.
- *
- * @type {function(string):!TemplateResult}
- */
-const domainIcon = (title) => html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>${title}</title><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>`;
-
 export class TerminalHomeApp extends LitElement {
   /** @override */
   async performUpdate() {
@@ -173,6 +166,12 @@ export class TerminalHomeApp extends LitElement {
           max-width: 256px;
         }
       }
+
+      .sublabel {
+        color: rgba(var(--foreground-color-rgb), 0.5);
+        margin-top: -10px;
+        padding: 0px 20px;
+      }
     `];
   }
 
@@ -202,30 +201,13 @@ export class TerminalHomeApp extends LitElement {
     }
   }
 
-  /** @override */
-  render() {
+  /** @return {!TemplateResult} */
+  renderLinux() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
-    const sshLabel = msg('TERMINAL_HOME_SSH');
-    const linuxLabel = msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL');
+    const label = msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL');
 
-    const disabledIcon = (msgname) => html`
-      <span class="row-icon icon-fill-svg">
-        ${domainIcon(msg(msgname))}
-      </span>
-    `;
-    const sshDisabled = disabledIcon('TERMINAL_HOME_SSH_DISABLED_BY_POLICY');
-    const linuxDisabled = disabledIcon('TERMINAL_HOME_LINUX_NOT_ENABLED');
-
-    const sshText = (c) => html`
-      <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
-      <h4>${c.description}</h4>
-   `;
-    const sshLink = (c) => html`
-      <a class="row full-width" target="_blank"
-          href="terminal_ssh.html#profile-id:${c.id}">
-        ${sshText(c)}
-      </a>
-    `;
+    const buttonText = this.crostiniEnabled
+      ? msg('TERMINAL_HOME_MANAGE') : msg('TERMINAL_HOME_SET_UP');
 
     const containerLabel = (c) => {
       if (c.vm_name === DEFAULT_VM_NAME) {
@@ -252,41 +234,86 @@ export class TerminalHomeApp extends LitElement {
     `;
 
     return html`
-      <div class="column full-width">
-        <section>
-          <div class="header row ${this.sshConnections.length ? 'line' : ''}">
-            <h3>${sshLabel}</h3>
-            ${this.sshAllowed ? undefined : sshDisabled}
+      <section>
+        <div class="${this.containers.length ? 'line' : ''}">
+          <div class="header row">
+            <h3>${label}</h3>
+            <button @click="${this.onOpenSystemSettings}">
+              <span class="button-icon">${ICON_OPEN_IN_NEW}</span>
+              ${buttonText}
+            </button>
+          </div>
+          ${this.crostiniEnabled ? undefined : html`
+            <h4 class="sublabel">${msg('TERMINAL_HOME_LINUX_NOT_ENABLED')}</h4>
+          `}
+        </div>
+        <ul>
+        ${this.containers.map((c) => html`
+          <li class="row">
+            ${this.crostiniEnabled ? containerLink(c) : containerText(c)}
+          </li>
+        `)}
+        </ul>
+      </section>
+    `;
+  }
+
+  /** @return {!TemplateResult} */
+  renderSSH() {
+    const msg = hterm.messageManager.get.bind(hterm.messageManager);
+    const label = msg('TERMINAL_HOME_SSH');
+
+    let sublabel;
+    if (!this.sshAllowed) {
+      sublabel = msg('TERMINAL_HOME_SSH_DISABLED_BY_POLICY');
+    } else if (this.sshConnections.length === 0) {
+      sublabel = msg('TERMINAL_HOME_SSH_EMPTY');
+    }
+    const text = (c) => html`
+      <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
+      <h4>${c.description}</h4>
+   `;
+    const link = (c) => html`
+      <a class="row full-width" target="_blank"
+          href="terminal_ssh.html#profile-id:${c.id}">
+        ${text(c)}
+      </a>
+    `;
+
+    return html`
+      <section>
+        <div class="${this.sshConnections.length ? 'line' : ''}">
+          <div class="header row">
+            <h3>${label}</h3>
             <button autofocus @click="${(e) => this.openSSHDialog()}">
               <span class="button-icon">${ICON_PLUS}</span>
               ${msg('TERMINAL_HOME_ADD_SSH')}
             </button>
           </div>
-          <ul>
-          ${this.sshConnections.map((c) => html`
-            <li class="row">
-              ${this.sshAllowed ? sshLink(c) : sshText(c)}
-              <a @click="${(e) => this.openSSHDialog(c.id)}"
-                  aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}">
-                <span class="row-icon icon-fill-svg">${ICON_EDIT}</span>
-              </a>
-            </li>
-          `)}
-          </ul>
-        </section>
-        <section>
-          <div class="header row ${this.containers.length ? 'line' : ''}">
-            <h3>${linuxLabel}</h3>
-            ${this.crostiniEnabled ? undefined : linuxDisabled}
-          </div>
-          <ul>
-          ${this.containers.map((c) => html`
-            <li class="row">
-              ${this.crostiniEnabled ? containerLink(c) : containerText(c)}
-            </li>
-          `)}
-          </ul>
-        </section>
+          ${sublabel ? html`<h4 class="sublabel">${sublabel}</h4>` : undefined}
+        </div>
+        <ul>
+        ${this.sshConnections.map((c) => html`
+          <li class="row">
+            ${this.sshAllowed ? link(c) : text(c)}
+            <a @click="${(e) => this.openSSHDialog(c.id)}"
+                aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}">
+              <span class="row-icon icon-fill-svg">${ICON_EDIT}</span>
+            </a>
+          </li>
+        `)}
+        </ul>
+      </section>    
+    `;
+  }
+
+  /** @override */
+  render() {
+    const msg = hterm.messageManager.get.bind(hterm.messageManager);
+    return html`
+      <div class="column full-width">
+        ${this.renderLinux()}
+        ${this.renderSSH()}
       </div>
       <div class="column settings">
         <section>

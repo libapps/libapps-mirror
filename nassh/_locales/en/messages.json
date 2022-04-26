@@ -2031,11 +2031,19 @@
 	},
 	"TERMINAL_HOME_LINUX_NOT_ENABLED": {
 		"description": "Help text shown when Linux is not enabled.",
-		"message": "Linux is not enabled, check Developer Settings."
+		"message": "Visit Developer Options to manage Linux"
+	},
+	"TERMINAL_HOME_MANAGE": {
+		"description": "Label to manage Linux developer settings.",
+		"message": "Manage"
 	},
 	"TERMINAL_HOME_NEW_SSH_CONNECTION": {
 		"description": "Title for a dialog to create a New SSH (Secure SHell) connection",
 		"message": "New SSH connection"
+	},
+	"TERMINAL_HOME_SET_UP": {
+		"description": "Label to set up Linux developer settings.",
+		"message": "Set up"
 	},
 	"TERMINAL_HOME_SSH": {
 		"description": "Label for SSH (Secure SHell) connections section.",
@@ -2047,7 +2055,11 @@
 	},
 	"TERMINAL_HOME_SSH_DISABLED_BY_POLICY": {
 		"description": "Help text shown when SSH (Secure SHell) has been disabled by policy.",
-		"message": "SSH is disabled by your administrator."
+		"message": "SSH is disabled by your administrator"
+	},
+	"TERMINAL_HOME_SSH_EMPTY": {
+		"description": "Description shown when there are no SSH connections yet in the list.",
+		"message": "SSH connections will appear here"
 	},
 	"TERMINAL_HOME_SSH_SPECIFY_DESTINATION": {
 		"description": "An error message shown under the command testfield when the user didn't input the destiniation for SSH",
