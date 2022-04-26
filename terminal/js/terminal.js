@@ -4,8 +4,8 @@
 
 import {CommandInstance} from './nassh_command_instance.js';
 import {composeTmuxUrl, definePrefs, getTmuxIntegrationEnabled,
-  loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily}
-    from './terminal_common.js';
+  loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily,
+  watchBackgroundColor} from './terminal_common.js';
 import {LaunchInfo, getTerminalInfoTracker} from './terminal_info.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
     from './terminal_tmux.js';
@@ -188,7 +188,7 @@ terminal.init = function(element, launchInfo) {
   term.onTerminalReady = function() {
     const prefs = term.getPrefs();
     definePrefs(prefs);
-    terminal.watchBackgroundColor(prefs);
+    watchBackgroundColor(prefs);
     terminal.watchBackgroundImage(term);
 
     loadPowerlineWebFonts(term.getDocument());
@@ -374,18 +374,6 @@ terminal.Command.prototype.exit = function(code) {
   if (code === 0 && this.term_.getPrefs().get('close-on-exit')) {
     window.close();
   }
-};
-
-/**
- * Add a listener to 'background-color' pref and set it on the outer body.
- * to update tab and frame colors.
- *
- * @param {!lib.PreferenceManager} prefs The preference manager.
- */
-terminal.watchBackgroundColor = function(prefs) {
-  prefs.addObserver('background-color', (color) => {
-    document.body.style.backgroundColor = /** @type {string} */ (color);
-  });
 };
 
 /**

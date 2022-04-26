@@ -6,8 +6,7 @@
  * @fileoverview Initializes global state used in terminal home page.
  */
 
-import {terminal} from './terminal.js';
-import {definePrefs} from './terminal_common.js';
+import {definePrefs, watchBackgroundColor} from './terminal_common.js';
 
 let resolveLibdotInitialized;
 window.libdotInitialized = new Promise((resolve) => {
@@ -45,7 +44,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       const c = lib.colors.normalizeCSS(v[12] || lib.colors.stockPalette[12]);
       setColorRgbCssVar('button-color', c);
     });
-    terminal.watchBackgroundColor(prefs);
+    watchBackgroundColor(prefs);
     prefs.readStorage(() => {
       prefs.notifyAll();
       resolveLibdotInitialized();

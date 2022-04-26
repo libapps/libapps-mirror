@@ -153,6 +153,18 @@ export function normalizePrefsInPlace(prefs) {
 }
 
 /**
+ * Add a listener to 'background-color' pref and set it on the outer body.
+ * to update tab and frame colors.
+ *
+ * @param {!lib.PreferenceManager} prefs The preference manager.
+ */
+export function watchBackgroundColor(prefs) {
+  prefs.addObserver('background-color', (color) => {
+    document.body.style.backgroundColor = /** @type {string} */ (color);
+  });
+}
+
+/**
  * Load a web font into a document object.
  *
  * @param {!Document} document The document to load the web font into.
