@@ -1,3 +1,36 @@
+# 0.47, 2022-04-26, More ES6 modules & WASM work.
+
+* relay: save user's choice for GoogMetricsReporter prompt.
+* ske: search for SKE for ssh-agent & certificate refresh handling.
+* check permissions before fetching client metadata.
+* command instance: convert to ES6 modules.
+* buffer: convert to ES6 modules.
+* sftp: convert packet APIs to ES6 modules.
+* sftp: fix up various typing information.
+* sftp: make helper funcs more forgiving of undefined args.
+* nasftp: fix return value for simple commands.
+* nasftp: chmod: add missing argument validation.
+* ssh_client: openssh: fix memory corruption with select().
+* wasi-js-bindings: move debug output behind a flag.
+* wassh: set argv[0] to the program.
+* ssh_client: lower starting free fd value.
+* gcse: trigger cert refresh if none exist.
+* wassh: fix unix socket wakeup.
+* wassh: handle when wasm plugin exits.
+* wasi-js-bindings: implement exit & abort handling.
+* plugins: generalize loading messages for wasm.
+* sftp status: convert to ES6 module.
+* sftp client: convert to ES6 module.
+* fsp: convert to ES6 modules.
+* external API: convert to ES6 module.
+* external API: switch external API to explicit init.
+* prefs: move profile out of the frozen header block.
+* prefs: keep large border sizes from breaking settings page.
+* websockify: new basic relay.
+* fs: add a few utils functions to handle identity files.
+* relay: metric reporter fetches metadata.
+* relay: switch pages without adding to history.
+
 # 0.46, 2022-03-25, ES6 modules & WASM work.
 
 * wassh: Connect relay streams through.

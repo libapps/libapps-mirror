@@ -13,5 +13,5 @@
 # release: 0.43 (stable Oct 2021)
 % \x1b]8;;https://www.openssh.com/txt/release-8.8\x07OpenSSH upgraded to 8.8p1\x1b]8;;\x07.
 
-# release: 0.47
+# release: 0.47 (stable Apr 2022)
 % \x1b]8;;https://github.com/novnc/websockify\x07Websockify proxy support\x1b]8;;\x07.
