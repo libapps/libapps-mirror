@@ -155,6 +155,10 @@ export class TerminalColorpickerElement extends LitElement {
         terminal-dialog #hexinput {
           margin: 0;
         }
+
+        terminal-dialog {
+          --terminal-dialog-overflow: hidden;
+        }
     `;
   }
 

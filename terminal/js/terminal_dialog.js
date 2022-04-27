@@ -41,8 +41,8 @@ export class TerminalDialog extends LitElement {
           color: var(--cr-secondary-text-color);
           font: 13px var(--font);
           min-width: var(--terminal-dialog-min-width);
-          overflow: hidden;
           padding: 20px 20px 16px 20px;
+          overflow: var(--terminal-dialog-overflow, auto);
         }
 
         ::slotted(div[slot=title]) {

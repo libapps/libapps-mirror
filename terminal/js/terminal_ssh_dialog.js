@@ -6,7 +6,8 @@
  * @fileoverview Export an element: terminal-ssh-dialog
  */
 
-import {getIdentityFileNames, importIdentityFiles} from './nassh_fs.js';
+import {deleteIdentityFiles, getIdentityFileNames, importIdentityFiles}
+    from './nassh_fs.js';
 
 import {LitElement, createRef, css, html, live, ref} from './lit.js';
 import './terminal_button.js';
@@ -268,6 +269,7 @@ export class TerminalSSHDialog extends LitElement {
             <terminal-dropdown
                 ${ref(this.identityDropdownRef_)}
                 id="identity-dropdown"
+                    @delete-item=${this.onDeleteIdentity_}
                 .options="${this.identities_}">
             </terminal-dropdown>
             <terminal-button @click=${this.onImportButtonClick_}>
@@ -492,7 +494,7 @@ export class TerminalSSHDialog extends LitElement {
     this.identities_ = [
         this.DEFAULT_IDENTITY,
         ...(await getIdentityFileNames(lib.notNull(this.fileSystem_)))
-            .map((value) => ({value})),
+            .map((value) => ({value, deletable: true})),
     ];
   }
 
@@ -523,6 +525,19 @@ export class TerminalSSHDialog extends LitElement {
         Object.keys(await hterm.defaultStorage.getItems(null))
             .filter((key) => key.startsWith(prefix)),
     );
+  }
+
+  async onDeleteIdentity_(e) {
+    const identityName = e.detail.option.value;
+    if (!identityName) {
+      throw new Error('identity name is empty');
+    }
+    if (identityName === this.identityDropdownRef_.value.value) {
+      // Switch to the default identity.
+      this.identityDropdownRef_.value.value = '';
+    }
+    await deleteIdentityFiles(lib.notNull(this.fileSystem_), identityName);
+    await this.loadIdentities_();
   }
 }
 
