@@ -288,7 +288,7 @@ export class TerminalSSHDialog extends LitElement {
             </terminal-button>
             <terminal-button class="action" ?disabled="${commandError}"
                 @click="${this.onOkClick_}">
-              ${msg('OK_BUTTON_LABEL')}
+              ${msg('SAVE_LABEL')}
             </terminal-button>
           </div>
         </terminal-dialog>
