@@ -56,3 +56,4 @@ import {createRef, ref} from 'lit/directives/ref.js';
 const lit = {LitElement, css, createRef, html, live, ref, unsafeCSS};
 export {lit};
 
+import '@material/mwc-icon-button';

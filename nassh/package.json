@@ -41,8 +41,9 @@
     "terser": "~5"
   },
   "dependencies": {
+    "@material/mwc-icon-button": "^0.25.3",
     "asn1js": "~2",
-    "lit-element": "^2.3.1",
+    "lit": "^2.2.1",
     "pkijs": "~2.1",
     "punycode": "~2"
   }

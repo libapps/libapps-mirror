@@ -15,10 +15,9 @@
   "scripts": {
     "start": "http-server --cors -a localhost -c-1 ."
   },
-  "devDependencies": {},
   "dependencies": {
+    "@material/mwc-icon-button": "^0.25.3",
     "@polymer/polymer": "^3.3",
-    "@purtuga/esm-webpack-plugin": "~1",
     "@rollup/plugin-image": "~2",
     "@rollup/plugin-json": "~4",
     "@rollup/plugin-node-resolve": "~9",
@@ -41,7 +40,6 @@
     "markdownlint-cli": "~0",
     "mocha": "~8",
     "mocha-headless-chrome": "~3",
-    "parallel-webpack": "~2",
     "pkijs": "~2.1",
     "punycode": "~2",
     "raw-loader": "~4",
