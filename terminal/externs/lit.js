@@ -99,3 +99,15 @@ function unsafeCSS$$module$js$lit(value) {}
  * @param {*} value
  */
 function live$$module$js$lit(value) {}
+
+/**
+ * @param {!Object} classInfo
+ */
+function classMap$$module$js$lit(classInfo) {}
+
+/**
+ * @param {boolean} condition
+ * @param {function()} trueCase
+ * @param {function()=} falseCase
+ */
+function when$$module$js$lit(condition, trueCase, falseCase) {}

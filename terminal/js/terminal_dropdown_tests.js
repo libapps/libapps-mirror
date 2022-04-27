@@ -12,7 +12,7 @@ describe('terminal_dropdown_tests.js', () => {
   const preference = 'terminal_dropdown_tests_preference';
   const createOptions = () => [
     {value: 'opt1'},
-    {value: 'opt2'},
+    {value: 'opt2', deletable: true},
     {value: 'opt3'},
   ];
   const options = createOptions();
@@ -37,6 +37,10 @@ describe('terminal_dropdown_tests.js', () => {
 
     this.button = this.el.shadowRoot.querySelector('button');
     this.ul = this.el.shadowRoot.querySelector('ul');
+
+    this.deleteItemEvents = [];
+    this.el.addEventListener('delete-item',
+        (e) => this.deleteItemEvents.push(e));
 
     this.waitAndCheckFocusAfterExpaneded = async () => {
       // We focus the `ul` element using `setTimeout()`, so here we need to wait
@@ -136,9 +140,17 @@ describe('terminal_dropdown_tests.js', () => {
     assert.isTrue(this.el.expanded);
     await this.waitAndCheckFocusAfterExpaneded();
 
-    this.ul.blur();
-    await this.el.updateComplete;
+    // If the focus switch inside the <ul>, we will receive a focusout following
+    // a focusin. In this case, we should not collapse the list.
+    this.ul.dispatchEvent(new FocusEvent('focusout'));
+    this.ul.dispatchEvent(new FocusEvent('focusin'));
+    await new Promise((resolve) => setTimeout(resolve));
+    assert.isTrue(this.el.expanded);
 
+    // Only a focusout event, this means that the focus is switched to the
+    // outside of this element, and we should collapse the list.
+    this.ul.dispatchEvent(new FocusEvent('focusout'));
+    await new Promise((resolve) => setTimeout(resolve));
     assert.isFalse(this.el.expanded);
   });
 
@@ -309,6 +321,70 @@ describe('terminal_dropdown_tests.js', () => {
       },
   ));
 
+  it('delete current item when delete pressed on <ul>', async function() {
+    // Expand the list first.
+    this.button.dispatchEvent(new MouseEvent('mousedown'));
+    await this.el.updateComplete;
+    assert.isTrue(this.el.expanded);
+
+    assert.equal(this.deleteItemEvents.length, 0);
+
+    this.el.value = 'opt2';
+    await this.el.updateComplete;
+    this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: 'Delete'}));
+    assert.equal(this.deleteItemEvents.length, 1);
+    assert.equal(this.deleteItemEvents[0].detail.index, 1);
+    assert.equal(this.deleteItemEvents[0].detail.option.value, 'opt2');
+
+    // No delete-item event if the item is not deletable.
+    this.el.value = 'opt1';
+    await this.el.updateComplete;
+    this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: 'Delete'}));
+    assert.equal(this.deleteItemEvents.length, 1);
+
+    // No delete-item event if there is no current item.
+    this.el.value = 'invalid opt';
+    await this.el.updateComplete;
+    this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: 'Delete'}));
+    assert.equal(this.deleteItemEvents.length, 1);
+  });
+
+  it('delete item when pressed the delete button', async function() {
+    // Expand the list first.
+    this.button.dispatchEvent(new MouseEvent('mousedown'));
+    await this.el.updateComplete;
+    assert.isTrue(this.el.expanded);
+
+    assert.equal(this.deleteItemEvents.length, 0);
+
+    this.getNthLiElement(1).querySelector('mwc-icon-button').click();
+    assert.equal(this.deleteItemEvents.length, 1);
+    assert.equal(this.deleteItemEvents[0].detail.index, 1);
+    assert.equal(this.deleteItemEvents[0].detail.option.value, 'opt2');
+
+  });
+
+  it('inhibit <li> hover effect when mouse is over delete button',
+      async function() {
+        // Expand the list first.
+        this.button.dispatchEvent(new MouseEvent('mousedown'));
+        await this.el.updateComplete;
+        assert.isTrue(this.el.expanded);
+
+        const liArray = Array.from(this.el.shadowRoot.querySelectorAll('li'));
+        assert.equal(liArray.length, 3);
+
+        assert.isTrue(liArray.every(
+            (e) => e.classList.contains('allow-hover-effect')));
+
+        this.getNthLiElement(1).querySelector('mwc-icon-button')
+            .dispatchEvent(new MouseEvent('mouseenter'));
+        await this.el.updateComplete;
+        assert.isFalse(liArray.some(
+            (e) => e.classList.contains('allow-hover-effect')));
+      },
+  );
+
   it('uses-label-for-option-if-available', async function() {
     const newOptions = createOptions();
     newOptions[0].label = 'hello world';
@@ -350,16 +426,16 @@ describe('terminal_dropdown_tests.js', () => {
 
     await window.preferenceManager.set(preference, options[0].value);
     await this.el.updateComplete;
-    assert.isTrue(this.button.hasAttribute('data-invalid'));
+    assert.isTrue(this.button.classList.contains('invalid'));
 
     await window.preferenceManager.set(preference, options[1].value);
     await this.el.updateComplete;
-    assert.isFalse(this.button.hasAttribute('data-invalid'));
+    assert.isFalse(this.button.classList.contains('invalid'));
 
     // For value not in the options, the invalid attribute should also be set.
     await window.preferenceManager.set(preference, 'opt4');
     await this.el.updateComplete;
-    assert.isTrue(this.button.hasAttribute('data-invalid'));
+    assert.isTrue(this.button.classList.contains('invalid'));
   });
 
   it('allows-type-coercion-for-value-matching', async function() {

@@ -51,9 +51,12 @@ export {punycode};
  * own dependencies, but instead includes nassh's.
  */
 import {LitElement, html, css, unsafeCSS} from 'lit';
+import {classMap} from 'lit/directives/class-map.js';
 import {live} from 'lit/directives/live.js';
 import {createRef, ref} from 'lit/directives/ref.js';
-const lit = {LitElement, css, createRef, html, live, ref, unsafeCSS};
+import {when} from 'lit/directives/when.js';
+const lit = {LitElement, classMap, css, createRef, html, live, ref, unsafeCSS,
+  when};
 export {lit};
 
 import '@material/mwc-icon-button';

@@ -7,7 +7,9 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html, LitElement} from './lit.js';
+
+import {LitElement, classMap, css, html, when} from './lit.js';
+import {ICON_CANCEL} from './terminal_icons.js';
 
 /**
  * If |label| is nullish, |value| is used as the label.
@@ -17,12 +19,17 @@ import {css, html, LitElement} from './lit.js';
  *            label: ?string,
  *            style: ?string,
  *            disabled: ?boolean,
+ *            deletable: ?boolean,
  *          }}
  */
 let OptionType;
 
 // A dropdown element. The a11y behavior follows
 // https://www.w3.org/TR/wai-aria-practices-1.1/examples/listbox/listbox-collapsible.html.
+//
+// It supports deletable items, but it only emits a 'delete-item' event, and the
+// user is responsible for actually deleting it and updating the `options`
+// property.
 export class TerminalDropdownElement extends LitElement {
   /** @override */
   static get properties() {
@@ -39,6 +46,9 @@ export class TerminalDropdownElement extends LitElement {
       value: {
         attribute: false,
       },
+      hoverDeleteButton_: {
+        state: true,
+      },
     };
   }
 
@@ -46,6 +56,7 @@ export class TerminalDropdownElement extends LitElement {
   static get styles() {
     return css`
         :host {
+          color: var(--cr-primary-text-color);
           display: block;
           line-height: 32px;
           outline: none;
@@ -56,7 +67,6 @@ export class TerminalDropdownElement extends LitElement {
           background-color: rgb(241, 243, 244);
           border: none;
           border-radius: 6px;
-          color: var(--cr-primary-text-color);
           cursor: pointer;
           min-width: 40px;
           outline: none;
@@ -69,7 +79,7 @@ export class TerminalDropdownElement extends LitElement {
           box-shadow: 0 0 0 2px var(--focus-shadow-color);
         }
 
-        button[data-invalid] {
+        button.invalid {
           color: var(--google-grey-600);
         }
 
@@ -109,8 +119,18 @@ export class TerminalDropdownElement extends LitElement {
         }
 
         li {
+          align-items: center;
           cursor: pointer;
+          display: flex;
           padding: 1px 9px;
+        }
+
+        li.taller {
+          line-height: 48px;
+        }
+
+        li > span {
+          flex-grow: 1;
         }
 
         li[disabled] {
@@ -121,7 +141,7 @@ export class TerminalDropdownElement extends LitElement {
           background-color: rgb(232, 240, 254);
         }
 
-        li:not([disabled]):hover {
+        li.allow-hover-effect:hover {
           background-color: lightgrey;
         }
     `;
@@ -135,20 +155,38 @@ export class TerminalDropdownElement extends LitElement {
     this.expanded = false;
     /** @public {!Array<!OptionType>} */
     this.options = [];
+    // This indicates whether the mouse is hovering over a delete button.
+    this.hoverDeleteButton_ = false;
+
+    // This keeps track of whether the focus is "within" the <ul> element (i.e.
+    // the focus is on the <ul> or an element inside the <ul>). This is used to
+    // prevent hiding the <ul> when the focus is moved within the <ul> instead
+    // of moving to the outside.
+    this.ulFocused_ = false;
+    this.ulFocusedTaskScheduled_ = false;
   }
 
   /** @override */
   render() {
     const selectedIndex = this.findSelectedIndex_();
+    const hasDeletable = this.options.some((option) => option.deletable);
 
     const renderOption = (option, index) => html`
         <li id="option-${index}"
+            class="${classMap({
+              // Use "taller" style if there is an deletable item so that the
+              // height is consistent.
+              'taller': hasDeletable,
+              'allow-hover-effect': !option.disabled &&
+                  !this.hoverDeleteButton_,
+            })}"
             role="option"
             aria-selected="${index === selectedIndex}"
             style="${option.style ?? ''}"
-            ?disabled="${option.disabled === true}"
+            ?disabled="${option.disabled}"
             @click="${this.onItemClickedHandler_(index)}">
-          ${option.label ?? option.value}
+          <span>${option.label ?? option.value}</span>
+          ${when(option.deletable, () => this.renderDeleteButton_(index))}
         </li>
     `;
 
@@ -171,7 +209,7 @@ export class TerminalDropdownElement extends LitElement {
         <button
             aria-haspopup="listbox"
             aria-expanded="${this.expanded}"
-            ?data-invalid="${selectedInvalid}"
+            class="${classMap({invalid: selectedInvalid})}"
             @keydown="${this.onButtonKeyDown_}"
             @mousedown="${this.onButtonMouseDown_}">
           ${selectedLabel}
@@ -181,9 +219,28 @@ export class TerminalDropdownElement extends LitElement {
             role="listbox"
             aria-activedescendant="option-${selectedIndex}"
             @keydown="${this.onUlKeyDown_}"
-            @blur=${() => this.expanded = false}>
+            @focusin="${() => this.setUlFocused_(true)}"
+            @focusout="${() => this.setUlFocused_(false)}">
           ${this.options.map(renderOption)}
         </ul>
+    `;
+  }
+
+  /**
+   * @param {number} index The option index.
+   * @return {!TemplateResult}
+   */
+  renderDeleteButton_(index) {
+    return html`
+        <mwc-icon-button
+            tabindex="-1"
+            aria-label="${hterm.messageManager.get(
+                'TERMINAL_DROPDOWN_DELETE_ITEM_TEXT')}"
+            @click=${this.onDeleteClickHandler_(index)}
+            @mouseenter=${(e) => this.hoverDeleteButton_ = true}
+            @mouseleave=${(e) => this.hoverDeleteButton_ = false}>
+          ${ICON_CANCEL}
+        </mwc-icon-button>
     `;
   }
 
@@ -225,7 +282,7 @@ export class TerminalDropdownElement extends LitElement {
 
   selectPrevious_() {
     const selected = this.findSelectedIndex_();
-    if (selected != -1) {
+    if (selected !== -1) {
       return this.selectFirstEnabled_(
           this.options.slice(0, selected).reverse());
     }
@@ -233,7 +290,7 @@ export class TerminalDropdownElement extends LitElement {
 
   selectNext_() {
     const selected = this.findSelectedIndex_();
-    if (selected != -1) {
+    if (selected !== -1) {
       return this.selectFirstEnabled_(this.options.slice(selected + 1));
     }
   }
@@ -274,6 +331,9 @@ export class TerminalDropdownElement extends LitElement {
         this.expanded = false;
         this.shadowRoot.querySelector('button').focus();
         break;
+      case 'Delete':
+        this.maybeDispatchDeleteItemEvent_(this.findSelectedIndex_());
+        break;
       case 'PageUp':
       case 'Home':
         preventDefault = this.selectFirstEnabled_(this.options);
@@ -313,6 +373,53 @@ export class TerminalDropdownElement extends LitElement {
       }
       event.stopPropagation();
     };
+  }
+
+  /**
+   * Return a click event handler for the delete button in the <li> element.
+   *
+   * @param {number} index The index of the option.
+   * @return {function(!Event)}
+   */
+  onDeleteClickHandler_(index) {
+    return (event) => {
+      this.maybeDispatchDeleteItemEvent_(index);
+      event.stopPropagation();
+    };
+  }
+
+  /**
+   * @param {number} index The index of the option.
+   */
+  maybeDispatchDeleteItemEvent_(index) {
+    if (index < 0) {
+      return;
+    }
+    const option = this.options[index];
+    if (option.deletable) {
+      this.dispatchEvent(new CustomEvent('delete-item', {
+        detail: {
+          index,
+          option,
+        },
+      }));
+    }
+  }
+
+  /** @param {boolean} focused */
+  setUlFocused_(focused) {
+    this.ulFocused_ = focused;
+    if (!this.ulFocusedTaskScheduled_) {
+      this.ulFocusedTaskScheduled_ = true;
+      // Use a timeout so that we only react when all the related focus events
+      // are handled.
+      setTimeout(() => {
+        this.ulFocusedTaskScheduled_ = false;
+        if (!this.ulFocused_) {
+          this.expanded = false;
+        }
+      });
+    }
   }
 }
 

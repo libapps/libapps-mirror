@@ -14,4 +14,5 @@
 import {lit} from './nassh_deps.rollup.js';
 
 /** @suppress {undefinedVars} */
-export const {LitElement, createRef, css, html, live, ref, unsafeCSS} = lit;
+export const {LitElement, classMap, createRef, css, html, live, ref, unsafeCSS,
+  when} = lit;

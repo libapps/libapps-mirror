@@ -1995,6 +1995,10 @@
 		"description": "The menu label to clear the terminal screen.",
 		"message": "Terminal Clear"
 	},
+	"TERMINAL_DROPDOWN_DELETE_ITEM_TEXT": {
+		"description": "The text which tells the user how to use the keyboard to delete an item from a dropdown menu. This could be used in a tooltip or be announced by a screen reader.",
+		"message": "Press the delete key to delete the item."
+	},
 	"TERMINAL_FONT_UNAVAILABLE": {
 		"description": "The title of the notification shown to the user when terminal fails to load a font",
 		"message": "\"$FONT$\" is not available",
