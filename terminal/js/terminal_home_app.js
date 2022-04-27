@@ -169,8 +169,8 @@ export class TerminalHomeApp extends LitElement {
 
       .sublabel {
         color: rgba(var(--foreground-color-rgb), 0.5);
-        margin-top: -10px;
-        padding: 0px 20px;
+        margin: -10px 0 0 0;
+        padding: 0 20px 20px 20px;
       }
     `];
   }

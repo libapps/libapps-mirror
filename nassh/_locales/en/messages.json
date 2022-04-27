@@ -2059,7 +2059,7 @@
 	},
 	"TERMINAL_HOME_SSH_EMPTY": {
 		"description": "Description shown when there are no SSH connections yet in the list.",
-		"message": "SSH connections will appear here"
+		"message": "Connections to remote devices will appear here"
 	},
 	"TERMINAL_HOME_SSH_SPECIFY_DESTINATION": {
 		"description": "An error message shown under the command testfield when the user didn't input the destiniation for SSH",
