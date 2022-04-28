@@ -137,6 +137,19 @@ describe('terminal_ssh_dialog.js', function() {
       await this.el.updateComplete;
       assert.equal(this.relayArgsEl.value, '--config=google --proxy-host=xxx');
     });
+
+    it('closes-on-enter-key', async function() {
+      await this.el.dialogRef_.value.show();
+      assert.isTrue(this.el.dialogRef_.value.open);
+      this.inputCommand('user@hostname');
+      await this.el.updateComplete;
+      await new Promise((resolve) => {
+        this.el.commandRef_.value.dispatchEvent(
+            new KeyboardEvent('keydown', {key: 'Enter'}));
+        this.el.addEventListener('close', resolve);
+      });
+      assert.isFalse(this.el.dialogRef_.value.open);
+    });
   });
 
   // TODO(b/223076712): test identity files logic and load/save nassh profile

@@ -214,6 +214,7 @@ export class TerminalSSHDialog extends LitElement {
     this.commandRef_ = createRef();
     this.relayArgsRef_ = createRef();
     this.identityDropdownRef_ = createRef();
+    this.okRef_ = createRef();
   }
 
   /** @return {string} */
@@ -253,12 +254,14 @@ export class TerminalSSHDialog extends LitElement {
           <div slot="title">
             <terminal-textfield blendIn fitContent
                 value="${live(this.getTitle_())}"
+                @keydown="${this.onTextfieldKeydown_}"
                 @change="${(e) => this.userTitle_ = e.target.value}">
             </terminal-textfield>
           </div>
           <terminal-textfield ${ref(this.commandRef_)}
               error="${this.suppressCommandError_ ? '' : commandError}"
               label="${msg('TERMINAL_HOME_SSH_COMMAND')}"
+              @keydown="${this.onTextfieldKeydown_}"
               @change="${() => this.suppressCommandError_ = false}"
               @input="${this.onCommandUpdated_}"
               placeholder="username@hostname -p <port> -R 1234:localhost:5678">
@@ -279,7 +282,8 @@ export class TerminalSSHDialog extends LitElement {
                 @change=${this.onIdentityInputChange_}>
           </div>
           <terminal-textfield ${ref(this.relayArgsRef_)} id="relay-args"
-              label="${msg('FIELD_NASSH_OPTIONS_PLACEHOLDER')}">
+              label="${msg('FIELD_NASSH_OPTIONS_PLACEHOLDER')}"
+              @keydown="${this.onTextfieldKeydown_}">
           </terminal-textfield>
           <div slot="buttons">
             ${deleteButton}
@@ -288,7 +292,8 @@ export class TerminalSSHDialog extends LitElement {
                 @click="${(e) => this.dialogRef_.value.cancel()}">
               ${msg('CANCEL_BUTTON_LABEL')}
             </terminal-button>
-            <terminal-button class="action" ?disabled="${commandError}"
+            <terminal-button  ${ref(this.okRef_)} class="action"
+                ?disabled="${commandError}"
                 @click="${this.onOkClick_}">
               ${msg('SAVE_LABEL')}
             </terminal-button>
@@ -395,6 +400,14 @@ export class TerminalSSHDialog extends LitElement {
           relayArgs.value = `--config=google ${relayArgs.value}`;
         }
       }
+    }
+  }
+
+  /** @param {!Event} event */
+  onTextfieldKeydown_(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.okRef_.value.click();
     }
   }
 
