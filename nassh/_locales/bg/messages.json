@@ -63,7 +63,7 @@
 		"message": "Изтриване"
 	},
 	"disconnect_message": {
-		"message": "Приставката за клиента с директно изпълнение се затвори с код на състоянието $1."
+		"message": "Програмата се затвори с код на състоянието $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Използване на стандартните клавишни комбинации в ОС"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Размер на вътрешните полета на височината на редовете"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Мултимедийните клавиши са функционални"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Дали често използваните клавишни комбинации в операционната система да бъдат зачитани, вместо винаги да се прихващат за употреба от hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Размерът на вътрешните полета (в пиксели) между всеки ред на екрана на терминала."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ако е true, мултимедийните клавиши се преобразуват в еквивалентните им функционални. Ако е false, се оставя на браузъра да обработва клавишите."
 	},
@@ -726,7 +732,7 @@
 		"message": "Превключване на използването на цвят"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Копиране на източника към дестинацията"
+		"message": "Копиране на отдалечен път до друг такъв"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Изтриване на файлове"
@@ -816,7 +822,7 @@
 		"message": "Показване на текущата версия на протокола"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Информация за версията на протокола SFTP:\n  локално: $1\n  на сървъра: $1"
+		"message": "Информация за версията на протокола SFTP:\n  локално: $1\n  на сървъра: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: край на файла"
@@ -837,7 +843,7 @@
 		"message": "ГРЕШКА: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: разширението $2 не е налице"
+		"message": "$1: изискваното разширение $2 не е налице в този сървър"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: не е обикновен файл"
@@ -882,7 +888,7 @@
 		"message": "[Експертен съвет] Използвайте „Отваряне като прозорец“ или „Цял екран“, така че терминалът да не се затваря с Ctrl+W.\n[Експертен съвет] За повече информация вижте $1."
 	},
 	"plugin_loading": {
-		"message": "Приставката NaCl се зарежда..."
+		"message": "Програмата $1 се зарежда..."
 	},
 	"plugin_loading_complete": {
 		"message": " е готово."
@@ -930,7 +936,10 @@
 		"message": "Размер при четене (КБ)"
 	},
 	"reconnect_message": {
-		"message": "Натиснете R, за да се свържете отново, C за избиране на друга връзка или Х за изход."
+		"message": "Можете да натиснете R, за да се свържете отново (опцията по подразбиране), C за избиране на друга връзка или Х за изход."
+	},
+	"relay_auth_error": {
+		"message": "Грешка при удостоверяването с препредаващия сървър: $1"
 	},
 	"relay_retry": {
 		"message": "Извършва се нов опит..."
@@ -982,6 +991,30 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "$1 не е налице"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Добавяне на SSH"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Настройки за програмисти"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Редактиране на SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Импортиране"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Нова SSH връзка"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Команда"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Посочете местоназначението чрез potrebitelskoime@imenahost"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Настройки на терминала"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI цветове"
@@ -1159,6 +1192,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Настройки"
+	},
+	"terminal_title_terminal": {
+		"message": "Терминал"
 	},
 	"terminal_title_theme": {
 		"message": "Тема"

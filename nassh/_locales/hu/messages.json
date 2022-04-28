@@ -63,7 +63,7 @@
 		"message": "Törlés"
 	},
 	"disconnect_message": {
-		"message": "A NaCl beépülő modul a következő állapotkóddal lépett ki: $1."
+		"message": "A program kilépett a következő állapotkóddal: $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -295,6 +295,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Az operációs rendszer alapértelmezett billentyűkombinációi/billentyűparancsai"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Sormagasság kitöltési mérete"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "A médiabillentyűk F-billentyűkként működnek"
@@ -533,6 +536,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Annak meghatározása, hogy az operációs rendszer gyakori billentyűkombinációi legyenek-e figyelembe véve ahelyett, hogy mindig a hterm saját használatára lennének lefoglalva."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "A terminál képernyőjének sorai közötti kitöltési méret képpontban megadva."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ha igaz, átalakítja a médiabillentyűket a megfelelő F-billentyűkké. Ha hamis, a böngésző kezeli a billentyűket."
 	},
@@ -729,7 +735,7 @@
 		"message": "Színhasználat váltása"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Forrás másolása a célhelyre"
+		"message": "Távoli elérési út másolása másik elérési útra"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Fájlok törlése"
@@ -819,7 +825,7 @@
 		"message": "Jelenlegi protokollverzió megjelenítése"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Információ az SFTP protokollverzióról:\n  helyi: $1\n  szerver: $1"
+		"message": "Információ az SFTP protokollverzióról:\n  helyi: $1\n  szerver: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: a fájl vége"
@@ -840,7 +846,7 @@
 		"message": "HIBA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: a(z) „$2” bővítmény nem áll rendelkezésre"
+		"message": "$1: a szükséges „$2” bővítmény nem áll rendelkezésre ennél a szervernél"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: nem megfelelő fájl"
@@ -885,7 +891,7 @@
 		"message": "[Profi tipp] Használja a „Megnyitás ablakként” vagy a „Teljes képernyős” lehetőséget, hogy a Ctrl + W ne zárja be a terminált.\n[Profi tipp] További információt a következő URL-en találhat: $1."
 	},
 	"plugin_loading": {
-		"message": "NaCl bővítmény betöltése..."
+		"message": "A(z) $1 program betöltése…"
 	},
 	"plugin_loading_complete": {
 		"message": " kész."
@@ -933,7 +939,10 @@
 		"message": "Olvasási méret (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Újracsatlakozás (r), Másik kapcsolat kiválasztása (c) vagy Kilépés (x)?"
+		"message": "Újracsatlakozás (r [alapértelmezett]), Másik kapcsolat kiválasztása (c) vagy Kilépés (x)?"
+	},
+	"relay_auth_error": {
+		"message": "Hiba lépett fel a közvetítőszerver hitelesítésekor: $1"
 	},
 	"relay_retry": {
 		"message": "Újrapróbálkozás…"
@@ -985,6 +994,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "A(z) „$1” nem áll rendelkezésre"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH hozzáadása"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Alapértelmezett]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Fejlesztői beállítások"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH szerkesztése"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importálás"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Új SSH-kapcsolat"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Parancs"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Adja meg a célt a következőképpen: „felhasznalonev@gazdagepnev”"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminálbeállítások"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-színek"
@@ -1165,6 +1201,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Beállítások"
+	},
+	"terminal_title_terminal": {
+		"message": "Terminál"
 	},
 	"terminal_title_theme": {
 		"message": "Téma"

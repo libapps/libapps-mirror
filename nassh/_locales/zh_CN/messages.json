@@ -63,7 +63,7 @@
 		"message": "删除"
 	},
 	"disconnect_message": {
-		"message": "NaCl 插件已退出，状态代码为：$1。"
+		"message": "已退出程序，状态代码为 $1。"
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "使用默认的操作系统键盘绑定关系/快捷键"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "行高内边距大小"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "将媒体键用作功能键 F1..F12"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "设定是否要遵循常用的操作系统键盘绑定关系，不再始终捕获按键序列供 hterm 使用。"
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "终端屏幕上各行之间的内边距大小（以像素为单位）。"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "将此设置设为 true 会使媒体键转换成对应的功能键 F1..F12，设为 false 则会让浏览器处理这些键。"
 	},
@@ -726,7 +732,7 @@
 		"message": "切换使用的颜色"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "将源内容复制到目标位置"
+		"message": "将一个远程路径复制到另一个远程路径"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "删除文件"
@@ -819,7 +825,7 @@
 		"message": "显示当前协议版本"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP 协议版本信息：\n  本地：$1\n  服务器：$1"
+		"message": "SFTP 协议版本信息：\n  本地：$1\n  服务器：$2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1：文件结束"
@@ -840,7 +846,7 @@
 		"message": "错误：$1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1：“$2”扩展不可用"
+		"message": "$1：此服务器无法使用所需的“$2”扩展程序"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1：$2：不是常规文件"
@@ -888,7 +894,7 @@
 		"message": "[专业提示] 请使用“在窗口中打开”或“全屏模式”来防止 Ctrl+W 组合键关闭终端！\n[专业提示] 如需了解详情，请访问 $1。"
 	},
 	"plugin_loading": {
-		"message": "正在加载 NaCl 插件…"
+		"message": "正在加载 $1 程序…"
 	},
 	"plugin_loading_complete": {
 		"message": " 已完成。"
@@ -936,7 +942,10 @@
 		"message": "读取大小 (KiB)"
 	},
 	"reconnect_message": {
-		"message": "重新连接(R)、重选连接(C)还是退出(E)？"
+		"message": "重新连接(R) [默认操作]、重选连接(C)，还是退出(E)？"
+	},
+	"relay_auth_error": {
+		"message": "向中继服务器验证身份时出错：$1"
 	},
 	"relay_retry": {
 		"message": "正在重试…"
@@ -988,6 +997,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "无法加载“$1”"
+	},
+	"terminal_home_add_ssh": {
+		"message": "添加 SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[默认]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "开发者设置"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "修改 SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "导入"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "新建 SSH 连接"
+	},
+	"terminal_home_ssh_command": {
+		"message": "命令"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "请使用“username@hostname”指定目的地"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "终端设置"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI 颜色"
@@ -1168,6 +1204,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "设置"
+	},
+	"terminal_title_terminal": {
+		"message": "终端"
 	},
 	"terminal_title_theme": {
 		"message": "主题背景"

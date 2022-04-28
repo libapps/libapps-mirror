@@ -100,6 +100,11 @@ def main(argv):
         # use the older (perhaps stale) translations than the english one.
         with open(in_locale, 'rb') as fp:
             new = json.load(fp)
+
+        # Strip translations only used by the CWS.
+        new.pop('cws_description', None)
+        new.pop('cws_description_dev', None)
+
         old = old_trans.get(locale, {})
         for msgid, msg in sorted(new.items()):
             # The conversion process is a bit buggy :(.

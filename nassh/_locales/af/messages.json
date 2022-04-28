@@ -57,7 +57,7 @@
 		"message": "Vee uit"
 	},
 	"disconnect_message": {
-		"message": "NaCl-inprop het uitgegaan met statuskode $1."
+		"message": "Program het uitgegaan met statuskode $1."
 	},
 	"faq_menu_label": {
 		"message": "Gereelde vrae"
@@ -280,6 +280,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Gebruik verstekbedryfstelselsleutelbordbindings/-kortpaaie"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Grootte van reëlhoogteopvulling"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Mediasleutels is F-sleutels"
@@ -518,6 +521,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Of gewone bedryfstelselsleutelbordbindings gerespekteer moet word eerder as om altyd vasgevang te word vir hterm se eie gebruik."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Die opvullinggrootte, in pieksels, tussen elke ry van die terminaalskerm."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Indien waar, moet jy mediasleutels na hul F-sleutelekwivalent omskakel. Indien vals, moet jy dat die blaaier die sleutels hanteer."
 	},
@@ -677,6 +683,9 @@
 	"missing_param": {
 		"message": "Ontbrekende parameter: $1"
 	},
+	"mosh_name": {
+		"message": "Mosh-program"
+	},
 	"mount_button_label": {
 		"message": "SFTP-montering"
 	},
@@ -726,7 +735,7 @@
 		"message": "kopieer"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopieer bron na bestemming"
+		"message": "Kopieer 'n afstandpad na 'n ander afstandpad"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Vee lêers uit"
@@ -852,7 +861,7 @@
 		"message": "Wys huidige protokolweergawe"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Inligting vir SFTP-protokolweergawe:\n  plaaslik: $1\n  bediener: $1"
+		"message": "Inligting vir SFTP-protokolweergawe:\n  plaaslik: $1\n  bediener: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: einde van lêer"
@@ -873,7 +882,7 @@
 		"message": "FOUT: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: \"$2\" uitbreiding onbeskikbaar"
+		"message": "$1: vereiste \"$2\"-uitbreiding is nie met hierdie bediener beskikbaar nie"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: Nie 'n gewone lêer nie"
@@ -915,7 +924,7 @@
 		"message": "[Wenk] Gebruik \"Maak oop as Venster\" of \"Volskerm\" om te keer dat Ctrl+W jou terminaal toemaak!\n[Wenk] Sien $1 vir nog inligting."
 	},
 	"plugin_loading": {
-		"message": "Laai tans NaCl-inprop …"
+		"message": "Laai tans $1-program …"
 	},
 	"plugin_loading_complete": {
 		"message": " klaar."
@@ -963,7 +972,10 @@
 		"message": "Leesgrootte (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Herkoppel (R), Kies (C) 'n ander verbinding of Gaan uit (X)?"
+		"message": "Herkoppel (R) (verstek), Kies (C) 'n ander verbinding of Gaan uit (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Kan nie met herleidingbediener staaf nie: $1"
 	},
 	"relay_retry": {
 		"message": "Herprobeer tans …"
@@ -1015,6 +1027,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" is nie beskikbaar nie"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Voeg SSH by"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Verstek]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Ontwikkelaarinstellings"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Wysig SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Voer in"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nuwe SSH-verbinding"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Opdrag"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Spesifiseer die bestemming met \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminaalinstellings"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-kleure"
@@ -1192,6 +1231,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Instellings"
+	},
+	"terminal_title_terminal": {
+		"message": "Terminaal"
 	},
 	"terminal_title_theme": {
 		"message": "Tema"

@@ -1,0 +1,1292 @@
+{
+	"already_mounted_message": {
+		"message": "Fitxategi-sistema erabilgarri dago dagoeneko"
+	},
+	"backup_prefs": {
+		"message": "Gorde babeskopia"
+	},
+	"bad_destination": {
+		"message": "Ezin da analizatu helmuga: $1"
+	},
+	"before_unload": {
+		"message": "Fitxa ixten baduzu, saioa deskonektatutako da."
+	},
+	"cache_pin_prompt": {
+		"message": "SSHko saio honen PINa cachean gorde nahi duzu? (y/N):"
+	},
+	"cancel_button_label": {
+		"message": "Utzi"
+	},
+	"changelog": {
+		"message": "Aldaketen erregistroa"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Garbitu SSHren ostalari ezagunak"
+	},
+	"clear_label": {
+		"message": "Garbitu"
+	},
+	"command_complete": {
+		"message": "$1 aginduak programa itxiarazi du. Egoera-kodea: $2."
+	},
+	"command_not_supported": {
+		"message": "$1 ezin da erabili Chrome-ren bertsio honetan"
+	},
+	"command_startup_failed": {
+		"message": "Ezin izan da abiarazi $1: $2."
+	},
+	"confirm_button_label": {
+		"message": "Berretsi"
+	},
+	"connect_button_label": {
+		"message": "Konektatu"
+	},
+	"connect_or_exit_message": {
+		"message": "Beste konexio bat aukeratu (C), edo irten (X) egin nahi duzu?"
+	},
+	"connecting": {
+		"message": "$1 helbidera konektatzen…"
+	},
+	"connection_dialog_name": {
+		"message": "Konexioaren leihoa"
+	},
+	"console_crosh_options_notice": {
+		"message": "Ba al zenekien berariazko orri bat dagoela aukeretarako?\nAurrerantzean, ez duzu \"term_\" zuzenean aldatu beharko.\nHura irekitzeko, sakatu $1 edo egin klik $2 helbidean."
+	},
+	"console_nassh_options_notice": {
+		"message": "Ba al zenekien berariazko orri bat dagoela aukeretarako?\nAurrerantzean, ez duzu \"term_\" zuzenean aldatu beharko.\n$1"
+	},
+	"del_keycap": {
+		"message": "[EZAB]"
+	},
+	"delete_button_label": {
+		"message": "Ezabatu"
+	},
+	"disconnect_message": {
+		"message": "Programa itxi egin da $1 egoera-kodearekin."
+	},
+	"enter_keycap": {
+		"message": "[SARTU]"
+	},
+	"field_argstr_placeholder": {
+		"message": "Agindu-lerroko argumentu gehiago"
+	},
+	"field_description_aria_label": {
+		"message": "azalpena"
+	},
+	"field_description_placeholder": {
+		"message": "erabiltzaile-izena@ostalari-izena edo formatu irekiko testua"
+	},
+	"field_hostname_aria_label": {
+		"message": "ostalari-izena"
+	},
+	"field_hostname_placeholder": {
+		"message": "ostalari-izena"
+	},
+	"field_mount_path_placeholder": {
+		"message": "bide-izen lehenetsia erabiltzailearen hasierako direktorioa da"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "SSHren birtransmisio-zerbitzariaren aukerak"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSHren birtransmisio-zerbitzariaren aukerak"
+	},
+	"field_port_aria_label": {
+		"message": "ataka"
+	},
+	"field_port_placeholder": {
+		"message": "ataka"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "lehenetsia"
+	},
+	"field_username_aria_label": {
+		"message": "erabiltzaile-izena"
+	},
+	"field_username_placeholder": {
+		"message": "erabiltzaile-izena"
+	},
+	"file_label": {
+		"message": "Fitxategia"
+	},
+	"found_relay": {
+		"message": "Aurkitutako birtransmisio-zerbitzaria: $1"
+	},
+	"get_profile_error": {
+		"message": "ERROREA. Ezin izan da kargatu $1 profila:\n$2."
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "Ehuneko $1 goraino edo beheraino joan zara,"
+	},
+	"hterm_button_allow_always": {
+		"message": "Eman baimena beti"
+	},
+	"hterm_button_allow_session": {
+		"message": "Eman baimena saioari"
+	},
+	"hterm_button_block": {
+		"message": "Blokeatu"
+	},
+	"hterm_button_close": {
+		"message": "Itxi"
+	},
+	"hterm_button_find": {
+		"message": "Bilatu"
+	},
+	"hterm_button_next": {
+		"message": "Hurrengoa"
+	},
+	"hterm_button_page_down": {
+		"message": "Egin orrian behera"
+	},
+	"hterm_button_page_up": {
+		"message": "Egin orrian gora"
+	},
+	"hterm_button_previous": {
+		"message": "Aurrekoa"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 emaitza"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "Ezin izan da kargatu $1"
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 kargatzen…"
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Eman irudi txertatuak bistaratzeko baimena"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "\"Alt + Atzera\" eta \"Meta + Atzera\" baliokideak dira"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "Alt Gr tekla modua"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Tratatu Alt tekla Meta tekla gisa"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt tekla aldatzailearen funtzionamendua"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Alerta-txirrinaren soinua (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Atzeko planoaren kolorea"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Atzeko planoko irudia"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Atzeko planoko irudiaren kokapena"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Atzeko planoko irudiaren tamaina"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Atzera teklaren jokabidea"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Karaktere-maparen ordezkapenak"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Garbitu automatikoki testu-hautapena"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Itxi leihoa irtetean"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Hasierako kolore-paleta"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Kopiatu automatikoki hautatutako edukia"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Edukia kopiatzeko Ktrl + C lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Zooma aplikatzeko Ktrl + +/-/0 lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Edukia itsasteko Ktrl + V lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Kurtsorearen keinua"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Kurtsorearen keinu-tasa"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Testu-kurtsorearen kolorea"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Testu-kurtsorearen forma"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Sortu mahaigaineko jakinarazpenak alerta-txirrinak jasotzen direnean"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous sistemak bi zutabe erabiltzen ditu"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "Onartu UTF-8 formatuan ez dauden C1 kontrol-karaktereak"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Gaitu testu keinukaria"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Testu lodiaren jokabidea"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Erabili kolore argiak testu lodiarekin"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Erakutsi jakinarazpen bat edukia kopiatzean"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Eman urrunetik arbelean idazteko baimena"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Eman atzera egiteko bufferra garbitzeko baimena (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Eman testu-kurtsorearen keinua aldatzeko baimena"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Erakutsi terminalaren neurriak tamaina aldatzen zaionean"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Ingurunearekin lotutako aldagaiak"
+	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Bilaketa-emaitzak nabarmentzeko kolorea"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Hautatutako bilaketa-emaitzak nabarmentzeko kolorea"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Testuaren letra-familia"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Testuaren letra-tamaina"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Leundu testuaren letra"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Testuaren kolorea"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Ezkutatu saguaren kurtsorea idatzi bitartean"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "\"Hasiera\" edo \"Amaiera\" teklaren bidez gora edo behera egiteko aukeraren jokabidea"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Teklatuko aginduak edo lasterbideak"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Erabili sistema eragilearen teklatuko agindu edo lasterbide lehenetsiak"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Lerroaren altueraren betetzearen tamaina"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Multimedia-teklak eta funtzio-teklak baliokideak dira"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Meta tekla aldatzailearen funtzionamendua"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Saguaren botoiarekin edukia itsasteko aukera"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Saguaren eskuineko botoiarekin klik egitean edukia itsasteko aukera"
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Orrian gora edo behera egiteko teklen bidez gora edo behera egiteko aukeraren jokabidea"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Fitxaz edo aplikazioz aldatzeko Alt + 1-9 lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Beste leiho bat irekitzeko Ktrl + N lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Fitxaz aldatzeko Ktrl + 1-9 lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Beste fitxa bat irekitzeko Ktrl + T lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Fitxaz aldatzeko Ktrl + Tab lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Fitxa bat ixteko Ktrl + W lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Fitxaz aldatzeko Meta + 1-9 lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Edukia itsasteko Meta + V lasterbidearen jokabidea"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Eman edukia itsasteko baimena arrastatu eta jaregiteko aukerari"
+	},
+	"hterm_name_pref_screen_border_color": {
+		"message": "Pantailaren ertzaren kolorea"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Pantailaren ertzaren tamaina"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Pantailaren betetzearen tamaina"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Joan beheraino edozein tekla sakatu ondoren"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Joan beheraino beste irteera bat ezarri ondoren"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Emulatu gezi-teklak gora/behera egiteko gurpilarekin"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Saguaren gora/behera egiteko gurpilaren biderkatzailea"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Korritze-barraren ikusgaitasuna"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Maius + Txertatu bidez edukia itsasteko aukera"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Terminalaren kodeketa"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Utzi arakatzaileari testuaren kopiaketa kudeatzen"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "CSS pertsonalizatua (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "CSS pertsonalizatua (testu txertatua)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Gelditu hautapen automatikoa (ezkerrera)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Hitzak banatzeko karaktereak"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Gelditu hautapen automatikoa (eskuinera)"
+	},
+	"hterm_notify_copy": {
+		"message": "Kopiatu egin da"
+	},
+	"hterm_options_button_label": {
+		"message": "Aukerak"
+	},
+	"hterm_popup_inline_image": {
+		"message": "Irudi txertatuak"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Irudi txertatuak desgaituta daude"
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Urruneko ostalariari terminalean irudiak bistaratzeko baimena ematen zaion ala ez zehazten du.\n\nModu lehenetsian, galdetzen jarraituko dugu aukera bat hautatu arte."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Ezartzen bada, Alt + Atzera->Ezabatu esleipena kentzen du Chrome OS-n; horrela, Alt + Atzera lasterbideak Alt + Atzera gisa funtzionatuko du."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "Hautatu Alt Gr tekla hautemateko analisi heuristiko bat.\n\n\"null\": navigator.language propietatearen araberako hautemate automatikoa.\n      \"en-us\" => \"none\"; bestela => \"right-alt\".\n\"none'\": desgaitu Alt Gr teklaren bidezko emulazio guztiak.\n\"ctrl-alt\": \"Ktrl + Alt\" eta \"Alt Gr\" baliokideak direla interpretatzen du.\n\"left-alt\": ezkerreko \"Alt\" eta \"Alt Gr\" baliokideak direla interpretatzen du.\n\"right-alt\": eskuineko \"Alt\" eta \"Alt Gr\" baliokideak direla interpretatzen du."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Alt teklak Meta tekla gisa edo beste Alt tekla baten gisa funtzionatzen duen zehazten du."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Alt teklaren funtzionamendua kontrolatzen du.\n\n  escape: bidali IHES teklaren aurrizki bat.\n  8-bit: gehitu \"128\" idatzitako karaktereari (xterm-en bezala).\n browser-key: itxaron tekla sakatu arte eta ikusi arakatzaileak zer egiten duen. (Aukera honek ez du ondo funtzionatuko arakatzaileak Alt teklaren sekuentzia batzuetarako ekintza lehenetsi bat egiten duen plataformetan.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "Terminalaren alerta-txirrinaren soinuaren URLa. Txirrinak jotzerik nahi ez baduzu, ez idatzi ezer."
+	},
+	"hterm_pref_background_color": {
+		"message": "Beste kolore-atributurik ez duen testuaren atzeko planoaren kolorea."
+	},
+	"hterm_pref_background_image": {
+		"message": "Atzeko planoko irudiaren CSS balioa. Ez idatzi ezer irudirik ez badago.\n\nAdibidez:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "Atzeko planoko irudiaren kokapenaren CSS balioa.\n\nAdibidez:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "Atzeko planoko irudiaren tamainaren CSS balioa."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "Egiazko gisa ezartzen bada, Atzera teklak BS bidaliko du (\"\\x08\"; hau da, ^H). Bestela, atzera egiteko teklak \"\\x7f\" bidaliko du."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Objektu gisa zehazten da. Matrize sakabanatu bat da. Bertan, propietate bakoitza karaktere multzoaren kode bat da, eta balioa objektu bat, zeina aldi berean matrize sakabanatu bat ere baita. Matrize sakabanatu horretan, propietate bakoitza jasotako karakterea da, eta balioa, berriz, bistaratutako karakterea.\n\nAdibidez:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }"
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Edukia kopiatu ondoren hautapena ezabatzen den ala ez zehazten du."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Komandoa exekutatzen amaitzen denean leihoa ixten den ala ez zehazten du."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Ordeztu paleta lehenetsiko koloreak.\n\nMatrize edo objektu gisa zehatz daiteke. Objektu gisa zehazten bada, matrize sakabanatu bat dela interpretatzen da. Bertan, propietate bakoitza kolore-paletaren zenbakizko indize bat da.\n\nBalioak CSSren ia edozein kolore-balio gisa zehatz daitezke; esaterako, #RGB, #RRGGBB, rgb(…), rgba(…) eta X11 rgb.txt fitxategi estandarraren edozein kolore-izen.\n\nBalio lehenetsia aldatu behar ez dela zehazteko, \"null\" erabil dezakezu. Lagungarria da indize kopuru txiki bat saltatzeko balioa matrize gisa zehazten denean.\n\nAdibidez, bi kode hauek 1. kolore-indizea urdinez ezartzen dute:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Automatikoki kopiatzen du arbelean saguaren hautapena."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Egiazko gisa ezartzen bada, Ktrl + C lasterbideak hautapena kopiatuko du; gezurrezko gisa ezartzen bada, berriz, ^C bidaliko du ostalarira.\nEgiazko gisa ezartzen bada, Ktrl + Maius + C lasterbideak ^C bidaliko du ostalarira; gezurrezko gisa ezartzen bada, berriz, hautapena kopiatuko du."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Egiazko gisa ezartzen bada, Ktrl + Gehi/Minus/Zero lasterbideak zooma kontrolatuko du.\nGezurrezko gisa ezartzen bada, berriz, Ktrl + Maius + Gehi/Minus/Zero lasterbideak zooma kontrolatuko du, Ktrl + Minus lasterbideak ^_ bidaliko du eta Ktrl + Gehi/Zero lasterbideak ez du ezer egingo."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Egiazko gisa ezartzen bada, Ktrl + V lasterbideak hautapena itsatsiko du; gezurrezko gisa ezartzen bada, berriz, ^V bidaliko du ostalarira.\nEgiazko gisa ezartzen bada, Ktrl + Maius + V lasterbideak ^V bidaliko du ostalarira; gezurrezko gisa ezartzen bada, berriz, hautapena itsatsiko du."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Kurtsoreak modu lehenetsian keinu egiten duen ala ez zehazten du. Terminalaren ihes-sekuentzien bidez aktibatu edo desaktiba daiteke exekuzio-denboran egon bitartean."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Kurtsorearen keinu-tasa milisegundotan.\n\nBi elementuko matrize bat da. Lehenengoak testuaren kurtsoreak zenbat denbora egon behar duen ikusgai zehazten du; bigarrenak, berriz, zenbat denbora egon behar duen ikusezin."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Ikusgai dagoen testu-kurtsorearen kolorea."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Ikusgai dagoen testu-kurtsorearen forma. Terminalaren ihes-sekuentzien bidez alda daiteke exekuzio-denboran egon bitartean."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Egiazko gisa ezartzen bada, terminalaren atzeko planoko txirrinek sareko jakinarazpen bat sortuko dute (https://www.w3.org/TR/notifications/).\n\nErabiltzaileak jakinarazpenak bistaratzeko baimena eman behar du. Aukera hau egiazko gisa ezartzen bada, erabiltzaileari baimena eskatzen saiatuko da hterm, behar izanez gero. Erabiltzailearen ekintza batek baimen-eskaera eragin ez badu, baliteke arakatzaileek eskaera hori ez erakustea.\n\nJakinarazpenak bistara ditzakete horretarako baimena duten Chrome-rako luzapenek."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous sistemako karaktereek bi zutabeko zabalera duten ala ez zehazten du."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "Egiazko gisa ezartzen bada, 8-biteko kontrol-karaktereak gaituko dira; gezurrezko gisa ezartzen bada, berriz, ez ikusi egingo zaie.\n\nKontrol-karaktere horien 2 byteko bertsioak errespetatuko ditugu, ezarpena kontuan izan gabe."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Egiazko gisa ezartzen bada, keinuaren atributua errespetatuko du. Gezurrezko gisa ezartzen bada, berriz, ez ikusi egingo zaio."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Egiazko gisa ezartzen bada, letra lodiak erabiliko dira \"lodia\" edo \"argia\" atributua duten testuetan. Gezurrezko gisa ezartzen bada, berriz, lodiera arrunteko letrak erabiliko dira. Balio nulua ezartzen bada, automatikoki hautemango da."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Egiazko gisa ezartzen bada, kolore argiak erabiliko dira (8 eta 15 kolore artean 16 koloreko paleta batean) \"lodia\" atributua duten testuetan. Bestela, gezurrezko gisa ezarriko da."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Terminalean mezu bat erakusten den ala ez zehazten du ostalariak arbelean idazten duenean."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Tokiko sistemaren arbelean zuzenean idazteko baimena ematen dio ostalariari.\nEz da inoiz ematen irakurtzeko sarbiderik, ezarpena edozein dela ere.\n\nHainbat eginbidetarako sarbidea kontrolatzeko erabiltzen da; besteak beste, OSC-52."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "\"Ezabatu bistaratzea\" komandoaren (CSI-J) \"Ezabatu gordetako lerroak\" funtzioak (3. modua) terminalaren atzera egiteko bufferra ezaba dezakeen ala ez zehazten du.\n\nSegurua da aukera hau modu lehenetsian gaitzea."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Ostalariak DEC 12 modu pribatua erabilita testu-kurtsorearen keinu-egoera aldatzeko egin duen saiakera errespetatzen du."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Terminalaren tamaina aldatzen denean, terminalaren neurriak erakusten diren ala ez zehazten du."
+	},
+	"hterm_pref_environment": {
+		"message": "Ingurunearekin lotutako aldagaien hasierako multzoa, objektu gisa."
+	},
+	"hterm_pref_find_result_color": {
+		"message": "Atzeko planoaren kolorea, bilaketa-emaitzak nabarmentzeko."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Atzeko planoaren kolorea, hautatutako bilaketa-emaitza nabarmentzeko."
+	},
+	"hterm_pref_font_family": {
+		"message": "Terminalaren testuaren letra-familia lehenetsia."
+	},
+	"hterm_pref_font_size": {
+		"message": "Letra-tamaina lehenetsia pixeletan."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS font-smoothing propietatea."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Beste kolore-atributurik ez duen testuaren aurreko planoaren kolorea."
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Idazten duzunean saguaren kurtsorea automatikoki ezkutatu behar den ala ez zehazten du. Modu lehenetsian, automatikoki hautematen da plataformak edo sistema eragileak hobespen hau kudeatzen duen ala ez.\n\nOharra: baliteke sistema eragileak ezarpen hau ordeztea; hortaz, litekeena da beti aktibatu ezin izatea."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Egiazko gisa ezartzen bada, \"Hasiera\" edo \"Amaiera\" teklak terminalaren korritze-barra kontrolatuko du, eta \"Maius + Hasiera\" edo \"Maius + Amaiera\" lasterbideak urruneko ostalarira bidaliko dira. Gezurrezko gisa ezartzen bada, berriz, \"Hasiera\" eta \"Amaiera\" tekla urruneko ostalarira bidaliko da, eta \"Maius + Hasiera\" edo \"Maius + Amaiera\" lasterbideak korritze-barra kontrolatuko du."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Teklen ekintzei esleitutako sekuentzien mapa bat. Tekla-sekuentziek zero tekla aldatzaile edo gehiago dituzte, eta, ondoren, tekla-kode bat. Tekla-kodeak zenbaki hamartarrak edo hexadezimalak izan daitezke, edo teklaren identifikatzaile bat. Teklen ekintzak ostalarira bidaliko den kate gisa zehatz daitezke, edo ekintza-identifikatzaile gisa. Formatuari buruzko azalpen osoa ikusteko, joan https://goo.gl/LWRndr helbidera.\n\nHona hemen teklatuko aginduen adibide batzuk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Kaixo denoi'\"\n}"
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Sistema eragilearen teklatuko agindu arruntak errespetatu behar diren ala ez zehazten du, hterm erabiltzeko erreserbatutakoen ordez."
+	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Terminalaren pantailako lerroen arteko tartearen betetzearen tamaina pixeletan."
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Egiazko gisa ezartzen bada, multimedia-teklak eta dagozkien funtzio-teklak baliokide bihurtuko dira. Gezurrezko gisa ezartzen bada, berriz, arakatzaileak kontrolatuko ditu teklak."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Bidali IHES teklaren aurrizki bat, Meta tekla sakatuta eduki bitartean beste tekla bat sakatzean.\n\nAdibidez, gaituta badago eta Meta + K sakatzen bada, ^[k bidaliko da (Ihes + K sakatu izan bazenu bezala). Desgaituta badago, berriz, \"k\" baino ez da bidaliko."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Edukia itsasteko erabiltzen den saguaren botoia.\n\nHautemate automatikorako, saguaren erdiko botoia erabiltzen da X11 ez darabilten plataformetan (Chrome OS barne). X11 darabilten plataformetan, berriz, saguaren eskuineko botoia erabiltzen da (leiho-kudeatzaileak erdiko botoia erabiltzen baitu edukia itsasteko).\n\n0 == ezkerreko botoia (nagusia).\n1 == erdiko botoia (osagarria).\n2 == eskuineko botoia (bigarren mailakoa).\n\nAukera hau ez da eskuineko botoiarekin itsasteko ezarpenaren araberakoa.\n\nOharra: botoi nagusia eta bigarren-mailako botoia zure ordez kudeatzen dira pertsona eskuin eta ezkerrentzako saguetan."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Itsatsi saguaren eskuineko botoiarekin klik egitean.\n\nAukera hau ez da \"mouse-paste-button\" ezarpenaren araberakoa.\n\nOharra: botoi nagusia eta bigarren-mailako botoia zure ordez kudeatzen dira pertsona eskuin eta ezkerrentzako saguetan."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Egiazko gisa ezartzen bada, \"Orrian gora\" edo \"Orrian behera\" teklak terminalaren korritze-barra kontrolatuko du, eta \"Maius + Orrian gora\" edo \"Maius + Orrian behera\" lasterbideak urruneko ostalarira bidaliko dira. Gezurrezko gisa ezartzen bada, berriz, \"Orrian gora\" edo \"Orrian behera\" tekla urruneko ostalarira bidaliko da, eta \"Maius + Orrian gora\" edo \"Maius + Orrian behera\" lasterbideak korritze-barra kontrolatuko du."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Alt + 1-9 lasterbideak arakatzailera eramaten diren ala ez zehazten du.\n\nLagungarria da arakatzaileko fitxa batean hterm exekutatzen denean; horrela, ez duzu galduko \"Aldatu fitxaz/aplikazioz\" lasterbidea. Fitxa batean exekutatzen ez denean, berriz, hobe da teklak ostalarira bidaltzea, vim edo emacs-en erabili ahal izateko.\n\nEgiazko gisa ezartzen bada, arakatzaileak Alt + 1-9 lasterbideak kudeatuko ditu. Gezurrezko gisa ezartzen bada, berriz, Alt + 1-9 lasterbideak ostalarira bidaliko dira. Balio nulua ezartzen bada, automatikoki hautemango da, arakatzailearen plataforma eta leiho motaren arabera."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ktrl + N lasterbidea arakatzailera eramaten den ala ez zehazten du.\n\nEgiazko gisa ezartzen bada, arakatzaileak \"Beste leiho bat\" lasterbide gisa kudeatuko du Ktrl + N. Gezurrezko gisa ezartzen bada, berriz, Ktrl + N ostalarira bidaliko da."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Ktrl + 1-9 lasterbideak arakatzailera eramaten den ala ez zehazten du.\n\nLagungarria da hterm arakatzailearen fitxa batean exekutatzen denean; horrela, ez duzu galduko \"Aldatu fitxaz\" lasterbidea. Fitxa batean exekutatzen ez denean, berriz, hobe da teklak ostalarira bidaltzea, vim edo emacs-en erabili ahal izateko.\n\nEgiazko gisa ezartzen bada, arakatzaileak Ktrl + 1-9 lasterbideak kudeatuko ditu. Gezurrezko gisa ezartzen bada, berriz, Ktrl + 1-9 lasterbideak ostalarira bidaliko dira. Balio nulua ezartzen bada, automatikoki hautemango da, arakatzailearen plataforma eta leiho motaren arabera."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ktrl + T arakatzailera eramaten den ala ez zehazten du.\n\nEgiazko gisa ezartzen bada, arakatzaileak \"Beste fitxa bat\" lasterbide gisa kudeatuko du Ktrl + T. Gezurrezko gisa ezartzen bada, berriz, Ktrl + T ostalarira bidaliko da."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "\"Ktrl + tabuladorea\" eta \"Ktrl + Maius + tabuladorea\" arakatzailera eramaten diren ala ez zehazten du.\n\nEgiazko gisa ezartzen bada, arakatzaileak \"Hurrengo/aurreko fitxa\" lasterbide gisa kudeatuko ditu \"Ktrl + tabuladorea\" eta \"Ktrl + Maius + tabuladorea\". Gezurrezko gisa ezartzen bada, berriz, tabuladorea ostalarira bidaliko da Ktrl edo Maius gabe."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ktrl + W arakatzailera eramaten den ala ez zehazten du.\n\nEgiazko gisa ezartzen bada, arakatzaileak \"Itxi fitxa\" lasterbide gisa kudeatuko du Ktrl + W. Gezurrezko gisa ezartzen bada, berriz, Ktrl + W ostalarira bidaliko da."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Meta + 1-9 lasterbideak arakatzailera eramaten diren ala ez zehazten du.\n\nLagungarria da hterm arakatzailearen fitxa batean exekutatzen denean; horrela, ez duzu galduko \"Aldatu fitxaz\" lasterbidea. Fitxa batean exekutatzen ez denean, berriz, hobe da teklak ostalarira bidaltzea, vim edo emacs-en erabili ahal izateko.\n\nEgiazko gisa ezartzen bada, arakatzaileak Meta + 1-9 lasterbideak kudeatuko ditu. Gezurrezko gisa ezartzen bada, berriz, Meta + 1-9 lasterbideak ostalarira bidaliko dira. Balio nulua ezartzen bada, automatikoki hautemango da, arakatzailearen plataforma eta leiho motaren arabera."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Meta + V arakatzailera eramaten den ala ez zehazten du.\n\nSistema batzuetan, edukia itsasteko erabiltzen da."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Egiazko gisa ezartzen bada, arrastatzen eta jaregiten den testua terminalean itsatsiko da.\nGezurrezko gisa ezartzen bada, berriz, testuari ez ikusi egingo zaio."
+	},
+	"hterm_pref_screen_border_color": {
+		"message": "Terminalaren pantaila inguratzen duen ertzaren kolorea.\n\nTerminalaren pantaila inguratzen duen ertzaren kolorea kontrolatzen du, pantailaren ertzetan ikusgai izango den lerro bat sortzeko."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Terminalaren pantaila inguratzen duen ertzaren tamaina pixeletan.\n\nTerminalaren pantaila inguratzen duen ertzaren tamaina kontrolatzen du, pantailaren ertzetan ikusgai izango den lerro bat sortzeko."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Terminalaren pantaila inguratzen duen betetzearen tamaina pixeletan.\n\nTerminalaren pantaila inguratzen duen betetzearen tamaina kontrolatzen du, erabiltzaileak pantailaren ertzetan ikusgai izango den betetzea gehitu ahal izateko."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Edozein tekla sakatzean beheraino egin behar duen ala ez zehazten du."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Terminalaren irteeran beheraino egin behar duen ala ez zehazten du."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Pantailaren ordezko bufferra erabiltzen denean eta DECCKM (aplikazioaren kurtsore-teklak) aktibo dagoenean, saguaren gora/behera egiteko gurpilaren gertaerek gezi-teklak emulatuko dituzte.\n\nBehin-behinean desgaitzeko, mantendu sakatuta Maius tekla.\n\nBilagailuak erabiltzean (less), man orriak edo testu-editoreak irakurtzean (vi/nano) edo screen/tmux erabiltzean gertatu ohi da."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Saguaren gora/behera egiteko gurpilaren gertaeren biderkatzailea, zeina pixeletan neurtzen baita.\n\nOrrian gora/behera egiteko abiadura aldatzen du."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Korritze-barra bertikalaren modua."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "\"Maius + Txertatu\" edukia itsasteko erabiltzen den edo urruneko ostalarira bidaltzen den zehazten du."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Terminalaren kodeketa lehenetsia (DOCS).\n\nISO-2022 arauak karaktere-mapen itzulpenak gaitzen ditu (esaterako, grafikoen mapak).\nUTF-8 formatuak haien bateragarritasuna desaktibatzen du.\n\nAldaera blokeatuta badago, ezin da aldatu kodifikazioa terminalaren ihes-sekuentzien bidez exekuzio-denboran egon bitartean.\n\nAplikazio zaharren errendatzea ondo funtzionatzen ez duela hauteman ez baduzu, jarraitu UTF-8 erabiltzen."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Arakatzaile edo sistema eragile lehenetsiaren kopiatzeko jokabidea erabili behar den ala ez zehazten du.\n\nEman kopiatze-gertaera kudeatzeko baimena zuzenean arakatzaileari edo sistema eragileari. Hala, baliteke kopiatzeko eginbidea onartzen ez duten sistema batzuekiko dagoen bateragarritasuna hobetzea, baina testuen hautapena ez da izango hain eraginkorra.\n\nEsaterako, automatikoki zatitutako lerro luzeak oraindik dauzkaten jatorrizko lerro-jauziekin kopiatuko dira."
+	},
+	"hterm_pref_user_css": {
+		"message": "Terminalaren dokumentuaren barnean sartu behar den erabiltzailearen estilo-orriaren URLa."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Terminalaren estiloa zehazteko CSSko testu pertsonalizatua."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Karaktereak hautapenaren ezkerrean (hasieran) lerrokatzeari uzteko adierazpen erregularra.\n\nMota honetako karaktereak karaktere zehatz batzuk baztertzeko erabili ohi dira.\nModu lehenetsian, \"~\" eta \".\" onartzen ditugu, bide-izenak karaktere horiekin hasten direlako normalean."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Karaktere guztiak erdian lerrokatzeko adierazpen erregularra.\n\nMota honetako karaktereak karaktere zehatz batzuk baztertzeko erabili ohi dira.\n\nAbiapuntuaren inguruko hautapena zabaltzeko erabiltzen da."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Karaktereak hautapenaren eskuinean (amaieran) lerrokatzeari uzteko adierazpen erregularra.\n\nMota honetako karaktereak karaktere zehatz batzuk baztertzeko erabili ohi dira."
+	},
+	"hterm_space_character": {
+		"message": "Zuriunea"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Itxura (letrak, koloreak, irudiak)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Kopiatu eta itsatsi"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Kodeketa"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Luzapenak"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Teklatua"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Askotarikoak"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Gora/Behera egitea"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Soinuak"
+	},
+	"identity_label": {
+		"message": "Identitatea"
+	},
+	"import_link_aria_label": {
+		"message": "fitxategien inportazioa"
+	},
+	"import_link_label": {
+		"message": "Inportatu…"
+	},
+	"initializing_relay": {
+		"message": "Birtransmisio-zerbitzaria bilatzen honen bidez: $1."
+	},
+	"json_parse_error": {
+		"message": "Ezin izan dira analizatu JSON formatuko datuak \"$1\" hobespenean ($2)."
+	},
+	"known_hosts_empty": {
+		"message": "Ez dago ostalari ezagunik; beraz, ez dago ahazteko ezer."
+	},
+	"known_hosts_prompt": {
+		"message": "Hautatu ahaztu beharreko ostalaria [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "Ostalari ezagunak:"
+	},
+	"licenses": {
+		"message": "Lizentziak"
+	},
+	"licenses_expand_link": {
+		"message": "Erakutsi lizentzia"
+	},
+	"licenses_title": {
+		"message": "Kode irekiko lizentziak"
+	},
+	"loading_label": {
+		"message": "Kargatzen…"
+	},
+	"migrate_to_ext": {
+		"message": "Oharra: migratu Secure Shell-en luzapen berrira ($1).\nChrome-ren aplikazioak zaharkituta daude; beraz, bertsio honek ez du eguneratzerik jasoko.\nXehetasun gehiago lortzeko, irakurri migrazio-gida ($2)."
+	},
+	"missing_param": {
+		"message": "Parametro bat falta da: $1."
+	},
+	"mount_button_label": {
+		"message": "SFTP erabilgarri jartzeko prozesua"
+	},
+	"mount_path_label": {
+		"message": "Erabilgarri jartzeko prozesuaren bide-izena"
+	},
+	"mounted_message": {
+		"message": "Erabilgarri dago"
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Irauli fitxategi bat terminalera"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Aldatu lan-direktorioa"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Aldatu bide-izenen multzoa"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Aldatu bide-izenen baimenak"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Aldatu bide-izenen jabea"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Garbitu oraingo terminalaren pantaila."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Kopiatu fitxategi bat arbelean (modu lehenetsian: 10 MiB hasieratik)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Kopiatu dira $1 byte arbelean"
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Aldatu kolorearen erabilera"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Kopiatu urruneko bide-izen batera daraman urruneko bide-izen bat"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Ezabatu fitxategiak"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Erakutsi diskoaren estatistikak"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Bide-izena: $1.\n  Fitxategi-sistemaren IDa: $2.\n Guztira: $3.\n  Erabilita: $4 ($5%).\n Erabilgarri: $6 (pribilegiorik gabeko erabiltzaileentzat) eta $7 (administratzaileentzat)."
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Deskonektatu"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "$1 fitxategia $2 gisa deskargatzen da"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Deskargatu fitxategiak"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Laguntza-pantaila hau"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Zerrendatu direktorioaren xehetasunak"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Sortu helbururako esteka bat bide-izenean"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Sortu direktorioak"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Aldatu fitxategi baten izena"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Ezarri eskaeraren katea"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Kargatu fitxategiak"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "$1 fitxategia $2 gisa kargatzen da ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Erakutsi oraingo lan-direktorioa"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Urruneko lan-direktorioa: $1."
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Irakurri esteka sinbolikoak"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Normalizatu bide-izenak"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Berrekin fitxategiak kargatzeari"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Kendu fitxategiak"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Ezabatu direktorio hutsak"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Erakutsi fitxategi txertatuak"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Luzapenak:"
+	},
+	"nasftp_cmd_stat_extensions_line": {
+		"message": "  $1: $2."
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Erakutsi fitxategiaren egoera"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Fitxategia: $1.\n  Tamaina: $2 byte.\n   Erabiltzailearen IDa: $3.\n   Taldearen IDa: $4.\nSarbidea: $5.\n Atzitze-ordua: $6.\n Aldatze-ordua: $7."
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Sortu helbururako esteka sinboliko bat bide-izenean"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Moztu bide-izena 0 bytera"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  zerbitzarien luzapenak:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Erakutsi oraingo protokoloaren bertsioa"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP protokoloaren bertsioari buruzko informazioa:\n  tokikoa: $1.\n  zerbitzaria: $2."
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: fitxategiaren amaiera."
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: ez da aurkitu fitxategia."
+	},
+	"nasftp_error_file_reading": {
+		"message": "Ezin izan da irakurri $1: $2."
+	},
+	"nasftp_error_internal": {
+		"message": "Kudeatu gabeko barneko errorea. Eman akats baten berri: $1."
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: \"$2\" eremuan, zenbakiak ez du balio ($3)."
+	},
+	"nasftp_error_message": {
+		"message": "ERROREA: $1."
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: beharrezko \"$2\" luzapena ez dago erabilgarri zerbitzarian"
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2 ez da ohiko fitxategi bat."
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: ez dago behar adina argumenturik."
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: baimena ukatu da."
+	},
+	"nasftp_error_server_error": {
+		"message": "$1: $2."
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: argumentu gehiegi daude."
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: agindu ezezaguna."
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: eginbide esperimental ezezaguna ($2)."
+	},
+	"nasftp_force_quit": {
+		"message": "Behartu irtetera"
+	},
+	"nasftp_progress_summary": {
+		"message": "$1 byte transferitu dira $2 segundotan ($3/s)"
+	},
+	"nassh_options_error": {
+		"message": "Aukera ezezaguna: $1."
+	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
+	"new_window_menu_label": {
+		"message": "Ireki beste leiho bat"
+	},
+	"ok_button_label": {
+		"message": "Ados"
+	},
+	"omnibox_default": {
+		"message": "<url><match>erabiltzailea@ostalari-izena[:ataka]</match></url> Konektatu gordetako profil batera edo SSH darabilen beste sistema batera"
+	},
+	"open_as_window_tip": {
+		"message": "[Profesionalentzako aholkua] Erabili \"Ireki leiho gisa\" edo \"Pantaila osoa\" aukerak, Ktrl + W lasterbideak terminaleko leihoa itxi ez dezan.\n[Profesionalentzako aholkua] Informazio gehiago lortzeko, joan $1 helbidera."
+	},
+	"plugin_loading": {
+		"message": "$1 programa kargatzen…"
+	},
+	"plugin_loading_complete": {
+		"message": " eginda."
+	},
+	"plugin_loading_failed": {
+		"message": " huts egin du. :("
+	},
+	"popup_connect_tooltip": {
+		"message": "Eduki sakatuta Ktrl, esteka beste fitxa batean irekitzeko."
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell-eko hobespenen Babeskopia.json fitxategia"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSHren fitxategiak"
+	},
+	"preferences_header_terminal": {
+		"message": "Terminalaren ezarpenak"
+	},
+	"preferences_header_uri": {
+		"message": "URIaren kudeatzaileak"
+	},
+	"preferences_reset": {
+		"message": "Berrezarri dira hobespen guztiak"
+	},
+	"protocol_register_button": {
+		"message": "Erregistratu protokolo-kudeatzaileak"
+	},
+	"protocol_register_explain": {
+		"message": "Beheko botoia protokolo bateragarri guztietarako kudeatzaileak erregistratzen saiatuko da. Horrela, ssh:// motako estekak zuzenean kudea ditzakegu. Arakatzailean protokolo bakoitzerako eskaera bat bistaratuko da; horietako bakoitza berretsi edo onartu beharko duzu. Ez bada bistaratzen eskaerarik, joan hurrengo atalera arazoak konpontzeko aholkuak ikusteko."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Dagoeneko kudeatzaileak erregistratu baditugu edo aurreko erregistro-saiakerak ukatu badira, ez da eskaera gehiagorik bistaratuko. Ireki beheko leihoa eta egiaztatu SSH, SFTP eta gainerako ataletan erregistratutako kudeatzailearen ezarpenak. Programa blokeatuta badago, ezarpen horiek ezaba ditzakezu; horrela, berriro erregistratzen saia zaitezke. Programa lehendik erregistratuta badago, baina ez badago kudeatzaile lehenetsi gisa ezarrita, kudeatzaile lehenetsia ere alda dezakezu."
+	},
+	"protocol_register_options_link": {
+		"message": "Protokoloen erregistroa"
+	},
+	"protocol_register_settings_button": {
+		"message": "Ireki erregistratutako kudeatzaileen ezarpenak"
+	},
+	"protocol_register_title": {
+		"message": "Secure Shell protokoloaren kudeatzailearen erregistroari buruzko laguntza"
+	},
+	"read_size_label": {
+		"message": "Irakurketa-tamaina (KiB)"
+	},
+	"reconnect_message": {
+		"message": "Zer egin nahi duzu: berriro konektatu (R) (hori da aukera lehenetsia), beste konexio bat aukeratu (C) edo irten (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Errore bat gertatu da birtransmisio-zerbitzariaren bidez autentifikatzean: $1."
+	},
+	"relay_retry": {
+		"message": "Berriro saiatzen…"
+	},
+	"remove_label": {
+		"message": "Kendu"
+	},
+	"request_pin_prompt": {
+		"message": "Idatzi PINa $1 gakoa desblokeatzeko $2 txartel-irakurgailuan ($3)' ($4 saiakera geratzen dira):"
+	},
+	"restore_prefs": {
+		"message": "Leheneratu babeskopia"
+	},
+	"save_label": {
+		"message": "Gorde"
+	},
+	"select_label": {
+		"message": "Hautatu"
+	},
+	"send_feedback_label": {
+		"message": "Bidali iritzia"
+	},
+	"shortcut_list_aria_label": {
+		"message": "gordetako konexioak"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Instalatu Smart Card Connector aplikazioa: $1."
+	},
+	"ssh_argstr_label": {
+		"message": "SSHren argumentuak"
+	},
+	"ssh_cert_check_error": {
+		"message": " huts egin du: $1."
+	},
+	"ssh_cert_check_refresh": {
+		"message": "SSHren ziurtagiria freskatzen…"
+	},
+	"ssh_cert_check_result": {
+		"message": " $1 ordu gutxi gorabehera, iraungi arte"
+	},
+	"ssh_cert_check_start": {
+		"message": "SSHren ziurtagiriei iraungitzeko zenbat falta zaien egiaztatzen…"
+	},
+	"stream_open_error": {
+		"message": "Ezin izan da ireki $1 konexioa: $2."
+	},
+	"terminal_clear_menu_label": {
+		"message": "Garbitu terminala"
+	},
+	"terminal_font_unavailable": {
+		"message": "$1 ez dago erabilgarri"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Gehitu SSH bidezko konexio bat"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Lehenetsia]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Garatzaileen ezarpenak"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Editatu SSH bidezko konexio bat"
+	},
+	"terminal_home_import_identity": {
+		"message": "Inportatu"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "SSHko konexio berria"
+	},
+	"terminal_home_ssh": {
+		"message": "SSH bidezko konexioa"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Agindua"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Zehaztu helmuga \"erabiltzaileizena@ostalariizena\" formatuan"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminalaren ezarpenak"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI koloreak"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Leuntzea"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Txirrina"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Keinua"
+	},
+	"terminal_name_pref_color": {
+		"message": "Kolorea"
+	},
+	"terminal_name_pref_font": {
+		"message": "Letra"
+	},
+	"terminal_name_pref_image": {
+		"message": "Irudia"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Forma"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Ikusgai"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "Hautatu Alt Gr tekla hautemateko analisi heuristiko bat.\n\n\"Auto\": navigator.language propietatearen araberako hautemate automatikoa:\n      'en-us' => \"Disable\"; bestela, => 'right-alt'.\n\"Disable\": desgaitu Alt Gr teklaren bidezko simulazio guztiak.\n\"ctrl-alt\": \"Ktrl + Alt\" eta \"Alt Gr\" baliokideak direla interpretatzen du.\n\"left-alt\": ezkerreko \"Alt\" eta \"Alt Gr\" baliokideak direla interpretatzen du.\n\"right-alt\": eskuineko \"Alt\" eta \"Alt Gr\" baliokideak direla interpretatzen du."
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Ezarri paleta lehenetsiaren koloreak."
+	},
+	"terminal_pref_bell": {
+		"message": "Terminalaren txirrina entzun egin daiteke."
+	},
+	"terminal_preview_label": {
+		"message": "Aurreikusi"
+	},
+	"terminal_profile_label": {
+		"message": "Profil hau"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Berrezarri terminala"
+	},
+	"terminal_settings_about_label": {
+		"message": "Honi buruz"
+	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Irudia handiegia da"
+	},
+	"terminal_settings_background_image_help": {
+		"message": "Hautatu atzeko planoko irudi-fitxategia ordenagailutik."
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Automatikoa"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Desgaitu"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Barra bertikala"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Blokeatu"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Azpimarratua"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Ziur gaiaren balio lehenetsiak berrezarri nahi dituzula?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Berrezarri gaia"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Berrezarri"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Klasikoa"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Iluna"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Ilunabarra"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Basoa"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Gandua"
+	},
+	"terminal_theme_light_label": {
+		"message": "Argia"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized iluna"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized argia"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "0 kolorea: beltza"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "1. kolorea: gorria"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "10. kolorea: berde argia"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "11. kolorea: hori argia"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "12. kolorea: urdin argia"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "13. kolorea: magenta argia"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "14. kolorea: zian argia"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "15. kolorea: zuri argia"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "2. kolorea: berdea"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "3. kolorea: horia"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "4. kolorea: urdina"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "5. kolorea: magenta"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "6. kolorea: ziana"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "7. kolorea: zuria"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "8. kolorea: beltz argia"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "9. kolorea: gorri argia"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Itxura"
+	},
+	"terminal_title_pref_background": {
+		"message": "Atzeko planoa"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Jokabidea"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Kurtsorea"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Teklatua"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Teklatua eta sagua"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Sagua"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Korritze-barra"
+	},
+	"terminal_title_pref_text": {
+		"message": "Testua"
+	},
+	"terminal_title_settings": {
+		"message": "Ezarpenak"
+	},
+	"terminal_title_terminal": {
+		"message": "Terminala"
+	},
+	"terminal_title_theme": {
+		"message": "Gaia"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Konektatu Internetera eta saiatu berriro."
+	},
+	"tip_1": {
+		"message": "Estekak irekitzeko, eduki sakatuta Ktrl (macOS darabilten gailuetan, Cmd da tekla) estekan klik egiten duzun bitartean"
+	},
+	"tip_10": {
+		"message": "Ktrl + Maius + N lasterbideak beste saio bat ireki dezake leiho batean exekutatzen denean."
+	},
+	"tip_11": {
+		"message": "Teklak edo lasterbideak berriro esleitzeko, joan https://goo.gl/LWRndr helbidera"
+	},
+	"tip_12": {
+		"message": "SSHren autentifikaziorako Yubikey-ak eta beste txartel adimendun batzuk erabiltzeko, joan https://goo.gl/Hu2o3v helbidera"
+	},
+	"tip_13": {
+		"message": "Irudi txertatuak bistaratzeko, joan https://goo.gl/MnSysj helbidera"
+	},
+	"tip_14": {
+		"message": "Ktrl sakatuta mantentzen baduzu saguaren eskuineko botoiarekin klik egiten duzun bitartean, laster-menu bat irekiko da."
+	},
+	"tip_2": {
+		"message": "Arakatzailean jakinarazpenak bistaratzeko hterm-notify erabili nahi baduzu, joan https://goo.gl/ZNxGdF helbidera"
+	},
+	"tip_3": {
+		"message": "\"ssh<Tab><profile name>\" idatzita arakatzaileko barratik konektatu nahi baduzu, joan https://goo.gl/V7o8ki helbidera"
+	},
+	"tip_4": {
+		"message": "Chrome OS-k SFTParen bidez instala ditzake fitxategi-sistemak, eta Fitxategiak aplikazioaren bidez arakatu. Erabili \"SFTP bidezko instalazioa\" \"Konektatu\" ordez."
+	},
+	"tip_5": {
+		"message": "Web-orrietan ssh:// motako estekak erabilita konektatzeko edo laster-markak gordetzeko, joan https://goo.gl/zS8EZD helbidera"
+	},
+	"tip_6": {
+		"message": "Oinarrizko 16 kolore, 256 kolore edo 24 biteko koloreak erabilita irteerak edo eskaerak koloreztatzeko, joan http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html helbidera"
+	},
+	"tip_7": {
+		"message": "OSC-52 erabilita emacs, vim eta beste editore batzuen edukia arbelean kopiatzeko, joan https://goo.gl/XSnyLo helbidera"
+	},
+	"tip_8": {
+		"message": "chromium-hterm@chromium.org helbide elektronikoaren bidez hterm-en eta Secure Shell-en beste erabiltzaile batzuekin txateatzeko, joan https://goo.gl/RYHiK helbidera"
+	},
+	"tip_9": {
+		"message": "Akats bat aurkitu duzu?  Eginbide berri bat eskatu nahi duzu?  Azal iezaguzu zer egin nahi duzun. Horretarako, joan https://goo.gl/vb94JY helbidera."
+	},
+	"unexpected_error": {
+		"message": "Ustekabeko errore bat gertatu da. Xehetasun gehiago lortzeko, eman begiratu bat JavaScript-en kontsolari."
+	},
+	"unknown_ssh_client_version": {
+		"message": "SSHren bertsio ezezaguna: $1."
+	},
+	"unmount_button_label": {
+		"message": "Desmuntatu SFTP"
+	},
+	"url_label": {
+		"message": "URLa"
+	},
+	"welcome_changelog": {
+		"message": "Aldaketen erregistroa / Bertsioaren oharrak: $1."
+	},
+	"welcome_faq": {
+		"message": "Maiz egiten diren galderen erantzunak: $1 (estekak irekitzeko, sakatu Ktrl + esteka)."
+	},
+	"welcome_release_highlights": {
+		"message": "Aldaketa garrantzitsuak $1 bertsioa kaleratu zenetik:"
+	},
+	"welcome_tip_of_day": {
+		"message": "Profesionalentzako ausazko $1. aholkua: $2."
+	},
+	"welcome_version": {
+		"message": "Ongi etorri $1 aplikazioaren $2 bertsiora."
+	},
+	"write_size_label": {
+		"message": "Idazketa-tamaina (KiB)"
+	},
+	"zoom_warning": {
+		"message": "Chrome-ko menuan, ezarri zooma % 100ean"
+	}
+}

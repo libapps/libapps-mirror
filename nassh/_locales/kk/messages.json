@@ -1,0 +1,1277 @@
+{
+	"already_mounted_message": {
+		"message": "Файл жүйесі орнатылып қойған."
+	},
+	"backup_prefs": {
+		"message": "Сақтық көшірме жасау"
+	},
+	"bad_destination": {
+		"message": "Белгіленген жерді талдау мүмкін емес: $1."
+	},
+	"before_unload": {
+		"message": "Бұл қойындыны жабу осы сеансты ажыратады."
+	},
+	"cache_pin_prompt": {
+		"message": "Осы SSH сеансы үшін PIN коды кэштелсін бе? (y/N):"
+	},
+	"cancel_button_label": {
+		"message": "Бас тарту"
+	},
+	"clear_known_hosts_menu_label": {
+		"message": "Белгілі SSH хостарын өшіру"
+	},
+	"clear_label": {
+		"message": "Өшіру"
+	},
+	"command_complete": {
+		"message": "$1 пәрмені $2 күй кодымен шықты."
+	},
+	"command_not_supported": {
+		"message": "$1 пәрменіне Chrome-ның осы нұсқасында қолдау көрсетілмейді."
+	},
+	"command_startup_failed": {
+		"message": "$1 іске қосылмады: $2."
+	},
+	"confirm_button_label": {
+		"message": "Растау"
+	},
+	"connect_button_label": {
+		"message": "Қосылу"
+	},
+	"connect_or_exit_message": {
+		"message": "Басқа байланысты таңдау (C) немесе шығу (X) керек пе?"
+	},
+	"connecting": {
+		"message": "$1 мекенжайына қосылуда…"
+	},
+	"connection_dialog_name": {
+		"message": "Қосылу диалогтік терезесі"
+	},
+	"console_crosh_options_notice": {
+		"message": "Арнайы опциялар беті бар екенін білген бе едіңіз?\nЕнді 'term_' тікелей өзгерту қажет емес.\nОны ашу үшін $1 немесе $2 басыңыз."
+	},
+	"console_nassh_options_notice": {
+		"message": "Арнайы опциялар беті бар екенін білген бе едіңіз?\nЕнді 'term_' тікелей өзгерту қажет емес.\n$1"
+	},
+	"delete_button_label": {
+		"message": "Жою"
+	},
+	"disconnect_message": {
+		"message": "Бағдарлама $1 күй кодымен шықты."
+	},
+	"faq_menu_label": {
+		"message": "Сұрақ-жауап"
+	},
+	"field_argstr_placeholder": {
+		"message": "қосымша пәрмен жолы аргументтері"
+	},
+	"field_description_aria_label": {
+		"message": "сипаттама"
+	},
+	"field_description_placeholder": {
+		"message": "username@hostname немесе еркін пішінді мәтін"
+	},
+	"field_hostname_aria_label": {
+		"message": "хост атауы"
+	},
+	"field_hostname_placeholder": {
+		"message": "хост атауы"
+	},
+	"field_mount_path_placeholder": {
+		"message": "әдепкі жол – пайдаланушының үй каталогі"
+	},
+	"field_nassh_options_aria_label": {
+		"message": "SSH ретрансляция серверінің опциялары"
+	},
+	"field_nassh_options_placeholder": {
+		"message": "SSH ретрансляция серверінің опциялары"
+	},
+	"field_port_aria_label": {
+		"message": "порт"
+	},
+	"field_port_placeholder": {
+		"message": "порт"
+	},
+	"field_terminal_profile_placeholder": {
+		"message": "әдепкі"
+	},
+	"field_username_aria_label": {
+		"message": "пайдаланушы аты"
+	},
+	"field_username_placeholder": {
+		"message": "пайдаланушы аты"
+	},
+	"file_label": {
+		"message": "Файл"
+	},
+	"found_relay": {
+		"message": "Ретрансляция сервері табылды: $1"
+	},
+	"get_profile_error": {
+		"message": "ҚАТЕ: $1 профилін жүктеу мүмкін емес:\n$2"
+	},
+	"hterm_announce_current_screen_header": {
+		"message": "$1% айналдырылды,"
+	},
+	"hterm_button_allow_always": {
+		"message": "Әрқашан рұқсат беру"
+	},
+	"hterm_button_allow_session": {
+		"message": "Осы сеансқа рұқсат беру"
+	},
+	"hterm_button_block": {
+		"message": "Бөгеу"
+	},
+	"hterm_button_close": {
+		"message": "Жабу"
+	},
+	"hterm_button_find": {
+		"message": "Табу"
+	},
+	"hterm_button_next": {
+		"message": "Келесі"
+	},
+	"hterm_button_page_down": {
+		"message": "Бір бет төмен"
+	},
+	"hterm_button_page_up": {
+		"message": "Бір бет жоғары"
+	},
+	"hterm_button_previous": {
+		"message": "Алдыңғы"
+	},
+	"hterm_find_result_count": {
+		"message": "$1 сәйкестік"
+	},
+	"hterm_loading_resource_failed": {
+		"message": "$1 жүктелмеді."
+	},
+	"hterm_loading_resource_start": {
+		"message": "$1 жүктелуде…"
+	},
+	"hterm_name_pref_allow_images_inline": {
+		"message": "Ендірілген кескінді көрсетуге рұқсат беру"
+	},
+	"hterm_name_pref_alt_backspace_is_meta_backspace": {
+		"message": "Alt+Backspace пернесі – Meta+Backspace пернесі"
+	},
+	"hterm_name_pref_alt_gr_mode": {
+		"message": "AltGr пернесі режимі"
+	},
+	"hterm_name_pref_alt_is_meta": {
+		"message": "Alt пернесін Meta пернесі ретінде қарастыру"
+	},
+	"hterm_name_pref_alt_sends_what": {
+		"message": "Alt пернесінің өзгерткішін өңдеу"
+	},
+	"hterm_name_pref_audible_bell_sound": {
+		"message": "Хабарландыру қоңырауының дыбысы (URI)"
+	},
+	"hterm_name_pref_background_color": {
+		"message": "Фон түсі"
+	},
+	"hterm_name_pref_background_image": {
+		"message": "Фондық кескін"
+	},
+	"hterm_name_pref_background_position": {
+		"message": "Фондық кескін орны"
+	},
+	"hterm_name_pref_background_size": {
+		"message": "Фондық кескін өлшемі"
+	},
+	"hterm_name_pref_backspace_sends_backspace": {
+		"message": "Backspace пернесінің қолданылуы"
+	},
+	"hterm_name_pref_character_map_overrides": {
+		"message": "Таңба картасын қайта анықтау"
+	},
+	"hterm_name_pref_clear_selection_after_copy": {
+		"message": "Белгіленген мәтінді автоматты түрде өшіру"
+	},
+	"hterm_name_pref_close_on_exit": {
+		"message": "Шыққанда терезені жабу"
+	},
+	"hterm_name_pref_color_palette_overrides": {
+		"message": "Бастапқы түстер палитрасы"
+	},
+	"hterm_name_pref_copy_on_select": {
+		"message": "Белгіленген мазмұнды автоматты түрде көшіру"
+	},
+	"hterm_name_pref_ctrl_c_copy": {
+		"message": "Ctrl+C арқылы көшіру"
+	},
+	"hterm_name_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Ctrl++/-/0 арқылы масштабтау"
+	},
+	"hterm_name_pref_ctrl_v_paste": {
+		"message": "Ctrl+V арқылы қою"
+	},
+	"hterm_name_pref_cursor_blink": {
+		"message": "Курсордың жыпылықтауы"
+	},
+	"hterm_name_pref_cursor_blink_cycle": {
+		"message": "Курсордың жыпылықтау жиілігі"
+	},
+	"hterm_name_pref_cursor_color": {
+		"message": "Мәтін курсорының түсі"
+	},
+	"hterm_name_pref_cursor_shape": {
+		"message": "Мәтін курсорының пішіні"
+	},
+	"hterm_name_pref_desktop_notification_bell": {
+		"message": "Хабарландыру қоңыраулары үшін жұмыс үстеліне шығатын хабарландырулар жасау"
+	},
+	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous стандарты үшін екі баған қолдану"
+	},
+	"hterm_name_pref_enable_8_bit_control": {
+		"message": "UTF-8 емес C1 басқару таңбаларын қолдау"
+	},
+	"hterm_name_pref_enable_blink": {
+		"message": "Жыпылықтайтын мәтінді қосу"
+	},
+	"hterm_name_pref_enable_bold": {
+		"message": "Қалың қаріпті мәтін"
+	},
+	"hterm_name_pref_enable_bold_as_bright": {
+		"message": "Қалың қаріпті мәтінмен ашық түстерді қолдану"
+	},
+	"hterm_name_pref_enable_clipboard_notice": {
+		"message": "Мазмұнды көшіргенде хабарландыру көрсету"
+	},
+	"hterm_name_pref_enable_clipboard_write": {
+		"message": "Буферге қашықтан жазуға рұқсат беру"
+	},
+	"hterm_name_pref_enable_csi_j_3": {
+		"message": "Кері айналдыру буферін өшіруге рұқсат беру (CSI-J-3)"
+	},
+	"hterm_name_pref_enable_dec12": {
+		"message": "Мәтін курсорының жыпылықтауын өзгертуге рұқсат беру"
+	},
+	"hterm_name_pref_enable_resize_status": {
+		"message": "Өлшемді өзгерткенде терминал өлшемдерін көрсету"
+	},
+	"hterm_name_pref_environment": {
+		"message": "Қоршаған ортаның айнымалы мәндері"
+	},
+	"hterm_name_pref_find_result_color": {
+		"message": "Іздеу нәтижелерін бөлектеу түсі"
+	},
+	"hterm_name_pref_find_result_selected_color": {
+		"message": "Таңдалған іздеу нәтижелерін бөлектеу түсі"
+	},
+	"hterm_name_pref_font_family": {
+		"message": "Мәтін қаріптерінің тобы"
+	},
+	"hterm_name_pref_font_size": {
+		"message": "Мәтін қаріптерінің өлшемі"
+	},
+	"hterm_name_pref_font_smoothing": {
+		"message": "Мәтін қарпін біркелкілендіру"
+	},
+	"hterm_name_pref_foreground_color": {
+		"message": "Мәтін түсі"
+	},
+	"hterm_name_pref_hide_mouse_while_typing": {
+		"message": "Тергенде тінтуір курсорын жасыру"
+	},
+	"hterm_name_pref_home_keys_scroll": {
+		"message": "Home/End пернесімен айналдыру"
+	},
+	"hterm_name_pref_keybindings": {
+		"message": "Пернетақтамен байланыстыру/жылдам пәрмендер"
+	},
+	"hterm_name_pref_keybindings_os_defaults": {
+		"message": "Операциялық жүйенің пернетақтамен әдепкі байланыстарын/жылдам пәрмендерді пайдалану"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Жолақ биіктігі бойынша бос жер өлшемі"
+	},
+	"hterm_name_pref_media_keys_are_fkeys": {
+		"message": "Мультимедиа пернелері – F пернелері"
+	},
+	"hterm_name_pref_meta_sends_escape": {
+		"message": "Meta пернесінің өзгерткішін өңдеу"
+	},
+	"hterm_name_pref_mouse_paste_button": {
+		"message": "Тінтуір түймесімен қою"
+	},
+	"hterm_name_pref_mouse_right_click_paste": {
+		"message": "Тінтуірдің оң жақ түймесін басқанда, мазмұн қойылады."
+	},
+	"hterm_name_pref_page_keys_scroll": {
+		"message": "Page Up/Down пернелерімен айналдыру"
+	},
+	"hterm_name_pref_pass_alt_number": {
+		"message": "Alt+1..9 арқылы қойындыны/қолданбаны ауыстыру"
+	},
+	"hterm_name_pref_pass_ctrl_n": {
+		"message": "Ctrl+N арқылы жаңа терезе ашу"
+	},
+	"hterm_name_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 арқылы қойындыны ауыстыру"
+	},
+	"hterm_name_pref_pass_ctrl_t": {
+		"message": "Ctrl+T арқылы жаңа қойынды ашу"
+	},
+	"hterm_name_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab арқылы қойындыны ауыстыру"
+	},
+	"hterm_name_pref_pass_ctrl_w": {
+		"message": "Ctrl+W арқылы қойындыны жабу"
+	},
+	"hterm_name_pref_pass_meta_number": {
+		"message": "Meta+1..9 арқылы қойындыны ауыстыру"
+	},
+	"hterm_name_pref_pass_meta_v": {
+		"message": "Meta+V арқылы қою"
+	},
+	"hterm_name_pref_paste_on_drop": {
+		"message": "Сүйреп апарып қоюға рұқсат ету"
+	},
+	"hterm_name_pref_screen_border_color": {
+		"message": "Экран жиегінің түсі"
+	},
+	"hterm_name_pref_screen_border_size": {
+		"message": "Экран жиегінің өлшемі"
+	},
+	"hterm_name_pref_screen_padding_size": {
+		"message": "Экран шегінісінің өлшемі"
+	},
+	"hterm_name_pref_scroll_on_keystroke": {
+		"message": "Пернені басқанда астыға айналдыру"
+	},
+	"hterm_name_pref_scroll_on_output": {
+		"message": "Жаңа элемент қойылғанда астыға айналдыру"
+	},
+	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Айналдыру дөңгелегімен бағыт пернелерін эмуляциялау"
+	},
+	"hterm_name_pref_scroll_wheel_move_multiplier": {
+		"message": "Тінтуірдің айналдыру дөңгелегінің жылдамдығын көбейткiш"
+	},
+	"hterm_name_pref_scrollbar_visible": {
+		"message": "Айналдыру жолағының көрінуі"
+	},
+	"hterm_name_pref_shift_insert_paste": {
+		"message": "Shift+Insert арқылы қою"
+	},
+	"hterm_name_pref_terminal_encoding": {
+		"message": "Терминалды кодтау"
+	},
+	"hterm_name_pref_use_default_window_copy": {
+		"message": "Браузерге мәтін көшіруді өңдеуге мүмкіндік беру"
+	},
+	"hterm_name_pref_user_css": {
+		"message": "Арнаулы CSS (URI)"
+	},
+	"hterm_name_pref_user_css_text": {
+		"message": "Арнаулы CSS (ендірілген мәтін)"
+	},
+	"hterm_name_pref_word_break_match_left": {
+		"message": "Автоматты белгілеуді тоқтату (солға қарай)"
+	},
+	"hterm_name_pref_word_break_match_middle": {
+		"message": "Сөздерді бөлетін таңбалар"
+	},
+	"hterm_name_pref_word_break_match_right": {
+		"message": "Автоматты белгілеуді тоқтату (оңға қарай)"
+	},
+	"hterm_notify_copy": {
+		"message": "Көшірілді."
+	},
+	"hterm_options_button_label": {
+		"message": "Опциялар"
+	},
+	"hterm_popup_inline_image": {
+		"message": "Ендірілген кескіндер"
+	},
+	"hterm_popup_inline_image_disabled": {
+		"message": "Ендірілген кескіндер өшірулі."
+	},
+	"hterm_pref_allow_images_inline": {
+		"message": "Қашықтағы хосқа терминалдағы кескіндерді көрсетуге рұқсат ету мүмкіндігі.\n\nБіз әдепкісінше таңдау жасалғанша сұраймыз."
+	},
+	"hterm_pref_alt_backspace_is_meta_backspace": {
+		"message": "Егер орнатылса, Chrome OS-тың Alt+Backspace->Delete пернелер тіркесімін қайта тағайындайды, мұндайда Alt+Backspace расында Alt+Backspace болады."
+	},
+	"hterm_pref_alt_gr_mode": {
+		"message": "AltGr анықтау эвристикасын таңдаңыз.\n\n\"null\": navigator.language негізінде автоанықтау:\n      \"en-us\" => \"none\", басқа жағдай => \"right-alt\"\n\"none\": Барлық AltGr эмуляциясын өшіру.\n\"ctrl-alt\": Ctrl+Alt пернелерін AltGr деп пайымдау.\n'\"left-alt\": сол жақтағы Alt пернесін AltGr деп пайымдау.\n\"right-alt\": оң жақтағы Alt пернесін AltGr деп пайымдау."
+	},
+	"hterm_pref_alt_is_meta": {
+		"message": "Alt пернесі Meta қызметін атқара ма, өз қызметінде қала ма – соны анықтайды."
+	},
+	"hterm_pref_alt_sends_what": {
+		"message": "Alt пернесі қалай пайдаланылатынын басқарады.\n\n  escape: ESC префиксін жібереді.\n  8-bit: терілген таңбаға xterm бағдарламасындағыдай 128-ді қосады.\n browser-key: пернені басу оқиғасын күтеді және браузер әрекетін бақылайды. (Браузер Alt реттерінің кейбірі үшін әдепкі әрекетті орындайтын платформада бұл жұмыс істемейді.)"
+	},
+	"hterm_pref_audible_bell_sound": {
+		"message": "Терминал қоңырауы дыбысының URL мекенжайы. Қоңырау естілмеуі үшін, оны бос қалдырыңыз."
+	},
+	"hterm_pref_background_color": {
+		"message": "Басқа түс атрибуттары жоқ мәтіннің фондық түсі."
+	},
+	"hterm_pref_background_image": {
+		"message": "Фондық кескіннің CSS мәні. Суретсіз болуы үшін, оны бос қалдырыңыз.\n\nМысалы:\n  url (https://goo.gl/anedTK)\n   linear-gradient(top bottom, blue, red)"
+	},
+	"hterm_pref_background_position": {
+		"message": "Фондық кескін орнының CSS мәні.\n\nМысалы:\n  10% 10%\n  center"
+	},
+	"hterm_pref_background_size": {
+		"message": "Фондық кескін өлшемінің CSS мәні."
+	},
+	"hterm_pref_backspace_sends_backspace": {
+		"message": "\"True\" мәні орнатылса, Backspace пернесі BS (\"\\x08\", ^H ретінде де белгілі) жібереді. Басқа жағдайда Backspace пернесі \"\\x7f\" жібереді."
+	},
+	"hterm_pref_character_map_overrides": {
+		"message": "Бұл параметр нысан ретінде көрсетіледі. Бұл – сиретілген массив, мұндағы әр сипат – таңбалар жиынының коды, ал мәннің өзі – сиретілген массив түріндегі нысан. Бұл сиретілген массивте әр сипат – алынған таңба, ал мән – көрсетілген таңба.\n\nМысалы:\n{ \"0\": {\n  \"+\": \"\\u2192\",\n  \",\": \"\\u2190\",\n  \"-\": \"\\u2191\",\n  \".\": \"\\u2193\",\n  \"0\": \"\\u2588\"\n} }."
+	},
+	"hterm_pref_clear_selection_after_copy": {
+		"message": "Көшірген соң белгілеуді өшіру керек пе – соны анықтайды."
+	},
+	"hterm_pref_close_on_exit": {
+		"message": "Пәрмен орындалған соң, терезені жабу керек пе – соны анықтайды."
+	},
+	"hterm_pref_color_palette_overrides": {
+		"message": "Әдепкі палитрадағы түстерді қайта анықтайды.\n\nМұны массив немесе нысан ретінде көрсетуге болады. Егер нысан ретінде көрсетілсе, ол сиретілген массив болып саналады, ондағы әр сипат – түстер палитрасындағы сандық индекс.\n\nМәндерді кез келген CSS түс мәні ретінде көрсетуге болады. Бұған #RGB, #RRGGBB, rgb(…), rgba(…) және стандартты X11 rgb.txt файлының бөлігі болып табылатын барлық түс атаулары кіреді.\n\nӘдепкі мән өзгермегеуі тиіс екенін көрсету үшін \"null\" мәнін қолдана аласыз. Бұл әрекет белгілі бір мән массив ретінде көрсетілгенде, кейбір индекстерді өткізіп жіберуде пайдалы.\n\nМысалы, мұның екеуі де 1 түс индексін көк ретінде белгілейді:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]."
+	},
+	"hterm_pref_copy_on_select": {
+		"message": "Тінтуір таңдауын буферге автоматты түрде көшіру."
+	},
+	"hterm_pref_ctrl_c_copy": {
+		"message": "Мән \"true\" болса, Ctrl+C көшіреді, \"false\" болса, хосқа ^C жібереді.\nМән \"true\" болса, Ctrl+Shift+C хосқа ^C жібереді, \"false\" болса – көшіреді."
+	},
+	"hterm_pref_ctrl_plus_minus_zero_zoom": {
+		"message": "Мән \"true\" болса, Ctrl+Плюс (+)/Минус (-)/Нөл (0) масштабтауды басқарады.\nМән \"false\" болса, Ctrl+Плюс (+)/Минус (-)/Нөл (0) масштабтауды басқарады, Ctrl+Минус (-) \"^_\" жібереді, ал Ctrl+Плюс (+)/Нөл (0) ешқандай әрекет орындамайды."
+	},
+	"hterm_pref_ctrl_v_paste": {
+		"message": "Мән \"true\" болса, Ctrl+V қояды, мән \"false\" болса, хосқа \"^V\" жібереді.\nМән \"true\" болса, Ctrl+Shift+V хосқа \"^V\" жібереді, мән \"false\" болса, қояды."
+	},
+	"hterm_pref_cursor_blink": {
+		"message": "Мәтін курсорының әдепкісінше жыпылықтауын анықтайды. Мұны жұмыс барысында да терминалдың escape реттері арқылы ауыстыруға болады."
+	},
+	"hterm_pref_cursor_blink_cycle": {
+		"message": "Мәтін курсорының миллисекундпен жыпылықтау жиілігі.\n\nЕкі элементтен тұратын массив, біріншісі мәтін курсоры қосулы болатын уақыт ұзақтығын, екіншісі оның өшірулі тұратын уақыт ұзақтығын көрсетеді."
+	},
+	"hterm_pref_cursor_color": {
+		"message": "Көрінетін мәтін курсорының түсі."
+	},
+	"hterm_pref_cursor_shape": {
+		"message": "Көрінетін мәтін курсорының пішіні. Мұны жұмыс барысында да терминалдың escape реттері арқылы өзгертуге болады."
+	},
+	"hterm_pref_desktop_notification_bell": {
+		"message": "Мән \"true\" болса, терминалдың фондағы қоңыраулары желі хабарландыруын жасайды. https://www.w3.org/TR/notifications/\n\nХабарландыруларды көрсетуге пайдаланушының рұқсаты қажет. Егер бұл опция мәні \"true\" болып орнатылса, қажет болған жағдайда hterm пайдаланушының рұқсатын алуға талпынады. Егер бұл рұқсат сұрауы пайдаланушы әрекетінен туындамаса, браузерлер оны көрсетпеуі мүмкін.\n\n\"Хабарландырулар\" рұқсаты бар Chrome кеңейтімдерінің хабарландыруларды көрсетуге рұқсаты бар."
+	},
+	"hterm_pref_east_asian_ambiguous_as_two_column": {
+		"message": "East Asian Ambiguous таңбаларының ені екі бағанды ала ма – соны анықтайды."
+	},
+	"hterm_pref_enable_8_bit_control": {
+		"message": "\"True\" мәні 8 биттік басқару таңбаларын қосады, \"false\" оларды елемейді.\n\nБұл параметрге қарамастан, осы басқару таңбаларының екі байттық нұсқаларын пайдаланамыз."
+	},
+	"hterm_pref_enable_blink": {
+		"message": "Мән \"true\" болса, жыпылықтау төлсипаты сақталады. \"False\" болса, еленбейді."
+	},
+	"hterm_pref_enable_bold": {
+		"message": "Мән \"true\" болса, қалың/ашық төлсипаты бар мәтін үшін қалың қою қаріп қолданылады. \"False\" болса, қалыпты қаріп пайдаланылады. \"Null\" болса, автоматты түрде анықталады."
+	},
+	"hterm_pref_enable_bold_as_bright": {
+		"message": "Мән \"true\" болса, қалың төлсипаты бар кез келген мәтін үшін ашық түстер (16 түс палитрасындағы 8-15) қолданылады. Басқа жағдайлардың мәні – \"false\"."
+	},
+	"hterm_pref_enable_clipboard_notice": {
+		"message": "Хост буферге жазғанда, хабарды терминалда көрсету керек пе – соны анықтайды."
+	},
+	"hterm_pref_enable_clipboard_write": {
+		"message": "Қашықтағы хосқа жергілікті жүйе буферіне тікелей жазуға рұқсат беру.\nБұл параметрге қарамастан, оқу рұқсаты ешқашан берілмейді.\n\nБұл OSC-52 сияқты функциялар қолданысын басқару үшін пайдаланылады."
+	},
+	"hterm_pref_enable_csi_j_3": {
+		"message": "Дисплейді тазарту пәрменінің (CSI-J) \"Сақталған жолдарды тазарту функциясы (3-режим) терминалдың кері айналдыру буферін өшіре ала ма – соны анықтайды.\n\nМұны әдепкісінше қосып қою қауіпсіз."
+	},
+	"hterm_pref_enable_dec12": {
+		"message": "Хостың DEC 12 жеке режимін пайдалану арқылы мәтін курсорының жыпылықтау күйін өзгерту талпынысы ескеріледі."
+	},
+	"hterm_pref_enable_resize_status": {
+		"message": "Өзгергенде терминал өлшемдерін көрсету керек пе – соны анықтайды."
+	},
+	"hterm_pref_environment": {
+		"message": "Қоршаған орта айнымалы мәндерінің бастапқы жиыны, мысалы, нысан."
+	},
+	"hterm_pref_find_result_color": {
+		"message": "Іздеу нәтижелерін бөлектеуге арналған фондық түс."
+	},
+	"hterm_pref_find_result_selected_color": {
+		"message": "Таңдалған іздеу нәтижелерін бөлектеуге арналған фондық түс."
+	},
+	"hterm_pref_font_family": {
+		"message": "Терминал мәтініне арналған әдепкі қаріптер тобы."
+	},
+	"hterm_pref_font_size": {
+		"message": "Қаріптің пиксельмен өрнектелген әдепкі өлшемі."
+	},
+	"hterm_pref_font_smoothing": {
+		"message": "CSS қаріпті тегістеу сипаты."
+	},
+	"hterm_pref_foreground_color": {
+		"message": "Басқа түс атрибуттары жоқ мәтіннің негізгі түсі."
+	},
+	"hterm_pref_hide_mouse_while_typing": {
+		"message": "Теру барысында тінтуір курсорын автоматты түрде жасыру керек пе – соны анықтайды. Әдепкісінше платформа/операциялық жүйе мұны өңдейтіні не өңдемейтінін автоматты түрде анықталады.\n\nЕскертпе: операциялық жүйеңіз бұл параметрді қайта анықтауы мүмкін, сондықтан оны әрдайым өшіре алмауыңыз мүмкін."
+	},
+	"hterm_pref_home_keys_scroll": {
+		"message": "Мән \"true\" болса, Home/End терминалдың айналдыру жолағын басқарады, ал Shift+Home/Shift+End қашықтағы хосқа жіберіледі. Мән \"false\" болса, онда Home/End қашықтағы хосқа жіберіледі, ал Shift+Home/Shift+End айналдырады."
+	},
+	"hterm_pref_keybindings": {
+		"message": "Перне әрекеттеріне қатысты пернелер ретінің картасы. Пернелердің реттеріне нөл немесе одан көп өзгерткіш пернелер кіреді, олардан кейін перне коды жүреді. Перне кодтары ондық немесе он алтылық сандар не перне идентификаторы болуы мүмкін. Перне әрекеттері хосқа жіберілетін жол немесе әрекет идентификаторы ретінде көрсетілуі мүмкін. Пішімді толық түсіну үшін қараңыз: https://goo.gl/LWRndr.\n\nПернелерді байланыстыру мысалдары:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"Hello World\"\n}."
+	},
+	"hterm_pref_keybindings_os_defaults": {
+		"message": "Операциялық жүйеге жалпы пернетақта пәрмендерін hterm үшін ұстап қалмай, әдеттегідей қолдана беруге бола ма – соны анықтайды."
+	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Терминал экранының әрбір жолы арасындағы пиксельмен өрнектелетін бос жер өлшемі."
+	},
+	"hterm_pref_media_keys_are_fkeys": {
+		"message": "Мән \"true\" болса, мультимедиа пернелері олардың Fkey баламаларына түрленеді. Мән \"false\" болса, браузерге пернелерді өңдеуге мүмкіндік беріледі."
+	},
+	"hterm_pref_meta_sends_escape": {
+		"message": "Meta пернесін ұстап тұрып пернені басқанда, ESC префиксі жіберіледі.\n\nМысалы, ол қосулы болса, Meta+K басылғанда, \"^[k\" Escape, одан кейін k терілгендей жіберіледі. Өшірулі болса, тек k жіберіледі."
+	},
+	"hterm_pref_mouse_paste_button": {
+		"message": "Қоюға арналған тінтуір түймесі.\n\nАвтоанықтауда X11 емес платформалар (соның ішінде Chrome OS) үшін тінтуірдің ортаңғы түймесін пайдаланамыз. X11 платформасында тінтуірдің оң жақ түймесін пайдаланамыз (себебі терезе менеджері қоюды тінтуірдің ортаңғы түймесімен өңдеуі керек).\n\n0 == сол жақ (негізгі) түйме.\n1 == ортаңғы (көмекші) түйме.\n2 == оң жақ (қосымша) түйме.\n\nБұл опция тінтуірдің оң жақ түймесімен қою параметріне байланысты емес.\n\nЕскертпе: негізгі және қосымша түймелер сол және оң қолға арналған тінтуірлермен басқарылады."
+	},
+	"hterm_pref_mouse_right_click_paste": {
+		"message": "Тінтуірдің оң жақ түймесін басқанда қойылады.\n\nБұл опция \"mouse-paste-button\" параметріне байланысты емес.\n\nЕскертпе: негізгі және қосымша түймелер сол және оң қолға арналған тінтуірлермен басқарылады."
+	},
+	"hterm_pref_page_keys_scroll": {
+		"message": "Мән \"true\" болса, Page Up/Page Down терминалдың айналдыру жолағын басқарады, ал Shift+Page Up/Shift+Page Down қашықтағы хосқа жіберіледі. Мән \"false\" болса, онда Page Up/Page Down қашықтағы хосқа жіберіледі, ал Shift+Page Up/Shift+Page Down айналдырады."
+	},
+	"hterm_pref_pass_alt_number": {
+		"message": "Alt+1..9 браузерге беріле ме – соны анықтайды.\n\nБұл параметр hterm-ді браузер қойындысында іске қосқанда ыңғайлы, мұндайда Chrome-ның \"қойындыға/қолданбаға ауысу\" пернелер тіркесімін жоғалтып алмайсыз. Қойындыда жұмыс істемегенде, бұл пернелерді хосқа жіберген дұрыс, сонда оларды vim немесе emacs-те қолдануға болады.\n\nМән \"true\" болса, Alt+1..9 браузер арқылы өңделеді. Мән \"false\" болса, Alt+1..9 хосқа жіберіледі. Мән \"null\" болса, браузер платформасына және терезе түріне байланысты автоматты түрде анықталады."
+	},
+	"hterm_pref_pass_ctrl_n": {
+		"message": "Ctrl+N браузерге беріле ме – соны анықтайды.\n\nМән \"true\" болса, браузер Ctrl+N пернелер тіркесімін \"жаңа терезе\" ретінде өңдейді. Мән \"false\" болса, Ctrl+N хосқа жіберіледі."
+	},
+	"hterm_pref_pass_ctrl_number": {
+		"message": "Ctrl+1..9 браузерге беріле ме – соны анықтайды.\n\nБұл параметр hterm-ді браузер қойындысында іске қосқанда ыңғайлы, мұндайда Chrome-ның \"қойындыға ауысу\" пернелер тіркесімін жоғалтып алмайсыз. Қойындыда жұмыс істемегенде, бұл пернелерді хосқа жіберген дұрыс, сонда оларды vim немесе emacs-те қолдануға болады.\n\nМән \"true\" болса, Ctrl+1..9 браузер арқылы өңделеді. Мән \"false\" болса, Ctrl+1..9 хосқа жіберіледі. Мән \"null\" болса, браузер платформасына және терезе түріне байланысты автоматты түрде анықталады."
+	},
+	"hterm_pref_pass_ctrl_t": {
+		"message": "Ctrl+T браузерге беріле ме – соны анықтайды.\n\nМән \"true\" болса, браузер Ctrl+T пернелер тіркесімін \"жаңа қойынды\" ретінде өңдейді. Мән \"false\" болса, Ctrl+T хосқа жіберіледі."
+	},
+	"hterm_pref_pass_ctrl_tab": {
+		"message": "Ctrl+Tab және Ctrl+Shift+Tab браузерге беріле ме – соны анықтайды.\n\nМән \"true\" болса, браузер Ctrl+Tab және Ctrl+Shift+Tab пернелер тіркесімін \"келесі/алдыңғы қойынды\" ретінде өңдейді. Мән \"false\" болса, Tab пернесі хосқа Ctrl немесе Shift пернесінсіз жіберіледі."
+	},
+	"hterm_pref_pass_ctrl_w": {
+		"message": "Ctrl+W браузерге беріле ме – соны анықтайды.\n\nМән \"true\" болса, браузер Ctrl+W пернелер тіркесімін \"қойындыны жабу\" ретінде өңдейді. Мән \"false\" болса, Ctrl+W хосқа жіберіледі."
+	},
+	"hterm_pref_pass_meta_number": {
+		"message": "Meta+1..9 браузерге беріле ме – соны анықтайды.\n\nБұл параметр hterm-ді браузер қойындысында іске қосқанда ыңғайлы, мұндайда Chrome-ның \"қойындыға ауысу\" пернелер тіркесімін жоғалтып алмайсыз. Қойындыда жұмыс істемегенде, бұл пернелерді хосқа жіберген дұрыс, сонда оларды vim немесе emacs-те қолдануға болады.\n\nМән \"true\" болса, Meta+1..9 браузер арқылы өңделеді. Мән \"false\" болса, Meta+1..9 хосқа жіберіледі. Мән \"null\" болса, браузер платформасына және терезе түріне байланысты автоматты түрде анықталады."
+	},
+	"hterm_pref_pass_meta_v": {
+		"message": "Meta+V браузерге беріле ме – соны анықтайды.\n\nКейбір жүйелерде ол мазмұнды қою үшін қолданылады."
+	},
+	"hterm_pref_paste_on_drop": {
+		"message": "Мән \"true\" болса, сүйреп қойылған мәтін терминалға қойылады.\nМән \"false\" болса, қойылған мәтін еленбейді."
+	},
+	"hterm_pref_screen_border_color": {
+		"message": "Терминал экранының айналасындағы жиек түсі.\n\nЭкран шеттерінде көрінетін сызық шығуы үшін терминал экранының айналасындағы жиек түсін реттейді."
+	},
+	"hterm_pref_screen_border_size": {
+		"message": "Терминал экранының айналасындағы жиектің пиксельмен өрнектелген өлшемі.\n\nЭкран шеттерінде көрінетін сызық шығуы үшін терминал экранының айналасындағы жиек өлшемін реттейді."
+	},
+	"hterm_pref_screen_padding_size": {
+		"message": "Терминал экранының жиегі айналасындағы шегіністің пиксельмен өрнектелген өлшемі.\n\nТерминал экранының айналасындағы жиек өлшемін реттейді, осылайша пайдаланушы экран шеттерінен көрінетін шегініс жасай алады."
+	},
+	"hterm_pref_scroll_on_keystroke": {
+		"message": "Кез келген перне басылғанда астыға айнала ма – соны анықтайды."
+	},
+	"hterm_pref_scroll_on_output": {
+		"message": "Терминалға дерек шығарғанда соңына дейін айналдыру мүмкіндігі бар ма – соны анықтайды."
+	},
+	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
+		"message": "Балама экран буфері пайдаланылса және DECCKM (қолданбадағы курсор пернелері) қосылып тұрса, тінтуірдің айналдыру дөңгелегінің әрекеттері бағыт пернелерін эмуляциялайды.\n\nShift пернесін басып тұру арқылы мұны уақытша өшіруге болады.\n\nБұл көбінесе пейджерлерді қолданғанда (less) немесе анықтамалық беттерді (man) не мәтін редакторларын (vi/nano) оқығанда немесе screen/tmux қолданғанда орын алады."
+	},
+	"hterm_pref_scroll_wheel_move_multiplier": {
+		"message": "Пиксельмен өлшегендегі тінтуірдің айналдыру дөңгелегінің әрекеттеріне арналған көбейткіш.\n\nБетті айналдыру жылдамдығын өзгертеді."
+	},
+	"hterm_pref_scrollbar_visible": {
+		"message": "Тік айналдыру жолағының режимі."
+	},
+	"hterm_pref_shift_insert_paste": {
+		"message": "Shift+Insert пернелер тіркесімін қою үшін пайдалану немесе оны қашықтағы хосқа жіберу."
+	},
+	"hterm_pref_terminal_encoding": {
+		"message": "Әдепкі терминалды кодтау (DOCS).\n\nISO-2022 таңбалар карталарын (мысалы, графикалық карталарды) аударуға мүмкіндік береді.\nUTF-8 оларға қолдауды өшіреді.\n\nҚұлыпталған нұсқа кодтауды орындау барысында терминалдың escape реттері арқылы өзгерту мүмкін еместігін білдіреді.\n\nЕгер бұрынғы қолданбалармен рендерингте ақаулар шықпаса, UTF-8-ді сақтағаныңыз жөн."
+	},
+	"hterm_pref_use_default_window_copy": {
+		"message": "Әдепкі браузердің/операциялық жүйенің көшіру әрекетін қолдану керек пе – соны анықтайды.\n\nБраузерге/операциялық жүйеге көшіру әрекетін тікелей өңдеуге рұқсат беру, бұл кейбір жүйелермен (мысалы, көшіру мүлдем орындалмайтын жүйелермен) үйлесімділікті жақсарта алады, бірақ мәтін белгілеу әрекеті сенімсіз болып қалады.\n\nМысалы, келесі жолға автоматты түрде көшірілген ұзын жолдар жаңа жолдармен бірге көшіріледі."
+	},
+	"hterm_pref_user_css": {
+		"message": "Терминал құжатына енетін пайдаланушының stylesheet URL мекенжайы."
+	},
+	"hterm_pref_user_css_text": {
+		"message": "Терминал стилін реттейтін арнаулы CSS мәтіні."
+	},
+	"hterm_pref_word_break_match_left": {
+		"message": "Белгілеудің сол жағына (басына) қарай сәйкестендіруді тоқтататын тұрақты өрнек.\n\nБұл – әдетте белгілі бір таңбаларды қабылдамайтын таңбалар класы.\nӘдепкісінше \"~\" және \".\" рұқсат етілген, себебі жолдар көбінесе осы таңбалардан басталады."
+	},
+	"hterm_pref_word_break_match_middle": {
+		"message": "Ортасындағы барлық таңбаларға сәйкестендіретін тұрақты өрнек.\n\nБұл – әдетте белгілі бір таңбаларды қабылдамайтын таңбалар класы.\n\nБастапқы нүктенің айналасындағы белгілеуді арттыру үшін қолданылады."
+	},
+	"hterm_pref_word_break_match_right": {
+		"message": "Белгілеудің оң жағына (соңына) қарай сәйкестендіруді тоқтататын тұрақты өрнек.\n\nБұл – әдетте белгілі бір таңбаларды қабылдамайтын таңбалар класы."
+	},
+	"hterm_space_character": {
+		"message": "Бос орын"
+	},
+	"hterm_title_pref_appearance": {
+		"message": "Көрініс (қаріптер, түстер, кескіндер)"
+	},
+	"hterm_title_pref_copypaste": {
+		"message": "Көшіріп қою"
+	},
+	"hterm_title_pref_encoding": {
+		"message": "Кодтау"
+	},
+	"hterm_title_pref_extensions": {
+		"message": "Кеңейтімдер"
+	},
+	"hterm_title_pref_keyboard": {
+		"message": "Пернетақта"
+	},
+	"hterm_title_pref_miscellaneous": {
+		"message": "Әртүрлі"
+	},
+	"hterm_title_pref_scrolling": {
+		"message": "Айналдыру"
+	},
+	"hterm_title_pref_sounds": {
+		"message": "Дыбыстар"
+	},
+	"identity_label": {
+		"message": "Идентификация"
+	},
+	"import_link_aria_label": {
+		"message": "файлды импорттау"
+	},
+	"import_link_label": {
+		"message": "Импорттау…"
+	},
+	"initializing_relay": {
+		"message": "Келесі хост арқылы ретрансляция серверін іздеу: $1."
+	},
+	"json_parse_error": {
+		"message": "\"$1\" параметрінде JSON талданбады: $2."
+	},
+	"known_hosts_empty": {
+		"message": "Белгілі хостар жоқ, ұмытатын ешнәрсе жоқ."
+	},
+	"known_hosts_prompt": {
+		"message": "Ұмытылатын хосты таңдаңыз [1-$1]:"
+	},
+	"known_hosts_title": {
+		"message": "Белгілі хостар:"
+	},
+	"licenses": {
+		"message": "Лицензиялар"
+	},
+	"licenses_expand_link": {
+		"message": "лицензияны көрсету"
+	},
+	"licenses_title": {
+		"message": "Ашық кодты бағдарлама лицензиялары"
+	},
+	"loading_label": {
+		"message": "Жүктелуде…"
+	},
+	"migrate_to_ext": {
+		"message": "Ескертпе: жаңа Secure Shell кеңейтіміне көшуіңізді сұраймыз ($1).\nChrome Apps қолданыстан шықты, сондықтан бұл нұсқа ендігәрі жаңартылмайды.\nКөшіру нұсқаулығына өтіп ($2), толығырақ мәліметтер алыңыз."
+	},
+	"missing_param": {
+		"message": "$1 параметрі жоқ."
+	},
+	"mount_button_label": {
+		"message": "SFTP орнату"
+	},
+	"mount_path_label": {
+		"message": "Орнату жолы"
+	},
+	"mounted_message": {
+		"message": "Орнатылды."
+	},
+	"nasftp_cmd_cat_help": {
+		"message": "Терминалдағы файлды қалпына келтіру"
+	},
+	"nasftp_cmd_chdir_help": {
+		"message": "Жұмыс каталогін өзгерту"
+	},
+	"nasftp_cmd_chgrp_help": {
+		"message": "Жолдар тобын өзгерту"
+	},
+	"nasftp_cmd_chmod_help": {
+		"message": "Жолдардағы рұқсаттарды өзгерту"
+	},
+	"nasftp_cmd_chown_help": {
+		"message": "Жолдардың иесін өзгерту"
+	},
+	"nasftp_cmd_clear_help": {
+		"message": "Ағымдағы терминал экранын өшіру."
+	},
+	"nasftp_cmd_clip_help": {
+		"message": "Файлды буферге көшіру (әдепкі: басынан бастап 10MiB)"
+	},
+	"nasftp_cmd_clip_summary": {
+		"message": "Буферге $1 байт көшірілді."
+	},
+	"nasftp_cmd_color_help": {
+		"message": "Қолданылатын түсті ауыстыру"
+	},
+	"nasftp_cmd_copy_help": {
+		"message": "Қашықтағы жолды қашықтағы басқа жолға көшіру"
+	},
+	"nasftp_cmd_del_help": {
+		"message": "Файлдарды жою"
+	},
+	"nasftp_cmd_df_help": {
+		"message": "Диск статистикасын көрсету"
+	},
+	"nasftp_cmd_df_summary": {
+		"message": "  Жол: $1\n  fsid: $2\n Жалпы: $3\n  Пайдаланылды: $4 ($5%)\n Бар: $6 (артықшылығы жоқ пайдаланушылар үшін)\n $7 (root-қа)."
+	},
+	"nasftp_cmd_exit_help": {
+		"message": "Өшіру"
+	},
+	"nasftp_cmd_get_download_file": {
+		"message": "Жүктеп алынатын файл: $1 – $2"
+	},
+	"nasftp_cmd_get_help": {
+		"message": "Файлдарды жүктеп алу"
+	},
+	"nasftp_cmd_help_help": {
+		"message": "Осы анықтама экраны"
+	},
+	"nasftp_cmd_list_help": {
+		"message": "Каталог мәліметтерінің тізімі"
+	},
+	"nasftp_cmd_ln_help": {
+		"message": "Мақсатты көрсететін жол сілтемесін жасау"
+	},
+	"nasftp_cmd_mkdir_help": {
+		"message": "Каталогтер жасау"
+	},
+	"nasftp_cmd_move_help": {
+		"message": "Файл атын өзгерту"
+	},
+	"nasftp_cmd_prompt_help": {
+		"message": "Сұрау жолын қосу"
+	},
+	"nasftp_cmd_put_help": {
+		"message": "Файлдарды жүктеп салу"
+	},
+	"nasftp_cmd_put_upload_file": {
+		"message": "Жүктеп салынатын файл: $1 – $2 ($3)"
+	},
+	"nasftp_cmd_pwd_help": {
+		"message": "Ағымдағы жұмыс каталогін көрсету"
+	},
+	"nasftp_cmd_pwd_output": {
+		"message": "Қашықтағы жұмыс каталогі: $1"
+	},
+	"nasftp_cmd_readlink_help": {
+		"message": "Символдық сілтемелерді оқу"
+	},
+	"nasftp_cmd_realpath_help": {
+		"message": "Жолдарды қалыптандыру"
+	},
+	"nasftp_cmd_reput_help": {
+		"message": "Файлдарды жүктеп салуды жалғастыру"
+	},
+	"nasftp_cmd_rm_help": {
+		"message": "Файлдарды өшіру"
+	},
+	"nasftp_cmd_rmdir_help": {
+		"message": "Бос каталогтерді жою"
+	},
+	"nasftp_cmd_show_help": {
+		"message": "Ендірілген файлдарды көрсету"
+	},
+	"nasftp_cmd_stat_extensions_header": {
+		"message": "Кеңейтімдер:"
+	},
+	"nasftp_cmd_stat_help": {
+		"message": "Файл күйін көрсету"
+	},
+	"nasftp_cmd_stat_summary": {
+		"message": "  Файл: $1\n  Өлшемі: $2 байт\n   UID: $3\n   GID: $4\nРұқсат: $5\n кірді: $6\n өзгертілді: $7."
+	},
+	"nasftp_cmd_symlink_help": {
+		"message": "Мақсатты көрсететін жолға символдық сілтеме жасау"
+	},
+	"nasftp_cmd_truncate_help": {
+		"message": "Жолдарды 0 байтқа дейін кесу"
+	},
+	"nasftp_cmd_version_extensions_header": {
+		"message": "  Сервер кеңейтімдері:"
+	},
+	"nasftp_cmd_version_help": {
+		"message": "Ағымдағы протокол нұсқасын көрсету"
+	},
+	"nasftp_cmd_version_summary": {
+		"message": "SFTP протокол нұсқасы туралы ақпарат:\n  жергілікті: $1\n  сервер: $2."
+	},
+	"nasftp_error_end_of_file": {
+		"message": "$1: файл соңы."
+	},
+	"nasftp_error_file_not_found": {
+		"message": "$1: файл табылмады."
+	},
+	"nasftp_error_file_reading": {
+		"message": "$1 оқылмады: $2."
+	},
+	"nasftp_error_internal": {
+		"message": "Өңделмеген ішкі қате; қате туралы хабарлаңыз: $1."
+	},
+	"nasftp_error_invalid_number": {
+		"message": "$1: $2: нөмір жарамсыз: $3."
+	},
+	"nasftp_error_message": {
+		"message": "ҚАТЕ: $1."
+	},
+	"nasftp_error_missing_protocol_extension": {
+		"message": "$1: қажетті \"$2\" кеңейтімі бұл серверде қолжетімсіз."
+	},
+	"nasftp_error_non_reg_file": {
+		"message": "$1: $2: қарапайым файл емес."
+	},
+	"nasftp_error_not_enough_args": {
+		"message": "$1: айнымалылар жеткіліксіз."
+	},
+	"nasftp_error_permission_denied": {
+		"message": "$1: рұқсат берілмеді."
+	},
+	"nasftp_error_server_error": {
+		"message": "$1: $2."
+	},
+	"nasftp_error_too_many_args": {
+		"message": "$1: айнымалылар тым көп."
+	},
+	"nasftp_error_unknown_cmd": {
+		"message": "$1: белгісіз пәрмен."
+	},
+	"nasftp_error_unknown_option": {
+		"message": "$1: $2 жалаушасы белгісіз."
+	},
+	"nasftp_force_quit": {
+		"message": "Мәжбүрлеп аяқтау"
+	},
+	"nasftp_progress_summary": {
+		"message": "$2 секундта $1 байт аударылды ($3/с)."
+	},
+	"nassh_options_error": {
+		"message": "Белгісіз опция: $1."
+	},
+	"nassh_product_name": {
+		"message": "Secure Shell"
+	},
+	"new_window_menu_label": {
+		"message": "Жаңа терезе"
+	},
+	"ok_button_label": {
+		"message": "Жарайды"
+	},
+	"omnibox_default": {
+		"message": "<url><match>user@hostname[:port]</match></url> Сақталған профильге немесе жаңа ssh жүйесіне қосылу"
+	},
+	"open_as_window_tip": {
+		"message": "[Кәсіби кеңес] Ctrl+W терминалыңызды жаппауы үшін \"Терезе ретінде ашу\" немесе \"Толық экран\" опциясын пайдаланыңыз.\n[Кәсіби кеңес] Толығырақ ақпарат алыңыз: $1."
+	},
+	"plugin_loading": {
+		"message": "$1 бағдарламасы жүктеліп жатыр…"
+	},
+	"plugin_loading_complete": {
+		"message": " орындалды."
+	},
+	"plugin_loading_failed": {
+		"message": " жүктелмеді. :("
+	},
+	"popup_connect_tooltip": {
+		"message": "Жаңа қойындыда ашу үшін Ctrl пернесін басып тұрыңыз."
+	},
+	"pref_backup_filename": {
+		"message": "Secure Shell параметрлерінің сақтық көшірмесі.json"
+	},
+	"preferences_header_ssh_files": {
+		"message": "SSH файлдары"
+	},
+	"preferences_header_terminal": {
+		"message": "Терминал параметрлері"
+	},
+	"preferences_header_uri": {
+		"message": "URI өңдегіштері"
+	},
+	"preferences_reset": {
+		"message": "Барлық параметр бастапқы күйге қайтарылды."
+	},
+	"protocol_register_button": {
+		"message": "Протокол өңдегіштерін тіркеу"
+	},
+	"protocol_register_explain": {
+		"message": "Төмендегі түйме біз қолдайтын барлық протокол үшін өңдегіштерді тіркеуге тырысады. Мысалы, бұл бізге ssh:// сілтемелерін тікелей өңдеуге мүмкіндік береді. Браузер әрбір протоколға арналған сұрауды көрсетеді, сондықтан олар көрсетілгенде, әрқайсысын растаңыз/қабылдаңыз. Егер сұраулар көрсетілмесе, келесі бөлімнен ақаулықтарды жоюға қатысты кеңестерді қараңыз."
+	},
+	"protocol_register_explain_settings": {
+		"message": "Егер өңдегіштерді тіркеп қойсақ немесе алдыңғы тіркеу әрекеттері қабылданбаған болса, бұдан былай сұраулар көрсетілмейді. Төмендегі диалогтік терезені ашыңыз, одан кейін ssh/sftp/etc… бөлімдеріндегі тіркелген өңдегіш параметрлерін тексеріңіз. Егер бұл бағдарлама бөгелген болса, осы параметрлерді жойып, қайта тіркеуге мүмкіндік ала аласыз. Егер бұл бағдарлама тіркелген, бірақ әдепкі өңдегіш ретінде орнатылмаған болса, әдепкі өңдегішті өзгертуге де болады."
+	},
+	"protocol_register_options_link": {
+		"message": "Протоколды тіркеу"
+	},
+	"protocol_register_settings_button": {
+		"message": "Тіркелген өңдегіш параметрлерін ашу"
+	},
+	"protocol_register_title": {
+		"message": "Secure Shell протоколының өңдегішін тіркеу көмекшісі"
+	},
+	"read_size_label": {
+		"message": "Оқылатын өлшем (KiB)"
+	},
+	"reconnect_message": {
+		"message": "Қайта жалғау (R, әдепкі), басқа байланысты таңдау (C) немесе шығу (X) керек пе?"
+	},
+	"relay_auth_error": {
+		"message": "Ретрансляция серверімен аутентификациялау кезінде қате шықты: $1"
+	},
+	"relay_retry": {
+		"message": "Қайталануда…"
+	},
+	"remove_label": {
+		"message": "Өшіру"
+	},
+	"request_pin_prompt": {
+		"message": "\"$2 ($3)\" $1 кілтінің құлпын ашу үшін PIN кодын енгізіңіз ($4 мүмкіндік бар):"
+	},
+	"restore_prefs": {
+		"message": "Сақтық көшірмені қалпына келтіру"
+	},
+	"save_label": {
+		"message": "Сақтау"
+	},
+	"select_label": {
+		"message": "Таңдау"
+	},
+	"send_feedback_label": {
+		"message": "Пікір жіберу"
+	},
+	"shortcut_list_aria_label": {
+		"message": "сақталған байланыстар"
+	},
+	"smart_card_connector_not_installed": {
+		"message": "Smart Card Connector қолданбасын орнатыңыз: $1."
+	},
+	"ssh_argstr_label": {
+		"message": "SSH аргументтері"
+	},
+	"ssh_cert_check_error": {
+		"message": " іске аспады: $1."
+	},
+	"ssh_cert_check_refresh": {
+		"message": "SSH сертификаты жаңартылуда…"
+	},
+	"ssh_cert_check_result": {
+		"message": " ~$1 сағаттан кейін мерзімі аяқталады."
+	},
+	"ssh_cert_check_start": {
+		"message": "SSH сертификатының жарамдылығы тексерілуде…"
+	},
+	"stream_open_error": {
+		"message": "$1 трансляциясы ашылмады: $2."
+	},
+	"terminal_clear_menu_label": {
+		"message": "Терминалды өшіру"
+	},
+	"terminal_font_unavailable": {
+		"message": "\"$1\" қолжетімсіз"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH қосу"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Әдепкі]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Әзірлеуші параметрлері"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH-ті өзгерту"
+	},
+	"terminal_home_import_identity": {
+		"message": "Импорттау"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Жаңа SSH байланысы"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Пәрмен"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Белгіленген орынды \"username@hostname\" форматында көрсетіңіз."
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Терминал параметрлері"
+	},
+	"terminal_name_pref_ansi_colors": {
+		"message": "ANSI түстері"
+	},
+	"terminal_name_pref_anti_alias": {
+		"message": "Шеттерді тегістеу"
+	},
+	"terminal_name_pref_bell": {
+		"message": "Қоңырау"
+	},
+	"terminal_name_pref_blinking": {
+		"message": "Жыпылықтату"
+	},
+	"terminal_name_pref_color": {
+		"message": "Түс"
+	},
+	"terminal_name_pref_font": {
+		"message": "Қаріп"
+	},
+	"terminal_name_pref_image": {
+		"message": "Кескін"
+	},
+	"terminal_name_pref_shape": {
+		"message": "Пішін"
+	},
+	"terminal_name_pref_visible": {
+		"message": "Көрінеді"
+	},
+	"terminal_pref_alt_gr_mode": {
+		"message": "AltGr анықтау эвристикасын таңдаңыз.\n\n'\"Auto\": navigator.language негізінде автоанықтау:\n      \"en-us\" => \"Өшіру\", басқа жағдай => \"right-alt\"\n\"Өшіру\": AltGr эмуляцияларының барлығын өшіру.\n\"ctrl-alt\": Ctrl+Alt пернелерін AltGr деп пайымдау.\n'\"left-alt\": сол жақтағы Alt пернесін AltGr деп пайымдау.\n\"right-alt\": оң жақтағы Alt пернесін AltGr деп пайымдау."
+	},
+	"terminal_pref_ansi_colors": {
+		"message": "Әдепкі палитраның түстерін белгілеу."
+	},
+	"terminal_pref_bell": {
+		"message": "Терминалдың қоңырауы естіледі."
+	},
+	"terminal_preview_label": {
+		"message": "Алдын ала қарау"
+	},
+	"terminal_profile_label": {
+		"message": "Ағымдағы профиль"
+	},
+	"terminal_reset_menu_label": {
+		"message": "Терминалды бастапқы күйге қайтару"
+	},
+	"terminal_settings_about_label": {
+		"message": "Ақпарат"
+	},
+	"terminal_settings_background_image_error_size": {
+		"message": "Сурет тым үлкен."
+	},
+	"terminal_settings_background_image_help": {
+		"message": "Компьютерден фондық кескін файлын таңдаңыз."
+	},
+	"terminal_settings_dropdown_alt_gr_mode_auto": {
+		"message": "Авто"
+	},
+	"terminal_settings_dropdown_alt_gr_mode_disable": {
+		"message": "Өшіру"
+	},
+	"terminal_settings_dropdown_cursor_shape_beam": {
+		"message": "Тік сызық"
+	},
+	"terminal_settings_dropdown_cursor_shape_block": {
+		"message": "Тіктөртбұрыш"
+	},
+	"terminal_settings_dropdown_cursor_shape_underline": {
+		"message": "Астыңғы сызық"
+	},
+	"terminal_settings_reset_dialog_message": {
+		"message": "Тақырыпты шынымен бастапқы күйге қайтарғыңыз келе ме?"
+	},
+	"terminal_settings_reset_dialog_title": {
+		"message": "Тақырыпты бастапқы күйге қайтару"
+	},
+	"terminal_settings_reset_label": {
+		"message": "Бастапқы күйге қайтару"
+	},
+	"terminal_theme_classic_label": {
+		"message": "Классика"
+	},
+	"terminal_theme_dark_label": {
+		"message": "Қараңғы"
+	},
+	"terminal_theme_dusk_label": {
+		"message": "Ымырт"
+	},
+	"terminal_theme_forest_label": {
+		"message": "Орман"
+	},
+	"terminal_theme_haze_label": {
+		"message": "Тұман"
+	},
+	"terminal_theme_light_label": {
+		"message": "Жарық"
+	},
+	"terminal_theme_solarized_dark_label": {
+		"message": "Solarized (қараңғы)"
+	},
+	"terminal_theme_solarized_light_label": {
+		"message": "Solarized (жарық)"
+	},
+	"terminal_title_ansi_color_tooltip_0": {
+		"message": "Нөлдік түс: қара"
+	},
+	"terminal_title_ansi_color_tooltip_1": {
+		"message": "1-түс: қызыл"
+	},
+	"terminal_title_ansi_color_tooltip_10": {
+		"message": "10-түс: ашық жасыл"
+	},
+	"terminal_title_ansi_color_tooltip_11": {
+		"message": "11-түс: ашық сары"
+	},
+	"terminal_title_ansi_color_tooltip_12": {
+		"message": "12-түс: ашық көк"
+	},
+	"terminal_title_ansi_color_tooltip_13": {
+		"message": "13-түс: ашық қызылкүрең"
+	},
+	"terminal_title_ansi_color_tooltip_14": {
+		"message": "14-түс: ашық көк жасыл"
+	},
+	"terminal_title_ansi_color_tooltip_15": {
+		"message": "15-түс: аппақ"
+	},
+	"terminal_title_ansi_color_tooltip_2": {
+		"message": "2-түс: жасыл"
+	},
+	"terminal_title_ansi_color_tooltip_3": {
+		"message": "3-түс: сары"
+	},
+	"terminal_title_ansi_color_tooltip_4": {
+		"message": "4-түс: көк"
+	},
+	"terminal_title_ansi_color_tooltip_5": {
+		"message": "5-түс: қызылкүрең"
+	},
+	"terminal_title_ansi_color_tooltip_6": {
+		"message": "6-түс: көк жасыл"
+	},
+	"terminal_title_ansi_color_tooltip_7": {
+		"message": "7-түс: ақ"
+	},
+	"terminal_title_ansi_color_tooltip_8": {
+		"message": "8-түс: ашық қара"
+	},
+	"terminal_title_ansi_color_tooltip_9": {
+		"message": "9-түс: ашық қызыл"
+	},
+	"terminal_title_pref_appearance": {
+		"message": "Көрініс"
+	},
+	"terminal_title_pref_background": {
+		"message": "Фон"
+	},
+	"terminal_title_pref_behavior": {
+		"message": "Әрекет"
+	},
+	"terminal_title_pref_cursor": {
+		"message": "Курсор"
+	},
+	"terminal_title_pref_keyboard": {
+		"message": "Пернетақта"
+	},
+	"terminal_title_pref_keyboard_mouse": {
+		"message": "Пернетақта және тінтуір"
+	},
+	"terminal_title_pref_mouse": {
+		"message": "Тінтуір"
+	},
+	"terminal_title_pref_scrollbar": {
+		"message": "Айналдыру жолағы"
+	},
+	"terminal_title_pref_text": {
+		"message": "Мәтін"
+	},
+	"terminal_title_settings": {
+		"message": "Параметрлер"
+	},
+	"terminal_title_terminal": {
+		"message": "Терминал"
+	},
+	"terminal_title_theme": {
+		"message": "Тақырып"
+	},
+	"terminal_try_again_with_internet": {
+		"message": "Интернетке қосылып, әрекетті қайталап көріңіз."
+	},
+	"tip_1": {
+		"message": "Сілтемелерді Ctrl пернесін (macOS-та Cmd) ұстап тұрып басу арқылы ашуға болады."
+	},
+	"tip_10": {
+		"message": "Терезеде орындалса, Ctrl+Shift+N тағы бір сеансты ашады."
+	},
+	"tip_11": {
+		"message": "Пернелерді/тіркесімдерді қайта байланыстыруға болады: https://goo.gl/LWRndr."
+	},
+	"tip_12": {
+		"message": "ssh аутентификациясы үшін Yubikeys және басқа да смарт карталарды қолдану: https://goo.gl/Hu2o3v."
+	},
+	"tip_13": {
+		"message": "Ендірілген кескіндерді көрсету: https://goo.gl/MnSysj."
+	},
+	"tip_14": {
+		"message": "Ctrl пернесін (macOS-та Cmd) ұстап тұрып, тінтуірдің оң жақ түймесін басу арқылы контекстік мәзірді ашуға болады."
+	},
+	"tip_2": {
+		"message": "Hterm-notify көмегімен хабарландыруларды браузерде көрсету: https://goo.gl/ZNxGdF."
+	},
+	"tip_3": {
+		"message": "'ssh<Tab><профиль атын>' теріп, omnibox арқылы қосылу: https://goo.gl/V7o8ki."
+	},
+	"tip_4": {
+		"message": "Chrome OS файлдық жүйелерді SFTP арқылы орнатып, оларды Files қолданбасы арқылы шолады. \"Қосылу\" орнына \"SFTP орнату\" түймесін пайдаланыңыз."
+	},
+	"tip_5": {
+		"message": "Веб-беттердегі ssh:// сілтемелері арқылы қосылыңыз немесе бетбелгіні сақтап қойыңыз: https://goo.gl/zS8EZD."
+	},
+	"tip_6": {
+		"message": "Негізгі 16 түсті және 256 түс пен толық 24 биттік түстерді пайдаланып, нәтижеңізді/сұрауыңызды бояңыз: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html."
+	},
+	"tip_7": {
+		"message": "OSC-52 пайдаланып, emacs/vim/etc... арқылы буферге көшіріңіз: https://goo.gl/XSnyLo."
+	},
+	"tip_8": {
+		"message": "Hterm/Secure Shell басқа пайдаланушыларымен chromium-hterm@chromium.org арқылы араласыңыз: https://goo.gl/RYHiK."
+	},
+	"tip_9": {
+		"message": "Қате табылды ма?  Жаңа функция сұрау керек пе?  Бізге айтыңыз: https://goo.gl/vb94JY."
+	},
+	"unexpected_error": {
+		"message": "Күтпеген қате шықты. Қосымша ақпарат үшін JavaScript консолін тексеріңіз."
+	},
+	"unknown_ssh_client_version": {
+		"message": "SSH белгісіз нұсқасы: $1."
+	},
+	"unmount_button_label": {
+		"message": "SFTP ажырату"
+	},
+	"welcome_changelog": {
+		"message": "ChangeLog/шығарылым туралы ескертпелер: $1"
+	},
+	"welcome_faq": {
+		"message": "Сұрақ-жауап: $1 (Ctrl+сілтемелерді басыңыз)"
+	},
+	"welcome_release_highlights": {
+		"message": "$1 нұсқасынан кейінгі негізгі өзгерістер:"
+	},
+	"welcome_tip_of_day": {
+		"message": "№$1 кездейсоқ кәсіби кеңес: $2."
+	},
+	"welcome_version": {
+		"message": "$1 қолданбасының $2 нұсқасына қош келдіңіз."
+	},
+	"write_size_label": {
+		"message": "Жазылатын өлшем (KiB)"
+	},
+	"zoom_warning": {
+		"message": "Chrome мәзірінде 100% масштабын қойыңыз."
+	}
+}

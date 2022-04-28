@@ -63,7 +63,7 @@
 		"message": "Eliminar"
 	},
 	"disconnect_message": {
-		"message": "El complemento NaCl se ha cerrado con el código de estado $1."
+		"message": "El programa se ha cerrado con el código de estado $1."
 	},
 	"enter_keycap": {
 		"message": "[INTRO]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Usar asignaciones o combinaciones de teclas predeterminadas del SO"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Tamaño del espacio de relleno del interlineado"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Las teclas multimedia son las teclas de función"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Define si las asignaciones de teclas habituales del SO se deben respetar en lugar de capturarlas siempre para que las use hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "El tamaño del espacio de relleno en píxeles entre cada fila de la pantalla del terminal."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Si se le asigna el valor true, las teclas multimedia funcionarán como sus teclas de función equivalentes. Si se le asigna el valor false, el navegador controlará las teclas."
 	},
@@ -690,10 +696,10 @@
 		"message": "Falta el siguiente parámetro: $1"
 	},
 	"mount_button_label": {
-		"message": "Activación de SFTP"
+		"message": "Montaje de SFTP"
 	},
 	"mount_path_label": {
-		"message": "Ruta de activación"
+		"message": "Ruta de montaje"
 	},
 	"mounted_message": {
 		"message": "Activado."
@@ -726,7 +732,7 @@
 		"message": "Alternar uso de color"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Copiar fuente a destino"
+		"message": "Copia una ruta remota en otra ruta remota"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Eliminar archivos"
@@ -822,7 +828,7 @@
 		"message": "Mostrar versión de protocolo actual"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Información de la versión del protocolo SFTP:\n  local: $1\n  servidor: $1"
+		"message": "Información de la versión del protocolo SFTP:\n  local: $1\n  servidor: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: fin de archivo"
@@ -840,7 +846,7 @@
 		"message": "$1: $2: número no válido: $3"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: $2 extensión no disponible"
+		"message": "$1: la extensión necesaria $2 no está disponible con este servidor"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: no es un archivo normal"
@@ -885,7 +891,7 @@
 		"message": "[Consejo] Utiliza la opción Abrir como ventana o Pantalla completa para evitar que la ventana del terminal se cierre al pulsar Ctrl + W.\n[Consejo] Consulta la página $1 para obtener más información."
 	},
 	"plugin_loading": {
-		"message": "Cargando complemento NaCl..."
+		"message": "Cargando programa $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " carga completada."
@@ -933,7 +939,10 @@
 		"message": "Tamaño de lectura (KiB)"
 	},
 	"reconnect_message": {
-		"message": "¿Volver a establecer conexión (R), elegir otra conexión (C) o salir (X)?"
+		"message": "¿Volver a establecer conexión (R, opción predeterminada), elegir otra conexión (C) o salir (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Error de autenticación mediante servidor relay: $1"
 	},
 	"relay_retry": {
 		"message": "Reintentando..."
@@ -985,6 +994,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "$1 no está disponible"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Añadir SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Predeterminado]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Configuración del desarrollador"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Editar SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importar"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nueva conexión SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Comando"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Especifica el destino con nombredeusuario@nombredehost"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Configuración del terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Colores ANSI"
@@ -1185,7 +1221,7 @@
 		"message": "Conéctate desde el omnibox escribiendo \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS puede activar sistemas de archivos a través de SFTP y navegar usando la aplicación Archivos. Utiliza la opción Activación de SFTP en lugar de Conectar."
+		"message": "Chrome OS puede montar sistemas de archivos a través de SFTP y navegar usando la aplicación Archivos. Utiliza la opción Montaje de SFTP en lugar de Conectar."
 	},
 	"tip_5": {
 		"message": "Utiliza enlaces ssh:// en las páginas web para conectarte. O bien, guarda un marcador: https://goo.gl/zS8EZD"

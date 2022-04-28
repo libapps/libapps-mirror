@@ -63,7 +63,7 @@
 		"message": "Radera"
 	},
 	"disconnect_message": {
-		"message": "NaCl-plugin avslutades med statuskoden $1."
+		"message": "Programmet avslutades med statuskoden $1."
 	},
 	"enter_keycap": {
 		"message": "[RETUR]"
@@ -293,6 +293,9 @@
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Använd tangentbindningar/kortkommandon som är standard i operativsystemet"
 	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Utfyllnadsstorlek för radhöjd"
+	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Uppspelningstangenterna används som funktionstangenter"
 	},
@@ -351,10 +354,10 @@
 		"message": "Scrolla längst ned efter ny utmatning"
 	},
 	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Emulera piltangenter med rullningshjulet"
+		"message": "Emulera piltangenter med scrollningshjulet"
 	},
 	"hterm_name_pref_scroll_wheel_move_multiplier": {
-		"message": "Multiplikator för musens rullningshjul"
+		"message": "Multiplikator för musens scrollningshjul"
 	},
 	"hterm_name_pref_scrollbar_visible": {
 		"message": "Rullningslistens synlighet"
@@ -529,6 +532,9 @@
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Om vanliga tangentbindningar i operativsystemet ska användas i stället för hterms egna tilldelningar."
+	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Storlek i pixlar på utfyllnad mellan varje rad på terminalskärmen"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "När detta är inställt på sant konverteras medietangenter till motsvarande funktionstangent. Med inställningen falskt hanterar webbläsaren tangenterna."
@@ -726,7 +732,7 @@
 		"message": "Aktivera och inaktivera färganvändning"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopiera källa till mål"
+		"message": "Kopiera en extern sökväg till en annan extern sökväg"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Radera filer"
@@ -816,7 +822,7 @@
 		"message": "Visa aktuell protokollversion"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Information om version av SFTP-protokoll:\n  lokalt: $1\n  server: $1"
+		"message": "Information om version av SFTP-protokoll:\n  lokalt: $1\n  server: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: filen tog slut"
@@ -837,7 +843,7 @@
 		"message": "FEL: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: tillägget $2 är inte tillgängligt"
+		"message": "$1: det obligatoriska tillägget $2 är inte tillgängligt med den här servern"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: inte en normal fil"
@@ -882,7 +888,7 @@
 		"message": "[Tips] Du kan förhindra att Ctrl+W stänger terminalen genom att använda Öppna som fönster eller Helskärm.\n[Tips] Mer information finns på $1."
 	},
 	"plugin_loading": {
-		"message": "Läser in plugin-programmet NaCl ..."
+		"message": "Läser in programmet $1 …"
 	},
 	"plugin_loading_complete": {
 		"message": " klart."
@@ -930,7 +936,10 @@
 		"message": "Lässtorlek (kB)"
 	},
 	"reconnect_message": {
-		"message": "Vill du återansluta (R), välja en annan anslutning (C) eller avsluta (X)?"
+		"message": "Vill du återansluta [R] (standard), välja en annan anslutning [C] eller avsluta [X]?"
+	},
+	"relay_auth_error": {
+		"message": "Det gick inte att autentisera via reläservern: $1"
 	},
 	"relay_retry": {
 		"message": "Försöker igen …"
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "$1 är inte tillgängligt"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Lägg till SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Standard]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Inställningar för utvecklare"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Redigera SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importera"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Ny SSH-anslutning"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Kommando"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Ange destination i formatet användarnamn@värdnamn"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminalinställningar"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-färger"

@@ -63,7 +63,7 @@
 		"message": "Verwijderen"
 	},
 	"disconnect_message": {
-		"message": "NaCl-plug-in afgesloten met statuscode $1."
+		"message": "Programma gesloten met statuscode $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -234,7 +234,7 @@
 		"message": "Niet-UTF-8 C1 stuurcodes ondersteunen"
 	},
 	"hterm_name_pref_enable_blink": {
-		"message": "Knipperende tekst inschakelen"
+		"message": "Knipperende tekst aanzetten"
 	},
 	"hterm_name_pref_enable_bold": {
 		"message": "Gedrag voor vetgedrukte tekst"
@@ -270,7 +270,7 @@
 		"message": "Lettertypefamilie"
 	},
 	"hterm_name_pref_font_size": {
-		"message": "Tekengrootte"
+		"message": "Lettergrootte"
 	},
 	"hterm_name_pref_font_smoothing": {
 		"message": "Lettertype-afvlakking"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Standaard OS-toetsenbordbindingen/sneltoetsen gebruiken"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Opvullingsgrootte voor regelhoogte"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Mediatoetsen zijn functietoetsen"
@@ -390,7 +393,7 @@
 		"message": "Inline afbeeldingen"
 	},
 	"hterm_popup_inline_image_disabled": {
-		"message": "Inline afbeeldingen uitgeschakeld"
+		"message": "Inline afbeeldingen staat uit"
 	},
 	"hterm_pref_allow_images_inline": {
 		"message": "Hiermee wordt bepaald of de externe host afbeeldingen mag bekijken in de terminal.\n\nStandaard vragen we hiernaar totdat een keuze wordt gemaakt."
@@ -399,7 +402,7 @@
 		"message": "Als deze optie is ingesteld, wordt de toewijzing van Alt + Backspace->Delete in Chrome OS ongedaan gemaakt, zodat Alt + Backspace daadwerkelijk Alt + Backspace is."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'null': automatische detectie op basis van navigator.language:\n      'en-us' => 'none', anders => 'right-alt'.\n'none': schakelt emulatie voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
+		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'null': automatische detectie op basis van navigator.language:\n      'en-us' => 'none', anders => 'right-alt'.\n'none': zet emulatie voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Hiermee kun je instellen of de Alt-toets als Meta-toets of specifiek als Alt-toets fungeert."
@@ -468,7 +471,7 @@
 		"message": "Hiermee bepaal je of ambigue Oost-Aziatische tekens twee kolommen breed zijn."
 	},
 	"hterm_pref_enable_8_bit_control": {
-		"message": "Met 'true' worden 8-bits stuurcodes ingeschakeld, en met 'false' worden ze genegeerd.\n\nDe twee-byteversies van deze stuurcodes zijn bruikbaar, ongeacht deze instelling."
+		"message": "Met 'true' worden 8-bits stuurcodes aangezet, en met 'false' worden ze genegeerd.\n\nDe twee-byteversies van deze stuurcodes zijn bruikbaar, ongeacht deze instelling."
 	},
 	"hterm_pref_enable_blink": {
 		"message": "Als 'true' is ingesteld, wordt het knipperkenmerk gerespecteerd. Als 'false' is ingesteld, wordt het kenmerk genegeerd."
@@ -486,7 +489,7 @@
 		"message": "Staat de externe host toe rechtstreeks op het klembord van het lokale systeem te schrijven.\nLeestoegang wordt nooit verleend, ongeacht deze instelling.\n\nWordt gebruikt om toegang tot functies zoals OSC-52 te beheren."
 	},
 	"hterm_pref_enable_csi_j_3": {
-		"message": "Hiermee bepaal je of de functie 'Opgeslagen regels wissen' (modus 3) van de opdracht 'Scherm wissen' (CSI-J) de buffer voor terminal terug scrollen mag wissen.\n\nHet is veilig om dit standaard in te schakelen."
+		"message": "Hiermee bepaal je of de functie 'Opgeslagen regels wissen' (modus 3) van de opdracht 'Scherm wissen' (CSI-J) de buffer voor terminal terug scrollen mag wissen.\n\nHet is veilig om dit standaard aan te zetten."
 	},
 	"hterm_pref_enable_dec12": {
 		"message": "Geeft toestemming als de host probeert de knipperstatus van de tekstcursor te wijzigen via DEC privémodus 12."
@@ -516,7 +519,7 @@
 		"message": "De voorgrondkleur voor tekst zonder andere kleurkenmerken."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Of de muisaanwijzer automatisch moet worden verborgen als je typt. Standaard wordt automatisch gedetecteerd of dit door het platform/OS wordt afgehandeld.\n\nOpmerking: Mogelijk wordt deze instelling overschreven door je besturingssysteem, waardoor je deze instelling niet altijd kunt uitschakelen."
+		"message": "Of de muisaanwijzer automatisch moet worden verborgen als je typt. Standaard wordt automatisch gedetecteerd of dit door het platform/OS wordt afgehandeld.\n\nOpmerking: Mogelijk wordt deze instelling overschreven door je besturingssysteem, waardoor je deze instelling niet altijd kunt uitzetten."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Als 'true' is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden Shift + Home/Shift + End naar de externe host gestuurd. Als 'false' is ingesteld, worden Home/End naar de externe host gestuurd en wordt met Shift + Home/Shift + End gescrolld."
@@ -527,11 +530,14 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Hiermee bepaal je of veelgebruikte OS-sneltoetsen moeten worden gerespecteerd of dat deze altijd voor hterm zelf moeten worden gebruikt."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "De opvullingsgrootte in pixels tussen elke rij van het terminalscherm."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Als dit is ingesteld op 'true', worden mediatoetsen geconverteerd naar de equivalente functietoets. Als dit is ingesteld op 'false', wordt de functie van de toetsen door de browser bepaald."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Hiermee stuur je een ESC-voorvoegsel als je een toets indrukt terwijl je de Meta-toets ingedrukt houdt.\n\nAls deze optie is ingeschakeld en je bijvoorbeeld op Meta + K drukt, wordt ^[k gestuurd alsof je Escape en vervolgens k typt. Als de optie is uitgeschakeld, wordt alleen k gestuurd."
+		"message": "Hiermee stuur je een ESC-voorvoegsel als je een toets indrukt terwijl je de Meta-toets ingedrukt houdt.\n\nAls deze optie aanstaat en je bijvoorbeeld op Meta + K drukt, wordt ^[k gestuurd alsof je Escape en vervolgens k typt. Als de optie uitstaat, wordt alleen k gestuurd."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "De muisknop die je kunt gebruiken om te plakken.\n\nOp niet-X11-platforms (waaronder Chrome OS) gebruiken we de middelste muisknop voor automatisch detecteren. Op X11 gebruiken we de rechtermuisknop (aangezien de functie voor vensterbeheer de middelste muisknop gebruikt voor de plakbewerking).\n\n0 == linkermuisknop (primair).\n1 == middelste knop (supplementair).\n2 == rechtermuisknop (secundair).\n\nDeze optie is onafhankelijk van de instelling voor plakken met de rechtermuisknop.\n\nOpmerking: Met deze optie worden de primaire en secundaire knoppen verwerkt voor zowel rechts- als linkshandige muizen."
@@ -585,7 +591,7 @@
 		"message": "Hiermee wordt bepaald of naar de onderzijde van de terminaluitvoer wordt gescrolld."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Als de alternatieve schermbuffer wordt gebruikt en DECCKM (Application Cursor Keys) actief is, emuleren gebeurtenissen met het muisscrollwiel de pijltoetsen.\n\nDit kan tijdelijk worden uitgeschakeld door de Shift-toets ingedrukt te houden.\n\nDit komt regelmatig voor als je pagers (less) gebruikt, documentatie of tekst in teksteditors (vi/nano) leest of screen/tmux gebruikt."
+		"message": "Als de alternatieve schermbuffer wordt gebruikt en DECCKM (Application Cursor Keys) actief is, emuleren gebeurtenissen met het muisscrollwiel de pijltoetsen.\n\nDit kan tijdelijk worden uitgezet door de Shift-toets ingedrukt te houden.\n\nDit komt regelmatig voor als je pagers (less) gebruikt, documentatie of tekst in teksteditors (vi/nano) leest of screen/tmux gebruikt."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "De multiplier voor gebeurtenissen met het muisscrollwiel als wordt gemeten in pixels.\n\nHiermee wijzig je hoe snel de pagina wordt gescrolld."
@@ -720,10 +726,10 @@
 		"message": "$1 bytes naar het klembord gekopieerd"
 	},
 	"nasftp_cmd_color_help": {
-		"message": "Kleurgebruik in- en uitschakelen"
+		"message": "Kleurgebruik aan- en uitzetten"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Bron kopiëren naar bestemming"
+		"message": "Een extern pad kopiëren naar een ander extern pad"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Bestanden verwijderen"
@@ -747,7 +753,7 @@
 		"message": "Dit hulpscherm"
 	},
 	"nasftp_cmd_list_help": {
-		"message": "Details van directory weergeven"
+		"message": "Details van directory tonen"
 	},
 	"nasftp_cmd_ln_help": {
 		"message": "Een link voor het pad maken dat naar de bestemming verwijst"
@@ -813,7 +819,7 @@
 		"message": "Huidige protocolversie tonen"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Versie-info SFTP-protocol:\n  lokaal: $1\n  server: $1"
+		"message": "Versie-info SFTP-protocol:\n  lokaal: $1\n  server: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: einde van bestand"
@@ -834,7 +840,7 @@
 		"message": "FOUT: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: extensie '$2' niet beschikbaar"
+		"message": "$1: de vereiste extensie $2 is niet beschikbaar met deze server"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: geen regulier bestand"
@@ -879,7 +885,7 @@
 		"message": "[Pro-tip] Gebruik 'Openen als venster' of 'Volledig scherm' om te voorkomen dat de terminal wordt gesloten met Ctrl + W.\n[Pro-tip] Zie $1 voor meer informatie."
 	},
 	"plugin_loading": {
-		"message": "NaCl-plug-in laden…"
+		"message": "$1-programma laden..."
 	},
 	"plugin_loading_complete": {
 		"message": " klaar."
@@ -927,7 +933,10 @@
 		"message": "Grootte voor lezen (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Opnieuw verbinden (R), een andere verbinding kiezen (C) of afsluiten (X)?"
+		"message": "Opnieuw verbinden (R) (standaard), een andere verbinding kiezen (C) of afsluiten (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Fout bij verificatie met relayserver: $1"
 	},
 	"relay_retry": {
 		"message": "Opnieuw proberen…"
@@ -980,6 +989,33 @@
 	"terminal_font_unavailable": {
 		"message": "'$1' is niet beschikbaar"
 	},
+	"terminal_home_add_ssh": {
+		"message": "SSH toevoegen"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Standaard]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Ontwikkelaarsinstellingen"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH bewerken"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importeren"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nieuwe SSH-verbinding"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Opdracht"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Geef de bestemming op met 'gebruikersnaam@hostnaam'"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminalinstellingen"
+	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-kleuren"
 	},
@@ -1005,7 +1041,7 @@
 		"message": "Zichtbaar"
 	},
 	"terminal_pref_alt_gr_mode": {
-		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'Auto': automatische detectie op basis van navigator.language:\n      'en-us' => 'Disable', anders => 'right-alt'.\n'Disable': schakelt emulatie voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
+		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'Auto': automatische detectie op basis van navigator.language:\n      'en-us' => 'Disable', anders => 'right-alt'.\n'Disable': zet emulatie voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
 	},
 	"terminal_pref_ansi_colors": {
 		"message": "Kleuren instellen voor het standaard kleurenpalet."
@@ -1035,7 +1071,7 @@
 		"message": "Automatisch"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
-		"message": "Uitschakelen"
+		"message": "Uitzetten"
 	},
 	"terminal_settings_dropdown_cursor_shape_beam": {
 		"message": "Balk"
@@ -1173,7 +1209,7 @@
 		"message": "Gebruik Yubikeys en andere smartcards voor SSH-verificatie: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
-		"message": "Afbeeldingen inline weergeven: https://goo.gl/MnSysj"
+		"message": "Afbeeldingen inline tonen: https://goo.gl/MnSysj"
 	},
 	"tip_14": {
 		"message": "Als je met de rechtermuisknop klikt terwijl je de Ctrl-toets (Cmd op macOS) ingedrukt houdt, wordt er een contextmenu weergegeven."

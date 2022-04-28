@@ -60,7 +60,7 @@
 		"message": "ລຶບ"
 	},
 	"disconnect_message": {
-		"message": "ປລັກອິນ NaCl ອອກໄປແລ້ວໂດຍມີລະຫັດສະຖານະ $1."
+		"message": "ໂປຣແກຣມອອກພ້ອມລະຫັດສະຖານະ $1."
 	},
 	"faq_menu_label": {
 		"message": "ຄຳຖາມທີ່ຖາມເລື້ອຍໆ"
@@ -286,6 +286,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ໃຊ້ການເຊື່ອມໂຍງ/ທາງລັດແປ້ນພິມຂອງລະບົບປະຕິບັດການເລີ່ມຕົ້ນ"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "ຂະໜາດໄລຍະຫ່າງຈາກຂອບຂອງຄວາມສູງເສັ້ນ"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "ປຸ່ມ Media ເປັນ Fkey"
@@ -524,6 +527,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "ກຳນົດວ່າຈະໃຫ້ລະບົບດຳເນີນການຕາມການເຊື່ອມໂຍງແປ້ນພິມຂອງລະບົບປະຕິບັດການໂດຍທົ່ວໄປແທນການບັນທຶກໄວ້ໃນທຸກຄັ້ງເພື່ອການນຳໃຊ້ຂອງ hterm ເອງຫຼືບໍ່."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "ຂະໜາດໄລຍະຫ່າງຈາກເສັ້ນຂອບລະຫວ່າງແຕ່ລະແຖວຂອງໜ້າຈໍເທິມິນັລທີ່ມີໜ່ວຍເປັນພິກເຊວ."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "ຖ້າເປັນຖືກ, ປ່ຽນປຸ່ມສື່ເປັນ Fkey ປຸ່ມທຽບເທົ່າ Fkey ຂອງພວກມັນ. ຖ້າເປັນຜິດ, ອະນຸຍາດໃຫ້ໂປຣແກຣມທ່ອງເວັບຈັດການປຸ່ມ."
 	},
@@ -732,7 +738,7 @@
 		"message": "ສຳເນົາ"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "ສຳເນົາແຫຼ່ງທີ່ມາໃສ່ປາຍທາງແລ້ວ"
+		"message": "ສຳເນົາເສັ້ນທາງໄລຍະໄກໄປຍັງເສັ້ນທາງໄລຍະໄກອື່ນ"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ລຶບໄຟລ໌"
@@ -861,7 +867,7 @@
 		"message": "ສະແດງເວີຊັນໂປຣໂຕຄໍປັດຈຸບັນ"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "ຂໍ້ມູນເວີຊັນໂປຣໂຕຄໍ SFTP:\n  ໃນເຄື່ອງ: $1\n  ເຊີບເວີ: $1"
+		"message": "ຂໍ້ມູນເວີຊັນໂປຣໂຕຄໍ SFTP:\n  ໃນເຄື່ອງ: $1\n  ເຊີບເວີ: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ສິ້ນສຸດໄຟລ໌"
@@ -882,7 +888,7 @@
 		"message": "ຂໍ້ຜິດພາດ: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: ສ່ວນຂະຫຍາຍ '$2' ບໍ່ພ້ອມນຳໃຊ້"
+		"message": "$1: ສ່ວນຂະຫຍາຍ '$2' ທີ່ຈຳເປັນບໍ່ມີໃຫ້ໃຊ້ກັບເຊີບເວີນີ້"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ບໍ່ເປັນໄຟລ໌ປົກກະຕິ"
@@ -927,7 +933,7 @@
 		"message": "[ເຄັດລັບສຳລັບມືອາຊີບ] ໃຊ້ 'ເປີດເປັນໜ້າຈໍ' ຫຼື 'ເຕັມຈໍ' ເພື່ອປ້ອງກັນບໍ່ໃຫ້ Ctrl+W ປິດເທີມິນອນຂອງທ່ານ!\n[ເຄັດລັບສຳລັບມືອາຊີບ] ເບິ່ງຂໍ້ມູນເພີ່ມເຕີມໄດ້ທີ່ $1."
 	},
 	"plugin_loading": {
-		"message": "ກຳລັງໂຫຼດປລັກອິນ NaCl..."
+		"message": "ກຳລັງໂຫລດໂປຣແກຣມ $1 ..."
 	},
 	"plugin_loading_complete": {
 		"message": " ສໍາເລັດ."
@@ -975,7 +981,10 @@
 		"message": "ຂະໜາດການອ່ານ (KiB)"
 	},
 	"reconnect_message": {
-		"message": "ເຊື່ອມຕໍ່ຄືນໃໝ່ (R), ເລືອກການເຊື່ອມຕໍ່ອື່ນ (C) ຫຼື ອອກບໍ (X)?"
+		"message": "ເຊື່ອມຕໍ່ຄືນໃໝ່ (R) (ຄ່າເລີ່ມຕົ້ນ), ເລືອກການເຊື່ອມຕໍ່ອື່ນ (C) ຫຼື ອອກບໍ (X)?"
+	},
+	"relay_auth_error": {
+		"message": "ເກີດຂໍ້ຜິດພາດໃນການພິສູດຢືນຢັນດ້ວຍເຊີບເວີ relay: $1"
 	},
 	"relay_retry": {
 		"message": "ກຳລັງລອງໃໝ່..."
@@ -1027,6 +1036,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ບໍ່ພ້ອມນຳໃຊ້"
+	},
+	"terminal_home_add_ssh": {
+		"message": "ເພີ່ມ SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[ຄ່າເລີ່ມຕົ້ນ]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "ການຕັ້ງຄ່າສຳລັບນັກພັດທະນາ"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "ແກ້ໄຂ SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "ນຳເຂົ້າ"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "ການເຊື່ອມຕໍ່ SSH ໃໝ່"
+	},
+	"terminal_home_ssh_command": {
+		"message": "ຄຳສັ່ງ"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "ລະບຸປາຍທາງດ້ວຍ \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "ການຕັ້ງຄ່າເທີມິນອນ"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ສີ ANSI"
@@ -1198,6 +1234,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "ການຕັ້ງຄ່າ"
+	},
+	"terminal_title_terminal": {
+		"message": "ເຄື່ອງຈ່າຍເງິນ"
 	},
 	"terminal_title_theme": {
 		"message": "ຮູບແບບສີສັນ"

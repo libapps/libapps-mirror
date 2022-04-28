@@ -63,7 +63,7 @@
 		"message": "حذف"
 	},
 	"disconnect_message": {
-		"message": "افزایه NaCl با کد وضعیت $1 خارج شد."
+		"message": "برنامه با رمز وضعیت $1 خارج شد."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "استفاده از اتصال‌ها/ میان‌برهای صفحه‌کلید OS پیش‌فرض"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "اندازه لایه‌گذاری ارتفاع خط"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "کلیدهای رسانه، Fkeys هستند"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "اینکه به‌جای ضبط همیشگی برای استفاده خود hterm باید اتصالات معمول صفحه‌کلید OS درنظر گرفته شود یا نه."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "اندازه لایه‌گذاری به پیکسل بین هر ردیف صفحه پایانه."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "اگر روی «درست» تنظیم شود، کلیدهای رسانه‌ای را به معادل کلیدهای F آن‌ها تبدیل می‌کند. اگر روی «نادرست» تنظیم شود، اجازه می‌دهد مرورگر کلیدها را کنترل کند."
 	},
@@ -609,7 +615,7 @@
 		"message": "نشانی وب برگه سبک نگارش برای قرار گرفتن در سند پایانه."
 	},
 	"hterm_pref_user_css_text": {
-		"message": "متن CSS سفارشی برای تعیین سبک در پایانه."
+		"message": "متن CSS سفارشی برای سبک‌بندی پایانه."
 	},
 	"hterm_pref_word_break_match_left": {
 		"message": "عبارت باقاعده برای توقف تطبیق دادن در سمت راست (شروع) یک انتخاب.\n\nمعمولاً این گزینه، گروهی نویسه برای رد کردن برخی نویسه‌ها است.\nما به‌صورت پیش‌فرض به «~» و «.» به‌عنوان مسیرهایی که عبارت اغلب با آن‌ها شروع می‌شود، اجازه می‌دهیم."
@@ -738,7 +744,7 @@
 		"message": "کپی"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "کپی کردن منبع در مقصد"
+		"message": "کپی کردن مسیر راه‌دور در مسیر راه‌دور دیگر"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "حذف فایل‌ها"
@@ -876,7 +882,7 @@
 		"message": "نمایش نسخه پروتکل فعلی"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "اطلاعات نسخه پروتکل SFTP:\n  محلی: $1\n  سرور: $1"
+		"message": "اطلاعات نسخه پروتکل SFTP:\n  محلی: $1\n  سرور: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: پایان فایل"
@@ -897,7 +903,7 @@
 		"message": "خطا: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: افزونه «$2» در دسترس نیست"
+		"message": "$1: افزونه الزامی «$2» در این سرور دردسترس نیست"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: فایلی معمولی نیست"
@@ -942,7 +948,7 @@
 		"message": "[نکته حرفه‌ای] برای اینکه کلید Ctrl+W پایانه‌تان را نبندد، «بازکردن به‌عنوان پنجره» یا «تمام صفحه» را انتخاب کنید!\n[نکته حرفه‌ای] برای اطلاعات بیشتر، به $1 مراجعه کنید."
 	},
 	"plugin_loading": {
-		"message": "در حال بارگیری افزایه NaCl..."
+		"message": "درحال بار کردن برنامه $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " تمام."
@@ -954,7 +960,7 @@
 		"message": "برای باز کردن برگه جدید، Ctrl را نگه دارید."
 	},
 	"pref_backup_filename": {
-		"message": "تنظیمات برگزیده پوسته امن Backup.json"
+		"message": "اولویت‌های پوسته امن Backup.json"
 	},
 	"preferences_header_ssh_files": {
 		"message": "فایل‌های SSH"
@@ -966,7 +972,7 @@
 		"message": "کنترل‌کننده‌های URI"
 	},
 	"preferences_reset": {
-		"message": "تمام تنظیمات برگزیده بازنشانی شد!"
+		"message": "همه اولویت‌ها بازنشانی شدند!"
 	},
 	"protocol_register_button": {
 		"message": "ثبت کنترل‌کنندگان پروتکل"
@@ -990,7 +996,10 @@
 		"message": "اندازه خوانش (کیلوبایت)"
 	},
 	"reconnect_message": {
-		"message": "دوباره متصل شود(R)، اتصال دیگری انتخاب شود(C)، یا خارج می‌شوید(E)؟"
+		"message": "دوباره متصل شود(R) (پیش‌فرض)، اتصال دیگری انتخاب شود(C)، یا خارج می‌شوید(E)؟"
+	},
+	"relay_auth_error": {
+		"message": "هنگام اصالت‌سنجی با سرور رله خطایی روی داد: $1"
 	},
 	"relay_retry": {
 		"message": "در حال تلاش مجدد…"
@@ -1026,7 +1035,7 @@
 		"message": " انجام نشد: $1"
 	},
 	"ssh_cert_check_refresh": {
-		"message": "درحال بازخوانی گواهینامه SSH…"
+		"message": "درحال بازآوری گواهینامه SSH…"
 	},
 	"ssh_cert_check_result": {
 		"message": " حدود $1 ساعت تا انقضا باقی مانده است"
@@ -1042,6 +1051,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "«$1» در دسترس نیست"
+	},
+	"terminal_home_add_ssh": {
+		"message": "افزودن SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[پیش‌فرض]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "تنظیمات توسعه‌دهنده"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "ویرایش SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "وارد کردن"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "اتصال «پوسته ایمن» جدید"
+	},
+	"terminal_home_ssh_command": {
+		"message": "فرمان"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "مقصد را با «username@hostname» مشخص کنید"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "تنظیمات پایانه"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "رنگ‌های ANSI"
@@ -1113,10 +1149,10 @@
 		"message": "زیرخط"
 	},
 	"terminal_settings_reset_dialog_message": {
-		"message": "مطمئنید می‌خواهید طرح زمینه را به پیش‌فرض‌های آن بازنشانی کنید؟"
+		"message": "مطمئنید می‌خواهید زمینه را به پیش‌فرض‌های آن بازنشانی کنید؟"
 	},
 	"terminal_settings_reset_dialog_title": {
-		"message": "بازنشانی طرح زمینه"
+		"message": "بازنشانی زمینه"
 	},
 	"terminal_settings_reset_label": {
 		"message": "بازنشاندن"
@@ -1140,10 +1176,10 @@
 		"message": "روشن"
 	},
 	"terminal_theme_solarized_dark_label": {
-		"message": "طرح زمینه تیره Solarized"
+		"message": "زمینه تیره Solarized"
 	},
 	"terminal_theme_solarized_light_label": {
-		"message": "طرح زمینه روشن Solarized"
+		"message": "زمینه روشن Solarized"
 	},
 	"terminal_title_ansi_color_tooltip_0": {
 		"message": "رنگ ۰: سیاه"
@@ -1223,8 +1259,11 @@
 	"terminal_title_settings": {
 		"message": "تنظیمات"
 	},
+	"terminal_title_terminal": {
+		"message": "پایانه"
+	},
 	"terminal_title_theme": {
-		"message": "طرح زمینه"
+		"message": "زمینه"
 	},
 	"terminal_try_again_with_internet": {
 		"message": "به اینترنت متصل شوید و دوباره امتحان کنید."

@@ -57,7 +57,7 @@
 		"message": "წაშლა"
 	},
 	"disconnect_message": {
-		"message": "NaCl დანამატი დასრულდა სტატუსის შემდეგი კოდით: $1."
+		"message": "პროგრამა გავიდა სტატუსის კოდით $1."
 	},
 	"faq_menu_label": {
 		"message": "ხშირად დასმული შეკითხვები"
@@ -283,6 +283,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ოპერაციული სისტემის კლავიშთა ნაგულისხმევი კომბინაციების/მალსახმობების გამოყენება"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "ხაზის სიმაღლის მინდვრების ზომა"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "მულტიმედიური კლავიშების დამუშავება, როგორც ფუნქციურების"
@@ -521,6 +524,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "დაშვებული იყოს თუ არა ოპერაციული სისტემის კლავიშთა ტიპური კომბინაციების გამოყენება (ყოველთვის hterm-ში გამოყენების ნაცვლად)."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "მინდვრების ზომა (პიქსელებში) ტერმინალის ეკრანის თითოეულ მწკრივს შორის."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "„true“-ს მითითების შემთხვევაში, მულტიმედიური კლავიშები იმუშავებს მათი ფუნქციური ეკვივალენტების სახით. „false“-ის მითითების შემთხვევაში, აღნიშნული დამოკიდებული იქნება ბრაუზერზე."
 	},
@@ -717,7 +723,7 @@
 		"message": "ფერთა გამოყენების გადართვა"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "წყაროს კოპირება დანიშნულების ადგილას"
+		"message": "დისტანციური მდებარეობის კოპირება განსხვავებულ დისტანციურ მდებარეობაზე"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ფაილების წაშლა"
@@ -807,7 +813,7 @@
 		"message": "პროტოკოლის ამჟამინდელი ვერსიის ჩვენება"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP-პროტოკოლის ვერსიების ინფორმაცია:\n  ადგილობრივი: $1\n  სერვერის: $1"
+		"message": "SFTP-პროტოკოლის ვერსიების ინფორმაცია:\n  ადგილობრივი: $1\n  სერვერის: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ფაილის დასასრული"
@@ -828,7 +834,7 @@
 		"message": "შეცდომა: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: გაფართოება „$2“ მიუწვდომელია"
+		"message": "$1: საჭირო „$2“ გაფართოება მიუწვდომელია ამ სერვერის შემთხვევაში"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: არ არის ჩვეულებრივი ფაილი"
@@ -873,7 +879,7 @@
 		"message": "[მინიშნება პროფესიონალისგან] კლავიშთა კომბინაციამ Ctrl+W ტერმინალი რომ არ დახუროს, გამოიყენეთ პარამეტრები „ახალ ფანჯარაში გახსნა“ ან „სრულეკრანიანი რეჟიმი“.\n[მინიშნება პროფესიონალისგან] დამატებითი ინფორმაციისთვის ეწვიეთ $1-ს."
 	},
 	"plugin_loading": {
-		"message": "იტვირთება NaCl დანამატი..."
+		"message": "იტვირთება პროგრამა $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " მზადაა."
@@ -918,7 +924,10 @@
 		"message": "წაკითხვის ზომა (კიბიბაიტი)"
 	},
 	"reconnect_message": {
-		"message": "აირჩიეთ, რა გსურთ: ხელახლა დაკავშირება (R), სხვა კავშირის არჩევა (C) თუ გასვლა (X)?"
+		"message": "აირჩიეთ, რა გსურთ: ხელახლა დაკავშირება (R, ნაგულისხმევი), სხვა კავშირის არჩევა (C) თუ გასვლა (X)?"
+	},
+	"relay_auth_error": {
+		"message": "ავტორიზაციის შეცდომა რეტრანსლაციის სერვერთან: $1"
 	},
 	"relay_retry": {
 		"message": "მიმდინარეობს ხელახლა ცდა..."
@@ -970,6 +979,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "„$1“ მიუწვდომელია"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH-ის დამატება"
+	},
+	"terminal_home_default_identity": {
+		"message": "[ნაგულისხმევი]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "დეველოპერის პარამეტრები"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH-ის რედაქტირება"
+	},
+	"terminal_home_import_identity": {
+		"message": "იმპორტირება"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "ახალი SSH კავშირი"
+	},
+	"terminal_home_ssh_command": {
+		"message": "ბრძანება"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "მიუთითეთ დანიშნულების ადგილი „username@hostname“-ით"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "ტერმინალის პარამეტრები"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI ფერები"
@@ -1147,6 +1183,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "პარამეტრები"
+	},
+	"terminal_title_terminal": {
+		"message": "ტერმინალი"
 	},
 	"terminal_title_theme": {
 		"message": "თემა"

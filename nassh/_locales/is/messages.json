@@ -60,7 +60,7 @@
 		"message": "Eyða"
 	},
 	"disconnect_message": {
-		"message": "NaCl-viðbót hætti með stöðukóðann $1."
+		"message": "Forriti lokað með stöðukóðann $1."
 	},
 	"enter_keycap": {
 		"message": "[FÆRSLULYKILL]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Nota sjálfgefnar lyklaborðsflýtiskipanir/flýtilykla stýrikerfa"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Fyllingarstærð línuhæðar"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Efnislyklar eru aðgerðalyklar"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ákvarða hvort virða eigi algengar lyklaborðsflýtiskipanir stýrikerfis í stað þess að hterm vinni þær sjálft í hvert skipti."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Fyllingarstærðin í pixlum á milli hverrar raðar í skipanalínu."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ef rétt þá er efnislyklum breytt í samsvarandi aðgerðalykla. Ef rangt er vafrinn látinn meðhöndla lykla."
 	},
@@ -738,7 +744,7 @@
 		"message": "afrit"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Afrita uppruna á áfangastað"
+		"message": "Afritaðu ytri slóð á aðra ytri slóð"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Eyða skrám"
@@ -873,7 +879,7 @@
 		"message": "Sýna núverandi útgáfu samskiptareglu"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Upplýsingar um SFTP-samskiptareglu:\nstaðbundið: $1\nþjónn: $1"
+		"message": "Upplýsingar um SFTP-samskiptareglu:\nstaðbundið: $1\nþjónn: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: lok skráar"
@@ -894,7 +900,7 @@
 		"message": "VILLA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: Viðbótin „$2“ er ekki tiltæk"
+		"message": "$1: áskilin „$2“ viðbót ótiltæk með þessum þjóni"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ekki venjuleg skrá"
@@ -939,7 +945,7 @@
 		"message": "[Gott ráð] Notaðu „Opna sem glugga“ eða „Allur skjárinn“ til að koma í veg fyrir að skipanaglugganum sé lokað með Ctrl+W.\n[Gott ráð] Frekari upplýsingar er að finna á $1."
 	},
 	"plugin_loading": {
-		"message": "Hleður NaCl-viðbót..."
+		"message": "Hleður $1 forritinu…"
 	},
 	"plugin_loading_complete": {
 		"message": " lokið."
@@ -987,7 +993,10 @@
 		"message": "Lestrarstærð (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Endurtengjast (R), velja aðra tengingu (C) eða hætta (X)?"
+		"message": "Endurtengjast (R) (sjálfgefið), velja aðra tengingu (C) eða hætta (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Villa kom upp við auðkenningu hjá miðlunarþjóni: $1"
 	},
 	"relay_retry": {
 		"message": "Reynir aftur..."
@@ -1039,6 +1048,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "„$1“ er ekki tiltækt"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Bæta SSH við"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Sjálfgefið]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Forritarastillingar"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Breyta SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Flytja inn"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Ný SSH-tenging"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Skipun"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Tilgreina áfangastað með „username@hostname“"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Útstöðvarstillingar"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-litir"
@@ -1219,6 +1255,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Stillingar"
+	},
+	"terminal_title_terminal": {
+		"message": "Útstöð"
 	},
 	"terminal_title_theme": {
 		"message": "Þema"

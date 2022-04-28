@@ -60,7 +60,7 @@
 		"message": "Elimina"
 	},
 	"disconnect_message": {
-		"message": "Plug-in di NaCl uscito con codice di stato $1."
+		"message": "Programma chiuso, con codice di stato $1."
 	},
 	"enter_keycap": {
 		"message": "[Invio]"
@@ -286,6 +286,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Utilizza scorciatoie/associazioni da tastiera predefinite del sistema operativo"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Dimensioni spaziatura interna altezza riga"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "I tasti Media sono tasti funzione"
@@ -524,6 +527,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Consente di stabilire se le comuni associazioni da tastiera del sistema operativo debbano essere rispettate invece che acquisire sempre l'uso di hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Le dimensioni in pixel della spaziatura interna tra ogni riga dello schermo del terminale."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Se il valore è vero, i tasti multimediali vengono convertiti nei tasti funzione equivalenti. Se il valore è falso, i tasti vengono gestiti dal browser."
 	},
@@ -720,7 +726,7 @@
 		"message": "Attiva/disattiva uso del colore"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Copia sorgente nella destinazione"
+		"message": "Copia un percorso remoto in un altro percorso dello stesso tipo"
 	},
 	"nasftp_cmd_del": {
 		"message": "Canc"
@@ -813,7 +819,7 @@
 		"message": "Mostra la versione dell'attuale protocollo"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Informazioni sulla versione del protocollo SFTP:\nlocale: $1\nserver: $1"
+		"message": "Informazioni sulla versione del protocollo SFTP:\nlocale: $1\nserver: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: fine del file"
@@ -834,7 +840,7 @@
 		"message": "ERRORE: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: estensione \"$2\" non disponibile"
+		"message": "$1: estensione obbligatoria \"$2\" non disponibile con questo server"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: il file non è regolare"
@@ -879,7 +885,7 @@
 		"message": "[Suggerimento avanzato] Utilizza \"Apri in una finestra\" o \"Schermo intero\" per evitare che Ctrl + W chiuda il terminale.\n[Suggerimento avanzato] Visita la pagina $1 per ulteriori informazioni."
 	},
 	"plugin_loading": {
-		"message": "Caricamento del plug-in di NaCl…"
+		"message": "Caricamento del programma $1 in corso…"
 	},
 	"plugin_loading_complete": {
 		"message": " completato."
@@ -927,7 +933,10 @@
 		"message": "Dimensioni lettura (kB)"
 	},
 	"reconnect_message": {
-		"message": "Riconnettere (R), Scegliere un'altra connessione (C) o Uscire (X)?"
+		"message": "Riconnettere (R) (impostazione predefinita), Scegliere un'altra connessione (C) o Uscire (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Errore durante l'autenticazione con il relay server: $1"
 	},
 	"relay_retry": {
 		"message": "Nuovo tentativo…"
@@ -979,6 +988,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" non disponibile"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Aggiungi SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Opzione predefinita]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Impostazioni sviluppatore"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Modifica SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importa"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nuova connessione SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Comando"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Specifica la destinazione nel formato \"nomeutente@nomehost\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Impostazioni terminale"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Colori ANSI"
@@ -1154,6 +1190,9 @@
 	"terminal_title_settings": {
 		"message": "Impostazioni"
 	},
+	"terminal_title_terminal": {
+		"message": "Terminale"
+	},
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
@@ -1212,7 +1251,7 @@
 		"message": "Smonta SFTP"
 	},
 	"welcome_changelog": {
-		"message": "Registro modifiche/note di rilascio: $1"
+		"message": "ChangeLog/note di rilascio: $1"
 	},
 	"welcome_faq": {
 		"message": "Risposte alle Domande frequenti: $1 (Ctrl + clic sui link per aprirli)"

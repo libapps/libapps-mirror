@@ -60,7 +60,7 @@
 		"message": "ડિલીટ કરો"
 	},
 	"disconnect_message": {
-		"message": "સ્ટેટસ કોડ $1 ધરાવતા NaCl પ્લગ-ઇનમાંથી બહાર નીકળ્યાં."
+		"message": "$1 સ્ટેટસ કોડ સાથે પ્રોગ્રામ બંધ થઈ ગયો."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ડિફૉલ્ટ OS કીબોર્ડ બાઇન્ડિંગ/શૉર્ટકટનો ઉપયોગ કરો"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "લાઇનની ઊંચાઈ અનુસાર જાહેરાતની આજુબાજુની ખાલી જગ્યાનું કદ"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "મીડિયા કી એ Fkeys છે"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "હંમેશાં htermના પોતાના ઉપયોગ માટે કૅપ્ચર કરવાને બદલે, સામાન્ય OS કીબોર્ડ બાઇન્ડિંગને માનવા જોઈએ કે નહીં."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "ટર્મિનલ સ્ક્રીનની પ્રત્યેક પંક્તિની વચ્ચે જાહેરાતની આજુબાજુની ખાલી જગ્યાનું કદ, પિક્સેલમાં."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "જો સાચું હોય, તો મીડિયા કીને તેમના બરાબરના Fkeyમાં બદલો. જો ખોટું હોય, તો બ્રાઉઝરને કી હૅન્ડલ કરવા દો."
 	},
@@ -723,7 +729,7 @@
 		"message": "રંગના ઉપયોગને ટૉગલ કરો"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "નિર્ધારિત સ્થાન પર સૉર્સને કૉપિ કરો"
+		"message": "કોઈ અલગ રિમોટ પથ માટે રિમોટ પથને કૉપિ કરો"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ફાઇલોને ડિલીટ કરો"
@@ -813,7 +819,7 @@
 		"message": "વર્તમાન પ્રોટોકૉલનું વર્ઝન બતાવો"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP પ્રોટોકૉલ વર્ઝનની માહિતી:\n  સ્થાનિક: $1\n  સર્વર: $1"
+		"message": "SFTP પ્રોટોકૉલ વર્ઝનની માહિતી:\n  સ્થાનિક: $1\n  સર્વર: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ફાઇલને અંતે"
@@ -834,7 +840,7 @@
 		"message": "ભૂલ: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' એક્સ્ટેંશન ઉપલબ્ધ નથી"
+		"message": "$1: આ સર્વર આવશ્યક '$2' એક્સ્ટેન્શન ધરાવતું નથી"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: નિયમિત ફાઇલ નથી"
@@ -879,7 +885,7 @@
 		"message": "[નિષ્ણાતની ટિપ] Ctrl+Wને તમારું ટર્મિનલ બંધ કરવાથી રોકવા માટે, 'વિંડો તરીકે ખોલો' અથવા 'પૂર્ણ-સ્ક્રીન'નો ઉપયોગ કરો!\n[નિષ્ણાતની ટિપ] વધુ માહિતી માટે $1 જુઓ."
 	},
 	"plugin_loading": {
-		"message": "NaCl પ્લગઇન લોડ કરી રહ્યું છે..."
+		"message": "$1 પ્રોગ્રામ લોડ કરી રહ્યાં છીએ..."
 	},
 	"plugin_loading_complete": {
 		"message": " પૂર્ણ થયું."
@@ -927,7 +933,10 @@
 		"message": "વાંચવાનું કદ (KiB)"
 	},
 	"reconnect_message": {
-		"message": "ફરી કનેક્ટ કરીએ (R), બીજું કનેક્શન પસંદ કરીએ (C) અથવા બહાર નીકળીએ (x)?"
+		"message": "શું (R) વડે ફરી કનેક્ટ કરીએ (ડિફૉલ્ટ), (C) વડે કોઈ અન્ય કનેક્શન પસંદ કરીએ કે (E) વડે બહાર નીકળીએ?"
+	},
+	"relay_auth_error": {
+		"message": "પ્રસારણના સર્વરમાં પ્રમાણિત કરવામાં ભૂલ આવી: $1"
 	},
 	"relay_retry": {
 		"message": "ફરી પ્રયાસ કરી રહ્યાં છીએ…"
@@ -979,6 +988,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ઉપલબ્ધ નથી"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH ઉમેરો"
+	},
+	"terminal_home_default_identity": {
+		"message": "[ડિફૉલ્ટ]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "ડેવલપર સેટિંગ"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSHમાં ફેરફાર કરો"
+	},
+	"terminal_home_import_identity": {
+		"message": "આયાત કરો"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "નવું SSH કનેક્શન"
+	},
+	"terminal_home_ssh_command": {
+		"message": "આદેશ"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "\"username@hostname\" સાથે સ્થાનનો ઉલ્લેખ કરો"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "ટર્મિનલ સેટિંગ"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI રંગો"
@@ -1156,6 +1192,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "સેટિંગ"
+	},
+	"terminal_title_terminal": {
+		"message": "ટર્મિનલ"
 	},
 	"terminal_title_theme": {
 		"message": "થીમ"

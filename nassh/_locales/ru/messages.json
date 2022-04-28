@@ -60,7 +60,7 @@
 		"message": "Удалить"
 	},
 	"disconnect_message": {
-		"message": "Работа плагина NaCl завершена. Код статуса: $1."
+		"message": "Программа завершила работу с кодом статуса $1."
 	},
 	"enter_keycap": {
 		"message": "[ВВОД]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Использовать системные сочетания клавиш по умолчанию"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Размер полей, равный высоте строки"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Обрабатывать мультимедийные клавиши как функциональные"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Определяет, разрешить ли ОС использовать типичные сочетания клавиш, не перехватывая их для использования в hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Размер полей в пикселях между каждой строкой экрана терминала."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Если задано значение True, клавиши мультимедиа будут работать как соответствующие им функциональные. Если задано значение False, настройки клавиш будут зависеть от браузера."
 	},
@@ -726,7 +732,7 @@
 		"message": "Изменить использование цветов"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Копировать источник в место назначения"
+		"message": "Копировать удаленный путь в другой удаленный путь"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Удалить файлы"
@@ -816,7 +822,7 @@
 		"message": "Показать текущую версию протокола"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Сведения о версии SFTP-протокола:\nЛокальная – $1\nНа сервере – $1"
+		"message": "Сведения о версии SFTP-протокола:\nЛокальная – $1\nНа сервере – $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: конец файла."
@@ -837,7 +843,7 @@
 		"message": "ОШИБКА: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: расширение $2 недоступно."
+		"message": "$1: необходимое разрешение $2 недоступно на этом сервере."
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2 не является обычным файлом."
@@ -882,7 +888,7 @@
 		"message": "Совет. Используйте параметры \"Открыть в отдельном окне\" или \"Полноэкранный режим\", чтобы сочетание клавиш Ctrl + W не закрывало терминал.\nСовет. Узнайте больше на странице $1."
 	},
 	"plugin_loading": {
-		"message": "Загрузка плагина NaCl:"
+		"message": "Загрузка программы \"$1\"…"
 	},
 	"plugin_loading_complete": {
 		"message": " готово."
@@ -930,7 +936,10 @@
 		"message": "Размер для чтения (КиБ)"
 	},
 	"reconnect_message": {
-		"message": "Подключиться заново (R), выбрать другое подключение (C) или выйти (X)?"
+		"message": "Подключиться заново (R, по умолчанию), выбрать другое подключение (C) или выйти (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Не удалось выполнить аутентификацию с помощью сервера ретрансляции: $1."
 	},
 	"relay_retry": {
 		"message": "Повторная попытка…"
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Шрифт \"$1\" недоступен"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Добавить SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[По умолчанию]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Настройки разработчика"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Изменить SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Импортировать"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Новое SSH-подключение"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Команда"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Укажите целевой объект в формате \"имя_пользователя@имя_хоста\"."
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Настройки терминала"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Цвета ANSI"
@@ -1159,6 +1195,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Настройки"
+	},
+	"terminal_title_terminal": {
+		"message": "Терминал"
 	},
 	"terminal_title_theme": {
 		"message": "Тема"

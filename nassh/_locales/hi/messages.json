@@ -63,7 +63,7 @@
 		"message": "मिटाएं"
 	},
 	"disconnect_message": {
-		"message": "NaCl प्लग इन स्थिति कोड $1 के साथ बाहर हो गया."
+		"message": "प्रोग्राम, स्टेटस कोड $1 के साथ बंद हो गया."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ओएस की कीबोर्ड की डिफ़ॉल्ट कार्रवाई/शॉर्टकट इस्तेमाल करें"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "लाइन हाइट पैडिंग साइज़"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "मीडिया कुंजियां Fkeys होती हैं"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "हमेशा hterm के अपने इस्तेमाल को कैप्चर करने के बजाय, ओएस की कीबोर्ड की सामान्य कार्रवाइयों (शॉर्टकट) का पालन करना चाहिए या नहीं."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "टर्मिनल स्क्रीन की हर लाइन के बीच का पैडिंग साइज़, पिक्सल में."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "सही होने पर, मीडिया कुंजियों को उनके समान Fkey में बदल दिया जाता है. गलत होने पर, ब्राउज़र कुंजियों को इस्तेमाल करता है."
 	},
@@ -738,7 +744,7 @@
 		"message": "कॉपी"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "सोर्स से डेस्टिनेशन पर कॉपी करें"
+		"message": "रिमोट पाथ को किसी अलग रिमोट पाथ पर कॉपी करें"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "फ़ाइलें मिटाएं"
@@ -870,7 +876,7 @@
 		"message": "मौजूदा प्रोटोकॉल वर्शन दिखाएं"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "एसएफ़टीपी प्रोटोकॉल वर्शन की जानकारी:\n  लोकल: $1\n  सर्वर: $1"
+		"message": "एसएफ़टीपी प्रोटोकॉल वर्शन की जानकारी:\n  लोकल: $1\n  सर्वर: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: फ़ाइल पूरी हुई"
@@ -891,7 +897,7 @@
 		"message": "गड़बड़ी: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' एक्सटेंशन उपलब्ध नहीं है"
+		"message": "$1: इस सर्वर के लिए ज़रूरी '$2' एक्सटेंशन उपलब्ध नहीं है"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: सामान्य फ़ाइल नहीं है"
@@ -936,7 +942,7 @@
 		"message": "[सलाह] Ctrl+W को अपना टर्मिनल बंद करने से रोकने के लिए 'विंडो के रूप में खोलें' या 'फ़ुलस्क्रीन' का इस्तेमाल करें!\n[सलाह] ज़्यादा जानकारी के लिए $1 देखें."
 	},
 	"plugin_loading": {
-		"message": "NaCl प्लग इन लोड हो रहा है..."
+		"message": "$1 प्रोग्राम लोड हो रहा है..."
 	},
 	"plugin_loading_complete": {
 		"message": " हाे गया."
@@ -984,7 +990,10 @@
 		"message": "पढ़ने के लिए साइज़ (किलोबाइट)"
 	},
 	"reconnect_message": {
-		"message": "फिर से कनेक्ट करें (R), कोई दूसरा कनेक्शन चुनें (C) या बाहर निकलें (X)?"
+		"message": "क्या आपको डिफ़ॉल्ट तौर पर फिर से कनेक्ट करना है (R), कोई दूसरा कनेक्शन चुनना है (C) या बाहर निकलना है (X)?"
+	},
+	"relay_auth_error": {
+		"message": "रिले सर्वर की मदद से पुष्टि करने में गड़बड़ी हुई: $1"
 	},
 	"relay_retry": {
 		"message": "फिर से कोशिश की जा रही है..."
@@ -1039,6 +1048,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" उपलब्ध नहीं है"
+	},
+	"terminal_home_add_ssh": {
+		"message": "एसएसएच जोड़ें"
+	},
+	"terminal_home_developer_settings": {
+		"message": "डेवलपर सेटिंग"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "एसएसएच में बदलाव करें"
+	},
+	"terminal_home_import_identity": {
+		"message": "इंपोर्ट करें"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "नया एसएसएच कनेक्शन"
+	},
+	"terminal_home_ssh": {
+		"message": "एसएसएच"
+	},
+	"terminal_home_ssh_command": {
+		"message": "निर्देश"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "\"username@hostname\" की मदद से डेस्टिनेशन की जानकारी दें"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "टर्मिनल सेटिंग"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI वाले रंग"
@@ -1219,6 +1255,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "सेटिंग"
+	},
+	"terminal_title_terminal": {
+		"message": "टर्मिनल"
 	},
 	"terminal_title_theme": {
 		"message": "थीम"

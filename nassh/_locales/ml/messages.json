@@ -60,7 +60,7 @@
 		"message": "ഇല്ലാതാക്കുക"
 	},
 	"disconnect_message": {
-		"message": "$1 എന്ന സ്‌റ്റാറ്റസ് കോഡ് ഉപയോഗിച്ച് NaCl പ്ലഗിൻ പ്രവർത്തനം നിർത്തി."
+		"message": "$1 എന്ന സ്റ്റാറ്റസ് കോഡോടെ പ്രോഗ്രാമിൽ നിന്ന് പുറത്തുകടന്നു."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ഡിഫോൾട്ട് OS കീബോർഡ് ബൈൻഡിംഗുകൾ/കുറുക്കുവഴികൾ ഉപയോഗിക്കുക"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "ലൈൻ ഉയരത്തിന്റെ പാഡിംഗ് വലുപ്പം"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "മീഡിയ കീകൾ എന്നാൽ Fkeys ആണ്"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "എല്ലായ്‌പ്പോഴും hterm-ന്റെ സ്വന്തം ഉപയോഗത്തിനായി ക്യാപ്‌ച്വർ ചെയ്യുന്നതിന് പകരം സാധാരണ OS കീബോർഡ് ബൈൻഡിംഗുകൾ പരിഗണിക്കണോ എന്നത്."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "ടെർമിനൽ സ്ക്രീനിന്റെ ഓരോ വരിയും തമ്മിലുള്ള പാഡിംഗ് വലുപ്പം പിക്‌സലിൽ."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "'ശരി' ആണെങ്കിൽ, മീഡിയാ കീകളെ അവയുടെ തത്തുല്യ Fkey ആയി പരിവർത്തനം ചെയ്യുക. 'തെറ്റ്' ആണെങ്കിൽ, കീകളെ കൈകാര്യം ചെയ്യാൻ ബ്രൗസറിനെ അനുവദിക്കുക."
 	},
@@ -723,7 +729,7 @@
 		"message": "വർണ്ണത്തിന്റെ ഉപയോഗം മാറ്റുക"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "ഉറവിടം ടാർഗെറ്റിലേക്ക് പകർത്തുക"
+		"message": "ഒരു വിദൂര പാത മറ്റൊരു വിദൂര പാതയിലേക്ക് പകർത്തുക"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ഫയലുകൾ ഇല്ലാതാക്കുക"
@@ -813,7 +819,7 @@
 		"message": "നിലവിലെ പ്രോട്ടോക്കോള്‍ പതിപ്പ് കാണിക്കുക"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP പ്രോട്ടോക്കോള്‍ പതിപ്പിന്റെ വിവരങ്ങൾ:\n  ലോക്കൽ: $1\n  സെര്‍വര്‍: $1"
+		"message": "SFTP പ്രോട്ടോക്കോള്‍ പതിപ്പിന്റെ വിവരങ്ങൾ:\n  ലോക്കൽ: $1\n  സെര്‍വര്‍: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ഫയലിന്റെ അവസാനം"
@@ -834,10 +840,10 @@
 		"message": "പിശക്: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' വിപുലീകരണം ലഭ്യമല്ല"
+		"message": "$1: ഈ സെർവറിനൊപ്പം ആവശ്യമായ '$2' വിപുലീകരണം ലഭ്യമല്ല"
 	},
 	"nasftp_error_non_reg_file": {
-		"message": "$1: $2: സാധാരണ ഫയൽ അല്ല"
+		"message": "$1: $2: റഗുലർ ഫയൽ അല്ല"
 	},
 	"nasftp_error_not_enough_args": {
 		"message": "$1: വേണ്ടത്ര സൂത്രവാക്യങ്ങളില്ല"
@@ -879,7 +885,7 @@
 		"message": "[പ്രൊഫഷണൽ നുറുങ്ങ്] Ctrl+W, നിങ്ങളുടെ ടെർമിനൽ അടയ്ക്കുന്നത് തടയാൻ 'വിൻഡോ ആയി തുറക്കുക' അല്ലെങ്കിൽ 'പൂര്‍‌ണ്ണസ്‌ക്രീൻ' ഉപയോഗിക്കുക!\n[പ്രൊഫഷണൽ നുറുങ്ങ്] കൂടുതൽ വിവരങ്ങൾക്ക് $1 കാണുക."
 	},
 	"plugin_loading": {
-		"message": "NaCl പ്ലഗിൻ ലോഡ് ചെയ്യുന്നു..."
+		"message": "$1 പ്രോഗ്രാം ലോഡ് ചെയ്യുന്നു..."
 	},
 	"plugin_loading_complete": {
 		"message": " പൂർത്തിയാക്കി."
@@ -927,7 +933,10 @@
 		"message": "റീഡ് വലുപ്പം (KiB)"
 	},
 	"reconnect_message": {
-		"message": "വീണ്ടും കണക്‌റ്റ് ചെയ്യണോ(R), മറ്റൊരു കണക്ഷൻ തിരഞ്ഞെടുക്കണോ(C), പുറത്തുകടക്കണോ(x)?"
+		"message": "വീണ്ടും കണക്‌റ്റ് ചെയ്യണോ(R) (ഡിഫോൾട്ട്), മറ്റൊരു കണക്ഷൻ തിരഞ്ഞെടുക്കണോ(C), പുറത്തുകടക്കണോ(x)?"
+	},
+	"relay_auth_error": {
+		"message": "റിലേ സെർവർ ഉപയോഗിച്ച് പരിശോധിച്ചുറപ്പിക്കുന്നതിൽ പിശക്: $1"
 	},
 	"relay_retry": {
 		"message": "വീണ്ടും ശ്രമിക്കുന്നു..."
@@ -979,6 +988,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ലഭ്യമല്ല"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH ചേർക്കുക"
+	},
+	"terminal_home_default_identity": {
+		"message": "[ഡിഫോൾട്ട്]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "ഡെവലപ്പർ ക്രമീകരണം"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH എഡിറ്റ് ചെയ്യുക"
+	},
+	"terminal_home_import_identity": {
+		"message": "ഇമ്പോർട്ട് ചെയ്യുക"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "പുതിയ SSH കണക്ഷൻ"
+	},
+	"terminal_home_ssh_command": {
+		"message": "കമാൻഡ്"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "\"username@hostname\" ഉപയോഗിച്ച് ലക്ഷ്യസ്ഥാനം വ്യക്തമാക്കുക"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "ടെർമിനൽ ക്രമീകരണം"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI വർണ്ണങ്ങൾ"
@@ -1153,6 +1189,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "ക്രമീകരണം"
+	},
+	"terminal_title_terminal": {
+		"message": "ടെർമിനൽ"
 	},
 	"terminal_title_theme": {
 		"message": "തീം"

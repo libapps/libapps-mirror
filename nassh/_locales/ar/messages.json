@@ -63,7 +63,7 @@
 		"message": "حذف"
 	},
 	"disconnect_message": {
-		"message": "تم إنهاء المكوّن الإضافي NaCl برمز الحالة $1."
+		"message": "تم الخروج من البرنامج برمز الحالة $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "استخدام روابط/اختصارات لوحة مفاتيح نظام التشغيل"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "حجم المساحة المتروكة الخاصة بارتفاع الأسطر"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "مفاتيح الوسائط هي مفاتيح وظيفية (Fkeys)."
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "يمكنك اختيار ما إذا كان يُفترَض مراعاة روابط لوحة مفاتيح أنظمة التشغيل الشائعة بدلاً من قصر استخدامها على hterm دائمًا."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "حجم المساحة المتروكة بوحدات البكسل بين صفوف الشاشة الطرفية"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "في حال الضبط على \"true\"، يمكنك تحويل مفاتيح الوسائط إلى مكافئ \"Fkey\". وفي حال الضبط على \"false\"، يتم السماح للمتصفِّح بالتعامل مع المفاتيح."
 	},
@@ -689,6 +695,9 @@
 	"missing_param": {
 		"message": "معلَمة مفقودة: $1"
 	},
+	"mosh_name": {
+		"message": "برنامج Mosh"
+	},
 	"mount_button_label": {
 		"message": "تثبيت SFTP"
 	},
@@ -732,7 +741,7 @@
 		"message": "نسخ"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "نسخ المصدر إلى الوجهة"
+		"message": "يمكنك نسخ أحد المسارات البعيدة إلى مسار بعيد مختلف."
 	},
 	"nasftp_cmd_del_help": {
 		"message": "حذف الملفات"
@@ -831,7 +840,7 @@
 		"message": "عرض الإصدار الحالي للبروتوكول"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "معلومات إصدار \"بروتوكول النقل الآمن للملفات (SFTP)\":\nالمحلي: $1\nالخادم: $1"
+		"message": "معلومات إصدار \"بروتوكول النقل الآمن للملفات (SFTP)\":\nالمحلي: $1\nالخادم: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: نهاية الملف"
@@ -852,7 +861,7 @@
 		"message": "خطأ: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: \"$2\" الإضافة غير متوفرة"
+		"message": "$1: الإضافة \"$2\" المطلوبة غير متاحة عند استخدام هذا الخادم."
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2 ليس ملفًا عاديًا."
@@ -897,7 +906,7 @@
 		"message": "[نصيحة] يمكنك استخدام الإعداد \"فتح كنافذة\" أو \"ملء الشاشة\" لمنع الإجراء Ctrl+W من إغلاق الوحدة الطرفية.\n[نصيحة] يُرجى الانتقال إلى $1 لمزيد من المعلومات."
 	},
 	"plugin_loading": {
-		"message": "جارٍ تحميل المكوّن الإضافي NaCl..."
+		"message": "جارٍ تحميل برنامج $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " اكتمل التحميل."
@@ -945,7 +954,10 @@
 		"message": "حجم القراءة (كيلوبايت)"
 	},
 	"reconnect_message": {
-		"message": "هل تريد إعادة الاتصال (R) أم اختيار اتصال آخر (C) أم الخروج (X)؟"
+		"message": "هل تريد إعادة الاتصال (R) (الإجراء التلقائي) أو اختيار (C) اتصال آخر أو الخروج (X)؟"
+	},
+	"relay_auth_error": {
+		"message": "حدث خطأ أثناء المصادقة باستخدام خادم الإرسال: $1"
 	},
 	"relay_retry": {
 		"message": "جارٍ إعادة المحاولة..."
@@ -1000,6 +1012,36 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" غير متاح"
+	},
+	"terminal_home_add_ssh": {
+		"message": "إضافة بروتوكول النقل الآمن (SSH)"
+	},
+	"terminal_home_default_identity": {
+		"message": "[الإعداد التلقائي]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "إعدادات مطوّر البرامج"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "تعديل بروتوكول النقل الآمن (SSH)"
+	},
+	"terminal_home_import_identity": {
+		"message": "استيراد"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "اتصال جديد من خلال بروتوكول النقل الآمن (SSH)"
+	},
+	"terminal_home_ssh": {
+		"message": "بروتوكول النقل الآمن (SSH)"
+	},
+	"terminal_home_ssh_command": {
+		"message": "الأمر"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "يُرجى تحديد الوجهة بالتنسيق \"username@hostname\"."
+	},
+	"terminal_home_terminal_settings": {
+		"message": "إعدادات الوحدة الطرفية"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ألوان \"المعهد الأمريكي للمعايير الوطنية (ANSI)\""
@@ -1174,6 +1216,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "الإعدادات"
+	},
+	"terminal_title_terminal": {
+		"message": "نافذة طرفية"
 	},
 	"terminal_title_theme": {
 		"message": "المظهر"

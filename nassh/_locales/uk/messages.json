@@ -63,7 +63,7 @@
 		"message": "Видалити"
 	},
 	"disconnect_message": {
-		"message": "Плагін NaCl завершив роботу з кодом статусу $1."
+		"message": "Програма завершила роботу з кодом статусу $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Використовувати призначення/комбінації клавіш в ОС за умовчанням"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Розмір відступів дорівнює одному рядку"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Клавіші медіа – це F-клавіші"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Визначає, чи потрібно брати до уваги звичні призначення клавіш в ОС замість параметрів hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Розмір відступів між рядками екрана термінала в пікселях."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Якщо вибрано значення true, медіа-клавіші перетворюватимуться на відповідні їм функціональні клавіші. Якщо вибрано значення false, налаштування клавіш залежатиме від веб-переглядача."
 	},
@@ -738,7 +744,7 @@
 		"message": "копіювати"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Копіювати з джерела в місце призначення"
+		"message": "Копіювати віддалений шлях в інший віддалений шлях"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Видалити файли"
@@ -879,7 +885,7 @@
 		"message": "Показати поточну версію протоколу"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Інформація про версію протоколу SFTP:\n  локально: $1\n  сервер: $1"
+		"message": "Інформація про версію протоколу SFTP:\n  локально: $1\n  сервер: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: кінець файлу"
@@ -900,7 +906,7 @@
 		"message": "ПОМИЛКА: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: розширення \"$2\" недоступне"
+		"message": "$1: обов’язкове розширення \"$2\" недоступне для цього сервера"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2 – не звичайний файл"
@@ -945,7 +951,7 @@
 		"message": "[Порада спеціаліста] Вибирайте опцію \"Відкрити як вікно\" або \"На весь екран\", щоб команда Control+W не закривала термінал.\n[Порада спеціаліста] Дізнайтеся більше на сторінці $1."
 	},
 	"plugin_loading": {
-		"message": "Завантаження плагіна NaCl…"
+		"message": "Завантаження програми $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " готово."
@@ -993,7 +999,10 @@
 		"message": "Розмір блока читання (КіБ)"
 	},
 	"reconnect_message": {
-		"message": "Підключитися ще раз (R), вибрати інше підключення (C) чи вийти (X)?"
+		"message": "Підключитися ще раз (R) (за умовчанням), вибрати інше підключення (C) чи вийти (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Не вдалось автентифікувати за допомогою сервера-ретранслятора: $1"
 	},
 	"relay_retry": {
 		"message": "Повторна спроба…"
@@ -1045,6 +1054,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Шрифт \"$1\" недоступний."
+	},
+	"terminal_home_add_ssh": {
+		"message": "Додати SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[За умовчанням]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Налаштування розробника"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Редагувати SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Імпортувати"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Нове підключення SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Команда"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Введіть місце призначення у форматі \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Налаштування термінала"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Кольори ANSI"
@@ -1225,6 +1261,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Налаштування"
+	},
+	"terminal_title_terminal": {
+		"message": "Термінал"
 	},
 	"terminal_title_theme": {
 		"message": "Тема"

@@ -63,7 +63,7 @@
 		"message": "Kustuta"
 	},
 	"disconnect_message": {
-		"message": "Pistikprogrammist NaCl väljuti olekukoodiga $1."
+		"message": "Programmist väljuti olekukoodiga $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Kasuta operatsioonisüsteemi klaviatuuri vaikeseoseid/-otseteid"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Joone kõrguse täidise suurus"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Meediaklahvid on F-klahvid"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Määrab, kas järgida tuleks operatsioonisüsteemi tavapäraseid klaviatuuriseoseid, selle asemel et jäädvustada kombinatsioonid alati htermis kasutamiseks."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Terminalikuva iga rea vahel oleva täidise suurus pikslites."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Kui see on Tõene, teisendatakse meediaklahvid F-klahvi ekvivalendiks. Kui see on Väär, lastakse brauseril klahve käsitleda."
 	},
@@ -726,7 +732,7 @@
 		"message": "Värvide kasutamise lüliti"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Lähtesisu kopeerimine sihtkohta"
+		"message": "Kopeerige kaugtee teisele kaugteele"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Failide kustutamine"
@@ -816,7 +822,7 @@
 		"message": "Protokolli praeguse versiooni kuvamine"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP-protokolli versiooniteave:\n  kohalik: $1\n  server: $1"
+		"message": "SFTP-protokolli versiooniteave:\n  kohalik: $1\n  server: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: faili lõpp"
@@ -837,7 +843,7 @@
 		"message": "VIGA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: laiendus „$2“ ei ole saadaval"
+		"message": "$1: nõutav laiendus „$2“ pole selle serveriga saadaval"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ei ole tavaline fail"
@@ -882,7 +888,7 @@
 		"message": "[Professionaali nõuanne.] Kasutage valikut „Ava aknana” või „Täisekraan”, et klahvikombinatsioon Ctrl + W ei saaks terminali sulgeda.\n[Professionaali nõuanne.] Lisateave: $1."
 	},
 	"plugin_loading": {
-		"message": "NaCl pistikprogrammi laadimine …"
+		"message": "Programmi $1 laadimine …"
 	},
 	"plugin_loading_complete": {
 		"message": " valmis."
@@ -930,7 +936,10 @@
 		"message": "Maht lugemisel (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Kas ühendada uuesti (R), valida teine ühendus (C) või väljuda (X)?"
+		"message": "Kas ühendada uuesti (R – vaikseseade), valida teine ühendus (C) või väljuda (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Viga vaheserveriga autentimisel: $1"
 	},
 	"relay_retry": {
 		"message": "Uuesti proovimine …"
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "„$1” ei ole saadaval"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Lisa SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Vaikeseade]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Arendaja seaded"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Muuda SSH-d"
+	},
+	"terminal_home_import_identity": {
+		"message": "Impordi"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Uus SSH-ühendus"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Käsk"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Täpsustage sihtkohta nimega „kasutajanimi@hostinimi“"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminali seaded"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-värvid"

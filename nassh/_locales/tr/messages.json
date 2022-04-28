@@ -60,7 +60,7 @@
 		"message": "Sil"
 	},
 	"disconnect_message": {
-		"message": "NaCl eklentisinden $1 koduyla çıkıldı."
+		"message": "Programdan $1 koduyla çıkıldı."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Varsayılan OS Klavye bağlamalarını/kısayollarını kullanır"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Satır yüksekliği dolgu boyutu"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Medya tuşları Fkey'lerdir"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Sürekli hterm'in kendi kullanımı için yakalamak yerine yaygın OS klavye bağlamalarına uyulup uyulmayacağı."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Dolgu boyutu, terminal ekranında satırlar arasındaki piksel sayısıdır."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Doğru değerine ayarlanırsa medya tuşlarını Fkey eşdeğerlerine dönüştürür. Yanlış değerine ayarlanırsa tarayıcının tuşları ele almasına izin verir."
 	},
@@ -723,7 +729,7 @@
 		"message": "Renk kullanımını değiştirir"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kaynağı hedefe kopyalar"
+		"message": "Uzak yolu farkı bir uzak yola kopyalayın"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Dosya silme"
@@ -813,7 +819,7 @@
 		"message": "Mevcut protokol sürümünü gösterir"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP protokolü sürüm bilgileri:\nyerel: $1\nsunucu: $1"
+		"message": "SFTP protokolü sürüm bilgileri:\nyerel: $1\nsunucu: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: Dosyanın sonu"
@@ -834,7 +840,7 @@
 		"message": "HATA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: \"$2\" uzantısı kullanılamıyor"
+		"message": "$1: Zorunlu \"$2\" uzantısı bu sunucuda mevcut değil"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: Normal bir dosya değil"
@@ -879,7 +885,7 @@
 		"message": "[Uzman İpucu] Ctrl+W tuşlarının terminalinizi kapatmasını önlemek için \"Pencere Olarak Aç\" veya \"Tam ekran\" seçeneğini kullanın!\n[Uzman İpucu] Daha fazla bilgi için $1 adresine bakın."
 	},
 	"plugin_loading": {
-		"message": "NaCl eklentisi yükleniyor..."
+		"message": "$1 programı yükleniyor..."
 	},
 	"plugin_loading_complete": {
 		"message": " tamamlandı."
@@ -927,7 +933,10 @@
 		"message": "Okuma Boyutu (KiB)"
 	},
 	"reconnect_message": {
-		"message": "(R) Yeniden bağlan, (C) Başka bir bağlantı seç veya (X) Çık?"
+		"message": "(R) Yeniden bağlanılsın, (C) Başka bir bağlantı seçilsin veya (X) Çıkılsın mı?"
+	},
+	"relay_auth_error": {
+		"message": "Geçiş sunucusuyla kimlik doğrulama hatası: $1"
 	},
 	"relay_retry": {
 		"message": "Yeniden deneniyor..."
@@ -979,6 +988,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" kullanılamıyor"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH ekle"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Varsayılan]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Geliştirici Ayarları"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH'yi düzenle"
+	},
+	"terminal_home_import_identity": {
+		"message": "İçe aktar"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Yeni SSH bağlantısı"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Komut"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "\"kullanciadi@anamakineadi\" ile hedefi belirleyin"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminal Ayarları"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI renkleri"

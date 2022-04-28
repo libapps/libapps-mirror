@@ -60,7 +60,7 @@
 		"message": "ลบ"
 	},
 	"disconnect_message": {
-		"message": "ออกจากปลั๊กอิน NaCl แล้วโดยมีรหัสสถานะ $1"
+		"message": "ออกจากโปรแกรมแล้วโดยมีรหัสสถานะ $1"
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ใช้การเชื่อมโยงแป้นพิมพ์/แป้นพิมพ์ลัดเริ่มต้นของระบบปฏิบัติการ"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "ขนาดระยะห่างจากขอบของความสูงบรรทัด"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "แป้น Media คือ Fkey"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "กำหนดว่าจะให้ระบบดำเนินการตามการเชื่อมโยงแป้นพิมพ์ของระบบปฏิบัติการโดยทั่วไปแทนการบันทึกไว้ทุกครั้งเพื่อการใช้งานของ hterm เองหรือไม่"
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "ขนาดระยะห่างจากเส้นขอบระหว่างแต่ละแถวของหน้าจอเทอร์มินัลซึ่งมีหน่วยเป็นพิกเซล"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "หากเป็น \"จริง\" ให้แปลงแป้น Media เป็นรายการที่เทียบเท่า Fkey หากเป็น \"เท็จ\" ให้เบราว์เซอร์จัดการแป้น"
 	},
@@ -726,7 +732,7 @@
 		"message": "คัดลอก"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "คัดลอกต้นทางไปยังปลายทาง"
+		"message": "คัดลอกรีโมตพาธไปยังรีโมตพาธอื่น"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ลบไฟล์"
@@ -816,7 +822,7 @@
 		"message": "แสดงเวอร์ชันปัจจุบันของโปรโตคอล"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "ข้อมูลเวอร์ชันโปรโตคอล SFTP:\nไคลเอ็นต์: $1\nเซิร์ฟเวอร์: $1"
+		"message": "ข้อมูลเวอร์ชันโปรโตคอล SFTP:\nไคลเอ็นต์: $1\nเซิร์ฟเวอร์: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: สิ้นสุดไฟล์"
@@ -837,7 +843,7 @@
 		"message": "ข้อผิดพลาด: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: ส่วนขยาย \"$2\" ไม่พร้อมใช้งาน"
+		"message": "$1: ส่วนขยาย '$2' ที่จำเป็นไม่พร้อมใช้งานกับเซิร์ฟเวอร์นี้"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ไม่ใช่ไฟล์ปกติ"
@@ -882,7 +888,7 @@
 		"message": "[เคล็ดลับสำหรับมือโปร] ใช้ \"เปิดเป็นหน้าต่าง\" หรือ \"เต็มหน้าจอ\" เพื่อป้องกันไม่ให้ Ctrl+W ปิดเทอร์มินัล\n[เคล็ดลับสำหรับมือโปร] ดูข้อมูลเพิ่มเติมได้ที่ $1"
 	},
 	"plugin_loading": {
-		"message": "กำลังโหลดปลั๊กอิน NaCl..."
+		"message": "กำลังโหลดโปรแกรม $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " เสร็จสิ้น"
@@ -930,7 +936,10 @@
 		"message": "ขนาดการอ่าน (KiB)"
 	},
 	"reconnect_message": {
-		"message": "ต้องการเชื่อมต่ออีกครั้ง (R) เลือกการเชื่อมต่ออื่น (C) หรือออก (X)"
+		"message": "ต้องการเชื่อมต่ออีกครั้ง (R) (เริ่มต้น) เลือกการเชื่อมต่ออื่น (C) หรือออก (X)"
+	},
+	"relay_auth_error": {
+		"message": "เกิดข้อผิดพลาดในการตรวจสอบสิทธิ์กับเซิร์ฟเวอร์การส่งต่อ: $1"
 	},
 	"relay_retry": {
 		"message": "กำลังลองใหม่..."
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ไม่พร้อมใช้งาน"
+	},
+	"terminal_home_add_ssh": {
+		"message": "เพิ่ม SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[ค่าเริ่มต้น]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "การตั้งค่าสำหรับนักพัฒนาซอฟต์แวร์"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "แก้ไข SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "นำเข้า"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "การเชื่อมต่อ SSH ใหม่"
+	},
+	"terminal_home_ssh_command": {
+		"message": "คำสั่ง"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "ระบุปลายทางด้วย \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "การตั้งค่าเทอร์มินัล"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "สีของ ANSI"
@@ -1153,6 +1189,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "การตั้งค่า"
+	},
+	"terminal_title_terminal": {
+		"message": "เทอร์มินัล"
 	},
 	"terminal_title_theme": {
 		"message": "ธีม"

@@ -63,13 +63,13 @@
 		"message": "Suprimeix"
 	},
 	"disconnect_message": {
-		"message": "S'ha sortit del connector NaCl amb el codi d'estat $1."
+		"message": "S'ha sortit del programa amb el codi d'estat $1."
 	},
 	"enter_keycap": {
 		"message": "[RETORN]"
 	},
 	"faq_menu_label": {
-		"message": "Preguntes freqüents"
+		"message": "Preguntes més freqüents"
 	},
 	"field_argstr_placeholder": {
 		"message": "arguments addicionals de la línia d'ordres"
@@ -270,10 +270,10 @@
 		"message": "Color per marcar el resultat de cerca seleccionat"
 	},
 	"hterm_name_pref_font_family": {
-		"message": "Família de tipus de lletra del text"
+		"message": "Família de fonts del text"
 	},
 	"hterm_name_pref_font_size": {
-		"message": "Mida de la lletra"
+		"message": "Mida de la font"
 	},
 	"hterm_name_pref_font_smoothing": {
 		"message": "Suavització del tipus de lletra de text"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Utilitza la vinculació de tecles o les tecles de drecera predeterminades del sistema operatiu"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Mida del farciment respecte a l'alçada de la línia"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Les tecles multimèdia són tecles de funció"
@@ -507,7 +510,7 @@
 		"message": "Color de fons per marcar el resultat de cerca seleccionat."
 	},
 	"hterm_pref_font_family": {
-		"message": "Família de tipus de lletra predeterminada per al text del terminal."
+		"message": "Família de fonts predeterminada per al text del terminal."
 	},
 	"hterm_pref_font_size": {
 		"message": "Mida de lletra predeterminada en píxels."
@@ -529,6 +532,9 @@
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Estableix si es respecta la vinculació de tecles del sistema operatiu en lloc de capturar-les sempre perquè les utilitzi hterm."
+	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "La mida en píxels del farciment entre cada fila de la pantalla del terminal."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Si s'estableix en \"true\", converteix les tecles multimèdia en la tecla de funció equivalent. Si s'estableix en \"false\", permet que el navegador gestioni les tecles."
@@ -726,7 +732,7 @@
 		"message": "Commuta l'ús del color"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Copia la font a la destinació"
+		"message": "Copia un camí remot a un camí remot diferent"
 	},
 	"nasftp_cmd_del": {
 		"message": "supr"
@@ -816,7 +822,7 @@
 		"message": "Mostra la versió de protocol actual"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Informació de la versió del protocol SFTP:\n  Local: $1\n  Servidor: $1"
+		"message": "Informació de la versió del protocol SFTP:\n  Local: $1\n  Servidor: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: s'ha arribat al final del fitxer"
@@ -834,7 +840,7 @@
 		"message": "$1: $2 número no vàlid: $3"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: extensió $2 no disponible"
+		"message": "$1: l'extensió \"$2\" requerida no està disponible amb aquest servidor"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2 no és un fitxer normal"
@@ -879,7 +885,7 @@
 		"message": "[Consell professional] Utilitza Obre com a finestra o Pantalla completa per evitar que es tanqui el terminal amb les tecles Ctrl+W.\n[Consell professional] Consulta $1 per obtenir més informació."
 	},
 	"plugin_loading": {
-		"message": "S'està carregant el connector NaCl..."
+		"message": "S'està carregant el programa $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " fet."
@@ -927,7 +933,10 @@
 		"message": "Mida de lectura (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Vols torna(r) a connectar, triar una altra (c)onnexió o sortir (x)?"
+		"message": "Vols tornar a connectar (predeterminat) [R], triar una altra connexió [C] o sortir [X]?"
+	},
+	"relay_auth_error": {
+		"message": "S'ha produït un error en fer l'autenticació amb el servidor de retransmissió: $1"
 	},
 	"relay_retry": {
 		"message": "S'està tornant a provar..."
@@ -979,6 +988,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" no està disponible"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Afegeix l'SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Predeterminat]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Configuració per a desenvolupadors"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Edita l'SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importa"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nova connexió SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Ordre"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Especifica la destinació amb \"nomdusuari@nomdamfitrio\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Configuració del terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Colors ANSI"
@@ -1209,7 +1245,7 @@
 		"message": "Registre de canvis i notes de la versió: $1"
 	},
 	"welcome_faq": {
-		"message": "Respostes a preguntes freqüents: $1 (fes Ctrl+clic en els enllaços per obrir-los)"
+		"message": "Respostes a preguntes més freqüents: $1 (fes Ctrl+clic en els enllaços per obrir-los)"
 	},
 	"welcome_release_highlights": {
 		"message": "Canvis importants des de la versió $1:"

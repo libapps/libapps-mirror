@@ -63,7 +63,7 @@
 		"message": "Избриши"
 	},
 	"disconnect_message": {
-		"message": "Рад додатне компоненте NaCl је прекинут уз кôд статуса $1."
+		"message": "Програм је затворен уз кôд статуса $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Користи подразумеване тастерске комбинације/пречице за ОС"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Величина размака за висину линије"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Тастери за медије су функцијски тастери"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Да ли најчешће тастерске пречице у ОС-у треба да се поштују уместо да се увек снимају ради употребе само за hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Величина размака у пикселима између сваког реда екрана терминала."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ако је вредност Тачно, конвертује медијске тастере у еквиваленте њихових комбинација са функцијским тастерима. Ако је вредност Нетачно, допушта да прегледач управља тастерима."
 	},
@@ -726,7 +732,7 @@
 		"message": "Укључите/искључите употребу боја"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Копирајте извор у одредиште"
+		"message": "Копирајте даљинску путању у другу даљинску путању"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Избришите датотеке"
@@ -816,7 +822,7 @@
 		"message": "Погледајте актуелну верзију протокола"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Информације о верзији SFTP протокола:\n  локално: $1\n  сервер: $1"
+		"message": "Информације о верзији SFTP протокола:\n  локално: $1\n  сервер: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: крај датотеке"
@@ -837,7 +843,7 @@
 		"message": "ГРЕШКА: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: додатак „$2“ није доступан"
+		"message": "$1: обавезан додатак $2 није доступан уз овај сервер"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: није стандардна датотека"
@@ -882,7 +888,7 @@
 		"message": "[Савет] Користите опцију „Отвори као прозор“ или „Преко целог екрана“ да бисте спречили затварање терминала помоћу Ctrl+W!\n[Савет] Више информација потражите на $1."
 	},
 	"plugin_loading": {
-		"message": "Учитавање додатне компоненте NaCl..."
+		"message": "Учитава се програм $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " готово."
@@ -930,7 +936,10 @@
 		"message": "Величина читања (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Желите ли поново да се повежете (R), да одаберете неку другу везу (C) или да изађете из процеса (x)?"
+		"message": "Желите поново да се повежете (подразумевано) (R), да одаберете неку другу везу (C) или да изађете из процеса (x)?"
+	},
+	"relay_auth_error": {
+		"message": "Грешка при потврди идентитета сервера за прослеђивање: $1"
 	},
 	"relay_retry": {
 		"message": "Покушава се поново..."
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Фонт $1 није доступан"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Додај SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Подразумевано]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Подешавања програмера"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Измени SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Увези"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Нова SSH веза"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Команда"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Наведите одредиште користећи korisnickoime@imehosta"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Подешавања терминала"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI боје"
@@ -1162,6 +1198,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Подешавања"
+	},
+	"terminal_title_terminal": {
+		"message": "Терминал"
 	},
 	"terminal_title_theme": {
 		"message": "Тема"

@@ -60,7 +60,7 @@
 		"message": "মুছে দিন"
 	},
 	"disconnect_message": {
-		"message": "$1 স্ট্যাটাস কোড দেখিয়ে NaCl প্লাগ-ইন বেরিয়ে এসেছে।"
+		"message": "স্ট্যাটাস কোড$1-এর মাধ্যমে প্রোগ্রাম বন্ধ হয়েছে।"
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ডিফল্ট OS কীবোর্ড বাইন্ডিং/শর্টকাট ব্যবহার করুন"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "লাইন হাইট প্যাডিং সাইজ"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Fkeys হল মিডিয়া কী"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "সবসময় hterm-এর নিজস্ব ব্যবহার ক্যাপচার করার পরিবর্তে সাধারণ OS কীবোর্ড বাইন্ডিং মেনে চলা হবে কিনা তা নির্ধারণ করে।"
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "টার্মিনাল স্ক্রিনের প্রতিটি লাইনের মধ্যের প্যাডিং সাইজ পিক্সেলে।"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "'ট্রু' হলে, মিডিয়া কী সমতুল্য Fkey-তে পরিবর্তন করা হয়, 'ফলস' হলে ব্রাউজার কীগুলি ম্যানেজ করে।"
 	},
@@ -723,7 +729,7 @@
 		"message": "রঙ ব্যবহার টগল করুন"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "সোর্স থেকে গন্তব্যে কপি করুন"
+		"message": "রিমোট পাথটি অন্য একটি রিমোট পাথে কপি করুন"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ফাইল মুছে দিন"
@@ -813,7 +819,7 @@
 		"message": "বর্তমান প্রোটোকল ভার্সন দেখুন"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP প্রোটোকল ভার্সনের তথ্য:\n  স্থানীয়: $1\n  সার্ভার: $1"
+		"message": "SFTP প্রোটোকল ভার্সনের তথ্য:\n  স্থানীয়: $1\n  সার্ভার: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ফাইলের শেষে পৌঁছে গেছে"
@@ -834,7 +840,7 @@
 		"message": "সমস্যা: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' এক্সটেনশন উপলভ্য নেই"
+		"message": "$1: এই সার্ভারের জন্য প্রয়োজনীয় '$2' এক্সটেনশন উপলভ্য নেই"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ফাইলের ধরন সঠিক নয়"
@@ -879,7 +885,7 @@
 		"message": "[পেশাদারি পরামর্শ] Ctrl+W যাতে আপনার টার্মিনাল বন্ধ করে না দেয়, সেই জন্য 'উইন্ডো হিসেবে খুলুন' বা 'ফুলস্ক্রিন' ব্যবহার করুন!\n[পেশাদারি পরামর্শ] আরও জানতে $1 দেখুন।"
 	},
 	"plugin_loading": {
-		"message": "NaCl প্লাগ-ইন লোড করা হচ্ছে…"
+		"message": "$1 প্রোগ্রাম লোড হচ্ছে..."
 	},
 	"plugin_loading_complete": {
 		"message": " হয়ে গেছে।"
@@ -927,7 +933,10 @@
 		"message": "পড়ার সাইজ (কিবিবাইট)"
 	},
 	"reconnect_message": {
-		"message": "আবার কানেক্ট (R) করতে, অন্য একটি কানেকশন (C) বেছে নিতে নাকি বেরিয়ে (x) আসতে চান?"
+		"message": "আপনি ডিফল্ট হিসেবে আবার কানেক্ট করতে চান (R), অন্য একটি কানেকশন বেছে নিতে চান (C) বা বেরিয়ে আসতে চান (x)?"
+	},
+	"relay_auth_error": {
+		"message": "রিলে সার্ভার ব্যবহার করে যাচাইকরণে সমস্যা: $1"
 	},
 	"relay_retry": {
 		"message": "আবার চেষ্টা করা হচ্ছে…"
@@ -979,6 +988,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" পাওয়া যাচ্ছে না"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH যোগ করুন"
+	},
+	"terminal_home_default_identity": {
+		"message": "[ডিফল্ট]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "'ডেভেলপার' সেটিংস"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH এডিট করুন"
+	},
+	"terminal_home_import_identity": {
+		"message": "ইমপোর্ট করুন"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "নতুন SSH কানেকশন"
+	},
+	"terminal_home_ssh_command": {
+		"message": "কমান্ড"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "\"username@hostname\" ব্যবহার করে গন্তব্য নির্দিষ্ট করুন"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "'টার্মিনাল' সেটিংস"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI রঙ"
@@ -1159,6 +1195,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "সেটিংস"
+	},
+	"terminal_title_terminal": {
+		"message": "টার্মিনাল"
 	},
 	"terminal_title_theme": {
 		"message": "থিম"

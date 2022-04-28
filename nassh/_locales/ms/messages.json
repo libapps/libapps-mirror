@@ -60,7 +60,7 @@
 		"message": "Padam"
 	},
 	"disconnect_message": {
-		"message": "Pemalam NaCl telah keluar dengan kod status $1."
+		"message": "Atur cara keluar dengan kod status $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Gunakan pengikatan/pintasan Papan Kekunci OS lalai"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Saiz pelapik ketinggian baris"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Kekunci media ialah Fkeys"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Sama ada pengikatan papan kekunci OS lazim harus diterima berbanding sentiasa menangkap untuk penggunaan sendiri hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Saiz pelapik antara setiap baris skrin terminal dalam piksel."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jika benar, tukar kekunci media kepada persamaan Fkey kekunci media. Jika palsu, biarkan penyemak imbas mengendalikan kekunci tersebut."
 	},
@@ -726,7 +732,7 @@
 		"message": "Togol penggunaan warna"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Salin sumber pada destinasi"
+		"message": "Salin laluan jauh ke laluan pintar jauh yang lain"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Padamkan fail"
@@ -819,7 +825,7 @@
 		"message": "Tunjukkan versi protokol semasa"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Maklumat versi protokol SFTP:\n  setempat: $1\n  pelayan: $1"
+		"message": "Maklumat versi protokol SFTP:\n  setempat: $1\n  pelayan: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: fail tamat"
@@ -840,7 +846,7 @@
 		"message": "RALAT: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: Sambungan '$2' tidak tersedia"
+		"message": "$1: sambungan '$2' yang diperlukan tidak tersedia dengan pelayan ini"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: bukan fail biasa"
@@ -885,7 +891,7 @@
 		"message": "[Petua Pro] Gunakan 'Buka sebagai Tetingkap' atau 'Skrin penuh' untuk mengelakkan Ctrl+W daripada menutup terminal anda!\n[Petua Pakar] Lihat $1 untuk mendapatkan maklumat lanjut."
 	},
 	"plugin_loading": {
-		"message": "Memuatkan pemalam NaCl..."
+		"message": "Memuatkan atur cara $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " selesai."
@@ -933,7 +939,10 @@
 		"message": "Saiz Bacaan (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Sambung semula (R), Pilih sambungan lain (C) atau Keluar (x)?"
+		"message": "Sambung semula (R) (lalai), Pilih sambungan lain (C) atau Keluar (x)?"
+	},
+	"relay_auth_error": {
+		"message": "Ralat semasa membuat pengesahan dengan pelayan geganti: $1"
 	},
 	"relay_retry": {
 		"message": "Mencuba semula…"
@@ -985,6 +994,30 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" tidak tersedia"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Tambah SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Lalai]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Tetapan Pembangun"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Edit SS"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Sambungan SSH baharu"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Perintah"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Tentukan destinasi dengan \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Tetapan Terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Warna ANSI"

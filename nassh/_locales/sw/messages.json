@@ -60,7 +60,7 @@
 		"message": "Futa"
 	},
 	"disconnect_message": {
-		"message": "Programu jalizi ya NaCl imekamilishwa kwa nambari ya kuonyesha hali $1."
+		"message": "Programu imejifunga ikiwa na nambari ya kuonyesha hali $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Tumia shurutisho au njia za mikato za Mfumo chaguomsingi wa Uendeshaji wa Kibodi"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Ukubwa wa nafasi kati ya mistari"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Vitufe vya maudhui ni Fkeys"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ikiwa shurutisho za kawaida za Mfumo wa Uendeshaji wa kibodi ni sharti zizingatiwe badala ya kunasa kila wakati kwa matumizi ya hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Ukubwa katika pikseli wa nafasi iliyo katikati ya kila safu mlalo kwenye skrini ya sehemu ya mwisho."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ikiwa ndivyo, badilisha funguo za maudhui zilingane na Fkey husika. Ikiwa sivyo, ruhusu kivinjari kishughulikie funguo."
 	},
@@ -744,7 +750,7 @@
 		"message": "nakili"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Nakili chanzo kwenye sehemu lengwa"
+		"message": "Nakili njia ya ufikiaji wa seva kutoka mbali uweke kwenye njia tofauti ya ufikiaji wa seva kutoka mbali"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Futa faili"
@@ -888,7 +894,7 @@
 		"message": "Onyesha toleo la sasa la itifaki"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Maelezo ya toleo la itifaki ya SFTP:\n  kifaa: $1\n  seva: $1"
+		"message": "Maelezo ya toleo la itifaki ya SFTP:\n  kifaa: $1\n  seva: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: mwisho wa faili"
@@ -909,7 +915,7 @@
 		"message": "HITILAFU: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: Kiendelezi cha '$2' hakipatikani"
+		"message": "$1: kiendelezi '$2' kinachohitajika hakipatikani kwa seva hii"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: si faili ya kawaida"
@@ -954,7 +960,7 @@
 		"message": "[Kidokezo] Tumia 'Fungua kama Dirisha' au 'Skrini nzima' kuzuia Ctrl+W isifunge sehemu yako ya mwisho!\n[Kidokezo] Angalia $1 ili upate maelezo zaidi."
 	},
 	"plugin_loading": {
-		"message": "Inapakia programu jalizi ya NaCI..."
+		"message": "Inapakia programu ya $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " imekamilika."
@@ -1002,7 +1008,10 @@
 		"message": "Ukubwa wa Faili ya Kusomwa (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Ungependa kuunganisha tena (R), Kuchagua muunganisho mwingine (C) au Kufunga (X)?"
+		"message": "Ungependa kuunganisha tena (R - chaguomsingi), kuchagua muunganisho mwingine (C) au kufunga (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Hitilafu imetokea wakati wa kuthibitisha kwa kutumia seva ya kutuma: $1"
 	},
 	"relay_retry": {
 		"message": "Inajaribu tena..."
@@ -1054,6 +1063,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" haipatikani"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Weka muunganisho wa SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Chaguomsingi]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Mipangilio ya msanidi programu"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Badilisha muunganisho wa SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Ingiza"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Muunganisho mpya wa SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Amri"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Bainisha kituo kwa kutumia \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Mipangilio ya Terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Rangi za ANSI"
@@ -1231,6 +1267,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Mipangilio"
+	},
+	"terminal_title_terminal": {
+		"message": "Kiolesura cha amri"
 	},
 	"terminal_title_theme": {
 		"message": "Mandhari"

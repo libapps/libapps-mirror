@@ -60,7 +60,7 @@
 		"message": "මකන්න"
 	},
 	"disconnect_message": {
-		"message": "NaCl පේනු මෘදුකාංගය $1 තත්ත්ව කේතය සමඟ පිටත් විය."
+		"message": "වැඩසටහන $1 තත්ත්ව කේතය සමග පිටවිය."
 	},
 	"faq_menu_label": {
 		"message": "නි.අ.ප්‍ර."
@@ -286,6 +286,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "පෙරනිමි OS යතුරු පුවරු බැඳීම්/කෙටිමං භාවිත කරන්න"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "පේළි උස පිරවුම් තරම"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "මාධ්‍ය යතුරු Fයතුරු වේ"
@@ -524,6 +527,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "hterm හි භාවිතය සැම විටම ග්‍රහණ කිරීම වෙනුවට පොදු OS යතුරු පුවරු බැඳීම්වලට ගරු කළ යුතුද යන්න."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "පෙළ අතුරුමුහුණත් තිරයේ එක් එක් පේළිය අතර පිරවුම් තරම පික්සලවලින්."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "සත්‍ය නම්, මාධ්‍ය යතුරු ඒවායේ Fයතුරු සමකවලට පරිවර්තන කරන්න. අසත්‍ය නම්, බ්‍රවුසරයට යතුරු පරිහරණ කිරීමට ඉඩ දෙන්න."
 	},
@@ -738,7 +744,7 @@
 		"message": "පිටපත් කරන්න"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "මූලාශ්‍රය ගමනාන්තයට පිටපත් කරන්න"
+		"message": "දුරස්ථ පෙතක් වෙනත් දුරස්ථ පෙතකට පිටපත් කරන්න"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ගොනු මකන්න"
@@ -885,7 +891,7 @@
 		"message": "වත්මන් ප්‍රොටොකෝල අනුවාදය පෙන්වන්න"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP ප්‍රොටොකෝල අනුවාද තොරතුරු:\n  ස්ථානික: $1\n  සේවාදායක: $1"
+		"message": "SFTP ප්‍රොටොකෝල අනුවාද තොරතුරු:\n  ස්ථානික: $1\n  සේවාදායක: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ගොනුවේ අවසානය"
@@ -906,7 +912,7 @@
 		"message": "දෝෂය: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' දිගුව නොලැබේ"
+		"message": "$1: අවශ්‍ය '$2' දිගුව මෙම සේවාදායකය සමගින් ලබා ගත නොහැකිය"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ක්‍රමවත් ගොනුවක් නොවේ"
@@ -951,7 +957,7 @@
 		"message": "[Pro Tip] Ctrl+W ඔබේ පර්යන්තය වැසීම වැළැක්වීමට 'කවුළුව ලෙස විවෘත කරන්න' හෝ 'පූර්ණ තිරය' භාවිත කරන්න!\n[Pro Tip] වැඩිදුර තොරතුරු සඳහා $1 බලන්න."
 	},
 	"plugin_loading": {
-		"message": "NaCl පේනු මෘදුකාංගය පූරණ කෙරේ..."
+		"message": "$1 වැඩසටහන පූරණය කරමින්..."
 	},
 	"plugin_loading_complete": {
 		"message": " කළා."
@@ -999,7 +1005,10 @@
 		"message": "කියවීම් තරම (KiB)"
 	},
 	"reconnect_message": {
-		"message": "නැවත සබඳින්නද(R), වෙනත් සබැඳුමක් තෝරන්නද(C), නැතහොත් ඉවත් වන්නද(x)?"
+		"message": "(R)යළි සබඳින්නද (පෙරනිමි), (C)වෙනත් සබැඳුමක් තෝරන්නද හෝ ඉ(x)වත් වන්නද?"
+	},
+	"relay_auth_error": {
+		"message": "රිලේ සේවාදායකය සමඟ සත්‍යාපනය කිරීමේ දෝෂයකි: $1"
 	},
 	"relay_retry": {
 		"message": "යළි උත්සාහ කෙරේ..."
@@ -1051,6 +1060,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" නොලැබේ"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH එක් කරන්න"
+	},
+	"terminal_home_default_identity": {
+		"message": "[පෙරනිමි]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "සංවර්ධක සැකසීම්"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH සංස්කරණය කරන්න"
+	},
+	"terminal_home_import_identity": {
+		"message": "ආයාත කරන්න"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "නව SSH සම්බන්ධතාව"
+	},
+	"terminal_home_ssh_command": {
+		"message": "විධානය"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "\"username@hostname\" සමගින් ගමනාන්තය සඳහන් කරන්න"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "පර්යන්ත සැකසීම්"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI වර්ණ"
@@ -1231,6 +1267,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "සැකසීම්"
+	},
+	"terminal_title_terminal": {
+		"message": "පර්යන්තය"
 	},
 	"terminal_title_theme": {
 		"message": "තේමාව"

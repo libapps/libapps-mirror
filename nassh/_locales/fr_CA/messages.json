@@ -60,7 +60,7 @@
 		"message": "Supprimer"
 	},
 	"disconnect_message": {
-		"message": "Le plugiciel NaCl s'est fermé avec le code d'état $1."
+		"message": "Le programme a quitté avec le code d'état $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTRÉE]"
@@ -280,6 +280,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Utiliser les combinaisons de touches et les raccourcis par défaut du SE"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Taille de remplissage de la hauteur de la ligne"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Les touches multimédias sont des touches de fonction"
@@ -515,6 +518,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Permet de spécifier si les combinaisons de touches de SE courantes doivent être utilisées au lieu de celles réservées à l'utilisation du terminal hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "La taille de remplissage, en pixels, entre chaque ligne de l'écran du terminal."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Si la préférence est définie sur vrai, les touches multimédias seront converties en leur équivalent de touches de fonction. Si la préférence est définie sur faux, les touches seront gérées par le navigateur."
 	},
@@ -708,7 +714,7 @@
 		"message": "Permet d'activer ou de désactiver l'utilisation de la couleur"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Permet de copier la source vers la destination"
+		"message": "Copiez un chemin d'accès distant vers un autre chemin d'accès distant"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Supprimer des fichiers"
@@ -768,7 +774,7 @@
 		"message": "Permet de reprendre le téléversement de fichiers"
 	},
 	"nasftp_cmd_rm_help": {
-		"message": "Permet de supprimer des fichiers"
+		"message": "Permet de retirer des fichiers"
 	},
 	"nasftp_cmd_rmdir_help": {
 		"message": "Permet de supprimer les annuaires vides"
@@ -804,7 +810,7 @@
 		"message": "Permet d'afficher la version actuelle du protocole"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Renseignements sur la version du protocole SFTP :\n  local : $1\n  serveur : $1"
+		"message": "Renseignements sur la version du protocole SFTP :\n  local : $1\n  serveur : $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1 : fin du fichier"
@@ -825,7 +831,7 @@
 		"message": "ERREUR : $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1 : extension « $2 » indisponible"
+		"message": "$1 : l'extension obligatoire « $2 » n'est pas disponible avec ce serveur"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1 : $2 : n'est pas un fichier normal"
@@ -873,7 +879,7 @@
 		"message": "[Conseil de pro] Utilisez « Ouvrir en tant que fenêtre » ou « Plein écran » pour éviter que le raccourci Ctrl+W ferme votre terminal.\n[Conseil de pro] Consultez $1 pour en savoir plus."
 	},
 	"plugin_loading": {
-		"message": "Chargement du plugiciel NaCl en cours…"
+		"message": "Chargement du programme $1 en cours…"
 	},
 	"plugin_loading_complete": {
 		"message": " terminé."
@@ -921,7 +927,10 @@
 		"message": "Taille de lecture (en Kio)"
 	},
 	"reconnect_message": {
-		"message": "Se reconnecter (R), choisir une autre connexion (C) ou quitter (X)?"
+		"message": "Se (R)econnecter (par défaut) , (C)hoisir une autre connexion (C) ou quitter (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Erreur d'authentification avec le serveur de relais : $1"
 	},
 	"relay_retry": {
 		"message": "Nouvelle tentative en cours…"
@@ -973,6 +982,36 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "« $1 » n'est pas disponible"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Ajouter une connexion SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Par défaut]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Paramètres pour développeurs"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Modifier une connexion SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importer"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nouvelle connexion SSH"
+	},
+	"terminal_home_ssh": {
+		"message": "Connexions SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Commande"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Spécifiez la destination au format « nom d'utilisateur@nom d'hôte »"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Paramètres du terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Couleurs ANSI"

@@ -63,7 +63,7 @@
 		"message": "Löschen"
 	},
 	"disconnect_message": {
-		"message": "NaCl-Plug-in wurde mit dem Statuscode \"$1\" beendet."
+		"message": "Das Programm wurde mit dem Statuscode $1 beendet."
 	},
 	"enter_keycap": {
 		"message": "[EINGABE]"
@@ -293,6 +293,9 @@
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Standardbelegung/Tastenkombinationen des Betriebssystems für die Tastatur verwenden"
 	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Zeilenabstand"
+	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Medientasten sind F-Tasten"
 	},
@@ -402,7 +405,7 @@
 		"message": "Durch diese Einstellung wird Alt + Rücktaste nicht mehr die Funktion einer herkömmlichen ENTF-Taste (Löschen nach rechts) in Chrome OS zugewiesen, sodass über die Tastenkombination tatsächlich Alt + Rücktaste ausgeführt und nach links gelöscht wird."
 	},
 	"hterm_pref_alt_gr_mode": {
-		"message": "Wählen Sie eine Alt Gr-Erkennungsheuristik aus.\n\n\"null\": Automatische Erkennung basiert auf navigator.language:\n      \"en-us\" => \"none\", sonst => \"right-alt\"\n\"none\": Deaktiviert jegliche Alt Gr-Emulation.\n\"ctrl-alt\": Es wird angenommen, dass Strg + Alt für Alt Gr steht.\n\"left-alt\": Es wird angenommen, dass Alt für Alt Gr steht.\n\"right-alt\": Es wird angenommen, dass Alt für Alt Gr steht."
+		"message": "Wähle eine Alt Gr-Erkennungsheuristik aus.\n\n„null“: Automatische Erkennung basiert auf navigator.language:\n      „en-us“ => „none“, sonst => „right-alt“\n„none“: Deaktiviert jegliche Alt Gr-Emulation.\n„ctrl-alt“: Es wird angenommen, dass Strg + Alt für Alt Gr steht.\n„left-alt“: Es wird angenommen, dass Alt für Alt Gr steht.\n„right-alt“: Es wird angenommen, dass Alt für Alt Gr steht."
 	},
 	"hterm_pref_alt_is_meta": {
 		"message": "Legt fest, ob die Alt-Taste als Meta- oder als Alt-Taste dient."
@@ -519,16 +522,19 @@
 		"message": "Vordergrundfarbe für Text ohne weitere Farbattribute."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Legt fest, ob der Mauszeiger beim Tippen automatisch ausgeblendet wird. Standardmäßig wird automatisch erkannt, ob die Plattform/das Betriebssystem das übernimmt.\n\nHinweis: Ihr Betriebssystemen überschreibt diese Einstellung möglicherweise. Sie kann daher nicht immer deaktiviert werden."
+		"message": "Legt fest, ob der Mauszeiger beim Tippen automatisch ausgeblendet wird. Standardmäßig wird automatisch erkannt, ob die Plattform/das Betriebssystem das übernimmt.\n\nHinweis: Dein Betriebssystem überschreibt diese Einstellung möglicherweise. Sie kann daher nicht immer deaktiviert werden."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Wenn \"true\" festgelegt ist, wird mit Pos1/Ende die Bildlaufleiste des Terminals gesteuert und Umschalttaste + Pos1/Ende an den Remote-Host gesendet. Bei \"false\" werden Pos1/Ende an den Remote-Host gesendet und mit Umschalttaste + Pos1/Ende wird gescrollt."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Eine Karte mit Tastenkombinationen für Schlüsselfunktionen. Tastenkombinationen bestehen aus keiner bis mehreren Modifikatortasten, gefolgt von einem Tastencode. Tastencodes können Dezimal- oder Hexadezimalzahlen oder eine Schlüsselkennung sein. Schlüsselfunktionen können als String definiert sein, der an den Host gesendet wird, oder als eine Aktionskennung. Eine vollständige Erklärung des Formats finden Sie unter https://goo.gl/LWRndr.\n\nBeispiele für Tastenbelegungen:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Eine Karte mit Tastenkombinationen für Schlüsselfunktionen. Tastenkombinationen bestehen aus keiner bis mehreren Modifikatortasten, gefolgt von einem Tastencode. Tastencodes können Dezimal- oder Hexadezimalzahlen oder eine Schlüsselkennung sein. Schlüsselfunktionen können als String definiert sein, der an den Host gesendet wird, oder als eine Aktionskennung. Eine vollständige Erklärung des Formats findest du unter https://goo.gl/LWRndr.\n\nBeispiele für Tastenbelegungen:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Legt fest, ob allgemeine Tastaturbelegungen des Betriebssystems beachtet werden oder immer die eigene Verwendung durch HTerm erfasst wird."
+	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Der Abstand zwischen den Zeilen des Terminal-Bildschirms in Pixel."
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Wenn \"true\" festgelegt ist, werden die Medientasten in ihr F-Tasten-Äquivalent umgewandelt. Bei \"false\" werden die Tasten vom Browser gesteuert."
@@ -726,7 +732,7 @@
 		"message": "Farbverwendung einstellen"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Quelle nach Ziel kopieren"
+		"message": "Einen Remote-Pfad in einen anderen Remote-Pfad kopieren"
 	},
 	"nasftp_cmd_del": {
 		"message": "Entf"
@@ -822,7 +828,7 @@
 		"message": "Aktuelle Protokollversion anzeigen"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Versionsinformationen des SFTP-Protokolls:\n  Lokal: $1\n  Server: $1"
+		"message": "Versionsinformationen des SFTP-Protokolls:\n  Lokal: $1\n  Server: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: Ende der Datei"
@@ -843,7 +849,7 @@
 		"message": "FEHLER: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: Erweiterung \"$2\" ist nicht verfügbar"
+		"message": "$1: Erweiterung „$2“ nicht für diesen Server verfügbar"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: keine reguläre Datei"
@@ -891,7 +897,7 @@
 		"message": "[Profitipp] Mit \"In Fenster öffnen\" oder \"Vollbild\" wird verhindert, dass mit Strg + W das Terminal geschlossen wird.\n[Profitipp] Weitere Informationen unter $1."
 	},
 	"plugin_loading": {
-		"message": "NaCl-Plug-in wird geladen…"
+		"message": "Programm „$1“ wird geladen…"
 	},
 	"plugin_loading_complete": {
 		"message": " fertig."
@@ -939,7 +945,10 @@
 		"message": "Lesegröße (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Verbindung wiederherstellen (r), eine andere Verbindung wählen (c) oder den Vorgang beenden (x)?"
+		"message": "Verbindung wiederherstellen (r) (Standard), eine andere Verbindung auswählen (c) oder den Vorgang beenden (x)?"
+	},
+	"relay_auth_error": {
+		"message": "Fehler bei der Authentifizierung am Relay-Server: $1"
 	},
 	"relay_retry": {
 		"message": "Wird noch einmal versucht…"
@@ -992,6 +1001,33 @@
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ist nicht verfügbar"
 	},
+	"terminal_home_add_ssh": {
+		"message": "SSH hinzufügen"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Standard]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Entwicklereinstellungen"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH bearbeiten"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importieren"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Neue SSH-Verbindung"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Befehl"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Gib das Ziel mit „username@hostname“ an"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminaleinstellungen"
+	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-Farben"
 	},
@@ -1020,7 +1056,7 @@
 		"message": "Sichtbar"
 	},
 	"terminal_pref_alt_gr_mode": {
-		"message": "Wählen Sie eine Alt Gr-Erkennungsheuristik aus.\n\n\"Auto\": Automatische Erkennung, basierend auf navigator.language:\n      \"en-us\" => \"Disable\", sonst => \"right-alt\"\n\"Disable\": Deaktiviert jegliche Alt Gr-Emulation.\n\"ctrl-alt\": Es wird angenommen, dass Strg + Alt für Alt Gr steht.\n\"left-alt\": Es wird angenommen, dass die linke Alt-Taste für Alt Gr steht.\n\"right-alt\": Es wird angenommen, dass die rechte Alt-Taste für Alt Gr steht."
+		"message": "Wähle eine Alt Gr-Erkennungsheuristik aus.\n\n„Auto“: Automatische Erkennung, basierend auf navigator.language:\n      „en-us“ => „Disable“, sonst => „right-alt“\n„Disable“: Deaktiviert jegliche Alt Gr-Emulation.\n„ctrl-alt“: Es wird angenommen, dass Strg + Alt für Alt Gr steht.\n„left-alt“: Es wird angenommen, dass die linke Alt-Taste für Alt Gr steht.\n„right-alt“: Es wird angenommen, dass die rechte Alt-Taste für Alt Gr steht."
 	},
 	"terminal_pref_ansi_colors": {
 		"message": "Farben für die Standardpalette einstellen."
@@ -1158,7 +1194,7 @@
 		"message": "Design"
 	},
 	"terminal_try_again_with_internet": {
-		"message": "Stellen Sie eine Internetverbindung her und versuchen Sie es noch einmal."
+		"message": "Stelle eine Internetverbindung her und versuche es noch einmal."
 	},
 	"tip_1": {
 		"message": "Die Strg-Taste gedrückt halten (Befehlstaste bei Mac OS) und gleichzeitig auf Links klicken, um sie zu öffnen."

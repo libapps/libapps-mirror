@@ -63,7 +63,7 @@
 		"message": "刪除"
 	},
 	"disconnect_message": {
-		"message": "NaCl 外掛程式結束，傳回狀態碼 $1。"
+		"message": "程式結束，傳回狀態碼 $1。"
 	},
 	"enter_keycap": {
 		"message": "[Enter]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "使用預設的 OS 鍵盤繫結/快速鍵"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "行高邊框間距大小"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "將媒體鍵視為功能鍵 (F1 ~ F12)"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "設定是否要遵守一般 OS 鍵盤繫結，而非一律擷取 hterm 本身的使用方式。"
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "終端機畫面每列之間邊框間距的像素大小。"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "如果設為 True，系統會將媒體鍵轉換成對應的功能鍵 (F1 ~ F12)。如果設為 False，系統會讓瀏覽器處理按鍵。"
 	},
@@ -726,7 +732,7 @@
 		"message": "切換使用的顏色"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "將來源複製到目的地"
+		"message": "將遠端路經複製到另一個遠端路徑"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "刪除檔案"
@@ -819,7 +825,7 @@
 		"message": "顯示目前的通訊協定版本"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP 通訊協定版本資訊：\n本機：$1\n伺服器：$1"
+		"message": "SFTP 通訊協定版本資訊：\n本機：$1\n伺服器：$2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1：已到達檔案結尾"
@@ -840,7 +846,7 @@
 		"message": "錯誤：$1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1：無法使用「$2」擴充功能"
+		"message": "$1：這個伺服器無法使用必要的「$2」擴充功能"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1：$2：並非一般檔案"
@@ -888,7 +894,7 @@
 		"message": "[實用秘訣] 使用「在視窗中開啟」或「全螢幕」可防止 Ctrl + W 鍵關閉終端機！\n[實用秘訣] 詳情請參閱 $1。"
 	},
 	"plugin_loading": {
-		"message": "正在載入 NaCl 外掛程式..."
+		"message": "正在載入 $1 程式..."
 	},
 	"plugin_loading_complete": {
 		"message": " 完成。"
@@ -936,7 +942,10 @@
 		"message": "讀取大小 (KiB)"
 	},
 	"reconnect_message": {
-		"message": "要重新連線(R)、選擇其他連線(C)還是結束(X)？"
+		"message": "要重新連線 (預設)(R)、選擇其他連線(C)還是結束(X)？"
+	},
+	"relay_auth_error": {
+		"message": "驗證轉送伺服器時發生錯誤：$1"
 	},
 	"relay_retry": {
 		"message": "正在重試..."
@@ -988,6 +997,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "「$1」無法使用"
+	},
+	"terminal_home_add_ssh": {
+		"message": "新增 SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[預設]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "開發人員設定"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "編輯 SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "匯入"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "新 SSH 連線"
+	},
+	"terminal_home_ssh_command": {
+		"message": "指令"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "請使用「username@hostname」指定目的地"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "終端機設定"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI 顏色"
@@ -1165,6 +1201,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "設定"
+	},
+	"terminal_title_terminal": {
+		"message": "終端機"
 	},
 	"terminal_title_theme": {
 		"message": "主題"

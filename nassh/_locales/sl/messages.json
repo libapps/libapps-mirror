@@ -63,7 +63,7 @@
 		"message": "Izbriši"
 	},
 	"disconnect_message": {
-		"message": "Vtičnik NaCl se je zaprl s kodo stanja $1."
+		"message": "Program se je končal s kodo statusa: $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Uporaba privzetih povezav tipk tipkovnice/bližnjic operacijskega sistema"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Velikost odmika višine vrstice"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Predstavnostne tipke so funkcijske tipke"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Določa, ali naj se upoštevajo običajne povezave tipk tipkovnice operacijskega sistema namesto stalnega zajemanja za lastno uporabo hterma."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Velikost odmika v slikovnih pikah med posameznimi vrsticami zaslona terminala."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Če je omogočeno, pretvori predstavnostne tipke v enakovredne za Fkey. Če je onemogočeno, tipke obdela brskalnik."
 	},
@@ -753,7 +759,7 @@
 		"message": "kopiraj"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopiranje vira v cilj"
+		"message": "Kopiranje oddaljene poti v drugo oddaljeno pot"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Brisanje datotek"
@@ -909,7 +915,7 @@
 		"message": "Prikaz trenutne različice protokola"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Podatki o različici protokola SFTP:\n  Lokalno: $1\n  Strežnik: $1"
+		"message": "Podatki o različici protokola SFTP:\n  Lokalno: $1\n  Strežnik: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: Konec datoteke"
@@ -930,7 +936,7 @@
 		"message": "NAPAKA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: Razširitev »$2« ni na voljo"
+		"message": "$1: zahtevana razširitev »$2« ni na voljo v tem strežniku."
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: Ni običajna datoteka"
@@ -975,7 +981,7 @@
 		"message": "[Nasvet strokovnjaka] Uporabite ukaz »Odpri kot okno« ali »Celozaslonsko«, da preprečite zapiranje terminala z bližnjico »CTRL + W«.\n[Nasvet strokovnjaka] Več informacij poiščite na $1."
 	},
 	"plugin_loading": {
-		"message": "Nalaganje vtičnika NaCl ..."
+		"message": "Nalaganje programa $1 …"
 	},
 	"plugin_loading_complete": {
 		"message": " končano."
@@ -1023,7 +1029,10 @@
 		"message": "Velikost za branje (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Želite znova vzpostaviti povezavo (R), izbrati drugo povezavo (C) ali zapreti (X)?"
+		"message": "Želite znova vzpostaviti povezavo (R) (privzeto), izbrati drugo povezavo (C) ali zapreti (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Napaka pri preverjanju pristnosti v posredovalnem strežniku: $1"
 	},
 	"relay_retry": {
 		"message": "Vnovičen poskus ..."
@@ -1075,6 +1084,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Pisava »$1« ni na voljo"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Dodaj SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Privzeto]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Nastavitve za razvijalce"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Uredi SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Uvozi"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nova povezava SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Ukaz"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Določite cilj z »username@hostname«"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Nastavitve terminala"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Barve ANSI"

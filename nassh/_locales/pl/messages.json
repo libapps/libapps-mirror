@@ -63,7 +63,7 @@
 		"message": "Usuń"
 	},
 	"disconnect_message": {
-		"message": "Wtyczka NaCl zakończyła działanie. Kod stanu: $1."
+		"message": "Program został zamknięty z kodem stanu $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Używaj domyślnych powiązań/skrótów klawiszowych systemu operacyjnego"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Rozmiar dopełnienia wysokości wiersza"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Klawisze multimedialne to klawisze funkcyjne"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Określa, czy hterm ma respektować typowe powiązania klawiszy systemu operacyjnego, zamiast przechwytywać je na własny użytek."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Rozmiar dopełnienia między każdym wierszem okna terminala w pikselach."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jeśli wybrano wartość „prawda”, klawisze multimedialne będą traktowane jako odpowiadające im klawisze funkcyjne. Jeśli wybrano „fałsz”, naciśnięcia tych klawiszy będzie obsługiwać przeglądarka."
 	},
@@ -689,6 +695,9 @@
 	"missing_param": {
 		"message": "Brak parametru: $1"
 	},
+	"mosh_name": {
+		"message": "Mobilna powłoka"
+	},
 	"mount_button_label": {
 		"message": "Podłącz SFTP"
 	},
@@ -726,7 +735,7 @@
 		"message": "Przełącznik używanych kolorów"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopiuj źródło w miejsce docelowe"
+		"message": "Kopiuj ścieżkę do elementu zdalnego do innej ścieżki do elementu zdalnego"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Usuń pliki"
@@ -816,7 +825,7 @@
 		"message": "Wyświetl aktualną wersję protokołu"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Informacje o wersjach protokołu SFTP:\n  Lokalna: $1\n  Serwer: $1"
+		"message": "Informacje o wersjach protokołu SFTP:\n  Lokalna: $1\n  Serwer: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: koniec pliku"
@@ -837,7 +846,7 @@
 		"message": "BŁĄD: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: rozszerzenie „$2” niedostępne"
+		"message": "$1: wymagane rozszerzenie „$2” jest niedostępne w przypadku tego serwera"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: nie jest zwykłym plikiem"
@@ -882,7 +891,7 @@
 		"message": "[Wskazówka] Użyj opcji „Otwórz jako okno” lub „Pełny ekran”, by skrót Ctrl+W nie zamykał terminala.\n[Wskazówka] Więcej informacji znajdziesz na $1."
 	},
 	"plugin_loading": {
-		"message": "Ładuję wtyczkę NaCl…"
+		"message": "Ładuję program $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " gotowe."
@@ -930,7 +939,10 @@
 		"message": "Rozmiar odczytu (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Połącz ponownie (R), Wybierz inne połączenie (C) lub Zakończ (X)."
+		"message": "Połącz ponownie (R) (domyślnie), Wybierz inne połączenie (C) lub Zakończ (X)."
+	},
+	"relay_auth_error": {
+		"message": "Błąd uwierzytelniania na serwerze przekazującym: $1"
 	},
 	"relay_retry": {
 		"message": "Próbuję ponownie…"
@@ -982,6 +994,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Czcionka „$1” jest niedostępna"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Dodaj SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Domyślnie]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Ustawienia programisty"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Edytuj SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importuj"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nowe połączenie SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Polecenie"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Podaj miejsce docelowe zawierające ciąg „nazwa_użytkownika@nazwa_hosta”"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Ustawienia terminala"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Kolory ANSI"

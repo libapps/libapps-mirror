@@ -63,7 +63,7 @@
 		"message": "삭제"
 	},
 	"disconnect_message": {
-		"message": "NaCl 플러그인이 상태 코드 $1(으)로 종료되었습니다."
+		"message": "$1 상태 코드로 프로그램이 종료되었습니다."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "기본 OS 키보드 바인딩/단축키 사용"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "줄 높이의 여백 크기"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "미디어 키는 Fkey임"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "hterm 자체 사용을 항상 캡처하는 대신 일반 OS 키보드 바인딩을 따를지 설정합니다."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "픽셀로 표시된 모니터 화면 내 텍스트 행 간의 여백 크기입니다."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "True로 설정하면 미디어 키가 Fkey와 동등한 키로 전환됩니다. False로 설정하면 브라우저에서 키를 처리합니다."
 	},
@@ -726,7 +732,7 @@
 		"message": "색상 사용을 전환합니다."
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "소스를 대상에 복사합니다."
+		"message": "원격 경로를 다른 원격 경로로 복사하기"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "파일 삭제"
@@ -816,7 +822,7 @@
 		"message": "현재 프로토콜 버전을 표시합니다."
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP 프로토콜 버전 정보:\n  로컬: $1\n  서버: $1"
+		"message": "SFTP 프로토콜 버전 정보:\n  로컬: $1\n  서버: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: 파일의 끝"
@@ -837,7 +843,7 @@
 		"message": "오류: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: ‘$2’ 확장 프로그램을 사용할 수 없음"
+		"message": "$1: 이 서버에서 필요한 '$2' 확장 프로그램을 사용할 수 없습니다."
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: 일반 파일이 아님"
@@ -882,7 +888,7 @@
 		"message": "[전문가의 팁] Ctrl + W 키를 눌러도 터미널이 닫히지 않게 하려면 '창으로 열기' 또는 '전체 화면'을 사용하세요.\n[전문가의 팁] 자세한 내용은 $1 페이지를 참조하세요."
 	},
 	"plugin_loading": {
-		"message": "NaCl 플러그인 로드 중..."
+		"message": "$1 프로그램 로드 중…"
 	},
 	"plugin_loading_complete": {
 		"message": " 완료되었습니다."
@@ -930,7 +936,10 @@
 		"message": "읽기 크기(KiB)"
 	},
 	"reconnect_message": {
-		"message": "다시 연결(R)하거나 다른 연결을 선택(C)하거나 종료(x)하시겠습니까?"
+		"message": "다시 연결(R)(기본값)하거나 다른 연결을 선택(C)하거나 종료(X)하시겠습니까?"
+	},
+	"relay_auth_error": {
+		"message": "릴레이 서버($1)를 인증하는 중에 오류가 발생했습니다."
 	},
 	"relay_retry": {
 		"message": "다시 시도하는 중..."
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "‘$1’ 글꼴을 사용할 수 없습니다."
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH 추가"
+	},
+	"terminal_home_default_identity": {
+		"message": "[기본값]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "개발자 설정"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH 수정"
+	},
+	"terminal_home_import_identity": {
+		"message": "가져오기"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "새 SSH 연결"
+	},
+	"terminal_home_ssh_command": {
+		"message": "명령어"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "'username@hostname'으로 대상을 지정하지 않았습니다."
+	},
+	"terminal_home_terminal_settings": {
+		"message": "터미널 설정"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI 색상"
@@ -1156,6 +1192,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "설정"
+	},
+	"terminal_title_terminal": {
+		"message": "터미널"
 	},
 	"terminal_title_theme": {
 		"message": "테마"

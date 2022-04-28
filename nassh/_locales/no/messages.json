@@ -63,7 +63,7 @@
 		"message": "Slett"
 	},
 	"disconnect_message": {
-		"message": "NaCl-programtillegget ble avsluttet med statuskoden $1."
+		"message": "Programmet ble avsluttet med statuskoden $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Bruk operativsystemets standardhurtigtaster"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Utfyllingsstørrelse for linjehøyde"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Medietaster er F-taster"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Om vanlige hurtigtaster for operativsystemet skal respekteres i stedet for at de alltid fanges opp for intern bruk i hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Størrelsen på utfyllingen i piksler mellom hver rad på terminalskjermen."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Hvis «true» (sann) er valgt, konverteres medietastene til de tilsvarende funksjonstastene. Hvis «false» (usann) er valgt, håndteres tastene av nettleseren."
 	},
@@ -726,7 +732,7 @@
 		"message": "Slå av/på fargebruk"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopiér kilden til destinasjonen"
+		"message": "Kopier en ekstern bane til en annen ekstern bane"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Slett filer"
@@ -816,7 +822,7 @@
 		"message": "Vis gjeldende protokollversjon"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Versjonsinformasjon om SFTP-protokollen:\n  lokal: $1\n  tjener: $1"
+		"message": "Versjonsinformasjon om SFTP-protokollen:\n  lokal: $1\n  tjener: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: slutt på filen"
@@ -837,7 +843,7 @@
 		"message": "FEIL: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: Utvidelsen «$2» er ikke tilgjengelig"
+		"message": "$1: den obligatoriske utvidelsen «$2» er ikke tilgjengelig for denne tjeneren"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ikke en ordinær fil"
@@ -882,7 +888,7 @@
 		"message": "[Profftips] Bruk «Åpne som vindu» eller «Fullskjerm» for å hindre at terminalen lukkes med Ctrl+W.\n[Profftips] Se $1 for mer informasjon."
 	},
 	"plugin_loading": {
-		"message": "Laster inn NaCl-programtillegget …"
+		"message": "Laster inn $1-programmet …"
 	},
 	"plugin_loading_complete": {
 		"message": " ferdig."
@@ -930,7 +936,10 @@
 		"message": "Lesestørrelse (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Vil du koble til på nytt (R), velge en annen tilkobling (C) eller avslutte (X)?"
+		"message": "Vil du koble til på nytt (R) (standard), velge en annen tilkobling (C) eller avslutte (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Feil ved autentisering med overføringstjener: $1"
 	},
 	"relay_retry": {
 		"message": "Prøver igjen …"
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "«$1» er ikke tilgjengelig"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Legg til SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Standard]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Utviklerinnstillinger"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Rediger SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importér"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Ny SSH-tilkobling"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Kommando"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Angi destinasjonen med «brukernavn@vertsnavn»"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminalinnstillinger"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-farger"
@@ -1038,7 +1074,7 @@
 		"message": "Automatisk"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
-		"message": "Slå av"
+		"message": "Deaktiver"
 	},
 	"terminal_settings_dropdown_cursor_shape_beam": {
 		"message": "Strek"

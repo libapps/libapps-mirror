@@ -60,7 +60,7 @@
 		"message": "Izbriši"
 	},
 	"disconnect_message": {
-		"message": "Dodatak NaCl izvršen je sa statusnim kodom $1."
+		"message": "Program se zatvorio sa šifrom statusa $1."
 	},
 	"faq_menu_label": {
 		"message": "Česta pitanja"
@@ -286,6 +286,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Upotreba zadanih tipkovnih povezivanja/prečaca za OS"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Veličina visine crte udaljenosti od ruba"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Medijske tipke su funkcijske tipke"
@@ -524,6 +527,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Određuje hoće li se uobičajena tipkovna povezivanja u OS-u upotrebljavati umjesto prenošenja za vlastitu upotrebu hterma."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Veličina udaljenosti od ruba zaslona u pikselima između svakog retka zaslona terminala."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ako je vrijednost \"točno\", medijske tipke pretvaraju se u svoje odgovarajuće funkcijske tipke. Ako je \"netočno\", tipke obrađuje preglednik."
 	},
@@ -747,7 +753,7 @@
 		"message": "kopiraj"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopiranje izvora u odredište"
+		"message": "Kopirajte udaljeni put na drugi udaljeni put"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Brisanje datoteka"
@@ -903,7 +909,7 @@
 		"message": "Prikaz trenutačne verzije protokola"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Podaci o verziji SFTP protokola:\n  lokalno: $1\n  poslužitelj: $1"
+		"message": "Podaci o verziji SFTP protokola:\n  lokalno: $1\n  poslužitelj: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: kraj datoteke"
@@ -924,7 +930,7 @@
 		"message": "POGREŠKA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: proširenje \"$2\" nije dostupno"
+		"message": "$1: potrebno proširenje $2 nije dostupno s ovim poslužiteljem"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: nije uobičajena datoteka"
@@ -969,7 +975,7 @@
 		"message": "[Profesionalni savjet] Upotrijebite \"Otvori kao prozor\" ili \"Na cijelom zaslonu\" da biste spriječili zatvaranje terminala prečacem Ctrl + W.\n[Profesionalni savjet] Više informacija dostupno je na $1."
 	},
 	"plugin_loading": {
-		"message": "Učitavanje dodatka NaCl..."
+		"message": "Učitavanje programa $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " gotovo."
@@ -1017,7 +1023,10 @@
 		"message": "Veličina za čitanje (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Želite li se ponovo povezati (R), odabrati neku drugu vezu (C) ili napustiti povezivanje (x)?"
+		"message": "Želite li se ponovo povezati (R, zadano), odabrati neku drugu vezu (C) ili napustiti povezivanje (x)?"
+	},
+	"relay_auth_error": {
+		"message": "Pogreška prilikom autentifikacije na relejnom poslužitelju: $1"
 	},
 	"relay_retry": {
 		"message": "Ponovni pokušaj..."
@@ -1069,6 +1078,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Font \"$1\" nije dostupan"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Dodajte SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Zadano]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Postavke razvojnog programera"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Uredite SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Uvoz"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nova SSH veza"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Naredba"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Navedite odredište kao \"korisnickoime@nazivhosta\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Postavke terminala"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI boje"

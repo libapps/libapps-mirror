@@ -63,7 +63,7 @@
 		"message": "Borrar"
 	},
 	"disconnect_message": {
-		"message": "El complemento NaCl salió con el código de estado $1."
+		"message": "Saliste del programa con el código de estado $1."
 	},
 	"enter_keycap": {
 		"message": "[INTRO]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Usar vinculaciones y combinaciones de teclas predeterminadas del SO"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Tamaño de relleno y altura de la línea"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Las teclas de medios son las de función"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Establece si se deben respetar las vinculaciones comunes del teclado del SO en lugar de capturar siempre el uso propio de hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "El tamaño de la línea en píxeles entre cada fila de la ventana de terminal."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Si esta preferencia se establece como \"true\", convierte las teclas de medios en su equivalente de tecla de función. Si se establece como \"false\", permite que el navegador administre las teclas."
 	},
@@ -726,7 +732,7 @@
 		"message": "Activa o desactiva el uso de colores"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Copia la fuente en el destino"
+		"message": "Copia una ruta de acceso remota a otra diferente"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Borra los archivos"
@@ -816,7 +822,7 @@
 		"message": "Muestra la versión actual del protocolo"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Información de la versión del protocolo SFTP:\nlocal: $1\nservidor: $1"
+		"message": "Información de la versión del protocolo SFTP:\nlocal: $1\nservidor: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: fin del archivo"
@@ -834,7 +840,7 @@
 		"message": "$1: $2: Número no válido: $3"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: La extensión \"$2\" no está disponible"
+		"message": "$1: Se requiere la extensión '$2', que no está disponible en este servidor"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: no es un archivo normal"
@@ -879,7 +885,7 @@
 		"message": "[Consejo de expertos] Usa \"Abrir como ventana\" o \"Pantalla completa\" para evitar que la combinación de teclas Ctrl-W cierre tu terminal.\n[Consejo de expertos] Para obtener más información, consulta $1."
 	},
 	"plugin_loading": {
-		"message": "Cargando el complemento NaCl…"
+		"message": "Cargando el programa $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " carga finalizada."
@@ -927,7 +933,10 @@
 		"message": "Tamaño de lectura (KiB)"
 	},
 	"reconnect_message": {
-		"message": "¿Reconectar (R), elegir (C) otra conexión o salir (X)?"
+		"message": "¿Reconectar (R) (configuración predeterminada), elegir (C) otra conexión o salir (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Se produjo un error durante la autenticación a través del servidor de retransmisión: $1"
 	},
 	"relay_retry": {
 		"message": "Reintentando…"
@@ -979,6 +988,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" no está disponible"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Agregar SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Predeterminada]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Configuración del programador"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Editar SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importar"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nueva conexión SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Comando"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Especifica el destino, como \"nombredeusuario@nombredehost\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Configuración de la terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Colores ANSI"

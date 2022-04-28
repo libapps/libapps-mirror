@@ -57,7 +57,7 @@
 		"message": "ਮਿਟਾਓ"
 	},
 	"disconnect_message": {
-		"message": "NaCl ਪਲੱਗਇਨ ਸਥਿਤੀ ਕੋਡ $1 ਨਾਲ ਬਾਹਰ ਨਿਕਲਿਆ।"
+		"message": "ਸਥਿਤੀ ਕੋਡ $1 ਨਾਲ ਪ੍ਰੋਗਰਾਮ ਬੰਦ ਹੋ ਗਿਆ।"
 	},
 	"faq_menu_label": {
 		"message": "ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲ"
@@ -283,6 +283,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ਪੂਰਵ-ਨਿਰਧਾਰਤ OS ਕੀ-ਬੋਰਡ ਬਾਇੰਡਿੰਗ/ਸ਼ਾਰਟਕੱਟ ਵਰਤੋ"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "ਕਤਾਰ ਦੀ ਉਚਾਈ ਦਾ ਪੈਡਿੰਗ ਆਕਾਰ"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "ਮੀਡੀਆ ਕੁੰਜੀਆਂ Fkeys ਹੁੰਦੀਆਂ ਹਨ"
@@ -521,6 +524,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "hterm ਦੀ ਆਪਣੀ ਵਰਤੋਂ ਲਈ ਹਮੇਸ਼ਾਂ ਕੈਪਚਰ ਕਰਨ ਦੀ ਬਜਾਏ ਆਮ OS ਕੀ-ਬੋਰਡ ਬਾਇੰਡਿੰਗਾਂ ਨੂੰ ਸਵੀਕਾਰ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।"
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "ਟਰਮੀਨਲ ਸਕ੍ਰੀਨ ਦੀ ਹਰੇਕ ਕਤਾਰ ਦੇ ਵਿਚਕਾਰ ਪਿਕਸਲਾਂ ਵਿੱਚ ਪੈਡਿੰਗ ਆਕਾਰ।"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ ਮੀਡੀਆ ਕੁੰਜੀਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਬਰਾਬਰ ਵਾਲੀਆਂ Fkey ਵਿੱਚ ਬਦਲੋ। ਜੇ ਗਲਤ ਹੈ, ਤਾਂ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਕੁੰਜੀਆਂ ਵਰਤਣ ਦਿਓ।"
 	},
@@ -720,7 +726,7 @@
 		"message": "ਕਾਪੀ ਕਰੋ"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "ਸਰੋਤ ਨੂੰ ਮੰਜ਼ਿਲ 'ਤੇ ਕਾਪੀ ਕਰੋ"
+		"message": "ਰਿਮੋਟ ਪਾਥ ਨੂੰ ਕਿਸੇ ਵੱਖਰੇ ਰਿਮੋਟ ਪਾਥ 'ਤੇ ਕਾਪੀ ਕਰੋ"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ਫ਼ਾਈਲਾਂ ਮਿਟਾਓ"
@@ -816,7 +822,7 @@
 		"message": "ਮੌਜੂਦਾ ਪ੍ਰੋਟੋਕੋਲ ਵਰਜਨ ਦਿਖਾਓ"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP ਪ੍ਰੋਟੋਕੋਲ ਵਰਜਨ ਜਾਣਕਾਰੀ:\n  ਸਥਾਨਕ: $1\n  ਸਰਵਰ: $1"
+		"message": "SFTP ਪ੍ਰੋਟੋਕੋਲ ਵਰਜਨ ਜਾਣਕਾਰੀ:\n  ਸਥਾਨਕ: $1\n  ਸਰਵਰ: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ਫ਼ਾਈਲ ਦਾ ਅੰਤ"
@@ -837,7 +843,7 @@
 		"message": "ਗੜਬੜ: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' ਐਕਸਟੈਂਸ਼ਨ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"
+		"message": "$1: ਇਸ ਸਰਵਰ ਨਾਲ ਲੋੜੀਂਦੀ '$2' ਐਕਸਟੈਂਸ਼ਨ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ਨਿਯਮਿਤ ਫ਼ਾਈਲ ਨਹੀਂ ਹੈ"
@@ -882,7 +888,7 @@
 		"message": "[ਪੇਸ਼ਾਵਰ ਨੁਕਤਾ] Ctrl-W ਨੂੰ ਤੁਹਾਡਾ ਟਰਮੀਨਲ ਬੰਦ ਕਰਨ ਤੋਂ ਰੋਕਣ ਲਈ 'ਵਿੰਡੋ ਵਜੋਂ ਖੋਲ੍ਹੋ' ਜਾਂ 'ਪੂਰੀ-ਸਕ੍ਰੀਨ' ਵਰਤੋ!\n[ਪੇਸ਼ਾਵਰ ਨੁਕਤਾ] ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ $1 ਦੇਖੋ।"
 	},
 	"plugin_loading": {
-		"message": "NaCl ਪਲੱਗਇਨ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ..."
+		"message": "$1 ਪ੍ਰੋਗਰਾਮ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
 	},
 	"plugin_loading_complete": {
 		"message": " ਹੋ ਗਿਆ।"
@@ -927,7 +933,10 @@
 		"message": "ਪੜ੍ਹਨ ਲਈ ਆਕਾਰ (KiB)"
 	},
 	"reconnect_message": {
-		"message": "ਕੀ ਮੁੜ-ਕਨੈਕਟ (R) ਕਰਨਾ ਹੈ, ਹੋਰ ਕਨੈਕਸ਼ਨ ਚੁਣਨਾ (C) ਹੈ ਜਾਂ ਬਾਹਰ ਨਿਕਲਨਾ (X) ਹੈ?"
+		"message": "ਕੀ ਮੁੜ-ਕਨੈਕਟ ਕਰਨਾ ਹੈ (ਪੂਰਵ-ਨਿਰਧਾਰਿਤ) (R), ਹੋਰ ਕਨੈਕਸ਼ਨ ਚੁਣਨਾ ਹੈ (C) ਜਾਂ ਬਾਹਰ ਨਿਕਲਨਾ ਹੈ (X)?"
+	},
+	"relay_auth_error": {
+		"message": "ਰੀਲੇਅ ਸਰਵਰ ਨਾਲ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਵੇਲੇ ਗੜਬੜ ਹੋਈ : $1"
 	},
 	"relay_retry": {
 		"message": "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
@@ -979,6 +988,30 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ਉਪਲਬਧ ਨਹੀਂ ਹੈ"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH ਸ਼ਾਮਲ ਕਰੋ"
+	},
+	"terminal_home_developer_settings": {
+		"message": "ਵਿਕਾਸਕਾਰ ਸੈਟਿੰਗਾਂ"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH ਦਾ ਸੰਪਾਦਨ ਕਰੋ"
+	},
+	"terminal_home_import_identity": {
+		"message": "ਆਯਾਤ ਕਰੋ"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "ਨਵਾਂ SSH ਕਨੈਕਸ਼ਨ"
+	},
+	"terminal_home_ssh_command": {
+		"message": "ਆਦੇਸ਼"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "\"username@hostname\" ਨਾਲ ਮੰਜ਼ਿਲ ਨੂੰ ਨਿਰਧਾਰਿਤ ਕਰੋ"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "ਟਰਮੀਨਲ ਸੈਟਿੰਗਾਂ"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI ਰੰਗ"
@@ -1153,6 +1186,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "ਸੈਟਿੰਗਾਂ"
+	},
+	"terminal_title_terminal": {
+		"message": "ਟਰਮੀਨਲ"
 	},
 	"terminal_title_theme": {
 		"message": "ਥੀਮ"

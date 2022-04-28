@@ -60,7 +60,7 @@
 		"message": "Ștergeți"
 	},
 	"disconnect_message": {
-		"message": "Pluginul NaCl s-a închis cu codul de stare $1."
+		"message": "Programul s-a închis cu codul de stare $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Folosiți asocierile/comenzile rapide de la tastatura sistemului de operare prestabilite"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Dimensiunea chenarului interior între rânduri"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Tastele Media sunt tastele F"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Dacă asocierile frecvente cu tastatura sistemului de operare trebuie respectate în locul capturării permanente pentru utilizarea de către hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Dimensiunea chenarului interior în pixeli între rândurile de pe ecranul terminalului."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Dacă preferința este activată, transformați tastele media în echivalentul lor Fkey. Dacă este dezactivată, lăsați browserul să trateze tastele."
 	},
@@ -723,7 +729,7 @@
 		"message": "Activați / dezactivați utilizarea culorilor"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Copiați sursa la destinație"
+		"message": "Copiați o cale de la distanță într-o altă cale de la distanță"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Ștergeți fișierele"
@@ -813,7 +819,7 @@
 		"message": "Afișați versiunea actuală a protocolului"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Informații despre versiunea protocolului SFTP:\n  local: $1\n  server: $1"
+		"message": "Informații despre versiunea protocolului SFTP:\n  local: $1\n  server: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: sfârșitul fișierului"
@@ -834,7 +840,7 @@
 		"message": "EROARE: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: extensia „$2” nu este disponibilă"
+		"message": "$1: extensia $2 obligatorie este indisponibilă cu acest server"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2 nu este un fișier obișnuit"
@@ -879,7 +885,7 @@
 		"message": "[Sfat profesionist] Folosiți „Deschideți ca fereastră” sau „Ecran complet”, pentru a împiedica Ctrl+W să închidă terminalul!\n[Sfat profesionist] Accesați $1 pentru mai multe informații."
 	},
 	"plugin_loading": {
-		"message": "Se încarcă pluginul NaCI…"
+		"message": "Se încarcă programul $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " finalizată."
@@ -927,7 +933,10 @@
 		"message": "Dimensiunea de citire (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Vă reconectați (r), alegeți o altă conexiune (c) sau ieșiți (x)?"
+		"message": "Vă reconectați (r) (prestabilit), alegeți o altă conexiune (c) sau ieșiți (x)?"
+	},
+	"relay_auth_error": {
+		"message": "Eroare de autentificare la serverul de retransmitere: $1"
 	},
 	"relay_retry": {
 		"message": "Se reîncearcă…"
@@ -979,6 +988,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "„$1” nu este disponibil"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Adăugați o conexiune SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Prestabilit]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Setări pentru dezvoltatori"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Editați o conexiune SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importați"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Conexiune SSH nouă"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Comandă"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Specificați destinația cu „numeutilizator@numegazdă”"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Setări pentru terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Culori ANSI"

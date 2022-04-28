@@ -60,7 +60,7 @@
 		"message": "Ištrinti"
 	},
 	"disconnect_message": {
-		"message": "„NaCl“ papildinys išjungtas su būsenos kodu $1."
+		"message": "Programa išjungta su būsenos kodu: $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Naudoti numatytuosius susietus OS klaviatūros klavišus arba sparčiuosius klavišus"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Eilutės aukščio užpildymo dydis"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Medijos klavišai yra F klavišai"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ar reikia paisyti įprastų susietų OS klaviatūros klavišų vietoje naudojamų „hterm“."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Užpildymo dydis pikseliais tarp kiekvienos terminalo ekrano eilutės."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Nustačius kaip „true“, medijos klavišai konvertuojami į atitinkamus funkcijų klavišus. Nustačius kaip „false“, naršyklei leidžiama apdoroti klavišus."
 	},
@@ -741,7 +747,7 @@
 		"message": "kopijuoti"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopijuoti šaltinį į paskirties vietą"
+		"message": "Kopijuoti nuotolinį kelią į kitą nuotolinį kelią"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Ištrinti failus"
@@ -867,7 +873,7 @@
 		"message": "Rodyti dabartinę protokolo versiją"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP protokolo versijos informacija:\n  vietos: $1\n  serverio: $1"
+		"message": "SFTP protokolo versijos informacija:\n  vietos: $1\n  serverio: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: failo pabaiga"
@@ -888,7 +894,7 @@
 		"message": "KLAIDA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: plėtinys „$2“ nepasiekiamas"
+		"message": "$1: būtinas plėtinys „$2“ nepasiekiamas naudojant šį serverį"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: neįprastas failas"
@@ -933,7 +939,7 @@
 		"message": "[Pro Tip] Naudokite parinktį „Atidaryti kaip langą“ arba „Visas ekranas“, kad neuždarytumėte terminalo naudodami „Ctrl“ + W!\n[Pro Tip] Jei reikia daugiau informacijos, žr. $1."
 	},
 	"plugin_loading": {
-		"message": "Įkeliamas papildinys „NaCl“..."
+		"message": "Įkeliama „$1“ programa..."
 	},
 	"plugin_loading_complete": {
 		"message": " atlikta."
@@ -981,7 +987,10 @@
 		"message": "Nuskaityto failo dydis (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Iš naujo prisijungti (R), pasirinkti kitą ryšį (C) ar išeiti (X)?"
+		"message": "Iš naujo prisijungti (R) (numatytasis), pasirinkti kitą ryšį (C) ar išeiti (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Autentifikuojant su perdavimo serveriu įvyko klaida: $1"
 	},
 	"relay_retry": {
 		"message": "Bandoma iš naujo..."
@@ -1033,6 +1042,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "„$1“ nepasiekiamas"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Pridėti SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Numatytasis]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Kūrėjų nustatymai"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Redaguoti SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importuoti"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Naujas SSH ryšys"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Klavišas „Command“"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Nurodykite paskirties vietą formatu „naudotojovardas@prieglobosserveriopavadinimas“"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminalo nustatymai"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI spalvos"
@@ -1213,6 +1249,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Nustatymai"
+	},
+	"terminal_title_terminal": {
+		"message": "Terminalas"
 	},
 	"terminal_title_theme": {
 		"message": "Tema"

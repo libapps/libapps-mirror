@@ -63,7 +63,7 @@
 		"message": "Smazat"
 	},
 	"disconnect_message": {
-		"message": "Plugin NaCl byl ukončen se stavovým kódem $1."
+		"message": "Program byl ukončen se stavovým kódem $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Použít výchozí mapování kláves operačního systému"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Velikost odsazení výšky řádku"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Mediální klávesy jsou funkční klávesy"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Určuje, zda se mají respektovat běžná mapování kláves operačního systému (namísto jejich zachytávání pro vlastní použití terminálem hterm)."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Velikost odsazení v pixelech mezi jednotlivými řádky na obrazovce terminálu."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Pokud je nastaveno na hodnotu true, budou se mediální klávesy převádět na ekvivalenty funkčních kláves. Pokud je nastaveno na hodnotu false, bude klávesy zpracovávat prohlížeč."
 	},
@@ -726,7 +732,7 @@
 		"message": "Přepnout používání barev"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Zkopírovat zdroj do cíle"
+		"message": "Zkopírovat vzdálenou cestu do jiné vzdálené cesty"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Smazat soubory"
@@ -816,7 +822,7 @@
 		"message": "Zobrazit aktuální verzi protokolu"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Informace o verzi protokolu SFTP:\n  místní: $1\n  server: $1"
+		"message": "Informace o verzi protokolu SFTP:\n  místní: $1\n  server: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: konec souboru"
@@ -837,7 +843,7 @@
 		"message": "CHYBA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: rozšíření $2 není k dispozici"
+		"message": "$1: povinná přípona $2 na tomto serveru není k dispozici"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: nejedná se o běžný soubor"
@@ -882,7 +888,7 @@
 		"message": "[Tip pro experty] Aby se terminál po stisknutí Ctrl+W nezavřel, použijte možnost Otevřít jako okno nebo Celá obrazovka.\n[Tip pro experty] Další informace naleznete na adrese $1."
 	},
 	"plugin_loading": {
-		"message": "Načítání pluginu NaCl..."
+		"message": "Načítání programu $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " hotovo."
@@ -930,7 +936,10 @@
 		"message": "Velikost ke čtení (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Znovu se připojit (R), vybrat jiné připojení (C) nebo ukončit (X)?"
+		"message": "Znovu se připojit (R, výchozí možnost), vybrat jiné připojení (C) nebo ukončit (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Chyba ověření na přenosovém serveru: $1"
 	},
 	"relay_retry": {
 		"message": "Další pokus..."
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Písmo $1 není k dispozici"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Přidat SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Výchozí]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Nastavení vývojáře"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Upravit SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importovat"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Nové připojení SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Příkaz"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Zadejte cíl ve formátu uživatelské_jméno@název_hostitele"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Nastavení terminálu"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Barvy ANSI"
@@ -1153,6 +1189,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Nastavení"
+	},
+	"terminal_title_terminal": {
+		"message": "Terminál"
 	},
 	"terminal_title_theme": {
 		"message": "Motiv"

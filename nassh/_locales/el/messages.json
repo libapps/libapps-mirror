@@ -63,7 +63,7 @@
 		"message": "Διαγραφή"
 	},
 	"disconnect_message": {
-		"message": "Η προσθήκη NaCl πραγματοποίησε έξοδο με κωδικό κατάστασης $1."
+		"message": "Το πρόγραμμα έκλεισε με κωδικό κατάστασης $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Χρήση των προεπιλεγμένων συσχετίσεων/συντομεύσεων πληκτρολογίου του λειτουργικού συστήματος"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Μέγεθος αναπλήρωσης ύψους γραμμής"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Τα πλήκτρα πολυμέσων είναι τα πλήκτρα F"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Εάν οι κοινές συσχετίσεις πληκτρολογίου του λειτουργικού συστήματος θα τηρούνται αντί να λαμβάνονται πάντα για τη χρήση του hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Το μέγεθος αναπλήρωσης σε pixel μεταξύ των σειρών της οθόνης τερματικού."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Εάν η τιμή είναι αληθής, τα πλήκτρα πολυμέσων θα μετατρέπονται στα αντίστοιχα πλήκτρα F. Εάν η τιμή είναι ψευδής, τότε το πρόγραμμα περιήγησης θα διαχειρίζεται τα πλήκτρα."
 	},
@@ -726,7 +732,7 @@
 		"message": "Εναλλαγή χρήσης χρώματος"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Αντιγραφή πηγής σε προορισμό"
+		"message": "Αντιγραφή μιας απομακρυσμένης διαδρομής σε άλλη απομακρυσμένη διαδρομή"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Διαγραφή αρχείων"
@@ -822,7 +828,7 @@
 		"message": "Εμφάνιση τρέχουσας έκδοσης πρωτοκόλλου"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Πληροφορίες έκδοσης πρωτοκόλλου SFTP:\n  τοπικό: $1\n  διακομιστής: $1"
+		"message": "Πληροφορίες έκδοσης πρωτοκόλλου SFTP:\n  τοπικό: $1\n  διακομιστής: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: τέλος αρχείου"
@@ -843,7 +849,7 @@
 		"message": "ΣΦΑΛΜΑ: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: η επέκταση \"$2\" δεν είναι διαθέσιμη"
+		"message": "$1: η απαιτούμενη επέκταση $2 δεν είναι διαθέσιμη με αυτόν τον διακομιστή"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: δεν είναι κανονικό αρχείο"
@@ -888,7 +894,7 @@
 		"message": "[Επαγγελματική συμβουλή] Χρησιμοποιήστε την επιλογή Άνοιγμα σε παράθυρο ή Πλήρης οθόνη, για να αποτρέψετε το κλείσιμο του τερματικού από το συνδυασμό Ctrl+W!\n[Επαγγελματική συμβουλή] Για περισσότερες πληροφορίες, ανατρέξτε στη διεύθυνση $1."
 	},
 	"plugin_loading": {
-		"message": "Φόρτωση της προσθήκης NaCl…"
+		"message": "Φόρτωση προγράμματος $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " τέλος."
@@ -937,6 +943,9 @@
 	},
 	"reconnect_message": {
 		"message": "Θέλετε να κάνετε επανασύνδεση(R), να επιλέξετε(C) άλλη σύνδεση ή να πραγματοποιήσετε έξοδο(X);"
+	},
+	"relay_auth_error": {
+		"message": "Σφάλμα κατά τον έλεγχο ταυτότητας με τον διακομιστή αναμετάδοσης: $1"
 	},
 	"relay_retry": {
 		"message": "Επανάληψη…"
@@ -988,6 +997,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Η γραμματοσειρά \"$1\" δεν είναι διαθέσιμη"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Προσθήκη SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Προεπιλογή]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Ρυθμίσεις προγραμματιστή"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Επεξεργασία SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Εισαγωγή"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Νέα σύνδεση SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Εντολή"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Προσδιορίστε τον προορισμό με το στοιχείο username@hostname"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Ρυθμίσεις τερματικού"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Χρώματα ANSI"
@@ -1168,6 +1204,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Ρυθμίσεις"
+	},
+	"terminal_title_terminal": {
+		"message": "Τερματικό"
 	},
 	"terminal_title_theme": {
 		"message": "Θέμα"

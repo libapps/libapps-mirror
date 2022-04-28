@@ -60,7 +60,7 @@
 		"message": "Dzēst"
 	},
 	"disconnect_message": {
-		"message": "NaCl spraudnis tika aizvērts ar statusa kodu $1."
+		"message": "Programma beidza darbu ar statusa kodu $1."
 	},
 	"enter_keycap": {
 		"message": "[IEVADĪT]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Izmantot noklusējuma OS saistītos taustiņus/īsinājumtaustiņus"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Rindiņu augstuma iekšējās atkāpes lielums"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Multivides taustiņi ir F taustiņi."
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Norāda, vai jāņem vērā bieži lietotie OS saistītie taustiņi, nevis vienmēr jāuztver komandas “hterm” lietojums."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Termināļa ekrāna iekšējās atkāpes lielums pikseļos starp katru rindiņu."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Ja ir iestatīta vērtība “true”, multivides taustiņi tiek mainīti uz to funkciju taustiņu ekvivalentiem. Ja ir iestatīta vērtība “false”, pārlūkprogrammai tiek atļauts apstrādāt taustiņus."
 	},
@@ -726,7 +732,7 @@
 		"message": "Pārslēgt krāsu izmantojumu"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopēt avotu galamērķī"
+		"message": "Kopēt attālo ceļu uz citu attālo ceļu"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Dzēst failus"
@@ -819,7 +825,7 @@
 		"message": "Rādīt pašreizējo protokola versiju"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP protokola versijas informācija —\n  lokāli: $1\n  serveris: $1"
+		"message": "SFTP protokola versijas informācija —\n  lokāli: $1\n  serveris: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: faila beigas"
@@ -840,7 +846,7 @@
 		"message": "KĻŪDA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: paplašinājums “$2” nav pieejams."
+		"message": "$1: šajā serverī nav pieejams nepieciešamais paplašinājums “$2”."
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: nav regulārs fails"
@@ -885,7 +891,7 @@
 		"message": "[Profesionāļa padoms] Izmantojiet “Atvērt kā logu” vai “Pilnekrāns”, lai ar taustiņu kombināciju Ctrl+W neaizvērtu termināli.\n[Profesionāļa padoms] Plašāku informāciju skatiet vietnē $1."
 	},
 	"plugin_loading": {
-		"message": "Notiek NaCl spraudņa ielāde..."
+		"message": "Notiek programmas “$1” ielāde…"
 	},
 	"plugin_loading_complete": {
 		"message": " pabeigta."
@@ -933,7 +939,10 @@
 		"message": "Lasīšanas lielums (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Vai atkārtoti izveidot savienojumu (R), izvēlēties citu savienojumu (C) vai iziet (X)?"
+		"message": "Vai atkārtoti izveidot savienojumu (R) (noklusējums), izvēlēties citu savienojumu (C) vai iziet (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Neizdevās veikt autentificēšanu, izmantojot pārraides serveri: $1"
 	},
 	"relay_retry": {
 		"message": "Notiek atkārtots mēģinājums..."
@@ -985,6 +994,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Fonts $1 nav pieejams"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Pievienot SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Noklusējums]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Izstrādātāja iestatījumi"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Rediģēt SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importēt"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Jauns SSH savienojums"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Komanda"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Norādiet galamērķi šādā formātā: “username@hostname”."
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Termināļa iestatījumi"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI krāsas"
@@ -1165,6 +1201,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Iestatījumi"
+	},
+	"terminal_title_terminal": {
+		"message": "Terminālis"
 	},
 	"terminal_title_theme": {
 		"message": "Motīvs"

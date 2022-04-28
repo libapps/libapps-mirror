@@ -60,7 +60,7 @@
 		"message": "លុប"
 	},
 	"disconnect_message": {
-		"message": "កម្មវិធីជំនួយ NaCl បានចាកចេញដោយប្រើលេខកូដស្ថានភាព $1។"
+		"message": "បានចាកចេញពី​កម្មវិធីដោយប្រើ​លេខកូដស្ថានភាព $1។"
 	},
 	"faq_menu_label": {
 		"message": "សំណួរ​ដែល​សួរ​ញឹកញាប់"
@@ -280,6 +280,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ប្រើផ្លូវកាត់/ការចងក្ដារចុចប្រព័ន្ធប្រតិបត្តិការលំនាំដើម"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "ទំហំស៊ុមគែមនៃកម្ពស់បន្ទាត់"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "គ្រាប់ចុចមេឌៀគឺ Fkey"
@@ -518,6 +521,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "ថាតើគួរតែគោរពតាមការចងក្ដារចុចប្រព័ន្ធប្រតិបត្តិការទូទៅជំនួសឱ្យការថតការប្រើប្រាស់ផ្ទាល់របស់ hterm ជានិច្ចឬអត់។"
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "ទំហំស៊ុមគែមជាភីកសែលរវាងជួរដេកនីមួយៗនៃអេក្រង់ស្ថានីយ។"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "ប្រសិនបើពិត បំប្លែងគ្រាប់ចុចមេឌៀទៅ Fkey ដែលមានមុខងារដូចគ្នា។ ប្រសិនបើមិនពិត អនុញ្ញាតឱ្យកម្មវិធីរុករកតាមអ៊ីនធឺណិតចាត់ចែងគ្រាប់ចុចទាំងនោះ។"
 	},
@@ -717,7 +723,7 @@
 		"message": "បិទ/បើកការប្រើប្រាស់ពណ៌"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "ចម្លងប្រភពទៅគោលដៅ"
+		"message": "ចម្លង​ផ្លូវពីចម្ងាយ​ទៅផ្លូវពីចម្ងាយ​ផ្សេង"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "លុបឯកសារ"
@@ -825,7 +831,7 @@
 		"message": "បង្ហាញកំណែប្រូតូកូលបច្ចុប្បន្ន"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "ព័ត៌មានអំពីកំណែប្រូតូកូល SFTP៖\n  មូលដ្ឋាន៖ $1\n  ម៉ាស៊ីនមេ៖ $1"
+		"message": "ព័ត៌មានអំពីកំណែប្រូតូកូល SFTP៖\n  មូលដ្ឋាន៖ $1\n  ម៉ាស៊ីនមេ៖ $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1៖ ផ្នែកបញ្ចប់នៃឯកសារ"
@@ -846,7 +852,7 @@
 		"message": "បញ្ហា៖ $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1៖ មិនអាចប្រើកម្មវិធីបន្ថែម '$2' បានទេ"
+		"message": "$1៖ មិនអាចប្រើ​កន្ទុយ '$2' ដែលចាំបាច់​ជាមួយ​ម៉ាស៊ីនមេនេះបានទេ"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1៖ $2៖ មិនមែនជាឯកសារធម្មតាទេ"
@@ -894,7 +900,7 @@
 		"message": "[គន្លឹះ] ប្រើ 'បើកជាវិនដូ' ឬ 'អេក្រង់ពេញ' ដើម្បីទប់ស្កាត់កុំឱ្យ Ctrl+W បិទស្ថានីយរបស់អ្នក!\n[គន្លឹះ] សូមមើល $1 ដើម្បីទទួលបានព័ត៌មានបន្ថែម។"
 	},
 	"plugin_loading": {
-		"message": "កំពុងផ្ទុកកម្មវិធីជំនួយ NaCl..."
+		"message": "កំពុងផ្ទុក​កម្មវិធី $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " រួចរាល់។"
@@ -942,7 +948,10 @@
 		"message": "ទំហំនៃការអាន (KiB)"
 	},
 	"reconnect_message": {
-		"message": "(R) ភ្ជាប់ឡើងវិញ, (C) ជ្រើសរើសការតភ្ជាប់ផ្សេងទៀត ឬ (X) ចាកចេញ?"
+		"message": "(R) ភ្ជាប់ឡើងវិញ (លំនាំដើម), (C) ជ្រើសរើសការតភ្ជាប់ផ្សេងទៀត ឬ (X) ចាកចេញ?"
+	},
+	"relay_auth_error": {
+		"message": "មានបញ្ហា​ក្នុងការផ្ទៀងផ្ទាត់​ជាមួយ​ម៉ាស៊ីនមេបញ្ជូនបន្ត៖ $1"
 	},
 	"relay_retry": {
 		"message": "កំពុង​ព្យាយាម​​ម្ដង​ទៀត..."
@@ -994,6 +1003,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" មិន​អាចប្រើបានទេ"
+	},
+	"terminal_home_add_ssh": {
+		"message": "បញ្ចូល SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[លំនាំដើម]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "ការកំណត់​អ្នក​អភិវឌ្ឍន៍"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "កែ SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "នាំចូល"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "ការតភ្ជាប់ SSH ថ្មី"
+	},
+	"terminal_home_ssh_command": {
+		"message": "ឃ្លាបញ្ជា"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "បញ្ជាក់គោលដៅ​ដោយប្រើ \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "ការកំណត់ទែមីណាល់"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ពណ៌ ANSI"
@@ -1165,6 +1201,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "ការកំណត់"
+	},
+	"terminal_title_terminal": {
+		"message": "ស្ថានីយ"
 	},
 	"terminal_title_theme": {
 		"message": "រចនាប័ទ្ម"

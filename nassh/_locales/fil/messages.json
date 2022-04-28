@@ -60,7 +60,7 @@
 		"message": "I-delete"
 	},
 	"disconnect_message": {
-		"message": "Na-exit na ang NaCl plugin nang may status code na $1."
+		"message": "Lumabas sa program gamit ang status code $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -283,6 +283,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Gamitin ang mga default na binding/shortcut sa OS Keyboard"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Laki ng padding ng line height"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Mga Fkey ang mga media key"
@@ -521,6 +524,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Kung dapat kilalanin ang mga karaniwang binding ng OS keyboard sa halip na palaging kunin para sa sariling paggamit ng hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Ang laki ng padding sa mga pixel sa pagitan ng bawat row ng screen ng terminal."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Kung true, i-convert ang mga media key sa mga katumbas na Fkey ng mga ito. Kung false, hayaang pangasiwaan ng browser ang mga key."
 	},
@@ -726,7 +732,7 @@
 		"message": "kopyahin"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopyahin ang source sa destinasyon"
+		"message": "Magkopya ng remote path sa ibang remote path"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Mag-delete ng mga file"
@@ -855,7 +861,7 @@
 		"message": "Ipakita ang kasalukuyang bersyon ng protocol"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Impormasyon ng bersyon ng protocol ng SFTP:\n  lokal: $1\n  server: $1"
+		"message": "Impormasyon ng bersyon ng protocol ng SFTP:\n  lokal: $1\n  server: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: dulo ng file"
@@ -873,7 +879,7 @@
 		"message": "$1: $2: invalid na numero: $3"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: hindi available ang extension na '$2'"
+		"message": "$1: hindi available sa server na ito ang kinakailangang '$2' na extension"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: hindi regular na file"
@@ -918,7 +924,7 @@
 		"message": "[Pro Tip] Gamitin ang 'Buksan bilang Window' o 'Fullscreen' para mapigilan ang Ctrl+W na isara ang iyong terminal!\n[Pro Tip] Tingnan ang $1 para sa higit pang impormasyon."
 	},
 	"plugin_loading": {
-		"message": "Nilo-load ang NaCl plugin..."
+		"message": "Nilo-load ang program na $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " tapos na."
@@ -966,7 +972,10 @@
 		"message": "Laki ng Pag-read (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Muling Kumonekta (R), Pumili ng ibang konesyon (C), o Lumabas (X)?"
+		"message": "Kumonekta ulit (R) (default), Pumili ng ibang koneksyon (C), o Lumabas (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Nagka-error sa pag-authenticate sa relay server: $1"
 	},
 	"relay_retry": {
 		"message": "Sinusubukan ulit..."
@@ -1018,6 +1027,27 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Hindi available ang \"$1\""
+	},
+	"terminal_home_add_ssh": {
+		"message": "Magdagdag ng SSH"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Mga Setting ng Developer"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "I-edit ang SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "I-import"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Bagong koneksyon sa SSH"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Tukuyin ang destinasyon gamit ang \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Mga Setting ng Terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Mga kulay ng ANSI"

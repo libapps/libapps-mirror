@@ -63,7 +63,7 @@
 		"message": "Slet"
 	},
 	"disconnect_message": {
-		"message": "NaCl-pluginnet blev afsluttet med statuskoden $1."
+		"message": "Programmet blev afsluttet med statuskoden $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Brug standard-OS-tastaturbindinger/-genveje"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Størrelsen på den indre margens linjehøjde"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Medietaster er F-taster"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Angiv, om almindelige OS-tastaturbindinger skal respekteres i stedet for altid at anvende registrering til hterms egen brug."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Størrelsen på den indre margen i pixels mellem hver række på terminalskærmen."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Hvis den er angivet som Sand, skal medietasterne konverteres til deres tilsvarende F-taster. Hvis den er angivet som Falsk, skal browseren styre tasterne."
 	},
@@ -753,7 +759,7 @@
 		"message": "kopiér"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopiér kilde til destination"
+		"message": "Kopiér en fjernsti til en anden fjernsti"
 	},
 	"nasftp_cmd_del": {
 		"message": "slet"
@@ -912,7 +918,7 @@
 		"message": "Vis den aktuelle protokolversion"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Oplysninger om SFTP-protokolversionen:\n  lokal: $1\n  server: $1"
+		"message": "Oplysninger om SFTP-protokolversionen:\n  lokal: $1\n  server: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: Slutningen af filen"
@@ -933,7 +939,7 @@
 		"message": "FEJL: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: Udvidelsen \"$2\" er ikke tilgængelig"
+		"message": "$1: Den påkrævede udvidelse \"$2\" er ikke tilgængelig for denne server"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: Ikke en normal fil"
@@ -978,7 +984,7 @@
 		"message": "[Tip!] Brug \"Åbn som vindue\" eller \"Fuld skærm\" for at forhindre, at Ctrl+W lukker din terminal.\n[Tip!] Se $1 for at få flere oplysninger."
 	},
 	"plugin_loading": {
-		"message": "Indlæser pluginnet NaCl..."
+		"message": "Indlæser programmet $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " udført."
@@ -1026,7 +1032,10 @@
 		"message": "Læsestørrelse (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Vil du genoprette forbindelsen (R), vælge en anden forbindelse (C) eller afslutte (X)?"
+		"message": "Vil du genoprette forbindelsen (R) (standardhandling), vælge en anden forbindelse (C) eller afslutte (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Der opstod en fejl under godkendelsen med relæserveren: $1"
 	},
 	"relay_retry": {
 		"message": "Prøver igen…"
@@ -1078,6 +1087,30 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" er ikke tilgængelig"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Tilføj SSH"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Indstillinger for udviklere"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Rediger SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importér"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Ny SSH-forbindelse"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Kommando"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Angiv destinationen ved hjælp af \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminalindstillinger"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-farver"

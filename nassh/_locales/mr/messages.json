@@ -60,7 +60,7 @@
 		"message": "हटवा"
 	},
 	"disconnect_message": {
-		"message": "NaCl प्लगिन स्थिती कोड $1 सोबत बाहेर पडले."
+		"message": "$1 या स्टेटस कोडसह प्रोग्राममधून बाहेर पडण्यात आले आहे."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "डीफॉल्ट OS कीबोर्ड बाइंडिंग/शॉर्टकट वापरा"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "ओळीच्या उंचीच्या पॅडिंगचा आकार"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "मीडिया की म्हणजे Fkeys"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "नेहमी hterm च्या स्वतःच्या वापरासाठी कॅप्चर करण्याऐवजी सामान्य OS कीबोर्ड बाइंडिंगचा आदर केला जावा का."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "टर्मिनलच्या प्रत्येक पंक्तीदरम्यानच्या पॅडिंगचा पिक्सेलनुसार आकार."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "सत्य असल्यास, मीडिया की चे Fkey त्यांच्या सममूल्यांमध्ये रूपांतर करा. असत्य असल्यास, ब्राउझरला की हाताळू द्या."
 	},
@@ -732,7 +738,7 @@
 		"message": "कॉपी करा"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "स्रोत गंतव्यस्थानावर कॉपी करा"
+		"message": "रिमोट पाथला वेगळ्या रिमोट पाथवर कॉपी करा"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "फाइल हटवा"
@@ -843,7 +849,7 @@
 		"message": "सध्याची प्रोटोकॉल आवृत्ती दाखवा"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP प्रोटोकॉल आवृत्ती माहिती:\n  स्थानिक: $1\n  सर्व्हर: $1"
+		"message": "SFTP प्रोटोकॉल आवृत्ती माहिती:\n  स्थानिक: $1\n  सर्व्हर: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: फाइलचा शेवट"
@@ -864,7 +870,7 @@
 		"message": "एरर: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' एक्स्टेंशन उपलब्ध नाही"
+		"message": "$1: '$2' हे आवश्यक एक्स्टेंशन या सर्व्हरसह उपलब्ध नाही"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: नियमित फाइल नाही"
@@ -909,7 +915,7 @@
 		"message": "[प्रो टीप] Ctrl+W ला तुमचे टर्मिनल बंद करण्यापासून रोखण्यासाठी 'विंडो म्हणून उघडा' किंवा 'फुलस्क्रीन' वापरा!\n[प्रो टीप] अधिक माहितीसाठी $1 पहा."
 	},
 	"plugin_loading": {
-		"message": "NaCl प्लग इन लोड करत आहे..."
+		"message": "$1 प्रोग्राम लोड करत आहे..."
 	},
 	"plugin_loading_complete": {
 		"message": " पूर्ण झाले."
@@ -957,7 +963,10 @@
 		"message": "रीड आकार (KiB)"
 	},
 	"reconnect_message": {
-		"message": "रीकनेक्ट करायचे (R), दुसरे कनेक्शन निवडायचे (C) की बाहेर पडायचे (X)?"
+		"message": "(R) रीकनेक्ट करायचे आहे, (C) दुसरे कनेक्शन निवडायचे आहे की (X) बाहेर पडायचे आहे?"
+	},
+	"relay_auth_error": {
+		"message": "रीले सर्व्हरवरून ऑथेंटिकेट करताना एरर आली: $1"
 	},
 	"relay_retry": {
 		"message": "पुन्हा प्रयत्न करत आहे..."
@@ -1009,6 +1018,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" उपलब्ध नाही"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH जोडा"
+	},
+	"terminal_home_default_identity": {
+		"message": "[डीफॉल्ट]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "डेव्हलपर सेटिंग्ज"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH संपादित करा"
+	},
+	"terminal_home_import_identity": {
+		"message": "इंपोर्ट करा"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "नवीन SSH कनेक्शन"
+	},
+	"terminal_home_ssh_command": {
+		"message": "कमांड"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "\"username@hostname\" वापरून डेस्टिनेशन नमूद करा"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "टर्मिनल सेटिंग्ज"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI रंग"
@@ -1189,6 +1225,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "सेटिंग्ज"
+	},
+	"terminal_title_terminal": {
+		"message": "टर्मिनल"
 	},
 	"terminal_title_theme": {
 		"message": "थीम"

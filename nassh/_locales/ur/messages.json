@@ -57,7 +57,7 @@
 		"message": "حذف کریں"
 	},
 	"disconnect_message": {
-		"message": "NaCl پلگ ان اسٹیٹس کوڈ $1 کے ساتھ بند ہوا۔"
+		"message": "صورتحال کے کوڈ $1 کے ساتھ پروگرام ختم ہو گیا۔"
 	},
 	"faq_menu_label": {
 		"message": "اکثر پوچھے گئے سوالات"
@@ -283,6 +283,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ڈیفالٹ OS کی بورڈ بائنڈنگز/شارٹ کٹس استعمال کریں"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "لائن کی اونچائی کی پیڈنگ کا سائز"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Fkeys میڈیا کی کلیدیں ہیں"
@@ -521,6 +524,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "آیا ہمیشہ hterm کے خود کے استعمال کو کیپچر کرنے کی بجائے OS کی بورڈ کی عام بائنڈنگز پر عمل کیا جانا چاہیے۔"
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "ٹرمینل اسکرین کی ہر قطار کے درمیان پکسلز میں پیڈنگ کا سائز۔"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "درست ہونے پر، میڈیا کلیدوں کو ان کے مساوی Fkey میں تبدیل کریں۔ غلط ہونے پر، براؤزر کلیدوں کو ہینڈل کرنے کی سہولت دیں۔"
 	},
@@ -630,7 +636,7 @@
 		"message": "کی بورڈ"
 	},
 	"hterm_title_pref_miscellaneous": {
-		"message": "متفرقات"
+		"message": "متفرق"
 	},
 	"hterm_title_pref_scrolling": {
 		"message": "سکرولنگ"
@@ -729,7 +735,7 @@
 		"message": "کاپی کریں"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "سورس کو منزل میں کاپی کریں"
+		"message": "ایک ریموٹ راستے کو ایک مختلف ریموٹ راستے پر کاپی کریں"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "فائلیں حذف کریں"
@@ -855,7 +861,7 @@
 		"message": "موجودہ پروٹوکول ورژن دکھائیں"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP پروٹوکول ورژن کی معلومات:\n  مقامی: $1\n  سرور: $1"
+		"message": "SFTP پروٹوکول ورژن کی معلومات:\n  مقامی: $1\n  سرور: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: فائل کا اختتام"
@@ -876,7 +882,7 @@
 		"message": "خرابی: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' ایکسٹینشن دستیاب نہیں ہے"
+		"message": "$1: مطلوبہ '$2' کی ایکسٹینشن اس سرور کے ساتھ دستیاب نہیں ہے"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ریگولر فائل نہیں ہے"
@@ -924,7 +930,7 @@
 		"message": "[ماہرانہ تجویز] 'بطور ونڈو کھولیں' یا 'مکمل اسکرین' استعمال کر کے Ctrl+W کو اپنا ٹرمینل بند کرنے سے روکیں!\n[ماہرانہ تجویز] مزید معلومات کیلئے $1 دیکھیں۔"
 	},
 	"plugin_loading": {
-		"message": "NaCl پلگ ان لوڈ ہو رہا ہے..."
+		"message": "پروگرام $1 لوڈ ہو رہا ہے..."
 	},
 	"plugin_loading_complete": {
 		"message": " ہو گیا۔"
@@ -972,7 +978,10 @@
 		"message": "پڑھنے کا سائز (KiB)"
 	},
 	"reconnect_message": {
-		"message": "دوبارہ منسلک کریں (R)، کوئی اور کنکشن منتخب کریں (C) یا باہر نکلیں (x)؟"
+		"message": "(R)دوبارہ منسلک کرنا چاہتے ہیں (ڈیفالٹ)، (C)کوئی اور کنکشن منتخب کریں یا (x) باہر نکلیں؟"
+	},
+	"relay_auth_error": {
+		"message": "ریلے سرور کے ساتھ تصدیق کرنے میں خرابی: $1"
 	},
 	"relay_retry": {
 		"message": "دوبارہ کوشش کی جا رہی ہے..."
@@ -1024,6 +1033,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" دستیاب نہیں ہے"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH شامل کریں"
+	},
+	"terminal_home_default_identity": {
+		"message": "[ڈیفالٹ]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "ڈیولپر کی ترتیبات"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH میں ترمیم کریں"
+	},
+	"terminal_home_import_identity": {
+		"message": "درآمد کریں"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "نیا SSH کنکشن"
+	},
+	"terminal_home_ssh_command": {
+		"message": "کمانڈ"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "\"username@hostname\" کی مدد سے منزل کا تعین کریں"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "ٹرمینل کی ترتیبات"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI رنگ"
@@ -1204,6 +1240,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "ترتیبات"
+	},
+	"terminal_title_terminal": {
+		"message": "ٹرمینل"
 	},
 	"terminal_title_theme": {
 		"message": "تھیم"

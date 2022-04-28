@@ -60,7 +60,7 @@
 		"message": "Susa"
 	},
 	"disconnect_message": {
-		"message": "I-plugin ye-NaCl iphume ngekhodi yesimo $1."
+		"message": "Uhlelo luphume nekhodi yesimo esithi $1."
 	},
 	"faq_menu_label": {
 		"message": "I-FAQ"
@@ -286,6 +286,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Sebenzisa ukubophezela/izinqamuleli zekhibhodi ye-OS ezenzakalelayo"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Usayizi wogqinsi wobude bomugqa"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Okhiye bemidiya ngabathi Fkeys"
@@ -524,6 +527,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ukuthi ukubophezela kwekhibhodi ye-OS kufanele kuhlonishwe yini esikhundleni sokuthathela ukusetshenziswa kwe-hterm ngokwayo."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Usayizi wogqinsi kuma-pixel phakathi komugqa ngamunye wesikrini setheminali."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Uma kuyiqiniso, guqula okhiye bemidiya babe okulinganayo kwabo kwe-Fkey. Uma kungamanga, vumela isiphequluli sibambe okhiye."
 	},
@@ -683,6 +689,9 @@
 	"missing_param": {
 		"message": "Uhlala olulahlekile: $1"
 	},
+	"mosh_name": {
+		"message": "I-Mosh"
+	},
 	"mount_button_label": {
 		"message": "Ukukhweza i-SFTP"
 	},
@@ -735,7 +744,7 @@
 		"message": "kopisha"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopisha umthombo endaweni"
+		"message": "Kopisha indlela ekude kumzila okude ohlukile"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Susa amafayela"
@@ -846,7 +855,7 @@
 		"message": "Bonisa inguqulo yephrothokholi yamanje"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Ulwazi lwenguqulo yephrothokholi ye-SFTP:\n  indawo: $1\n  iseva: $1"
+		"message": "Ulwazi lwenguqulo yephrothokholi ye-SFTP:\n  indawo: $1\n  iseva: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ukuphela kwefayela"
@@ -867,7 +876,7 @@
 		"message": "IPHUTHA: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' isandiso asitholakali"
+		"message": "$1: isandiso se-'$2' esidingekile asitholakali ngale seva"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: akulona ifayela elivamile"
@@ -912,7 +921,7 @@
 		"message": "[Ithiphu] Sebenzisa okuthi 'Vula njengewindi' noma 'Isikrini esigcwele' ukugwema i-Ctrl+W ekuvaleni itheminali yakho!\n[Ithiphu] Bona i-$1 ukuthola ulwazi olwengeziwe."
 	},
 	"plugin_loading": {
-		"message": "Ilayisha i-plugin ye-NaCl..."
+		"message": "Ilayisha uhlelo lwe-$1..."
 	},
 	"plugin_loading_complete": {
 		"message": " kwenziwe."
@@ -960,7 +969,10 @@
 		"message": "Usayizi wokufunda (KiB)"
 	},
 	"reconnect_message": {
-		"message": "(R)Xhuma kabusha, (C)Khetha olunye uxhumo, noma (X)Phuma?"
+		"message": "(R)Xhuma kabusha (okuzenzekelayo), (C)Khetha olunye uxhumo, noma (X)Phuma?"
+	},
+	"relay_auth_error": {
+		"message": "Iphutha lokugunyaza ngeseva yesidlulisi: $1"
 	},
 	"relay_retry": {
 		"message": "Izama futhi..."
@@ -1012,6 +1024,39 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "I-\"$1\" ayitholakali"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Engeza i-SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Okuzenzekelayo]"
+	},
+	"terminal_home_default_linux_container_label": {
+		"message": "I-Linux"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Amasethingi Kanjiniyela"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Hlela i-SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Ngenisa"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Uxhumano olusha lwe-SSH"
+	},
+	"terminal_home_ssh": {
+		"message": "I-SSH"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Umyalo"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Cacisa indawo oya kuyo ngokuthi \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Amasethingi Etheminali"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Imibala ye-ANSI"
@@ -1189,6 +1234,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Izilungiselelo"
+	},
+	"terminal_title_terminal": {
+		"message": "Itheminali"
 	},
 	"terminal_title_theme": {
 		"message": "Itimu"

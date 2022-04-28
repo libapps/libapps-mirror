@@ -60,7 +60,7 @@
 		"message": "ಅಳಿಸಿ"
 	},
 	"disconnect_message": {
-		"message": "NaCl ಪ್ಲಗ್‌ಇನ್ $1 ಸ್ಥಿತಿ ಕೋಡ್‌ನೊಂದಿಗೆ ನಿರ್ಗಮಿಸಿದೆ."
+		"message": "$1 ಸ್ಥಿತಿ ಕೋಡ್‌ನೊಂದಿಗೆ ಪ್ರೋಗ್ರಾಂನಿಂದ ನಿರ್ಗಮಿಸಲಾಗಿದೆ."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ಡೀಫಾಲ್ಟ್ OS ಕೀಬೋರ್ಡ್ ಬೈಂಡಿಂಗ್‌ಗಳು/ಶಾರ್ಟ್‌ಕಟ್‌ಗಳನ್ನು ಬಳಸಿ"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "ಸಾಲಿನ ಎತ್ತರದ ಪ್ಯಾಡಿಂಗ್ ಗಾತ್ರ"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "ಮೀಡಿಯಾ ಕೀಗಳು Fkey ಗಳಾಗಿರುತ್ತವೆ"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "hterm ನ ಸ್ವಂತ ಬಳಕೆಗಾಗಿ ಯಾವಾಗಲೂ ಕ್ಯಾಪ್ಚರ್ ಮಾಡುವ ಬದಲಿಗೆ ಸಾಮಾನ್ಯ OS ಕೀಬೋರ್ಡ್ ಬೈಂಡಿಂಗ್‌ಗಳನ್ನು ಗೌರವಿಸಬೇಕೇ."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "ಟರ್ಮಿನಲ್ ಸ್ಕ್ರೀನ್‌ನ ಪ್ರತಿ ಸಾಲಿನ ನಡುವಿನ ಪ್ಯಾಡಿಂಗ್‌ನ ಗಾತ್ರ (ಪಿಕ್ಸೆಲ್‌ಗಳಲ್ಲಿ)."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "ಸರಿ ಎಂದಾದರೆ, ಮೀಡಿಯಾ ಕೀಗಳನ್ನು ಅವುಗಳ ಸಮಾನಕ Fkey ಗೆ ಪರಿವರ್ತಿಸಿ. ತಪ್ಪು ಎಂದಾದರೆ, ಕೀಗಳನ್ನು ಬ್ರೌಸರ್ ನಿರ್ವಹಿಸಲಿ."
 	},
@@ -735,7 +741,7 @@
 		"message": "ನಕಲಿಸಿ"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "ಮೂಲ ವಿಷಯವನ್ನು ಗಮ್ಯಸ್ಥಾನದಲ್ಲಿ ನಕಲಿಸಿ"
+		"message": "ರಿಮೋಟ್ ಪಾಥ್ ಒಂದನ್ನು ಬೇರೊಂದು ರಿಮೋಟ್ ಪಾಥ್‌ಗೆ ನಕಲಿಸಿ"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ಫೈಲ್‌ಗಳನ್ನು ಅಳಿಸಿ"
@@ -879,7 +885,7 @@
 		"message": "ಪ್ರಸ್ತುತ ಪ್ರೊಟೊಕಾಲ್ ಆವೃತ್ತಿಯನ್ನು ತೋರಿಸಿ"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP ಪ್ರೊಟೊಕಾಲ್ ಆವೃತ್ತಿಯ ಮಾಹಿತಿ:\n  ಸ್ಥಳೀಯ: $1\n  ಸರ್ವರ್: $1"
+		"message": "SFTP ಪ್ರೊಟೊಕಾಲ್ ಆವೃತ್ತಿಯ ಮಾಹಿತಿ:\n  ಸ್ಥಳೀಯ: $1\n  ಸರ್ವರ್: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ಫೈಲ್‌ನ ಕೊನೆ"
@@ -900,7 +906,7 @@
 		"message": "ದೋಷ: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: '$2' ವಿಸ್ತರಣೆ ಲಭ್ಯವಿಲ್ಲ"
+		"message": "$1: ಅಗತ್ಯವಿರುವ '$2' ವಿಸ್ತರಣೆ ಈ ಸರ್ವರ್‌ನ ಜೊತೆಯಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ನಿಯಮಿತ ಫೈಲ್ ಅಲ್ಲ"
@@ -945,7 +951,7 @@
 		"message": "[ಸಲಹೆ] Ctrl+W ನಿಮ್ಮ ಟರ್ಮಿನಲ್ ಅನ್ನು ಮುಚ್ಚುವುದನ್ನು ತಡೆಯಲು 'ವಿಂಡೋದಂತೆ ತೆರೆಯಿರಿ' ಅಥವಾ 'ಪೂರ್ಣಪರದೆ' ಬಳಸಿ!\n[ಸಲಹೆ] ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ $1 ವೀಕ್ಷಿಸಿ."
 	},
 	"plugin_loading": {
-		"message": "NaCl ಪ್ಲಗ್‌ಇನ್‌ ಲೋಡ್‌ ಆಗುತ್ತಿದೆ..."
+		"message": "$1 ಪ್ರೋಗ್ರಾಂ ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ..."
 	},
 	"plugin_loading_complete": {
 		"message": " ಪೂರ್ಣಗೊಂಡಿದೆ."
@@ -993,7 +999,10 @@
 		"message": "ಓದುವ ಗಾತ್ರ (KiB)"
 	},
 	"reconnect_message": {
-		"message": "ರೀಕನೆಕ್ಟ್ ಮಾಡಬೇಕೇ (R), ಬೇರೊಂದು ಕನೆಕ್ಷನ್ ಅನ್ನು ಆಯ್ಕೆ ಮಾಡಬೇಕೇ (C), ಅಥವಾ ನಿರ್ಗಮಿಸಬೇಕೇ (x)?"
+		"message": "ರೀಕನೆಕ್ಟ್ ಮಾಡಬೇಕೆ (R) (ಡೀಫಾಲ್ಟ್), ಬೇರೊಂದು ಕನೆಕ್ಷನ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಬೇಕೆ (C) ಅಥವಾ ನಿರ್ಗಮಿಸಬೇಕೆ (x)?"
+	},
+	"relay_auth_error": {
+		"message": "ರಿಲೇ ಸರ್ವರ್ ದೃಢೀಕರಿಸುವಾಗ ದೋಷ ಕಂಡುಬಂದಿದೆ: $1"
 	},
 	"relay_retry": {
 		"message": "ಮರುಪ್ರಯತ್ನಿಸಲಾಗುತ್ತಿದೆ..."
@@ -1045,6 +1054,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ಲಭ್ಯವಿಲ್ಲ"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH ಸೇರಿಸಿ"
+	},
+	"terminal_home_default_identity": {
+		"message": "[ಡಿಫಾಲ್ಟ್]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "ಡೆವಲಪರ್ ಸೆಟ್ಟಿಂಗ್‍ಗಳು"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH ಎಡಿಟ್ ಮಾಡಿ"
+	},
+	"terminal_home_import_identity": {
+		"message": "ಆಮದು ಮಾಡಿ"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "ಹೊಸ SSH ಸಂಪರ್ಕ"
+	},
+	"terminal_home_ssh_command": {
+		"message": "ಕಮಾಂಡ್"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "ಡೆಸ್ಟಿನೇಶನ್ ಅನ್ನು \"username@hostname\" ಬಳಸಿ ನಿರ್ದಿಷ್ಟಪಡಿಸಿ"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "ಟರ್ಮಿನಲ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI ಬಣ್ಣಗಳು"
@@ -1225,6 +1261,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
+	},
+	"terminal_title_terminal": {
+		"message": "ಟರ್ಮಿನಲ್‌"
 	},
 	"terminal_title_theme": {
 		"message": "ಥೀಮ್"

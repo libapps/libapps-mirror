@@ -63,7 +63,7 @@
 		"message": "Hapus"
 	},
 	"disconnect_message": {
-		"message": "Plugin NaCl dihentikan dengan kode status $1."
+		"message": "Program ditutup dengan kode status $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -289,6 +289,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Gunakan binding/pintasan Keyboard OS default"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Ukuran padding tinggi baris"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Tombol media adalah Fkeys"
@@ -527,6 +530,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Menentukan apakah binding keyboard OS umum harus dipatuhi, bukan selalu mengambil gambar untuk penggunaan hterm sendiri."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Ukuran padding dalam piksel antar-tiap baris layar terminal."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jika benar, akan mengonversi tombol media ke yang setara Fkey. Jika salah, akan mengizinkan browser menangani tombol."
 	},
@@ -735,7 +741,7 @@
 		"message": "salin"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Menyalin sumber ke tujuan"
+		"message": "Salin jalur jarak jauh ke jalur jarak jauh lain"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Menghapus file"
@@ -750,7 +756,7 @@
 		"message": "keluar"
 	},
 	"nasftp_cmd_exit_help": {
-		"message": "Memutuskan koneksi"
+		"message": "Putuskan koneksi"
 	},
 	"nasftp_cmd_get": {
 		"message": "download"
@@ -864,7 +870,7 @@
 		"message": "Menampilkan versi protokol saat ini"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Info versi protokol SFTP:\n  lokal: $1\n  server: $1"
+		"message": "Info versi protokol SFTP:\n  lokal: $1\n  server: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: akhir file"
@@ -882,7 +888,7 @@
 		"message": "$1: $2: nomor tidak valid: $3"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: ekstensi '$2' tidak tersedia"
+		"message": "$1: ekstensi '$2' yang diperlukan tidak tersedia dengan server ini"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: bukan file reguler"
@@ -927,7 +933,7 @@
 		"message": "[Tips Pro] Gunakan 'Buka sebagai Jendela' atau 'Layar penuh' agar Ctrl+W tidak menutup terminal.\n[Tips Pro] Lihat $1 untuk informasi selengkapnya."
 	},
 	"plugin_loading": {
-		"message": "Memuat plugin NaCl ..."
+		"message": "Memuat program $1 ..."
 	},
 	"plugin_loading_complete": {
 		"message": " selesai."
@@ -975,7 +981,10 @@
 		"message": "Ukuran Baca (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Hubungkan ulang (R), Pilih koneksi lainnya (C), atau Keluar (X)?"
+		"message": "Hubungkan kembali (R) (default), Pilih koneksi lainnya (C), atau Keluar (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Terjadi error saat mengautentikasi dengan server relai: $1"
 	},
 	"relay_retry": {
 		"message": "Mencoba ulang ..."
@@ -1027,6 +1036,27 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" tidak tersedia"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Tambahkan SSH"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Setelan Developer"
+	},
+	"terminal_home_import_identity": {
+		"message": "Impor"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Koneksi SSH baru"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Perintah"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Tentukan tujuan dengan \"namapengguna@namahost\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Setelan Terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Warna ANSI"

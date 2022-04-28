@@ -63,7 +63,7 @@
 		"message": "Xóa"
 	},
 	"disconnect_message": {
-		"message": "Plugin NaCl đã thoát với mã trạng thái $1."
+		"message": "Đã thoát khỏi chương trình với mã trạng thái $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -246,7 +246,7 @@
 		"message": "Hiển thị chữ in đậm bằng màu sáng"
 	},
 	"hterm_name_pref_enable_clipboard_notice": {
-		"message": "Hiển thị thông báo khi sao chép nội dung"
+		"message": "Hiện thông báo khi sao chép nội dung"
 	},
 	"hterm_name_pref_enable_clipboard_write": {
 		"message": "Cho phép ghi vào bảng nhớ tạm từ xa"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Sử dụng phím tắt/liên kết phím mặc định của hệ điều hành"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Kích thước khoảng đệm của chiều cao dòng"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Các phím điều khiển nội dung nghe nhìn là các Fkey (phím chức năng)"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Xác định xem các hình thức liên kết thông thường của bàn phím trên hệ điều hành có được tuân thủ thay vì luôn giữ để dùng riêng cho hterm hay không."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Kích thước khoảng đệm (tính bằng pixel) giữa từng hàng của màn hình thiết bị đầu cuối."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Đặt là true sẽ chuyển đổi các phím phương tiện thành các phím chức năng tương đương. Đặt là false sẽ để trình duyệt xử lý các phím."
 	},
@@ -726,7 +732,7 @@
 		"message": "Bật/tắt chế độ sử dụng màu"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Sao chép từ nguồn sang đích"
+		"message": "Sao chép một đường dẫn từ xa vào một đường dẫn từ xa khác"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Xóa tệp"
@@ -816,7 +822,7 @@
 		"message": "Hiển thị phiên bản giao thức hiện tại"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Thông tin về phiên bản giao thức SFTP:\n  máy cục bộ: $1\n  máy chủ: $1"
+		"message": "Thông tin về phiên bản giao thức SFTP:\n  máy cục bộ: $1\n  máy chủ: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: cuối tệp"
@@ -837,7 +843,7 @@
 		"message": "LỖI: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: Không có tiện ích '$2'"
+		"message": "$1: máy chủ này không có tiện ích bắt buộc \"$2\""
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: không phải là tệp thông thường"
@@ -882,7 +888,7 @@
 		"message": "[Mẹo hay] Hãy sử dụng tùy chọn 'Mở dưới dạng cửa sổ' hoặc 'Toàn màn hình' để ngăn thao tác nhấn tổ hợp phím Ctrl+W đóng thiết bị đầu cuối của bạn!\n[Mẹo hay] Xem $1 để biết thêm thông tin."
 	},
 	"plugin_loading": {
-		"message": "Đang tải trình cắm NaCl..."
+		"message": "Đang tải chương trình $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " xong."
@@ -930,7 +936,10 @@
 		"message": "Kích thước đọc (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Kết nối lại (R), Chọn một kết nối khác (C) hoặc Thoát (X)?"
+		"message": "Kết nối lại (R) (mặc định), Chọn một kết nối khác (C) hoặc Thoát (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Lỗi khi xác thực bằng máy chủ chuyển tiếp: $1"
 	},
 	"relay_retry": {
 		"message": "Đang thử lại..."
@@ -985,6 +994,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "Không tải được \"$1\""
+	},
+	"terminal_home_add_ssh": {
+		"message": "Thêm SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Mặc định]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Cài đặt của nhà phát triển"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Chỉnh sửa SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "Nhập"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Kết nối SSH mới"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Lệnh"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Chỉ định đích đến với \"tennguoidung@tenmaychu\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Cài đặt của thiết bị đầu cuối"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Màu theo Viện Tiêu chuẩn Quốc gia Hoa Kỳ (ANSI)"
@@ -1163,6 +1199,9 @@
 	"terminal_title_settings": {
 		"message": "Cài đặt"
 	},
+	"terminal_title_terminal": {
+		"message": "Thiết bị đầu cuối"
+	},
 	"terminal_title_theme": {
 		"message": "Giao diện"
 	},
@@ -1188,7 +1227,7 @@
 		"message": "Thao tác giữ phím Ctrl (Cmd trên macOS) trong khi nhấp chuột phải sẽ làm xuất hiện trình đơn ngữ cảnh."
 	},
 	"tip_2": {
-		"message": "Hiển thị thông báo trong trình duyệt bằng hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Hiện thông báo trong trình duyệt bằng hterm-notify: https://goo.gl/ZNxGdF"
 	},
 	"tip_3": {
 		"message": "Kết nối từ thanh địa chỉ bằng cách nhập 'ssh<Tab><tên hồ sơ>': https://goo.gl/V7o8ki"

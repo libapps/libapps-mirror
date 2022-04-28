@@ -63,7 +63,7 @@
 		"message": "ሰርዝ"
 	},
 	"disconnect_message": {
-		"message": "የNaCl ተሰኪ ከሁኔታ ኮድ $1 ጋር ወጥቷል።"
+		"message": "ፕሮግራሙ በሁኔታ ኮድ $1 ወጥቷል።"
 	},
 	"enter_keycap": {
 		"message": "[አስገባ]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "ነባሪዎቹን የስርዓተ ክወና ቁልፍ ሰሌዳ ማሰሪያዎች/አቋራጮች ይጠቀሙ"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "የመስመር ቁመት ድብዳብ መጠን"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "የሚዲያ ቁልፎች Fkeys ናቸው"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "የተለመደ የስርዓተ ክወና ቁልፍ ሰሌዳ ማሰሪያዎች ለhterm የራሱ አጠቃቀም ፎቶ ከማንሳት ይልቅ መከበር እንዳለባቸው እና እንደሌለባቸው።"
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "በእያንዳንዱ የተርሚናሉ ማያ ገጽ መካከል ያለው የድብዳብ መጠን በፒክሰል።"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "እውነት ከሆነ የሚዲያ ቁልፎችን ወደ የF ቁፍል እኩያቸውን ይለውጡ። ሐሰት ከሆነ አሳሹ ቁልፎቹን ይቆጣጠር።"
 	},
@@ -729,7 +735,7 @@
 		"message": "የቀለም አጠቃቀምን ቀይር"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "ምንጭን ወደ መድረሻ ቅዳ"
+		"message": "አንድ የርቀት ዱካን ወደ ሌላ የርቀት ዱካ ይቅዱ"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ፋይሎችን ይሰርዙ"
@@ -828,7 +834,7 @@
 		"message": "አሁን ያለውን የፕሮቶኮል ስሪት አሳይ"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP ፕሮቶኮል ስሪት መረጃ፦\n  አካባቢ፦ $1\n  አገልጋይ፦ $1"
+		"message": "SFTP ፕሮቶኮል ስሪት መረጃ፦\n  አካባቢ፦ $1\n  አገልጋይ፦ $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1፦ የፋይል ማብቂያ"
@@ -849,7 +855,7 @@
 		"message": "ስሕተት፦ $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1፦ የ«$2» ቅጥያ አይገኝም"
+		"message": "$1፦ አስፈላጊ የ«$2» ቅጥያ በዚህ አገልጋይ አይገኝም"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1፦ $2፦ መደበኛ ፋይል አይደለም"
@@ -897,7 +903,7 @@
 		"message": "[Pro Tip] Ctrl+W ተርሚናልዎን እንዳይዘጋው «እንደ መስኮት ክፈት»ን ወይም «ሙሉ ማያ»ን ይጠቀሙ!\n[Pro Tip] ተጨማሪ መረጃ ለማግኘት $1ን ይመልከቱ።"
 	},
 	"plugin_loading": {
-		"message": "የNaCl ተሰኪን በመጫን ላይ..."
+		"message": "$1 ፕሮግራምን በመጫን ላይ..."
 	},
 	"plugin_loading_complete": {
 		"message": " ተከናውኗል።"
@@ -945,7 +951,10 @@
 		"message": "የንባብ መጠን (ኪቢባይት)"
 	},
 	"reconnect_message": {
-		"message": "ዳግም(R) ይገናኝ፣ ሌላ ግንኙነት ይምረጡ(C) ወይም ይውጡ(X)?"
+		"message": "ዳግም(R) ይገናኝ (ነባሪ)፣ ሌላ ግንኙነት ይምረጡ(C) ወይም ይውጡ(X)?"
+	},
+	"relay_auth_error": {
+		"message": "በአቀባይ አገልጋይ ማረጋገጥ ላይ ስህተት፦ $1"
 	},
 	"relay_retry": {
 		"message": "ዳግም በመሞከር ላይ..."
@@ -1000,6 +1009,36 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "«$1» አይገኝም"
+	},
+	"terminal_home_add_ssh": {
+		"message": "ኤስኤስኤች ያክሉ"
+	},
+	"terminal_home_default_linux_container_label": {
+		"message": "ሊኑክስ"
+	},
+	"terminal_home_developer_settings": {
+		"message": "የገንቢ ቅንብሮች"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "ኤስኤስኤች ያርትዑ"
+	},
+	"terminal_home_import_identity": {
+		"message": "አስመጣ"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "አዲስ የኤስኤስኤች ግንኙነት"
+	},
+	"terminal_home_ssh": {
+		"message": "ኤስኤስኤች"
+	},
+	"terminal_home_ssh_command": {
+		"message": "ትዕዛዝ"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "መድረሻውን በ\"username@hostname\" ይግለጹ"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "የተርሚናል ቅንብሮች"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "የANSI ቀለማት"
@@ -1180,6 +1219,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "ቅንብሮች"
+	},
+	"terminal_title_terminal": {
+		"message": "ተርሚናል"
 	},
 	"terminal_title_theme": {
 		"message": "ገፅታ"

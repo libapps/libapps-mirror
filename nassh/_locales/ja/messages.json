@@ -63,7 +63,7 @@
 		"message": "削除"
 	},
 	"disconnect_message": {
-		"message": "NaCl プラグインが終了しました（ステータス コード $1）。"
+		"message": "プログラムが $1 のステータス コードで終了しました。"
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "OS のデフォルトのキーボード バインディング / ショートカットを使用する"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "行間のパディング サイズ"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "メディアキーをファンクション キーとして扱う"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "hterm での処理より、OS の一般的なキーボード バインディングを優先するかどうかを設定します。"
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "ターミナル画面の各行間のパディング サイズをピクセル単位で指定します。"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "true の場合、メディアキーを同等のファンクション キーに変換します。false の場合、キーはブラウザの処理に従います。"
 	},
@@ -726,7 +732,7 @@
 		"message": "使用する色を切り替えます"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "対象にソースをコピーします"
+		"message": "リモートパスを別のリモートパスにコピーします"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ファイルを削除します"
@@ -816,7 +822,7 @@
 		"message": "現在のプロトコル バージョンを表示します"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP プロトコル バージョン情報:\n  ローカル: $1\n  サーバー: $1"
+		"message": "SFTP プロトコル バージョン情報:\n  ローカル: $1\n  サーバー: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: ファイルの最後に達しました"
@@ -837,7 +843,7 @@
 		"message": "エラー: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: 「$2」エクステンションを使用できません"
+		"message": "$1: 必須の「$2」エクステンションはこのサーバーで使用できません"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: 通常のファイルではありません"
@@ -882,7 +888,7 @@
 		"message": "[上級者向けのヒント] Ctrl+W キーを押してもターミナルが閉じられないようにするには、[ウィンドウとして開く] または [全画面表示] を使用します。\n[上級者向けのヒント] 詳しくは、$1 をご覧ください。"
 	},
 	"plugin_loading": {
-		"message": "NaCl プラグインを読み込んでいます..."
+		"message": "$1 プログラムを読み込んでいます..."
 	},
 	"plugin_loading_complete": {
 		"message": " 完了しました。"
@@ -930,7 +936,10 @@
 		"message": "読み込みサイズ（KiB）"
 	},
 	"reconnect_message": {
-		"message": "再接続(&R)、別の接続を選択(&C)、または終了(&X)"
+		"message": "再接続（デフォルト）(&R)、別の接続を選択(&C)、または終了(&X)"
+	},
+	"relay_auth_error": {
+		"message": "リレーサーバーでの認証中にエラーが発生しました: $1"
 	},
 	"relay_retry": {
 		"message": "再試行しています..."
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "「$1」は使用できません"
+	},
+	"terminal_home_add_ssh": {
+		"message": "SSH を追加"
+	},
+	"terminal_home_default_identity": {
+		"message": "[デフォルト]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "デベロッパーの設定"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "SSH を編集"
+	},
+	"terminal_home_import_identity": {
+		"message": "インポート"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "新しい SSH 接続"
+	},
+	"terminal_home_ssh_command": {
+		"message": "コマンド"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "接続先を「username@hostname」の形式で指定してください"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "ターミナルの設定"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI カラー"
@@ -1162,6 +1198,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "設定"
+	},
+	"terminal_title_terminal": {
+		"message": "ターミナル"
 	},
 	"terminal_title_theme": {
 		"message": "テーマ"

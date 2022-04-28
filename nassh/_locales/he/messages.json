@@ -63,7 +63,7 @@
 		"message": "מחיקה"
 	},
 	"disconnect_message": {
-		"message": "פלאגין NaCl נסגר והחזיר את קוד הסטטוס $1."
+		"message": "בוצעה יציאה מהתוכנית עם קוד הסטטוס $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -295,6 +295,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "שימוש בקיצורי/קישורי המקשים של ה-OS שמוגדרים כברירת מחדל"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "גודל המרווח הפנימי של גובה השורה"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "מקשי המדיה הם מקשי פונקציות"
@@ -533,6 +536,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "ההעדפה הזו קובעת אם קיצורי המקשים הנפוצים של מערכת ההפעלה מיושמים, או ההגדרות של hterm תמיד יקבלו עדיפות."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "הגודל בפיקסלים של המרווח הפנימי בין כל שורה במסך הטרמינל."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "אם העדפה זו קיבלה את הערך True, הפעולות של מקשי המדיה יבוצעו על ידי מקשי הפונקציות המתאימים. אם היא קיבלה את הערך False, הדפדפן מטפל במקשים."
 	},
@@ -729,7 +735,7 @@
 		"message": "החלפת המצב של השימוש בצבע"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "העתקת המקור ליעד"
+		"message": "העתקה של נתיב מרוחק לנתיב מרוחק אחר"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "מחיקת קבצים"
@@ -819,7 +825,7 @@
 		"message": "הצגת הגרסה הנוכחית של הפרוטוקול"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "פרטי גרסה של פרוטוקול SFTP:\n  מקומי: $1\n  שרת: $1"
+		"message": "פרטי גרסה של פרוטוקול SFTP:\n  מקומי: $1\n  שרת: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: סוף הקובץ"
@@ -840,7 +846,7 @@
 		"message": "שגיאה: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: התוסף '$2' לא זמין"
+		"message": "$1: התוסף '$2' הנדרש לא זמין דרך השרת הזה"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: לא קובץ רגיל"
@@ -888,7 +894,7 @@
 		"message": "[טיפ למתקדמים] אפשר להשתמש ב'פתיחה כחלון' או 'מסך מלא' כדי למנוע סגירה של הטרמינל כשמקישים על Ctrl+W.\n[טיפ למתקדמים] מידע נוסף זמין בכתובת $1."
 	},
 	"plugin_loading": {
-		"message": "טעינת הפלאגין של NaCl מתבצעת..."
+		"message": "התוכנית $1 בטעינה…"
 	},
 	"plugin_loading_complete": {
 		"message": " בוצע."
@@ -936,7 +942,10 @@
 		"message": "גודל הקריאה (KiB)"
 	},
 	"reconnect_message": {
-		"message": "צריך להקיש על R כדי להתחבר מחדש, על C כדי לבחור חיבור אחר או על X כדי לצאת."
+		"message": "צריך להקיש על R כדי להתחבר מחדש (ברירת המחדל), על C כדי לבחור חיבור אחר או על X כדי לצאת."
+	},
+	"relay_auth_error": {
+		"message": "הייתה שגיאה באימות באמצעות שרת הממסר: $1"
 	},
 	"relay_retry": {
 		"message": "מתבצע ניסיון נוסף..."
@@ -988,6 +997,30 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" לא זמין"
+	},
+	"terminal_home_add_ssh": {
+		"message": "הוספת SSH"
+	},
+	"terminal_home_developer_settings": {
+		"message": "הגדרות המפתח"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "עריכת SSH"
+	},
+	"terminal_home_import_identity": {
+		"message": "ייבוא"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "חיבור SSH חדש"
+	},
+	"terminal_home_ssh_command": {
+		"message": "פקודה"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "צריך לציין את היעד באמצעות התבנית 'username@hostname'"
+	},
+	"terminal_home_terminal_settings": {
+		"message": "הגדרות הטרמינל"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "צבעי ANSI"
@@ -1165,6 +1198,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "הגדרות"
+	},
+	"terminal_title_terminal": {
+		"message": "טרמינל"
 	},
 	"terminal_title_theme": {
 		"message": "עיצוב"

@@ -63,7 +63,7 @@
 		"message": "Poista"
 	},
 	"disconnect_message": {
-		"message": "NaCl-laajennus suljettu, tilakoodi $1"
+		"message": "Ohjelmasta poistuttu. Statuskoodi: $1"
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -292,6 +292,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Käytä oletusarvoisia käyttöjärjestelmän sidontoja/pikanäppäimiä"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Rivikorkeuden täytekoko"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Medianäppäimet ovat F-näppäimiä"
@@ -530,6 +533,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Pitääkö yleisiä käyttöjärjestelmän sidontoja noudattaa htermin omaan käyttöön kaappauksen sijaan."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Terminaalinäytön rivien välissä oleva täyte pikseleinä"
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Jos arvo on tosi, medianäppäimet muunnetaan niitä vastaaviksi F-näppäimiksi. Jos arvo on epätosi, selain käsittelee näppäimet."
 	},
@@ -726,7 +732,7 @@
 		"message": "Värien käyttö päälle/pois"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopioi lähde kohteeseen"
+		"message": "Kopioi etäpolku toiseen etäpolkuun"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Poista tiedostot"
@@ -816,7 +822,7 @@
 		"message": "Näytä nykyinen protokollaversio"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "SFTP-protokollan versiotiedot:\n  paikallinen: $1\n  palvelin: $1"
+		"message": "SFTP-protokollan versiotiedot:\n  paikallinen: $1\n  palvelin: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: tiedoston loppu"
@@ -837,7 +843,7 @@
 		"message": "VIRHE: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: laajennus $2 ei ole saatavilla"
+		"message": "$1: pakollinen \"$2\"-laajennus ei käytettävissä tällä palvelimella"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: ei tavallinen tiedosto"
@@ -882,7 +888,7 @@
 		"message": "[Pro-vinkki] Kun käytät Avaa ikkunassa- tai Koko näyttö ‑toimintoa, Ctrl+W ei sulje terminaalia.\n[Pro-vinkki] Katso lisätietoja: $1"
 	},
 	"plugin_loading": {
-		"message": "Ladataan NaCl-laajennusta…"
+		"message": "Ladataan ohjelmaa: $1…"
 	},
 	"plugin_loading_complete": {
 		"message": " valmis."
@@ -930,7 +936,10 @@
 		"message": "Lukemiskoko (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Haluatko yhdistää uudelleen (r), valita toisen yhteystavan (c) vai poistua (x)?"
+		"message": "Haluatko yhdistää uudelleen (oletus, r), valita toisen yhteystavan (c) vai poistua (x)?"
+	},
+	"relay_auth_error": {
+		"message": "Välityspalvelimessa todentamisessa tapahtui virhe: $1"
 	},
 	"relay_retry": {
 		"message": "Yritetään uudelleen…"
@@ -982,6 +991,33 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "$1 ei ole käytettävissä"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Lisää SSH"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Oletus]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Kehittäjän asetukset"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Muokkaa SSH:ta"
+	},
+	"terminal_home_import_identity": {
+		"message": "Tuo"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Uusi SSH-yhteys"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Komento"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Määritä kohteeksi \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Terminaalin asetukset"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-värit"
@@ -1162,6 +1198,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Asetukset"
+	},
+	"terminal_title_terminal": {
+		"message": "Pääte"
 	},
 	"terminal_title_theme": {
 		"message": "Teema"

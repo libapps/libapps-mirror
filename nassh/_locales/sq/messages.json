@@ -57,7 +57,7 @@
 		"message": "Fshi"
 	},
 	"disconnect_message": {
-		"message": "Përbërësi shtesë NaCl u mbyll me kodin e statusit $1."
+		"message": "Programi u mbyll me kodin e statusit $1."
 	},
 	"faq_menu_label": {
 		"message": "Pyetjet e shpeshta"
@@ -283,6 +283,9 @@
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
 		"message": "Përdor shkurtoret/lidhjet e parazgjedhura të tastierës së sistemit operativ"
+	},
+	"hterm_name_pref_line_height_padding_size": {
+		"message": "Madhësia e mbushjes së lartësisë së rreshtit"
 	},
 	"hterm_name_pref_media_keys_are_fkeys": {
 		"message": "Tastet e medias janë tastet F"
@@ -521,6 +524,9 @@
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Nëse lidhjet e zakonshme me tastierën me sistemin operativ duhet të respektohen në vend që të regjistrohen për përdorim nga hterm."
 	},
+	"hterm_pref_line_height_padding_size": {
+		"message": "Madhësia e mbushjes në pikselë ndërmjet çdo rreshti të ekranit të terminalit."
+	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "Nëse është e vërtetë, konverto tastet e medias në tastet ekuivalente F. Nëse nuk është e vërtetë, lejo që shfletuesi t'i menaxhojë tastet."
 	},
@@ -717,7 +723,7 @@
 		"message": "Ndrysho përdorimin e ngjyrës"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Kopjo burimin te destinacioni"
+		"message": "Kopjo një shteg në distancë te një shteg tjetër në distancë"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Fshi skedarët"
@@ -819,7 +825,7 @@
 		"message": "Shfaq versionin aktual të protokollit"
 	},
 	"nasftp_cmd_version_summary": {
-		"message": "Informacione për versionin e protokollit SFTP:\n  lokal: $1\n  serveri: $1"
+		"message": "Informacione për versionin e protokollit SFTP:\n  lokal: $1\n  serveri: $2"
 	},
 	"nasftp_error_end_of_file": {
 		"message": "$1: fundi i skedarit"
@@ -840,7 +846,7 @@
 		"message": "GABIM: $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
-		"message": "$1: shtesa \"$2\" nuk ofrohet"
+		"message": "$1: shtesa \"$2\" e kërkuar nuk ofrohet në këtë server"
 	},
 	"nasftp_error_non_reg_file": {
 		"message": "$1: $2: nuk është një skedar i rregullt"
@@ -885,7 +891,7 @@
 		"message": "[Këshillë profesioniste] Përdor \"Hap si dritare\" ose \"Ekrani i plotë\" për të parandaluar mbylljen e terminalit tënd nga Ctrl+W!\n[Këshillë profesioniste] Shiko $1 për më shumë informacion."
 	},
 	"plugin_loading": {
-		"message": "Po ngarkon përbërësin shtesë NaCl..."
+		"message": "Po ngarkohet programi $1..."
 	},
 	"plugin_loading_complete": {
 		"message": " u krye."
@@ -933,7 +939,10 @@
 		"message": "Madhësia e leximit (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Të rilidhet (R), të zgjidhet një lidhje tjetër (C) apo të dilet (X)?"
+		"message": "Të rilidhet (R) (parazgjedhje), të zgjidhet një lidhje tjetër (C) apo të dilet (X)?"
+	},
+	"relay_auth_error": {
+		"message": "Gabim gjatë vërtetimit me serverin e ridrejtimit: $1"
 	},
 	"relay_retry": {
 		"message": "Po riprovon..."
@@ -985,6 +994,36 @@
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" nuk ofrohet"
+	},
+	"terminal_home_add_ssh": {
+		"message": "Shto SSH-në"
+	},
+	"terminal_home_default_identity": {
+		"message": "[Parazgjedhur]"
+	},
+	"terminal_home_developer_settings": {
+		"message": "Cilësimet e zhvilluesit"
+	},
+	"terminal_home_edit_ssh": {
+		"message": "Modifiko SSH-në"
+	},
+	"terminal_home_import_identity": {
+		"message": "Importo"
+	},
+	"terminal_home_new_ssh_connection": {
+		"message": "Lidhje e re SSH"
+	},
+	"terminal_home_ssh": {
+		"message": "SSH-ja"
+	},
+	"terminal_home_ssh_command": {
+		"message": "Komanda"
+	},
+	"terminal_home_ssh_specify_destination": {
+		"message": "Specifiko destinacionin me \"username@hostname\""
+	},
+	"terminal_home_terminal_settings": {
+		"message": "Cilësimet e terminalit"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Ngjyrat ANSI"
@@ -1165,6 +1204,9 @@
 	},
 	"terminal_title_settings": {
 		"message": "Cilësimet"
+	},
+	"terminal_title_terminal": {
+		"message": "Terminali"
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
