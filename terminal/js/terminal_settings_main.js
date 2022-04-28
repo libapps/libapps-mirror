@@ -26,9 +26,20 @@ window.webFontPromises = new Map(
 );
 
 window.addEventListener('DOMContentLoaded', (event) => {
+  window.SSH_ENABLED = false;
+
   if (chrome.terminalPrivate) {
     lib.registerInit('terminal-private-storage', () => {
       hterm.defaultStorage = new lib.Storage.TerminalPrivate();
+    });
+
+    lib.registerInit('ssh-enabled', async () => {
+      return new Promise((resolve) => {
+        chrome.terminalPrivate.getOSInfo((info) => {
+          window.SSH_ENABLED = !!info.ssh;
+          resolve();
+        });
+      });
     });
   }
 

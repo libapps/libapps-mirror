@@ -8,10 +8,11 @@
  * @suppress {moduleLoad}
  */
 
-import {css, html, LitElement, unsafeCSS} from './lit.js';
+import {LitElement, createRef, css, html, ref, unsafeCSS, when} from './lit.js';
 import {SUPPORTED_FONT_SIZES,
   SUPPORTED_LINE_HEIGHT_PADDINGS} from './terminal_common.js';
 import './terminal_dropdown.js';
+import './terminal_file_editor.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_background_image.js';
@@ -19,6 +20,7 @@ import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
 import './terminal_settings_colorpicker.js';
 import './terminal_settings_fonts.js';
+import './terminal_settings_row.js';
 import './terminal_settings_theme.js';
 
 export const BELL_SOUND_CONVERTER = {
@@ -51,6 +53,10 @@ export class TerminalSettingsApp extends LitElement {
     super();
 
     this.activeCategory_ = 'appearance';
+
+    this.fileSystemPromise_ = nassh.getFileSystem();
+    this.sshKnownHostEditorRef_ = createRef();
+    this.sshConfigEditorRef_ = createRef();
   }
 
   /** @override */
@@ -127,6 +133,10 @@ export class TerminalSettingsApp extends LitElement {
         padding: 0;
       }
 
+      terminal-settings-row {
+        margin-left: 32px;
+      }
+
       .setting-container {
         align-items: center;
         border-bottom: 1px solid rgba(0, 0, 0, 0.14);
@@ -158,6 +168,10 @@ export class TerminalSettingsApp extends LitElement {
         background: no-repeat right
           url('data:image/svg+xml;utf8,${unsafeCSS(OPEN_IN_NEW)}');
         cursor: pointer;
+      }
+
+      terminal-file-editor {
+        height: 350px;
       }
 
       @media(max-width: 680px) {
@@ -198,6 +212,8 @@ export class TerminalSettingsApp extends LitElement {
             <div data-name="behavior">
               ${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}
             </div>
+            ${when(window.SSH_ENABLED, () => html`
+                <div data-name="ssh">SSH</div>`)}
             <div data-name="about">
               ${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}
             </div>
@@ -470,6 +486,8 @@ export class TerminalSettingsApp extends LitElement {
             </ul>
         </section>
 
+        ${when(window.SSH_ENABLED, () => this.renderSSHSection_())}
+
         <section class="terminal-settings-category"
             ?active-category="${this.activeCategory_ === 'about'}">
           <h3>${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}</h3>
@@ -479,6 +497,31 @@ export class TerminalSettingsApp extends LitElement {
                 <h4>${msg('LICENSES')}</h4>
             </li>
           </ul>
+        </section>
+    `;
+  }
+
+  renderSSHSection_() {
+    return html`
+        <section class="terminal-settings-category"
+            ?active-category="${this.activeCategory_ === 'ssh'}">
+          <h3>SSH Files</h3>
+
+          <terminal-settings-row label="~/.ssh/known_hosts" expandable
+              @expand=${() => this.sshKnownHostEditorRef_.value.load()}>
+            <terminal-file-editor ${ref(this.sshKnownHostEditorRef_)}
+                .fileSystemPromise=${this.fileSystemPromise_}
+                path="/.ssh/known_hosts">
+            </terminal-file-editor>
+          </terminal-settings-row>
+
+          <terminal-settings-row label="~/.ssh/config" expandable
+              @expand=${() => this.sshConfigEditorRef_.value.load()}>
+            <terminal-file-editor ${ref(this.sshConfigEditorRef_)}
+                .fileSystemPromise=${this.fileSystemPromise_}
+                path="/.ssh/config">
+            </terminal-file-editor>
+          </terminal-settings-row>
         </section>
     `;
   }
