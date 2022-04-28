@@ -66,3 +66,19 @@ export const ICON_SSH = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 
  * @type {!TemplateResult}
  */
 export const ICON_CANCEL = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>`;
+
+/**
+ * Imported from
+ * https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aexpand_more%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
+ *
+ * @type {!TemplateResult}
+ */
+export const ICON_EXPAND_MORE = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>`;
+
+/**
+ * Imported from
+ * https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aexpand_more%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
+ *
+ * @type {!TemplateResult}
+ */
+export const ICON_EXPAND_LESS = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>`;
