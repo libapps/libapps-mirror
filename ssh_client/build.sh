@@ -11,6 +11,7 @@ SSH_VERSIONS=( 8.8 8.6 )
 ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
 DEBUG=0
+OFFICIAL_RELEASE=0
 
 # pnacl tries to use "python" instead of "python2".
 export PNACLPYTHON=python2
@@ -21,7 +22,9 @@ for i in $@; do
     "--debug")
       DEBUG=1
       ;;
-
+    "--official-release")
+      OFFICIAL_RELEASE=1
+      ;;
     *)
       echo "usage: $0 [--debug]"
       exit 1
@@ -146,7 +149,14 @@ for version in "${SSH_VERSIONS[@]}"; do
 done
 
 cd output
+# Only spend extra time on this on official release builders.  All other modes
+# can get by with slightly larger file.
+if [[ "${OFFICIAL_RELEASE}" == 1 ]]; then
+  comp_level="-9"
+else
+  comp_level="-0"
+fi
 tar cf - \
   `find plugin/ -type f | LC_ALL=C sort` \
   `find build/pnacl* -name '*.pexe' -o -name '*.dbg.nexe' | LC_ALL=C sort` \
-  | xz -T0 -9 >"${tarname}.xz"
+  | xz -T0 ${comp_level} >"${tarname}.xz"

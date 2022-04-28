@@ -115,7 +115,10 @@ def build():
     if should_build_plugin():
         # Build the ssh client code.
         ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, 'ssh_client')
-        libdot.run(['./build.sh'], cwd=ssh_client_dir)
+        cmd = ['./build.sh']
+        if not is_presubmit():
+            cmd += ['--official-release']
+        libdot.run(cmd, cwd=ssh_client_dir)
         # Copy output files.
         libdot.run(['cp', '-r', './ssh_client/output/plugin/', './nassh/'],
                    cwd=kokoro.LIBAPPS_DIR)
