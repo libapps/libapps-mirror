@@ -204,22 +204,22 @@ export class TerminalHomeApp extends LitElement {
   /** @return {!TemplateResult} */
   renderLinux() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
-    const label = msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL');
+    const sectionLabel = msg('TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL');
 
     const buttonText = this.crostiniEnabled
       ? msg('TERMINAL_HOME_MANAGE') : msg('TERMINAL_HOME_SET_UP');
 
-    const containerLabel = (c) => {
+    const label = (c) => {
       if (c.vm_name === DEFAULT_VM_NAME) {
         return c.container_name;
       }
       return `${c.vm_name}:${c.container_name}`;
     };
-    const containerText = (c) => html`
+    const text = (c) => html`
       <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
-      <h4>${containerLabel(c)}</h4>
+      <h4>${label(c)}</h4>
    `;
-    const containerHref = (c) => {
+    const href = (c) => {
       if (!this.crostiniEnabled) {
         return '';
       }
@@ -227,9 +227,9 @@ export class TerminalHomeApp extends LitElement {
           encodeURIComponent(`--vm_name=${c.vm_name}`)}&args[]=${
           encodeURIComponent(`--target_container=${c.container_name}`)}`;
     };
-    const containerLink = (c) => html`
-      <a class="row full-width" target="_blank" href="${containerHref(c)}">
-        ${containerText(c)}
+    const link = (c) => html`
+      <a class="row full-width" target="_blank" href="${href(c)}">
+        ${text(c)}
       </a>
     `;
 
@@ -237,7 +237,7 @@ export class TerminalHomeApp extends LitElement {
       <section>
         <div class="${this.containers.length ? 'line' : ''}">
           <div class="header row">
-            <h3>${label}</h3>
+            <h3>${sectionLabel}</h3>
             <button @click="${this.onOpenSystemSettings}">
               <span class="button-icon">${ICON_OPEN_IN_NEW}</span>
               ${buttonText}
@@ -247,13 +247,15 @@ export class TerminalHomeApp extends LitElement {
             <h4 class="sublabel">${msg('TERMINAL_HOME_LINUX_NOT_ENABLED')}</h4>
           `}
         </div>
-        <ul>
-        ${this.containers.map((c) => html`
-          <li class="row">
-            ${this.crostiniEnabled ? containerLink(c) : containerText(c)}
-          </li>
-        `)}
-        </ul>
+        ${this.containers.length === 0 ? undefined : html`
+          <ul>
+          ${this.containers.map((c) => html`
+            <li class="row">
+              ${this.crostiniEnabled ? link(c) : text(c)}
+            </li>
+          `)}
+          </ul>
+        `}
       </section>
     `;
   }
@@ -261,7 +263,7 @@ export class TerminalHomeApp extends LitElement {
   /** @return {!TemplateResult} */
   renderSSH() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
-    const label = msg('TERMINAL_HOME_SSH');
+    const sectionLabel = msg('TERMINAL_HOME_SSH');
 
     let sublabel;
     if (!this.sshAllowed) {
@@ -284,7 +286,7 @@ export class TerminalHomeApp extends LitElement {
       <section>
         <div class="${this.sshConnections.length ? 'line' : ''}">
           <div class="header row">
-            <h3>${label}</h3>
+            <h3>${sectionLabel}</h3>
             <button autofocus @click="${(e) => this.openSSHDialog()}">
               <span class="button-icon">${ICON_PLUS}</span>
               ${msg('TERMINAL_HOME_ADD_SSH')}
@@ -292,18 +294,20 @@ export class TerminalHomeApp extends LitElement {
           </div>
           ${sublabel ? html`<h4 class="sublabel">${sublabel}</h4>` : undefined}
         </div>
-        <ul>
-        ${this.sshConnections.map((c) => html`
-          <li class="row">
-            ${this.sshAllowed ? link(c) : text(c)}
-            <a @click="${(e) => this.openSSHDialog(c.id)}"
-                aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}">
-              <span class="row-icon icon-fill-svg">${ICON_EDIT}</span>
-            </a>
-          </li>
-        `)}
-        </ul>
-      </section>    
+        ${this.sshConnections.length === 0 ? undefined : html`
+          <ul>
+          ${this.sshConnections.map((c) => html`
+            <li class="row">
+              ${this.sshAllowed ? link(c) : text(c)}
+              <a tabindex="0" aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}"
+                  @click="${(e) => this.openSSHDialog(c.id)}">
+                <span class="row-icon icon-fill-svg">${ICON_EDIT}</span>
+              </a>
+            </li>
+          `)}
+          </ul>
+        `}
+      </section>
     `;
   }
 
