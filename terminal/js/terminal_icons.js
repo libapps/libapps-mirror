@@ -11,6 +11,14 @@
 import {html} from './lit.js';
 
 /**
+ * Imported from
+ * https://fonts.google.com/icons?selected=Material%20Icons%3Acancel%3A.
+ *
+ * @type {!TemplateResult}
+ */
+export const ICON_CANCEL = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>`;
+
+/**
  * Code / Developers svg icon.
  *
  * @type {!TemplateResult}
@@ -23,6 +31,22 @@ export const ICON_CODE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0
  * @type {!TemplateResult}
  */
 export const ICON_EDIT = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.4 3.9L16 2.6C15.3 1.8 14 1.8 13.2 2.6L10.4 5.4L2 13.8V18H6.2L17.4 6.8C18.2 6 18.2 4.7 17.4 3.9ZM4 16V14.6L11.8 6.8L13.2 8.2L5.4 16L4 16Z"/></svg>`;
+
+/**
+ * Imported from
+ * https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aexpand_more%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
+ *
+ * @type {!TemplateResult}
+ */
+export const ICON_EXPAND_LESS = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>`;
+
+/**
+ * Imported from
+ * https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aexpand_more%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
+ *
+ * @type {!TemplateResult}
+ */
+export const ICON_EXPAND_MORE = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>`;
 
 /**
  * Linux crostini penguin svg icon.
@@ -58,27 +82,3 @@ export const ICON_SETTINGS = html`<svg viewBox="0 0 20 20" xmlns="http://www.w3.
  * @type {!TemplateResult}
  */
 export const ICON_SSH = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.5 3H2.5C1.6 3 1 3.7 1 4.55556V13.5C1 14.3556 1.6 15 2.5 15H7H8V16H6V18H14V16H12V15H13H17.5C18.4 15 19 14.3556 19 13.5V4.5C19 3.64444 18.4 3 17.5 3ZM17 13H3V5H17V13Z"/></svg>`;
-
-/**
- * Imported from
- * https://fonts.google.com/icons?selected=Material%20Icons%3Acancel%3A.
- *
- * @type {!TemplateResult}
- */
-export const ICON_CANCEL = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>`;
-
-/**
- * Imported from
- * https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aexpand_more%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
- *
- * @type {!TemplateResult}
- */
-export const ICON_EXPAND_MORE = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>`;
-
-/**
- * Imported from
- * https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aexpand_more%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
- *
- * @type {!TemplateResult}
- */
-export const ICON_EXPAND_LESS = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>`;
