@@ -29,10 +29,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   window.SSH_ENABLED = false;
 
   if (chrome.terminalPrivate) {
-    lib.registerInit('terminal-private-storage', () => {
-      hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-    });
-
     lib.registerInit('ssh-enabled', async () => {
       return new Promise((resolve) => {
         chrome.terminalPrivate.getOSInfo((info) => {
@@ -55,8 +51,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
   });
   lib.init().then(() => {
     window.PreferenceManager = hterm.PreferenceManager;
-    window.preferenceManager = new window.PreferenceManager(
-        hterm.defaultStorage);
+    const storage = chrome.terminalPrivate
+      ? new lib.Storage.TerminalPrivate() : new lib.Storage.Local();
+    window.preferenceManager = new window.PreferenceManager(storage);
     definePrefs(window.preferenceManager);
     window.preferenceManager.readStorage(() => {
       normalizePrefsInPlace(window.preferenceManager);

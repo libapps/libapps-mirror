@@ -111,7 +111,7 @@ terminal.addBindings = function(term) {
  * @return {!hterm.Terminal} The new hterm.Terminal instance.
  */
 terminal.init = function(element, launchInfo) {
-  const term = new hterm.Terminal();
+  const term = new hterm.Terminal({storage: new lib.Storage.TerminalPrivate()});
 
   term.decorate(element);
   term.installKeyboard();
@@ -413,6 +413,7 @@ function runNassh(term, tmuxControllerDriver) {
   /** @suppress {undefinedVars|missingProperties} */
   const nasshCommand = new CommandInstance({
     io: term.io,
+    syncStorage: new lib.Storage.TerminalPrivate(),
     args: [document.location.hash.substr(1)],
     environment: environment,
     onExit: async (code) => {

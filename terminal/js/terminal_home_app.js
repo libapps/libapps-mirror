@@ -182,7 +182,7 @@ export class TerminalHomeApp extends LitElement {
     this.crostiniEnabled = true;
     this.sshAllowed = true;
 
-    hterm.defaultStorage.addObserver(this.onSettingsChanged.bind(this));
+    window.storage.addObserver(this.onSettingsChanged.bind(this));
     this.onSettingsChanged({});
 
     const prefsChanged = this.onPrefsChanged.bind(this);
@@ -194,9 +194,9 @@ export class TerminalHomeApp extends LitElement {
     } else {
       // Fallback for dev / testing.
       console.warn('chrome.terminalPrivate API not found.');
-      const changed = () => hterm.defaultStorage.getItems(
+      const changed = () => window.storage.getItems(
         paths).then(prefsChanged);
-      hterm.defaultStorage.addObserver(changed);
+      window.storage.addObserver(changed);
       changed();
     }
   }
@@ -354,7 +354,7 @@ export class TerminalHomeApp extends LitElement {
    * @param {!Object} changes
    */
   onSettingsChanged(changes) {
-    hterm.defaultStorage.getItems(null).then((items) => {
+    window.storage.getItems(null).then((items) => {
       const sshConnections = [];
       const ids = /** @type {!Array<string>} */(
           items['/nassh/profile-ids'] || []);

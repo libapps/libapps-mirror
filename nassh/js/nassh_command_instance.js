@@ -75,7 +75,10 @@ export function CommandInstance({io, ...argv}) {
   this.mountOptions = argv.mountOptions || null;
 
   // Session storage (can accept another hterm tab's sessionStorage).
-  this.storage = argv.terminalStorage || window.sessionStorage;
+  this.sessionStorage = argv.sessionStorage || window.sessionStorage;
+
+  // Sync storage is optional storage to use for prefs.
+  this.syncStorage = argv.syncStorage || null;
 
   // Terminal Location reference (can accept another hterm tab's location).
   this.terminalLocation = argv.terminalLocation || document.location;
@@ -94,7 +97,7 @@ export function CommandInstance({io, ...argv}) {
   this.profileId_ = null;
 
   // Root preference managers.
-  this.prefs_ = new nassh.PreferenceManager();
+  this.prefs_ = new nassh.PreferenceManager(this.syncStorage);
   this.localPrefs_ = new nassh.LocalPreferenceManager();
 
   // Prevent us from reporting an exit twice.
@@ -246,10 +249,10 @@ CommandInstance.prototype.run = function() {
 
     // This item is set before we redirect away to login to a relay server.
     // If it's set now, it's the first time we're reloading after the redirect.
-    const pendingRelay = this.storage.getItem('nassh.pendingRelay');
-    this.storage.removeItem('nassh.pendingRelay');
+    const pendingRelay = this.sessionStorage.getItem('nassh.pendingRelay');
+    this.sessionStorage.removeItem('nassh.pendingRelay');
 
-    if (!argstr || (this.storage.getItem('nassh.promptOnReload') &&
+    if (!argstr || (this.sessionStorage.getItem('nassh.promptOnReload') &&
                     !pendingRelay)) {
       // If promptOnReload is set or we haven't gotten the destination
       // as an argument then we need to ask the user for the destination.
@@ -258,14 +261,14 @@ CommandInstance.prototype.run = function() {
       // displayed the dialog, so we can re-display it if the user reloads
       // the page.  (Items in sessionStorage are scoped to the tab, kept
       // between page reloads, and discarded when the tab goes away.)
-      this.storage.setItem('nassh.promptOnReload', 'yes');
+      this.sessionStorage.setItem('nassh.promptOnReload', 'yes');
 
       this.promptForDestination_();
     } else {
       const params = new URLSearchParams(this.terminalLocation.search);
       // An undocumented hack for extension popup to force a one-off connection.
       if (params.get('promptOnReload') == 'yes') {
-        this.storage.setItem('nassh.promptOnReload', 'yes');
+        this.sessionStorage.setItem('nassh.promptOnReload', 'yes');
       }
 
       this.connectToArgString(argstr);
@@ -396,10 +399,10 @@ CommandInstance.prototype.navigate_ = function(hash) {
 
 /** @param {string} argstr */
 CommandInstance.prototype.connectToArgString = function(argstr) {
-  const isMount = (this.storage.getItem('nassh.isMount') == 'true');
-  const isSftp = (this.storage.getItem('nassh.isSftp') == 'true');
-  this.storage.removeItem('nassh.isMount');
-  this.storage.removeItem('nassh.isSftp');
+  const isMount = (this.sessionStorage.getItem('nassh.isMount') == 'true');
+  const isSftp = (this.sessionStorage.getItem('nassh.isSftp') == 'true');
+  this.sessionStorage.removeItem('nassh.isMount');
+  this.sessionStorage.removeItem('nassh.isSftp');
 
   // Handle profile-id:XXX forms.  These are bookmarkable.
   const ary = argstr.match(/^profile-id:([a-z0-9]+)(\?.*)?/i);
@@ -1070,13 +1073,13 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] === 'websockify') {
     this.relay_ = new RelayWebsockify(this.io, options, this.terminalLocation,
-                                      this.storage, this.localPrefs_);
+                                      this.sessionStorage, this.localPrefs_);
   } else if (!options['--proxy-host']) {
     // Do nothing when disabled.  We check this first to avoid excessive
     // indentation or redundant checking of the proxy-host setting below.
   } else if (options['--proxy-mode'] == 'ssh-fe@google.com') {
       this.relay_ = new RelaySshfe(this.io, options, this.terminalLocation,
-                                   this.storage, this.localPrefs_);
+                                   this.sessionStorage, this.localPrefs_);
     this.io.println(nassh.msg(
         'FOUND_RELAY',
         [`${this.relay_.proxyHost}:${this.relay_.proxyPort}`]));
@@ -1085,10 +1088,10 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
              options['--proxy-mode'] == 'corp-relay-v4@google.com') {
     if (options['--proxy-mode'] == 'corp-relay@google.com') {
       this.relay_ = new RelayCorp(this.io, options, this.terminalLocation,
-                                  this.storage, this.localPrefs_);
+                                  this.sessionStorage, this.localPrefs_);
     } else {
       this.relay_ = new RelayCorpv4(this.io, options, this.terminalLocation,
-                                    this.storage, this.localPrefs_);
+                                    this.sessionStorage, this.localPrefs_);
     }
 
     this.io.println(nassh.msg(
@@ -1113,11 +1116,11 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
 
       // If we're going to have to redirect for the relay then we should make
       // sure not to re-prompt for the destination when we return.
-      this.storage.setItem('nassh.pendingRelay', 'yes');
+      this.sessionStorage.setItem('nassh.pendingRelay', 'yes');
 
       // If we're trying to mount the connection, remember it.
-      this.storage.setItem('nassh.isMount', this.isMount);
-      this.storage.setItem('nassh.isSftp', this.isSftp);
+      this.sessionStorage.setItem('nassh.isMount', this.isMount);
+      this.sessionStorage.setItem('nassh.isSftp', this.isSftp);
 
       if (!this.relay_.redirect()) {
         this.exit(EXIT_INTERNAL_ERROR, true);

@@ -486,7 +486,7 @@ export class TerminalSSHDialog extends LitElement {
    */
   async getNasshProfileValues_(names, defaultValue) {
     const keys = names.map((x) => this.getNasshProfileKey_(x));
-    const rv = await hterm.defaultStorage.getItems(keys);
+    const rv = await window.storage.getItems(keys);
     return keys.map((k) => rv[k] ?? defaultValue);
   }
 
@@ -500,7 +500,7 @@ export class TerminalSSHDialog extends LitElement {
     for (const [name, value] of Object.entries(values)) {
       values2[this.getNasshProfileKey_(name)] = value;
     }
-    await hterm.defaultStorage.setItems(values2);
+    await window.storage.setItems(values2);
   }
 
   async loadIdentities_() {
@@ -514,7 +514,7 @@ export class TerminalSSHDialog extends LitElement {
   /** @return {!Promise<!Array<string>>} */
   async getNasshProfileIds_() {
     const profileIds = /** @type {?Array<string>}*/(
-        await hterm.defaultStorage.getItem('/nassh/profile-ids'));
+        await window.storage.getItem('/nassh/profile-ids'));
     return profileIds ?? [];
   }
 
@@ -523,7 +523,7 @@ export class TerminalSSHDialog extends LitElement {
    * @return {!Promise<void>}
    */
   async setNasshProfileIds_(profileIds) {
-    await hterm.defaultStorage.setItem('/nassh/profile-ids', profileIds);
+    await window.storage.setItem('/nassh/profile-ids', profileIds);
   }
 
   async deleteNasshProfile_(deleteFromProfileIds = true) {
@@ -534,8 +534,8 @@ export class TerminalSSHDialog extends LitElement {
       );
     }
     const prefix = `/nassh/profiles/${this.nasshProfileId_}`;
-    hterm.defaultStorage.removeItems(
-        Object.keys(await hterm.defaultStorage.getItems(null))
+    window.storage.removeItems(
+        Object.keys(await window.storage.getItems(null))
             .filter((key) => key.startsWith(prefix)),
     );
   }

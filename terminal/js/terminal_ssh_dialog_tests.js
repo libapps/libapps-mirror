@@ -84,6 +84,7 @@ describe('terminal_ssh_dialog.js', function() {
 
   describe('dialog', function() {
     beforeEach(async function() {
+      window.storage = new lib.Storage.Memory();
       this.el = /** @type {!TerminalSSHDialog} */(
           document.createElement('terminal-ssh-dialog'));
       document.body.append(this.el);
@@ -100,6 +101,7 @@ describe('terminal_ssh_dialog.js', function() {
 
     afterEach(function() {
       document.body.removeChild(this.el);
+      delete window.storage;
     });
 
     it('title', async function() {

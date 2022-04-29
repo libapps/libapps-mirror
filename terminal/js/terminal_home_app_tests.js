@@ -10,7 +10,7 @@ import './terminal_home_app.js';
 
 describe('terminal_home_app_tests.js', () => {
   beforeEach(function() {
-    hterm.defaultStorage.clear();
+    window.storage = new lib.Storage.Memory();
     this.el = /** @type {!Element} */ (
       document.createElement('terminal-home-app'));
     document.body.appendChild(this.el);
@@ -26,10 +26,11 @@ describe('terminal_home_app_tests.js', () => {
 
   afterEach(function() {
     document.body.removeChild(this.el);
+    delete window.storage;
   });
 
   it('shows-ssh-connections-and-linux-containers', async function() {
-    hterm.defaultStorage.setItems({
+    window.storage.setItems({
       '/nassh/profile-ids': ['p1', 'p2'],
       '/nassh/profiles/p1/description': 'ssh-connection-1',
       '/nassh/profiles/p2/description': 'ssh-connection-2',
@@ -65,7 +66,7 @@ describe('terminal_home_app_tests.js', () => {
   });
 
   it('shows-sublabels', async function() {
-    hterm.defaultStorage.setItems({
+    window.storage.setItems({
       '/nassh/profile-ids': [],
       'crostini.enabled': false,
       'crostini.terminal_ssh_allowed_by_policy': true,
@@ -89,7 +90,7 @@ describe('terminal_home_app_tests.js', () => {
   });
 
   it('removes-links-if-policy-disabled', async function() {
-    hterm.defaultStorage.setItems({
+    window.storage.setItems({
       '/nassh/profile-ids': ['p1', 'p2'],
       '/nassh/profiles/p1/description': 'ssh-connection-1',
       '/nassh/profiles/p2/description': 'ssh-connection-2',

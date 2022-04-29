@@ -34,6 +34,7 @@ test.listenForPrefChange = function(prefMgr, prefName) {
 mocha.setup({ui: 'bdd', globals: [
   'PreferenceManager',
   'preferenceManager',
+  'storage',
   'webFontPromises',
 ]});
 mocha.checkLeaks();
@@ -43,6 +44,7 @@ const assert = chai.assert;
 
 // Catch any random errors before the test runner runs.
 let earlyError = null;
+
 /**
  * Catch any errors.
  *

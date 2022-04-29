@@ -25,10 +25,6 @@ getTerminalInfoTracker().then((tracker) => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-  lib.registerInit('terminal-private-storage', () => {
-    hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-  });
-
   // Load i18n messages.
   lib.registerInit('messages', async () => {
     // Load hterm.messageManager from /_locales/<lang>/messages.json.

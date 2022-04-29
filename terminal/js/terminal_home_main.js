@@ -13,7 +13,7 @@ window.libdotInitialized = new Promise((resolve) => {
   resolveLibdotInitialized = resolve;
 });
 
-hterm.defaultStorage = chrome.terminalPrivate
+window.storage = chrome.terminalPrivate
   ? new lib.Storage.TerminalPrivate() : new lib.Storage.Local();
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   });
   lib.init().then(() => {
     const prefs = window.preferenceManager = new hterm.PreferenceManager(
-        hterm.defaultStorage);
+        window.storage);
     definePrefs(prefs);
     // Dynamically change colors if settings change.
     const setColorRgbCssVar = (name, color) => {
