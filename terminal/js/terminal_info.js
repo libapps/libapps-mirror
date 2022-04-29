@@ -40,6 +40,7 @@ export let VshLaunchInfo;
 /**
  * @typedef {{
  *   needRedirect: boolean,
+ *   hash: string,
  * }}
  */
 export let SSHLaunchInfo;
@@ -215,14 +216,14 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
   }
 
   if (url.pathname === '/html/terminal_ssh.html') {
-    return {ssh: {needRedirect: false}};
+    return {ssh: {needRedirect: false, hash: url.hash}};
   }
 
   // We only follow parentLaunchInfo if there is no search params. (The default
   // url does not have search param.)
   if (!url.search && parentLaunchInfo) {
     if (parentLaunchInfo.ssh) {
-      return {ssh: {needRedirect: true}};
+      return {ssh: {needRedirect: true, hash: parentLaunchInfo.ssh.hash}};
     }
 
     if (parentLaunchInfo.tmux) {

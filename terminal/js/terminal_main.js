@@ -11,7 +11,9 @@ import {getTerminalInfoTracker, setUpTitleHandler} from './terminal_info.js';
 
 getTerminalInfoTracker().then((tracker) => {
   if (tracker.launchInfo.ssh?.needRedirect) {
-    window.location.pathname = '/html/terminal_ssh.html';
+    window.location.replace(new URL(
+        '/html/terminal_ssh.html' + tracker.launchInfo.ssh.hash,
+        window.location.href).toString());
     return;
   }
   // This must be called before we initialize the terminal to ensure capturing
