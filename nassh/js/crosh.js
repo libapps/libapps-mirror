@@ -34,9 +34,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   // Modifications if crosh is running as a web app.
   if (Crosh.isWebApp()) {
-    lib.registerInit('terminal-private-storage', () => {
-      hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-    });
     lib.registerInit('messages', nassh.loadMessages);
   }
 
@@ -104,7 +101,9 @@ Crosh.msg = function(name, args) {
 Crosh.init = function() {
   const params = new URLSearchParams(document.location.search);
   const profileId = params.get('profile');
-  const terminal = new hterm.Terminal({profileId});
+  const storage =
+      Crosh.isWebApp() ? new lib.Storage.TerminalPrivate() : undefined;
+  const terminal = new hterm.Terminal({profileId, storage});
   // Use legacy pasting when running as an extension to avoid prompt.
   // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
   // permission.
