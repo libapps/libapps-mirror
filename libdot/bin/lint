@@ -276,7 +276,8 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
     TEXT_FILENAMES = {
         '.clang-format', '.eslintrc.js', '.gitignore', '.markdownlintrc',
         '.npmrc', '.pylintrc',
-        'Dockerfile', 'LICENSE', 'Makefile', 'METADATA', 'OWNERS',
+        'DIR_METADATA', 'Dockerfile', 'LICENSE', 'Makefile', 'METADATA',
+        'OWNERS',
     }
     TEXT_EXTENSIONS = {
         '.cfg', '.concat', '.css', '.el', '.sh', '.svg', '.txt', '.vim', '.xml',
