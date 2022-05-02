@@ -861,41 +861,6 @@ hterm.Terminal.prototype.getForegroundColor = function() {
 };
 
 /**
- * Create a new instance of a terminal command and run it with a given
- * argument string.
- *
- * @param {!Function} commandClass The constructor for a terminal command.
- * @param {string} commandName The command to run for this terminal.
- * @param {!Array<string>} args The arguments to pass to the command.
- */
-hterm.Terminal.prototype.runCommandClass = function(
-    commandClass, commandName, args) {
-  let environment = this.prefs_.get('environment');
-  if (typeof environment != 'object' || environment == null) {
-    environment = {};
-  }
-
-  this.command = new commandClass(
-      {
-        commandName: commandName,
-        args: args,
-        io: this.io.push(),
-        environment: environment,
-        onExit: (code) => {
-          this.io.pop();
-          this.uninstallKeyboard();
-          this.div_.dispatchEvent(new CustomEvent('terminal-closing'));
-          if (this.prefs_.get('close-on-exit')) {
-            window.close();
-          }
-        },
-      });
-
-  this.installKeyboard();
-  this.command.run();
-};
-
-/**
  * Returns true if the current screen is the primary screen, false otherwise.
  *
  * @return {boolean}
