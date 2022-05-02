@@ -341,9 +341,10 @@ export class GoogMetricsReporter {
  * @const {string}
  */
 GoogMetricsReporter.prototype.PERMISSIONS_PROMPT =
-    'Help improve your SSH experience to your Cloudtop/workstation by ' +
-    'sharing latency data with developers. If yes, you will receive a prompt ' +
-    'for additional permissions to ' +
+    '[GOOGLE EMPLOYEES ONLY] Help improve your SSH experience to your ' +
+    'Cloudtop/workstation by sharing latency data with developers. Collected ' +
+    'data will include the name of your host device. If yes, you will ' +
+    'receive a prompt for additional permissions to ' +
     'cloudtopmanagement-googleapis.corp.google.com and ' +
     'uberproxy-debug.corp.google.com';
 
