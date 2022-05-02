@@ -1,0 +1,74 @@
+Migrate off of hterm runCommandClass.
+
+https://crbug.com/1258487
+
+--- a/mosh_app/mosh_window.js
++++ b/mosh_app/mosh_window.js
+@@ -33,7 +33,14 @@ function execMosh() {
+   terminal.onTerminalReady = function() {
+     terminal.setCursorPosition(0, 0);
+     terminal.setCursorVisible(true);
+-    terminal.runCommandClass(mosh.CommandInstance, 'mosh', window.args);
++    const client = new mosh.CommandInstance({
++      io: terminal.io,
++      args: window.args,
++    });
++    // Useful for console debugging.
++    window.mosh_client_ = client;
++    terminal.installKeyboard();
++    client.run();
+   };
+ 
+   // Don't exit fullscreen with ESC.
+@@ -91,15 +98,12 @@ function execMosh() {
+ 
+ var mosh = {};
+ 
+-mosh.CommandInstance = function(argv) {
++mosh.CommandInstance = function({io, args}) {
+   // Command arguments.
+-  this.argv_ = argv;
+-
+-  // Command environment.
+-  this.environment_ = argv.environment || {};
++  this.args_ = args;
+ 
+   // hterm.Terminal.IO instance.
+-  this.io = null;
++  this.io = io;
+ 
+   // Whether the NaCl module is running.
+   this.running_ = false;
+@@ -111,14 +115,11 @@ mosh.CommandInstance = function(argv) {
+   this.agentPort_ = null;
+ 
+   // App ID of an SSH agent.
+-  this.agentAppID_ = argv.args['ssh-agent-id'];
++  this.agentAppID_ = args['ssh-agent-id'];
+ };
+ 
+ mosh.CommandInstance.prototype.run = function() {
+-  // Useful for console debugging.
+-  window.mosh_client_ = this;
+-
+-  this.io = this.argv_.io.push();
++  this.io = this.io.push();
+   this.io.onVTKeystroke = this.sendKeyboard_.bind(this);
+   this.io.sendString = this.sendKeyboard_.bind(this);
+   this.io.onTerminalResize = this.onTerminalResize_.bind(this);
+@@ -134,13 +135,10 @@ mosh.CommandInstance.prototype.run = function() {
+        'height: 0;');
+   this.moshNaCl_.setAttribute('src', nacl_nmf_file);
+   this.moshNaCl_.setAttribute('type', nacl_mime_type);
+-  for (var k in this.argv_.args) {
+-    this.moshNaCl_.setAttribute(k, this.argv_.args[k]);
++  for (var k in this.args_) {
++    this.moshNaCl_.setAttribute(k, this.args_[k]);
+   }
+ 
+-  // Delete argv_, as it contains sensitive info.
+-  delete this.argv_;
+-
+   // Output special text (e.g., ANSI escape sequences) if desired.
+   chrome.storage.sync.get('term_init_string', function(o) {
+     if (o && o['term_init_string']) {
