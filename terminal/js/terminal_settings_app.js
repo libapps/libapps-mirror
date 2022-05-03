@@ -160,7 +160,7 @@ export class TerminalSettingsApp extends LitElement {
         min-width: 170px;
       }
 
-      terminal-settings-dropdown[preference='font-size'] {
+      terminal-settings-dropdown {
         min-width: 80px;
       }
 

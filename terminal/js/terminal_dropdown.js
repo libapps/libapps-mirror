@@ -107,10 +107,10 @@ export class TerminalDropdownElement extends LitElement {
           left: 0;
           list-style: none;
           margin: 0;
-          min-width: 100%;
           padding: 0;
           position: absolute;
           top: 100%;
+          width: 100%;
           z-index: 1;
         }
 
@@ -131,6 +131,7 @@ export class TerminalDropdownElement extends LitElement {
 
         li > span {
           flex-grow: 1;
+          overflow-x: hidden;
         }
 
         li[disabled] {
