@@ -105,6 +105,11 @@ export class TerminalHomeApp extends LitElement {
         border-bottom: 1px solid rgb(var(--foreground-color-rgb), 0.14);
       }
 
+      mwc-icon-button {
+        --mdc-icon-size: 20px;
+        margin: 0 10px;
+      }
+
       section {
         background-color: rgba(var(--foreground-color-rgb), 0.06);
         border-radius: 8px;
@@ -299,10 +304,12 @@ export class TerminalHomeApp extends LitElement {
           ${this.sshConnections.map((c) => html`
             <li class="row">
               ${this.sshAllowed ? link(c) : text(c)}
-              <a tabindex="0" aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}"
+              <mwc-icon-button
+                  aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}"
+                  class="icon-fill-svg"
                   @click="${(e) => this.openSSHDialog(c.id)}">
-                <span class="row-icon icon-fill-svg">${ICON_EDIT}</span>
-              </a>
+                ${ICON_EDIT}
+              </mwc-icon-button>
             </li>
           `)}
           </ul>
