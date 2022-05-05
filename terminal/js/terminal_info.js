@@ -111,9 +111,15 @@ export class TerminalInfoTracker {
    */
   static async create() {
     return new Promise((resolve) => {
+      const channel = new BroadcastChannel('terminalInfoTracker');
+      // Return early if running in dev env without chrome.tabs.
+      if (!chrome.tabs) {
+        console.warn('chrome.tabs API not found.');
+        return resolve(new TerminalInfoTracker(
+            {tabId: 0, channel, launchInfo: {home: {}}}));
+      }
       chrome.tabs.getCurrent((tab) => {
         (async () => {
-          const channel = new BroadcastChannel('terminalInfoTracker');
           const parentTerminalInfo =
               await TerminalInfoTracker.requestTerminalInfo(channel,
                   tab.openerTabId);

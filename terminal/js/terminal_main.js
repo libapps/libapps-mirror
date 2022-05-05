@@ -21,7 +21,7 @@ const globalInit = getTerminalInfoTracker().then((tracker) => {
   // TODO(crbug.com/999028): Make sure system web apps are not discarded as
   // part of the lifecycle API.  This fix used by crosh and nassh is not
   // guaranteed to be a long term solution.
-  chrome.tabs.update(tracker.tabId, {autoDiscardable: false});
+  chrome.tabs?.update(tracker.tabId, {autoDiscardable: false});
 
   return tracker;
 });
