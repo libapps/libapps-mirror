@@ -68,7 +68,9 @@ before(function(done) {
   div.style.width = '100%';
   document.body.appendChild(div);
 
-  this.terminal = new hterm.Terminal();
+  this.terminal = new hterm.Terminal({
+    storage: new lib.Storage.Memory(),
+  });
   this.terminal.decorate(div);
   // The terminal doesn't need to be super big.
   this.terminal.setHeight(5);
