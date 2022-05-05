@@ -59,7 +59,7 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal(6, links.length);
 
     // Buttons for Add SSH, and Manage (Linux).
-    const buttons = this.el.shadowRoot.querySelectorAll('button');
+    const buttons = this.el.shadowRoot.querySelectorAll('terminal-button');
     assert.equal(2, buttons.length);
     assert.equal('TERMINAL_HOME_MANAGE', buttons[0].innerText.trim());
     assert.equal('TERMINAL_HOME_ADD_SSH', buttons[1].innerText.trim());
@@ -83,7 +83,7 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[5].innerText);
 
     // Buttons for Add SSH, and Manage (Linux).
-    const buttons = this.el.shadowRoot.querySelectorAll('button');
+    const buttons = this.el.shadowRoot.querySelectorAll('terminal-button');
     assert.equal(2, buttons.length);
     assert.equal('TERMINAL_HOME_SET_UP', buttons[0].innerText.trim());
     assert.equal('TERMINAL_HOME_ADD_SSH', buttons[1].innerText.trim());
@@ -119,7 +119,7 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal(2, links.length);
 
       // Buttons for Add SSH, and Set up (Linux).
-    const buttons = this.el.shadowRoot.querySelectorAll('button');
+    const buttons = this.el.shadowRoot.querySelectorAll('terminal-button');
     assert.equal(2, buttons.length);
     assert.equal('TERMINAL_HOME_SET_UP', buttons[0].innerText.trim());
     assert.equal('TERMINAL_HOME_ADD_SSH', buttons[1].innerText.trim());

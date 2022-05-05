@@ -28,6 +28,7 @@ export class TerminalButtonElement extends LitElement {
           --button-disabled-bg: white;
           --button-disabled-border-color: var(--google-grey-100);
           --button-disabled-text-color: var(--google-grey-600);
+          --button-focus-shadow-color: var(--focus-shadow-color);
         }
 
         button {
@@ -44,7 +45,7 @@ export class TerminalButtonElement extends LitElement {
         }
 
         button:focus-visible {
-          box-shadow: 0 0 0 2px var(--focus-shadow-color);
+          box-shadow: 0 0 0 2px var(--button-focus-shadow-color);
         }
 
         button:hover {
@@ -77,6 +78,14 @@ export class TerminalButtonElement extends LitElement {
           border-color: transparent;
         }
     `];
+  }
+
+  /** @override */
+  static get shadowRootOptions() {
+    return {
+      ...super.shadowRootOptions,
+      delegatesFocus: true,
+    };
   }
 
   /** @override */

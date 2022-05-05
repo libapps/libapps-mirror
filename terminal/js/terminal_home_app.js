@@ -9,6 +9,7 @@
  */
 
 import {css, html, LitElement} from './lit.js';
+import './terminal_button.js';
 import {DEFAULT_VM_NAME} from './terminal_common.js';
 import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_OPEN_IN_NEW, ICON_PLUS,
     ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
@@ -69,22 +70,6 @@ export class TerminalHomeApp extends LitElement {
         text-decoration: none;
       }
 
-      button {
-        background-color: inherit;
-        border: 1px solid rgb(var(--foreground-color-rgb), 0.14);
-        border-radius: 4px;
-        color: rgb(var(--button-color-rgb));
-        cursor: pointer;
-        font-size: 13px;
-        font-weight: 700;
-        outline: none;
-        padding: 7px 15px;
-      }
-
-      button:hover {
-        background-color: rgba(var(--button-color-rgb), 0.2);
-      }
-
       h3 {
         color: rgb(var(--foreground-color-rgb));
         flex: 1;
@@ -115,6 +100,14 @@ export class TerminalHomeApp extends LitElement {
         border-radius: 8px;
         margin: 0 8px 16px 8px;
         min-width: 256px;
+      }
+
+      terminal-button {
+        --button-bg: inherit;
+        --button-border-color: rgba(var(--foreground-color-rgb), 0.14);
+        --button-focus-shadow-color: rgba(var(--button-color-rgb), 0.2);
+        --button-hover-bg: rgba(var(--button-color-rgb), 0.2);
+        --button-text-color: rgb(var(--button-color-rgb));
       }
 
       ul {
@@ -243,10 +236,10 @@ export class TerminalHomeApp extends LitElement {
         <div class="${this.containers.length ? 'line' : ''}">
           <div class="header row">
             <h3>${sectionLabel}</h3>
-            <button @click="${this.onOpenSystemSettings}">
+            <terminal-button autofocus @click="${this.onOpenSystemSettings}">
               <span class="button-icon">${ICON_OPEN_IN_NEW}</span>
               ${buttonText}
-            </button>
+            </terminal-button>
           </div>
           ${this.crostiniEnabled ? undefined : html`
             <h4 class="sublabel">${msg('TERMINAL_HOME_LINUX_NOT_ENABLED')}</h4>
@@ -292,10 +285,10 @@ export class TerminalHomeApp extends LitElement {
         <div class="${this.sshConnections.length ? 'line' : ''}">
           <div class="header row">
             <h3>${sectionLabel}</h3>
-            <button autofocus @click="${(e) => this.openSSHDialog()}">
+            <terminal-button @click="${(e) => this.openSSHDialog()}">
               <span class="button-icon">${ICON_PLUS}</span>
               ${msg('TERMINAL_HOME_ADD_SSH')}
-            </button>
+            </terminal-button>
           </div>
           ${sublabel ? html`<h4 class="sublabel">${sublabel}</h4>` : undefined}
         </div>
