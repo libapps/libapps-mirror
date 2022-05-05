@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {LitElement, classMap, css, html, when} from './lit.js';
+import {LitElement, classMap, css, html, ifDefined, when} from './lit.js';
 import {ICON_CANCEL} from './terminal_icons.js';
 
 /**
@@ -34,6 +34,9 @@ export class TerminalDropdownElement extends LitElement {
   /** @override */
   static get properties() {
     return {
+      ariaLabel: {
+        type: String,
+      },
       expanded: {
         type: Boolean,
         reflect: true,
@@ -151,6 +154,7 @@ export class TerminalDropdownElement extends LitElement {
   constructor() {
     super();
 
+    this.ariaLabel = undefined;
     /** @public {*} */
     this.value;
     this.expanded = false;
@@ -208,6 +212,8 @@ export class TerminalDropdownElement extends LitElement {
     // and the "click" event will then incorrectly toggle it to true again.
     return html`
         <button
+            aria-label="${ifDefined(this.ariaLabel)}"
+            aria-description="${selectedLabel}"
             aria-haspopup="listbox"
             aria-expanded="${this.expanded}"
             class="${classMap({invalid: selectedInvalid})}"

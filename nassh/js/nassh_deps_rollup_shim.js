@@ -52,11 +52,12 @@ export {punycode};
  */
 import {LitElement, html, css, unsafeCSS} from 'lit';
 import {classMap} from 'lit/directives/class-map.js';
+import {ifDefined} from 'lit/directives/if-defined.js';
 import {live} from 'lit/directives/live.js';
 import {createRef, ref} from 'lit/directives/ref.js';
 import {when} from 'lit/directives/when.js';
-const lit = {LitElement, classMap, css, createRef, html, live, ref, unsafeCSS,
-  when};
+const lit = {LitElement, classMap, css, createRef, html, ifDefined, live, ref,
+  unsafeCSS, when};
 export {lit};
 
 import '@material/mwc-icon-button';

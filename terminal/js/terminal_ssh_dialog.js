@@ -248,6 +248,8 @@ export class TerminalSSHDialog extends LitElement {
       `;
     }
 
+    const identityLabel = msg('IDENTITY_LABEL');
+
     return html`
         <terminal-dialog ${ref(this.dialogRef_)}
             @close="${this.onDialogClose_}">
@@ -267,12 +269,13 @@ export class TerminalSSHDialog extends LitElement {
               placeholder="username@hostname -p <port> -R 1234:localhost:5678">
             <span slot="inline-prefix">ssh&nbsp</span>
           </terminal-textfield>
-          <terminal-label>${msg('IDENTITY_LABEL')}</terminal-label>
+          <terminal-label>${identityLabel}</terminal-label>
           <div id="identity-container">
             <terminal-dropdown
                 ${ref(this.identityDropdownRef_)}
+                ariaLabel="${identityLabel}"
                 id="identity-dropdown"
-                    @delete-item=${this.onDeleteIdentity_}
+                @delete-item=${this.onDeleteIdentity_}
                 .options="${this.identities_}">
             </terminal-dropdown>
             <terminal-button @click=${this.onImportButtonClick_}>
