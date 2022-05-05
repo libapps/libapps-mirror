@@ -19,11 +19,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
  * @constructor
  */
 function popup() {
+  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+
   // The nassh global preference managers.
-  this.prefs_ = new nassh.PreferenceManager();
+  this.prefs_ = new nassh.PreferenceManager(storage);
   this.localPrefs_ = new nassh.LocalPreferenceManager();
   // The hterm pref manager.  We use the 'default' profile to theme.
-  this.htermPrefs_ = new hterm.PreferenceManager(hterm.defaultStorage);
+  this.htermPrefs_ = new hterm.PreferenceManager(storage);
 
   // Load the theme first so the style doesn't flicker.
   this.htermPrefs_.readStorage(() => {
