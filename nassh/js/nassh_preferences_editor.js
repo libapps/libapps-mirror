@@ -18,9 +18,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   function setupPreferences() {
     const manifest = chrome.runtime.getManifest();
+    const storage = new lib.Storage.Chrome(chrome.storage.sync);
 
     // Create a local hterm instance so people can see their changes live.
-    const term = new hterm.Terminal();
+    const term = new hterm.Terminal({storage});
     term.onTerminalReady = function() {
         nassh.loadWebFonts(term.getDocument());
         const io = term.io.push();
@@ -46,7 +47,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const params = new URLSearchParams(document.location.search);
     const profileId = params.get('profileId') ??
         nassh.msg('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
-    const prefsEditor = new nassh.PreferencesEditor(profileId);
+    const prefsEditor = new nassh.PreferencesEditor(storage, profileId);
 
     let a = document.querySelector('#backup');
     a.download = nassh.msg('PREF_BACKUP_FILENAME');
@@ -113,11 +114,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 /**
  * Class for editing hterm profiles.
  *
+ * @param {!lib.Storage} storage Where to store preferences.
  * @param {string=} profileId Profile name to read settings from.
  * @constructor
  */
 nassh.PreferencesEditor = function(
-    profileId = hterm.Terminal.DEFAULT_PROFILE_ID) {
+    storage, profileId = hterm.Terminal.DEFAULT_PROFILE_ID) {
+  this.storage_ = storage;
   this.selectProfile(profileId);
 };
 
@@ -209,7 +212,7 @@ nassh.PreferencesEditor.debounce = function(input, callback, timeout = 500) {
  */
 nassh.PreferencesEditor.prototype.selectProfile = function(profileId) {
   window.term_.setProfile(profileId);
-  const prefs = new hterm.PreferenceManager(hterm.defaultStorage, profileId);
+  const prefs = new hterm.PreferenceManager(this.storage_, profileId);
   this.prefs_ = prefs;
   prefs.readStorage(() => {
     prefs.notifyAll();
