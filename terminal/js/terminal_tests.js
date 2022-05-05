@@ -27,6 +27,15 @@ const newFakeLaunchInfo = () => ({
 
 const encoder = new TextEncoder();
 
+const waitForPrefLoaded = async function(prefName) {
+  while (true) {
+    const args = await mockTerminalPrivateController.on('getPrefs');
+    if (args[0][0] === prefName) {
+      break;
+    }
+  }
+};
+
 /**
  * Create the #terminal div in the document for testing, and start mocks.
  */
@@ -40,6 +49,8 @@ beforeEach(function() {
   document.body.appendChild(div);
   mockTerminalPrivateController = MockTerminalPrivate.start();
   mockTerminalPrivate = mockTerminalPrivateController.instance;
+  mockTerminalPrivate.prefs['crostini.terminal_settings'] = {};
+  mockTerminalPrivate.prefs['settings.accessibility'] = false;
 
   window.localStorage.clear();
   mockTabsController = new MockTabsController();
@@ -68,17 +79,16 @@ it('opens-process-in-init', async function() {
 });
 
 [true, false].map((value) => it(`set-a11y-in-init-to-${value}`, async () => {
-  mockTerminalPrivate.prefs = {'settings.accessibility': value};
+  mockTerminalPrivate.prefs['settings.accessibility'] = value;
   const term = terminal.init(div, newFakeLaunchInfo());
-  await mockTerminalPrivateController.on('getPrefs');
+  await waitForPrefLoaded('settings.accessibility');
   assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
 }));
 
 [true, false].map((value) => it(`set-a11y-to-${value}-on-changed`, async () => {
-  mockTerminalPrivate.prefs = {'settings.accessibility': !value};
+  mockTerminalPrivate.prefs['settings.accessibility'] = !value;
   const term = terminal.init(div, newFakeLaunchInfo());
-  await mockTerminalPrivateController.on('getPrefs');
-
+  await waitForPrefLoaded('settings.accessibility');
   await mockTerminalPrivate.onPrefChanged.dispatch(
       {'settings.accessibility': value});
   assert.equal(term.accessibilityReader_.accessibilityEnabled, value);

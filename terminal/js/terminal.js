@@ -2,10 +2,15 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {CommandInstance as NasshCommand} from './nassh_command_instance.js';
+/**
+ * @fileoverview
+ * @suppress {moduleLoad}
+ */
+
 import {composeTmuxUrl, definePrefs, getTmuxIntegrationEnabled,
   loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily,
   watchBackgroundColor} from './terminal_common.js';
+import {terminalImport} from './terminal_import.js';
 import {LaunchInfo, getTerminalInfoTracker} from './terminal_info.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
     from './terminal_tmux.js';
@@ -406,14 +411,16 @@ terminal.watchBackgroundImage = function(term) {
  *     like '#profile-id:xxxx'.
  * @param {?TmuxControllerDriver} tmuxControllerDriver
  */
-function runNassh(term, hash, tmuxControllerDriver) {
+async function runNassh(term, hash, tmuxControllerDriver) {
+  const {CommandInstance} = await terminalImport('./nassh_command_instance.js');
+
   let environment = term.getPrefs().get('environment');
   if (typeof environment !== 'object' || environment === null) {
     environment = {};
   }
 
   /** @suppress {undefinedVars|missingProperties} */
-  const nasshCommand = new NasshCommand({
+  const nasshCommand = new CommandInstance({
     io: term.io,
     syncStorage: new lib.Storage.TerminalPrivate(),
     args: [hash.substr(1)],
