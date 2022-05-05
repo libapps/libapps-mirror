@@ -1,0 +1,16 @@
+The default storage is no longer Chrome sync, so we have to explicitly set it.
+
+--- a/mosh_app/mosh_window.js
++++ b/mosh_app/mosh_window.js
+@@ -26,7 +26,10 @@ window.onload = function() {
+ };
+ 
+ function execMosh() {
+-  var terminal = new hterm.Terminal('mosh');
++  var terminal = new hterm.Terminal({
++      profileId: 'mosh',
++      storage: new lib.Storage.Chrome(chrome.storage.sync),
++  });
+   terminal.decorate(document.querySelector('#terminal'));
+   terminal.onTerminalReady = function() {
+     terminal.setCursorPosition(0, 0);

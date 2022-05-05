@@ -31,6 +31,7 @@ PATCHES = (
     '%(p)s-utf8-send.patch',
     '%(p)s-icon.patch',
     '%(p)s-hterm-runcommandclass.patch',
+    '%(p)s-hterm-storage.patch',
 )
 
 
