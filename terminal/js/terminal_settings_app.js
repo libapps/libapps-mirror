@@ -60,13 +60,6 @@ export class TerminalSettingsApp extends LitElement {
   }
 
   /** @override */
-  async performUpdate() {
-    // A lot of elements in this page assume libdot has finished initialization.
-    await window.libdotInitialized;
-    super.performUpdate();
-  }
-
-  /** @override */
   static get styles() {
     return [stylesVars, css`
       :host {

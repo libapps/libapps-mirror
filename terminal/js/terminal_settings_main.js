@@ -9,11 +9,6 @@
 import {SUPPORTED_FONT_FAMILIES, definePrefs, loadWebFont,
   normalizePrefsInPlace} from './terminal_common.js';
 
-let resolveLibdotInitialized;
-window.libdotInitialized = new Promise((resolve) => {
-  resolveLibdotInitialized = resolve;
-});
-
 // We are loading all web fonts at the beginning because some settings UI need
 // to know whether a web font is available.
 window.webFontPromises = new Map(
@@ -58,7 +53,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     window.preferenceManager.readStorage(() => {
       normalizePrefsInPlace(window.preferenceManager);
       window.preferenceManager.notifyAll();
-      resolveLibdotInitialized();
+      document.body.appendChild(
+          document.createElement('terminal-settings-app'));
     });
   });
 });
