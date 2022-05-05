@@ -88,7 +88,7 @@ it('does-not-exit-on-first-output', async function() {
   const pid = 'pid1234';
   mockTerminalPrivate.openVmshellProcessId = pid;
   let exitCalled = false;
-  const term = new hterm.Terminal();
+  const term = new hterm.Terminal({storage: new lib.Storage.Memory()});
   term.decorate(div);
   const terminalCommand = new terminal.Command(term);
   terminalCommand.run(newFakeLaunchInfo());
