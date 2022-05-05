@@ -102,7 +102,8 @@ Crosh.init = function() {
   const params = new URLSearchParams(document.location.search);
   const profileId = params.get('profile');
   const storage =
-      Crosh.isWebApp() ? new lib.Storage.TerminalPrivate() : undefined;
+      Crosh.isWebApp() ? new lib.Storage.TerminalPrivate() :
+      new lib.Storage.Chrome(chrome.storage.sync);
   const terminal = new hterm.Terminal({profileId, storage});
   // Use legacy pasting when running as an extension to avoid prompt.
   // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
