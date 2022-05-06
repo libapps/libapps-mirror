@@ -8,6 +8,7 @@
  */
 
 import {App} from './nassh_app.js';
+import {importPreferences} from './nassh_background.js';
 import {addListeners as externalAddListeners,
         initApi} from './nassh_external_api.js';
 
@@ -106,7 +107,7 @@ chrome.runtime.onInstalled.addListener((details) => {
       nassh.runtimeSendMessage(srcId, {command: 'prefsExport'})
         .then((response) => {
           const {prefs} = response;
-          return nassh.importPreferences(prefs);
+          return importPreferences(prefs);
         })
         .catch(onError);
     };

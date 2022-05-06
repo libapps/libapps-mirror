@@ -251,6 +251,7 @@ The vast majority of the code here lives under [js/].
   * [nassh_relay_corp.js]: Web relay `nassh.relay.Corp` code for proxying
     connections via [Corp Relay] protocol.
 * Extension glue code
+  * [nassh_background.js]: Background utility code.
   * [nassh_background_main.js]: Background extension code.
   * [nassh_main.js]: Main code to initialize a new connection and hand off.
 * Stream (I/O) related code
@@ -516,6 +517,7 @@ Here's a random list of documents which would be useful to people.
 [nassh_agent_message.js]: ../js/nassh_agent_message.js
 [nassh_agent_message_types.js]: ../js/nassh_agent_message_types.js
 [nassh_app.js]: ../js/nassh_app.js
+[nassh_background.js]: ../js/nassh_background.js
 [nassh_background_main.js]: ../js/nassh_background_main.js
 [nassh_column_list.js]: ../js/nassh_column_list.js
 [nassh_command_instance.js]: ../js/nassh_command_instance.js

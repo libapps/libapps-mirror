@@ -6,6 +6,7 @@
  * @fileoverview A remote API for external apps/extensions.
  */
 
+import {exportPreferences, importPreferences} from './nassh_background.js';
 import {CommandInstance} from './nassh_command_instance.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
 import {fsp, onUnmountRequested} from './nassh_sftp_fsp.js';
@@ -388,7 +389,7 @@ function(request, sender, sendResponse) {
     lib.assert(typeof request.prefs == 'object');
     prefs = request.prefs;
   }
-  nassh.importPreferences(prefs).then(() => {
+  importPreferences(prefs).then(() => {
     sendResponse({error: false, message: 'prefsImport'});
   });
 });
@@ -408,7 +409,7 @@ function(request, sender, sendResponse) {
     return;
   }
 
-  nassh.exportPreferences((prefs) => {
+  exportPreferences((prefs) => {
     if (request.asJson) {
       prefs = JSON.stringify(prefs);
     }
