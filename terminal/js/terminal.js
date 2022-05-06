@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {CommandInstance} from './nassh_command_instance.js';
+import {CommandInstance as NasshCommand} from './nassh_command_instance.js';
 import {composeTmuxUrl, definePrefs, getTmuxIntegrationEnabled,
   loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily,
   watchBackgroundColor} from './terminal_common.js';
@@ -176,7 +176,7 @@ terminal.init = function(element, launchInfo) {
     if (launchInfo.ssh) {
       // We handle the needRedirect case in another place.
       if (!launchInfo.ssh.needRedirect) {
-        runNassh(term, tmuxControllerDriver);
+        runNassh(term, launchInfo.ssh.hash, tmuxControllerDriver);
       }
       return;
     }
@@ -402,19 +402,21 @@ terminal.watchBackgroundImage = function(term) {
 
 /**
  * @param {!hterm.Terminal} term
+ * @param {string} hash This is normally taken from the url's hash. It looks
+ *     like '#profile-id:xxxx'.
  * @param {?TmuxControllerDriver} tmuxControllerDriver
  */
-function runNassh(term, tmuxControllerDriver) {
+function runNassh(term, hash, tmuxControllerDriver) {
   let environment = term.getPrefs().get('environment');
   if (typeof environment !== 'object' || environment === null) {
     environment = {};
   }
 
   /** @suppress {undefinedVars|missingProperties} */
-  const nasshCommand = new CommandInstance({
+  const nasshCommand = new NasshCommand({
     io: term.io,
     syncStorage: new lib.Storage.TerminalPrivate(),
-    args: [document.location.hash.substr(1)],
+    args: [hash.substr(1)],
     environment: environment,
     onExit: async (code) => {
       if (term.getPrefs().get('close-on-exit')) {
