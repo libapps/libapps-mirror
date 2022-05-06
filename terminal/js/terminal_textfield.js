@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {LitElement, createRef, css, html, live, ref} from './lit.js';
+import {LitElement, createRef, css, html, ifDefined, live, ref} from './lit.js';
 import {redispatchEvent} from './terminal_common.js';
 import './terminal_label.js';
 
@@ -16,6 +16,11 @@ export class TerminalTextfieldElement extends LitElement {
   static get properties() {
     return {
       label: {
+        type: String,
+      },
+      // The aria label for the <input>. If this is undefined, we will fallback
+      // to `label`.
+      ariaLabel: {
         type: String,
       },
       placeholder: {
@@ -153,7 +158,8 @@ export class TerminalTextfieldElement extends LitElement {
   constructor() {
     super();
 
-    this.label = '';
+    this.label = undefined;
+    this.ariaLabel = undefined;
     this.placeholder = '';
     this.value = '';
     this.blendIn = false;
@@ -210,7 +216,7 @@ export class TerminalTextfieldElement extends LitElement {
                 @change=${(e) => redispatchEvent(this, e)}
                 @input=${this.onInput_}
                 spellcheck="false"
-                aria-labelledby="label"
+                aria-label=${ifDefined(this.ariaLabel ?? this.label)}
             />
           </div>
           ${this.blendIn ? '' :

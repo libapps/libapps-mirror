@@ -255,6 +255,7 @@ export class TerminalSSHDialog extends LitElement {
             @close="${this.onDialogClose_}">
           <div slot="title">
             <terminal-textfield blendIn fitContent
+                ariaLabel="${msg('TERMINAL_HOME_SSH_CONNECTION_NAME')}"
                 value="${live(this.getTitle_())}"
                 @keydown="${this.onTextfieldKeydown_}"
                 @change="${(e) => this.userTitle_ = e.target.value}">

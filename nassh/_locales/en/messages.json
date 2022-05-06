@@ -2057,6 +2057,10 @@
 		"description": "Label for the SSH (Secure SHell) command input.",
 		"message": "Command"
 	},
+	"TERMINAL_HOME_SSH_CONNECTION_NAME": {
+		"description": "Users can give an SSH connecton a name by editing a textfield. This is the label for the textfield.",
+		"message": "Connection name"
+	},
 	"TERMINAL_HOME_SSH_DISABLED_BY_POLICY": {
 		"description": "Help text shown when SSH (Secure SHell) has been disabled by policy.",
 		"message": "SSH is disabled by your administrator"
