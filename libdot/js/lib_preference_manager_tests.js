@@ -47,4 +47,120 @@ it('local-delete-default', (done) => {
   window.dispatchEvent(event);
 });
 
+/**
+ * Verify export prefs works.
+ */
+it('export-json', () => {
+  const storage = new lib.Storage.Memory();
+  const manager = new lib.PreferenceManager(storage);
+
+  // Declare prefs on the top object.  Change some, but keep some as defaults.
+  manager.definePreferences([
+    ['color', 'red'],
+    ['lines', null],
+  ]);
+  manager.set('color', 'blue');
+
+  // Declare children prefs since we will have to recurse into them.
+  manager.defineChildren('profiles', function(parent, id) {
+    const childManager = new lib.PreferenceManager(
+        parent.storage, `/profiles/${id}`);
+    childManager.definePreferences([
+      ['host', 'localhost'],
+      ['port', 22],
+    ]);
+    return childManager;
+  });
+  // Add a child with changed prefs.
+  const child = manager.createChild('profiles', undefined, '1234');
+  child.set('host', '::1');
+  child.set('port', 443);
+  // Add a child that uses the defaults.
+  manager.createChild('profiles', undefined, '2222');
+
+  // Export the prefs and make sure it works.
+  const prefs = manager.exportAsJson();
+  assert.deepStrictEqual(prefs, {
+    color: 'blue',
+    profiles: [
+      {
+        id: '1234',
+        json: {
+          host: '::1',
+          port: 443,
+        },
+      },
+      {
+        id: '2222',
+        json: {},
+      },
+    ],
+  });
+});
+
+/**
+ * Verify import prefs works.
+ */
+it('import-json', (done) => {
+  const storage = new lib.Storage.Memory();
+  const manager = new lib.PreferenceManager(storage);
+
+  // Declare prefs on the top object.  Change their values from what we import.
+  manager.definePreferences([
+    ['color', 'red'],
+    ['lines', null],
+  ]);
+  manager.set('color', 'green');
+  manager.set('lines', 10);
+
+  // Declare children prefs since we will have to recurse into them.
+  manager.defineChildren('profiles', function(parent, id) {
+    const childManager = new lib.PreferenceManager(
+        parent.storage, `/profiles/${id}`);
+    childManager.definePreferences([
+      ['host', 'localhost'],
+      ['port', 22],
+    ]);
+    return childManager;
+  });
+  // Add some children that won't match.
+  const child = manager.createChild('profiles', undefined, '6666');
+  child.set('host', '::1');
+  child.set('port', 443);
+  // Add a child that uses the defaults.
+  manager.createChild('profiles', undefined, '7777');
+  // Add a child that will be overwritten.
+  manager.createChild('profiles', undefined, '1234');
+  child.set('host', 'remote');
+
+  // Import a completely diff set of prefs.
+  const newPrefs = {
+    color: 'blue',
+    profiles: [
+      {
+        id: '1234',
+        json: {
+          host: '::1',
+          port: 443,
+        },
+      },
+      {
+        id: '2222',
+        json: {},
+      },
+    ],
+  };
+  // We'll get three callbacks -- one for each preference manager.  Wait until
+  // the final one to check the state.
+  let callbacks = 3;
+  manager.importFromJson(newPrefs, () => {
+    // Export the prefs and make sure it matches.
+    const prefs = manager.exportAsJson();
+    if (--callbacks === 0) {
+      assert.deepStrictEqual(prefs, newPrefs);
+      done();
+    }
+  });
+});
+
 });

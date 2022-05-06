@@ -859,6 +859,16 @@ lib.PreferenceManager.prototype.exportAsJson = function() {
 lib.PreferenceManager.prototype.importFromJson = function(json, onComplete) {
   this.isImportingJson_ = true;
 
+  // Clear the current prefernces back to their defaults, and throw away any
+  // children.  We'll recreate them if needed.
+  for (const listName in this.childLists_) {
+    const childList = this.childLists_[listName];
+    for (const id in childList) {
+      this.removeChild(listName, id);
+    }
+  }
+  this.resetAll();
+
   let pendingWrites = 0;
   const onWriteStorage = () => {
     if (--pendingWrites < 1) {
