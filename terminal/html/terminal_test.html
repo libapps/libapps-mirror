@@ -11,33 +11,34 @@
     <script src='../js/terminal_test.js'></script>
 
     <script src='../js/nassh_deps.concat.js'></script>
-    <script type='module' src='../js/terminal_common.js'></script>
 
     <!-- All the unittests go below here. -->
-    <script type='module' src='../js/terminal_tests.js'></script>
-    <script type='module' src='../js/terminal_common_tests.js'></script>
-    <script type='module' src='../js/terminal_dialog_tests.js'></script>
-    <script type='module' src='../js/terminal_dropdown_tests.js'></script>
-    <script type='module' src='../js/terminal_file_editor_tests.js'></script>
-    <script type='module' src='../js/terminal_home_app_tests.js'></script>
-    <script type='module' src='../js/terminal_info_tests.js'></script>
-    <script type='module' src='../js/terminal_textfield_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_ansi_colors_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_app_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_background_image_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_category_selector_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_checkbox_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_colorpicker_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_fonts_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_hue_slider_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_row_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_saturation_value_picker_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_theme_tests.js'></script>
-    <script type='module' src='../js/terminal_settings_transparency_slider_tests.js'></script>
-    <script type='module' src='../js/terminal_slider_tests.js'></script>
-    <script type='module' src='../js/terminal_ssh_dialog_tests.js'></script>
-    <script type='module' src='../js/terminal_tmux_tests.js'></script>
-    <script type='module' src='../js/tmux_tests.js'></script>
+    <script type='module'>
+      import '../js/terminal_tests.js';
+      import '../js/terminal_common_tests.js';
+      import '../js/terminal_dialog_tests.js';
+      import '../js/terminal_dropdown_tests.js';
+      import '../js/terminal_file_editor_tests.js';
+      import '../js/terminal_home_app_tests.js';
+      import '../js/terminal_info_tests.js';
+      import '../js/terminal_textfield_tests.js';
+      import '../js/terminal_settings_ansi_colors_tests.js';
+      import '../js/terminal_settings_app_tests.js';
+      import '../js/terminal_settings_background_image_tests.js';
+      import '../js/terminal_settings_category_selector_tests.js';
+      import '../js/terminal_settings_checkbox_tests.js';
+      import '../js/terminal_settings_colorpicker_tests.js';
+      import '../js/terminal_settings_fonts_tests.js';
+      import '../js/terminal_settings_hue_slider_tests.js';
+      import '../js/terminal_settings_row_tests.js';
+      import '../js/terminal_settings_saturation_value_picker_tests.js';
+      import '../js/terminal_settings_theme_tests.js';
+      import '../js/terminal_settings_transparency_slider_tests.js';
+      import '../js/terminal_slider_tests.js';
+      import '../js/terminal_ssh_dialog_tests.js';
+      import '../js/terminal_tmux_tests.js';
+      import '../js/tmux_tests.js';
+    </script>
 
     <link href='../../node_modules/mocha/mocha.css' rel='stylesheet'/>
     <link href='../../libdot/css/mocha-dark-theme.css' rel='stylesheet'/>
