@@ -49,6 +49,7 @@ export let SSHLaunchInfo;
  * Only one of the top level properties should exist.
  *
  * @typedef {{
+ *   home: (!Object|undefined),
  *   tmux: (!TmuxLaunchInfo|undefined),
  *   vsh: (!VshLaunchInfo|undefined),
  *   crosh: (!Object|undefined),
@@ -116,10 +117,13 @@ export class TerminalInfoTracker {
           const parentTerminalInfo =
               await TerminalInfoTracker.requestTerminalInfo(channel,
                   tab.openerTabId);
+          console.log('parentTerminalInfo: ', parentTerminalInfo);
+          const launchInfo = resolveLaunchInfo(parentTerminalInfo?.launchInfo);
+          console.log(`current tab (${tab.id}) launchInfo: `, launchInfo);
           resolve(new TerminalInfoTracker({
             tabId: tab.id,
             channel,
-            launchInfo: resolveLaunchInfo(parentTerminalInfo?.launchInfo),
+            launchInfo,
             parentTitle: parentTerminalInfo?.title,
           }));
         })();
@@ -219,6 +223,10 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
     return {ssh: {needRedirect: false, hash: url.hash}};
   }
 
+  if (url.hash === '#home') {
+    return {home: {}};
+  }
+
   // We only follow parentLaunchInfo if there is no search params. (The default
   // url does not have search param.)
   if (!url.search && parentLaunchInfo) {
@@ -231,6 +239,10 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
         driverChannelName: parentLaunchInfo.tmux.driverChannelName,
       }};
     }
+
+    if (parentLaunchInfo.home) {
+      return {home: {}};
+    }
   }
 
   if (url.searchParams.has(TMUX_PARAM_NAME)) {
@@ -238,6 +250,8 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
         /** @type {string} */(url.searchParams.get(TMUX_PARAM_NAME))))};
   }
 
+
+  // We are launching the terminal with vsh.
   const args = url.searchParams.getAll('args[]');
   const outputArgs = [];
   let containerId = {};
@@ -332,6 +346,10 @@ export function getInitialTitleCacheKey(containerId) {
  * Set up a title handler. For vsh, it sets a proper document title before the
  * terminal is ready, and caches title for other terminals to use.
  *
+ * This should be called 1) after `hterm.messageManager` is initialized and 2)
+ * before the `hterm.Terminal` (if any) is initilized so that we can capture the
+ * first title that it sets.
+ *
  * @param {!TerminalInfoTracker} terminalInfoTracker
  */
 export function setUpTitleHandler(terminalInfoTracker) {
@@ -348,6 +366,11 @@ export function setUpTitleHandler(terminalInfoTracker) {
 
   if (launchInfo.ssh) {
     document.title = 'SSH';
+    return;
+  }
+
+  if (launchInfo.home) {
+    document.title = hterm.messageManager.get('TERMINAL_TITLE_TERMINAL');
     return;
   }
 

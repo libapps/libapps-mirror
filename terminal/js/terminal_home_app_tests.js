@@ -54,9 +54,9 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[6].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[7].innerText);
 
-    // All 6 rows are links.
+    // All rows except for the 2 settings rows are links.
     const links = this.el.shadowRoot.querySelectorAll('li a h4');
-    assert.equal(6, links.length);
+    assert.equal(4, links.length);
 
     // Buttons for Add SSH, and Manage (Linux).
     const buttons = this.el.shadowRoot.querySelectorAll('terminal-button');
@@ -114,9 +114,9 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[7].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[8].innerText);
 
-    // Only last 2 settings rows are links.
+    // Only linux and ssh rows are links, and there should be 0 of them.
     const links = this.el.shadowRoot.querySelectorAll('li a h4');
-    assert.equal(2, links.length);
+    assert.equal(0, links.length);
 
       // Buttons for Add SSH, and Set up (Linux).
     const buttons = this.el.shadowRoot.querySelectorAll('terminal-button');

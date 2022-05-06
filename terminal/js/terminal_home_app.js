@@ -39,13 +39,6 @@ const PREF_PATH_CONTAINERS = 'crostini.containers';
 
 export class TerminalHomeApp extends LitElement {
   /** @override */
-  async performUpdate() {
-    // A lot of elements in this page assume libdot has finished initialization.
-    await window.libdotInitialized;
-    super.performUpdate();
-  }
-
-  /** @override */
   static get properties() {
     return {
       sshConnections: {state: true},
@@ -68,6 +61,14 @@ export class TerminalHomeApp extends LitElement {
 
       a {
         text-decoration: none;
+      }
+
+      button {
+        background: inherit;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        text-align: inherit;
       }
 
       h3 {
@@ -323,23 +324,23 @@ export class TerminalHomeApp extends LitElement {
         <section>
           <ul>
             <li>
-              <a class="row full-width" href=""
-                    @click="${this.onOpenTerminalSettings}">
+              <button class="row full-width"
+                  @click="${this.onOpenTerminalSettings}">
                 <span class="row-icon icon-fill-svg">${ICON_SETTINGS}</span>
                 <h4 class="full-width nowrap">
                   ${msg('TERMINAL_HOME_TERMINAL_SETTINGS')}
                 </h4>
-              </a>
+              </button>
             </li>
             <li>
-              <a class="row full-width" href=""
-                    @click="${this.onOpenSystemSettings}">
+              <button class="row full-width"
+                  @click="${this.onOpenSystemSettings}">
                 <span class="row-icon icon-fill-svg">${ICON_CODE}</span>
                 <h4 class="full-width nowrap">
                   ${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}
                 </h4>
                 <span class="row-icon icon-fill-svg">${ICON_OPEN_IN_NEW}</span>
-              </a>
+              </button>
             </li>
           </ul>
         </section>
