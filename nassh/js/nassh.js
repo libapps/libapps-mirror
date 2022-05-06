@@ -162,7 +162,8 @@ nassh.exportPreferences = function(onComplete) {
   rv.magic = 'nassh-prefs';
   rv.version = 1;
 
-  const nasshPrefs = new nassh.PreferenceManager();
+  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+  const nasshPrefs = new nassh.PreferenceManager(storage);
   nasshPrefs.readStorage(function() {
     // Export all the connection settings.
     rv.nassh = nasshPrefs.exportAsJson();
@@ -172,8 +173,7 @@ nassh.exportPreferences = function(onComplete) {
     hterm.PreferenceManager.listProfiles(nasshPrefs.storage, (profiles) => {
       profiles.forEach((profile) => {
         rv.hterm[profile] = null;
-        const prefs = new hterm.PreferenceManager(
-            hterm.defaultStorage, profile);
+        const prefs = new hterm.PreferenceManager(storage, profile);
         prefs.readStorage(onReadStorage.bind(null, profile, prefs));
         pendingReads++;
       });
@@ -203,15 +203,15 @@ nassh.importPreferences = function(prefsObject) {
     throw new Error('Bad version, expected 1, got: ' + prefsObject.version);
   }
 
-  const nasshPrefs = new nassh.PreferenceManager();
+  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+  const nasshPrefs = new nassh.PreferenceManager(storage);
   return new Promise(async (resolve) => {
     // First import the nassh settings.
     await nasshPrefs.importFromJson(prefsObject.nassh);
 
     // Then import each hterm profile.
     for (const terminalProfile in prefsObject.hterm) {
-      const prefs = new hterm.PreferenceManager(
-          hterm.defaultStorage, terminalProfile);
+      const prefs = new hterm.PreferenceManager(storage, terminalProfile);
       // Sync storage to prefs object so we can reset it when importing.
       await new Promise((resolve) => prefs.readStorage(resolve));
       await prefs.importFromJson(prefsObject.hterm[terminalProfile]);
