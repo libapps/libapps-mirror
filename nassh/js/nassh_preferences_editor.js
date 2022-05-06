@@ -242,19 +242,18 @@ nassh.PreferencesEditor.prototype.onFeedbackClick = function(e) {
  *
  * @param {?Event} e
  */
-nassh.PreferencesEditor.prototype.onBackupClick = function(e) {
+nassh.PreferencesEditor.prototype.onBackupClick = async function(e) {
   // If we generated this event, just let it happen.
   if (!e || e.synthetic) {
     return;
   }
 
-  this.updateBackupLink(function() {
-    const event = new MouseEvent(e.type, e);
-    event.synthetic = true;
-    e.target.dispatchEvent(event);
-  });
-
   e.preventDefault();
+
+  await this.updateBackupLink();
+  const event = new MouseEvent(e.type, e);
+  event.synthetic = true;
+  e.target.dispatchEvent(event);
 };
 
 /**
@@ -272,29 +271,39 @@ nassh.PreferencesEditor.prototype.onRestoreClick = function(e) {
     e.preventDefault();
   }
   const input = document.querySelector('input.restore');
-  input.onchange = () => {
+  input.onchange = async () => {
     if (input.files.length != 1) {
       return;
     }
 
-    input.files[0].text().then((result) => {
-      const obj = /** @type {!Object} */ (JSON.parse(result));
-      nassh.importPreferences(obj, document.location.reload);
+    const prefs = await input.files[0].text();
+    await nassh.runtimeSendMessage({
+      command: 'prefsImport',
+      asJson: true,
+      prefs: prefs,
     });
+    document.location.reload();
   };
 
   input.click();
 };
 
-/** @param {function()=} onComplete */
-nassh.PreferencesEditor.prototype.updateBackupLink = function(onComplete) {
-  nassh.exportPreferences(function(value) {
-    const a = document.querySelector('#backup');
-    a.href = `data:text/json,${encodeURIComponent(JSON.stringify(value))}`;
-    if (onComplete) {
-      onComplete();
-    }
+/**
+ * Update the backup link content.
+ */
+nassh.PreferencesEditor.prototype.updateBackupLink = async function() {
+  const a = document.querySelector('#backup');
+  if (a.href.startsWith('blob:')) {
+    // Revoke any previous URLs created from these blobs.
+    URL.revokeObjectURL(a.href);
+  }
+
+  const result = await nassh.runtimeSendMessage({
+    command: 'prefsExport',
+    asJson: true,
   });
+  const blob = new Blob([result.prefs], {type: 'text/json'});
+  a.href = URL.createObjectURL(blob);
 };
 
 /**
