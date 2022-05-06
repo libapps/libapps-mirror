@@ -53,7 +53,7 @@ EXCLUDE_PATTERNS = (
 EXCLUDE_PATTERNS_CROSH = (
     'manifest.json',
     'html/nassh_background.html',
-    'js/nassh_background.js',
+    'js/nassh_background_main.js',
     'plugin/mosh',
     'plugin/pnacl-*',
     'plugin/wasm*',

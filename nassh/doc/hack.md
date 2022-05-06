@@ -251,7 +251,7 @@ The vast majority of the code here lives under [js/].
   * [nassh_relay_corp.js]: Web relay `nassh.relay.Corp` code for proxying
     connections via [Corp Relay] protocol.
 * Extension glue code
-  * [nassh_background.js]: Background extension code.
+  * [nassh_background_main.js]: Background extension code.
   * [nassh_main.js]: Main code to initialize a new connection and hand off.
 * Stream (I/O) related code
   * [nassh_stream.js]: Basic class for implementing all `nassh.Stream` streams.
@@ -312,9 +312,9 @@ Secure Shell logic.
 When the extension is launched (e.g. a new connection is opened), the background
 page is automatically created.  This is used to monitor global state like
 extension updates and coordinate SFTP mounts.  The logic lives in
-[nassh_background.js] and takes care of creating a new instance of `nassh.App`
-which it saves in the background page's `app` variable.  If you aren't looking
-at the SFTP logic, you can probably ignore this code.
+[nassh_background_main.js] and takes care of creating a new instance of
+`nassh.App` which it saves in the background page's `app` variable.  If you
+aren't looking at the SFTP logic, you can probably ignore this code.
 
 When the extension is run, a new [nassh.html] window is shown.  If no connection
 info is provided via the URL, then an iframe is created to show
@@ -516,7 +516,7 @@ Here's a random list of documents which would be useful to people.
 [nassh_agent_message.js]: ../js/nassh_agent_message.js
 [nassh_agent_message_types.js]: ../js/nassh_agent_message_types.js
 [nassh_app.js]: ../js/nassh_app.js
-[nassh_background.js]: ../js/nassh_background.js
+[nassh_background_main.js]: ../js/nassh_background_main.js
 [nassh_column_list.js]: ../js/nassh_column_list.js
 [nassh_command_instance.js]: ../js/nassh_command_instance.js
 [nassh_connect_dialog.js]: ../js/nassh_connect_dialog.js

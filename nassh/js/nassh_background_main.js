@@ -2,6 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+/**
+ * @fileoverview The background page that loads & runs everything.  Try to keep
+ * code in here minimal as this cannot be unittested.
+ */
+
 import {App} from './nassh_app.js';
 import {addListeners as externalAddListeners,
         initApi} from './nassh_external_api.js';
