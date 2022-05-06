@@ -388,7 +388,7 @@ function(request, sender, sendResponse) {
     lib.assert(typeof request.prefs == 'object');
     prefs = request.prefs;
   }
-  nassh.importPreferences(prefs, () => {
+  nassh.importPreferences(prefs).then(() => {
     sendResponse({error: false, message: 'prefsImport'});
   });
 });

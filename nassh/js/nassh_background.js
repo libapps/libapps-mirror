@@ -101,7 +101,7 @@ chrome.runtime.onInstalled.addListener((details) => {
       nassh.runtimeSendMessage(srcId, {command: 'prefsExport'})
         .then((response) => {
           const {prefs} = response;
-          nassh.importPreferences(prefs);
+          return nassh.importPreferences(prefs);
         })
         .catch(onError);
     };

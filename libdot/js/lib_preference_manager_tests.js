@@ -101,7 +101,7 @@ it('export-json', () => {
 /**
  * Verify import prefs works.
  */
-it('import-json', (done) => {
+it('import-json', async () => {
   const storage = new lib.Storage.Memory();
   const manager = new lib.PreferenceManager(storage);
 
@@ -150,17 +150,10 @@ it('import-json', (done) => {
       },
     ],
   };
-  // We'll get three callbacks -- one for each preference manager.  Wait until
-  // the final one to check the state.
-  let callbacks = 3;
-  manager.importFromJson(newPrefs, () => {
-    // Export the prefs and make sure it matches.
-    const prefs = manager.exportAsJson();
-    if (--callbacks === 0) {
-      assert.deepStrictEqual(prefs, newPrefs);
-      done();
-    }
-  });
+  await manager.importFromJson(newPrefs);
+  // Export the prefs and make sure it matches.
+  const prefs = manager.exportAsJson();
+  assert.deepStrictEqual(prefs, newPrefs);
 });
 
 });

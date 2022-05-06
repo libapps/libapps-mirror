@@ -854,9 +854,9 @@ lib.PreferenceManager.prototype.exportAsJson = function() {
  * This will create nested preference managers as well.
  *
  * @param {!Object} json The JSON settings to import.
- * @param {function()=} onComplete Callback when all imports have finished.
+ * @return {!Promise<void>} A promise that resolves once the import completes.
  */
-lib.PreferenceManager.prototype.importFromJson = function(json, onComplete) {
+lib.PreferenceManager.prototype.importFromJson = async function(json) {
   this.isImportingJson_ = true;
 
   // Clear the current prefernces back to their defaults, and throw away any
@@ -869,50 +869,29 @@ lib.PreferenceManager.prototype.importFromJson = function(json, onComplete) {
   }
   this.resetAll();
 
-  let pendingWrites = 0;
-  const onWriteStorage = () => {
-    if (--pendingWrites < 1) {
-      if (onComplete) {
-        onComplete();
-      }
-
-      // We've delayed updates to the child arrays, so flush them now.
-      for (const name in json) {
-        if (name in this.childLists_) {
-          this.set(name, this.get(name));
-        }
-      }
-
-      this.isImportingJson_ = false;
-    }
-  };
-
   for (const name in json) {
     if (name in this.childLists_) {
       const childList = json[name];
+      const ids = [];
       for (let i = 0; i < childList.length; i++) {
         const id = childList[i].id;
+        ids.push(id);
 
         let childPrefManager = this.childLists_[name][id];
         if (!childPrefManager) {
           childPrefManager = this.createChild(name, null, id);
         }
 
-        childPrefManager.importFromJson(childList[i].json, onWriteStorage);
-        pendingWrites++;
+        await childPrefManager.importFromJson(childList[i].json);
       }
-
+      // Update the list of children now that we've finished creating them.
+      await this.set(name, ids);
     } else {
-      // The set is synchronous.
-      this.set(name, json[name]);
+      await this.set(name, json[name]);
     }
   }
 
-  // If we didn't update any children, no async work has been queued, so make
-  // the completion callback directly.
-  if (pendingWrites == 0 && onComplete) {
-    onComplete();
-  }
+  this.isImportingJson_ = false;
 };
 
 /**

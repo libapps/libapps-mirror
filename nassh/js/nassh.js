@@ -192,19 +192,9 @@ nassh.exportPreferences = function(onComplete) {
  *
  * @param {!Object} prefsObject A preferences object created with
  *     nassh.exportPreferences.
- * @param {function()=} onComplete A callback to be invoked when the import is
- *     complete.
+ * @return {!Promise<void>} A promise that resolves once the import completes.
  */
-nassh.importPreferences = function(prefsObject, onComplete) {
-  let pendingReads = 0;
-
-  const onReadStorage = function(terminalProfile, prefs) {
-    prefs.importFromJson(prefsObject.hterm[terminalProfile]);
-    if (--pendingReads < 1 && onComplete) {
-      onComplete();
-    }
-  };
-
+nassh.importPreferences = function(prefsObject) {
   if (prefsObject.magic != 'nassh-prefs') {
     throw new Error('Not a JSON object or bad value for \'magic\'.');
   }
@@ -214,13 +204,20 @@ nassh.importPreferences = function(prefsObject, onComplete) {
   }
 
   const nasshPrefs = new nassh.PreferenceManager();
-  nasshPrefs.importFromJson(prefsObject.nassh, () => {
+  return new Promise(async (resolve) => {
+    // First import the nassh settings.
+    await nasshPrefs.importFromJson(prefsObject.nassh);
+
+    // Then import each hterm profile.
     for (const terminalProfile in prefsObject.hterm) {
       const prefs = new hterm.PreferenceManager(
           hterm.defaultStorage, terminalProfile);
-      prefs.readStorage(onReadStorage.bind(null, terminalProfile, prefs));
-      pendingReads++;
+      // Sync storage to prefs object so we can reset it when importing.
+      await new Promise((resolve) => prefs.readStorage(resolve));
+      await prefs.importFromJson(prefsObject.hterm[terminalProfile]);
     }
+
+    resolve();
   });
 };
 
