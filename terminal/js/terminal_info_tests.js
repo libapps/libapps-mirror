@@ -17,6 +17,46 @@ const DEFAULT_CONTAINER = {
 };
 
 describe('terminal_info_tests.js', () => {
+  describe('resolveLaunchInfo for home', function() {
+    it('follows url', function() {
+      const parentLaunchInfo = /** @type {!LaunchInfo} */({
+        ssh: {},
+      });
+
+      assert.deepEqual(
+          resolveLaunchInfo(parentLaunchInfo,
+            new URL('/html/terminal.html#home', location.href)).home,
+          {});
+
+      // The ssh page without hash should be considered the home page.
+      assert.deepEqual(
+          resolveLaunchInfo(parentLaunchInfo,
+            new URL('/html/terminal_ssh.html', location.href)).home,
+          {});
+    });
+
+    it('follows parent', function() {
+      const parentLaunchInfo = /** @type {!LaunchInfo} */({
+        home: {},
+      });
+
+      const url = new URL(location.href);
+      url.search = '';
+
+      // No parent.
+      assert.isUndefined(resolveLaunchInfo(/** @type {!LaunchInfo} */({}),
+            url).home);
+
+      // Has parent at the home page.
+      assert.deepEqual(resolveLaunchInfo(parentLaunchInfo, url).home, {});
+
+      // Has parent but there is a url param.
+      url.search = '?vm=penguin';
+      assert.isUndefined(
+          resolveLaunchInfo(parentLaunchInfo, url).home);
+    });
+  });
+
   describe('resolveLaunchInfo for tmux', function() {
     it('follows parent', function() {
       const parentLaunchInfo = /** @type {!LaunchInfo} */({

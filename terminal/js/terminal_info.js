@@ -220,7 +220,11 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
   }
 
   if (url.pathname === '/html/terminal_ssh.html') {
-    return {ssh: {needRedirect: false, hash: url.hash}};
+    if (url.hash) {
+      return {ssh: {needRedirect: false, hash: url.hash}};
+    } else {
+      return {home: {}};
+    }
   }
 
   if (url.hash === '#home') {
