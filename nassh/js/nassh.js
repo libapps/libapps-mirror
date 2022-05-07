@@ -51,9 +51,6 @@ nassh.isCrOSSystemApp = function() {
 nassh.setupForWebApp = function() {
   // Modifications if running as Chrome OS Terminal SWA.
   if (nassh.isCrOSSystemApp()) {
-    lib.registerInit('terminal-private-storage', () => {
-      hterm.defaultStorage = new lib.Storage.TerminalPrivate();
-    });
     lib.registerInit('messages', nassh.loadMessages);
     if (chrome && chrome.runtime && !chrome.runtime.getManifest) {
       chrome.runtime.getManifest = () => {
