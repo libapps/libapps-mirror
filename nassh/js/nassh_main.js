@@ -79,6 +79,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       const nasshCommand = new CommandInstance({
         io: terminal.io,
+        syncStorage: new lib.Storage.Chrome(chrome.storage.sync),
         args: [document.location.hash.substr(1)],
         environment: environment,
         onExit: (code) => {

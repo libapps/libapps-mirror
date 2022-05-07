@@ -102,6 +102,7 @@ function(request, sender, sendResponse) {
   ]).then(() => {
     const argv = {
       io: io_,
+      syncStorage: new lib.Storage.Chrome(chrome.storage.sync),
       isSftp: true,
       mountOptions: {
         fileSystemId: request.fileSystemId,
@@ -620,6 +621,7 @@ function(port) {
         // UI wants us to start a connection.
         const {argv, connectOptions} = msg;
         argv.io = pipeIo;
+        argv.syncStorage = new lib.Storage.Chrome(chrome.storage.sync);
         argv.onExit = (status) => {
           post({error: false, command: 'exit', status});
           port.disconnect();

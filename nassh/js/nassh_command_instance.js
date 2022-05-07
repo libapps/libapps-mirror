@@ -77,8 +77,8 @@ export function CommandInstance({io, ...argv}) {
   // Session storage (can accept another hterm tab's sessionStorage).
   this.sessionStorage = argv.sessionStorage || window.sessionStorage;
 
-  // Sync storage is optional storage to use for prefs.
-  this.syncStorage = argv.syncStorage || null;
+  // Sync storage is where synced prefs are saved.
+  this.syncStorage = argv.syncStorage;
 
   // Terminal Location reference (can accept another hterm tab's location).
   this.terminalLocation = argv.terminalLocation || document.location;
