@@ -18,7 +18,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   function setupPreferences() {
     const manifest = chrome.runtime.getManifest();
-    const storage = new lib.Storage.Chrome(chrome.storage.sync);
+    const storage = nassh.isCrOSSystemApp() ?
+        new lib.Storage.TerminalPrivate() :
+        new lib.Storage.Chrome(chrome.storage.sync);
 
     // Create a local hterm instance so people can see their changes live.
     const term = new hterm.Terminal({storage});

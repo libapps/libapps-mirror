@@ -52,13 +52,18 @@ nassh.setupForWebApp = function() {
   // Modifications if running as Chrome OS Terminal SWA.
   if (nassh.isCrOSSystemApp()) {
     lib.registerInit('messages', nassh.loadMessages);
-    if (chrome && chrome.runtime && !chrome.runtime.getManifest) {
+    if (chrome?.runtime && !chrome.runtime.getManifest) {
       chrome.runtime.getManifest = () => {
         return /** @type {!chrome.runtime.Manifest} */ ({
           'name': 'SSH',
           'version': '',
           'icons': {'192': '/images/dev/crostini-192.png'},
         });
+      };
+    }
+    if (chrome?.runtime && !chrome.runtime.sendMessage) {
+      chrome.runtime.sendMessage = (message, callback) => {
+        setTimeout(/** @type {function(!Object)} */ (callback), 0, {});
       };
     }
   }
