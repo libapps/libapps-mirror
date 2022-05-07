@@ -8,10 +8,10 @@ import {addListeners} from './nassh_sftp_fsp.js';
  * The singleton app instance for the nassh packaged app, created by the
  * background page.
  *
- * @param {!lib.Storage=} storage Storage for sync settings.
+ * @param {!lib.Storage} storage Storage for sync settings.
  * @constructor
  */
-export function App(storage = undefined) {
+export function App(storage) {
   this.prefs_ = new nassh.PreferenceManager(storage);
   this.localPrefs_ = new nassh.LocalPreferenceManager();
   this.omniMatches_ = [];

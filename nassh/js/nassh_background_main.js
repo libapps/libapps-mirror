@@ -40,7 +40,8 @@ if (nassh.browserAction) {
 lib.init(console.log.bind(console)).then(() => {
   initApi();
 
-  const app = new App();
+  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+  const app = new App(storage);
 
   // Register our context menus.
   app.installContextMenus();

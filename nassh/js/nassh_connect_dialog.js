@@ -30,7 +30,8 @@ function ConnectDialog(messagePort) {
   }
 
   // The nassh global pref manager.
-  this.prefs_ = new nassh.PreferenceManager();
+  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+  this.prefs_ = new nassh.PreferenceManager(storage);
   this.localPrefs_ = new nassh.LocalPreferenceManager();
   this.prefs_.readStorage(() => {
     this.syncProfiles_(this.onPreferencesReady_.bind(this));
