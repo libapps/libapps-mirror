@@ -56,7 +56,7 @@ nassh.setupForWebApp = function() {
       chrome.runtime.getManifest = () => {
         return /** @type {!chrome.runtime.Manifest} */ ({
           'name': 'SSH',
-          'version': '',
+          'version': lib.f.getChromeMilestone(),
           'icons': {'192': '/images/dev/crostini-192.png'},
         });
       };
