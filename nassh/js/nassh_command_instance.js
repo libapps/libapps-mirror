@@ -119,16 +119,6 @@ export function CommandInstance({io, ...argv}) {
 CommandInstance.prototype.commandName = 'nassh';
 
 /**
- * Static run method invoked by the terminal.
- *
- * @param {!Object} argv
- * @return {!CommandInstance}
- */
-CommandInstance.run = function(argv) {
-  return new CommandInstance(argv);
-};
-
-/**
  * When the command exit is from nassh instead of ssh_client.  The ssh module
  * can only ever exit with positive values, so negative values are reserved.
  */
