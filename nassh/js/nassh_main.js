@@ -60,8 +60,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   const execNaSSH = function() {
     const profileId = params.get('profile');
+    const storage = new lib.Storage.Chrome(chrome.storage.sync);
 
-    const terminal = new hterm.Terminal({profileId});
+    const terminal = new hterm.Terminal({profileId, storage});
     // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
     // permission.
     terminal.alwaysUseLegacyPasting = true;
@@ -79,7 +80,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       const nasshCommand = new CommandInstance({
         io: terminal.io,
-        syncStorage: new lib.Storage.Chrome(chrome.storage.sync),
+        syncStorage: storage,
         args: [document.location.hash.substr(1)],
         environment: environment,
         onExit: (code) => {
