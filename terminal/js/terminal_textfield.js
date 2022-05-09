@@ -217,6 +217,8 @@ export class TerminalTextfieldElement extends LitElement {
                 @input=${this.onInput_}
                 spellcheck="false"
                 aria-label=${ifDefined(this.ariaLabel ?? this.label)}
+                aria-invalid=${!!this.error}
+                aria-errormessage="error"
             />
           </div>
           ${this.blendIn ? '' :
