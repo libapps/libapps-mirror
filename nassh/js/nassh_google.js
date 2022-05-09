@@ -187,11 +187,13 @@ export function getGnubbyExtension() {
 
 /**
  * Find a usable gnubby extension.
+ *
+ * @return {!Promise}
  */
 function findGnubbyExtension() {
   // If we're not in an extension context, nothing to do.
   if (!window.chrome || !chrome.runtime) {
-    return;
+    return Promise.resolve();
   }
 
   // The possible gnubby extensions.
@@ -222,7 +224,7 @@ function findGnubbyExtension() {
   defaultGnubbyExtension = (hterm.os == 'cros' ? stableAppId : stableExtId);
 
   // We don't set a timeout here as it doesn't block overall execution.
-  Promise.all(extensions.map(check)).then((results) => {
+  return Promise.all(extensions.map(check)).then((results) => {
     console.log(`gnubby probe results: ${results}`);
     for (let i = 0; i < extensions.length; ++i) {
       const extId = extensions[i];
@@ -247,17 +249,19 @@ let defaultGcseExtension = 'cfmgaohenjcikllcgjpepfadgbflcjof';
 
 /**
  * Find a usable GCSE extension.
+ *
+ * @return {!Promise}
  */
 function findGcseExtension() {
   // If we're not in an extension context, nothing to do.
   if (!window.chrome || !chrome.runtime) {
-    return;
+    return Promise.resolve();
   }
 
   const devId = 'oncenbbimcccjedkmajnncfllmbnmbnp';
 
   // Ping the dev extension to see if it's installed/enabled/alive.
-  runtimeSendMessage(devId, {'action': 'hello'}).then((result) => {
+  return runtimeSendMessage(devId, {'action': 'hello'}).then((result) => {
     // If the probe worked, return the id, else return nothing so we can
     // clear out all the pending promises.  We don't check the value of the
     // status field as it will be "error" which is confusing -- while the
@@ -325,7 +329,9 @@ export async function gcseRefreshCert(io) {
 lib.registerInit('goog init', async () => {
   const ske = await findSkeExtension();
   if (ske !== true) {
-    findGnubbyExtension();
-    findGcseExtension();
+    await Promise.all([
+      findGnubbyExtension(),
+      findGcseExtension(),
+    ]);
   }
 });

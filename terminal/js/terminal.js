@@ -412,7 +412,9 @@ terminal.watchBackgroundImage = function(term) {
  * @param {?TmuxControllerDriver} tmuxControllerDriver
  */
 async function runNassh(term, hash, tmuxControllerDriver) {
+  // Load nassh modules and ensure gnubby extension lookup is complete.
   const {CommandInstance} = await terminalImport('./nassh_command_instance.js');
+  await lib.init();
 
   let environment = term.getPrefs().get('environment');
   if (typeof environment !== 'object' || environment === null) {
