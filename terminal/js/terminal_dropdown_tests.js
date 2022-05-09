@@ -270,8 +270,14 @@ describe('terminal_dropdown_tests.js', () => {
 
         this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
         await this.el.updateComplete;
-        // There is not previous option.
+        // There is no previous option.
         assert.equal(this.el.value, options[0].value);
+
+        // If the current value is invalid, we should select the last item.
+        this.el.value = 'invalid value';
+        await this.el.updateComplete;
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        assert.equal(this.el.value, options[2].value);
 
         // Let's disable the second option, and it should be skipped.
         const newOptions = createOptions();
@@ -305,6 +311,12 @@ describe('terminal_dropdown_tests.js', () => {
         await this.el.updateComplete;
         // There is no next option.
         assert.equal(this.el.value, options[2].value);
+
+        // If the current value is invalid, we should select the first item.
+        this.el.value = 'invalid value';
+        await this.el.updateComplete;
+        this.ul.dispatchEvent(new KeyboardEvent('keydown', {code: keyCode}));
+        assert.equal(this.el.value, options[0].value);
 
         // Let's disable the second option, and it should be skipped.
         const newOptions = createOptions();

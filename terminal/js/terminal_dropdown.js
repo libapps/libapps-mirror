@@ -288,18 +288,19 @@ export class TerminalDropdownElement extends LitElement {
   }
 
   selectPrevious_() {
-    const selected = this.findSelectedIndex_();
-    if (selected !== -1) {
-      return this.selectFirstEnabled_(
-          this.options.slice(0, selected).reverse());
+    let selected = this.findSelectedIndex_();
+    if (selected === -1) {
+      selected = this.options.length;
     }
+    return this.selectFirstEnabled_(
+        this.options.slice(0, selected).reverse());
   }
 
   selectNext_() {
-    const selected = this.findSelectedIndex_();
-    if (selected !== -1) {
-      return this.selectFirstEnabled_(this.options.slice(selected + 1));
-    }
+    // findSelectedIndex_() could return -1, in this case, the code here will
+    // select the first enabled option, which is want we want.
+    return this.selectFirstEnabled_(
+        this.options.slice(this.findSelectedIndex_() + 1));
   }
 
   /** @param {!Event} event */
