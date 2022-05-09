@@ -13,6 +13,15 @@ import {stylesVars} from './terminal_settings_styles.js';
 
 export class TerminalButtonElement extends LitElement {
   /** @override */
+  static get properties() {
+    return {
+      disabled: {
+        type: Boolean,
+      },
+    };
+  }
+
+  /** @override */
   static get styles() {
     // The styling follows chrome's <cr-button>
     return [stylesVars, css`
@@ -88,9 +97,19 @@ export class TerminalButtonElement extends LitElement {
     };
   }
 
+  constructor() {
+    super();
+    this.disabled = false;
+  }
+
   /** @override */
   render() {
     return html`<button><slot></slot></button>`;
+  }
+
+  /** @override */
+  updated() {
+    this.setAttribute('aria-disabled', `${this.disabled}`);
   }
 }
 
