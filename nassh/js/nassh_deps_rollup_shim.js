@@ -66,3 +66,9 @@ import {Terminal} from 'xterm';
 import {FitAddon} from 'xterm-addon-fit';
 import {WebglAddon} from 'xterm-addon-webgl';
 export const xterm = {Terminal, FitAddon, WebglAddon};
+
+/**
+ * indexeddb-fs is used to provide persistance filesystem (e.g. /.ssh/).
+ */
+import {createFs} from 'indexeddb-fs';
+export {createFs};
