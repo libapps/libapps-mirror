@@ -701,6 +701,10 @@ export class ClientWindow {
     this.io_ = term.io;
     this.channelName_ = channelName;
 
+    this.term_.setWindowTitle = (title) => {
+      document.title = `[tmux] ${title}`;
+    };
+
     /** @private {?string} */
     this.windowId_ = null;
     this.closed_ = false;
