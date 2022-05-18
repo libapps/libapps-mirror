@@ -10,7 +10,7 @@
 
 import {getFileSystem} from './nassh.js';
 
-import {LitElement, createRef, css, html, ref, unsafeCSS, when} from './lit.js';
+import {LitElement, createRef, css, html, ref, unsafeCSS} from './lit.js';
 import {SUPPORTED_FONT_SIZES,
   SUPPORTED_LINE_HEIGHT_PADDINGS} from './terminal_common.js';
 import './terminal_dropdown.js';
@@ -207,8 +207,7 @@ export class TerminalSettingsApp extends LitElement {
             <div data-name="behavior">
               ${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}
             </div>
-            ${when(window.SSH_ENABLED, () => html`
-                <div data-name="ssh">SSH</div>`)}
+            <div data-name="ssh">SSH</div>
             <div data-name="about">
               ${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}
             </div>
@@ -481,23 +480,6 @@ export class TerminalSettingsApp extends LitElement {
             </ul>
         </section>
 
-        ${when(window.SSH_ENABLED, () => this.renderSSHSection_())}
-
-        <section class="terminal-settings-category"
-            ?active-category="${this.activeCategory_ === 'about'}">
-          <h3>${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}</h3>
-          <ul class="section-body">
-            <li class="setting-container about-link" role="link"
-                @click="${() => lib.f.openWindow('/html/licenses.html')}">
-                <h4>${msg('LICENSES')}</h4>
-            </li>
-          </ul>
-        </section>
-    `;
-  }
-
-  renderSSHSection_() {
-    return html`
         <section class="terminal-settings-category"
             ?active-category="${this.activeCategory_ === 'ssh'}">
           <h3>SSH Files</h3>
@@ -517,6 +499,17 @@ export class TerminalSettingsApp extends LitElement {
                 path="/.ssh/config">
             </terminal-file-editor>
           </terminal-settings-row>
+        </section>
+
+        <section class="terminal-settings-category"
+            ?active-category="${this.activeCategory_ === 'about'}">
+          <h3>${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}</h3>
+          <ul class="section-body">
+            <li class="setting-container about-link" role="link"
+                @click="${() => lib.f.openWindow('/html/licenses.html')}">
+                <h4>${msg('LICENSES')}</h4>
+            </li>
+          </ul>
         </section>
     `;
   }
