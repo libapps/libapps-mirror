@@ -21,16 +21,6 @@ window.webFontPromises = new Map(
 );
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  if (chrome.terminalPrivate) {
-    lib.registerInit('ssh-enabled', async () => {
-      return new Promise((resolve) => {
-        chrome.terminalPrivate.getOSInfo((info) => {
-          resolve();
-        });
-      });
-    });
-  }
-
   // Load i18n messages.
   lib.registerInit('messages', async () => {
     // Load hterm.messageManager from /_locales/<lang>/messages.json.
