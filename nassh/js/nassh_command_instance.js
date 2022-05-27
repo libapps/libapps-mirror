@@ -13,7 +13,9 @@ import {
 import {punycode} from './nassh_deps.rollup.js';
 import {Agent} from './nassh_agent.js';
 import {setDefaultBackend} from './nassh_buffer.js';
-import {Cli as nasftpCli} from './nasftp_cli.js';
+import {
+  syncFilesystemFromDomToIndexeddb, syncFilesystemFromIndexeddbToDom,
+} from './nassh_fs.js';
 import {gcseRefreshCert, getGnubbyExtension} from './nassh_google.js';
 import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
 import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
@@ -26,6 +28,7 @@ import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
 import {Websockify as RelayWebsockify} from './nassh_relay_websockify.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
 import {fsp} from './nassh_sftp_fsp.js';
+import {Cli as nasftpCli} from './nasftp_cli.js';
 
 /**
  * The ssh terminal command.
@@ -1490,10 +1493,14 @@ CommandInstance.prototype.initWasmPlugin_ =
  * @param {function()} onComplete
  */
 CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
+  syncFilesystemFromIndexeddbToDom();
+
   this.plugin_ = new NaclPlugin({
     io: this.io,
     sshClientVersion: this.sshClientVersion_,
     onExit: (code) => {
+      syncFilesystemFromDomToIndexeddb();
+
       this.onPluginExit(code);
       this.exit(code, /* noReconnect= */ false);
     },

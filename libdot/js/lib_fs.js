@@ -18,7 +18,7 @@ lib.fs = {};
  * @param {!DirectoryEntry} root The directory to consider as the root of the
  *     path.
  * @param {string} path The path of the target file, relative to root.
- * @param {!Blob|string} contents The new contents of the file.
+ * @param {!ArrayBuffer|!Blob|string} contents The new contents of the file.
  * @return {!Promise<void>}
  */
 lib.fs.overwriteFile = function(root, path, contents) {

@@ -111,6 +111,69 @@ export async function migrateFilesystemFromDomToIndexeddb(
 }
 
 /**
+ * Manually sync indexeddb-fs state to DOM filesystem.
+ *
+ * Keep this until the NaCl plugin is removed.  JS & WASM only use indexeddb-fs,
+ * but NaCl reads the DOM filesystem directly.
+ *
+ * @param {!IndexeddbFs=} fs The new indexeddb-fs filesystem to export to.
+ * @param {!FileSystem=} domfs The old DOM file system to import from.
+ * @return {!Promise<void>} Returns on completion.
+ */
+export async function syncFilesystemFromIndexeddbToDom(
+    fs = undefined, domfs = undefined) {
+  const syncFile = async (file) => {
+    const data = await fs.readFile(file);
+    return lib.fs.overwriteFile(domfs.root, file, data);
+  };
+
+  const syncDir = async (basedir) => {
+    console.log(`fs: Migrating ${basedir} from indexeddb-fs to DOM`);
+    return fs.readDirectory(basedir).then(async (entries) => {
+      for (const file of entries.files) {
+        await syncFile(`${basedir}/${file.name}`);
+      }
+      for (const dir of entries.directories) {
+        await syncDir(`${basedir}/${dir.name}`);
+      }
+    });
+  };
+
+  if (!fs) {
+    fs = await getIndexeddbFileSystem();
+  }
+  if (!domfs) {
+    domfs = await getDomFileSystem();
+  }
+  return syncDir('/.ssh');
+}
+
+/**
+ * Sync a little DOM state to indexeddb-fs.
+ *
+ * Keep this until the NaCl plugin is removed.  JS & WASM only use indexeddb-fs,
+ * but NaCl wries the DOM filesystem directly.
+ *
+ * @param {!FileSystem=} domfs The old DOM file system to import from.
+ * @param {!IndexeddbFs=} fs The new indexeddb-fs filesystem to export to.
+ * @return {!Promise<void>} Returns on completion.
+ */
+export async function syncFilesystemFromDomToIndexeddb(
+    domfs = undefined, fs = undefined) {
+  if (!fs) {
+    fs = await getIndexeddbFileSystem();
+  }
+  if (!domfs) {
+    domfs = await getDomFileSystem();
+  }
+
+  // NaCl doesn't seem to write to that much.
+  const file = '/.ssh/known_hosts';
+  const data = await lib.fs.readFile(domfs.root, file);
+  await fs.writeFile(file, data);
+}
+
+/**
  * Import identity files to the file system.
  *
  * @param {!FileSystem} fileSystem The file system to import the files.
