@@ -3,12 +3,13 @@
 // found in the LICENSE file.
 
 import {
-  getFileSystem, isCrOSSystemApp, loadWebFonts, localize, openOptionsPage,
+  isCrOSSystemApp, loadWebFonts, localize, openOptionsPage,
   registerProtocolHandler, runtimeSendMessage, sendFeedback, setupForWebApp,
 } from './nassh.js';
 import {ColumnList} from './nassh_column_list.js';
-import {deleteIdentityFiles, getIdentityFileNames, importIdentityFiles} from
-    './nassh_fs.js';
+import {
+  deleteIdentityFiles, getFileSystem, getIdentityFileNames, importIdentityFiles,
+} from './nassh_fs.js';
 import {
   LocalPreferenceManager, PreferenceManager,
 } from './nassh_preference_manager.js';

@@ -6,7 +6,7 @@
  * @fileoverview SSH file editing helper.
  */
 
-import {getFileSystem} from './nassh.js';
+import {getFileSystem} from './nassh_fs.js';
 
 /**
  * A cached handle to the filesystem.

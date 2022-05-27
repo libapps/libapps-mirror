@@ -6,9 +6,9 @@
  * @fileoverview Export an element: terminal-ssh-dialog
  */
 
-import {getFileSystem} from './nassh.js';
-import {deleteIdentityFiles, getIdentityFileNames, importIdentityFiles}
-    from './nassh_fs.js';
+import {
+  deleteIdentityFiles, getFileSystem, getIdentityFileNames, importIdentityFiles,
+} from './nassh_fs.js';
 
 import {LitElement, createRef, css, html, live, ref} from './lit.js';
 import './terminal_button.js';

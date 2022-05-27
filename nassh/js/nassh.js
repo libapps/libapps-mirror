@@ -94,38 +94,6 @@ export function localize(name, args) {
 }
 
 /**
- * Request the persistent HTML5 filesystem for this extension.
- *
- * This will also create the /.ssh/ directory if it does not exits.
- *
- * TODO: moved to 'nassh_fs.js' once all callers migrate to ES6 modules.
- *
- * @return {!Promise<!FileSystem>} The root filesystem handle.
- */
-export function getFileSystem() {
-  const requestFS = window.requestFileSystem || window.webkitRequestFileSystem;
-
-  return new Promise((resolve, reject) => {
-    function onFileSystem(fileSystem) {
-      // We create /.ssh/identity/ subdir for storing keys.  We need a dedicated
-      // subdir for users to import files to avoid collisions with standard ssh
-      // config files.
-      lib.fs.getOrCreateDirectory(fileSystem.root, '/.ssh/identity')
-        .then(() => resolve(fileSystem))
-        .catch(reject);
-    }
-
-    requestFS(window.PERSISTENT,
-              16 * 1024 * 1024,
-              onFileSystem,
-              (e) => {
-                console.error(`Error initializing filesystem: ${e}`);
-                reject(e);
-              });
-  });
-}
-
-/**
  * Create a new window to the options page for customizing preferences.
  *
  * @param {string=} page The specific options page to navigate to.

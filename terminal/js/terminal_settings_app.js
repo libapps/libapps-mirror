@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {getFileSystem} from './nassh.js';
+import {getFileSystem} from './nassh_fs.js';
 
 import {LitElement, createRef, css, html, ref, unsafeCSS} from './lit.js';
 import {SUPPORTED_FONT_SIZES,
