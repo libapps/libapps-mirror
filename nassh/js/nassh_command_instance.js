@@ -7,9 +7,7 @@
  * @suppress {moduleLoad}
  */
 
-import {
-  getFileSystem, isCrOSSystemApp, localize, osc8Link, sgrText,
-} from './nassh.js';
+import {isCrOSSystemApp, localize, osc8Link, sgrText} from './nassh.js';
 import {punycode} from './nassh_deps.rollup.js';
 import {Agent} from './nassh_agent.js';
 import {setDefaultBackend} from './nassh_buffer.js';
@@ -55,9 +53,6 @@ export function CommandInstance({io, ...argv}) {
 
   // Parsed extension manifest.
   this.manifest_ = null;
-
-  // The HTML5 persistent FileSystem instance for this extension.
-  this.fileSystem_ = null;
 
   // The version of the ssh client to load.
   this.sshClientVersion_ = 'pnacl';
@@ -141,16 +136,6 @@ CommandInstance.prototype.run = function() {
     lines.forEach((line) => this.io.println(line));
   });
 
-  // Similar to lib.fs.err, except this logs to the terminal too.
-  const ferr = (msg) => {
-    return (err, ...args) => {
-      console.error(`${msg}: ${args.join(', ')}`);
-
-      this.io.println(localize('UNEXPECTED_ERROR'));
-      this.io.println(err);
-    };
-  };
-
   this.prefs_.readStorage(() => {
     this.manifest_ = chrome.runtime.getManifest();
 
@@ -160,9 +145,7 @@ CommandInstance.prototype.run = function() {
 
     showWelcome();
 
-    getFileSystem()
-      .then(onFileSystemFound)
-      .catch(ferr('FileSystem init failed'));
+    onFileSystemFound();
 
     this.localPrefs_.readStorage(() => {
       this.localPrefs_.syncProfiles(this.prefs_);
@@ -238,9 +221,7 @@ CommandInstance.prototype.run = function() {
     }
   };
 
-  const onFileSystemFound = (fileSystem) => {
-    this.fileSystem_ = fileSystem;
-
+  const onFileSystemFound = () => {
     const argstr = this.argv_.args.join(' ');
 
     // This item is set before we redirect away to login to a relay server.
