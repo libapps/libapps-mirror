@@ -132,8 +132,13 @@ CommandInstance.prototype.run = function() {
   // easier for them to copy & paste when reporting issues.
   window.addEventListener('error', (e) => {
     this.io.println(localize('UNEXPECTED_ERROR'));
-    const lines = e.error.stack.split(/[\r\n]/);
-    lines.forEach((line) => this.io.println(line));
+    if (e.error?.stack) {
+      const lines = e.error.stack.split(/[\r\n]/);
+      lines.forEach((line) => this.io.println(line));
+    }
+    if (e.message) {
+      this.io.println(`${e.filename}:${e.lineno}:${e.colno}: ${e.message}`);
+    }
   });
 
   this.prefs_.readStorage(() => {
