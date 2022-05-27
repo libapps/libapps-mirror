@@ -7,7 +7,7 @@
  */
 
 import {
-  deleteIdentityFiles, getDomFileSystem, getIdentityFileNames,
+  deleteIdentityFiles, getIdentityFileNames, getIndexeddbFileSystem,
   importIdentityFiles,
 } from './nassh_fs.js';
 
@@ -217,7 +217,7 @@ export class TerminalSSHDialog extends LitElement {
       value: '',
     };
     this.identities_ = [this.DEFAULT_IDENTITY];
-    /** @private {?FileSystem} */
+    /** @private {?IndexeddbFs} */
     this.fileSystem_;
 
     this.settingsProfiles_ = [hterm.Terminal.DEFAULT_PROFILE_ID];
@@ -341,7 +341,7 @@ export class TerminalSSHDialog extends LitElement {
     // elements that have internal state (e.g. `terminal-textfield`)).
 
     if (!this.fileSystem_) {
-      this.fileSystem_ = await getDomFileSystem();
+      this.fileSystem_ = await getIndexeddbFileSystem();
     }
     this.loadIdentities_();
 

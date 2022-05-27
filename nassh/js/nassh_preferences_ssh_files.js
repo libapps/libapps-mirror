@@ -6,10 +6,12 @@
  * @fileoverview SSH file editing helper.
  */
 
-import {getDomFileSystem} from './nassh_fs.js';
+import {getIndexeddbFileSystem} from './nassh_fs.js';
 
 /**
  * A cached handle to the filesystem.
+ *
+ * @type {?IndexeddbFs}
  */
 let filesystem = null;
 
@@ -51,7 +53,7 @@ class FileWatcher {
    * @return {!Promise<void>} Promise that resolves when the load finishes.
    */
   load() {
-    return lib.fs.readFile(filesystem.root, this.path)
+    return filesystem.readFile(this.path)
       .then((contents) => this.element.value = contents)
       .catch(() => {});
   }
@@ -62,7 +64,7 @@ class FileWatcher {
    * @return {!Promise<void>} Promise that resolves when the save finishes.
    */
   save() {
-    return lib.fs.overwriteFile(filesystem.root, this.path, this.element.value);
+    return filesystem.writeFile(this.path, this.element.value).then(() => {});
   }
 
   /**
@@ -114,14 +116,15 @@ class DirWatcher {
    * @return {!Promise<void>} Promise that resolves when the load finishes.
    */
   load() {
-    return lib.fs.readDirectory(filesystem.root, this.path)
-      .then((contents) => contents.forEach((path) => this.addFile_(path)));
+    return filesystem.readDirectory(this.path).then((entries) => {
+      entries.files.forEach((file) => this.addFile_(file));
+    });
   }
 
   /**
    * Add a UI element for this path.
    *
-   * @param {!Entry} path The filesystem path to work with.
+   * @param {!IndexeddbFsFileEntry} path The filesystem path to work with.
    */
   addFile_(path) {
     const li = document.createElement('li');
@@ -150,8 +153,7 @@ class DirWatcher {
    */
   deleteFile_(elementTree, path) {
     // Delete the file, and then remove the UI element.
-    lib.fs.removeFile(filesystem.root, path)
-      .then(() => elementTree.remove());
+    filesystem.removeFile(path).then(() => elementTree.remove());
   }
 }
 
@@ -165,13 +167,13 @@ const watched = {};
  */
 window.addEventListener('DOMContentLoaded', (event) => {
   // Load all the ~/.ssh files into the UI.
-  getDomFileSystem().then((fs) => {
+  getIndexeddbFileSystem().then((fs) => {
     filesystem = fs;
     watched.knowHosts = new FileWatcher(
         'ssh-files-known-hosts', '/.ssh/known_hosts');
     watched.sshConfig = new FileWatcher(
         'ssh-files-config', '/.ssh/config');
     watched.identities = new DirWatcher(
-        'ssh-files-identities', '/.ssh/identity/');
+        'ssh-files-identities', '/.ssh/identity');
   });
 });

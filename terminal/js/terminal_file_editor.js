@@ -66,12 +66,9 @@ class TerminalFileEditor extends LitElement {
   constructor() {
     super();
 
-    /** @type {!Promise<!FileSystem>} */
+    /** @type {!Promise<!IndexeddbFs>} */
     this.fileSystemPromise;
     this.textareaRef_ = createRef();
-
-    // This allows tests to inject mocks.
-    this.libFs_ = lib.fs;
   }
 
   /** @override */
@@ -85,8 +82,7 @@ class TerminalFileEditor extends LitElement {
   async load() {
     let value = '';
     try {
-      value = await this.libFs_.readFile(
-          (await this.fileSystemPromise).root, this.path);
+      value = await (await this.fileSystemPromise).readFile(this.path);
     } catch (e) {
       console.warn(
           `failed to read file ${this.path}. File does not exist? error:`, e);
@@ -96,8 +92,7 @@ class TerminalFileEditor extends LitElement {
 
   async onChange_(e) {
     const value = e.target.value;
-    this.libFs_.overwriteFile((await this.fileSystemPromise).root, this.path,
-        value);
+    await (await this.fileSystemPromise).writeFile(this.path, value);
   }
 }
 

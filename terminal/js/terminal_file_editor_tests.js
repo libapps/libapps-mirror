@@ -4,25 +4,24 @@
 
 /**
  * @fileoverview Test for <terminal-file-editor>
+ * @suppress {moduleLoad}
  */
 
+import {createFs} from './nassh_deps.rollup.js';
+
 import './terminal_file_editor.js';
-import {MockObject} from './terminal_test_mocks.js';
 
 describe('terminal_file_editor.js', () => {
   beforeEach(async function() {
+    // The store name has 20 char limit.
+    const fsId = `test-${Date.now() % 1e7}-${Math.floor(Math.random() * 1e7)}`;
+    this.fileSystem = createFs({databaseName: fsId});
+    await this.fileSystem.createDirectory('/fake');
+    await this.fileSystem.writeFile('/fake/path', 'hello world');
 
     this.el = document.createElement('terminal-file-editor');
-    this.el.fileSystemPromise = Promise.resolve({root: '/fake/root'});
+    this.el.fileSystemPromise = Promise.resolve(this.fileSystem);
     this.el.setAttribute('path', '/fake/path');
-
-    this.libFsMock = new MockObject({
-      readFile: (...args) => {
-        this.libFsMock.methodCalled('readFile', ...args);
-        return Promise.resolve('hello world');
-      },
-    });
-    this.el.libFs_ = this.libFsMock.proxy;
 
     document.body.appendChild(this.el);
     await this.el.updateComplete;
@@ -37,18 +36,23 @@ describe('terminal_file_editor.js', () => {
   it('loads from fs', async function() {
     this.el.load();
     await new Promise((resolve) => setTimeout(resolve));
-    assert.deepEqual(this.libFsMock.getMethodHistory('readFile'),
-        [['/fake/root', '/fake/path']]);
+    assert.deepEqual(await this.fileSystem.readFile('/fake/path'),
+                     'hello world');
     assert.equal(this.el.textareaRef_.value.value, 'hello world');
-    assert.deepEqual(this.libFsMock.getMethodHistory('overwriteFile'), []);
   });
 
   it('save to fs on change event', async function() {
     this.el.textareaRef_.value.value = 'hello world again';
     this.el.textareaRef_.value.dispatchEvent(new Event('change'));
-    await new Promise((resolve) => setTimeout(resolve));
-    assert.deepEqual(this.libFsMock.getMethodHistory('overwriteFile'),
-        [['/fake/root', '/fake/path', 'hello world again']]);
-    assert.deepEqual(this.libFsMock.getMethodHistory('readFile'), []);
+
+    let data;
+    while (true) {
+      data = await this.fileSystem.readFile('/fake/path');
+      if (data !== 'hello world') {
+        break;
+      }
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+    assert.deepEqual(data, 'hello world again');
   });
 });

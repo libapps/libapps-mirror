@@ -176,12 +176,11 @@ export async function syncFilesystemFromDomToIndexeddb(
 /**
  * Import identity files to the file system.
  *
- * @param {!FileSystem} fileSystem The file system to import the files.
+ * @param {!IndexeddbFs} fileSystem The file system to import the files.
  * @param {!FileList} files The identity files.
  * @return {!Promise<void>}
  */
 export async function importIdentityFiles(fileSystem, files) {
-  const promises = [];
   for (let i = 0; i < files.length; ++i) {
     const file = files[i];
 
@@ -192,30 +191,34 @@ export async function importIdentityFiles(fileSystem, files) {
     }
 
     const targetPath = `/.ssh/identity/${file.name}`;
-    promises.push(lib.fs.overwriteFile(
-        fileSystem.root, targetPath, file));
+    const blob = new Blob([file], {type: 'text/plain'});
+    const contents = await blob.arrayBuffer();
+    await fileSystem.writeFile(targetPath, contents);
   }
-
-  await Promise.all(promises);
 }
 
 /**
  * Get the names of identity files in the file system, which are suitable for
  * passing to ssh's -i option.
  *
- * @param {!FileSystem} fileSystem The file system to get the identity files.
+ * @param {!IndexeddbFs} fileSystem The file system to get the identity files.
  * @return {!Promise<!Array<string>>} The names of identity files.
  */
 export async function getIdentityFileNames(fileSystem) {
-  return (await lib.fs.readDirectory(fileSystem.root, '/.ssh/identity/'))
-      .filter((entry) => entry.isFile && !entry.name.endsWith('-cert.pub'))
-      .map((entry) => entry.name);
+  const identityDir = '/.ssh/identity';
+  // Make sure the directory exists.  This makes reading empty dirs easier.
+  await fileSystem.createDirectory(identityDir);
+  const entries = await fileSystem.readDirectory(identityDir);
+  return entries.files.filter((entry) => {
+    return entry.type === 'file' && !entry.name.endsWith('-cert.pub');
+  }).map((entry) => entry.name);
 }
 
 /**
  * Delete identity files.
  *
- * @param {!FileSystem} fileSystem The file system to delete the identity files.
+ * @param {!IndexeddbFs} fileSystem The file system to delete the identity
+ *     files.
  * @param {string} identityName The name (not path) of the identity file.
  * @return {!Promise<void>}
  */
@@ -224,9 +227,11 @@ export async function deleteIdentityFiles(fileSystem, identityName) {
     `/.ssh/identity/${identityName}`,
     `/.ssh/identity/${identityName}.pub`,
     `/.ssh/identity/${identityName}-cert.pub`,
-  ].map((file) => {
+  ].map(async (file) => {
     // We swallow the rejection because we try to delete paths that are
     // often not there (e.g. missing .pub file).
-    return lib.fs.removeFile(fileSystem.root, file).catch(() => {});
+    try {
+      await fileSystem.removeFile(file);
+    } catch (e) { /**/ }
   }));
 }

@@ -96,6 +96,7 @@ function(request, sender, sendResponse) {
    * @return {!Promise<void>} A promise completing when the write finishes.
    */
   const writeFile = (filename, content) => {
+    // TODO(vapier): Move to indexeddb-fs once SFTP works w/WASM.
     return lib.fs.overwriteFile(fileSystem_.root, filename, content);
   };
   Promise.all([
