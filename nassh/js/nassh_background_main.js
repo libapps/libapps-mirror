@@ -12,6 +12,7 @@ import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';
 import {addListeners as externalAddListeners,
         initApi} from './nassh_external_api.js';
+import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
 
 let didLaunch = false;
 
@@ -60,6 +61,9 @@ lib.init(console.log.bind(console)).then(() => {
     browserAction.onClicked.removeListener(onLaunched);
     app.installBrowserAction();
   }
+
+  // Migrate over the DOM filesystem to the new indexeddb-fs.
+  migrateFilesystemFromDomToIndexeddb();
 
   // If the user tried to run us while we were initializing, run it now.
   if (didLaunch) {

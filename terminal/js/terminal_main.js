@@ -6,6 +6,8 @@
  * @fileoverview Initializes global state used in terminal.
  */
 
+import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
+
 import {terminal} from './terminal.js';
 import {definePrefs, registerOSInfoPreFetch, watchColors}
     from './terminal_common.js';
@@ -86,6 +88,10 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   lib.init().then(async () => {
+    // Migrate over the DOM filesystem to the new indexeddb-fs.
+    // TODO(vapier): Delete this with R110+.
+    await migrateFilesystemFromDomToIndexeddb();
+
     const launchInfo = (await globalInit).launchInfo;
     if (launchInfo.home) {
       runTerminalHome();

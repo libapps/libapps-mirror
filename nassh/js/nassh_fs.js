@@ -4,7 +4,11 @@
 
 /**
  * @fileoverview Core FS code and related utility logic.
+ *
+ * @suppress {moduleLoad}
  */
+
+import {createFs} from './nassh_deps.rollup.js';
 
 /**
  * Request the persistent HTML5 filesystem for this extension.
@@ -47,6 +51,63 @@ export async function getDomFileSystem() {
                 reject(e);
               });
   });
+}
+
+/**
+ * Request the persistent indexeddb-fs for this extension.
+ *
+ * @return {!Promise<!IndexeddbFs>} The filesystem handle.
+ */
+export async function getIndexeddbFileSystem() {
+  return createFs({objectStoreName: 'nassh-rootfs'});
+}
+
+/**
+ * Migrate files from the old DOM FS to the new indexeddb-fs.
+ *
+ * We should only have files under /.ssh.  Don't bother migrating anything else.
+ *
+ * @param {!FileSystem=} domfs The old DOM file system to import from.
+ * @param {!IndexeddbFs=} fs The new indexeddb-fs filesystem to export to.
+ * @return {!Promise<void>} Returns on completion.
+ */
+export async function migrateFilesystemFromDomToIndexeddb(
+    domfs = undefined, fs = undefined) {
+  const migrateFile = async (file) => {
+    const data = await lib.fs.readFile(domfs.root, file);
+    return fs.writeFile(file, data);
+  };
+
+  const migrateDir = async (basedir) => {
+    console.log(`fs: Migrating ${basedir} from DOM to indexeddb-fs`);
+    await fs.createDirectory(basedir);
+
+    const paths = await lib.fs.readDirectory(domfs.root, basedir);
+    for (const path of paths) {
+      if (path.isFile) {
+        await migrateFile(path.fullPath);
+      } else {
+        await migrateDir(path.fullPath);
+      }
+    }
+  };
+
+  if (!fs) {
+    fs = await getIndexeddbFileSystem();
+  }
+  if (!domfs) {
+    domfs = await getDomFileSystem();
+  }
+
+  // If we already migrated, don't do it again.  If the path doesn't exist, the
+  // API throws an exception instead of returning false.
+  try {
+    if (await fs.isDirectory('/.ssh')) {
+      return;
+    }
+  } catch (e) { /**/ }
+
+  return migrateDir('/.ssh');
 }
 
 /**

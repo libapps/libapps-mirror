@@ -6,6 +6,8 @@
  * @fileoverview Initializes global state used in terminal settings.
  */
 
+import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
+
 import {SUPPORTED_FONT_FAMILIES, definePrefs, loadWebFont,
   normalizePrefsInPlace, registerOSInfoPreFetch} from './terminal_common.js';
 
@@ -33,7 +35,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     await hterm.messageManager.findAndLoadMessages(url);
     document.title = hterm.messageManager.get('TERMINAL_TITLE_SETTINGS');
   });
-  lib.init().then(() => {
+  lib.init().then(async () => {
+    // Migrate over the DOM filesystem to the new indexeddb-fs.
+    // TODO(vapier): Delete this with R110+.
+    await migrateFilesystemFromDomToIndexeddb();
+
     window.PreferenceManager = hterm.PreferenceManager;
     window.storage = chrome.terminalPrivate
       ? new lib.Storage.TerminalPrivate() : new lib.Storage.Local();
