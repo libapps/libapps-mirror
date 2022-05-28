@@ -156,4 +156,64 @@ it('import-json', async () => {
   assert.deepStrictEqual(prefs, newPrefs);
 });
 
+
+/**
+ * Verify changing prefix works.
+ */
+it('change-prefix', async () => {
+  const storage = new lib.Storage.Memory();
+  // a: p1 and p2 have custom value.
+  // b: p1 has custom value.
+  // c: p2 has custom value.
+  // d: no custom values.
+  storage.setItems({
+    '/p1/a': 'p1a',
+    '/p1/b': 'p1b',
+    '/p2/a': 'p2a',
+    '/p2/c': 'p2c',
+  });
+  const manager = new lib.PreferenceManager(storage, '/p1');
+  manager.definePreferences([
+    ['a', 'a'],
+    ['b', 'b'],
+    ['c', 'c'],
+    ['d', 'd'],
+  ]);
+  await new Promise((resolve) => manager.readStorage(resolve));
+
+  const observed = {};
+  let observerCount = 0;
+  for (const c of 'abcd') {
+    manager.addObserver(c, (value, key) => {
+      observed[key] = value;
+      observerCount++;
+    });
+  }
+
+  // Observe all prefs for '/p1'.
+  manager.notifyAll();
+  assert.deepStrictEqual({a: 'p1a', b: 'p1b', c: 'c', d: 'd'}, observed);
+  assert.equal(4, observerCount);
+  assert.equal('p1a', manager.get('a'));
+  assert.equal('p1b', manager.get('b'));
+  assert.equal('c', manager.get('c'));
+  assert.equal('d', manager.get('d'));
+
+  // Change prefix to '/p2', and validate.
+  let prefixObserved;
+  manager.addPrefixObserver((value) => {
+    prefixObserved = value;
+    // This should be called before prefs are notified.
+    assert.equal(4, observerCount);
+  });
+  await new Promise((resolve) => manager.setPrefix('/p2', resolve));
+  assert.equal('/p2/', prefixObserved);
+  assert.deepStrictEqual({a: 'p2a', b: 'b', c: 'p2c', d: 'd'}, observed);
+  assert.equal(8, observerCount);
+  assert.equal('p2a', manager.get('a'));
+  assert.equal('b', manager.get('b'));
+  assert.equal('p2c', manager.get('c'));
+  assert.equal('d', manager.get('d'));
+});
+
 });

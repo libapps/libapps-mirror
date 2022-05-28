@@ -45,6 +45,7 @@ lib.PreferenceManager = function(storage, prefix = '/') {
   /** @type {!Object<string, !lib.PreferenceManager.Record>} */
   this.prefRecords_ = {};
   this.globalObservers_ = [];
+  this.prefixObservers_ = [];
 
   this.childFactories_ = {};
 
@@ -145,6 +146,41 @@ lib.PreferenceManager.Record.prototype.get = function() {
   }
 
   return this.currentValue;
+};
+
+/**
+ * Update prefix and reset and reload storage, then notify prefix observers, and
+ * all pref observers with new values.
+ *
+ * @param {string} prefix
+ * @param {function()=} callback Optional function to invoke when completed.
+ */
+lib.PreferenceManager.prototype.setPrefix = function(prefix, callback) {
+  if (!prefix.endsWith('/')) {
+    prefix += '/';
+  }
+  if (prefix === this.prefix) {
+    if (callback) {
+      callback();
+    }
+    return;
+  }
+
+  this.prefix = prefix;
+
+  for (const name in this.prefRecords_) {
+    this.prefRecords_[name].currentValue = this.DEFAULT_VALUE;
+  }
+
+  this.readStorage(() => {
+    for (const o of this.prefixObservers_) {
+      o(this.prefix, this);
+    }
+    this.notifyAll();
+    if (callback) {
+      callback();
+    }
+  });
 };
 
 /**
@@ -304,6 +340,30 @@ lib.PreferenceManager.prototype.defineChildren = function(
                         this.onChildListChange_.bind(this, listName));
   this.childFactories_[listName] = childFactory;
   this.childLists_[listName] = {};
+};
+
+/**
+ * Register a callback to be invoked when PreferenceManager prefix changes.
+ *
+ * @param {function(string, !lib.PreferenceManager)} observer The
+ *     function to invoke.  It will receive the new prefix, and a reference
+ *     to the PreferenceManager as parameters.
+ */
+lib.PreferenceManager.prototype.addPrefixObserver = function(observer) {
+  this.prefixObservers_.push(observer);
+};
+
+/**
+ * Unregister an observer callback.
+ *
+ * @param {function(string, !lib.PreferenceManager)} observer A
+ *     previously registered callback.
+ */
+lib.PreferenceManager.prototype.removePrefixObserver = function(observer) {
+  const i = this.prefixObservers_.indexOf(observer);
+  if (i >= 0) {
+    this.prefixObservers_.splice(i, 1);
+  }
 };
 
 /**
