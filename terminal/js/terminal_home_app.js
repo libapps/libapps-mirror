@@ -8,11 +8,14 @@
  * @suppress {moduleLoad}
  */
 
-import {css, html, LitElement} from './lit.js';
+import {LitElement, css, html, when} from './lit.js';
 import './terminal_button.js';
 import {DEFAULT_VM_NAME} from './terminal_common.js';
 import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_OPEN_IN_NEW, ICON_PLUS,
     ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
+import './terminal_linux_dialog.js';
+import {ProfileType, deleteProfile, getProfileIds, getProfileValues,
+  setProfileIds, setProfileValues} from './terminal_profiles.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_ssh_dialog.js';
 
@@ -36,6 +39,20 @@ const PREF_PATH_SSH_ALLOWED = 'crostini.terminal_ssh_allowed_by_policy';
  * @type {string}
  */
 const PREF_PATH_CONTAINERS = 'crostini.containers';
+
+/**
+ * Container label is <container_name> for termina, else
+ * <vm_name>:<container_name>.
+ *
+ * @param {{vm_name: string, container_name: string}} container
+ * @return {string}
+ */
+function containerLabel(container) {
+  if (container.vm_name === DEFAULT_VM_NAME) {
+     return container.container_name;
+  }
+  return `${container.vm_name}:${container.container_name}`;
+}
 
 export class TerminalHomeApp extends LitElement {
   /** @override */
@@ -208,23 +225,19 @@ export class TerminalHomeApp extends LitElement {
     const buttonText = this.crostiniEnabled
       ? msg('TERMINAL_HOME_MANAGE') : msg('TERMINAL_HOME_SET_UP');
 
-    const label = (c) => {
-      if (c.vm_name === DEFAULT_VM_NAME) {
-        return c.container_name;
-      }
-      return `${c.vm_name}:${c.container_name}`;
-    };
     const text = (c) => html`
       <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
-      <h4>${label(c)}</h4>
+      <h4>${containerLabel(c)}</h4>
    `;
     const href = (c) => {
       if (!this.crostiniEnabled) {
         return '';
       }
-      return `terminal.html?command=vmshell&args[]=${
-          encodeURIComponent(`--vm_name=${c.vm_name}`)}&args[]=${
-          encodeURIComponent(`--target_container=${c.container_name}`)}`;
+      const enc = encodeURIComponent;
+      return `terminal.html?command=vmshell&settings_profile=${
+          enc(c.settingsProfileId)
+          }&args[]=${enc(`--vm_name=${c.vm_name}`)
+          }&args[]=${enc(`--target_container=${c.container_name}`)}`;
     };
     const link = (c) => html`
       <a class="row full-width" target="_blank" href="${href(c)}">
@@ -251,6 +264,14 @@ export class TerminalHomeApp extends LitElement {
           ${this.containers.map((c) => html`
             <li class="row">
               ${this.crostiniEnabled ? link(c) : text(c)}
+              ${when(window.MULTI_PROFILE_ENABLED, () => html`
+                <mwc-icon-button
+                    aria-label="${msg('TERMINAL_HOME_EDIT_LINUX')}"
+                    class="icon-fill-svg"
+                    @click="${(e) => this.openLinuxDialog(c.vshProfileId)}">
+                  ${ICON_EDIT}
+                </mwc-icon-button>
+              `)}
             </li>
           `)}
           </ul>
@@ -274,9 +295,11 @@ export class TerminalHomeApp extends LitElement {
       <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
       <h4>${c.description}</h4>
    `;
+    const enc = encodeURIComponent;
     const link = (c) => html`
       <a class="row full-width" target="_blank"
-          href="terminal_ssh.html#profile-id:${c.id}">
+          href="terminal_ssh.html?settings_profile=${
+            enc(c.settingsProfileId)}#profile-id:${enc(c.id)}">
         ${text(c)}
       </a>
     `;
@@ -345,6 +368,8 @@ export class TerminalHomeApp extends LitElement {
           </ul>
         </section>
       </div>
+      <terminal-linux-dialog @close=${this.updateVshProfiles_}>
+      </terminal-linux-dialog>
       <terminal-ssh-dialog></terminal-ssh-dialog>
     `;
   }
@@ -355,14 +380,17 @@ export class TerminalHomeApp extends LitElement {
    * @param {!Object} changes
    */
   onSettingsChanged(changes) {
-    window.storage.getItems(null).then((items) => {
+    window.storage.getItems(null).then(async (items) => {
       const sshConnections = [];
       const ids = /** @type {!Array<string>} */(
           items['/nassh/profile-ids'] || []);
       for (const id of ids) {
         const description = items[`/nassh/profiles/${id}/description`];
+        const settingsProfileId =
+            items[`/nassh/profiles/${id}/terminal-profile`] ||
+            hterm.Terminal.DEFAULT_PROFILE_ID;
         if (description) {
-          sshConnections.push({id, description});
+          sshConnections.push({id, description, settingsProfileId});
         }
       }
       this.sshConnections = sshConnections;
@@ -377,6 +405,7 @@ export class TerminalHomeApp extends LitElement {
   onPrefsChanged(prefs) {
     if (prefs.hasOwnProperty(PREF_PATH_CONTAINERS)) {
       this.containers = prefs[PREF_PATH_CONTAINERS];
+      this.updateVshProfiles_();
     }
     if (prefs.hasOwnProperty(PREF_PATH_ENABLED)) {
       this.crostiniEnabled = prefs[PREF_PATH_ENABLED];
@@ -384,6 +413,55 @@ export class TerminalHomeApp extends LitElement {
     if (prefs.hasOwnProperty(PREF_PATH_SSH_ALLOWED)) {
       this.sshAllowed = prefs[PREF_PATH_SSH_ALLOWED];
     }
+  }
+
+  /**
+   * Sync vsh profiles with containers. Create new profiles if needed, and
+   * delete any that do not match.
+   *
+   * @private
+   */
+  async updateVshProfiles_() {
+    const enc = encodeURIComponent;
+    const containerKey = (vm, container) => `${enc(vm)}:${enc(container)}`;
+    const toMatch = {};
+    for (const c of this.containers) {
+      toMatch[containerKey(c.vm_name, c.container_name)] = c;
+    }
+
+    const ids = await getProfileIds(ProfileType.VSH);
+    for (const id of ids) {
+      const [label, vmName, containerName, settingsProfile] =
+          await getProfileValues(ProfileType.VSH, id, [
+            'description',
+            'vm-name',
+            'container-name',
+            'terminal-profile',
+          ], '');
+      const key = containerKey(vmName, containerName);
+      const c = toMatch[key];
+      if (c) {
+        c.vshProfileId = id;
+        c.settingsProfileId = settingsProfile;
+        delete toMatch[key];
+      } else {
+        deleteProfile(ProfileType.VSH, id, true);
+      }
+    }
+
+    for (const c of Object.values(toMatch)) {
+      const id = lib.PreferenceManager.newRandomId(ids);
+      c.vshProfileId = id;
+      c.settingsProfileId = hterm.Terminal.DEFAULT_PROFILE_ID;
+      await setProfileIds(ProfileType.VSH, [...ids, id]);
+      await setProfileValues(ProfileType.VSH, id, {
+        'description': containerLabel(c),
+        'vm-name': c.vm_name,
+        'container-name': c.container_name,
+        'terminal-profile': hterm.Terminal.DEFAULT_PROFILE_ID,
+      });
+    }
+    this.requestUpdate();
   }
 
   /**
@@ -398,6 +476,15 @@ export class TerminalHomeApp extends LitElement {
    */
   onOpenSystemSettings() {
     chrome.terminalPrivate?.openSettingsSubpage('crostini', () => {});
+  }
+
+  /**
+   * Open the linux dialog to add new connection or edit existing ones.
+   *
+   * @param {string=} vshProfileId
+   */
+  openLinuxDialog(vshProfileId) {
+    this.shadowRoot.querySelector('terminal-linux-dialog').show(vshProfileId);
   }
 
   /**

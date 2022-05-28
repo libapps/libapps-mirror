@@ -103,6 +103,7 @@ export class TerminalDialog extends LitElement {
     nativeDialog.returnValue = 'cancel';
     nativeDialog.showModal();
     this.open = true;
+    this.dispatchEvent(new CustomEvent('open'));
   }
 
   onNativeClose_(event) {

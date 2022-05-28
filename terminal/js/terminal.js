@@ -116,10 +116,15 @@ terminal.addBindings = function(term) {
  * @return {!hterm.Terminal} The new hterm.Terminal instance.
  */
 terminal.init = function(element, launchInfo) {
-  const term = new hterm.Terminal({storage: new lib.Storage.TerminalPrivate()});
+  const params = new URLSearchParams(window.location.search);
+  const profileId = params.get('settings_profile') ||
+      hterm.Terminal.DEFAULT_PROFILE_ID;
+  const term = new hterm.Terminal(
+      {profileId, storage: new lib.Storage.TerminalPrivate()});
 
   term.decorate(element);
   term.installKeyboard();
+  watchBackgroundColor(term.getPrefs());
   const runTerminal = async function() {
     term.onOpenOptionsPage = terminal.openOptionsPage;
     term.keyboard.keyMap.keyDefs[78].control = terminal.onCtrlN;
@@ -193,7 +198,6 @@ terminal.init = function(element, launchInfo) {
   term.onTerminalReady = function() {
     const prefs = term.getPrefs();
     definePrefs(prefs);
-    watchBackgroundColor(prefs);
     terminal.watchBackgroundImage(term);
 
     loadPowerlineWebFonts(term.getDocument());
