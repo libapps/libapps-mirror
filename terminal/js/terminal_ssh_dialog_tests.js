@@ -153,7 +153,4 @@ describe('terminal_ssh_dialog.js', function() {
       assert.isFalse(this.el.dialogRef_.value.open);
     });
   });
-
-  // TODO(b/223076712): test identity files logic and load/save nassh profile
-  // logic.
 });

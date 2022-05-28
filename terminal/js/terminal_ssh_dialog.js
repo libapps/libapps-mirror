@@ -15,6 +15,8 @@ import './terminal_button.js';
 import './terminal_dialog.js';
 import './terminal_dropdown.js';
 import './terminal_label.js';
+import {ProfileType, deleteProfile, getProfileIds, getProfileValues,
+  setProfileIds, setProfileValues} from './terminal_profiles.js';
 import './terminal_textfield.js';
 
 const GOOGLE_HOST_REGEXP = new RegExp(
@@ -332,7 +334,7 @@ export class TerminalSSHDialog extends LitElement {
 
     if (this.nasshProfileId_) {
       [command, this.userTitle_, relayArgs, identity] =
-          await this.getNasshProfileValues_([
+          await getProfileValues(ProfileType.NASSH, this.nasshProfileId_, [
             'terminalSSHDialogCommand',
             'description',
             'nassh-options',
@@ -344,7 +346,7 @@ export class TerminalSSHDialog extends LitElement {
       if (!command) {
         console.warn('Construct command string from other profile values.');
         const [username, hostname, port, argstr] =
-            await this.getNasshProfileValues_([
+            await getProfileValues(ProfileType.NASSH, this.nasshProfileId_, [
               'username',
               'hostname',
               'port',
@@ -388,7 +390,7 @@ export class TerminalSSHDialog extends LitElement {
    */
   onDeleteClick_(event) {
     this.dialogRef_.value.cancel();
-    this.deleteNasshProfile_();
+    deleteProfile(ProfileType.NASSH, this.nasshProfileId_);
   }
 
   /** @param {!Event} event */
@@ -444,16 +446,16 @@ export class TerminalSSHDialog extends LitElement {
 
       if (this.nasshProfileId_) {
         // Remove the profile first to ensure a clean state.
-        await this.deleteNasshProfile_(false);
+        await deleteProfile(ProfileType.NASSH, this.nasshProfileId_, false);
       } else {
-        const profileIds = await this.getNasshProfileIds_();
+        const profileIds = await getProfileIds(ProfileType.NASSH);
         this.nasshProfileId_ = lib.PreferenceManager.newRandomId(profileIds);
-        await this.setNasshProfileIds_([
+        await setProfileIds(ProfileType.NASSH, [
             ...profileIds,
             this.nasshProfileId_,
         ]);
       }
-      this.setNasshProfileValues_({
+      setProfileValues(ProfileType.NASSH, this.nasshProfileId_, {
         'terminalSSHDialogCommand': this.commandRef_.value.value,
         'description': this.getTitle_(),
         'username': parsedDestination.username,
@@ -470,79 +472,12 @@ export class TerminalSSHDialog extends LitElement {
     this.dispatchEvent(new CustomEvent('close'));
   }
 
-  /**
-   * @param {string} name
-   * @return {string}
-   */
-  getNasshProfileKey_(name) {
-    if (!this.nasshProfileId_) {
-      throw new Error('nasshProfileId is empty');
-    }
-    return `/nassh/profiles/${this.nasshProfileId_}/${name}`;
-  }
-
-  /**
-   * Get nassh ssh profile values. The return value is an array in the same
-   * order as the param `names`.
-   *
-   * @param {!Array<string>} names
-   * @param {*} defaultValue Missing value is replaced with this.
-   * @return {!Promise<!Array<*>>}
-   */
-  async getNasshProfileValues_(names, defaultValue) {
-    const keys = names.map((x) => this.getNasshProfileKey_(x));
-    const rv = await window.storage.getItems(keys);
-    return keys.map((k) => rv[k] ?? defaultValue);
-  }
-
-  /**
-   * Set nassh profile values from an object.
-   *
-   * @param {!Object} values
-   */
-  async setNasshProfileValues_(values) {
-    const values2 = {};
-    for (const [name, value] of Object.entries(values)) {
-      values2[this.getNasshProfileKey_(name)] = value;
-    }
-    await window.storage.setItems(values2);
-  }
-
   async loadIdentities_() {
     this.identities_ = [
         this.DEFAULT_IDENTITY,
         ...(await getIdentityFileNames(lib.notNull(this.fileSystem_)))
             .map((value) => ({value, deletable: true})),
     ];
-  }
-
-  /** @return {!Promise<!Array<string>>} */
-  async getNasshProfileIds_() {
-    const profileIds = /** @type {?Array<string>}*/(
-        await window.storage.getItem('/nassh/profile-ids'));
-    return profileIds ?? [];
-  }
-
-  /**
-   * @param {!Array<string>} profileIds
-   * @return {!Promise<void>}
-   */
-  async setNasshProfileIds_(profileIds) {
-    await window.storage.setItem('/nassh/profile-ids', profileIds);
-  }
-
-  async deleteNasshProfile_(deleteFromProfileIds = true) {
-    if (deleteFromProfileIds) {
-      await this.setNasshProfileIds_(
-          (await this.getNasshProfileIds_())
-              .filter((id) => id !== this.nasshProfileId_),
-      );
-    }
-    const prefix = `/nassh/profiles/${this.nasshProfileId_}`;
-    window.storage.removeItems(
-        Object.keys(await window.storage.getItems(null))
-            .filter((key) => key.startsWith(prefix)),
-    );
   }
 
   async onDeleteIdentity_(e) {
