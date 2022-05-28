@@ -7,7 +7,8 @@
  */
 
 import {terminal} from './terminal.js';
-import {definePrefs, watchBackgroundColor} from './terminal_common.js';
+import {definePrefs, registerGetOSInfo, watchBackgroundColor}
+    from './terminal_common.js';
 import './terminal_home_app.js';
 import {getTerminalInfoTracker, setUpTitleHandler} from './terminal_info.js';
 
@@ -66,6 +67,8 @@ function runTerminalHome() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  registerGetOSInfo();
+
   // Load i18n messages.
   lib.registerInit('messages', async () => {
     // Load hterm.messageManager from /_locales/<lang>/messages.json.

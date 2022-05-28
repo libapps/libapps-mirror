@@ -10,7 +10,7 @@ import {
   deleteIdentityFiles, getFileSystem, getIdentityFileNames, importIdentityFiles,
 } from './nassh_fs.js';
 
-import {LitElement, createRef, css, html, live, ref} from './lit.js';
+import {LitElement, createRef, css, html, live, ref, when} from './lit.js';
 import './terminal_button.js';
 import './terminal_dialog.js';
 import './terminal_dropdown.js';
@@ -151,6 +151,7 @@ export class TerminalSSHDialog extends LitElement {
       userTitle_: {state: true},
       parsedCommand_: {state: true},
       identities_: {state: true},
+      settingsProfiles_: {state: true},
       suppressCommandError_: {state: true},
     };
   }
@@ -174,6 +175,10 @@ export class TerminalSSHDialog extends LitElement {
 
         #identity-input {
           display: none;
+        }
+
+        #settings-profile-container {
+          margin-bottom: 16px;
         }
 
         div[slot="buttons"] {
@@ -213,10 +218,13 @@ export class TerminalSSHDialog extends LitElement {
     /** @private {?FileSystem} */
     this.fileSystem_;
 
+    this.settingsProfiles_ = [hterm.Terminal.DEFAULT_PROFILE_ID];
+
     this.dialogRef_ = createRef();
     this.commandRef_ = createRef();
     this.relayArgsRef_ = createRef();
     this.identityDropdownRef_ = createRef();
+    this.settingsProfileDropdownRef_ = createRef();
     this.okRef_ = createRef();
   }
 
@@ -252,6 +260,7 @@ export class TerminalSSHDialog extends LitElement {
     }
 
     const identityLabel = msg('IDENTITY_LABEL');
+    const settingsProfileLabel = msg('TERMINAL_PROFILE_LABEL');
 
     return html`
         <terminal-dialog ${ref(this.dialogRef_)}
@@ -273,6 +282,15 @@ export class TerminalSSHDialog extends LitElement {
               placeholder="username@hostname -p <port> -R 1234:localhost:5678">
             <span slot="inline-prefix">ssh&nbsp</span>
           </terminal-textfield>
+          ${when(window.MULTI_PROFILE_ENABLED, () => html`
+            <div id="settings-profile-container">
+              <terminal-label>${settingsProfileLabel}</terminal-label>
+              <terminal-dropdown ${ref(this.settingsProfileDropdownRef_)}
+                  .options="${this.settingsProfiles_.map((value) => ({value}))}"
+                  ariaLabel="${settingsProfileLabel}">
+              </terminal-dropdown>
+            </div>
+          `)}
           <terminal-label>${identityLabel}</terminal-label>
           <div id="identity-container">
             <terminal-dropdown
@@ -330,15 +348,17 @@ export class TerminalSSHDialog extends LitElement {
     let command = '';
     let relayArgs = '';
     let identity = this.DEFAULT_IDENTITY.value;
+    let settingsProfile = '';
     this.userTitle_ = '';
 
     if (this.nasshProfileId_) {
-      [command, this.userTitle_, relayArgs, identity] =
+      [command, this.userTitle_, relayArgs, identity, settingsProfile] =
           await getProfileValues(ProfileType.NASSH, this.nasshProfileId_, [
             'terminalSSHDialogCommand',
             'description',
             'nassh-options',
             'identity',
+            'terminal-profile',
           ], '');
 
       // We might have some old SSH profile without the "command". In this case,
@@ -368,6 +388,14 @@ export class TerminalSSHDialog extends LitElement {
     this.relayArgsRef_.value.value = relayArgs;
     this.identityDropdownRef_.value.value = identity;
     this.suppressCommandError_ = !this.nasshProfileId_;
+
+    if (window.MULTI_PROFILE_ENABLED) {
+      this.settingsProfiles_ = /** @type {?Array<string>}*/ (
+          await getProfileIds(ProfileType.HTERM)) ||
+          [hterm.Terminal.DEFAULT_PROFILE_ID];
+      this.settingsProfileDropdownRef_.value.value =
+          settingsProfile || hterm.Terminal.DEFAULT_PROFILE_ID;
+    }
 
     this.shadowRoot.querySelector('terminal-dialog').show();
     this.shadowRoot.querySelector('terminal-textfield[fitContent]')
@@ -455,7 +483,7 @@ export class TerminalSSHDialog extends LitElement {
             this.nasshProfileId_,
         ]);
       }
-      setProfileValues(ProfileType.NASSH, this.nasshProfileId_, {
+      const values = {
         'terminalSSHDialogCommand': this.commandRef_.value.value,
         'description': this.getTitle_(),
         'username': parsedDestination.username,
@@ -466,7 +494,12 @@ export class TerminalSSHDialog extends LitElement {
         'argstr': this.parsedCommand_.argstr,
         'nassh-options': this.relayArgsRef_.value.value,
         'identity': this.identityDropdownRef_.value.value,
-      });
+      };
+      if (window.MULTI_PROFILE_ENABLED) {
+        values['terminal-profile'] =
+            this.settingsProfileDropdownRef_.value.value;
+      }
+      setProfileValues(ProfileType.NASSH, this.nasshProfileId_, values);
     }
 
     this.dispatchEvent(new CustomEvent('close'));
