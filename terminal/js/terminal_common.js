@@ -233,6 +233,27 @@ export function loadPowerlineWebFonts(document) {
 }
 
 /**
+ * Registers with lib.registerInit() to set window.MULTI_PROFILE_ENABLED.
+ */
+export function registerGetOSInfo() {
+  window.MULTI_PROFILE_ENABLED = false;
+
+  if (chrome.terminalPrivate) {
+    lib.registerInit('get-os-info', async () => {
+      return new Promise((resolve) => {
+        chrome.terminalPrivate.getOSInfo((info) => {
+          window.MULTI_PROFILE_ENABLED = !!info.multi_profile;
+          resolve();
+        });
+      });
+    });
+  } else {
+    // Always true for testing.
+    window.MULTI_PROFILE_ENABLED = true;
+  }
+}
+
+/**
  * Resolves to true if tmux integration is enabled via chrome://flags.
  *
  * @type {!Promise<boolean>}

@@ -238,6 +238,7 @@ export class TerminalSettingsThemeElement extends LitElement {
 
     /** @private {!Theme} */
     this.theme_;
+    this.boundProfileChanged_ = this.profileChanged_.bind(this);
     this.boundPreferenceChanged_ = this.preferenceChanged_.bind(this);
   }
 
@@ -245,11 +246,8 @@ export class TerminalSettingsThemeElement extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    Object.values(THEMES).forEach((t) => {
-      t.init(window.preferenceManager);
-    });
-    this.preferenceChanged_(
-        window.preferenceManager.get('theme'), 'theme');
+    this.profileChanged_();
+    window.preferenceManager.addPrefixObserver(this.boundProfileChanged_);
     PREFS.forEach((p) => {
       window.preferenceManager.addObserver(
           p, this.boundPreferenceChanged_);
@@ -260,6 +258,7 @@ export class TerminalSettingsThemeElement extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
 
+    window.preferenceManager.removePrefixObserver(this.boundProfileChanged_);
     PREFS.forEach((p) => {
       window.preferenceManager.removeObserver(
         p, this.boundPreferenceChanged_);
@@ -450,6 +449,15 @@ ${span(t.ansi[10], 'joel@penguin')}:${span(t.ansi[12], '~')
         event.preventDefault();
         break;
     }
+  }
+
+  /** @private */
+  profileChanged_() {
+    Object.values(THEMES).forEach((t) => {
+      t.init(window.preferenceManager);
+    });
+    this.preferenceChanged_(
+        window.preferenceManager.get('theme'), 'theme');
   }
 
   /**

@@ -7,7 +7,7 @@
  */
 
 import {SUPPORTED_FONT_FAMILIES, definePrefs, loadWebFont,
-  normalizePrefsInPlace} from './terminal_common.js';
+  normalizePrefsInPlace, registerGetOSInfo} from './terminal_common.js';
 
 // We are loading all web fonts at the beginning because some settings UI need
 // to know whether a web font is available.
@@ -21,6 +21,8 @@ window.webFontPromises = new Map(
 );
 
 window.addEventListener('DOMContentLoaded', (event) => {
+  registerGetOSInfo();
+
   // Load i18n messages.
   lib.registerInit('messages', async () => {
     // Load hterm.messageManager from /_locales/<lang>/messages.json.
@@ -33,9 +35,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
   });
   lib.init().then(() => {
     window.PreferenceManager = hterm.PreferenceManager;
-    const storage = chrome.terminalPrivate
+    window.storage = chrome.terminalPrivate
       ? new lib.Storage.TerminalPrivate() : new lib.Storage.Local();
-    window.preferenceManager = new window.PreferenceManager(storage);
+    window.preferenceManager = new window.PreferenceManager(
+        window.storage, hterm.Terminal.DEFAULT_PROFILE_ID);
     definePrefs(window.preferenceManager);
     window.preferenceManager.readStorage(() => {
       normalizePrefsInPlace(window.preferenceManager);

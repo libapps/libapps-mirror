@@ -10,11 +10,12 @@
 
 import {getFileSystem} from './nassh_fs.js';
 
-import {LitElement, createRef, css, html, ref, unsafeCSS} from './lit.js';
+import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import {SUPPORTED_FONT_SIZES,
   SUPPORTED_LINE_HEIGHT_PADDINGS} from './terminal_common.js';
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
+import {ICON_OPEN_IN_NEW} from './terminal_icons.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_background_image.js';
@@ -22,6 +23,7 @@ import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
 import './terminal_settings_colorpicker.js';
 import './terminal_settings_fonts.js';
+import './terminal_settings_profile_selector.js';
 import './terminal_settings_row.js';
 import './terminal_settings_theme.js';
 
@@ -29,19 +31,6 @@ export const BELL_SOUND_CONVERTER = {
   toChecked: (value) => !!value,
   fromChecked: (checked) => checked ? 'lib-resource:hterm/audio/bell' : '',
 };
-
-/**
- * Open in new window svg icon.
- *
- * @type {string}
- */
-const OPEN_IN_NEW =
-    '<svg width="20px" height="20px" viewBox="0 0 24 24" ' +
-    'fill="rgb(95,99,104)" xmlns="http://www.w3.org/2000/svg">' +
-    '<path d="M0 0h24v24H0V0z" fill="none"/>' +
-    '<path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 ' +
-    '2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>' +
-    '</svg>';
 
 export class TerminalSettingsApp extends LitElement {
   /** @override */
@@ -96,6 +85,10 @@ export class TerminalSettingsApp extends LitElement {
 
       #left-panel {
         min-width: 192px;
+      }
+
+      terminal-settings-profile-selector {
+        padding-left: 32px;
       }
 
       .terminal-settings-category {
@@ -160,9 +153,13 @@ export class TerminalSettingsApp extends LitElement {
       }
 
       .about-link {
-        background: no-repeat right
-          url('data:image/svg+xml;utf8,${unsafeCSS(OPEN_IN_NEW)}');
         cursor: pointer;
+      }
+
+      .icon svg {
+        fill: rgb(95,99,104);
+        height: 20px;
+        width: 20px;
       }
 
       terminal-file-editor {
@@ -193,18 +190,25 @@ export class TerminalSettingsApp extends LitElement {
             }),
         );
 
+    const profileCategory =
+        window.MULTI_PROFILE_ENABLED ? 'profile-category' : '';
+
     return html`
         <div id="left-panel">
           <h1>${msg('PREFERENCES_HEADER_TERMINAL')}</h1>
+          ${when(window.MULTI_PROFILE_ENABLED, () => html`
+            <terminal-settings-profile-selector>
+            </terminal-settings-profile-selector>
+          `)}
           <terminal-settings-category-selector
               @category-change="${this.onCategoryChange_}">
-            <div data-name="appearance">
+            <div data-name="appearance" class="${profileCategory}">
               ${msg('TERMINAL_TITLE_PREF_APPEARANCE')}
             </div>
-            <div data-name="mousekeyboard">
+            <div data-name="mousekeyboard" class="${profileCategory}">
               ${msg('TERMINAL_TITLE_PREF_KEYBOARD_MOUSE')}
             </div>
-            <div data-name="behavior">
+            <div data-name="behavior" class="${profileCategory}">
               ${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}
             </div>
             <div data-name="ssh">SSH</div>
@@ -508,6 +512,7 @@ export class TerminalSettingsApp extends LitElement {
             <li class="setting-container about-link" role="link"
                 @click="${() => lib.f.openWindow('/html/licenses.html')}">
                 <h4>${msg('LICENSES')}</h4>
+                <span class="icon">${ICON_OPEN_IN_NEW}</span>
             </li>
           </ul>
         </section>

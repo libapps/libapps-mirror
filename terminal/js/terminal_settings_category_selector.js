@@ -28,6 +28,10 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
         user-select: none;
       }
 
+      ::slotted(div.profile-category) {
+        padding-left: 40px;
+      }
+
       ::slotted(div:hover) {
         background-color: rgb(240, 240, 240);
       }

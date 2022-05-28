@@ -2131,7 +2131,7 @@
 	},
 	"TERMINAL_PROFILE_LABEL": {
 		"description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts.",
-		"message": "Current profile"
+		"message": "Profile"
 	},
 	"TERMINAL_RESET_MENU_LABEL": {
 		"description": "The menu label to reset the active terminal settings.",
@@ -2148,6 +2148,16 @@
 	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP": {
 		"description": "Help text shown for the 'background-image' preference.",
 		"message": "Select a background image file from your computer."
+	},
+	"TERMINAL_SETTINGS_DELETE_PROFILE_DIALOG_MESSAGE": {
+		"description": "Message for the delete profile dialog. The confirmation dialog is shown when a user clicks to delete a settings profile.",
+		"message": "Are you sure you want to delete profile \"$PROFILE$\"?",
+		"placeholders": {
+			"PROFILE": {
+				"content": "$1",
+				"example": "MyCustomProfile"
+			}
+		}
 	},
 	"TERMINAL_SETTINGS_DROPDOWN_ALT_GR_MODE_AUTO": {
 		"description": "Label for AltGr key mode 'Auto' option. See TERMINAL_PREF_ALT_GR_MODE.",

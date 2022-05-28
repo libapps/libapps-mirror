@@ -259,6 +259,10 @@ export class TerminalDropdownElement extends LitElement {
       // of some race condition.
       setTimeout(() => this.shadowRoot.querySelector('ul').focus());
     }
+    if (changedProperties.has('value')) {
+      this.dispatchEvent(new CustomEvent('change',
+          {detail: {value: this.value}}));
+    }
   }
 
   /**
