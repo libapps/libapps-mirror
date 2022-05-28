@@ -255,7 +255,8 @@ hterm.Terminal.prototype.setProfile = function(
   this.profileId_ = profileId;
 
   if (this.prefs_) {
-    this.prefs_.deactivate();
+    this.prefs_.setProfile(profileId, callback);
+    return;
   }
 
   this.prefs_ = new hterm.PreferenceManager(this.storage_, this.profileId_);

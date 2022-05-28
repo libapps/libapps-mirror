@@ -985,15 +985,18 @@ it('auto-scroll-enabled', function() {
  */
 it('set-profile', async function() {
   const prefs = this.terminal.getPrefs();
+  assert.equal('/hterm/profiles/default/', prefs.prefix);
   await new Promise((resolve) => {
     this.terminal.setProfile('default', resolve);
   });
   assert.equal(prefs, this.terminal.getPrefs());
+  assert.equal('/hterm/profiles/default/', prefs.prefix);
 
   await new Promise((resolve) => {
     this.terminal.setProfile('not-default', resolve);
   });
-  assert.notEqual(prefs, this.terminal.getPrefs());
+  assert.equal(prefs, this.terminal.getPrefs());
+  assert.equal('/hterm/profiles/not-default/', prefs.prefix);
 });
 
 });

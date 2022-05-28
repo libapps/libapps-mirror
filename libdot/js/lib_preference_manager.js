@@ -26,9 +26,7 @@
 lib.PreferenceManager = function(storage, prefix = '/') {
   this.storage = storage;
   this.storageObserver_ = this.onStorageChange_.bind(this);
-
-  this.isActive_ = false;
-  this.activate();
+  this.storage.addObserver(this.storageObserver_);
 
   this.trace = false;
 
@@ -181,37 +179,6 @@ lib.PreferenceManager.prototype.setPrefix = function(prefix, callback) {
       callback();
     }
   });
-};
-
-/**
- * Stop this preference manager from tracking storage changes.
- *
- * Call this if you're going to swap out one preference manager for another so
- * that you don't get notified about irrelevant changes.
- */
-lib.PreferenceManager.prototype.deactivate = function() {
-  if (!this.isActive_) {
-    throw new Error('Not activated');
-  }
-
-  this.isActive_ = false;
-  this.storage.removeObserver(this.storageObserver_);
-};
-
-/**
- * Start tracking storage changes.
- *
- * If you previously deactivated this preference manager, you can reactivate it
- * with this method.  You don't need to call this at initialization time, as
- * it's automatically called as part of the constructor.
- */
-lib.PreferenceManager.prototype.activate = function() {
-  if (this.isActive_) {
-    throw new Error('Already activated');
-  }
-
-  this.isActive_ = true;
-  this.storage.addObserver(this.storageObserver_);
 };
 
 /**

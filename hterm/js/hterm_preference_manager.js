@@ -878,3 +878,14 @@ hterm.PreferenceManager.prototype =
     Object.create(lib.PreferenceManager.prototype);
 /** @override */
 hterm.PreferenceManager.constructor = hterm.PreferenceManager;
+
+/**
+ * Changes profile and notifies all listeners with updated values.
+ *
+ * @param {string} profileId New profile to use.
+ * @param {function()=} callback Optional function to invoke when completed.
+ */
+hterm.PreferenceManager.prototype.setProfile = function(profileId, callback) {
+  lib.PreferenceManager.prototype.setPrefix.call(
+      this, hterm.PreferenceManager.prefix_ + profileId, callback);
+};
