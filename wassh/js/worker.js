@@ -13,7 +13,6 @@ import {
 } from '../../wasi-js-bindings/index.js';
 import * as WasshProcess from './process.js';
 import * as WasshSyscallEntry from './syscall_entry.js';
-import * as WasshSyscallHandler from './syscall_handler.js';
 
 class WasshWorker extends BackgroundWorker.Base {
   newProcess(executable, argv, environ, sab, handler_ids) {
@@ -22,7 +21,7 @@ class WasshWorker extends BackgroundWorker.Base {
 
     const sys_handlers = [
       new SyscallHandler.ProxyWasiPreview1(this, sab, handler_ids),
-      new WasshSyscallHandler.DirectWasiPreview1(),
+      new SyscallHandler.DirectWasiPreview1(),
     ];
     const sys_entries = [
       new SyscallEntry.WasiPreview1({sys_handlers, trace}),

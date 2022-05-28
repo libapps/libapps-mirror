@@ -66,14 +66,6 @@ class Tty extends VFS.FileHandle {
 }
 
 /**
- * Wassh implementation of direct syscalls.
- *
- * These must all be synchronous.
- */
-export class DirectWasiPreview1 extends SyscallHandler.DirectWasiPreview1 {
-}
-
-/**
  * Wassh implementation of proxied syscalls.
  *
  * These may be asynchronous.
