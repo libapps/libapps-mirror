@@ -129,21 +129,16 @@ lib.PreferenceManager.Record.prototype.removeObserver = function(observer) {
  * @return {*} The value for this preference.
  */
 lib.PreferenceManager.Record.prototype.get = function() {
-  if (this.currentValue === this.DEFAULT_VALUE) {
-    if (/^(string|number)$/.test(typeof this.defaultValue)) {
-      return this.defaultValue;
-    }
+  const result = this.currentValue === this.DEFAULT_VALUE ?
+      this.defaultValue : this.currentValue;
 
-    if (typeof this.defaultValue == 'object') {
-      // We want to return a COPY of the default value so that users can
-      // modify the array or object without changing the default value.
-      return JSON.parse(JSON.stringify(this.defaultValue));
-    }
-
-    return this.defaultValue;
+  if (typeof this.defaultValue === 'object') {
+    // We want to return a COPY of the value so that users can
+    // modify the array or object without changing the value.
+    return JSON.parse(JSON.stringify(result));
   }
 
-  return this.currentValue;
+  return result;
 };
 
 /**
@@ -653,8 +648,9 @@ lib.PreferenceManager.prototype.resetAll = function() {
  * returns false (no difference), otherwise return true.
  *
  * This is used in places where we want to check if a preference has changed.
- * Rather than take the time to compare complex values we just consider them
- * to always be different.
+ * Compare complex values (objects or arrays) using JSON serialization. Objects
+ * with more than a single primitive property may not have the same JSON
+ * serialization, but for our purposes with default objects, this is OK.
  *
  * @param {*} a A value to compare.
  * @param {*} b A value to compare.
@@ -672,7 +668,7 @@ lib.PreferenceManager.prototype.diff = function(a, b) {
     if (a === null && b === null) {
       return false;
     } else {
-      return true;
+      return JSON.stringify(a) !== JSON.stringify(b);
     }
   }
 

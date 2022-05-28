@@ -216,4 +216,72 @@ it('change-prefix', async () => {
   assert.equal('d', manager.get('d'));
 });
 
+/**
+ * Verify we always return a copy of array or objects.
+ */
+it('get-array-or-object-returns-copy', async () => {
+  const storage = new lib.Storage.Memory();
+  const manager = new lib.PreferenceManager(storage);
+  const defaultObject = {default: true};
+  const defaultArray = ['default', 'array'];
+  manager.definePreferences([
+    ['object', defaultObject],
+    ['array', defaultArray],
+  ]);
+  await new Promise((resolve) => manager.readStorage(resolve));
+
+  // Check when value is default.
+  let o = /** @type {!Object} */(manager.get('object'));
+  assert.notEqual(o, defaultObject);
+  assert.deepEqual(o, defaultObject);
+  o['changed'] = true;
+  assert.isUndefined(defaultObject['changed']);
+  let a = /** @type {!Array} */(manager.get('array'));
+  assert.notEqual(a, defaultArray);
+  assert.deepEqual(a, defaultArray);
+  a.push('changed');
+  assert.equal(defaultArray.length, 2);
+
+  // Check when value is not default
+  const notDefaultObject = {notDefault: true};
+  const notDefaultArray = ['notdefault', 'array'];
+  manager.set('object', notDefaultObject);
+  manager.set('array', notDefaultArray);
+  o = /** @type {!Object} */(manager.get('object'));
+  assert.notEqual(o, notDefaultObject);
+  assert.deepEqual(o, notDefaultObject);
+  o['changed'] = true;
+  assert.isUndefined(notDefaultObject['changed']);
+  a = /** @type {!Array} */(manager.get('array'));
+  assert.notEqual(a, notDefaultArray);
+  assert.deepEqual(a, notDefaultArray);
+  a.push('changed');
+  assert.equal(notDefaultArray.length, 2);
+});
+
+/**
+ * Verify we clear storage when we set an object back to its default value.
+ */
+it('set-array-or-object-detects-default', async () => {
+  const storage = new lib.Storage.Memory();
+  const manager = new lib.PreferenceManager(storage);
+  const defaultObject = {default: true};
+  const defaultArray = ['default', 'array'];
+  manager.definePreferences([
+    ['object', defaultObject],
+    ['array', defaultArray],
+  ]);
+  await new Promise((resolve) => manager.readStorage(resolve));
+
+  assert.isUndefined(await storage.getItem('/object'));
+  assert.isUndefined(await storage.getItem('/array'));
+  manager.set('object', {notdefault: true});
+  manager.set('array', ['notdefault', 'array']);
+  assert.isDefined(await storage.getItem('/object'));
+  assert.isDefined(await storage.getItem('/array'));
+  manager.set('object', {default: true});
+  manager.set('array', ['default', 'array']);
+  assert.isUndefined(await storage.getItem('/object'));
+  assert.isUndefined(await storage.getItem('/array'));
+});
 });
