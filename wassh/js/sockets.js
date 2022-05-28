@@ -10,11 +10,6 @@
 import * as WASI from '../../wasi-js-bindings/js/wasi.js';
 import * as VFS from './vfs.js';
 
-// const AF_UNSPEC = 0;
-export const AF_INET = 1;
-export const AF_INET6 = 2;
-export const AF_UNIX = 3;
-
 const SOL_SOCKET = 0x7fffffff;
 // const SO_RCVBUF sets bufferSize.
 const SO_KEEPALIVE = 9;

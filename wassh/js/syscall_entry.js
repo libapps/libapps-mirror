@@ -9,7 +9,7 @@
  */
 
 import {SyscallEntry, WASI} from '../../wasi-js-bindings/index.js';
-import * as Sockets from './sockets.js';
+import * as Constants from './constants.js';
 
 /**
  * WASSH syscall extensions.
@@ -30,9 +30,9 @@ export class WasshExperimental extends SyscallEntry.Base {
 
   sys_sock_create(sock_ptr, domain, type, protocol) {
     switch (domain) {
-      case Sockets.AF_INET:
-      case Sockets.AF_INET6:
-      case Sockets.AF_UNIX:
+      case Constants.AF_INET:
+      case Constants.AF_INET6:
+      case Constants.AF_UNIX:
         switch (type) {
           case WASI.filetype.SOCKET_STREAM:
           case WASI.filetype.SOCKET_DGRAM:
@@ -59,7 +59,7 @@ export class WasshExperimental extends SyscallEntry.Base {
     let address;
     const td = new TextDecoder();
     switch (domain) {
-      case Sockets.AF_UNIX: {
+      case Constants.AF_UNIX: {
         // NB: We use port to pass the max length of the UNIX path buffer.
         let sun_path = this.getMem_(addr_ptr, addr_ptr + port);
         let nul = sun_path.indexOf(0);
@@ -73,7 +73,7 @@ export class WasshExperimental extends SyscallEntry.Base {
         break;
       }
 
-      case Sockets.AF_INET: {
+      case Constants.AF_INET: {
         const dv = this.getView_(addr_ptr, 4);
         const bytes = this.getMem_(addr_ptr, addr_ptr + 4);
         // If address is within the fake range (0.0.0.0/8), pass it as an
@@ -85,7 +85,7 @@ export class WasshExperimental extends SyscallEntry.Base {
         break;
       }
 
-      case Sockets.AF_INET6: {
+      case Constants.AF_INET6: {
         const bytes = this.getMem_(addr_ptr, addr_ptr + 16);
         if (bytes[0] === 1) {
           // If address is within the fake range (100::/64), pass it as an
@@ -125,11 +125,11 @@ export class WasshExperimental extends SyscallEntry.Base {
     let addrLen;
 
     switch (ret.family) {
-      case Sockets.AF_INET:
+      case Constants.AF_INET:
         addrLen = 4;
         break;
 
-      case Sockets.AF_INET6:
+      case Constants.AF_INET6:
         addrLen = 16;
         break;
 

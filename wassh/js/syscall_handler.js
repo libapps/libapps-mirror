@@ -9,6 +9,7 @@
  */
 
 import {SyscallHandler, WASI} from '../../wasi-js-bindings/index.js';
+import * as Constants from './constants.js';
 import * as Sockets from './sockets.js';
 import * as VFS from './vfs.js';
 
@@ -449,8 +450,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   async handle_sock_create(domain, type, protocol) {
     let handle;
     switch (domain) {
-      case Sockets.AF_INET:
-      case Sockets.AF_INET6:
+      case Constants.AF_INET:
+      case Constants.AF_INET6:
         switch (type) {
           case WASI.filetype.SOCKET_STREAM:
             handle = new Sockets.TcpSocket(
@@ -463,7 +464,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
         }
         break;
 
-      case Sockets.AF_UNIX:
+      case Constants.AF_UNIX:
         switch (type) {
           case WASI.filetype.SOCKET_STREAM:
           case WASI.filetype.SOCKET_DGRAM:
@@ -578,10 +579,10 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     let address;
     let family;
     if (info.peerAddress.includes('.')) {
-      family = Sockets.AF_INET;
+      family = Constants.AF_INET;
       address = strAddress.split('.').map((x) => parseInt(x, 10));
     } else {
-      family = Sockets.AF_INET6;
+      family = Constants.AF_INET6;
       // TODO(vapier): Verify return value of getSocketInfo.
       address = strAddress.split(':').map((x) => parseInt(x, 16));
     }
