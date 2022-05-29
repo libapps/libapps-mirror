@@ -114,8 +114,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /** @override */
-  handle_path_filestat_get(path) {
-    const stat = this.vfs.stat(path);
+  handle_path_filestat_get(fd, lookupflags, path) {
+    const fh = this.vfs.getFileHandle(fd);
+    if (fh === undefined) {
+      return WASI.errno.EBADF;
+    }
+
+    const stat = this.vfs.stat(fh.target + path);
     if (typeof stat === 'number') {
       return stat;
     }
