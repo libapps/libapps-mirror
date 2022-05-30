@@ -56,6 +56,13 @@ function runTerminalHome() {
     document.body.style.overflow = 'auto';
     document.body.appendChild(document.createElement('terminal-home-app'));
   });
+  // Ctrl+Shift+P for settings page.
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.keyCode === 80) {
+      chrome.terminalPrivate.openOptionsPage(() => {});
+      e.preventDefault();
+    }
+  });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
