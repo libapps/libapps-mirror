@@ -133,11 +133,14 @@ export class GoogMetricsReporter {
    * @return {!Promise<void>}
    */
   async requestChromePermissions() {
-    if (await this.checkChromePermissions()
+    if (window?.chrome?.permissions === undefined
+        || await this.checkChromePermissions()
         || this.localPrefs.get('goog-metrics-reporter-permission') === false) {
-      // If 'goog-metrics-reporter-permission' is null the user has yet to be
-      // prompted, if yes the user has opted in, but Chrome permissions were
-      // lost. In both cases, the prompt below should be displayed.
+      // Don't request permissions if:
+      // 1. Environment doesn't have chrome.permissions API, or
+      // 2. Permissions already exist, or
+      // 3. 'goog-metrics-reporter-permission' is false (meaning user has
+      // already opted-out).
       return;
     }
 
