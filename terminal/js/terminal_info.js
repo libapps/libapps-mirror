@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {DEFAULT_VM_NAME, DEFAULT_CONTAINER_NAME, ORIGINAL_URL, TMUX_PARAM_NAME}
-    from './terminal_common.js';
+import {DEFAULT_VM_NAME, DEFAULT_CONTAINER_NAME, ORIGINAL_URL,
+    SETTINGS_PROFILE_PARAM_NAME, TMUX_PARAM_NAME} from './terminal_common.js';
 
 /**
  * @typedef {{
@@ -46,7 +46,8 @@ export let VshLaunchInfo;
 export let SSHLaunchInfo;
 
 /**
- * Only one of the top level properties should exist.
+ * Only one of the top level properties besides 'settingsProfileId' should
+ * exist.
  *
  * @typedef {{
  *   home: (!Object|undefined),
@@ -54,6 +55,7 @@ export let SSHLaunchInfo;
  *   vsh: (!VshLaunchInfo|undefined),
  *   crosh: (!Object|undefined),
  *   ssh: (!SSHLaunchInfo|undefined),
+ *   settingsProfileId: (?string|undefined),
  * }}
  */
 export let LaunchInfo;
@@ -227,7 +229,11 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
 
   if (url.pathname === '/html/terminal_ssh.html') {
     if (url.hash) {
-      return {ssh: {needRedirect: false, hash: url.hash}};
+      return {
+        ssh: {needRedirect: false, hash: url.hash},
+        settingsProfileId: url.searchParams.get('settings_profile') ||
+            parentLaunchInfo?.settingsProfileId,
+      };
     } else {
       return {home: {}};
     }
@@ -241,13 +247,17 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
   // url does not have search param.)
   if (!url.search && parentLaunchInfo) {
     if (parentLaunchInfo.ssh) {
-      return {ssh: {needRedirect: true, hash: parentLaunchInfo.ssh.hash}};
+      return {
+        ssh: {needRedirect: true, hash: parentLaunchInfo.ssh.hash},
+        settingsProfileId: parentLaunchInfo.settingsProfileId,
+      };
     }
 
     if (parentLaunchInfo.tmux) {
-      return {tmux: {
-        driverChannelName: parentLaunchInfo.tmux.driverChannelName,
-      }};
+      return {
+        tmux: {driverChannelName: parentLaunchInfo.tmux.driverChannelName},
+        settingsProfileId: parentLaunchInfo.settingsProfileId,
+      };
     }
 
     if (parentLaunchInfo.home) {
@@ -256,10 +266,12 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
   }
 
   if (url.searchParams.has(TMUX_PARAM_NAME)) {
-    return {tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
-        /** @type {string} */(url.searchParams.get(TMUX_PARAM_NAME))))};
+    return {
+      tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
+        /** @type {string} */(url.searchParams.get(TMUX_PARAM_NAME)))),
+      settingsProfileId: url.searchParams.get(SETTINGS_PROFILE_PARAM_NAME),
+    };
   }
-
 
   // We are launching the terminal with vsh.
   const args = url.searchParams.getAll('args[]');
@@ -319,11 +331,15 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
     outputArgsHasCwd = true;
   }
 
-  return {vsh: {
-    args: outputArgs,
-    containerId,
-    hasCwd: outputArgsHasCwd,
-  }};
+  return {
+    vsh: {
+      args: outputArgs,
+      containerId,
+      hasCwd: outputArgsHasCwd,
+    },
+    settingsProfileId: url.searchParams.get(SETTINGS_PROFILE_PARAM_NAME) ||
+        parentLaunchInfo?.settingsProfileId,
+  };
 }
 
 /**

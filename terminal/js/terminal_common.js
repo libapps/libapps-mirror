@@ -63,6 +63,7 @@ export const DEFAULT_THEME = 'dark';
 export const DEFAULT_VM_NAME = 'termina';
 export const DEFAULT_CONTAINER_NAME = 'penguin';
 
+export const SETTINGS_PROFILE_PARAM_NAME = 'settings_profile';
 export const TMUX_PARAM_NAME = 'tmux';
 
 // Cache the url at the first opportunity. The url normally should not change,
@@ -271,15 +272,19 @@ export const getTmuxIntegrationEnabled = new Promise((resolve) => {
  * @param {{
  *   windowChannelName: string,
  *   driverChannelName: string,
+ *   settingsProfileId: (?string|undefined)
  * }} obj
  * @return {string}
  */
-export function composeTmuxUrl({windowChannelName, driverChannelName}) {
+export function composeTmuxUrl(
+    {windowChannelName, driverChannelName, settingsProfileId}) {
   const url = new URL(ORIGINAL_URL.origin);
   url.pathname = '/html/terminal.html';
 
   const paramValue = JSON.stringify({windowChannelName, driverChannelName});
-  url.search = `?${TMUX_PARAM_NAME}=${paramValue}`;
+  const settingsProfileParam = settingsProfileId ?
+      `&${SETTINGS_PROFILE_PARAM_NAME}=${settingsProfileId}` : '';
+  url.search = `?${TMUX_PARAM_NAME}=${paramValue}${settingsProfileParam}`;
 
   return url.toString();
 }

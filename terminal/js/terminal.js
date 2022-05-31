@@ -111,13 +111,11 @@ terminal.addBindings = function(term) {
  * the Terminal command.
  *
  * @param {!Element} element The element that is to be decorated.
- * @param {!LaunchInfo=} launchInfo This is for testing. It should not be
- *     specified normally.
+ * @param {!LaunchInfo} launchInfo launch info.
  * @return {!hterm.Terminal} The new hterm.Terminal instance.
  */
 terminal.init = function(element, launchInfo) {
-  const params = new URLSearchParams(window.location.search);
-  const profileId = params.get('settings_profile') ||
+  const profileId = launchInfo.settingsProfileId ||
       hterm.Terminal.DEFAULT_PROFILE_ID;
   const term = new hterm.Terminal(
       {profileId, storage: new lib.Storage.TerminalPrivate()});
@@ -133,9 +131,6 @@ terminal.init = function(element, launchInfo) {
     term.setCursorVisible(true);
 
     const isTmuxIntegrationEnabled = await getTmuxIntegrationEnabled;
-    if (!launchInfo) {
-      launchInfo = (await getTerminalInfoTracker()).launchInfo;
-    }
 
     /** @type {?TmuxControllerDriver} */
     let tmuxControllerDriver = null;
@@ -148,6 +143,7 @@ terminal.init = function(element, launchInfo) {
             url: composeTmuxUrl({
               windowChannelName: channelName,
               driverChannelName: driver.channelName,
+              settingsProfileId: launchInfo.settingsProfileId,
             }),
             asTab: true,
           });

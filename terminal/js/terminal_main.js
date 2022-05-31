@@ -80,7 +80,8 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   lib.init().then(async () => {
-    if ((await globalInit).launchInfo.home) {
+    const launchInfo = (await globalInit).launchInfo;
+    if (launchInfo.home) {
       runTerminalHome();
       return;
     }
@@ -88,6 +89,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const div = document.createElement('div');
     div.id = 'terminal';
     document.body.appendChild(div);
-    window.term_ = terminal.init(div);
+    window.term_ = terminal.init(div, launchInfo);
   });
 });
