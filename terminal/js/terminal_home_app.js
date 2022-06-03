@@ -296,13 +296,18 @@ export class TerminalHomeApp extends LitElement {
       <h4>${c.description}</h4>
    `;
     const enc = encodeURIComponent;
-    const link = (c) => html`
-      <a class="row full-width" target="_blank"
-          href="terminal_ssh.html?settings_profile=${
-            enc(c.settingsProfileId)}#profile-id:${enc(c.id)}">
-        ${text(c)}
-      </a>
-    `;
+    const link = (c) => {
+      let param = '';
+      if (c.settingsProfileId !== hterm.Terminal.DEFAULT_PROFILE_ID) {
+        param = `?settings_profile=${enc(c.settingsProfileId)}`;
+      }
+      return html`
+        <a class="row full-width" target="_blank"
+            href="terminal_ssh.html${param}#profile-id:${enc(c.id)}">
+          ${text(c)}
+        </a>
+      `;
+    };
 
     return html`
       <section>
