@@ -17,6 +17,7 @@ const assert = chai.assert;
 
 // Catch any random errors before the test runner runs.
 let earlyError = null;
+
 /**
  * Catch any errors.
  *
@@ -30,8 +31,15 @@ window.onerror = function(...args) {
 window.onload = async function() {
   await lib.init();
   mocha.run();
-
-  if (earlyError !== null) {
-    assert.fail(`uncaught exception detected:\n${earlyError.join('\n')}\n`);
-  }
 };
+
+describe('lib_test.js', () => {
+
+  /** Make sure no general framework errors happened (e.g. syntax errors). */
+  it('uncaught framework errors', () => {
+    if (earlyError !== null) {
+      assert.fail(`uncaught exception detected:\n${earlyError.join('\n')}`);
+    }
+  });
+
+});

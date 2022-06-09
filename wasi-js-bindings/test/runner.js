@@ -22,6 +22,7 @@ const assert = chai.assert;
 
 // Catch any random errors before the test runner runs.
 let earlyError = null;
+
 /**
  * Catch any errors.
  *
@@ -34,8 +35,15 @@ window.onerror = function(...args) {
 /** Run the test framework once everything is finished. */
 window.onload = async function() {
   mocha.run();
-
-  if (earlyError !== null) {
-    assert.fail(`uncaught exception detected:\n${earlyError.join('\n')}\n`);
-  }
 };
+
+describe('runner.js', () => {
+
+  /** Make sure no general framework errors happened (e.g. missing include). */
+  it('uncaught framework errors', () => {
+    if (earlyError !== null) {
+      assert.fail(`uncaught exception detected:\n${earlyError.join('\n')}`);
+    }
+  });
+
+});
