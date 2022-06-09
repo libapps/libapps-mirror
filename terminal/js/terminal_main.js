@@ -57,13 +57,19 @@ function runTerminalHome() {
     document.body.style.overflow = 'auto';
     document.body.appendChild(document.createElement('terminal-home-app'));
   });
-  // Ctrl+Shift+P for settings page.
-  document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.keyCode === 80) {
-      chrome.terminalPrivate.openOptionsPage(() => {});
-      e.preventDefault();
-    }
-  });
+  // Ctrl+Shift+N for new window, Ctrl+Shift+P for settings page.
+  const keyMaps = {
+    'N': chrome.terminalPrivate.openWindow,
+    'P': () => chrome.terminalPrivate.openOptionsPage(() => {}),
+  };
+  for (const [keyCode, f] of Object.entries(keyMaps)) {
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0)) {
+        f();
+        e.preventDefault();
+      }
+    });
+  }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
