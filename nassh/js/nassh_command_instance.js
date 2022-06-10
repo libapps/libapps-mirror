@@ -990,7 +990,9 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
   });
 
   // Finally post process the combined result.
-  options = postProcessOptions(options, params.hostname, params.username);
+  options =
+      postProcessOptions(options, params.hostname, params.username,
+                         this.isMount);
 
   // Merge ssh options from the ssh:// URI that we believe are safe.
   params.userSshArgs = [];
@@ -1304,9 +1306,10 @@ export function tokenizeOptions(optionString = '') {
  * @param {!Object<string, *>} options A map of --option to its value.
  * @param {string} hostname The hostname we're connecting to.
  * @param {string} username The ssh username we're using.
+ * @param {boolean} isMount Whether the connection is for mounting.
  * @return {!Object<string, *>} A map of --option to its value.
  */
-export function postProcessOptions(options, hostname, username) {
+export function postProcessOptions(options, hostname, username, isMount) {
   let rv = Object.assign(options);
 
   // Handle various named "configs" we have.
@@ -1332,7 +1335,7 @@ export function postProcessOptions(options, hostname, username) {
       '--proxy-port': '443',
       '--proxy-mode': proxyMode,
       '--use-ssl': true,
-      '--report-ack-latency': true,
+      '--report-ack-latency': !isMount,
       '--report-connect-attempts': true,
       '--relay-protocol': 'v2',
       '--ssh-agent': 'gnubby',

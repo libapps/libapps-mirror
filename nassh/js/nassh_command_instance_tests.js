@@ -331,7 +331,7 @@ describe('proxy-host-addresses', () => {
       let rv = tokenizeOptions(`--proxy-host=${host}`);
       assert.equal(rv['--proxy-host'], host);
       // Then verify the post processing phase.
-      rv = postProcessOptions(rv, host, '');
+      rv = postProcessOptions(rv, host, '', false);
       assert.equal(rv['--proxy-host'], expected);
     });
   });
@@ -386,7 +386,7 @@ describe('default-proxy-host', () => {
   tests.forEach(([options, host, port, relay, user, mode, resume]) => {
     it(`default relay for '${options}' & '${host}'`, () => {
       let rv = tokenizeOptions(options);
-      rv = postProcessOptions(rv, host, 'root');
+      rv = postProcessOptions(rv, host, 'root', false);
       assert.equal(port, rv['--proxy-port']);
       assert.equal(relay, rv['--proxy-host']);
       assert.equal(user, rv['--proxy-user']);
@@ -415,7 +415,7 @@ describe('default-ssh-agent', () => {
   tests.forEach(([host, expected]) => {
     it(`forwarding for ${host}`, () => {
       let rv = tokenizeOptions('--config=google');
-      rv = postProcessOptions(rv, host, '');
+      rv = postProcessOptions(rv, host, '', false);
       assert.equal(rv['auth-agent-forward'], expected);
     });
   });

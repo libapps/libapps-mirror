@@ -22,3 +22,6 @@ package-lock.json
 # Terminal settings page can be run from a local server if you make some of the
 # nassh dirs available at the right path.
 /_locales
+
+# macOS data.
+.DS_Store
