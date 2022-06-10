@@ -8,8 +8,8 @@
  */
 
 import {composeTmuxUrl, definePrefs, getTmuxIntegrationEnabled,
-  loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily,
-  watchBackgroundColor} from './terminal_common.js';
+    loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily, watchColors}
+    from './terminal_common.js';
 import {terminalImport} from './terminal_import.js';
 import {LaunchInfo, getTerminalInfoTracker} from './terminal_info.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
@@ -122,7 +122,7 @@ terminal.init = function(element, launchInfo) {
 
   term.decorate(element);
   term.installKeyboard();
-  watchBackgroundColor(term.getPrefs());
+  watchColors(term.getPrefs());
   const runTerminal = async function() {
     term.onOpenOptionsPage = terminal.openOptionsPage;
     term.keyboard.keyMap.keyDefs[78].control = terminal.onCtrlN;

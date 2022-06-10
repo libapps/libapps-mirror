@@ -154,14 +154,35 @@ export function normalizePrefsInPlace(prefs) {
 }
 
 /**
- * Add a listener to 'background-color' pref and set it on the outer body.
- * to update tab and frame colors.
+ * Add a listener to 'foreground-color' and 'background-color' prefs to update
+ * outer body color and favicon.
  *
  * @param {!lib.PreferenceManager} prefs The preference manager.
  */
-export function watchBackgroundColor(prefs) {
+export function watchColors(prefs) {
+  const esc = encodeURIComponent;
+  const updateFavicon = (fg, bg) => {
+    const link = document.querySelector('head link[rel="icon"]');
+    if (!window.MULTI_PROFILE_ENABLED) {
+      link.href = '../images/terminal-icon.svg';
+      return;
+    }
+    link.href = `data:image/svg+xml,
+      <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px"
+          viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="24" fill="${esc(bg)}"/>
+        <polyline points="7,17 20,24 7,31" stroke-width="5" fill="none"
+            stroke="${esc(fg)}"/>
+        <line x1="23" y1="36" x2="38" y2="36" stroke-width="5"
+            stroke="${esc(fg)}"/>
+      </svg>`;
+  };
+  prefs.addObserver('foreground-color', (color) => {
+    updateFavicon(color, prefs.get('background-color'));
+  });
   prefs.addObserver('background-color', (color) => {
     document.body.style.backgroundColor = /** @type {string} */ (color);
+    updateFavicon(prefs.get('foreground-color'), color);
   });
 }
 

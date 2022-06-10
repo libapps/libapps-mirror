@@ -7,7 +7,7 @@
  */
 
 import {terminal} from './terminal.js';
-import {definePrefs, registerGetOSInfo, watchBackgroundColor}
+import {definePrefs, registerGetOSInfo, watchColors}
     from './terminal_common.js';
 import './terminal_home_app.js';
 import {getTerminalInfoTracker, setUpTitleHandler} from './terminal_info.js';
@@ -51,7 +51,7 @@ function runTerminalHome() {
     const c = lib.colors.normalizeCSS(v[12] || lib.colors.stockPalette[12]);
     setColorRgbCssVar('button-color', c);
   });
-  watchBackgroundColor(prefs);
+  watchColors(prefs);
   prefs.readStorage(() => {
     prefs.notifyAll();
     document.body.style.overflow = 'auto';
