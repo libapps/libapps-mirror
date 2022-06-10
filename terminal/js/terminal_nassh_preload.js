@@ -4,14 +4,8 @@
  * @suppress {lintChecks}
  */
 
-// Polyfill `getBackgroundPage()` and `getManifest()` so that nassh is happy.
+// Polyfill `getManifest()` so that nassh is happy.
 if (chrome?.runtime) {
-  if (!chrome.runtime.getBackgroundPage) {
-    chrome.runtime.getBackgroundPage = (callback) => {
-      setTimeout(callback, 0, window);
-    };
-  }
-
   if (!chrome.runtime.getManifest) {
     chrome.runtime.getManifest = () => {
       return /** @type {!chrome.runtime.Manifest} */ ({
