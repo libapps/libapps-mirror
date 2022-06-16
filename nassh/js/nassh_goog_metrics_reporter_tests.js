@@ -35,6 +35,8 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
         host_zone: '',
         infra_provider: '',
         ssh_client: '',
+        l1gfe_cluster: '',
+        client_region: '',
       };
       reporter.firstReportIsSent = true;
     });
@@ -186,6 +188,8 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
         infra_provider: 'infra_provider',
         client_corp_status: 'client_corp_status',
         start_time_ms: 0,
+        l1gfe_cluster: 'l1gfe_cluster',
+        client_region: 'client_region',
       };
 
       // Expected

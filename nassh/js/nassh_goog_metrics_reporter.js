@@ -375,6 +375,14 @@ export class GoogMetricsReporter {
             name: 'client_corp_status',
             string_value: this.metadata.client_corp_status,
           },
+          {
+            name: 'l1gfe_cluster',
+            string_value: '__unknown__',
+          },
+          {
+            name: 'client_region',
+            string_value: 'unknown',
+          },
         ],
       },
     },
