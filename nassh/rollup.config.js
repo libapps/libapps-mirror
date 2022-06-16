@@ -9,6 +9,7 @@
 
 import {terser} from 'rollup-plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 export default {
   input: 'js/nassh_deps_rollup_shim.js',
@@ -22,5 +23,6 @@ export default {
       preferBuiltins: false
     }),
     terser(),
+    commonjs(),
   ],
 };

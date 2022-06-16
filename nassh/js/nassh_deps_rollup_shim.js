@@ -61,3 +61,8 @@ const lit = {LitElement, classMap, css, createRef, html, ifDefined, live, ref,
 export {lit};
 
 import '@material/mwc-icon-button';
+
+import {Terminal} from 'xterm';
+import {FitAddon} from 'xterm-addon-fit';
+import {WebglAddon} from 'xterm-addon-webgl';
+export const xterm = {Terminal, FitAddon, WebglAddon};

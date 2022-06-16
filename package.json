@@ -18,6 +18,7 @@
   "dependencies": {
     "@material/mwc-icon-button": "^0.25.3",
     "@polymer/polymer": "^3.3",
+    "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-image": "~2",
     "@rollup/plugin-json": "~4",
     "@rollup/plugin-node-resolve": "~9",
@@ -52,7 +53,10 @@
     "url-loader": "~4",
     "val-loader": "~2",
     "webpack": "~5",
-    "webpack-cli": "~4"
+    "webpack-cli": "~4",
+    "xterm": "^4.18.0",
+    "xterm-addon-fit": "^0.5.0",
+    "xterm-addon-webgl": "^0.11.4"
   },
   "bugs": {
     "url": "https://goo.gl/vb94JY",
