@@ -104,9 +104,14 @@ export class Window {
 let WinInfo;
 
 /**
+ * A tmux pane can be in a few modes (e.g. copy mode), and our implementation
+ * only works well with the normal mode. We uses `needResetMode` to indicate
+ * whether we need to reset the mode (to normal mode) before sending input.
+ *
  * @typedef {{
  *            id: string,
  *            winInfo: !WinInfo,
+ *            needResetMode: boolean,
  *          }}
  */
 let PaneInfo;
@@ -229,6 +234,7 @@ export class Controller {
       '%exit': this.handleExit_.bind(this),
       '%layout-change': this.handleLayoutChange_.bind(this),
       '%output': this.handleOutput_.bind(this),
+      '%pane-mode-changed': this.handlePaneModeChanged_.bind(this),
     };
 
     /**
@@ -427,7 +433,8 @@ export class Controller {
   }
 
   /**
-   * Send input for a pane to the tmux process.
+   * Send input for a pane to the tmux process. This also resets the pane's mode
+   * if necessary.
    *
    * @param {string} paneId
    * @param {string} text The pane input.
@@ -436,6 +443,17 @@ export class Controller {
     if (!text) {
       return;
     }
+
+    const pane = this.panes_.get(paneId);
+    if (!pane) {
+      throw new Error(`unknown pane id {paneId}`);
+    }
+    if (pane.needResetMode) {
+      pane.needResetMode = false;
+      // Note that this "cancels copy mode and any other modes".
+      this.queueCommand('copy-mode -q');
+    }
+
     let command = `send-keys -H -t ${paneId}`;
     for (const x of this.textEncoder_.encode(text)) {
       command += ` ${x.toString(16)}`;
@@ -623,7 +641,12 @@ export class Controller {
       if (this.panes_.has(paneId)) {
         throw new Error(`duplicate paneId=${paneId}`);
       }
-      this.panes_.set(paneId, {id: paneId, winInfo});
+      this.panes_.set(paneId, {
+        id: paneId,
+        // Default to true since the pane can already be in a special mode.
+        needResetMode: true,
+        winInfo,
+      });
     }
 
     this.windows_.set(winInfo.id, winInfo);
@@ -689,6 +712,34 @@ export class Controller {
         /\\[01][0-7]{2}/g,
         (x) => String.fromCharCode(parseInt(x.slice(1), 8)));
     pane.winInfo.win.onPaneOutput(paneId, data);
+  }
+
+  /**
+   * Handler for '%pane-mode-changed <paneId>'
+   *
+   * @param {string} text
+   */
+  handlePaneModeChanged_(text) {
+    const match = text.match(/^(%\d+)$/);
+    if (!match) {
+      throw new Error(`failed to parse output: ${text}`);
+    }
+
+    const paneId = match[1];
+    const pane = this.panes_.get(paneId);
+    if (!pane) {
+      console.warn(`unknown pane id: ${paneId}`);
+      return;
+    }
+
+    // We always set `needResetMode` to true here. This is not necessary if the
+    // mode we are changing to is already the normal mode. However, this is
+    // benign because we will just send an extra `copy-mode -q` to tmux to reset
+    // the mode, which is an no-op and it will not trigger another
+    // `%pane-mode-changed` notification (so we don't need to worry about a
+    // infinate loop).
+    console.info(`pane ${paneId} needs to reset mode`);
+    pane.needResetMode = true;
   }
 
   /**
