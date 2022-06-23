@@ -248,7 +248,7 @@ export class GoogMetricsReporter {
         host_name: `${this.hostname}_${timestamp}`,
         host_zone: await this.getHostZone_(),
         client_corp_status: await this.getClientCorpStatus_(),
-        client_os: hterm.os,
+        client_os: this.getOs_(),
         infra_provider: 'cloud',
         ssh_client: this.getSshClient_(),
         connection_phase: this.getConnectionPhase_(),
@@ -443,6 +443,22 @@ export class GoogMetricsReporter {
     } catch (error) {
       console.error(`Looking up host GCE zone failed: ${error}`);
       return 'unknown';
+    }
+  }
+
+  /**
+   * Gets client OS.
+   *
+   * @return {string} Name of OS.
+   */
+  getOs_() {
+    switch (hterm.os) {
+      case 'mac':
+      case 'linux':
+      case 'windows':
+        return `g${hterm.os}`;
+      default:
+        return hterm.os;
     }
   }
 
