@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     return;
   }
 
-  const url = chrome.extension.getURL(path);
+  const url = lib.f.getURL(path);
   console.log(url);
 
   // Avoid infinite loops when the relay server rejects us and we redirect
