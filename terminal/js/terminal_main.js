@@ -59,7 +59,7 @@ function runTerminalHome() {
   });
   // Ctrl+Shift+N for new window, Ctrl+Shift+P for settings page.
   const keyMaps = {
-    'N': chrome.terminalPrivate.openWindow,
+    'N': () => chrome.terminalPrivate.openWindow(),
     'P': () => chrome.terminalPrivate.openOptionsPage(() => {}),
   };
   for (const [keyCode, f] of Object.entries(keyMaps)) {
