@@ -76,13 +76,13 @@ App.prototype.installContextMenus = function() {
 App.prototype.onContextMenu_ = function(info, tab = undefined) {
   switch (info.menuItemId) {
     case 'connect-dialog':
-      lib.f.openWindow(chrome.runtime.getURL('/html/nassh.html'), '',
+      lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',
                        'chrome=no,close=yes,resize=yes,minimizable=yes,' +
                        'scrollbars=yes,width=900,height=600');
       break;
     case 'mosh':
       lib.f.openWindow(
-          chrome.runtime.getURL('/plugin/mosh/mosh_client.html'), '',
+          lib.f.getURL('/plugin/mosh/mosh_client.html'), '',
           'chrome=no,close=yes,resize=yes,minimizable=yes,' +
           'scrollbars=yes,width=900,height=600');
       break;
@@ -219,7 +219,7 @@ App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
     }
   }
 
-  const url = chrome.runtime.getURL('/html/nassh.html#' + text);
+  const url = lib.f.getURL('/html/nassh.html#' + text);
   switch (disposition) {
     default:
       console.warn('unknown disposition: ' + disposition);
