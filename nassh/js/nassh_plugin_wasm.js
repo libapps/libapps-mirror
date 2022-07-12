@@ -61,6 +61,9 @@ export class Plugin {
       this.environ_['SSH_AUTH_SOCK'] = `/AF_UNIX/agent/${this.authAgentAppID_}`;
     }
 
+    this.terminal_.io.print(
+        ' «««This is a WIP -- see https://crbug.com/1298699 for KIs»»»');
+
     const settings = {
       executable: this.executable_,
       argv: [this.executable_, ...this.argv_],
