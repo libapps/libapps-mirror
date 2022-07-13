@@ -9,7 +9,7 @@
 import {getSyncStorage} from './nassh.js';
 import {exportPreferences, importPreferences} from './nassh_background.js';
 import {CommandInstance} from './nassh_command_instance.js';
-import {getFileSystem} from './nassh_fs.js';
+import {getDomFileSystem} from './nassh_fs.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
 import {fsp, onUnmountRequested} from './nassh_sftp_fsp.js';
 
@@ -764,7 +764,7 @@ export function initApi() {
   }));
 
   // Get handle on FileSystem, cleanup files, and register listener.
-  return getFileSystem().then((fileSystem) => {
+  return getDomFileSystem().then((fileSystem) => {
     fileSystem_ = fileSystem;
     return new Promise((deleteDone) => {
       // Remove existing contents of '/external/' before registering listener.

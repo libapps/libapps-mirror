@@ -13,7 +13,7 @@
  *
  * @return {!Promise<!FileSystem>} The root filesystem handle.
  */
-export async function getFileSystem() {
+export async function getDomFileSystem() {
   const requestFS = window.requestFileSystem || window.webkitRequestFileSystem;
   const size = 16 * 1024 * 1024;
 

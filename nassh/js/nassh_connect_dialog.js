@@ -8,7 +8,8 @@ import {
 } from './nassh.js';
 import {ColumnList} from './nassh_column_list.js';
 import {
-  deleteIdentityFiles, getFileSystem, getIdentityFileNames, importIdentityFiles,
+  deleteIdentityFiles, getDomFileSystem, getIdentityFileNames,
+  importIdentityFiles,
 } from './nassh_fs.js';
 import {
   LocalPreferenceManager, PreferenceManager,
@@ -130,7 +131,7 @@ ConnectDialog.prototype.onPreferencesReady_ = function() {
   // The shortcut list will eventually do this async, but we want it now...
   this.setCurrentProfileRecord(this.profileList_[profileIndex]);
 
-  getFileSystem().then(this.onFileSystemFound_.bind(this));
+  getDomFileSystem().then(this.onFileSystemFound_.bind(this));
 };
 
 /**
@@ -920,7 +921,7 @@ ConnectDialog.prototype.syncProfiles_ = function(callback) {
 };
 
 /**
- * Success callback for lib.fs.getFileSystem().
+ * Success callback for lib.fs.getDomFileSystem().
  *
  * Kick off the "Identity" dropdown now that we have access to the filesystem.
  *

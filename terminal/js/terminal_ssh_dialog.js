@@ -7,7 +7,8 @@
  */
 
 import {
-  deleteIdentityFiles, getFileSystem, getIdentityFileNames, importIdentityFiles,
+  deleteIdentityFiles, getDomFileSystem, getIdentityFileNames,
+  importIdentityFiles,
 } from './nassh_fs.js';
 
 import {LitElement, createRef, css, html, live, ref, when} from './lit.js';
@@ -340,7 +341,7 @@ export class TerminalSSHDialog extends LitElement {
     // elements that have internal state (e.g. `terminal-textfield`)).
 
     if (!this.fileSystem_) {
-      this.fileSystem_ = await getFileSystem();
+      this.fileSystem_ = await getDomFileSystem();
     }
     this.loadIdentities_();
 
