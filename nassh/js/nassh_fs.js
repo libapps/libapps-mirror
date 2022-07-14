@@ -13,8 +13,21 @@
  *
  * @return {!Promise<!FileSystem>} The root filesystem handle.
  */
-export function getFileSystem() {
+export async function getFileSystem() {
   const requestFS = window.requestFileSystem || window.webkitRequestFileSystem;
+  const size = 16 * 1024 * 1024;
+
+  const quotaInfo = await new Promise((resolve, reject) => {
+    navigator.webkitPersistentStorage.queryUsageAndQuota(
+        (usage, quota) => resolve({usage, quota}), reject);
+  });
+
+  // Requests quota only when needed.
+  if (quotaInfo.quota === 0) {
+    await new Promise((resolve, reject) => {
+      navigator.webkitPersistentStorage.requestQuota(size, resolve, reject);
+    });
+  }
 
   return new Promise((resolve, reject) => {
     function onFileSystem(fileSystem) {
@@ -27,7 +40,7 @@ export function getFileSystem() {
     }
 
     requestFS(window.PERSISTENT,
-              16 * 1024 * 1024,
+              size,
               onFileSystem,
               (e) => {
                 console.error(`Error initializing filesystem: ${e}`);
