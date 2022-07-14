@@ -7,7 +7,9 @@
  * @suppress {moduleLoad}
  */
 
-import {isCrOSSystemApp, localize, osc8Link, sgrText} from './nassh.js';
+import {
+  getManifest, isCrOSSystemApp, localize, osc8Link, sgrText,
+} from './nassh.js';
 import {punycode} from './nassh_deps.rollup.js';
 import {Agent} from './nassh_agent.js';
 import {setDefaultBackend} from './nassh_buffer.js';
@@ -142,7 +144,7 @@ CommandInstance.prototype.run = function() {
   });
 
   this.prefs_.readStorage(() => {
-    this.manifest_ = chrome.runtime.getManifest();
+    this.manifest_ = getManifest();
 
     // Set default window title.
     this.io.print('\x1b]0;' + this.manifest_.name + ' ' +

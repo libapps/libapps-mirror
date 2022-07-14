@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 import {
-  isCrOSSystemApp, loadWebFonts, localize, runtimeSendMessage, sendFeedback,
-  setupForWebApp,
+  getManifest, isCrOSSystemApp, loadWebFonts, localize, runtimeSendMessage,
+  sendFeedback, setupForWebApp,
 } from './nassh.js';
 
 /**
@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   });
 
   function setupPreferences() {
-    const manifest = chrome.runtime.getManifest();
+    const manifest = getManifest();
     const storage = isCrOSSystemApp() ?
         new lib.Storage.TerminalPrivate() :
         new lib.Storage.Chrome(chrome.storage.sync);

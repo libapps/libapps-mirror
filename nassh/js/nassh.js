@@ -40,15 +40,6 @@ export function setupForWebApp() {
   // Modifications if running as Chrome OS Terminal SWA.
   if (isCrOSSystemApp()) {
     lib.registerInit('messages', loadMessages);
-    if (chrome?.runtime && !chrome.runtime.getManifest) {
-      chrome.runtime.getManifest = () => {
-        return /** @type {!chrome.runtime.Manifest} */ ({
-          'name': 'SSH',
-          'version': lib.f.getChromeMilestone(),
-          'icons': {'192': '/images/dev/crostini-192.png'},
-        });
-      };
-    }
     if (chrome?.runtime && !chrome.runtime.sendMessage) {
       chrome.runtime.sendMessage = (message, callback) => {
         setTimeout(/** @type {function(!Object)} */ (callback), 0, {});
@@ -356,4 +347,21 @@ export function runtimeSendMessage(...args) {
       }
     });
   });
+}
+
+/**
+ * Returns the manifest (or a manifest polyfill if loaded as a web page).
+ *
+ * @return {!chrome.runtime.Manifest}
+ */
+export function getManifest() {
+  if (window?.chrome?.runtime?.getManifest) {
+    return chrome.runtime.getManifest();
+  } else {
+    return /** @type {!chrome.runtime.Manifest} */ ({
+      'name': 'SSH',
+      'version': lib.f.getChromeMilestone(),
+      'icons': {'192': '/images/dev/crostini-192.png'},
+    });
+  }
 }
