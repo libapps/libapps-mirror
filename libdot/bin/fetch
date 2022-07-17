@@ -5,7 +5,7 @@
 
 """Simpler helper to download files."""
 
-import os
+from pathlib import Path
 import sys
 
 import libdot
@@ -18,7 +18,7 @@ def get_parser():
         "--base64", action="store_true", help="Decode file using base64."
     )
     parser.add_argument(
-        "-o", "--output", type=str, help="Alternative path to save to."
+        "-o", "--output", type=Path, help="Alternative path to save to."
     )
     parser.add_argument("args", nargs="+", help="URIs or files to download.")
     return parser
@@ -32,7 +32,7 @@ def main(argv):
     for uri in opts.args:
         output = opts.output
         if not output:
-            output = os.path.basename(uri)
+            output = uri.rsplit("/", 1)[-1]
         libdot.fetch(uri, output, b64=opts.base64)
 
 
