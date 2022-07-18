@@ -157,7 +157,7 @@ it('RelayCorpv4WS basic', (done) => {
   };
   const streamData = [];
   stream.onDataAvailable = (data) => {
-    streamData.push(data);
+    streamData.push(Array.from(new Uint8Array(data)));
   };
   let streamClosed;
   stream.onClose = () => {

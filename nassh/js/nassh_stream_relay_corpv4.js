@@ -417,7 +417,9 @@ RelayCorpv4WsStream.prototype.onSocketData_ = function(e) {
       // alternative -- PPAPI doesn't accept views like Uint8Array.  If it did,
       // it would probably still serialize the entire underlying ArrayBuffer
       // (which in this case wouldn't be a big deal as it's only 4 extra bytes).
-      this.onDataAvailable(Array.from(packet.data));
+      const data = packet.data;
+      this.onDataAvailable(data.buffer.slice(
+          data.byteOffset, data.byteOffset + data.byteLength));
 
       this.readCount_ += BigInt(packet.length);
       const ackPacket = new ClientAckPacket(this.readCount_);
