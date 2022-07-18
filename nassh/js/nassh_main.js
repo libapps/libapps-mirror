@@ -38,7 +38,18 @@ const openNewWindow = function(url) {
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', async (event) => {
+  // Check if site's storage has been marked as persistent.
+  if (navigator?.storage?.persist && navigator?.storage?.persisted) {
+    if (!await navigator.storage.persisted()) {
+      // Request persistent storage for site.
+      const isPersisted = await navigator.storage.persist();
+      if (!isPersisted) {
+        console.warn('Failed to request persistent storage.');
+      }
+    }
+  }
+
   const params = new URLSearchParams(document.location.search);
 
   // Allow users to bookmark links that open as a window.
