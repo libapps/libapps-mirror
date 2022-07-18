@@ -167,7 +167,7 @@ describe('nassh_buffer_tests.js', () => {
  * Check creating data packets.
  */
 it('new', () => {
-  // Default is concat.
+  // Default is scatgat.
   let ret = newBuffer();
   assert.instanceOf(ret, ScatGatBuffer);
 
