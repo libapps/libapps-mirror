@@ -7,7 +7,7 @@
  */
 
 import {newBuffer, setDefaultBackend} from './nassh_buffer.js';
-import {ConcatBuffer} from './nassh_buffer_concat.js';
+import {ScatGatBuffer} from './nassh_buffer_scatgat.js';
 import {BufferInterface} from './nassh_buffer_interface.js';
 
 /**
@@ -169,15 +169,15 @@ describe('nassh_buffer_tests.js', () => {
 it('new', () => {
   // Default is concat.
   let ret = newBuffer();
-  assert.instanceOf(ret, ConcatBuffer);
+  assert.instanceOf(ret, ScatGatBuffer);
 
   // Bad config still works.
   setDefaultBackend('foooooo');
   ret = newBuffer();
-  assert.instanceOf(ret, ConcatBuffer);
+  assert.instanceOf(ret, ScatGatBuffer);
 
   // Restore good state.
-  setDefaultBackend('concat');
+  setDefaultBackend('scatgat');
 });
 
 });

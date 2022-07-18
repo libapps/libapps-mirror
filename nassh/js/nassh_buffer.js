@@ -13,7 +13,7 @@ import {ScatGatBuffer} from './nassh_buffer_scatgat.js';
 /**
  * The buffer backend to use.
  */
-let defaultBackend = 'concat';
+let defaultBackend = 'scatgat';
 
 /**
  * Set default backend for all buffer users.
@@ -36,13 +36,13 @@ export function setDefaultBackend(backend) {
  */
 export function newBuffer(...args) {
   switch (defaultBackend) {
-    case 'scatgat':
-      return new ScatGatBuffer(...args);
+    case 'concat':
+      return new ConcatBuffer(...args);
 
     default:
       console.warn(`Unknown buffer type '${defaultBackend}'; ` +
-                   `using 'concat' instead.`);
-    case 'concat':
-      return new ConcatBuffer(...args);
+                   `using 'scatgat' instead.`);
+    case 'scatgat':
+      return new ScatGatBuffer(...args);
   }
 }
