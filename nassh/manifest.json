@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self'",
   "name": "__MSG_nassh_product_name__",
-  "version": "0.47",
+  "version": "0.48",
   "version_name": "ToT",
   "default_locale": "en",
   "icons": {

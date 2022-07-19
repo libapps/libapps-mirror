@@ -1,3 +1,49 @@
+# 0.48, 2022-07-19, House keeping & bandwidth optimizations.
+
+* main: Request persisted storage if storage is temporary.
+* buffer: Use scatgat buffer by default.
+* relay: RelayCorpv4WsStream copies data into ArrayBuffer instead of Array.
+* ssh_client: Don't patch openssh channel window.
+* polyfill: Move manifest polyfill to common code.
+* fs: Add a call to requestQuota.
+* relay: Use lib.f.getURL.
+* wassh: Add a WIP wasm warning.
+* Replace chrome.runtime.getURL with helper function.
+* google-smart-card: Update to latest 1.3.8.0 version.
+* metrics: Adjust OS names to match data destination.
+* metrics: Remove collection for mount connections.
+* metrics: update latency metric fields.
+* metrics: Build payload and send it via go/monapi.
+* metrics: Show prompts only when chrome.permissions is available.
+* wassh: vfs: Change cwd path to /.
+* wassh: constants: New module to only hold constants.
+* wassh: Drop custom DirectWasiPreview1.
+* fs: Move getFileSystem to the new module.
+* command: Handle stackless errors.
+* command: Stop looking up filesystem.
+* prefs: Convert to ES6 modules.
+* utils: Convert to ES6 module.
+* prefs: Convert to ES6 module.
+* hterm: Drop hterm.defaultStorage fallback.
+* main: Pass explicit storage to hterm.Terminal.
+* prefs editor: Add dark mode support.
+* prefs: Require explicit storage.
+* command: Make syncStorage a requirement.
+* background: Move import/export functions out of main code.
+* background: Rename main page to _main.js.
+* prefs: Switch import/export APIs to Chrome sync storage.
+* libdot: prefs: Change import APIs from callbacks to async.
+* libdot: prefs: Clear all prefs on import.
+* prefs editor: Call background page to import/export settings.
+* popup: Switch to explicit sync storage.
+* prefs: Switch editor to explicit sync storage.
+* mosh: Migrate off of hterm.Terminal.runCommandClass.
+* tests: Stop using hterm.defaultStorage.
+* mosh: Stop using hterm.defaultStorage.
+* nassh: Stop using hterm.defaultStorage.
+* crosh: Stop using hterm.defaultStorage.
+* l10n: Update translations.
+
 # 0.47, 2022-04-26, More ES6 modules & WASM work.
 
 * relay: save user's choice for GoogMetricsReporter prompt.
