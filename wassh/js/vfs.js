@@ -43,7 +43,7 @@ export class PathHandler {
   }
 
   /**
-   * @see https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#filestat
+   * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#filestat
    * @return {!WASI_t.filestat}
    */
   stat() {
@@ -124,7 +124,7 @@ export class PathHandle {
   }
 
   /**
-   * @see https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#fdstat
+   * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#fdstat
    * @return {!WASI_t.fdstat|!Object}
    */
   stat() {

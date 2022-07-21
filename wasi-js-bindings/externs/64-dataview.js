@@ -697,7 +697,7 @@ class WasiViewInterface {
   /**
    * Read a subscription structure.
    *
-   * @see https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#subscription
+   * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#subscription
    * @param {number} byteOffset Byte offset to the value.
    * @param {boolean=} littleEndian Whether the value is LE instead of BE.
    * @return {!WASI_t.subscription}
@@ -709,7 +709,7 @@ class WasiViewInterface {
    *
    * NB: Omitted for now out of laziness, and because no APIs need to write it.
    *
-   * @see https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#subscription
+   * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#subscription
    * @param {number} byteOffset Byte offset to the value.
    * @param {!WASI_t.subscription} value The value to write.
    * @param {boolean=} littleEndian Whether the value is LE instead of BE.
@@ -719,7 +719,7 @@ class WasiViewInterface {
   /**
    * Read a subscription clock structure.
    *
-   * @see https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#subscription_clock
+   * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#subscription_clock
    * @param {number} byteOffset Byte offset to the value.
    * @param {boolean=} littleEndian Whether the value is LE instead of BE.
    * @return {!WASI_t.subscription_clock}
@@ -729,7 +729,7 @@ class WasiViewInterface {
   /**
    * Write a subscription clock structure.
    *
-   * @see https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#subscription_clock
+   * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#subscription_clock
    * @param {number} byteOffset Byte offset to the value.
    * @param {!WASI_t.subscription_clock} value The value to write.
    * @param {boolean=} littleEndian Whether the value is LE instead of BE.
@@ -739,7 +739,7 @@ class WasiViewInterface {
   /**
    * Read a subscription fd read/write structure.
    *
-   * @see https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#subscription_fd_readwrite
+   * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#subscription_fd_readwrite
    * @param {number} byteOffset Byte offset to the value.
    * @param {boolean=} littleEndian Whether the value is LE instead of BE.
    * @return {!WASI_t.subscription_fd_readwrite}
@@ -749,7 +749,7 @@ class WasiViewInterface {
   /**
    * Write a subscription fd read/write structure.
    *
-   * @see https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#subscription_fd_readwrite
+   * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#subscription_fd_readwrite
    * @param {number} byteOffset Byte offset to the value.
    * @param {!WASI_t.subscription_fd_readwrite} value The value to write.
    * @param {boolean=} littleEndian Whether the value is LE instead of BE.
