@@ -156,6 +156,12 @@ CommandInstance.prototype.run = function() {
 
     this.localPrefs_.readStorage(() => {
       this.localPrefs_.syncProfiles(this.prefs_);
+
+      // updateWindowDimensions_ uses chrome.windows.getCurrent.
+      if (!window?.chrome?.windows?.getCurrent) {
+        return;
+      }
+
       const updater = this.updateWindowDimensions_.bind(this);
       window.addEventListener('resize', updater);
       // Window doesn't offer a 'move' event, and blur/resize don't seem to
