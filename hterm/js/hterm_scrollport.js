@@ -1890,7 +1890,7 @@ hterm.ScrollPort.prototype.scrollWheelDelta = function(e) {
   }
 
   // The Y sign is inverted from what we would expect: up/down are
-  // negative/positive respectively.  The X sign is sane though: left/right
+  // negative/positive respectively.  The X sign is correct though: left/right
   // are negative/positive respectively.
   delta.y *= -1;
 

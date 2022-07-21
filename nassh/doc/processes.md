@@ -103,7 +103,7 @@ files as we'll update that after we create a git tag.
 
 Once all the release files look OK, we wait for the internal builders to produce
 the signed CRX files which we upload again.
-Then we do a sanity check to make sure the release works in the dev channel.
+Then we do a smoke check to make sure the release works in the dev channel.
 
 If there's a problem, go through the steps above again (landing fixes and
 updating ChangeLogs) until the dev CRX is stable.

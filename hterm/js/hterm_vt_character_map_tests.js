@@ -11,7 +11,7 @@
 describe('hterm_vt_character_map_tests.js', () => {
 
 /**
- * Verify null maps work sanely.
+ * Verify null maps work.
  */
 it('null-map', () => {
   const map = new hterm.VT.CharacterMap('foo', null);
@@ -21,7 +21,7 @@ it('null-map', () => {
 });
 
 /**
- * Verify empty maps work sanely.
+ * Verify empty maps work.
  */
 it('empty-map', () => {
   const map = new hterm.VT.CharacterMap('foo bar', {});
@@ -47,7 +47,7 @@ it('gl-translate', () => {
 it('overrides', () => {
   const map = new hterm.VT.CharacterMap('test', {'a': 'A', 'b': 'B'});
 
-  // Verify things start off sane.
+  // Verify things start off correctly.
   assert.equal(map.GL('a'), 'A');
   assert.equal(map.GL('b'), 'B');
   assert.equal(map.GL('c'), 'c');
@@ -74,7 +74,7 @@ it('overrides', () => {
 it('resets', () => {
   const map = new hterm.VT.CharacterMap('test', {'a': 'A', 'b': 'B'});
 
-  // Verify things start off sane.
+  // Verify things start off correctly.
   assert.equal(map.GL('a'), 'A');
   assert.equal(map.GL('b'), 'B');
   assert.equal(map.GL('c'), 'c');
@@ -225,7 +225,7 @@ it('overrides', () => {
   assert.equal(map.GL('a'), 'A');
   assert.equal(map.GL('\x60'), '\u25c6');
 
-  // Now verify the default maps are sane.
+  // Now verify the default maps are correctly.
   assert.isUndefined(hterm.VT.CharacterMaps.DefaultMaps['U']);
   assert.isUndefined(hterm.VT.CharacterMaps.DefaultMaps['V']);
   assert.isUndefined(hterm.VT.CharacterMaps.DefaultMaps['X']);

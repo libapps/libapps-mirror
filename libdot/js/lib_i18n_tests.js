@@ -11,7 +11,7 @@
 describe('lib_i18n_tests.js', () => {
 
 /**
- * Basic sanity test.  Hard to validate real values here.
+ * Basic smoke test.  Hard to validate real values here.
  */
 it('getAcceptLanguages', (done) => {
   // Just make sure we're called with an array of some sort.
@@ -22,7 +22,7 @@ it('getAcceptLanguages', (done) => {
 });
 
 /**
- * Basic sanity test.  Hard to validate real values here.
+ * Basic smoke test.  Hard to validate real values here.
  */
 it('getMessage', () => {
   // There shouldn't be any registered messages.

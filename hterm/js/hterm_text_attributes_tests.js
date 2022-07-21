@@ -11,7 +11,7 @@
 describe('hterm_text_attributes_tests.js', () => {
 
 /**
- * Make sure isDefault works sanely.
+ * Make sure isDefault works reasonably.
  */
 it('isDefault', () => {
   const tattrs = new hterm.TextAttributes();
@@ -29,7 +29,7 @@ it('isDefault', () => {
 });
 
 /**
- * Make sure createContainer works sanely.
+ * Make sure createContainer works reasonably.
  */
 it('createContainer', () => {
   const tattrs = new hterm.TextAttributes(window.document);

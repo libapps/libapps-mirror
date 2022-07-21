@@ -269,7 +269,7 @@
 * fs: Convert lib.fs.readDirectory to Promises.
 * array: Drop unused custom uint32 helpers.
 * Drop lib.f.parseQuery for URLSearchParams.
-* minify-translations: Sanity check placeholders.
+* minify-translations: Check placeholders.
 * concat: Preserve whitespace in lines.
 * tests: Drop setDefaults usage.
 * mkzip: Also include css from third_party.
@@ -359,7 +359,7 @@
 # 1.20, 2017-12-13, Features & fixes.
 
 * refactor ranges.py for better modularity
-* add sanity check for empty test selection
+* add check for empty test selection
 * parseQuery: support arrays
 * run replacements on default messages too
 * fix loadMessages callback

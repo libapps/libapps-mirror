@@ -121,7 +121,7 @@ ConnectDialog.prototype.onPreferencesReady_ = function() {
   const profileIndex = lib.f.clamp(
       this.getProfileIndex_(lastProfileId), 0, this.profileList_.length);
 
-  // Make sure the buttons initial state is sane if we don't switch profiles
+  // Make sure the buttons initial state is correct if we don't switch profiles
   // (which refreshes the UI for us).
   if (profileIndex === 0) {
     this.syncButtons_();

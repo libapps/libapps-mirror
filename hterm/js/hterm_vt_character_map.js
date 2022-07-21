@@ -28,7 +28,7 @@ hterm.VT.CharacterMap = function(description, glmap) {
   this.GL = null;
 
   // Always keep an unmodified reference to the map.
-  // This allows us to sanely reset back to the original state.
+  // This allows us to easily reset back to the original state.
   this.glmapBase_ = glmap;
 
   // Now sync the internal state as needed.
@@ -114,7 +114,7 @@ hterm.VT.CharacterMaps = function() {
   this.maps_ = hterm.VT.CharacterMaps.DefaultMaps;
 
   // Always keep an unmodified reference to the map.
-  // This allows us to sanely reset back to the original state.
+  // This allows us to easily reset back to the original state.
   this.mapsBase_ = this.maps_;
 };
 

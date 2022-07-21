@@ -276,7 +276,7 @@ int JsFile::isatty() {
 }
 
 void JsFile::InitTerminal() {
-  // Some sane values that produce good result.
+  // Some reasonable values that produce good result.
   tio_.c_iflag = ICRNL | IXON | IXOFF | IUTF8;
   tio_.c_oflag = OPOST | ONLCR;
   tio_.c_cflag = CREAD | 077;

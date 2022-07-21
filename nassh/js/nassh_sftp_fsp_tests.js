@@ -96,7 +96,7 @@ beforeEach(function() {
  * Verify all FSP methods are properly registered.
  */
 it('fsp-known-methods', function() {
-  // Sanity check that we have some methods.
+  // Check that we have some methods.
   assert.isAbove(providerMethods.length, 10);
 
   // Make sure every method is registered.

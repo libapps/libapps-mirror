@@ -89,10 +89,10 @@ afterEach(function() {
 });
 
 /**
- * Basic sanity test to make sure that when we insert plain text it appears
+ * Basic smoke test to make sure that when we insert plain text it appears
  * on the screen and scrolls into the scrollback buffer correctly.
  */
-it('sanity', function() {
+it('smoke', function() {
     this.terminal.interpret('0\r\n1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n' +
                             '7\r\n8\r\n9\r\n10\r\n11\r\n12');
 
@@ -180,7 +180,7 @@ it('utf8-arraybuffer', function() {
  * should follow "real" characters, not escape sequences that we filter out.
  * So you could argue that this should be âbc or abĉ.  We happen to (almost)
  * produce âbc currently, but if logic changes in hterm that makes it more
- * difficult to pull off, that's OK.  This test is partially a sanity check
+ * difficult to pull off, that's OK.  This test is partially a smoke check
  * to make sure we don't significantly regress (like we have in the past) by
  * producing something like "âc".
  */
@@ -2381,7 +2381,7 @@ it('character-maps', function() {
 
     this.terminal.setWidth(line.length);
 
-    // Start with sanity check -- no translations are active.
+    // Start with smoke check -- no translations are active.
     this.terminal.clearHome();
     this.terminal.interpret(line);
     assert.equal(this.terminal.getRowText(0), line);

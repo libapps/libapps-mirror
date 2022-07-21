@@ -138,7 +138,7 @@ it('substr-test', () => {
 it('substr-wide-surrogate-test', () => {
   const string = '12\u{2099d}34';
 
-  // Sanity check this string actually contains a surrogate pair.
+  // Check this string actually contains a surrogate pair.
   assert.equal(6, string.length);
 
   assert.equal(string, lib.wc.substr(string, 0));
@@ -158,7 +158,7 @@ it('substr-wide-surrogate-test', () => {
 it('substr-narrow-surrogate-test', () => {
   const string = '12\u{1f66b}34';
 
-  // Sanity check this string actually contains a surrogate pair.
+  // Check this string actually contains a surrogate pair.
   assert.equal(6, string.length);
 
   assert.equal(string, lib.wc.substr(string, 0));

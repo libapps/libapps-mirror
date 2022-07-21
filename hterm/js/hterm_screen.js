@@ -672,7 +672,7 @@ hterm.Screen.prototype.deleteChars = function(count) {
   let startLength, endLength;
 
   while (node && count) {
-    // Sanity check so we don't loop forever, but we don't also go quietly.
+    // Check so we don't loop forever, but we don't also go quietly.
     if (count < 0) {
       console.error(`Deleting ${rv} chars went negative: ${count}`);
       break;

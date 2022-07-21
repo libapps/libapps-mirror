@@ -367,7 +367,7 @@
 # 1.77, 2018-01-05, Various bug fixes.
 
 * Fix typo in mouse wheel reporting (for newer tmux).
-* Add sanity check on user font size.
+* Check user font size.
 * Overhaul SGR 38/48 handling for ISO 8613-6.
 * Fix osc52 vim script in tmux.
 * Allow F11 when running in a tab for fullscreen.

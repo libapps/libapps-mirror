@@ -916,7 +916,7 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   directly.
 
   By default, hterm sends a delete (DEL, '\x7f') character for the
-  backspace key.  Sounds crazy, but it tends to be the right thing for
+  backspace key.  Sounds weird, but it tends to be the right thing for
   most people.  If you'd prefer it send the backspace (BS, '\x08', aka ^H)
   character, then open the JavaScript console and type...
 

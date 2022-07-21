@@ -24,7 +24,7 @@ import urllib.error
 import urllib.request
 
 
-# Require recent Python 3 versions as a sanity check.
+# Require recent Python 3 versions.
 # NB: We cannot require newer versions than CrOS itself supports.
 assert (sys.version_info.major, sys.version_info.minor) >= (3, 6), (
     'Python 3.6 or newer is required; found %s' % (sys.version,))
@@ -276,7 +276,7 @@ def pack(archive: Union[Path, str],
     if archive.suffix == '.xz':
         archive = archive.with_suffix('')
 
-    # Make sure all the paths have sane permissions.
+    # Make sure all the paths have reasonable permissions.
     def walk(path):
         if path.is_symlink():
             return
@@ -300,7 +300,7 @@ def pack(archive: Union[Path, str],
         else:
             raise ValueError(f'{path}: unknown file type')
 
-    logging.info('Forcing sane permissions on inputs')
+    logging.info('Forcing reasonable permissions on inputs')
     for path in paths:
         walk(cwd / path)
 

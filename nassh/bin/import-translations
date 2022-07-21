@@ -48,7 +48,7 @@ def main(argv):
         libdot.minify_translations.minify_placeholders(msg)
         baseline[msgid.lower()] = baseline.pop(msgid)
 
-    # Find new translations.  Do it here for sanity checking.
+    # Find new translations.  Do it here for smoke checking.
     new_locales = glob.glob(os.path.join(opts.builddir, '*', 'messages.json'))
     if not new_locales:
         parser.error("builddir doesn't seem to contain any translations")

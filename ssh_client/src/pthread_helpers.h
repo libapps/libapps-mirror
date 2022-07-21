@@ -27,7 +27,7 @@
 
 // The newlib pthreads library returns errors directly instead of via errno.
 // Take care of stuffing that into errno and setting return to -1 so callers
-// can assume sane POSIX semantics.  We might have to make wrappers in our
+// can assume POSIX semantics.  We might have to make wrappers in our
 // syscalls.c if OpenSSH itself ever starts using pthreads.
 #define _PTHREAD_HANDLE_ERRNO(call) \
   ({ \

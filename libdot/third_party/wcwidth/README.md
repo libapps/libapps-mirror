@@ -23,4 +23,4 @@ Then use the helper script to update the tables in [lib_wc.js](./lib_wc.js).
 $ ./ranges.py update
 ```
 
-Now you'll double check the update to make sure things look sane.  G'luck!
+Now you'll double check the update to make sure things look OK.  G'luck!
