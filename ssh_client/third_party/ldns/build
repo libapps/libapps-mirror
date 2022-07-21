@@ -44,17 +44,17 @@ def src_configure(metadata):
 
     cmd = [
         './configure',
-        '--build=%s' % (tc.cbuild,),
-        '--host=%s' % (tc.chost,),
+        f'--build={tc.cbuild}',
+        f'--host={tc.chost}',
         # The prefix path matches what is used at runtime.
         '--prefix=/',
         '--cache-file=../config.cache',
-        'CFLAGS=%s' % (' '.join(EXTRA_CFLAGS),),
+        f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
         '--disable-dane-verify',
         '--disable-gost',
         # The ldns configure logic is quite poor and searches the filesystem
         # instead of querying the compiler.  Force it to our sysroot.
-        '--with-ssl=%s' % (tc.sysroot,),
+        f'--with-ssl={tc.sysroot}',
     ]
     ssh_client.run(cmd)
 
@@ -71,7 +71,7 @@ def src_install(metadata):
     # List install targets ourselves to avoid installing man pages.
     # This package has a lot (~500) and can be a little slow.
     ssh_client.emake('install-h', 'install-lib', 'install-config',
-                     'DESTDIR=%s' % (tc.sysroot,))
+                     f'DESTDIR={tc.sysroot}')
 
 
 ssh_client.build_package(sys.modules[__name__], 'pnacl')

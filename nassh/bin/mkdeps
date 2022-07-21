@@ -113,9 +113,9 @@ def concat_third_party_dir(third_party_dir):
             entry['data'] = license_file.read_text(encoding='utf-8')
             break
         else:
-            raise ValueError('Unable to locate LICENSE for %s' % (package,))
+            raise ValueError(f'Unable to locate LICENSE for {package}')
 
-        ret['%s@%s' % (package, version)] = entry
+        ret[f'{package}@{version}'] = entry
 
     return ret
 

@@ -46,9 +46,11 @@ def convert_to_kokoro(data):
     See eslint.convert_to_kokoro for example return value.
     """
     for result in data:
-        msg = '[pylint] %s (%s)\n%s\n%s\n%s' % (
-            result['symbol'], result['message-id'], result['message'],
-            MAIN_DOCS, USER_BASE_URI % (result['message-id'],),
+        msg = (
+            f"[pylint] {result['symbol']} ({result['message-id']})\n" +
+            result['message'] + '\n' +
+            MAIN_DOCS + '\n' +
+            USER_BASE_URI % (result['message-id'],),
         )
 
         path = os.path.join(os.getcwd(), result['path'])

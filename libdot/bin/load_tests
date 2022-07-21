@@ -84,7 +84,7 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
              os.path.join(libdot.node.NODE_BIN_DIR, 'http-server'),
              '--cors', '-a', 'localhost', '-c-1'],
             cwd=libdot.LIBAPPS_DIR)
-        path = 'http://localhost:8080/%s' % path
+        path = f'http://localhost:8080/{path}'
 
     # Some environments are unable to utilize the sandbox: we're not running as
     # root, and userns is unavailable.  For example, while using docker.
@@ -100,7 +100,7 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
         logging.info('Running tests against browser "%s".', browser)
         logging.info('Tests page: %s', path)
         if opts.visible:
-            subprocess.Popen([browser, '--user-data-dir=%s' % (profile_dir,),
+            subprocess.Popen([browser, f'--user-data-dir={profile_dir}',
                               path] + sb_arg)
         else:
             # The standalone mocha runner doesn't have a timeout.  The headless
@@ -123,7 +123,7 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
 
 def main(argv):
     """The main func!"""
-    return test_runner_main(argv, 'file://%s' % (TEST_PAGE,))
+    return test_runner_main(argv, f'file://{TEST_PAGE}')
 
 
 if __name__ == '__main__':

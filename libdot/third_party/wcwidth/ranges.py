@@ -135,7 +135,7 @@ def load_east_asian():
             continue
 
         codepoint, width = line.split(';')
-        assert width in db, 'Missing classification: %s' % width
+        assert width in db, f'Missing classification: {width}'
 
         if '..' in codepoint:
             first, last = codepoint.split('..')
@@ -164,8 +164,8 @@ def load_east_asian():
         # Make sure some codepoints weren't allocated with different width.
         # This is for future proofing to avoid silent corruption.
         non_wide = db['A'] | db['H'] | db['N'] | db['Na']
-        overlap = ['U+%04X' % x for x in sorted(non_wide & block)]
-        assert not overlap, 'duplicates found: %s' % overlap
+        overlap = [f'U+{x:04X}' for x in sorted(non_wide & block)]
+        assert not overlap, f'duplicates found: {overlap}'
 
     # CJK Radicals Supplement.
     add_block(0x2e80, 0x2eff)
@@ -250,7 +250,7 @@ def js_dumps(ranges):
         else:
             # Add a space after the previous element.
             ret += ' '
-        ret += '[%#06x, %#06x],' % (r[0], r[1])
+        ret += f'[{r[0]:#06x}, {r[1]:#06x}],'
         i += 1
         if i == 3:
             ret += '\n'
@@ -412,7 +412,7 @@ def main(argv):
         data = js.read_text(encoding='utf-8')
 
         for name, text in tables:
-            data = re.sub(r'^%s = .*?^\];\n$' % name, name + ' = ' + text, data,
+            data = re.sub(rf'^{name} = .*?^\];\n$', f'{name} = {text}', data,
                           flags=re.M|re.S)
 
         js.write_text(data, encoding='utf-8')

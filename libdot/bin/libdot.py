@@ -26,8 +26,8 @@ import urllib.request
 
 # Require recent Python 3 versions.
 # NB: We cannot require newer versions than CrOS itself supports.
-assert (sys.version_info.major, sys.version_info.minor) >= (3, 6), (
-    'Python 3.6 or newer is required; found %s' % (sys.version,))
+assert sys.version_info >= (3, 6), (
+    f'Python 3.6 or newer is required; found {sys.version}')
 
 
 BIN_DIR = Path(__file__).resolve().parent
@@ -54,7 +54,7 @@ class ColoredFormatter(logging.Formatter):
         msg = super().format(record)
         color = self._COLOR_MAPPING.get(record.levelname)
         if self._use_colors and color:
-            msg = '%s%s%s' % (color, msg, self._RESET)
+            msg = f'{color}{msg}{self._RESET}'
         return msg
 
 
@@ -158,7 +158,7 @@ def cmdstr(cmd):
         if isinstance(arg, Path):
             arg = str(arg)
         if ' ' in arg:
-            arg = '"%s"' % (arg,)
+            arg = f'"{arg}"'
         quoted.append(arg)
     return ' '.join(quoted)
 
@@ -338,10 +338,10 @@ def fetch_data(uri: str, output=None, verbose: bool = False, b64: bool = False):
                 # Show a simple progress bar if the user is interactive.
                 if verbose:
                     mb += 1
-                    print('~%i MiB downloaded' % (mb,), end='')
+                    print(f'~{mb} MiB downloaded', end='')
                     if length:
                         percent = mb * 1024 * 1024 * 100 / length
-                        print(' (%.2f%%)' % (percent,), end='')
+                        print(f' ({percent:.2f}%)', end='')
                     print('\r', end='', flush=True)
                 if b64:
                     data = base64.b64decode(data)

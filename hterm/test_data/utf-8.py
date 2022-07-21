@@ -43,7 +43,7 @@ def print_range(opts):
     spacer = opts.spacer or ' '
     while i < len(codepoints):
         data = codepoints[i:i + opts.width]
-        print('%*x%s' % (opts.pad, i + start, spacer), end='')
+        print(f'{i + start:>{opts.pad}x}{spacer}', end='')
         print(opts.spacer.join(data), end='')
         print(opts.spacer)
         i += opts.width
@@ -51,13 +51,14 @@ def print_range(opts):
 
 def print_header(opts):
     """Display the header for the codepoints."""
-    print('%*s%s' % (opts.pad, '', opts.spacer or ' '), end='')
+    print(f'{"":{opts.pad}}{opts.spacer or " "}', end='')
     i = 4
     width = 4
     if opts.spacer:
         width += 4 * len(opts.spacer) - 1
     while i <= opts.width:
-        print('%*s%s' % (width, '+' + ('%x' % (i - 1)), opts.spacer), end='')
+        cell = f'+{i - 1:x}'
+        print(f'{cell:>{width}}{opts.spacer}', end='')
         i += 4
     print('')
 
@@ -86,7 +87,7 @@ def main(argv):
     """The main entry point!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
-    opts.pad = len('%x' % opts.end)
+    opts.pad = len(f'{opts.end:x}')
 
     print_header(opts)
     print_range(opts)

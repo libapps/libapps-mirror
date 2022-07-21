@@ -22,7 +22,7 @@ def src_compile(metadata):
     """Compile the source."""
     tc = metadata['toolchain']
     shutil.rmtree(os.path.join(tc.incdir, 'wassh-libc-sup'), ignore_errors=True)
-    ssh_client.emake('OUTPUT=%s' % (metadata['workdir'],),
+    ssh_client.emake(f"OUTPUT={metadata['workdir']}",
                      cwd=os.path.join(FILESDIR, 'src'))
 
 

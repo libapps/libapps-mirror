@@ -37,7 +37,7 @@ import libdot
 
 
 CONTAINER_NAME = 'ssh_client'
-IMAGE_NAME = '%s-image.tar.xz' % (CONTAINER_NAME,)
+IMAGE_NAME = f'{CONTAINER_NAME}-image.tar.xz'
 
 
 def cleanup():
@@ -95,15 +95,15 @@ def run_docker(opts, docker_args=(), cmd_args=()):
         '--env', 'LANG=C.UTF-8',
         '--env', 'VCSID=HEAD',
         '--env', 'DISTDIR=/libapps/ssh_client/distfiles',
-        '--volume', '%s:/libapps' % (libdot.LIBAPPS_DIR,),
-        '--volume', '%s:/libapps/ssh_client/distfiles' % (distfiles,),
+        '--volume', f'{libdot.LIBAPPS_DIR}:/libapps',
+        '--volume', f'{distfiles}:/libapps/ssh_client/distfiles',
     ]
 
     # If we're running in a CrOS checkout, we have to bind mount in .repo so
     # that the local .git tree works.
     repo_dir = os.path.join(libdot.LIBAPPS_DIR, '..', '..', '..', '.repo')
     if os.path.isdir(repo_dir):
-        base_cmd += ['--volume', '%s:/.repo:ro' % (repo_dir,)]
+        base_cmd += ['--volume', f'{repo_dir}:/.repo:ro']
 
     # The kokoro build detects this env var for presubmit.
     if opts.type == 'presubmit':
@@ -178,7 +178,7 @@ def main(argv):
             return ret.returncode
         return 0
 
-    parser.error('unhandled action %s' % (opts.action,))
+    parser.error(f'unhandled action {opts.action}')
     return 1
 
 

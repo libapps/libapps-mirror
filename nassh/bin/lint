@@ -49,7 +49,7 @@ def main(argv):
     os.chdir(nassh.DIR)
 
     externs = ['--js_module_root', JS_DIR] + [
-        '--externs=%s' % os.path.relpath(x) for x in
+        f'--externs={os.path.relpath(x)}' for x in
         sorted(glob.glob(os.path.join(nassh.DIR, 'externs', '*.js')))]
     closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + externs + [
         # TODO(vapier): We want to turn this on at some point.

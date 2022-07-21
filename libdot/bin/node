@@ -74,7 +74,7 @@ def update():
     elif osname == 'Windows':
         node_hash = NODE_WIN_HASH
     else:
-        raise RuntimeError('Unknown OS %s' % (osname,))
+        raise RuntimeError(f'Unknown OS {osname}')
 
     # In case of an upgrade, nuke existing dir.
     hash_file = NODE_DIR / node_hash

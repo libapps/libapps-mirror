@@ -40,8 +40,7 @@ def chrome_setup():
 
     # Get the snapshot deb archive.
     chrome_deb = os.path.join(tmpdir, 'deb')
-    uri = '%s/%s_amd64.deb' % (libdot.node.NODE_MODULES_BASE_URI,
-                               CHROME_VERSION)
+    uri = f'{libdot.node.NODE_MODULES_BASE_URI}/{CHROME_VERSION}_amd64.deb'
     libdot.fetch(uri, chrome_deb)
 
     # Unpack the deb archive, then clean it all up.

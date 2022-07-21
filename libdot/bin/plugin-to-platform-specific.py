@@ -39,11 +39,11 @@ def process_manifest(opts, manifest_path, srcroot, dstroot):
         url = manifest['program'][arch]['url']
         if '_platform_specific' in url:
             if not opts.quiet:
-                print('Already relocated: %s' % (url,))
+                print(f'Already relocated: {url}')
             continue
         if not url.endswith('.nexe'):
             if not opts.quiet:
-                print('Ignoring non-NaCl file: %s' % (url,))
+                print(f'Ignoring non-NaCl file: {url}')
             continue
 
         srcurl = os.path.join(srcroot, srcsubpath, url)
@@ -56,8 +56,7 @@ def process_manifest(opts, manifest_path, srcroot, dstroot):
 
     if update:
         if not opts.quiet:
-            print('Rewriting manifest for _platform_specific: %s' %
-                  (manifest_path,))
+            print(f'Rewriting manifest for _platform_specific: {manifest_path}')
         with open(manifest_path, 'wb') as fp:
             json.dump(manifest, fp, sort_keys=True)
 

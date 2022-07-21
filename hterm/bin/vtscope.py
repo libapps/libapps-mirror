@@ -223,16 +223,15 @@ class VTScope:
             if len(plaintext) > MAX_TEXT:
                 plaintext = plaintext[0:MAX_TEXT] + '...'
 
-            return ('%s chars: %s' %
-                    (self.end_position - self.start_position,
-                     json.dumps(plaintext)))
+            return (f'{self.end_position - self.start_position} chars: ' +
+                    json.dumps(plaintext))
 
     def show_next_chunk(self):
         """Find the next chunk of data, and display it to the user."""
         snippet = self.find_next_chunk()
 
         if snippet:
-            print('Next up: offset %s, %s' % (self.start_position, snippet))
+            print(f'Next up: offset {self.start_position}, {snippet}')
         else:
             print('End of data.')
 
@@ -246,7 +245,7 @@ class VTScope:
             try:
                 fd.send(data)
             except IOError:
-                print('Client #%s disconnected.' % i)
+                print(f'Client #{i} disconnected.')
                 del self.clients[i - 1]
 
     def broadcast_chunk(self):
@@ -270,14 +269,14 @@ class VTScope:
 
         command_function = getattr(self, 'cmd_' + command_name, None)
         if not command_function:
-            print('Unknown command: "%s"' % command_name)
+            print(f'Unknown command: "{command_name}"')
             return
 
         try:
             command_function(command_args)
         except Exception:  # pylint: disable=broad-except
             traceback.print_exc()
-            print('Internal error executing "%s"' % (command_name,))
+            print(f'Internal error executing "{command_name}"')
 
     # Commands start here, in alphabetical order.
 
@@ -304,15 +303,15 @@ class VTScope:
             count = int(args[0])
             self.clients = []
 
-        print('Listening on %s:%s' % (LISTEN_HOST, LISTEN_PORT))
+        print(f'Listening on {LISTEN_HOST}:{LISTEN_PORT}')
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         sock.bind((LISTEN_HOST, LISTEN_PORT))
         sock.listen(1)
 
         while len(self.clients) < count:
-            print('Waiting for client %s/%s...' %
-                  (len(self.clients) + 1, count))
+            print('Waiting for client', len(self.clients) + 1, '/', count,
+                  '...')
             (fd, addr) = sock.accept()
             self.clients.append(fd)
             print('Remote connected by', addr)
@@ -337,7 +336,7 @@ class VTScope:
         if args:
             self.delay_ms = int(args[0])
 
-        print('Delay is now: %s' % self.delay_ms)
+        print('Delay is now:', self.delay_ms)
 
     def cmd_exit(self, args):
         """Exit vtscope.
@@ -364,11 +363,11 @@ class VTScope:
                 else:
                     first = False
 
-                print('%s:' % (method[4:],))
+                print(f'{method[4:]}:')
                 for line in getattr(self, method).__doc__.strip().splitlines():
                     if line.startswith('        '):
                         line = line[8:]
-                    print('  %s' % (line,))
+                    print(' ', line)
 
     def cmd_send(self, args):
         r"""Send a string to all clients.
@@ -410,9 +409,9 @@ class VTScope:
             elif arg == 'ESC':
                 data += '\x1b'
             else:
-                data += json.loads('"%s"' % arg)
+                data += json.loads(f'"{arg}"')
 
-        print('Sending %s' % json.dumps(data))
+        print('Sending', json.dumps(data))
         self.send(data)
 
     def cmd_stops(self, args):
@@ -429,9 +428,9 @@ class VTScope:
             return
 
         for i, offset in enumerate(self.stops):
-            print('#%s offset: %s, lines: %s, cursor: %s,%s' %
-                  (i + 1, offset['offset'], offset['lines'], offset['row'],
-                   offset['column']))
+            print(f'#{i + 1} offset:', offset['offset'], 'lines:',
+                  offset['lines'], 'cursor:',
+                  f"{offset['row']},{offset['column']}")
 
     def cmd_open(self, args):
         """Open a local file containing canned data.
@@ -457,11 +456,11 @@ class VTScope:
                 print('Unable to locate end of header.')
             else:
                 end = m.end()
-                print('Read %s bytes of header.' % end)
+                print('Read', end, 'bytes of header.')
                 self.scan_header(self.data[0:end])
                 self.data = self.data[end:]
 
-        print('Read %s bytes of playback.' % len(self.data))
+        print('Read', len(self.data), 'bytes of playback.')
         self.cmd_reset([])
 
     def cmd_reset(self, args):

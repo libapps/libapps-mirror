@@ -53,13 +53,13 @@ def minify_placeholders(msg):
 
         # Require every replacement exist in the message.  If it's not in there,
         # then it's probably a typo, or a stale entry we want to remove.
-        assert '$%s$' % (key.lower(),) in msg['message'].lower(), \
-            'Missing $%s$ (case insensitive) in: %s' % (key, msg['message'])
+        assert f'${key.lower()}$' in msg['message'].lower(), (
+            f"Missing ${key}$ (case insensitive) in: {msg['message']}")
 
         # If the replacement is simple, inline it.
         m = re.match(r'^[$][0-9]+$', settings['content'])
         if m:
-            msg['message'] = re.sub(r'[$]%s[$]' % (key,), settings['content'],
+            msg['message'] = re.sub(rf'[$]{key}[$]', settings['content'],
                                     msg['message'], flags=re.I)
             msg['placeholders'].pop(key)
 

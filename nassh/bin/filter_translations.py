@@ -56,7 +56,7 @@ def reformat(path, output=None, inplace=False):
             try:
                 data = json.loads(fp.read())
             except ValueError as e:
-                print('ERROR: Processing %s: %s' % (path, e), file=sys.stderr)
+                print(f'ERROR: Processing {path}: {e}', file=sys.stderr)
                 return False
 
     trim_redundant_placeholders(data)

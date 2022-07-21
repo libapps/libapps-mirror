@@ -25,7 +25,7 @@ def mkdeps(_opts):
 def main(argv):
     """The main func!"""
     return libdot.load_tests.test_runner_main(
-        argv, 'file://%s' % (TEST_PAGE,), mkdeps=mkdeps)
+        argv, f'file://{TEST_PAGE}', mkdeps=mkdeps)
 
 
 if __name__ == '__main__':

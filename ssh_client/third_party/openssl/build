@@ -86,7 +86,7 @@ def src_compile(_metadata):
 def src_install(metadata):
     """Install the package."""
     tc = metadata['toolchain']
-    ssh_client.emake('install_sw', 'INSTALL_PREFIX=%s' % (tc.sysroot,),
+    ssh_client.emake('install_sw', f'INSTALL_PREFIX={tc.sysroot}',
                      'DIRS=crypto ssl', 'LIBS=libcrypto.a libssl.a')
 
 

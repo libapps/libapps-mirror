@@ -95,15 +95,15 @@ def convert_to_kokoro(data):
             continue
 
         for message in file_results['messages']:
-            msg = '[eslint] %s: %s' % (
-                SEVERITY_TO_HEADER[message['severity']],
-                message['message'],
+            msg = (
+                '[eslint] ' + SEVERITY_TO_HEADER[message['severity']] + ': ' +
+                message['message']
             )
 
             # For syntax errors, this will be omitted.
             ruleId = message.get('ruleId')
             if ruleId:
-                msg += '\n%s%s' % (RULES_URI_BASE, ruleId)
+                msg += '\n' + RULES_URI_BASE + ruleId
 
             # Gerrit comments appear to count columns from 0 while eslint counts
             # from 1.  Adjust them down by one to handle.

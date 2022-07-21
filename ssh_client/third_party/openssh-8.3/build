@@ -93,13 +93,13 @@ def src_configure(metadata):
 
     cmd = [
         './configure',
-        '--build=%s' % (tc.cbuild,),
-        '--host=%s' % (tc.chost,),
+        f'--build={tc.cbuild}',
+        f'--host={tc.chost}',
         # The prefix path matches what is used at runtime.
         '--prefix=/',
         '--cache-file=../config.cache',
-        'CFLAGS=%s' % (' '.join(EXTRA_CFLAGS),),
-        'LIBS=%s' % (' '.join(EXTRA_LIBS),),
+        f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
+        f"LIBS={' '.join(EXTRA_LIBS)}",
     ]
     ssh_client.run(cmd + EXTRA_CONFIGURE_FLAGS)
 
@@ -149,7 +149,7 @@ def src_install(metadata):
                 'openbsd-compat/libopenbsd-compat.a'):
         # Transform libssh.a to libssh-8.0.a.
         base, ext = os.path.splitext(os.path.basename(lib))
-        target = '%s-%s%s' % (base, major_minor_version, ext)
+        target = f'{base}-{major_minor_version}{ext}'
         ssh_client.copy(lib, os.path.join(tc.libdir, target))
 
     plugin_docs = os.path.join(ssh_client.OUTPUT, 'plugin', 'docs')

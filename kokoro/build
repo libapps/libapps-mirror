@@ -144,7 +144,7 @@ def _run_linter(cmd, cwd):
     """Run the linter taking into account presubmit bot state."""
     result = libdot.run(cmd, check=False, cwd=cwd)
     if result.returncode:
-        msg = '%s linter exited %i' % (cmd[0], result.returncode)
+        msg = f'{cmd[0]} linter exited {result.returncode}'
         if is_presubmit():
             logging.error(msg)
             return False

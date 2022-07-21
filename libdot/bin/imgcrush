@@ -24,8 +24,8 @@ import libdot
 CHROMIUM_REF = '85.0.4148.0'
 
 # Full path to Chromium's png crush script.
-PNG_CRUSHER_URL = ('https://chromium.googlesource.com/chromium/src/+/%s/tools/'
-                   'resources/optimize-png-files.sh' % (CHROMIUM_REF,))
+PNG_CRUSHER_URL = ('https://chromium.googlesource.com/chromium/src/+/'
+                   f'{CHROMIUM_REF}/tools/resources/optimize-png-files.sh')
 
 # Our local cache of the script.
 PNG_CRUSHER = libdot.BIN_DIR / f'.png.crusher.{CHROMIUM_REF}'

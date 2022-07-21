@@ -207,7 +207,7 @@ def mkzip(stable: bool, archive_suffix: str,
     data['name'] = name
 
     basename += archive_suffix + '-' + version
-    zipfile = '%s.zip' % (basename,)
+    zipfile = f'{basename}.zip'
     archive = DIST_DIR / zipfile
 
     logging.info('Name: %s', _hack_localize(name))
@@ -241,7 +241,7 @@ def mkcrosh(enable_minify, enable_gzip):
     logging.info('Processing crosh/terminal')
 
     basename = 'crosh'
-    zipfile = '%s.zip' % (basename,)
+    zipfile = f'{basename}.zip'
     archive = DIST_DIR / zipfile
     logging.info('Name: %s', basename)
     logging.info('Archive: %s', zipfile)

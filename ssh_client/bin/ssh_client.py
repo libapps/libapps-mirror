@@ -71,7 +71,7 @@ def copy(source, dest):
 def emake(*args, **kwargs):
     """Run `make` with |args| and automatic -j."""
     jobs = kwargs.pop('jobs', JOBS)
-    run(['make', '-j%s' % (jobs,)] + list(args), **kwargs)
+    run(['make', f'-j{jobs}'] + list(args), **kwargs)
 
 
 def fetch(uri=None, name=None):
@@ -98,7 +98,7 @@ def stamp_name(workdir, phase, unique):
     Returns:
       The full file path to the stamp file.
     """
-    return os.path.join(workdir, '.stamp.%s.%s' % (phase, unique))
+    return os.path.join(workdir, f'.stamp.{phase}.{unique}')
 
 
 def unpack(archive, cwd=None, workdir=None):
@@ -194,11 +194,11 @@ def _toolchain_pnacl_env():
         'PKG_CONFIG_PATH': pkgconfig_dir,
         'PKG_CONFIG_LIBDIR': sysroot_libdir,
         'SYSROOT': sysroot,
-        'CPPFLAGS': '-I%s -I%s' % (
-            os.path.join(sysroot, 'include', 'glibc-compat'),
-            os.path.join(nacl_sdk_root, 'include')),
-        'LDFLAGS': '-L%s' % (os.path.join(nacl_sdk_root, 'lib', 'pnacl',
-                                          'Release'),),
+        'CPPFLAGS': (
+            '-I' + os.path.join(sysroot, 'include', 'glibc-compat') +
+            ' -I' + os.path.join(nacl_sdk_root, 'include')),
+        'LDFLAGS': '-L' + os.path.join(nacl_sdk_root, 'lib', 'pnacl',
+                                       'Release'),
     }
 
 
@@ -220,8 +220,8 @@ def _toolchain_wasm_env():
         'ac_cv_func_malloc_0_nonnull': 'yes',
         'ac_cv_func_realloc_0_nonnull': 'yes',
         'CHOST': 'wasm32-wasi',
-        'CC': os.path.join(bin_dir, 'clang') + ' --sysroot=%s' % sysroot,
-        'CXX': os.path.join(bin_dir, 'clang++') + ' --sysroot=%s' % sysroot,
+        'CC': os.path.join(bin_dir, 'clang') + f' --sysroot={sysroot}',
+        'CXX': os.path.join(bin_dir, 'clang++') + f' --sysroot={sysroot}',
         'AR': os.path.join(bin_dir, 'llvm-ar'),
         'RANLIB': os.path.join(bin_dir, 'llvm-ranlib'),
         'STRIP': os.path.join(BUILD_BINDIR, 'wasm-strip'),
@@ -232,11 +232,11 @@ def _toolchain_wasm_env():
             f'-isystem {os.path.join(incdir, "wassh-libc-sup")}',
         )),
         'LDFLAGS': ' '.join([
-            '-L%s' % (libdir,),
+            f'-L{libdir}',
             '-lwassh-libc-sup',
             '-lwasi-emulated-signal',
-            '-Wl,--allow-undefined-file=%s' % (
-                os.path.join(libdir, 'wassh-libc-sup.imports'),),
+            ('-Wl,--allow-undefined-file=' +
+             os.path.join(libdir, 'wassh-libc-sup.imports')),
             '-Wl,--export=__wassh_signal_deliver',
         ]),
     }
@@ -381,7 +381,7 @@ def build_package(module, default_toolchain):
         """Run this single source phase."""
         logging.info('>>> %s: Running phase %s', metadata['P'], phase)
         func = getattr(module, phase,
-                       getattr(common_module, 'default_%s' % phase))
+                       getattr(common_module, f'default_{phase}'))
         os.chdir(cwd)
         func(metadata)
 
