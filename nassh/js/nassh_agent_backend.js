@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview A dummy backend for the SSH agent from which all other backends
+ * @fileoverview A stub backend for the SSH agent from which all other backends
  * derive.
  */
 

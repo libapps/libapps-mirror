@@ -38,9 +38,9 @@ RUN apt-get --assume-yes install --no-install-recommends \
 # Clean out any caches.  We won't need them anymore.
 RUN apt-get clean
 
-# Set git config to dummy values for webports patch to work.
+# Set git config to stub values for webports patch to work.
 # When patches are applied, webports generates local git repos & commits.
-RUN git config --system user.email "secureshelldummyemail@google.com"
-RUN git config --system user.name "Secure Shell Dummy Name"
+RUN git config --system user.email "noreply@google.com"
+RUN git config --system user.name "Secure Shell Builder"
 
 CMD /libapps/kokoro/build

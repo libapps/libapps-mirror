@@ -517,7 +517,7 @@ CommandInstance.prototype.mountProfile = function(profileID) {
           io.showOverlay(localize('DISCONNECT_MESSAGE', [msg.status]), null);
         }
 
-        // Put the IO into dummy mode for the most part.
+        // Disable most I/O other than reconnect shortcuts.
         io.onVTKeystroke = (string) => {
           const ch = string.toLowerCase();
           switch (ch) {

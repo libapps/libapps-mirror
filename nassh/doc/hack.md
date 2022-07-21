@@ -276,7 +276,7 @@ The vast majority of the code here lives under [js/].
     An SSH agent that aggregates responses from multiple dynamically loaded
     backends.
   * [nassh_agent_backend.js]:
-    A dummy backend for the SSH agent from which all other backends derive.
+    A stub backend for the SSH agent from which all other backends derive.
   * [nassh_agent_message.js]:
     General message handling in accordance with the SSH agent protocol.
   * [nassh_agent_message_types.js]:

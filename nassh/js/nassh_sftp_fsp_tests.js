@@ -874,7 +874,7 @@ it('fsp-onCopyEntry-symlink', function(done) {
  * Verify onUnmount works normally.
  */
 it('fsp-onUnmount-exit', function() {
-  // Create a dummy instance mock that has an exit method.
+  // Create a stub instance that has an exit method.
   let exitStatus;
   fsp.sftpInstances['id'] = {
     sftpClient: /** @type {!sftpClient} */ ({}),

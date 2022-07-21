@@ -137,7 +137,7 @@ readers[MessageNumbers.AGENT_PUBLIC_KEY_RESPONSE] = function(message) {
   }
 
   const pk = new Message(
-      // Dummy zero value used.
+      // Stub zero value used.
       /** @type {!MessageNumbers} */ (0),
       message.fields.publicKeyRaw);
   message.fields.publicKeyAlgo =

@@ -250,9 +250,9 @@ void UDPSocket::OnRead(int32_t result) {
     LOG("UDPSocket::OnRead: %d %s\n",
         fd_, pp::NetAddressPrivate::Describe(addr, true).c_str());
     in_queue_.resize(in_queue_.size() + 1);
-    socklen_t dummy;
+    socklen_t slen;
     FileSystem::CreateSocketAddress(
-        addr, (sockaddr*)&in_queue_.back().first, &dummy);
+        addr, (sockaddr*)&in_queue_.back().first, &slen);
     in_queue_.back().second.assign(read_buf_.begin(),
                                    read_buf_.begin() + result);
     PostReadTask();

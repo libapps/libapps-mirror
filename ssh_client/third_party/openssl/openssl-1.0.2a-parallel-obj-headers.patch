@@ -5,7 +5,7 @@ From: Mike Frysinger <vapier@gentoo.org>
 Date: Sun, 8 Mar 2015 01:34:48 -0500
 Subject: [PATCH] fix parallel generation of obj headers
 
-The current code has dummy sleep/touch commands to try and work
+The current code has stub sleep/touch commands to try and work
 around the parallel issue, but that is obviously racy.  Instead
 lets force one of the files to depend on the other so we know
 they'll never run in parallel.
