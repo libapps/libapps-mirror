@@ -117,8 +117,11 @@ window.addEventListener('DOMContentLoaded', async (event) => {
           chrome.accessibilityFeatures.spokenFeedback) {
         chrome.accessibilityFeatures.spokenFeedback.onChange.addListener(
             (details) => terminal.setAccessibilityEnabled(details.value));
-        chrome.accessibilityFeatures.spokenFeedback.get({}, function(details) {
-          terminal.setAccessibilityEnabled(details.value);
+        chrome.accessibilityFeatures.spokenFeedback.get({}, (details) => {
+          // In case it fails, don't break startup.
+          if (details) {
+            terminal.setAccessibilityEnabled(details.value);
+          }
           runNassh();
         });
       } else {

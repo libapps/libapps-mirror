@@ -1,5 +1,6 @@
 # 0.48, 2022-07-19, House keeping & bandwidth optimizations.
 
+* main: Workaround LaCrOS accessibility bug.
 * main: Request persisted storage if storage is temporary.
 * buffer: Use scatgat buffer by default.
 * relay: RelayCorpv4WsStream copies data into ArrayBuffer instead of Array.
