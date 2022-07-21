@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # This is taken from upstream GitHub repo, so disable style related checks.
-# pylint: disable=bad-indentation,missing-docstring
+# pylint: disable=bad-indentation,missing-docstring,consider-using-f-string
 
 """Downloads from GitHub the latest released version of the client library for
 communicating to the Google Smart Card Connector app."""

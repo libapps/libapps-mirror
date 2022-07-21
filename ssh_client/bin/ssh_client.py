@@ -336,6 +336,7 @@ def build_package(module, default_toolchain):
     metadata_file = os.path.join(filesdir, 'METADATA')
     metadata = parse_metadata(metadata_file)
     metadata.update({
+        # pylint: disable=consider-using-f-string
         'P': '%(name)s-%(version)s' % metadata,
         'PN': '%(name)s' % metadata,
         'PV': '%(version)s' % metadata,

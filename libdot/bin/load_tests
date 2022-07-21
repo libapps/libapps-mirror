@@ -79,6 +79,8 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
 
     # Kick off server if needed.
     if serve:
+        # We manage the life-cycle of this ourselves below.
+        # pylint: disable=consider-using-with
         server = subprocess.Popen(
             [libdot.node.NODE,
              os.path.join(libdot.node.NODE_BIN_DIR, 'http-server'),
@@ -100,6 +102,8 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
         logging.info('Running tests against browser "%s".', browser)
         logging.info('Tests page: %s', path)
         if opts.visible:
+            # We want to orphan this process.
+            # pylint: disable=consider-using-with
             subprocess.Popen([browser, f'--user-data-dir={profile_dir}',
                               path] + sb_arg)
         else:

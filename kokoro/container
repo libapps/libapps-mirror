@@ -69,6 +69,10 @@ def build(opts):
     sudo_run(opts, ['docker', 'build', '--no-cache', '-t', CONTAINER_NAME, '.'],
              cwd=libdot.LIBAPPS_DIR)
     with open(IMAGE_NAME, 'wb') as fp:
+        # We can't use a context manager here because it will close stdout
+        # before waiting, and the point of this code is to let stdout run
+        # until it finishes (with our wait call).
+        # pylint: disable=consider-using-with
         xz = subprocess.Popen(
             ['xz', '-T0', '-9', '-v'], cwd=libdot.LIBAPPS_DIR, stdout=fp,
             stdin=subprocess.PIPE)
