@@ -87,7 +87,7 @@ Now that your checkout is ready, you can load it into Chrome.
 3. Click *Load Unpacked Extension* and navigate to the `nassh/` directory.
 
 If you're not running on Chrome OS device, and loading the app, you might see
-warnings right away about certain permissions (see the whitelisted sections
+warnings right away about certain permissions (see the allowed sections
 below).  You can ignore those.  It's unfortunate they show up with the same
 level/color as legitmate errors.
 ```
@@ -101,11 +101,11 @@ level/color as legitmate errors.
 If you're updating the [manifest.json], you'll sometimes also need to update the
 [manifest][manifest_crosh.json] for [crosh] which lives in the Chromium tree.
 
-## Whitelisted Permissions
+## Allowed Permissions
 
 Using the dev extension id is necessary in order to access some APIs that are
-whitelisted only for Secure Shell.  If you don't need these features, you can
-get by with using a different id (and delete the settings from the
+allowed only for Secure Shell.  If you don't need these features, you can get
+by with using a different id (and delete the settings from the
 [manifest.json] to avoid warnings at runtime).
 
 * Access to [crosh] under Chrome OS (`terminalPrivate`).
@@ -132,9 +132,9 @@ get by with using a different id (and delete the settings from the
   [(1)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/_permission_features.json)
   <br>
   Note: Normal extensions/apps can use these features, but since Secure Shell
-  is still a "legacy packaged app", we had to whitelist access.
+  is still a "legacy packaged app", we had to allow access.
 
-To double check what & where things are whitelisted, search the Chromium code
+To double check what & where things are allowed, search the Chromium code
 base for our extension ids:
 
 | Name             | ID                                    | hash                                          |
@@ -166,8 +166,8 @@ $ ext_id_hash pnhechapfaindjhompbnflcldabbghjo
 ## Partner Extensions
 
 There are a few extensions we talk to for various services at runtime which need
-to whitelist our extension ids (for source verification).  If you don't need any
-of these services, then you can ignore it.
+to allow our extension ids (for source verification).  If you don't need any of
+these services, then you can ignore it.
 
 * [gnubbyd app beknehfpfkghjoafdifaflglpjkojoco](https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco)
   * Optional SSH Agent backend (mostly for internal Google use).

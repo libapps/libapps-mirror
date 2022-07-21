@@ -909,7 +909,7 @@
 * Update to hterm 1.78.  Extended underlying support.
 * Rework label alignment logic.
 * Accept URI escapes in usernames & fingerprints.
-* Document extensions that whitelist us.
+* Document extensions that list us.
 * sftp: document the source a bit more
 * Delay some connection dialog work until visibility.
 * Unify params object setup.
@@ -1069,7 +1069,7 @@
 * Highlight invalid fields in the connection manager better.
 * Pretty format JSON objects in the options page.
 * Support completely arbitrary usernames (spaces, dashes, etc...).
-* Expand our Chrome whitelisted features document.
+* Expand our Chrome exceptions features document.
 * Add basic hostname checking to the connection manager.
 * Add IDN support (to connect to international hostnames using Unicode).
 * Lots of internal SFTP API cleanups & improvements.
@@ -1280,7 +1280,7 @@
 
     // Array if chrome extension ids which are allowed to make wam connections
     // to nassh.  Defaults to Wash (tot) and Wash (dev).
-    app_.prefs_.set('wam-whitelist', [...]);
+    app_.prefs_.set('wam-allowlist', [...]);
 
 # 0.8.27.2, 2014-04-29, Update hterm.
 

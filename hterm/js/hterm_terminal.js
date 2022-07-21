@@ -3755,7 +3755,7 @@ hterm.Terminal.prototype.openSelectedUrl_ = function() {
   // If the URI isn't anchored, it'll open relative to the extension.
   // We have no way of knowing the correct schema, so assume http.
   if (str.search('^[a-zA-Z][a-zA-Z0-9+.-]*://') < 0) {
-    // We have to whitelist a few protocols that lack authorities and thus
+    // We have to allow a few protocols that lack authorities and thus
     // never use the //.  Like mailto.
     switch (str.split(':', 1)[0]) {
       case 'mailto':

@@ -558,7 +558,7 @@ int client_loop(Userdata* data) {
     pos = oldlen;
     while (pos < buf.length()) {
       switch (buf[pos]) {
-        // Whitelist characters we accept.
+        // List characters we accept.
         case 0x04:  // EOT CTRL+D
         case 0x0a:  // \n newline
         case 0x0d:  // \r return
