@@ -12,6 +12,7 @@ __pycache__/
 
 # Stuff we build for distribution
 /artifacts/
+/depot_tools/
 dist
 /ssh_client-image.tar*
 

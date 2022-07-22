@@ -9,6 +9,7 @@ import fnmatch
 import glob
 import logging
 import os
+from pathlib import Path
 import re
 import shutil
 import subprocess
@@ -20,7 +21,7 @@ import libdot  # pylint: disable=wrong-import-order
 
 # Where kokoro expects files to end up.  Anything put in this dir will be
 # uploaded & archived, while everything else will be discarded.
-ARTIFACTS_DIR = os.path.join(kokoro.LIBAPPS_DIR, 'artifacts')
+ARTIFACTS_DIR = kokoro.LIBAPPS_DIR / 'artifacts'
 
 # When doing official internal builds, some files might be provided ahead of
 # time via this path.
@@ -43,6 +44,10 @@ GERRIT_COMMENTS_DIR = os.path.join(ARTIFACTS_DIR, 'gerrit_comments')
 SPONGE_LOG_NAME = 'sponge_log.log'
 SPONGE_XML_NAME = 'sponge_log.xml'
 SPONGE_RESULTS_DIR = os.path.join(ARTIFACTS_DIR, 'sponge')
+
+# Where to get depot_tools.
+DEPOT_TOOLS_URI = 'https://chromium.googlesource.com/chromium/tools/depot_tools'
+DEPOT_TOOLS_DIR = kokoro.LIBAPPS_DIR / 'depot_tools'
 
 
 def is_presubmit():
@@ -235,6 +240,29 @@ def test():
         sys.exit(1)
 
 
+def _chown(path: Path, uid: int, gid: int) -> None:
+    """Helper to chown |path| to |uid| & |gid|."""
+    if path.stat().st_uid == uid:
+        return
+
+    try:
+        os.chown(path, uid, gid)
+    except OSError as e:
+        logging.warning('Unable to chown(%s, %s, %s): %s', path, uid, gid, e)
+
+
+def chown_recursive(path: Path, uid: int, gid: int) -> None:
+    """Chown all paths under |path| to |uid| & |gid|."""
+    _chown(path, uid, gid)
+    for p in path.iterdir():
+        if p.is_symlink():
+            continue
+        elif p.is_dir():
+            chown_recursive(p, uid, gid)
+        elif p.is_file():
+            _chown(p, uid, gid)
+
+
 def clean():
     """Clean up various compiled objects.
 
@@ -253,23 +281,9 @@ def clean():
     uid = st.st_uid
     gid = st.st_gid
     if uid != os.getuid():
-        def chown(path):
-            """Helper to chown |path| to |uid| & |gid|."""
-            if os.path.islink(path):
-                return
-            try:
-                os.chown(path, uid, gid)
-            except OSError as e:
-                logging.warning('Unable to chown(%s, %s, %s): %s',
-                                path, uid, gid, e)
-
-        logging.info('Changing ownership of artifacts dir to %i:%i', uid, gid)
-        chown(ARTIFACTS_DIR)
-        for root, dirs, files in os.walk(ARTIFACTS_DIR):
-            for d in dirs:
-                chown(os.path.join(root, d))
-            for f in files:
-                chown(os.path.join(root, f))
+        for path in (ARTIFACTS_DIR, DEPOT_TOOLS_DIR):
+            logging.info('Changing ownership of %s to %i:%i', path, uid, gid)
+            chown_recursive(path, uid, gid)
 
 
 def setup():
@@ -293,6 +307,13 @@ def setup():
     stub = os.path.join(GERRIT_COMMENTS_DIR, GERRIT_COMMENTS_NAME)
     with open(stub, 'wb') as fp:
         fp.write(b'[]')
+
+    # Make sure depot_tools is available for vpython.
+    if not DEPOT_TOOLS_DIR.exists():
+        subprocess.run(
+            ['git', 'clone', '--depth=1', DEPOT_TOOLS_URI, DEPOT_TOOLS_DIR],
+            check=True)
+    os.environ['PATH'] = f'{DEPOT_TOOLS_DIR}{os.pathsep}' + os.environ['PATH']
 
 
 def get_parser():
