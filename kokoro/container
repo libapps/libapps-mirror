@@ -79,8 +79,12 @@ def build(opts):
         logging.info('Waiting for xz to finish ...')
         xz.stdin.close()
         xz.wait()
-    sudo_run(opts, ['docker', 'load', '--input', IMAGE_NAME],
-             cwd=libdot.LIBAPPS_DIR)
+
+
+def load(opts):
+    """Load the container."""
+    return sudo_run(opts, ['docker', 'load', '--input', IMAGE_NAME],
+                    cwd=libdot.LIBAPPS_DIR)
 
 
 def run_docker(opts, docker_args=(), cmd_args=()):
@@ -143,7 +147,7 @@ def get_parser():
     parser.add_argument('--no-sudo', dest='sudo', action='store_false',
                         help='Do not use sudo to run docker')
     parser.add_argument('action',
-                        choices=('build', 'enter', 'test', 'all'),
+                        choices=('build', 'load', 'enter', 'test', 'all'),
                         help='What to do!')
     return parser
 
@@ -160,7 +164,9 @@ def main(argv):
     cleanup()
     if opts.action == 'build':
         build(opts)
-        return 0
+        return load(opts).returncode
+    elif opts.action == 'load':
+        return load(opts).returncode
     elif opts.action == 'enter':
         return enter(opts).returncode
     elif opts.action == 'test':
