@@ -128,7 +128,8 @@ class ArgumentParser(argparse.ArgumentParser):
 
 def touch(path):
     """Touch (and truncate) |path|."""
-    open(path, 'wb').close()
+    with open(path, 'wb'):
+        pass
 
 
 def unlink(path):

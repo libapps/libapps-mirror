@@ -33,7 +33,7 @@ import subprocess
 import sys
 
 import kokoro  # pylint: disable=unused-import
-import libdot
+import libdot  # pylint: disable=wrong-import-order
 
 
 CONTAINER_NAME = 'ssh_client'

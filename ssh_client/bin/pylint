@@ -8,7 +8,7 @@
 import sys
 
 import ssh_client
-import libdot
+import libdot  # pylint: disable=wrong-import-order
 
 
 if __name__ == '__main__':

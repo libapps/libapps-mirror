@@ -10,7 +10,7 @@ import sys
 from typing import List
 
 import kokoro
-import libdot
+import libdot  # pylint: disable=wrong-import-order
 
 
 def _get_default_paths(basedir: Path) -> List[Path]:

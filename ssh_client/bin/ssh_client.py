@@ -263,7 +263,8 @@ def default_src_prepare(metadata):
         else:
             patch = os.path.join(filesdir, patch)
             logging.info('Applying patch %s', name)
-            run(['patch', '-p1'], stdin=open(patch, 'rb'))
+            with open(patch, 'rb') as fp:
+                run(['patch', '-p1'], stdin=fp)
             touch(stamp)
 
 

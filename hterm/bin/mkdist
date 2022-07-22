@@ -25,7 +25,7 @@ from pathlib import Path
 import sys
 
 import hterm
-import libdot
+import libdot  # pylint: disable=wrong-import-order
 
 
 def get_parser():

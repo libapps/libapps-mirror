@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 
 import wassh
-import libdot
+import libdot  # pylint: disable=wrong-import-order
 
 
 JS_DIR = wassh.DIR / 'js'

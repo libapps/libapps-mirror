@@ -93,17 +93,13 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
 
-    pool = multiprocessing.Pool()
-
-    # We walk the top set of args by hand to deref links.
-    for path in opts.paths:
-        if path.is_dir():
-            process_dir(pool, path)
-        elif path.is_file():
-            process_file(pool, path)
-
-    pool.close()
-    pool.join()
+    with multiprocessing.Pool() as pool:
+        # We walk the top set of args by hand to deref links.
+        for path in opts.paths:
+            if path.is_dir():
+                process_dir(pool, path)
+            elif path.is_file():
+                process_file(pool, path)
 
 
 if __name__ == '__main__':

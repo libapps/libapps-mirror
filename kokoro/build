@@ -15,7 +15,7 @@ import subprocess
 import sys
 
 import kokoro
-import libdot
+import libdot  # pylint: disable=wrong-import-order
 
 
 # Where kokoro expects files to end up.  Anything put in this dir will be

@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 import hterm
-import libdot
+import libdot  # pylint: disable=wrong-import-order
 
 
 # Path to our html test page.

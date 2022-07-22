@@ -447,7 +447,7 @@ class VTScope:
 
         filename = os.path.expanduser(args[0])
 
-        with open(filename) as f:
+        with open(filename, encoding='utf-8') as f:
             self.data = f.read()
 
         if re.match(r'(#[^\n]*\n)*@@ HEADER_START', self.data):
