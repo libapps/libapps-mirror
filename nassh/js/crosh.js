@@ -116,7 +116,9 @@ Crosh.init = function() {
   terminal.alwaysUseLegacyPasting = !Crosh.isWebApp();
 
   // If we want to execute something other than the default crosh.
-  const commandName = params.get('command') || 'crosh';
+  // Since Terminal has shipped and supports Crostini now, we don't need to
+  // support anything else, so hardcode crosh.
+  const commandName = 'crosh';
   window.document.title = commandName;
 
   terminal.decorate(lib.notNull(document.querySelector('#terminal')));
