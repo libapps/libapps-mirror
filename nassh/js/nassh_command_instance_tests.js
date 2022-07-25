@@ -6,8 +6,10 @@
  * @fileoverview nassh command instance tests.
  */
 
-import {parseDestination, parseURI, postProcessOptions, splitCommandLine,
-        tokenizeOptions} from './nassh_command_instance.js';
+import {
+  isSafeUriNasshOption, isSafeUriSshOption, parseDestination, parseURI,
+  postProcessOptions, splitCommandLine, tokenizeOptions,
+} from './nassh_command_instance.js';
 
 describe('nassh_command_instance_tests.js', () => {
 
@@ -307,6 +309,85 @@ it('tokenizeOptions', () => {
 
   // Check for bad options.
   assert.throws(() => tokenizeOptions('blah'));
+});
+
+/**
+ * Verify safe URI nassh option checking.
+ */
+it('isSafeUriNasshOption', () => {
+  // Options we allow via URI.
+  // Yes, this duplicates safeUriNasshOptions a bit, but considering the
+  // sensitive security aspect, we prefer to have this extra layer.
+  const safeOptions = [
+    '--config',
+    '--no-config',
+    '--proxy-mode',
+    '--no-proxy-mode',
+    '--proxy-host',
+    '--no-proxy-host',
+    '--proxy-port',
+    '--no-proxy-port',
+    '--proxy-user',
+    '--no-proxy-user',
+    '--ssh-agent',
+    '--no-ssh-agent',
+    '--welcome',
+    '--no-welcome',
+  ];
+
+  const unsafeOptions = [
+    // Options we don't allow currently.
+    '--use-ssl',
+    '--use-xhr',
+    // Same leading prefix as a safe option.
+    '--welcome1',
+    // Unknown option.
+    '--foooo',
+  ];
+
+  safeOptions.forEach((option) => {
+    assert.isTrue(isSafeUriNasshOption(option), option);
+  });
+
+  unsafeOptions.forEach((option) => {
+    assert.isFalse(isSafeUriNasshOption(option), option);
+  });
+});
+
+/**
+ * Verify safe URI ssh option checking.
+ */
+it('isSafeUriSshOption', () => {
+  // Options we allow via URI.
+  // Yes, this duplicates safeUriSshOptions a bit, but considering the
+  // sensitive security aspect, we prefer to have this extra layer.
+  const safeOptions = [
+    '-4', '-6', '-a', '-A', '-C', '-q', '-Q', '-v', '-V',
+  ];
+
+  const unsafeOptions = [
+    // Options we don't allow currently.
+    '-D',
+    '-F',
+    '-L',
+    '-o',
+    '-O',
+    '-R',
+    // Same leading prefix as a safe option.
+    '-41',
+    // Long option similar to a safe option.
+    '--4',
+    // Unknown option.
+    '-1',
+  ];
+
+  safeOptions.forEach((option) => {
+    assert.isTrue(isSafeUriSshOption(option), option);
+  });
+
+  unsafeOptions.forEach((option) => {
+    assert.isFalse(isSafeUriSshOption(option), option);
+  });
 });
 
 /**

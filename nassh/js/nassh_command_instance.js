@@ -985,12 +985,8 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
   }
 
   // Merge nassh options from the ssh:// URI that we believe are safe.
-  const safeNasshOptions = new Set([
-    '--config', '--proxy-mode', '--proxy-host', '--proxy-port', '--proxy-user',
-    '--ssh-agent', '--welcome',
-  ]);
   Object.keys(userOptions).forEach((option) => {
-    if (safeNasshOptions.has(option)) {
+    if (isSafeUriNasshOption(option)) {
       options[option] = userOptions[option];
     } else {
       console.warn(`Option ${option} not currently supported`);
@@ -1005,11 +1001,8 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
   // Merge ssh options from the ssh:// URI that we believe are safe.
   params.userSshArgs = [];
   const userSshOptionsList = splitCommandLine(params.nasshUserSshOptions).args;
-  const safeSshOptions = new Set([
-    '-4', '-6', '-a', '-A', '-C', '-q', '-Q', '-v', '-V',
-  ]);
   userSshOptionsList.forEach((option) => {
-    if (safeSshOptions.has(option)) {
+    if (isSafeUriSshOption(option)) {
       params.userSshArgs.push(option);
     } else {
       console.warn(`Option ${option} not currently supported`);
@@ -1306,6 +1299,65 @@ export function tokenizeOptions(optionString = '') {
   }
 
   return rv;
+}
+
+/**
+ * Nassh options we allow from ssh:// URIs that we believe are safe.
+ *
+ * NB: We implicitly allow negative verions.  For example, --welcome implies
+ * --no-welcome is also safe.
+ *
+ * @type {!Set<string>}
+ */
+const safeUriNasshOptions = new Set([
+  '--config', '--proxy-mode', '--proxy-host', '--proxy-port', '--proxy-user',
+  '--ssh-agent', '--welcome',
+]);
+
+/**
+ * Determine wheher a nassh option is safe for URIs.
+ *
+ * NB: This function is expected to be called after tokenizing.  Thus it looks
+ * for values like `--config`, not `--config=google`.
+ *
+ * @param {string} option The option to check.
+ * @return {boolean} Whether the option is safe.
+ */
+export function isSafeUriNasshOption(option) {
+  // See if the option is explicitly listed.
+  if (safeUriNasshOptions.has(option)) {
+    return true;
+  }
+
+  // See if the negative variant is used.
+  if (option.startsWith('--no-')) {
+    return isSafeUriNasshOption(`--${option.substr(5)}`);
+  }
+
+  // No matches, so assume it's unsafe.
+  return false;
+}
+
+/**
+ * OpenSSH options we allow from ssh:// URIs that we believe are safe.
+ *
+ * @type {!Set<string>}
+ */
+const safeUriSshOptions = new Set([
+  '-4', '-6', '-a', '-A', '-C', '-q', '-Q', '-v', '-V',
+]);
+
+/**
+ * Determine wheher an OpenSSH option is safe for URIs.
+ *
+ * NB: This function is expected to be called after command line splitting.
+ * Thus it supports separate options only like -4 -q and not -4q.
+ *
+ * @param {string} option The option to check.
+ * @return {boolean} Whether the option is safe.
+ */
+export function isSafeUriSshOption(option) {
+  return safeUriSshOptions.has(option);
 }
 
 /**
