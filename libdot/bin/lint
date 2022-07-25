@@ -226,6 +226,7 @@ def main(
         for func in (
             libdot.eslint.run,
             libdot.closure_compiler.run,
+            libdot.black.run,
             libdot.pylint.run,
         ):
             func(["--version"])
@@ -273,7 +274,10 @@ def main(
     tolint_paths -= set(py_files)
     if py_files and opts.py:
         py_kwargs = {"paths": py_files, **kwargs}
-        checks += [libdot.pylint.perform(**py_kwargs)]
+        checks += [
+            libdot.black.perform(**py_kwargs),
+            libdot.pylint.perform(**py_kwargs),
+        ]
 
     cpp_files = libdot.cpplint.filter_known_files(opts.paths)
     tolint_paths -= set(cpp_files)
@@ -324,6 +328,7 @@ def main(
         ".el",
         ".sh",
         ".svg",
+        ".toml",
         ".txt",
         ".vim",
         ".xml",

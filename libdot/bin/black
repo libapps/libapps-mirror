@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+# Copyright 2022 The ChromiumOS Authors.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Run black with the right settings."""
+
+import argparse
+import functools
+import logging
+import shutil
+import subprocess
+import sys
+from typing import List
+
+import libdot
+
+
+filter_known_files = libdot.pylint.filter_known_files
+
+
+@functools.lru_cache(maxsize=1)
+def find_black() -> str:
+    """Figure out the name of the black tool."""
+    # Prefer our vpython copy if possible.
+    if shutil.which("vpython"):
+        return libdot.BIN_DIR / "black-vpython"
+
+    # If there's no black, give up.
+    if not shutil.which("black"):
+        logging.error(
+            "unable to locate black; please install:\n"
+            "sudo apt-get install black"
+        )
+        sys.exit(1)
+
+    return "black"
+
+
+def setup() -> None:
+    """Initialize the tool settings."""
+    find_black()
+
+
+def run(argv=(), **kwargs) -> subprocess.CompletedProcess:
+    """Run the tool directly."""
+    setup()
+
+    cmd = [find_black(), "--quiet"] + list(argv)
+    return libdot.run(cmd, **kwargs)
+
+
+def perform(
+    # pylint: disable=unused-argument
+    argv=(),
+    paths=(),
+    fix=False,
+    gerrit_comments_file=None,
+) -> bool:
+    """Run high level tool logic."""
+    argv = list(argv)
+    paths = list(paths)
+
+    if not fix:
+        argv += ["--check", "--diff"]
+
+    # TODO(vapier): Add support for Gerrit comments.
+
+    result = run(argv + paths, check=False)
+    return result.returncode == 0
+
+
+def get_parser() -> argparse.ArgumentParser:
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__, short_options=False)
+    parser.add_argument(
+        "--gerrit-comments-file",
+        help="Save errors for posting files to Gerrit.",
+    )
+    parser.add_argument("paths", nargs="*", help="Paths to lint.")
+    return parser
+
+
+def main(argv: List[str]) -> int:
+    """The main func!"""
+    parser = get_parser()
+    opts, args = parser.parse_known_args(argv)
+
+    return (
+        0
+        if perform(
+            argv=args,
+            paths=opts.paths,
+            gerrit_comments_file=opts.gerrit_comments_file,
+        )
+        else 1
+    )
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
