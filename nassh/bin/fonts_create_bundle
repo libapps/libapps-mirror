@@ -24,21 +24,26 @@ def main(argv):
     parser = get_parser()
     _opts = parser.parse_args(argv)
 
-    tar = nassh.LIBAPPS_DIR / 'fonts.tar.xz'
+    tar = nassh.LIBAPPS_DIR / "fonts.tar.xz"
 
-    libdot.pack(tar, ['fonts'], exclude=['fonts/.hash'], cwd=nassh.DIR)
+    libdot.pack(tar, ["fonts"], exclude=["fonts/.hash"], cwd=nassh.DIR)
 
     new_hash = libdot.sha256(tar)
-    final_tar = nassh.LIBAPPS_DIR / f'fonts-{new_hash}.tar.xz'
+    final_tar = nassh.LIBAPPS_DIR / f"fonts-{new_hash}.tar.xz"
     os.rename(tar, final_tar)
 
     logging.info(
-        'To update the hash, run:\n'
+        "To update the hash, run:\n"
         "sed -i \"/^FONTS_HASH *=/s:=.*:= '%s':\" '%s/fonts'",
-        new_hash, nassh.BIN_DIR)
-    logging.info('To upload the new fonts:\ngsutil cp -a public-read %s %s/',
-                 final_tar, nassh.fonts.FONTS_GS_URI)
+        new_hash,
+        nassh.BIN_DIR,
+    )
+    logging.info(
+        "To upload the new fonts:\ngsutil cp -a public-read %s %s/",
+        final_tar,
+        nassh.fonts.FONTS_GS_URI,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

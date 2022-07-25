@@ -15,8 +15,8 @@ import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 
-CHANGELOG_FILE = os.path.join(nassh.DIR, 'html', 'changelog.html')
-CHANGELOG_TEMPLATE = os.path.join(nassh.DIR, 'html', 'changelog.html.in')
+CHANGELOG_FILE = os.path.join(nassh.DIR, "html", "changelog.html")
+CHANGELOG_TEMPLATE = os.path.join(nassh.DIR, "html", "changelog.html.in")
 
 CHANGELOG_ENTRY_TEMPLATE = """\
 <div><a href="https://crrev.com/%(commit)s">%(summary)s</a></div>
@@ -25,56 +25,68 @@ CHANGELOG_ENTRY_TEMPLATE = """\
 
 def generate_html(tag: str, entries: List[List[str]]):
     """Generate the changelog file from |entries|."""
-    with open(CHANGELOG_TEMPLATE, 'r', encoding='utf-8') as fp:
+    with open(CHANGELOG_TEMPLATE, "r", encoding="utf-8") as fp:
         template = fp.read()
-    output = ''
+    output = ""
     for (commit, summary) in entries:
         output += CHANGELOG_ENTRY_TEMPLATE % {
-            'commit': commit,
-            'summary': html.escape(summary),
+            "commit": commit,
+            "summary": html.escape(summary),
         }
-    output = template.replace('%%COMMITS%%', output).replace('%%TAG%%', tag)
-    with open(CHANGELOG_FILE, 'w', encoding='utf-8') as fp:
+    output = template.replace("%%COMMITS%%", output).replace("%%TAG%%", tag)
+    with open(CHANGELOG_FILE, "w", encoding="utf-8") as fp:
         fp.write(output)
 
 
 def get_entries(tag: str) -> List[List[str]]:
     """Find all the commits since |tag|."""
     output = libdot.run(
-        ['git', 'log', '--format=%H %s', f'{tag}..HEAD'],
-        capture_output=True, encoding='utf-8', cwd=nassh.DIR).stdout
-    return [x.split(' ', 1) for x in output.splitlines()]
+        ["git", "log", "--format=%H %s", f"{tag}..HEAD"],
+        capture_output=True,
+        encoding="utf-8",
+        cwd=nassh.DIR,
+    ).stdout
+    return [x.split(" ", 1) for x in output.splitlines()]
 
 
 def get_previous_tag() -> str:
     """Find the most recent nassh tag."""
     return libdot.run(
-        ['git', 'describe', '--tags', '--abbrev=0', '--match', 'nassh-*',
-         'HEAD'],
-        capture_output=True, encoding='utf-8', cwd=nassh.DIR).stdout.strip()
+        [
+            "git",
+            "describe",
+            "--tags",
+            "--abbrev=0",
+            "--match",
+            "nassh-*",
+            "HEAD",
+        ],
+        capture_output=True,
+        encoding="utf-8",
+        cwd=nassh.DIR,
+    ).stdout.strip()
 
 
 def generate_changelog(prev_tag: str = None):
     """Generate the changelog.html file from recent git history."""
     # Ebuilds don't currently checkout the entire tree, so stub it.
-    if 'EAPI' in os.environ:
-        logging.warning('Generating a stub changelog for ebuild.')
-        generate_html('', [])
+    if "EAPI" in os.environ:
+        logging.warning("Generating a stub changelog for ebuild.")
+        generate_html("", [])
         return
 
     if prev_tag is None:
         prev_tag = get_previous_tag()
     logging.info('Generating history since tag "%s"', prev_tag)
     entries = get_entries(prev_tag)
-    logging.info('Found %i commits', len(entries))
+    logging.info("Found %i commits", len(entries))
     generate_html(prev_tag, entries)
 
 
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
-    parser.add_argument('--commit',
-                        help='Commit to generate history back to')
+    parser.add_argument("--commit", help="Commit to generate history back to")
     return parser
 
 
@@ -86,6 +98,5 @@ def main(argv: List[str]):
     generate_changelog(prev_tag=opts.commit)
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

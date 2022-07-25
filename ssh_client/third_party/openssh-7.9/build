@@ -11,85 +11,81 @@ import os
 import sys
 
 FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ('%(p)s.tar.gz',)
-PATCHES = ('%(p)s.patch',)
+ARCHIVES = ("%(p)s.tar.gz",)
+PATCHES = ("%(p)s.patch",)
 
 
 def src_configure(metadata):
     """Configure the source."""
-    if os.path.exists('Makefile'):
-        logging.info('Makefile exists; skipping ./configure step')
+    if os.path.exists("Makefile"):
+        logging.info("Makefile exists; skipping ./configure step")
         return
 
-    tc = metadata['toolchain']
+    tc = metadata["toolchain"]
 
-    EXTRA_LIBS = ['-lcrypto']
+    EXTRA_LIBS = ["-lcrypto"]
     EXTRA_CFLAGS = [
-        '-DHAVE_SIGACTION',
-        '-DHAVE_TRUNCATE',
-        '-DHAVE_SETSID',
-        '-DHAVE_GETNAMEINFO',
-        '-DHAVE_GETADDRINFO',
-        '-DHAVE_GETCWD',
-        '-DHAVE_STATVFS',
-        '-DHAVE_FSTATVFS',
-        '-DHAVE_ENDGRENT',
-        '-DHAVE_FD_MASK',
-        '-include', 'sys/cdefs.h',
+        "-DHAVE_SIGACTION",
+        "-DHAVE_TRUNCATE",
+        "-DHAVE_SETSID",
+        "-DHAVE_GETNAMEINFO",
+        "-DHAVE_GETADDRINFO",
+        "-DHAVE_GETCWD",
+        "-DHAVE_STATVFS",
+        "-DHAVE_FSTATVFS",
+        "-DHAVE_ENDGRENT",
+        "-DHAVE_FD_MASK",
+        "-include",
+        "sys/cdefs.h",
     ]
 
     EXTRA_CONFIGURE_FLAGS = [
         # Log related settings.
-        '--disable-lastlog',
-        '--disable-utmp',
-        '--disable-utmpx',
-        '--disable-wtmp',
-        '--disable-wtmpx',
-        '--disable-pututline',
-        '--disable-pututxline',
-
+        "--disable-lastlog",
+        "--disable-utmp",
+        "--disable-utmpx",
+        "--disable-wtmp",
+        "--disable-wtmpx",
+        "--disable-pututline",
+        "--disable-pututxline",
         # Various toolchain settings.
-        '--without-rpath',
-        '--without-Werror',
-
+        "--without-rpath",
+        "--without-Werror",
         # Features we don't use.
-        '--without-audit',
-        '--without-libedit',
-        '--without-pam',
-        '--without-sandbox',
-        '--without-selinux',
-        '--without-shadow',
-        '--without-ssl-engine',
-
+        "--without-audit",
+        "--without-libedit",
+        "--without-pam",
+        "--without-sandbox",
+        "--without-selinux",
+        "--without-shadow",
+        "--without-ssl-engine",
         # Features we want.
         # OpenSSL is needed for DSA/RSA key support.
-        '--with-openssl',
-        '--with-ldns',
-        '--with-zlib',
-        '--without-zlib-version-check',
-
+        "--with-openssl",
+        "--with-ldns",
+        "--with-zlib",
+        "--without-zlib-version-check",
         # These don't work with newlib (used in PNaCl).
-        '--without-stackprotect',
-        '--without-hardening',
-
+        "--without-stackprotect",
+        "--without-hardening",
         # Disable inet funcs we don't rely upon.
-        'ac_cv_func_inet_aton=no',
-        'ac_cv_func_inet_ntoa=no',
-        'ac_cv_func_inet_ntop=no',
+        "ac_cv_func_inet_aton=no",
+        "ac_cv_func_inet_ntoa=no",
+        "ac_cv_func_inet_ntop=no",
     ]
 
     cmd = [
-        './configure',
-        f'--build={tc.cbuild}',
-        f'--host={tc.chost}',
+        "./configure",
+        f"--build={tc.cbuild}",
+        f"--host={tc.chost}",
         # The prefix path matches what is used at runtime.
-        '--prefix=/',
-        '--cache-file=../config.cache',
+        "--prefix=/",
+        "--cache-file=../config.cache",
         f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
         f"LIBS={' '.join(EXTRA_LIBS)}",
     ]
@@ -97,54 +93,66 @@ def src_configure(metadata):
 
     # Build the html man pages.  Since we're hooking the Makefile, we need can
     # do this only after we've run configure.
-    with open('Makefile', 'ab') as f:
-        f.writelines([
-            b'html: $(MANPAGES_IN:%=%.html)\n',
-            b'%.html: %\n',
-            (b'\tmandoc -Thtml -I os=' + metadata['p'].encode('utf-8') +
-             b' -O man=%N.%S.html $< >$@.tmp\n'),
-            b'\tmv $@.tmp $@\n',
-        ])
+    with open("Makefile", "ab") as f:
+        f.writelines(
+            [
+                b"html: $(MANPAGES_IN:%=%.html)\n",
+                b"%.html: %\n",
+                (
+                    b"\tmandoc -Thtml -I os="
+                    + metadata["p"].encode("utf-8")
+                    + b" -O man=%N.%S.html $< >$@.tmp\n"
+                ),
+                b"\tmv $@.tmp $@\n",
+            ]
+        )
 
 
 def src_compile(metadata):
     """Compile the source."""
     # These are the few objects we care about for our tools.
     objects = [
-        'ssh.o', 'readconf.o', 'clientloop.o', 'sshtty.o', 'sshconnect.o',
-        'sshconnect2.o', 'mux.o',
+        "ssh.o",
+        "readconf.o",
+        "clientloop.o",
+        "sshtty.o",
+        "sshconnect.o",
+        "sshconnect2.o",
+        "mux.o",
     ]
 
     targets = objects + [
         # These are internal ssh libs that the objects above might use.
-        'libssh.a',
-        'openbsd-compat/libopenbsd-compat.a',
-
+        "libssh.a",
+        "openbsd-compat/libopenbsd-compat.a",
         # The documentation we'll ship later on.
-        'html',
+        "html",
     ]
 
-    tc = metadata['toolchain']
+    tc = metadata["toolchain"]
     ssh_client.emake(*targets)
-    ssh_client.run([tc.ar, 'rcs', 'libopenssh.a'] + objects)
+    ssh_client.run([tc.ar, "rcs", "libopenssh.a"] + objects)
 
 
 def src_install(metadata):
     """Install the package."""
-    tc = metadata['toolchain']
+    tc = metadata["toolchain"]
     # Turn "8.0p1" into just "8.0".
-    major_minor_version = metadata['PV'][:3]
-    for lib in ('libopenssh.a', 'libssh.a',
-                'openbsd-compat/libopenbsd-compat.a'):
+    major_minor_version = metadata["PV"][:3]
+    for lib in (
+        "libopenssh.a",
+        "libssh.a",
+        "openbsd-compat/libopenbsd-compat.a",
+    ):
         # Transform libssh.a to libssh-8.0.a.
         base, ext = os.path.splitext(os.path.basename(lib))
-        target = f'{base}-{major_minor_version}{ext}'
+        target = f"{base}-{major_minor_version}{ext}"
         ssh_client.copy(lib, os.path.join(tc.libdir, target))
 
-    plugin_docs = os.path.join(ssh_client.OUTPUT, 'plugin', 'docs')
+    plugin_docs = os.path.join(ssh_client.OUTPUT, "plugin", "docs")
     os.makedirs(plugin_docs, exist_ok=True)
-    for path in glob.glob('*.[0-9].html'):
+    for path in glob.glob("*.[0-9].html"):
         ssh_client.copy(path, os.path.join(plugin_docs, path))
 
 
-ssh_client.build_package(sys.modules[__name__], 'pnacl')
+ssh_client.build_package(sys.modules[__name__], "pnacl")

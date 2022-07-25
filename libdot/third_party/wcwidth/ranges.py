@@ -29,16 +29,16 @@ def load_proplist():
     """Return codepoints based on their various properties."""
     db = {}
 
-    data = Path('PropList.txt').read_text(encoding='utf-8')
+    data = Path("PropList.txt").read_text(encoding="utf-8")
 
     for line in data.splitlines():
-        line = line.split('#', 1)[0].strip()
+        line = line.split("#", 1)[0].strip()
         if not line:
             continue
 
-        codepoint, prop = line.split(';')
-        if '..' in codepoint:
-            first, last = codepoint.split('..')
+        codepoint, prop = line.split(";")
+        if ".." in codepoint:
+            first, last = codepoint.split("..")
         else:
             first = last = codepoint
         first = int(first, 16)
@@ -59,48 +59,48 @@ def load_unicode_data():
     https://unicode.org/reports/tr44/#General_Category_Values
     """
     db = {
-        'Cc': set(),
+        "Cc": set(),
         # Format Character: https://unicode.org/glossary/#format_character
-        'Cf': set(),
-        'Co': set(),
-        'Cs': set(),
-        'Ll': set(),
-        'Lm': set(),
-        'Lo': set(),
-        'Lt': set(),
-        'Lu': set(),
-        'Mc': set(),
+        "Cf": set(),
+        "Co": set(),
+        "Cs": set(),
+        "Ll": set(),
+        "Lm": set(),
+        "Lo": set(),
+        "Lt": set(),
+        "Lu": set(),
+        "Mc": set(),
         # Enclosing Mark: https://unicode.org/glossary/#enclosing_mark
-        'Me': set(),
+        "Me": set(),
         # Nonspacing Mark: https://unicode.org/glossary/#nonspacing_mark
-        'Mn': set(),
-        'Nd': set(),
-        'Nl': set(),
-        'No': set(),
-        'Pc': set(),
-        'Pd': set(),
-        'Pe': set(),
-        'Pf': set(),
-        'Pi': set(),
-        'Po': set(),
-        'Ps': set(),
-        'Sc': set(),
-        'Sk': set(),
-        'Sm': set(),
-        'So': set(),
-        'Zl': set(),
-        'Zp': set(),
-        'Zs': set(),
+        "Mn": set(),
+        "Nd": set(),
+        "Nl": set(),
+        "No": set(),
+        "Pc": set(),
+        "Pd": set(),
+        "Pe": set(),
+        "Pf": set(),
+        "Pi": set(),
+        "Po": set(),
+        "Ps": set(),
+        "Sc": set(),
+        "Sk": set(),
+        "Sm": set(),
+        "So": set(),
+        "Zl": set(),
+        "Zp": set(),
+        "Zs": set(),
     }
 
-    data = Path('UnicodeData.txt').read_text(encoding='utf-8')
+    data = Path("UnicodeData.txt").read_text(encoding="utf-8")
 
     for line in data.splitlines():
-        line = line.split('#', 1)[0].strip()
+        line = line.split("#", 1)[0].strip()
         if not line:
             continue
 
-        eles = line.split(';')
+        eles = line.split(";")
         codepoint = eles[0]
         cat = eles[2]
 
@@ -119,26 +119,26 @@ def load_east_asian():
     https://www.unicode.org/reports/tr11/
     """
     db = {
-        'A': set(),  # Ambiguous.
-        'F': set(),  # Full-width.
-        'H': set(),  # Half-width.
-        'N': set(),  # Neutral.
-        'Na': set(),  # Narrow.
-        'W': set(),  # Wide.
+        "A": set(),  # Ambiguous.
+        "F": set(),  # Full-width.
+        "H": set(),  # Half-width.
+        "N": set(),  # Neutral.
+        "Na": set(),  # Narrow.
+        "W": set(),  # Wide.
     }
 
-    data = Path('EastAsianWidth.txt').read_text(encoding='utf-8')
+    data = Path("EastAsianWidth.txt").read_text(encoding="utf-8")
 
     for line in data.splitlines():
-        line = line.split('#', 1)[0].strip()
+        line = line.split("#", 1)[0].strip()
         if not line:
             continue
 
-        codepoint, width = line.split(';')
-        assert width in db, f'Missing classification: {width}'
+        codepoint, width = line.split(";")
+        assert width in db, f"Missing classification: {width}"
 
-        if '..' in codepoint:
-            first, last = codepoint.split('..')
+        if ".." in codepoint:
+            first, last = codepoint.split("..")
         else:
             first = last = codepoint
         first = int(first, 16)
@@ -160,61 +160,61 @@ def load_east_asian():
 
     def add_block(start, end):
         block = set(range(start, end + 1))
-        db['W'].update(block)
+        db["W"].update(block)
         # Make sure some codepoints weren't allocated with different width.
         # This is for future proofing to avoid silent corruption.
-        non_wide = db['A'] | db['H'] | db['N'] | db['Na']
-        overlap = [f'U+{x:04X}' for x in sorted(non_wide & block)]
-        assert not overlap, f'duplicates found: {overlap}'
+        non_wide = db["A"] | db["H"] | db["N"] | db["Na"]
+        overlap = [f"U+{x:04X}" for x in sorted(non_wide & block)]
+        assert not overlap, f"duplicates found: {overlap}"
 
     # CJK Radicals Supplement.
-    add_block(0x2e80, 0x2eff)
+    add_block(0x2E80, 0x2EFF)
     # Kangxi Radicals.
-    add_block(0x2f00, 0x2fdf)
+    add_block(0x2F00, 0x2FDF)
     # Ideographic Description Characters.
-    add_block(0x2ff0, 0x2fff)
+    add_block(0x2FF0, 0x2FFF)
     # Hiragana.
-    add_block(0x3040, 0x309f)
+    add_block(0x3040, 0x309F)
     # Katakana.
-    add_block(0x30a0, 0x30ff)
+    add_block(0x30A0, 0x30FF)
     # Bopomofo.
-    add_block(0x3100, 0x312f)
+    add_block(0x3100, 0x312F)
     # Hangul Compatibility Jamo.
-    add_block(0x3130, 0x318f)
+    add_block(0x3130, 0x318F)
     # Bopomofo Extended.
-    add_block(0x31a0, 0x31bf)
+    add_block(0x31A0, 0x31BF)
     # CJK Strokes.
-    add_block(0x31c0, 0x31ef)
+    add_block(0x31C0, 0x31EF)
     # Enclosed CJK Letters and Months.
     # This block has a few narrow chars in the middle.
     add_block(0x3200, 0x3247)
-    add_block(0x3250, 0x32ff)
+    add_block(0x3250, 0x32FF)
     # CJK Compatibility.
-    add_block(0x3300, 0x33ff)
+    add_block(0x3300, 0x33FF)
     # CJK Unified Ideographs Extension A.
-    add_block(0x3400, 0x4dbf)
+    add_block(0x3400, 0x4DBF)
     # CJK Unified Ideographs.
-    add_block(0x4e00, 0x9fff)
+    add_block(0x4E00, 0x9FFF)
     # Yi Syllables.
-    add_block(0xa000, 0xa48f)
+    add_block(0xA000, 0xA48F)
     # Yi Radicals.
-    add_block(0xa490, 0xa4cf)
+    add_block(0xA490, 0xA4CF)
     # Hangul Jamo Extended-A.
-    add_block(0xa960, 0xa97f)
+    add_block(0xA960, 0xA97F)
     # CJK Compatibility Ideographs.
-    add_block(0xf900, 0xfaff)
+    add_block(0xF900, 0xFAFF)
     # CJK Small Form Variants.
-    add_block(0xfe50, 0xfe6f)
+    add_block(0xFE50, 0xFE6F)
     # Tangut.
-    add_block(0x17000, 0x187ff)
+    add_block(0x17000, 0x187FF)
     # Tangut Components.
-    add_block(0x18800, 0x18aff)
+    add_block(0x18800, 0x18AFF)
     # Kana Supplement.
-    add_block(0x1b000, 0x1b0ff)
+    add_block(0x1B000, 0x1B0FF)
     # Kana Extended-A.
-    add_block(0x1b100, 0x1b12f)
+    add_block(0x1B100, 0x1B12F)
     # Nushu.
-    add_block(0x1b170, 0x1b2ff)
+    add_block(0x1B170, 0x1B2FF)
 
     return db
 
@@ -241,23 +241,23 @@ def js_dumps(ranges):
     This is currently ad-hoc code but could easily use the json
     module.  We do this to have better control over output format.
     """
-    ret = '[\n'
+    ret = "[\n"
     i = 0
     for r in ranges:
         if i == 0:
             # Indent this new line.
-            ret += '  '
+            ret += "  "
         else:
             # Add a space after the previous element.
-            ret += ' '
-        ret += f'[{r[0]:#06x}, {r[1]:#06x}],'
+            ret += " "
+        ret += f"[{r[0]:#06x}, {r[1]:#06x}],"
         i += 1
         if i == 3:
-            ret += '\n'
+            ret += "\n"
             i = 0
     if i:
-        ret += '\n'
-    ret += '];\n'
+        ret += "\n"
+    ret += "];\n"
 
     return ret
 
@@ -265,7 +265,7 @@ def js_dumps(ranges):
 def gen_combining(db, prob_db):
     """Generate the table of all zero-width/combining characters."""
     # The classes that are explicitly zero width.
-    combining_chars = db['Me'] | db['Mn'] | db['Cf']
+    combining_chars = db["Me"] | db["Mn"] | db["Cf"]
 
     # A note on soft-hyphen (U+OOAD): Previous versions that used the tables
     # from Markus Kuhn's code marked this as wcwidth of 1.  Unicode has changed
@@ -299,7 +299,7 @@ def gen_combining(db, prob_db):
     # Prepended_Concatenation_Mark=True, to identify them as a class. They also
     # have special behavior in text segmentation. (See Unicode Standard Annex
     # #29, "Unicode Text Segmentation.")
-    combining_chars -= set(prob_db['Prepended_Concatenation_Mark'])
+    combining_chars -= set(prob_db["Prepended_Concatenation_Mark"])
 
     # Add the Hangul Jungseong and Jongseong block (1160-11FF).
     # While they are not marked as combining characters, they are used
@@ -313,18 +313,18 @@ def gen_combining(db, prob_db):
 
 def gen_east_asian(db):
     """Generate the table of all explicitly wide east asian characters."""
-    return gen_table(db['W'] | db['F'])
+    return gen_table(db["W"] | db["F"])
 
 
 def gen_east_asian_ambiguous(db):
     """Generate the table of explicit & ambiguous wide east asian characters."""
-    return gen_table(db['W'] | db['F'] | db['A'])
+    return gen_table(db["W"] | db["F"] | db["A"])
 
 
 def find_js(js):
     """Locate the JavaScript file to update."""
     if js is None:
-        js = Path(__file__).resolve().parent / 'lib_wc.js'
+        js = Path(__file__).resolve().parent / "lib_wc.js"
 
     return js
 
@@ -336,27 +336,27 @@ def download(version):
     # read attempt (which may be partial reads).  5 minutes should be fine.
     TIMEOUT = 5 * 60
 
-    if version == 'latest':
-        uri = 'https://www.unicode.org/Public/UNIDATA/UCD.zip'
-        output = Path.cwd() / 'UCD.zip'
+    if version == "latest":
+        uri = "https://www.unicode.org/Public/UNIDATA/UCD.zip"
+        output = Path.cwd() / "UCD.zip"
 
         if output.exists():
-            req = urllib.request.Request(uri, method='HEAD')
+            req = urllib.request.Request(uri, method="HEAD")
             with urllib.request.urlopen(req, timeout=TIMEOUT) as f:
-                length = int(f.getheader('Content-Length'))
+                length = int(f.getheader("Content-Length"))
             if length != output.stat().st_size:
-                print(f'Refreshing {output}')
+                print(f"Refreshing {output}")
                 output.unlink()
     else:
-        uri = f'https://www.unicode.org/Public/zipped/{version}/UCD.zip'
-        output = Path.cwd() / f'UCD-{version}.zip'
+        uri = f"https://www.unicode.org/Public/zipped/{version}/UCD.zip"
+        output = Path.cwd() / f"UCD-{version}.zip"
 
     # Fetch the archive if it doesn't exist.
     if not output.exists():
-        print(f'Downloading {uri}')
-        tmpfile = output.with_suffix('.tmp')
+        print(f"Downloading {uri}")
+        tmpfile = output.with_suffix(".tmp")
 
-        with open(tmpfile, 'wb') as outfp:
+        with open(tmpfile, "wb") as outfp:
             with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
                 while True:
                     data = infp.read(1024 * 1024)
@@ -366,22 +366,25 @@ def download(version):
 
         tmpfile.rename(output)
 
-    print('Extracting files')
+    print("Extracting files")
     with zipfile.ZipFile(output) as archive:
-        archive.extract('EastAsianWidth.txt')
-        archive.extract('PropList.txt')
-        archive.extract('UnicodeData.txt')
+        archive.extract("EastAsianWidth.txt")
+        archive.extract("PropList.txt")
+        archive.extract("UnicodeData.txt")
 
 
 def get_parser():
     """Return an argparse parser for the CLI."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--version', default='latest',
-                        help='The Unicode version to use (%(default)s)')
-    parser.add_argument('--js', type=Path,
-                        help='JavaScript file to update')
-    parser.add_argument('action', choices=('download', 'print', 'update'),
-                        help='Operating mode')
+    parser.add_argument(
+        "--version",
+        default="latest",
+        help="The Unicode version to use (%(default)s)",
+    )
+    parser.add_argument("--js", type=Path, help="JavaScript file to update")
+    parser.add_argument(
+        "action", choices=("download", "print", "update"), help="Operating mode"
+    )
     return parser
 
 
@@ -390,7 +393,7 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
 
-    if opts.action == 'download':
+    if opts.action == "download":
         download(opts.version)
         return
 
@@ -399,24 +402,28 @@ def main(argv):
     cjk_db = load_east_asian()
 
     tables = (
-        ('lib.wc.combining', js_dumps(gen_combining(uni_db, prop_db))),
-        ('lib.wc.unambiguous', js_dumps(gen_east_asian(cjk_db))),
-        ('lib.wc.ambiguous', js_dumps(gen_east_asian_ambiguous(cjk_db))),
+        ("lib.wc.combining", js_dumps(gen_combining(uni_db, prop_db))),
+        ("lib.wc.unambiguous", js_dumps(gen_east_asian(cjk_db))),
+        ("lib.wc.ambiguous", js_dumps(gen_east_asian_ambiguous(cjk_db))),
     )
 
-    if opts.action == 'print':
+    if opts.action == "print":
         for name, text in tables:
-            print(name + ' = ' + text)
+            print(name + " = " + text)
     else:
         js = find_js(opts.js)
-        data = js.read_text(encoding='utf-8')
+        data = js.read_text(encoding="utf-8")
 
         for name, text in tables:
-            data = re.sub(rf'^{name} = .*?^\];\n$', f'{name} = {text}', data,
-                          flags=re.M|re.S)
+            data = re.sub(
+                rf"^{name} = .*?^\];\n$",
+                f"{name} = {text}",
+                data,
+                flags=re.M | re.S,
+            )
 
-        js.write_text(data, encoding='utf-8')
+        js.write_text(data, encoding="utf-8")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

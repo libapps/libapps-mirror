@@ -17,26 +17,28 @@ import libdot
 
 # The version we currently run.  Pinned to make sure everyone gets consistent
 # behavior all the time.
-VERSION = '20201102'
+VERSION = "20201102"
 
 # Full path to Google's closure compiler.
-URI = ('https://repo1.maven.org/maven2/com/google/javascript/closure-compiler/'
-       f'v{VERSION}/closure-compiler-v{VERSION}.jar')
+URI = (
+    "https://repo1.maven.org/maven2/com/google/javascript/closure-compiler/"
+    f"v{VERSION}/closure-compiler-v{VERSION}.jar"
+)
 
 
 # Where we cache our copy of closure.
-CLOSURE = libdot.BIN_DIR / f'.closure-compiler.{VERSION}.jar'
+CLOSURE = libdot.BIN_DIR / f".closure-compiler.{VERSION}.jar"
 
 
 # Where we store externs files.
-EXTERNS_DIR = libdot.DIR / 'externs'
+EXTERNS_DIR = libdot.DIR / "externs"
 
 # The version of externs that we pull in from closure.  We normally pin to the
 # closure version for stability, but this can be updated independently.
 EXTERNS_VERSION = VERSION
 
 # The version of Chrome externs that we pull from Chromium directly.
-CHROME_EXTERNS_VERSION = '3109dbe9599376b4d6b0d4ba76a354198ce5a59e'
+CHROME_EXTERNS_VERSION = "3109dbe9599376b4d6b0d4ba76a354198ce5a59e"
 
 # We pick 50 as the mid point as it allows us to easily add files before and
 # after the closure modules.
@@ -49,8 +51,10 @@ CHROME_ORDER_BASE = CLOSURE_ORDER_BASE + 10
 
 def update_closure_externs():
     """Update our local cache of externs."""
-    URI_TEMPLATE = ('https://github.com/google/closure-compiler/raw/'
-                    f'v{EXTERNS_VERSION}/contrib/externs/%(name)s.js')
+    URI_TEMPLATE = (
+        "https://github.com/google/closure-compiler/raw/"
+        f"v{EXTERNS_VERSION}/contrib/externs/%(name)s.js"
+    )
 
     # NB: Order here matters when modules are subsets of others.  For example,
     # 'chrome.js' defines 'var chrome = {}' which 'chrome_extensions.js' needs.
@@ -58,39 +62,39 @@ def update_closure_externs():
     # not check some things.  It's kind of buggy that way :(.
     # https://github.com/google/closure-compiler/issues/3586
     EXTERNS = (
-        'chrome',
-        'chrome_extensions',
+        "chrome",
+        "chrome_extensions",
     )
 
     for i, name in enumerate(EXTERNS, start=CLOSURE_ORDER_BASE):
-        uri = URI_TEMPLATE % {'name': name}
-        path = EXTERNS_DIR / f'{i}-closure-{name}-v{EXTERNS_VERSION}.js'
+        uri = URI_TEMPLATE % {"name": name}
+        path = EXTERNS_DIR / f"{i}-closure-{name}-v{EXTERNS_VERSION}.js"
         if path.exists():
             continue
 
-        for oldpath in EXTERNS_DIR.glob(f'*closure-{name}-v*.js'):
+        for oldpath in EXTERNS_DIR.glob(f"*closure-{name}-v*.js"):
             oldpath.unlink()
         libdot.fetch(uri, path)
 
 
 def update_chrome_externs():
     """Update our local cache of externs from Chrome."""
-    URI_TEMPLATE = ('https://chromium.googlesource.com/chromium/src/+/'
-                    f'{CHROME_EXTERNS_VERSION}/third_party/closure_compiler/'
-                    'externs/%(name)s.js?format=TEXT')
-
-    # Order here shouldn't matter as each file shouldn't have overlapping APIs.
-    EXTERNS = (
-        'terminal_private',
+    URI_TEMPLATE = (
+        "https://chromium.googlesource.com/chromium/src/+/"
+        f"{CHROME_EXTERNS_VERSION}/third_party/closure_compiler/"
+        "externs/%(name)s.js?format=TEXT"
     )
 
+    # Order here shouldn't matter as each file shouldn't have overlapping APIs.
+    EXTERNS = ("terminal_private",)
+
     for i, name in enumerate(EXTERNS, start=CHROME_ORDER_BASE):
-        uri = URI_TEMPLATE % {'name': name}
-        path = EXTERNS_DIR / f'{i}-chrome-{name}-v{CHROME_EXTERNS_VERSION}.js'
+        uri = URI_TEMPLATE % {"name": name}
+        path = EXTERNS_DIR / f"{i}-chrome-{name}-v{CHROME_EXTERNS_VERSION}.js"
         if path.exists():
             continue
 
-        for oldpath in EXTERNS_DIR.glob(f'*-chrome-{name}-v*.js'):
+        for oldpath in EXTERNS_DIR.glob(f"*-chrome-{name}-v*.js"):
             oldpath.unlink()
         libdot.fetch(uri, path, b64=True)
 
@@ -100,7 +104,7 @@ def update_closure():
     if CLOSURE.exists():
         return
 
-    for path in libdot.BIN_DIR.glob('.closure-compiler.*.jar'):
+    for path in libdot.BIN_DIR.glob(".closure-compiler.*.jar"):
         path.unlink()
 
     libdot.fetch(URI, CLOSURE)
@@ -130,26 +134,28 @@ def convert_to_kokoro(data):
     """
     for result in data:
         # Ignore info lines.
-        if result['level'] == 'info':
+        if result["level"] == "info":
             continue
 
         # Ignore generated files not in git.
-        if libdot.lint.is_generated_path(result['source']):
+        if libdot.lint.is_generated_path(result["source"]):
             continue
 
         # Add leading space prefix to results to get code text.
-        msg = '[closure] %s: %s\n%s\n\n %s' % (
-            result['level'], result['key'], result['description'],
-            '\n '.join(result['context'].splitlines()),
+        msg = "[closure] %s: %s\n%s\n\n %s" % (
+            result["level"],
+            result["key"],
+            result["description"],
+            "\n ".join(result["context"].splitlines()),
         )
 
         yield {
-            'path': os.path.relpath(result['source'], libdot.LIBAPPS_DIR),
-            'message': msg,
-            'startLine': result['line'],
-            'endLine': result.get('endline', result['line']),
-            'startCharacter': result['column'],
-            'endCharacter': result['column'],
+            "path": os.path.relpath(result["source"], libdot.LIBAPPS_DIR),
+            "message": msg,
+            "startLine": result["line"],
+            "endLine": result.get("endline", result["line"]),
+            "startCharacter": result["column"],
+            "endCharacter": result["column"],
         }
 
 
@@ -165,9 +171,10 @@ def run(argv=(), **kwargs):
     setup()
     return libdot.run(
         list(argv),
-        cmd_prefix=['java', '-jar', CLOSURE],
-        log_prefix=['closure-compiler'],
-        **kwargs)
+        cmd_prefix=["java", "-jar", CLOSURE],
+        log_prefix=["closure-compiler"],
+        **kwargs,
+    )
 
 
 def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
@@ -177,7 +184,8 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
     paths = list(paths)
 
     comments_path = libdot.lint.kokoro_comments_path(
-        gerrit_comments_file, 'closure')
+        gerrit_comments_file, "closure"
+    )
 
     # Closure doesn't have any automatic fixing logic.
     if fix:
@@ -185,13 +193,14 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
 
     setup()
     externs = []
-    externs_paths = libdot.DIR / 'externs'
-    for extern in externs_paths.glob('*.js'):
-        externs += ['--externs', os.path.relpath(extern)]
+    externs_paths = libdot.DIR / "externs"
+    for extern in externs_paths.glob("*.js"):
+        externs += ["--externs", os.path.relpath(extern)]
 
     # Set the language first so projects can override it.
-    argv = (['--language_in=ECMASCRIPT_2020'] + argv + ['--checks-only'] +
-            externs)
+    argv = (
+        ["--language_in=ECMASCRIPT_2020"] + argv + ["--checks-only"] + externs
+    )
     result = run(argv + paths, check=False)
     if result.returncode:
         ret = False
@@ -203,22 +212,22 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
             if dirname:
                 os.makedirs(dirname, exist_ok=True)
 
-            argv += ['--error_format=JSON']
+            argv += ["--error_format=JSON"]
             result = run(argv + paths, check=False, capture_output=True)
 
             # Save a copy for debugging later.
-            with open(comments_path + '.in', 'wb') as fp:
+            with open(comments_path + ".in", "wb") as fp:
                 fp.write(result.stderr)
 
-            data = json.loads(result.stderr.decode('utf-8'))
+            data = json.loads(result.stderr.decode("utf-8"))
             comments = list(convert_to_kokoro(data))
-            with open(comments_path, 'w', encoding='utf-8') as fp:
+            with open(comments_path, "w", encoding="utf-8") as fp:
                 json.dump(comments, fp, sort_keys=True)
     elif comments_path:
         # If there were no failures, clear the files to avoid leaving previous
         # results laying around & confuse devs.
         libdot.unlink(comments_path)
-        libdot.unlink(comments_path + '.in')
+        libdot.unlink(comments_path + ".in")
 
     return ret
 
@@ -229,5 +238,5 @@ def main(argv):
     run(argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

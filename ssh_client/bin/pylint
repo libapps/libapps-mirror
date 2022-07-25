@@ -11,6 +11,7 @@ import ssh_client
 import libdot  # pylint: disable=wrong-import-order
 
 
-if __name__ == '__main__':
-    sys.exit(libdot.pylint.main(
-        sys.argv[1:], pythonpaths=(ssh_client.BIN_DIR,)))
+if __name__ == "__main__":
+    sys.exit(
+        libdot.pylint.main(sys.argv[1:], pythonpaths=(ssh_client.BIN_DIR,))
+    )

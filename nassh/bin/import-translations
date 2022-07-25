@@ -14,20 +14,28 @@ import sys
 import nassh  # pylint: disable=wrong-import-order
 import libdot
 
-import filter_translations
+import filter_translations  # pylint: disable=wrong-import-order
 
 
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
-    parser.add_argument('--skip-git', dest='run_git',
-                        action='store_false', default=True,
-                        help='Skip creating a new git commit.')
-    parser.add_argument('builddir',
-                        help='Input path to the compiled locale messages.')
-    parser.add_argument('sourcedir', nargs='?',
-                        default=os.path.join(nassh.DIR, '_locales'),
-                        help='Output path to nassh/_locales/ directory.')
+    parser.add_argument(
+        "--skip-git",
+        dest="run_git",
+        action="store_false",
+        default=True,
+        help="Skip creating a new git commit.",
+    )
+    parser.add_argument(
+        "builddir", help="Input path to the compiled locale messages."
+    )
+    parser.add_argument(
+        "sourcedir",
+        nargs="?",
+        default=os.path.join(nassh.DIR, "_locales"),
+        help="Output path to nassh/_locales/ directory.",
+    )
     return parser
 
 
@@ -40,7 +48,7 @@ def main(argv):
     opts.sourcedir = os.path.abspath(opts.sourcedir)
 
     # The english translation is the hand maintained baseline.
-    with open(os.path.join(opts.sourcedir, 'en', 'messages.json'), 'rb') as fp:
+    with open(os.path.join(opts.sourcedir, "en", "messages.json"), "rb") as fp:
         baseline = json.load(fp)
     # The translation process normalizes all the ids to lowercase, so do that
     # here too to simplify checks later on.
@@ -49,19 +57,19 @@ def main(argv):
         baseline[msgid.lower()] = baseline.pop(msgid)
 
     # Find new translations.  Do it here for smoke checking.
-    new_locales = glob.glob(os.path.join(opts.builddir, '*', 'messages.json'))
+    new_locales = glob.glob(os.path.join(opts.builddir, "*", "messages.json"))
     if not new_locales:
         parser.error("builddir doesn't seem to contain any translations")
 
     # Load & clear existing translations.
-    logging.info('Clearing existing translation files')
+    logging.info("Clearing existing translation files")
     old_trans = {}
     os.makedirs(opts.sourcedir, exist_ok=True)
     for locale in os.listdir(opts.sourcedir):
         locale_dir = os.path.join(opts.sourcedir, locale)
-        path = os.path.join(locale_dir, 'messages.json')
+        path = os.path.join(locale_dir, "messages.json")
         try:
-            with open(path, 'rb') as fp:
+            with open(path, "rb") as fp:
                 old_trans[locale] = json.load(fp)
         except FileNotFoundError:
             # Completely new translations won't exist yet.
@@ -69,7 +77,7 @@ def main(argv):
 
         # Special case: English messages are our source of truth, so we'd never
         # import those from the dump.  Do not try to delete the file.
-        if locale == 'en':
+        if locale == "en":
             continue
 
         libdot.unlink(path)
@@ -87,33 +95,34 @@ def main(argv):
         mangled -- leading, trailing, or inline.  Try to reduce it all down
         so we can compare it to the original English input.
         """
-        return msg['message'].replace(' ', '')
+        return msg["message"].replace(" ", "")
 
     # Copy over the new translations, and merge it with existing content.
-    logging.info('Importing new translation files')
+    logging.info("Importing new translation files")
     for in_locale in new_locales:
         locale = os.path.basename(os.path.dirname(in_locale))
-        out_locale = os.path.join(opts.sourcedir, locale, 'messages.json')
+        out_locale = os.path.join(opts.sourcedir, locale, "messages.json")
         os.makedirs(os.path.dirname(out_locale), exist_ok=True)
 
         # Strip out untranslated strings.  This saves space, and we'd rather
         # use the older (perhaps stale) translations than the english one.
-        with open(in_locale, 'rb') as fp:
+        with open(in_locale, "rb") as fp:
             new = json.load(fp)
 
         # Strip translations only used by the CWS.
-        new.pop('cws_description', None)
-        new.pop('cws_description_dev', None)
+        new.pop("cws_description", None)
+        new.pop("cws_description_dev", None)
 
         old = old_trans.get(locale, {})
         for msgid, msg in sorted(new.items()):
             # The conversion process is a bit buggy :(.
-            msg['message'] = msg['message'].replace(
-                'chromium- hterm@chromium.org', 'chromium-hterm@chromium.org')
+            msg["message"] = msg["message"].replace(
+                "chromium- hterm@chromium.org", "chromium-hterm@chromium.org"
+            )
 
             # The CWS requires manifest strings be in all locales.  It should
             # fall back to English automatically, but it doesn't.
-            if msgid == 'nassh_product_name':
+            if msgid == "nassh_product_name":
                 new.setdefault(msgid, baseline[msgid])
                 continue
 
@@ -136,11 +145,13 @@ def main(argv):
 
     # Generate git commits automatically.
     if opts.run_git:
-        libdot.run(['git', 'checkout', '-f', 'en/'], cwd=opts.sourcedir)
-        libdot.run(['git', 'add', '.'], cwd=opts.sourcedir)
-        libdot.run(['git', 'commit', '-m', 'nassh: update translations', '.'],
-                   cwd=opts.sourcedir)
+        libdot.run(["git", "checkout", "-f", "en/"], cwd=opts.sourcedir)
+        libdot.run(["git", "add", "."], cwd=opts.sourcedir)
+        libdot.run(
+            ["git", "commit", "-m", "nassh: update translations", "."],
+            cwd=opts.sourcedir,
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

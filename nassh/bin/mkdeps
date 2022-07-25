@@ -15,107 +15,109 @@ import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 
-LICENSE_FILE = nassh.DIR / 'html' / 'licenses.html'
-LICENSE_TEMPLATE = nassh.DIR / 'html' / 'licenses.html.in'
+LICENSE_FILE = nassh.DIR / "html" / "licenses.html"
+LICENSE_TEMPLATE = nassh.DIR / "html" / "licenses.html.in"
 
 # Make sure we keep a handle on what licenses we ship.  This is not the list of
 # licenses that are actually used, just all the ones that we're OK with using.
 ALLOWED_LICENSES = {
-    'Apache-2.0',
-    'BSD',
-    'BSD-2-Clause',
-    'BSD-3-Clause',
-    'CC0',
-    'GPL-2',
-    'GPL-2.0',
-    'GPL-3',
-    'GPL-3.0',
-    'ISC',
-    'LGPL',
-    'LGPL-2.1',
-    'LGPL-3',
-    'MIT',
-    'Unlicense',
-    'zlib',
+    "Apache-2.0",
+    "BSD",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "CC0",
+    "GPL-2",
+    "GPL-2.0",
+    "GPL-3",
+    "GPL-3.0",
+    "ISC",
+    "LGPL",
+    "LGPL-2.1",
+    "LGPL-3",
+    "MIT",
+    "Unlicense",
+    "zlib",
 }
 
 # Licenses that we explicitly never want to use.  Do *not* remove any of these.
 BANNED_LICENSES = {
-    'AGPL',
-    'AGPL-3',
-    'AGPL-3+',
-    'CC-BY-NC',
-    'CC-BY-NC-ND',
-    'CC-BY-NC-SA',
-    'CPAL',
-    'EUPL',
-    'SISSL',
-    'SSPL',
-    'WTFPL',
+    "AGPL",
+    "AGPL-3",
+    "AGPL-3+",
+    "CC-BY-NC",
+    "CC-BY-NC-ND",
+    "CC-BY-NC-SA",
+    "CPAL",
+    "EUPL",
+    "SISSL",
+    "SSPL",
+    "WTFPL",  # nocheck
 }
 assert not BANNED_LICENSES & ALLOWED_LICENSES
 
 
 def mkdeps(rollup=True):
     """Build the dependencies."""
-    libdot.concat.concat(nassh.DIR / 'concat' / 'nassh_deps.concat',
-                         nassh.DIR / 'js' / 'nassh_deps.concat.js')
+    libdot.concat.concat(
+        nassh.DIR / "concat" / "nassh_deps.concat",
+        nassh.DIR / "js" / "nassh_deps.concat.js",
+    )
     if rollup:
-        libdot.node.run(['rollup', '-c'], cwd=nassh.DIR)
+        libdot.node.run(["rollup", "-c"], cwd=nassh.DIR)
 
     # Hack up the local tree for wassh integration.
     # NB: We can't create loops or deep directory trees as loading unpacked
     # extensions will make Chrome walk the entire tree and be very slow.
 
-    wjb_src = nassh.LIBAPPS_DIR / 'wasi-js-bindings'
-    wjb_dst = nassh.DIR / 'wasi-js-bindings'
+    wjb_src = nassh.LIBAPPS_DIR / "wasi-js-bindings"
+    wjb_dst = nassh.DIR / "wasi-js-bindings"
     wjb_dst.mkdir(exist_ok=True)
-    for path in ('index.js', 'js'):
+    for path in ("index.js", "js"):
         libdot.symlink(wjb_src / path, wjb_dst / path)
 
-    wassh_src = nassh.LIBAPPS_DIR / 'wassh'
-    wassh_dst = nassh.DIR / 'wassh'
+    wassh_src = nassh.LIBAPPS_DIR / "wassh"
+    wassh_dst = nassh.DIR / "wassh"
     wassh_dst.mkdir(exist_ok=True)
-    for path in ('js', 'test.html', 'test.js', 'test.wasm'):
+    for path in ("js", "test.html", "test.js", "test.wasm"):
         libdot.symlink(wassh_src / path, wassh_dst / path)
 
-    wasm_src = nassh.LIBAPPS_DIR / 'ssh_client' / 'output'
-    wasm_dst = nassh.DIR / 'ssh_client' / 'output'
+    wasm_src = nassh.LIBAPPS_DIR / "ssh_client" / "output"
+    wasm_dst = nassh.DIR / "ssh_client" / "output"
     wasm_dst.mkdir(parents=True, exist_ok=True)
-    libdot.symlink(wasm_src / 'plugin', wasm_dst / 'plugin')
+    libdot.symlink(wasm_src / "plugin", wasm_dst / "plugin")
 
 
 def concat_third_party_dir(third_party_dir):
     """Concatenate all licenses of |third_party_dir| bundles."""
     ret = {}
-    for package_dir in third_party_dir.glob('*'):
+    for package_dir in third_party_dir.glob("*"):
         entry = {}
         version = None
 
         package = package_dir.name
 
-        metadata_file = package_dir / 'METADATA'
-        with metadata_file.open(encoding='utf-8') as fp:
+        metadata_file = package_dir / "METADATA"
+        with metadata_file.open(encoding="utf-8") as fp:
             lines = fp.readlines()
             for i, line in enumerate(lines):
-                if 'HOMEPAGE' in line:
+                if "HOMEPAGE" in line:
                     m = re.match(r'.*"(.*)"', lines[i + 1])
-                    entry['repository'] = m.group(1)
-                elif 'version' in line:
+                    entry["repository"] = m.group(1)
+                elif "version" in line:
                     m = re.match(r'.*"(.*)"', line)
                     version = m.group(1)
 
-        for path in ('LICENSE', 'LICENSE.md'):
+        for path in ("LICENSE", "LICENSE.md"):
             license_file = package_dir / path
             if not license_file.exists():
                 continue
-            logging.debug('%s: loading %s', package, license_file)
-            entry['data'] = license_file.read_text(encoding='utf-8')
+            logging.debug("%s: loading %s", package, license_file)
+            entry["data"] = license_file.read_text(encoding="utf-8")
             break
         else:
-            raise ValueError(f'Unable to locate LICENSE for {package}')
+            raise ValueError(f"Unable to locate LICENSE for {package}")
 
-        ret[f'{package}@{version}'] = entry
+        ret[f"{package}@{version}"] = entry
 
     return ret
 
@@ -123,37 +125,57 @@ def concat_third_party_dir(third_party_dir):
 def concat_local_deps():
     """Concatenate all licenses of third_party/ bundles."""
     ret = {}
-    ret.update(concat_third_party_dir(nassh.DIR / 'third_party'))
-    ret.update(concat_third_party_dir(
-        libdot.LIBAPPS_DIR / 'ssh_client' / 'third_party'))
+    ret.update(concat_third_party_dir(nassh.DIR / "third_party"))
+    ret.update(
+        concat_third_party_dir(
+            libdot.LIBAPPS_DIR / "ssh_client" / "third_party"
+        )
+    )
     return ret
 
 
 def concat_licenses():
     """Concatenate all licenses of npm dependencies."""
-    ret = libdot.node.run([
-        'license-checker', '--search', nassh.DIR, '--onlyunknown',
-        '--production', '--csv',
-    ], capture_output=True, cwd=nassh.DIR)
+    ret = libdot.node.run(
+        [
+            "license-checker",
+            "--search",
+            nassh.DIR,
+            "--onlyunknown",
+            "--production",
+            "--csv",
+        ],
+        capture_output=True,
+        cwd=nassh.DIR,
+    )
     # 'Found error' in stderr indicates that no packages with unspecified
     # licenses were found.
-    if b'Found error' in ret.stderr:
-        ret = libdot.node.run([
-            'license-checker', '--search', nassh.DIR, '--unknown',
-            '--production', '--json', '--onlyAllow',
-            ';'.join(sorted(ALLOWED_LICENSES)),
-        ], capture_output=True, cwd=nassh.DIR)
-        res = json.loads(ret.stdout.decode('utf8'))
+    if b"Found error" in ret.stderr:
+        ret = libdot.node.run(
+            [
+                "license-checker",
+                "--search",
+                nassh.DIR,
+                "--unknown",
+                "--production",
+                "--json",
+                "--onlyAllow",
+                ";".join(sorted(ALLOWED_LICENSES)),
+            ],
+            capture_output=True,
+            cwd=nassh.DIR,
+        )
+        res = json.loads(ret.stdout.decode("utf8"))
         for entry in res.values():
-            with open(entry['licenseFile'], 'r', encoding='utf8') as fp:
-                entry['data'] = fp.read().strip()
+            with open(entry["licenseFile"], "r", encoding="utf8") as fp:
+                entry["data"] = fp.read().strip()
 
         res.update(concat_local_deps())
 
         generate_html(res)
     else:
-        logging.error('The following packages did not specify their licenses:')
-        logging.error(ret.stdout.decode('utf8'))
+        logging.error("The following packages did not specify their licenses:")
+        logging.error(ret.stdout.decode("utf8"))
 
 
 # Template for every package/license entry.
@@ -170,29 +192,34 @@ LICENSE_ENTRY_TEMPLATE = """
 </pre>
 """
 
+
 def generate_html(licenses):
     """Write the collected |licenses| to an HTML file."""
-    with open(LICENSE_TEMPLATE, 'r', encoding='utf8') as fp:
+    with open(LICENSE_TEMPLATE, "r", encoding="utf8") as fp:
         template = fp.read()
-    output = ''
+    output = ""
     for package in sorted(licenses):
         entry = licenses[package]
         output += LICENSE_ENTRY_TEMPLATE % {
-            'repository': entry['repository'],
-            'package': html.escape(package),
-            'data': html.escape(entry['data']),
+            "repository": entry["repository"],
+            "package": html.escape(package),
+            "data": html.escape(entry["data"]),
         }
-    output = template.replace('%%LICENSES%%', output)
-    with open(LICENSE_FILE, 'w', encoding='utf8') as fp:
+    output = template.replace("%%LICENSES%%", output)
+    with open(LICENSE_FILE, "w", encoding="utf8") as fp:
         fp.write(output)
 
 
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
-    parser.add_argument('--skip-rollup', dest='rollup',
-                        action='store_false', default=True,
-                        help='Skip (re)building of rollup dependencies.')
+    parser.add_argument(
+        "--skip-rollup",
+        dest="rollup",
+        action="store_false",
+        default=True,
+        help="Skip (re)building of rollup dependencies.",
+    )
     return parser
 
 
@@ -207,16 +234,16 @@ def main(argv):
     nassh.generate_changelog.generate_changelog()
 
     if opts.rollup:
-        logging.info('Concatenating licenses...')
+        logging.info("Concatenating licenses...")
         # We use nassh's package.json, but reuse libapps' node_modules.
         libdot.symlink(
-            libdot.LIBAPPS_DIR / 'node_modules',
-            nassh.DIR / 'node_modules')
+            libdot.LIBAPPS_DIR / "node_modules", nassh.DIR / "node_modules"
+        )
         try:
             concat_licenses()
         finally:
-            libdot.unlink(nassh.DIR / 'node_modules')
+            libdot.unlink(nassh.DIR / "node_modules")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

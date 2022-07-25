@@ -15,16 +15,16 @@ import libdot
 # The sha256sum hash of the plugin archive that we maintain.
 # Allow a long line for easy automated updating.
 # pylint: disable=line-too-long
-PLUGIN_HASH = '76f9f191d351c02a892ae9cf4a1ccae6f80e0bfb6a1f1848e8f58dea17304430'
+PLUGIN_HASH = "76f9f191d351c02a892ae9cf4a1ccae6f80e0bfb6a1f1848e8f58dea17304430"
 # pylint: enable=line-too-long
 
 # Bucket maintained by us.
 PLUGIN_VERSION = 0.48
-PLUGIN_GS_FRAGMENT = 'chromeos-localmirror/secureshell/releases'
-PLUGIN_BASE_URI = f'https://storage.googleapis.com/{PLUGIN_GS_FRAGMENT}'
+PLUGIN_GS_FRAGMENT = "chromeos-localmirror/secureshell/releases"
+PLUGIN_BASE_URI = f"https://storage.googleapis.com/{PLUGIN_GS_FRAGMENT}"
 
 # The nassh plugin path.
-PLUGIN_DIR = nassh.DIR / 'plugin'
+PLUGIN_DIR = nassh.DIR / "plugin"
 
 
 def plugin_update():
@@ -32,8 +32,9 @@ def plugin_update():
     # TODO(joelhockey): It would be nicer if plugin files had a prefix such as
     # plugin-0.47.tar.xz rather than just the version 0.47.tar.xz.
     if not os.path.exists(PLUGIN_DIR):
-        libdot.download_tarball(f'{PLUGIN_VERSION}.tar.xz', PLUGIN_BASE_URI,
-                                PLUGIN_DIR, PLUGIN_HASH)
+        libdot.download_tarball(
+            f"{PLUGIN_VERSION}.tar.xz", PLUGIN_BASE_URI, PLUGIN_DIR, PLUGIN_HASH
+        )
 
 
 def get_parser():
@@ -50,5 +51,5 @@ def main(argv):
     plugin_update()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

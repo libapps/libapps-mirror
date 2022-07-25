@@ -9,31 +9,33 @@ import os
 import sys
 
 FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ('naclsdk_linux-%(PV)s.tar.xz',)
-S = '%(workdir)s'
+ARCHIVES = ("naclsdk_linux-%(PV)s.tar.xz",)
+S = "%(workdir)s"
 
 
 def src_install(metadata):
     """Install the package."""
-    pepper = 'pepper_' + metadata['PV'].split('.')[0]
+    pepper = "pepper_" + metadata["PV"].split(".")[0]
 
     # This is what the webports did historically.
-    srcdir = os.path.join(pepper, 'include', 'pnacl')
-    dstdir = os.path.join(pepper, 'toolchain', 'linux_pnacl', 'le32-nacl',
-                          'usr', 'include')
+    srcdir = os.path.join(pepper, "include", "pnacl")
+    dstdir = os.path.join(
+        pepper, "toolchain", "linux_pnacl", "le32-nacl", "usr", "include"
+    )
     for root, _, files in os.walk(srcdir):
         for header in files:
             relpath = os.path.join(os.path.relpath(root, srcdir), header)
-            ssh_client.copy(os.path.join(srcdir, relpath),
-                            os.path.join(dstdir, relpath))
+            ssh_client.copy(
+                os.path.join(srcdir, relpath), os.path.join(dstdir, relpath)
+            )
 
-    path = os.path.join(ssh_client.OUTPUT, 'naclsdk')
-    ssh_client.symlink(os.path.join(metadata['S'], pepper), path)
+    path = os.path.join(ssh_client.OUTPUT, "naclsdk")
+    ssh_client.symlink(os.path.join(metadata["S"], pepper), path)
 
 
-ssh_client.build_package(sys.modules[__name__], 'build')
+ssh_client.build_package(sys.modules[__name__], "build")

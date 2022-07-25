@@ -36,15 +36,16 @@ def trim_redundant_placeholders(data):
     We can delete the placeholders entirely.
     """
     for msg in data.values():
-        for key, settings in list(msg.get('placeholders', {}).items()):
-            if (re.match(r'^[0-9]+$', key) and
-                    re.match(r'^[$][0-9]+$', settings['content'])):
-                msg['placeholders'].pop(key)
+        for key, settings in list(msg.get("placeholders", {}).items()):
+            if re.match(r"^[0-9]+$", key) and re.match(
+                r"^[$][0-9]+$", settings["content"]
+            ):
+                msg["placeholders"].pop(key)
 
         # Remove the placeholders setting if it's empty now.
-        placeholders = msg.get('placeholders', {})
+        placeholders = msg.get("placeholders", {})
         if not placeholders:
-            msg.pop('placeholders', None)
+            msg.pop("placeholders", None)
 
 
 def reformat(path, output=None, inplace=False):
@@ -52,26 +53,30 @@ def reformat(path, output=None, inplace=False):
     if isinstance(path, dict):
         data = path
     else:
-        with open(path, 'rb') as fp:
+        with open(path, "rb") as fp:
             try:
                 data = json.loads(fp.read())
             except ValueError as e:
-                print(f'ERROR: Processing {path}: {e}', file=sys.stderr)
+                print(f"ERROR: Processing {path}: {e}", file=sys.stderr)
                 return False
 
     trim_redundant_placeholders(data)
 
-    format_spaces = json.dumps(data, ensure_ascii=False, indent=4,
-                               sort_keys=True)
-    format_tabs = re.sub('^(    )+',
-                         lambda match: '\t' * (len(match.group()) // 4),
-                         format_spaces, flags=re.M)
-    format_tabs += '\n'
+    format_spaces = json.dumps(
+        data, ensure_ascii=False, indent=4, sort_keys=True
+    )
+    format_tabs = re.sub(
+        "^(    )+",
+        lambda match: "\t" * (len(match.group()) // 4),
+        format_spaces,
+        flags=re.M,
+    )
+    format_tabs += "\n"
 
     if inplace:
         output = path
     if output:
-        with open(output, 'w', encoding='utf-8') as fp:
+        with open(output, "w", encoding="utf-8") as fp:
             fp.write(format_tabs)
     else:
         sys.stdout.write(format_tabs)
@@ -82,10 +87,16 @@ def reformat(path, output=None, inplace=False):
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
-    parser.add_argument('-i', '--inplace', default=False, action='store_true',
-                        help='Modify files inline rather than writing stdout.')
-    parser.add_argument('files', nargs='+', metavar='files',
-                        help='The translations to format.')
+    parser.add_argument(
+        "-i",
+        "--inplace",
+        default=False,
+        action="store_true",
+        help="Modify files inline rather than writing stdout.",
+    )
+    parser.add_argument(
+        "files", nargs="+", metavar="files", help="The translations to format."
+    )
     return parser
 
 
@@ -101,5 +112,5 @@ def main(argv):
     return ret
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

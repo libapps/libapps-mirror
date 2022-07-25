@@ -32,12 +32,18 @@ def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(
         description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-o', '--output', type=Path,
-                        default=hterm.DIR / 'dist' / 'js',
-                        help='Output directory. (default: %(default)s)')
-    parser.add_argument('dist_files', nargs='*',
-                        help='Only process these concat files.')
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=Path,
+        default=hterm.DIR / "dist" / "js",
+        help="Output directory. (default: %(default)s)",
+    )
+    parser.add_argument(
+        "dist_files", nargs="*", help="Only process these concat files."
+    )
     return parser
 
 
@@ -47,15 +53,16 @@ def main(argv):
     opts = parser.parse_args(argv)
 
     if not opts.dist_files:
-        opts.dist_files = list((hterm.DIR / 'concat').glob('*.concat'))
+        opts.dist_files = list((hterm.DIR / "concat").glob("*.concat"))
     else:
         opts.dist_files = [x.resolve() for x in opts.dist_files]
 
     opts.output.mkdir(parents=True, exist_ok=True)
     for concat_file in opts.dist_files:
-        libdot.concat.concat(concat_file,
-                             opts.output / f'{concat_file.stem}.js')
+        libdot.concat.concat(
+            concat_file, opts.output / f"{concat_file.stem}.js"
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

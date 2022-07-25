@@ -16,34 +16,37 @@ import libdot
 # The hash of the node_modules that we maintain.
 # Allow a long line for easy automated updating.
 # pylint: disable=line-too-long
-NODE_MODULES_HASH = '7539e02265e046755ad0fffa36018f915c4feeb2c87f21346ded68a857f38153'
+NODE_MODULES_HASH = (
+    "7539e02265e046755ad0fffa36018f915c4feeb2c87f21346ded68a857f38153"
+)
 # pylint: enable=line-too-long
 
 # In sync with Chromium's DEPS file because it's easier to use something that
 # already exists than maintain our own.
 # Run `./node_sync_with_chromium` to update these settings.
-NODE_VER = '16.13.0'
-NODE_LINUX_HASH = 'ab9544e24e752d3d17f335fb7b2055062e582d11'
-NODE_MAC_HASH = '16dfd094763b71988933a31735f9dea966f9abd6'
-NODE_WIN_HASH = '5ef847033c517c499f56f9d136d159b663bab717'
+NODE_VER = "16.13.0"
+NODE_LINUX_HASH = "ab9544e24e752d3d17f335fb7b2055062e582d11"
+NODE_MAC_HASH = "16dfd094763b71988933a31735f9dea966f9abd6"
+NODE_WIN_HASH = "5ef847033c517c499f56f9d136d159b663bab717"
 
 # Bucket maintained by Chromium.
 # gsutil ls gs://chromium-nodejs/
-NODE_BASE_URI = 'https://storage.googleapis.com/chromium-nodejs'
+NODE_BASE_URI = "https://storage.googleapis.com/chromium-nodejs"
 
 # Bucket maintained by us.
-NODE_MODULES_GS_FRAGMENT = 'chromeos-localmirror/secureshell/distfiles'
-NODE_MODULES_GS_URI = f'gs://{NODE_MODULES_GS_FRAGMENT}'
+NODE_MODULES_GS_FRAGMENT = "chromeos-localmirror/secureshell/distfiles"
+NODE_MODULES_GS_URI = f"gs://{NODE_MODULES_GS_FRAGMENT}"
 NODE_MODULES_BASE_URI = (
-    f'https://storage.googleapis.com/{NODE_MODULES_GS_FRAGMENT}')
+    f"https://storage.googleapis.com/{NODE_MODULES_GS_FRAGMENT}"
+)
 
 # The node_modules & node/npm paths.
-NODE_MODULES_DIR = libdot.LIBAPPS_DIR / 'node_modules'
-NODE_BIN_DIR = NODE_MODULES_DIR / '.bin'
-NODE = NODE_BIN_DIR / 'node'
-NPM = NODE_BIN_DIR / 'npm'
+NODE_MODULES_DIR = libdot.LIBAPPS_DIR / "node_modules"
+NODE_BIN_DIR = NODE_MODULES_DIR / ".bin"
+NODE = NODE_BIN_DIR / "node"
+NPM = NODE_BIN_DIR / "npm"
 # Use a dotdir as npm expects to manage everything under node_modules/.
-NODE_DIR = NODE_MODULES_DIR / '.node'
+NODE_DIR = NODE_MODULES_DIR / ".node"
 
 
 def run(cmd, **kwargs):
@@ -54,27 +57,28 @@ def run(cmd, **kwargs):
     """
     # We need the node bin dir to be at the start of the $PATH as some packages
     # will try to run other npm packages directly.
-    extra_env = kwargs.setdefault('extra_env', {})
-    assert 'PATH' not in extra_env
-    extra_env['PATH'] = os.pathsep.join((str(NODE_BIN_DIR), os.getenv('PATH')))
+    extra_env = kwargs.setdefault("extra_env", {})
+    assert "PATH" not in extra_env
+    extra_env["PATH"] = os.pathsep.join((str(NODE_BIN_DIR), os.getenv("PATH")))
     return libdot.run(
         cmd[1:],
         cmd_prefix=[NODE, NODE_BIN_DIR / cmd[0]],
         log_prefix=[cmd[0]],
-        **kwargs)
+        **kwargs,
+    )
 
 
 def update():
     """Download & update our copy of node."""
     osname = platform.system()
-    if osname == 'Linux':
+    if osname == "Linux":
         node_hash = NODE_LINUX_HASH
-    elif osname == 'Darwin':
+    elif osname == "Darwin":
         node_hash = NODE_MAC_HASH
-    elif osname == 'Windows':
+    elif osname == "Windows":
         node_hash = NODE_WIN_HASH
     else:
-        raise RuntimeError(f'Unknown OS {osname}')
+        raise RuntimeError(f"Unknown OS {osname}")
 
     # In case of an upgrade, nuke existing dir.
     hash_file = NODE_DIR / node_hash
@@ -82,17 +86,17 @@ def update():
         shutil.rmtree(NODE_DIR, ignore_errors=True)
 
     node = NODE
-    if osname == 'Windows':
-        node = node.with_suffix('.exe')
+    if osname == "Windows":
+        node = node.with_suffix(".exe")
     if not node.exists():
         os.makedirs(NODE_BIN_DIR, exist_ok=True)
         os.makedirs(NODE_DIR, exist_ok=True)
 
         # Download & unpack the archive.
-        uri = '/'.join((NODE_BASE_URI, NODE_VER, node_hash))
+        uri = "/".join((NODE_BASE_URI, NODE_VER, node_hash))
         output = NODE_DIR / node_hash
         libdot.fetch(uri, output)
-        if osname == 'Windows':
+        if osname == "Windows":
             libdot.unlink(node)
             output.rename(node)
         else:
@@ -100,9 +104,9 @@ def update():
             libdot.unlink(output)
 
             # Create canonical symlinks for node & npm.
-            path = next(NODE_DIR.glob('*/bin/node'))
+            path = next(NODE_DIR.glob("*/bin/node"))
             libdot.symlink(path, NODE)
-            path = next(NODE_DIR.glob('*/*/node_modules/npm/bin/npm-cli.js'))
+            path = next(NODE_DIR.glob("*/*/node_modules/npm/bin/npm-cli.js"))
             libdot.symlink(path, NPM)
 
         # Mark the hash of this checkout.
@@ -111,17 +115,20 @@ def update():
 
 def modules_update():
     """Download & update our copy of node_modules."""
-    libdot.download_tarball(f'node_modules-{NODE_MODULES_HASH}.tar.xz',
-                            NODE_MODULES_BASE_URI, NODE_MODULES_DIR,
-                            NODE_MODULES_HASH)
+    libdot.download_tarball(
+        f"node_modules-{NODE_MODULES_HASH}.tar.xz",
+        NODE_MODULES_BASE_URI,
+        NODE_MODULES_DIR,
+        NODE_MODULES_HASH,
+    )
 
 
 def main(argv):
     """The main func!"""
     libdot.setup_logging()
     libdot.node_and_npm_setup()
-    os.execv(NODE, ['node'] + argv)
+    os.execv(NODE, ["node"] + argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

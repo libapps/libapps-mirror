@@ -16,10 +16,15 @@ def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(
         description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-o', '--output', type=Path,
-                        default=libdot.DIR / 'js',
-                        help='Output directory. (default: %(default)s)')
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=Path,
+        default=libdot.DIR / "js",
+        help="Output directory. (default: %(default)s)",
+    )
     return parser
 
 
@@ -31,9 +36,9 @@ def main(argv):
     # TODO(vapier): Move more logic out of package.json here, maybe?
     opts.output.mkdir(parents=True, exist_ok=True)
     libdot.concat.concat(
-        libdot.DIR / 'concat' / 'libdot.concat',
-        opts.output / 'libdot.js')
+        libdot.DIR / "concat" / "libdot.concat", opts.output / "libdot.js"
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

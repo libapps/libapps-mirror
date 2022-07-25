@@ -13,14 +13,15 @@ import libdot
 
 
 # Path to our html test page.
-TEST_PAGE = os.path.join('nassh', 'html', 'nassh_test.html')
+TEST_PAGE = os.path.join("nassh", "html", "nassh_test.html")
 
 
 def main(argv):
     """The main func!"""
     return libdot.load_tests.test_runner_main(
-        argv, TEST_PAGE, serve=True, mkdeps=lambda opts: nassh.mkdeps.mkdeps())
+        argv, TEST_PAGE, serve=True, mkdeps=lambda opts: nassh.mkdeps.mkdeps()
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

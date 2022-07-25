@@ -9,23 +9,23 @@ import os
 import sys
 
 FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ('%(PN)s-version_%(PV)s-x86_64-linux.tar.gz',)
-S = '%(workdir)s/%(PN)s-version_%(PV)s'
+ARCHIVES = ("%(PN)s-version_%(PV)s-x86_64-linux.tar.gz",)
+S = "%(workdir)s/%(PN)s-version_%(PV)s"
 
 
 def src_install(metadata):
     """Install the package."""
     # For now we assume everything in here is a program.
-    srcbindir = os.path.join(metadata['S'], 'bin')
+    srcbindir = os.path.join(metadata["S"], "bin")
     for prog in os.listdir(srcbindir):
         target = os.path.join(srcbindir, prog)
         path = os.path.join(ssh_client.BUILD_BINDIR, prog)
         ssh_client.symlink(target, path)
 
 
-ssh_client.build_package(sys.modules[__name__], 'build')
+ssh_client.build_package(sys.modules[__name__], "build")

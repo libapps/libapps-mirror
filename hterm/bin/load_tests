@@ -14,19 +14,20 @@ import libdot  # pylint: disable=wrong-import-order
 
 
 # Path to our html test page.
-TEST_PAGE = os.path.join(hterm.DIR, 'html', 'hterm_test.html')
+TEST_PAGE = os.path.join(hterm.DIR, "html", "hterm_test.html")
 
 
 def mkdeps(_opts):
     """Build the required deps for the test suite."""
-    subprocess.check_call([os.path.join(hterm.BIN_DIR, 'mkdist')])
+    subprocess.check_call([os.path.join(hterm.BIN_DIR, "mkdist")])
 
 
 def main(argv):
     """The main func!"""
     return libdot.load_tests.test_runner_main(
-        argv, f'file://{TEST_PAGE}', mkdeps=mkdeps)
+        argv, f"file://{TEST_PAGE}", mkdeps=mkdeps
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

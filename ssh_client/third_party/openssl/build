@@ -10,84 +10,90 @@ import os
 import sys
 
 FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ('%(p)s.tar.gz',)
+ARCHIVES = ("%(p)s.tar.gz",)
 PATCHES = (
-    'nacl.patch',
-    'openssl-1.0.0a-ldflags.patch',
-    'openssl-1.0.2i-parallel-build.patch',
-    'openssl-1.0.2a-parallel-obj-headers.patch',
-    'openssl-1.0.2a-parallel-install-dirs.patch',
-    'openssl-1.0.2a-parallel-symlinking.patch',
+    "nacl.patch",
+    "openssl-1.0.0a-ldflags.patch",
+    "openssl-1.0.2i-parallel-build.patch",
+    "openssl-1.0.2a-parallel-obj-headers.patch",
+    "openssl-1.0.2a-parallel-install-dirs.patch",
+    "openssl-1.0.2a-parallel-symlinking.patch",
 )
 
 
 def src_configure(metadata):
     """Configure the source."""
-    tc = metadata['toolchain']
-    if tc.chost == 'nacl':
-        machine = 'le32newlib'
+    tc = metadata["toolchain"]
+    if tc.chost == "nacl":
+        machine = "le32newlib"
     else:
-        machine = tc.chost.split('-')[0]
+        machine = tc.chost.split("-")[0]
 
     # See if configure passed.
-    with open('Makefile', encoding='utf-8') as fp:
+    with open("Makefile", encoding="utf-8") as fp:
         if machine in fp.read():
-            logging.info('Makefile exists; skipping ./configure step')
+            logging.info("Makefile exists; skipping ./configure step")
             return
 
     env = os.environ.copy()
-    env.update({
-        'SYSTEM': tc.chost,
-        'MACHINE': machine,
-        'RELEASE': '0',
-    })
+    env.update(
+        {
+            "SYSTEM": tc.chost,
+            "MACHINE": machine,
+            "RELEASE": "0",
+        }
+    )
 
     cmd = [
-        './config',
-        '--prefix=/',
-        'no-asm',
-        'no-deprecated',
-        'no-dso',
-        'no-ec2m',
-        'no-engine',
-        'no-gmp',
-        'no-gost',
-        'no-heartbeats',
-        'no-hw',
-        'no-krb5',
-        'no-rfc3779',
-        'no-sctp',
-        'no-srp',
-        'no-sse2',
-        'no-ssl2',
-        'no-ssl3',
-        'no-syslog',
-        'no-threads',
-        'no-unit-test',
-        '-fgnu-inline-asm',
-        '-D_GNU_SOURCE',
-        '-DNO_SYSLOG',
-    ] + env['CPPFLAGS'].split()
+        "./config",
+        "--prefix=/",
+        "no-asm",
+        "no-deprecated",
+        "no-dso",
+        "no-ec2m",
+        "no-engine",
+        "no-gmp",
+        "no-gost",
+        "no-heartbeats",
+        "no-hw",
+        "no-krb5",
+        "no-rfc3779",
+        "no-sctp",
+        "no-srp",
+        "no-sse2",
+        "no-ssl2",
+        "no-ssl3",
+        "no-syslog",
+        "no-threads",
+        "no-unit-test",
+        "-fgnu-inline-asm",
+        "-D_GNU_SOURCE",
+        "-DNO_SYSLOG",
+    ] + env["CPPFLAGS"].split()
 
     ssh_client.run(cmd, env=env)
-    ssh_client.emake('depend', 'DIRS=crypto ssl', env=env)
+    ssh_client.emake("depend", "DIRS=crypto ssl", env=env)
 
 
 def src_compile(_metadata):
     """Compile the source."""
-    ssh_client.emake('build_libs', 'DIRS=crypto ssl')
+    ssh_client.emake("build_libs", "DIRS=crypto ssl")
 
 
 def src_install(metadata):
     """Install the package."""
-    tc = metadata['toolchain']
-    ssh_client.emake('install_sw', f'INSTALL_PREFIX={tc.sysroot}',
-                     'DIRS=crypto ssl', 'LIBS=libcrypto.a libssl.a')
+    tc = metadata["toolchain"]
+    ssh_client.emake(
+        "install_sw",
+        f"INSTALL_PREFIX={tc.sysroot}",
+        "DIRS=crypto ssl",
+        "LIBS=libcrypto.a libssl.a",
+    )
 
 
-ssh_client.build_package(sys.modules[__name__], 'pnacl')
+ssh_client.build_package(sys.modules[__name__], "pnacl")

@@ -13,18 +13,21 @@ import wassh
 import libdot  # pylint: disable=wrong-import-order
 
 
-JS_DIR = wassh.DIR / 'js'
-WJB_DIR = wassh.DIR.parent / 'wasi-js-bindings'
+JS_DIR = wassh.DIR / "js"
+WJB_DIR = wassh.DIR.parent / "wasi-js-bindings"
 
 
 def _get_default_paths(basedir):
     """Get list of paths to lint by default."""
-    most_files = sorted(x for x in libdot.lint.get_known_sources(basedir)
-                        if x.suffix not in {'.js'})
+    most_files = sorted(
+        x
+        for x in libdot.lint.get_known_sources(basedir)
+        if x.suffix not in {".js"}
+    )
 
     # All files in js/*.js.
     # Use relpath for nicer default output.
-    js_files = sorted(JS_DIR.glob('**/*.js'))
+    js_files = sorted(JS_DIR.glob("**/*.js"))
 
     return [os.path.relpath(x) for x in most_files + js_files]
 
@@ -35,23 +38,33 @@ def main(argv):
     # https://github.com/google/closure-compiler/issues/3580
     for i, arg in enumerate(argv):
         path = Path(arg)
-        if arg and arg[0] != '-' and path.exists():
+        if arg and arg[0] != "-" and path.exists():
             argv[i] = os.path.relpath(path.resolve(), wassh.DIR)
     os.chdir(wassh.DIR)
 
-    wasi_externs = WJB_DIR / 'externs'
-    closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + [
-        '--js_module_root', JS_DIR,
-        # TODO(vapier): We want to turn this on at some point.
-        '--jscomp_off=strictMissingProperties',
-        # Let closure compiler itself do the expansion.
-        wassh.DIR.parent / 'wasi-js-bindings' / 'js' / '**.js',
-    ] + [f'--externs={os.path.relpath(x)}'
-         for x in sorted(wasi_externs.glob('*.js'))]
-    return libdot.lint.main(argv, basedir=wassh.DIR,
-                            get_default_paths=_get_default_paths,
-                            closure_args=closure_args)
+    wasi_externs = WJB_DIR / "externs"
+    closure_args = (
+        list(libdot.lint.DEFAULT_CLOSURE_ARGS)
+        + [
+            "--js_module_root",
+            JS_DIR,
+            # TODO(vapier): We want to turn this on at some point.
+            "--jscomp_off=strictMissingProperties",
+            # Let closure compiler itself do the expansion.
+            wassh.DIR.parent / "wasi-js-bindings" / "js" / "**.js",
+        ]
+        + [
+            f"--externs={os.path.relpath(x)}"
+            for x in sorted(wasi_externs.glob("*.js"))
+        ]
+    )
+    return libdot.lint.main(
+        argv,
+        basedir=wassh.DIR,
+        get_default_paths=_get_default_paths,
+        closure_args=closure_args,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

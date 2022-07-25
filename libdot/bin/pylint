@@ -18,11 +18,13 @@ import libdot
 
 
 # URI to the official pylint docs.
-MAIN_DOCS = ('http://pylint.pycqa.org/en/latest/technical_reference/'
-             'features.html#pylint-checkers-options-and-switches')
+MAIN_DOCS = (
+    "http://pylint.pycqa.org/en/latest/technical_reference/"
+    "features.html#pylint-checkers-options-and-switches"
+)
 
 # URI base for user managed wiki.  It's sometimes better.
-USER_BASE_URI = 'http://pylint-messages.wikidot.com/messages:%s'
+USER_BASE_URI = "http://pylint-messages.wikidot.com/messages:%s"
 
 
 def convert_to_kokoro(data):
@@ -47,20 +49,22 @@ def convert_to_kokoro(data):
     """
     for result in data:
         msg = (
-            f"[pylint] {result['symbol']} ({result['message-id']})\n" +
-            result['message'] + '\n' +
-            MAIN_DOCS + '\n' +
-            USER_BASE_URI % (result['message-id'],)
+            f"[pylint] {result['symbol']} ({result['message-id']})\n"
+            + result["message"]
+            + "\n"
+            + MAIN_DOCS
+            + "\n"
+            + USER_BASE_URI % (result["message-id"],)
         )
 
-        path = os.path.join(os.getcwd(), result['path'])
+        path = os.path.join(os.getcwd(), result["path"])
         yield {
-            'path': os.path.relpath(path, libdot.LIBAPPS_DIR),
-            'message': msg,
-            'startLine': result['line'],
-            'endLine': result['line'],
-            'startCharacter': result['column'],
-            'endCharacter': result['column'],
+            "path": os.path.relpath(path, libdot.LIBAPPS_DIR),
+            "message": msg,
+            "startLine": result["line"],
+            "endLine": result["line"],
+            "startCharacter": result["column"],
+            "endCharacter": result["column"],
         }
 
 
@@ -70,7 +74,7 @@ def filter_known_files(paths: List[Path]) -> List[Path]:
     for path in paths:
         path = Path(path)
 
-        if path.suffix == '.py':
+        if path.suffix == ".py":
             # Add all .py files as they should only be Python.
             ret += [path]
         elif path.is_symlink():
@@ -81,9 +85,9 @@ def filter_known_files(paths: List[Path]) -> List[Path]:
             pass
         elif path.is_file() and path.stat().st_mode & 0o111:
             # Add executable programs with python shebangs.
-            with path.open('rb') as fp:
+            with path.open("rb") as fp:
                 shebang = fp.readline()
-            if b'python' in shebang:
+            if b"python" in shebang:
                 ret += [path]
 
     return [str(x) for x in ret]
@@ -96,27 +100,32 @@ def find_pylint():
     It keeps changing with Python 2->3 migrations.  Fun.
     """
     # Prefer our vpython copy if possible.
-    if shutil.which('vpython'):
-        return libdot.BIN_DIR / 'pylint-vpython'
+    if shutil.which("vpython"):
+        return libdot.BIN_DIR / "pylint-vpython"
 
     # Prefer pylint3 as that's what we want.
-    if shutil.which('pylint3'):
-        return 'pylint3'
+    if shutil.which("pylint3"):
+        return "pylint3"
 
     # If there's no pylint, give up.
-    if not shutil.which('pylint'):
-        logging.error('unable to locate pylint; please install:\n'
-                      'sudo apt-get install pylint')
+    if not shutil.which("pylint"):
+        logging.error(
+            "unable to locate pylint; please install:\n"
+            "sudo apt-get install pylint"
+        )
         sys.exit(1)
 
     # Make sure pylint is using Python 3.
-    result = libdot.run(['pylint', '--version'], capture_output=True,
-                        encoding='utf-8')
-    if 'Python 3' in result.stdout:
-        return 'pylint'
+    result = libdot.run(
+        ["pylint", "--version"], capture_output=True, encoding="utf-8"
+    )
+    if "Python 3" in result.stdout:
+        return "pylint"
 
-    logging.error('pylint does not support Python 3; please upgrade:\n%s',
-                  result.stdout.strip())
+    logging.error(
+        "pylint does not support Python 3; please upgrade:\n%s",
+        result.stdout.strip(),
+    )
     sys.exit(1)
 
 
@@ -131,25 +140,27 @@ def run(argv=(), pythonpaths=(), **kwargs):
 
     # Add libdot to search path so pylint can find it.  Any subproject that
     # uses us will make sure it's in the search path too.
-    path = os.environ.get('PYTHONPATH', '')
+    path = os.environ.get("PYTHONPATH", "")
     paths = [libdot.BIN_DIR] + list(pythonpaths)
     if path is not None:
         paths.append(path)
-    extra_env = kwargs.pop('extra_env', {})
-    assert 'PYTHONPATH' not in extra_env
-    kwargs['extra_env'] = {
-        'PYTHONPATH': os.pathsep.join(str(x) for x in paths),
+    extra_env = kwargs.pop("extra_env", {})
+    assert "PYTHONPATH" not in extra_env
+    kwargs["extra_env"] = {
+        "PYTHONPATH": os.pathsep.join(str(x) for x in paths),
         **extra_env,
     }
 
-    pylintrc = os.path.relpath(os.path.join(libdot.LIBAPPS_DIR, '.pylintrc'),
-                               os.getcwd())
-    cmd = [find_pylint(), '--rcfile', pylintrc] + list(argv)
+    pylintrc = os.path.relpath(
+        os.path.join(libdot.LIBAPPS_DIR, ".pylintrc"), os.getcwd()
+    )
+    cmd = [find_pylint(), "--rcfile", pylintrc] + list(argv)
     return libdot.run(cmd, **kwargs)
 
 
-def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None,
-            pythonpaths=()):
+def perform(
+    argv=(), paths=(), fix=False, gerrit_comments_file=None, pythonpaths=()
+):
     """Run high level tool logic."""
     ret = True
     argv = list(argv)
@@ -160,7 +171,8 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None,
         return ret
 
     comments_path = libdot.lint.kokoro_comments_path(
-        gerrit_comments_file, 'pylint')
+        gerrit_comments_file, "pylint"
+    )
 
     result = run(argv + paths, pythonpaths=pythonpaths, check=False)
     if result.returncode:
@@ -173,23 +185,27 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None,
             if dirname:
                 os.makedirs(dirname, exist_ok=True)
 
-            argv += ['--output-format=json']
-            result = run(argv + paths, pythonpaths=pythonpaths, check=False,
-                         capture_output=True)
+            argv += ["--output-format=json"]
+            result = run(
+                argv + paths,
+                pythonpaths=pythonpaths,
+                check=False,
+                capture_output=True,
+            )
 
             # Save a copy for debugging later.
-            with open(comments_path + '.in', 'wb') as fp:
+            with open(comments_path + ".in", "wb") as fp:
                 fp.write(result.stdout)
 
-            data = json.loads(result.stdout.decode('utf-8'))
+            data = json.loads(result.stdout.decode("utf-8"))
             comments = list(convert_to_kokoro(data))
-            with open(comments_path, 'w', encoding='utf-8') as fp:
+            with open(comments_path, "w", encoding="utf-8") as fp:
                 json.dump(comments, fp, sort_keys=True)
     elif comments_path:
         # If there were no failures, clear the files to avoid leaving previous
         # results laying around & confuse devs.
         libdot.unlink(comments_path)
-        libdot.unlink(comments_path + '.in')
+        libdot.unlink(comments_path + ".in")
 
     return ret
 
@@ -197,10 +213,11 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None,
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__, short_options=False)
-    parser.add_argument('--gerrit-comments-file',
-                        help='Save errors for posting files to Gerrit.')
-    parser.add_argument('paths', nargs='*',
-                        help='Paths to lint.')
+    parser.add_argument(
+        "--gerrit-comments-file",
+        help="Save errors for posting files to Gerrit.",
+    )
+    parser.add_argument("paths", nargs="*", help="Paths to lint.")
     return parser
 
 
@@ -209,10 +226,17 @@ def main(argv, pythonpaths=()):
     parser = get_parser()
     opts, args = parser.parse_known_args(argv)
 
-    return 0 if perform(argv=args, paths=opts.paths,
-                        pythonpaths=pythonpaths,
-                        gerrit_comments_file=opts.gerrit_comments_file) else 1
+    return (
+        0
+        if perform(
+            argv=args,
+            paths=opts.paths,
+            pythonpaths=pythonpaths,
+            gerrit_comments_file=opts.gerrit_comments_file,
+        )
+        else 1
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

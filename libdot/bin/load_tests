@@ -15,29 +15,50 @@ import libdot
 
 
 # Path to our html test page.
-TEST_PAGE = os.path.join(libdot.DIR, 'html', 'lib_test.html')
+TEST_PAGE = os.path.join(libdot.DIR, "html", "lib_test.html")
 
 
 def get_parser():
     """Get a parser for our test runner."""
     parser = libdot.ArgumentParser(
-        description='HTML test runner',
-        formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('--browser', default=os.getenv('CHROME_BIN'),
-                        help='Browser program to run tests against.')
-    parser.add_argument('--profile', default=os.getenv('CHROME_TEST_PROFILE'),
-                        help='Browser profile dir to run against.')
-    parser.add_argument('--skip-mkdeps', dest='run_mkdeps',
-                        action='store_false', default=True,
-                        help='Skip (re)building of dependencies.')
-    parser.add_argument('--visible', action='store_true',
-                        help='Show the browser window to interact with.')
-    parser.add_argument('--reporter', default='spec',
-                        help='Set the mocha test results report format.')
+        description="HTML test runner",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "--browser",
+        default=os.getenv("CHROME_BIN"),
+        help="Browser program to run tests against.",
+    )
+    parser.add_argument(
+        "--profile",
+        default=os.getenv("CHROME_TEST_PROFILE"),
+        help="Browser profile dir to run against.",
+    )
+    parser.add_argument(
+        "--skip-mkdeps",
+        dest="run_mkdeps",
+        action="store_false",
+        default=True,
+        help="Skip (re)building of dependencies.",
+    )
+    parser.add_argument(
+        "--visible",
+        action="store_true",
+        help="Show the browser window to interact with.",
+    )
+    parser.add_argument(
+        "--reporter",
+        default="spec",
+        help="Set the mocha test results report format.",
+    )
     # Note: This CLI option matches Chrome's own naming.
-    parser.add_argument('--no-sandbox', dest='sandbox',
-                        action='store_false', default=True,
-                        help='Disable Chrome sandboxing.')
+    parser.add_argument(
+        "--no-sandbox",
+        dest="sandbox",
+        action="store_false",
+        default=True,
+        help="Disable Chrome sandboxing.",
+    )
     return parser
 
 
@@ -54,7 +75,7 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
     opts = parser.parse_args(argv)
 
     # Try to use default X session.
-    os.environ.setdefault('DISPLAY', ':0')
+    os.environ.setdefault("DISPLAY", ":0")
 
     # Ensure chai/mocha node modules exist.
     libdot.node_and_npm_setup()
@@ -64,12 +85,12 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
         if opts.run_mkdeps:
             mkdeps(opts)
         else:
-            logging.info('Skipping building dependencies due to --skip-mkdeps')
+            logging.info("Skipping building dependencies due to --skip-mkdeps")
 
     # Set up a unique profile to avoid colliding with user settings.
     profile_dir = opts.profile
     if not profile_dir:
-        profile_dir = os.path.expanduser('~/.config/google-chrome-run_local')
+        profile_dir = os.path.expanduser("~/.config/google-chrome-run_local")
     os.makedirs(profile_dir, exist_ok=True)
 
     # Find a Chrome version to run against.
@@ -82,37 +103,54 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
         # We manage the life-cycle of this ourselves below.
         # pylint: disable=consider-using-with
         server = subprocess.Popen(
-            [libdot.node.NODE,
-             os.path.join(libdot.node.NODE_BIN_DIR, 'http-server'),
-             '--cors', '-a', 'localhost', '-c-1'],
-            cwd=libdot.LIBAPPS_DIR)
-        path = f'http://localhost:8080/{path}'
+            [
+                libdot.node.NODE,
+                os.path.join(libdot.node.NODE_BIN_DIR, "http-server"),
+                "--cors",
+                "-a",
+                "localhost",
+                "-c-1",
+            ],
+            cwd=libdot.LIBAPPS_DIR,
+        )
+        path = f"http://localhost:8080/{path}"
 
     # Some environments are unable to utilize the sandbox: we're not running as
     # root, and userns is unavailable.  For example, while using docker.
     if opts.sandbox:
         sb_arg = mocha_sb_arg = []
     else:
-        sb_arg = ['--no-sandbox']
+        sb_arg = ["--no-sandbox"]
         # The wrapper requires omitting the leading dashes for no real reason.
-        mocha_sb_arg = ['--args=no-sandbox']
+        mocha_sb_arg = ["--args=no-sandbox"]
 
     try:
         # Kick off test runner in the background so we exit.
         logging.info('Running tests against browser "%s".', browser)
-        logging.info('Tests page: %s', path)
+        logging.info("Tests page: %s", path)
         if opts.visible:
             # We want to orphan this process.
             # pylint: disable=consider-using-with
-            subprocess.Popen([browser, f'--user-data-dir={profile_dir}',
-                              path] + sb_arg)
+            subprocess.Popen(
+                [browser, f"--user-data-dir={profile_dir}", path] + sb_arg
+            )
         else:
             # The standalone mocha runner doesn't have a timeout.  The headless
             # one defaults to 1 minute which is too slow for some of our suites.
             # Increase it to 5 minutes as that should be good enough for all.
-            libdot.node.run(['mocha-headless-chrome', '-e', browser, '-f', path,
-                             '--reporter', opts.reporter, '--timeout=300000'] +
-                            mocha_sb_arg)
+            libdot.node.run(
+                [
+                    "mocha-headless-chrome",
+                    "-e",
+                    browser,
+                    "-f",
+                    path,
+                    "--reporter",
+                    opts.reporter,
+                    "--timeout=300000",
+                ]
+                + mocha_sb_arg
+            )
     finally:
         # Wait for the server if it exists.
         if serve:
@@ -127,8 +165,8 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
 
 def main(argv):
     """The main func!"""
-    return test_runner_main(argv, f'file://{TEST_PAGE}')
+    return test_runner_main(argv, f"file://{TEST_PAGE}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

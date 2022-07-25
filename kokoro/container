@@ -36,8 +36,8 @@ import kokoro  # pylint: disable=unused-import
 import libdot  # pylint: disable=wrong-import-order
 
 
-CONTAINER_NAME = 'ssh_client'
-IMAGE_NAME = f'{CONTAINER_NAME}-image.tar.xz'
+CONTAINER_NAME = "ssh_client"
+IMAGE_NAME = f"{CONTAINER_NAME}-image.tar.xz"
 
 
 def cleanup():
@@ -46,19 +46,25 @@ def cleanup():
     We want to make sure every kokoro run starts from the same state.
     When these are owned by root, docker & users get upset.
     """
-    cmd = ['rm', '-rf', 'artifacts', 'hterm/dist', 'nassh/dist',
-           'ssh_client/output']
-    with open('/dev/null', 'wb') as fp:
+    cmd = [
+        "rm",
+        "-rf",
+        "artifacts",
+        "hterm/dist",
+        "nassh/dist",
+        "ssh_client/output",
+    ]
+    with open("/dev/null", "wb") as fp:
         ret = libdot.run(cmd, cwd=libdot.LIBAPPS_DIR, check=False, stderr=fp)
     if ret.returncode:
-        libdot.run(['sudo'] + cmd, cwd=libdot.LIBAPPS_DIR)
+        libdot.run(["sudo"] + cmd, cwd=libdot.LIBAPPS_DIR)
 
 
 def sudo_run(opts, cmd, **kwargs):
     """Run |cmd| through sudo if requested."""
-    if kwargs.get('shell'):
+    if kwargs.get("shell"):
         if opts.sudo_cmd:
-            cmd = opts.sudo_cmd[0] + ' ' + cmd
+            cmd = opts.sudo_cmd[0] + " " + cmd
     else:
         cmd = opts.sudo_cmd + cmd
     return libdot.run(cmd, **kwargs)
@@ -66,52 +72,72 @@ def sudo_run(opts, cmd, **kwargs):
 
 def build(opts):
     """Build the container."""
-    sudo_run(opts, ['docker', 'build', '--no-cache', '-t', CONTAINER_NAME, '.'],
-             cwd=libdot.LIBAPPS_DIR)
-    with open(IMAGE_NAME, 'wb') as fp:
+    sudo_run(
+        opts,
+        ["docker", "build", "--no-cache", "-t", CONTAINER_NAME, "."],
+        cwd=libdot.LIBAPPS_DIR,
+    )
+    with open(IMAGE_NAME, "wb") as fp:
         # We can't use a context manager here because it will close stdout
         # before waiting, and the point of this code is to let stdout run
         # until it finishes (with our wait call).
         # pylint: disable=consider-using-with
         xz = subprocess.Popen(
-            ['xz', '-T0', '-9', '-v'], cwd=libdot.LIBAPPS_DIR, stdout=fp,
-            stdin=subprocess.PIPE)
-        logging.info('Starting: %s\n  (cwd = %s)', libdot.cmdstr(xz.args),
-                     libdot.LIBAPPS_DIR)
-        sudo_run(opts, ['docker', 'save', 'ssh_client'],
-                 cwd=libdot.LIBAPPS_DIR, stdout=xz.stdin)
-        logging.info('Waiting for xz to finish ...')
+            ["xz", "-T0", "-9", "-v"],
+            cwd=libdot.LIBAPPS_DIR,
+            stdout=fp,
+            stdin=subprocess.PIPE,
+        )
+        logging.info(
+            "Starting: %s\n  (cwd = %s)",
+            libdot.cmdstr(xz.args),
+            libdot.LIBAPPS_DIR,
+        )
+        sudo_run(
+            opts,
+            ["docker", "save", "ssh_client"],
+            cwd=libdot.LIBAPPS_DIR,
+            stdout=xz.stdin,
+        )
+        logging.info("Waiting for xz to finish ...")
         xz.stdin.close()
         xz.wait()
 
 
 def load(opts):
     """Load the container."""
-    return sudo_run(opts, ['docker', 'load', '--input', IMAGE_NAME],
-                    cwd=libdot.LIBAPPS_DIR)
+    return sudo_run(
+        opts, ["docker", "load", "--input", IMAGE_NAME], cwd=libdot.LIBAPPS_DIR
+    )
 
 
 def run_docker(opts, docker_args=(), cmd_args=()):
     """Invoke docker."""
-    distfiles = os.path.join(libdot.LIBAPPS_DIR, 'ssh_client', 'distfiles')
+    distfiles = os.path.join(libdot.LIBAPPS_DIR, "ssh_client", "distfiles")
     base_cmd = [
-        'docker', 'run',
-        '--env', 'LANG=C.UTF-8',
-        '--env', 'VCSID=HEAD',
-        '--env', 'DISTDIR=/libapps/ssh_client/distfiles',
-        '--volume', f'{libdot.LIBAPPS_DIR}:/libapps',
-        '--volume', f'{distfiles}:/libapps/ssh_client/distfiles',
+        "docker",
+        "run",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "VCSID=HEAD",
+        "--env",
+        "DISTDIR=/libapps/ssh_client/distfiles",
+        "--volume",
+        f"{libdot.LIBAPPS_DIR}:/libapps",
+        "--volume",
+        f"{distfiles}:/libapps/ssh_client/distfiles",
     ]
 
     # If we're running in a CrOS checkout, we have to bind mount in .repo so
     # that the local .git tree works.
-    repo_dir = os.path.join(libdot.LIBAPPS_DIR, '..', '..', '..', '.repo')
+    repo_dir = os.path.join(libdot.LIBAPPS_DIR, "..", "..", "..", ".repo")
     if os.path.isdir(repo_dir):
-        base_cmd += ['--volume', f'{repo_dir}:/.repo:ro']
+        base_cmd += ["--volume", f"{repo_dir}:/.repo:ro"]
 
     # The kokoro build detects this env var for presubmit.
-    if opts.type == 'presubmit':
-        base_cmd += ['--env', 'KOKORO_GERRIT_REVISION=HEAD']
+    if opts.type == "presubmit":
+        base_cmd += ["--env", "KOKORO_GERRIT_REVISION=HEAD"]
 
     cmd = base_cmd + list(docker_args) + [CONTAINER_NAME] + list(cmd_args)
     return sudo_run(opts, cmd, cwd=libdot.LIBAPPS_DIR, check=False)
@@ -119,8 +145,9 @@ def run_docker(opts, docker_args=(), cmd_args=()):
 
 def enter(opts):
     """Enter the container."""
-    return run_docker(opts, docker_args=('-i', '-t'),
-                      cmd_args=('/bin/bash', '-l', '-i'))
+    return run_docker(
+        opts, docker_args=("-i", "-t"), cmd_args=("/bin/bash", "-l", "-i")
+    )
 
 
 def test(opts):
@@ -131,7 +158,7 @@ def test(opts):
 def docker_needs_sudo():
     """See whether we need sudo."""
     try:
-        group = grp.getgrnam('docker')
+        group = grp.getgrnam("docker")
     except KeyError:
         return True
 
@@ -142,17 +169,30 @@ def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(
         description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('--type', choices=('presubmit', 'release'),
-                        default='presubmit',
-                        help='Type of build to run (default: %(default)s)')
-    parser.add_argument('--sudo', action='store_true',
-                        help='Use sudo to run docker (default: auto)')
-    parser.add_argument('--no-sudo', dest='sudo', action='store_false',
-                        help='Do not use sudo to run docker')
-    parser.add_argument('action',
-                        choices=('build', 'load', 'enter', 'test', 'all'),
-                        help='What to do!')
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "--type",
+        choices=("presubmit", "release"),
+        default="presubmit",
+        help="Type of build to run (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--sudo",
+        action="store_true",
+        help="Use sudo to run docker (default: auto)",
+    )
+    parser.add_argument(
+        "--no-sudo",
+        dest="sudo",
+        action="store_false",
+        help="Do not use sudo to run docker",
+    )
+    parser.add_argument(
+        "action",
+        choices=("build", "load", "enter", "test", "all"),
+        help="What to do!",
+    )
     return parser
 
 
@@ -163,28 +203,28 @@ def main(argv):
 
     if opts.sudo is None:
         opts.sudo = docker_needs_sudo()
-    opts.sudo_cmd = ['sudo'] if opts.sudo else []
+    opts.sudo_cmd = ["sudo"] if opts.sudo else []
 
     cleanup()
-    if opts.action == 'build':
+    if opts.action == "build":
         build(opts)
         return load(opts).returncode
-    elif opts.action == 'load':
+    elif opts.action == "load":
         return load(opts).returncode
-    elif opts.action == 'enter':
+    elif opts.action == "enter":
         return enter(opts).returncode
-    elif opts.action == 'test':
+    elif opts.action == "test":
         return test(opts).returncode
-    elif opts.action == 'all':
+    elif opts.action == "all":
         build(opts)
         ret = test(opts)
         if ret.returncode:
             return ret.returncode
         return 0
 
-    parser.error(f'unhandled action {opts.action}')
+    parser.error(f"unhandled action {opts.action}")
     return 1
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

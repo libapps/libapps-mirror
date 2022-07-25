@@ -9,40 +9,40 @@ import os
 import sys
 
 FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ('%(P)s.tar.gz',)
+ARCHIVES = ("%(P)s.tar.gz",)
 
 
 def src_configure(_metadata):
     """Configure the source."""
-    if os.path.exists('configure.log'):
+    if os.path.exists("configure.log"):
         return
 
     try:
-        ssh_client.run(['./configure', '--static', '--prefix=/'])
+        ssh_client.run(["./configure", "--static", "--prefix=/"])
     except Exception:
-        ssh_client.run(['cat', 'configure.log'])
-        ssh_client.unlink('configure.log')
+        ssh_client.run(["cat", "configure.log"])
+        ssh_client.unlink("configure.log")
         raise
 
 
 def src_compile(_metadata):
     """Compile the source."""
-    ssh_client.emake('libz.a')
+    ssh_client.emake("libz.a")
 
 
 def src_install(metadata):
     """Install the package."""
-    tc = metadata['toolchain']
-    ssh_client.copy('libz.a', os.path.join(tc.libdir, 'libz.a'))
-    ssh_client.copy('zlib.pc', os.path.join(tc.pkgconfdir, 'zlib.pc'))
-    for header in ('zconf.h', 'zlib.h'):
+    tc = metadata["toolchain"]
+    ssh_client.copy("libz.a", os.path.join(tc.libdir, "libz.a"))
+    ssh_client.copy("zlib.pc", os.path.join(tc.pkgconfdir, "zlib.pc"))
+    for header in ("zconf.h", "zlib.h"):
         target = os.path.join(tc.incdir, header)
         ssh_client.copy(header, target)
 
 
-ssh_client.build_package(sys.modules[__name__], 'pnacl')
+ssh_client.build_package(sys.modules[__name__], "pnacl")

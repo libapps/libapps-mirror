@@ -9,33 +9,33 @@ import os
 import sys
 
 FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ('%(P)s.tar.gz',)
-PATCHES = ('%(P)s.patch',)
+ARCHIVES = ("%(P)s.tar.gz",)
+PATCHES = ("%(P)s.patch",)
 
 
 def src_configure(_metadata):
     """Configure the source."""
-    for var in ('AR', 'CC', 'CFLAGS', 'CPPFLAGS', 'LDFLAGS'):
+    for var in ("AR", "CC", "CFLAGS", "CPPFLAGS", "LDFLAGS"):
         os.environ.pop(var, None)
-    if not os.path.exists('Makefile.local'):
-        ssh_client.run(['./configure'])
+    if not os.path.exists("Makefile.local"):
+        ssh_client.run(["./configure"])
 
 
 def src_compile(_metadata):
     """Compile the source."""
-    ssh_client.emake('mandoc')
+    ssh_client.emake("mandoc")
 
 
 def src_install(metadata):
     """Install the package."""
-    target = os.path.join(metadata['S'], 'mandoc')
-    path = os.path.join(ssh_client.BUILD_BINDIR, 'mandoc')
+    target = os.path.join(metadata["S"], "mandoc")
+    path = os.path.join(ssh_client.BUILD_BINDIR, "mandoc")
     ssh_client.symlink(target, path)
 
 
-ssh_client.build_package(sys.modules[__name__], 'build')
+ssh_client.build_package(sys.modules[__name__], "build")

@@ -19,57 +19,55 @@ import sys
 import libdot
 
 
-ARCHES = set(('arm', 'x86-32', 'x86-64'))
+ARCHES = set(("arm", "x86-32", "x86-64"))
 
 
 def process_manifest(opts, manifest_path, srcroot, dstroot):
     """Rewrite the manifest to use the _platform_specific feature."""
-    with open(manifest_path, 'rb') as fp:
+    with open(manifest_path, "rb") as fp:
         manifest = json.load(fp)
-    if 'program' not in manifest:
+    if "program" not in manifest:
         return
 
     srcsubpath = os.path.dirname(os.path.relpath(manifest_path, srcroot))
 
     update = False
     for arch in ARCHES:
-        if arch not in manifest['program']:
+        if arch not in manifest["program"]:
             continue
 
-        url = manifest['program'][arch]['url']
-        if '_platform_specific' in url:
+        url = manifest["program"][arch]["url"]
+        if "_platform_specific" in url:
             if not opts.quiet:
-                print(f'Already relocated: {url}')
+                print(f"Already relocated: {url}")
             continue
-        if not url.endswith('.nexe'):
+        if not url.endswith(".nexe"):
             if not opts.quiet:
-                print(f'Ignoring non-NaCl file: {url}')
+                print(f"Ignoring non-NaCl file: {url}")
             continue
 
         srcurl = os.path.join(srcroot, srcsubpath, url)
         dsturl = os.path.join(dstroot, arch, srcsubpath, url)
         os.makedirs(os.path.dirname(dsturl), exist_ok=True)
         os.rename(srcurl, dsturl)
-        manifest['program'][arch]['url'] = os.path.relpath(
-            dsturl, os.path.dirname(srcurl))
+        manifest["program"][arch]["url"] = os.path.relpath(
+            dsturl, os.path.dirname(srcurl)
+        )
         update = True
 
     if update:
         if not opts.quiet:
-            print(f'Rewriting manifest for _platform_specific: {manifest_path}')
-        with open(manifest_path, 'wb') as fp:
+            print(f"Rewriting manifest for _platform_specific: {manifest_path}")
+        with open(manifest_path, "wb") as fp:
             json.dump(manifest, fp, sort_keys=True)
 
 
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
-    parser.add_argument('--base',
-                        help='Base path for input/output defaults.')
-    parser.add_argument('--input',
-                        help='The plugin directory to read.')
-    parser.add_argument('--output',
-                        help='The nacl directory to write.')
+    parser.add_argument("--base", help="Base path for input/output defaults.")
+    parser.add_argument("--input", help="The plugin directory to read.")
+    parser.add_argument("--output", help="The nacl directory to write.")
     return parser
 
 
@@ -80,16 +78,17 @@ def main(argv):
 
     if opts.input is None and opts.output is None:
         if opts.base is None:
-            parser.error('--base or --input/--output required')
-        opts.input = os.path.join(opts.base, 'plugin')
-        opts.output = os.path.join(opts.base, '_platform_specific')
+            parser.error("--base or --input/--output required")
+        opts.input = os.path.join(opts.base, "plugin")
+        opts.output = os.path.join(opts.base, "_platform_specific")
 
     for root, _, files in os.walk(opts.input):
         for f in files:
-            if f.endswith('.nmf'):
-                process_manifest(opts, os.path.join(root, f), opts.input,
-                                 opts.output)
+            if f.endswith(".nmf"):
+                process_manifest(
+                    opts, os.path.join(root, f), opts.input, opts.output
+                )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

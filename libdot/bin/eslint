@@ -86,35 +86,38 @@ def convert_to_kokoro(data):
         { ... more results above ... }
     ]
     """
-    RULES_URI_BASE = 'https://eslint.org/docs/rules/'
-    SEVERITY_TO_HEADER = {1: 'Warning', 2: 'Error'}
+    RULES_URI_BASE = "https://eslint.org/docs/rules/"
+    SEVERITY_TO_HEADER = {1: "Warning", 2: "Error"}
 
     for file_results in data:
         # Ignore generated files not in git.
-        if libdot.lint.is_generated_path(file_results['filePath']):
+        if libdot.lint.is_generated_path(file_results["filePath"]):
             continue
 
-        for message in file_results['messages']:
+        for message in file_results["messages"]:
             msg = (
-                '[eslint] ' + SEVERITY_TO_HEADER[message['severity']] + ': ' +
-                message['message']
+                "[eslint] "
+                + SEVERITY_TO_HEADER[message["severity"]]
+                + ": "
+                + message["message"]
             )
 
             # For syntax errors, this will be omitted.
-            ruleId = message.get('ruleId')
+            ruleId = message.get("ruleId")
             if ruleId:
-                msg += '\n' + RULES_URI_BASE + ruleId
+                msg += "\n" + RULES_URI_BASE + ruleId
 
             # Gerrit comments appear to count columns from 0 while eslint counts
             # from 1.  Adjust them down by one to handle.
             yield {
-                'path': os.path.relpath(file_results['filePath'],
-                                        libdot.LIBAPPS_DIR),
-                'message': msg,
-                'startLine': message['line'],
-                'endLine': message.get('endLine', message['line']),
-                'startCharacter': message['column'] - 1,
-                'endCharacter': message.get('endColumn', message['column']),
+                "path": os.path.relpath(
+                    file_results["filePath"], libdot.LIBAPPS_DIR
+                ),
+                "message": msg,
+                "startLine": message["line"],
+                "endLine": message.get("endLine", message["line"]),
+                "startCharacter": message["column"] - 1,
+                "endCharacter": message.get("endColumn", message["column"]),
             }
 
 
@@ -126,7 +129,7 @@ def setup():
 def run(argv=(), **kwargs):
     """Run the tool directly."""
     setup()
-    return libdot.node.run(['eslint'] + list(argv), **kwargs)
+    return libdot.node.run(["eslint"] + list(argv), **kwargs)
 
 
 def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
@@ -136,12 +139,13 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
     paths = list(paths)
 
     comments_path = libdot.lint.kokoro_comments_path(
-        gerrit_comments_file, 'eslint')
+        gerrit_comments_file, "eslint"
+    )
 
     if comments_path:
-        argv += ['--max-warnings=0']
+        argv += ["--max-warnings=0"]
     if fix:
-        argv += ['--fix']
+        argv += ["--fix"]
 
     result = run(argv + paths, check=False)
     if result.returncode:
@@ -154,22 +158,22 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
             if dirname:
                 os.makedirs(dirname, exist_ok=True)
 
-            argv += ['--format=json']
+            argv += ["--format=json"]
             result = run(argv + paths, check=False, capture_output=True)
 
             # Save a copy for debugging later.
-            with open(comments_path + '.in', 'wb') as fp:
+            with open(comments_path + ".in", "wb") as fp:
                 fp.write(result.stdout)
 
-            data = json.loads(result.stdout.decode('utf-8'))
+            data = json.loads(result.stdout.decode("utf-8"))
             comments = list(convert_to_kokoro(data))
-            with open(comments_path, 'w', encoding='utf-8') as fp:
+            with open(comments_path, "w", encoding="utf-8") as fp:
                 json.dump(comments, fp, sort_keys=True)
     elif comments_path:
         # If there were no failures, clear the files to avoid leaving previous
         # results laying around & confuse devs.
         libdot.unlink(comments_path)
-        libdot.unlink(comments_path + '.in')
+        libdot.unlink(comments_path + ".in")
 
     return ret
 
@@ -177,10 +181,11 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__, short_options=False)
-    parser.add_argument('--gerrit-comments-file',
-                        help='Save errors for posting files to Gerrit.')
-    parser.add_argument('paths', nargs='*',
-                        help='Paths to lint.')
+    parser.add_argument(
+        "--gerrit-comments-file",
+        help="Save errors for posting files to Gerrit.",
+    )
+    parser.add_argument("paths", nargs="*", help="Paths to lint.")
     return parser
 
 
@@ -189,9 +194,16 @@ def main(argv):
     parser = get_parser()
     opts, args = parser.parse_known_args(argv)
 
-    return 0 if perform(argv=args, paths=opts.paths,
-                        gerrit_comments_file=opts.gerrit_comments_file) else 1
+    return (
+        0
+        if perform(
+            argv=args,
+            paths=opts.paths,
+            gerrit_comments_file=opts.gerrit_comments_file,
+        )
+        else 1
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

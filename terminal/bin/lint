@@ -15,16 +15,22 @@ import libdot
 
 def _get_default_paths(basedir):
     """Get list of paths to lint by default."""
-    most_files = sorted(x for x in libdot.lint.get_known_sources(basedir)
-                        if x.suffix not in {'.js'})
+    most_files = sorted(
+        x
+        for x in libdot.lint.get_known_sources(basedir)
+        if x.suffix not in {".js"}
+    )
 
     # All files in js/*.js.
     # Use relpath for nicer default output.
     # Sort to ensure consistent order.
-    js_files = sorted(x for x in terminal.JS_DIR.glob('*.js')
-                      if not (
-                          x.name.startswith('nassh_deps') or
-                          x.name == 'terminal_import.js'))
+    js_files = sorted(
+        x
+        for x in terminal.JS_DIR.glob("*.js")
+        if not (
+            x.name.startswith("nassh_deps") or x.name == "terminal_import.js"
+        )
+    )
 
     return [os.path.relpath(x) for x in most_files + js_files]
 
@@ -34,25 +40,37 @@ def main(argv):
     # We need to use an absolute paths & set the cwd to workaround
     # https://github.com/google/closure-compiler/issues/3580
     for i, arg in enumerate(argv):
-        if arg and arg[0] != '-' and os.path.exists(arg):
+        if arg and arg[0] != "-" and os.path.exists(arg):
             argv[i] = os.path.relpath(os.path.realpath(arg), terminal.DIR)
     os.chdir(terminal.DIR)
 
-    externs = ['--js_module_root', terminal.JS_DIR]
-    for path in sorted(chain((terminal.DIR / 'externs').glob('*.js'),
-                             (terminal.NASSH_DIR / 'externs').glob('*.js'))):
-        externs.append(f'--externs={os.path.relpath(path)}')
+    externs = ["--js_module_root", terminal.JS_DIR]
+    for path in sorted(
+        chain(
+            (terminal.DIR / "externs").glob("*.js"),
+            (terminal.NASSH_DIR / "externs").glob("*.js"),
+        )
+    ):
+        externs.append(f"--externs={os.path.relpath(path)}")
 
-    closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + externs + [
-        # TODO(vapier): We want to turn this on at some point.
-        '--jscomp_off=strictMissingProperties',
-        'js/nassh_deps.concat.js']
-    return libdot.lint.main(argv, basedir=terminal.DIR,
-                            get_default_paths=_get_default_paths,
-                            mkdeps=terminal.mkdeps,
-                            closure_args=closure_args)
+    closure_args = (
+        list(libdot.lint.DEFAULT_CLOSURE_ARGS)
+        + externs
+        + [
+            # TODO(vapier): We want to turn this on at some point.
+            "--jscomp_off=strictMissingProperties",
+            "js/nassh_deps.concat.js",
+        ]
+    )
+    return libdot.lint.main(
+        argv,
+        basedir=terminal.DIR,
+        get_default_paths=_get_default_paths,
+        mkdeps=terminal.mkdeps,
+        closure_args=closure_args,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     with terminal.SymlinkNasshFiles():
         sys.exit(main(sys.argv[1:]))

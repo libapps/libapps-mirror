@@ -14,22 +14,26 @@ import wjb
 import libdot
 
 
-JS_DIR = wjb.DIR / 'js'
-EXTERNS_DIR = wjb.DIR / 'externs'
+JS_DIR = wjb.DIR / "js"
+EXTERNS_DIR = wjb.DIR / "externs"
 
 
 def _get_default_paths(basedir):
     """Get list of paths to lint by default."""
-    most_files = sorted(x for x in libdot.lint.get_known_sources(basedir)
-                        if x.suffix not in {'.js'})
+    most_files = sorted(
+        x
+        for x in libdot.lint.get_known_sources(basedir)
+        if x.suffix not in {".js"}
+    )
 
     # All files in js/*.js.
     # Use relpath for nicer default output.
-    test_dir = wjb.DIR / 'test'
-    js_files = sorted(itertools.chain(
-        JS_DIR.glob('**/*.js'), test_dir.glob('**/*.js')))
+    test_dir = wjb.DIR / "test"
+    js_files = sorted(
+        itertools.chain(JS_DIR.glob("**/*.js"), test_dir.glob("**/*.js"))
+    )
 
-    return ['index.js'] + [os.path.relpath(x) for x in most_files + js_files]
+    return ["index.js"] + [os.path.relpath(x) for x in most_files + js_files]
 
 
 def main(argv):
@@ -38,20 +42,30 @@ def main(argv):
     # https://github.com/google/closure-compiler/issues/3580
     for i, arg in enumerate(argv):
         path = Path(arg)
-        if arg and arg[0] != '-' and path.exists():
+        if arg and arg[0] != "-" and path.exists():
             argv[i] = os.path.relpath(path.resolve(), wjb.DIR)
     os.chdir(wjb.DIR)
 
-    closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + [
-        '--js_module_root', JS_DIR,
-        # TODO(vapier): We want to turn this on at some point.
-        '--jscomp_off=strictMissingProperties',
-    ] + [f'--externs={os.path.relpath(x)}'
-         for x in sorted(EXTERNS_DIR.glob('*.js'))]
-    return libdot.lint.main(argv, basedir=wjb.DIR,
-                            get_default_paths=_get_default_paths,
-                            closure_args=closure_args)
+    closure_args = (
+        list(libdot.lint.DEFAULT_CLOSURE_ARGS)
+        + [
+            "--js_module_root",
+            JS_DIR,
+            # TODO(vapier): We want to turn this on at some point.
+            "--jscomp_off=strictMissingProperties",
+        ]
+        + [
+            f"--externs={os.path.relpath(x)}"
+            for x in sorted(EXTERNS_DIR.glob("*.js"))
+        ]
+    )
+    return libdot.lint.main(
+        argv,
+        basedir=wjb.DIR,
+        get_default_paths=_get_default_paths,
+        closure_args=closure_args,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

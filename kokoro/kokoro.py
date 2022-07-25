@@ -13,7 +13,7 @@ DIR = Path(__file__).resolve().parent
 LIBAPPS_DIR = DIR.parent
 
 
-sys.path.insert(0, str(LIBAPPS_DIR / 'libdot' / 'bin'))
+sys.path.insert(0, str(LIBAPPS_DIR / "libdot" / "bin"))
 
 # pylint: disable=unused-import
 import libdot  # pylint: disable=wrong-import-position

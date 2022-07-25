@@ -18,10 +18,13 @@ import libdot
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
-    parser.add_argument('-f', '--canonicalize', action='store_true',
-                        help='Canonicalize the paths.')
-    parser.add_argument('paths', nargs='+',
-                        help='Paths to process.')
+    parser.add_argument(
+        "-f",
+        "--canonicalize",
+        action="store_true",
+        help="Canonicalize the paths.",
+    )
+    parser.add_argument("paths", nargs="+", help="Paths to process.")
     return parser
 
 
@@ -33,5 +36,5 @@ def main(argv):
         print(os.path.realpath(path))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

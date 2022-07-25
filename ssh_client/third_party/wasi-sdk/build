@@ -9,19 +9,19 @@ import os
 import sys
 
 FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ('%(P)s-linux.tar.gz',)
-PATCHES = ('%(p)s-ififo.patch',)
+ARCHIVES = ("%(P)s-linux.tar.gz",)
+PATCHES = ("%(p)s-ififo.patch",)
 
 
 def src_install(metadata):
     """Install the package."""
-    path = os.path.join(ssh_client.OUTPUT, 'wasi-sdk')
-    ssh_client.symlink(metadata['S'], path)
+    path = os.path.join(ssh_client.OUTPUT, "wasi-sdk")
+    ssh_client.symlink(metadata["S"], path)
 
 
-ssh_client.build_package(sys.modules[__name__], 'build')
+ssh_client.build_package(sys.modules[__name__], "build")

@@ -18,7 +18,7 @@ def filter_known_files(paths: List[Path]) -> List[Path]:
     for path in paths:
         path = Path(path)
 
-        if path.suffix[1:] in {'md'}:
+        if path.suffix[1:] in {"md"}:
             ret += [path]
 
     return [str(x) for x in ret]
@@ -32,16 +32,18 @@ def setup():
 def run(argv=(), **kwargs):
     """Run the tool directly."""
     setup()
-    return libdot.node.run(['markdownlint'] + list(argv), **kwargs)
+    return libdot.node.run(["markdownlint"] + list(argv), **kwargs)
 
 
-def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):  # pylint: disable=unused-argument
+def perform(
+    argv=(), paths=(), fix=False, gerrit_comments_file=None
+):  # pylint: disable=unused-argument
     """Run high level tool logic."""
     argv = list(argv)
     paths = list(paths)
 
     if fix:
-        argv += ['--fix']
+        argv += ["--fix"]
 
     # TODO(vapier): Add support for Gerrit comments.
 
@@ -52,10 +54,11 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):  # pylint:
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__, short_options=False)
-    parser.add_argument('--gerrit-comments-file',
-                        help='Save errors for posting files to Gerrit.')
-    parser.add_argument('paths', nargs='*',
-                        help='Paths to lint.')
+    parser.add_argument(
+        "--gerrit-comments-file",
+        help="Save errors for posting files to Gerrit.",
+    )
+    parser.add_argument("paths", nargs="*", help="Paths to lint.")
     return parser
 
 
@@ -64,9 +67,16 @@ def main(argv):
     parser = get_parser()
     opts, args = parser.parse_known_args(argv)
 
-    return 0 if perform(argv=args, paths=opts.paths,
-                        gerrit_comments_file=opts.gerrit_comments_file) else 1
+    return (
+        0
+        if perform(
+            argv=args,
+            paths=opts.paths,
+            gerrit_comments_file=opts.gerrit_comments_file,
+        )
+        else 1
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

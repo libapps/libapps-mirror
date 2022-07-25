@@ -9,25 +9,26 @@ import os
 import sys
 
 FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-S = '%(workdir)s'
+S = "%(workdir)s"
 
 
 def src_install(metadata):
     """Install the package."""
-    tc = metadata['toolchain']
-    srcdir = os.path.join(FILESDIR, 'include')
+    tc = metadata["toolchain"]
+    srcdir = os.path.join(FILESDIR, "include")
     for root, _, files in os.walk(srcdir):
         for header in files:
             relsrcdir = os.path.relpath(root, srcdir)
-            targetdir = os.path.join(tc.incdir, 'glibc-compat', relsrcdir)
+            targetdir = os.path.join(tc.incdir, "glibc-compat", relsrcdir)
             os.makedirs(targetdir, exist_ok=True)
-            ssh_client.copy(os.path.join(root, header),
-                            os.path.join(targetdir, header))
+            ssh_client.copy(
+                os.path.join(root, header), os.path.join(targetdir, header)
+            )
 
 
-ssh_client.build_package(sys.modules[__name__], 'pnacl')
+ssh_client.build_package(sys.modules[__name__], "pnacl")

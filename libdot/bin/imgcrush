@@ -21,17 +21,19 @@ import libdot
 
 # We pick a recent Chromium commit.  It doesn't change much so shouldn't matter.
 # Updating to the latest version shouldn't cause problems.
-CHROMIUM_REF = '85.0.4148.0'
+CHROMIUM_REF = "85.0.4148.0"
 
 # Full path to Chromium's png crush script.
-PNG_CRUSHER_URL = ('https://chromium.googlesource.com/chromium/src/+/'
-                   f'{CHROMIUM_REF}/tools/resources/optimize-png-files.sh')
+PNG_CRUSHER_URL = (
+    "https://chromium.googlesource.com/chromium/src/+/"
+    f"{CHROMIUM_REF}/tools/resources/optimize-png-files.sh"
+)
 
 # Our local cache of the script.
-PNG_CRUSHER = libdot.BIN_DIR / f'.png.crusher.{CHROMIUM_REF}'
+PNG_CRUSHER = libdot.BIN_DIR / f".png.crusher.{CHROMIUM_REF}"
 
 # The tool used to crush jpeg images.
-JPG_CRUSHER = 'jpegoptim'
+JPG_CRUSHER = "jpegoptim"
 
 
 def update_png_crusher():
@@ -39,16 +41,16 @@ def update_png_crusher():
     if PNG_CRUSHER.exists():
         return
 
-    for path in libdot.BIN_DIR.glob('.png.crusher.*'):
+    for path in libdot.BIN_DIR.glob(".png.crusher.*"):
         path.unlink()
 
-    libdot.fetch(f'{PNG_CRUSHER_URL}?format=TEXT', PNG_CRUSHER, b64=True)
+    libdot.fetch(f"{PNG_CRUSHER_URL}?format=TEXT", PNG_CRUSHER, b64=True)
     PNG_CRUSHER.chmod(0o755)
 
 
 def run(path, cmd):
     """Run the |cmd| for the |path| file."""
-    logging.info('Processing %s', path)
+    logging.info("Processing %s", path)
     libdot.run([str(x) for x in cmd], check=False)
 
 
@@ -58,13 +60,13 @@ def process_file(pool, path):
     Jobs are thrown into the |pool|, but we don't currently bother checking
     their return values.  General life cycle management is handled by the pool.
     """
-    if path.suffix in ('.png',):
+    if path.suffix in (".png",):
         update_png_crusher()
         pool.apply_async(run, (path, [PNG_CRUSHER, path]))
-    elif path.suffix in ('.jpg', '.jpeg'):
+    elif path.suffix in (".jpg", ".jpeg"):
         pool.apply_async(run, (path, [JPG_CRUSHER, path]))
     else:
-        logging.debug('Skipping unknown file type %s', path.suffix)
+        logging.debug("Skipping unknown file type %s", path.suffix)
 
 
 def process_dir(pool, topdir):
@@ -83,8 +85,12 @@ def process_dir(pool, topdir):
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
-    parser.add_argument('paths', nargs='+', type=Path,
-                        help='Image files or directories to crush.')
+    parser.add_argument(
+        "paths",
+        nargs="+",
+        type=Path,
+        help="Image files or directories to crush.",
+    )
     return parser
 
 
@@ -102,5 +108,5 @@ def main(argv):
                 process_file(pool, path)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

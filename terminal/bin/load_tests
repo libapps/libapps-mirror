@@ -12,15 +12,16 @@ import libdot
 
 
 # Path to our html test page.
-TEST_PAGE = 'terminal/html/terminal_test.html'
+TEST_PAGE = "terminal/html/terminal_test.html"
 
 
 def main(argv):
     """The main func!"""
     return libdot.load_tests.test_runner_main(
-        argv, TEST_PAGE, serve=True, mkdeps=terminal.mkdeps)
+        argv, TEST_PAGE, serve=True, mkdeps=terminal.mkdeps
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     with terminal.SymlinkNasshFiles():
         sys.exit(main(sys.argv[1:]))

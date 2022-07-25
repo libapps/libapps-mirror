@@ -13,8 +13,8 @@ import libdot
 
 
 # Path to our html test page.
-TEST_DIR = wjb.DIR / 'test'
-TEST_PAGE = (TEST_DIR / 'index.html').relative_to(libdot.LIBAPPS_DIR)
+TEST_DIR = wjb.DIR / "test"
+TEST_PAGE = (TEST_DIR / "index.html").relative_to(libdot.LIBAPPS_DIR)
 
 
 # Number of jobs for parallel operations.
@@ -23,14 +23,15 @@ JOBS = multiprocessing.cpu_count()
 
 def mkdeps(_opts):
     """Build the required deps for the test suite."""
-    libdot.run(['make', f'-j{JOBS}'], cwd=TEST_DIR)
+    libdot.run(["make", f"-j{JOBS}"], cwd=TEST_DIR)
 
 
 def main(argv):
     """The main func!"""
     return libdot.load_tests.test_runner_main(
-        argv, TEST_PAGE, serve=True, mkdeps=mkdeps)
+        argv, TEST_PAGE, serve=True, mkdeps=mkdeps
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

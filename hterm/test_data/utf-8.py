@@ -17,9 +17,9 @@ def wcfilter(ch):
     """Return x/X for non-printable characters."""
     width = wcwidth.wcwidth(ch)
     if width == -1:
-        return 'x'
+        return "x"
     elif width == 0:
-        return 'X'
+        return "X"
     else:
         return ch
 
@@ -29,7 +29,7 @@ def gen_range(start, end):
 
     This filters out surrogate pairs.
     """
-    return [x for x in range(start, end) if x < 0xd800 or x >= 0xe000]
+    return [x for x in range(start, end) if x < 0xD800 or x >= 0xE000]
 
 
 def print_range(opts):
@@ -40,31 +40,32 @@ def print_range(opts):
     start = codepoints[0]
     codepoints = [wcfilter(chr(x)) for x in codepoints]
     i = 0
-    spacer = opts.spacer or ' '
+    spacer = opts.spacer or " "
     while i < len(codepoints):
-        data = codepoints[i:i + opts.width]
-        print(f'{i + start:>{opts.pad}x}{spacer}', end='')
-        print(opts.spacer.join(data), end='')
+        data = codepoints[i : i + opts.width]
+        print(f"{i + start:>{opts.pad}x}{spacer}", end="")
+        print(opts.spacer.join(data), end="")
         print(opts.spacer)
         i += opts.width
 
 
 def print_header(opts):
     """Display the header for the codepoints."""
-    print(f'{"":{opts.pad}}{opts.spacer or " "}', end='')
+    print(f'{"":{opts.pad}}{opts.spacer or " "}', end="")
     i = 4
     width = 4
     if opts.spacer:
         width += 4 * len(opts.spacer) - 1
     while i <= opts.width:
-        cell = f'+{i - 1:x}'
-        print(f'{cell:>{width}}{opts.spacer}', end='')
+        cell = f"+{i - 1:x}"
+        print(f"{cell:>{width}}{opts.spacer}", end="")
         i += 4
-    print('')
+    print("")
 
 
 class IntAction(argparse.Action):
     """Argparse callback to parse int/hex values."""
+
     def __call__(self, parser, namespace, values, option_string=None):
         setattr(namespace, self.dest, int(values, 0))
 
@@ -72,14 +73,30 @@ class IntAction(argparse.Action):
 def get_parser():
     """Return an argparse parser for the CLI."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('-s', dest='start', default=0, action=IntAction,
-                        help='First codepoint to display')
-    parser.add_argument('-e', dest='end', default=0x800, action=IntAction,
-                        help='Last codepoint to display')
-    parser.add_argument('-w', dest='width', default=64, action=IntAction,
-                        help='Width of the table')
-    parser.add_argument('-p', dest='spacer', default='|',
-                        help='Interspace character for table')
+    parser.add_argument(
+        "-s",
+        dest="start",
+        default=0,
+        action=IntAction,
+        help="First codepoint to display",
+    )
+    parser.add_argument(
+        "-e",
+        dest="end",
+        default=0x800,
+        action=IntAction,
+        help="Last codepoint to display",
+    )
+    parser.add_argument(
+        "-w",
+        dest="width",
+        default=64,
+        action=IntAction,
+        help="Width of the table",
+    )
+    parser.add_argument(
+        "-p", dest="spacer", default="|", help="Interspace character for table"
+    )
     return parser
 
 
@@ -87,11 +104,11 @@ def main(argv):
     """The main entry point!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
-    opts.pad = len(f'{opts.end:x}')
+    opts.pad = len(f"{opts.end:x}")
 
     print_header(opts)
     print_range(opts)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

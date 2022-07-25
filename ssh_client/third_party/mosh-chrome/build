@@ -10,66 +10,77 @@ from pathlib import Path
 import sys
 
 FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, '..', '..', 'bin'))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ('%(P)s.tar.gz',)
+ARCHIVES = ("%(P)s.tar.gz",)
 PATCHES = (
-    '%(p)s-private-net.patch',
-    '%(p)s-mosh-main.patch',
-    '%(p)s-hterm-update.patch',
-    '%(p)s-app-to-ext.patch',
-    '%(p)s-term-init.patch',
-    '%(p)s-misc.patch',
-    '%(p)s-dist-reuse.patch',
-    '%(p)s-ssh-agent.patch',
-    '%(p)s-libssh-update.patch',
-    '%(p)s-reconnect.patch',
-    '%(p)s-contextmenu.patch',
-    '%(p)s-utf8-send.patch',
-    '%(p)s-icon.patch',
-    '%(p)s-hterm-runcommandclass.patch',
-    '%(p)s-hterm-storage.patch',
+    "%(p)s-private-net.patch",
+    "%(p)s-mosh-main.patch",
+    "%(p)s-hterm-update.patch",
+    "%(p)s-app-to-ext.patch",
+    "%(p)s-term-init.patch",
+    "%(p)s-misc.patch",
+    "%(p)s-dist-reuse.patch",
+    "%(p)s-ssh-agent.patch",
+    "%(p)s-libssh-update.patch",
+    "%(p)s-reconnect.patch",
+    "%(p)s-contextmenu.patch",
+    "%(p)s-utf8-send.patch",
+    "%(p)s-icon.patch",
+    "%(p)s-hterm-runcommandclass.patch",
+    "%(p)s-hterm-storage.patch",
 )
 
 
 def src_compile(_metadata):
     """Compile the source."""
-    ssh_client.run([
-        'bazel-0.17', 'build', '-s', '--spawn_strategy=standalone',
-        '--genrule_strategy=standalone', '//:mosh_chrome', '--config=pnacl',
-    ], extra_env={'DISTDIR': ssh_client.DISTDIR})
+    ssh_client.run(
+        [
+            "bazel-0.17",
+            "build",
+            "-s",
+            "--spawn_strategy=standalone",
+            "--genrule_strategy=standalone",
+            "//:mosh_chrome",
+            "--config=pnacl",
+        ],
+        extra_env={"DISTDIR": ssh_client.DISTDIR},
+    )
 
 
 def src_install(metadata):
     """Install the package."""
-    output = Path(ssh_client.OUTPUT) / 'plugin' / 'mosh'
+    output = Path(ssh_client.OUTPUT) / "plugin" / "mosh"
     output.mkdir(exist_ok=True)
-    srcdir = Path(metadata['S'])
-    genfiles = srcdir / 'bazel-genfiles'
+    srcdir = Path(metadata["S"])
+    genfiles = srcdir / "bazel-genfiles"
 
-    for f in (genfiles / 'mosh_nacl').glob('*'):
-        if f.suffix != '.pexe':
+    for f in (genfiles / "mosh_nacl").glob("*"):
+        if f.suffix != ".pexe":
             ssh_client.copy(f, output / f.name)
-    ssh_client.copy(genfiles / 'mosh_app' / 'mosh_version.js',
-                    output / 'mosh_version.js')
-    ssh_client.copy(genfiles / 'all_architectures' / 'mosh_manifest.js',
-                    output / 'mosh_manifest.js')
+    ssh_client.copy(
+        genfiles / "mosh_app" / "mosh_version.js", output / "mosh_version.js"
+    )
+    ssh_client.copy(
+        genfiles / "all_architectures" / "mosh_manifest.js",
+        output / "mosh_manifest.js",
+    )
 
     FILES = (
-        'mosh_client.html',
-        'mosh_client.js',
-        'mosh_window.html',
-        'mosh_window.js',
-        'ssh_key.html',
-        'ssh_key.js',
+        "mosh_client.html",
+        "mosh_client.js",
+        "mosh_window.html",
+        "mosh_window.js",
+        "ssh_key.html",
+        "ssh_key.js",
     )
     for f in FILES:
-        ssh_client.copy(srcdir / 'mosh_app' / f, output / f)
+        ssh_client.copy(srcdir / "mosh_app" / f, output / f)
 
 
 # NB: This isn't actually "build", it's "pnacl", but the bazel build's env is a
 # bit too sensitive and fails atm with "pnacl".
-ssh_client.build_package(sys.modules[__name__], 'build')
+ssh_client.build_package(sys.modules[__name__], "build")

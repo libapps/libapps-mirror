@@ -44,57 +44,64 @@ def minify_placeholders(msg):
         }
       }
     """
-    assert 'message' in msg
+    assert "message" in msg
 
     # Walk each of the placeholders.
-    for key, settings in list(msg.get('placeholders', {}).items()):
+    for key, settings in list(msg.get("placeholders", {}).items()):
         # Throw away the 'example' field which is meant for translators.
-        settings.pop('example', None)
+        settings.pop("example", None)
 
         # Require every replacement exist in the message.  If it's not in there,
         # then it's probably a typo, or a stale entry we want to remove.
-        assert f'${key.lower()}$' in msg['message'].lower(), (
-            f"Missing ${key}$ (case insensitive) in: {msg['message']}")
+        assert (
+            f"${key.lower()}$" in msg["message"].lower()
+        ), f"Missing ${key}$ (case insensitive) in: {msg['message']}"
 
         # If the replacement is simple, inline it.
-        m = re.match(r'^[$][0-9]+$', settings['content'])
+        m = re.match(r"^[$][0-9]+$", settings["content"])
         if m:
-            msg['message'] = re.sub(rf'[$]{key}[$]', settings['content'],
-                                    msg['message'], flags=re.I)
-            msg['placeholders'].pop(key)
+            msg["message"] = re.sub(
+                rf"[$]{key}[$]", settings["content"], msg["message"], flags=re.I
+            )
+            msg["placeholders"].pop(key)
 
     # Remove the placeholders setting if it's empty after we've processed it.
-    placeholders = msg.get('placeholders', {})
+    placeholders = msg.get("placeholders", {})
     if not placeholders:
-        msg.pop('placeholders', None)
+        msg.pop("placeholders", None)
 
 
 def minify(path, inplace=False):
     """Minify translation."""
-    with open(path, encoding='utf-8') as fp:
+    with open(path, encoding="utf-8") as fp:
         try:
             data = json.loads(fp.read())
         except ValueError as e:
-            logging.error('Processing %s: %s', path, e)
+            logging.error("Processing %s: %s", path, e)
             return False
 
     # Strip out the metadata that only translators read.
     for msg in data.values():
         # Translator-aimed description of the message.
-        msg.pop('description', None)
+        msg.pop("description", None)
 
         # Expand the placeholders where possible.
         minify_placeholders(msg)
 
     # Throw away all whitespace.
-    formatted = json.dumps(data, ensure_ascii=False, indent=None,
-                           separators=(',', ':'), sort_keys=True)
+    formatted = json.dumps(
+        data,
+        ensure_ascii=False,
+        indent=None,
+        separators=(",", ":"),
+        sort_keys=True,
+    )
 
     if inplace:
-        with open(path, 'w', encoding='utf-8') as fp:
+        with open(path, "w", encoding="utf-8") as fp:
             fp.write(formatted)
     else:
-        sys.stdout.write(formatted + '\n')
+        sys.stdout.write(formatted + "\n")
 
     return True
 
@@ -103,7 +110,7 @@ def minify_many(paths, inplace=False):
     """Minify translations."""
     ret = True
     for path in paths:
-        logging.debug('Processing %s', path)
+        logging.debug("Processing %s", path)
         if not minify(path, inplace):
             ret = False
     return ret
@@ -112,12 +119,21 @@ def minify_many(paths, inplace=False):
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
-    parser.add_argument('-i', '--inplace', default=False, action='store_true',
-                        help='Modify files inline rather than writing stdout.')
-    parser.add_argument('--glob', action='store_true',
-                        help='Whether to use glob() on input paths.')
-    parser.add_argument('files', nargs='+', metavar='files',
-                        help='The translations to format.')
+    parser.add_argument(
+        "-i",
+        "--inplace",
+        default=False,
+        action="store_true",
+        help="Modify files inline rather than writing stdout.",
+    )
+    parser.add_argument(
+        "--glob",
+        action="store_true",
+        help="Whether to use glob() on input paths.",
+    )
+    parser.add_argument(
+        "files", nargs="+", metavar="files", help="The translations to format."
+    )
     return parser
 
 
@@ -137,5 +153,5 @@ def main(argv):
     return 0 if minify_many(expander(opts.files), opts.inplace) else 1
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

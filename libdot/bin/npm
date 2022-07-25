@@ -37,9 +37,9 @@ def temp_switch_path_owner(path: os.PathLike):
 
 def run(cmd, **kwargs):
     """Run the npm |cmd|."""
-    cwd = Path(kwargs.get('cwd', '.'))
+    cwd = Path(kwargs.get("cwd", "."))
     with temp_switch_path_owner(cwd):
-        return libdot.node.run(['npm'] + cmd, **kwargs)
+        return libdot.node.run(["npm"] + cmd, **kwargs)
 
 
 def main(argv):
@@ -49,5 +49,5 @@ def main(argv):
     run(argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))
