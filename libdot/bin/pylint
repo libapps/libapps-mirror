@@ -79,7 +79,7 @@ def filter_known_files(paths: List[Path]) -> List[Path]:
         elif not path.exists():
             # Ignore missing files here (caller will handle it).
             pass
-        elif path.stat().st_mode & 0o111:
+        elif path.is_file() and path.stat().st_mode & 0o111:
             # Add executable programs with python shebangs.
             with path.open('rb') as fp:
                 shebang = fp.readline()
