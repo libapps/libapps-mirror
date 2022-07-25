@@ -50,7 +50,7 @@ def convert_to_kokoro(data):
             f"[pylint] {result['symbol']} ({result['message-id']})\n" +
             result['message'] + '\n' +
             MAIN_DOCS + '\n' +
-            USER_BASE_URI % (result['message-id'],),
+            USER_BASE_URI % (result['message-id'],)
         )
 
         path = os.path.join(os.getcwd(), result['path'])
