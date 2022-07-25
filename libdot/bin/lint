@@ -196,7 +196,6 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
         for func in (
                 libdot.eslint.run,
                 libdot.closure_compiler.run,
-                libdot.pylint.run,
         ):
             func(['--version'])
         return 0
@@ -242,7 +241,9 @@ def main(argv, get_default_paths=get_known_sources, basedir=None, mkdeps=None,
     tolint_paths -= set(py_files)
     if py_files and opts.py:
         py_kwargs = {'paths': py_files, **kwargs}
-        checks += [libdot.pylint.perform(**py_kwargs)]
+        # Disabled due to pylint not being hermetic, and this old branch isn't
+        # being updated anymore.  Newer versions of pylint find a lot of issues.
+        # checks += [libdot.pylint.perform(**py_kwargs)]
 
     cpp_files = libdot.cpplint.filter_known_files(opts.paths)
     tolint_paths -= set(cpp_files)
