@@ -84,6 +84,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     this.socketUdpRecv_ = null;
     this.socketMap_ = new Map();
     this.fakeAddrMap_ = new Map();
+    this.firstConnection_ = true;
   }
 
   async init() {
@@ -454,8 +455,14 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       case Constants.AF_INET6:
         switch (type) {
           case WASI.filetype.SOCKET_STREAM:
-            handle = new Sockets.TcpSocket(
-                domain, type, protocol, this.tcpSocketsOpen_);
+            if (this.tcpSocketsOpen_ && this.firstConnection_) {
+              handle = new Sockets.RelaySocket(
+                  domain, type, protocol, this.tcpSocketsOpen_);
+              this.firstConnection_ = false;
+            } else {
+              handle = new Sockets.ChromeTcpSocket(
+                  domain, type, protocol);
+            }
             break;
           case WASI.filetype.SOCKET_DGRAM:
             // TODO(vapier): Implement UDP support.
@@ -536,11 +543,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       const ret = await unixHandle.connect(address, port);
       if (unixHandle.callback_) {
         unixHandle.callback_.onDataAvailable = (data) => {
-          unixHandle.onRecv(data);
-          // TODO(crbug.com/1311909): Do better.
-          if (this.notify_) {
-            this.notify_();
-          }
+          this.onSocketHandleRecv({handle: unixHandle, data});
         };
       }
       return ret;
@@ -548,9 +551,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
 
     const ret = await handle.connect(address, port);
     if (handle.callback_) {
-      const socketId = handle.socketId;
       handle.callback_.onDataAvailable = (data) => {
-        this.onSocketTcpRecv({socketId, data});
+        this.onSocketHandleRecv({handle, data});
       };
     }
     return ret;
@@ -622,6 +624,10 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       return;
     }
 
+    this.onSocketHandleRecv({handle, data});
+  }
+
+  onSocketHandleRecv({handle, data}) {
     // TODO(crbug.com/1311909): Do better.
     handle.onRecv(data);
     if (this.notify_) {

@@ -100,20 +100,16 @@ export class Socket extends VFS.PathHandle {
 }
 
 /**
- * A TCP/IP based socket.
+ * A TCP/IP based socket backed by the chrome.sockets.tcp API.
  */
-export class TcpSocket extends Socket {
+export class ChromeTcpSocket extends Socket {
   /**
    * @param {number} domain
    * @param {number} type
    * @param {number} protocol
-   * @param {function(string, number)} open
    */
-  constructor(domain, type, protocol, open) {
+  constructor(domain, type, protocol) {
     super(domain, type, protocol);
-
-    this.open_ = open;
-    this.callback_ = null;
 
     /** @type {number} */
     this.socketId = -1;
@@ -141,14 +137,6 @@ export class TcpSocket extends Socket {
       return WASI.errno.EISCONN;
     }
 
-    this.callback_ = await this.open_(address, port);
-    if (this.callback_) {
-      this.callback_.onDataAvailable = (data) => this.onRecv(data);
-      this.address = address;
-      this.port = port;
-      return WASI.errno.ESUCCESS;
-    }
-
     const result = await new Promise((resolve) => {
       chrome.sockets.tcp.connect(this.socketId, address, port, resolve);
     });
@@ -170,11 +158,6 @@ export class TcpSocket extends Socket {
   async close() {
     // In the *NIX world, close must never fail.  That's why we don't return
     // any errors here.
-
-    if (this.callback_) {
-      this.callback_.close();
-      this.callback_ = null;
-    }
 
     if (this.socketId === -1) {
       return;
@@ -198,11 +181,6 @@ export class TcpSocket extends Socket {
 
   /** @override */
   async write(buf) {
-    if (this.callback_) {
-      await this.callback_.asyncWrite(buf);
-      return {nwritten: buf.length};
-    }
-
     const {result, bytesSent} = await new Promise((resolve) => {
       // TODO(vapier): Double check whether send accepts TypedArrays directly.
       // Or if we have to respect buf.byteOffset & buf.byteLength ourself.
@@ -299,6 +277,151 @@ export class TcpSocket extends Socket {
               console.warn(`setNoDelay(${value}) failed with ${result})`);
               return WASI.errno.EINVAL;
             }
+            this.tcpNoDelay_ = value;
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+    }
+
+    return WASI.errno.ENOPROTOOPT;
+  }
+}
+
+/**
+ * A TCP/IP based socket backed by a Stream. Used to connect to a relay server.
+ */
+export class RelaySocket extends Socket {
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @param {function(string, number)} open
+   */
+  constructor(domain, type, protocol, open) {
+    super(domain, type, protocol);
+
+    this.open_ = open;
+
+    this.callback_ = null;
+
+    this.tcpKeepAlive_ = false;
+    this.tcpNoDelay_ = false;
+  }
+
+  /** @override */
+  async connect(address, port) {
+    if (this.address !== null) {
+      return WASI.errno.EISCONN;
+    }
+
+    this.callback_ = await this.open_(address, port);
+
+    if (!this.callback_) {
+      console.error('Unable to connect to relay server.');
+      return WASI.errno.EIO;
+    }
+
+    this.callback_.onDataAvailable = (data) => this.onRecv(data);
+    this.address = address;
+    this.port = port;
+    return WASI.errno.ESUCCESS;
+  }
+
+  /** @override */
+  async close() {
+    // In the *NIX world, close must never fail.  That's why we don't return
+    // any errors here.
+
+    if (this.callback_) {
+      this.callback_.close();
+      this.callback_ = null;
+    }
+
+    this.address = null;
+    this.port = null;
+  }
+
+  /** @override */
+  async write(buf) {
+    await this.callback_.asyncWrite(buf);
+    return {nwritten: buf.length};
+  }
+
+  /**
+   * @return {!Promise<!chrome.socket.SocketInfo>}
+   */
+  async getSocketInfo() {
+    // Return a stub socketInfo since we can't extract the required info
+    // out of a WebSocket.
+    return /** @type {!chrome.socket.SocketInfo} **/ ({
+      // Only works when connected is set to false.
+      connected: false,
+      paused: false,
+      persistent: false,
+      socketId: -1,
+    });
+  }
+
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @return {!Promise<{option: number}>}
+   */
+  async getSocketOption(level, name) {
+    switch (level) {
+      case SOL_SOCKET: {
+        switch (name) {
+          case SO_KEEPALIVE:
+            return {option: this.tcpKeepAlive_ ? 1 : 0};
+        }
+        break;
+      }
+
+      case IPPROTO_TCP: {
+        switch (name) {
+          case TCP_NODELAY:
+            return {option: this.tcpNoDelay_ ? 1 : 0};
+        }
+        break;
+      }
+    }
+
+    return WASI.errno.ENOPROTOOPT;
+  }
+
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async setSocketOption(level, name, value) {
+    switch (level) {
+      case SOL_SOCKET: {
+        switch (name) {
+          case SO_KEEPALIVE: {
+            this.tcpKeepAlive_ = value;
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+
+      case IPPROTO_IP: {
+        switch (name) {
+          case IP_TOS: {
+            console.warn(`Ignoring IP_TOS=${value}`);
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+
+      case IPPROTO_TCP: {
+        switch (name) {
+          case TCP_NODELAY: {
             this.tcpNoDelay_ = value;
             return WASI.errno.ESUCCESS;
           }

@@ -44,7 +44,6 @@ export class Plugin {
     this.authAgent_ = authAgent;
     this.authAgentAppID_ = authAgentAppID;
     this.relay_ = relay;
-    this.firstTcpConnect_ = true;
     this.secureInput_ = secureInput;
     this.plugin_ = null;
   }
@@ -70,7 +69,9 @@ export class Plugin {
       environ: this.environ_,
       handler: new WasshSyscallHandler.RemoteReceiverWasiPreview1({
         term: this.terminal_,
-        tcpSocketsOpen: (address, port) => this.openTcpSocket_(address, port),
+        tcpSocketsOpen: this.relay_
+            ? (address, port) => this.openTcpSocket_(address, port)
+            : null,
         unixSocketsOpen: (address, port) => this.openUnixSocket_(address, port),
         secureInput: this.secureInput_,
       }),
@@ -103,17 +104,9 @@ export class Plugin {
    *
    * @param {string} address The remote server to connect to.
    * @param {number} port The remote port to connect to.
-   * @return {!Promise<?Stream>} The new relay socket stream if available.
+   * @return {!Promise<!Stream>} The new relay socket stream.
    */
   async openTcpSocket_(address, port) {
-    if (!this.firstTcpConnect_) {
-      return null;
-    }
-    this.firstTcpConnect_ = false;
-    if (!this.relay_) {
-      return null;
-    }
-
     // We're only ever going to have one relay, so construct the stream set &
     // use a fake fd below in it.  After we turn down the NaCl code, we can
     // refactor the stream APIs entirely to avoid this.
