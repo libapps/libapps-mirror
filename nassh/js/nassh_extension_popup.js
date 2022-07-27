@@ -2,7 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {localize, openOptionsPage, sendFeedback} from './nassh.js';
+import {
+  getSyncStorage, localize, openOptionsPage, sendFeedback,
+} from './nassh.js';
 import {
   LocalPreferenceManager, PreferenceManager,
 } from './nassh_preference_manager.js';
@@ -24,7 +26,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
  * @constructor
  */
 function popup() {
-  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+  const storage = getSyncStorage();
 
   // The nassh global preference managers.
   this.prefs_ = new PreferenceManager(storage);

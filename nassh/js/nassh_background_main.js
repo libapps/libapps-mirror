@@ -7,7 +7,7 @@
  * code in here minimal as this cannot be unittested.
  */
 
-import {browserAction, runtimeSendMessage} from './nassh.js';
+import {browserAction, getSyncStorage, runtimeSendMessage} from './nassh.js';
 import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';
 import {addListeners as externalAddListeners,
@@ -41,7 +41,7 @@ if (browserAction) {
 lib.init(console.log.bind(console)).then(() => {
   initApi();
 
-  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+  const storage = getSyncStorage();
   const app = new App(storage);
 
   // Register our context menus.

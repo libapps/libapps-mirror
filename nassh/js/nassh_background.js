@@ -6,6 +6,7 @@
  * @fileoverview Utility code for the background page.
  */
 
+import {getSyncStorage} from './nassh.js';
 import {PreferenceManager} from './nassh_preference_manager.js';
 
 /**
@@ -34,7 +35,7 @@ export function exportPreferences(onComplete) {
   rv.magic = 'nassh-prefs';
   rv.version = 1;
 
-  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+  const storage = getSyncStorage();
   const nasshPrefs = new PreferenceManager(storage);
   nasshPrefs.readStorage(function() {
     // Export all the connection settings.
@@ -75,7 +76,7 @@ export function importPreferences(prefsObject) {
     throw new Error(`Bad version, expected 1, got: ${prefsObject.version}`);
   }
 
-  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+  const storage = getSyncStorage();
   const nasshPrefs = new PreferenceManager(storage);
   return new Promise(async (resolve) => {
     // First import the nassh settings.

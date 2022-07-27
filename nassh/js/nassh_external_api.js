@@ -6,6 +6,7 @@
  * @fileoverview A remote API for external apps/extensions.
  */
 
+import {getSyncStorage} from './nassh.js';
 import {exportPreferences, importPreferences} from './nassh_background.js';
 import {CommandInstance} from './nassh_command_instance.js';
 import {getFileSystem} from './nassh_fs.js';
@@ -103,7 +104,7 @@ function(request, sender, sendResponse) {
   ]).then(() => {
     const argv = {
       io: io_,
-      syncStorage: new lib.Storage.Chrome(chrome.storage.sync),
+      syncStorage: getSyncStorage(),
       isSftp: true,
       mountOptions: {
         fileSystemId: request.fileSystemId,
@@ -622,7 +623,7 @@ function(port) {
         // UI wants us to start a connection.
         const {argv, connectOptions} = msg;
         argv.io = pipeIo;
-        argv.syncStorage = new lib.Storage.Chrome(chrome.storage.sync);
+        argv.syncStorage = getSyncStorage();
         argv.onExit = (status) => {
           post({error: false, command: 'exit', status});
           port.disconnect();

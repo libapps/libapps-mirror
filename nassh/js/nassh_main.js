@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import {
-  disableTabDiscarding, loadWebFonts, localize, openOptionsPage,
+  disableTabDiscarding, getSyncStorage, loadWebFonts, localize, openOptionsPage,
   runtimeSendMessage, sendFeedback, setupForWebApp, watchBackgroundColor,
 } from './nassh.js';
 import {CommandInstance} from './nassh_command_instance.js';
@@ -75,7 +75,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
 
   const execNaSSH = function() {
     const profileId = params.get('profile');
-    const storage = new lib.Storage.Chrome(chrome.storage.sync);
+    const storage = getSyncStorage();
 
     const terminal = new hterm.Terminal({profileId, storage});
     // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard

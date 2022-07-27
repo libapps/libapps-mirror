@@ -365,3 +365,19 @@ export function getManifest() {
     });
   }
 }
+
+/**
+ * Returns a Storage instance that syncs between devices, falling back
+ * to local storage if no sync storage API is available.
+ *
+ * @return {!lib.Storage}
+ */
+export function getSyncStorage() {
+  if (location.href.startsWith('chrome-untrusted://')) {
+    return new lib.Storage.TerminalPrivate();
+  }
+  if (window?.chrome?.storage?.sync) {
+    return new lib.Storage.Chrome(chrome.storage.sync);
+  }
+  return new lib.Storage.Local();
+}

@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 import {
-  disableTabDiscarding, loadMessages, loadWebFonts, openOptionsPage, osc8Link,
-  sendFeedback, sgrText,
+  disableTabDiscarding, getSyncStorage, loadMessages, loadWebFonts,
+  openOptionsPage, osc8Link, sendFeedback, sgrText,
 } from './nassh.js';
 
 /**
@@ -106,9 +106,7 @@ Crosh.msg = function(name, args) {
 Crosh.init = function() {
   const params = new URLSearchParams(document.location.search);
   const profileId = params.get('profile');
-  const storage =
-      Crosh.isWebApp() ? new lib.Storage.TerminalPrivate() :
-      new lib.Storage.Chrome(chrome.storage.sync);
+  const storage = getSyncStorage();
   const terminal = new hterm.Terminal({profileId, storage});
   // Use legacy pasting when running as an extension to avoid prompt.
   // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard

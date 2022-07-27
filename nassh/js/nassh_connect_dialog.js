@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import {
-  isCrOSSystemApp, loadWebFonts, localize, openOptionsPage,
+  getSyncStorage, isCrOSSystemApp, loadWebFonts, localize, openOptionsPage,
   registerProtocolHandler, runtimeSendMessage, sendFeedback, setupForWebApp,
 } from './nassh.js';
 import {ColumnList} from './nassh_column_list.js';
@@ -38,7 +38,7 @@ function ConnectDialog(messagePort) {
   }
 
   // The nassh global pref manager.
-  const storage = new lib.Storage.Chrome(chrome.storage.sync);
+  const storage = getSyncStorage();
   this.prefs_ = new PreferenceManager(storage);
   this.localPrefs_ = new LocalPreferenceManager();
   this.prefs_.readStorage(() => {

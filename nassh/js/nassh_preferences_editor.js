@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 import {
-  getManifest, isCrOSSystemApp, loadWebFonts, localize, runtimeSendMessage,
-  sendFeedback, setupForWebApp,
+  getManifest, getSyncStorage, loadWebFonts, localize,
+  runtimeSendMessage, sendFeedback, setupForWebApp,
 } from './nassh.js';
 
 /**
@@ -21,9 +21,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   function setupPreferences() {
     const manifest = getManifest();
-    const storage = isCrOSSystemApp() ?
-        new lib.Storage.TerminalPrivate() :
-        new lib.Storage.Chrome(chrome.storage.sync);
+    const storage = getSyncStorage();
 
     // Create a local hterm instance so people can see their changes live.
     const term = new hterm.Terminal({storage});
