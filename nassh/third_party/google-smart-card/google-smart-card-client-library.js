@@ -197,3 +197,22 @@ H.getPredefinedLevel=Xb;H.prototype.toString=H.prototype.toString;p("goog.log.Lo
 T.all=function(a){return new T(function(b,c){var d=a.length,f=[];if(d)for(var g=function(E,ec){d--;f[E]=ec;0==d&&b(f)},l=function(E){c(E)},m=0,w;m<a.length;m++)w=a[m],vd(w,ia(g,m),l);else b(f)})};T.allSettled=function(a){return new T(function(b){var c=a.length,d=[];if(c)for(var f=function(m,w,E){c--;d[m]=w?{ma:!0,value:E}:{ma:!1,reason:E};0==c&&b(d)},g=0,l;g<a.length;g++)l=a[g],vd(l,ia(f,g,!0),ia(f,g,!1));else b(d)})};
 T.firstFulfilled=function(a){return new T(function(b,c){var d=a.length,f=[];if(d)for(var g=function(E){b(E)},l=function(E,ec){d--;f[E]=ec;0==d&&c(f)},m=0,w;m<a.length;m++)w=a[m],vd(w,g,ia(l,m));else b(void 0)})};T.withResolver=xd;T.setUnhandledRejectionHandler=function(a){Jd=a};T.CancellationError=Bd;T.prototype.then=T.prototype.then;T.prototype.thenAlways=T.prototype.aa;T.prototype.thenCatch=T.prototype.pa;T.prototype.cancel=T.prototype.cancel;T.prototype.thenAlways=T.prototype.aa;
 p("goog.Disposable",r);r.prototype.isDisposed=r.prototype.na;r.prototype.dispose=r.prototype.C;r.prototype.addOnDisposeCallback=r.prototype.N;p("goog.messaging.AbstractChannel",V);V.prototype.connect=V.prototype.connect;V.prototype.isConnected=V.prototype.ea;V.prototype.registerService=V.prototype.registerService;V.prototype.registerDefaultService=V.prototype.Y;V.prototype.send=V.prototype.send;})();
+/**
+ * @license
+ * Copyright 2022 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+export const goog = globalThis.goog;
+export const GoogleSmartCard = globalThis.GoogleSmartCard;

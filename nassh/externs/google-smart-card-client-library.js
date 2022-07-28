@@ -127,3 +127,15 @@ GoogleSmartCard.PcscLiteCommon.Constants = {}
 
 /** @type {string} */
 GoogleSmartCard.PcscLiteCommon.Constants.SERVER_OFFICIAL_APP_ID;
+
+/**
+ * Glue because closure-compiler is bad at imports.
+ */
+var GoogleSmartCard$$module$third_party$google_smart_card$google_smart_card_client_library = {};
+GoogleSmartCard$$module$third_party$google_smart_card$google_smart_card_client_library.PcscLiteClient = {};
+/** @constructor */
+GoogleSmartCard$$module$third_party$google_smart_card$google_smart_card_client_library.PcscLiteClient.API = GoogleSmartCard.PcscLiteClient.API;
+/** @constructor */
+GoogleSmartCard$$module$third_party$google_smart_card$google_smart_card_client_library.PcscLiteClient.Context = GoogleSmartCard.PcscLiteClient.Context;
+/** @constructor */
+GoogleSmartCard$$module$third_party$google_smart_card$google_smart_card_client_library.PcscLiteClient.API.Result = GoogleSmartCard.PcscLiteClient.API.Result;

@@ -21,6 +21,9 @@ import {
   decodeCurveOidWithVendorFixes, encodeAsWireMpint, encodeAsWireString,
   generateKeyBlob, KeyTypes, Identity, OidToCurveInfo,
 } from './nassh_agent_message_types.js';
+import {
+  GoogleSmartCard,
+} from '../third_party/google-smart-card/google-smart-card-client-library.js';
 
 /**
  * An SSH agent backend that uses the Google Smart Card Connector library to

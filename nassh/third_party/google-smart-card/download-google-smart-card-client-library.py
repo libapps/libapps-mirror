@@ -36,7 +36,7 @@ except ImportError:
 
 GITHUB_REPO_OWNER = "GoogleChrome"
 GITHUB_REPO = "chromeos_smart_card_connector"
-CLIENT_LIBRARY_ASSET_NAME = "google-smart-card-client-library.js"
+CLIENT_LIBRARY_ASSET_NAME = "google-smart-card-client-library-es-module.js"
 OUTPUT_FILE_NAME = "google-smart-card-client-library.js"
 
 GITHUB_LATEST_RELEASE_URL_TEMPLATE = (
