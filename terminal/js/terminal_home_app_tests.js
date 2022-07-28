@@ -36,27 +36,31 @@ describe('terminal_home_app_tests.js', () => {
       '/nassh/profiles/p2/description': 'ssh-connection-2',
       'crostini.enabled': true,
       'crostini.containers': [
-        {vm_name: 'termina', container_name:'penguin'},
-        {vm_name: 'termina', container_name:'c2'},
+        {
+          vm_name: 'termina',
+          container_name: 'penguin',
+          terminal_supported: true,
+        },
+        {vm_name: 'termina', container_name: 'c2'},
+        {vm_name: 'termina', container_name: 'c3', terminal_supported: false},
       ],
       'crostini.terminal_ssh_allowed_by_policy': true,
     });
 
     const rows = await this.getRowText();
-    assert.equal(8, rows.length);
+    assert.equal(7, rows.length);
     assert.equal(
       'TERMINAL_HOME_DEFAULT_LINUX_CONTAINER_LABEL', rows[0].innerText);
     assert.equal('penguin', rows[1].innerText);
-    assert.equal('c2', rows[2].innerText);
-    assert.equal('TERMINAL_HOME_SSH', rows[3].innerText);
-    assert.equal('ssh-connection-1', rows[4].innerText);
-    assert.equal('ssh-connection-2', rows[5].innerText);
-    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[6].innerText);
-    assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[7].innerText);
+    assert.equal('TERMINAL_HOME_SSH', rows[2].innerText);
+    assert.equal('ssh-connection-1', rows[3].innerText);
+    assert.equal('ssh-connection-2', rows[4].innerText);
+    assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[5].innerText);
+    assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[6].innerText);
 
-    // All rows except for the 2 settings rows are links.
+    // One container and two ssh connections == 3 links
     const links = this.el.shadowRoot.querySelectorAll('li a h4');
-    assert.equal(4, links.length);
+    assert.equal(3, links.length);
 
     // Buttons for Add SSH, and Manage (Linux).
     const buttons = this.el.shadowRoot.querySelectorAll('terminal-button');
@@ -96,7 +100,11 @@ describe('terminal_home_app_tests.js', () => {
       '/nassh/profiles/p2/description': 'ssh-connection-2',
       'crostini.enabled': false,
       'crostini.containers': [
-        {vm_name: 'termina', container_name:'penguin'},
+        {
+          vm_name: 'termina',
+          container_name: 'penguin',
+          terminal_supported: true,
+        },
       ],
       'crostini.terminal_ssh_allowed_by_policy': false,
     });
@@ -114,11 +122,12 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_TERMINAL_SETTINGS', rows[7].innerText);
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[8].innerText);
 
-    // Only linux and ssh rows are links, and there should be 0 of them.
+    // Even though Crostini isn't enabled, we still have a container so should
+    // have a link.
     const links = this.el.shadowRoot.querySelectorAll('li a h4');
-    assert.equal(0, links.length);
+    assert.equal(1, links.length);
 
-      // Buttons for Add SSH, and Set up (Linux).
+    // Buttons for Add SSH, and Set up (Linux).
     const buttons = this.el.shadowRoot.querySelectorAll('terminal-button');
     assert.equal(2, buttons.length);
     assert.equal('TERMINAL_HOME_SET_UP', buttons[0].innerText.trim());

@@ -34,20 +34,24 @@ const PREF_PATH_ENABLED = 'crostini.enabled';
 const PREF_PATH_SSH_ALLOWED = 'crostini.terminal_ssh_allowed_by_policy';
 
 /**
- * Path for pref with list of crostini containers.
+ * Path for pref with list of GuestOS containers.
  *
  * @type {string}
  */
 const PREF_PATH_CONTAINERS = 'crostini.containers';
 
 /**
- * Container label is <container_name> for termina, else
- * <vm_name>:<container_name>.
+ * If we're told what the name should be use that, otherwise container label is
+ * <container_name> for termina, else <vm_name>:<container_name>.
  *
- * @param {{vm_name: string, container_name: string}} container
+ * @param {{vm_name: string, container_name: string,
+ *     terminal_label: ?string}} container
  * @return {string}
  */
 function containerLabel(container) {
+  if (container.terminal_label) {
+    return container.terminal_label;
+  }
   if (container.vm_name === DEFAULT_VM_NAME) {
      return container.container_name;
   }
@@ -230,9 +234,6 @@ export class TerminalHomeApp extends LitElement {
       <h4>${containerLabel(c)}</h4>
    `;
     const href = (c) => {
-      if (!this.crostiniEnabled) {
-        return '';
-      }
       const enc = encodeURIComponent;
       return `terminal.html?command=vmshell&settings_profile=${
           enc(c.settingsProfileId)
@@ -261,9 +262,11 @@ export class TerminalHomeApp extends LitElement {
         </div>
         ${this.containers.length === 0 ? undefined : html`
           <ul>
-          ${this.containers.map((c) => html`
+          ${this.containers
+              .filter((c) => c['terminal_supported'])
+              .map((c) => html`
             <li class="row">
-              ${this.crostiniEnabled ? link(c) : text(c)}
+              ${link(c)}
               ${when(!!getOSInfo().multi_profile, () => html`
                 <mwc-icon-button
                     aria-label="${msg('TERMINAL_HOME_EDIT_LINUX')}"
