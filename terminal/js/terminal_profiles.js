@@ -107,16 +107,14 @@ export async function deleteProfile(
 }
 
 /**
- * @param {!ProfileType} profileType
+ * Clean up any vsh sync prefs.
+ *
  * @return {!Promise<void>}
  */
-export async function cleanupLostValues(profileType) {
-  const ids = await getProfileIds(profileType);
+export async function cleanupVshSyncPrefs() {
   await window.storage.removeItems(
       Object.keys(await window.storage.getItems(null)).filter((key) => {
-        const parts = key.split('/');
-        return parts[1] === profileType && parts[2] === 'profiles' &&
-               !ids.includes(parts[3]);
+        return key.split('/')[1] === 'vsh';
       }));
 }
 
@@ -128,12 +126,48 @@ export async function cleanupLostValues(profileType) {
  * @return {!Promise<void>}
  */
 export async function resetTerminalProfileToDefault(terminalProfile) {
-  const profileTypes = [ProfileType.NASSH, ProfileType.VSH];
+  // Reset nassh.
   const items = await window.storage.getItems(null);
   await window.storage.removeItems(
       Object.entries(items).filter(([key, value]) => {
         const parts = key.split('/');
-        return profileTypes.includes(parts[1]) && parts[2] === 'profiles' &&
+        return parts[1] === ProfileType.NASSH && parts[2] === 'profiles' &&
              parts[4] === 'terminal-profile' && value === terminalProfile;
       }).map(([key, value]) => key));
+
+  // Reset vsh.
+  const profiles = getVshProfiles();
+  for (const p in profiles) {
+    const profile = profiles[p];
+    if (profile['terminal-profile'] === terminalProfile) {
+      delete profile['terminal-profile'];
+    }
+  }
+  setVshProfiles(profiles);
+}
+
+/**
+ * Get VSH profiles.  VSH profiles are stored in window.localStorage as JSON.
+ *
+ * @return {!Object}
+ */
+export function getVshProfiles() {
+  let profiles = {};
+  let json = '';
+  try {
+    json = window.localStorage.getItem('vsh-profiles') || '';
+    profiles = JSON.parse(json) || {};
+  } catch (e) {
+    console.error(`Error parsing localStorage vsh-profiles: ${json}`, e);
+  }
+  return /** @type {!Object} */ (profiles);
+}
+
+/**
+ * Update VSH profiles.
+ *
+ * @param {!Object} profiles
+ */
+export function setVshProfiles(profiles) {
+  window.localStorage.setItem('vsh-profiles', JSON.stringify(profiles));
 }

@@ -6,7 +6,7 @@ import {lib} from './deps_local.concat.js';
 
 import {TerminalLinuxDialog} from './terminal_linux_dialog.js';
 
-import {ProfileType, setProfileIds, setProfileValues}
+import {ProfileType, setProfileIds, setVshProfiles}
   from './terminal_profiles.js';
 
 describe('terminal_linux_dialog.js', function() {
@@ -25,9 +25,8 @@ describe('terminal_linux_dialog.js', function() {
 
   it('shows-vsh-profile', async function() {
     await setProfileIds(ProfileType.HTERM, ['default', 'red']);
-    await setProfileValues(ProfileType.VSH, 'test',
-        {'description': 'penguin', 'terminal-profile': 'red'});
-    this.el.show('test');
+    setVshProfiles({'termina:penguin': {'terminal-profile': 'red'}});
+    this.el.show('termina:penguin', 'penguin');
     await new Promise((resolve) => this.el.shadowRoot.querySelector(
         'terminal-dialog').addEventListener('open', resolve));
     await this.el.updateComplete;

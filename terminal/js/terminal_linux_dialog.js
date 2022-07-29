@@ -6,14 +6,14 @@
  * @fileoverview Export an element: terminal-linux-dialog
  */
 
-import {hterm, lib} from './deps_local.concat.js';
+import {hterm} from './deps_local.concat.js';
 
 import {LitElement, createRef, css, html, ref} from './lit.js';
 import './terminal_dialog.js';
 import './terminal_dropdown.js';
 import './terminal_label.js';
-import {ProfileType, deleteProfile, getProfileIds, getProfileValues,
-  setProfileIds, setProfileValues} from './terminal_profiles.js';
+import {ProfileType, getProfileIds, getVshProfiles, setVshProfiles}
+  from './terminal_profiles.js';
 import './terminal_textfield.js';
 
 export class TerminalLinuxDialog extends LitElement {
@@ -22,8 +22,6 @@ export class TerminalLinuxDialog extends LitElement {
     return {
       vshProfileId_: {state: true},
       userTitle_: {state: true},
-      vmName_: {state: true},
-      containerName_: {state: true},
       settingsProfiles_: {state: true},
     };
   }
@@ -46,8 +44,6 @@ export class TerminalLinuxDialog extends LitElement {
 
     // The title manually set by the user.
     this.userTitle_ = '';
-    this.vmName_ = '';
-    this.containerName_ = '';
     // This is set in Show(). Empty string means we are creating a new VSH
     // connection.
     this.vshProfileId_ = '';
@@ -93,35 +89,20 @@ export class TerminalLinuxDialog extends LitElement {
   /**
    * Show the dialog. All content in the dialog will be refreshed automatically.
    *
-   * @param {string=} vshProfileId A non-empty value means editing an existing
-   *     connection with the id. An empty value means creating a new connection.
+   * @param {string} id
+   * @param {string} title
    */
-  async show(vshProfileId = '') {
-    // Since this dialog can be reused, we need to be careful here and make sure
-    // we update all state (including member variables and also child HTML
-    // elements that have internal state (e.g. `terminal-textfield`)).
-
-    this.vshProfileId_ = vshProfileId;
-
-    let settingsProfile = '';
-    this.userTitle_ = '';
-
-    if (this.vshProfileId_) {
-      [this.userTitle_, this.vmName_, this.containerName_, settingsProfile] =
-          await getProfileValues(ProfileType.VSH, this.vshProfileId_, [
-            'description',
-            'vm-name',
-            'container-name',
-            'terminal-profile',
-          ], '');
-    }
+  async show(id, title) {
+    this.vshProfileId_ = id;
+    this.userTitle_ = title;
 
     this.settingsProfiles_ = /** @type {?Array<string>}*/ (
         await getProfileIds(ProfileType.HTERM)) ||
         [hterm.Terminal.DEFAULT_PROFILE_ID];
 
+    const profiles = getVshProfiles();
     this.settingsProfileDropdownRef_.value.value =
-        settingsProfile || hterm.Terminal.DEFAULT_PROFILE_ID;
+        profiles[id]['terminal-profile'] || hterm.Terminal.DEFAULT_PROFILE_ID;
 
     this.shadowRoot.querySelector('terminal-dialog').show();
     this.settingsProfileDropdownRef_.value.focus();
@@ -131,24 +112,10 @@ export class TerminalLinuxDialog extends LitElement {
   async onDialogClose_(event) {
     if (event.detail.accept) {
       // Save the connection.
-
-      if (this.vshProfileId_) {
-        // Remove the profile first to ensure a clean state.
-        await deleteProfile(ProfileType.VSH, this.vshProfileId_, false);
-      } else {
-        const profileIds = await getProfileIds(ProfileType.VSH);
-        this.vshProfileId_ = lib.PreferenceManager.newRandomId(profileIds);
-        await setProfileIds(ProfileType.VSH, [
-            ...profileIds,
-            this.vshProfileId_,
-        ]);
-      }
-      setProfileValues(ProfileType.VSH, this.vshProfileId_, {
-        'description': this.getTitle_(),
-        'vm-name': this.vmName_,
-        'container-name': this.containerName_,
-        'terminal-profile': this.settingsProfileDropdownRef_.value.value,
-      });
+      const profiles = getVshProfiles();
+      profiles[this.vshProfileId_]['terminal-profile'] =
+          this.settingsProfileDropdownRef_.value.value;
+      setVshProfiles(profiles);
     }
 
     this.dispatchEvent(new CustomEvent('close'));

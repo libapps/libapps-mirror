@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {hterm, lib} from './deps_local.concat.js';
+import {hterm} from './deps_local.concat.js';
 
 import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import './terminal_button.js';
@@ -17,9 +17,8 @@ import './terminal_context_menu.js';
 import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_MORE_VERT, ICON_OPEN_IN_NEW,
   ICON_PLUS, ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
 import './terminal_linux_dialog.js';
-import {ProfileType, cleanupLostValues, deleteProfile, getProfileIds,
-  getProfileValues, setProfileIds, setProfileValues}
-  from './terminal_profiles.js';
+import {ProfileType, cleanupVshSyncPrefs, deleteProfile, getProfileIds,
+  getVshProfiles, setVshProfiles} from './terminal_profiles.js';
 import './terminal_ssh_dialog.js';
 
 /**
@@ -285,7 +284,8 @@ export class TerminalHomeApp extends LitElement {
                     title="${msg('TERMINAL_HOME_EDIT_LINUX')}"
                     aria-label="${msg('TERMINAL_HOME_EDIT_LINUX')}"
                     class="icon-fill-svg"
-                    @click="${(e) => this.openLinuxDialog(c.vshProfileId)}">
+                    @click="${(e) => this.openLinuxDialog(
+                                 c.vshProfileId, containerLabel(c))}">
                   ${ICON_EDIT}
                 </mwc-icon-button>
               `)}
@@ -458,45 +458,32 @@ export class TerminalHomeApp extends LitElement {
   async updateVshProfiles_() {
     const enc = encodeURIComponent;
     const containerKey = (vm, container) => `${enc(vm)}:${enc(container)}`;
-    const toMatch = {};
+    const profiles = getVshProfiles();
+    const containerMap = {};
     for (const c of this.containers) {
-      toMatch[containerKey(c.vm_name, c.container_name)] = c;
+      const key = containerKey(c.vm_name, c.container_name);
+      containerMap[key] = true;
+      if (!profiles[key]) {
+        profiles[key] = {};
+      }
+      if (!profiles[key]['terminal-profile']) {
+        profiles[key]['terminal-profile'] = hterm.Terminal.DEFAULT_PROFILE_ID;
+      }
+      c.vshProfileId = key;
+      c.settingsProfileId = profiles[key]['terminal-profile'];
     }
 
-    const ids = await getProfileIds(ProfileType.VSH);
-    for (const id of ids) {
-      const [label, vmName, containerName, settingsProfile] =
-          await getProfileValues(ProfileType.VSH, id, [
-            'description',
-            'vm-name',
-            'container-name',
-            'terminal-profile',
-          ], '');
-      const key = containerKey(vmName, containerName);
-      const c = toMatch[key];
-      if (c) {
-        c.vshProfileId = id;
-        c.settingsProfileId = settingsProfile;
-        delete toMatch[key];
-      } else {
-        await deleteProfile(ProfileType.VSH, id, true);
+    // Delete any unused profiles.
+    for (const key in profiles) {
+      if (!containerMap[key]) {
+        delete profiles[key];
       }
     }
+    setVshProfiles(profiles);
 
-    for (const c of Object.values(toMatch)) {
-      const id = lib.PreferenceManager.newRandomId(ids);
-      c.vshProfileId = id;
-      c.settingsProfileId = hterm.Terminal.DEFAULT_PROFILE_ID;
-      await setProfileIds(ProfileType.VSH, [...ids, id]);
-      await setProfileValues(ProfileType.VSH, id, {
-        'description': containerLabel(c),
-        'vm-name': c.vm_name,
-        'container-name': c.container_name,
-        'terminal-profile': hterm.Terminal.DEFAULT_PROFILE_ID,
-      });
-    }
-
-    await cleanupLostValues(ProfileType.VSH);
+    // Clean up any sync'd prefs for vsh.
+    // TODO(joelhockey): Remove after M120.
+    await cleanupVshSyncPrefs();
     this.requestUpdate();
   }
 
@@ -517,10 +504,12 @@ export class TerminalHomeApp extends LitElement {
   /**
    * Open the linux dialog to add new connection or edit existing ones.
    *
-   * @param {string=} vshProfileId
+   * @param {string} vshProfileId
+   * @param {string} title
    */
-  openLinuxDialog(vshProfileId) {
-    this.shadowRoot.querySelector('terminal-linux-dialog').show(vshProfileId);
+  openLinuxDialog(vshProfileId, title) {
+    this.shadowRoot.querySelector('terminal-linux-dialog')
+        .show(vshProfileId, title);
   }
 
   /**
