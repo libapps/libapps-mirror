@@ -573,4 +573,42 @@ export class VFS {
     return this.fds_.dup2(oldfd, newfd) ?
         WASI.errno.ESUCCESS : WASI.errno.EBADF;
   }
+
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {string} path
+   * @return {!Promise<!WASI_t.errno|{fd: number}>}
+   */
+  mkdirat(fd, path) {
+    let dirpath = '';
+    if (path[0] !== '/') {
+      let dfh = this.getFileHandle(fd);
+      if (dfh === undefined) {
+        return WASI.errno.EBADF;
+      }
+
+      if (dfh.filetype !== WASI.filetype.DIRECTORY) {
+        return WASI.errno.ENOTDIR;
+      }
+      if (dfh.path === '.') {
+        dfh = this.paths_.get(dfh.target);
+      }
+      dirpath = dfh.path;
+    }
+
+    return this.mkdir(dirpath + path);
+  }
+
+  /**
+   * @param {string} path
+   * @return {!Promise<!WASI_t.errno|{fd: number}>}
+   */
+  mkdir(path) {
+    // TODO(vapier): Push this down a layer.
+    switch (path) {
+      case '/.ssh': return WASI.errno.ESUCCESS;
+    }
+
+    return WASI.errno.ENOENT;
+  }
 }
