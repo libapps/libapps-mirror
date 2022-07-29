@@ -387,10 +387,13 @@ export class RelaySocket extends Socket {
     // Return a stub socketInfo since we can't extract the required info
     // out of a WebSocket.
     return /** @type {!chrome.socket.SocketInfo} **/ ({
-      // Only works when connected is set to false.
-      connected: false,
+      connected: (this.address !== null),
       paused: false,
       persistent: false,
+      localAddress: '0.0.0.0',
+      localPort: 0,
+      peerAddress: '0.0.0.0',
+      peerPort: this.port,
       socketId: -1,
     });
   }
