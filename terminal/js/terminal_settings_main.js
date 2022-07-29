@@ -7,7 +7,7 @@
  */
 
 import {SUPPORTED_FONT_FAMILIES, definePrefs, loadWebFont,
-  normalizePrefsInPlace, registerGetOSInfo} from './terminal_common.js';
+  normalizePrefsInPlace, registerOSInfoPreFetch} from './terminal_common.js';
 
 // We are loading all web fonts at the beginning because some settings UI need
 // to know whether a web font is available.
@@ -21,7 +21,7 @@ window.webFontPromises = new Map(
 );
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  registerGetOSInfo();
+  registerOSInfoPreFetch();
 
   // Load i18n messages.
   lib.registerInit('messages', async () => {

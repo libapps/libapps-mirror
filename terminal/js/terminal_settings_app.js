@@ -11,8 +11,8 @@
 import {getFileSystem} from './nassh_fs.js';
 
 import {LitElement, createRef, css, html, ref, when} from './lit.js';
-import {SUPPORTED_FONT_SIZES,
-  SUPPORTED_LINE_HEIGHT_PADDINGS} from './terminal_common.js';
+import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT_PADDINGS, getOSInfo}
+    from './terminal_common.js';
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
 import {ICON_OPEN_IN_NEW} from './terminal_icons.js';
@@ -191,12 +191,12 @@ export class TerminalSettingsApp extends LitElement {
         );
 
     const profileCategory =
-        window.MULTI_PROFILE_ENABLED ? 'profile-category' : '';
+        getOSInfo().multi_profile ? 'profile-category' : '';
 
     return html`
         <div id="left-panel">
           <h1>${msg('PREFERENCES_HEADER_TERMINAL')}</h1>
-          ${when(window.MULTI_PROFILE_ENABLED, () => html`
+          ${when(!!getOSInfo().multi_profile, () => html`
             <terminal-settings-profile-selector>
             </terminal-settings-profile-selector>
           `)}

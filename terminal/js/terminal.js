@@ -7,9 +7,8 @@
  * @suppress {moduleLoad}
  */
 
-import {composeTmuxUrl, definePrefs, getTmuxIntegrationEnabled,
-    loadPowerlineWebFonts, loadWebFont, normalizeCSSFontFamily, watchColors}
-    from './terminal_common.js';
+import {composeTmuxUrl, definePrefs, getOSInfo, loadPowerlineWebFonts,
+  loadWebFont, normalizeCSSFontFamily, watchColors} from './terminal_common.js';
 import {terminalImport} from './terminal_import.js';
 import {LaunchInfo, getTerminalInfoTracker} from './terminal_info.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
@@ -130,12 +129,10 @@ terminal.init = function(element, launchInfo) {
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);
 
-    const isTmuxIntegrationEnabled = await getTmuxIntegrationEnabled;
-
     /** @type {?TmuxControllerDriver} */
     let tmuxControllerDriver = null;
 
-    if (isTmuxIntegrationEnabled) {
+    if (getOSInfo().tmux_integration) {
       tmuxControllerDriver = new TmuxControllerDriver({
         term,
         onOpenWindow: ({driver, channelName}) => {

@@ -163,7 +163,7 @@ export function watchColors(prefs) {
   const esc = encodeURIComponent;
   const updateFavicon = (fg, bg) => {
     const link = document.querySelector('head link[rel="icon"]');
-    if (!window.MULTI_PROFILE_ENABLED) {
+    if (!getOSInfo().multi_profile) {
       link.href = '../images/terminal-icon.svg';
       return;
     }
@@ -255,39 +255,51 @@ export function loadPowerlineWebFonts(document) {
 }
 
 /**
- * Registers with lib.registerInit() to set window.MULTI_PROFILE_ENABLED.
+ * @typedef {{
+ *            alternative_emulator: (boolean|undefined),
+ *            multi_profile: (boolean|undefined),
+ *            tmux_integration: (boolean|undefined),
+ *          }}
  */
-export function registerGetOSInfo() {
-  window.MULTI_PROFILE_ENABLED = false;
+export let OsInfo;
 
+/**
+ * @type {?OsInfo}
+ */
+let OS_INFO;
+
+/**
+ * Registers with lib.registerInit() to pre-fetch data for getOSInfo().
+ */
+export function registerOSInfoPreFetch() {
   if (chrome.terminalPrivate) {
     lib.registerInit('get-os-info', async () => {
       return new Promise((resolve) => {
         chrome.terminalPrivate.getOSInfo((info) => {
-          window.MULTI_PROFILE_ENABLED = !!info.multi_profile;
+          OS_INFO = info;
           resolve();
         });
       });
     });
   } else {
-    // Always true for testing.
-    window.MULTI_PROFILE_ENABLED = true;
+    // Set it to something approriate for the testing environment.
+    OS_INFO = {
+      multi_profile: true,
+    };
   }
 }
 
 /**
- * Resolves to true if tmux integration is enabled via chrome://flags.
+ * Return the pre-fetched os info from `chrome.terminalPrivate.getOSInfo()`.
  *
- * @type {!Promise<boolean>}
+ * @return {!OsInfo}
  */
-export const getTmuxIntegrationEnabled = new Promise((resolve) => {
-  const getOSInfo = chrome.terminalPrivate?.getOSInfo;
-  if (!getOSInfo) {
-    resolve(false);
-    return;
+export function getOSInfo() {
+  if (!OS_INFO) {
+    throw new Error('OS_INFO is not initialized');
   }
-  getOSInfo((info) => resolve(info.tmux_integration));
-});
+  return OS_INFO;
+}
 
 /**
  * @param {{

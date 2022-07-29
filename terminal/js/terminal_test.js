@@ -6,6 +6,8 @@
  * @fileoverview Test framework setup when run inside the browser.
  */
 
+import {registerOSInfoPreFetch} from './terminal_common.js';
+
 /**
  * Listens for the next change to the specified preference.
  *
@@ -48,6 +50,7 @@ window.onerror = function(...args) {
 
 /** Run the test framework once everything is finished. */
 window.onload = async function() {
+  registerOSInfoPreFetch();
   await lib.init();
   mocha.run();
 };

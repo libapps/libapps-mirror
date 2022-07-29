@@ -10,7 +10,7 @@
 
 import {LitElement, css, html, when} from './lit.js';
 import './terminal_button.js';
-import {DEFAULT_VM_NAME} from './terminal_common.js';
+import {DEFAULT_VM_NAME, getOSInfo} from './terminal_common.js';
 import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_OPEN_IN_NEW, ICON_PLUS,
     ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
 import './terminal_linux_dialog.js';
@@ -264,7 +264,7 @@ export class TerminalHomeApp extends LitElement {
           ${this.containers.map((c) => html`
             <li class="row">
               ${this.crostiniEnabled ? link(c) : text(c)}
-              ${when(window.MULTI_PROFILE_ENABLED, () => html`
+              ${when(!!getOSInfo().multi_profile, () => html`
                 <mwc-icon-button
                     aria-label="${msg('TERMINAL_HOME_EDIT_LINUX')}"
                     class="icon-fill-svg"

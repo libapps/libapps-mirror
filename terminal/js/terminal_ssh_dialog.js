@@ -12,6 +12,7 @@ import {
 
 import {LitElement, createRef, css, html, live, ref, when} from './lit.js';
 import './terminal_button.js';
+import {getOSInfo} from './terminal_common.js';
 import './terminal_dialog.js';
 import './terminal_dropdown.js';
 import './terminal_label.js';
@@ -282,7 +283,7 @@ export class TerminalSSHDialog extends LitElement {
               placeholder="username@hostname -p <port> -R 1234:localhost:5678">
             <span slot="inline-prefix">ssh&nbsp</span>
           </terminal-textfield>
-          ${when(window.MULTI_PROFILE_ENABLED, () => html`
+          ${when(!!getOSInfo().multi_profile, () => html`
             <div id="settings-profile-container">
               <terminal-label>${settingsProfileLabel}</terminal-label>
               <terminal-dropdown ${ref(this.settingsProfileDropdownRef_)}
@@ -389,7 +390,7 @@ export class TerminalSSHDialog extends LitElement {
     this.identityDropdownRef_.value.value = identity;
     this.suppressCommandError_ = !this.nasshProfileId_;
 
-    if (window.MULTI_PROFILE_ENABLED) {
+    if (getOSInfo().multi_profile) {
       this.settingsProfiles_ = /** @type {?Array<string>}*/ (
           await getProfileIds(ProfileType.HTERM)) ||
           [hterm.Terminal.DEFAULT_PROFILE_ID];
@@ -495,7 +496,7 @@ export class TerminalSSHDialog extends LitElement {
         'nassh-options': this.relayArgsRef_.value.value,
         'identity': this.identityDropdownRef_.value.value,
       };
-      if (window.MULTI_PROFILE_ENABLED) {
+      if (getOSInfo().multi_profile) {
         values['terminal-profile'] =
             this.settingsProfileDropdownRef_.value.value;
       }
