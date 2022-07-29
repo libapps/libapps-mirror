@@ -6,6 +6,7 @@
  * @fileoverview Terminal Settings Dropdown Element unit tests.
  */
 
+import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsDropdownElement} from './terminal_dropdown.js';
 
 describe('terminal_dropdown_tests.js', () => {
@@ -71,13 +72,13 @@ describe('terminal_dropdown_tests.js', () => {
     assert.equal(window.preferenceManager.get(preference), options[0].value);
     assert.equal(this.el.value, options[0].value);
 
-    let prefChanged = test.listenForPrefChange(
+    let prefChanged = listenForPrefChange(
         window.preferenceManager, preference);
     this.getNthLiElement(1).click();
     await prefChanged;
     assert.equal(window.preferenceManager.get(preference), options[1].value);
 
-    prefChanged = test.listenForPrefChange(
+    prefChanged = listenForPrefChange(
         window.preferenceManager, preference);
     this.getNthLiElement(2).click();
     await prefChanged;

@@ -9,10 +9,11 @@
     <script src='../../node_modules/chai/chai.js'></script>
     <script src='../../node_modules/mocha/mocha.js'></script>
 
-    <!-- Initialize the test framework first. -->
-    <script src='../js/terminal_test.js'></script>
-
     <script src='../js/nassh_deps.concat.js'></script>
+
+    <!-- Initialize the test framework first. -->
+    <script src='../js/terminal_test_preload.js'></script>
+    <script type='module' src='../js/terminal_test.js'></script>
 
     <!-- All the unittests go below here. -->
     <script type='module'>

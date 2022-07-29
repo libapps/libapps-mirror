@@ -6,6 +6,7 @@
  * @fileoverview Terminal Settings Checkbox Element unit tests.
  */
 
+import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
 
 describe('terminal_settings_checkbox_tests.js', () => {
@@ -52,13 +53,13 @@ describe('terminal_settings_checkbox_tests.js', () => {
     assert.equal(window.preferenceManager.get(preference), 'off');
     assert.isFalse(this.el.shadowRoot.getElementById('checkbox').checked);
 
-    let prefChanged = test.listenForPrefChange(
+    let prefChanged = listenForPrefChange(
         window.preferenceManager, preference);
     this.el.shadowRoot.getElementById('checkbox').click();
     await prefChanged;
     assert.equal(window.preferenceManager.get(preference), 'on');
 
-    prefChanged = test.listenForPrefChange(
+    prefChanged = listenForPrefChange(
         window.preferenceManager, preference);
     this.el.shadowRoot.getElementById('checkbox').click();
     await prefChanged;

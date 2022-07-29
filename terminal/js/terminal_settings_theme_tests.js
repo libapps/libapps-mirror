@@ -6,6 +6,7 @@
  * @fileoverview Terminal Settings Theme Element unit tests.
  */
 
+import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsThemeElement} from './terminal_settings_theme.js';
 import {DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR, DEFAULT_CURSOR_COLOR,
     DEFAULT_FOREGROUND_COLOR} from './terminal_common.js';
@@ -97,7 +98,7 @@ describe('terminal_settings_theme_tests.js', () => {
     it(`updates-preferences-when-ui-changes-${index}`, async function() {
       assert.equal(window.preferenceManager.get('theme'), 'dark');
 
-      const prefChanged = test.listenForPrefChange(
+      const prefChanged = listenForPrefChange(
           window.preferenceManager, 'theme');
       activateTheme(this.el, 'light');
       await prefChanged;
@@ -144,7 +145,7 @@ describe('terminal_settings_theme_tests.js', () => {
       assert.isTrue(this.el.shadowRoot.getElementById('dark').hasAttribute(
           'reset-theme'));
 
-      let prefChanged = test.listenForPrefChange(
+      let prefChanged = listenForPrefChange(
           window.preferenceManager, 'theme');
       activateTheme(this.el, 'light');
       await prefChanged;
@@ -153,7 +154,7 @@ describe('terminal_settings_theme_tests.js', () => {
       assert.isFalse(this.el.shadowRoot.getElementById('light').hasAttribute(
           'reset-theme'));
 
-      prefChanged = test.listenForPrefChange(window.preferenceManager, 'theme');
+      prefChanged = listenForPrefChange(window.preferenceManager, 'theme');
       activateTheme(this.el, 'dark');
       await prefChanged;
       assert.isTrue(this.el.shadowRoot.getElementById('dark').hasAttribute(
@@ -181,7 +182,7 @@ describe('terminal_settings_theme_tests.js', () => {
       await this.el.updateComplete;
       assert.isTrue(dialog.hasAttribute('open'));
 
-      const prefChanged = test.listenForPrefChange(
+      const prefChanged = listenForPrefChange(
           window.preferenceManager, 'background-color');
       dialog.accept();
       await prefChanged;
