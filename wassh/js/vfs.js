@@ -283,79 +283,201 @@ export class DirectoryHandle extends PathHandle {
 }
 
 /**
- * The closure externs are out of date.
- *
- * @typedef {{
- *   getDirectory: function(): !FileSystemDirectoryEntry,
- *   getFile: function(string=, !Object=),
- * }}
+ * A directory handler backed by indexeddb-fs.
  */
-const FileSystemDirectoryEntry = {};
-
-export class OriginPrivateDirectoryHandler extends DirectoryHandler {
-  constructor(path) {
-    super(path, WASI.filetype.DIRECTORY, OriginPrivateDirectoryHandle);
-    /** @type {?FileSystemDirectoryEntry} */
-    this.root_ = null;
+export class IndexeddbFsDirectoryHandler extends DirectoryHandler {
+  /**
+   * @override
+   * @param {string} path
+   * @param {?IndexeddbFs} fileSystem
+   */
+  constructor(path, fileSystem) {
+    super(path, WASI.filetype.DIRECTORY, IndexeddbFsDirectoryHandle);
+    this.fs_ = fileSystem;
   }
 
-  /**
-   * @suppress {missingProperties} getDirectory is missing.
-   * @return {!Promise<!FileSystemDirectoryEntry>}
-   */
-  async getRoot_() {
-    if (!this.root_) {
-      this.root_ = await navigator.storage.getDirectory();
+  /** @override */
+  async link(oldPath, newPath) {
+    // This isn't an actual link, but it works well enough for what OpenSSH
+    // needs -- a basic copy.
+    try {
+      await this.fs_.copyFile(oldPath, newPath);
+      return WASI.errno.ESUCCESS;
+    } catch (e) {
+      return WASI.errno.ENOENT;
     }
-    return this.root_;
   }
 
   /** @override */
   async open(path, fs_flags, o_flags) {
     if (path !== this.path) {
-      const root = await this.getRoot_();
-      let opHandle;
+      let details = null;
       try {
-        opHandle = await root.getFile(
-            path.substr(this.path.length + 1),
-            {create: !!(o_flags & WASI.oflags.CREAT)});
-      } catch (e) {
-        if (e.code === e.NOT_FOUND_ERR) {
+        details = await this.fs_.details(path);
+      } catch (e) { /**/ }
+      const exists = (details !== null);
+      let doTruncate = (exists && o_flags & WASI.oflags.TRUNC);
+
+      // Make sure directory settings match.
+      if (o_flags & WASI.oflags.DIRECTORY) {
+        if (!exists) {
+          return WASI.oflags.EEXIST;
+        } else if (details.type !== 'directory') {
+          return WASI.oflags.ENOTDIR;
+        }
+      } else {
+        if (exists && details.type === 'directory') {
+          return WASI.oflags.EISDIR;
+        }
+      }
+
+      // Make sure create settings match.
+      if (o_flags & WASI.oflags.CREAT) {
+        if (o_flags & WASI.oflags.EXCL) {
+          // File cannot yet exist.
+          if (exists) {
+            return WASI.errno.EEXIST;
+          }
+        }
+
+        // If file doesn't exist yet, create a stub file.
+        if (!exists) {
+          doTruncate = true;
+        }
+      } else {
+        // File must exist.
+        if (!exists) {
           return WASI.errno.ENOENT;
         }
-        // Shouldn't have happened, so bubble up.
-        throw e;
       }
-      const ret = new OriginPrivateFileHandle(path, opHandle);
+
+      // Handle truncation.
+      if (doTruncate) {
+        await this.fs_.writeFile(path, '');
+      }
+
+      const ret = new IndexeddbFsFileHandle(path, this.fs_);
       await ret.init();
+      if (fs_flags & WASI.fdflags.APPEND) {
+        ret.seek(0, WASI.whence.END);
+      }
       return ret;
     }
     return PathHandler.prototype.open.call(this, path, fs_flags, o_flags);
   }
+
+  /** @override */
+  async rename(oldPath, newPath) {
+    // This is atomic enough because JS is single threaded.  It's fine even
+    // between multiple instances since it'll behave like multiple ssh runs.
+    //
+    // NB: There is a renameFile API, but it expects the new name to be a base
+    // name only.  It doesn't support full paths in both source & destination.
+    //
+    // NB: There is a moveFile API, but it fails if the target exists already.
+    // If we unlink+move, there's still a race with multiple ssh runs.
+    //
+    // So we fake it here with read(old)+write(new)+unlink(old).
+
+    let data;
+    try {
+      data = await this.fs_.readFile(oldPath);
+    } catch (e) {
+      return WASI.errno.ENOENT;
+    }
+
+    try {
+      await this.fs_.writeFile(newPath, data);
+    } catch (e) {
+      return WASI.errno.EINVAL;
+    }
+
+    await this.unlink(oldPath);
+
+    return WASI.errno.ESUCCESS;
+  }
+
+  /** @override */
+  async stat() {
+    let details = null;
+    try {
+      details = await this.fs_.details(this.path);
+    } catch (e) {
+      return WASI.errno.ENOENT;
+    }
+
+    // This is kind of terrible, but the indexeddb-fs module doesn't have a way
+    // to query the size of a file.  It shouldn't be *too* terrible for our use
+    // as we don't stat /.ssh files very often, and they're usually on the small
+    // side (as in, O(KB)).
+    let size = 0n;
+    if (details.type === 'file') {
+      const str = await this.fs_.readFile(this.path);
+      if (typeof str === 'string') {
+        const te = new TextEncoder();
+        const data = te.encode(str);
+        size = BigInt(data.length);
+      } else {
+        size = str.byteLength;
+      }
+    }
+    return /** @type {!WASI_t.filestat} */ ({
+      filetype:
+        details.type === 'directory' ?
+          WASI.filetype.DIRECTORY :
+          WASI.filetype.REGULAR_FILE,
+      size: size,
+      atim: BigInt(details.createdAt),
+      mtim: BigInt(details.createdAt),
+      ctim: BigInt(details.createdAt),
+    });
+  }
+
+  /** @override */
+  async unlink(path) {
+    try {
+      await this.fs_.removeFile(path);
+      return WASI.errno.ESUCCESS;
+    } catch (e) {
+      return WASI.errno.ENOENT;
+    }
+  }
 }
 
-export class OriginPrivateDirectoryHandle extends DirectoryHandle {
+/**
+ * A directory handle backed by indexeddb-fs.
+ */
+export class IndexeddbFsDirectoryHandle extends DirectoryHandle {
 }
 
-export class OriginPrivateFileHandle extends FileHandle {
-  constructor(path, opHandle) {
+/**
+ * An open file handle backed by indexeddb-fs.
+ */
+export class IndexeddbFsFileHandle extends FileHandle {
+  constructor(path, fileSystem) {
     super(path, WASI.filetype.REGULAR_FILE);
-    this.opHandle_ = opHandle;
+    this.fs_ = fileSystem;
   }
 
   /** @override */
   async init() {
-    const file = await this.opHandle_.getFile();
-    this.data = new Uint8Array(await file.arrayBuffer());
+    const data = await this.fs_.readFile(this.path);
+    if (typeof data === 'string') {
+      const te = new TextEncoder();
+      this.data = te.encode(data);
+    } else {
+      this.data = new Uint8Array(data);
+    }
   }
 
   /** @override */
   async close() {
-    /* TODO(vapier): Needs more work.
-    const stream = await this.opHandle_.createWritable();
-    await stream.write(this.data);
-    await stream.close();
-    */
+    let str = this.data;
+    if (typeof str !== 'string') {
+      const td = new TextDecoder();
+      str = td.decode(str);
+    }
+    await this.fs_.writeFile(this.path, str);
   }
 }
 

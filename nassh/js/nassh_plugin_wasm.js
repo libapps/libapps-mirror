@@ -9,6 +9,7 @@
 
 import {sanitizeScriptUrl} from './nassh.js';
 import {Agent} from './nassh_agent.js';
+import {getIndexeddbFileSystem} from './nassh_fs.js';
 import {Relay} from './nassh_relay.js';
 import {Stream} from './nassh_stream.js';
 import {StreamSet} from './nassh_stream_set.js';
@@ -69,6 +70,7 @@ export class Plugin {
       argv: [this.executable_, ...this.argv_],
       environ: this.environ_,
       handler: new WasshSyscallHandler.RemoteReceiverWasiPreview1({
+        fileSystem: await getIndexeddbFileSystem(),
         term: this.terminal_,
         tcpSocketsOpen: this.relay_
             ? (address, port) => this.openTcpSocket_(address, port)

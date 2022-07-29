@@ -57,6 +57,7 @@ def main(argv):
             f"--externs={os.path.relpath(x)}"
             for x in sorted(wasi_externs.glob("*.js"))
         ]
+        + ["--externs=../nassh/externs/indexeddb-fs.js"]
     )
     return libdot.lint.main(
         argv,

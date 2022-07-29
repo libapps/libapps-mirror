@@ -72,13 +72,15 @@ class Tty extends VFS.FileHandle {
  * These may be asynchronous.
  */
 export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
-  constructor({term, tcpSocketsOpen, unixSocketsOpen, secureInput} = {}) {
+  constructor({term, tcpSocketsOpen, unixSocketsOpen, secureInput,
+               fileSystem} = {}) {
     super();
     this.term_ = term;
     this.tcpSocketsOpen_ = tcpSocketsOpen;
     this.unixSocketsOpen_ = unixSocketsOpen;
     this.secureInput_ = secureInput;
     this.notify_ = null;
+    this.fileSystem_ = fileSystem;
     this.vfs = new VFS.VFS({stdio: false});
     this.socketUdpRecv_ = null;
     this.fakeAddrMap_ = new Map();
@@ -93,7 +95,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     this.vfs.addHandler(root);
     await this.vfs.open('/');
 
-    const sshdir = new VFS.OriginPrivateDirectoryHandler('/.ssh');
+    const sshdir = new VFS.IndexeddbFsDirectoryHandler(
+        '/.ssh', this.fileSystem_);
     this.vfs.addHandler(sshdir);
 
     const cwd = new VFS.CwdHandler('/');
