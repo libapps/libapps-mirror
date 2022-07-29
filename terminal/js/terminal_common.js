@@ -24,6 +24,12 @@ export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
 export const SUPPORTED_LINE_HEIGHT_PADDINGS = [-2, -1.5, -1, -0.5, 0, 0.5, 1,
   1.5, 2, 3, 4, 5];
 
+export const TERMINAL_EMULATORS = new Map([
+    ['xterm.js', {lib: 'xterm.js', webgl: true}],
+    ['xterm.js (disable WebGl)', {lib: 'xterm.js', webgl: false}],
+    ['hterm', {lib: 'hterm', webgl: false}],
+]);
+
 // Numeric chrome version (e.g. 78). `null` if fail to detect.
 export const CHROME_VERSION = (function() {
   const matches = navigator.userAgent.match(/Chrome\/(\d+)/);
@@ -103,8 +109,9 @@ export function normalizeCSSFontFamily(cssFontFamily) {
 }
 
 /**
- * Define prefs for terminal which are not used by hterm, or that have a
- * different default.
+ * Change default values for some existing prefs and define new ones. Note that
+ * for the new prefs, you might get incorrect value if this is called after
+ * `prefs.readStorage()`.
  *
  * @param {!lib.PreferenceManager} prefs The preference manager.
  */
@@ -122,8 +129,12 @@ export function definePrefs(prefs) {
   prefs.definePreference('pass-ctrl-number', false);
   prefs.definePreference('pass-ctrl-tab', true);
   prefs.definePreference('screen-padding-size', DEFAULT_SCREEN_PADDING_SIZE);
+
+  // Add new prefs.
   prefs.definePreference('theme', DEFAULT_THEME);
   prefs.definePreference('theme-variations', {});
+  prefs.definePreference('terminal-emulator',
+      TERMINAL_EMULATORS.keys().next().value);
 }
 
 /**
