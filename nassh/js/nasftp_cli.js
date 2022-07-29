@@ -907,10 +907,8 @@ const defaultColorMap = {
 /**
  * Cache the SGR sequences.
  */
-lib.registerInit('nasftp color cache', () => {
-  Object.entries(defaultColorMap).forEach(([key, setting]) => {
-    defaultColorMap[key] = sgrSequence(setting);
-  });
+Object.entries(defaultColorMap).forEach(([key, setting]) => {
+  defaultColorMap[key] = sgrSequence(setting);
 });
 
 /**
