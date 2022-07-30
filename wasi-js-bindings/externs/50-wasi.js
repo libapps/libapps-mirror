@@ -79,8 +79,14 @@ WASI_t.exitcode;
 /** @typedef {!WASI_t.u32} */
 WASI_t.fd;
 
-/** @typedef {!WASI_t.u16} */
-WASI_t.fdflags;
+/** @enum {!WASI_t.u16} */
+WASI_t.fdflags = {
+  APPEND: 0,
+  DSYNC: 0,
+  NONBLOCK: 0,
+  RSYNC: 0,
+  SYNC: 0,
+};
 
 /** @typedef {!WASI_t.s64} */
 WASI_t.filedelta;

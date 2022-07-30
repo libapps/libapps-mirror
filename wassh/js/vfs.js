@@ -30,10 +30,11 @@ export class PathHandler {
 
   /**
    * @param {string} path
-   * @param {!WASI_t.oflags} flags
+   * @param {!WASI_t.fdflags} fs_flags
+   * @param {!WASI_t.oflags} o_flags
    * @return {!Promise<!PathHandle>}
    */
-  async open(path, flags) {
+  async open(path, fs_flags, o_flags) {
     if (path !== this.path) {
       return WASI.errno.ENOTDIR;
     }
@@ -224,13 +225,13 @@ export class DirectoryHandler extends PathHandler {
   }
 
   /** @override */
-  async open(path, flags) {
+  async open(path, fs_flags, o_flags) {
     if (path !== this.path) {
       const ret = new FileHandle(path);
       await ret.init();
       return ret;
     }
-    return PathHandler.prototype.open.call(this, path, flags);
+    return PathHandler.prototype.open.call(this, path, fs_flags, o_flags);
   }
 }
 
@@ -284,14 +285,14 @@ export class OriginPrivateDirectoryHandler extends DirectoryHandler {
   }
 
   /** @override */
-  async open(path, flags) {
+  async open(path, fs_flags, o_flags) {
     if (path !== this.path) {
       const root = await this.getRoot_();
       let opHandle;
       try {
         opHandle = await root.getFile(
             path.substr(this.path.length + 1),
-            {create: !!(flags & WASI.oflags.CREAT)});
+            {create: !!(o_flags & WASI.oflags.CREAT)});
       } catch (e) {
         if (e.code === e.NOT_FOUND_ERR) {
           return WASI.errno.ENOENT;
@@ -303,7 +304,7 @@ export class OriginPrivateDirectoryHandler extends DirectoryHandler {
       await ret.init();
       return ret;
     }
-    return PathHandler.prototype.open.call(this, path, flags);
+    return PathHandler.prototype.open.call(this, path, fs_flags, o_flags);
   }
 }
 
@@ -345,8 +346,9 @@ export class CwdHandler extends DirectoryHandler {
    * @suppress {checkTypes}
    * @override
    */
-  async open(path, flags) {
-    const ret = await DirectoryHandler.prototype.open.call(this, path, flags);
+  async open(path, fs_flags, o_flags) {
+    const ret = await DirectoryHandler.prototype.open.call(
+        this, path, fs_flags, o_flags);
     ret.target = this.target;
     return ret;
   }
@@ -491,10 +493,11 @@ export class VFS {
 
   /**
    * @param {string} path
-   * @param {!WASI_t.oflags} flags
+   * @param {!WASI_t.fdflags} fs_flags
+   * @param {!WASI_t.oflags} o_flags
    * @return {!Promise<!WASI_t.errno|{fd: number}>}
    */
-  async open(path, flags) {
+  async open(path, fs_flags, o_flags) {
     let handler = this.paths_.get(path);
     if (!handler) {
       // Let the parent directory handle it.
@@ -515,7 +518,7 @@ export class VFS {
       }
     }
 
-    const handle = await handler.open(path, flags);
+    const handle = await handler.open(path, fs_flags, o_flags);
     if (typeof handle === 'number') {
       return handle;
     }
@@ -527,10 +530,11 @@ export class VFS {
    * @param {!WASI_t.fd} dfd
    * @param {!WASI_t.lookupflags} dirflags
    * @param {string} path
-   * @param {!WASI_t.oflags} flags
+   * @param {!WASI_t.fdflags} fs_flags
+   * @param {!WASI_t.oflags} o_flags
    * @return {!Promise<!WASI_t.errno|{fd: number}>}
    */
-  async openat(dfd, dirflags, path, flags) {
+  async openat(dfd, dirflags, path, fs_flags, o_flags) {
     let dirpath = '';
     if (path[0] !== '/') {
       let dfh = this.getFileHandle(dfd);
@@ -547,7 +551,7 @@ export class VFS {
       dirpath = dfh.path;
     }
 
-    return this.open(dirpath + path, flags);
+    return this.open(dirpath + path, fs_flags, o_flags);
   }
 
   close(fd) {
