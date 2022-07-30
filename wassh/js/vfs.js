@@ -45,9 +45,9 @@ export class PathHandler {
 
   /**
    * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#filestat
-   * @return {!WASI_t.filestat}
+   * @return {!Promise<!WASI_t.filestat>}
    */
-  stat() {
+  async stat() {
     return /** @type {!WASI_t.filestat} */ ({
       filetype: this.filetype,
     });
@@ -126,13 +126,13 @@ export class PathHandle {
 
   /**
    * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#fdstat
-   * @return {!WASI_t.fdstat|!Object}
+   * @return {!Promise<!WASI_t.fdstat>}
    */
-  stat() {
-    return {
+  async stat() {
+    return /** @type {!WASI_t.fdstat} */ ({
       fs_filetype: this.filetype,
       fs_flags: 0,
-    };
+    });
   }
 }
 
@@ -479,7 +479,11 @@ export class VFS {
     return this.fds_.get(fd);
   }
 
-  stat(path) {
+  /**
+   * @param {string} path
+   * @return {!Promise<!WASI_t.errno|!WASI_t.filestat>}
+   */
+  async stat(path) {
     const handler = this.paths_.get(path);
     if (!handler) {
       return WASI.errno.ENOENT;

@@ -93,8 +93,8 @@ export class Socket extends VFS.PathHandle {
   }
 
   /** @override */
-  stat() {
-    return /** @type {!WASI_t.filestat} */ ({
+  async stat() {
+    return /** @type {!WASI_t.fdstat} */ ({
       fs_filetype: this.filetype,
       fs_rights_base:
           WASI.rights.FD_READ |

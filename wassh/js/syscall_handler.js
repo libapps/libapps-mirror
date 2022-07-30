@@ -114,13 +114,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /** @override */
-  handle_path_filestat_get(fd, lookupflags, path) {
+  async handle_path_filestat_get(fd, lookupflags, path) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
       return WASI.errno.EBADF;
     }
 
-    const stat = this.vfs.stat(fh.target + path);
+    const stat = await this.vfs.stat(fh.target + path);
     if (typeof stat === 'number') {
       return stat;
     }
@@ -139,13 +139,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /** @override */
-  handle_fd_filestat_get(fd) {
+  async handle_fd_filestat_get(fd) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
       return WASI.errno.EBADF;
     }
 
-    const stat = this.vfs.stat(fh.path);
+    const stat = await this.vfs.stat(fh.path);
     if (typeof stat === 'number') {
       return stat;
     }
