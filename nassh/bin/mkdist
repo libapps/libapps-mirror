@@ -33,12 +33,9 @@ INCLUDE_PATTERNS = (
     "third_party/*/*.js",
     "_locales",
     "_platform_specific",
-    "plugin/*",
+    "plugin/*/*",
     "wasi-js-bindings/*",
     "wassh/js/*",
-    # TODO(vapier): Delete these once nassh runs wasm directly.
-    "wassh/test.html",
-    "wassh/test.js",
 )
 
 # List of files to be excluded from the zip as fnmatch globs.
@@ -54,9 +51,9 @@ EXCLUDE_PATTERNS_CROSH = (
     "manifest.json",
     "html/nassh_background.html",
     "js/nassh_background_main.js",
-    "plugin/mosh",
+    "plugin/mosh*",
     "plugin/pnacl-*",
-    "plugin/wasm*",
+    "plugin/wasm-*",
     "images/*/icon-fullsize.png",
 )
 
