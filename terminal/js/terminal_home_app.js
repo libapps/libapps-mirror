@@ -14,9 +14,8 @@ import {DEFAULT_VM_NAME, getOSInfo} from './terminal_common.js';
 import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_OPEN_IN_NEW, ICON_PLUS,
     ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
 import './terminal_linux_dialog.js';
-import {ProfileType, cleanupLostValues, deleteProfile, getProfileIds,
-  getProfileValues, setProfileIds, setProfileValues}
-  from './terminal_profiles.js';
+import {ProfileType, deleteProfile, getProfileIds, getProfileValues,
+  setProfileIds, setProfileValues} from './terminal_profiles.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_ssh_dialog.js';
 
@@ -470,8 +469,6 @@ export class TerminalHomeApp extends LitElement {
         'terminal-profile': hterm.Terminal.DEFAULT_PROFILE_ID,
       });
     }
-
-    cleanupLostValues(ProfileType.VSH);
     this.requestUpdate();
   }
 
