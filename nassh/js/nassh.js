@@ -132,7 +132,7 @@ export function registerProtocolHandler(proto) {
     navigator.registerProtocolHandler(
         proto,
         lib.f.getURL('/html/nassh.html#uri:%s'),
-        chrome.runtime.getManifest().name);
+        getManifest().name);
   } catch (e) {
     console.error(`Unable to register '${proto}' handler:`, e);
   }
