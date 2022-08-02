@@ -867,6 +867,6 @@ PreferencesEditor.prototype.notify = function(msg, timeout = 1000) {
   const status = document.getElementById('label_status');
   status.innerText = msg;
   this.notifyTimeout_ = setTimeout(function() {
-      status.innerHTML = '&nbsp;';
+      status.innerText = '\u00A0';
     }, timeout);
 };
