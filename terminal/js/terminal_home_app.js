@@ -14,8 +14,9 @@ import {DEFAULT_VM_NAME, getOSInfo} from './terminal_common.js';
 import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_OPEN_IN_NEW, ICON_PLUS,
     ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
 import './terminal_linux_dialog.js';
-import {ProfileType, deleteProfile, getProfileIds, getProfileValues,
-  setProfileIds, setProfileValues} from './terminal_profiles.js';
+import {ProfileType, cleanupLostValues, deleteProfile, getProfileIds,
+  getProfileValues, setProfileIds, setProfileValues}
+  from './terminal_profiles.js';
 import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_ssh_dialog.js';
 
@@ -262,9 +263,7 @@ export class TerminalHomeApp extends LitElement {
         </div>
         ${this.containers.length === 0 ? undefined : html`
           <ul>
-          ${this.containers
-              .filter((c) => c['terminal_supported'])
-              .map((c) => html`
+          ${this.containers.map((c) => html`
             <li class="row">
               ${link(c)}
               ${when(!!getOSInfo().multi_profile, () => html`
@@ -412,7 +411,8 @@ export class TerminalHomeApp extends LitElement {
    */
   onPrefsChanged(prefs) {
     if (prefs.hasOwnProperty(PREF_PATH_CONTAINERS)) {
-      this.containers = prefs[PREF_PATH_CONTAINERS];
+      this.containers =
+          prefs[PREF_PATH_CONTAINERS].filter((c) => c.terminal_supported);
       this.updateVshProfiles_();
     }
     if (prefs.hasOwnProperty(PREF_PATH_ENABLED)) {
@@ -453,7 +453,7 @@ export class TerminalHomeApp extends LitElement {
         c.settingsProfileId = settingsProfile;
         delete toMatch[key];
       } else {
-        deleteProfile(ProfileType.VSH, id, true);
+        await deleteProfile(ProfileType.VSH, id, true);
       }
     }
 
@@ -469,6 +469,8 @@ export class TerminalHomeApp extends LitElement {
         'terminal-profile': hterm.Terminal.DEFAULT_PROFILE_ID,
       });
     }
+
+    await cleanupLostValues(ProfileType.VSH);
     this.requestUpdate();
   }
 

@@ -105,3 +105,17 @@ export async function deleteProfile(
           .filter((key) => key.startsWith(prefix)),
   );
 }
+
+/**
+ * @param {!ProfileType} profileType
+ * @return {!Promise<void>}
+ */
+export async function cleanupLostValues(profileType) {
+  const ids = await getProfileIds(profileType);
+  await window.storage.removeItems(
+      Object.keys(await window.storage.getItems(null)).filter((key) => {
+        const parts = key.split('/');
+        return parts[1] === profileType && parts[2] === 'profiles' &&
+               !ids.includes(parts[3]);
+      }));
+}

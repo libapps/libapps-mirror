@@ -2,8 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {ProfileType, deleteProfile, getProfileIds, getProfileValues,
-  setProfileIds, setProfileValues} from './terminal_profiles.js';
+import {ProfileType, cleanupLostValues, deleteProfile, getProfileIds,
+  getProfileValues, setProfileIds, setProfileValues}
+  from './terminal_profiles.js';
 
 describe('terminal_profiles.js', function() {
   beforeEach(async function() {
@@ -21,6 +22,7 @@ describe('terminal_profiles.js', function() {
       '/vsh/profiles/p1/k2': 'p1k2',
       '/vsh/profiles/p2/k1': 'p2k1',
       '/vsh/profiles/p2/k3': 'p2k3',
+      '/vsh/profiles/p3/k4': 'p3k4',
     });
 
     // getProfileIds()
@@ -41,6 +43,24 @@ describe('terminal_profiles.js', function() {
     // setProfileIds()
     await setProfileIds(ProfileType.VSH, ['p1', 'p2']);
     assert.deepEqual(await getProfileIds(ProfileType.VSH), ['p1', 'p2']);
+    assert.deepEqual(await window.storage.getItems(), {
+      '/vsh/profile-ids': ['p1', 'p2'],
+      '/vsh/profiles/p1/k1': 'p1k1',
+      '/vsh/profiles/p1/k2': 'p1k2',
+      '/vsh/profiles/p2/k1': 'p2k1',
+      '/vsh/profiles/p2/k3': 'p2k3',
+      '/vsh/profiles/p3/k4': 'p3k4',
+    });
+
+    // cleanupLostValues()
+    await cleanupLostValues(ProfileType.VSH);
+    assert.deepEqual(await window.storage.getItems(), {
+      '/vsh/profile-ids': ['p1', 'p2'],
+      '/vsh/profiles/p1/k1': 'p1k1',
+      '/vsh/profiles/p1/k2': 'p1k2',
+      '/vsh/profiles/p2/k1': 'p2k1',
+      '/vsh/profiles/p2/k3': 'p2k3',
+    });
 
     // setProfileValues()
     await setProfileValues(ProfileType.VSH, 'p1', {k1: 'p1k11', k3:'p1k33'});
