@@ -107,6 +107,10 @@ def main(argv):
             elif path.is_file():
                 process_file(pool, path)
 
+        # Wait for the jobs to finish rather than let context manager terminate.
+        pool.close()
+        pool.join()
+
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))
