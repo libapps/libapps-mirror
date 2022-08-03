@@ -1261,6 +1261,10 @@ The prompt makes it sound like it will delete & reset everything, but it won't.
 
     $ hterm-notify.sh "Some Title" "Lots of text here."
 
+  The [osc52.sh] script has support for sending these DCS sequences
+  automatically. However, on tmux 3.3a and newer, you'll also need to set
+  `set -g allow-passthrough on` in your tmux.conf file.
+
 
 ### How do I view images?
 
