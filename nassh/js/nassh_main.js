@@ -50,6 +50,13 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     }
   }
 
+  // Register stub service worker for PWAs.
+  if (navigator?.serviceWorker?.register) {
+    navigator.serviceWorker.register('../js/pwa_service_worker.js', {
+      scope: '/',
+    });
+  }
+
   const params = new URLSearchParams(document.location.search);
 
   // Allow users to bookmark links that open as a window.
