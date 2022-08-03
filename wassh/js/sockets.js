@@ -40,6 +40,8 @@ export class Socket extends VFS.PathHandle {
     this.address = null;
     /** @type {?number} */
     this.port = null;
+    /** @type {?function()} */
+    this.receiveListener_ = null;
 
     // TODO(vapier): Make this into a stream.
     this.data = new Uint8Array(0);
@@ -72,6 +74,10 @@ export class Socket extends VFS.PathHandle {
       this.reader_();
       this.reader_ = null;
     }
+
+    if (this.receiveListener_) {
+      this.receiveListener_();
+    }
   }
 
   /** @override */
@@ -97,6 +103,16 @@ export class Socket extends VFS.PathHandle {
           WASI.rights.SOCK_SHUTDOWN,
     });
   }
+
+  /**
+   * Registers a listener that will be called when data is recieved on the
+   * socket.
+   *
+   * @param {?function()} listener
+   */
+  setReceiveListener(listener) {
+    this.receiveListener_ = listener;
+  }
 }
 
 /**
@@ -112,7 +128,7 @@ export class ChromeTcpSocket extends Socket {
     super(domain, type, protocol);
 
     /** @type {number} */
-    this.socketId = -1;
+    this.socketId_ = -1;
 
     this.tcpKeepAlive_ = false;
     this.tcpNoDelay_ = false;
@@ -128,7 +144,13 @@ export class ChromeTcpSocket extends Socket {
       chrome.sockets.tcp.create(resolve);
     });
 
-    this.socketId = info.socketId;
+    this.socketId_ = info.socketId;
+
+    if (ChromeTcpSocket.eventRouter_ === null) {
+      ChromeTcpSocket.eventRouter_ = new ChromeTcpSocketEventRouter();
+    }
+
+    ChromeTcpSocket.eventRouter_.register(this.socketId_, this);
   }
 
   /** @override */
@@ -138,7 +160,7 @@ export class ChromeTcpSocket extends Socket {
     }
 
     const result = await new Promise((resolve) => {
-      chrome.sockets.tcp.connect(this.socketId, address, port, resolve);
+      chrome.sockets.tcp.connect(this.socketId_, address, port, resolve);
     });
 
     switch (result) {
@@ -159,7 +181,7 @@ export class ChromeTcpSocket extends Socket {
     // In the *NIX world, close must never fail.  That's why we don't return
     // any errors here.
 
-    if (this.socketId === -1) {
+    if (this.socketId_ === -1) {
       return;
     }
 
@@ -169,12 +191,14 @@ export class ChromeTcpSocket extends Socket {
       // We wait for the disconnect only so that we can reset the internal
       // state below, but we could probably wait for the close too if needed.
       await new Promise((resolve) => {
-        chrome.sockets.tcp.disconnect(this.socketId, resolve);
+        chrome.sockets.tcp.disconnect(this.socketId_, resolve);
       });
     }
 
-    chrome.sockets.tcp.close(this.socketId);
-    this.socketId = -1;
+    chrome.sockets.tcp.close(this.socketId_);
+    ChromeTcpSocket.eventRouter_.unregister(this.socketId_);
+
+    this.socketId_ = -1;
     this.address = null;
     this.port = null;
   }
@@ -184,7 +208,7 @@ export class ChromeTcpSocket extends Socket {
     const {result, bytesSent} = await new Promise((resolve) => {
       // TODO(vapier): Double check whether send accepts TypedArrays directly.
       // Or if we have to respect buf.byteOffset & buf.byteLength ourself.
-      chrome.sockets.tcp.send(this.socketId, buf.buffer, resolve);
+      chrome.sockets.tcp.send(this.socketId_, buf.buffer, resolve);
     });
 
     if (result < 0) {
@@ -200,7 +224,7 @@ export class ChromeTcpSocket extends Socket {
    */
   async getSocketInfo() {
     return new Promise((resolve) => {
-      chrome.sockets.tcp.getInfo(this.socketId, resolve);
+      chrome.sockets.tcp.getInfo(this.socketId_, resolve);
     });
   }
 
@@ -243,7 +267,7 @@ export class ChromeTcpSocket extends Socket {
         switch (name) {
           case SO_KEEPALIVE: {
             const result = await new Promise((resolve) => {
-              chrome.sockets.tcp.setKeepAlive(this.socketId, !!value, resolve);
+              chrome.sockets.tcp.setKeepAlive(this.socketId_, !!value, resolve);
             });
             if (result < 0) {
               console.warn(`setKeepAlive(${value}) failed with ${result})`);
@@ -271,7 +295,7 @@ export class ChromeTcpSocket extends Socket {
         switch (name) {
           case TCP_NODELAY: {
             const result = await new Promise((resolve) => {
-              chrome.sockets.tcp.setNoDelay(this.socketId, !!value, resolve);
+              chrome.sockets.tcp.setNoDelay(this.socketId_, !!value, resolve);
             });
             if (result < 0) {
               console.warn(`setNoDelay(${value}) failed with ${result})`);
@@ -288,6 +312,13 @@ export class ChromeTcpSocket extends Socket {
     return WASI.errno.ENOPROTOOPT;
   }
 }
+
+/**
+ * Used to route receive events to all ChromeTcpSockets.
+ *
+ * @type {?ChromeTcpSocketEventRouter}
+ */
+ChromeTcpSocket.eventRouter_ = null;
 
 /**
  * A TCP/IP based socket backed by a Stream. Used to connect to a relay server.
@@ -491,5 +522,55 @@ export class UnixSocket extends Socket {
   async write(buf) {
     await this.callback_.asyncWrite(buf);
     return {nwritten: buf.length};
+  }
+}
+
+/**
+ * Maps socketIds to sockets and forwards data received to the sockets.
+ */
+class ChromeTcpSocketEventRouter {
+  constructor() {
+    this.socketMap_ = new Map();
+
+    const socketTcpRecv = this.onSocketTcpRecv_.bind(this);
+    chrome.sockets.tcp.onReceive.addListener(socketTcpRecv);
+  }
+
+  /**
+   * Registers the given ChromeTcpSocket with the router.
+   *
+   * Sockets must be registered in order to be notified when they receive
+   * data.
+   *
+   * @param {number} socketId
+   * @param {!ChromeTcpSocket} socket
+   */
+  register(socketId, socket) {
+    this.socketMap_.set(socketId, socket);
+  }
+
+  /**
+   * Unregisters the ChromeTcpSocket with the given ID from the router.
+   *
+   * @param {number} socketId
+   */
+  unregister(socketId) {
+    this.socketMap_.delete(socketId);
+  }
+
+  /**
+   * The onReceive listener for the chrome.sockets API which forwards data to
+   * the associated ChromeTcpSocket.
+   *
+   * @param {{socketId: number, data: !ArrayBuffer}} options
+   */
+  onSocketTcpRecv_({socketId, data}) {
+    const handle = this.socketMap_.get(socketId);
+    if (handle === undefined) {
+      console.warn(`Data received for unknown socket ${socketId}`);
+      return;
+    }
+
+    handle.onRecv(data);
   }
 }

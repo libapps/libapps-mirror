@@ -80,9 +80,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     this.secureInput_ = secureInput;
     this.notify_ = null;
     this.vfs = new VFS.VFS({stdio: false});
-    this.socketTcpRecv_ = null;
     this.socketUdpRecv_ = null;
-    this.socketMap_ = new Map();
     this.fakeAddrMap_ = new Map();
     this.firstConnection_ = true;
   }
@@ -460,8 +458,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
                   domain, type, protocol, this.tcpSocketsOpen_);
               this.firstConnection_ = false;
             } else {
-              handle = new Sockets.ChromeTcpSocket(
-                  domain, type, protocol);
+              handle = new Sockets.ChromeTcpSocket(domain, type, protocol);
             }
             break;
           case WASI.filetype.SOCKET_DGRAM:
@@ -486,11 +483,16 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
         return WASI.errno.EAFNOSUPPORT;
     }
 
+    handle.setReceiveListener(() => {
+      if (this.notify_) {
+        this.notify_();
+      }
+    });
+
     if (await handle.init() === false) {
       return WASI.errno.ENOSYS;
     }
-    // TODO(vapier): Missing socketMap_.delete call on close.
-    this.socketMap_.set(handle.socketId, handle);
+
     const socket = this.vfs.openHandle(handle);
     return {socket};
   }
@@ -508,11 +510,6 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     }
     if (!(handle instanceof Sockets.Socket)) {
       return WASI.errno.ENOTSOCK;
-    }
-
-    if (this.socketTcpRecv_ === null) {
-      this.socketTcpRecv_ = this.onSocketTcpRecv.bind(this);
-      chrome.sockets.tcp.onReceive.addListener(this.socketTcpRecv_);
     }
 
     /* TODO(vapier): Implement UDP support.
@@ -537,25 +534,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       const unixHandle = new Sockets.UnixSocket(
           handle.domain, handle.type, handle.protocol,
           this.unixSocketsOpen_);
-      this.socketMap_.delete(handle.socketId);
       handle.close();
       this.vfs.fds_.set(socket, unixHandle);
-      const ret = await unixHandle.connect(address, port);
-      if (unixHandle.callback_) {
-        unixHandle.callback_.onDataAvailable = (data) => {
-          this.onSocketHandleRecv({handle: unixHandle, data});
-        };
-      }
-      return ret;
+
+      return unixHandle.connect(address, port);
     }
 
-    const ret = await handle.connect(address, port);
-    if (handle.callback_) {
-      handle.callback_.onDataAvailable = (data) => {
-        this.onSocketHandleRecv({handle, data});
-      };
-    }
-    return ret;
+    return handle.connect(address, port);
   }
 
   /**
@@ -615,24 +600,6 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     }
 
     return handle.setSocketOption(level, name, value);
-  }
-
-  onSocketTcpRecv({socketId, data}) {
-    const handle = this.socketMap_.get(socketId);
-    if (handle === undefined) {
-      console.warn(`Data received for unknown socket ${socketId}`);
-      return;
-    }
-
-    this.onSocketHandleRecv({handle, data});
-  }
-
-  onSocketHandleRecv({handle, data}) {
-    // TODO(crbug.com/1311909): Do better.
-    handle.onRecv(data);
-    if (this.notify_) {
-      this.notify_();
-    }
   }
 
   /**
