@@ -9,6 +9,7 @@
 
 import {composeTmuxUrl, definePrefs, getOSInfo, loadPowerlineWebFonts,
   loadWebFont, normalizeCSSFontFamily, watchColors} from './terminal_common.js';
+import {createEmulator} from './terminal_emulator.js';
 import {terminalImport} from './terminal_import.js';
 import {LaunchInfo, getTerminalInfoTracker} from './terminal_info.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
@@ -111,13 +112,16 @@ terminal.addBindings = function(term) {
  *
  * @param {!Element} element The element that is to be decorated.
  * @param {!LaunchInfo} launchInfo launch info.
- * @return {!hterm.Terminal} The new hterm.Terminal instance.
+ * @return {!Promise<!hterm.Terminal>} The new hterm.Terminal instance.
  */
-terminal.init = function(element, launchInfo) {
+terminal.init = async function(element, launchInfo) {
   const profileId = launchInfo.settingsProfileId ||
       hterm.Terminal.DEFAULT_PROFILE_ID;
-  const term = new hterm.Terminal(
-      {profileId, storage: new lib.Storage.TerminalPrivate()});
+
+  const term = await createEmulator({
+    storage: new lib.Storage.TerminalPrivate(),
+    profileId,
+  });
 
   term.decorate(element);
   term.installKeyboard();

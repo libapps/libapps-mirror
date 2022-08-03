@@ -69,7 +69,7 @@ afterEach(function() {
 it('opens-process-in-init', async function() {
   const launchInfo = newFakeLaunchInfo();
 
-  terminal.init(div, launchInfo);
+  await terminal.init(div, launchInfo);
   const [args, pidInit] =
       await mockTerminalPrivateController.on('openVmshellProcess');
   assert.equal(args.filter((x) => /^--startup_id=\d+$/.test(x)).length, 1);
@@ -80,14 +80,14 @@ it('opens-process-in-init', async function() {
 
 [true, false].map((value) => it(`set-a11y-in-init-to-${value}`, async () => {
   mockTerminalPrivate.prefs['settings.accessibility'] = value;
-  const term = terminal.init(div, newFakeLaunchInfo());
+  const term = await terminal.init(div, newFakeLaunchInfo());
   await waitForPrefLoaded('settings.accessibility');
   assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
 }));
 
 [true, false].map((value) => it(`set-a11y-to-${value}-on-changed`, async () => {
   mockTerminalPrivate.prefs['settings.accessibility'] = !value;
-  const term = terminal.init(div, newFakeLaunchInfo());
+  const term = await terminal.init(div, newFakeLaunchInfo());
   await waitForPrefLoaded('settings.accessibility');
   await mockTerminalPrivate.onPrefChanged.dispatch(
       {'settings.accessibility': value});
@@ -119,7 +119,7 @@ it('overrides-ctrl-n-keymap-and-calls-openWindow', async function() {
     ++callCount;
   });
 
-  const term = terminal.init(div, newFakeLaunchInfo());
+  const term = await terminal.init(div, newFakeLaunchInfo());
   await mockTerminalPrivateController.on('openVmshellProcess');
 
   const keyDef = term.keyboard.keyMap.keyDefs[78]; // N.

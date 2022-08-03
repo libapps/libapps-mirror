@@ -95,6 +95,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const div = document.createElement('div');
     div.id = 'terminal';
     document.body.appendChild(div);
-    window.term_ = terminal.init(div, launchInfo);
+    window.term_ = await terminal.init(div, launchInfo);
   });
 });

@@ -269,6 +269,9 @@ def mkcrosh(enable_minify, enable_gzip):
             # linting and testing.
             if not path.is_symlink() and not path.match("*_test*"):
                 shutil.copy(path, tmpdir / subdir)
+    shutil.copy(
+        libdot.LIBAPPS_DIR / "node_modules/xterm/css/xterm.css", tmpdir / "css"
+    )
 
     if enable_minify:
         minify(tmpdir)
