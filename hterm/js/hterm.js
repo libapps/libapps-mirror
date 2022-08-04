@@ -97,6 +97,28 @@ lib.registerInit(
     });
 
 /**
+ * Sanitizes the given HTML source into a TrustedHTML, or a string if the
+ * Trusted Types API is not available.
+ *
+ * For now, we wrap the given HTML into a TrustedHTML without modifying it.
+ *
+ * @param {string} html
+ * @return {!TrustedHTML|string}
+ */
+hterm.sanitizeHtml = function(html) {
+  if (window?.trustedTypes?.createPolicy) {
+    if (!hterm.sanitizeHtml.policy) {
+      hterm.sanitizeHtml.policy = trustedTypes.createPolicy('default', {
+        createHTML: (source) => source,
+      });
+    }
+    return hterm.sanitizeHtml.policy.createHTML(html);
+  }
+
+  return html;
+};
+
+/**
  * Copy the specified text to the system clipboard.
  *
  * We'll create selections on demand based on the content to copy.

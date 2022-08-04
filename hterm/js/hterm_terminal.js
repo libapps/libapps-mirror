@@ -3378,8 +3378,8 @@ hterm.Terminal.prototype.copyStringToClipboard = function(str) {
       this.clipboardNotice_ = this.document_.createElement('div');
       this.clipboardNotice_.style.textAlign = 'center';
       const copyImage = lib.resource.getData('hterm/images/copy');
-      this.clipboardNotice_.innerHTML =
-          `${copyImage}<div>${hterm.msg('NOTIFY_COPY')}</div>`;
+      this.clipboardNotice_.innerHTML = hterm.sanitizeHtml(
+          `${copyImage}<div>${hterm.msg('NOTIFY_COPY')}</div>`);
     }
     setTimeout(() => this.showOverlay(this.clipboardNotice_, 500), 200);
   }

@@ -59,6 +59,23 @@ lib.resource.get = function(name, defaultValue) {
 };
 
 /**
+ * @param {string} name The name of the resource to get.
+ * @return {string} The resource data.
+ */
+lib.resource.getText = function(name) {
+  const resource = lib.resource.resources_[name];
+  if (resource === undefined) {
+    throw new Error(`Error: Resource "${name}" does not exist`);
+  }
+  if (!resource.type.startsWith('text/') &&
+      !resource.type.startsWith('image/svg')) {
+    throw new Error(`Error: Resource "${name}" is not of type string`);
+  }
+
+  return String(lib.resource.resources_[name].data);
+};
+
+/**
  * Retrieve resource data.
  *
  * @param {string} name The name of the resource to get.

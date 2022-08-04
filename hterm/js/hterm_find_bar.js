@@ -204,7 +204,8 @@ hterm.FindBar.prototype.decorate = function(document) {
   this.findBar_ = document.createElement('div');
   this.findBar_.id = 'hterm:find-bar';
   this.findBar_.setAttribute('aria-hidden', 'true');
-  this.findBar_.innerHTML = lib.resource.getData('hterm/html/find_bar');
+  this.findBar_.innerHTML = hterm.sanitizeHtml(
+      lib.resource.getText('hterm/html/find_bar'));
 
   this.input_ = this.findBar_.querySelector('input');
   this.upArrowButton_ = this.findBar_.querySelector('#hterm\\:find-bar-up');
@@ -213,11 +214,12 @@ hterm.FindBar.prototype.decorate = function(document) {
   this.counterLabel_ = this.findBar_.querySelector('#hterm\\:find-bar-count');
 
   // Add aria-label and svg icons.
-  this.upArrowButton_.innerHTML = lib.resource
-      .getData('hterm/images/keyboard_arrow_up');
-  this.downArrowButton_.innerHTML = lib.resource
-      .getData('hterm/images/keyboard_arrow_down');
-  this.closeButton_.innerHTML = lib.resource.getData('hterm/images/close');
+  this.upArrowButton_.innerHTML = hterm.sanitizeHtml(
+      lib.resource.getText('hterm/images/keyboard_arrow_up'));
+  this.downArrowButton_.innerHTML = hterm.sanitizeHtml(
+      lib.resource.getText('hterm/images/keyboard_arrow_down'));
+  this.closeButton_.innerHTML = hterm.sanitizeHtml(
+      lib.resource.getText('hterm/images/close'));
 
   this.upArrowButton_.setAttribute('aria-label', hterm.msg('BUTTON_PREVIOUS'));
   this.downArrowButton_.setAttribute('aria-label', hterm.msg('BUTTON_NEXT'));
@@ -240,7 +242,8 @@ hterm.FindBar.prototype.decorate = function(document) {
 
   this.resultScreen_ = document.createElement('div');
   this.resultScreen_.id = 'hterm:find-result-screen';
-  this.resultScreen_.innerHTML = lib.resource.getData('hterm/html/find_screen');
+  this.resultScreen_.innerHTML = hterm.sanitizeHtml(
+      lib.resource.getText('hterm/html/find_screen'));
   this.resultScreen_.style.display = 'none';
   document.body.appendChild(this.resultScreen_);
 };

@@ -262,7 +262,7 @@ hterm.Screen.prototype.invalidateCursorPosition = function() {
  * Clear the contents of the cursor row.
  */
 hterm.Screen.prototype.clearCursorRow = function() {
-  this.cursorRowNode_.innerHTML = '';
+  this.cursorRowNode_.innerText = '';
   this.cursorRowNode_.removeAttribute('line-overflow');
   this.cursorOffset_ = 0;
   this.cursorPosition.column = 0;

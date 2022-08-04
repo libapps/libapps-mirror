@@ -65,7 +65,7 @@ hterm.ContextMenu.prototype.regenerate_ = function() {
   this.menu_.forEach(({name, action}) => {
     const menuitem = this.document_.createElement('menuitem');
     if (name === hterm.ContextMenu.SEPARATOR) {
-      menuitem.innerHTML = '<hr>';
+      menuitem.innerHTML = hterm.sanitizeHtml('<hr>');
       menuitem.className = 'separator';
     } else {
       menuitem.innerText = name;
