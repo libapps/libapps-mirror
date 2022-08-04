@@ -32,7 +32,7 @@ export class PathHandler {
    * @param {string} path
    * @param {!WASI_t.fdflags} fs_flags
    * @param {!WASI_t.oflags} o_flags
-   * @return {!Promise<!PathHandle>}
+   * @return {!Promise<!WASI_t.errno|!PathHandle>}
    */
   async open(path, fs_flags, o_flags) {
     if (path !== this.path) {
@@ -481,34 +481,60 @@ export class VFS {
     return this.fds_.get(fd);
   }
 
-  /**
-   * @param {string} path
-   * @return {!Promise<!WASI_t.errno|!WASI_t.filestat>}
-   */
-  async stat(path) {
-    this.debug(`stat(${path})`);
-
-    const handler = this.paths_.get(path);
-    if (!handler) {
-      return WASI.errno.ENOENT;
-    }
-    return handler.stat();
-  }
-
   openHandle(handle) {
     this.debug(`openHandle(${handle})`);
     return this.fds_.open(handle);
   }
 
   /**
-   * @param {string} path
-   * @param {!WASI_t.fdflags} fs_flags
-   * @param {!WASI_t.oflags} o_flags
-   * @return {!Promise<!WASI_t.errno|{fd: number}>}
+   * Resolve a path relative to a file descriptor.
+   *
+   * @param {!WASI_t.fd} fd The directory fd to resolve path under.
+   * @param {string} path The path to open relative to the dirfd.
+   * @return {!WASI_t.errno|string} The resolved path, or errno if failed.
    */
-  async open(path, fs_flags, o_flags) {
-    this.debug(`open(${path}, ${fs_flags}, ${o_flags})`);
+  resolvePath_(fd, path) {
+    // If path is already absolute, then we never use the dirfd.
+    if (path.startsWith('/')) {
+      return path;
+    }
 
+    // Find the handle for this fd.
+    let fh = this.getFileHandle(fd);
+    if (fh === undefined) {
+      return WASI.errno.EBADF;
+    }
+
+    // Make sure the handle is actually a directory.
+    if (fh.filetype !== WASI.filetype.DIRECTORY) {
+      return WASI.errno.ENOTDIR;
+    }
+
+    // If the base dir is cwd, resolve that too.
+    if (fh.path === '.') {
+      fh = this.paths_.get(fh.target);
+    }
+
+    // Normalize leading & trailing slashes.
+    let dirpath = fh.path.replace(/^\/+/, '').replace(/\/+$/, '');
+    if (dirpath) {
+      // Don't add trailing slash if dirpath is "" (i.e. it's the root dir).
+      dirpath += '/';
+    }
+
+    return `/${dirpath}${path}`;
+  }
+
+  /**
+   * Find the path handler via an absolute path.
+   *
+   * If the path itself doesn't have one, we'll try to locate a parent based
+   * on parent directories.
+   *
+   * @param {string} path Resolved path.
+   * @return {!WASI_t.errno|!PathHandler}
+   */
+  findHandler_(path) {
     let handler = this.paths_.get(path);
     if (!handler) {
       // Let the parent directory handle it.
@@ -527,6 +553,37 @@ export class VFS {
       if (!handler) {
         return WASI.errno.ENOENT;
       }
+    }
+
+    return handler;
+  }
+
+  /**
+   * @param {string} path
+   * @return {!Promise<!WASI_t.errno|!WASI_t.filestat>}
+   */
+  async stat(path) {
+    this.debug(`stat(${path})`);
+
+    const handler = this.findHandler_(path);
+    if (typeof handler === 'number') {
+      return handler;
+    }
+    return handler.stat();
+  }
+
+  /**
+   * @param {string} path
+   * @param {!WASI_t.fdflags} fs_flags
+   * @param {!WASI_t.oflags} o_flags
+   * @return {!Promise<!WASI_t.errno|{fd: number}>}
+   */
+  async open(path, fs_flags, o_flags) {
+    this.debug(`open(${path}, ${fs_flags}, ${o_flags})`);
+
+    const handler = this.findHandler_(path);
+    if (typeof handler === 'number') {
+      return handler;
     }
 
     const handle = await handler.open(path, fs_flags, o_flags);
@@ -548,23 +605,12 @@ export class VFS {
   async openat(dfd, dirflags, path, fs_flags, o_flags) {
     this.debug(`openat(${dfd}, ${dirflags}, ${path}, ${fs_flags}, ${o_flags})`);
 
-    let dirpath = '';
-    if (path[0] !== '/') {
-      let dfh = this.getFileHandle(dfd);
-      if (dfh === undefined) {
-        return WASI.errno.EBADF;
-      }
-
-      if (dfh.filetype !== WASI.filetype.DIRECTORY) {
-        return WASI.errno.ENOTDIR;
-      }
-      if (dfh.path === '.') {
-        dfh = this.paths_.get(dfh.target);
-      }
-      dirpath = dfh.path;
+    // NB: dirflags currently only involves symlinks which we don't support.
+    const resolvedPath = this.resolvePath_(dfd, path);
+    if (typeof resolvedPath === 'number') {
+      return resolvedPath;
     }
-
-    return this.open(dirpath + path, fs_flags, o_flags);
+    return this.open(resolvedPath, fs_flags, o_flags);
   }
 
   close(fd) {
@@ -602,31 +648,19 @@ export class VFS {
    * @param {string} path
    * @return {!Promise<!WASI_t.errno|{fd: number}>}
    */
-  mkdirat(fd, path) {
+  async mkdirat(fd, path) {
     this.debug(`mkdirat(${fd}, ${path})`);
 
-    let dirpath = '';
-    if (path[0] !== '/') {
-      let dfh = this.getFileHandle(fd);
-      if (dfh === undefined) {
-        return WASI.errno.EBADF;
-      }
-
-      if (dfh.filetype !== WASI.filetype.DIRECTORY) {
-        return WASI.errno.ENOTDIR;
-      }
-      if (dfh.path === '.') {
-        dfh = this.paths_.get(dfh.target);
-      }
-      dirpath = dfh.path;
+    const resolvedPath = this.resolvePath_(fd, path);
+    if (typeof resolvedPath === 'number') {
+      return resolvedPath;
     }
-
-    return this.mkdir(dirpath + path);
+    return this.mkdir(resolvedPath);
   }
 
   /**
    * @param {string} path
-   * @return {!Promise<!WASI_t.errno|{fd: number}>}
+   * @return {!WASI_t.errno|{fd: number}}
    */
   mkdir(path) {
     this.debug(`mkdir(${path})`);
