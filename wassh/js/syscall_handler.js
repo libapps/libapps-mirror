@@ -286,6 +286,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /** @override */
+  handle_path_link(old_fd, old_flags, old_path, new_fd, new_path) {
+    return this.vfs.linkat(old_fd, old_flags, old_path, new_fd, new_path);
+  }
+
+  /** @override */
   handle_path_open(dirfd, dirflags, path, o_flags, fs_rights_base,
                    fs_rights_inheriting, fs_flags) {
     return this.vfs.openat(dirfd, dirflags, path, fs_flags, o_flags);

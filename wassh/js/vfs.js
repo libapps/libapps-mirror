@@ -29,6 +29,15 @@ export class PathHandler {
   }
 
   /**
+   * @param {string} oldPath The existing path to link.
+   * @param {string} newPath The new path to create the link.
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async link(oldPath, newPath) {
+    return WASI.errno.EROFS;
+  }
+
+  /**
    * @param {string} path
    * @param {!WASI_t.fdflags} fs_flags
    * @param {!WASI_t.oflags} o_flags
@@ -703,6 +712,54 @@ export class VFS {
     }
 
     return WASI.errno.ENOENT;
+  }
+
+  /**
+   * @param {!WASI_t.fd} old_fd
+   * @param {!WASI_t.lookupflags} old_flags
+   * @param {string} old_path
+   * @param {!WASI_t.fd} new_fd
+   * @param {string} new_path
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async linkat(old_fd, old_flags, old_path, new_fd, new_path) {
+    this.debug(`linkat(${old_fd}, ${old_flags}, ${old_path}, ${new_fd}, ` +
+               `${new_path})`);
+
+    const oldResolvedPath = this.resolvePath_(old_fd, old_path);
+    if (typeof oldResolvedPath === 'number') {
+      return oldResolvedPath;
+    }
+    const newResolvedPath = this.resolvePath_(new_fd, new_path);
+    if (typeof newResolvedPath === 'number') {
+      return newResolvedPath;
+    }
+
+    return this.link(oldResolvedPath, newResolvedPath);
+  }
+
+  /**
+   * @param {string} old_path
+   * @param {string} new_path
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async link(old_path, new_path) {
+    this.debug(`link(${old_path}, ${new_path})`);
+
+    const oldHandler = this.findHandler_(old_path);
+    if (typeof oldHandler === 'number') {
+      return oldHandler;
+    }
+    const newHandler = this.findHandler_(new_path);
+    if (typeof newHandler === 'number') {
+      return newHandler;
+    }
+
+    if (oldHandler === newHandler) {
+      return oldHandler.link(old_path, new_path);
+    } else {
+      return WASI.errno.EXDEV;
+    }
   }
 
   /**
