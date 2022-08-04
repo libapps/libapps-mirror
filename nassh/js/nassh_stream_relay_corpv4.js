@@ -31,6 +31,20 @@ const PacketTag = {
 };
 
 /**
+ * Maximum number of failed reconnect attempts until we give up.
+ */
+const RECONNECT_LIMIT = 3;
+
+/**
+ * Delay in ms for creating a new WebSocket when reconnecting. When a connection
+ * is closed due to close-lid-suspend, it is best to not reconnect immmediately,
+ * but delay enough time for system to fully suspend, and then reconnect after
+ * open-lid-resume.  2s seems to be enough time for suspend to stop network,
+ * then also stop JS execution.
+ */
+const RECONNECT_DELAY = 2000;
+
+/**
  * Parse a packet from the server.
  */
 export class ServerPacket {
@@ -178,8 +192,8 @@ export function RelayCorpv4WsStream(fd) {
    */
   this.sid_ = null;
 
-  // Keep track of overall connection to avoid infinite recursion.
-  this.connecting_ = false;
+  // Current count of failed reconnect attempts.
+  this.reconnectCount_ = 0;
 
   // The actual WebSocket connected to the ssh server.
   this.socket_ = null;
@@ -267,7 +281,6 @@ RelayCorpv4WsStream.prototype.connect_ = function() {
   if (this.socket_) {
     throw new Error('stream already connected');
   }
-  this.connecting_ = true;
 
   const uri = lib.f.replaceVars(this.connectTemplate_, {
     host: this.host_,
@@ -299,11 +312,11 @@ RelayCorpv4WsStream.prototype.reconnectTemplate_ =
  *     or reconnect already in progress.
  */
 RelayCorpv4WsStream.prototype.reconnect_ = function() {
-  if (!this.resume_ || this.connecting_ || !this.sid_) {
+  if (!this.resume_ || ++this.reconnectCount_ > RECONNECT_LIMIT || !this.sid_) {
+    console.warn(`Not reconnecting, resume=${this.resume_}, sid=${
+      !!this.sid_} count=${this.reconnectCount_}`);
     return false;
   }
-
-  this.connecting_ = true;
 
   if (this.io_) {
     this.io_.showOverlay(localize('RELAY_RETRY'), 500);
@@ -315,13 +328,24 @@ RelayCorpv4WsStream.prototype.reconnect_ = function() {
     sid: this.sid_,
   });
 
+  // Remove old callbacks to stop any potential late onclose/onerror calls to
+  // the old socket.
+  this.socket_.onopen = null;
+  this.socket_.onmessage = null;
+  this.socket_.onclose = null;
+  this.socket_.onerror = null;
   this.socket_.close();
-  this.socket_ = new WebSocket(uri, ['ssh']);
-  this.socket_.binaryType = 'arraybuffer';
-  this.socket_.onopen = this.onSocketOpen_.bind(this);
-  this.socket_.onmessage = this.onSocketData_.bind(this);
-  this.socket_.onclose = this.onSocketClose_.bind(this);
-  this.socket_.onerror = this.onSocketError_.bind(this);
+
+  // Delay creating new socket to ensure it only happens after any suspend is
+  // resumed (lid close/open).
+  setTimeout(() => {
+    this.socket_ = new WebSocket(uri, ['ssh']);
+    this.socket_.binaryType = 'arraybuffer';
+    this.socket_.onopen = this.onSocketOpen_.bind(this);
+    this.socket_.onmessage = this.onSocketData_.bind(this);
+    this.socket_.onclose = this.onSocketClose_.bind(this);
+    this.socket_.onerror = this.onSocketError_.bind(this);
+  }, RECONNECT_DELAY);
   return true;
 };
 
@@ -360,9 +384,6 @@ RelayCorpv4WsStream.prototype.onSocketOpen_ = function(e) {
     this.openCallback_(true);
     this.openCallback_ = null;
   }
-
-  // We've finished the connection, so we can retry if needed.
-  this.connecting_ = false;
 
   // If we had any pending writes, kick them off.  We can't call sendWrite
   // directly as the socket isn't in the correct state until after this handler
@@ -428,6 +449,7 @@ RelayCorpv4WsStream.prototype.onSocketData_ = function(e) {
     }
 
     case PacketTag.RECONNECT_SUCCESS:
+      this.reconnectCount_ = 0;
       // Queue the output after we resync our ack state below.
       setTimeout(this.sendWrite_.bind(this), 0);
       // Fallthrough.
