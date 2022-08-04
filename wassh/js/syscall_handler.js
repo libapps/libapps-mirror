@@ -292,6 +292,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /** @override */
+  async handle_path_unlink_file(fd, path) {
+    return this.vfs.unlinkat(fd, path);
+  }
+
+  /** @override */
   async handle_poll_oneoff(subscriptions) {
     const now = BigInt(Date.now());
 

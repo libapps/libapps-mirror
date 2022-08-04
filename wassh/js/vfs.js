@@ -52,6 +52,14 @@ export class PathHandler {
       filetype: this.filetype,
     });
   }
+
+  /**
+   * @param {string} path The path to remove.
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async unlink(path) {
+    return WASI.errno.EROFS;
+  }
 }
 
 /**
@@ -686,5 +694,32 @@ export class VFS {
     }
 
     return WASI.errno.ENOENT;
+  }
+
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {string} path
+   * @return {!Promise<!WASI_t.errno|{fd: number}>}
+   */
+  async unlinkat(fd, path) {
+    this.debug(`unlinkat(${fd}, ${path})`);
+    const resolvedPath = this.resolvePath_(fd, path);
+    if (typeof resolvedPath === 'number') {
+      return resolvedPath;
+    }
+    return this.unlink(resolvedPath);
+  }
+
+  /**
+   * @param {string} path
+   * @return {!Promise<!WASI_t.errno|{fd: number}>}
+   */
+  async unlink(path) {
+    this.debug(`unlink(${path})`);
+    const handler = this.findHandler_(path);
+    if (typeof handler === 'number') {
+      return handler;
+    }
+    return handler.unlink(path);
   }
 }
