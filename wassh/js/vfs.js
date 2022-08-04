@@ -573,6 +573,21 @@ export class VFS {
   }
 
   /**
+   * @param {!WASI_t.fd} fd
+   * @param {string} path
+   * @return {!Promise<!WASI_t.errno|!WASI_t.filestat>}
+   */
+  async statat(fd, path) {
+    this.debug(`statat(${fd}, ${path})`);
+
+    const resolvedPath = this.resolvePath_(fd, path);
+    if (typeof resolvedPath === 'number') {
+      return resolvedPath;
+    }
+    return this.stat(resolvedPath);
+  }
+
+  /**
    * @param {string} path
    * @param {!WASI_t.fdflags} fs_flags
    * @param {!WASI_t.oflags} o_flags
