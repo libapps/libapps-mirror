@@ -44,6 +44,15 @@ export class PathHandler {
   }
 
   /**
+   * @param {string} oldPath The old path name.
+   * @param {string} newPath The new path name.
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async rename(oldPath, newPath) {
+    return WASI.errno.EROFS;
+  }
+
+  /**
    * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#filestat
    * @return {!Promise<!WASI_t.filestat>}
    */
@@ -694,6 +703,52 @@ export class VFS {
     }
 
     return WASI.errno.ENOENT;
+  }
+
+  /**
+   * @param {!WASI_t.fd} old_fd
+   * @param {string} old_path
+   * @param {!WASI_t.fd} new_fd
+   * @param {string} new_path
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async renameat(old_fd, old_path, new_fd, new_path) {
+    this.debug(`renameat(${old_fd}, ${old_path}, ${new_fd}, ${new_path})`);
+
+    const oldResolvedPath = this.resolvePath_(old_fd, old_path);
+    if (typeof oldResolvedPath === 'number') {
+      return oldResolvedPath;
+    }
+    const newResolvedPath = this.resolvePath_(new_fd, new_path);
+    if (typeof newResolvedPath === 'number') {
+      return newResolvedPath;
+    }
+
+    return this.rename(oldResolvedPath, newResolvedPath);
+  }
+
+  /**
+   * @param {string} old_path
+   * @param {string} new_path
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async rename(old_path, new_path) {
+    this.debug(`rename(${old_path}, ${new_path})`);
+
+    const oldHandler = this.findHandler_(old_path);
+    if (typeof oldHandler === 'number') {
+      return oldHandler;
+    }
+    const newHandler = this.findHandler_(new_path);
+    if (typeof newHandler === 'number') {
+      return newHandler;
+    }
+
+    if (oldHandler === newHandler) {
+      return oldHandler.rename(old_path, new_path);
+    } else {
+      return WASI.errno.EXDEV;
+    }
   }
 
   /**

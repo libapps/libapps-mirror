@@ -258,7 +258,6 @@ class SyscallHandler {
    * @param {?string} new_path
    * @return {!WASI_t.errno}
    */
-  /** @return {!WASI_t.errno} */
   handle_path_rename(fd, old_path, new_fd, new_path) {}
 
   /**

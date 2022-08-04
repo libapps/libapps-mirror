@@ -292,6 +292,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /** @override */
+  handle_path_rename(fd, old_path, new_fd, new_path) {
+    return this.vfs.renameat(fd, old_path, new_fd, new_path);
+  }
+
+  /** @override */
   async handle_path_unlink_file(fd, path) {
     return this.vfs.unlinkat(fd, path);
   }
