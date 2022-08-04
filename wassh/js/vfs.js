@@ -458,7 +458,7 @@ export class VFS {
   }
 
   debug(...args) {
-    console.log(...args);
+    console.debug('VFS', ...args);
   }
 
   initStdio(handle) {
@@ -476,6 +476,8 @@ export class VFS {
   }
 
   getFileHandle(fd) {
+    // This log is a little too chatty to enable by default.
+    // this.debug(`getFileHandle(${fd})`);
     return this.fds_.get(fd);
   }
 
@@ -484,6 +486,8 @@ export class VFS {
    * @return {!Promise<!WASI_t.errno|!WASI_t.filestat>}
    */
   async stat(path) {
+    this.debug(`stat(${path})`);
+
     const handler = this.paths_.get(path);
     if (!handler) {
       return WASI.errno.ENOENT;
@@ -492,6 +496,7 @@ export class VFS {
   }
 
   openHandle(handle) {
+    this.debug(`openHandle(${handle})`);
     return this.fds_.open(handle);
   }
 
@@ -502,6 +507,8 @@ export class VFS {
    * @return {!Promise<!WASI_t.errno|{fd: number}>}
    */
   async open(path, fs_flags, o_flags) {
+    this.debug(`open(${path}, ${fs_flags}, ${o_flags})`);
+
     let handler = this.paths_.get(path);
     if (!handler) {
       // Let the parent directory handle it.
@@ -539,6 +546,8 @@ export class VFS {
    * @return {!Promise<!WASI_t.errno|{fd: number}>}
    */
   async openat(dfd, dirflags, path, fs_flags, o_flags) {
+    this.debug(`openat(${dfd}, ${dirflags}, ${path}, ${fs_flags}, ${o_flags})`);
+
     let dirpath = '';
     if (path[0] !== '/') {
       let dfh = this.getFileHandle(dfd);
@@ -559,6 +568,8 @@ export class VFS {
   }
 
   close(fd) {
+    this.debug(`close(${fd})`);
+
     const fh = this.getFileHandle(fd);
     if (fh !== undefined) {
       this.fds_.delete(fd);
@@ -570,6 +581,8 @@ export class VFS {
   }
 
   dup(oldfd) {
+    this.debug(`dup(${oldfd})`);
+
     const fd = this.fds_.dup(oldfd);
     if (fd === false) {
       return WASI.errno.EBADF;
@@ -578,6 +591,8 @@ export class VFS {
   }
 
   dup2(oldfd, newfd) {
+    this.debug(`dup2(${oldfd}, ${newfd})`);
+
     return this.fds_.dup2(oldfd, newfd) ?
         WASI.errno.ESUCCESS : WASI.errno.EBADF;
   }
@@ -588,6 +603,8 @@ export class VFS {
    * @return {!Promise<!WASI_t.errno|{fd: number}>}
    */
   mkdirat(fd, path) {
+    this.debug(`mkdirat(${fd}, ${path})`);
+
     let dirpath = '';
     if (path[0] !== '/') {
       let dfh = this.getFileHandle(fd);
@@ -612,6 +629,8 @@ export class VFS {
    * @return {!Promise<!WASI_t.errno|{fd: number}>}
    */
   mkdir(path) {
+    this.debug(`mkdir(${path})`);
+
     // TODO(vapier): Push this down a layer.
     switch (path) {
       case '/.ssh': return WASI.errno.ESUCCESS;
