@@ -8,39 +8,6 @@
  * Styles used by the preferences editor.
  */
 
-/*
- * Dark mode settings.  It's a bit hacky, but gets the job done.
- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --nassh-dm-bg-color: rgb(32, 33, 36);
-    --nassh-dm-fg-color: rgb(232, 234, 237);
-  }
-  html {
-    color: var(--nassh-dm-fg-color);
-    background-color: var(--nassh-dm-bg-color);
-  }
-  .chrome-bootstrap header {
-    background-image: linear-gradient(var(--nassh-dm-bg-color), var(--nassh-dm-bg-color));
-  }
-  .chrome-bootstrap {
-    color: var(--nassh-dm-fg-color);
-  }
-  .chrome-bootstrap h3 {
-    color: var(--nassh-dm-fg-color);
-  }
-  .chrome-bootstrap ul.menu li.selected a {
-    color: rgb(154, 160, 166);
-  }
-  .chrome-bootstrap a {
-    color: rgb(138, 180, 248);
-  }
-  input, textarea {
-    color: var(--nassh-dm-fg-color) !important;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-}
-
 /* Make body 100% height of page
  * See https://stackoverflow.com/questions/6654958
  */

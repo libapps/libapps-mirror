@@ -1,0 +1,40 @@
+/*
+ * Copyright 2022 The ChromiumOS Authors.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+/**
+ * Dark mode settings when using the Chrome Bootstrap CSS.
+ * It's a bit hacky, but gets the job done.
+ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --nassh-dm-bg-color: rgb(32, 33, 36);
+    --nassh-dm-fg-color: rgb(232, 234, 237);
+  }
+  html {
+    background-color: var(--nassh-dm-bg-color);
+    color: var(--nassh-dm-fg-color);
+  }
+  .chrome-bootstrap header {
+    background-image: linear-gradient(var(--nassh-dm-bg-color), var(--nassh-dm-bg-color));
+  }
+  .chrome-bootstrap {
+    color: var(--nassh-dm-fg-color);
+  }
+  .chrome-bootstrap h3 {
+    color: var(--nassh-dm-fg-color);
+  }
+  .chrome-bootstrap ul.menu li.selected a {
+    color: rgb(154, 160, 166);
+  }
+  .chrome-bootstrap a {
+    color: rgb(138, 180, 248);
+  }
+  input, textarea {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--nassh-dm-fg-color) !important;
+  }
+}
