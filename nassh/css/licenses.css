@@ -8,6 +8,18 @@
  * Styles in the licensing page.
  */
 
+:root {
+  --google-blue-50: rgb(232, 240, 254);
+  --google-grey-800: rgb(60, 64, 67);
+
+  --product-background: var(--google-blue-50);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --product-background: var(--google-grey-800);
+  }
+}
+
 body {
   padding: 1em;
 }
@@ -17,7 +29,7 @@ pre.license {
 }
 h2.package {
   clear: both;
-  background-color: #c3d9ff;
+  background-color: var(--product-background);
   width: 100%;
 }
 a.license {
