@@ -57,9 +57,7 @@ export function CommandInstance({io, ...argv}) {
   this.manifest_ = null;
 
   // The version of the ssh client to load.
-  const naclSupported =
-      navigator.mimeTypes['application/x-pnacl'] !== undefined;
-  this.sshClientVersion_ = naclSupported ? 'pnacl' : 'wasm';
+  this.sshClientVersion_ = 'pnacl';
 
   // Application ID of auth agent.
   this.authAgentAppID_ = null;
