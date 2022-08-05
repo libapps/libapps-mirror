@@ -534,9 +534,9 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       const unixHandle = new Sockets.UnixSocket(
           handle.domain, handle.type, handle.protocol,
           this.unixSocketsOpen_);
+      unixHandle.receiveListener_ = handle.receiveListener_;
       handle.close();
       this.vfs.fds_.set(socket, unixHandle);
-
       return unixHandle.connect(address, port);
     }
 
