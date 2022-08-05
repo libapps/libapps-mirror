@@ -25,9 +25,20 @@ a.license {
   font-size: smaller;
 }
 
+/* The licensing content is very verbose. Make it dense. */
 @media print {
+  h1 {
+    display: none;
+  }
+
   pre.license {
     display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2.package {
+    margin-bottom: 0.5em;
   }
 
   a.license {
