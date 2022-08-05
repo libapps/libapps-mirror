@@ -319,7 +319,7 @@ RelayCorpv4WsStream.prototype.reconnect_ = function() {
   }
 
   if (this.io_) {
-    this.io_.showOverlay(localize('RELAY_RETRY'), 500);
+    this.io_.showOverlay(localize('RELAY_RETRY'), null);
   }
 
   const uri = lib.f.replaceVars(this.reconnectTemplate_, {
@@ -367,6 +367,7 @@ RelayCorpv4WsStream.prototype.close_ = function(reason) {
   }
 
   if (this.io_) {
+    this.io_.hideOverlay();
     this.io_.println(`Closing socket due to ${reason}`);
   }
   this.socket_.close();
@@ -449,7 +450,11 @@ RelayCorpv4WsStream.prototype.onSocketData_ = function(e) {
     }
 
     case PacketTag.RECONNECT_SUCCESS:
+      // Reset reconnect counter and hide retry overlay.
       this.reconnectCount_ = 0;
+      if (this.io_) {
+        this.io_.hideOverlay();
+      }
       // Queue the output after we resync our ack state below.
       setTimeout(this.sendWrite_.bind(this), 0);
       // Fallthrough.
