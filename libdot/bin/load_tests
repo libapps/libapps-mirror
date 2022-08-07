@@ -78,7 +78,9 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
       serve: Whether to launch a webserver or load the page from disk.
       mkdeps: Callback to build dependencies after we've initialized.
     """
-    parser = get_parser()
+    # Try to provide a default port that doesn't collide with other projects.
+    # We hash the path to the test page and use that to stay [8000,9000].
+    parser = get_parser(port=8000 + sum(ord(x) for x in str(path)) % 1000)
     opts = parser.parse_args(argv)
 
     # Try to use default X session.
