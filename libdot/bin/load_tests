@@ -18,7 +18,7 @@ import libdot
 TEST_PAGE = os.path.join(libdot.DIR, "html", "lib_test.html")
 
 
-def get_parser():
+def get_parser(port: int = 8080):
     """Get a parser for our test runner."""
     parser = libdot.ArgumentParser(
         description="HTML test runner",
@@ -45,6 +45,13 @@ def get_parser():
         "--visible",
         action="store_true",
         help="Show the browser window to interact with.",
+    )
+    parser.add_argument(
+        "-p",
+        "--port",
+        type=int,
+        default=port,
+        help="Port to run local server on. (default: %(default)s)",
     )
     parser.add_argument(
         "--reporter",
@@ -110,10 +117,11 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
                 "-a",
                 "localhost",
                 "-c-1",
+                f"-p{opts.port}",
             ],
             cwd=libdot.LIBAPPS_DIR,
         )
-        path = f"http://localhost:8080/{path}"
+        path = f"http://localhost:{opts.port}/{path}"
 
     # Some environments are unable to utilize the sandbox: we're not running as
     # root, and userns is unavailable.  For example, while using docker.
