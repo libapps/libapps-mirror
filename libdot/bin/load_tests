@@ -6,6 +6,7 @@
 """Run unittests in a new browser."""
 
 import argparse
+import datetime
 import logging
 import os
 import subprocess
@@ -107,6 +108,8 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
     if not browser:
         browser = libdot.headless_chrome.chrome_setup()
 
+    start_time = datetime.datetime.utcnow()
+
     # Kick off server if needed.
     if serve:
         # We manage the life-cycle of this ourselves below.
@@ -171,6 +174,10 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
                     pass
             else:
                 server.terminate()
+
+    end_time = datetime.datetime.utcnow()
+    delta = end_time - start_time
+    logging.info("Tests took %s", delta)
 
 
 def main(argv):
