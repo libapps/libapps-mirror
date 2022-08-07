@@ -2,13 +2,8 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-@include hterm/concat/hterm_deps.concat
+@include libdot/concat/libdot.concat
 @include hterm/concat/hterm.concat
-
-@file libdot/js/lib_codec.js
-@file libdot/js/lib_credential_cache.js
-@file libdot/js/lib_event.js
-@file libdot/js/lib_fs.js
 
 @resource nassh/images/visibility image/svg+xml;utf8 < ../images/visibility.svg
 @resource nassh/images/visibility_off image/svg+xml;utf8 < ../images/visibility_off.svg

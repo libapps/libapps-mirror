@@ -4,25 +4,4 @@
 
 # This file lists the hterm dependencies on libdot.
 
-libdot/js/lib.js
-libdot/js/lib_polyfill.js
-libdot/js/lib_array.js
-libdot/js/lib_codec.js
-libdot/js/lib_colors.js
-libdot/js/lib_f.js
-libdot/js/lib_i18n.js
-libdot/js/lib_message_manager.js
-libdot/js/lib_preference_manager.js
-libdot/js/lib_resource.js
-libdot/js/lib_storage.js
-libdot/js/lib_storage_chrome.js
-libdot/js/lib_storage_local.js
-libdot/js/lib_storage_memory.js
-libdot/js/lib_storage_terminal_private.js
-libdot/third_party/intl-segmenter/intl-segmenter.js
-libdot/third_party/wcwidth/lib_wc.js
-
-@resource libdot/changelog/version text/plain \
-  changelog version ../../libdot/docs/ChangeLog.md
-@resource libdot/changelog/date text/plain \
-  changelog date ../../libdot/docs/ChangeLog.md
+@include libdot/concat/libdot.concat
