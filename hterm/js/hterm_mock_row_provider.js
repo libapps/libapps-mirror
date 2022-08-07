@@ -7,7 +7,7 @@
  *
  * @implements {hterm.RowProvider}
  */
-class MockRowProvider {
+export class MockRowProvider {
   /**
    * @param {!Document} document Document.
    * @param {number} count Number of visible rows.

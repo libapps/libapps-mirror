@@ -2,11 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview hterm.Terminal unit tests.
  */
+
+import {MockNotification} from './hterm_mock_notification.js';
+import {MockTerminalMouseEvent} from './hterm_mock_terminal_mouseevent.js';
 
 describe('hterm_terminal_tests.js', () => {
 

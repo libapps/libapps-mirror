@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview hterm unit tests.  Specifically for core/high-level functions.
  */
+
+import {MockNotification} from './hterm_mock_notification.js';
 
 describe('hterm_tests.js', () => {
 

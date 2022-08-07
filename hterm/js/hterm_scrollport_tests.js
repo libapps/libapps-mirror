@@ -2,7 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+/**
+ * @fileoverview Scrollport test suite.
+ */
+
+import {MockRowProvider} from './hterm_mock_row_provider.js';
 
 describe('hterm_scrollport_tests.js', () => {
 

@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /** @type {number} Notification.count is used in tests. */
 Notification.count;
 /** @type {{title: string}} Notification.lastCall is used in tests. */
@@ -14,7 +12,7 @@ Notification.lastCall;
  *
  * @constructor
  */
-const MockNotification = function() {
+export function MockNotification() {
   function mock(title, opts) {
     if (opts === undefined) {
       opts = {};
@@ -36,7 +34,7 @@ const MockNotification = function() {
   mock.calls = [];
 
   return mock;
-};
+}
 
 /**
  * Handle for original Notification object.

@@ -14,7 +14,9 @@ import libdot  # pylint: disable=wrong-import-order
 
 
 # Path to our html test page.
-TEST_PAGE = os.path.join(hterm.DIR, "html", "hterm_test.html")
+TEST_PAGE = (hterm.DIR / "html" / "hterm_test.html").relative_to(
+    libdot.LIBAPPS_DIR
+)
 
 
 def mkdeps(_opts):
@@ -25,7 +27,10 @@ def mkdeps(_opts):
 def main(argv):
     """The main func!"""
     return libdot.load_tests.test_runner_main(
-        argv, f"file://{TEST_PAGE}", mkdeps=mkdeps
+        argv,
+        TEST_PAGE,
+        serve=True,
+        mkdeps=mkdeps,
     )
 
 
