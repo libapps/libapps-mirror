@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Test suite for Terminal private storage.
  */
+
+import {storageApiTest} from './lib_storage_tests.js';
 
 describe('lib_storage_terminal_private_tests.js', () => {
 
@@ -67,7 +67,7 @@ beforeEach(function() {
   this.storage = new lib.Storage.TerminalPrivate('test.path', this.fake);
 });
 
-lib.Storage.ApiTest();
+storageApiTest();
 
 /**
  * Make sure multiple writes collapse into one.

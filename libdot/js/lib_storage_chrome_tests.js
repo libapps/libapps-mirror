@@ -2,11 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Test suite for Chrome storage.
  */
+
+import {storageApiTest} from './lib_storage_tests.js';
 
 describe('lib_storage_chrome_tests.js', () => {
 
@@ -119,6 +119,6 @@ beforeEach(function() {
   this.storage = new lib.Storage.Chrome(fake);
 });
 
-lib.Storage.ApiTest();
+storageApiTest();
 
 });

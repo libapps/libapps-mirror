@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Common storage API tests.
  */
@@ -13,7 +11,7 @@
  *
  * Each implementation should call this to verify functionality.
  */
-lib.Storage.ApiTest = function() {
+export function storageApiTest() {
 
 /**
  * @param {!Object} storage The storage object under test.
@@ -236,4 +234,4 @@ it('observe', function(done) {
   check();
 });
 
-};
+}
