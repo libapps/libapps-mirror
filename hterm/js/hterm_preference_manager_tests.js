@@ -6,12 +6,17 @@
  * @fileoverview Preference manager tests.
  */
 
+/**
+ * The main body of translations.
+ */
+const nasshMessagesPromise = fetch('../../nassh/_locales/en/messages.json');
+
 describe('hterm_preference_manager_tests.js', () => {
 
 /**
  * Make sure hterm translations are kept in sync with nassh.
  */
-it('pref-messages-sync', () => {
+it('pref-messages-sync', async function() {
   const toMsgId = (id) => id.replace(/-/g, '_').toUpperCase();
   const fromMsgId = (id) => id.replace(/_/g, '-').toLowerCase();
   const helpIdToMsgId = (id) => `PREF_${toMsgId(id)}`;
@@ -21,8 +26,15 @@ it('pref-messages-sync', () => {
   const titleIdToMsgId = (id) => `TITLE_PREF_${toMsgId(id)}`;
 
   // Load the translations database from nassh.
+  const td = new TextDecoder();
+  const response = await nasshMessagesPromise;
+  if (!response.ok) {
+    console.warn('Unable to load nassh translations');
+    this.skip();
+    return;
+  }
   const messages = /** @type {!lib.MessageManager.Messages} */
-      (lib.resource.getData('hterm/test/messages'));
+      (JSON.parse(td.decode(await response.arrayBuffer())));
   hterm.messageManager.addMessages(messages);
 
   // Walk the loaded message ids and check for stale entries.

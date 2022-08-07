@@ -16,8 +16,6 @@ hterm.js: The hterm code and bundled resources.
 hterm_resources.js: Only the bundled resources (e.g. audio & icon).
 
 hterm_all.js: hterm_deps.js + hterm.js.  Most apps can just use this.
-
-hterm_test_resources.js: Test-specific resources.
 """
 
 import argparse

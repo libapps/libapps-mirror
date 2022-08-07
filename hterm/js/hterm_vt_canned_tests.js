@@ -120,8 +120,10 @@ afterEach(function() {
  * @param {!hterm.Terminal} terminal The terminal to run canned tests against.
  * @param {string} name The name of canned test.
  */
-const testData = function(terminal, name) {
-  let data = lib.resource.getData(`hterm/test/canned/${name}`);
+const testData = async function(terminal, name) {
+  const td = new TextDecoder();
+  const response = await fetch(`../test_data/${name}.log`);
+  let data = td.decode(await response.arrayBuffer());
 
   let m = data.match(/^(#[^\n]*\n)*@@ HEADER_START/);
   // And that it has optional lead-in comments followed by a header.
@@ -138,6 +140,11 @@ const testData = function(terminal, name) {
 
   let startOffset = 0;
   const headerLines = header.split(/\r?\n/);
+
+  // Make sure the terminal has the exact dimensions now since we rely on this
+  // below with our final asserts.
+  terminal.setWidth(80);
+  terminal.setHeight(25);
 
   for (let headerIndex = 0; headerIndex < headerLines.length; headerIndex++) {
     const line = headerLines[headerIndex];
@@ -179,8 +186,8 @@ const testData = function(terminal, name) {
   'vttest-02',
   'charsets',
 ].forEach((name) => {
-  it(name, function() {
-    testData(this.terminal, name);
+  it(name, async function() {
+    await testData(this.terminal, name);
   }).timeout(5000);
 });
 
