@@ -381,3 +381,24 @@ export function getSyncStorage() {
   }
   return new lib.Storage.Local();
 }
+
+/**
+ * Sanitizes the given URL source into a TrustedScriptURL, or a string if the
+ * Trusted Types API is not available.
+ *
+ * For now, we wrap the given URL into a TrustedScriptURL without modifying it.
+ *
+ * @param {string} url
+ * @return {!TrustedScriptURL|string}
+ */
+ export function sanitizeScriptUrl(url) {
+  if (window?.trustedTypes?.createPolicy) {
+    if (!sanitizeScriptUrl.policy) {
+      sanitizeScriptUrl.policy = trustedTypes.createPolicy('nassh', {
+        createScriptURL: (url) => url,
+      });
+    }
+    return sanitizeScriptUrl.policy.createScriptURL(url);
+  }
+  return url;
+}

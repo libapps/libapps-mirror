@@ -7,6 +7,7 @@
  * @suppress {moduleLoad}
  */
 
+import {sanitizeScriptUrl} from './nassh.js';
 import {Agent} from './nassh_agent.js';
 import {Relay} from './nassh_relay.js';
 import {Stream} from './nassh_stream.js';
@@ -78,7 +79,8 @@ export class Plugin {
     };
     await settings.handler.init();
     this.plugin_ = new WasshProcess.Background(
-        `../wassh/js/worker.js?trace=${this.trace_}`, settings);
+        sanitizeScriptUrl(`../wassh/js/worker.js?trace=${this.trace_}`),
+        settings);
   }
 
   /**

@@ -3,8 +3,9 @@
 // found in the LICENSE file.
 
 import {
-  disableTabDiscarding, getSyncStorage, loadWebFonts, localize, openOptionsPage,
-  runtimeSendMessage, sendFeedback, setupForWebApp, watchBackgroundColor,
+  disableTabDiscarding, getSyncStorage, loadWebFonts, localize,
+  openOptionsPage, runtimeSendMessage, sanitizeScriptUrl, sendFeedback,
+  setupForWebApp, watchBackgroundColor,
 } from './nassh.js';
 import {CommandInstance} from './nassh_command_instance.js';
 
@@ -52,9 +53,8 @@ window.addEventListener('DOMContentLoaded', async (event) => {
 
   // Register stub service worker for PWAs.
   if (navigator?.serviceWorker?.register) {
-    navigator.serviceWorker.register('../js/pwa_service_worker.js', {
-      scope: '/',
-    });
+    navigator.serviceWorker.register(
+      sanitizeScriptUrl('../js/pwa_service_worker.js'), {scope: '/'});
   }
 
   const params = new URLSearchParams(document.location.search);
