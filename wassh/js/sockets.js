@@ -469,6 +469,214 @@ export class RelaySocket extends Socket {
 }
 
 /**
+ * A TCP/IP based socket backed by the Direct Sockets API.
+ *
+ * @see https://wicg.github.io/direct-sockets/
+ */
+ export class WebTcpSocket extends Socket {
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   */
+  constructor(domain, type, protocol) {
+    super(domain, type, protocol);
+
+    this.socket_ = null;
+    this.directSocketsReader_ = null;
+    this.directSocketsWriter_ = null;
+
+    this.tcpKeepAlive_ = false;
+    this.tcpNoDelay_ = false;
+  }
+
+  /** @override */
+  async connect(address, port) {
+    if (this.address !== null) {
+      return WASI.errno.EISCONN;
+    }
+
+    const options = {
+      noDelay: this.tcpNoDelay_,
+    };
+    // Keep alive is disabled by default, so don't specify it if it's disabled.
+    if (this.tcpKeepAlive_) {
+      // Default to 75 seconds to match default Linux TCP_KEEPINTVL.
+      options.keepAliveDelay = 75000;
+    }
+
+    this.socket_ = new TCPSocket(address, port, options);
+
+    try {
+      const {readable, writable} = await this.socket_.opened;
+      this.directSocketsReader_ = readable.getReader();
+      this.directSocketsWriter_ = writable.getWriter();
+    } catch (e) {
+      this.socket_ = null;
+      console.warn('Connecting failed.', e);
+      return WASI.errno.ENETUNREACH;
+    }
+
+    this.address = address;
+    this.port = port;
+
+    this.pollData_();
+
+    return WASI.errno.ESUCCESS;
+  }
+
+  /**
+   * Wait for data from the reader, then notify the socket upon receiving data.
+   */
+  async pollData_() {
+    while (true) {
+      const {value, done} = await this.directSocketsReader_.read();
+      if (done) {
+        break;
+      }
+      this.onRecv(value);
+    }
+  }
+
+  /** @override */
+  async close() {
+    if (this.socket_ === null) {
+      return;
+    }
+
+    this.directSocketsReader_.releaseLock();
+    this.directSocketsWriter_.releaseLock();
+
+    this.directSocketsReader_ = null;
+    this.directSocketsWriter_ = null;
+
+    try {
+      await this.socket_.close();
+      this.socket_ = null;
+    } catch (e) {
+      console.warn('Error with closing socket.', e);
+    }
+
+    this.address = null;
+    this.port = null;
+  }
+
+  /** @override */
+  async write(buf) {
+    try {
+      await this.directSocketsWriter_.ready;
+      await this.directSocketsWriter_.write(buf.buffer);
+      return {nwritten: buf.buffer.byteLength};
+    } catch (e) {
+      console.warn('Chunk error:', e);
+      return WASI.errno.EIO;
+    }
+  }
+
+  /**
+   * @return {!Promise<!chrome.socket.SocketInfo>}
+   */
+  async getSocketInfo() {
+    // Return a stub socketInfo.
+    if (this.socket_ === null) {
+      return /** @type {!chrome.socket.SocketInfo} */ ({
+        connected: false,
+        socketType: 'tcp',
+      });
+    }
+
+    const info = await this.socket_.opened;
+
+    return /** @type {!chrome.socket.SocketInfo} **/ ({
+      connected: true,
+      localAddress: info.localAddress,
+      localPort: info.localPort,
+      peerAddress: info.remoteAddress,
+      peerPort: info.remotePort,
+      socketType: 'tcp',
+    });
+  }
+
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @return {!Promise<{option: number}>}
+   */
+  async getSocketOption(level, name) {
+    switch (level) {
+      case SOL_SOCKET: {
+        switch (name) {
+          case SO_KEEPALIVE:
+            return {option: this.tcpKeepAlive_ ? 1 : 0};
+        }
+        break;
+      }
+
+      case IPPROTO_TCP: {
+        switch (name) {
+          case TCP_NODELAY:
+            return {option: this.tcpNoDelay_ ? 1 : 0};
+        }
+        break;
+      }
+    }
+
+    return WASI.errno.ENOPROTOOPT;
+  }
+
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async setSocketOption(level, name, value) {
+    switch (level) {
+      case SOL_SOCKET: {
+        switch (name) {
+          case SO_KEEPALIVE: {
+            this.tcpKeepAlive_ = value;
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+
+      case IPPROTO_IP: {
+        switch (name) {
+          case IP_TOS: {
+            console.warn(`Ignoring IP_TOS=${value}`);
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+
+      case IPPROTO_TCP: {
+        switch (name) {
+          case TCP_NODELAY: {
+            this.tcpNoDelay_ = value;
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+    }
+
+    return WASI.errno.ENOPROTOOPT;
+  }
+
+  /**
+   * Checks if Direct Sockets API is available to use.
+   *
+   * @return {boolean}
+   */
+   static isSupported() {
+    return window?.TCPSocket !== undefined;
+  }
+}
+
+/**
  * A local/UNIX socket.
  */
 export class UnixSocket extends Socket {
