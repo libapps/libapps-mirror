@@ -61,7 +61,7 @@ export class TerminalLinuxDialog extends LitElement {
     if (this.userTitle_) {
       return this.userTitle_;
     }
-    return hterm.messageManager.get('TERMINAL_HOME_NEW_LINUX_CONNECTION');
+    return hterm.messageManager.get('TERMINAL_HOME_NEW_LINUX');
   }
 
   /** @override */

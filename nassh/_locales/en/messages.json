@@ -2025,6 +2025,10 @@
 		"description": "Label to open system settings at Developer (crostini) subpage.",
 		"message": "Developer Settings"
 	},
+	"TERMINAL_HOME_EDIT_LINUX": {
+		"description": "Label to edit an existing Linux container.",
+		"message": "Edit Linux"
+	},
 	"TERMINAL_HOME_EDIT_SSH": {
 		"description": "Label to edit an existing SSH (Secure SHell) connection.",
 		"message": "Edit SSH"
@@ -2040,6 +2044,10 @@
 	"TERMINAL_HOME_MANAGE": {
 		"description": "Label to manage Linux developer settings.",
 		"message": "Manage"
+	},
+	"TERMINAL_HOME_NEW_LINUX": {
+		"description": "Title for a dialog to create a New Linux container.",
+		"message": "New Linux"
 	},
 	"TERMINAL_HOME_NEW_SSH_CONNECTION": {
 		"description": "Title for a dialog to create a New SSH (Secure SHell) connection",
