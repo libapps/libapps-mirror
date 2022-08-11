@@ -81,6 +81,8 @@
 
 import sys
 
+# https://github.com/PyCQA/pylint/issues/7289
+# pylint: disable=no-name-in-module
 from pylint import lint
 
 lint.Run(sys.argv[1:])
