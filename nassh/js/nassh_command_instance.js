@@ -56,8 +56,15 @@ export function CommandInstance({io, ...argv}) {
   // Parsed extension manifest.
   this.manifest_ = null;
 
+  // WASM requires SABs, so if they aren't available, fallback to NaCl.
+  // chrome-untrusted:// doesn't have access to any socket APIs yet, so
+  // fallback to NaCl there as well.
+  const naclSupported =
+      navigator.mimeTypes['application/x-pnacl'] !== undefined ||
+      window.SharedArrayBuffer === undefined ||
+      location.href.startsWith('chrome-untrusted://');
   // The version of the ssh client to load.
-  this.sshClientVersion_ = 'pnacl';
+  this.sshClientVersion_ = naclSupported ? 'pnacl' : 'wasm';
 
   // Application ID of auth agent.
   this.authAgentAppID_ = null;
