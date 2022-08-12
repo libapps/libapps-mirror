@@ -671,7 +671,7 @@ export class RelaySocket extends Socket {
    *
    * @return {boolean}
    */
-   static isSupported() {
+  static isSupported() {
     return window?.TCPSocket !== undefined;
   }
 }
