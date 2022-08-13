@@ -482,8 +482,10 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
               this.firstConnection_ = false;
             } else if (Sockets.WebTcpSocket.isSupported()) {
               handle = new Sockets.WebTcpSocket(domain, type, protocol);
-            } else {
+            } else if (Sockets.ChromeTcpSocket.isSupported()) {
               handle = new Sockets.ChromeTcpSocket(domain, type, protocol);
+            } else {
+              return WASI.errno.EPROTONOSUPPORT;
             }
             break;
           case WASI.filetype.SOCKET_DGRAM:

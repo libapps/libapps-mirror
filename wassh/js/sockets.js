@@ -123,6 +123,15 @@ export class Socket extends VFS.PathHandle {
   setReceiveListener(listener) {
     this.receiveListener_ = listener;
   }
+
+  /**
+   * Checks if the API is available to use.
+   *
+   * @return {boolean}
+   */
+  static isSupported() {
+    return true;
+  }
 }
 
 /**
@@ -146,10 +155,6 @@ export class ChromeTcpSocket extends Socket {
 
   /** @override */
   async init() {
-    if (!window.chrome || !chrome.sockets || !chrome.sockets.tcp) {
-      return;
-    }
-
     const info = await new Promise((resolve) => {
       chrome.sockets.tcp.create(resolve);
     });
@@ -322,6 +327,11 @@ export class ChromeTcpSocket extends Socket {
     }
 
     return WASI.errno.ENOPROTOOPT;
+  }
+
+  /** @override */
+  static isSupported() {
+    return window?.chrome?.sockets?.tcp !== undefined;
   }
 }
 
@@ -682,11 +692,7 @@ export class RelaySocket extends Socket {
     return WASI.errno.ENOPROTOOPT;
   }
 
-  /**
-   * Checks if Direct Sockets API is available to use.
-   *
-   * @return {boolean}
-   */
+  /** @override */
   static isSupported() {
     return window?.TCPSocket !== undefined;
   }
