@@ -89,6 +89,16 @@ int sock_bind(__wasi_fd_t sock, int domain, const uint8_t* addr,
   return 0;
 }
 
+SYSCALL(sock_listen)(__wasi_fd_t sock, int backlog);
+int sock_listen(__wasi_fd_t sock, int backlog) {
+  __wasi_errno_t error = __wassh_sock_listen(sock, backlog);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return 0;
+}
+
 SYSCALL(sock_register_fake_addr)(int idx, const char* name, size_t namelen);
 void sock_register_fake_addr(int idx, const char* name) {
   size_t namelen = strlen(name);

@@ -58,6 +58,17 @@ Same semantics as standard Linux/POSIX [bind(2)] function.
 
 [bind(2)]: https://man7.org/linux/man-pages/man2/bind.2.html
 
+### __wassh_sock_listen
+
+`__wasi_errno_t sock_listen(__wasi_fd_t sock, int backlog)`
+
+* `sock`: The existing open socket to listen.
+* `backlog`: Max pending connections to allow.
+
+Same semantics as standard Linux/POSIX [listen(2)] function.
+
+[listen(2)]: https://man7.org/linux/man-pages/man2/listen.2.html
+
 ### __wassh_sock_register_fake_addr
 
 `__wasi_errno_t sock_register_fake_addr(int idx, const char* name, size_t namelen)`

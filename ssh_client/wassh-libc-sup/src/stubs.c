@@ -36,9 +36,6 @@
   return val; \
 }
 
-int listen(int sockfd, int backlog) {
-  STUB_ENOSYS(-1, "sockfd=%i backlog=%i", sockfd, backlog);
-}
 int accept(int sockfd, struct sockaddr* addr, socklen_t* addrlen) {
   STUB_ENOSYS(-1, "");
 }

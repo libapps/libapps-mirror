@@ -63,6 +63,15 @@ export class WasshExperimental extends SyscallEntry.Base {
     return this.handle_sock_bind(sock, address, port);
   }
 
+  /**
+   * @param {!WASI_t.fd} sock
+   * @param {!WASI_t.s32} backlog
+   * @return {!WASI_t.errno}
+   */
+  sys_sock_listen(sock, backlog) {
+    return this.handle_sock_listen(sock, backlog);
+  }
+
   sys_sock_register_fake_addr(idx, name_ptr, namelen) {
     const td = new TextDecoder();
     const buf = this.getMem_(name_ptr, name_ptr + namelen);

@@ -7,7 +7,9 @@
 #ifndef _WASSH_TRACE_H
 #define _WASSH_TRACE_H
 
+#include <errno.h>
 #include <stdio.h>
+#include <string.h>
 
 #ifdef NDEBUG
 # define DEBUG_ENABLED 0

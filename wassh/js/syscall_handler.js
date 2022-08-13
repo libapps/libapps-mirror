@@ -469,6 +469,15 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /**
+   * @param {number} socket
+   * @param {number} backlog
+   * @return {!WASI_t.errno}
+   */
+  handle_sock_listen(socket, backlog) {
+    return WASI.errno.ENOSYS;
+  }
+
+  /**
    * @param {number} idx
    * @param {string} name
    * @return {!WASI_t.errno}

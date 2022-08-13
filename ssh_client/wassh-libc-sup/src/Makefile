@@ -27,6 +27,7 @@ C_SOURCES := \
 	getsockname.c \
 	getsockopt.c \
 	ioctl.c \
+	listen.c \
 	setsockopt.c \
 	signal.c \
 	socket.c \
