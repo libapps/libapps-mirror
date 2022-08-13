@@ -125,6 +125,25 @@ export class Socket extends VFS.PathHandle {
   }
 
   /**
+   * @param {number} level
+   * @param {number} name
+   * @return {!Promise<{option: number}>}
+   */
+  async getSocketOption(level, name) {
+    return WASI.errno.ENOPROTOOPT;
+  }
+
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async setSocketOption(level, name, value) {
+    return WASI.errno.ENOPROTOOPT;
+  }
+
+  /**
    * Checks if the API is available to use.
    *
    * @return {boolean}
@@ -245,11 +264,7 @@ export class ChromeTcpSocket extends Socket {
     });
   }
 
-  /**
-   * @param {number} level
-   * @param {number} name
-   * @return {!Promise<{option: number}>}
-   */
+  /** @override */
   async getSocketOption(level, name) {
     switch (level) {
       case SOL_SOCKET: {
@@ -272,12 +287,7 @@ export class ChromeTcpSocket extends Socket {
     return WASI.errno.ENOPROTOOPT;
   }
 
-  /**
-   * @param {number} level
-   * @param {number} name
-   * @param {number} value
-   * @return {!Promise<!WASI_t.errno>}
-   */
+  /** @override */
   async setSocketOption(level, name, value) {
     switch (level) {
       case SOL_SOCKET: {
@@ -422,11 +432,7 @@ export class RelaySocket extends Socket {
     });
   }
 
-  /**
-   * @param {number} level
-   * @param {number} name
-   * @return {!Promise<{option: number}>}
-   */
+  /** @override */
   async getSocketOption(level, name) {
     switch (level) {
       case SOL_SOCKET: {
@@ -449,12 +455,7 @@ export class RelaySocket extends Socket {
     return WASI.errno.ENOPROTOOPT;
   }
 
-  /**
-   * @param {number} level
-   * @param {number} name
-   * @param {number} value
-   * @return {!Promise<!WASI_t.errno>}
-   */
+  /** @override */
   async setSocketOption(level, name, value) {
     switch (level) {
       case SOL_SOCKET: {
@@ -623,11 +624,7 @@ export class RelaySocket extends Socket {
     });
   }
 
-  /**
-   * @param {number} level
-   * @param {number} name
-   * @return {!Promise<{option: number}>}
-   */
+  /** @override */
   async getSocketOption(level, name) {
     switch (level) {
       case SOL_SOCKET: {
@@ -650,12 +647,7 @@ export class RelaySocket extends Socket {
     return WASI.errno.ENOPROTOOPT;
   }
 
-  /**
-   * @param {number} level
-   * @param {number} name
-   * @param {number} value
-   * @return {!Promise<!WASI_t.errno>}
-   */
+  /** @override */
   async setSocketOption(level, name, value) {
     switch (level) {
       case SOL_SOCKET: {
