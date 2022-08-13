@@ -20,6 +20,49 @@ export class WasshExperimental extends SyscallEntry.Base {
     this.namespace = 'wassh_experimental';
   }
 
+  /**
+   * @param {!WASI_t.fd} sock
+   * @param {!WASI_t.s32} domain
+   * @param {!WASI_t.pointer} addr_ptr
+   * @param {!WASI_t.u16} port
+   * @return {!WASI_t.errno}
+   */
+  sys_sock_bind(sock, domain, addr_ptr, port) {
+    let address;
+    switch (domain) {
+      case Constants.AF_INET: {
+        const dv = this.getView_(addr_ptr, 4);
+        const bytes = this.getMem_(addr_ptr, addr_ptr + 4);
+        // If address is within the fake range (0.0.0.0/8), pass it as an
+        // integer to look up the real host later.
+        address = dv.getUint32(0, true);
+        if (address >= 0x1000000) {
+          address = bytes.join('.');
+        }
+        break;
+      }
+
+      case Constants.AF_INET6: {
+        const bytes = this.getMem_(addr_ptr, addr_ptr + 16);
+        if (bytes[0] === 1) {
+          // If address is within the fake range (100::/64), pass it as an
+          // integer to look up the real host later.
+          address = bytes[15];
+        } else {
+          // TODO(vapier): Check endianness; might need DataView via getView_().
+          const u16 = new Uint16Array(bytes.buffer, bytes.bytesOffset, 8);
+          address = Array.from(u16).map(
+              (b) => b.toString(16).padStart(4, '0')).join(':');
+        }
+        break;
+      }
+
+      default:
+        return WASI.errno.EAFNOSUPPORT;
+    }
+    return this.handle_sock_bind(sock, address, port);
+  }
+
   sys_sock_register_fake_addr(idx, name_ptr, namelen) {
     const td = new TextDecoder();
     const buf = this.getMem_(name_ptr, name_ptr + namelen);

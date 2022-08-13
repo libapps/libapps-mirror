@@ -41,6 +41,23 @@ Same semantics as standard Linux/POSIX [dup2(2)] function.
 
 See the [wassh sockets design] for higher level details.
 
+### __wassh_sock_bind
+
+`__wasi_errno_t sock_bind(__wasi_fd_t sock, int domain, const uint8_t* addr, uint16_t port)`
+
+* `sock`: The existing open socket to bind.
+* `domain`: The communication domain.
+  * `AF_INET`: IPv4
+  * `AF_INET6`: IPv6
+* `addr`: Pointer to a domain-specific address buffer.
+  * `AF_INET`: A 32-bit IPv4 address (in network/big endian)
+  * `AF_INET6`: A 128-bit IPv6 address (in network/big endian)
+* `port`: The port to bind.
+
+Same semantics as standard Linux/POSIX [bind(2)] function.
+
+[bind(2)]: https://man7.org/linux/man-pages/man2/bind.2.html
+
 ### __wassh_sock_register_fake_addr
 
 `__wasi_errno_t sock_register_fake_addr(int idx, const char* name, size_t namelen)`

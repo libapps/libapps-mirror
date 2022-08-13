@@ -36,10 +36,6 @@
   return val; \
 }
 
-int bind(int sockfd, const struct sockaddr* addr, socklen_t addrlen) {
-  STUB_ENOSYS(-1, "sockfd=%i addr=%p addrlen=%i", sockfd, addr, addrlen);
-}
-
 int listen(int sockfd, int backlog) {
   STUB_ENOSYS(-1, "sockfd=%i backlog=%i", sockfd, backlog);
 }

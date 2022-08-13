@@ -458,6 +458,21 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return {events, signals};
   }
 
+  /**
+   * @param {number} socket
+   * @param {string} address
+   * @param {number} port
+   * @return {!WASI_t.errno}
+   */
+  handle_sock_bind(socket, address, port) {
+    return WASI.errno.ENOSYS;
+  }
+
+  /**
+   * @param {number} idx
+   * @param {string} name
+   * @return {!WASI_t.errno}
+   */
   handle_sock_register_fake_addr(idx, name) {
     this.fakeAddrMap_.set(idx, name);
     return WASI.errno.ESUCCESS;

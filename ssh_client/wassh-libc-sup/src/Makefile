@@ -18,6 +18,7 @@ CPPFLAGS += -DNDEBUG
 
 C_SOURCES := \
 	bh-syscalls.c \
+	bind.c \
 	connect.c \
 	dup.c \
 	dup2.c \

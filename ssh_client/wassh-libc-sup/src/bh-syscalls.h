@@ -22,6 +22,8 @@ __BEGIN_DECLS
 
 struct winsize;
 
+int sock_bind(__wasi_fd_t sock, int domain, const uint8_t* addr,
+              uint16_t port);
 void sock_register_fake_addr(int idx, const char* name);
 __wasi_fd_t sock_create(int domain, int type, int protocol);
 int sock_connect(__wasi_fd_t sock, int domain, const uint8_t* addr,

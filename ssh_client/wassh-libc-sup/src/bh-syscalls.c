@@ -77,6 +77,18 @@ char* readpassphrase(const char* prompt, char* buf, size_t buf_len, int flags) {
   return buf;
 }
 
+SYSCALL(sock_bind)(__wasi_fd_t sock, int domain, const uint8_t* addr,
+                   uint16_t port);
+int sock_bind(__wasi_fd_t sock, int domain, const uint8_t* addr,
+              uint16_t port) {
+  __wasi_errno_t error = __wassh_sock_bind(sock, domain, addr, port);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return 0;
+}
+
 SYSCALL(sock_register_fake_addr)(int idx, const char* name, size_t namelen);
 void sock_register_fake_addr(int idx, const char* name) {
   size_t namelen = strlen(name);
