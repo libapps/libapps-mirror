@@ -55,9 +55,9 @@
     "val-loader": "~2",
     "webpack": "~5",
     "webpack-cli": "~4",
-    "xterm": "^4.18.0",
+    "xterm": "^4.19.0",
     "xterm-addon-fit": "^0.5.0",
-    "xterm-addon-webgl": "^0.11.4"
+    "xterm-addon-webgl": "^0.12.0"
   },
   "bugs": {
     "url": "https://goo.gl/vb94JY",
