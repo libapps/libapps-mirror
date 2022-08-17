@@ -811,7 +811,11 @@ class ChromeTcpSocketEventRouter {
   onSocketTcpRecv_({socketId, data}) {
     const handle = this.socketMap_.get(socketId);
     if (handle === undefined) {
-      console.warn(`Data received for unknown socket ${socketId}`);
+      // We don't do anything about this because Chrome broadcasts events to all
+      // instances of Secure Shell.  The sockets are not bound to the specific
+      // runtime.
+      // console.warn(`Data received for unknown socket ${socketId}`);
+      // chrome.sockets.tcp.close(socketId);
       return;
     }
 
