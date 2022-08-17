@@ -1,0 +1,24 @@
+/*
+ * Copyright 2022 The ChromiumOS Authors.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+/**
+ * Dark mode settings for generated man pages.
+ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --nassh-dm-bg-color: rgb(32, 33, 36);
+    --nassh-dm-fg-color: rgb(232, 234, 237);
+    --interactive-color: rgb(138, 180, 248);
+  }
+  html {
+    background-color: var(--nassh-dm-bg-color);
+    color: var(--nassh-dm-fg-color);
+  }
+  a {
+    color: var(--interactive-color);
+  }
+}

@@ -38,5 +38,14 @@ def src_install(metadata):
     path = ssh_client.BUILD_BINDIR / "mandoc"
     ssh_client.symlink(target, path)
 
+    # Copy style files used by generated man pages.
+    plugin_docs = ssh_client.OUTPUT / "plugin" / "docs"
+    plugin_docs.mkdir(parents=True, exist_ok=True)
+    target_css = plugin_docs / "mandoc.css"
+    ssh_client.copy("mandoc.css", target_css)
+    # Insert our darkmode settings.
+    data = "@import '../../css/mandoc-darkmode.css';\n" + target_css.read_text()
+    target_css.write_text(data)
+
 
 ssh_client.build_package(sys.modules[__name__], "build")

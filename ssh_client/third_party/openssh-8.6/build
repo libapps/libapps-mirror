@@ -110,7 +110,7 @@ def src_configure(metadata):
                 (
                     b"\tmandoc -Thtml -I os="
                     + metadata["p"].encode("utf-8")
-                    + b" -O man=%N.%S.html $< >$@.tmp\n"
+                    + b" -O man=%N.%S.html,style=mandoc.css $< >$@.tmp\n"
                 ),
                 b"\tmv $@.tmp $@\n",
             ]
