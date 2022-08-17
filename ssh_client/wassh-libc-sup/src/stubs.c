@@ -15,9 +15,6 @@
 #include <string.h>
 #include <syslog.h>
 
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <netinet/ip.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 
@@ -34,10 +31,6 @@
   _ENTER("STUB " fmt, ##args); \
   _EXIT("return " #val); \
   return val; \
-}
-
-int accept(int sockfd, struct sockaddr* addr, socklen_t* addrlen) {
-  STUB_ENOSYS(-1, "");
 }
 
 // ssize_t send(int sockfd, const void* buf, size_t len, int flags);

@@ -17,6 +17,7 @@ CPPFLAGS += -I$(SRCDIR)/../include
 CPPFLAGS += -DNDEBUG
 
 C_SOURCES := \
+	accept.c \
 	bh-syscalls.c \
 	bind.c \
 	connect.c \

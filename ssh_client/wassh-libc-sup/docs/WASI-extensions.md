@@ -41,6 +41,19 @@ Same semantics as standard Linux/POSIX [dup2(2)] function.
 
 See the [wassh sockets design] for higher level details.
 
+### __wassh_sock_accept
+
+`__wasi_errno_t sock_accept(__wasi_fd_t sock, __wasi_fd_t* newsock)`
+
+* `sock`: The existing open socket to fetch new socket from.
+* `newsock` (output): The new socket for the new connection.
+
+Same semantics as standard Linux/POSIX [accept(2)] function.
+
+The `addr` output is not currently supported as it doesn't appear to be used.
+
+[accept(2)]: https://man7.org/linux/man-pages/man2/accept.2.html
+
 ### __wassh_sock_bind
 
 `__wasi_errno_t sock_bind(__wasi_fd_t sock, int domain, const uint8_t* addr, uint16_t port)`

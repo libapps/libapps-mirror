@@ -22,6 +22,7 @@ __BEGIN_DECLS
 
 struct winsize;
 
+int sock_accept(__wasi_fd_t sock, __wasi_fd_t* newsock);
 int sock_bind(__wasi_fd_t sock, int domain, const uint8_t* addr,
               uint16_t port);
 int sock_listen(__wasi_fd_t sock, int backlog);

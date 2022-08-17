@@ -77,6 +77,16 @@ char* readpassphrase(const char* prompt, char* buf, size_t buf_len, int flags) {
   return buf;
 }
 
+SYSCALL(sock_accept)(__wasi_fd_t sock, __wasi_fd_t* newsock);
+int sock_accept(__wasi_fd_t sock, __wasi_fd_t* newsock) {
+  __wasi_errno_t error = __wassh_sock_accept(sock, newsock);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return 0;
+}
+
 SYSCALL(sock_bind)(__wasi_fd_t sock, int domain, const uint8_t* addr,
                    uint16_t port);
 int sock_bind(__wasi_fd_t sock, int domain, const uint8_t* addr,

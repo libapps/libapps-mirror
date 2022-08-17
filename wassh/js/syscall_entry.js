@@ -22,6 +22,23 @@ export class WasshExperimental extends SyscallEntry.Base {
 
   /**
    * @param {!WASI_t.fd} sock
+   * @param {!WASI_t.pointer} newsock_ptr
+   * @return {!WASI_t.errno}
+   */
+  sys_sock_accept(sock, newsock_ptr) {
+    const ret = this.handle_sock_accept(sock);
+    if (typeof ret === 'number') {
+      return ret;
+    }
+
+    const dv = this.getView_(newsock_ptr, 4);
+    dv.setFd(0, ret.socket, true);
+
+    return WASI.errno.ESUCCESS;
+  }
+
+  /**
+   * @param {!WASI_t.fd} sock
    * @param {!WASI_t.s32} domain
    * @param {!WASI_t.pointer} addr_ptr
    * @param {!WASI_t.u16} port

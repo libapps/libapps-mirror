@@ -460,6 +460,14 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
 
   /**
    * @param {number} socket
+   * @return {!WASI_t.errno}
+   */
+  handle_sock_accept(socket) {
+    return WASI.errno.ENOSYS;
+  }
+
+  /**
+   * @param {number} socket
    * @param {string} address
    * @param {number} port
    * @return {!WASI_t.errno}
