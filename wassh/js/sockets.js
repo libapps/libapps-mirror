@@ -126,6 +126,30 @@ export class Socket extends VFS.PathHandle {
   }
 
   /**
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   */
+  async accept() {
+    return WASI.errno.EINVAL;
+  }
+
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   */
+  async bind(address, port) {
+    return WASI.errno.EINVAL;
+  }
+
+  /**
+   * @param {number} backlog
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async listen(backlog) {
+    return WASI.errno.EINVAL;
+  }
+
+  /**
    * @param {number} level
    * @param {number} name
    * @return {!Promise<{option: number}>}
@@ -174,12 +198,16 @@ export class ChromeTcpSocket extends Socket {
   }
 
   /** @override */
-  async init() {
-    const info = await new Promise((resolve) => {
-      chrome.sockets.tcp.create(resolve);
-    });
+  async init(socketId = undefined) {
+    if (socketId === undefined) {
+      const info = await new Promise((resolve) => {
+        chrome.sockets.tcp.create(resolve);
+      });
 
-    this.socketId_ = info.socketId;
+      this.socketId_ = info.socketId;
+    } else {
+      this.socketId_ = socketId;
+    }
 
     if (ChromeTcpSocket.eventRouter_ === null) {
       ChromeTcpSocket.eventRouter_ = new ChromeTcpSocketEventRouter();
@@ -263,6 +291,19 @@ export class ChromeTcpSocket extends Socket {
     return new Promise((resolve) => {
       chrome.sockets.tcp.getInfo(this.socketId_, resolve);
     });
+  }
+
+  /** @override */
+  async bind(address, port) {
+    const handle = new ChromeTcpListenSocket(
+        this.domain, this.filetype, this.protocol);
+    await handle.init();
+    const result = await handle.bind(address, port);
+    if (result !== 0) {
+      handle.close();
+      return result;
+    }
+    return handle;
   }
 
   /** @override */
@@ -358,6 +399,168 @@ export class ChromeTcpSocket extends Socket {
  * @type {?ChromeTcpSocketEventRouter}
  */
 ChromeTcpSocket.eventRouter_ = null;
+
+/**
+ * A TCP/IP based listening socket backed by the chrome.sockets.tcpServer API.
+ */
+export class ChromeTcpListenSocket extends Socket {
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   */
+  constructor(domain, type, protocol) {
+    super(domain, type, protocol);
+
+    /** @type {number} */
+    this.socketId_ = -1;
+
+    /** @type {!Array<!ChromeTcpSocket>} */
+    this.clients_ = [];
+    this.callback_ = null;
+  }
+
+  /** @override */
+  async init() {
+    const info = await new Promise((resolve) => {
+      chrome.sockets.tcpServer.create(resolve);
+    });
+
+    this.socketId_ = info.socketId;
+
+    if (ChromeTcpListenSocket.eventRouter_ === null) {
+      ChromeTcpListenSocket.eventRouter_ =
+          new ChromeTcpListenSocketEventRouter();
+    }
+
+    ChromeTcpListenSocket.eventRouter_.register(this.socketId_, this);
+  }
+
+  /** @override */
+  async close() {
+    // In the *NIX world, close must never fail.  That's why we don't return
+    // any errors here.
+
+    if (this.socketId_ === -1) {
+      return;
+    }
+
+    // If a socket was created but not connected, we can't disconnect it, but we
+    // need to stiil close it.
+    if (this.address) {
+      // We wait for the disconnect only so that we can reset the internal
+      // state below, but we could probably wait for the close too if needed.
+      await new Promise((resolve) => {
+        chrome.sockets.tcpServer.disconnect(this.socketId_, resolve);
+      });
+    }
+
+    chrome.sockets.tcpServer.close(this.socketId_);
+    ChromeTcpListenSocket.eventRouter_.unregister(this.socketId_);
+
+    this.socketId_ = -1;
+    this.address = null;
+    this.port = null;
+  }
+
+  /**
+   * @return {!Promise<!chrome.socket.SocketInfo>}
+   */
+  async getSocketInfo() {
+    return new Promise((resolve) => {
+      chrome.sockets.tcpServer.getInfo(this.socketId_, resolve);
+    });
+  }
+
+  /** @override */
+  async accept() {
+    const result = this.clients_.shift();
+    if (result !== undefined) {
+      return result;
+    }
+
+    return new Promise((resolve) => {
+      this.callback_ = () => {
+        resolve(this.clients_.shift());
+        this.callback_ = null;
+      };
+    });
+  }
+
+  /**
+   * @param {number} socketId
+   */
+  async onAccept(socketId) {
+    const handle = new ChromeTcpSocket(
+        this.domain, this.filetype, this.protocol);
+    await handle.init(socketId);
+    this.clients_.push(handle);
+    if (this.callback_) {
+      this.callback_();
+    }
+
+    // The Chrome API pauses new sockets by default, so unpause them.
+    await new Promise((resolve) => {
+      chrome.sockets.tcp.setPaused(socketId, false, resolve);
+    });
+
+    if (this.receiveListener_) {
+      this.receiveListener_();
+    }
+  }
+
+  /** @override */
+  async bind(address, port) {
+    if (this.address !== null) {
+      return WASI.errno.EADDRINUSE;
+    }
+
+    this.address = address;
+    this.port = port;
+    return WASI.errno.ESUCCESS;
+  }
+
+  /** @override */
+  async listen(backlog) {
+    const result = await new Promise((resolve) => {
+      // If the caller hasn't called bind(), then POSIX tries to bind a random
+      // address with a random port.  If those fail, it returns EADDRINUSE.  We
+      // don't bother and immediately return EADDRINUSE.  This isn't exactly
+      // correct, but it's also not exactly incorrect.
+      if (this.address === null || this.port === null) {
+        resolve(-147);
+        return;
+      }
+
+      chrome.sockets.tcpServer.listen(
+          this.socketId_, this.address, this.port, backlog, resolve);
+    });
+
+    switch (result) {
+      case 0:
+        return WASI.errno.ESUCCESS;
+      case -4:
+        return WASI.errno.EINVAL;
+      case -147:
+        return WASI.errno.EADDRINUSE;
+      default:
+        // NB: Should try to translate these error codes.
+        return WASI.errno.ENETUNREACH;
+    }
+  }
+
+  /** @override */
+  static isSupported() {
+    return window?.chrome?.sockets?.tcpServer !== undefined;
+  }
+}
+
+/**
+ * Used to route receive events to all ChromeTcpListenSockets.
+ *
+ * @type {?ChromeTcpListenSocketEventRouter}
+ */
+ChromeTcpListenSocket.eventRouter_ = null;
 
 /**
  * A TCP/IP based socket backed by a Stream. Used to connect to a relay server.
@@ -820,5 +1023,59 @@ class ChromeTcpSocketEventRouter {
     }
 
     handle.onRecv(data);
+  }
+}
+
+/**
+ * Maps socketIds to sockets and forwards data received to the sockets.
+ */
+class ChromeTcpListenSocketEventRouter {
+  constructor() {
+    this.socketMap_ = new Map();
+
+    const listener = this.onSocketTcpAccept_.bind(this);
+    chrome.sockets.tcpServer.onAccept.addListener(listener);
+  }
+
+  /**
+   * Registers the given ChromeTcpListenSocket with the router.
+   *
+   * Sockets must be registered in order to be notified when they receive
+   * data.
+   *
+   * @param {number} socketId
+   * @param {!ChromeTcpListenSocket} socket
+   */
+  register(socketId, socket) {
+    this.socketMap_.set(socketId, socket);
+  }
+
+  /**
+   * Unregisters the ChromeTcpListenSocket with the given ID from the router.
+   *
+   * @param {number} socketId
+   */
+  unregister(socketId) {
+    this.socketMap_.delete(socketId);
+  }
+
+  /**
+   * The onReceive listener for the chrome.sockets API which forwards data to
+   * the associated ChromeTcpListenSocket.
+   *
+   * @param {!chrome.sockets.tcpServer.AcceptEventData} options
+   */
+  onSocketTcpAccept_({socketId, clientSocketId}) {
+    const handle = this.socketMap_.get(socketId);
+    if (handle === undefined) {
+      // We don't do anything about this because Chrome broadcasts events to all
+      // instances of Secure Shell.  The sockets are not bound to the specific
+      // runtime.
+      // console.warn(`Connection received for unknown socket ${socketId}`);
+      // chrome.sockets.tcpServer.close(socketId);
+      return;
+    }
+
+    handle.onAccept(clientSocketId);
   }
 }

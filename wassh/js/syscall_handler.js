@@ -410,9 +410,10 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
           } else if (handle instanceof Sockets.Socket ||
                      handle instanceof Tty) {
             // If it's a socket, see if any data is available.
-            if (subscription.tag === WASI.eventtype.FD_READ &&
-                handle.data.length) {
-              events.push(eventBase);
+            if (subscription.tag === WASI.eventtype.FD_READ) {
+              if (handle.data.length || handle?.clients_?.length) {
+                events.push(eventBase);
+              }
             } else if (subscription.tag === WASI.eventtype.FD_WRITE) {
               events.push(eventBase);
             }
@@ -462,8 +463,28 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
    * @param {number} socket
    * @return {!WASI_t.errno}
    */
-  handle_sock_accept(socket) {
-    return WASI.errno.ENOSYS;
+  async handle_sock_accept(socket) {
+    const handle = this.vfs.getFileHandle(socket);
+    if (handle === undefined) {
+      return WASI.errno.EBADF;
+    }
+    if (!(handle instanceof Sockets.Socket)) {
+      return WASI.errno.ENOTSOCK;
+    }
+
+    const newHandle = await handle.accept();
+    if (typeof newHandle === 'number') {
+      return newHandle;
+    }
+    newHandle.setReceiveListener(() => {
+      if (this.notify_) {
+        this.notify_();
+      }
+    });
+    // NB: The accept code already initialized the socket.
+
+    const newSocket = this.vfs.openHandle(newHandle);
+    return {socket: newSocket};
   }
 
   /**
@@ -472,8 +493,27 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
    * @param {number} port
    * @return {!WASI_t.errno}
    */
-  handle_sock_bind(socket, address, port) {
-    return WASI.errno.ENOSYS;
+  async handle_sock_bind(socket, address, port) {
+    const handle = this.vfs.getFileHandle(socket);
+    if (handle === undefined) {
+      return WASI.errno.EBADF;
+    }
+    if (!(handle instanceof Sockets.Socket)) {
+      return WASI.errno.ENOTSOCK;
+    }
+
+    const newHandle = await handle.bind(address, port);
+    if (typeof newHandle === 'number') {
+      return newHandle;
+    }
+    if (newHandle !== handle) {
+      // In case the handle changes, hot swap it.
+      newHandle.receiveListener_ = handle.receiveListener_;
+      handle.close();
+      this.vfs.fds_.set(socket, newHandle);
+    }
+
+    return WASI.errno.ESUCCESS;
   }
 
   /**
@@ -504,8 +544,16 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
    * @param {number} backlog
    * @return {!WASI_t.errno}
    */
-  handle_sock_listen(socket, backlog) {
-    return WASI.errno.ENOSYS;
+  async handle_sock_listen(socket, backlog) {
+    const handle = this.vfs.getFileHandle(socket);
+    if (handle === undefined) {
+      return WASI.errno.EBADF;
+    }
+    if (!(handle instanceof Sockets.Socket)) {
+      return WASI.errno.ENOTSOCK;
+    }
+
+    return handle.listen(backlog);
   }
 
   /**
@@ -647,7 +695,12 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     const strAddress = remote ? info.peerAddress : info.localAddress;
     let address;
     let family;
-    if (info.peerAddress.includes('.')) {
+    if (strAddress === undefined) {
+      // TODO(vapier): Probably need to extend Chrome APIs to set these all the
+      // time.  A socket opened via tcpServer seems to be missing local info.
+      family = Constants.AF_INET;
+      address = [0, 0, 0, 0];
+    } else if (strAddress.includes('.')) {
       family = Constants.AF_INET;
       address = strAddress.split('.').map((x) => parseInt(x, 10));
     } else {
@@ -656,7 +709,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       address = strAddress.split(':').map((x) => parseInt(x, 16));
     }
 
-    const port = remote ? info.peerPort : info.localPort;
+    const port = (remote ? info.peerPort : info.localPort) ?? 0;
     return {family, address, port};
   }
 
