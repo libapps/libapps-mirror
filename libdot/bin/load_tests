@@ -142,11 +142,15 @@ def test_runner_main(argv, path, serve=False, mkdeps=False):
         logging.info('Running tests against browser "%s".', browser)
         logging.info("Tests page: %s", path)
         if opts.visible:
+            cmd = [browser, f"--user-data-dir={profile_dir}", path] + sb_arg
+            logging.info(
+                "Running: %s\n  (cwd = %s)",
+                libdot.cmdstr(cmd),
+                os.getcwd(),
+            )
             # We want to orphan this process.
             # pylint: disable=consider-using-with
-            subprocess.Popen(
-                [browser, f"--user-data-dir={profile_dir}", path] + sb_arg
-            )
+            subprocess.Popen(cmd)
         else:
             # The standalone mocha runner doesn't have a timeout.  The headless
             # one defaults to 1 minute which is too slow for some of our suites.
