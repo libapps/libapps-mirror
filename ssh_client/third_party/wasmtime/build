@@ -5,11 +5,11 @@
 
 """Build wasmtime package."""
 
-import os
+from pathlib import Path
 import sys
 
-FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
@@ -21,8 +21,8 @@ S = "%(workdir)s/%(PN)s-v%(PV)s-x86_64-linux"
 def src_install(metadata):
     """Install the package."""
     for prog in ("wasmtime",):
-        target = os.path.join(metadata["S"], prog)
-        path = os.path.join(ssh_client.BUILD_BINDIR, prog)
+        target = metadata["S"] / prog
+        path = ssh_client.BUILD_BINDIR / prog
         ssh_client.symlink(target, path)
 
 

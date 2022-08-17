@@ -5,12 +5,11 @@
 
 """Build mosh-chrome package."""
 
-import os
 from pathlib import Path
 import sys
 
-FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
@@ -47,7 +46,7 @@ def src_compile(_metadata):
             "//:mosh_chrome",
             "--config=pnacl",
         ],
-        extra_env={"DISTDIR": ssh_client.DISTDIR},
+        extra_env={"DISTDIR": str(ssh_client.DISTDIR)},
     )
 
 

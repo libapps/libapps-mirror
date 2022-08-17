@@ -5,11 +5,11 @@
 
 """Build wasi-sdk package."""
 
-import os
+from pathlib import Path
 import sys
 
-FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
@@ -20,7 +20,7 @@ PATCHES = ("%(p)s-ififo.patch",)
 
 def src_install(metadata):
     """Install the package."""
-    path = os.path.join(ssh_client.OUTPUT, "wasi-sdk")
+    path = ssh_client.OUTPUT / "wasi-sdk"
     ssh_client.symlink(metadata["S"], path)
 
 

@@ -25,22 +25,22 @@ import libdot  # pylint: disable=wrong-import-position
 
 
 # The top output directory.  Everything lives under this.
-OUTPUT = os.path.join(DIR, "output")
+OUTPUT = DIR / "output"
 
 # Where archives are cached for fetching & unpacking.
-DISTDIR = os.path.join(OUTPUT, "distfiles")
+DISTDIR = OUTPUT / "distfiles"
 
 # All package builds happen under this path.
-BUILDDIR = os.path.join(OUTPUT, "build")
+BUILDDIR = OUTPUT / "build"
 
 # Directory to put build-time tools.
-BUILD_BINDIR = os.path.join(OUTPUT, "bin")
+BUILD_BINDIR = OUTPUT / "bin"
 
 # Some tools like to scribble in $HOME.
-HOME = os.path.join(OUTPUT, "home")
+HOME = OUTPUT / "home"
 
 # Where we save shared libs and headers.
-SYSROOT = os.path.join(OUTPUT, "sysroot")
+SYSROOT = OUTPUT / "sysroot"
 
 # Base path to our source mirror.
 SRC_URI_MIRROR = (
@@ -83,7 +83,7 @@ def fetch(uri=None, name=None):
     if name is None:
         name = os.path.basename(uri)
 
-    libdot.fetch(uri, os.path.join(DISTDIR, name))
+    libdot.fetch(uri, DISTDIR / name)
 
 
 def stamp_name(workdir, phase, unique):
@@ -105,9 +105,9 @@ def stamp_name(workdir, phase, unique):
 
 def unpack(archive, cwd=None, workdir=None):
     """Unpack |archive| into |cwd|."""
-    distfile = os.path.join(DISTDIR, archive)
+    distfile = DISTDIR / archive
 
-    stamp = stamp_name(workdir, "unpack", os.path.basename(archive))
+    stamp = stamp_name(workdir, "unpack", distfile.name)
     if workdir and os.path.exists(stamp):
         logging.info("Archive already unpacked: %s", archive)
     else:
@@ -141,10 +141,10 @@ class ToolchainInfo:
             return
         self._cbuild = None
         self.chost = self._env["CHOST"]
-        self.sysroot = self._env["SYSROOT"]
-        self.libdir = os.path.join(self.sysroot, "lib")
-        self.incdir = os.path.join(self.sysroot, "include")
-        self.pkgconfdir = os.path.join(self.libdir, "pkgconfig")
+        self.sysroot = Path(self._env["SYSROOT"])
+        self.libdir = self.sysroot / "lib"
+        self.incdir = self.sysroot / "include"
+        self.pkgconfdir = self.libdir / "pkgconfig"
         self.ar = self._env["AR"]
 
     @classmethod
@@ -166,7 +166,7 @@ class ToolchainInfo:
     def cbuild(self):
         """Get the current build system."""
         if self._cbuild is None:
-            prog = os.path.join(BUILD_BINDIR, "config.guess")
+            prog = BUILD_BINDIR / "config.guess"
             result = run([prog], capture_output=True)
             self._cbuild = result.stdout.strip().decode("utf-8")
         return self._cbuild
@@ -174,48 +174,45 @@ class ToolchainInfo:
 
 def _toolchain_pnacl_env():
     """Get custom env to build using PNaCl toolchain."""
-    nacl_sdk_root = os.path.join(OUTPUT, "naclsdk")
+    nacl_sdk_root = OUTPUT / "naclsdk"
 
-    toolchain_root = os.path.join(nacl_sdk_root, "toolchain", "linux_pnacl")
-    bin_dir = os.path.join(toolchain_root, "bin")
-    compiler_prefix = os.path.join(bin_dir, "pnacl-")
-    sysroot = os.path.join(toolchain_root, "le32-nacl")
-    sysroot_libdir = os.path.join(sysroot, "lib")
-    pkgconfig_dir = os.path.join(sysroot_libdir, "pkgconfig")
+    toolchain_root = nacl_sdk_root / "toolchain" / "linux_pnacl"
+    bin_dir = toolchain_root / "bin"
+    compiler_prefix = str(bin_dir / "pnacl-")
+    sysroot = toolchain_root / "le32-nacl"
+    sysroot_libdir = sysroot / "lib"
+    pkgconfig_dir = sysroot_libdir / "pkgconfig"
 
     return {
         "CHOST": "nacl",
         "NACL_ARCH": "pnacl",
-        "NACL_SDK_ROOT": nacl_sdk_root,
-        "PATH": os.path.sep.join((bin_dir, os.environ["PATH"])),
+        "NACL_SDK_ROOT": str(nacl_sdk_root),
+        "PATH": os.path.sep.join((str(bin_dir), os.environ["PATH"])),
         "CC": compiler_prefix + "clang",
         "CXX": compiler_prefix + "clang++",
         "AR": compiler_prefix + "ar",
         "RANLIB": compiler_prefix + "ranlib",
         "STRIP": compiler_prefix + "strip",
-        "PKG_CONFIG_PATH": pkgconfig_dir,
-        "PKG_CONFIG_LIBDIR": sysroot_libdir,
-        "SYSROOT": sysroot,
+        "PKG_CONFIG_PATH": str(pkgconfig_dir),
+        "PKG_CONFIG_LIBDIR": str(sysroot_libdir),
+        "SYSROOT": str(sysroot),
         "CPPFLAGS": (
-            "-I"
-            + os.path.join(sysroot, "include", "glibc-compat")
-            + " -I"
-            + os.path.join(nacl_sdk_root, "include")
+            f"-I{sysroot / 'include' / 'glibc-compat'}"
+            f" -I{nacl_sdk_root / 'include'}"
         ),
-        "LDFLAGS": "-L"
-        + os.path.join(nacl_sdk_root, "lib", "pnacl", "Release"),
+        "LDFLAGS": f"-L{nacl_sdk_root / 'lib' / 'pnacl' / 'Release'}",
     }
 
 
 def _toolchain_wasm_env():
     """Get custom env to build using WASM toolchain."""
-    sdk_root = os.path.join(OUTPUT, "wasi-sdk")
+    sdk_root = OUTPUT / "wasi-sdk"
 
-    bin_dir = os.path.join(sdk_root, "bin")
-    sysroot = os.path.join(sdk_root, "share", "wasi-sysroot")
-    libdir = os.path.join(sysroot, "lib")
-    incdir = os.path.join(sysroot, "include")
-    pcdir = os.path.join(libdir, "pkgconfig")
+    bin_dir = sdk_root / "bin"
+    sysroot = sdk_root / "share" / "wasi-sysroot"
+    libdir = sysroot / "lib"
+    incdir = sysroot / "include"
+    pcdir = libdir / "pkgconfig"
 
     return {
         # Only use single core here due to known bug in 89 release:
@@ -225,17 +222,15 @@ def _toolchain_wasm_env():
         "ac_cv_func_malloc_0_nonnull": "yes",
         "ac_cv_func_realloc_0_nonnull": "yes",
         "CHOST": "wasm32-wasi",
-        "CC": os.path.join(bin_dir, "clang") + f" --sysroot={sysroot}",
-        "CXX": os.path.join(bin_dir, "clang++") + f" --sysroot={sysroot}",
-        "AR": os.path.join(bin_dir, "llvm-ar"),
-        "RANLIB": os.path.join(bin_dir, "llvm-ranlib"),
-        "STRIP": os.path.join(BUILD_BINDIR, "wasm-strip"),
-        "PKG_CONFIG_SYSROOT_DIR": sysroot,
-        "PKG_CONFIG_LIBDIR": pcdir,
-        "SYSROOT": sysroot,
-        "CPPFLAGS": " ".join(
-            (f'-isystem {os.path.join(incdir, "wassh-libc-sup")}',)
-        ),
+        "CC": f"{bin_dir / 'clang'} --sysroot={sysroot}",
+        "CXX": f"{bin_dir / 'clang++'} --sysroot={sysroot}",
+        "AR": str(bin_dir / "llvm-ar"),
+        "RANLIB": str(bin_dir / "llvm-ranlib"),
+        "STRIP": str(BUILD_BINDIR / "wasm-strip"),
+        "PKG_CONFIG_SYSROOT_DIR": str(sysroot),
+        "PKG_CONFIG_LIBDIR": str(pcdir),
+        "SYSROOT": str(sysroot),
+        "CPPFLAGS": " ".join((f'-isystem {incdir / "wassh-libc-sup"}',)),
         "LDFLAGS": " ".join(
             [
                 f"-L{libdir}",
@@ -243,7 +238,7 @@ def _toolchain_wasm_env():
                 "-lwasi-emulated-signal",
                 (
                     "-Wl,--allow-undefined-file="
-                    + os.path.join(libdir, "wassh-libc-sup.imports")
+                    f"{libdir / 'wassh-libc-sup.imports'}"
                 ),
                 "-Wl,--export=__wassh_signal_deliver",
             ]
@@ -270,9 +265,9 @@ def default_src_prepare(metadata):
         if os.path.exists(stamp):
             logging.info("Patch already applied: %s", name)
         else:
-            patch = os.path.join(filesdir, patch)
+            patch = filesdir / patch
             logging.info("Applying patch %s", name)
-            with open(patch, "rb") as fp:
+            with patch.open("rb") as fp:
                 run(["patch", "-p1"], stdin=fp)
             touch(stamp)
 
@@ -313,7 +308,7 @@ def update_gnuconfig(metadata, sourcedir):
         return
 
     for prog in ("config.guess", "config.sub"):
-        source = os.path.join(BUILD_BINDIR, prog)
+        source = BUILD_BINDIR / prog
         target = os.path.join(sourcedir, prog)
         if os.path.exists(source) and os.path.exists(target):
             copy(source, target)
@@ -364,12 +359,12 @@ def build_package(module, default_toolchain):
     )
 
     # All package-specific build state is under this directory.
-    basedir = os.path.join(BUILDDIR, opts.toolchain, metadata["p"])
-    workdir = os.path.join(basedir, "work")
+    basedir = BUILDDIR / opts.toolchain / metadata["p"]
+    workdir = basedir / "work"
     # Package-specific source directory with all the source.
     sourcedir = getattr(module, "S", os.path.join(workdir, metadata["p"]))
     # Package-specific temp directory.
-    tempdir = os.path.join(basedir, "temp")
+    tempdir = basedir / "temp"
 
     metadata.update(
         {
@@ -382,7 +377,7 @@ def build_package(module, default_toolchain):
     )
     metadata.update(
         {
-            "S": sourcedir % metadata,
+            "S": Path(sourcedir % metadata),
         }
     )
 
@@ -395,8 +390,10 @@ def build_package(module, default_toolchain):
     toolchain.activate()
     metadata["toolchain"] = toolchain
 
-    os.environ["HOME"] = HOME
-    os.environ["PATH"] = os.pathsep.join((BUILD_BINDIR, os.environ["PATH"]))
+    os.environ["HOME"] = str(HOME)
+    os.environ["PATH"] = os.pathsep.join(
+        (str(BUILD_BINDIR), os.environ["PATH"])
+    )
 
     # Run all the source phases now to build it.
     common_module = sys.modules[__name__]

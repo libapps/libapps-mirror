@@ -6,10 +6,11 @@
 """Build glibc-compat package."""
 
 import os
+from pathlib import Path
 import sys
 
-FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
@@ -20,7 +21,7 @@ S = "%(workdir)s"
 def src_install(metadata):
     """Install the package."""
     tc = metadata["toolchain"]
-    srcdir = os.path.join(FILESDIR, "include")
+    srcdir = FILESDIR / "include"
     for root, _, files in os.walk(srcdir):
         for header in files:
             relsrcdir = os.path.relpath(root, srcdir)

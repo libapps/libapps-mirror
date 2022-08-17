@@ -5,11 +5,11 @@
 
 """Build binaryen package."""
 
-import os
+from pathlib import Path
 import sys
 
-FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
@@ -21,10 +21,9 @@ S = "%(workdir)s/%(PN)s-version_%(PV)s"
 def src_install(metadata):
     """Install the package."""
     # For now we assume everything in here is a program.
-    srcbindir = os.path.join(metadata["S"], "bin")
-    for prog in os.listdir(srcbindir):
-        target = os.path.join(srcbindir, prog)
-        path = os.path.join(ssh_client.BUILD_BINDIR, prog)
+    srcbindir = metadata["S"] / "bin"
+    for target in srcbindir.iterdir():
+        path = ssh_client.BUILD_BINDIR / target.name
         ssh_client.symlink(target, path)
 
 

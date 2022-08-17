@@ -8,10 +8,11 @@
 import glob
 import logging
 import os
+from pathlib import Path
 import sys
 
-FILESDIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(0, os.path.join(FILESDIR, "..", "..", "bin"))
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
 
 import ssh_client  # pylint: disable=wrong-import-position
 
@@ -149,10 +150,10 @@ def src_install(metadata):
         target = f"{base}-{major_minor_version}{ext}"
         ssh_client.copy(lib, os.path.join(tc.libdir, target))
 
-    plugin_docs = os.path.join(ssh_client.OUTPUT, "plugin", "docs")
-    os.makedirs(plugin_docs, exist_ok=True)
+    plugin_docs = ssh_client.OUTPUT / "plugin" / "docs"
+    plugin_docs.mkdir(parents=True, exist_ok=True)
     for path in glob.glob("*.[0-9].html"):
-        ssh_client.copy(path, os.path.join(plugin_docs, path))
+        ssh_client.copy(path, plugin_docs / path)
 
 
 ssh_client.build_package(sys.modules[__name__], "pnacl")
