@@ -17,17 +17,24 @@ describe('terminal_settings_fonts_tests.js', () => {
     window.preferenceManager.definePreference('font-family',
         DEFAULT_FONT_FAMILY);
 
-    this.loadWebFontsMock = [];
-    window.webFontPromises = new Map();
-    for (const [font, isWebFont] of SUPPORTED_FONT_FAMILIES) {
-      if (isWebFont) {
-        window.webFontPromises.set(font, new Promise((resolve, reject) => {
-          this.loadWebFontsMock.push({font, resolve, reject});
-        }));
-      }
+    this.fontInfo = new Map();
+    for (const font of SUPPORTED_FONT_FAMILIES.keys()) {
+      let resolve, reject;
+      const promise = new Promise((resolve2, reject2) => {
+        resolve = resolve2;
+        reject = reject2;
+      });
+      this.fontInfo.set(font, {
+        promise,
+        resolve,
+        reject,
+      });
     }
 
     this.el = document.createElement('terminal-settings-fonts');
+    this.el.fontManager_ = {
+      loadFont: (font) => this.fontInfo.get(font).promise,
+    };
     document.body.appendChild(this.el);
     await this.el.updateComplete;
     this.dropdown = this.el.shadowRoot.querySelector(
@@ -37,7 +44,6 @@ describe('terminal_settings_fonts_tests.js', () => {
   afterEach(function() {
     document.body.removeChild(this.el);
 
-    delete window.webFontPromises;
     delete window.preferenceManager;
   });
 
@@ -51,31 +57,30 @@ describe('terminal_settings_fonts_tests.js', () => {
     // returns without triggering a re-rendering.
     const waitUpdate = async () => this.el.updateComplete;
 
-    // All web fonts should be disabled by default.
-    this.dropdown.options.forEach(({label, disabled}) => {
-      assert.equal(
-          disabled,
-          window.webFontPromises.has(label),
-          `"${label}"->${disabled}`);
-    });
+    // All fonts should be disabled by default.
+    for (const {disabled} of this.dropdown.options) {
+      assert.isTrue(disabled);
+    }
 
-    // "Load" first web font
-    this.loadWebFontsMock[0].resolve(true);
+    // "Load" first font
+    const fonts = Array.from(this.fontInfo.keys());
+    this.fontInfo.get(fonts[0]).resolve();
     await waitUpdate();
     this.dropdown.options.forEach(({label, disabled}) => {
       assert.equal(
           disabled,
-          window.webFontPromises.has(label) &&
-              label !== this.loadWebFontsMock[0].font,
+          label !== fonts[0],
           `"${label}"->${disabled}`);
     });
 
-    // Reject the the second web font and "load" the rest.
-    this.loadWebFontsMock[1].reject();
-    this.loadWebFontsMock.slice(2).forEach(({resolve}) => resolve(true));
+    // Reject the second font and "load" the rest.
+    this.fontInfo.get(fonts[1]).reject();
+    for (const font of fonts.slice(2)) {
+      this.fontInfo.get(font).resolve();
+    }
     await waitUpdate();
     this.dropdown.options.forEach(({label, disabled}) => {
-      assert.equal(disabled, label === this.loadWebFontsMock[1].font);
+      assert.equal(disabled, label === fonts[1]);
     });
   });
 });

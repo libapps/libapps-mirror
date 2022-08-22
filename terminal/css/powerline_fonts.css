@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Powerline For Noto Sans Mono';
+  src: url('../fonts/PowerlineForNotoSansMono.woff2')
+       format('woff2');
+  font-weight: normal bold;
+  unicode-range:
+      U+2693,U+26A1,U+2699,U+270E,U+2714,U+2718,U+273C,U+279C,U+27A6,
+      U+2B06-2B07,U+E0A0-E0D4;
+}
+
+@font-face {
+  font-family: 'Powerline For Cousine';
+  src: url('../fonts/PowerlineForCousine.woff2')
+       format('woff2');
+  font-weight: normal bold;
+  unicode-range:
+      U+2693,U+26A1,U+2699,U+270E,U+2714,U+2718,U+273C,U+279C,U+27A6,
+      U+2B06-2B07,U+E0A0-E0D4;
+}
+
+@font-face {
+  font-family: 'Powerline For Roboto Mono';
+  src: url('../fonts/PowerlineForRobotoMono.woff2')
+       format('woff2');
+  font-weight: normal bold;
+  unicode-range:
+      U+2693,U+26A1,U+2699,U+270E,U+2714,U+2718,U+273C,U+279C,U+27A6,
+      U+2B06-2B07,U+E0A0-E0D4;
+}
+
+@font-face {
+  font-family: 'Powerline For Inconsolata';
+  src: url('../fonts/PowerlineForInconsolata.woff2')
+       format('woff2');
+  font-weight: normal bold;
+  unicode-range:
+      U+2693,U+26A1,U+2699,U+270E,U+2714,U+2718,U+273C,U+279C,U+27A6,
+      U+2B06-2B07,U+E0A0-E0D4;
+}
+
+@font-face {
+  font-family: 'Powerline For Source Code Pro';
+  src: url('../fonts/PowerlineForSourceCodePro.woff2')
+       format('woff2');
+  font-weight: normal bold;
+  unicode-range:
+      U+2693,U+26A1,U+2699,U+270E,U+2714,U+2718,U+273C,U+279C,U+27A6,
+      U+2B06-2B07,U+E0A0-E0D4;
+}

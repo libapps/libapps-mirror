@@ -8,19 +8,8 @@
 
 import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
 
-import {SUPPORTED_FONT_FAMILIES, definePrefs, loadWebFont,
-  normalizePrefsInPlace, registerOSInfoPreFetch} from './terminal_common.js';
-
-// We are loading all web fonts at the beginning because some settings UI need
-// to know whether a web font is available.
-window.webFontPromises = new Map(
-    Array.from(SUPPORTED_FONT_FAMILIES)
-        .filter(([f, isWebFont]) => isWebFont)
-        .map(([f]) => [
-          f,
-          loadWebFont(document, f, `terminal-settings:font:${f}`),
-        ]),
-);
+import {definePrefs, normalizePrefsInPlace, registerOSInfoPreFetch}
+    from './terminal_common.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
   registerOSInfoPreFetch();

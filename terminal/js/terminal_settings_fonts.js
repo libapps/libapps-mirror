@@ -8,15 +8,16 @@
  * @suppress {moduleLoad}
  */
 import {html, LitElement} from './lit.js';
-import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS} from './terminal_common.js';
+import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS, fontManager}
+    from './terminal_common.js';
 import './terminal_dropdown.js';
 
 export class TerminalSettingsFonts extends LitElement {
   /** @override */
   static get properties() {
     return {
-      loadedWebFonts_: {
-        type: Array,
+      loadedFonts_: {
+        state: true,
       },
     };
   }
@@ -24,26 +25,33 @@ export class TerminalSettingsFonts extends LitElement {
   constructor() {
     super();
 
-    this.loadedWebFonts_ = [];
-    window.webFontPromises.forEach(async (promise, font) => {
-      try {
-        await promise;  // Ignore return value. It must be true.
-        this.loadedWebFonts_.push(font);
-        this.requestUpdate();
-      } catch (error) {
-        // Do nothing.
+    this.loadedFonts_ = [];
+    // Tests might overwrite this.
+    this.fontManager_ = fontManager;
+  }
+
+  /** @override */
+  connectedCallback() {
+    super.connectedCallback();
+
+    if (this.loadedFonts_.length === 0) {
+      for (const font of SUPPORTED_FONT_FAMILIES.keys()) {
+        this.fontManager_.loadFont(font).then(() => {
+          this.loadedFonts_.push(font);
+          this.requestUpdate();
+        });
       }
-    });
+    }
   }
 
   /** @override */
   render() {
-    const options = Array.from(SUPPORTED_FONT_FAMILIES).map(
-        ([font, isWebFont]) => ({
+    const options = Array.from(SUPPORTED_FONT_FAMILIES.keys()).map(
+        (font) => ({
           value: fontFamilyToCSS(font),
           label: font,
           style: `font-family: ${font}`,
-          disabled: isWebFont && !this.loadedWebFonts_.includes(font),
+          disabled: !this.loadedFonts_.includes(font),
         }),
     );
     return html`

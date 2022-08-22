@@ -7,8 +7,8 @@
  * @suppress {moduleLoad}
  */
 
-import {composeTmuxUrl, definePrefs, getOSInfo, loadPowerlineWebFonts,
-  loadWebFont, normalizeCSSFontFamily, watchColors} from './terminal_common.js';
+import {composeTmuxUrl, definePrefs, getOSInfo, watchColors}
+    from './terminal_common.js';
 import {createEmulator} from './terminal_emulator.js';
 import {terminalImport} from './terminal_import.js';
 import {LaunchInfo, getTerminalInfoTracker} from './terminal_info.js';
@@ -196,28 +196,6 @@ terminal.init = async function(element, launchInfo) {
     const prefs = term.getPrefs();
     definePrefs(prefs);
     terminal.watchBackgroundImage(term);
-
-    loadPowerlineWebFonts(term.getDocument());
-    const onFontFamilyChanged = async (cssFontFamily) => {
-      const fontFamily = normalizeCSSFontFamily(cssFontFamily);
-      // If the user changes font quickly enough, we might have a pending
-      // loadWebFont() task, but it should be harmless. Potentially, we can
-      // implement a cancellable promise so that we can cancel it.
-      try {
-        await loadWebFont(term.getDocument(), fontFamily);
-      } catch (error) {
-        /* eslint-disable-next-line no-new */
-        new Notification(
-            terminal.msg('TERMINAL_FONT_UNAVAILABLE', [fontFamily]),
-            {
-              body: terminal.msg('TERMINAL_TRY_AGAIN_WITH_INTERNET'),
-              tag: 'TERMINAL_FONT_UNAVAILABLE',
-            },
-        );
-      }
-    };
-    onFontFamilyChanged(prefs.get('font-family'));
-    prefs.addObserver('font-family', onFontFamilyChanged);
 
     const prefKey = 'settings.accessibility';
     const prefChanged = (prefs) => {

@@ -32,7 +32,6 @@ mocha.setup({ui: 'bdd', globals: [
   'PreferenceManager',
   'preferenceManager',
   'storage',
-  'webFontPromises',
 ]});
 mocha.checkLeaks();
 

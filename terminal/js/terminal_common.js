@@ -198,72 +198,102 @@ export function watchColors(prefs) {
 }
 
 /**
- * Load a web font into a document object.
- *
- * @param {!Document} document The document to load the web font into.
- * @param {string} fontFamily The font family to load.
- * @param {?string=} link_id The id for the <link> element. Existing element
- *     with the same id will be removed first. If this is not specified, a
- *     default value will be used.
- * @return {!Promise<boolean>} Reject if cannot load the font. Otherwise, it
- *     resolves to a boolean indicating whether the font is a web font or not.
+ * A font manager to load (web) fonts. Normally, a `document` should only have
+ * one font manager.
  */
-export function loadWebFont(document, fontFamily, link_id) {
-  return new Promise((resolve, reject) => {
-    link_id = link_id || 'terminal:web-font-link';
+export class FontManager {
+  /**
+   * @param {!Document} doc
+   */
+  constructor(doc) {
+    this.document_ = doc;
+    // Store ongoing or successful promises for loading fonts.
+    this.loadFontsPromises_ = new Map();
+  }
+
+  /**
+   * Load a font. Note that normally, only the latin font set is guaranteed to
+   * be loaded when this function is done.
+   *
+   * @param {string} cssFontFamily We will call normalizeCSSFontFamily() on
+   *     this, and load the returning font family.
+   * @return {!Promise<void>}
+   */
+  async loadFont(cssFontFamily) {
+    const fontFamily = normalizeCSSFontFamily(cssFontFamily);
+
     if (!SUPPORTED_FONT_FAMILIES.get(fontFamily)) {
       // Not a web font.
-      resolve(false);
       return;
     }
 
-    const head = document.querySelector('head');
-    let link = head.querySelector(`#${CSS.escape(link_id)}`);
-    if (link) {
-      link.remove();
+    let promise = this.loadFontsPromises_.get(fontFamily);
+    if (!promise) {
+      promise = this.loadFontImpl_(fontFamily).catch((error) => {
+        /* eslint-disable-next-line no-new */
+        new Notification(
+            hterm.messageManager.get('TERMINAL_FONT_UNAVAILABLE', [fontFamily]),
+            {
+              body: hterm.messageManager.get(
+                  'TERMINAL_TRY_AGAIN_WITH_INTERNET'),
+              tag: 'TERMINAL_FONT_UNAVAILABLE',
+            },
+        );
+
+        // Delete it from the cache so that we will retry the next time.
+        this.loadFontsPromises_.delete(fontFamily);
+
+        throw error;
+      });
+
+      this.loadFontsPromises_.set(fontFamily, promise);
     }
-    link = document.createElement('link');
-    link.id = link_id;
-    link.href = `https://fonts.googleapis.com/css2?family=` +
-        `${encodeURIComponent(fontFamily)}&display=swap`;
+
+    return promise;
+  }
+
+  /**
+   * Load the powerline css. This is only necessary for hterm, which uses it own
+   * document object inside an iframe.
+   */
+  async loadPowerlineCSS() {
+    await this.insertStyleSheet_('../css/powerline_fonts.css');
+  }
+
+  /**
+   * @param {string} fontFamily Not cssFontFamily.
+   * @return {!Promise<void>}
+   */
+  async loadFontImpl_(fontFamily) {
+    await this.insertStyleSheet_(`https://fonts.googleapis.com/css2?family=` +
+        `${encodeURIComponent(fontFamily)}&display=swap`);
+    // 'X' is the character from which hterm measures the size. For the font
+    // size, the default one is used because it probably does not matter.
+    const fonts = await this.document_.fonts.load(
+        `${DEFAULT_FONT_SIZE}px "${fontFamily}"`, 'X');
+    if (fonts.length === 0) {
+      throw new Error(`Unable to load fonts ${fontFamily}`);
+    }
+  }
+
+  /**
+   * @param {string} url Url to the style sheet.
+   * @return {!Promise<void>}
+   */
+  async insertStyleSheet_(url) {
+    const link = this.document_.createElement('link');
+    link.href = url;
     link.rel = 'stylesheet';
-    link.addEventListener('load', async () => {
-      // 'X' is the character of which hterm measures the size. For the font
-      // size, the default one is used because it probably does not matter.
-      const fonts = await document.fonts.load(
-          `${DEFAULT_FONT_SIZE}px "${fontFamily}"`, 'X');
-      if (fonts.length === 0) {
-        reject(new Error('Unable to load fonts'));
-      } else {
-        resolve(true);
-      }
+    return new Promise((resolve, reject) => {
+      link.addEventListener('load', () => resolve());
+      link.addEventListener('error',
+          () => reject(new Error(`Unable to insert style sheet for ${url}`)));
+      this.document_.head.appendChild(link);
     });
-    link.addEventListener('error',
-        () => reject(new Error('Unable to load css')));
-    head.appendChild(link);
-  });
+  }
 }
 
-/**
- * Load local Powerline web fonts.
- *
- * @param {!Document} document The document to load into.
- */
-export function loadPowerlineWebFonts(document) {
-  const style = document.createElement('style');
-  style.textContent = Array.from(SUPPORTED_FONT_FAMILIES.keys()).map((f) => `
-      @font-face {
-        font-family: 'Powerline For ${f}';
-        src: url('../fonts/PowerlineFor${f.replace(/\s/g, '')}.woff2')
-             format('woff2');
-        font-weight: normal bold;
-        unicode-range:
-            U+2693,U+26A1,U+2699,U+270E,U+2714,U+2718,U+273C,U+279C,U+27A6,
-            U+2B06-2B07,U+E0A0-E0D4;
-      }
-  `).join('');
-  document.head.appendChild(style);
-}
+export const fontManager = new FontManager(document);
 
 /**
  * @typedef {{

@@ -1,3 +1,7 @@
+// Copyright 2022 The Chromium OS Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 /**
  * @fileoverview For supporting xterm.js and the terminal emulator.
  */
@@ -6,7 +10,7 @@
 // terminal_tests.js for XtermTerminal.
 
 import {Terminal, FitAddon, WebglAddon} from './xterm.js';
-import {TERMINAL_EMULATORS, getOSInfo} from './terminal_common.js';
+import {FontManager, TERMINAL_EMULATORS, getOSInfo} from './terminal_common.js';
 
 const ANSI_COLOR_NAMES = [
     'black',
@@ -266,6 +270,22 @@ class XtermTerminal {
   sendString(v) {}
 }
 
+class HtermTerminal extends hterm.Terminal {
+  /** @override */
+  decorate(div) {
+    super.decorate(div);
+
+    const fontManager = new FontManager(this.getDocument());
+    fontManager.loadPowerlineCSS().then(() => {
+      const prefs = this.getPrefs();
+      fontManager.loadFont(/** @type {string} */(prefs.get('font-family')));
+      prefs.addObserver(
+          'font-family',
+          (v) => fontManager.loadFont(/** @type {string} */(v)));
+    });
+  }
+}
+
 /**
  * Constructs and returns a `hterm.Terminal` or a compatible one based on the
  * preference value.
@@ -301,7 +321,7 @@ export async function createEmulator({storage, profileId}) {
         return terminal;
       }
     case 'hterm':
-      return new hterm.Terminal({profileId, storage});
+      return new HtermTerminal({profileId, storage});
     default:
       throw new Error('incorrect emulator config');
   }
