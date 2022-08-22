@@ -10,8 +10,8 @@
 // terminal_tests.js for XtermTerminal.
 
 import {Terminal, FitAddon, WebglAddon} from './xterm.js';
-import {FontManager, TERMINAL_EMULATORS, delayedScheduler, fontManager,
-  getOSInfo, sleep} from './terminal_common.js';
+import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, delayedScheduler,
+  fontManager, getOSInfo, sleep} from './terminal_common.js';
 
 const ANSI_COLOR_NAMES = [
     'black',
@@ -34,7 +34,6 @@ const ANSI_COLOR_NAMES = [
 
 const PrefToXtermOptions = {
   'font-family': 'fontFamily',
-  'font-size': 'fontSize',
 };
 
 /**
@@ -47,12 +46,45 @@ const PrefToXtermOptions = {
 export let XtermTerminalTestParams;
 
 /**
+ * A "terminal io" class for xterm. We don't want the vanilla hterm.Terminal.IO
+ * because it always convert utf8 data to strings, which is not necessary for
+ * xterm.
+ */
+class XtermTerminalIO extends hterm.Terminal.IO {
+  /** @override */
+  writeUTF8(buffer) {
+    this.terminal_.write(new Uint8Array(buffer));
+  }
+
+  /** @override */
+  writelnUTF8(buffer) {
+    this.terminal_.writeln(new Uint8Array(buffer));
+  }
+
+  /** @override */
+  print(string) {
+    this.terminal_.write(string);
+  }
+
+  /** @override */
+  writeUTF16(string) {
+    this.print(string);
+  }
+
+  /** @override */
+  println(string) {
+    this.terminal_.writeln(string);
+  }
+
+  /** @override */
+  writelnUTF16(string) {
+    this.println(string);
+  }
+}
+
+/**
  * A terminal class that 1) uses xterm.js and 2) behaves like a `hterm.Terminal`
  * so that it can be used in existing code.
- *
- * TODO: Currently, this also behaves like a `hterm.Terminal.IO` object, which
- * kind of works but it is weird. We might want to just use the real
- * `hterm.Terminal.IO`.
  *
  * @extends {hterm.Terminal}
  * @unrestricted
@@ -67,6 +99,7 @@ export class XtermTerminal {
    * }} args
    */
   constructor({storage, profileId, enableWebGL, testParams}) {
+    this.profileId_ = profileId;
     /** @type {!hterm.PreferenceManager} */
     this.prefs_ = new hterm.PreferenceManager(storage, profileId);
     this.enableWebGL_ = enableWebGL;
@@ -89,12 +122,13 @@ export class XtermTerminal {
 
     this.observePrefs_();
 
-    this.term.onResize(({cols, rows}) => this.onTerminalResize(cols, rows));
-    this.term.onData((data) => this.sendString(data));
+    this.term.onResize(({cols, rows}) => this.io.onTerminalResize(cols, rows));
+    // We could also use `this.io.sendString()` except for the nassh exit
+    // prompt, which only listens to onVTKeystroke().
+    this.term.onData((data) => this.io.onVTKeystroke(data));
 
-    // Also pretends to be a `hterm.Terminal.IO` object.
-    this.io = this;
-    this.terminal_ = this;
+    this.io = new XtermTerminalIO(this);
+    this.notificationCenter_ = null;
   }
 
   /**
@@ -116,17 +150,10 @@ export class XtermTerminal {
     this.keyboard.keyMap.keyDefs[78] = {};
 
     const methodNames = [
-        'hideOverlay',
         'setAccessibilityEnabled',
         'setBackgroundImage',
         'setCursorPosition',
         'setCursorVisible',
-        'setTerminalProfile',
-        'showOverlay',
-
-        // This two are for `hterm.Terminal.IO`.
-        'push',
-        'pop',
     ];
 
     for (const name of methodNames) {
@@ -138,6 +165,12 @@ export class XtermTerminal {
         console.warn('.contextMenu.setItems() is not implemented');
       },
     };
+
+    this.vt = {
+      resetParseState: () => {
+        console.warn('.vt.resetParseState() is not implemented');
+      },
+    };
   }
 
   /**
@@ -147,6 +180,25 @@ export class XtermTerminal {
     await new Promise((resolve) => this.prefs_.readStorage(resolve));
     this.prefs_.notifyAll();
     this.onTerminalReady();
+  }
+
+  /**
+   * Write data to the terminal.
+   *
+   * @param {string|!Uint8Array} data string for UTF-16 data, Uint8Array for
+   *     UTF-8 data
+   */
+  write(data) {
+    this.term.write(data);
+  }
+
+  /**
+   * Like `this.write()` but also write a line break.
+   *
+   * @param {string|!Uint8Array} data
+   */
+  writeln(data) {
+    this.term.writeln(data);
   }
 
   get screenSize() {
@@ -169,7 +221,24 @@ export class XtermTerminal {
     if (this.enableWebGL_) {
       this.term.loadAddon(new WebglAddon());
     }
+    this.term.focus();
     (new ResizeObserver(() => this.scheduleFit_())).observe(elem);
+    // TODO: Make a11y work. Maybe we can just use `hterm.AccessibilityReader`.
+    this.notificationCenter_ = new hterm.NotificationCenter(document.body);
+  }
+
+  /** @override */
+  showOverlay(msg, timeout = 1500) {
+    if (this.notificationCenter_) {
+      this.notificationCenter_.show(msg, {timeout});
+    }
+  }
+
+  /** @override */
+  hideOverlay() {
+    if (this.notificationCenter_) {
+      this.notificationCenter_.hide();
+    }
   }
 
   /** @override */
@@ -182,56 +251,31 @@ export class XtermTerminal {
     return window.document;
   }
 
-  /**
-   * This is a method from `hterm.Terminal.IO`.
-   *
-   * @param {!ArrayBuffer|!Array<number>} buffer The UTF-8 data to print.
-   */
-  writeUTF8(buffer) {
-    this.term.write(new Uint8Array(buffer));
+  /** @override */
+  reset() {
+    this.term.reset();
   }
 
   /** @override */
-  print(data) {
-    this.term.write(data);
+  setProfile(profileId, callback = undefined) {
+    this.prefs_.setProfile(profileId, callback);
   }
 
-  /**
-   * This is a method from `hterm.Terminal.IO`.
-   *
-   * @param {string} data
-   */
-  println(data) {
-    this.term.writeln(data);
+  /** @override */
+  interpret(string) {
+    this.term.write(string);
   }
 
-  /**
-   * This is a method from `hterm.Terminal.IO`.
-   *
-   * @param {number} width
-   * @param {number} height
-   */
-  onTerminalResize(width, height) {}
+  /** @override */
+  focus() {
+    this.term.focus();
+  }
 
   /** @override */
   onOpenOptionsPage() {}
 
   /** @override */
   onTerminalReady() {}
-
-  /**
-   * This is a method from `hterm.Terminal.IO`.
-   *
-   * @param {string} v
-   */
-  onVTKeystoke(v) {}
-
-  /**
-   * This is a method from `hterm.Terminal.IO`.
-   *
-   * @param {string} v
-   */
-  sendString(v) {}
 
   observePrefs_() {
     for (const pref in PrefToXtermOptions) {
@@ -240,13 +284,31 @@ export class XtermTerminal {
       });
     }
 
+    // This is for this.notificationCenter_.
+    const setHtermCSSVariable = (name, value) => {
+      document.body.style.setProperty(`--hterm-${name}`, value);
+    };
+
+    const setHtermColorCSSVariable = (name, color) => {
+      const css = lib.notNull(lib.colors.normalizeCSS(color));
+      const rgb = lib.colors.crackRGB(css).slice(0, 3).join(',');
+      setHtermCSSVariable(name, rgb);
+    };
+
+    this.prefs_.addObserver('font-size', (v) => {
+      this.updateOption_('fontSize', v);
+      setHtermCSSVariable('font-size', `${v}px`);
+    });
+
     // Theme-related preference items.
     this.prefs_.addObservers(null, {
       'background-color': (v) => {
         this.updateTheme_({background: v});
+        setHtermColorCSSVariable('background-color', v);
       },
       'foreground-color': (v) => {
         this.updateTheme_({foreground: v});
+        setHtermColorCSSVariable('foreground-color', v);
       },
       'cursor-color': (v) => {
         this.updateTheme_({cursor: v});
@@ -381,9 +443,13 @@ export async function createEmulator({storage, profileId}) {
   let config = TERMINAL_EMULATORS.get('hterm');
 
   if (getOSInfo().alternative_emulator) {
-    const prefKey = `/hterm/profiles/${profileId}/terminal-emulator`;
+    // TODO: remove the url param logic. This is temporary to make manual
+    // testing a bit easier, which is also why this is not in
+    // './js/terminal_info.js'.
+    const emulator = ORIGINAL_URL.searchParams.get('emulator') ||
+        await storage.getItem(`/hterm/profiles/${profileId}/terminal-emulator`);
     // Use the default (i.e. first) one if the pref is not set or invalid.
-    config = TERMINAL_EMULATORS.get(await storage.getItem(prefKey)) ||
+    config = TERMINAL_EMULATORS.get(emulator) ||
         TERMINAL_EMULATORS.values().next().value;
     console.log('Terminal emulator config: ', config);
   }

@@ -18,6 +18,10 @@ class Terminal$$module$js$xterm {
     this.rows;
   }
 
+  focus() {}
+
+  reset() {}
+
   /**
    * @param {!FitAddon$$module$js$xterm|!WebglAddon$$module$js$xterm} addon
    */
