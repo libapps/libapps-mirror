@@ -178,7 +178,7 @@ hterm.TextAttributes.prototype.isDefault = function() {
  *
  * This method will create a plain text node if the text is unstyled, or
  * an HTML span if the text is styled.  Due to lack of monospace wide character
- * fonts on certain systems (e.g. Chrome OS), we need to put each wide character
+ * fonts on certain systems (e.g. ChromeOS), we need to put each wide character
  * in a span of CSS class '.wc-node' which has double column width.
  * Each vt_tiledata tile is also represented by a span with a single
  * character, with CSS classes '.tile' and '.tile_<glyph number>'.

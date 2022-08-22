@@ -124,7 +124,7 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
   }
 
   // Close the popup.  It happens automatically on some systems (e.g. Linux),
-  // but not all (e.g. Chrome OS).
+  // but not all (e.g. ChromeOS).
   window.close();
 };
 

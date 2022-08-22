@@ -171,7 +171,7 @@ hterm.Parser.identifiers.keyCodes = {
   KP_DECIMAL: 110,
   KP_PERIOD: 110,
 
-  // Chrome OS media keys
+  // ChromeOS media keys
   NAVIGATE_BACK: 166,
   NAVIGATE_FORWARD: 167,
   RELOAD: 168,

@@ -86,7 +86,7 @@ Now that your checkout is ready, you can load it into Chrome.
    right of the page depending on Chrome version).
 3. Click *Load Unpacked Extension* and navigate to the `nassh/` directory.
 
-If you're not running on Chrome OS device, and loading the app, you might see
+If you're not running on ChromeOS device, and loading the app, you might see
 warnings right away about certain permissions (see the allowed sections
 below).  You can ignore those.  It's unfortunate they show up with the same
 level/color as legitmate errors.
@@ -108,7 +108,7 @@ allowed only for Secure Shell.  If you don't need these features, you can get
 by with using a different id (and delete the settings from the
 [manifest.json] to avoid warnings at runtime).
 
-* Access to [crosh] under Chrome OS (`terminalPrivate`).
+* Access to [crosh] under ChromeOS (`terminalPrivate`).
   [(1)](https://cs.chromium.org/search/?q=terminalPrivate)
   [(2)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/terminal_private.json)
   [(3)](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/terminal_extension_helper.cc)
@@ -127,7 +127,7 @@ by with using a different id (and delete the settings from the
 * Access to `chrome.metricsPrivate` APIs.
   This allows users to opt-in to metrics/UMA collection about basic features.
   Not required to be able to use Secure Shell of course.
-* SFTP backend for Chrome OS (`fileSystemProvider` and
+* SFTP backend for ChromeOS (`fileSystemProvider` and
   `file_system_provider_capabilities`).
   [(1)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/_permission_features.json)
   <br>
@@ -223,7 +223,7 @@ The vast majority of the code here lives under [js/].
 * dist/: Builds of the Chrome extension.
 * [doc/]: Documentation files.
 * [html/]: The main UI objects.
-  * [crosh.html]: Chrome OS developer shell.  Not used outside of Chrome OS.
+  * [crosh.html]: ChromeOS developer shell.  Not used outside of ChromeOS.
   * [nassh.html]: The main ssh terminal page.
   * [nassh_connect_dialog.html]: The main connection dialog.
   * [nassh_google_relay.html]: Stub page when redirecting with external relay.
@@ -289,7 +289,7 @@ The vast majority of the code here lives under [js/].
 There are a few specialized modules that are not relevant to the core
 Secure Shell logic.
 
-* [crosh.js]: Chrome OS developer shell.  Only used with [crosh.html].
+* [crosh.js]: ChromeOS developer shell.  Only used with [crosh.html].
 * Connections page specific code (i.e. [nassh_connect_dialog.html]).
   * [nassh_column_list.js]: Utility code for showing things in columns.
   * [nassh_connect_dialog.js]: The main connection dialog page.
@@ -406,7 +406,7 @@ The `name` field can be any one of:
 
 # SFTP {#SFTP}
 
-On Chrome OS, it is possible to mount remote paths via SFTP and the Files app.
+On ChromeOS, it is possible to mount remote paths via SFTP and the Files app.
 We currently support [version 3][SFTPv3] of the protocol.
 We don't support newer standards because the most popular implementation is
 [OpenSSH]'s which only supports SFTPv3, and for the majority of Secure Shell

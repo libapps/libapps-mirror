@@ -84,7 +84,7 @@ The response will have these additional fields:
 
 ### Mount
 
-On Chrome OS, trigger a SFTP filesystem mount with the Files app.
+On ChromeOS, trigger a SFTP filesystem mount with the Files app.
 
 This is a one-shot API that does not allow for interactive UI.
 It is meant to automatically set up connections that use key auth only.
@@ -97,28 +97,28 @@ It is meant to automatically set up connections that use key auth only.
 | `username`     | !string | Username for connection |
 | `hostname`     | !string | Hostname or IP address for connection |
 | `port`         | number= | Port, default is 22 |
-| `fileSystemId` | !string | ID used for Chrome OS mounted filesystem |
-| `displayName`  | !string | Display name in Chrome OS Files.app for mounted filesystem |
+| `fileSystemId` | !string | ID used for ChromeOS mounted filesystem |
+| `displayName`  | !string | Display name in ChromeOS Files.app for mounted filesystem |
 
 ### Unmount
 
-On Chrome OS, unmount an existing SFTP filesystem mount.
+On ChromeOS, unmount an existing SFTP filesystem mount.
 
 | Field name     | Type    | Description |
 |----------------|---------|-------------|
 | `command`      | !string | Must be `unmount`. |
-| `fileSystemId` | !string | ID used for Chrome OS mounted filesystem. |
+| `fileSystemId` | !string | ID used for ChromeOS mounted filesystem. |
 
 ### Get Mount Info
 
-On Chrome OS, return information about a particular mount.
+On ChromeOS, return information about a particular mount.
 
 On success, the information will be returned in the `data` field.
 
 | Field name     | Type    | Description |
 |----------------|---------|-------------|
 | `command`      | !string | Must be `getMountInfo`. |
-| `fileSystemId` | !string | ID used for Chrome OS mounted filesystem. |
+| `fileSystemId` | !string | ID used for ChromeOS mounted filesystem. |
 
 The response will have these additional fields:
 
@@ -128,18 +128,18 @@ The response will have these additional fields:
 
 ### Set Mount Info
 
-On Chrome OS, update configuration for a particular mount.
+On ChromeOS, update configuration for a particular mount.
 Note: Not all fields are configurable.
 
 | Field name     | Type    | Description |
 |----------------|---------|-------------|
 | `command`      | !string | Must be `setMountInfo`. |
-| `fileSystemId` | !string | ID used for Chrome OS mounted filesystem. |
+| `fileSystemId` | !string | ID used for ChromeOS mounted filesystem. |
 | `info`         | !Object | New settings to use. |
 
 ### Crosh
 
-On Chrome OS, open a new [crosh] session.
+On ChromeOS, open a new [crosh] session.
 
 | Field name     | Type    | Description |
 |----------------|---------|-------------|
@@ -283,7 +283,7 @@ The response will have these additional fields:
 **NB**: This is only available to Secure Shell itself.
 ***
 
-On Chrome OS, trigger a SFTP filesystem mount with the Files app.
+On ChromeOS, trigger a SFTP filesystem mount with the Files app.
 
 This API allows for interactive auth, so it's a bit more complicated.
 

@@ -125,7 +125,7 @@ hterm.PreferenceManager.defaultPreferences = {
       'Alt+Backspace is Meta+Backspace',
       hterm.PreferenceManager.Categories.Keyboard,
       false, 'bool',
-      `If set, undoes the Chrome OS Alt+Backspace->Delete remap, so that ` +
+      `If set, undoes the ChromeOS Alt+Backspace->Delete remap, so that ` +
       `Alt+Backspace indeed is Alt+Backspace.`,
   ),
 
@@ -587,7 +587,7 @@ hterm.PreferenceManager.defaultPreferences = {
       `The mouse button to use for pasting.\n` +
       `\n` +
       `For autodetect, we'll use the middle mouse button for non-X11 ` +
-      `platforms (including Chrome OS). On X11, we'll use the right mouse ` +
+      `platforms (including ChromeOS). On X11, we'll use the right mouse ` +
       `button (since the window manager should handle pasting via the middle ` +
       `mouse button).\n` +
       `\n` +

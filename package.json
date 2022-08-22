@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://chromium.googlesource.com/apps/libapps.git"
   },
-  "author": "Chromium OS Authors",
+  "author": "ChromiumOS Authors",
   "license": "BSD-3-Clause",
   "files": [
     "README.md"

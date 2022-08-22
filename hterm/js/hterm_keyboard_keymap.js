@@ -471,7 +471,7 @@ hterm.Keyboard.KeyMap.prototype.reset = function() {
 
   // OS-specific differences.
   if (hterm.os == 'cros') {
-    // Chrome OS keyboard top row.  The media-keys-are-fkeys preference allows
+    // ChromeOS keyboard top row.  The media-keys-are-fkeys preference allows
     // users to make these always behave as function keys (see those bindings
     // above for more details).
     /* eslint-disable max-len */
@@ -576,7 +576,7 @@ hterm.Keyboard.KeyMap.prototype.onKeyPageUp_ = function(e) {
 /**
  * Either send a true DEL, or sub in meta-backspace.
  *
- * On Chrome OS, if we know the alt key is down, but we get a DEL event that
+ * On ChromeOS, if we know the alt key is down, but we get a DEL event that
  * claims that the alt key is not pressed, we know the DEL was a synthetic
  * one from a user that hit alt-backspace. Based on a user pref, we can sub
  * in meta-backspace in this case.

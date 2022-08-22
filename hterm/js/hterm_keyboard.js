@@ -139,9 +139,9 @@ hterm.Keyboard = function(terminal) {
 
   /**
    * If true, tries to detect DEL key events that are from alt-backspace on
-   * Chrome OS vs from a true DEL key press.
+   * ChromeOS vs from a true DEL key press.
    *
-   * Background: At the time of writing, on Chrome OS, alt-backspace is mapped
+   * Background: At the time of writing, on ChromeOS, alt-backspace is mapped
    * to DEL. Some users may be happy with this, but others may be frustrated
    * that it's impossible to do meta-backspace. If the user enables this pref,
    * we use a trick to tell a true DEL keypress from alt-backspace: on
@@ -159,7 +159,7 @@ hterm.Keyboard = function(terminal) {
   this.altKeyPressed = 0;
 
   /**
-   * If true, Chrome OS media keys will be mapped to their F-key equivalent.
+   * If true, ChromeOS media keys will be mapped to their F-key equivalent.
    * E.g. "Back" will be mapped to F1. If false, Chrome will handle the keys.
    */
   this.mediaKeysAreFKeys = false;

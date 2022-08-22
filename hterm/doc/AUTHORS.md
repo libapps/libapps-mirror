@@ -1,6 +1,6 @@
 # Authors & Maintainers & Contributors
 
-This is part of the Chromium OS project.
+This is part of the ChromiumOS project.
 
 Please do not use this list to contact authors.  We have a mailing list for
 discussions.  See the [README.md](./README.md#Contact) file for details.

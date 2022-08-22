@@ -174,7 +174,7 @@ The JSON response is [base64url] encoded in the [URI fragment].
 
 Secure Shell uses `js-redirect` by default, but can be configured to use
 `direct` by setting option `--relay-method=direct`. The `direct` method is used
-by Chrome OS Terminal which embeds Secure Shell. Terminal does not work with the
+by ChromeOS Terminal which embeds Secure Shell. Terminal does not work with the
 `js-redirect` method since Chrome does not allow redirects into its internal
 pages such as chrome-untrusted://terminal.
 

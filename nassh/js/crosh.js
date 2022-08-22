@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
  *
  * This class defines a command that can be run in an hterm.Terminal instance.
  * The Crosh command uses terminalPrivate extension API to create and use crosh
- * process on Chrome OS machine.
+ * process on ChromeOS machine.
  *
  * @param {{
  *   commandName: string,
@@ -69,7 +69,7 @@ function Crosh({commandName, terminal, args}) {
 
 /**
  * The extension id of "crosh_builtin", the version of crosh that ships with
- * the Chromium OS system image.
+ * the ChromiumOS system image.
  */
 Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
 

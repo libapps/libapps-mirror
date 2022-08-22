@@ -47,7 +47,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   other text-based command) on its own.
 
 
-### How do Secure Shell and hterm relate to the "crosh" (Ctrl+Alt+T) command in Chrome OS?
+### How do Secure Shell and hterm relate to the "crosh" (Ctrl+Alt+T) command in ChromeOS?
 
   See [chromeos-crosh.md](chromeos-crosh.md) in this directory for the details.
 
@@ -118,7 +118,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   Subscribers have access to the "Dev" versions in the Chrome Web Store, which
   are located here:
 
-  * [App for Chrome OS](https://goo.gl/cFZlv)
+  * [App for ChromeOS](https://goo.gl/cFZlv)
   * [Extension for all systems](https://goo.gl/9NCCZQ)
 
   Note: You'll also need to sign in to the Chrome Web Store using the same
@@ -270,7 +270,7 @@ have to re-import them.
   it can't forward access to it to the remote system.
 
   Even if it did have such access, it would only work when the local system
-  was also running X.  Chrome OS long ago stopped using X (instead, it switched
+  was also running X.  ChromeOS long ago stopped using X (instead, it switched
   to "freon" which is a native graphics stack like [Wayland]), and many Linux
   distros are also switching away from X.  That means the userbase is shrinking.
 
@@ -894,7 +894,7 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   Note that composed characters (those that require multiple keystrokes) are
   not currently supported by this mode.
 
-  If you are running Chrome OS on a Chromebook you can select your keyboard
+  If you are running ChromeOS on a Chromebook you can select your keyboard
   locale from the system settings and just use the Right-Alt (the small one,
   on the right) to enter accented characters.  No need to change the
   'alt-sends-what' preference at all.
@@ -992,7 +992,7 @@ The prompt makes it sound like it will delete & reset everything, but it won't.
 
 ### How do I change input methods?
 
-  In Chrome OS, Ctrl+Shift+Space and Ctrl+Space are used to cycle through
+  In ChromeOS, Ctrl+Shift+Space and Ctrl+Space are used to cycle through
   keyboard input methods.  By default, hterm will capture these.  You can
   turn on the 'keybindings-os-defaults' setting, or add custom bindings for
   these in the 'keybindings' settings to pass them along to the OS instead.
@@ -1006,11 +1006,11 @@ The prompt makes it sound like it will delete & reset everything, but it won't.
   section below.
 
 
-### How do I use Chrome OS window manager shortcuts?
+### How do I use ChromeOS window manager shortcuts?
 
-  In Chrome OS, Alt+- & Alt+= & Alt+[ & Alt+] are used to move windows around.
+  In ChromeOS, Alt+- & Alt+= & Alt+[ & Alt+] are used to move windows around.
   By default, hterm will capture these when using the Left Alt key.
-  In recent Chrome OS versions, the Right Alt key is not captured.
+  In recent ChromeOS versions, the Right Alt key is not captured.
   So you can use RightAlt+-/=/[/] keys even when running Secure Shell.
 
   If you really want to use the Left Alt key too, you can add custom bindings in

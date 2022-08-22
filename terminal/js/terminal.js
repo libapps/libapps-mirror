@@ -24,7 +24,7 @@ window.preferenceManager;
  * The Terminal command.
  *
  * The Terminal command uses the terminalPrivate extension API to create and
- * use the vmshell process on a Chrome OS machine.
+ * use the vmshell process on a ChromeOS machine.
  *
  * @param {!hterm.Terminal} term
  * @constructor
@@ -76,7 +76,7 @@ terminal.onCtrlN = function(e, k) {
 };
 
 /**
- * Adds bindings for terminal such as options page and some extra Chrome OS
+ * Adds bindings for terminal such as options page and some extra ChromeOS
  * system key bindings when 'keybindings-os-defaults' pref is set. Reloads
  * current bindings if needed.
  *

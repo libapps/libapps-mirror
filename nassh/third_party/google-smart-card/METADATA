@@ -1,5 +1,5 @@
 name: "google-smart-card-client-library"
-description: "Client library for the Smart Card Connector App for Chrome OS"
+description: "Client library for the Smart Card Connector App for ChromeOS"
 
 third_party {
   url {

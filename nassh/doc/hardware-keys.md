@@ -14,7 +14,7 @@ at least the following:
 1. Ensure that your smart card/hardware token is properly set up and loaded
    with at least an authentication key.
 
-   The initial setup cannot be carried out under Chrome OS and does take some
+   The initial setup cannot be carried out under ChromeOS and does take some
    time. There are plenty of guides available covering the process, among
    them the ones by
    [Yubico](https://www.yubico.com/support/knowledge-base/categories/articles/use-yubikey-openpgp/),

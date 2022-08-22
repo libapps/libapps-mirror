@@ -1,5 +1,5 @@
 This is the client library for the Google Smart Card Connector App, which is a
-Chrome OS implementation of the PC/SC API for smart card operations.
+ChromeOS implementation of the PC/SC API for smart card operations.
 
 Upstream details can be found in the METADATA file.
 

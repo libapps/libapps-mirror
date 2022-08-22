@@ -23,7 +23,7 @@ to the right people.
 
 * [Authors](./doc/AUTHORS.md) -- List of people who have contributed
 * [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release
-* [Crosh (Chrome OS shell)](./doc/chromeos-crosh.md) -- Interactions with the crosh command on Chrome OS
+* [Crosh (ChromeOS shell)](./doc/chromeos-crosh.md) -- Interactions with the crosh command on ChromeOS
 * [FAQ](./doc/FAQ.md) -- Frequently Asked Questions
 * [Fonts](./doc/fonts.md) -- Fonts including Powerline symbols bundled with Secure Shell
 * [Hacking](./doc/hack.md) -- Developing the Secure Shell source

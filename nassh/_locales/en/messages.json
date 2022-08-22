@@ -131,7 +131,7 @@
 	},
 	"CWS_DESCRIPTION": {
 		"description": "Description shown in the Chrome Web Store for the stable extension.",
-		"message": "Secure Shell is an xterm-compatible terminal emulator and stand-alone ssh client for Chrome.  It uses Native-Client to connect directly to ssh servers without the need for external proxies.\n\nA SFTP command line client is included.  On Chrome OS, you can create SFTP mounts and access them from the Files app!\n\nAn alpha build of Mosh is included now too.\n\nIt has been well tested for a couple of years.\n\nPlease read the FAQ, available here: https://hterm.org/x/ssh/faq.\n\nYou can also exchange feedback in the chromium-hterm mailing list, available here: https://hterm.org/x/ssh/contact.\n\nThe changelog is available here: https://hterm.org/x/ssh/changelog"
+		"message": "Secure Shell is an xterm-compatible terminal emulator and stand-alone ssh client for Chrome.  It uses Native-Client to connect directly to ssh servers without the need for external proxies.\n\nA SFTP command line client is included.  On ChromeOS, you can create SFTP mounts and access them from the Files app!\n\nAn alpha build of Mosh is included now too.\n\nIt has been well tested for a couple of years.\n\nPlease read the FAQ, available here: https://hterm.org/x/ssh/faq.\n\nYou can also exchange feedback in the chromium-hterm mailing list, available here: https://hterm.org/x/ssh/contact.\n\nThe changelog is available here: https://hterm.org/x/ssh/changelog"
 	},
 	"CWS_DESCRIPTION_DEV": {
 		"description": "Description shown in the Chrome Web Store for the developer extension",
@@ -658,8 +658,8 @@
 		"message": "Whether to allow the remote host to display images in the terminal.\n\nBy default, we prompt until a choice is made."
 	},
 	"HTERM_PREF_ALT_BACKSPACE_IS_META_BACKSPACE": {
-		"description": "Help text shown for the 'alt-backspace-is-meta-backspace' preference. 'Alt', 'Backspace', and 'Delete' are the names of the keyboard buttons and may be translated as makes sense. By default, Chrome OS has a Alt+Backspace keyboard shortcut to behave like the Delete key, so this setting reverts that behavior.",
-		"message": "If set, undoes the Chrome OS Alt+Backspace->Delete remap, so that Alt+Backspace indeed is Alt+Backspace."
+		"description": "Help text shown for the 'alt-backspace-is-meta-backspace' preference. 'Alt', 'Backspace', and 'Delete' are the names of the keyboard buttons and may be translated as makes sense. By default, ChromeOS has a Alt+Backspace keyboard shortcut to behave like the Delete key, so this setting reverts that behavior.",
+		"message": "If set, undoes the ChromeOS Alt+Backspace->Delete remap, so that Alt+Backspace indeed is Alt+Backspace."
 	},
 	"HTERM_PREF_ALT_GR_MODE": {
 		"description": "Help text shown for the 'alt-gr-mode' preference. 'Alt' and 'AltGR' are the names of the keyboard buttons and may be translated as makes sense. Do not translate 'navigator.language' or anything else in quotes here. The quote style may be changed as makes sense for the language. The 'else' keyword here should be translated with its normal meaning. Emulation is like 'pretending' and can be translated as such.",
@@ -847,7 +847,7 @@
 	},
 	"HTERM_PREF_MOUSE_PASTE_BUTTON": {
 		"description": "Help text shown for the 'mouse-paste-button' preference. Do not translate 'X11', '0', '1', or '2'. The '==' and general layout of the message and options may be formatted however makes sense. The window manager is the user's standard desktop interface for interacting with their OS.",
-		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the window manager should handle pasting via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: The primary & secondary buttons are handled for you with left & right handed mice."
+		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including ChromeOS). On X11, we'll use the right mouse button (since the window manager should handle pasting via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: The primary & secondary buttons are handled for you with left & right handed mice."
 	},
 	"HTERM_PREF_MOUSE_RIGHT_CLICK_PASTE": {
 		"description": "Help text shown for the 'mouse-right-click-paste' preference. The quote style may be changed as needed. Do not translate 'mouse-paste-button'.",
@@ -2385,7 +2385,7 @@
 	},
 	"TIP_4": {
 		"description": "Helpful tip shown to user advertising features. 'SFTP Mount' and 'Connect' refer to button labels and should be translated using the same text as the MOUNT_BUTTON_LABEL and CONNECT_BUTTON_LABEL messages.",
-		"message": "Chrome OS can mount file systems via SFTP and browse via the Files app. Use 'SFTP Mount' instead of 'Connect'."
+		"message": "ChromeOS can mount file systems via SFTP and browse via the Files app. Use 'SFTP Mount' instead of 'Connect'."
 	},
 	"TIP_5": {
 		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh://' part as it refers to a web link.",

@@ -54,7 +54,7 @@ The trick is to hold Ctrl when clicking the connection.
 
 ### Shelf Interaction
 
-It's still possible to pin a shortcut to the shelf on Chrome OS (dock on macOS
+It's still possible to pin a shortcut to the shelf on ChromeOS (dock on macOS
 or taskbar on Windows).
 
 [See the FAQ for detailed instructions](./FAQ.md#how-do-i-make-a-desktop-icon-or-shelf-shortcut).
@@ -79,7 +79,7 @@ See the
 ## EOL Systems (<M80) {#EOL}
 
 The extension requires functionality that will only ever exist in newer versions
-of Chrome OS.
+of ChromeOS.
 Unfortunately EOL devices will never be able to upgrade to these versions.
 The Chrome App will continue to be built on top of NaCl & Chrome Apps for now.
 So EOL users need not migrate.
@@ -90,16 +90,16 @@ https://dev.chromium.org/chromium-os/developer-information-for-chrome-os-devices
 ## Timeline
 
 *   Aug 2016: Chrome first announces [Chrome Apps deprecation].
-    *   Chrome Apps are deprecated on non-Chrome OS platforms.
+    *   Chrome Apps are deprecated on non-ChromeOS platforms.
     *   Chrome Extensions are unaffected.
-    *   Chrome Apps on Chrome OS are unaffected.
+    *   Chrome Apps on ChromeOS are unaffected.
     *   NaCl & PNaCl are unaffected.
     *   Chrome Apps can still be installed & synced between devices.
 *   May 2017: Chrome announces [PNaCl deprecation].
     *   This only applies to using PNaCl on websites.
     *   Chrome Apps & Extensions are unaffected.
 *   Dec 2017: The Chrome Web Store (CWS) [stops displaying Chrome Apps] when
-    running on non-Chrome OS platforms.
+    running on non-ChromeOS platforms.
     *   Chrome Apps can still be installed on CrOS.
     *   Installed Chrome Apps are synced between devices.
     *   Chrome Apps still run on all platforms.
