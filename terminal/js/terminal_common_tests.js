@@ -8,7 +8,7 @@
 
 import {DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_SIZE, SUPPORTED_FONT_FAMILIES,
   SUPPORTED_FONT_SIZES, delayedScheduler, definePrefs, fontFamilyToCSS,
-  normalizePrefsInPlace} from './terminal_common.js';
+  normalizePrefsInPlace, sleep} from './terminal_common.js';
 
 const FONT_FAMILIES = Array.from(SUPPORTED_FONT_FAMILIES.keys());
 
@@ -59,7 +59,7 @@ describe('terminal_common_tests.js', () => {
     }
     assert.equal(counter, 0);
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    await sleep(0);
     assert.equal(counter, 1);
   });
 

@@ -405,6 +405,7 @@ export class MockObject {
     if (baseObj === undefined) {
       baseObj = {};
     }
+    this.baseObj = baseObj;
 
     /** @type {!Map<string, !MethodData>} */
     this.perMethodData_ = new Map();

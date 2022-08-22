@@ -10,8 +10,8 @@
 // terminal_tests.js for XtermTerminal.
 
 import {Terminal, FitAddon, WebglAddon} from './xterm.js';
-import {FontManager, TERMINAL_EMULATORS, delayedScheduler, getOSInfo}
-    from './terminal_common.js';
+import {FontManager, TERMINAL_EMULATORS, delayedScheduler, fontManager,
+  getOSInfo, sleep} from './terminal_common.js';
 
 const ANSI_COLOR_NAMES = [
     'black',
@@ -38,6 +38,15 @@ const PrefToXtermOptions = {
 };
 
 /**
+ * @typedef {{
+ *   term: !Terminal,
+ *   fontManager: !FontManager,
+ *   fitAddon: !FitAddon,
+ * }}
+ */
+export let XtermTerminalTestParams;
+
+/**
  * A terminal class that 1) uses xterm.js and 2) behaves like a `hterm.Terminal`
  * so that it can be used in existing code.
  *
@@ -48,23 +57,33 @@ const PrefToXtermOptions = {
  * @extends {hterm.Terminal}
  * @unrestricted
  */
-class XtermTerminal {
+export class XtermTerminal {
   /**
    * @param {{
    *   storage: !lib.Storage,
    *   profileId: string,
    *   enableWebGL: boolean,
+   *   testParams: (!XtermTerminalTestParams|undefined),
    * }} args
    */
-  constructor({storage, profileId, enableWebGL}) {
+  constructor({storage, profileId, enableWebGL, testParams}) {
     /** @type {!hterm.PreferenceManager} */
     this.prefs_ = new hterm.PreferenceManager(storage, profileId);
     this.enableWebGL_ = enableWebGL;
 
-    this.term = new Terminal();
-    this.fitAddon = new FitAddon();
+    this.term = testParams?.term || new Terminal();
+    this.fontManager_ = testParams?.fontManager || fontManager;
+    this.fitAddon = testParams?.fitAddon || new FitAddon();
+
     this.term.loadAddon(this.fitAddon);
-    this.scheduleFit_ = delayedScheduler(() => this.fitAddon.fit(), 250);
+    this.scheduleFit_ = delayedScheduler(() => this.fitAddon.fit(),
+        testParams ? 0 : 250);
+
+    this.pendingFont_ = null;
+    this.scheduleRefreshFont_ = delayedScheduler(
+        () => this.refreshFont_(), 100);
+    document.fonts.addEventListener('loadingdone',
+        () => this.onFontLoadingDone_());
 
     this.installUnimplementedStubs_();
 
@@ -265,10 +284,70 @@ class XtermTerminal {
    * @param {*} value
    */
   updateOption_(key, value) {
+    if (key === 'fontFamily') {
+      this.updateFont_(/** @type {string} */(value));
+      return;
+    }
     // TODO: xterm supports updating multiple options at the same time. We
     // should probably do that.
     this.term.options[key] = value;
     this.scheduleFit_();
+  }
+
+  /**
+   * Called when there is a "fontloadingdone" event. We need this because
+   * `FontManager.loadFont()` does not guarantee loading all the font files.
+   */
+  async onFontLoadingDone_() {
+    // If there is a pending font, the font is going to be refresh soon, so we
+    // don't need to do anything.
+    if (!this.pendingFont_) {
+      this.scheduleRefreshFont_();
+    }
+  }
+
+  /**
+   * Refresh xterm rendering for a font related event.
+   */
+  refreshFont_() {
+    // We have to set the fontFamily option to a different string to trigger the
+    // re-rendering. Appending a space at the end seems to be the easiest
+    // solution. Note that `clearTextureAtlas()` and `refresh()` do not work for
+    // us.
+    //
+    // TODO: Report a bug to xterm.js and ask for exposing a public function for
+    // the refresh so that we don't need to do this hack.
+    this.term.options.fontFamily += ' ';
+  }
+
+  /**
+   * Update a font.
+   *
+   * @param {string} cssFontFamily
+   */
+  async updateFont_(cssFontFamily) {
+      this.pendingFont_ = cssFontFamily;
+      await this.fontManager_.loadFont(cssFontFamily);
+      // Sleep a bit to wait for flushing fontloadingdone events. This is not
+      // strictly necessary, but it should prevent `this.onFontLoadingDone_()`
+      // to refresh font unnecessarily in some cases.
+      await sleep(30);
+
+      if (this.pendingFont_ !== cssFontFamily) {
+        // `updateFont_()` probably is called again. Abort what we are doing.
+        console.log(`pendingFont_ (${this.pendingFont_}) is changed` +
+            ` (expecting ${cssFontFamily})`);
+        return;
+      }
+
+      if (this.term.options.fontFamily !== cssFontFamily) {
+        this.term.options.fontFamily = cssFontFamily;
+      } else {
+        // If the font is already the same, refresh font just to be safe.
+        this.refreshFont_();
+      }
+      this.pendingFont_ = null;
+      this.scheduleFit_();
   }
 }
 

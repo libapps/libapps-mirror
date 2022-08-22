@@ -377,6 +377,16 @@ export function redispatchEvent(element, event) {
 }
 
 /**
+ * Await to sleep.
+ *
+ * @param {number} ms
+ * @return {!Promise<void>}
+ */
+export async function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
  * Return a new "scheduler" function. When the function is called, it will
  * schedule the `callback` to be called after `delay` time. The function does
  * nothing if it is called again and the last one hasn't timed out yet.
