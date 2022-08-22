@@ -1814,8 +1814,10 @@ CommandInstance.prototype.secureInput_ = function(
     e.stopPropagation();
     if (e.key === 'Enter') {
       cleanup(input.value);
+      e.preventDefault();
     } else if (e.key === 'Escape') {
       cleanup('');
+      e.preventDefault();
     }
   }, true);
 };

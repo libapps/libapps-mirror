@@ -94,8 +94,7 @@ hterm.Terminal.IO.prototype.setTerminalProfile = function(profileName) {
  * @return {!hterm.Terminal.IO} The new foreground IO instance.
  */
 hterm.Terminal.IO.prototype.push = function() {
-  const io = new hterm.Terminal.IO(this.terminal_);
-  io.keyboardCaptured_ = this.keyboardCaptured_;
+  const io = new this.constructor(this.terminal_);
 
   io.columnCount = this.columnCount;
   io.rowCount = this.rowCount;
