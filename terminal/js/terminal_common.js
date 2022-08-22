@@ -375,3 +375,28 @@ export function composeTmuxUrl(
 export function redispatchEvent(element, event) {
     element.dispatchEvent(new event.constructor(event.type, event));
 }
+
+/**
+ * Return a new "scheduler" function. When the function is called, it will
+ * schedule the `callback` to be called after `delay` time. The function does
+ * nothing if it is called again and the last one hasn't timed out yet.
+ *
+ * TODO: This can probably replace some other existing scheduling code (search
+ * "schedule" in the source code).
+ *
+ * @param {function()} callback
+ * @param {number} delay
+ * @return {function()} The schedule function.
+ */
+export function delayedScheduler(callback, delay) {
+  let pending = false;
+  return () => {
+    if (!pending) {
+      pending = true;
+      setTimeout(() => {
+        pending = false;
+        callback();
+      }, delay);
+    }
+  };
+}

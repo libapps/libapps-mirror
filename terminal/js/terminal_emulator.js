@@ -10,7 +10,8 @@
 // terminal_tests.js for XtermTerminal.
 
 import {Terminal, FitAddon, WebglAddon} from './xterm.js';
-import {FontManager, TERMINAL_EMULATORS, getOSInfo} from './terminal_common.js';
+import {FontManager, TERMINAL_EMULATORS, delayedScheduler, getOSInfo}
+    from './terminal_common.js';
 
 const ANSI_COLOR_NAMES = [
     'black',
@@ -35,63 +36,6 @@ const PrefToXtermOptions = {
   'font-family': 'fontFamily',
   'font-size': 'fontSize',
 };
-
-/**
- * This class observers a PreferenceManager and sets the corresponding options
- * on the xterm.js terminal when necessary.
- */
-class PrefReflector {
-  /**
-   * @param {!hterm.PreferenceManager} prefs
-   * @param {!Terminal} xtermTerminal
-   */
-  constructor(prefs, xtermTerminal) {
-    this.xtermTerminal_ = xtermTerminal;
-    this.theme_ = {};
-
-    for (const pref in PrefToXtermOptions) {
-      prefs.addObserver(pref, (v) => {
-        this.xtermTerminal_.options[PrefToXtermOptions[pref]] = v;
-      });
-    }
-
-    // Theme-related preference items.
-    prefs.addObservers(null, {
-      'background-color': (v) => {
-        this.updateTheme_({background: v});
-      },
-      'foreground-color': (v) => {
-        this.updateTheme_({foreground: v});
-      },
-      'cursor-color': (v) => {
-        this.updateTheme_({cursor: v});
-      },
-      'color-palette-overrides': (v) => {
-        if (!(v instanceof Array)) {
-          // For terminal, we always expect this to be an array.
-          console.warn('unexpected color palette: ', v);
-          return;
-        }
-        const colors = {};
-        for (let i = 0; i < v.length; ++i) {
-          colors[ANSI_COLOR_NAMES[i]] = v[i];
-        }
-        this.updateTheme_(colors);
-      },
-    });
-  }
-
-  /**
-   * @param {!Object} theme
-   */
-  updateTheme_(theme) {
-    for (const key in theme) {
-      this.theme_[key] = lib.colors.normalizeCSS(theme[key]);
-    }
-    // Must copy, otherwise, xterm.js will not detect the change.
-    this.xtermTerminal_.options.theme = Object.assign({}, this.theme_);
-  }
-}
 
 /**
  * A terminal class that 1) uses xterm.js and 2) behaves like a `hterm.Terminal`
@@ -120,10 +64,11 @@ class XtermTerminal {
     this.term = new Terminal();
     this.fitAddon = new FitAddon();
     this.term.loadAddon(this.fitAddon);
+    this.scheduleFit_ = delayedScheduler(() => this.fitAddon.fit(), 250);
 
     this.installUnimplementedStubs_();
 
-    this.prefReflector_ = new PrefReflector(this.prefs_, this.term);
+    this.observePrefs_();
 
     this.term.onResize(({cols, rows}) => this.onTerminalResize(cols, rows));
     this.term.onData((data) => this.sendString(data));
@@ -201,11 +146,11 @@ class XtermTerminal {
    */
   decorate(elem) {
     this.term.open(elem);
-    this.fitAddon.fit();
+    this.scheduleFit_();
     if (this.enableWebGL_) {
       this.term.loadAddon(new WebglAddon());
     }
-    (new ResizeObserver(() => this.fitAddon.fit())).observe(elem);
+    (new ResizeObserver(() => this.scheduleFit_())).observe(elem);
   }
 
   /** @override */
@@ -268,6 +213,63 @@ class XtermTerminal {
    * @param {string} v
    */
   sendString(v) {}
+
+  observePrefs_() {
+    for (const pref in PrefToXtermOptions) {
+      this.prefs_.addObserver(pref, (v) => {
+        this.updateOption_(PrefToXtermOptions[pref], v);
+      });
+    }
+
+    // Theme-related preference items.
+    this.prefs_.addObservers(null, {
+      'background-color': (v) => {
+        this.updateTheme_({background: v});
+      },
+      'foreground-color': (v) => {
+        this.updateTheme_({foreground: v});
+      },
+      'cursor-color': (v) => {
+        this.updateTheme_({cursor: v});
+      },
+      'color-palette-overrides': (v) => {
+        if (!(v instanceof Array)) {
+          // For terminal, we always expect this to be an array.
+          console.warn('unexpected color palette: ', v);
+          return;
+        }
+        const colors = {};
+        for (let i = 0; i < v.length; ++i) {
+          colors[ANSI_COLOR_NAMES[i]] = v[i];
+        }
+        this.updateTheme_(colors);
+      },
+    });
+  }
+
+  /**
+   * @param {!Object} theme
+   */
+  updateTheme_(theme) {
+    const newTheme = {...this.term.options.theme};
+    for (const key in theme) {
+      newTheme[key] = lib.colors.normalizeCSS(theme[key]);
+    }
+    this.updateOption_('theme', newTheme);
+  }
+
+  /**
+   * Update one xterm.js option.
+   *
+   * @param {string} key
+   * @param {*} value
+   */
+  updateOption_(key, value) {
+    // TODO: xterm supports updating multiple options at the same time. We
+    // should probably do that.
+    this.term.options[key] = value;
+    this.scheduleFit_();
+  }
 }
 
 class HtermTerminal extends hterm.Terminal {
