@@ -9,9 +9,11 @@
 // TODO(b/236205389): add tests. For example, we should enable the test in
 // terminal_tests.js for XtermTerminal.
 
-import {Terminal, FitAddon, WebglAddon} from './xterm.js';
+import {LitElement, css, html} from './lit.js';
 import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, delayedScheduler,
   fontManager, getOSInfo, sleep} from './terminal_common.js';
+import {ICON_COPY} from './terminal_icons.js';
+import {Terminal, FitAddon, WebglAddon} from './xterm.js';
 
 const ANSI_COLOR_NAMES = [
     'black',
@@ -120,15 +122,24 @@ export class XtermTerminal {
 
     this.installUnimplementedStubs_();
 
-    this.observePrefs_();
-
     this.term.onResize(({cols, rows}) => this.io.onTerminalResize(cols, rows));
     // We could also use `this.io.sendString()` except for the nassh exit
     // prompt, which only listens to onVTKeystroke().
     this.term.onData((data) => this.io.onVTKeystroke(data));
+    this.term.onTitleChange((title) => document.title = title);
+    this.term.onSelectionChange(() => this.onSelectionChange_());
 
     this.io = new XtermTerminalIO(this);
     this.notificationCenter_ = null;
+
+    this.copyNotice_ = null;
+
+    this.term.options.theme = {
+      selection: 'rgba(174, 203, 250, .6)',
+      selectionForeground: 'black',
+      customGlyphs: true,
+    };
+    this.observePrefs_();
   }
 
   /**
@@ -368,6 +379,18 @@ export class XtermTerminal {
     }
   }
 
+  onSelectionChange_() {
+    const selection = this.term.getSelection();
+    if (!selection) {
+      return;
+    }
+    navigator.clipboard?.writeText(selection);
+    if (!this.copyNotice_) {
+      this.copyNotice_ = document.createElement('terminal-copy-notice');
+    }
+    setTimeout(() => this.showOverlay(lib.notNull(this.copyNotice_), 500), 200);
+  }
+
   /**
    * Refresh xterm rendering for a font related event.
    */
@@ -388,28 +411,28 @@ export class XtermTerminal {
    * @param {string} cssFontFamily
    */
   async updateFont_(cssFontFamily) {
-      this.pendingFont_ = cssFontFamily;
-      await this.fontManager_.loadFont(cssFontFamily);
-      // Sleep a bit to wait for flushing fontloadingdone events. This is not
-      // strictly necessary, but it should prevent `this.onFontLoadingDone_()`
-      // to refresh font unnecessarily in some cases.
-      await sleep(30);
+    this.pendingFont_ = cssFontFamily;
+    await this.fontManager_.loadFont(cssFontFamily);
+    // Sleep a bit to wait for flushing fontloadingdone events. This is not
+    // strictly necessary, but it should prevent `this.onFontLoadingDone_()`
+    // to refresh font unnecessarily in some cases.
+    await sleep(30);
 
-      if (this.pendingFont_ !== cssFontFamily) {
-        // `updateFont_()` probably is called again. Abort what we are doing.
-        console.log(`pendingFont_ (${this.pendingFont_}) is changed` +
-            ` (expecting ${cssFontFamily})`);
-        return;
-      }
+    if (this.pendingFont_ !== cssFontFamily) {
+      // `updateFont_()` probably is called again. Abort what we are doing.
+      console.log(`pendingFont_ (${this.pendingFont_}) is changed` +
+          ` (expecting ${cssFontFamily})`);
+      return;
+    }
 
-      if (this.term.options.fontFamily !== cssFontFamily) {
-        this.term.options.fontFamily = cssFontFamily;
-      } else {
-        // If the font is already the same, refresh font just to be safe.
-        this.refreshFont_();
-      }
-      this.pendingFont_ = null;
-      this.scheduleFit_();
+    if (this.term.options.fontFamily !== cssFontFamily) {
+      this.term.options.fontFamily = cssFontFamily;
+    } else {
+      // If the font is already the same, refresh font just to be safe.
+      this.refreshFont_();
+    }
+    this.pendingFont_ = null;
+    this.scheduleFit_();
   }
 }
 
@@ -474,3 +497,28 @@ export async function createEmulator({storage, profileId}) {
   }
 }
 
+class TerminalCopyNotice extends LitElement {
+  /** @override */
+  static get styles() {
+    return css`
+        :host {
+          display: block;
+          text-align: center;
+        }
+
+        svg {
+          fill: currentColor;
+        }
+    `;
+  }
+
+  /** @override */
+  render() {
+    return html`
+       ${ICON_COPY}
+       <div>${hterm.messageManager.get('HTERM_NOTIFY_COPY')}</div>
+    `;
+  }
+}
+
+customElements.define('terminal-copy-notice', TerminalCopyNotice);

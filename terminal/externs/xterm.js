@@ -20,7 +20,8 @@ class Terminal$$module$js$xterm {
 
   focus() {}
 
-  reset() {}
+  /** @return {string} */
+  getSelection() {}
 
   /**
    * @param {!FitAddon$$module$js$xterm|!WebglAddon$$module$js$xterm} addon
@@ -28,19 +29,31 @@ class Terminal$$module$js$xterm {
   loadAddon(addon) {}
 
   /**
-   * @param {function({cols: number, rows: number})} callback
-   */
-  onResize(callback) {}
-
-  /**
    * @param {function(string)} callback
    */
   onData(callback) {}
 
   /**
+   * @param {function({cols: number, rows: number})} callback
+   */
+  onResize(callback) {}
+
+  /**
+   * @param {function()} callback
+   */
+  onSelectionChange(callback) {}
+
+  /**
+   * @param {function(string)} callback
+   */
+  onTitleChange(callback) {}
+
+  /**
    * @param {!Element} elem
    */
   open(elem) {}
+
+  reset() {}
 
   /**
    * @param {string|!Uint8Array} data
