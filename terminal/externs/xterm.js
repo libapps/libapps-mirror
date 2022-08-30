@@ -18,10 +18,18 @@ class Terminal$$module$js$xterm {
     this.rows;
   }
 
+  /**
+   * @param {function(!KeyboardEvent): boolean} handler
+   */
+  attachCustomKeyEventHandler(handler) {}
+
   focus() {}
 
   /** @return {string} */
   getSelection() {}
+
+  /** @return {boolean} */
+  hasSelection() {}
 
   /**
    * @param {!FitAddon$$module$js$xterm|!WebglAddon$$module$js$xterm} addon

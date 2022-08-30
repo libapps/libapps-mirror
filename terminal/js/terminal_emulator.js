@@ -15,6 +15,48 @@ import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, delayedScheduler,
 import {ICON_COPY} from './terminal_icons.js';
 import {Terminal, FitAddon, WebglAddon} from './xterm.js';
 
+
+/** @enum {number} */
+export const Modifier = {
+  Shift: 1 << 0,
+  Alt: 1 << 1,
+  Ctrl: 1 << 2,
+  Meta: 1 << 3,
+};
+
+// This is just a static map from key names to key codes. It helps make the code
+// a bit more readable.
+const keyCodes = hterm.Parser.identifiers.keyCodes;
+
+/**
+ * Encode a key combo (i.e. modifiers + a normal key) to an unique number.
+ *
+ * @param {number} modifiers
+ * @param {number} keyCode
+ * @return {number}
+ */
+export function encodeKeyCombo(modifiers, keyCode) {
+  return keyCode << 4 | modifiers;
+}
+
+const OS_DEFAULT_BINDINGS = [
+  // Submit feedback.
+  encodeKeyCombo(Modifier.Alt | Modifier.Shift, keyCodes.I),
+  // Toggle chromevox.
+  encodeKeyCombo(Modifier.Ctrl | Modifier.Alt, keyCodes.Z),
+  // Switch input method.
+  encodeKeyCombo(Modifier.Ctrl, keyCodes.SPACE),
+
+  // Dock window left/right.
+  encodeKeyCombo(Modifier.Alt, keyCodes.BRACKET_LEFT),
+  encodeKeyCombo(Modifier.Alt, keyCodes.BRACKET_RIGHT),
+
+  // Maximize/minimize window.
+  encodeKeyCombo(Modifier.Alt, keyCodes.EQUAL),
+  encodeKeyCombo(Modifier.Alt, keyCodes.MINUS),
+];
+
+
 const ANSI_COLOR_NAMES = [
     'black',
     'red',
@@ -46,6 +88,16 @@ const PrefToXtermOptions = {
  * }}
  */
 export let XtermTerminalTestParams;
+
+/**
+ * Compute a control character for a given character.
+ *
+ * @param {string} ch
+ * @return {string}
+ */
+function ctl(ch) {
+  return String.fromCharCode(ch.charCodeAt(0) - 64);
+}
 
 /**
  * A "terminal io" class for xterm. We don't want the vanilla hterm.Terminal.IO
@@ -101,11 +153,16 @@ export class XtermTerminal {
    * }} args
    */
   constructor({storage, profileId, enableWebGL, testParams}) {
+    this.ctrlCKeyDownHandler_ = this.ctrlCKeyDownHandler_.bind(this);
+    this.ctrlVKeyDownHandler_ = this.ctrlVKeyDownHandler_.bind(this);
+    this.zoomKeyDownHandler_ = this.zoomKeyDownHandler_.bind(this);
+
     this.profileId_ = profileId;
     /** @type {!hterm.PreferenceManager} */
     this.prefs_ = new hterm.PreferenceManager(storage, profileId);
     this.enableWebGL_ = enableWebGL;
 
+    // TODO: we should probably pass the initial prefs to the ctor.
     this.term = testParams?.term || new Terminal();
     this.fontManager_ = testParams?.fontManager || fontManager;
     this.fitAddon = testParams?.fitAddon || new FitAddon();
@@ -127,7 +184,27 @@ export class XtermTerminal {
     // prompt, which only listens to onVTKeystroke().
     this.term.onData((data) => this.io.onVTKeystroke(data));
     this.term.onTitleChange((title) => document.title = title);
-    this.term.onSelectionChange(() => this.onSelectionChange_());
+    this.term.onSelectionChange(() => this.copySelection_());
+
+    /**
+     * A mapping from key combo (see encodeKeyCombo()) to a handler function.
+     *
+     * If a key combo is in the map:
+     *
+     * - The handler instead of xterm.js will handle the keydown event.
+     * - Keyup and keypress will be ignored by both us and xterm.js.
+     *
+     * We re-generate this map every time a relevant pref value is changed. This
+     * is ok because pref changes are rare.
+     *
+     * @type {!Map<number, function(!KeyboardEvent)>}
+     */
+    this.keyDownHandlers_ = new Map();
+    this.scheduleResetKeyDownHandlers_ =
+        delayedScheduler(() => this.resetKeyDownHandlers_(), 250);
+
+    this.term.attachCustomKeyEventHandler(
+        this.customKeyEventHandler_.bind(this));
 
     this.io = new XtermTerminalIO(this);
     this.notificationCenter_ = null;
@@ -337,6 +414,12 @@ export class XtermTerminal {
         this.updateTheme_(colors);
       },
     });
+
+    for (const name of ['keybindings-os-defaults', 'pass-ctrl-n', 'pass-ctrl-t',
+        'pass-ctrl-w', 'pass-ctrl-tab', 'pass-ctrl-number', 'pass-alt-number',
+        'ctrl-plus-minus-zero-zoom', 'ctrl-c-copy', 'ctrl-v-paste']) {
+      this.prefs_.addObserver(name, this.scheduleResetKeyDownHandlers_);
+    }
   }
 
   /**
@@ -379,7 +462,7 @@ export class XtermTerminal {
     }
   }
 
-  onSelectionChange_() {
+  copySelection_() {
     const selection = this.term.getSelection();
     if (!selection) {
       return;
@@ -433,6 +516,197 @@ export class XtermTerminal {
     }
     this.pendingFont_ = null;
     this.scheduleFit_();
+  }
+
+  /**
+   * @param {!KeyboardEvent} ev
+   * @return {boolean} Return false if xterm.js should not handle the key event.
+   */
+  customKeyEventHandler_(ev) {
+    const modifiers = (ev.shiftKey ? Modifier.Shift : 0) |
+        (ev.altKey ? Modifier.Alt : 0) |
+        (ev.ctrlKey ? Modifier.Ctrl : 0) |
+        (ev.metaKey ? Modifier.Meta : 0);
+    const handler = this.keyDownHandlers_.get(
+        encodeKeyCombo(modifiers, ev.keyCode));
+    if (handler) {
+      if (ev.type === 'keydown') {
+        handler(ev);
+      }
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * A keydown handler for zoom-related keys.
+   *
+   * @param {!KeyboardEvent} ev
+   */
+  zoomKeyDownHandler_(ev) {
+    ev.preventDefault();
+
+    if (this.prefs_.get('ctrl-plus-minus-zero-zoom') === ev.shiftKey) {
+      // The only one with a control code.
+      if (ev.keyCode === keyCodes.MINUS) {
+        this.io.onVTKeystroke('\x1f');
+      }
+      return;
+    }
+
+    let newFontSize;
+    switch (ev.keyCode) {
+      case keyCodes.ZERO:
+        newFontSize = this.prefs_.get('font-size');
+        break;
+      case keyCodes.MINUS:
+        newFontSize = this.term.options.fontSize - 1;
+        break;
+      default:
+        newFontSize = this.term.options.fontSize + 1;
+        break;
+    }
+
+    this.updateOption_('fontSize', Math.max(1, newFontSize));
+  }
+
+  /** @param {!KeyboardEvent} ev */
+  ctrlCKeyDownHandler_(ev) {
+    ev.preventDefault();
+    if (this.prefs_.get('ctrl-c-copy') !== ev.shiftKey &&
+        this.term.hasSelection()) {
+      this.copySelection_();
+      return;
+    }
+
+    this.io.onVTKeystroke('\x03');
+  }
+
+  /** @param {!KeyboardEvent} ev */
+  ctrlVKeyDownHandler_(ev) {
+    if (this.prefs_.get('ctrl-v-paste') !== ev.shiftKey) {
+      // Don't do anything and let the browser handles the key.
+      return;
+    }
+
+    ev.preventDefault();
+    this.io.onVTKeystroke('\x16');
+  }
+
+  resetKeyDownHandlers_() {
+    this.keyDownHandlers_.clear();
+
+    /**
+     * Don't do anything and let the browser handles the key.
+     *
+     * @param {!KeyboardEvent} ev
+     */
+    const noop = (ev) => {};
+
+    /**
+     * @param {number} modifiers
+     * @param {number} keyCode
+     * @param {function(!KeyboardEvent)} func
+     */
+    const set = (modifiers, keyCode, func) => {
+      this.keyDownHandlers_.set(encodeKeyCombo(modifiers, keyCode),
+          func);
+    };
+
+    /**
+     * @param {number} modifiers
+     * @param {number} keyCode
+     * @param {function(!KeyboardEvent)} func
+     */
+    const setWithShiftVersion = (modifiers, keyCode, func) => {
+      set(modifiers, keyCode, func);
+      set(modifiers | Modifier.Shift, keyCode, func);
+    };
+
+
+    // Ctrl+/
+    set(Modifier.Ctrl, 191, (ev) => {
+      ev.preventDefault();
+      this.io.onVTKeystroke(ctl('_'));
+    });
+
+    // Settings page.
+    set(Modifier.Ctrl | Modifier.Shift, keyCodes.P, (ev) => {
+      ev.preventDefault();
+      chrome.terminalPrivate.openOptionsPage(() => {});
+    });
+
+    if (this.prefs_.get('keybindings-os-defaults')) {
+      for (const binding of OS_DEFAULT_BINDINGS) {
+        this.keyDownHandlers_.set(binding, noop);
+      }
+    }
+
+    /** @param {!KeyboardEvent} ev */
+    const newWindow = (ev) => {
+      ev.preventDefault();
+      chrome.terminalPrivate.openWindow();
+    };
+    set(Modifier.Ctrl | Modifier.Shift, keyCodes.N, newWindow);
+    if (this.prefs_.get('pass-ctrl-n')) {
+      set(Modifier.Ctrl, keyCodes.N, newWindow);
+    }
+
+    if (this.prefs_.get('pass-ctrl-t')) {
+      setWithShiftVersion(Modifier.Ctrl, keyCodes.T, noop);
+    }
+
+    if (this.prefs_.get('pass-ctrl-w')) {
+      setWithShiftVersion(Modifier.Ctrl, keyCodes.W, noop);
+    }
+
+    if (this.prefs_.get('pass-ctrl-tab')) {
+      setWithShiftVersion(Modifier.Ctrl, keyCodes.TAB, noop);
+    }
+
+    const passCtrlNumber = this.prefs_.get('pass-ctrl-number');
+
+    /**
+     * Set a handler for the key combo ctrl+<number>.
+     *
+     * @param {number} number 1 to 9
+     * @param {string} controlCode The control code to send if we don't want to
+     *     let the browser to handle it.
+     */
+    const setCtrlNumberHandler = (number, controlCode) => {
+      let func = noop;
+      if (!passCtrlNumber) {
+        func = (ev) => {
+          ev.preventDefault();
+          this.io.onVTKeystroke(controlCode);
+        };
+      }
+      set(Modifier.Ctrl, keyCodes.ZERO + number, func);
+    };
+
+    setCtrlNumberHandler(1, '1');
+    setCtrlNumberHandler(2, ctl('@'));
+    setCtrlNumberHandler(3, ctl('['));
+    setCtrlNumberHandler(4, ctl('\\'));
+    setCtrlNumberHandler(5, ctl(']'));
+    setCtrlNumberHandler(6, ctl('^'));
+    setCtrlNumberHandler(7, ctl('_'));
+    setCtrlNumberHandler(8, '\x7f');
+    setCtrlNumberHandler(9, '9');
+
+    if (this.prefs_.get('pass-alt-number')) {
+      for (let keyCode = keyCodes.ZERO; keyCode <= keyCodes.NINE; ++keyCode) {
+        set(Modifier.Alt, keyCode, noop);
+      }
+    }
+
+    for (const keyCode of [keyCodes.ZERO, keyCodes.MINUS, keyCodes.EQUAL]) {
+      setWithShiftVersion(Modifier.Ctrl, keyCode, this.zoomKeyDownHandler_);
+    }
+
+    setWithShiftVersion(Modifier.Ctrl, keyCodes.C, this.ctrlCKeyDownHandler_);
+    setWithShiftVersion(Modifier.Ctrl, keyCodes.V, this.ctrlVKeyDownHandler_);
   }
 }
 

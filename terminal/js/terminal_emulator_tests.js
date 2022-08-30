@@ -7,8 +7,9 @@
  */
 
 import {sleep} from './terminal_common.js';
-import {XtermTerminal, XtermTerminalTestParams} from './terminal_emulator.js';
-import {MockObject} from './terminal_test_mocks.js';
+import {encodeKeyCombo, Modifier, XtermTerminal, XtermTerminalTestParams}
+    from './terminal_emulator.js';
+import {MockFunction, MockObject} from './terminal_test_mocks.js';
 
 describe('terminal_emulator_tests.js', function() {
   describe('XtermTerminal', function() {
@@ -83,6 +84,37 @@ describe('terminal_emulator_tests.js', function() {
         await sleep(0);
         assert.deepEqual(this.mocks.fitAddon.getMethodHistory('fit'), []);
       });
+    });
+
+    it('customKeyEventHandler_', async function() {
+      const mockHandler = new MockFunction();
+      const fakeEvent = {
+        type: 'keydown',
+        keyCode: 65,
+        ctrlKey: true,
+      };
+      this.terminal.keyDownHandlers_.set(encodeKeyCombo(Modifier.Ctrl, 65),
+          mockHandler.proxy);
+      assert.isFalse(this.terminal.customKeyEventHandler_(fakeEvent));
+      const history = mockHandler.popHistory();
+      assert.equal(history.length, 1);
+      assert.equal(history[0][0], fakeEvent);
+
+      assert.isFalse(this.terminal.customKeyEventHandler_({...fakeEvent,
+        type: 'keypress'}));
+      assert.isEmpty(mockHandler.popHistory());
+
+      assert.isTrue(this.terminal.customKeyEventHandler_({...fakeEvent,
+        shiftKey: true}));
+      assert.isEmpty(mockHandler.popHistory());
+
+      assert.isTrue(this.terminal.customKeyEventHandler_({...fakeEvent,
+        keyCode: 66}));
+      assert.isEmpty(mockHandler.popHistory());
+
+      assert.isTrue(this.terminal.customKeyEventHandler_({...fakeEvent,
+        ctrlKey: false}));
+      assert.isEmpty(mockHandler.popHistory());
     });
   });
 });
