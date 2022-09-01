@@ -178,6 +178,7 @@ export class XtermTerminal {
         () => this.onFontLoadingDone_());
 
     this.installUnimplementedStubs_();
+    this.installEscapeSequenceHandlers_();
 
     this.term.onResize(({cols, rows}) => this.io.onTerminalResize(cols, rows));
     // We could also use `this.io.sendString()` except for the nassh exit
@@ -259,6 +260,32 @@ export class XtermTerminal {
         console.warn('.vt.resetParseState() is not implemented');
       },
     };
+  }
+
+  installEscapeSequenceHandlers_() {
+    // OSC 52 for copy.
+    this.term.parser.registerOscHandler(52, (args) => {
+      // Args comes in as a single 'clipboard;b64-data' string.  The clipboard
+      // parameter is used to select which of the X clipboards to address. Since
+      // we're not integrating with X, we treat them all the same.
+      const parsedArgs = args.match(/^[cps01234567]*;(.*)/);
+      if (!parsedArgs) {
+        return true;
+      }
+
+      let data;
+      try {
+        data = window.atob(parsedArgs[1]);
+      } catch (e) {
+        // If the user sent us invalid base64 content, silently ignore it.
+        return true;
+      }
+      const decoder = new TextDecoder();
+      const bytes = lib.codec.stringToCodeUnitArray(data);
+      this.copyString_(decoder.decode(bytes));
+
+      return true;
+    });
   }
 
   /**
@@ -463,11 +490,15 @@ export class XtermTerminal {
   }
 
   copySelection_() {
-    const selection = this.term.getSelection();
-    if (!selection) {
+    this.copyString_(this.term.getSelection());
+  }
+
+  /** @param {string} data */
+  copyString_(data) {
+    if (!data) {
       return;
     }
-    navigator.clipboard?.writeText(selection);
+    navigator.clipboard?.writeText(data);
     if (!this.copyNotice_) {
       this.copyNotice_ = document.createElement('terminal-copy-notice');
     }

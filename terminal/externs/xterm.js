@@ -8,6 +8,14 @@
  * @externs
  */
 
+class IParser {
+  /**
+   * @param {number} ident
+   * @param {function(string): boolean|!Promise<boolean>} callback
+   */
+  registerOscHandler(ident, callback) {}
+}
+
 class Terminal$$module$js$xterm {
   constructor() {
     /** @type {!Object} */
@@ -16,6 +24,8 @@ class Terminal$$module$js$xterm {
     this.cols;
     /** @type {number} */
     this.rows;
+    /** @type {IParser} */
+    this.parser;
   }
 
   /**

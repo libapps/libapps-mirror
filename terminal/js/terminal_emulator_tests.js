@@ -15,7 +15,12 @@ describe('terminal_emulator_tests.js', function() {
   describe('XtermTerminal', function() {
     beforeEach(async function() {
       this.mocks = {
-        term: new MockObject({options: {}}),
+        term: new MockObject({
+          options: {},
+          parser: {
+            registerOscHandler: () => {},
+          },
+        }),
         fontManager: new MockObject(),
         fitAddon: new MockObject(),
       };
