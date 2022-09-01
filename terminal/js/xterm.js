@@ -7,4 +7,5 @@
 import {xterm} from './nassh_deps.rollup.js';
 
 /** @suppress {undefinedVars} */
-export const {Terminal, FitAddon, WebglAddon} = xterm;
+export const {FitAddon, Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
+    = xterm;

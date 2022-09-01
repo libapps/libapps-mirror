@@ -26,6 +26,9 @@ class Terminal$$module$js$xterm {
     this.rows;
     /** @type {IParser} */
     this.parser;
+    this.unicode = {
+      activeVersion: '',
+    };
   }
 
   /**

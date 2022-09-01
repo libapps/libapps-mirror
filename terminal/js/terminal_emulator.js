@@ -13,7 +13,8 @@ import {LitElement, css, html} from './lit.js';
 import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, delayedScheduler,
   fontManager, getOSInfo, sleep} from './terminal_common.js';
 import {ICON_COPY} from './terminal_icons.js';
-import {Terminal, FitAddon, WebglAddon} from './xterm.js';
+import {FitAddon, Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
+    from './xterm.js';
 
 
 /** @enum {number} */
@@ -170,6 +171,10 @@ export class XtermTerminal {
     this.term.loadAddon(this.fitAddon);
     this.scheduleFit_ = delayedScheduler(() => this.fitAddon.fit(),
         testParams ? 0 : 250);
+
+    this.term.loadAddon(new WebLinksAddon());
+    this.term.loadAddon(new Unicode11Addon());
+    this.term.unicode.activeVersion = '11';
 
     this.pendingFont_ = null;
     this.scheduleRefreshFont_ = delayedScheduler(
