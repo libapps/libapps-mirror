@@ -28,9 +28,7 @@
     "terminalPrivate",
     "unlimitedStorage",
     "fileSystemProvider",
-    "accessibilityFeatures.read",
-    "crashReportPrivate",
-    "metricsPrivate"
+    "accessibilityFeatures.read"
   ],
   "optional_permissions": [
     "https://cloudtopmanagement-googleapis.corp.google.com/*",
