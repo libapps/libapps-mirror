@@ -655,6 +655,20 @@ export class XtermTerminal {
       set(modifiers | Modifier.Shift, keyCode, func);
     };
 
+    // Temporary shortcut to refresh the rendering in case of rendering errors.
+    // TODO(lxj): remove after this is fixed:
+    // https://github.com/xtermjs/xterm.js/issues/3878
+    set(Modifier.Ctrl | Modifier.Shift, keyCodes.L,
+        /** @suppress {missingProperties} */
+        () => {
+          this.scheduleRefreshFont_();
+          // Refresh the cursor layer.
+          if (this.enableWebGL_) {
+            this.term?._core?._renderService?._renderer?._renderLayers[1]
+                ?._clearAll();
+          }
+        },
+    );
 
     // Ctrl+/
     set(Modifier.Ctrl, 191, (ev) => {
