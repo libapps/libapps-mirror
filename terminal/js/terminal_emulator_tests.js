@@ -35,6 +35,7 @@ describe('terminal_emulator_tests.js', function() {
         enableWebGL: true,
         testParams: /** @type {!XtermTerminalTestParams} */(testParams),
       });
+      this.terminal.inited_ = true;
     });
 
     describe('updateFont_()', function() {

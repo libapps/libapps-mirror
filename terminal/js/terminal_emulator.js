@@ -158,6 +158,7 @@ export class XtermTerminal {
     this.ctrlVKeyDownHandler_ = this.ctrlVKeyDownHandler_.bind(this);
     this.zoomKeyDownHandler_ = this.zoomKeyDownHandler_.bind(this);
 
+    this.inited_ = false;
     this.profileId_ = profileId;
     /** @type {!hterm.PreferenceManager} */
     this.prefs_ = new hterm.PreferenceManager(storage, profileId);
@@ -169,7 +170,12 @@ export class XtermTerminal {
     this.fitAddon = testParams?.fitAddon || new FitAddon();
 
     this.term.loadAddon(this.fitAddon);
-    this.scheduleFit_ = delayedScheduler(() => this.fitAddon.fit(),
+    this.scheduleFit_ = delayedScheduler(
+        () => {
+          if (this.inited_) {
+            this.fitAddon.fit();
+          }
+        },
         testParams ? 0 : 250);
 
     this.term.loadAddon(new WebLinksAddon());
@@ -294,15 +300,6 @@ export class XtermTerminal {
   }
 
   /**
-   * One-time initialization at the beginning.
-   */
-  async init() {
-    await new Promise((resolve) => this.prefs_.readStorage(resolve));
-    this.prefs_.notifyAll();
-    this.onTerminalReady();
-  }
-
-  /**
    * Write data to the terminal.
    *
    * @param {string|!Uint8Array} data string for UTF-16 data, Uint8Array for
@@ -336,15 +333,26 @@ export class XtermTerminal {
    * @override
    */
   decorate(elem) {
-    this.term.open(elem);
-    this.scheduleFit_();
-    if (this.enableWebGL_) {
-      this.term.loadAddon(new WebglAddon());
-    }
-    this.term.focus();
-    (new ResizeObserver(() => this.scheduleFit_())).observe(elem);
-    // TODO: Make a11y work. Maybe we can just use `hterm.AccessibilityReader`.
-    this.notificationCenter_ = new hterm.NotificationCenter(document.body);
+    (async () => {
+      await new Promise((resolve) => this.prefs_.readStorage(resolve));
+      // This will trigger all the observers to set the terminal options before
+      // we call `this.term.open()`.
+      this.prefs_.notifyAll();
+
+      this.inited_ = true;
+      this.term.open(elem);
+
+      this.scheduleFit_();
+      if (this.enableWebGL_) {
+        this.term.loadAddon(new WebglAddon());
+      }
+      this.term.focus();
+      (new ResizeObserver(() => this.scheduleFit_())).observe(elem);
+      // TODO: Make a11y work. Maybe we can just use hterm.AccessibilityReader.
+      this.notificationCenter_ = new hterm.NotificationCenter(document.body);
+
+      this.onTerminalReady();
+    })();
   }
 
   /** @override */
@@ -458,15 +466,25 @@ export class XtermTerminal {
    * @param {!Object} theme
    */
   updateTheme_(theme) {
-    const newTheme = {...this.term.options.theme};
-    for (const key in theme) {
-      newTheme[key] = lib.colors.normalizeCSS(theme[key]);
+    const updateTheme = (target) => {
+      for (const [key, value] of Object.entries(theme)) {
+        target[key] = lib.colors.normalizeCSS(value);
+      }
+    };
+
+    // Must use a new theme object to trigger re-render if we have initialized.
+    if (this.inited_) {
+      const newTheme = {...this.term.options.theme};
+      updateTheme(newTheme);
+      this.term.options.theme = newTheme;
+      return;
     }
-    this.updateOption_('theme', newTheme);
+
+    updateTheme(this.term.options.theme);
   }
 
   /**
-   * Update one xterm.js option.
+   * Update one xterm.js option. Use updateTheme_() for theme.
    *
    * @param {string} key
    * @param {*} value
@@ -489,7 +507,7 @@ export class XtermTerminal {
   async onFontLoadingDone_() {
     // If there is a pending font, the font is going to be refresh soon, so we
     // don't need to do anything.
-    if (!this.pendingFont_) {
+    if (this.inited_ && !this.pendingFont_) {
       this.scheduleRefreshFont_();
     }
   }
@@ -809,9 +827,6 @@ export async function createEmulator({storage, profileId}) {
           profileId,
           enableWebGL: config.webgl,
         });
-        // Don't await it so that the caller can override
-        // `terminal.onTerminalReady()` before the terminal is ready.
-        terminal.init();
         return terminal;
       }
     case 'hterm':
