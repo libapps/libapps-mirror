@@ -186,6 +186,7 @@ export class XtermTerminal {
     // We could also use `this.io.sendString()` except for the nassh exit
     // prompt, which only listens to onVTKeystroke().
     this.term.onData((data) => this.io.onVTKeystroke(data));
+    this.term.onBinary((data) => this.io.onVTKeystroke(data));
     this.term.onTitleChange((title) => document.title = title);
     this.term.onSelectionChange(() => this.copySelection_());
 

@@ -60,6 +60,11 @@ class Terminal$$module$js$xterm {
   /**
    * @param {function(string)} callback
    */
+  onBinary(callback) {}
+
+  /**
+   * @param {function(string)} callback
+   */
   onData(callback) {}
 
   /**
