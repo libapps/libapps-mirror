@@ -20,9 +20,16 @@ describe('terminal_emulator_tests.js', function() {
           parser: {
             registerOscHandler: () => {},
           },
+          _core: {
+            _renderService: {
+              dimensions: {
+                actualCellWidth: 10.5,
+                actualCellHeight: 20.5,
+              },
+            },
+          },
         }),
         fontManager: new MockObject(),
-        fitAddon: new MockObject(),
       };
       const testParams = {};
       for (const prop in this.mocks) {
@@ -35,6 +42,13 @@ describe('terminal_emulator_tests.js', function() {
         enableWebGL: true,
         testParams: /** @type {!XtermTerminalTestParams} */(testParams),
       });
+
+      // Some hacking because we don't run the decorate() function. Maybe we
+      // should just run it.
+      this.terminal.container_ = /** @type {!Element} */({
+        offsetWidth: 1000,
+        offsetHeight: 500,
+      });
       this.terminal.inited_ = true;
     });
 
@@ -46,13 +60,13 @@ describe('terminal_emulator_tests.js', function() {
             [['font one']]);
         assert.equal(this.mocks.term.baseObj.options.fontFamily, undefined);
         assert.isNotNull(this.terminal.pendingFont_);
-        assert.deepEqual(this.mocks.fitAddon.getMethodHistory('fit'), []);
+        assert.equal(this.mocks.term.popMethodHistory('resize').length, 0);
 
         await updateFontPromise;
         assert.equal(this.mocks.term.baseObj.options.fontFamily, 'font one');
         assert.isNull(this.terminal.pendingFont_);
         await sleep(0);
-        assert.deepEqual(this.mocks.fitAddon.getMethodHistory('fit'), [[]]);
+        assert.equal(this.mocks.term.popMethodHistory('resize').length, 1);
       });
 
       it('refresh font when the font is the same', async function() {
@@ -63,14 +77,14 @@ describe('terminal_emulator_tests.js', function() {
             [['font one']]);
         assert.equal(this.mocks.term.baseObj.options.fontFamily, 'font one');
         assert.isNotNull(this.terminal.pendingFont_);
-        assert.deepEqual(this.mocks.fitAddon.getMethodHistory('fit'), []);
+        assert.equal(this.mocks.term.popMethodHistory('resize').length, 0);
 
         await updateFontPromise;
         // Note the extra space at the end.
         assert.equal(this.mocks.term.baseObj.options.fontFamily, 'font one ');
         assert.isNull(this.terminal.pendingFont_);
         await sleep(0);
-        assert.deepEqual(this.mocks.fitAddon.getMethodHistory('fit'), [[]]);
+        assert.equal(this.mocks.term.popMethodHistory('resize').length, 1);
       });
 
       it('aborts if pendingFont_ was changed', async function() {
@@ -80,7 +94,7 @@ describe('terminal_emulator_tests.js', function() {
             [['font one']]);
         assert.equal(this.mocks.term.baseObj.options.fontFamily, undefined);
         assert.isNotNull(this.terminal.pendingFont_);
-        assert.deepEqual(this.mocks.fitAddon.getMethodHistory('fit'), []);
+        assert.equal(this.mocks.term.popMethodHistory('resize').length, 0);
 
         this.terminal.pendingFont_ = 'font two';
 
@@ -88,7 +102,7 @@ describe('terminal_emulator_tests.js', function() {
         assert.equal(this.mocks.term.baseObj.options.fontFamily, undefined);
         assert.equal(this.terminal.pendingFont_, 'font two');
         await sleep(0);
-        assert.deepEqual(this.mocks.fitAddon.getMethodHistory('fit'), []);
+        assert.equal(this.mocks.term.popMethodHistory('resize').length, 0);
       });
     });
 

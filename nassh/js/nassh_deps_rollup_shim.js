@@ -63,11 +63,10 @@ export {lit};
 import '@material/mwc-icon-button';
 
 import {Terminal} from 'xterm';
-import {FitAddon} from 'xterm-addon-fit';
 import {Unicode11Addon} from 'xterm-addon-unicode11';
 import {WebglAddon} from 'xterm-addon-webgl';
 import {WebLinksAddon} from 'xterm-addon-web-links';
-export const xterm = {FitAddon, Terminal, Unicode11Addon, WebLinksAddon,
+export const xterm = {Terminal, Unicode11Addon, WebLinksAddon,
   WebglAddon};
 
 /**

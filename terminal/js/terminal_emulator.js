@@ -13,7 +13,7 @@ import {LitElement, css, html} from './lit.js';
 import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, delayedScheduler,
   fontManager, getOSInfo, sleep} from './terminal_common.js';
 import {ICON_COPY} from './terminal_icons.js';
-import {FitAddon, Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
+import {Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
     from './xterm.js';
 
 
@@ -81,7 +81,6 @@ const ANSI_COLOR_NAMES = [
  * @typedef {{
  *   term: !Terminal,
  *   fontManager: !FontManager,
- *   fitAddon: !FitAddon,
  * }}
  */
 export let XtermTerminalTestParams;
@@ -163,15 +162,11 @@ export class XtermTerminal {
     // TODO: we should probably pass the initial prefs to the ctor.
     this.term = testParams?.term || new Terminal();
     this.fontManager_ = testParams?.fontManager || fontManager;
-    this.fitAddon = testParams?.fitAddon || new FitAddon();
 
-    this.term.loadAddon(this.fitAddon);
-    this.scheduleFit_ = delayedScheduler(
-        () => {
-          if (this.inited_) {
-            this.fitAddon.fit();
-          }
-        },
+    /** @type {?Element} */
+    this.container_;
+
+    this.scheduleFit_ = delayedScheduler(() => this.fit_(),
         testParams ? 0 : 250);
 
     this.term.loadAddon(new WebLinksAddon());
@@ -329,11 +324,16 @@ export class XtermTerminal {
    * @override
    */
   decorate(elem) {
+    this.container_ = elem;
     (async () => {
       await new Promise((resolve) => this.prefs_.readStorage(resolve));
       // This will trigger all the observers to set the terminal options before
       // we call `this.term.open()`.
       this.prefs_.notifyAll();
+
+      const screenPaddingSize = /** @type {number} */(
+          this.prefs_.get('screen-padding-size'));
+      elem.style.paddingTop = elem.style.paddingLeft = `${screenPaddingSize}px`;
 
       this.inited_ = true;
       this.term.open(elem);
@@ -469,6 +469,32 @@ export class XtermTerminal {
         'pass-ctrl-w', 'pass-ctrl-tab', 'pass-ctrl-number', 'pass-alt-number',
         'ctrl-plus-minus-zero-zoom', 'ctrl-c-copy', 'ctrl-v-paste']) {
       this.prefs_.addObserver(name, this.scheduleResetKeyDownHandlers_);
+    }
+  }
+
+  /**
+   * Fit the terminal to the containing HTML element.
+   */
+  fit_() {
+    if (!this.inited_) {
+      return;
+    }
+
+    const screenPaddingSize = /** @type {number} */(
+        this.prefs_.get('screen-padding-size'));
+
+    const calc = (size, cellSize) => {
+      return Math.floor((size - 2 * screenPaddingSize) / cellSize);
+    };
+
+    // Unfortunately, it looks like we have to use private API from xterm.js.
+    // Maybe we should patch the FitAddon so that it works for us.
+    const dimensions = this.term._core._renderService.dimensions;
+    const cols = calc(this.container_.offsetWidth, dimensions.actualCellWidth);
+    const rows = calc(this.container_.offsetHeight,
+        dimensions.actualCellHeight);
+    if (cols >= 0 && rows >= 0) {
+      this.term.resize(cols, rows);
     }
   }
 

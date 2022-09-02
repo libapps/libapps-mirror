@@ -9,6 +9,7 @@ body {
 }
 
 #terminal {
+  box-sizing: border-box;
   display: block;
   position: relative;
   width: 100%;

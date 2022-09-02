@@ -29,6 +29,14 @@ class Terminal$$module$js$xterm {
     this.unicode = {
       activeVersion: '',
     };
+    this._core = {
+      _renderService: {
+        dimensions: {
+          actualCellWidth: 0,
+          actualCellHeight: 0,
+        },
+      },
+    };
   }
 
   /**
@@ -45,7 +53,7 @@ class Terminal$$module$js$xterm {
   hasSelection() {}
 
   /**
-   * @param {!FitAddon$$module$js$xterm|!WebglAddon$$module$js$xterm} addon
+   * @param {!WebglAddon$$module$js$xterm} addon
    */
   loadAddon(addon) {}
 
@@ -77,6 +85,12 @@ class Terminal$$module$js$xterm {
   reset() {}
 
   /**
+   * @param {number} cols
+   * @param {number} rows
+   */
+  resize(cols, rows) {}
+
+  /**
    * @param {string|!Uint8Array} data
    */
   write(data) {}
@@ -85,10 +99,6 @@ class Terminal$$module$js$xterm {
    * @param {string|!Uint8Array} data
    */
   writeln(data) {}
-}
-
-class FitAddon$$module$js$xterm {
-  fit() {}
 }
 
 class WebglAddon$$module$js$xterm {}
