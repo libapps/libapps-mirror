@@ -77,10 +77,6 @@ const ANSI_COLOR_NAMES = [
     'brightWhite',
 ];
 
-const PrefToXtermOptions = {
-  'font-family': 'fontFamily',
-};
-
 /**
  * @typedef {{
  *   term: !Terminal,
@@ -406,12 +402,6 @@ export class XtermTerminal {
   onTerminalReady() {}
 
   observePrefs_() {
-    for (const pref in PrefToXtermOptions) {
-      this.prefs_.addObserver(pref, (v) => {
-        this.updateOption_(PrefToXtermOptions[pref], v);
-      });
-    }
-
     // This is for this.notificationCenter_.
     const setHtermCSSVariable = (name, value) => {
       document.body.style.setProperty(`--hterm-${name}`, value);
@@ -424,22 +414,24 @@ export class XtermTerminal {
     };
 
     this.prefs_.addObserver('font-size', (v) => {
-      this.updateOption_('fontSize', v);
+      this.updateOption_('fontSize', v, true);
       setHtermCSSVariable('font-size', `${v}px`);
     });
 
-    // Theme-related preference items.
+    // TODO(lxj): support option "lineHeight", "scrollback".
     this.prefs_.addObservers(null, {
+      'audible-bell-sound': (v) => {
+        if (v) {
+          this.updateOption_('bellStyle', 'sound', false);
+          this.updateOption_('bellSound', lib.resource.getDataUrl(
+              'hterm/audio/bell'), false);
+        } else {
+          this.updateOption_('bellStyle', 'none', false);
+        }
+      },
       'background-color': (v) => {
         this.updateTheme_({background: v});
         setHtermColorCSSVariable('background-color', v);
-      },
-      'foreground-color': (v) => {
-        this.updateTheme_({foreground: v});
-        setHtermColorCSSVariable('foreground-color', v);
-      },
-      'cursor-color': (v) => {
-        this.updateTheme_({cursor: v});
       },
       'color-palette-overrides': (v) => {
         if (!(v instanceof Array)) {
@@ -452,6 +444,24 @@ export class XtermTerminal {
           colors[ANSI_COLOR_NAMES[i]] = v[i];
         }
         this.updateTheme_(colors);
+      },
+      'cursor-blink': (v) => this.updateOption_('cursorBlink', v, false),
+      'cursor-color': (v) => this.updateTheme_({cursor: v}),
+      'cursor-shape': (v) => {
+        let shape;
+        if (v === 'BEAM') {
+          shape = 'bar';
+        } else {
+          shape = v.toLowerCase();
+        }
+        this.updateOption_('cursorStyle', shape, false);
+      },
+      'font-family': (v) => this.updateFont_(v),
+      'foreground-color': (v) => {
+        // TODO(lxj): setting the cursorAccent to the foreground color mimics
+        // what hterm does, but I think it is better to expose this option.
+        this.updateTheme_({foreground: v, cursorAccent: v});
+        setHtermColorCSSVariable('foreground-color', v);
       },
     });
 
@@ -484,20 +494,20 @@ export class XtermTerminal {
   }
 
   /**
-   * Update one xterm.js option. Use updateTheme_() for theme.
+   * Update one xterm.js option. Use updateTheme_()/updateFont_() for
+   * theme/font.
    *
    * @param {string} key
    * @param {*} value
+   * @param {boolean} scheduleFit
    */
-  updateOption_(key, value) {
-    if (key === 'fontFamily') {
-      this.updateFont_(/** @type {string} */(value));
-      return;
-    }
+  updateOption_(key, value, scheduleFit) {
     // TODO: xterm supports updating multiple options at the same time. We
     // should probably do that.
     this.term.options[key] = value;
-    this.scheduleFit_();
+    if (scheduleFit) {
+      this.scheduleFit_();
+    }
   }
 
   /**
@@ -622,7 +632,7 @@ export class XtermTerminal {
         break;
     }
 
-    this.updateOption_('fontSize', Math.max(1, newFontSize));
+    this.updateOption_('fontSize', Math.max(1, newFontSize), true);
   }
 
   /** @param {!KeyboardEvent} ev */
