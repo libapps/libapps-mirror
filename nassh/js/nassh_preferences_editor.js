@@ -23,8 +23,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const manifest = getManifest();
     const storage = getSyncStorage();
 
+    const params = new URLSearchParams(document.location.search);
+    const profileId = params.get('profileId') ??
+        localize('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
+
     // Create a local hterm instance so people can see their changes live.
-    const term = new hterm.Terminal({storage});
+    const term = new hterm.Terminal({profileId, storage});
     term.onTerminalReady = function() {
         loadWebFonts(term.getDocument());
         const io = term.io.push();
@@ -47,9 +51,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // Useful for console debugging.
     window.term_ = term;
 
-    const params = new URLSearchParams(document.location.search);
-    const profileId = params.get('profileId') ??
-        localize('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
     const prefsEditor = new PreferencesEditor(storage, profileId);
 
     let a = document.querySelector('#backup');
