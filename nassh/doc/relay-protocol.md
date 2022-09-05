@@ -1,5 +1,10 @@
 # Secure Shell Relay Server Protocols
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/relay-protocol.md
+***
+
 Some servers are accessible only behind a different secure server, and over a
 web protocol like [XHR] or [WebSockets].
 To support those use cases, Secure Shell supports connecting to machines through

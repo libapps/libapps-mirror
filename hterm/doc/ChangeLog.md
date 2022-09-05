@@ -1,3 +1,8 @@
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ChangeLog.md
+***
+
 # 1.90, 2020-07-06, ES2018, UI tweaks to martial design, and minor bugfixes.
 
 * storage: Convert get APIs to promises.

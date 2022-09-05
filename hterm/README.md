@@ -1,5 +1,10 @@
 # hterm
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/
+***
+
 hterm is a JS library that provides a terminal emulator.  It is reasonably fast,
 reasonably correct, and reasonably portable across browsers.
 

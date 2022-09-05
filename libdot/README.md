@@ -1,5 +1,10 @@
 # libdot
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot/
+***
+
 This is a small set of custom JS utility libraries initially developed as part
 of hterm, now available as shared code.  It provides a base layer for web
 applications.  The code is intended to work in any modern browser, in either a

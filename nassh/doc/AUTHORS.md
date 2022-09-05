@@ -1,5 +1,10 @@
 # Authors & Maintainers & Contributors
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/AUTHORS.md
+***
+
 This is part of the Chromium OS project.
 
 Please do not use this list to contact authors.  We have a mailing list for

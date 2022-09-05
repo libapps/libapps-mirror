@@ -1,5 +1,10 @@
 # Images
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/images/
+***
+
 To quickly convert the SVG's to PNG's, use `inkscape`:
 ```bash
 $ s=64

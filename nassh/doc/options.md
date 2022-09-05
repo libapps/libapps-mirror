@@ -1,5 +1,10 @@
 # Secure Shell runtime options
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/options.md
+***
+
 The Secure Shell program supports a number of command line flags to control
 behavior on a per-connection basis.  These are not to be confused with the
 various terminal preferences (like colors or fonts).

@@ -1,5 +1,10 @@
 # Bundled fonts
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/fonts.md
+***
+
 The following fonts are loaded automatically as web fonts with Secure Shell.
 * [Cousine]
 * [Inconsolata]

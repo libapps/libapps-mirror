@@ -1,5 +1,10 @@
 # Secure Shell (nassh)
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/
+***
+
 Secure Shell (nassh) is a Chrome App that combines [hterm](/hterm/) with a NaCl
 build of OpenSSH to provide a PuTTY-like app for Chrome users.
 

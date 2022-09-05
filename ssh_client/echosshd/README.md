@@ -1,5 +1,10 @@
 # echosshd testing server
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/ssh_client/echosshd/
+***
+
 This is a simple server built on [libssh] for testing Secure Shell locally.
 It provides a simple shell interface so content can be sent back & forth.
 

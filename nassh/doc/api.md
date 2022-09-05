@@ -1,5 +1,10 @@
 # External API
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/api.md
+***
+
 The extension provides an external API to allow other apps/extensions make
 requests using the [Chrome messaging API].
 

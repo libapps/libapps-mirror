@@ -1,3 +1,8 @@
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/hack.md
+***
+
 ```
                             .--~~~~~~~~~~~~~------.
                            /--===============------\

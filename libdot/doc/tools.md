@@ -1,5 +1,10 @@
 # Helper Tools
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot/docs/tools.md
+***
+
 Libdot provides a bunch of helper tools and we try to have consistent behavior.
 Lets lay out expectations of them.
 

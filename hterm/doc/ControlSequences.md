@@ -1,5 +1,10 @@
 [TOC]
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ControlSequences.md
+***
+
 # hterm Control Sequences
 
 Like every terminal out there, hterm supports a number of standard (and perhaps

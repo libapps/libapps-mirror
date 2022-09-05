@@ -1,3 +1,8 @@
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot/third_party/wcwidth/
+***
+
 This is a port of wcwidth.js (which is a port of wcwidth implemented in C by
 Markus Kuhn) to the libdot framework.
 

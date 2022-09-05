@@ -1,5 +1,10 @@
 # WASI JavaScript Bindings
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/wasi-js-bindings/
+***
+
 This project aims to provide a generic framework for [WASM] programs built using
 [WASI] and run on the Web platform using JavaScript.
 It is meant to be portable across projects and avoids encoding project-specific

@@ -2,6 +2,11 @@
 
 # OpenSSH NaCl port
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/ssh_client/
+***
+
 This is the port of [OpenSSH] to [NaCl] (which is then integrated into [nassh]).
 
 Most people who want to hack on the Secure Shell app do not need to make changes

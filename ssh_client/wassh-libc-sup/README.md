@@ -1,5 +1,10 @@
 # WASSH C Library Supplement
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/ssh_client/wassh-libc-sup/
+***
+
 The [WASI Libc] that comes with the [WASI SDK] is fairly complete for our needs,
 as is the [WASI Core API] (syscall layer).
 But we have some additional needs, both at the C library & syscall layers, hence

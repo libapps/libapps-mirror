@@ -1,5 +1,10 @@
 [TOC]
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/embed.md
+***
+
 # Embedding hterm
 
 This is a quick overview describing how to use hterm in your own application.

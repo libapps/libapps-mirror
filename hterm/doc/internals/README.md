@@ -16,6 +16,11 @@
                             hterm Internals Guide
 ```
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/internals/
+***
+
 # Introduction
 
 If you need to dive into the hterm internals, these are the docs for you.

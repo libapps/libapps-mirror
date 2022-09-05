@@ -1,3 +1,8 @@
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot/docs/ChangeLog.md
+***
+
 # 7.0.0, 2020-07-06, ES2018, lint/tooling updates, and rewrite storage & init APIs to Promises.
 
 * tests: storage: Add observer/change event coverage.

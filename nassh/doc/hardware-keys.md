@@ -1,5 +1,10 @@
 # Using smart cards and hardware tokens with Secure Shell
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/hardware-keys.md
+***
+
 This guide explains how to use an OpenPGP-enabled hardware token or smart card
 for SSH authentication with [Secure Shell]. Any device with an OpenPGP applet
 based on the [OpenPGP card specification] should be supported, which includes

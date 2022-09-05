@@ -1,3 +1,8 @@
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/ChangeLog.md
+***
+
 # 0.36, 2020-11-09, 2020-11-11, OpenSSH 8.4p1, UI tweaks.
 
 * connect: Improve incomplete form UX.

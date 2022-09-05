@@ -1,5 +1,10 @@
 # WASSH WASI Extensions
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/ssh_client/wassh-libc-sup/docs/WASI-extensions.md
+***
+
 The [WASI Core API] has a lot of good stuff, but not enough for us.
 These are the various extensions we've made.
 

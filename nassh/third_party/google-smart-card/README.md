@@ -1,3 +1,8 @@
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/third_party/google-smart-card/
+***
+
 This is the client library for the Google Smart Card Connector App, which is a
 Chrome OS implementation of the PC/SC API for smart card operations.
 

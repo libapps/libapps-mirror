@@ -1,5 +1,10 @@
 # Translations
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/translations.md
+***
+
 The project has translations for many languages.
 This covers all the details of that process for people.
 

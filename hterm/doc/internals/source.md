@@ -1,5 +1,10 @@
 # Source Layout
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/internals/source.md
+***
+
 The vast majority of the code here lives under [js/].
 
 * [audio/]: Audio files (e.g. the bell alert).

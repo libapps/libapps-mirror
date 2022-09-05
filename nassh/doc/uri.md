@@ -1,5 +1,10 @@
 # URI ssh:// links
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/uri.md
+***
+
 You can create `ssh://` links that will automatically open Secure Shell.
 
 `ssh://user[;option=value]@host[:port][@proxyhost[:proxyport]]`

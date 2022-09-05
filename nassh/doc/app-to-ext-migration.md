@@ -1,5 +1,10 @@
 # Chrome Apps Deprecation
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/app-to-ext-migration.md
+***
+
 Chrome has been deprecating Chrome-specific technologies in favor of standard
 web platform features as they become available.
 Historically, Secure Shell has built on top of a lot of those Chrome-only

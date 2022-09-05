@@ -1,5 +1,10 @@
 [TOC]
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/HACK.md
+***
+
 # Getting the source
 
 The official copy of this repository is located on chromium.googlesource.com.

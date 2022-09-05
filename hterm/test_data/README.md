@@ -1,5 +1,10 @@
 # Various Test Data
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/test_data/
+***
+
 These are test files for checking behavior/rendering of hterm.
 They come from a bunch of random sources.
 

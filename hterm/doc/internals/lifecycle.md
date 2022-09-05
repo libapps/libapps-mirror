@@ -1,5 +1,10 @@
 # JS Life cycle
 
+*** note
+**Warning: This document is old & has moved.  Please update any links:**<br>
+https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/internals/lifecycle.md
+***
+
 The [hterm.js] code will initialize defaults for the various objects.  You can
 override them yourself (such as setting up `hterm.defaultStorage`) before you
 instantiate anything.
