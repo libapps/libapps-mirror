@@ -21,15 +21,15 @@ to the right people.
 
 # Documentation
 
-* [Authors](./doc/AUTHORS.md) -- List of people who have contributed
-* [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release
-* [Crosh (ChromeOS shell)](./doc/chromeos-crosh.md) -- Interactions with the crosh command on ChromeOS
-* [FAQ](./doc/FAQ.md) -- Frequently Asked Questions
-* [Fonts](./doc/fonts.md) -- Fonts including Powerline symbols bundled with Secure Shell
-* [Hacking](./doc/hack.md) -- Developing the Secure Shell source
-* [Hardware keys](./doc/hardware-keys.md) -- Using smart cards and hardware tokens with Secure Shell
-* [Options](./doc/options.md) -- Secure Shell command line options
-* [Processes](./doc/processes.md) -- Release processes and other mundane topics
+* [Authors](./docs/AUTHORS.md) -- List of people who have contributed
+* [ChangeLog](./docs/ChangeLog.md) -- List of interesting changes in each release
+* [Crosh (ChromeOS shell)](./docs/chromeos-crosh.md) -- Interactions with the crosh command on ChromeOS
+* [FAQ](./docs/FAQ.md) -- Frequently Asked Questions
+* [Fonts](./docs/fonts.md) -- Fonts including Powerline symbols bundled with Secure Shell
+* [Hacking](./docs/hack.md) -- Developing the Secure Shell source
+* [Hardware keys](./docs/hardware-keys.md) -- Using smart cards and hardware tokens with Secure Shell
+* [Options](./docs/options.md) -- Secure Shell command line options
+* [Processes](./docs/processes.md) -- Release processes and other mundane topics
 
 # Requirements
 

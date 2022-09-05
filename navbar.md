@@ -4,7 +4,7 @@
 [home]: /README.md
 
 * [Home][home]
-* [FAQ](/nassh/doc/FAQ.md)
+* [FAQ](/nassh/docs/FAQ.md)
 * [Contact](https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm)
 * [Bugs](https://goo.gl/VkasRC)
 * [hterm](/hterm/)

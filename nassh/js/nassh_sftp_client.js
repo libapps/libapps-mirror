@@ -934,7 +934,7 @@ Client.prototype.readLink = function(path) {
  * Create a symlink.
  *
  * Note: The SFTPv3 protocol says the order should be linkpath then targetpath,
- * but we're reversed to match OpenSSH.  See ../doc/hack.md for more details.
+ * but we're reversed to match OpenSSH.  See ../docs/hack.md for more details.
  *
  * @param {string} target The target of the symlink.
  * @param {string} path The symlink to create.

@@ -17,9 +17,9 @@
 <h1>Online ChangeLogs</h1>
 <ul>
   <li><a href='https://chromium.googlesource.com/apps/libapps/+log'>Full `git log`</a></li>
-  <li><a href='https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot/doc/ChangeLog.md'>libdot ChangeLog.md</a></li>
-  <li><a href='https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/doc/ChangeLog.md'>hterm ChangeLog.md</a></li>
-  <li><a href='https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/doc/ChangeLog.md'>nassh ChangeLog.md</a></li>
+  <li><a href='https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot/docs/ChangeLog.md'>libdot ChangeLog.md</a></li>
+  <li><a href='https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ChangeLog.md'>hterm ChangeLog.md</a></li>
+  <li><a href='https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/ChangeLog.md'>nassh ChangeLog.md</a></li>
 </ul>
 
 <h1>ChangeLog (since %%TAG%%)</h1>

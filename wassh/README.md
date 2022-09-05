@@ -18,7 +18,7 @@ In that case, your best bet is to switch to using the Secure Shell extension.
 If you want to test out networking syscalls, those definitely only work inside
 the extension since they're built off `chrome.sockets.*` APIs.
 
-1.  Follow [nassh hacking documentation](../nassh/doc/hack.md) if you've never
+1.  Follow [nassh hacking documentation](../nassh/docs/hack.md) if you've never
     loaded Secure Shell locally before.
 2.  If you want to test ssh programs, you should get a full build locally.
     `cd ../ssh_client && ./build.sh` will take care of that.

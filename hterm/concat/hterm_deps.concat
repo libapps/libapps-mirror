@@ -23,6 +23,6 @@ libdot/third_party/intl-segmenter/intl-segmenter.js
 libdot/third_party/wcwidth/lib_wc.js
 
 @resource libdot/changelog/version text/plain \
-  changelog version ../../libdot/doc/ChangeLog.md
+  changelog version ../../libdot/docs/ChangeLog.md
 @resource libdot/changelog/date text/plain \
-  changelog date ../../libdot/doc/ChangeLog.md
+  changelog date ../../libdot/docs/ChangeLog.md

@@ -41,14 +41,14 @@ Feel free to let us know via the Contact section above! :)
 
 # Documentation
 
-* [Authors](./doc/AUTHORS.md) -- List of people who have contributed
-* [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release
-* [FAQ](../nassh/doc/FAQ.md) -- Frequently Asked Questions
-* [Keyboard Bindings](./doc/KeyboardBindings.md) -- All keyboard related details
-* [Control Sequences](./doc/ControlSequences.md) -- Supported control sequences
-* [Embedding](./doc/embed.md) -- Using hterm in your project
-* [Hacking](./doc/hack.md) -- Using the hterm source
-* [Internals](./doc/internals/) -- Developing the hterm project
+* [Authors](./docs/AUTHORS.md) -- List of people who have contributed
+* [ChangeLog](./docs/ChangeLog.md) -- List of interesting changes in each release
+* [FAQ](../nassh/docs/FAQ.md) -- Frequently Asked Questions
+* [Keyboard Bindings](./docs/KeyboardBindings.md) -- All keyboard related details
+* [Control Sequences](./docs/ControlSequences.md) -- Supported control sequences
+* [Embedding](./docs/embed.md) -- Using hterm in your project
+* [Hacking](./docs/hack.md) -- Using the hterm source
+* [Internals](./docs/internals/) -- Developing the hterm project
 
 [chromium-hterm mailing list]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm
 [libdot]: ../libdot

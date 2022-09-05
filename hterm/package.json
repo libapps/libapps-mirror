@@ -11,7 +11,7 @@
   "author": "ChromiumOS Authors",
   "license": "BSD-3-Clause",
   "files": [
-    "doc",
+    "docs",
     "html/hterm.html",
     "js/hterm_all.js",
     "js/hterm_all.min.js",

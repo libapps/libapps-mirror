@@ -32,6 +32,6 @@ to the right people.
 
 # Documentation
 
-* [ChangeLog](./doc/ChangeLog.md) -- List of interesting changes in each release
+* [ChangeLog](./docs/ChangeLog.md) -- List of interesting changes in each release
 
 [chromium-hterm mailing list]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm

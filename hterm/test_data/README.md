@@ -17,7 +17,7 @@ These are used by [hterm_vt_canned_tests.js](../js/hterm_vt_canned_tests.js).
 
 They were created via [Vttest](https://invisible-island.net/vttest/).
 
-See the [hacking document](../doc/hack.md) and
+See the [hacking document](../docs/hack.md) and
 [bin/vtscope.py](../bin/vtscope.py) for more details.
 
 * [charsets.log](./charsets.log)

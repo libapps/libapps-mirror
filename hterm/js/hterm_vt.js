@@ -13,7 +13,7 @@
  * This interpreter is intended to be compatible with xterm, though it
  * ignores some of the more esoteric escape sequences.
  *
- * Control sequences are documented in hterm/doc/ControlSequences.md.
+ * Control sequences are documented in hterm/docs/ControlSequences.md.
  *
  * @param {!hterm.Terminal} terminal Terminal to use with the interpreter.
  * @constructor

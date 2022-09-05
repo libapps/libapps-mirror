@@ -6,7 +6,7 @@ The vast majority of the code here lives under [js/].
 * [bin/]: Tools for building/testing hterm.
 * concat/: Compiled output of other projects we use.
 * dist/: Builds of the hterm for integration with other projects.
-* [doc/]: Documentation files.
+* [docs/]: Documentation files.
 * [etc/]: Scripts/snippets for hterm users to leverage terminal features.
 * [examples/]: Example projects using hterm.
 * [html/]:
@@ -60,7 +60,7 @@ The vast majority of the code here lives under [js/].
 
 [audio/]: ../../audio/
 [bin/]: ../../bin/
-[doc/]: ../../doc/
+[docs/]: ../../docs/
 [etc/]: ../../etc/
 [examples/]: ../../examples/
 [html/]: ../../html/

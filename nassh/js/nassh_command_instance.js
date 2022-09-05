@@ -1040,7 +1040,7 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     const extUrl = 'https://chrome.google.com/webstore/detail/' +
         'iodihamcpbpeioajjeobimgagajmlibd';
     const docUrl = 'https://chromium.googlesource.com/apps/libapps/+/HEAD/' +
-        'nassh/doc/app-to-ext-migration.md';
+        'nassh/docs/app-to-ext-migration.md';
 
     // Display in the terminal as red+bold+blink text.
     this.io.println('');

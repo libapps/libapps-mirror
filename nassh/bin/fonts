@@ -3,7 +3,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-"""Download web fonts to bundle with nassh. See ../doc/fonts.md"""
+"""Download web fonts to bundle with nassh. See ../docs/fonts.md"""
 
 import sys
 

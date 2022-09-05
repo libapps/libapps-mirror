@@ -221,7 +221,7 @@ The vast majority of the code here lives under [js/].
   * [nassh_connect_dialog.css]: Styling for the connection dialog.
   * [nassh_preferences_editor.css]: Styling for the extensions options page.
 * dist/: Builds of the Chrome extension.
-* [doc/]: Documentation files.
+* [docs/]: Documentation files.
 * [html/]: The main UI objects.
   * [crosh.html]: ChromeOS developer shell.  Not used outside of ChromeOS.
   * [nassh.html]: The main ssh terminal page.
@@ -486,7 +486,7 @@ Here's a random list of documents which would be useful to people.
 
 [bin/]: ../bin/
 [css/]: ../css/
-[doc/]: ../doc/
+[docs/]: ../docs/
 [html/]: ../html/
 [images/]: ../images/
 [js/]: ../js/

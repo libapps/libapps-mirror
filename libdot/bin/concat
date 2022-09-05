@@ -48,7 +48,7 @@ There are a few directives that can be specified in the input file.  They are...
   SOURCE - There are a variety of source formats that are supported.
   '< FILENAME' is interpreted as a file to read.
   'date <format>' uses the current date/time with strftime.
-  'changelog <date|version> [../doc/ChangeLog.md]' loads changelog details.
+  'changelog <date|version> [../docs/ChangeLog.md]' loads changelog details.
   'git-rev REV' expands the symbolic revision using `git rev-parse`.
   'head -1 FILENAME' reads the first line from a file.
   'grep REGEX FILENAME' reads all lines from a file that match a regex.
@@ -174,7 +174,7 @@ def append_resource(name, mime, resource, header_files):
 
         key = argv[0]
         if len(argv) == 1:
-            path = Path("../doc/ChangeLog.md")
+            path = Path("../docs/ChangeLog.md")
         elif len(argv) == 2:
             path = Path(argv[1])
         else:

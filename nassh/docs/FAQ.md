@@ -104,7 +104,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   session.  For bonus points, track down the troublesome sequence and
   include the offset into the log file.  For more information about how to
   do this, see [hterm's "Debugging escape sequences"
-  section](../../hterm/doc/hack.md#Debugging-escape-sequences).
+  section](../../hterm/docs/hack.md#Debugging-escape-sequences).
 
 
 ### Is there a mailing list to discuss hterm or Secure Shell?
@@ -139,9 +139,9 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
 ### Is there a changelog?
 
-  Yes.  Look under the doc/ directory for each project.
+  Yes.  Look under the docs/ directory for each project.
 
-  There is [one for hterm](../../hterm/doc/ChangeLog.md) and
+  There is [one for hterm](../../hterm/docs/ChangeLog.md) and
   [one for Secure Shell](./ChangeLog.md).
 
 
@@ -1273,12 +1273,12 @@ The prompt makes it sound like it will delete & reset everything, but it won't.
   you.  iTerm2's "imgcat" script should also work.
 
   For more details on the options available, see the
-  [specification](../../hterm/doc/ControlSequences.md#OSC-1337).
+  [specification](../../hterm/docs/ControlSequences.md#OSC-1337).
 
 
-[DOCS]: ../../hterm/doc/ControlSequences.md#DOCS
-[SCS]: ../../hterm/doc/ControlSequences.md#SCS
-[Keyboard Bindings]: ../../hterm/doc/KeyboardBindings.md
+[DOCS]: ../../hterm/docs/ControlSequences.md#DOCS
+[SCS]: ../../hterm/docs/ControlSequences.md#SCS
+[Keyboard Bindings]: ../../hterm/docs/KeyboardBindings.md
 
 [hterm-notify.sh]: ../../hterm/etc/hterm-notify.sh
 [hterm-show-file.sh]: ../../hterm/etc/hterm-show-file.sh
