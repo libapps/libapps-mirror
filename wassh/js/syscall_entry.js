@@ -24,27 +24,10 @@ export class WasshExperimental extends SyscallEntry.Base {
     const td = new TextDecoder();
     const buf = this.getMem_(name_ptr, name_ptr + namelen);
     const name = td.decode(buf);
-    this.handle_sock_register_fake_addr(idx, name);
-    return WASI.errno.ESUCCESS;
+    return this.handle_sock_register_fake_addr(idx, name);
   }
 
   sys_sock_create(sock_ptr, domain, type, protocol) {
-    switch (domain) {
-      case Constants.AF_INET:
-      case Constants.AF_INET6:
-      case Constants.AF_UNIX:
-        switch (type) {
-          case WASI.filetype.SOCKET_STREAM:
-          case WASI.filetype.SOCKET_DGRAM:
-            break;
-          default:
-            return WASI.errno.EPROTONOSUPPORT;
-        }
-        break;
-      default:
-        return WASI.errno.EAFNOSUPPORT;
-    }
-
     const ret = this.handle_sock_create(domain, type, protocol);
     if (typeof ret === 'number') {
       return ret;
