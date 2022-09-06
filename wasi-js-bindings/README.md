@@ -28,7 +28,7 @@ align with your particular use case.
 
 ## Background
 
-[Wassh] is the project for building OpenSSH for [WASM] & [WASI].
+[wassh] is the project for building OpenSSH for [WASM] & [WASI].
 As part of the development, we found that the [WASI] project lacked any real
 JS binding support.
 There is [generated emscripten code](https://wasi.dev/polyfill/polyfill.js),
@@ -62,6 +62,9 @@ No attempt is made to provide backwards compatibility or transpiling.
 * [WebAssembly BigInt Integration](https://www.chromestatus.com/feature/5648655109324800)
   * Chrome 85+
 * Non-blocking message behavior between main thread & web workers
+
+Note that the supported [WASI API] version matches the aforementioned [WASI SDK]
+version only.
 
 ## Framework Overview
 
@@ -104,6 +107,14 @@ For complicated programs, it is expected that people will use Process.Background
 SyscallEntry.WasiPreview1 and SyscallHandler.ProxyWasiPreview1 and
 SyscallHandler.DirectWasiPreview1 APIs unmodified, and provide their own Worker
 and SyscallHandler implementations to round things out.
+
+### Networking
+
+While the [WASI API] includes some basic networking support (`sock_recv`,
+`sock_send`, and `sock_shutdown`), they haven't really been fleshed out upstream
+as of yet, so they are currently stubs here too.
+
+See the [wassh] docs for details on how it implements networking support.
 
 ## Examples
 
@@ -182,3 +193,4 @@ See the common [libapps HACK.md](../HACK.md) for details.
 [WASI C library]: https://github.com/WebAssembly/wasi-libc
 [WASI SDK]: https://github.com/WebAssembly/wasi-sdk
 [WASM]: https://webassembly.org/
+[wassh]: ../wassh/

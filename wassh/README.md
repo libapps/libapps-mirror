@@ -11,6 +11,7 @@ Consult the other projects in the stack:
 For details on how wassh implements various subsystems:
 
 * [signals](./docs/signals.md): Signal emulation.
+* [sockets](./docs/sockets.md): Network support.
 
 
 [nassh]: ../nassh/
