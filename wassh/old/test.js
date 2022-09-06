@@ -2,10 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {SyscallEntry} from '../wasi-js-bindings/index.js';
-import * as WasshProcess from './js/process.js';
-import * as WasshSyscallEntry from './js/syscall_entry.js';
-import * as WasshSyscallHandler from './js/syscall_handler.js';
+import {SyscallEntry} from '../../wasi-js-bindings/index.js';
+import * as WasshProcess from '../js/process.js';
+import * as WasshSyscallEntry from '../js/syscall_entry.js';
+import * as WasshSyscallHandler from '../js/syscall_handler.js';
 
 window.onload = async function() {
   await lib.init();

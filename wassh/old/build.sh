@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xe
 cd "$(dirname "$(realpath "$0")")"
-OUT="${PWD}/../ssh_client/output"
+OUT="${PWD}/../../ssh_client/output"
 export PATH="${OUT}/bin:${OUT}/wasi-sdk/bin:${PATH}"
 doit() {
   clang \
