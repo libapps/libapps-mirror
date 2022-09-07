@@ -216,9 +216,13 @@ export class XtermTerminal {
     this.copyNotice_ = null;
 
     this.term.options.theme = {
+      // The webgl cursor layer also paints the character under the cursor with
+      // this `cursorAccent` color. We use a completely transparent color here
+      // to effectively disable that.
+      cursorAccent: 'rgba(0, 0, 0, 0)',
+      customGlyphs: true,
       selection: 'rgba(174, 203, 250, .6)',
       selectionForeground: 'black',
-      customGlyphs: true,
     };
     this.observePrefs_();
   }
@@ -459,9 +463,7 @@ export class XtermTerminal {
       },
       'font-family': (v) => this.updateFont_(v),
       'foreground-color': (v) => {
-        // TODO(lxj): setting the cursorAccent to the foreground color mimics
-        // what hterm does, but I think it is better to expose this option.
-        this.updateTheme_({foreground: v, cursorAccent: v});
+        this.updateTheme_({foreground: v});
         setHtermColorCSSVariable('foreground-color', v);
       },
     });
