@@ -160,7 +160,7 @@ export class XtermTerminal {
     this.enableWebGL_ = enableWebGL;
 
     // TODO: we should probably pass the initial prefs to the ctor.
-    this.term = testParams?.term || new Terminal();
+    this.term = testParams?.term || new Terminal({allowProposedApi: true});
     this.fontManager_ = testParams?.fontManager || fontManager;
 
     /** @type {?Element} */

@@ -17,7 +17,10 @@ class IParser {
 }
 
 class Terminal$$module$js$xterm {
-  constructor() {
+  /**
+   * @param {!Object=} options
+   */
+  constructor(options) {
     /** @type {!Object} */
     this.options;
     /** @type {number} */
