@@ -1,3 +1,54 @@
+# 0.49, 2022-09-09, FS migration to indexeddb-fs, WASM updates.
+
+* wassh: sockets: Drop redundant checks.
+* prefs: Fix loading for non-default profiles.
+* wassh: fs: Connect to indexeddb-fs.
+* wassh: fs: Wire up link functions.
+* wassh: fs: Wire up rename functions.
+* wassh: fs: Wire up unlink functions.
+* manifest: Drop crash & metrics for now.
+* wassh: fs: Push statat logic down a level.
+* wassh: fs: Add a path resolver helper.
+* wassh: fs: Add some debug logs.
+* wassh: fs: Make stat funcs async.
+* wassh: fs: Fix path_filestat_get implementation.
+* wassh: fs: Pass fs_flags down to open calls.
+* wassh: fs: mkdir: Hook up basic logic.
+* command: Fix reconnect keyboard input.
+* fs: Migrate to indexddb-fs.
+* fs: Add logic to sync indexeddb-fs & DOM FS when running NaCl.
+* fs: Migrate filesystem backends.
+* fs: Rename getDomFileSystem.
+* fs: Enable indexeddb-fs usage.
+* man-pages: Improve css styles & add support for dark mode.
+* changelog: Enable dark mode.
+* wassh: sockets: Implement WebTcpSocket backed by Direct Sockets API.
+* nassh: Implement sanitizeScriptUrl to avoid policy issue.
+* relay: Show reconnect dialog for entire time while connecting.
+* licenses: Add darkmode support.
+* prefs: Move chrome-bootstrap darkmode overrides to dedicated file.
+* licenses: Tighten up print style a little more.
+* licenses: Move style to dedicated CSS file.
+* wassh: sockets: Fix Unix socket recv callback.
+* relay: Fix corp relay v4 reconnect.
+* wassh: relay: Stub out connection info better.
+* ssh_client: openssh: Do not close all fds on startup.
+* pwa: Automatically use wasm plugin for web app.
+* pwa: Add manifest.
+* wassh: sockets: Remove all socket recv logic from syscall_handler.js.
+* prefs: Replace innerHTML with innerText to avoid policy issue.
+* protocols: Use getManifest function.
+* mkdist: Update list of files.
+* nasftp: Remove use of lib.registerInit.
+* gsc: Move to ES6 module.
+* wassh: sockets: Split TcpSocket into RelaySocket & ChromeTcpSocket.
+* storage: Add getSyncStorage helper function.
+* uri: Allow negative options.
+* Dockerfile: Upgrade to Debian bullseye.
+* crosh: Drop support for non-crosh commands.
+* coil: Improve terminology usage.
+* command: Add a check for chrome.windows.getCurrent.
+
 # 0.48, 2022-07-19, House keeping & bandwidth optimizations.
 
 * main: Workaround LaCrOS accessibility bug.
