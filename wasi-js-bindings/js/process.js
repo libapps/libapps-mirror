@@ -112,12 +112,13 @@ export class Foreground extends Base {
    *   executable: (string|!Promise<!Response>|!Response|!ArrayBuffer),
    *   argv: (!Array<string>|undefined),
    *   environ: (!Object<string, string>|undefined),
+   *   debug: (boolean|undefined),
    *   sys_handlers: !Array<!SyscallHandler>,
    *   sys_entries: !Array<!SyscallEntry>,
    * }} param1
    */
-  constructor({executable, argv, environ, sys_handlers, sys_entries}) {
-    super({executable, argv, environ});
+  constructor({executable, argv, environ, debug, sys_handlers, sys_entries}) {
+    super({executable, argv, environ, debug});
     this.sys_handlers = sys_handlers;
     this.sys_entries = sys_entries;
     /** @type {?WebAssembly.Instance} */
