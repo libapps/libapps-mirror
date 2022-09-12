@@ -50,6 +50,16 @@ export class Socket extends VFS.PathHandle {
     this.reader_ = null;
   }
 
+  /** @override */
+  toString() {
+    return `${this.constructor.name}(${this.address}:${this.port}, ` +
+        `domain=${this.domain}, protocol=${this.protocol})`;
+  }
+
+  debug(...args) {
+    console.debug('socket', ...args);
+  }
+
   /**
    * @param {string} address
    * @param {number} port
@@ -155,6 +165,8 @@ export class ChromeTcpSocket extends Socket {
 
   /** @override */
   async connect(address, port) {
+    this.debug(`connect(${address}, ${port})`);
+
     if (this.address !== null) {
       return WASI.errno.EISCONN;
     }
@@ -343,6 +355,8 @@ export class RelaySocket extends Socket {
 
   /** @override */
   async connect(address, port) {
+    this.debug(`connect(${address}, ${port})`);
+
     if (this.address !== null) {
       return WASI.errno.EISCONN;
     }
@@ -492,6 +506,8 @@ export class RelaySocket extends Socket {
 
   /** @override */
   async connect(address, port) {
+    this.debug(`connect(${address}, ${port})`);
+
     if (this.address !== null) {
       return WASI.errno.EISCONN;
     }
@@ -700,6 +716,8 @@ export class UnixSocket extends Socket {
 
   /** @override */
   async connect(address, port) {
+    this.debug(`connect(${address}, ${port})`);
+
     if (this.address !== null) {
       return WASI.errno.EISCONN;
     }

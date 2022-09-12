@@ -28,6 +28,11 @@ export class PathHandler {
     this.handleCls = handleCls;
   }
 
+  /** @override */
+  toString() {
+    return `${this.constructor.name}(${this.path}, type=${this.filetype})`;
+  }
+
   /**
    * @param {string} oldPath The existing path to link.
    * @param {string} newPath The new path to create the link.
@@ -88,6 +93,12 @@ export class PathHandle {
     this.path = path;
     this.pos = 0n;
     this.filetype = filetype;
+  }
+
+  /** @override */
+  toString() {
+    return `${this.constructor.name}(${this.path}, type=${this.filetype}, ` +
+        `pos=${this.pos})`;
   }
 
   async init() {}
