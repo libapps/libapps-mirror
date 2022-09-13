@@ -402,7 +402,7 @@ RelaySshfeWsStream.prototype.sendWrite_ = function() {
   this.writeBuffer_.ack(size);
   this.writeCount_ += size;
 
-  if (this.onWriteSuccess_ !== null) {
+  if (this.onWriteSuccess_) {
     // Notify nassh that we are ready to consume more data.
     this.onWriteSuccess_(this.writeCount_);
   }

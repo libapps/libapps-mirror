@@ -356,7 +356,7 @@ RelayCorpXhrStream.prototype.onWriteDone_ = function(e) {
 
   this.requestSuccess_(false);
 
-  if (typeof this.onWriteSuccess_ == 'function') {
+  if (this.onWriteSuccess_) {
     this.onWriteSuccess_(this.writeCount_);
   }
 };
@@ -586,7 +586,7 @@ RelayCorpWsStream.prototype.sendWrite_ = function() {
   this.ackTime_ = Date.now();
   this.expectedAck_ = (this.writeCount_ + this.sentCount_) & 0xffffff;
 
-  if (typeof this.onWriteSuccess_ == 'function') {
+  if (this.onWriteSuccess_) {
     // Notify nassh that we are ready to consume more data.
     this.onWriteSuccess_(this.writeCount_ + this.sentCount_);
   }
