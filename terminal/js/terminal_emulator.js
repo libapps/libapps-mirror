@@ -221,7 +221,8 @@ export class XtermTerminal {
       // to effectively disable that.
       cursorAccent: 'rgba(0, 0, 0, 0)',
       customGlyphs: true,
-      selection: 'rgba(174, 203, 250, .6)',
+      selectionBackground: 'rgba(174, 203, 250, .6)',
+      selectionInactiveBackground: 'rgba(218, 220, 224, .6)',
       selectionForeground: 'black',
     };
     this.observePrefs_();
