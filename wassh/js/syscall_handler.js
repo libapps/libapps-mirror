@@ -478,6 +478,29 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
 
   /**
    * @param {number} socket
+   * @param {number} how
+   * @return {!WASI_t.errno}
+   */
+  async handle_sock_shutdown(socket, how) {
+    const handle = this.vfs.getFileHandle(socket);
+    if (handle === undefined) {
+      return WASI.errno.EBADF;
+    }
+    if (!(handle instanceof Sockets.Socket)) {
+      return WASI.errno.ENOTSOCK;
+    }
+
+    if (how != 0x2 /* SHUT_RDWR */) {
+      // TODO(vapier): Should we handle shutting down channels independently?
+      console.warn(`shutdown(${handle}, ${how}): Assuming SHUT_RDWR`);
+    }
+
+    await handle.close();
+    return WASI.errno.ESUCCESS;
+  }
+
+  /**
+   * @param {number} socket
    * @param {number} backlog
    * @return {!WASI_t.errno}
    */
