@@ -12,6 +12,7 @@ import * as VFS from './vfs.js';
 
 const SOL_SOCKET = 0x7fffffff;
 // const SO_RCVBUF sets bufferSize.
+const SO_REUSEADDR = 2;
 const SO_KEEPALIVE = 9;
 const IPPROTO_IP = 0;
 const IP_TOS = 1;
@@ -303,6 +304,12 @@ export class ChromeTcpSocket extends Socket {
             this.tcpKeepAlive_ = value;
             return WASI.errno.ESUCCESS;
           }
+
+          case SO_REUSEADDR: {
+            // TODO(vapier): Try and extend Chrome sockets API to support this.
+            console.warn(`Ignoring SO_REUSEADDR=${value}`);
+            return WASI.errno.ESUCCESS;
+          }
         }
         break;
       }
@@ -462,6 +469,11 @@ export class RelaySocket extends Socket {
         switch (name) {
           case SO_KEEPALIVE: {
             this.tcpKeepAlive_ = value;
+            return WASI.errno.ESUCCESS;
+          }
+
+          case SO_REUSEADDR: {
+            console.warn(`Ignoring SO_REUSEADDR=${value}`);
             return WASI.errno.ESUCCESS;
           }
         }
@@ -654,6 +666,11 @@ export class RelaySocket extends Socket {
         switch (name) {
           case SO_KEEPALIVE: {
             this.tcpKeepAlive_ = value;
+            return WASI.errno.ESUCCESS;
+          }
+
+          case SO_REUSEADDR: {
+            console.warn(`Ignoring SO_REUSEADDR=${value}`);
             return WASI.errno.ESUCCESS;
           }
         }
