@@ -19,6 +19,7 @@ export function SshAgentRelayStream(fd) {
   this.port_ = null;
   this.pendingMessageSize_ = null;
   this.writeBuffer_ = newBuffer(/* autoack= */ true);
+  this.writeCount_ = 0;
 }
 
 /**
@@ -160,6 +161,7 @@ SshAgentRelayStream.prototype.asyncWrite = function(data, onSuccess) {
 
   // Note: report binary length written.
   if (onSuccess) {
-    onSuccess(data.byteLength);
+    this.writeCount_ += data.byteLength;
+    onSuccess(this.writeCount_);
   }
 };
