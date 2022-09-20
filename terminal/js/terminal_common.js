@@ -6,6 +6,8 @@
  * @fileoverview Common code for terminal and it settings page.
  */
 
+import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
+
 // The value of an entry is true if it is a web font from fonts.google.com,
 // otherwise it is a local font. Note that the UI shows the fonts in the same
 // order as the entries'.
@@ -310,16 +312,16 @@ export let OsInfo;
 let OS_INFO;
 
 /**
- * Registers with lib.registerInit() to pre-fetch data for getOSInfo().
+ * Pre-fetch data for getOSInfo().
+ *
+ * @return {!Promise<void>}
  */
-export function registerOSInfoPreFetch() {
+async function prefetchOSInfo() {
   if (chrome.terminalPrivate) {
-    lib.registerInit('get-os-info', async () => {
-      return new Promise((resolve) => {
-        chrome.terminalPrivate.getOSInfo((info) => {
-          OS_INFO = info;
-          resolve();
-        });
+    return new Promise((resolve) => {
+      chrome.terminalPrivate.getOSInfo((info) => {
+        OS_INFO = info;
+        resolve();
       });
     });
   } else {
@@ -328,6 +330,31 @@ export function registerOSInfoPreFetch() {
       multi_profile: true,
     };
   }
+}
+
+/**
+ * Common initialization logic that should be executed once at the beginning.
+ *
+ * @return {!Promise<void>}
+ */
+export async function init() {
+  await lib.init();
+
+  hterm.messageManager.useCrlf = true;
+
+  // These initialization tasks should not affect each other, so we run them
+  // concurrently.
+  return Promise.all([
+      prefetchOSInfo(),
+      // Load hterm.messageManager from /_locales/<lang>/messages.json.
+      hterm.messageManager.findAndLoadMessages(
+          lib.f.getURL('/_locales/$1/messages.json')),
+      // Migrate over the DOM filesystem to the new indexeddb-fs.
+      // TODO(vapier): Delete this with R110+.
+      migrateFilesystemFromDomToIndexeddb().catch((e) => {
+        console.error('Error migrating filesystem', e);
+      }),
+  ]).then(() => {});
 }
 
 /**

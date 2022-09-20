@@ -6,11 +6,8 @@
  * @fileoverview Initializes global state used in terminal.
  */
 
-import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
-
 import {terminal} from './terminal.js';
-import {definePrefs, registerOSInfoPreFetch, watchColors}
-    from './terminal_common.js';
+import {definePrefs, init, watchColors} from './terminal_common.js';
 import './terminal_home_app.js';
 import {getTerminalInfoTracker, setUpTitleHandler} from './terminal_info.js';
 
@@ -74,37 +71,18 @@ function runTerminalHome() {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  registerOSInfoPreFetch();
+window.addEventListener('DOMContentLoaded', async () => {
+  await init();
+  const tracker = await globalInit;
+  setUpTitleHandler(tracker);
 
-  // Load i18n messages.
-  lib.registerInit('messages', async () => {
-    // Load hterm.messageManager from /_locales/<lang>/messages.json.
-    hterm.messageManager.useCrlf = true;
-    const url = lib.f.getURL('/_locales/$1/messages.json');
-    await hterm.messageManager.findAndLoadMessages(url);
+  if (tracker.launchInfo.home) {
+    runTerminalHome();
+    return;
+  }
 
-    setUpTitleHandler(await globalInit);
-  });
-
-  lib.init().then(async () => {
-    // Migrate over the DOM filesystem to the new indexeddb-fs.
-    // TODO(vapier): Delete this with R110+.
-    try {
-      await migrateFilesystemFromDomToIndexeddb();
-    } catch (e) {
-      console.error('Error migrating filesystem', e);
-    }
-
-    const launchInfo = (await globalInit).launchInfo;
-    if (launchInfo.home) {
-      runTerminalHome();
-      return;
-    }
-
-    const div = document.createElement('div');
-    div.id = 'terminal';
-    document.body.appendChild(div);
-    window.term_ = await terminal.init(div, launchInfo);
-  });
+  const div = document.createElement('div');
+  div.id = 'terminal';
+  document.body.appendChild(div);
+  window.term_ = await terminal.init(div, tracker.launchInfo);
 });
