@@ -90,7 +90,11 @@ window.addEventListener('DOMContentLoaded', () => {
   lib.init().then(async () => {
     // Migrate over the DOM filesystem to the new indexeddb-fs.
     // TODO(vapier): Delete this with R110+.
-    await migrateFilesystemFromDomToIndexeddb();
+    try {
+      await migrateFilesystemFromDomToIndexeddb();
+    } catch (e) {
+      console.error('Error migrating filesystem', e);
+    }
 
     const launchInfo = (await globalInit).launchInfo;
     if (launchInfo.home) {

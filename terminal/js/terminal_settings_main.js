@@ -27,7 +27,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
   lib.init().then(async () => {
     // Migrate over the DOM filesystem to the new indexeddb-fs.
     // TODO(vapier): Delete this with R110+.
-    await migrateFilesystemFromDomToIndexeddb();
+    try {
+      await migrateFilesystemFromDomToIndexeddb();
+    } catch (e) {
+      console.error('Error migrating filesystem', e);
+    }
 
     window.PreferenceManager = hterm.PreferenceManager;
     window.storage = chrome.terminalPrivate
