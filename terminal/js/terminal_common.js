@@ -340,6 +340,11 @@ async function prefetchOSInfo() {
 export async function init() {
   await lib.init();
 
+  // See https://crbug.com/1364172#c6 for why we are overriding it. Note that
+  // this is safe because Terminal SWA sets a restricted
+  // CrossOriginOpenerPolicy.
+  lib.f.openWindow = window.open.bind(window);
+
   hterm.messageManager.useCrlf = true;
 
   // These initialization tasks should not affect each other, so we run them

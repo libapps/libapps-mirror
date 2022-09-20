@@ -290,7 +290,9 @@ hterm.openUrl = function(url) {
     chrome.browser.openTab({'url': url});
   } else {
     const win = lib.f.openWindow(url, '_blank');
-    win.focus();
+    if (win) {
+      win.focus();
+    }
   }
 };
 
