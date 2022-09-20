@@ -13,6 +13,7 @@ import * as VFS from './vfs.js';
 const SOL_SOCKET = 0x7fffffff;
 // const SO_RCVBUF sets bufferSize.
 const SO_REUSEADDR = 2;
+const SO_ERROR = 4;
 const SO_KEEPALIVE = 9;
 const IPPROTO_IP = 0;
 const IP_TOS = 1;
@@ -311,6 +312,11 @@ export class ChromeTcpSocket extends Socket {
     switch (level) {
       case SOL_SOCKET: {
         switch (name) {
+          case SO_ERROR: {
+            // TODO(vapier): This should return current connection state.
+            return {option: 0};
+          }
+
           case SO_KEEPALIVE:
             return {option: this.tcpKeepAlive_ ? 1 : 0};
         }
@@ -647,6 +653,11 @@ export class RelaySocket extends Socket {
     switch (level) {
       case SOL_SOCKET: {
         switch (name) {
+          case SO_ERROR: {
+            // TODO(vapier): This should return current connection state.
+            return {option: 0};
+          }
+
           case SO_KEEPALIVE:
             return {option: this.tcpKeepAlive_ ? 1 : 0};
         }
@@ -844,6 +855,11 @@ export class RelaySocket extends Socket {
     switch (level) {
       case SOL_SOCKET: {
         switch (name) {
+          case SO_ERROR: {
+            // TODO(vapier): This should return current connection state.
+            return {option: 0};
+          }
+
           case SO_KEEPALIVE:
             return {option: this.tcpKeepAlive_ ? 1 : 0};
         }
