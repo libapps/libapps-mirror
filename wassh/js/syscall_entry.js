@@ -89,6 +89,12 @@ export class WasshExperimental extends SyscallEntry.Base {
     return this.handle_sock_listen(sock, backlog);
   }
 
+  /**
+   * @param {!WASI_t.s32} idx
+   * @param {!WASI_t.pointer} name_ptr
+   * @param {!WASI_t.size} namelen
+   * @return {!WASI_t.errno}
+   */
   sys_sock_register_fake_addr(idx, name_ptr, namelen) {
     const td = new TextDecoder();
     const buf = this.getMem_(name_ptr, name_ptr + namelen);
@@ -96,6 +102,13 @@ export class WasshExperimental extends SyscallEntry.Base {
     return this.handle_sock_register_fake_addr(idx, name);
   }
 
+  /**
+   * @param {!WASI_t.pointer} sock_ptr
+   * @param {!WASI_t.s32} domain
+   * @param {!WASI_t.s32} type
+   * @param {!WASI_t.s32} protocol
+   * @return {!WASI_t.errno}
+   */
   sys_sock_create(sock_ptr, domain, type, protocol) {
     const ret = this.handle_sock_create(domain, type, protocol);
     if (typeof ret === 'number') {
@@ -107,6 +120,13 @@ export class WasshExperimental extends SyscallEntry.Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /**
+   * @param {!WASI_t.fd} sock
+   * @param {!WASI_t.s32} domain
+   * @param {!WASI_t.pointer} addr_ptr
+   * @param {!WASI_t.u16} port
+   * @return {!WASI_t.errno}
+   */
   sys_sock_connect(sock, domain, addr_ptr, port) {
     let address;
     const td = new TextDecoder();
@@ -198,6 +218,13 @@ export class WasshExperimental extends SyscallEntry.Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /**
+   * @param {!WASI_t.fd} sock
+   * @param {!WASI_t.s32} level
+   * @param {!WASI_t.s32} name
+   * @param {!WASI_t.pointer} value_ptr
+   * @return {!WASI_t.errno}
+   */
   sys_sock_get_opt(sock, level, name, value_ptr) {
     const ret = this.handle_sock_get_opt(sock, level, name);
     if (typeof ret === 'number') {
@@ -209,10 +236,22 @@ export class WasshExperimental extends SyscallEntry.Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /**
+   * @param {!WASI_t.fd} sock
+   * @param {!WASI_t.s32} level
+   * @param {!WASI_t.s32} name
+   * @param {!WASI_t.s32} value
+   * @return {!WASI_t.errno}
+   */
   sys_sock_set_opt(sock, level, name, value) {
     return this.handle_sock_set_opt(sock, level, name, value);
   }
 
+  /**
+   * @param {!WASI_t.fd} oldfd
+   * @param {!WASI_t.pointer} newfd_ptr
+   * @return {!WASI_t.errno}
+   */
   sys_fd_dup(oldfd, newfd_ptr) {
     const ret = this.handle_fd_dup(oldfd);
     if (typeof ret === 'number') {
@@ -224,6 +263,11 @@ export class WasshExperimental extends SyscallEntry.Base {
     return WASI.errno.ESUCCESS;
   }
 
+  /**
+   * @param {!WASI_t.fd} oldfd
+   * @param {!WASI_t.fd} newfd
+   * @return {!WASI_t.errno}
+   */
   sys_fd_dup2(oldfd, newfd) {
     return this.handle_fd_dup2(oldfd, newfd);
   }
@@ -262,6 +306,17 @@ export class WasshExperimental extends SyscallEntry.Base {
     return WASI.errno.ENOTTY;
   }
 
+  /**
+   * Display a message to the user and get their response.
+   *
+   * @param {!WASI_t.pointer} prompt_ptr Pointer to the string to display to the
+   *     user.
+   * @param {!WASI_t.size} prompt_len Length (in bytes) of message.
+   * @param {!WASI_t.pointer} buf_ptr Pointer to buffer for user's input.
+   * @param {!WASI_t.size} buf_len Length (in bytes) of user's input.
+   * @param {!WASI_t.s32} echo Whether the user's input should be hidden.
+   * @return {!WASI_t.errno}
+   */
   sys_readpassphrase(prompt_ptr, prompt_len, buf_ptr, buf_len, echo) {
     let prompt = '';
     if (prompt_ptr) {

@@ -687,7 +687,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   /**
    * @param {!WASI_t.fd} socket
    * @param {!WASI_t.size} remote
-   * @return {!Promise<{family: number, address: !Array<number>, port: number}>}
+   * @return {!WASI_t.errno|{
+   *    family: number,
+   *    address: !Array<number>,
+   *    port: number,
+   * }}
    */
   async handle_sock_get_name(socket, remote) {
     const handle = this.vfs.getFileHandle(socket);
@@ -724,6 +728,12 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return {family, address, port};
   }
 
+  /**
+   * @param {!WASI_t.fd} socket
+   * @param {number} level
+   * @param {number} name
+   * @return {!WASI_t.errno|{option: number}}
+   */
   async handle_sock_get_opt(socket, level, name) {
     const handle = this.vfs.getFileHandle(socket);
     if (handle === undefined) {
@@ -736,6 +746,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return handle.getSocketOption(level, name);
   }
 
+  /**
+   * @param {!WASI_t.fd} socket
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!WASI_t.errno}
+   */
   async handle_sock_set_opt(socket, level, name, value) {
     const handle = this.vfs.getFileHandle(socket);
     if (handle === undefined) {
