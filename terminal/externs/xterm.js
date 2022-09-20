@@ -21,6 +21,8 @@ class Terminal$$module$js$xterm {
    * @param {!Object=} options
    */
   constructor(options) {
+    /** @type {?HTMLElement} */
+    this.element;
     /** @type {!Object} */
     this.options;
     /** @type {number} */

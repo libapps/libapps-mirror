@@ -13,6 +13,7 @@ import {LitElement, css, html} from './lit.js';
 import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, delayedScheduler,
   fontManager, getOSInfo, sleep} from './terminal_common.js';
 import {ICON_COPY} from './terminal_icons.js';
+import {TerminalTooltip} from './terminal_tooltip.js';
 import {Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
     from './xterm.js';
 
@@ -133,6 +134,65 @@ class XtermTerminalIO extends hterm.Terminal.IO {
 }
 
 /**
+ * A custom link handler that:
+ *
+ * - Shows a tooltip with the url on a OSC 8 link. This is following what hterm
+ *   is doing. Also, showing the tooltip is better for the security of the user
+ *   because the link can have arbitrary text.
+ * - Uses our own way to open the window.
+ */
+class LinkHandler {
+  /**
+   * @param {!Terminal} term
+   */
+  constructor(term) {
+    this.term_ = term;
+    /** @type {?TerminalTooltip} */
+    this.tooltip_ = null;
+  }
+
+  /**
+   * @return {!TerminalTooltip}
+   */
+  getTooltip_() {
+    if (!this.tooltip_) {
+      this.tooltip_ = /** @type {!TerminalTooltip} */(
+          document.createElement('terminal-tooltip'));
+      this.tooltip_.classList.add('xterm-hover');
+      lib.notNull(this.term_.element).appendChild(this.tooltip_);
+    }
+    return this.tooltip_;
+  }
+
+  /**
+   * @param {!MouseEvent} ev
+   * @param {string} url
+   * @param {!Object} range
+   */
+  activate(ev, url, range) {
+    lib.f.openWindow(url, '_blank');
+  }
+
+  /**
+   * @param {!MouseEvent} ev
+   * @param {string} url
+   * @param {!Object} range
+   */
+  hover(ev, url, range) {
+    this.getTooltip_().show(url, {x: ev.clientX, y: ev.clientY});
+  }
+
+  /**
+   * @param {!MouseEvent} ev
+   * @param {string} url
+   * @param {!Object} range
+   */
+  leave(ev, url, range) {
+    this.getTooltip_().hide();
+  }
+}
+
+/**
  * A terminal class that 1) uses xterm.js and 2) behaves like a `hterm.Terminal`
  * so that it can be used in existing code.
  *
@@ -169,7 +229,8 @@ export class XtermTerminal {
     this.scheduleFit_ = delayedScheduler(() => this.fit_(),
         testParams ? 0 : 250);
 
-    this.term.loadAddon(new WebLinksAddon());
+    this.term.loadAddon(
+        new WebLinksAddon((e, uri) => lib.f.openWindow(uri, '_blank')));
     this.term.loadAddon(new Unicode11Addon());
     this.term.unicode.activeVersion = '11';
 
@@ -215,6 +276,7 @@ export class XtermTerminal {
 
     this.copyNotice_ = null;
 
+    this.term.options.linkHandler = new LinkHandler(this.term);
     this.term.options.theme = {
       // The webgl cursor layer also paints the character under the cursor with
       // this `cursorAccent` color. We use a completely transparent color here
