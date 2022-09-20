@@ -63,7 +63,7 @@ export class Plugin {
     }
 
     this.terminal_.io.print(
-        ' «««This is a WIP -- see https://crbug.com/1298699 for KIs»»»');
+        ' «««This is in alpha -- see https://crbug.com/1312115 for KIs»»»');
 
     const settings = {
       executable: this.executable_,

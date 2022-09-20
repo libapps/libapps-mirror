@@ -1157,6 +1157,14 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   // Make sure the selected ssh-client version is somewhat valid.
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
+  } else if (!this.isSftp && this.sshClientVersion_ === 'pnacl') {
+    if (lib.f.randomInt(0, 1000) < 5) {
+      this.io.println(sgrText(
+          'Opting in to WASM for this session.  Please report issues.\n\r' +
+          'Use --ssh-client-version=pnacl to temporarily opt-out.\n\r',
+          {bold: true}));
+      this.sshClientVersion_ = 'wasm';
+    }
   }
   if (!this.sshClientVersion_.match(/^[a-zA-Z0-9.-]+$/)) {
     this.io.println(localize('UNKNOWN_SSH_CLIENT_VERSION',
