@@ -1,3 +1,22 @@
+# 0.50, 2022-09-25, WASM port forwarding support.
+
+* wassh: sockets: Stub out SO_ERROR.
+* wassh: fs: Stub out fd_fdstat_set_flags.
+* Update license boilerplate text in source code files.
+* relays: Harmonize onWriteSuccess usage.
+* wassh: sockets: Implement listening support
+* wassh: sockets: Don't warn about unhandled sockets
+* wassh: sockets: Implement shutdown() support
+* wassh: sockets: Initial accept() support
+* wassh: sockets: Initial listen() support
+* wassh: sockets: Initial bind() support
+* agent: Use correct write count for ssh-agent relay.
+* wassh: sockets: Ignore SO_REUSEADDR.
+* wasi-js-bindings/wassh: Fix passing debug setting down.
+* wassh: sockets: Unify get/set socket option methods.
+* wassh: sockets: Tweak chrome.sockets.tcp checks.
+* wassh: vfs/sockets: Improve debugging a little more.
+
 # 0.49, 2022-09-09, FS migration to indexeddb-fs, WASM updates.
 
 * wassh: sockets: Drop redundant checks.
