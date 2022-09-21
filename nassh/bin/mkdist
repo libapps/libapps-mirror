@@ -54,6 +54,9 @@ EXCLUDE_PATTERNS_CROSH = (
     "plugin/mosh*",
     "plugin/pnacl-*",
     "plugin/wasm-*",
+    "plugin/wasm/scp*",
+    "plugin/wasm/sftp*",
+    "plugin/wasm/ssh-keygen*",
     "images/*/icon-fullsize.png",
 )
 
