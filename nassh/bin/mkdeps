@@ -222,7 +222,7 @@ def generate_html(packages_order, licenses):
         output += LICENSE_ENTRY_TEMPLATE % {
             "homepages": "<br>".join(homepages),
             "idx": idx,
-            "data": html.escape(entry["data"]),
+            "data": html.escape(entry["data"], quote=False),
         }
     output = template.replace("%%LICENSES%%", output)
     with open(LICENSE_FILE, "w", encoding="utf8") as fp:
