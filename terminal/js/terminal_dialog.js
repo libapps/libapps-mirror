@@ -34,19 +34,20 @@ export class TerminalDialog extends LitElement {
   static get styles() {
     return css`
         dialog {
+          background: var(--cros-bg-color);
           border: 0;
           border-radius: 8px;
-          box-shadow: 0 0 16px rgba(0, 0, 0, 0.12),
-                      0 16px 16px rgba(0, 0, 0, 0.24);
-          color: var(--cr-secondary-text-color);
-          font: 13px var(--font);
+          box-shadow: 0 0 16px rgba(var(--cros-shadow-color-key-rgb), 0.12),
+                      0 16px 16px rgba(var(--cros-shadow-color-key-rgb), 0.24);
+          color: var(--cros-color-secondary);
+          font: 13px var(--cros-body-1-font-family);
           min-width: var(--terminal-dialog-min-width);
           padding: 20px 20px 16px 20px;
           overflow: var(--terminal-dialog-overflow, auto);
         }
 
         ::slotted(div[slot=title]) {
-          color: var(--cr-primary-text-color);
+          color: var(--cros-color-primary);
           font-size: calc(15 / 13 * 100%);
           padding-bottom: 16px;
         }

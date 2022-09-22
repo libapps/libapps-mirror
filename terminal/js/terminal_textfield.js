@@ -69,7 +69,7 @@ export class TerminalTextfieldElement extends LitElement {
       }
 
       #container {
-        background-color: #F1F3F4;
+        background-color: var(--cros-textfield-background-color);
         border-radius: 4px;
         box-sizing: border-box;
         overflow: hidden;
@@ -81,7 +81,7 @@ export class TerminalTextfieldElement extends LitElement {
       input {
         background-color: inherit;
         border: none;
-        color: #202124;
+        color: var(--cros-color-primary);
         font-family: Roboto;
         font-size: 13px;
         line-height: 32px;
@@ -92,7 +92,7 @@ export class TerminalTextfieldElement extends LitElement {
       }
 
       #underline {
-        border-bottom: 2px solid var(--google-blue-600);
+        border-bottom: 2px solid var(--cros-color-prominent);
         bottom: 0;
         box-sizing: border-box;
         left: 0;
@@ -111,7 +111,7 @@ export class TerminalTextfieldElement extends LitElement {
       }
 
       #underline[invalid] {
-        border-bottom-color: var(--cr-input-error-color);
+        border-bottom-color: var(--cros-color-alert);
         opacity: 1;
         width: 100%;
       }
@@ -126,11 +126,11 @@ export class TerminalTextfieldElement extends LitElement {
       }
 
       :host([blendIn]:hover) #container {
-        box-shadow: 0 0 0 1px #E5E5E5;
+        box-shadow: 0 0 0 1px var(--cros-bg-color-dropped-elevation-2);
       }
 
       :host([blendIn]:focus) #container {
-        box-shadow: 0 0 0 2px #1a73e8;
+        box-shadow: 0 0 0 2px var(--cros-color-prominent);
       }
 
       :host([blendIn]) input {
@@ -139,7 +139,7 @@ export class TerminalTextfieldElement extends LitElement {
 
       /* The sizes are copied from chrome's <cr-input>. */
       #error {
-        color: var(--cr-input-error-color);
+        color: var(--cros-color-alert);
         font-size: .625rem;
         line-height: 1em;
         height: 1em;

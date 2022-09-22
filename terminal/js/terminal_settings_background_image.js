@@ -38,7 +38,7 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
 
       .error {
         margin-right: 12px;
-        color: #d93025;
+        color: var(--cros-color-alert)
       }
 
       img {

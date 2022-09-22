@@ -18,8 +18,8 @@ export class TerminalKnob extends LitElement {
           cursor: pointer;
           display: block;
           border-radius: 100%;
-          border: 3px solid white;
-          box-shadow: 0 0 0 1px #5F6368;
+          border: 3px solid var(--cros-bg-color);
+          box-shadow: 0 0 0 1px var(--cros-button-stroke-color-secondary);
           box-sizing: border-box;
           height: 32px;
           outline: none;
@@ -28,7 +28,8 @@ export class TerminalKnob extends LitElement {
         }
 
         :host(:focus-visible), :host-context(terminal-slider[focusVisible]) {
-          box-shadow: 0 0 0 3px var(--focus-shadow-color), 0 0 0 1px #5F6368;
+          box-shadow: 0 0 0 3px var(--cros-color-prominent),
+                      0 0 0 1px var(--cros-color-secondary);
         }
     `;
   }

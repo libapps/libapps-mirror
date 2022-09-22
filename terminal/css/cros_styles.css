@@ -1,0 +1,289 @@
+/* Copyright 2020 The Chromium Authors
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. */
+
+/* This file is generated from:
+ *  ../../ui/chromeos/styles/cros_colors.json5
+ *  ../../ui/chromeos/styles/cros_palette.json5
+ *  ../../ui/chromeos/styles/cros_shadows.json5
+ *  ../../ui/chromeos/styles/cros_typography.json5
+ */
+:root {
+  color-scheme: light dark;
+}
+
+html:not(body) {
+  --cros-color-primary-light-rgb: var(--google-grey-900-rgb);
+  --cros-color-primary-light: var(--google-grey-900);
+
+  --cros-color-primary-dark-rgb: var(--google-grey-200-rgb);
+  --cros-color-primary-dark: var(--google-grey-200);
+
+  --cros-color-primary-rgb: var(--cros-color-primary-light-rgb);
+  --cros-color-primary: var(--cros-color-primary-light);
+
+  --cros-color-secondary-light-rgb: var(--google-grey-700-rgb);
+  --cros-color-secondary-light: var(--google-grey-700);
+
+  --cros-color-secondary-dark-rgb: var(--google-grey-400-rgb);
+  --cros-color-secondary-dark: var(--google-grey-400);
+
+  --cros-color-secondary-rgb: var(--cros-color-secondary-light-rgb);
+  --cros-color-secondary: var(--cros-color-secondary-light);
+
+  --cros-color-prominent-light-rgb: var(--google-blue-600-rgb);
+  --cros-color-prominent-light: var(--google-blue-600);
+
+  --cros-color-prominent-dark-rgb: var(--google-blue-300-rgb);
+  --cros-color-prominent-dark: var(--google-blue-300);
+
+  --cros-color-prominent-rgb: var(--cros-color-prominent-light-rgb);
+  --cros-color-prominent: var(--cros-color-prominent-light);
+
+  --cros-color-alert-light-rgb: var(--google-red-600-rgb);
+  --cros-color-alert-light: var(--google-red-600);
+
+  --cros-color-alert-dark-rgb: var(--google-red-300-rgb);
+  --cros-color-alert-dark: var(--google-red-300);
+
+  --cros-color-alert-rgb: var(--cros-color-alert-light-rgb);
+  --cros-color-alert: var(--cros-color-alert-light);
+
+  --cros-bg-color-light-rgb: 255, 255, 255;
+  --cros-bg-color-light: rgb(var(--cros-bg-color-light-rgb));
+
+  --cros-bg-color-dark-rgb: var(--google-grey-900-rgb);
+  --cros-bg-color-dark: var(--google-grey-900);
+
+  --cros-bg-color-rgb: var(--cros-bg-color-light-rgb);
+  --cros-bg-color: var(--cros-bg-color-light);
+
+  --cros-bg-color-dropped-elevation-2-rgb: var(--google-grey-200-rgb);
+  --cros-bg-color-dropped-elevation-2: var(--google-grey-200);
+
+  --cros-app-shield-color-rgb: var(--google-grey-300-rgb);
+  --cros-app-shield-color: rgb(var(--cros-app-shield-color-rgb));
+
+  --cros-separator-color-rgb: 0, 0, 0;
+  --cros-separator-color: rgba(var(--cros-separator-color-rgb), 0.14);
+
+  --cros-shadow-color-key-rgb: var(--google-grey-800-rgb);
+  --cros-shadow-color-key: rgba(var(--cros-shadow-color-key-rgb), 0.3);
+
+  --cros-shadow-color-ambient-rgb: var(--google-grey-800-rgb);
+  --cros-shadow-color-ambient: rgba(var(--cros-shadow-color-ambient-rgb), 0.15);
+
+  --cros-highlight-color-rgb: var(--google-blue-50-rgb);
+  --cros-highlight-color: var(--google-blue-50);
+
+  --cros-highlight-color-hover-light-rgb: var(--google-grey-700-rgb);
+  --cros-highlight-color-hover-light: rgba(var(--cros-highlight-color-hover-light-rgb), 0.2);
+
+  --cros-highlight-color-hover-dark-rgb: 255, 255, 255;
+  --cros-highlight-color-hover-dark: rgba(var(--cros-highlight-color-hover-dark-rgb), 0.2);
+
+  --cros-highlight-color-hover-rgb: var(--cros-highlight-color-hover-light-rgb);
+  --cros-highlight-color-hover: var(--cros-highlight-color-hover-light);
+
+  --cros-button-background-color-primary-rgb: var(--cros-color-prominent-rgb);
+  --cros-button-background-color-primary: var(--cros-color-prominent);
+
+  --cros-button-active-shadow-color-ambient-primary-rgb: var(--google-blue-500-rgb);
+  --cros-button-active-shadow-color-ambient-primary: rgba(var(--cros-button-active-shadow-color-ambient-primary-rgb), 0.15);
+
+  --cros-button-active-shadow-color-key-primary-rgb: var(--google-blue-500-rgb);
+  --cros-button-active-shadow-color-key-primary: rgba(var(--cros-button-active-shadow-color-key-primary-rgb), 0.3);
+
+  --cros-button-background-color-primary-disabled-rgb: var(--google-grey-100-rgb);
+  --cros-button-background-color-primary-disabled: var(--google-grey-100);
+
+  --cros-button-label-color-secondary-rgb: var(--cros-color-prominent-rgb);
+  --cros-button-label-color-secondary: var(--cros-color-prominent);
+
+  --cros-button-stroke-color-secondary-rgb: var(--google-grey-300-rgb);
+  --cros-button-stroke-color-secondary: var(--google-grey-300);
+
+  --cros-button-background-color-secondary-hover-rgb: var(--google-blue-500-rgb);
+  --cros-button-background-color-secondary-hover: rgba(var(--cros-button-background-color-secondary-hover-rgb), 0.04);
+
+  --cros-button-label-color-secondary-disabled-rgb: var(--google-grey-600-rgb);
+  --cros-button-label-color-secondary-disabled: var(--google-grey-600);
+
+  --cros-button-stroke-color-secondary-disabled-rgb: var(--google-grey-100-rgb);
+  --cros-button-stroke-color-secondary-disabled: var(--google-grey-100);
+
+  --cros-menu-label-color-rgb: var(--google-grey-900-rgb);
+  --cros-menu-label-color: var(--google-grey-900);
+
+  --cros-slider-color-active-rgb: var(--cros-color-prominent-rgb);
+  --cros-slider-color-active: var(--cros-color-prominent);
+
+  --cros-slider-color-inactive-rgb: var(--cros-color-secondary-rgb);
+  --cros-slider-color-inactive: var(--cros-color-secondary);
+
+  --cros-slider-track-color-active-rgb: var(--cros-slider-color-active-rgb);
+  --cros-slider-track-color-active: rgba(var(--cros-slider-track-color-active-rgb), var(--cros-second-tone-opacity));
+
+  --cros-slider-track-color-inactive-rgb: var(--cros-slider-color-inactive-rgb);
+  --cros-slider-track-color-inactive: rgba(var(--cros-slider-track-color-inactive-rgb), var(--cros-second-tone-opacity));
+
+  --cros-switch-knob-color-active-rgb: var(--cros-color-prominent-rgb);
+  --cros-switch-knob-color-active: var(--cros-color-prominent);
+
+  --cros-switch-knob-color-inactive-rgb: 255, 255, 255;
+  --cros-switch-knob-color-inactive: rgb(var(--cros-switch-knob-color-inactive-rgb));
+
+  --cros-switch-track-color-active-rgb: var(--cros-slider-track-color-active-rgb);
+  --cros-switch-track-color-active: var(--cros-slider-track-color-active);
+
+  --cros-switch-track-color-inactive-rgb: var(--cros-slider-track-color-inactive-rgb);
+  --cros-switch-track-color-inactive: var(--cros-slider-track-color-inactive);
+
+  --cros-textfield-background-color-rgb: var(--google-grey-100-rgb);
+  --cros-textfield-background-color: var(--google-grey-100);
+
+  --cros-textfield-label-color-rgb: var(--google-grey-700-rgb);
+  --cros-textfield-label-color: var(--google-grey-700);
+
+  --cros-tooltip-background-color-rgb: var(--google-grey-900-rgb);
+  --cros-tooltip-background-color: rgba(var(--cros-tooltip-background-color-rgb), 0.8);
+
+  --cros-selection-outline-rgb: 0, 0, 0;
+  --cros-selection-outline: rgba(var(--cros-selection-outline-rgb), 0.1);
+
+  --google-blue-50-rgb: 232, 240, 254;
+  --google-blue-50: rgb(var(--google-blue-50-rgb));
+
+  --google-blue-300-rgb: 138, 180, 248;
+  --google-blue-300: rgb(var(--google-blue-300-rgb));
+
+  --google-blue-400-rgb: 102, 157, 246;
+  --google-blue-400: rgb(var(--google-blue-400-rgb));
+
+  --google-blue-500-rgb: 66, 133, 244;
+  --google-blue-500: rgb(var(--google-blue-500-rgb));
+
+  --google-blue-600-rgb: 26, 115, 232;
+  --google-blue-600: rgb(var(--google-blue-600-rgb));
+
+  --google-grey-100-rgb: 241, 243, 244;
+  --google-grey-100: rgb(var(--google-grey-100-rgb));
+
+  --google-grey-200-rgb: 232, 234, 237;
+  --google-grey-200: rgb(var(--google-grey-200-rgb));
+
+  --google-grey-300-rgb: 218, 220, 224;
+  --google-grey-300: rgb(var(--google-grey-300-rgb));
+
+  --google-grey-400-rgb: 189, 193, 198;
+  --google-grey-400: rgb(var(--google-grey-400-rgb));
+
+  --google-grey-500-rgb: 154, 160, 166;
+  --google-grey-500: rgb(var(--google-grey-500-rgb));
+
+  --google-grey-600-rgb: 128, 134, 139;
+  --google-grey-600: rgb(var(--google-grey-600-rgb));
+
+  --google-grey-700-rgb: 95, 99, 104;
+  --google-grey-700: rgb(var(--google-grey-700-rgb));
+
+  --google-grey-800-rgb: 60, 64, 67;
+  --google-grey-800: rgb(var(--google-grey-800-rgb));
+
+  --google-grey-900-rgb: 32, 33, 36;
+  --google-grey-900: rgb(var(--google-grey-900-rgb));
+
+  --google-red-300-rgb: 242, 139, 130;
+  --google-red-300: rgb(var(--google-red-300-rgb));
+
+  --google-red-600-rgb: 217, 48, 37;
+  --google-red-600: rgb(var(--google-red-600-rgb));
+
+  --cros-second-tone-opacity: 0.3;
+}
+
+html {
+  /* font families */
+  --cros-font-family-roboto: Roboto, 'Roboto', 'Noto Sans', sans-serif;
+
+  --cros-body-1-font-family: var(--cros-font-family-roboto);
+}
+
+@media (prefers-color-scheme: dark) {
+html:not(body) {
+  --cros-color-primary-rgb: var(--cros-color-primary-dark-rgb);
+  --cros-color-primary: var(--cros-color-primary-dark);
+
+  --cros-color-secondary-rgb: var(--cros-color-secondary-dark-rgb);
+  --cros-color-secondary: var(--cros-color-secondary-dark);
+
+  --cros-color-prominent-rgb: var(--cros-color-prominent-dark-rgb);
+  --cros-color-prominent: var(--cros-color-prominent-dark);
+
+  --cros-color-alert-rgb: var(--cros-color-alert-dark-rgb);
+  --cros-color-alert: var(--cros-color-alert-dark);
+
+  --cros-bg-color-rgb: var(--cros-bg-color-dark-rgb);
+  --cros-bg-color: var(--cros-bg-color-dark);
+
+  --cros-bg-color-dropped-elevation-2-rgb: 0, 0, 0;
+  --cros-bg-color-dropped-elevation-2: rgb(var(--cros-bg-color-dropped-elevation-2-rgb));
+
+  --cros-app-shield-color-rgb: 0, 0, 0;
+  --cros-app-shield-color: rgb(var(--cros-app-shield-color-rgb));
+
+  --cros-separator-color-rgb: 255, 255, 255;
+  --cros-separator-color: rgba(var(--cros-separator-color-rgb), 0.14);
+
+  --cros-shadow-color-key-rgb: 0, 0, 0;
+  --cros-shadow-color-key: rgba(var(--cros-shadow-color-key-rgb), 0.3);
+
+  --cros-shadow-color-ambient-rgb: 0, 0, 0;
+  --cros-shadow-color-ambient: rgba(var(--cros-shadow-color-ambient-rgb), 0.15);
+
+  --cros-highlight-color-rgb: var(--google-blue-300-rgb);
+  --cros-highlight-color: rgba(var(--cros-highlight-color-rgb), 0.3);
+
+  --cros-highlight-color-hover-rgb: var(--cros-highlight-color-hover-dark-rgb);
+  --cros-highlight-color-hover: var(--cros-highlight-color-hover-dark);
+
+  --cros-button-active-shadow-color-ambient-primary-rgb: var(--google-blue-400-rgb);
+  --cros-button-active-shadow-color-ambient-primary: rgba(var(--cros-button-active-shadow-color-ambient-primary-rgb), 0.15);
+
+  --cros-button-active-shadow-color-key-primary-rgb: var(--google-blue-400-rgb);
+  --cros-button-active-shadow-color-key-primary: rgba(var(--cros-button-active-shadow-color-key-primary-rgb), 0.3);
+
+  --cros-button-background-color-primary-disabled-rgb: var(--google-grey-800-rgb);
+  --cros-button-background-color-primary-disabled: var(--google-grey-800);
+
+  --cros-button-stroke-color-secondary-rgb: var(--google-grey-700-rgb);
+  --cros-button-stroke-color-secondary: var(--google-grey-700);
+
+  --cros-button-background-color-secondary-hover-rgb: var(--google-blue-300-rgb);
+  --cros-button-background-color-secondary-hover: rgba(var(--cros-button-background-color-secondary-hover-rgb), 0.08);
+
+  --cros-button-label-color-secondary-disabled-rgb: var(--google-grey-500-rgb);
+  --cros-button-label-color-secondary-disabled: var(--google-grey-500);
+
+  --cros-button-stroke-color-secondary-disabled-rgb: var(--google-grey-800-rgb);
+  --cros-button-stroke-color-secondary-disabled: var(--google-grey-800);
+
+  --cros-menu-label-color-rgb: var(--google-grey-200-rgb);
+  --cros-menu-label-color: var(--google-grey-200);
+
+  --cros-switch-knob-color-inactive-rgb: var(--google-grey-400-rgb);
+  --cros-switch-knob-color-inactive: var(--google-grey-400);
+
+  --cros-textfield-background-color-rgb: 0, 0, 0;
+  --cros-textfield-background-color: rgba(var(--cros-textfield-background-color-rgb), 0.3);
+
+  --cros-textfield-label-color-rgb: 255, 255, 255;
+  --cros-textfield-label-color: rgba(var(--cros-textfield-label-color-rgb), 0.6);
+
+  --cros-tooltip-background-color-rgb: 255, 255, 255;
+  --cros-tooltip-background-color: rgba(var(--cros-tooltip-background-color-rgb), 0.8);
+
+  --cros-selection-outline-rgb: 255, 255, 255;
+  --cros-selection-outline: rgba(var(--cros-selection-outline-rgb), 0.12);
+}
+}

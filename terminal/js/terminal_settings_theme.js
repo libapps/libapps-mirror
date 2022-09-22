@@ -10,7 +10,6 @@
 import {LitElement, css, html, unsafeCSS} from './lit.js';
 import {DEFAULT_THEME, DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR,
     DEFAULT_CURSOR_COLOR, DEFAULT_FOREGROUND_COLOR} from './terminal_common.js';
-import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_button.js';
 import './terminal_dialog.js';
 
@@ -267,7 +266,7 @@ export class TerminalSettingsThemeElement extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesVars, css`
+    return css`
       #themes {
         display: flex;
         flex-wrap: wrap;
@@ -283,7 +282,7 @@ export class TerminalSettingsThemeElement extends LitElement {
       }
 
       .theme-inner {
-        border: 1px solid #E5E5E5;
+        border: 1px solid var(--cros-bg-color-dropped-elevation-2);
         border-radius: 8px;
         cursor: pointer;
         height: 88px;
@@ -294,7 +293,7 @@ export class TerminalSettingsThemeElement extends LitElement {
       }
 
       .theme-inner:focus-visible {
-        box-shadow: 0 0 0 2px var(--focus-shadow-color);
+        box-shadow: 0 0 0 2px var(--cros-color-prominent);
       }
 
       .theme:nth-child(-n+4) > .theme-inner {
@@ -319,9 +318,9 @@ export class TerminalSettingsThemeElement extends LitElement {
       }
 
       .label {
-        background-color: #FFF;
+        background-color: var(--cros-bg-color);
         bottom: 0;
-        color: #202124;
+        color: var(--cros-color-primary);
         font-weight: 400;
         line-height: 40px;
         position: absolute;
@@ -330,18 +329,18 @@ export class TerminalSettingsThemeElement extends LitElement {
 
       .label p {
         margin: 0 10px;
-        overflow: hidden; 
+        overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
 
       .theme[active-theme] .label {
-        background-color: var(--active-bg);
+        background-color: var(--cros-highlight-color);
         color: var(--google-blue-600);
       }
 
       .reset {
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(var(--cros-app-shield-color-rgb), 0.6);
         bottom: 0;
         color: #fff;
         display: none;
@@ -369,7 +368,7 @@ export class TerminalSettingsThemeElement extends LitElement {
       .theme[active-theme][reset-theme] .reset {
         display: block;
       }
-    `];
+    `;
   }
 
   /** @override */

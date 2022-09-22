@@ -44,7 +44,7 @@ export class TerminalSettingsProfileSelector extends LitElement {
       }
 
       .icon svg {
-        fill: rgb(95,99,104);
+        fill: var(--cros-textfield-label-color);
         height: 20px;
         width: 20px;
       }

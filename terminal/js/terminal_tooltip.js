@@ -33,8 +33,8 @@ export class TerminalTooltip extends LitElement {
   static get styles() {
     return css`
         :host {
-          background-color: rgba(255, 255, 255, .8);
-          border: 1px solid black;
+          background-color: var(--cros-tooltip-background-color);
+          border: 1px solid rgb(--cros-separator-color-rgb);
           display: block;
           font-size: smaller;
           padding: 3px 5px;

@@ -17,7 +17,6 @@ import './terminal_linux_dialog.js';
 import {ProfileType, cleanupLostValues, deleteProfile, getProfileIds,
   getProfileValues, setProfileIds, setProfileValues}
   from './terminal_profiles.js';
-import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_ssh_dialog.js';
 
 /**
@@ -72,11 +71,11 @@ export class TerminalHomeApp extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesVars, css`
+    return css`
       :host {
         display: flex;
         flex-wrap: wrap;
-        font-family: 'Roboto';
+        font-family: var(--cros-body-1-font-family);
         padding: 40px 0 0 0;
         justify-content: center;
       }
@@ -193,7 +192,7 @@ export class TerminalHomeApp extends LitElement {
         margin: -10px 0 0 0;
         padding: 0 20px 20px 20px;
       }
-    `];
+    `;
   }
 
   constructor() {

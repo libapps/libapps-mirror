@@ -19,8 +19,9 @@ import './terminal_dialog.js';
 
 // Export for testing.
 export const TOO_WHITE_BOX_SHADOW = 'inset 0 0 0 1px black';
+export const TOO_BLACK_BOX_SHADOW = 'inset 0 0 0 1px white';
 export const FOCUS_BOX_SHADOW =
-    '0 0 0 2px var(--focus-shadow-color)';
+    '0 0 0 2px var(--cros-color-prominent)';
 
 /**
  * Convert CSS color to hex color.  Always use uppercase for display.
@@ -47,10 +48,14 @@ function swatchStyle(color, showFocusRing) {
     const c = lib.colors;
     const contrastRatio = c.contrastRatio(1, c.luminance(
         ...lib.notNull(c.crackRGB(lib.notNull(c.normalizeCSS(color))))));
-    if (contrastRatio < 1.25) {
+    const darkMode = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (!darkMode && contrastRatio < 1.25) {
       // The color is too white. Put a "border" to make it stands out from the
       // background.
       boxShadows.push(TOO_WHITE_BOX_SHADOW);
+    } else if (darkMode && contrastRatio > 8) {
+      boxShadows.push(TOO_BLACK_BOX_SHADOW);
     }
   }
 
@@ -111,17 +116,17 @@ export class TerminalColorpickerElement extends LitElement {
         #swatch {
           background-image: linear-gradient(
               45deg,
-              rgba(0,0,0,0.1) 25%,
+              var(--cros-selection-outline) 25%,
               transparent 25%,
               transparent 75%,
-              rgba(0,0,0,0.1) 75%,
-              rgba(0,0,0,0.1) 0), linear-gradient(
+              var(--cros-selection-outline) 75%,
+              var(--cros-selection-outline) 0), linear-gradient(
               45deg,
               rgba(0,0,0,0.1) 25%,
               transparent 25%,
               transparent 75%,
-              rgba(0,0,0,0.1) 75%,
-              rgba(0,0,0,0.1) 0);
+              var(--cros-selection-outline) 75%,
+              var(--cros-selection-outline) 0);
           background-position: 0px 0, 5px 5px;
           background-size: 10px 10px, 10px 10px;
           border-radius: 50%;

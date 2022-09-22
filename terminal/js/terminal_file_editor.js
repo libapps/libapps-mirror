@@ -31,17 +31,17 @@ class TerminalFileEditor extends LitElement {
         :host {
           border-radius: 4px;
           box-sizing: border-box;
-          box-shadow: 0 0 0 1px rgba(0, 0, 0, .38);
+          box-shadow: 0 0 0 1px rgba(var(--cros-shadow-color-key-rgb), .38);
           display: block;
           padding: 7px
         }
 
         :host(:hover) {
-          box-shadow: 0 0 0 1px rgba(0, 0, 0, .81);
+          box-shadow: 0 0 0 1px rgba(var(--cros-shadow-color-key-rgb), .81);
         }
 
         :host(:focus) {
-          box-shadow: 0 0 0 2px var(--google-blue-600);
+          box-shadow: 0 0 0 2px var(--cros-color-prominent);
         }
 
         textarea {

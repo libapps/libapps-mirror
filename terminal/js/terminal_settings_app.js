@@ -16,7 +16,6 @@ import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT_PADDINGS,
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
 import {ICON_OPEN_IN_NEW} from './terminal_icons.js';
-import {stylesVars} from './terminal_settings_styles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_background_image.js';
 import './terminal_settings_category_selector.js';
@@ -55,13 +54,14 @@ export class TerminalSettingsApp extends LitElement {
 
   /** @override */
   static get styles() {
-    return [stylesVars, css`
+    return css`
       :host {
+        background: var(--cros-bg-color);
         bottom: 0;
-        color: rgb(95, 99, 104);
+        color: var(--cros-menu-label-color);
         display: flex;
         flex-wrap: nowrap;
-        font-family: 'Roboto';
+        font-family: var(--cros-body-1-font-family);
         font-size: 13px;
         left: 0;
         margin: 0;
@@ -80,7 +80,7 @@ export class TerminalSettingsApp extends LitElement {
       }
 
       h4 {
-        color: #212121;
+        color: var(--cros-menu-label-color);
         font-weight: 400;
         line-height: 24px;
         margin: 12px 0;
@@ -111,7 +111,7 @@ export class TerminalSettingsApp extends LitElement {
       }
 
       .terminal-settings-category h3 {
-        color: rgb(95, 99, 104);
+        color: var(--cros-menu-label-color);
         font-size: 13px;
         font-weight: 500;
         line-height: 20px;
@@ -130,7 +130,7 @@ export class TerminalSettingsApp extends LitElement {
 
       .setting-container {
         align-items: center;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+        border-bottom: 1px solid var(--cros-separator-color);
         display: flex;
         flex-wrap: nowrap;
         margin: 0 0 0 32px;
@@ -182,7 +182,7 @@ export class TerminalSettingsApp extends LitElement {
           padding: 4px 16px;
         }
       }
-    `];
+    `;
   }
 
   /** @override */

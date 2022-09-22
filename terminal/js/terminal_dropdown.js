@@ -59,7 +59,7 @@ export class TerminalDropdownElement extends LitElement {
   static get styles() {
     return css`
         :host {
-          color: var(--cr-primary-text-color);
+          color: var(--cros-color-primary);
           display: block;
           line-height: 32px;
           outline: none;
@@ -67,7 +67,7 @@ export class TerminalDropdownElement extends LitElement {
         }
 
         button {
-          background-color: rgb(241, 243, 244);
+          background-color: var(--cros-textfield-background-color);
           border: none;
           border-radius: 6px;
           cursor: pointer;
@@ -79,7 +79,7 @@ export class TerminalDropdownElement extends LitElement {
         }
 
         button:focus-visible {
-          box-shadow: 0 0 0 2px var(--focus-shadow-color);
+          box-shadow: 0 0 0 2px var(--cros-color-prominent);
         }
 
         button.invalid {
@@ -88,7 +88,7 @@ export class TerminalDropdownElement extends LitElement {
 
         button:after {
           /* Set color to avoid being affected by button's invalid styling */
-          color: var(--cr-primary-text-color);
+          color: var(--cros-color-primary);
           content: "⯆";
           position: absolute;
           right: 9px;
@@ -101,10 +101,10 @@ export class TerminalDropdownElement extends LitElement {
         }
 
         ul {
-          background-color: white;
+          background-color: var(--cros-bg-color);
           border-radius: 4px;
-          box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
-                      0 2px 6px 2px rgba(60, 64, 67, 0.15);
+          box-shadow: 0 1px 2px 0 var(--cros-shadow-color-key),
+                      0 2px 6px 2px var(--cros-shadow-color-ambient);
           box-sizing: border-box;
           display: none;
           left: 0;
@@ -142,11 +142,11 @@ export class TerminalDropdownElement extends LitElement {
         }
 
         li[aria-selected="true"] {
-          background-color: rgb(232, 240, 254);
+          background-color: var(--cros-highlight-color);
         }
 
         li.allow-hover-effect:hover {
-          background-color: lightgrey;
+          background-color: var(--cros-highlight-color-hover);
         }
     `;
   }

@@ -16,7 +16,6 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
   static get styles() {
     return css`
       ::slotted(div) {
-        border: 1px solid rgba(0, 0, 0, 0);
         border-radius: 0 16px 16px 0;
         cursor: pointer;
         font-size: 13px;
@@ -33,16 +32,16 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
       }
 
       ::slotted(div:hover) {
-        background-color: rgb(240, 240, 240);
+        background-color: var(--cros-textfield-background-color);
       }
 
       ::slotted(div[active]) {
-        background-color: var(--active-bg);
+        background-color: var(--cros-highlight-color);
         color: rgb(26, 115, 232);
       }
 
       ::slotted(div:focus-visible) {
-        border-color: rgb(26, 115, 232);
+        border-color: var(--cros-color-prominent);
       }
     `;
   }

@@ -58,10 +58,11 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
           margin: 2px 0;
           position: relative;
           width: 38px;
+          -webkit-appearance: none;
         }
 
         #checkbox:before {
-          background-color: rgb(189, 193, 198);
+          background-color: var(--cros-switch-track-color-inactive);
           border-radius: 15px;
           bottom: 0;
           content: "";
@@ -74,11 +75,11 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
         }
 
         #checkbox:after {
-          background-color: rgb(255, 255, 255);
+          background-color: var(--cros-switch-knob-color-inactive);
           border-radius: 100%;
           bottom: 0;
-          box-shadow: 0 1px 1px 0 rgba(60, 64, 67, 0.3),
-                      0 1px 3px 1px rgba(60, 64, 67, 0.15);
+          box-shadow: 0 1px 1px 0 var(--cros-shadow-color-key),
+                      0 1px 3px 1px var(--cros-shadow-color-ambient);
           content: "";
           display: block;
           left: 0;
@@ -91,12 +92,15 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
 
         #checkbox:checked:before {
           background-color: rgb(160, 194, 249);
+          background-color: var(--cros-switch-track-color-active);
         }
 
         #checkbox:checked:after {
-          background-color: rgb(66, 133, 244);
-          box-shadow: 0 1px 1px 0 rgba(66, 133, 244, 0.3),
-                      0 1px 3px 1px rgba(66, 133, 244, 0.15);
+          background-color: var(--cros-switch-knob-color-active);
+          box-shadow:
+            0 1px 1px 0 var(--cros-button-active-shadow-color-key-primary),
+            0 1px 3px 1px
+            var(--cros-button-active-shadow-color-ambient-primary);
           left: calc(100% - 19px + 4px);
         }
     `;

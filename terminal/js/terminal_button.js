@@ -9,7 +9,6 @@
  */
 
 import {LitElement, css, html} from './lit.js';
-import {stylesVars} from './terminal_settings_styles.js';
 
 export class TerminalButtonElement extends LitElement {
   /** @override */
@@ -24,20 +23,26 @@ export class TerminalButtonElement extends LitElement {
   /** @override */
   static get styles() {
     // The styling follows chrome's <cr-button>
-    return [stylesVars, css`
+    return css`
         :host {
-          --button-bg: white;
-          --button-bg-action: var(--google-blue-600);
-          --button-border-color: var(--google-grey-300);
-          --button-hover-bg: rgba(var(--google-blue-refresh-500-rgb), .04);
-          --button-hover-bg-action: rgba(var(--google-blue-600-rgb), .9);
-          --button-text-color: var(--google-blue-600);
-          --button-text-color-action: white;
-          --button-disabled-bg-action: var(--google-grey-100);
-          --button-disabled-bg: white;
-          --button-disabled-border-color: var(--google-grey-100);
-          --button-disabled-text-color: var(--google-grey-600);
-          --button-focus-shadow-color: var(--focus-shadow-color);
+          --button-bg: var(--cros-bg-color);
+          --button-bg-action: var(--cros-button-background-color-primary);
+          --button-border-color: var(--cros-button-stroke-color-secondary);
+          --button-hover-bg:
+            var(--cros-button-background-color-secondary-hover);
+          --button-hover-bg-action:
+            rgba(var(--cros-button-background-color-primary-rgb), .9);
+          --button-text-color: var(--cros-button-label-color-secondary);
+          --button-text-color-action: var(--cros-button-label-color-primary);
+          --button-disabled-bg-action:
+            var(--cros-button-background-color-primary-disabled);
+          --button-disabled-bg:
+            var(--cros-button-stroke-color-secondary-disabled);
+          --button-disabled-border-color:
+            var(--cros-button-stroke-color-secondary-disabled);
+          --button-disabled-text-color:
+            var(--cros-button-label-color-secondary-disabled);
+          --button-focus-shadow-color: var(--cros-color-prominent);
         }
 
         button {
@@ -46,7 +51,7 @@ export class TerminalButtonElement extends LitElement {
           border-radius: 4px;
           color: var(--button-text-color);
           cursor: pointer;
-          font-family: var(--font);
+          font-family: var(--cros-body-1-font-family);
           font-weight: 500;
           min-width: 5.14em;
           outline: none;
@@ -86,7 +91,7 @@ export class TerminalButtonElement extends LitElement {
           background-color: var(--button-disabled-bg-action);
           border-color: transparent;
         }
-    `];
+    `;
   }
 
   /** @override */

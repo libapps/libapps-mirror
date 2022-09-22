@@ -17,7 +17,7 @@ export class TerminalLabelElement extends LitElement {
   static get styles() {
     return css`
       :host > div {
-        color: #5F6368;
+        color: var(--cros-color-secondary);
         font-size: 10px;
         font-weight: 500;
         letter-spacing: .4px;
@@ -26,11 +26,11 @@ export class TerminalLabelElement extends LitElement {
       }
 
       :host([focused]) > div {
-        color: var(--google-blue-600);
+        color: var(--cros-color-prominent);
       }
 
       :host([invalid]) > div {
-        color: var(--cr-input-error-color);
+        color: var(--cros-color-alert);
       }
     `;
   }

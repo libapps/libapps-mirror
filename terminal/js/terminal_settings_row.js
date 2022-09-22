@@ -36,7 +36,7 @@ class TerminalSettingsRow extends LitElement {
     return css`
         :host {
           display: block;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+          border-bottom: 1px solid var(--cros-separator-color);
         }
 
         :host([expandable]) #main {
@@ -50,7 +50,7 @@ class TerminalSettingsRow extends LitElement {
         }
 
         #label {
-          color: #212121;
+          color: var(--cros-color-primary);
           flex-grow: 1;
           font-weight: 400;
           line-height: 24px;
