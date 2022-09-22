@@ -172,37 +172,56 @@ def concat_licenses():
 
         res.update(concat_local_deps())
 
-        generate_html(res)
+        # Dedupe by license to save on space.
+        lic_to_pkgs = {}
+        for package, entry in res.items():
+            # Collapse whitespace to make sure people reformatting doesn't
+            # result in a "new" license.
+            lic = re.sub(r"\s+", "", entry["data"].lower())
+            packages = lic_to_pkgs.setdefault(lic, [])
+            packages.append(package)
+            packages.sort()
+
+        generate_html(sorted(lic_to_pkgs.values()), res)
     else:
         logging.error("The following packages did not specify their licenses:")
         logging.error(ret.stdout.decode("utf8"))
 
 
 # Template for every package/license entry.
+LICENSE_ENTRY_TEMPLATE_HOMEPAGE = "<a href='%(repository)s'>%(package)s</a>"
 LICENSE_ENTRY_TEMPLATE = """
-<h2 class='package' id='package-%(package)s'>
-  <a href='%(repository)s'>%(package)s</a>
+<h2 class='package' id='package-%(idx)s'>
+  %(homepages)s
   <a class='license'
-     id='show-%(package)s'
      i18n='{"aria-label": "$id", "_": "LICENSES_EXPAND_LINK"}'
      href='#'></a>
 </h2>
-<pre class='license' id='license-%(package)s'>
+<pre class='license' id='license-%(idx)s'>
 %(data)s
 </pre>
 """
 
 
-def generate_html(licenses):
+def generate_html(packages_order, licenses):
     """Write the collected |licenses| to an HTML file."""
     with open(LICENSE_TEMPLATE, "r", encoding="utf8") as fp:
         template = fp.read()
     output = ""
-    for package in sorted(licenses):
-        entry = licenses[package]
+    for idx, packages in enumerate(packages_order):
+        homepages = []
+        for package in packages:
+            entry = licenses[package]
+            homepages.append(
+                LICENSE_ENTRY_TEMPLATE_HOMEPAGE
+                % {
+                    "repository": entry["repository"],
+                    "package": html.escape(package),
+                }
+            )
         output += LICENSE_ENTRY_TEMPLATE % {
-            "repository": entry["repository"],
-            "package": html.escape(package),
+            "homepages": "<br>".join(homepages),
+            "idx": idx,
             "data": html.escape(entry["data"]),
         }
     output = template.replace("%%LICENSES%%", output)
