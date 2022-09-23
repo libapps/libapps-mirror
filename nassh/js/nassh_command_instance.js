@@ -228,8 +228,7 @@ CommandInstance.prototype.run = function() {
                               [num, localize(`TIP_${num}`)]));
     this.io.println('');
 
-    if (this.manifest_.name.match(/\((dev|tot)\)/) ||
-        this.manifest_.version_name === 'ToT') {
+    if (this.isDevVersion()) {
       // If we're a development version, show hterm details.
       const htermDate = lib.resource.getData('hterm/concat/date');
       const htermVer = lib.resource.getData('hterm/changelog/version');
@@ -274,6 +273,18 @@ CommandInstance.prototype.run = function() {
       this.connectToArgString(argstr);
     }
   };
+};
+
+/**
+ * Whether this is a developer-oriented build.
+ *
+ * This includes ToT extension (locally unpacked) builds & dev channel builds.
+ *
+ * @return {boolean}
+ */
+CommandInstance.prototype.isDevVersion = function() {
+  return (!!this.manifest_.name.match(/\((dev|tot)\)/) ||
+          this.manifest_.version_name === 'ToT');
 };
 
 /**
@@ -1158,7 +1169,7 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
   } else if (!this.isSftp && this.sshClientVersion_ === 'pnacl') {
-    if (lib.f.randomInt(0, 1000) < 5) {
+    if (lib.f.randomInt(0, 1000) < 5 || this.isDevVersion()) {
       this.io.println(sgrText(
           'Opting in to WASM for this session.  Please report issues.\n\r' +
           'Use --ssh-client-version=pnacl to temporarily opt-out.\n\r',
