@@ -418,8 +418,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
           } else if (handle.filetype === WASI.filetype.REGULAR_FILE) {
             // If it's a regular file, return right away.
             events.push(eventBase);
-          } else if (handle instanceof Sockets.Socket ||
-                     handle instanceof Tty) {
+          } else if (handle.filetype === WASI.filetype.SOCKET_STREAM ||
+                     handle.filetype === WASI.filetype.CHARACTER_DEVICE) {
             // If it's a socket, see if any data is available.
             if (subscription.tag === WASI.eventtype.FD_READ) {
               if (handle.data.length || handle?.clients_?.length) {
