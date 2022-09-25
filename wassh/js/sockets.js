@@ -153,7 +153,7 @@ export class Socket extends VFS.PathHandle {
   /**
    * @param {number} level
    * @param {number} name
-   * @return {!Promise<{option: number}>}
+   * @return {!Promise<!WASI_t.errno|{option: number}>}
    */
   async getSocketOption(level, name) {
     return WASI.errno.ENOPROTOOPT;

@@ -5,6 +5,7 @@
 /**
  * @fileoverview WASM-specific module logic.
  * @suppress {moduleLoad}
+ * @suppress {checkTypes} FileHandle$$module$wassh$js$vfs naming confusion.
  */
 
 import {sanitizeScriptUrl} from './nassh.js';
@@ -16,8 +17,102 @@ import {StreamSet} from './nassh_stream_set.js';
 import {SshAgentStream} from './nassh_stream_sshagent.js';
 import {SshAgentRelayStream} from './nassh_stream_sshagent_relay.js';
 
+import {WASI} from '../../wasi-js-bindings/index.js';
+
 import * as WasshProcess from '../wassh/js/process.js';
 import * as WasshSyscallHandler from '../wassh/js/syscall_handler.js';
+import {FileHandle} from '../wassh/js/vfs.js';
+
+/**
+ * A write-only pipe.
+ *
+ * WASM writes to this handle, and the handle writes to our SFTP client which
+ * processes the packets.
+ *
+ * TODO(vapier): Generalize this and move to wassh.vfs?
+ */
+class SftpPipeWriteHandle extends FileHandle {
+  constructor(path, client) {
+    // TODO(vapier): This should really be FIFO, but WASI doesn't define that?
+    super(path, WASI.filetype.CHARACTER_DEVICE);
+    this.client_ = client;
+  }
+
+  write(buf) {
+    this.client_.writeStreamData(buf);
+    return {nwritten: buf.length};
+  }
+
+  /** @override */
+  async pwrite(buf, offset) {
+    return WASI.errno.ESPIPE;
+  }
+
+  /** @override */
+  async read(length) {
+    return WASI.errno.ESPIPE;
+  }
+
+  /** @override */
+  async pread(length, offset) {
+    return WASI.errno.ESPIPE;
+  }
+
+  /** @override */
+  tell() {
+    return WASI.errno.ESPIPE;
+  }
+}
+
+/**
+ * A read-only pipe.
+ *
+ * Our SFTP client queues packets (via write() calls) for WASM to read.
+ *
+ * TODO(vapier): Generalize this and move to wassh.vfs?
+ */
+class SftpPipeReadHandle extends FileHandle {
+  constructor(path, handler) {
+    // TODO(vapier): This should really be FIFO, but WASI doesn't define that?
+    super(path, WASI.filetype.CHARACTER_DEVICE);
+    this.handler = handler;
+  }
+
+  /** @override */
+  write(buf) {
+    buf = new Uint8Array(buf);
+    const data = new Uint8Array(this.data.length + buf.length);
+    data.set(this.data);
+    data.set(buf, this.data.length);
+    this.data = data;
+    if (this.handler.notify_) {
+      this.handler.notify_();
+    }
+    return {nwritten: buf.length};
+  }
+
+  /** @override */
+  async pwrite(buf, offset) {
+    return WASI.errno.ESPIPE;
+  }
+
+  /** @override */
+  async read(length) {
+    const buf = this.data.slice(0, length);
+    this.data = this.data.subarray(length);
+    return {buf};
+  }
+
+  /** @override */
+  async pread(length, offset) {
+    return WASI.errno.ESPIPE;
+  }
+
+  /** @override */
+  tell() {
+    return WASI.errno.ESPIPE;
+  }
+}
 
 /**
  * Plugin message handlers.
@@ -33,11 +128,13 @@ export class Plugin {
    *   authAgent: ?Agent,
    *   authAgentAppID: string,
    *   relay: ?Relay,
+   *   isSftp: (boolean|undefined),
+   *   sftpClient: (?Object|undefined),
    *   secureInput: function(string, number, boolean),
    * }} opts
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
-               authAgentAppID, relay, secureInput}) {
+               authAgentAppID, relay, isSftp, sftpClient, secureInput}) {
     this.executable_ = executable;
     this.argv_ = argv;
     this.environ_ = environ;
@@ -46,8 +143,12 @@ export class Plugin {
     this.authAgent_ = authAgent;
     this.authAgentAppID_ = authAgentAppID;
     this.relay_ = relay;
+    this.isSftp_ = isSftp;
+    this.sftpClient_ = sftpClient;
     this.secureInput_ = secureInput;
     this.plugin_ = null;
+    this.sftpStdin_ = null;
+    this.sftpStdout_ = null;
   }
 
   /**
@@ -60,6 +161,12 @@ export class Plugin {
       // forever, so use that.  Also allows people to set IdentityAgent via the
       // ssh_config file.
       this.environ_['SSH_AUTH_SOCK'] = `/AF_UNIX/agent/${this.authAgentAppID_}`;
+    }
+
+    // Tell OpenSSH to use the sftp subsystem instead of an interactive session.
+    if (this.isSftp_) {
+      this.argv_.push('-s');
+      this.argv_.push('sftp');
     }
 
     this.terminal_.io.print(
@@ -80,6 +187,27 @@ export class Plugin {
       }),
     };
     await settings.handler.init();
+
+    // If this is an SFTP connection, rebind stdin/stdout to our custom pipes
+    // which connect to our JS SFTP client.
+    if (this.isSftp_) {
+      const vfs = settings.handler.vfs;
+
+      this.sftpStdin_ = new SftpPipeReadHandle('sftp-in', settings.handler);
+      let fd = vfs.openHandle(this.sftpStdin_);
+      if (fd != 0) {
+        vfs.fds_.dup2(fd, 0);
+        vfs.close(fd);
+      }
+
+      this.sftpStdout_ = new SftpPipeWriteHandle('sftp-out', this.sftpClient_);
+      fd = vfs.openHandle(this.sftpStdout_);
+      if (fd != 1) {
+        vfs.fds_.dup2(fd, 1);
+        vfs.close(fd);
+      }
+    }
+
     this.plugin_ = new WasshProcess.Background(
         sanitizeScriptUrl(`../wassh/js/worker.js?trace=${this.trace_}`),
         settings);

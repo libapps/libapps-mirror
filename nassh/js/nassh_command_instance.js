@@ -1168,7 +1168,7 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   // Make sure the selected ssh-client version is somewhat valid.
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
-  } else if (!this.isSftp && this.sshClientVersion_ === 'pnacl') {
+  } else if (this.sshClientVersion_ === 'pnacl') {
     if (lib.f.randomInt(0, 1000) < 5 || this.isDevVersion()) {
       this.io.println(sgrText(
           'Opting in to WASM for this session.  Please report issues.\n\r' +
@@ -1502,6 +1502,8 @@ CommandInstance.prototype.initWasmPlugin_ =
     authAgent: this.authAgent_,
     authAgentAppID: this.authAgentAppID_,
     relay: this.relay_,
+    isSftp: this.isSftp,
+    sftpClient: this.sftpClient,
     secureInput: (...args) => this.secureInput(...args),
   });
   return this.plugin_.init();
