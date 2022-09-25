@@ -29,6 +29,7 @@ C_SOURCES := \
 	getsockopt.c \
 	ioctl.c \
 	listen.c \
+	readpassphrase.c \
 	setsockopt.c \
 	signal.c \
 	socket.c \

@@ -12,7 +12,6 @@
 // returns the new socket directly and translates the error into errno.
 
 #include <errno.h>
-#include <readpassphrase.h>
 #include <stdint.h>
 #include <string.h>
 #include <unistd.h>
@@ -60,16 +59,10 @@ __wasi_fd_t fd_dup2(__wasi_fd_t oldfd, __wasi_fd_t newfd) {
 
 SYSCALL(readpassphrase)(const char* prompt, __wasi_size_t prompt_len,
                         char* buf, __wasi_size_t buf_len, int echo);
-char* readpassphrase(const char* prompt, char* buf, size_t buf_len, int flags) {
-  // Not sure if we should handle this write here or on the WASI side.
-  write(2, prompt, strlen(prompt));
+char* wassh_readpassphrase(const char* prompt, char* buf, size_t buf_len,
+                           bool echo) {
   __wasi_errno_t error = __wassh_readpassphrase(prompt, strlen(prompt), buf,
-                                                buf_len, flags & RPP_ECHO_ON);
-  if (flags & RPP_ECHO_ON) {
-    write(2, buf, strlen(buf));
-  }
-  write(2, "\n", 1);
-
+                                                buf_len, echo);
   if (error != 0) {
     errno = error;
     return NULL;

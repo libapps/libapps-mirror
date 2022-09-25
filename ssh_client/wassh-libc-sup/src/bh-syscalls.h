@@ -38,6 +38,8 @@ __wasi_fd_t fd_dup(__wasi_fd_t oldfd);
 __wasi_fd_t fd_dup2(__wasi_fd_t oldfd, __wasi_fd_t newfd);
 int tty_get_window_size(__wasi_fd_t fd, struct winsize* winsize);
 int tty_set_window_size(__wasi_fd_t fd, const struct winsize* winsize);
+char* wassh_readpassphrase(const char* prompt, char* buf, size_t buf_len,
+                           bool echo);
 
 __END_DECLS
 
