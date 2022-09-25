@@ -242,6 +242,16 @@ export class Plugin {
   }
 
   /**
+   * Write data to the plugin.
+   *
+   * @param {number} fd The file handle to write to.
+   * @param {!ArrayBuffer} data The content to write.
+   */
+  writeTo(fd, data) {
+    this.send('onRead', [fd, data]);
+  }
+
+  /**
    * Plugin has exited.
    *
    * @param {number} code Exit code, 0 for success.

@@ -104,6 +104,19 @@ export class Plugin {
   }
 
   /**
+   * Write data to the plugin.
+   *
+   * @param {number} fd The file handle to write to.
+   * @param {!ArrayBuffer} data The content to write.
+   */
+  async writeTo(fd, data) {
+    const ret = await this.plugin_.writeTo(fd, data);
+    if (typeof ret === 'number') {
+      console.error(`Unable to write to plugin fd ${fd}: ${ret}`);
+    }
+  }
+
+  /**
    * Hijack initial TCP connection if relay is requested.
    *
    * @param {string} address The remote server to connect to.

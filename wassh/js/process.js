@@ -41,4 +41,15 @@ export class Background extends Process.Background {
       this.handler.notify_();
     }
   }
+
+  /**
+   * Write data to the plugin.
+   *
+   * @param {number} fd The file handle to write to.
+   * @param {!ArrayBuffer} buf The content to write.
+   * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
+   */
+  async writeTo(fd, buf) {
+    return this.handler.handle_fd_write(fd, buf);
+  }
 }

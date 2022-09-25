@@ -232,7 +232,7 @@ Client.prototype.sendRequest_ = function(type, data) {
 
   return new Promise((resolve) => {
     this.pendingRequests_[requestId] = resolve;
-    this.plugin_.send('onRead', [0, packet.toArrayBuffer()]);
+    this.plugin_.writeTo(0, packet.toArrayBuffer());
   });
 };
 
@@ -333,7 +333,7 @@ Client.prototype.init = async function() {
       resolve();
     };
 
-    this.plugin_.send('onRead', [0, packet.toArrayBuffer()]);
+    this.plugin_.writeTo(0, packet.toArrayBuffer());
   });
 
   // See the comments for these class constants for details.
