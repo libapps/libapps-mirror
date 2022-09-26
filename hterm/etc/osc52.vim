@@ -89,12 +89,20 @@ function! s:get_OSC52_DCS (str)
 endfunction
 
 " Echo a string to the terminal without munging the escape sequences.
-"
-" This function causes the terminal to flash as a side effect.  It would be
-" better if it didn't, but I can't figure out how.
 function! s:rawecho (str)
-  exec("silent! !echo " . shellescape(a:str))
-  redraw!
+  " We have to use some way to send this message to stdout.
+  " Vim's built-in echo does not write to stdout and only displays on the
+  " command line in the vim interface.
+    if filewritable('/dev/stdout')
+      " Write directly to stdout. This will prevent a flicker from occurring
+      " since no redraw is required.
+      call writefile([a:str], '/dev/stdout', 'b')
+    else
+      " This will cause a flicker to occur due to a new shell actually
+      " appearing, requiring a redraw of vim, but we will use as fallback.
+      exec("silent! !echo " . shellescape(a:str))
+      redraw!
+    endif
 endfunction
 
 " Lookup table for s:b64encode.
