@@ -4,6 +4,7 @@
 
 /**
  * @fileoverview DataView supporting WASI structures.
+ * @externs
  */
 
 /**

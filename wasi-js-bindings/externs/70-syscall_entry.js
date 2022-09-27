@@ -4,6 +4,7 @@
 
 /**
  * @fileoverview Extern settings for syscall entry's.
+ * @externs
  */
 
 /** @extends {SyscallHandler} */

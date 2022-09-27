@@ -4,6 +4,7 @@
 
 /**
  * @fileoverview Extern settings for the Process API.
+ * @externs
  */
 
 /**

@@ -4,6 +4,7 @@
 
 /**
  * @fileoverview Extern settings for syscall handlers.
+ * @externs
  */
 
 /**

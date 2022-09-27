@@ -5,6 +5,7 @@
 /**
  * @fileoverview extern settings for WASI structures.
  * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md
+ * @externs
  */
 
 /**
