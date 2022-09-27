@@ -58,7 +58,7 @@ export class TerminalSettingsApp extends LitElement {
       :host {
         background: var(--cros-bg-color);
         bottom: 0;
-        color: var(--cros-menu-label-color);
+        color: var(--cros-color-secondary);
         display: flex;
         flex-wrap: nowrap;
         font-family: var(--cros-body-1-font-family);
@@ -111,7 +111,7 @@ export class TerminalSettingsApp extends LitElement {
       }
 
       .terminal-settings-category h3 {
-        color: var(--cros-menu-label-color);
+        color: var(--cros-color-secondary);
         font-size: 13px;
         font-weight: 500;
         line-height: 20px;
