@@ -244,7 +244,7 @@ export class Background extends Base {
 
   /**
    * @param {string} name
-   * @param {number|string|!Object} args Arguments that can be serialized.
+   * @param {...number|string|!Object} args Arguments that can be serialized.
    */
   postMessage(name, ...args) {
     this.debug(`main>>> postMessage ${name}`, args);
@@ -284,7 +284,7 @@ export class Background extends Base {
 
   /**
    * @param {string} syscall
-   * @param {!Array<*>} args
+   * @param {...!Array<*>} args
    */
   async onMessage_syscall(syscall, ...args) {
     const method = `handle_${syscall}`;

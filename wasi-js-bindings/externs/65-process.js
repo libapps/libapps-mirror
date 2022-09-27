@@ -28,13 +28,13 @@ class Process {
     this.instance_ = null;
   }
 
-  /** @param {*} args */
+  /** @param {...*} args */
   debug(...args) {}
 
-  /** @param {*} args */
+  /** @param {...*} args */
   logGroup(...args) {}
 
-  /** @param {*} args */
+  /** @param {...*} args */
   logError(...args) {}
 
   /**

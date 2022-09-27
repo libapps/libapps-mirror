@@ -58,7 +58,7 @@ export class Base {
   /**
    * Log a debug message.
    *
-   * @param {*} args The message to log.
+   * @param {...*} args The message to log.
    */
   debug(...args) {
     if (!this.enableDebug_) {
@@ -71,7 +71,7 @@ export class Base {
   /**
    * Send an error message.
    *
-   * @param {*} args The message to log.
+   * @param {...*} args The message to log.
    */
   postError(...args) {
     this.debug('worker>>> error', args);
@@ -82,7 +82,7 @@ export class Base {
    * Send a normal message.
    *
    * @param {string} name The message identifier.
-   * @param {*} args The message to log.
+   * @param {...*} args The message to log.
    */
   postMessage(name, ...args) {
     this.debug(`worker>>> postMessage ${name}`, args);
@@ -127,7 +127,7 @@ export class Base {
    * @param {!Array<string>} argv The program's command line opts.
    * @param {!Object<string, string>} environ The program's environment.
    * @param {!SharedArrayBuffer} sab The shared array buffer memory.
-   * @param {*} handlers
+   * @param {...*} handlers
    */
   async onMessage_run(executable, argv, environ, sab, handlers) {
     const proc = this.newProcess(executable, argv, environ, sab, handlers);

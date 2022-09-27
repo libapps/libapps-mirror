@@ -63,7 +63,7 @@ export class Base {
   /**
    * Log a debug message.
    *
-   * @param {*} args The message to log.
+   * @param {...*} args The message to log.
    */
   debug(...args) {
     if (!this.enableDebug_) {
@@ -76,7 +76,7 @@ export class Base {
   /**
    * Start a group of log messages.
    *
-   * @param {*} args The header message to log.
+   * @param {...*} args The header message to log.
    */
   logGroup(...args) {
     this.process_.logGroup(...args);
@@ -85,7 +85,7 @@ export class Base {
   /**
    * Log an error message.
    *
-   * @param {*} args The message to log.
+   * @param {...*} args The message to log.
    */
   logError(...args) {
     this.process_.logError(...args);
@@ -145,7 +145,7 @@ export class Base {
 
   /**
    * @param {!Function} func
-   * @param {*} args
+   * @param {...*} args
    * @return {*}
    */
   unhandledExceptionWrapper_(func, ...args) {
