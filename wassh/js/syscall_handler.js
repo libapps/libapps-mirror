@@ -419,6 +419,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
             // If it's a regular file, return right away.
             events.push(eventBase);
           } else if (handle.filetype === WASI.filetype.SOCKET_STREAM ||
+                     handle.filetype === WASI.filetype.SOCKET_DGRAM ||
                      handle.filetype === WASI.filetype.CHARACTER_DEVICE) {
             // If it's a socket, see if any data is available.
             if (subscription.tag === WASI.eventtype.FD_READ) {
@@ -673,7 +674,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     // to cleanup the OpenSSH patches first.
     if (address === '127.1.2.3') {
       const unixHandle = new Sockets.UnixSocket(
-          handle.domain, handle.type, handle.protocol,
+          handle.domain, handle.filetype, handle.protocol,
           this.unixSocketsOpen_);
       unixHandle.receiveListener_ = handle.receiveListener_;
       handle.close();
