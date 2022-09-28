@@ -114,7 +114,8 @@ export function openOptionsPage(page = '') {
  * Trigger the flow for sending feedback.
  */
 export function sendFeedback() {
-  lib.f.openWindow('https://goo.gl/vb94JY');
+  const manifest = getManifest();
+  lib.f.openWindow(`https://hterm.org/x/newbug?labels=ver-${manifest.version}`);
 }
 
 /**
