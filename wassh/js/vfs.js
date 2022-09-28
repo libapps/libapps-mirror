@@ -555,11 +555,18 @@ class PathMap extends Map {
 class FdMap extends Map {
   constructor() {
     super();
+    // This is what WASI sets FD_SETSIZE to, and OpenSSH relies on select(), so
+    // keep fds within this range for now.  It means we can never have more than
+    // this many open fds at once, but that *shouldn't* be a problem.
+    this.max_ = 1024;
     this.next_ = 0;
   }
 
   open(handle) {
     const fd = this.next();
+    if (fd < 0) {
+      return fd;
+    }
     this.set(fd, handle);
     return fd;
   }
@@ -594,11 +601,31 @@ class FdMap extends Map {
     return true;
   }
 
+  /**
+   * Find a free file descriptor in the table.
+   *
+   * @return {number} The next free file descriptor.
+   */
   next() {
+    // Whether we hit the max fd and looped around to the start.  We do this
+    // once, but if we loop a second time, give up.  We don't want to get stuck
+    // here eating cpu forever if the file descriptor table actually fills up.
+    let looped = false;
     while (1) {
       const fd = this.next_++;
       if (!this.has(fd)) {
-        return fd;
+        // We finally found a free entry.  Make sure it's within range.
+        if (fd < this.max_) {
+          return fd;
+        } else {
+          // We hit the max, so try to loop (once).
+          if (looped) {
+            return -1;
+          } else {
+            looped = true;
+            this.next_ = 0;
+          }
+        }
       }
     }
   }
@@ -765,7 +792,12 @@ export class VFS {
       return handle;
     }
     const fd = this.openHandle(handle);
-    return {fd};
+    if (fd < 0) {
+      await handle.close();
+      return WASI.errno.EMFILE;
+    } else {
+      return {fd};
+    }
   }
 
   /**

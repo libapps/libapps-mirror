@@ -496,7 +496,12 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     // NB: The accept code already initialized the socket.
 
     const newSocket = this.vfs.openHandle(newHandle);
-    return {socket: newSocket};
+    if (newSocket < 0) {
+      await newHandle.close();
+      return WASI.errno.EMFILE;
+    } else {
+      return {socket: newSocket};
+    }
   }
 
   /**
@@ -636,7 +641,12 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     }
 
     const socket = this.vfs.openHandle(handle);
-    return {socket};
+    if (socket < 0) {
+      await handle.close();
+      return WASI.errno.EMFILE;
+    } else {
+      return {socket};
+    }
   }
 
   /**
