@@ -6,9 +6,9 @@
  * @fileoverview unit tests for terminal_common.js
  */
 
-import {DEFAULT_BACKGROUND_COLOR, DEFAULT_FONT_SIZE, SUPPORTED_FONT_FAMILIES,
-  SUPPORTED_FONT_SIZES, delayedScheduler, definePrefs, fontFamilyToCSS,
-  normalizePrefsInPlace, sleep} from './terminal_common.js';
+import {DEFAULT_BACKGROUND_COLOR, SUPPORTED_FONT_FAMILIES, delayedScheduler,
+  definePrefs, fontFamilyToCSS, normalizeCSSFontFamily, normalizePrefsInPlace,
+  sleep} from './terminal_common.js';
 
 const FONT_FAMILIES = Array.from(SUPPORTED_FONT_FAMILIES.keys());
 
@@ -19,28 +19,28 @@ describe('terminal_common_tests.js', () => {
     this.preferenceManager.definePreference('font-family', 'invalid');
   });
 
+  it('fontFamilyToCSS', function() {
+    assert.equal(fontFamilyToCSS(FONT_FAMILIES[0]),
+        `'Noto Sans Mono', 'Powerline For Noto Sans Mono'`);
+    assert.equal(fontFamilyToCSS(FONT_FAMILIES[1]),
+        `'Cousine', 'Powerline For Cousine', 'Noto Sans Mono'`);
+  });
+
+  it('normalizeCSSFontFamily', function() {
+    assert.equal(normalizeCSSFontFamily('invalid'), FONT_FAMILIES[0]);
+    assert.equal(normalizeCSSFontFamily(FONT_FAMILIES[1]), FONT_FAMILIES[1]);
+    assert.equal(normalizeCSSFontFamily(
+        `invalid, ${FONT_FAMILIES[1]}, ${FONT_FAMILIES[0]}`),
+        FONT_FAMILIES[1]);
+  });
+
   it('normalizePrefsInPlace', function() {
     const assertNormalizationResult = (pref, before, after) => {
-      this.preferenceManager.set(pref, before);
       definePrefs(this.preferenceManager);
+      this.preferenceManager.set(pref, before);
       normalizePrefsInPlace(this.preferenceManager);
       assert.equal(this.preferenceManager.get(pref), after);
     };
-
-    assertNormalizationResult('font-family', 'invalid', fontFamilyToCSS(
-        FONT_FAMILIES[0]));
-    assertNormalizationResult('font-family', FONT_FAMILIES[1],
-        fontFamilyToCSS(FONT_FAMILIES[1]));
-    assertNormalizationResult('font-family', fontFamilyToCSS(FONT_FAMILIES[1]),
-        fontFamilyToCSS(FONT_FAMILIES[1]));
-    // Select first valid font if it is a list
-    assertNormalizationResult('font-family',
-        `invalid, ${FONT_FAMILIES[1]}, ${FONT_FAMILIES[0]}`,
-        fontFamilyToCSS(FONT_FAMILIES[1]));
-
-    assertNormalizationResult('font-size', 1000, DEFAULT_FONT_SIZE);
-    assertNormalizationResult('font-size', SUPPORTED_FONT_SIZES[0],
-        SUPPORTED_FONT_SIZES[0]);
 
     assertNormalizationResult(
         'background-color', 'invalid', DEFAULT_BACKGROUND_COLOR);

@@ -145,14 +145,6 @@ export function definePrefs(prefs) {
  * @param {!lib.PreferenceManager} prefs The preference manager.
  */
 export function normalizePrefsInPlace(prefs) {
-
-  prefs.set('font-family', fontFamilyToCSS(normalizeCSSFontFamily(
-      /** @type {string} */(prefs.get('font-family')))));
-
-  if (!SUPPORTED_FONT_SIZES.includes(prefs.get('font-size'))) {
-    prefs.set('font-size', DEFAULT_FONT_SIZE);
-  }
-
   // Remove alpha from background-color.
   const backgroundColor = lib.colors.normalizeCSS(
       /** @type {string} */(prefs.get('background-color')));
