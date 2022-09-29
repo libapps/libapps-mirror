@@ -8,6 +8,7 @@
  */
 
 import * as WASI from '../../wasi-js-bindings/js/wasi.js';
+import * as Constants from './constants.js';
 import * as VFS from './vfs.js';
 
 const SOL_SOCKET = 0x7fffffff;
@@ -228,7 +229,17 @@ export class ChromeTcpSocket extends Socket {
     }
 
     const result = await new Promise((resolve) => {
-      chrome.sockets.tcp.connect(this.socketId_, address, port, resolve);
+      let addrType;
+      switch (this.domain) {
+        case Constants.AF_INET:
+          addrType = 'ipv4';
+          break;
+        case Constants.AF_INET6:
+          addrType = 'ipv6';
+          break;
+      }
+      chrome.sockets.tcp.connect(
+          this.socketId_, address, port, addrType, resolve);
     });
 
     switch (result) {

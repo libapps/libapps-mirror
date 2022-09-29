@@ -17,12 +17,12 @@ import libdot
 
 # The version we currently run.  Pinned to make sure everyone gets consistent
 # behavior all the time.
-VERSION = "20201102"
+VERSION = "v20201102"
 
 # Full path to Google's closure compiler.
 URI = (
     "https://repo1.maven.org/maven2/com/google/javascript/closure-compiler/"
-    f"v{VERSION}/closure-compiler-v{VERSION}.jar"
+    f"{VERSION}/closure-compiler-{VERSION}.jar"
 )
 
 
@@ -35,7 +35,7 @@ EXTERNS_DIR = libdot.DIR / "externs"
 
 # The version of externs that we pull in from closure.  We normally pin to the
 # closure version for stability, but this can be updated independently.
-EXTERNS_VERSION = VERSION
+EXTERNS_VERSION = "f0a7084a6791c339cfaccc5c655b175da6545084"
 
 # The version of Chrome externs that we pull from Chromium directly.
 CHROME_EXTERNS_VERSION = "30ea2619cf7e9d4338d975cdc55d159d34f085ed"
@@ -53,7 +53,7 @@ def update_closure_externs():
     """Update our local cache of externs."""
     URI_TEMPLATE = (
         "https://github.com/google/closure-compiler/raw/"
-        f"v{EXTERNS_VERSION}/contrib/externs/%(name)s.js"
+        f"{EXTERNS_VERSION}/contrib/externs/%(name)s.js"
     )
 
     # NB: Order here matters when modules are subsets of others.  For example,
