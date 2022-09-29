@@ -16,9 +16,11 @@ const SO_REUSEADDR = 2;
 const SO_ERROR = 4;
 const SO_KEEPALIVE = 9;
 const IPPROTO_IP = 0;
+const IPPROTO_IPV6 = 41;
 const IP_TOS = 1;
 const IPPROTO_TCP = 6;
 const TCP_NODELAY = 1;
+const IPV6_TCLASS = 67;
 
 /**
  * Base class for all socket types.
@@ -372,6 +374,17 @@ export class ChromeTcpSocket extends Socket {
         break;
       }
 
+      case IPPROTO_IPV6: {
+        switch (name) {
+          case IPV6_TCLASS: {
+            // TODO(vapier): Try and extend Chrome sockets API to support this.
+            console.warn(`Ignoring IPV6_TCLASS=${value}`);
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+
       case IPPROTO_TCP: {
         switch (name) {
           case TCP_NODELAY: {
@@ -704,6 +717,16 @@ export class RelaySocket extends Socket {
         break;
       }
 
+      case IPPROTO_IPV6: {
+        switch (name) {
+          case IPV6_TCLASS: {
+            console.warn(`Ignoring IPV6_TCLASS=${value}`);
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+
       case IPPROTO_TCP: {
         switch (name) {
           case TCP_NODELAY: {
@@ -900,6 +923,16 @@ export class RelaySocket extends Socket {
         switch (name) {
           case IP_TOS: {
             console.warn(`Ignoring IP_TOS=${value}`);
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+
+      case IPPROTO_IPV6: {
+        switch (name) {
+          case IPV6_TCLASS: {
+            console.warn(`Ignoring IPV6_TCLASS=${value}`);
             return WASI.errno.ESUCCESS;
           }
         }
