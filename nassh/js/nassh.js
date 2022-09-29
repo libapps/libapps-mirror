@@ -361,7 +361,7 @@ export function getManifest() {
   } else {
     return /** @type {!chrome.runtime.Manifest} */ ({
       'name': 'SSH',
-      'version': lib.f.getChromeMilestone(),
+      'version': lib.f.getChromeMilestone().toString(),
       'icons': {'192': '/images/dev/crostini-192.png'},
     });
   }

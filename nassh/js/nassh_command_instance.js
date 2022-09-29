@@ -57,7 +57,7 @@ export function CommandInstance({io, ...argv}) {
   this.relay_ = null;
 
   // Parsed extension manifest.
-  this.manifest_ = null;
+  this.manifest_ = getManifest();
 
   // WASM requires SABs, so if they aren't available, fallback to NaCl.
   // chrome-untrusted:// doesn't have access to any socket APIs yet, so
@@ -154,8 +154,6 @@ CommandInstance.prototype.run = function() {
   });
 
   this.prefs_.readStorage(() => {
-    this.manifest_ = getManifest();
-
     // Set default window title.
     this.io.print('\x1b]0;' + this.manifest_.name + ' ' +
                     this.manifest_.version + '\x07');
@@ -283,6 +281,29 @@ CommandInstance.prototype.run = function() {
  * @return {boolean}
  */
 CommandInstance.prototype.isDevVersion = function() {
+  // For Terminal, opt in R108 in dev/canary channel.  We don't have access to
+  // the channels, so time-delay it to prevent slipping into stable.  We go by
+  // the branch date in https://chromiumdash.appspot.com/schedule.
+  const version = parseInt(this.manifest_.version, 10);
+  if (version >= 108) {
+    const now = new Date();
+    switch (version) {
+      case 108:
+        return now < new Date(2022, 10, 13);
+      case 109:
+        return now < new Date(2022, 11, 10);
+      case 110:
+        return now < new Date(2022, 12, 15);
+      case 111:
+        return now < new Date(2023, 1, 26);
+      case 112:
+        return now < new Date(2023, 2, 23);
+    }
+    // Hopefully we'll have a better solution by R113.
+    return false;
+  }
+
+  // For the normal extension, check the manifest build type.
   return (!!this.manifest_.name.match(/\((dev|tot)\)/) ||
           this.manifest_.version_name === 'ToT');
 };
