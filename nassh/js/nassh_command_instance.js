@@ -188,21 +188,19 @@ CommandInstance.prototype.run = function() {
 
     this.io.println(localize(
         'WELCOME_FAQ',
-        [sgrText('https://goo.gl/muppJj', style)]));
+        [sgrText(osc8Link('https://goo.gl/muppJj'), style)]));
 
-    if (hterm.windowType != 'popup' && hterm.os != 'mac') {
+    if (hterm.windowType !== 'app' &&
+        hterm.windowType !== 'popup' &&
+        hterm.os !== 'mac') {
       this.io.println('');
       this.io.println(localize(
           'OPEN_AS_WINDOW_TIP',
-          [sgrText('https://goo.gl/muppJj', style)]));
-      this.io.println('');
+          [sgrText(osc8Link('https://goo.gl/muppJj'), style)]));
     }
 
     // Show some release highlights the first couple of runs with a new version.
     // We'll reset the counter when the release notes change.
-    this.io.println(localize(
-        'WELCOME_CHANGELOG',
-        [sgrText(osc8Link('/html/changelog.html'), style)]));
     const notes = lib.resource.getData('nassh/release/highlights');
     if (this.prefs_.getNumber('welcome/notes-version') != notes.length) {
       // They upgraded, so reset the counters.
@@ -213,10 +211,15 @@ CommandInstance.prototype.run = function() {
     const notesShowCount = this.prefs_.getNumber('welcome/show-count');
     if (notesShowCount < 10) {
       // For new runs, show the highlights directly.
+      this.io.println('');
       this.io.print(localize('WELCOME_RELEASE_HIGHLIGHTS',
                               [lib.resource.getData('nassh/release/lastver')]));
       this.io.println(notes.replace(/%/g, '\r\n \u00A4'));
       this.prefs_.set('welcome/show-count', notesShowCount + 1);
+
+      this.io.println(localize(
+          'WELCOME_CHANGELOG',
+          [sgrText(osc8Link('/html/changelog.html'), style)]));
     }
 
     // Display a random tip every time they launch to advertise features.
@@ -224,7 +227,6 @@ CommandInstance.prototype.run = function() {
     this.io.println('');
     this.io.println(localize('WELCOME_TIP_OF_DAY',
                               [num, localize(`TIP_${num}`)]));
-    this.io.println('');
 
     if (this.isDevVersion()) {
       // If we're a development version, show hterm details.
@@ -235,10 +237,13 @@ CommandInstance.prototype.run = function() {
           Math.round((new Date().getTime() - new Date(htermDate).getTime()) /
                      1000 / 60);
 
+      this.io.println('');
       this.io.println(`[dev] hterm v${htermVer} (git ${htermRev})`);
       this.io.println(`[dev] built on ${htermDate} ` +
                       `(${htermAgeMinutes} minutes ago)`);
     }
+
+    this.io.println('');
   };
 
   const onFileSystemFound = () => {
