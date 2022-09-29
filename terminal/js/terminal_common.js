@@ -8,20 +8,45 @@
 
 import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
 
-// The value of an entry is true if it is a web font from fonts.google.com,
-// otherwise it is a local font. Note that the UI shows the fonts in the same
-// order as the entries'.
-//
-// @type {!Map<string, boolean>}
-export const SUPPORTED_FONT_FAMILIES = new Map([
-  // The first font is the default font. It must be a local font.
-  ['Noto Sans Mono', false],
-  ['Cousine', false],
-  ['Roboto Mono', true],
-  ['Inconsolata', true],
-  ['Source Code Pro', true],
-]);
-export const DEFAULT_FONT_FAMILY = SUPPORTED_FONT_FAMILIES.keys().next().value;
+// Fonts which are installed in ChromeOS.
+/** @type {!Array<string>} */
+const LOCAL_FONTS = [
+  'Noto Sans Mono',
+  'Cousine',
+];
+// Minimal set of fonts used without xterm.js.  These fonts have additional
+// Powerline glyphs provided.
+/** @type {!Array<string>} */
+export const SUPPORTED_FONT_FAMILIES_MINIMAL = [
+  'Noto Sans Mono',
+  'Cousine',
+  'Roboto Mono',
+  'Inconsolata',
+  'Source Code Pro',
+];
+// Fonts available as web fonts from fonts.google.com.
+/** @type {!Array<string>} */
+export const SUPPORTED_FONT_FAMILIES = [
+  'Anonymous Pro',
+  'Courier Prime',
+  'Cousine',
+  'Cutive Mono',
+  'Fira Code',
+  'Fira Mono',
+  'IBM Plex Mono',
+  'Inconsolata',
+  'JetBrains Mono',
+  'Nanum Gothic Coding',
+  'Noto Sans Mono',
+  'PT Mono',
+  'Roboto Mono',
+  'Share Tech Mono',
+  'Source Code Pro',
+  'Space Mono',
+  'Ubuntu Mono',
+];
+// 'Noto Sans Mono' is the default local font.
+export const DEFAULT_FONT_FAMILY = 'Noto Sans Mono';
 export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
 export const SUPPORTED_LINE_HEIGHT_PADDINGS = [-2, -1.5, -1, -0.5, 0, 0.5, 1,
   1.5, 2, 3, 4, 5];
@@ -79,17 +104,42 @@ export const TMUX_PARAM_NAME = 'tmux';
 export const ORIGINAL_URL = new URL(document.location.href);
 
 /**
+ * Returns whether we are using xterm.js for emulator.
+ *
+ * @param {!lib.PreferenceManager} prefs The preference manager.
+ * @return {boolean}
+ */
+export function isXtermJs(prefs) {
+  return !!getOSInfo().alternative_emulator &&
+    prefs.get('terminal-emulator') === 'xterm.js';
+}
+
+/**
+ * Return supported fonts.
+ *
+ * @param {!lib.PreferenceManager} prefs The preference manager.
+ * @return {!Array<string>}
+ */
+export function getSupportedFontFamilies(prefs) {
+  if (isXtermJs(prefs)) {
+    return SUPPORTED_FONT_FAMILIES;
+  }
+  return SUPPORTED_FONT_FAMILIES_MINIMAL;
+}
+
+/**
  * Convert a font family to a CSS string.
  *
  * @param {string} fontFamily one of the font in SUPPORTED_FONT_FAMILIES.
  * @return {string}
  */
 export function fontFamilyToCSS(fontFamily) {
-  if (fontFamily === DEFAULT_FONT_FAMILY) {
-    return `'${fontFamily}', 'Powerline For ${fontFamily}'`;
-  }
-  return `'${fontFamily}', 'Powerline For ${fontFamily}', ` +
-      `'${DEFAULT_FONT_FAMILY}'`;
+  // TODO(joelhockey): Remove powerline fonts once migrated to xterm.js.
+  const powerline = SUPPORTED_FONT_FAMILIES_MINIMAL.includes(fontFamily) ?
+      `, 'Powerline For ${fontFamily}'` : '';
+  const fallback =
+      fontFamily === DEFAULT_FONT_FAMILY ? '' : `, '${DEFAULT_FONT_FAMILY}'`;
+  return `'${fontFamily}'${powerline}${fallback}`;
 }
 
 /**
@@ -103,7 +153,7 @@ export function normalizeCSSFontFamily(cssFontFamily) {
   for (let fontFamily of cssFontFamily.split(',')) {
     // The regex can never fail, so it is safe to just use the result.
     fontFamily = fontFamily.match(/^\s*['"]?(.*?)['"]?\s*$/)[1];
-    if (SUPPORTED_FONT_FAMILIES.has(fontFamily)) {
+    if (SUPPORTED_FONT_FAMILIES.includes(fontFamily)) {
       return fontFamily;
     }
   }
@@ -216,7 +266,7 @@ export class FontManager {
   async loadFont(cssFontFamily) {
     const fontFamily = normalizeCSSFontFamily(cssFontFamily);
 
-    if (!SUPPORTED_FONT_FAMILIES.get(fontFamily)) {
+    if (LOCAL_FONTS.includes(fontFamily)) {
       // Not a web font.
       return;
     }
@@ -319,6 +369,7 @@ async function prefetchOSInfo() {
   } else {
     // Set it to something approriate for the testing environment.
     OS_INFO = {
+      alternative_emulator: true,
       multi_profile: true,
     };
   }

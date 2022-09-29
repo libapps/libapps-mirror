@@ -6,32 +6,42 @@
  * @fileoverview unit tests for terminal_common.js
  */
 
-import {DEFAULT_BACKGROUND_COLOR, SUPPORTED_FONT_FAMILIES, delayedScheduler,
-  definePrefs, fontFamilyToCSS, normalizeCSSFontFamily, normalizePrefsInPlace,
-  sleep} from './terminal_common.js';
-
-const FONT_FAMILIES = Array.from(SUPPORTED_FONT_FAMILIES.keys());
+import {DEFAULT_BACKGROUND_COLOR, SUPPORTED_FONT_FAMILIES,
+  SUPPORTED_FONT_FAMILIES_MINIMAL, delayedScheduler, definePrefs,
+  fontFamilyToCSS, getSupportedFontFamilies, normalizeCSSFontFamily,
+  normalizePrefsInPlace, sleep} from './terminal_common.js';
 
 describe('terminal_common_tests.js', () => {
   beforeEach(function() {
     this.preferenceManager = new lib.PreferenceManager(
         new lib.Storage.Memory());
     this.preferenceManager.definePreference('font-family', 'invalid');
+    this.preferenceManager.definePreference('terminal-emulator', 'xterm.js');
+  });
+
+  it('getSupportedFontFamilies', function() {
+    this.preferenceManager.set('terminal-emulator', 'xterm.js');
+    assert.equal(
+        getSupportedFontFamilies(this.preferenceManager),
+        SUPPORTED_FONT_FAMILIES);
+    this.preferenceManager.set('terminal-emulator', 'hterm');
+    assert.equal(
+        getSupportedFontFamilies(this.preferenceManager),
+        SUPPORTED_FONT_FAMILIES_MINIMAL);
   });
 
   it('fontFamilyToCSS', function() {
-    assert.equal(fontFamilyToCSS(FONT_FAMILIES[0]),
+    assert.equal(fontFamilyToCSS('Noto Sans Mono'),
         `'Noto Sans Mono', 'Powerline For Noto Sans Mono'`);
-    assert.equal(fontFamilyToCSS(FONT_FAMILIES[1]),
-        `'Cousine', 'Powerline For Cousine', 'Noto Sans Mono'`);
+    assert.equal(fontFamilyToCSS('Anonymous Pro'),
+        `'Anonymous Pro', 'Noto Sans Mono'`);
   });
 
   it('normalizeCSSFontFamily', function() {
-    assert.equal(normalizeCSSFontFamily('invalid'), FONT_FAMILIES[0]);
-    assert.equal(normalizeCSSFontFamily(FONT_FAMILIES[1]), FONT_FAMILIES[1]);
+    assert.equal(normalizeCSSFontFamily('invalid'), 'Noto Sans Mono');
+    assert.equal(normalizeCSSFontFamily(`'Cousine'`), 'Cousine');
     assert.equal(normalizeCSSFontFamily(
-        `invalid, ${FONT_FAMILIES[1]}, ${FONT_FAMILIES[0]}`),
-        FONT_FAMILIES[1]);
+        `invalid, 'Roboto Mono', 'Cousine'`), 'Roboto Mono');
   });
 
   it('normalizePrefsInPlace', function() {

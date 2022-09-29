@@ -8,8 +8,8 @@
  * @suppress {moduleLoad}
  */
 import {html, LitElement} from './lit.js';
-import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS, fontManager}
-    from './terminal_common.js';
+import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS, fontManager,
+  getSupportedFontFamilies} from './terminal_common.js';
 import './terminal_dropdown.js';
 
 export class TerminalSettingsFonts extends LitElement {
@@ -35,18 +35,22 @@ export class TerminalSettingsFonts extends LitElement {
     super.connectedCallback();
 
     if (this.loadedFonts_.length === 0) {
-      for (const font of SUPPORTED_FONT_FAMILIES.keys()) {
+      for (const font of SUPPORTED_FONT_FAMILIES) {
         this.fontManager_.loadFont(font).then(() => {
           this.loadedFonts_.push(font);
           this.requestUpdate();
         });
       }
     }
+
+    window.preferenceManager.addObserver(
+      'terminal-emulator', () => this.requestUpdate());
   }
 
   /** @override */
   render() {
-    const options = Array.from(SUPPORTED_FONT_FAMILIES.keys()).map(
+    const fonts = getSupportedFontFamilies(window.preferenceManager);
+    const options = fonts.map(
         (font) => ({
           value: fontFamilyToCSS(font),
           label: font,

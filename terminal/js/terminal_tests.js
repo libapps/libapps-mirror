@@ -49,7 +49,9 @@ beforeEach(function() {
   document.body.appendChild(div);
   mockTerminalPrivateController = MockTerminalPrivate.start();
   mockTerminalPrivate = mockTerminalPrivateController.instance;
-  mockTerminalPrivate.prefs['crostini.terminal_settings'] = {};
+  mockTerminalPrivate.prefs['crostini.terminal_settings'] = {
+    '/hterm/profiles/default/terminal-emulator': 'hterm',
+  };
   mockTerminalPrivate.prefs['settings.accessibility'] = false;
 
   window.localStorage.clear();

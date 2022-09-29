@@ -14,11 +14,13 @@ describe('terminal_settings_fonts_tests.js', () => {
   beforeEach(async function() {
     window.preferenceManager =
       new lib.PreferenceManager(new lib.Storage.Memory());
-    window.preferenceManager.definePreference('font-family',
-        DEFAULT_FONT_FAMILY);
+    window.preferenceManager.definePreference(
+      'font-family', DEFAULT_FONT_FAMILY);
+    window.preferenceManager.definePreference(
+      'terminal-emulator', 'xterm.js');
 
     this.fontInfo = new Map();
-    for (const font of SUPPORTED_FONT_FAMILIES.keys()) {
+    for (const font of SUPPORTED_FONT_FAMILIES) {
       let resolve, reject;
       const promise = new Promise((resolve2, reject2) => {
         resolve = resolve2;
@@ -48,7 +50,7 @@ describe('terminal_settings_fonts_tests.js', () => {
   });
 
   it('enable-loaded-web-fonts', async function() {
-    assert.equal(this.dropdown.options.length, SUPPORTED_FONT_FAMILIES.size);
+    assert.equal(this.dropdown.options.length, SUPPORTED_FONT_FAMILIES.length);
 
     // We need double layers of async (instead of directly await on
     // |this.el.updateComplete|) so that the font promise handlers in
