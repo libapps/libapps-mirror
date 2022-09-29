@@ -31,7 +31,7 @@
     "accessibilityFeatures.read"
   ],
   "optional_permissions": [
-    "https://cloudtopmanagement-googleapis.corp.google.com/*",
+    "https://us-cloudtoplifecycle-googleapis.corp.google.com/*",
     "https://uberproxy-debug.corp.google.com/*"
   ],
   "sockets": {

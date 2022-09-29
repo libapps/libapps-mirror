@@ -32,7 +32,7 @@ let Metadata;
  * @const {string}
  */
 const CLOUDTOP_API_LIST_INSTANCES =
-    'https://cloudtopmanagement-googleapis.corp.google.com/v1/instances:list';
+    'https://us-cloudtoplifecycle-googleapis.corp.google.com/v1/instances:list';
 
 /**
  * API key for CLOUDTOP_API_LIST_INSTANCES.
@@ -64,7 +64,7 @@ const UBERPROXY_DEBUG = 'https://uberproxy-debug.corp.google.com/oncorp';
  * @const {string}
  */
 const CLOUDTOP_API_ORIGIN =
-    'https://cloudtopmanagement-googleapis.corp.google.com/*';
+    'https://us-cloudtoplifecycle-googleapis.corp.google.com/*';
 
 /**
  * Origin used to get permission for UBERPROXY_DEBUG.
@@ -556,7 +556,7 @@ GoogMetricsReporter.prototype.PERMISSIONS_PROMPT =
     'Cloudtop/workstation by sharing latency data with developers. Collected ' +
     'data will include the name of your host device. If yes, you will ' +
     'receive a prompt for additional permissions to ' +
-    'cloudtopmanagement-googleapis.corp.google.com and ' +
+    'us-cloudtoplifecycle-googleapis.corp.google.com and ' +
     'uberproxy-debug.corp.google.com';
 
 /**
