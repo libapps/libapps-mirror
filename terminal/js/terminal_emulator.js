@@ -415,6 +415,27 @@ export class XtermTerminal {
       // TODO: Make a11y work. Maybe we can just use hterm.AccessibilityReader.
       this.notificationCenter_ = new hterm.NotificationCenter(document.body);
 
+      // Block right-click context menu from popping up.
+      elem.addEventListener('contextmenu', (e) => e.preventDefault());
+
+      // Add a handler for pasting with the mouse.
+      elem.addEventListener('mousedown', async (e) => {
+        if (this.term.modes.mouseTrackingMode !== 'none') {
+          // xterm.js is in mouse mode and will handle the event.
+          return;
+        }
+        const MIDDLE = 1;
+        const RIGHT = 2;
+        if (e.button === MIDDLE || (e.button === RIGHT &&
+                this.prefs_.getBoolean('mouse-right-click-paste'))) {
+          // Paste.
+          if (navigator.clipboard && navigator.clipboard.readText) {
+            const text = await navigator.clipboard.readText();
+            this.term.paste(text);
+          }
+        }
+      });
+
       this.onTerminalReady();
     })();
   }

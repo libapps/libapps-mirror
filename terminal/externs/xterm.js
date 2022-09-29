@@ -42,6 +42,7 @@ class Terminal$$module$js$xterm {
         },
       },
     };
+    this.modes = {mouseTrackingMode: ''};
   }
 
   /**
@@ -91,6 +92,11 @@ class Terminal$$module$js$xterm {
    * @param {!Element} elem
    */
   open(elem) {}
+
+  /**
+   * @param {!string} data
+   */
+  paste(data) {}
 
   reset() {}
 
