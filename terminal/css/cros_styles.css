@@ -88,6 +88,9 @@ html:not(body) {
   --cros-button-background-color-primary-rgb: var(--cros-color-prominent-rgb);
   --cros-button-background-color-primary: var(--cros-color-prominent);
 
+  --cros-button-label-color-primary-rgb: 255, 255, 255;
+  --cros-button-label-color-primary: rgb(var(--cros-button-label-color-primary-rgb));
+
   --cros-button-active-shadow-color-ambient-primary-rgb: var(--google-blue-500-rgb);
   --cros-button-active-shadow-color-ambient-primary: rgba(var(--cros-button-active-shadow-color-ambient-primary-rgb), 0.15);
 
@@ -96,6 +99,9 @@ html:not(body) {
 
   --cros-button-background-color-primary-disabled-rgb: var(--google-grey-100-rgb);
   --cros-button-background-color-primary-disabled: var(--google-grey-100);
+
+  --cros-button-label-color-primary-disabled-rgb: var(--google-grey-600-rgb);
+  --cros-button-label-color-primary-disabled: var(--google-grey-600);
 
   --cros-button-label-color-secondary-rgb: var(--cros-color-prominent-rgb);
   --cros-button-label-color-secondary: var(--cros-color-prominent);
@@ -247,6 +253,9 @@ html:not(body) {
   --cros-highlight-color-hover-rgb: var(--cros-highlight-color-hover-dark-rgb);
   --cros-highlight-color-hover: var(--cros-highlight-color-hover-dark);
 
+  --cros-button-label-color-primary-rgb: var(--google-grey-900-rgb);
+  --cros-button-label-color-primary: var(--google-grey-900);
+
   --cros-button-active-shadow-color-ambient-primary-rgb: var(--google-blue-400-rgb);
   --cros-button-active-shadow-color-ambient-primary: rgba(var(--cros-button-active-shadow-color-ambient-primary-rgb), 0.15);
 
@@ -255,6 +264,9 @@ html:not(body) {
 
   --cros-button-background-color-primary-disabled-rgb: var(--google-grey-800-rgb);
   --cros-button-background-color-primary-disabled: var(--google-grey-800);
+
+  --cros-button-label-color-primary-disabled-rgb: var(--google-grey-500-rgb);
+  --cros-button-label-color-primary-disabled: var(--google-grey-500);
 
   --cros-button-stroke-color-secondary-rgb: var(--google-grey-700-rgb);
   --cros-button-stroke-color-secondary: var(--google-grey-700);
