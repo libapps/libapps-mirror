@@ -125,6 +125,11 @@ clear all of this when connecting.
 Control internal field trial settings.
 These are not currently documented as they aren't meant for normal users.
 
+## `--debug-xxx`
+
+Control internal debug settings.
+These are not currently documented as they aren't meant for normal users.
+
 
 [Relay Protocol]: relay-protocol.md
 [Section 6 of RFC4251]: https://tools.ietf.org/html/rfc4251#section-6

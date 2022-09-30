@@ -1233,7 +1233,9 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
     disp_hostname += ' (' + idn_hostname + ')';
   }
 
-  const argv = {};
+  const argv = {
+    debugTrace: options['--debug-trace-syscalls'],
+  };
   argv.terminalWidth = this.io.terminal_.screenSize.width;
   argv.terminalHeight = this.io.terminal_.screenSize.height;
   argv.useJsSocket = !!this.relay_;
@@ -1523,15 +1525,17 @@ CommandInstance.prototype.dispatchMessage_ = function(desc, handlers, msg) {
 /**
  * @param {!Array<string>} argv SSH command line arguments.
  * @param {!Object<string, string>} environ SSH environment variables.
+ * @param {!Object=} options
  * @return {!Promise<void>}
  */
 CommandInstance.prototype.initWasmPlugin_ =
-    async function(argv, environ) {
+    async function(argv, environ, {trace = false} = {}) {
   this.plugin_ = new WasmPlugin({
     executable: `../../plugin/${this.sshClientVersion_}/ssh.wasm`,
     argv: argv,
     environ: environ,
     terminal: this.io.terminal_,
+    trace: trace,
     authAgent: this.authAgent_,
     authAgentAppID: this.authAgentAppID_,
     relay: this.relay_,
@@ -1581,7 +1585,9 @@ CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
       onComplete();
     });
   } else {
-    await this.initWasmPlugin_(argv.arguments, argv.environment);
+    await this.initWasmPlugin_(argv.arguments, argv.environment, {
+      trace: argv.debugTrace,
+    });
     this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
     this.plugin_.run().then((code) => {
       this.onPluginExit(code);
