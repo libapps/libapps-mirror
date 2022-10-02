@@ -13,11 +13,11 @@ import {
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.addEventListener('DOMContentLoaded', (event) => {
-  lib.init().then(() => {
-    // Save a handle for debugging.
-    window.popup_ = new popup();
-  });
+window.addEventListener('DOMContentLoaded', async (event) => {
+  await hterm.initPromise;
+
+  // Save a handle for debugging.
+  window.popup_ = new popup();
 });
 
 /**

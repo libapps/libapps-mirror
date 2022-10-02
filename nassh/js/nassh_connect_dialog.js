@@ -86,7 +86,7 @@ function ConnectDialog(messagePort) {
  *
  * @param {!Event} e
  */
-ConnectDialog.onWindowMessage = function(e) {
+ConnectDialog.onWindowMessage = async function(e) {
   if (e.data.name != 'ipc-init') {
     console.warn('Unknown message from terminal:', e.data);
     return;
@@ -94,11 +94,9 @@ ConnectDialog.onWindowMessage = function(e) {
 
   window.removeEventListener('message', ConnectDialog.onWindowMessage);
 
-  setupForWebApp();
-  lib.init().then(() => {
-    window.dialog_ = new ConnectDialog(e.data.argv[0].messagePort);
-    loadWebFonts(document);
-  });
+  await setupForWebApp();
+  window.dialog_ = new ConnectDialog(e.data.argv[0].messagePort);
+  loadWebFonts(document);
 };
 
 // Register the message listener.

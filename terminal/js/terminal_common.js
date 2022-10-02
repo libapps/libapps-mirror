@@ -387,8 +387,6 @@ async function prefetchOSInfo() {
  * @return {!Promise<void>}
  */
 export async function init() {
-  await lib.init();
-
   // See https://crbug.com/1364172#c6 for why we are overriding it. Note that
   // this is safe because Terminal SWA sets a restricted
   // CrossOriginOpenerPolicy.

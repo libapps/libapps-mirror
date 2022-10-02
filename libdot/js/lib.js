@@ -7,57 +7,6 @@
 const lib = {};
 
 /**
- * List of functions that need to be invoked during library initialization.
- *
- * Each element in the initCallbacks_ array is itself a two-element array.
- * Element 0 is a short string describing the owner of the init routine, useful
- * for debugging.  Element 1 is the callback function.
- */
-lib.initCallbacks_ = [];
-
-/**
- * Register an initialization function.
- *
- * The initialization functions are invoked in registration order when
- * lib.init() is invoked.  Each function will receive a single parameter, which
- * is a function to be invoked when it completes its part of the initialization.
- *
- * @param {string} name A short descriptive name of the init routine useful for
- *     debugging.
- * @param {function()} callback The initialization function to register.
- */
-lib.registerInit = function(name, callback) {
-  lib.initCallbacks_.push([name, callback]);
-};
-
-/**
- * Initialize the library.
- *
- * This will ensure that all registered runtime dependencies are met, and
- * invoke any registered initialization functions.
- *
- * Initialization is asynchronous.  The library is not ready for use until
- * the returned promise resolves.
- *
- * @param {function(*)=} logFunction An optional function to send initialization
- *     related log messages to.
- * @return {!Promise<void>} Promise that resolves once all inits finish.
- */
-lib.init = async function(logFunction = undefined) {
-  const ary = lib.initCallbacks_;
-  while (ary.length) {
-    const [name, init] = ary.shift();
-    if (logFunction) {
-      logFunction(`init: ${name}`);
-    }
-    const ret = init();
-    if (ret && typeof ret.then === 'function') {
-      await ret;
-    }
-  }
-};
-
-/**
  * Verify |condition| is truthy else throw Error.
  *
  * This function is primarily for satisfying the JS compiler and should be

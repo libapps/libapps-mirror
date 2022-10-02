@@ -45,7 +45,8 @@ export function setupForWebApp() {
     return loadMessages();
   }
 
-  return Promise.resolve();
+  // This tracks the message manager setup like above.
+  return hterm.initPromise;
 }
 
 /**

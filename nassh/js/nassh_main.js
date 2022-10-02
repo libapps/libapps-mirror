@@ -156,6 +156,6 @@ window.addEventListener('DOMContentLoaded', async (event) => {
   };
 
   disableTabDiscarding();
-  setupForWebApp();
-  lib.init(console.log.bind(console)).then(execNaSSH);
+  await setupForWebApp();
+  execNaSSH();
 });

@@ -367,7 +367,6 @@ terminal.Command.prototype.exit = function(code) {
 async function runNassh(term, ssh, tmuxControllerDriver) {
   // Load nassh modules and ensure gnubby extension lookup is complete.
   const {CommandInstance} = await terminalImport('./nassh_command_instance.js');
-  await lib.init();
 
   const profileId = ssh.hash.substr(1);
 

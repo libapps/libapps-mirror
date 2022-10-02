@@ -25,7 +25,7 @@ function onLaunched() {
 }
 
 // We have to turn on listeners here so we can handle messages when first
-// launched (but before lib.registerInit finishes).
+// launched.
 externalAddListeners();
 
 // Used to watch for launch events that occur before we're ready to handle
@@ -40,7 +40,7 @@ if (browserAction) {
  * The window.app_ property will contain the new app instance so it can be
  * reached from the background page's JS console.
  */
-lib.init(console.log.bind(console)).then(() => {
+function init() {
   initApi();
 
   const storage = getSyncStorage();
@@ -76,7 +76,7 @@ lib.init(console.log.bind(console)).then(() => {
 
   // Help with live debugging.
   window.app_ = app;
-});
+}
 
 /**
  * Sync prefs between versions automatically.
@@ -140,3 +140,6 @@ chrome.runtime.onInstalled.addListener((details) => {
     }
   });
 });
+
+// Initialize the page!
+hterm.initPromise.then(init);

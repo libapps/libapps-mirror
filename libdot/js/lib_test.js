@@ -26,8 +26,7 @@ window.onerror = function(...args) {
 };
 
 /** Run the test framework once everything is finished. */
-window.onload = async function() {
-  await lib.init();
+window.onload = function() {
   mocha.run();
 };
 

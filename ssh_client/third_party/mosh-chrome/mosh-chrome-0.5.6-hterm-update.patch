@@ -20,7 +20,7 @@ Tweak hterm APIs to match the latest release and to share code.
 -  lib.init(execMosh, console.log.bind(console));
 +  const params = new URLSearchParams(document.location.search);
 +  window.args = JSON.parse(atob(params.get('args')));
-+  lib.init(console.log.bind(console)).then(execMosh);
++  execMosh();
  };
  
  function execMosh() {

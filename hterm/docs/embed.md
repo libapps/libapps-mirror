@@ -72,27 +72,7 @@ This should be one of:
 *   `lib.Storage.Chrome(chrome.storage.local)`: If you are a Chrome extension
     and want local storage (i.e. settings are per-device).
 
-### Framework initialization
-
-Before using hterm, you'll need to initialize the underlying libdot framework.
-You do this by calling `lib.init()` and waiting it for it to finish before
-calling your own initialization function.
-
-```js
-function setupHterm() {
-  ... your hterm initialization logic ...
-}
-
-// This will be whatever normal entry/initialization point your project uses.
-window.onload = async function() {
-  await lib.init();
-  setupHterm();
-};
-```
-
 ### Terminal initialization
-
-All of the logic below lives within the `setupHterm` callback.
 
 Create an instance of `hterm.Terminal`:
 

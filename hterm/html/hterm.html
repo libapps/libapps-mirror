@@ -156,8 +156,7 @@ function setupHterm() {
   window.term_ = term;
 }
 
-window.onload = async function() {
-  await lib.init();
+window.onload = function() {
   setupHterm();
 };
 </script>

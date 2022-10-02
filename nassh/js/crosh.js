@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
 
   await setupForWebApp();
 
-  lib.init().then(Crosh.init);
+  Crosh.init();
 });
 
 /**

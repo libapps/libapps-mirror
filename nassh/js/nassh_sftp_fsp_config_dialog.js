@@ -102,20 +102,18 @@ ConfigDialog.prototype.refresh_ = function() {
  * Event when the window finishes loading.
  */
 window.addEventListener('DOMContentLoaded', (event) => {
-  lib.init().then(() => {
-    const params = new URLSearchParams(document.location.search);
-    const profileId = lib.notNull(params.get('profile-id'));
-    document.title = `SFTP: ${profileId}`;
-    runtimeSendMessage({
-      command: 'getMountInfo', fileSystemId: profileId,
-    })
-      .then(({error, message, info}) => {
-        if (error) {
-          console.error(message);
-          window.close();
-        } else {
-          window.dialog_ = new ConfigDialog(profileId, info);
-        }
-      });
-  });
+  const params = new URLSearchParams(document.location.search);
+  const profileId = lib.notNull(params.get('profile-id'));
+  document.title = `SFTP: ${profileId}`;
+  runtimeSendMessage({
+    command: 'getMountInfo', fileSystemId: profileId,
+  })
+    .then(({error, message, info}) => {
+      if (error) {
+        console.error(message);
+        window.close();
+      } else {
+        window.dialog_ = new ConfigDialog(profileId, info);
+      }
+    });
 });

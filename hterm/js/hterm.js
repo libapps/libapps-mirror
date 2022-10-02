@@ -91,11 +91,11 @@ hterm.init_ = async function() {
 };
 
 /**
- * Allow people to track when init has finished.
+ * Allow people to track when init has finished.  If you're only using the
+ * hterm.Terminal API, you can ignore this.  But if you rely on other APIs
+ * (like hterm.msg or hterm.messageManager), you should wait on this first.
  */
 hterm.initPromise = hterm.init_();
-
-lib.registerInit('hterm', () => hterm.initPromise);
 
 /**
  * Sanitizes the given HTML source into a TrustedHTML, or a string if the

@@ -8,8 +8,6 @@ import * as WasshSyscallEntry from '../js/syscall_entry.js';
 import * as WasshSyscallHandler from '../js/syscall_handler.js';
 
 window.onload = async function() {
-  await lib.init();
-
   const term = new hterm.Terminal();
   term.onTerminalReady = run;
   term.setAutoCarriageReturn(true);
