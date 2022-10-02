@@ -16,7 +16,9 @@ import {setDefaultBackend} from './nassh_buffer.js';
 import {
   syncFilesystemFromDomToIndexeddb, syncFilesystemFromIndexeddbToDom,
 } from './nassh_fs.js';
-import {gcseRefreshCert, getGnubbyExtension} from './nassh_google.js';
+import {
+  gcseRefreshCert, getGnubbyExtension, probeExtensions,
+} from './nassh_google.js';
 import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
 import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
 import {
@@ -136,9 +138,12 @@ const EXIT_INTERNAL_ERROR = -1;
  *
  * Instance run method invoked by the CommandInstance ctor.
  */
-CommandInstance.prototype.run = function() {
+CommandInstance.prototype.run = async function() {
   // Useful for console debugging.
   window.nassh_ = this;
+
+  // Kick off gnubby extension probing in the background.
+  const probePromise = probeExtensions();
 
   // In case something goes horribly wrong, display an error to the user so it's
   // easier for them to copy & paste when reporting issues.
@@ -153,13 +158,15 @@ CommandInstance.prototype.run = function() {
     }
   });
 
-  this.prefs_.readStorage(() => {
+  this.prefs_.readStorage(async () => {
     // Set default window title.
     this.io.print('\x1b]0;' + this.manifest_.name + ' ' +
                     this.manifest_.version + '\x07');
 
     showWelcome();
 
+    // Wait for the probing results before we connect to a remote.
+    await probePromise;
     onFileSystemFound();
 
     this.localPrefs_.readStorage(() => {

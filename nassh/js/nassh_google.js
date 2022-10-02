@@ -326,7 +326,7 @@ export async function gcseRefreshCert(io) {
  * This could take time to resolve, so do it as part of start up.
  * It resolves using promises in the background, so this is OK.
  */
-lib.registerInit('goog init', async () => {
+export async function probeExtensions() {
   const ske = await findSkeExtension();
   if (ske !== true) {
     await Promise.all([
@@ -334,4 +334,4 @@ lib.registerInit('goog init', async () => {
       findGcseExtension(),
     ]);
   }
-});
+}
