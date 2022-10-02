@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "תיבת דו-שיח לחיבור"
 	},
-	"console_crosh_options_notice": {
-		"message": "ידעת שיש דף אפשרויות ייעודי?\nכבר אין צורך לשנות את 'term_‎' באופן ישיר!\nאפשר להקיש על $1 כדי לפתוח אותו, או ללחוץ על:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "ידעת שיש דף אפשרויות ייעודי?\nכבר אין צורך לערוך את 'term_‎' באופן ישיר!\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Verbindingdialoog"
 	},
-	"console_crosh_options_notice": {
-		"message": "Het jy geweet dat daar 'n \"toegewyde opsies\"-bladsy is?\nNie meer nodig om \"term_\" direk te wysig nie!\nDruk $1 om dit oop te maak, of klik:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Het jy geweet dat daar 'n \"toegewyde opsies\"-bladsy is?\nNie meer nodig om \"term_\" direk te verander nie!\n$1"
-	},
 	"delete_button_label": {
 		"message": "Vee uit"
 	},

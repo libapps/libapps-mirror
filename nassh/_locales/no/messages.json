@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Tilkoblingsdialogboks"
 	},
-	"console_crosh_options_notice": {
-		"message": "Visste du at det finnes en egen side for alternativer?\nDet betyr at du ikke trenger å endre «term_» direkte lenger.\nTrykk på $1 for å åpne den, eller klikk på\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Visste du at det finnes en egen alternativside?\nDet betyr at du ikke trenger å endre «term_» direkte lenger.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

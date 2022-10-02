@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Tengingargluggi"
 	},
-	"console_crosh_options_notice": {
-		"message": "Vissirðu að það er til sérstök valkostasíða?\nNú þarftu ekki lengur að breyta „term_“ beint!\nÝttu á $1 til að opna hana eða smelltu á:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Vissirðu að það er til sérstök valkostasíða?\nEkki þarf lengur að breyta „term_“ beint!\n$1"
-	},
 	"delete_button_label": {
 		"message": "Eyða"
 	},

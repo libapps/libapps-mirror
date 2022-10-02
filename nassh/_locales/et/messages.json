@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Ühenduse dialoog"
 	},
-	"console_crosh_options_notice": {
-		"message": "Kas teadsite, et olemas on ka spetsiaalne valikute leht?\nEnam ei pea reeglit „term_” otse muutma!\nSelle avamiseks vajutage klahvikombinatsiooni $1 või klõpsake URL-il\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Kas teadsite, et olemas on ka spetsiaalne valikute leht?\nEnam ei pea reeglit „term_” vahetult muutma!\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

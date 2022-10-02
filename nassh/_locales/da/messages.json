@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Dialogboks for forbindelse"
 	},
-	"console_crosh_options_notice": {
-		"message": "Vidste du, at der er en dedikeret side med indstillinger?\nDu behøver ikke længere at ændre \"term_\" direkte.\nTryk på $1 for at åben den, eller klik på:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Vidste du, at der er en dedikeret side med indstillinger?\nDu behøver ikke længere at ændre \"term_\" direkte.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DELETE]"
 	},

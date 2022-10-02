@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "連線對話方塊"
 	},
-	"console_crosh_options_notice": {
-		"message": "你知道嗎？我們提供了專用的選項頁面。\n因此，你再也不需要直接修改「term_」！\n按下 $1 或點選以下連結即可開啟：\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "你知道嗎？我們提供了專用的選項頁面。\n因此，你再也不需要直接修改「term_」！\n$1"
-	},
 	"del_keycap": {
 		"message": "[Del]"
 	},

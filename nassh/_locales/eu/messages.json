@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Konexioaren leihoa"
 	},
-	"console_crosh_options_notice": {
-		"message": "Ba al zenekien berariazko orri bat dagoela aukeretarako?\nAurrerantzean, ez duzu \"term_\" zuzenean aldatu beharko.\nHura irekitzeko, sakatu $1 edo egin klik $2 helbidean."
-	},
-	"console_nassh_options_notice": {
-		"message": "Ba al zenekien berariazko orri bat dagoela aukeretarako?\nAurrerantzean, ez duzu \"term_\" zuzenean aldatu beharko.\n$1"
-	},
 	"del_keycap": {
 		"message": "[EZAB]"
 	},

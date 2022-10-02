@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "ກ່ອງໂຕ້ຕອບການເຊື່ອມຕໍ່"
 	},
-	"console_crosh_options_notice": {
-		"message": "ທ່ານຮູ້ບໍ່ວ່າມີໜ້າຕົວເລືອກສະເພາະ?\nບໍ່ຈຳເປັນຕ້ອງປັບປ່ຽນ 'term_' ໂດຍກົງອີກຕໍ່ໄປ!\nກົດ $1 ເພື່ອເປີດມັນ ຫຼື ຄລິກ:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "ທ່ານຮູ້ບໍ່ວ່າມີໜ້າຕົວເລືອກສະເພາະ?\nບໍ່ຈຳເປັນຕ້ອງປັບປ່ຽນ 'term_' ໂດຍກົງອີກຕໍ່ໄປ!\n$1"
-	},
 	"del_keycap": {
 		"message": "[ລຶບ]"
 	},

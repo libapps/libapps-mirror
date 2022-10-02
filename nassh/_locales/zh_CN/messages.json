@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "连接对话框"
 	},
-	"console_crosh_options_notice": {
-		"message": "您知道吗？我们提供了一个专用的选项页面。\n您再也不必直接修改“term_”了！\n请按 $1 或点击此处的链接打开此页面：\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "您知道吗？我们提供了一个专用的选项页面。\n您再也不必直接修改“term_”了！\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

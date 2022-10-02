@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Dialoogvenster Verbinding"
 	},
-	"console_crosh_options_notice": {
-		"message": "Wist je dat er een speciale optiepagina is?\nJe hoeft 'term_' niet meer rechtstreeks te wijzigen.\nDruk op $1 om de pagina te openen of klik op:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Wist je dat er een speciale optiepagina is?\nJe hoeft 'term_' niet meer rechtstreeks te wijzigen.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

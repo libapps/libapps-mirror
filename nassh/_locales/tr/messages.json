@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Bağlantı İletişim Kutusu"
 	},
-	"console_crosh_options_notice": {
-		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık doğrudan \"term_\" öğesini değiştirmenize gerek yok!\nAçmak için $1 tuşuna basın veya şu adresi tıklayın:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Seçenekler için özel bir sayfa olduğunu biliyor muydunuz?\nArtık \"term_\" ifadesini doğrudan değiştirmeniz gerekmiyor.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

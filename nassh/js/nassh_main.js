@@ -157,9 +157,6 @@ window.addEventListener('DOMContentLoaded', async (event) => {
 
     // Useful for console debugging.
     window.term_ = terminal;
-    console.log(localize(
-        'CONSOLE_NASSH_OPTIONS_NOTICE',
-        [lib.f.getURL('/html/nassh_preferences_editor.html')]));
   };
 
   disableTabDiscarding();

@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Dialog de conectare"
 	},
-	"console_crosh_options_notice": {
-		"message": "Știați că există o pagină de opțiuni dedicată?\nNu mai e nevoie să modificați „term_” direct!\nApăsați $1 pentru a-l deschide sau dați clic pe:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Știați că există o pagină de opțiuni dedicată?\nNu mai e nevoie să modificați „term_” direct!\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

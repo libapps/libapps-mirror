@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Ibhokisi lokuxhuma"
 	},
-	"console_crosh_options_notice": {
-		"message": "Kade wazi ukuthi kukhona ikhasi lezinketho elikhethekile?\nAsisekho isidingo sokuguqula okuthi 'term_' ngokuqondile!\nCindezela i-$1 ukuyivula, noma chofoza:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Kade wazi ukuthi kukhona ikhasi lezinketho elikhethekile?\nAsisekho isidingo sokushintsha i-term_' ngokuqondile!\n$1"
-	},
 	"delete_button_label": {
 		"message": "Susa"
 	},

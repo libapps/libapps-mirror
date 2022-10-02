@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Dialog ng Koneksyon"
 	},
-	"console_crosh_options_notice": {
-		"message": "Alam mo bang may nakalaang page ng mga opsyon?\nHindi na kailangang baguhin nang direkta ang 'term_'!\nPindutin ang $1 para buksan ito, o i-click ang:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Alam mo bang may nakalaang page ng mga opsyon?\nHindi na kailangang direktang baguhin ang 'term_!'\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

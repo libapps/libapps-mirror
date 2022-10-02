@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Finestra di dialogo di connessione"
 	},
-	"console_crosh_options_notice": {
-		"message": "Sapevi che esiste una pagina delle opzioni dedicata?\nNon è più necessario modificare direttamente \"term_\".\nPremi $1 per aprirla oppure fai clic qui di seguito:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Sapevi che esiste una pagina delle opzioni dedicata?\nNon è più necessario modificare direttamente \"term_\".\n$1"
-	},
 	"del_keycap": {
 		"message": "[Canc]"
 	},

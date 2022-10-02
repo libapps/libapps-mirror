@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Dialogfeld für die Verbindung"
 	},
-	"console_crosh_options_notice": {
-		"message": "Schon gewusst: Es gibt eine spezielle Optionsseite.\nDas macht eine direkte Modifizierung von \"term_\" überflüssig.\nEinfach $1 drücken, um sie zu öffnen, oder auf $2 klicken."
-	},
-	"console_nassh_options_notice": {
-		"message": "Schon gewusst: Es gibt eine spezielle Optionsseite.\nDas macht eine direkte Modifizierung von \"term_\" überflüssig.\n$1"
-	},
 	"del_keycap": {
 		"message": "[ENTF]"
 	},

@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Dijalog za povezivanje"
 	},
-	"console_crosh_options_notice": {
-		"message": "Znate li da postoji posebna stranica s opcijama?\nViše ne morate izravno mijenjati \"term_\".\nPritisnite $1 da biste je otvorili ili kliknite:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Znate li da postoji posebna stranica s opcijama?\nViše ne morate izravno mijenjati \"term_\"!\n$1"
-	},
 	"delete_button_label": {
 		"message": "Izbriši"
 	},

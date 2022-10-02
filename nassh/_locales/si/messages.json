@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "සබැඳුම් සංවාදය"
 	},
-	"console_crosh_options_notice": {
-		"message": "කැප වූ විකල්ප පිටුවත් ඇති බව ඔබ දන්නේද?\nතවදුරටත් 'term_' ඍජුව වෙනස් කිරීමට අවශ්‍ය නැත!\nඑය විවෘත කිරීමට $1 ඔබන්න, නැති නම් ක්ලික් කරන්න:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "කැප වූ විකල්ප පිටුවත් ඇති බව ඔබ දන්නේද?\nතවදුරටත් 'term_' ඍජුව වෙනස් කිරීමට අවශ්‍ය නැත!\n$1"
-	},
 	"delete_button_label": {
 		"message": "මකන්න"
 	},

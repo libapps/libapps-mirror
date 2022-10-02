@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Диалоговое окно подключения"
 	},
-	"console_crosh_options_notice": {
-		"message": "Больше не нужно менять term_ напрямую.\nТеперь есть специальная страница настроек.\nНажмите $1 или перейдите по ссылке:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Больше не нужно менять term_ напрямую.\nТеперь есть специальная страница настроек:\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Ryšio dialogo langas"
 	},
-	"console_crosh_options_notice": {
-		"message": "Ar žinote, kad yra paskirtas parinkčių puslapis?\nNebereikia tiesiogiai keisti „term_“!\nPaspauskite $1, kad atidarytumėte, arba spustelėkite\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Ar žinojote, kad yra paskirtas parinkčių puslapis?\nNebereikia tiesiogiai keisti „term_“!\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

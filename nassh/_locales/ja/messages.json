@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "接続ダイアログ"
 	},
-	"console_crosh_options_notice": {
-		"message": "「term_」を直接編集しなくても、専用のオプション ページを使用できます。\nページを開くには $1 キーを押すか、次のリンクをクリックしてください:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "「term_」を直接編集しなくても、\n専用のオプション ページを使用できます。\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

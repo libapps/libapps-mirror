@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Dialog Sambungan"
 	},
-	"console_crosh_options_notice": {
-		"message": "Adakah anda tahu terdapat halaman pilihan khusus?\nTidak perlu mengubah suai 'term_' secara langsung lagi!\nTekan $1 untuk membukanya atau klik:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Adakah anda tahu terdapat halaman pilihan khusus?\nTidak perlu mengubah suai 'term_' secara langsung lagi!\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

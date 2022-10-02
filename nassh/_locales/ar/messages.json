@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "مربع حوار الاتصال"
 	},
-	"console_crosh_options_notice": {
-		"message": "هل تعلم أن هناك صفحة مخصّصة للخيارات؟\nلا حاجة لتعديل \"term_\" مباشرةً بعد الآن.\nاضغط على اختصار $1 لفتحه، أو انقر على:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "هل تعلم أن هناك صفحة مخصّصة للخيارات؟\nلا حاجة لتعديل 'term_' مباشرةً بعد الآن.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

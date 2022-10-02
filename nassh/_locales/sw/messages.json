@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Kidirisha cha Kuunganisha"
 	},
-	"console_crosh_options_notice": {
-		"message": "Je, unajua kwamba kuna ukurasa mahususi wa chaguo?\nHakuna tena haja ya kubadilisha 'term_' moja kwa moja!\nBonyeza $1 ili uufungue au ubofye:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Je, unajua kwamba kuna ukurasa mahususi wa chaguo?\nHakuna tena haja ya kubadilisha 'term_' moja kwa moja!\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

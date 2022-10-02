@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Қосылу диалогтік терезесі"
 	},
-	"console_crosh_options_notice": {
-		"message": "Арнайы опциялар беті бар екенін білген бе едіңіз?\nЕнді 'term_' тікелей өзгерту қажет емес.\nОны ашу үшін $1 немесе $2 басыңыз."
-	},
-	"console_nassh_options_notice": {
-		"message": "Арнайы опциялар беті бар екенін білген бе едіңіз?\nЕнді 'term_' тікелей өзгерту қажет емес.\n$1"
-	},
 	"delete_button_label": {
 		"message": "Жою"
 	},

@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "კავშირის დიალოგური ფანჯარა"
 	},
-	"console_crosh_options_notice": {
-		"message": "იცოდით ვარიანტების გვერდის შესახებ?\n„term_“ კატალოგის შეცვლა აღარ გჭირდებათ!\nგასახსნელად დააჭირეთ „$1“-ს, ან დააწკაპუნეთ აქ:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "იცოდით ვარიანტების გვერდის შესახებ?\n„term_“ კატალოგის შეცვლა აღარ გჭირდებათ!\n$1"
-	},
 	"delete_button_label": {
 		"message": "წაშლა"
 	},

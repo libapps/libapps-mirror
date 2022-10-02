@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Okno połączenia"
 	},
-	"console_crosh_options_notice": {
-		"message": "Czy wiesz, że istnieje specjalna strona opcji?\nNie musisz już modyfikować bezpośrednio „term_”.\nAby ją otworzyć, naciśnij $1 lub kliknij:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Czy wiesz, że istnieje specjalna strona opcji?\nNie musisz już bezpośrednio edytować „term_”.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

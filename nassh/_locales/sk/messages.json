@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Dialógové okno pripojenia"
 	},
-	"console_crosh_options_notice": {
-		"message": "Vedeli ste, že existuje vyhradená stránka pre možnosti?\nUž nemusíte priamo upravovať parameter „term_“!\nOtvorte ho pomocou skratky $1, prípadne kliknite na\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Vedeli ste, že existuje vyhradená stránka pre možnosti?\nUž nemusíte priamo upravovať parameter „term_“!\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Yhteyden valintaikkuna"
 	},
-	"console_crosh_options_notice": {
-		"message": "Nyt voit käyttää valintojen omaa sivua\nsuorien term_-komentojen sijaan.\nAvaa se painamalla $1 tai klikkaamalla tätä:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Nyt voit käyttää valintojen omaa sivua\nsuorien term_‑komentojen sijaan.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

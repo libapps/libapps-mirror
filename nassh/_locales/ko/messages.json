@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "연결 대화상자"
 	},
-	"console_crosh_options_notice": {
-		"message": "전용 옵션 페이지가 있다는 사실을 알고 계셨나요?\n이제 'term_'을 직접 수정하지 않아도 됩니다.\n$1 키를 눌러서 열거나 다음 URL을 클릭하세요.\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "전용 옵션 페이지가 있다는 사실을 알고 계셨나요?\n이제 'term_'을 직접 수정하지 않아도 됩니다.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

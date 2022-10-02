@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Hộp thoại kết nối"
 	},
-	"console_crosh_options_notice": {
-		"message": "Bạn có biết rằng chúng tôi cung cấp một trang chuyên về tùy chọn không?\nBạn sẽ không cần sửa đổi 'term_' trực tiếp nữa!\nĐể mở trang này, hãy nhấn tổ hợp phím $1 hoặc nhấp vào:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Bạn có biết rằng chúng tôi cung cấp một trang chuyên về tùy chọn không?\nBạn sẽ không cần sửa đổi \"term_\" trực tiếp nữa!\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

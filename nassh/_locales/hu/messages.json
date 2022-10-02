@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Kapcsolódási párbeszédablak"
 	},
-	"console_crosh_options_notice": {
-		"message": "Tudta, hogy van külön oldala a beállításoknak?\nTöbbé nem kell közvetlenül a „term_” parancsot módosítani.\nA megnyitásához nyomja le a(z) $1 billentyűparancsot, vagy kattintson a következő linkre:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Tudta, hogy van külön oldala a beállításoknak?\nTöbbé nem kell közvetlenül a „term_” parancsot módosítani.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

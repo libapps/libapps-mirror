@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "ਕਨੈਕਸ਼ਨ ਵਿੰਡੋ"
 	},
-	"console_crosh_options_notice": {
-		"message": "ਕੀ ਤੁਹਾਨੂੰ ਪਤਾ ਹੈ ਕਿ ਵਿਕਲਪਾਂ ਲਈ ਖਾਸ ਤੌਰ 'ਤੇ ਪੰਨਾ ਮੌਜੂਦ ਹੈ?\nਹੁਣ 'term_' ਨੂੰ ਸਿੱਧਾ ਸੋਧਣ ਦੀ ਕੋਈ ਲੋੜ ਨਹੀਂ!\nਇਸਨੂੰ ਖੋਲ੍ਹਣ ਲਈ $1 ਦਬਾਓ, ਜਾਂ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "ਕੀ ਤੁਹਾਨੂੰ ਪਤਾ ਹੈ ਕਿ ਵਿਕਲਪਾਂ ਲਈ ਖਾਸ ਤੌਰ 'ਤੇ ਪੰਨਾ ਮੌਜੂਦ ਹੈ?\nਹੁਣ 'term_' ਨੂੰ ਸਿੱਧਾ ਸੋਧਣ ਦੀ ਕੋਈ ਲੋੜ ਨਹੀਂ!\n$1"
-	},
 	"delete_button_label": {
 		"message": "ਮਿਟਾਓ"
 	},

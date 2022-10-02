@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "የግንኙነት መገናኛ"
 	},
-	"console_crosh_options_notice": {
-		"message": "አማራጮችን የሚመለከት ገጽ እንዳለ ያውቃሉ?\nከአሁን በኋላ ከ«ቃል_» ጋር በቀጥታ መለወጥ የለም!\nእሱን ለመክፈት $1ን ጠቅ ያድርጉ፣ ወይም ይህን ጠቅ ያድርጉ፦\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "አማራጮችን የሚመለከት ገጽ እንዳለ ያውቃሉ?\nከአሁን በኋላ «term_»ን በቀጥታ መለወጥ አያስፈልግም!\n$1"
-	},
 	"del_keycap": {
 		"message": "[ሰርዝ]"
 	},

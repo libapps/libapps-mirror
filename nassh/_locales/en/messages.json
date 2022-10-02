@@ -105,30 +105,6 @@
 		"description": "Message displayed after a connection closes and the user cannot reconnect. We capitialize 'Choose' and 'Exit' as a hint to the reader that these are the actions they may choose from, but keeping them capitalized as such is not required. Do not translate the (C) or (X) fields as they are keyboard shortcuts. Placing them relative to the word is OK as long as it's clear what action will be taken when the keyboard button is pressed. Similarly, using parentheses is not required other than for clarity. Changing case of the key is also OK. There is an additional (E) keyboard shortcut that is the same as (X), so that may be used as an alternative if the translation uses an E but not an X. For example, these are OK: 'Exit (X)' or '[X]Exit' or '(E)xit' or whatever makes the most sense for the language. There is no default action here if the user presses Enter.",
 		"message": "(C)hoose another connection or E(x)it?"
 	},
-	"CONSOLE_CROSH_OPTIONS_NOTICE": {
-		"description": "Message shown to users who open the internal Chrome DevTools (JavaScript Developer Console). It is meant to direct them to the options page instead of having to write custom code themselves. Do not translate 'term_', but the quote style may be changed as makes sense for the language.",
-		"message": "Did you know there is a dedicated options page?\nNo need to modify 'term_' directly anymore!\nPress $SHORTCUT$ to open it, or click:\n$URL$",
-		"placeholders": {
-			"SHORTCUT": {
-				"content": "$1",
-				"example": "Ctrl+Shift+P"
-			},
-			"URL": {
-				"content": "$2",
-				"example": "chrome-extension://okddffdblfhhnmhodogpojmfkjmhinfp/html/nassh_preferences_editor.html"
-			}
-		}
-	},
-	"CONSOLE_NASSH_OPTIONS_NOTICE": {
-		"description": "Message shown to users who open the internal Chrome DevTools (JavaScript Developer Console). It is meant to direct them to the options page instead of having to write custom code themselves. Do not translate 'term_', but the quote style may be changed as makes sense for the language.",
-		"message": "Did you know there is a dedicated options page?\nNo need to modify 'term_' directly anymore!\n$URL$",
-		"placeholders": {
-			"URL": {
-				"content": "$1",
-				"example": "chrome-extension://okddffdblfhhnmhodogpojmfkjmhinfp/html/nassh_preferences_editor.html"
-			}
-		}
-	},
 	"CWS_DESCRIPTION": {
 		"description": "Description shown in the Chrome Web Store for the stable extension.",
 		"message": "Secure Shell is an xterm-compatible terminal emulator and stand-alone ssh client for Chrome.  It uses Native-Client to connect directly to ssh servers without the need for external proxies.\n\nA SFTP command line client is included.  On ChromeOS, you can create SFTP mounts and access them from the Files app!\n\nAn alpha build of Mosh is included now too.\n\nIt has been well tested for a couple of years.\n\nPlease read the FAQ, available here: https://hterm.org/x/ssh/faq.\n\nYou can also exchange feedback in the chromium-hterm mailing list, available here: https://hterm.org/x/ssh/contact.\n\nThe changelog is available here: https://hterm.org/x/ssh/changelog"

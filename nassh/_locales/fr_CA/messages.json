@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Boîte de dialogue de connexion"
 	},
-	"console_crosh_options_notice": {
-		"message": "Saviez-vous qu'il existe une page dédiée aux options?\nVous n'avez plus besoin de modifier « term_ » directement.\nAppuyez sur $1 pour l'ouvrir ou cliquez sur :\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Saviez-vous qu'il existe une page dédiée aux options?\nPlus besoin de modifier « term_ » directement.\n$1"
-	},
 	"del_keycap": {
 		"message": "[Suppr]"
 	},

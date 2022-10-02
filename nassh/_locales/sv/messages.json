@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Anslutningsdialogruta"
 	},
-	"console_crosh_options_notice": {
-		"message": "Visste du att det finns en särskild alternativsida?\nNu behöver du inte ändra term_ direkt längre.\nÖppna sidan med $1 eller klicka på:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Visste du att det finns en särskild alternativsida?\nNu behöver du inte ändra term_ direkt längre.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

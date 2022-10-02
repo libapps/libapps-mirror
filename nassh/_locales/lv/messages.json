@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Savienojuma izveides dialoglodziņš"
 	},
-	"console_crosh_options_notice": {
-		"message": "Vai zinājāt, ka ir pieejama atsevišķa opciju lapa?\nVairs nav tieši jāpārveido parametrs term_.\nNospiediet $1, lai atvērtu lapu, vai noklikšķiniet uz šīs saites:\n$2."
-	},
-	"console_nassh_options_notice": {
-		"message": "Vai zinājāt, ka ir pieejama atsevišķa opciju lapa?\nVairs nav tieši jāpārveido parametrs term_.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DZĒST]"
 	},

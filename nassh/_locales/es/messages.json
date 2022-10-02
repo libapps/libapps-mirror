@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Diálogo de conexión"
 	},
-	"console_crosh_options_notice": {
-		"message": "¿Sabías que hay una página dedicada a las opciones?\nYa no es necesario cambiar term_ directamente.\nPara abrir la consola, pulsa $1 o haz clic en el siguiente enlace:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "¿Sabías que hay una página dedicada a las opciones?\nYa no es necesario cambiar term_ directamente.\n$1"
-	},
 	"del_keycap": {
 		"message": "[Supr]"
 	},

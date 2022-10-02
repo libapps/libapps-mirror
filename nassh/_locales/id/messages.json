@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Dialog Koneksi"
 	},
-	"console_crosh_options_notice": {
-		"message": "Tahukah Anda ada halaman opsi khusus?\nTidak perlu lagi mengubah 'term_' secara langsung.\nTekan $1 untuk membukanya, atau klik:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Tahukah Anda ada halaman khusus untuk opsi?\nTidak perlu lagi mengubah 'term_' secara langsung.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

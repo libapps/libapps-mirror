@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "ប្រអប់តភ្ជាប់"
 	},
-	"console_crosh_options_notice": {
-		"message": "តើអ្នកបានដឹងថាមានទំព័រជម្រើស​ដាច់ដោយឡែកដែរទេ?\nមិនចាំបាច់កែប្រែ 'term_' ដោយផ្ទាល់ទៀតទេ!\nចុច $1 ដើម្បីបើកវា ឬចុច៖\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "តើអ្នកបានដឹងថាមានទំព័រជម្រើស​ដាច់ដោយឡែកដែរទេ?\nមិនចាំបាច់កែប្រែ 'term_' ដោយផ្ទាល់ទៀតទេ!\n$1"
-	},
 	"delete_button_label": {
 		"message": "លុប"
 	},

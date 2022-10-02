@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Dialogové okno připojení"
 	},
-	"console_crosh_options_notice": {
-		"message": "Víte, že je k dispozici samostatná stránka možností?\nUž není potřeba ručně upravovat objekt term_.\nOtevřete ji stisknutím kláves $1 nebo kliknutím na tento odkaz:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Víte, že je k dispozici samostatná stránka možností?\nUž není potřeba ručně upravovat objekt term_.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

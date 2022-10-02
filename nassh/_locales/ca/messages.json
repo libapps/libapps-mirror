@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Quadre de diàleg de connexió"
 	},
-	"console_crosh_options_notice": {
-		"message": "Sabies que hi ha una pàgina d'opcions dedicada?\nJa no caldrà que modifiquis \"term_\" directament.\nPrem $1 per obrir-la o fes clic a l'enllaç següent:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Sabies que hi ha una pàgina d'opcions dedicada?\nJa no caldrà que modifiquis \"term_\" directament.\n$1"
-	},
 	"del_keycap": {
 		"message": "[SUPR]"
 	},

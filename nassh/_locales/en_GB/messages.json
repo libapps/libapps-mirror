@@ -11,12 +11,6 @@
 	"connection_dialog_name": {
 		"message": "Connection dialogue"
 	},
-	"console_crosh_options_notice": {
-		"message": "Did you know that there is a dedicated options page?\nNo need to modify 'term_' directly anymore.\nPress $1 to open it, or click:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Did you know that there is a dedicated options page?\nNo need to modify 'term_' directly anymore.\n$1"
-	},
 	"disconnect_message": {
 		"message": "NaCl plug-in exited with status code $1."
 	},

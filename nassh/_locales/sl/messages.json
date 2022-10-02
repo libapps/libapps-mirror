@@ -50,12 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Pogovorno okno za povezovanje"
 	},
-	"console_crosh_options_notice": {
-		"message": "Ali ste vedeli, da je na voljo namenska stran z možnostmi?\nNi vam treba več neposredno spreminjati operatorja »term_«.\nPritisnite $1, če jo želite odpreti, ali kliknite:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "Ali ste vedeli, da je na voljo namenska stran z možnostmi?\nNi vam več treba spreminjati operatorja »term_«.\n$1"
-	},
 	"del_keycap": {
 		"message": "[DEL]"
 	},

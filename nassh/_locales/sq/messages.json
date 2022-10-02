@@ -47,12 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Dialogu i lidhjes"
 	},
-	"console_crosh_options_notice": {
-		"message": "A e dije se ka një faqe të dedikuar për opsionet?\nNuk është nevoja të modifikosh më drejtpërdrejt \"term_\"!\nShtyp $1 për ta hapur ose kliko:\n$2"
-	},
-	"console_nassh_options_notice": {
-		"message": "A e dije se ka një faqe të dedikuar për opsionet?\nNuk është nevoja të modifikosh më drejtpërdrejt \"term_\"!\n$1"
-	},
 	"delete_button_label": {
 		"message": "Fshi"
 	},
