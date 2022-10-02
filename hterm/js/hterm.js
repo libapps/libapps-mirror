@@ -29,6 +29,18 @@ hterm.windowType = null;
 hterm.os = null;
 
 /**
+ * Initialize hterm.os.
+ *
+ * @return {!Promise<void>}
+ */
+hterm.initOs_ = function() {
+  // If OS detection fails, then we'll still set the value to something.
+  // The OS logic in hterm tends to be best effort anyways.
+  const initOs = (os) => { hterm.os = os; };
+  return lib.f.getOs().then(initOs).catch(initOs);
+};
+
+/**
  * Text shown in a desktop notification for the terminal
  * bell.  \u226a is a unicode EIGHTH NOTE, %(title) will
  * be replaced by the terminal title.
@@ -55,13 +67,7 @@ lib.registerInit(
               hterm.messageManager = new lib.MessageManager(languages);
             }
           })
-          .then(() => {
-            // If OS detection fails, then we'll still set the value to
-            // something.  The OS logic in hterm tends to be best effort
-            // anyways.
-            const initOs = (os) => { hterm.os = os; };
-            return lib.f.getOs().then(initOs).catch(initOs);
-          });
+          .then(() => hterm.initOs_());
       }
 
       function onWindow(window) {
