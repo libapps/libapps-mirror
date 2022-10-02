@@ -19,6 +19,31 @@ const hterm = {};
 hterm.windowType = null;
 
 /**
+ * Initialize hterm.windowType.
+ */
+hterm.initWindowType_ = async function() {
+  if (window?.chrome?.tabs?.getCurrent) {
+    // The getCurrent method gets the tab that is "currently running",
+    // not the topmost or focused tab.
+    const tab = await new Promise((resolve) => {
+      chrome.tabs.getCurrent(resolve);
+    });
+    if (tab && window?.chrome?.windows?.get) {
+      const win = await new Promise((resolve) => {
+        chrome.windows.get(tab.windowId, null, resolve);
+      });
+      hterm.windowType = win.type;
+    } else {
+      // TODO(rginda): This is where we end up for a v1 app's background page.
+      // Maybe windowType = 'none' would be more appropriate, or something.
+      hterm.windowType = 'normal';
+    }
+  } else {
+    hterm.windowType = 'normal';
+  }
+};
+
+/**
  * The OS we're running under.
  *
  * Used when setting up OS-specific behaviors.
@@ -70,36 +95,8 @@ lib.registerInit(
           .then(() => hterm.initOs_());
       }
 
-      function onWindow(window) {
-        hterm.windowType = window.type;
-        return initMessageManager();
-      }
-
-      function onTab(tab = undefined) {
-        if (tab && window.chrome) {
-          return new Promise((resolve) => {
-            chrome.windows.get(tab.windowId, null, (win) => {
-              onWindow(win).then(resolve);
-            });
-          });
-        } else {
-          // TODO(rginda): This is where we end up for a v1 app's background
-          // page. Maybe windowType = 'none' would be more appropriate, or
-          // something.
-          hterm.windowType = 'normal';
-          return initMessageManager();
-        }
-      }
-
-      return new Promise((resolve) => {
-        if (window.chrome && chrome.tabs) {
-          // The getCurrent method gets the tab that is "currently running",
-          // not the topmost or focused tab.
-          chrome.tabs.getCurrent((tab) => onTab(tab).then(resolve));
-        } else {
-          onWindow({type: 'normal'}).then(resolve);
-        }
-      });
+      await hterm.initWindowType_();
+      return initMessageManager();
     });
 
 /**
