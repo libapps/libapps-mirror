@@ -10,16 +10,11 @@ export const browserAction =
     window.chrome && chrome.browserAction ? chrome.browserAction :
     null;
 
-lib.registerInit(
-    'nassh',
-    /**
-     * Register a static initializer for nassh.*.
-     */
-    () => {
-      // Since our translation process only preserves \n (and discards \r), we
-      // have to manually insert them ourselves.
-      hterm.messageManager.useCrlf = true;
-    });
+hterm.initPromise.then(() => {
+  // Since our translation process only preserves \n (and discards \r), we
+  // have to manually insert them ourselves.
+  hterm.messageManager.useCrlf = true;
+});
 
 /**
  * Returns true if this is running as a ChromeOS System App such as Terminal
