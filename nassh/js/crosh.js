@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 import {
-  disableTabDiscarding, getSyncStorage, isCrOSSystemApp, loadMessages,
-  loadWebFonts, openOptionsPage, osc8Link, sendFeedback, sgrText,
+  disableTabDiscarding, getSyncStorage, isCrOSSystemApp, loadWebFonts,
+  openOptionsPage, osc8Link, sendFeedback, setupForWebApp, sgrText,
 } from './nassh.js';
 
 /**
@@ -37,10 +37,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   disableTabDiscarding();
 
-  // Modifications if crosh is running as a web app.
-  if (isCrOSSystemApp()) {
-    lib.registerInit('messages', loadMessages);
-  }
+  setupForWebApp();
 
   lib.init().then(Crosh.init);
 });
