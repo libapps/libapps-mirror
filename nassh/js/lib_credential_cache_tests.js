@@ -6,13 +6,15 @@
  * @fileoverview Test suite for the session-local, encrypted cache.
  */
 
+import {CredentialCache} from './lib_credential_cache.js';
+
 describe('lib_credential_cache_tests.js', () => {
 
 /**
  * Verify that the cache remains enabled after being enabled once.
  */
 it('enabled', () => {
-  const cache = new lib.CredentialCache();
+  const cache = new CredentialCache();
   assert.isNull(cache.isEnabled());
   cache.setEnabled(true);
   assert.isTrue(cache.isEnabled());
@@ -24,7 +26,7 @@ it('enabled', () => {
  * Verify that the cache remains disabled after being disabled once.
  */
 it('disabled', () => {
-  const cache = new lib.CredentialCache();
+  const cache = new CredentialCache();
   assert.isNull(cache.isEnabled());
   cache.setEnabled(false);
   assert.isFalse(cache.isEnabled());
@@ -37,7 +39,7 @@ it('disabled', () => {
  * operations.
  */
 it('workflow', async () => {
-  const cache = new lib.CredentialCache();
+  const cache = new CredentialCache();
   const keyId1 = 'AABBCCDDEEFF';
   const keyId2 = 'FFEEDDCCBBAA';
   await cache.store('reader_1' + keyId1, new Uint8Array([1, 2, 4, 8]));

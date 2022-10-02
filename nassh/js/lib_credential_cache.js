@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview A general-purpose cache for user credentials in the form of
  * a Uint8Array.
@@ -31,7 +29,7 @@
  *
  * @constructor
  */
-lib.CredentialCache = function() {
+export function CredentialCache() {
   /**
    * The underlying cache. Keys are strings and the cache entries consist of the
    * encrypted data and the initialization vector (IV) used for the AES
@@ -69,7 +67,7 @@ lib.CredentialCache = function() {
       }
     });
   }
-};
+}
 
 /**
  * Initialize the cache and generate a new, non-extractable encryption key.
@@ -77,7 +75,7 @@ lib.CredentialCache = function() {
  * @return {!Promise.<void>}
  * @private
  */
-lib.CredentialCache.prototype.init_ = async function() {
+CredentialCache.prototype.init_ = async function() {
   this.cache_ = {};
   this.cryptoKey_ = /** @type {!webCrypto.CryptoKey} */ (
       await window.crypto.subtle.generateKey(
@@ -89,7 +87,7 @@ lib.CredentialCache.prototype.init_ = async function() {
  *
  * @private
  */
-lib.CredentialCache.prototype.clear_ = function() {
+CredentialCache.prototype.clear_ = function() {
   this.cache_ = null;
   this.cryptoKey_ = null;
   this.enabled_ = null;
@@ -110,7 +108,7 @@ lib.CredentialCache.prototype.clear_ = function() {
  * @return {?Promise<?Uint8Array>} The data bytes if the key is present in the
  *     cache; null otherwise.
  */
-lib.CredentialCache.prototype.retrieve = async function(key) {
+CredentialCache.prototype.retrieve = async function(key) {
   if (!this.cache_) {
     await this.init_();
   }
@@ -135,7 +133,7 @@ lib.CredentialCache.prototype.retrieve = async function(key) {
  * @param {!Uint8Array} data The data bytes to be stored.
  * @return {?Promise<void>}
  */
-lib.CredentialCache.prototype.store = async function(key, data) {
+CredentialCache.prototype.store = async function(key, data) {
   if (!this.cache_) {
     await this.init_();
   }
@@ -153,7 +151,7 @@ lib.CredentialCache.prototype.store = async function(key, data) {
  * @return {?boolean} True if the user enabled caching; false if the user
  *     disabled caching; null if the user has not made a decision yet.
  */
-lib.CredentialCache.prototype.isEnabled = function() {
+CredentialCache.prototype.isEnabled = function() {
   return this.enabled_;
 };
 
@@ -164,7 +162,7 @@ lib.CredentialCache.prototype.isEnabled = function() {
  *
  * @param {boolean} enable
  */
-lib.CredentialCache.prototype.setEnabled = function(enable) {
+CredentialCache.prototype.setEnabled = function(enable) {
   if (this.enabled_ === null) {
     this.enabled_ = enable;
   }

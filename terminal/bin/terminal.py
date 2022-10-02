@@ -35,9 +35,7 @@ class SymlinkNasshFiles:
 
     def __enter__(self):
         paths = {
-            p
-            for p in (NASSH_DIR / "js").glob("nas*.js")
-            if "test" not in p.name
+            p for p in (NASSH_DIR / "js").glob("*.js") if "test" not in p.name
         }
         # Manually adding them since they might not exist until mkdeps() is run.
         paths.add(NASSH_DIR / "js/nassh_deps.concat.js")

@@ -13,6 +13,7 @@
  * @suppress {moduleLoad}
  */
 
+import {CredentialCache} from './lib_credential_cache.js';
 import {localize} from './nassh.js';
 import {asn1js, pkijs} from './nassh_deps.rollup.js';
 import {UserIO} from './nassh_agent.js';
@@ -51,10 +52,10 @@ export function GSC(userIO, isForwarded) {
   /**
    * The cache used to offer smart card PIN caching to the user.
    *
-   * @private {!lib.CredentialCache}
+   * @private {!CredentialCache}
    * @const
    */
-  this.pinCache_ = new lib.CredentialCache();
+  this.pinCache_ = new CredentialCache();
   if (!isForwarded) {
     this.pinCache_.setEnabled(false);
   }
