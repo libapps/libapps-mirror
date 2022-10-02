@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 import {
-  disableTabDiscarding, getSyncStorage, loadMessages, loadWebFonts,
-  openOptionsPage, osc8Link, sendFeedback, sgrText,
+  disableTabDiscarding, getSyncStorage, isCrOSSystemApp, loadMessages,
+  loadWebFonts, openOptionsPage, osc8Link, sendFeedback, sgrText,
 } from './nassh.js';
 
 /**
@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   disableTabDiscarding();
 
   // Modifications if crosh is running as a web app.
-  if (Crosh.isWebApp()) {
+  if (isCrOSSystemApp()) {
     lib.registerInit('messages', loadMessages);
   }
 
@@ -74,17 +74,6 @@ function Crosh({commandName, terminal, args}) {
 Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
 
 /**
- * Returns true if this is running as a web app in
- * chrome-untrusted://[crosh|terminal]/, or false if this is running as a nassh
- * app/extension.
- *
- * @return {boolean}
- */
-Crosh.isWebApp = function() {
-  return location.href.startsWith('chrome-untrusted://');
-};
-
-/**
  * Return a formatted message in the current locale.
  *
  * @param {string} name The name of the message to return.
@@ -111,7 +100,7 @@ Crosh.init = function() {
   // Use legacy pasting when running as an extension to avoid prompt.
   // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
   // permission.
-  terminal.alwaysUseLegacyPasting = !Crosh.isWebApp();
+  terminal.alwaysUseLegacyPasting = !isCrOSSystemApp();
 
   // If we want to execute something other than the default crosh.
   // Since Terminal has shipped and supports Crostini now, we don't need to
@@ -247,7 +236,7 @@ Crosh.prototype.run = function() {
   // open as a new window.
   if (hterm.windowType !== 'app' &&
       hterm.windowType !== 'popup' &&
-      !Crosh.isWebApp()) {
+      !isCrOSSystemApp()) {
     const params = new URLSearchParams(document.location.search);
     params.set('openas', 'window');
     const url = new URL(document.location.toString());

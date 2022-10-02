@@ -374,7 +374,7 @@ export function getManifest() {
  * @return {!lib.Storage}
  */
 export function getSyncStorage() {
-  if (location.href.startsWith('chrome-untrusted://')) {
+  if (isCrOSSystemApp()) {
     return new lib.Storage.TerminalPrivate();
   }
   if (window?.chrome?.storage?.sync) {

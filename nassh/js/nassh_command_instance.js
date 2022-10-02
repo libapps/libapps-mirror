@@ -67,7 +67,7 @@ export function CommandInstance({io, ...argv}) {
   const naclSupported =
       navigator.mimeTypes['application/x-pnacl'] !== undefined ||
       window.SharedArrayBuffer === undefined ||
-      location.href.startsWith('chrome-untrusted://');
+      isCrOSSystemApp();
   // The version of the ssh client to load.
   this.sshClientVersion_ = naclSupported ? 'pnacl' : 'wasm';
 
