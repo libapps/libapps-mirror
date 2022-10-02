@@ -194,8 +194,9 @@ hterm.Terminal = function({profileId, storage} = {}) {
   // TODO(crbug.com/1063219) Remove this once the bug is fixed.
   this.alwaysUseLegacyPasting = false;
 
-  this.setProfile(profileId || hterm.Terminal.DEFAULT_PROFILE_ID,
-                  function() { this.onTerminalReady(); }.bind(this));
+  this.setProfile(profileId || hterm.Terminal.DEFAULT_PROFILE_ID, () => {
+    hterm.initPromise.then(() => this.onTerminalReady());
+  });
 
   /** @const */
   this.findBar = new hterm.FindBar(this);

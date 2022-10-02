@@ -75,29 +75,27 @@ hterm.desktopNotificationTitle = '\u266A %(title) \u266A';
 /** @type {?lib.MessageManager} */
 hterm.messageManager = null;
 
-lib.registerInit(
-    'hterm',
-    /**
-     * The hterm init function, registered with lib.registerInit().
-     *
-     * This is called during lib.init().
-     *
-     * @return {!Promise<void>}
-     */
-    async () => {
-      function initMessageManager() {
-        return lib.i18n.getAcceptLanguages()
-          .then((languages) => {
-            if (!hterm.messageManager) {
-              hterm.messageManager = new lib.MessageManager(languages);
-            }
-          })
-          .then(() => hterm.initOs_());
-      }
+/**
+ * Initialize some global hterm state.
+ *
+ * @return {!Promise<void>}
+ */
+hterm.init_ = async function() {
+  await hterm.initWindowType_();
+  await hterm.initOs_();
+  return lib.i18n.getAcceptLanguages().then((languages) => {
+    if (!hterm.messageManager) {
+      hterm.messageManager = new lib.MessageManager(languages);
+    }
+  });
+};
 
-      await hterm.initWindowType_();
-      return initMessageManager();
-    });
+/**
+ * Allow people to track when init has finished.
+ */
+hterm.initPromise = hterm.init_();
+
+lib.registerInit('hterm', () => hterm.initPromise);
 
 /**
  * Sanitizes the given HTML source into a TrustedHTML, or a string if the
