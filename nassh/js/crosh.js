@@ -11,7 +11,7 @@ import {
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', async (event) => {
   const params = new URLSearchParams(document.location.search);
 
   // Make it easy to re-open as a window.
@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   disableTabDiscarding();
 
-  setupForWebApp();
+  await setupForWebApp();
 
   lib.init().then(Crosh.init);
 });

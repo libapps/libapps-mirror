@@ -35,17 +35,22 @@ export function isCrOSSystemApp() {
  * Modify if nassh is running within ChromeOS Terminal System App. We will
  * use lib.Storage.TerminalPrivate as the default storage, load messages via
  * XHR, and polyfill chrome.runtime.getManifest().
+ *
+ * @return {!Promise<void>}
  */
 export function setupForWebApp() {
   // Modifications if running as ChromeOS Terminal SWA.
   if (isCrOSSystemApp()) {
-    lib.registerInit('messages', loadMessages);
     if (chrome?.runtime && !chrome.runtime.sendMessage) {
       chrome.runtime.sendMessage = (message, callback) => {
         setTimeout(/** @type {function(!Object)} */ (callback), 0, {});
       };
     }
+
+    return loadMessages();
   }
+
+  return Promise.resolve();
 }
 
 /**
