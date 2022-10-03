@@ -2,12 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
- * HTML5 FileSystem related utility functions.
+ * @fileoverview HTML5 FileSystem related utility functions.
  */
-lib.fs = {};
 
 /**
  * Overwrite a file on an HTML5 filesystem.
@@ -21,14 +18,14 @@ lib.fs = {};
  * @param {!ArrayBuffer|!Blob|string} contents The new contents of the file.
  * @return {!Promise<void>}
  */
-lib.fs.overwriteFile = function(root, path, contents) {
+export function overwriteFile(root, path, contents) {
   if (!(contents instanceof Blob)) {
     contents = new Blob([contents], {type: 'text/plain'});
   }
 
-  return lib.fs.removeFile(root, path)
+  return removeFile(root, path)
     .catch(() => {})
-    .then(() => lib.fs.getOrCreateFile(root, path))
+    .then(() => getOrCreateFile(root, path))
     .then((fileEntry) => new Promise((resolve, reject) => {
       fileEntry.createWriter((writer) => {
         writer.onwriteend = resolve;
@@ -36,7 +33,7 @@ lib.fs.overwriteFile = function(root, path, contents) {
         writer.write(contents);
       }, reject);
     }));
-};
+}
 
 /**
  * Open a file on an HTML5 filesystem.
@@ -46,13 +43,13 @@ lib.fs.overwriteFile = function(root, path, contents) {
  * @param {string} path The path of the target file, relative to root.
  * @return {!Promise<!File>} The open file handle.
  */
-lib.fs.openFile = function(root, path) {
+export function openFile(root, path) {
   return new Promise((resolve, reject) => {
     root.getFile(path, {create: false}, (fileEntry) => {
       fileEntry.file(resolve, reject);
     }, reject);
   });
-};
+}
 
 /**
  * Read a file on an HTML5 filesystem.
@@ -62,10 +59,10 @@ lib.fs.openFile = function(root, path) {
  * @param {string} path The path of the target file, relative to root.
  * @return {!Promise<string>} The file content.
  */
-lib.fs.readFile = function(root, path) {
-  return lib.fs.openFile(root, path)
+export function readFile(root, path) {
+  return openFile(root, path)
     .then((file) => file.text());
-};
+}
 
 /**
  * Remove a file from an HTML5 filesystem.
@@ -75,11 +72,11 @@ lib.fs.readFile = function(root, path) {
  * @param {string} path The path of the target file, relative to root.
  * @return {!Promise<void>}
  */
-lib.fs.removeFile = function(root, path) {
+export function removeFile(root, path) {
   return new Promise((resolve, reject) => {
     root.getFile(path, {}, (f) => f.remove(resolve, reject), reject);
   });
-};
+}
 
 /**
  * Build a list of all FileEntrys in an HTML5 filesystem.
@@ -90,14 +87,14 @@ lib.fs.removeFile = function(root, path) {
  * @return {!Promise<!Array<!Entry>>} All the entries in the
  *     directory.
  */
-lib.fs.readDirectory = function(root, path) {
+export function readDirectory(root, path) {
   return new Promise((resolve, reject) => {
     root.getDirectory(path, {create: false}, (dirEntry) => {
       const reader = dirEntry.createReader();
       reader.readEntries(resolve, reject);
     }, reject);
   });
-};
+}
 
 /**
  * Locate the file referred to by path, creating directories or the file
@@ -108,7 +105,7 @@ lib.fs.readDirectory = function(root, path) {
  * @param {string} path The path of the target file, relative to root.
  * @return {!Promise<!FileEntry>}
  */
-lib.fs.getOrCreateFile = function(root, path) {
+export function getOrCreateFile(root, path) {
   let dirname = null;
   let basename = null;
 
@@ -130,8 +127,8 @@ lib.fs.getOrCreateFile = function(root, path) {
     return onDirFound(root);
   }
 
-  return lib.fs.getOrCreateDirectory(root, dirname).then(onDirFound);
-};
+  return getOrCreateDirectory(root, dirname).then(onDirFound);
+}
 
 /**
  * Locate the directory referred to by path, creating directories along the
@@ -142,7 +139,7 @@ lib.fs.getOrCreateFile = function(root, path) {
  * @param {string} path The path of the target file, relative to root.
  * @return {!Promise<!DirectoryEntry>}
  */
-lib.fs.getOrCreateDirectory = function(root, path) {
+export function getOrCreateDirectory(root, path) {
   const names = path.split('/');
 
   return new Promise((resolve, reject) => {
@@ -161,4 +158,4 @@ lib.fs.getOrCreateDirectory = function(root, path) {
 
     getOrCreateNextName(root);
   });
-};
+}

@@ -6,6 +6,7 @@
  * @fileoverview A remote API for external apps/extensions.
  */
 
+import {overwriteFile} from './lib_fs.js';
 import {getSyncStorage} from './nassh.js';
 import {exportPreferences, importPreferences} from './nassh_background.js';
 import {CommandInstance} from './nassh_command_instance.js';
@@ -97,7 +98,7 @@ function(request, sender, sendResponse) {
    */
   const writeFile = (filename, content) => {
     // TODO(vapier): Move to indexeddb-fs once SFTP works w/WASM.
-    return lib.fs.overwriteFile(fileSystem_.root, filename, content);
+    return overwriteFile(fileSystem_.root, filename, content);
   };
   Promise.all([
       writeFile(knownHosts, request.knownHosts),

@@ -8,6 +8,9 @@
  * @suppress {moduleLoad}
  */
 
+import {
+  getOrCreateDirectory, overwriteFile, readDirectory, readFile,
+} from './lib_fs.js';
 import {createFs} from './nassh_deps.rollup.js';
 
 /**
@@ -38,7 +41,7 @@ export async function getDomFileSystem() {
       // We create /.ssh/identity/ subdir for storing keys.  We need a dedicated
       // subdir for users to import files to avoid collisions with standard ssh
       // config files.
-      lib.fs.getOrCreateDirectory(fileSystem.root, '/.ssh/identity')
+      getOrCreateDirectory(fileSystem.root, '/.ssh/identity')
         .then(() => resolve(fileSystem))
         .catch(reject);
     }
@@ -74,7 +77,7 @@ export async function getIndexeddbFileSystem() {
 export async function migrateFilesystemFromDomToIndexeddb(
     domfs = undefined, fs = undefined) {
   const migrateFile = async (file) => {
-    const data = await lib.fs.readFile(domfs.root, file);
+    const data = await readFile(domfs.root, file);
     return fs.writeFile(file, data);
   };
 
@@ -82,7 +85,7 @@ export async function migrateFilesystemFromDomToIndexeddb(
     console.log(`fs: Migrating ${basedir} from DOM to indexeddb-fs`);
     await fs.createDirectory(basedir);
 
-    const paths = await lib.fs.readDirectory(domfs.root, basedir);
+    const paths = await readDirectory(domfs.root, basedir);
     for (const path of paths) {
       if (path.isFile) {
         await migrateFile(path.fullPath);
@@ -124,7 +127,7 @@ export async function syncFilesystemFromIndexeddbToDom(
     fs = undefined, domfs = undefined) {
   const syncFile = async (file) => {
     const data = await fs.readFile(file);
-    return lib.fs.overwriteFile(domfs.root, file, data);
+    return overwriteFile(domfs.root, file, data);
   };
 
   const syncDir = async (basedir) => {
@@ -169,7 +172,7 @@ export async function syncFilesystemFromDomToIndexeddb(
 
   // NaCl doesn't seem to write to that much.
   const file = '/.ssh/known_hosts';
-  const data = await lib.fs.readFile(domfs.root, file);
+  const data = await readFile(domfs.root, file);
   await fs.writeFile(file, data);
 }
 
