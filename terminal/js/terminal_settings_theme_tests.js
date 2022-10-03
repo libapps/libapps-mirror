@@ -6,6 +6,8 @@
  * @fileoverview Terminal Settings Theme Element unit tests.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsThemeElement} from './terminal_settings_theme.js';
 import {DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR, DEFAULT_CURSOR_COLOR,

@@ -6,6 +6,8 @@
  * @fileoverview nassh preference manager tests.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {LocalPreferenceManager,
         PreferenceManager} from './nassh_preference_manager.js';
 

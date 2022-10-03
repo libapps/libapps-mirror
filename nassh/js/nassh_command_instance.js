@@ -7,6 +7,7 @@
  * @suppress {moduleLoad}
  */
 
+import {hterm, lib} from './deps_local.concat.js';
 import {punycode} from './deps_punycode.rollup.js';
 
 import {

@@ -13,6 +13,7 @@
  * @suppress {moduleLoad}
  */
 
+import {lib} from './deps_local.concat.js';
 import {asn1js, pkijs} from './deps_pkijs.rollup.js';
 
 import {concatTyped, compare} from './lib_array.js';

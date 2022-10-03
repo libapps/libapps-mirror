@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {hterm} from './deps_local.concat.js';
+
 import {DEFAULT_VM_NAME, DEFAULT_CONTAINER_NAME, ORIGINAL_URL,
   PARAM_NAME_SETTINGS_PROFILE, PARAM_NAME_SFTP, PARAM_NAME_TMUX}
   from './terminal_common.js';

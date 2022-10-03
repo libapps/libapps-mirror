@@ -7,6 +7,8 @@
  * dynamically loaded backends.
  */
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {Backend} from './nassh_agent_backend.js';
 import {GSC} from './nassh_agent_backend_gsc.js';
 import {Message} from './nassh_agent_message.js';

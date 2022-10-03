@@ -6,6 +6,8 @@
  * @fileoverview Terminal Home App Element unit tests.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import './terminal_home_app.js';
 
 describe('terminal_home_app_tests.js', () => {

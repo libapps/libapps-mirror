@@ -6,6 +6,8 @@
  * @fileoverview Runtime SFTP connect dialog.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {runtimeSendMessage} from './nassh.js';
 import {MountInfo} from './nassh_external_api.js';
 

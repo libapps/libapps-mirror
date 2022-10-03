@@ -7,6 +7,8 @@
  * code in here minimal as this cannot be unittested.
  */
 
+import {hterm} from './deps_local.concat.js';
+
 import {browserAction, getSyncStorage, runtimeSendMessage} from './nassh.js';
 import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';

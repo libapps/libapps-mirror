@@ -7,6 +7,8 @@
  *     backends.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {concatTyped} from './lib_array.js';
 import {Agent} from './nassh_agent.js';
 import {Stream} from './nassh_stream.js';

@@ -6,6 +6,8 @@
  * @fileoverview Export an element: terminal-ssh-dialog
  */
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {
   deleteIdentityFiles, getIdentityFileNames, getIndexeddbFileSystem,
   importIdentityFiles,

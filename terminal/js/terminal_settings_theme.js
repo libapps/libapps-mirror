@@ -7,6 +7,9 @@
  *
  * @suppress {moduleLoad}
  */
+
+import {hterm, lib} from './deps_local.concat.js';
+
 import {LitElement, css, html, unsafeCSS} from './lit.js';
 import {DEFAULT_THEME, DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR,
     DEFAULT_CURSOR_COLOR, DEFAULT_FOREGROUND_COLOR} from './terminal_common.js';

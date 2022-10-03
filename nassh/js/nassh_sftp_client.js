@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {lib} from './deps_local.concat.js';
+
 import {newBuffer} from './nassh_buffer.js';
 import {Packet} from './nassh_sftp_packet.js';
 import {

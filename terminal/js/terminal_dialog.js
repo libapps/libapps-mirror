@@ -7,6 +7,9 @@
  *
  * @suppress {moduleLoad}
  */
+
+import {hterm} from './deps_local.concat.js';
+
 import {css, html, LitElement} from './lit.js';
 import './terminal_button.js';
 

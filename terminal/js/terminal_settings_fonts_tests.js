@@ -6,6 +6,8 @@
  * @fileoverview Terminal Settings Fonts Element unit tests.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {SUPPORTED_FONT_FAMILIES, DEFAULT_FONT_FAMILY}
     from './terminal_common.js';
 import './terminal_settings_fonts.js';

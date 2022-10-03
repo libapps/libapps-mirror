@@ -8,6 +8,8 @@
  *                only.
  */
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {localize, sgrSequence} from './nassh.js';
 import {CommandInstance, splitCommandLine} from './nassh_command_instance.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';

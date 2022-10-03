@@ -6,6 +6,8 @@
  * @fileoverview `GoogMetricsReporter` unit tests.
  */
 
+import {hterm} from './deps_local.concat.js';
+
 import {Distribution, GoogMetricsReporter}
     from './nassh_goog_metrics_reporter.js';
 import {LocalPreferenceManager} from './nassh_preference_manager.js';

@@ -6,6 +6,8 @@
  * @fileoverview Common code for terminal and it settings page.
  */
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
 
 // Fonts which are installed in ChromeOS.

@@ -7,6 +7,9 @@
  *
  * @suppress {moduleLoad}
  */
+
+import {lib} from './deps_local.concat.js';
+
 import {LitElement, css, html} from './lit.js';
 import {CHROME_VERSION} from './terminal_common.js';
 

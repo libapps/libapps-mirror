@@ -6,6 +6,8 @@
  * @fileoverview Initializes global state used in terminal.
  */
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {terminal} from './terminal.js';
 import {composeSshUrl, definePrefs, init, watchColors}
   from './terminal_common.js';

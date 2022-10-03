@@ -7,6 +7,9 @@
  *
  * @suppress {moduleLoad}
  */
+
+import {lib} from './deps_local.concat.js';
+
 import {LitElement, css, html} from './lit.js';
 import {redispatchEvent} from './terminal_common.js';
 import './terminal_knob.js';

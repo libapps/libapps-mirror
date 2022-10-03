@@ -6,6 +6,8 @@
  * @fileoverview Implementation for the corp-relay@google.com proxy.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {localize} from './nassh.js';
 import {Relay} from './nassh_relay.js';
 import {Stream} from './nassh_stream.js';

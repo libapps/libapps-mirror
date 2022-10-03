@@ -6,6 +6,8 @@
  * @fileoverview Test suite for the generic SSH agent in Agent.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {keyBlobToAuthorizedKeysFormat} from './nassh_agent.js';
 
 describe('nassh_agent_tests.js', () => {

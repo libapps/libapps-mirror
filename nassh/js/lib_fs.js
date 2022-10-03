@@ -6,6 +6,8 @@
  * @fileoverview HTML5 FileSystem related utility functions.
  */
 
+import {lib} from './deps_local.concat.js';
+
 /**
  * Overwrite a file on an HTML5 filesystem.
  *

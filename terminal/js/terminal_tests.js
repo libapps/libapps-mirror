@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {terminal} from './terminal.js';
 import {MockTabsController, MockTerminalPrivate}
     from './terminal_test_mocks.js';

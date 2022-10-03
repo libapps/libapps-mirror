@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {lib} from './deps_local.concat.js';
+
 /**
  * A general packet. Utilizes an offset to keep track of data being
  * read/written.

@@ -6,6 +6,8 @@
  * @fileoverview Stream for connecting to a ssh server via a Websocket relay.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {newBuffer} from './nassh_buffer.js';
 import {Stream} from './nassh_stream.js';
 

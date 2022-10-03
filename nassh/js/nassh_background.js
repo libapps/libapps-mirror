@@ -6,6 +6,8 @@
  * @fileoverview Utility code for the background page.
  */
 
+import {hterm} from './deps_local.concat.js';
+
 import {getSyncStorage} from './nassh.js';
 import {PreferenceManager} from './nassh_preference_manager.js';
 

@@ -6,6 +6,8 @@
  * @fileoverview nasftp tests.
  */
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {Cli, ProgressBar} from './nasftp_cli.js';
 import {CommandInstance} from './nassh_command_instance.js';
 import {MockSftpClient} from './nassh_sftp_fsp_tests.js';

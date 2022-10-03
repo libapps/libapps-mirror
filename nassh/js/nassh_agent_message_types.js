@@ -7,6 +7,8 @@
  * the SSH agent protocol.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {concatTyped} from './lib_array.js';
 import {Message} from './nassh_agent_message.js';
 

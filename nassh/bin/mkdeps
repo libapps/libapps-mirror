@@ -61,6 +61,7 @@ def mkdeps(rollup=True):
     libdot.concat.concat(
         nassh.DIR / "concat" / "deps_local.concat",
         nassh.DIR / "js" / "deps_local.concat.js",
+        es_module=True,
     )
     if rollup:
         libdot.node.run(["rollup", "-c"], cwd=nassh.DIR)

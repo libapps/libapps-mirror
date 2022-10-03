@@ -8,6 +8,8 @@
  * @suppress {moduleLoad}
  */
 
+import {hterm} from './deps_local.concat.js';
+
 import {LitElement, createRef, css, html, ref} from './lit.js';
 import './terminal_dropdown.js';
 import {ICON_PLUS} from './terminal_icons.js';

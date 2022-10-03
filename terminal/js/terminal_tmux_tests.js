@@ -6,6 +6,8 @@
  * @fileoverview Unit tests for terminal_tmux.js.
  */
 
+import {hterm} from './deps_local.concat.js';
+
 import {MockFunction, MockObject} from './terminal_test_mocks.js';
 import {DriverChannel, PseudoTmuxCommand, TmuxControllerDriver}
     from './terminal_tmux.js';

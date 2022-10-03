@@ -8,6 +8,8 @@
  *                handled by their respective SFTP clients.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {Client as sftpClient} from './nassh_sftp_client.js';
 import {
   File, FileAttrs, OpenFlags, StatusCodes,

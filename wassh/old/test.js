@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {hterm} from '../../nassh/js/deps_local.concat.js';
 import {SyscallEntry} from '../../wasi-js-bindings/index.js';
 import * as WasshProcess from '../js/process.js';
 import * as WasshSyscallEntry from '../js/syscall_entry.js';

@@ -8,6 +8,8 @@
  * @suppress {moduleLoad}
  */
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {LitElement, css, html, when} from './lit.js';
 import './terminal_button.js';
 import {DEFAULT_VM_NAME, composeSshUrl, getOSInfo} from './terminal_common.js';

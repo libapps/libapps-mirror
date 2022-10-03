@@ -10,3 +10,5 @@
 
 @resource nassh/release/lastver text/plain head -1 release-highlights.txt
 @resource nassh/release/highlights text/plain grep ^% release-highlights.txt
+
+nassh/concat/es.js

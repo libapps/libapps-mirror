@@ -6,6 +6,8 @@
  * @fileoverview Stream for connecting to a ssh server via a Corp v4 relay.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {localize} from './nassh.js';
 import {newBuffer} from './nassh_buffer.js';
 import {GoogMetricsReporter} from './nassh_goog_metrics_reporter.js';

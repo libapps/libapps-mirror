@@ -8,6 +8,8 @@
  * @suppress {moduleLoad}
  */
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {getIndexeddbFileSystem} from './nassh_fs.js';
 
 import {LitElement, createRef, css, html, ref, when} from './lit.js';

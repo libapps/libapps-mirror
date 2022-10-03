@@ -6,6 +6,8 @@
  * @fileoverview Initializes global state used in terminal settings.
  */
 
+import {hterm, lib} from './deps_local.concat.js';
+
 import {definePrefs, init, normalizePrefsInPlace} from './terminal_common.js';
 
 window.addEventListener('DOMContentLoaded', async () => {

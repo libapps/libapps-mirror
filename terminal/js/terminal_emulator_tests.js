@@ -6,6 +6,8 @@
  * @fileoverview Unit tests for terminal_emulator.js.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {sleep} from './terminal_common.js';
 import {encodeKeyCombo, Modifier, XtermTerminal, XtermTerminalTestParams}
     from './terminal_emulator.js';
