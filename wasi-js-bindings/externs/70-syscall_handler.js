@@ -151,7 +151,12 @@ class SyscallHandler {
    */
   handle_fd_read(fd, length) {}
 
-  /** @return {!WASI_t.errno|{length: !WASI_t.size}} */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!TypedArray} buf
+   * @param {!WASI_t.dircookie} cookie
+   * @return {!WASI_t.errno|{length: !WASI_t.size}}
+   */
   handle_fd_readdir(fd, buf, cookie) {}
 
   /**
@@ -311,6 +316,10 @@ class SyscallHandler {
   /** @return {!WASI_t.errno} */
   handle_sock_send(fd, si_data, si_flags, so_datalen_ptr) {}
 
-  /** @return {!WASI_t.errno} */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.u32} how
+   * @return {!WASI_t.errno}
+   */
   handle_sock_shutdown(fd, how) {}
 }

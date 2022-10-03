@@ -52,4 +52,4 @@ var it = function(name, fn) {};
  * @param {string} name
  * @param {function(function())} fn
  */
-it.skip = function(name, fn) {}
+it.skip = function(name, fn) {};

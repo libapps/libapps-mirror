@@ -64,7 +64,7 @@ WASI_t.errno;
 
 /** @enum {!WASI_t.u16} */
 WASI_t.eventrwflags = {
-  FD_READWRITE_HANGUP: 0
+  FD_READWRITE_HANGUP: 0,
 };
 
 /** @enum {!WASI_t.u8} */

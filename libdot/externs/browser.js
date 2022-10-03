@@ -48,8 +48,10 @@ var Intl = Intl || {};
 
 /**
  * @param {string=} locales
- * @param {!{localeMatcher:(string|undefined), granularity:(string|undefined)}=}
- *     options
+ * @param {!{
+ *     localeMatcher:(string|undefined),
+ *     granularity:(string|undefined),
+ * }=} options
  * @constructor
  */
 Intl.Segmenter = function(locales, options) {};

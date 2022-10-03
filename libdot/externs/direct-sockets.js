@@ -22,7 +22,7 @@ class TCPSocket {
   }
 
   close() {}
-};
+}
 
 /**
  * @typedef {{
@@ -43,5 +43,5 @@ TCPSocket.TCPSocketOpenInfo;
  *   noDelay: (boolean|undefined),
  *   keepAliveDelay: (number|undefined),
  * }}
-*/
+ */
 TCPSocket.TcpSocketOptions;
