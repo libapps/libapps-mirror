@@ -15,9 +15,9 @@
 lib.Storage.Local = function(storage = undefined) {
   this.observers_ = [];
   /** @type {!Storage} */
-  this.storage_ = storage ? storage : lib.notNull(window.localStorage);
+  this.storage_ = storage ? storage : lib.notNull(globalThis.localStorage);
   // Closure thinks all addEventListener calls take Events.
-  window.addEventListener(
+  globalThis.addEventListener(
       'storage',
       /** @type {function(!Event)} */ (this.onStorage_.bind(this)));
 };

@@ -78,7 +78,7 @@ lib.f.getURL = function(path) {
 
   // Use current location origin if path is absolute.
   if (path.startsWith('/')) {
-    return window.location.origin + path;
+    return globalThis.location.origin + path;
   }
 
   return path;
@@ -90,7 +90,7 @@ lib.f.getURL = function(path) {
  * @return {boolean} True if chrome.runtime.getURL is supported.
  */
 lib.f.getURL.chromeSupported = function() {
-  return !!(window.chrome && chrome.runtime && chrome.runtime.getURL);
+  return !!(globalThis.chrome?.runtime?.getURL);
 };
 
 /**
@@ -207,12 +207,12 @@ lib.f.randomInt = function(min, max) {
  */
 lib.f.getOs = function() {
   // Try the brower extensions API.
-  if (window.browser && browser.runtime && browser.runtime.getPlatformInfo) {
+  if (globalThis.browser?.runtime?.getPlatformInfo) {
     return browser.runtime.getPlatformInfo().then((info) => info.os);
   }
 
   // Use the native Chrome API if available.
-  if (window.chrome && chrome.runtime && chrome.runtime.getPlatformInfo) {
+  if (globalThis.chrome?.runtime?.getPlatformInfo) {
     return new Promise((resolve, reject) => {
       return chrome.runtime.getPlatformInfo((info) => resolve(info.os));
     });
@@ -220,7 +220,7 @@ lib.f.getOs = function() {
 
   // Fallback logic.  Capture the major OS's.  The rest should support the
   // browser API above.
-  if (window.navigator && navigator.userAgent) {
+  if (globalThis.navigator?.userAgent) {
     const ua = navigator.userAgent;
     if (ua.includes('Mac OS X')) {
       return Promise.resolve('mac');
@@ -250,7 +250,7 @@ lib.f.getOs = function() {
  * @return {number} The milestone number if we're running on Chrome, else NaN.
  */
 lib.f.getChromeMilestone = function() {
-  if (window.navigator && navigator.userAgent) {
+  if (globalThis.navigator?.userAgent) {
     const ary = navigator.userAgent.match(/\sChrome\/(\d+)/);
     if (ary) {
       return parseInt(ary[1], 10);
@@ -272,9 +272,9 @@ lib.f.getChromeMilestone = function() {
  */
 lib.f.lastError = function(defaultMsg = null) {
   let lastError;
-  if (window.browser && browser.runtime) {
+  if (globalThis.browser?.runtime) {
     lastError = browser.runtime.lastError;
-  } else if (window.chrome && chrome.runtime) {
+  } else if (globalThis.chrome?.runtime) {
     lastError = chrome.runtime.lastError;
   }
 
@@ -299,7 +299,7 @@ lib.f.lastError = function(defaultMsg = null) {
  */
 lib.f.openWindow = function(url, name = undefined, features = undefined) {
   // We create the window first without the URL loaded.
-  const win = window.open(undefined, name, features);
+  const win = globalThis.open(undefined, name, features);
 
   // If the system is blocking window.open, don't crash.
   if (win !== null) {

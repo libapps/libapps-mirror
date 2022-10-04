@@ -34,7 +34,7 @@ it('getURL', () => {
   } else {
     // We don't have a chrome.runtime and such, absolute path should use current
     // location origin, else pass through.
-    assert.equal(lib.f.getURL('/foo'), window.location.origin + '/foo');
+    assert.equal(lib.f.getURL('/foo'), globalThis.location.origin + '/foo');
     assert.equal(lib.f.getURL('foo'), 'foo');
   }
 });
@@ -114,7 +114,7 @@ it('getOs', () => {
  */
 it('getChromeMilestone', () => {
   const milestone = lib.f.getChromeMilestone();
-  if (window.chrome) {
+  if (globalThis.chrome) {
     assert.isAbove(milestone, 30);
   } else {
     assert.isNaN(milestone);

@@ -34,7 +34,7 @@ it('local-delete-default', (done) => {
    */
   function newEvent() {
     return new StorageEvent('storage', {
-      storageArea: window.localStorage,
+      storageArea: globalThis.localStorage,
       key: '/color',
       oldValue: JSON.stringify('blue'),
       newValue: null,
@@ -42,7 +42,7 @@ it('local-delete-default', (done) => {
   }
   // Simpulate deleting the key on another browser.
   const event = newEvent();
-  window.dispatchEvent(event);
+  globalThis.dispatchEvent(event);
 });
 
 /**

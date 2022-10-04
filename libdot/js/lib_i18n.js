@@ -15,8 +15,8 @@ lib.i18n = {};
  * Convenience shortcut to the browser i18n object.
  */
 lib.i18n.browser_ =
-    window.browser && browser.i18n ? browser.i18n :
-    window.chrome && chrome.i18n ? chrome.i18n :
+    globalThis.browser?.i18n ? browser.i18n :
+    globalThis.chrome?.i18n ? chrome.i18n :
     null;
 
 /**

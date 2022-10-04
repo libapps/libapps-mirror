@@ -15,9 +15,9 @@ describe('lib_storage_local_tests.js', () => {
  */
 beforeEach(function() {
   // Make sure other/previous tests don't leak.
-  window.sessionStorage.clear();
+  globalThis.sessionStorage.clear();
 
-  this.storage = new lib.Storage.Local(window.sessionStorage);
+  this.storage = new lib.Storage.Local(globalThis.sessionStorage);
 });
 
 storageApiTest();

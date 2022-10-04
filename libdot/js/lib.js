@@ -19,8 +19,8 @@ const lib = {};
  * @closurePrimitive {asserts.truthy}
  */
 lib.assert = function(condition) {
-  if (window.chai) {
-    lib.assert = window.chai.assert;
+  if (globalThis.chai) {
+    lib.assert = globalThis.chai.assert;
   } else {
     lib.assert = function(condition) {};
   }
