@@ -12,7 +12,7 @@ describe('hterm_find_bar_tests.js', () => {
  * Ensure fresh terminal is used for every test case.
  */
 beforeEach(function(done) {
-  const document = window.document;
+  const document = globalThis.document;
 
   const div = this.div = document.createElement('div');
   div.style.position = 'absolute';
@@ -50,7 +50,7 @@ beforeEach(function(done) {
  * Remove the terminal.
  */
 afterEach(function() {
-  window.document.body.removeChild(this.div);
+  globalThis.document.body.removeChild(this.div);
 });
 
 function setInputElementValue(value, inputElement) {

@@ -2224,7 +2224,7 @@ hterm.VT.OSC['52'] = function(parseState) {
 
   let data;
   try {
-    data = window.atob(args[1]);
+    data = globalThis.atob(args[1]);
   } catch (e) {
     // If the user sent us invalid base64 content, silently ignore it.
     return;
@@ -2327,7 +2327,7 @@ hterm.VT.OSC['1337'] = function(parseState) {
     switch (kv[1]) {
       case 'name':
         try {
-          options.name = window.atob(kv[2]);
+          options.name = globalThis.atob(kv[2]);
         } catch (e) {
           // Ignore invalid base64 from user.
         }

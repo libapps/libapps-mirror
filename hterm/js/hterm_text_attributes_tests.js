@@ -30,7 +30,7 @@ it('isDefault', () => {
  * Make sure createContainer works reasonably.
  */
 it('createContainer', () => {
-  const tattrs = new hterm.TextAttributes(window.document);
+  const tattrs = new hterm.TextAttributes(globalThis.document);
   let node;
 
   // We don't check all the fields currently.  Not clear it's worth the effort.
@@ -56,7 +56,7 @@ it('createContainer', () => {
  * Make sure matchesContainer works correctly.
  */
 it('matchesContainer', () => {
-  const tattrs = new hterm.TextAttributes(window.document);
+  const tattrs = new hterm.TextAttributes(globalThis.document);
   let node;
 
   // For plain string, this is just isDefault.
@@ -78,7 +78,7 @@ it('matchesContainer', () => {
  * Check combination of text decorations.
  */
 it('decoration-combos', () => {
-  const tattrs = new hterm.TextAttributes(window.document);
+  const tattrs = new hterm.TextAttributes(globalThis.document);
   let node;
 
   // Underline.
@@ -121,7 +121,7 @@ it('decoration-combos', () => {
  * Underline colors.
  */
 it('underline-colors', () => {
-  const tattrs = new hterm.TextAttributes(window.document);
+  const tattrs = new hterm.TextAttributes(globalThis.document);
   let node;
 
   tattrs.underline = 'solid';
@@ -153,15 +153,15 @@ it('underline-colors', () => {
  * Inverse color processing.
  */
 it('inverse-colors', () => {
-  const tattrs = new hterm.TextAttributes(window.document);
+  const tattrs = new hterm.TextAttributes(globalThis.document);
   let node;
 
   // Set an attribute to force a container (rather than a text node),
   // but doesn't affect the color behavior in syncColors.
   tattrs.underline = true;
-  window.document.documentElement.style.setProperty(
+  globalThis.document.documentElement.style.setProperty(
       '--hterm-foreground-color', 'rgb(1, 2, 3)');
-  window.document.documentElement.style.setProperty(
+  globalThis.document.documentElement.style.setProperty(
       '--hterm-background-color', 'rgb(3, 2, 1)');
 
   // Test with default colors.
@@ -212,14 +212,14 @@ it('inverse-colors', () => {
  * Handling of invisible tags.
  */
 it('invisible', () => {
-  const tattrs = new hterm.TextAttributes(window.document);
+  const tattrs = new hterm.TextAttributes(globalThis.document);
 
   // Set an attribute to force a container (rather than a text node),
   // but doesn't affect the color behavior in syncColors.
   tattrs.underline = true;
-  window.document.documentElement.style.setProperty(
+  globalThis.document.documentElement.style.setProperty(
       '--hterm-foreground-color', 'rgb(1, 2, 3)');
-  window.document.documentElement.style.setProperty(
+  globalThis.document.documentElement.style.setProperty(
       '--hterm-background-color', 'rgb(3, 2, 1)');
 
   // Set colors to something other than the default.

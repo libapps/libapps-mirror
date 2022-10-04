@@ -547,7 +547,7 @@ hterm.ScrollPort.prototype.decorate = function(div, callback) {
 
   // Insert Iframe content asynchronously in FF.  Otherwise when the frame's
   // load event fires in FF it clears out the content of the iframe.
-  if ('mozInnerScreenX' in window) { // detect a FF only property
+  if ('mozInnerScreenX' in globalThis) { // detect a FF only property
     this.iframe_.addEventListener('load', () => onLoad());
   } else {
     onLoad();
@@ -1936,7 +1936,7 @@ hterm.ScrollPort.prototype.onTouch_ = function(e) {
     case 'touchstart':
       // Workaround focus bug on CrOS if possible.
       // TODO(vapier): Drop this once https://crbug.com/919222 is fixed.
-      if (hterm.os == 'cros' && window.chrome && chrome.windows) {
+      if (hterm.os == 'cros' && globalThis.chrome?.windows?.getCurrent) {
         chrome.windows.getCurrent((win) => {
           if (!win.focused) {
             chrome.windows.update(win.id, {focused: true});

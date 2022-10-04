@@ -22,13 +22,13 @@ hterm.windowType = null;
  * Initialize hterm.windowType.
  */
 hterm.initWindowType_ = async function() {
-  if (window?.chrome?.tabs?.getCurrent) {
+  if (globalThis.chrome?.tabs?.getCurrent) {
     // The getCurrent method gets the tab that is "currently running",
     // not the topmost or focused tab.
     const tab = await new Promise((resolve) => {
       chrome.tabs.getCurrent(resolve);
     });
-    if (tab && window?.chrome?.windows?.get) {
+    if (tab && globalThis.chrome?.windows?.get) {
       const win = await new Promise((resolve) => {
         chrome.windows.get(tab.windowId, null, resolve);
       });
@@ -107,7 +107,7 @@ hterm.initPromise = hterm.init_();
  * @return {!TrustedHTML|string}
  */
 hterm.sanitizeHtml = function(html) {
-  if (window?.trustedTypes?.createPolicy) {
+  if (globalThis.trustedTypes?.createPolicy) {
     if (!hterm.sanitizeHtml.policy) {
       hterm.sanitizeHtml.policy = trustedTypes.createPolicy('default', {
         createHTML: (source) => source,
@@ -266,7 +266,7 @@ hterm.notify = function(params) {
       'icon': def(params.icon, lib.resource.getDataUrl('hterm/images/icon-96')),
   };
 
-  let title = def(params.title, window.document.title);
+  let title = def(params.title, globalThis.document.title);
   if (!title) {
     title = 'hterm';
   }
@@ -274,7 +274,7 @@ hterm.notify = function(params) {
 
   const n = new Notification(title, options);
   n.onclick = function() {
-    window.focus();
+    globalThis.focus();
     n.close();
   };
   return n;
@@ -286,7 +286,7 @@ hterm.notify = function(params) {
  * @param {string} url URL to launch in a new tab.
  */
 hterm.openUrl = function(url) {
-  if (window.chrome && chrome.browser && chrome.browser.openTab) {
+  if (globalThis.chrome?.browser?.openTab) {
     // For Chrome v2 apps, we need to use this API to properly open windows.
     chrome.browser.openTab({'url': url});
   } else {

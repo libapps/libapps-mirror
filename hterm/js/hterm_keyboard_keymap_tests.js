@@ -14,8 +14,8 @@ describe('hterm_keyboard_keymap_tests.js', () => {
    * Mock window.open, set up keyMap.
    */
   beforeEach(function() {
-    this.originalOpen = window.open;
-    window.open = function() { return null; };
+    this.originalOpen = globalThis.open;
+    globalThis.open = function() { return null; };
     this.terminal = {
       passCtrlN: false,
       passCtrlT: false,
@@ -30,7 +30,7 @@ describe('hterm_keyboard_keymap_tests.js', () => {
    * Restore window.open.
    */
   afterEach(function() {
-    window.open = this.originalOpen;
+    globalThis.open = this.originalOpen;
   });
 
   /** Verify tab shortcuts. */

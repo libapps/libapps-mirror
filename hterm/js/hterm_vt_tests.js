@@ -27,7 +27,7 @@ before(function() {
  * Called before each test case in this suite.
  */
 beforeEach(function(done) {
-  this.document = window.document;
+  this.document = globalThis.document;
 
   const div = this.document.createElement('div');
   div.style.position = 'absolute';

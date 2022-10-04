@@ -89,8 +89,8 @@ it('forever-alone', (done) => {
 it('exception', function(done) {
     // We need to manually disable this.
     // https://github.com/mochajs/mocha/issues/1985
-    const oldOnerror = window.onerror;
-    window.onerror = () => true;
+    const oldOnerror = globalThis.onerror;
+    globalThis.onerror = () => true;
 
     const calledFoo = false;
     let calledBar = false;
@@ -113,7 +113,7 @@ it('exception', function(done) {
         assert.isFalse(calledFoo);
         assert.isTrue(calledBar);
         assert.isTrue(calledLast);
-        window.onerror = oldOnerror;
+        globalThis.onerror = oldOnerror;
         done();
       } else {
         setTimeout(check, 1);

@@ -41,7 +41,7 @@ before(function() {
   this.visibleRowCount = 25;
   this.totalRowCount = 10000;
 
-  const document = window.document;
+  const document = globalThis.document;
 
   this.rowProvider = new MockRowProvider(document, this.totalRowCount);
 
@@ -66,7 +66,7 @@ after(function() {
  * scrollport to test on.
  */
 beforeEach(function(done) {
-  const selection = window.getSelection();
+  const selection = globalThis.getSelection();
   if (!selection.isCollapsed) {
     selection.collapseToStart();
   }
@@ -819,7 +819,7 @@ it('scroll-selection-hidden', function() {
  * with a full page scrollPort to poke at.
  */
 it('fullscreen', function() {
-    const document = window.document;
+    const document = globalThis.document;
 
     const rowProvider = new MockRowProvider(document, this.totalRowCount);
 
@@ -864,7 +864,7 @@ beforeEach(function() {
   // Create a new port since so the subscribe event doesn't stick to
   // this.scrollPort across multiple tests.
   this.scrollPort = new hterm.ScrollPort(
-      new MockRowProvider(window.document, 0));
+      new MockRowProvider(globalThis.document, 0));
 });
 
 /**

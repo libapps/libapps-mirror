@@ -231,6 +231,7 @@
         string, segment(this._locale, this._granularity, string));
     }
   };
-}(typeof window !== 'undefined' ?
-      window :
-      (typeof global !== 'undefined' ? global : this)));
+}(typeof globalThis !== 'undefined' ? globalThis :
+  typeof window !== 'undefined' ? window :
+  typeof global !== 'undefined' ? global :
+  {}));

@@ -153,10 +153,10 @@ function setupHterm() {
   ]);
 
   // Useful for console debugging.
-  window.term_ = term;
+  globalThis.term_ = term;
 }
 
-window.onload = function() {
+globalThis.onload = function() {
   setupHterm();
 };
 </script>

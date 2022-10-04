@@ -290,8 +290,8 @@ hterm.Keyboard.KeyMap.prototype.reset = function() {
   let keycapSC;
   let keycapEP;
   let keycapMU;
-  if (window.navigator && navigator.userAgent &&
-      navigator.userAgent.includes('Firefox')) {
+  if (globalThis.navigator?.userAgent &&
+      globalThis.navigator.userAgent.includes('Firefox')) {
     // Firefox defines some keys uniquely.  No other browser defines these in
     // this way.  Some even conflict.  The keyCode field isn't well documented
     // as it isn't standardized.  At some point we should switch to "key".
@@ -845,8 +845,8 @@ hterm.Keyboard.KeyMap.prototype.onCtrlN_ = function(e) {
   if (e.shiftKey) {
     lib.f.openWindow(document.location.href, '',
                      'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                     'minimizable=yes,width=' + window.innerWidth +
-                     ',height=' + window.innerHeight);
+                     `minimizable=yes,width=${globalThis.innerWidth}` +
+                     `,height=${globalThis.innerHeight}`);
     return hterm.Keyboard.KeyActions.CANCEL;
   }
 
@@ -890,8 +890,8 @@ hterm.Keyboard.KeyMap.prototype.onMetaN_ = function(e) {
   if (e.shiftKey) {
     lib.f.openWindow(document.location.href, '',
                      'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                     'minimizable=yes,width=' + window.outerWidth +
-                     ',height=' + window.outerHeight);
+                     `minimizable=yes,width=${globalThis.outerWidth}` +
+                     `,height=${globalThis.outerHeight}`);
     return hterm.Keyboard.KeyActions.CANCEL;
   }
 

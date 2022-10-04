@@ -71,7 +71,7 @@ hterm.Terminal = function({profileId, storage} = {}) {
   // The document that contains the scrollPort.  Defaulted to the global
   // document here so that the terminal is functional even if it hasn't been
   // inserted into a document yet, but re-set in decorate().
-  this.document_ = window.document;
+  this.document_ = globalThis.document;
 
   // The rows that have scrolled off screen and are no longer addressable.
   this.scrollbackRows_ = [];
@@ -1136,7 +1136,7 @@ hterm.Terminal.prototype.setTextAttributes = function(textAttributes) {
  * @param {string} title The title to set.
  */
 hterm.Terminal.prototype.setWindowTitle = function(title) {
-  window.document.title = title;
+  globalThis.document.title = title;
 };
 
 /**

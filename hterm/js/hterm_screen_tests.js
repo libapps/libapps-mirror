@@ -585,7 +585,7 @@ it('whitespace-fill', function() {
  * Test expanding strings when selecting.
  */
 it('expand-selection', function() {
-  const document = window.document;
+  const document = globalThis.document;
   const row = document.createElement('x-row');
   document.body.appendChild(row);
 

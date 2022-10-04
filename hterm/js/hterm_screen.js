@@ -57,7 +57,7 @@ hterm.Screen = function(columnCount = 0) {
   this.columnCount_ = columnCount;
 
   // The current color, bold, underline and blink attributes.
-  this.textAttributes = new hterm.TextAttributes(window.document);
+  this.textAttributes = new hterm.TextAttributes(globalThis.document);
 
   // Current zero-based cursor coordinates.
   this.cursorPosition = new hterm.RowCol(0, 0);

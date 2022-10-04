@@ -24,7 +24,7 @@ before(() => {
  * Called before each test case in this suite.
  */
 beforeEach(function() {
-  const document = window.document;
+  const document = globalThis.document;
 
   const div = this.div = document.createElement('div');
   div.style.position = 'absolute';
@@ -43,7 +43,7 @@ beforeEach(function() {
  * Clean up the hterm.AccessibilityReader object.
  */
 afterEach(function() {
-  window.document.body.removeChild(this.div);
+  globalThis.document.body.removeChild(this.div);
 });
 
 /**

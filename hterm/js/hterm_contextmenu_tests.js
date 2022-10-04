@@ -23,7 +23,7 @@ it('contextmenu-stub', () => {
  * Verify we can show/hide a simple menu.
  */
 it('contextmenu-simple', () => {
-  const document = window.document;
+  const document = globalThis.document;
   const menu = new hterm.ContextMenu();
   menu.setDocument(document);
 
@@ -39,7 +39,7 @@ it('contextmenu-simple', () => {
  * Check separator handling.
  */
 it('contextmenu-separator', () => {
-  const document = window.document;
+  const document = globalThis.document;
   const menu = new hterm.ContextMenu();
   menu.setDocument(document);
 

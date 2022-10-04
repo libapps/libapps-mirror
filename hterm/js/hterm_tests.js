@@ -61,7 +61,7 @@ it('notification-fields', () => {
  * Test copying content via execCommand.
  */
 it.skip('copy-execCommand', (done) => {
-  const doc = window.document;
+  const doc = globalThis.document;
 
   // Mock out newer clipboard API to make sure we don't use it.
   let oldClipboardWrite;

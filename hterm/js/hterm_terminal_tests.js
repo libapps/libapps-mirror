@@ -30,7 +30,7 @@ before(function() {
  * Called before each test case in this suite.
  */
 beforeEach(function(done) {
-  const document = window.document;
+  const document = globalThis.document;
 
   const div = this.div = document.createElement('div');
   div.style.position = 'absolute';
