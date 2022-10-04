@@ -43,7 +43,7 @@ EXCLUDE_PATTERNS = (
     "*_test.html",
     "*_test.js",
     "*_tests.js",
-    "js/nassh_deps_rollup_shim.js",
+    "js/deps_*.shim.js",
 )
 
 # List of additionall files to be excluded when building crosh archive.
