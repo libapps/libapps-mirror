@@ -28,7 +28,9 @@ def _get_default_paths(basedir):
         x
         for x in terminal.JS_DIR.glob("*.js")
         if not (
-            x.name.startswith("nassh_deps") or x.name == "terminal_import.js"
+            x.name.startswith("nassh_deps")
+            or x.name.startswith("deps_")
+            or x.name == "terminal_import.js"
         )
     )
 
@@ -59,7 +61,7 @@ def main(argv):
         + [
             # TODO(vapier): We want to turn this on at some point.
             "--jscomp_off=strictMissingProperties",
-            "js/nassh_deps.concat.js",
+            "js/deps_local.concat.js",
         ]
     )
     return libdot.lint.main(

@@ -7,7 +7,7 @@
   <link rel='stylesheet' href='../css/licenses.css'></link>
   <link rel='stylesheet' href='../css/chrome-bootstrap-darkmode.css'></link>
 
-  <script src='../js/nassh_deps.concat.js'></script>
+  <script src='../js/deps_local.concat.js'></script>
 
   <script type='module' src='../js/licenses.js'></script>
 </head>

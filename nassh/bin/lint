@@ -18,7 +18,7 @@ WASSH_DIR = libdot.LIBAPPS_DIR / "wassh"
 WJB_DIR = libdot.LIBAPPS_DIR / "wasi-js-bindings"
 
 # Path to generated deps file that terminal uses for libdot/hterm/etc...
-DEPS_FILE = os.path.join(JS_DIR, "nassh_deps.concat.js")
+DEPS_FILE = os.path.join(JS_DIR, "deps_local.concat.js")
 
 
 def _get_default_paths(basedir):
@@ -33,7 +33,9 @@ def _get_default_paths(basedir):
     # Use relpath for nicer default output.
     # Sort to ensure nasftp.js comes before nasftp_cli.js, etc.
     js_files = sorted(
-        x for x in JS_DIR.glob("*.js") if not x.name.startswith("nassh_deps")
+        x
+        for x in JS_DIR.glob("*.js")
+        if not (x.name.startswith("nassh_deps") or x.name.startswith("deps_"))
     )
 
     return [os.path.relpath(x) for x in most_files + js_files]

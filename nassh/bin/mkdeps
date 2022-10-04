@@ -59,8 +59,8 @@ assert not BANNED_LICENSES & ALLOWED_LICENSES
 def mkdeps(rollup=True):
     """Build the dependencies."""
     libdot.concat.concat(
-        nassh.DIR / "concat" / "nassh_deps.concat",
-        nassh.DIR / "js" / "nassh_deps.concat.js",
+        nassh.DIR / "concat" / "deps_local.concat",
+        nassh.DIR / "js" / "deps_local.concat.js",
     )
     if rollup:
         libdot.node.run(["rollup", "-c"], cwd=nassh.DIR)

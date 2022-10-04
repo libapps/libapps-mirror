@@ -35,7 +35,7 @@ The Secure Shell app depends on some library code from
 
     nassh$ ./bin/mkdeps
 
-This will create the `nassh/js/nassh_deps.concat.js` file containing all of the
+This will create the `nassh/js/deps_local.concat.js` file containing all of the
 necessary libdot and hterm source.
 
 ## The NaCl plugin dependency

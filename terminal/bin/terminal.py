@@ -38,7 +38,7 @@ class SymlinkNasshFiles:
             p for p in (NASSH_DIR / "js").glob("*.js") if "test" not in p.name
         }
         # Manually adding them since they might not exist until mkdeps() is run.
-        paths.add(NASSH_DIR / "js/nassh_deps.concat.js")
+        paths.add(NASSH_DIR / "js/deps_local.concat.js")
         paths.add(NASSH_DIR / "js/nassh_deps.rollup.js")
 
         logging.info("symlinking nassh files")
