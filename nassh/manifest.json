@@ -1,8 +1,10 @@
 {
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl8sdzpPbCg8pDh/1zrwU17WdrQROlsJsuxGA0RkMX0T0+b/Tarh4YcSA5NDhAqVO3hA8acmYnjkCCOMpP0roceVLBUOag9WxhpXak4A0ZPrwZi2bLPjx+gxkccyAp8bXwskSvjaL+vF/+zN8PT9yDz/Np7WJmfakksDPAZSoCnbykVbaEtpG8qbbUPgmjndrHkgV9cMjpNLAd+GnlARyQ/DceBPtA27z06N/nV+hS7TRIQJTx7XwH6rGKSJ1gn61/wtBWqZQyL3PA6997++55GYtWVB4pmLPXa0vog3GF2wFYf3geD9v2jfP4t9PhPZy9zESr6fP4nqd1HXd6pzamwIDAQAB",
-  "minimum_chrome_version": "86",
-  "manifest_version": 2,
-  "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self'",
+  "minimum_chrome_version": "108",
+  "manifest_version": 3,
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
   "name": "__MSG_nassh_product_name__",
   "version": "0.53",
   "version_name": "ToT",
@@ -30,7 +32,7 @@
     "fileSystemProvider",
     "accessibilityFeatures.read"
   ],
-  "optional_permissions": [
+  "optional_host_permissions": [
     "https://us-cloudtoplifecycle-googleapis.corp.google.com/*",
     "https://uberproxy-debug.corp.google.com/*"
   ],
@@ -60,12 +62,19 @@
     "source": "network"
   },
   "web_accessible_resources": [
-    "html/nassh.html",
-    "html/nassh_google_relay.html"
+    {
+      "resources": [
+        "html/nassh.html",
+        "html/nassh_google_relay.html"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
   ],
   "background": {
-    "persistent": false,
-    "page": "html/nassh_background.html"
+    "service_worker": "js/nassh_background_main.js",
+    "type": "module"
   },
   "platforms": [
     {
@@ -84,7 +93,7 @@
   "omnibox": {
     "keyword": "ssh"
   },
-  "browser_action": {
+  "action": {
     "default_popup": "html/nassh_popup.html",
     "default_icon": {
       "128": "images/dev/icon-128.png",
