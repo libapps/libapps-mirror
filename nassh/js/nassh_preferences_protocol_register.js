@@ -28,7 +28,7 @@ function openSettings() {
 /**
  * Event when the window finishes loading.
  */
-window.addEventListener('DOMContentLoaded', (event) => {
+globalThis.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById('proto-register').onclick = registerProtocols;
   document.getElementById('proto-open-settings').onclick = openSettings;
 });

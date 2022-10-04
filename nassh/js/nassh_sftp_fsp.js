@@ -623,7 +623,7 @@ export function onUnmountRequested(options, onSuccess, onError) {
     }
   }
 
-  if (window.chrome && chrome.fileSystemProvider) {
+  if (globalThis.chrome?.fileSystemProvider) {
     chrome.fileSystemProvider.unmount(
       {fileSystemId: options.fileSystemId}, () => {
         const err = lib.f.lastError();
@@ -700,7 +700,7 @@ export const providerMethods = [
  * Loop over the provider methods and link them to their handlers.
  */
 export function addListeners() {
-  if (window.chrome && chrome.fileSystemProvider) {
+  if (globalThis.chrome?.fileSystemProvider) {
     providerMethods.forEach((method) => {
       chrome.fileSystemProvider[method.name].addListener(method);
     });

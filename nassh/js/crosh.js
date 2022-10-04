@@ -11,7 +11,7 @@ import {
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.addEventListener('DOMContentLoaded', async (event) => {
+globalThis.addEventListener('DOMContentLoaded', async (event) => {
   const params = new URLSearchParams(document.location.search);
 
   // Make it easy to re-open as a window.
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
       params.delete('openas');
       const url = new URL(document.location.toString());
       url.search = params.toString();
-      Crosh.openNewWindow_(url.href).then(() => window.close());
+      Crosh.openNewWindow_(url.href).then(() => globalThis.close());
       return;
     }
 
@@ -103,7 +103,7 @@ Crosh.init = function() {
   // Since Terminal has shipped and supports Crostini now, we don't need to
   // support anything else, so hardcode crosh.
   const commandName = 'crosh';
-  window.document.title = commandName;
+  globalThis.document.title = commandName;
 
   terminal.decorate(lib.notNull(document.querySelector('#terminal')));
   terminal.installKeyboard();
@@ -167,7 +167,7 @@ Crosh.init = function() {
   ]);
 
   // Useful for console debugging.
-  window.term_ = terminal;
+  globalThis.term_ = terminal;
 
   return true;
 };
@@ -189,8 +189,8 @@ Crosh.openNewWindow_ = function(url) {
   return new Promise((resolve) => {
     chrome.windows.create({
       url: url,
-      width: window.innerWidth,
-      height: window.innerHeight,
+      width: globalThis.innerWidth,
+      height: globalThis.innerHeight,
       focused: true,
       type: 'popup',
     }, resolve);
@@ -265,7 +265,7 @@ Crosh.prototype.run = function() {
       return;
     }
 
-    window.onbeforeunload = this.onBeforeUnload_.bind(this);
+    globalThis.onbeforeunload = this.onBeforeUnload_.bind(this);
     this.id_ = id;
 
     // Setup initial window size.
@@ -341,11 +341,11 @@ Crosh.prototype.onTerminalResize_ = function(width, height) {
  */
 Crosh.prototype.exit = function(code) {
   this.close_();
-  window.onbeforeunload = null;
+  globalThis.onbeforeunload = null;
 
   const onExit = () => {
     if (this.terminal.getPrefs().get('close-on-exit')) {
-      window.close();
+      globalThis.close();
     }
   };
 

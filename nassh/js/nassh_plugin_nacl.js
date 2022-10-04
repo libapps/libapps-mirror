@@ -66,7 +66,7 @@ export class Plugin {
     this.io.sendString = this.sendString_.bind(this);
     this.io.onTerminalResize = this.onTerminalResize_.bind(this);
 
-    this.plugin_ = window.document.createElement('embed');
+    this.plugin_ = globalThis.document.createElement('embed');
     // Height starts at 1px, and is changed to 0 after inserting into body.
     // This modification to the plugin ensures that the 'load' event fires
     // when it is running in the background page.

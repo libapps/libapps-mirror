@@ -459,7 +459,7 @@ const OnMessageRequest = undefined;
 function dispatchMessage_(internal, request, sender, sendResponse) {
   // If we aren't ready yet, reschedule the call.
   if (!handlersReady) {
-    window.setTimeout(
+    setTimeout(
         dispatchMessage_.bind(this, internal, request, sender, sendResponse),
         100);
     return true;
@@ -681,7 +681,7 @@ function(port) {
 function dispatchConnect_(internal, port) {
   // If we aren't ready yet, reschedule the call.
   if (!handlersReady) {
-    window.setTimeout(dispatchConnect_.bind(this, internal, port), 100);
+    setTimeout(dispatchConnect_.bind(this, internal, port), 100);
     return null;
   }
 

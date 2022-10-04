@@ -50,7 +50,7 @@ function init() {
   app.installContextMenus();
 
   // If omnibox is enabled, set it up.
-  if (window.chrome && chrome.omnibox) {
+  if (globalThis.chrome?.omnibox) {
     app.installOmnibox(chrome.omnibox);
   }
 
@@ -75,7 +75,7 @@ function init() {
   }
 
   // Help with live debugging.
-  window.app_ = app;
+  globalThis.app_ = app;
 }
 
 /**

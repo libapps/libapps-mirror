@@ -86,7 +86,7 @@ export function CommandInstance(argv) {
   // fallback to NaCl there as well.
   const naclSupported =
       navigator.mimeTypes['application/x-pnacl'] !== undefined ||
-      window.SharedArrayBuffer === undefined ||
+      globalThis.SharedArrayBuffer === undefined ||
       isCrOSSystemApp();
   // The version of the ssh client to load.
   this.sshClientVersion_ = naclSupported ? 'pnacl' : 'wasm';
@@ -110,7 +110,7 @@ export function CommandInstance(argv) {
   this.mountOptions = argv.mountOptions || null;
 
   // Session storage (can accept another hterm tab's sessionStorage).
-  this.sessionStorage = argv.sessionStorage || window.sessionStorage;
+  this.sessionStorage = argv.sessionStorage || globalThis.sessionStorage;
 
   // Sync storage is where synced prefs are saved.
   this.syncStorage = argv.syncStorage;
@@ -119,7 +119,7 @@ export function CommandInstance(argv) {
   this.terminalLocation = argv.terminalLocation || document.location;
 
   // Terminal Window reference (can accept another hterm tab's window).
-  this.terminalWindow = argv.terminalWindow || window;
+  this.terminalWindow = argv.terminalWindow || globalThis;
 
   /**
    * @type {(?NaclPlugin|?WasmPlugin)} The current plugin (WASM/NaCl/etc...).
@@ -160,14 +160,14 @@ const EXIT_INTERNAL_ERROR = -1;
  */
 CommandInstance.prototype.run = async function() {
   // Useful for console debugging.
-  window.nassh_ = this;
+  globalThis.nassh_ = this;
 
   // Kick off gnubby extension probing in the background.
   const probePromise = probeExtensions();
 
   // In case something goes horribly wrong, display an error to the user so it's
   // easier for them to copy & paste when reporting issues.
-  window.addEventListener('error', (e) => {
+  globalThis.addEventListener('error', (e) => {
     this.io.println(localize('UNEXPECTED_ERROR'));
     if (e.error?.stack) {
       const lines = e.error.stack.split(/[\r\n]/);
@@ -193,15 +193,15 @@ CommandInstance.prototype.run = async function() {
       this.localPrefs_.syncProfiles(this.prefs_);
 
       // updateWindowDimensions_ uses chrome.windows.getCurrent.
-      if (!window?.chrome?.windows?.getCurrent) {
+      if (!globalThis.chrome?.windows?.getCurrent) {
         return;
       }
 
       const updater = this.updateWindowDimensions_.bind(this);
-      window.addEventListener('resize', updater);
+      globalThis.addEventListener('resize', updater);
       // Window doesn't offer a 'move' event, and blur/resize don't seem to
       // work.  Listening for mouseout should be low enough overhead.
-      window.addEventListener('mouseout', updater);
+      globalThis.addEventListener('mouseout', updater);
     });
   });
 
@@ -383,10 +383,10 @@ CommandInstance.prototype.updateWindowDimensions_ = function() {
     // the position/size to be remembered independent of temporarily going to
     // the max screen dimensions.
     if (win.state === 'normal') {
-      profile.set('win/top', window.screenTop);
-      profile.set('win/left', window.screenLeft);
-      profile.set('win/height', window.outerHeight);
-      profile.set('win/width', window.outerWidth);
+      profile.set('win/top', globalThis.screenTop);
+      profile.set('win/left', globalThis.screenLeft);
+      profile.set('win/height', globalThis.outerHeight);
+      profile.set('win/width', globalThis.outerWidth);
     }
   });
 };
@@ -434,14 +434,14 @@ CommandInstance.prototype.promptForDestination_ = function() {
 
     const resize_ = resize.bind(this);
     resize_();
-    window.addEventListener('resize', resize_);
+    globalThis.addEventListener('resize', resize_);
     this.onClose = () => {
-      window.removeEventListener('resize', resize_);
+      globalThis.removeEventListener('resize', resize_);
     };
   };
 
   // Clear retry count whenever we show the dialog.
-  window.sessionStorage.removeItem('googleRelay.redirectCount');
+  globalThis.sessionStorage.removeItem('googleRelay.redirectCount');
 
   connectDialog.show();
 };

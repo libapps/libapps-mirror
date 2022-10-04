@@ -92,15 +92,15 @@ ConnectDialog.onWindowMessage = async function(e) {
     return;
   }
 
-  window.removeEventListener('message', ConnectDialog.onWindowMessage);
+  globalThis.removeEventListener('message', ConnectDialog.onWindowMessage);
 
   await setupForWebApp();
-  window.dialog_ = new ConnectDialog(e.data.argv[0].messagePort);
+  globalThis.dialog_ = new ConnectDialog(e.data.argv[0].messagePort);
   loadWebFonts(document);
 };
 
 // Register the message listener.
-window.addEventListener('message', ConnectDialog.onWindowMessage);
+globalThis.addEventListener('message', ConnectDialog.onWindowMessage);
 
 /**
  * Called by the preference manager when we've retrieved the current preference
@@ -337,7 +337,7 @@ ConnectDialog.prototype.setCurrentProfileRecord = function(profileRecord) {
   this.syncForm_();
 
   // For console debugging.
-  window.p_ = profileRecord;
+  globalThis.p_ = profileRecord;
 };
 
 /**

@@ -13,11 +13,11 @@ import {
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.addEventListener('DOMContentLoaded', async (event) => {
+globalThis.addEventListener('DOMContentLoaded', async (event) => {
   await hterm.initPromise;
 
   // Save a handle for debugging.
-  window.popup_ = new popup();
+  globalThis.popup_ = new popup();
 });
 
 /**
@@ -125,7 +125,7 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
 
   // Close the popup.  It happens automatically on some systems (e.g. Linux),
   // but not all (e.g. ChromeOS).
-  window.close();
+  globalThis.close();
 };
 
 /**
@@ -307,7 +307,7 @@ popup.prototype.populateList_ = function() {
     document.body.appendChild(link);
   }
 
-  window.addEventListener('keydown', /** @type {!EventListener} */ (
+  globalThis.addEventListener('keydown', /** @type {!EventListener} */ (
       this.keydownWindow_.bind(this)));
 
   // Workaround bugs on Chrome on macOS where the popup renders as a small box

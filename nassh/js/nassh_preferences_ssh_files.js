@@ -165,7 +165,7 @@ const watched = {};
 /**
  * Event when the window finishes loading.
  */
-window.addEventListener('DOMContentLoaded', (event) => {
+globalThis.addEventListener('DOMContentLoaded', (event) => {
   // Load all the ~/.ssh files into the UI.
   getIndexeddbFileSystem().then((fs) => {
     filesystem = fs;

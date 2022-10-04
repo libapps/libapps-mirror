@@ -329,7 +329,7 @@ Cli.prototype.onInputChar_ = function(ch) {
        *     the event with the uncaught promise that we need to handle.
        */
       const finishCommand = (e) => {
-        window.removeEventListener('unhandledrejection', finishCommand);
+        globalThis.removeEventListener('unhandledrejection', finishCommand);
         resolve();
 
         if (e) {
@@ -366,7 +366,7 @@ Cli.prototype.onInputChar_ = function(ch) {
 
       // If the subcommand uses an async handler that rejects or crashes,
       // catch it and recover gracefully.
-      window.addEventListener('unhandledrejection', finishCommand);
+      globalThis.addEventListener('unhandledrejection', finishCommand);
 
       // Dispatch the command and wait for it to finish.
       return this.dispatchCommand_(data)

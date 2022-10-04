@@ -6,8 +6,8 @@
  * Non-null if nassh is running as an extension.
  */
 export const browserAction =
-    window.browser && browser.browserAction ? browser.browserAction :
-    window.chrome && chrome.browserAction ? chrome.browserAction :
+    globalThis.browser?.browserAction ? browser.browserAction :
+    globalThis.chrome?.browserAction ? chrome.browserAction :
     null;
 
 hterm.initPromise.then(() => {
@@ -95,8 +95,7 @@ export function openOptionsPage(page = '') {
     lib.f.openWindow(`/html/nassh_preferences_editor.html#${page}`);
   };
 
-  if (!page && window.chrome && chrome.runtime &&
-      chrome.runtime.openOptionsPage) {
+  if (!page && globalThis.chrome?.runtime?.openOptionsPage) {
     // This is a bit convoluted because, in some scenarios (e.g. crosh), the
     // openOptionsPage helper might fail.  If it does, fallback to a tab.
     chrome.runtime.openOptionsPage(() => {
@@ -158,7 +157,7 @@ export function registerProtocolHandler(proto) {
  * fine for our usage as we don't generally create windows/tabs on the fly.
  */
 export function disableTabDiscarding() {
-  if (window.chrome && chrome.tabs) {
+  if (globalThis.chrome?.tabs?.getCurrent) {
     chrome.tabs.getCurrent((tab) => {
       chrome.tabs.update(tab.id, {autoDiscardable: false});
     });
@@ -357,7 +356,7 @@ export function runtimeSendMessage(...args) {
  * @return {!chrome.runtime.Manifest}
  */
 export function getManifest() {
-  if (window?.chrome?.runtime?.getManifest) {
+  if (globalThis.chrome?.runtime?.getManifest) {
     return chrome.runtime.getManifest();
   } else {
     return /** @type {!chrome.runtime.Manifest} */ ({
@@ -378,7 +377,7 @@ export function getSyncStorage() {
   if (isCrOSSystemApp()) {
     return new lib.Storage.TerminalPrivate();
   }
-  if (window?.chrome?.storage?.sync) {
+  if (globalThis.chrome?.storage?.sync) {
     return new lib.Storage.Chrome(chrome.storage.sync);
   }
   return new lib.Storage.Local();
@@ -394,7 +393,7 @@ export function getSyncStorage() {
  * @return {!TrustedScriptURL|string}
  */
  export function sanitizeScriptUrl(url) {
-  if (window?.trustedTypes?.createPolicy) {
+  if (globalThis.trustedTypes?.createPolicy) {
     if (!sanitizeScriptUrl.policy) {
       sanitizeScriptUrl.policy = trustedTypes.createPolicy('nassh', {
         createScriptURL: (url) => url,

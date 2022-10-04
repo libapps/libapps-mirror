@@ -313,7 +313,7 @@ export class Corp extends Relay {
    */
   async showLoginPopup(proxy) {
     const url = `${proxy}&method=close&origin=${
-        encodeURIComponent(window.location.origin)}`;
+        encodeURIComponent(globalThis.location.origin)}`;
     const width = 1000;
     const height = 550;
     const left = (screen.width - width) / 2;

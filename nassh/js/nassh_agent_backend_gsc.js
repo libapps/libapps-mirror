@@ -396,7 +396,7 @@ GSC.prototype.signRequest = async function(keyBlob, data, flags) {
               `0x${flags.toString(16)}`);
         }
         const hash =
-            await window.crypto.subtle.digest(rsaHashConstants.name, data);
+            await globalThis.crypto.subtle.digest(rsaHashConstants.name, data);
         dataToSign = concatTyped(
             rsaHashConstants.identifier, new Uint8Array(hash));
         break;
@@ -410,7 +410,7 @@ GSC.prototype.signRequest = async function(keyBlob, data, flags) {
         const hashAlgorithm =
             OidToCurveInfo[lib.notNull(keyInfo.curveOid)].hashAlgorithm;
         dataToSign = new Uint8Array(
-            await window.crypto.subtle.digest(hashAlgorithm, data));
+            await globalThis.crypto.subtle.digest(hashAlgorithm, data));
         break;
       }
       case KeyTypes.EDDSA:
@@ -1586,7 +1586,7 @@ SmartCardManager.prototype.fetchAuthenticationPublicKeyId = async function() {
       const subjectPublicKeyInfo =
           pkijsCertificate.subjectPublicKeyInfo.toSchema().toBER(false);
       return new Uint8Array(
-          await window.crypto.subtle.digest('SHA-1', subjectPublicKeyInfo));
+          await globalThis.crypto.subtle.digest('SHA-1', subjectPublicKeyInfo));
     }
     default:
       throw new Error(

@@ -66,7 +66,7 @@ let defaultSkeExtension = '';
  */
 async function findSkeExtension() {
   // If we're not in an extension context, nothing to do.
-  if (!window.chrome || !chrome.runtime) {
+  if (!globalThis.chrome?.runtime) {
     return false;
   }
 
@@ -192,7 +192,7 @@ export function getGnubbyExtension() {
  */
 function findGnubbyExtension() {
   // If we're not in an extension context, nothing to do.
-  if (!window.chrome || !chrome.runtime) {
+  if (!globalThis.chrome?.runtime) {
     return Promise.resolve();
   }
 
@@ -254,7 +254,7 @@ let defaultGcseExtension = 'cfmgaohenjcikllcgjpepfadgbflcjof';
  */
 function findGcseExtension() {
   // If we're not in an extension context, nothing to do.
-  if (!window.chrome || !chrome.runtime) {
+  if (!globalThis.chrome?.runtime) {
     return Promise.resolve();
   }
 

@@ -11,7 +11,7 @@ import {
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.addEventListener('DOMContentLoaded', async (event) => {
+globalThis.addEventListener('DOMContentLoaded', async (event) => {
   await setupForWebApp();
 
   // Support multiple settings subpages.
@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     ]);
 
     // Useful for console debugging.
-    window.term_ = term;
+    globalThis.term_ = term;
 
     const prefsEditor = new PreferencesEditor(storage, profileId);
 
@@ -215,7 +215,7 @@ PreferencesEditor.debounce = function(input, callback, timeout = 500) {
  * @param {string} profileId The profile name to read settings from.
  */
 PreferencesEditor.prototype.selectProfile = function(profileId) {
-  window.term_.setProfile(profileId);
+  globalThis.term_.setProfile(profileId);
   const prefs = new hterm.PreferenceManager(this.storage_, profileId);
   this.prefs_ = prefs;
   prefs.readStorage(() => {

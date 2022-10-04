@@ -39,14 +39,14 @@ const showRelayError = function(msg) {
 };
 
 /** On load. */
-window.addEventListener('DOMContentLoaded', (event) => {
+globalThis.addEventListener('DOMContentLoaded', (event) => {
   const hash = document.location.hash.substr(1);
 
   if (hash.indexOf('@') != -1) {
     // URLs containing '@' are legacy v1 redirects.
     const ary = hash.match(/@([^:]+)(?::(\d+))?/);
-    window.sessionStorage.setItem('googleRelay.relayHost', ary[1]);
-    window.sessionStorage.setItem('googleRelay.relayPort', ary[2] || '');
+    globalThis.sessionStorage.setItem('googleRelay.relayHost', ary[1]);
+    globalThis.sessionStorage.setItem('googleRelay.relayPort', ary[2] || '');
   } else {
     // URLs not containing '@' are assumed to be v2 URL safe Base64 JSON blobs.
     const blob = atob(base64UrlToBase64(hash));
@@ -54,8 +54,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     if (params['endpoint']) {
       const [host, port] = params['endpoint'].split(':');
-      window.sessionStorage.setItem('googleRelay.relayHost', host);
-      window.sessionStorage.setItem('googleRelay.relayPort', port || '');
+      globalThis.sessionStorage.setItem('googleRelay.relayHost', host);
+      globalThis.sessionStorage.setItem('googleRelay.relayPort', port || '');
     }
 
     if (params['error']) {
@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
   }
 
-  const path = window.sessionStorage.getItem('googleRelay.resumePath');
+  const path = globalThis.sessionStorage.getItem('googleRelay.resumePath');
   if (!path) {
     showNasshError('Nowhere to resume to!');
     return;
@@ -74,17 +74,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   // Avoid infinite loops when the relay server rejects us and we redirect
   // back and forth.
-  let count =
-      parseInt(window.sessionStorage.getItem('googleRelay.redirectCount'), 10);
+  let count = parseInt(
+      globalThis.sessionStorage.getItem('googleRelay.redirectCount'), 10);
   if (isNaN(count)) {
     count = 0;
   }
   if (++count > 3) {
     showNasshError('Redirected by relay too many times, so giving up.  Sorry.');
-    window.sessionStorage.removeItem('googleRelay.redirectCount');
+    globalThis.sessionStorage.removeItem('googleRelay.redirectCount');
     return;
   }
-  window.sessionStorage.setItem('googleRelay.redirectCount', count.toString());
+  globalThis.sessionStorage.setItem(
+      'googleRelay.redirectCount', count.toString());
 
   document.location.replace(url);
 });

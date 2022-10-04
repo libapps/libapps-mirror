@@ -60,7 +60,7 @@ export function CredentialCache() {
   this.enabled_ = null;
 
   // Clear the cache on screen lock.
-  if (window.chrome && chrome.idle) {
+  if (globalThis.chrome?.idle) {
     chrome.idle.onStateChanged.addListener((state) => {
       if (state === 'locked') {
         this.clear_();
@@ -78,7 +78,7 @@ export function CredentialCache() {
 CredentialCache.prototype.init_ = async function() {
   this.cache_ = {};
   this.cryptoKey_ = /** @type {!webCrypto.CryptoKey} */ (
-      await window.crypto.subtle.generateKey(
+      await globalThis.crypto.subtle.generateKey(
           {name: 'AES-CBC', length: 128}, false, ['encrypt', 'decrypt']));
 };
 
@@ -116,7 +116,7 @@ CredentialCache.prototype.retrieve = async function(key) {
     const {encryptedData, iv} = this.cache_[key];
     // Remove cache entry to be added again only if data verification succeeds.
     delete this.cache_[key];
-    return new Uint8Array(await window.crypto.subtle.decrypt(
+    return new Uint8Array(await globalThis.crypto.subtle.decrypt(
         {name: 'AES-CBC', iv}, lib.notNull(this.cryptoKey_), encryptedData));
   }
   return null;
@@ -138,8 +138,8 @@ CredentialCache.prototype.store = async function(key, data) {
     await this.init_();
   }
   // AES-CBC requires a new, cryptographically random IV for every operation.
-  const iv = window.crypto.getRandomValues(new Uint8Array(16));
-  const encryptedData = await window.crypto.subtle.encrypt(
+  const iv = globalThis.crypto.getRandomValues(new Uint8Array(16));
+  const encryptedData = await globalThis.crypto.subtle.encrypt(
       {name: 'AES-CBC', iv}, lib.notNull(this.cryptoKey_), data.buffer);
   data.fill(0);
   this.cache_[key] = {encryptedData, iv};

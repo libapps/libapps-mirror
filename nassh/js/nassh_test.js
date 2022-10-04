@@ -23,12 +23,12 @@ let earlyError = null;
  *
  * @param {*} args Whatever arguments are passed in.
  */
-window.onerror = function(...args) {
+globalThis.onerror = function(...args) {
   earlyError = Array.from(args);
 };
 
 /** Run the test framework once everything is finished. */
-window.onload = function() {
+globalThis.onload = function() {
   mocha.run();
 };
 

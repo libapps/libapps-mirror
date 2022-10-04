@@ -59,7 +59,7 @@ function sleep(timeout = 1) {
  * Do it once per-run for speed.
  */
 before(function(done) {
-  const document = window.document;
+  const document = globalThis.document;
 
   const div = document.createElement('div');
   this.div = div;

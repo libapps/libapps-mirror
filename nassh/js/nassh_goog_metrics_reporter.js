@@ -149,7 +149,7 @@ export class GoogMetricsReporter {
       origins: [CLOUDTOP_API_ORIGIN, UBERPROXY_DEBUG_ORIGIN],
     };
     return new Promise((resolve) => {
-      if (window?.chrome?.permissions !== undefined) {
+      if (globalThis.chrome?.permissions !== undefined) {
         chrome.permissions.contains(permissions, resolve);
       } else {
         resolve(false);
@@ -164,7 +164,7 @@ export class GoogMetricsReporter {
    * @return {!Promise<void>}
    */
   async requestChromePermissions() {
-    if (window?.chrome?.permissions === undefined
+    if (globalThis.chrome?.permissions === undefined
         || await this.checkChromePermissions()
         || this.localPrefs.get('goog-metrics-reporter-permission') === false) {
       // Don't request permissions if:
@@ -210,7 +210,7 @@ export class GoogMetricsReporter {
           permissions: [],
           origins: [CLOUDTOP_API_ORIGIN, UBERPROXY_DEBUG_ORIGIN],
         };
-        if (window?.chrome?.permissions !== undefined) {
+        if (globalThis.chrome?.permissions !== undefined) {
           chrome.permissions.request(permissions, (granted) => {
             this.localPrefs.set('goog-metrics-reporter-permission', granted);
             resolve();

@@ -23,8 +23,8 @@ import {CommandInstance} from './nassh_command_instance.js';
 const openNewWindow = function(url) {
   const msg = {
     command: 'nassh',
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: globalThis.innerWidth,
+    height: globalThis.innerHeight,
     url: url,
     window: true,
   };
@@ -39,9 +39,10 @@ const openNewWindow = function(url) {
  * CSP means that we can't kick off the initialization from the html file,
  * so we do it like this instead.
  */
-window.addEventListener('DOMContentLoaded', async (event) => {
+globalThis.addEventListener('DOMContentLoaded', async (event) => {
   // Check if site's storage has been marked as persistent.
-  if (navigator?.storage?.persist && navigator?.storage?.persisted) {
+  if (globalThis.navigator?.storage?.persist &&
+      globalThis.navigator?.storage?.persisted) {
     if (!await navigator.storage.persisted()) {
       // Request persistent storage for site.
       const isPersisted = await navigator.storage.persist();
@@ -68,7 +69,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
       params.delete('openas');
       const url = new URL(document.location.toString());
       url.search = params.toString();
-      openNewWindow(url.href).then(() => window.close);
+      openNewWindow(url.href).then(() => globalThis.close);
       return;
     }
 
@@ -107,7 +108,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         environment: environment,
         onExit: (code) => {
           if (terminal.getPrefs().get('close-on-exit')) {
-            window.close();
+            globalThis.close();
           }
         },
       });
@@ -116,8 +117,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     terminal.onTerminalReady = function() {
       watchBackgroundColor(terminal.getPrefs());
       loadWebFonts(terminal.getDocument());
-      if (window.chrome && chrome.accessibilityFeatures &&
-          chrome.accessibilityFeatures.spokenFeedback) {
+      if (globalThis.chrome?.accessibilityFeatures?.spokenFeedback) {
         chrome.accessibilityFeatures.spokenFeedback.onChange.addListener(
             (details) => terminal.setAccessibilityEnabled(details.value));
         chrome.accessibilityFeatures.spokenFeedback.get({}, (details) => {
@@ -152,7 +152,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     ]);
 
     // Useful for console debugging.
-    window.term_ = terminal;
+    globalThis.term_ = terminal;
   };
 
   disableTabDiscarding();

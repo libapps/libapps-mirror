@@ -22,7 +22,8 @@ import {
  * @return {!Promise<!FileSystem>} The root filesystem handle.
  */
 export async function getDomFileSystem() {
-  const requestFS = window.requestFileSystem || window.webkitRequestFileSystem;
+  const requestFS =
+      globalThis.requestFileSystem || globalThis.webkitRequestFileSystem;
   const size = 16 * 1024 * 1024;
 
   const quotaInfo = await new Promise((resolve, reject) => {
@@ -47,7 +48,7 @@ export async function getDomFileSystem() {
         .catch(reject);
     }
 
-    requestFS(window.PERSISTENT,
+    requestFS(globalThis.PERSISTENT,
               size,
               onFileSystem,
               (e) => {

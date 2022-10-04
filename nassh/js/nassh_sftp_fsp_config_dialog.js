@@ -101,7 +101,7 @@ ConfigDialog.prototype.refresh_ = function() {
 /**
  * Event when the window finishes loading.
  */
-window.addEventListener('DOMContentLoaded', (event) => {
+globalThis.addEventListener('DOMContentLoaded', (event) => {
   const params = new URLSearchParams(document.location.search);
   const profileId = lib.notNull(params.get('profile-id'));
   document.title = `SFTP: ${profileId}`;
@@ -111,9 +111,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     .then(({error, message, info}) => {
       if (error) {
         console.error(message);
-        window.close();
+        globalThis.close();
       } else {
-        window.dialog_ = new ConfigDialog(profileId, info);
+        globalThis.dialog_ = new ConfigDialog(profileId, info);
       }
     });
 });
