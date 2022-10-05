@@ -150,10 +150,8 @@ def _get_default_paths(basedir: Path) -> List[Path]:
     # Use relpath for nicer default output.
     # Sort to ensure lib.js comes before lib_array.js, etc.
     # Filter out the generated libdot.js/libdot.min.js/etc...
-    js_files = (
-        list((libdot.DIR / "html").glob("*.html"))
-        + list((libdot.DIR / "js").glob("*.js"))
-        + list((libdot.DIR / "third_party").glob("*/*.js"))
+    js_files = list((libdot.DIR / "html").glob("*.html")) + list(
+        (libdot.DIR / "js").glob("*.js")
     )
     js_files = sorted(x for x in js_files if not x.name.startswith("libdot."))
 

@@ -18,7 +18,6 @@ libdot/js/lib_storage_chrome.js
 libdot/js/lib_storage_local.js
 libdot/js/lib_storage_memory.js
 libdot/js/lib_storage_terminal_private.js
-libdot/third_party/intl-segmenter/intl-segmenter.js
 
 @resource libdot/changelog/version text/plain changelog version
 @resource libdot/changelog/date text/plain changelog date
