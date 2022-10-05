@@ -151,9 +151,6 @@ html:not(body) {
   --cros-textfield-label-color-rgb: var(--google-grey-700-rgb);
   --cros-textfield-label-color: var(--google-grey-700);
 
-  --cros-tooltip-background-color-rgb: var(--google-grey-900-rgb);
-  --cros-tooltip-background-color: rgba(var(--cros-tooltip-background-color-rgb), 0.8);
-
   --cros-selection-outline-rgb: 0, 0, 0;
   --cros-selection-outline: rgba(var(--cros-selection-outline-rgb), 0.1);
 
@@ -291,9 +288,6 @@ html:not(body) {
 
   --cros-textfield-label-color-rgb: 255, 255, 255;
   --cros-textfield-label-color: rgba(var(--cros-textfield-label-color-rgb), 0.6);
-
-  --cros-tooltip-background-color-rgb: 255, 255, 255;
-  --cros-tooltip-background-color: rgba(var(--cros-tooltip-background-color-rgb), 0.8);
 
   --cros-selection-outline-rgb: 255, 255, 255;
   --cros-selection-outline: rgba(var(--cros-selection-outline-rgb), 0.12);

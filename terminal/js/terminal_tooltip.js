@@ -10,8 +10,6 @@ import {LitElement, css, html} from './lit.js';
 
 /**
  * A tooltip element that looks like the native tooltip.
- *
- * TODO: respect dark mode.
  */
 export class TerminalTooltip extends LitElement {
   /** @override */
@@ -33,8 +31,8 @@ export class TerminalTooltip extends LitElement {
   static get styles() {
     return css`
         :host {
-          background-color: var(--cros-tooltip-background-color);
-          border: 1px solid rgb(--cros-separator-color-rgb);
+          background-color: var(--cros-bg-color);
+          border: 1px solid rgb(var(--cros-separator-color-rgb));
           display: block;
           font-size: smaller;
           padding: 3px 5px;
