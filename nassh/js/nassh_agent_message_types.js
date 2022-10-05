@@ -7,6 +7,7 @@
  * the SSH agent protocol.
  */
 
+import {concatTyped} from './lib_array.js';
 import {Message} from './nassh_agent_message.js';
 
 /**
@@ -431,7 +432,7 @@ export function encodeAsWireMpint(bytes) {
   // Add a leading zero if the positive result would otherwise be treated as a
   // signed mpint.
   if (mpint.length && (mpint[0] & (1 << 7))) {
-    mpint = lib.array.concatTyped(new Uint8Array([0]), mpint);
+    mpint = concatTyped(new Uint8Array([0]), mpint);
   }
 
   return encodeAsWireString(mpint);
@@ -451,7 +452,7 @@ keyBlobGenerators[KeyTypes.RSA] = function(exponent, modulus) {
   const exponentMpint = encodeAsWireMpint(exponent);
   const modulusMpint = encodeAsWireMpint(modulus);
   const BYTES_SSH_RSA = new TextEncoder().encode('ssh-rsa');
-  return lib.array.concatTyped(
+  return concatTyped(
       encodeAsWireString(BYTES_SSH_RSA),
       exponentMpint,
       modulusMpint,
@@ -475,8 +476,8 @@ keyBlobGenerators[KeyTypes.ECDSA] = function(curveOid, key) {
   const prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
   const identifier =
       new TextEncoder().encode(OidToCurveInfo[curveOid].identifier);
-  return lib.array.concatTyped(
-      encodeAsWireString(lib.array.concatTyped(prefix, identifier)),
+  return concatTyped(
+      encodeAsWireString(concatTyped(prefix, identifier)),
       encodeAsWireString(identifier),
       encodeAsWireString(key));
 };
@@ -496,7 +497,5 @@ keyBlobGenerators[KeyTypes.EDDSA] = function(curveOid, key) {
         `SmartCardManager.fetchKeyInfo: unsupported curve OID: ${curveOid}`);
   }
   const prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
-  return lib.array.concatTyped(
-      encodeAsWireString(prefix),
-      encodeAsWireString(key));
+  return concatTyped(encodeAsWireString(prefix), encodeAsWireString(key));
 };

@@ -13,6 +13,7 @@
  * @suppress {moduleLoad}
  */
 
+import {concatTyped, compare} from './lib_array.js';
 import {CredentialCache} from './lib_credential_cache.js';
 import {localize} from './nassh.js';
 import {asn1js, pkijs} from './nassh_deps.rollup.js';
@@ -309,7 +310,7 @@ GSC.prototype.unlockKey_ = async function(manager, keyId) {
   do {
     pinBytes = null;
     const currentKeyId = await manager.fetchAuthenticationPublicKeyId();
-    if (!lib.array.compare(keyId, currentKeyId)) {
+    if (!compare(keyId, currentKeyId)) {
       throw new Error(
           `GSC.unlockKey_: key ID changed for reader ${manager.reader}`);
     }
@@ -395,7 +396,7 @@ GSC.prototype.signRequest = async function(keyBlob, data, flags) {
         }
         const hash =
             await window.crypto.subtle.digest(rsaHashConstants.name, data);
-        dataToSign = lib.array.concatTyped(
+        dataToSign = concatTyped(
             rsaHashConstants.identifier, new Uint8Array(hash));
         break;
       }
@@ -432,7 +433,7 @@ GSC.prototype.signRequest = async function(keyBlob, data, flags) {
     const curveOid = lib.notNull(keyInfo.curveOid);
     switch (keyInfo.type) {
       case KeyTypes.RSA:
-        return lib.array.concatTyped(
+        return concatTyped(
             encodeAsWireString(rsaHashConstants.signaturePrefix),
             encodeAsWireString(rawSignature));
       case KeyTypes.ECDSA: {
@@ -440,17 +441,17 @@ GSC.prototype.signRequest = async function(keyBlob, data, flags) {
         const sRaw = rawSignature.subarray(rawSignature.length / 2);
         const rMpint = encodeAsWireMpint(rRaw);
         const sMpint = encodeAsWireMpint(sRaw);
-        const signatureBlob = lib.array.concatTyped(rMpint, sMpint);
+        const signatureBlob = concatTyped(rMpint, sMpint);
         prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
         const identifier =
             new TextEncoder().encode(OidToCurveInfo[curveOid].identifier);
-        return lib.array.concatTyped(
-            encodeAsWireString(lib.array.concatTyped(prefix, identifier)),
+        return concatTyped(
+            encodeAsWireString(concatTyped(prefix, identifier)),
             encodeAsWireString(signatureBlob));
       }
       case KeyTypes.EDDSA:
         prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
-        return lib.array.concatTyped(
+        return concatTyped(
             encodeAsWireString(prefix),
             encodeAsWireString(rawSignature));
     }
@@ -596,21 +597,19 @@ CommandAPDU.prototype.commands = function(
     const extendedLe = this.expectResponse_ ?
         new Uint8Array([0x00, 0x00, 0x00]) :
         new Uint8Array([]);
-    return [lib.array.concatTyped(this.header_, extendedLe)];
+    return [concatTyped(this.header_, extendedLe)];
   }
   if (this.data_.length === 0) {
     const le =
         this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
-    return [lib.array.concatTyped(this.header_, le)];
+    return [concatTyped(this.header_, le)];
   }
   if (this.data_.length <= MAX_EXTENDED_LC && supportsExtendedLength) {
     const extendedLc = new Uint8Array(
         [0x00, this.data_.length >> 8, this.data_.length & 0xFF]);
     const extendedLe = this.expectResponse_ ? new Uint8Array([0x00, 0x00]) :
                                               new Uint8Array([]);
-    return [
-      lib.array.concatTyped(this.header_, extendedLc, this.data_, extendedLe),
-    ];
+    return [concatTyped(this.header_, extendedLc, this.data_, extendedLe)];
   }
   if (this.data_.length <= MAX_LC || supportsChaining) {
     const commands = [];
@@ -625,14 +624,14 @@ CommandAPDU.prototype.commands = function(
           this.data_.length - remainingBytes + MAX_LC);
       const le =
           this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
-      commands.push(lib.array.concatTyped(header, lc, data, le));
+      commands.push(concatTyped(header, lc, data, le));
       remainingBytes -= MAX_LC;
     }
     const lc = new Uint8Array([remainingBytes]);
     const data = this.data_.subarray(this.data_.length - remainingBytes);
     const le =
         this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
-    commands.push(lib.array.concatTyped(this.header_, lc, data, le));
+    commands.push(concatTyped(this.header_, lc, data, le));
     return commands;
   }
   throw new Error(
@@ -1217,7 +1216,7 @@ SmartCardManager.prototype.getData_ = async function(rawResult) {
       SmartCardManager.StatusValues.COMMAND_CORRECT_MORE_DATA_1) {
     // transmit recursively calls getData_ to assemble the complete response.
     const dataContinued = await this.transmit(GET_RESPONSE_APDU);
-    data = lib.array.concatTyped(data, dataContinued);
+    data = concatTyped(data, dataContinued);
   } else if (
       this.appletSelected_ === SmartCardManager.CardApplets.PIV &&
       (statusBytes.value() & 0xFFF0) ===
@@ -1763,8 +1762,7 @@ SmartCardManager.prototype.verifyPIN = async function(pinBytes) {
       }
       // Pad to 8 bytes by appending (at most two) 0xFF bytes.
       const paddedPinBytes =
-          lib.array.concatTyped(pinBytes, new Uint8Array([0xFF, 0xFF]))
-              .subarray(0, 8);
+          concatTyped(pinBytes, new Uint8Array([0xFF, 0xFF])).subarray(0, 8);
       try {
         await this.transmit(new CommandAPDU(
             ...VERIFY_PIN_APDU_HEADER_PIV,
@@ -1835,14 +1833,14 @@ SmartCardManager.prototype.authenticate = async function(data) {
       const keyInfo = await this.fetchKeyInfo();
       switch (keyInfo.type) {
         case KeyTypes.RSA: {
-          const paddedData = lib.array.concatTyped(
+          const paddedData = concatTyped(
               new Uint8Array([0x00, 0x01]),
               new Uint8Array(new Array(256 - 3 - data.length).fill(0xFF)),
               new Uint8Array([0x00]),
               data);
           // Create Dynamic Authentication Template.
           // @see Section 3.2.4, Table 7 & Table 20
-          const authTemplate = lib.array.concatTyped(
+          const authTemplate = concatTyped(
               new Uint8Array(
                   [0x7C, 0x82, 0x01, 0x06, 0x82, 0x00, 0x81, 0x82, 0x01, 0x00]),
               paddedData);
@@ -1855,7 +1853,7 @@ SmartCardManager.prototype.authenticate = async function(data) {
         case KeyTypes.ECDSA: {
           // Create Dynamic Authentication Template.
           // @see Section 3.2.4, Table 7 & Table 20 (adapted to ECC)
-          const authTemplate = lib.array.concatTyped(
+          const authTemplate = concatTyped(
               new Uint8Array(
                   [0x7C, 4 + data.length, 0x82, 0x00, 0x81, data.length]),
               data);
@@ -1871,7 +1869,7 @@ SmartCardManager.prototype.authenticate = async function(data) {
           const asn1SequenceBlock = asn1Signature.result.valueBlock;
           const x = asn1SequenceBlock.value[0].valueBlock.valueHex;
           const y = asn1SequenceBlock.value[1].valueBlock.valueHex;
-          return lib.array.concatTyped(new Uint8Array(x), new Uint8Array(y));
+          return concatTyped(new Uint8Array(x), new Uint8Array(y));
         }
       }
     }

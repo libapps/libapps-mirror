@@ -7,6 +7,7 @@
  * protocol.
  */
 
+import {concatTyped} from './lib_array.js';
 import {MessageNumbers, readMessage} from './nassh_agent_message_types.js';
 
 /**
@@ -64,7 +65,7 @@ Message.prototype.rawMessage = function() {
   const dv = new DataView(buffer);
   dv.setUint32(0, 1 + this.data_.length);
   u8[4] = this.type;
-  return lib.array.concatTyped(u8, this.data_);
+  return concatTyped(u8, this.data_);
 };
 
 /**
@@ -107,7 +108,7 @@ Message.prototype.writeUint32 = function(uint32) {
   const buffer = new ArrayBuffer(4);
   const dv = new DataView(buffer);
   dv.setUint32(0, uint32);
-  this.data_ = lib.array.concatTyped(this.data_, new Uint8Array(buffer));
+  this.data_ = concatTyped(this.data_, new Uint8Array(buffer));
 };
 
 /**
@@ -140,7 +141,7 @@ Message.prototype.writeString = function(string) {
   }
   const length = string.length;
   this.writeUint32(length);
-  this.data_ = lib.array.concatTyped(this.data_, string);
+  this.data_ = concatTyped(this.data_, string);
 };
 
 /**

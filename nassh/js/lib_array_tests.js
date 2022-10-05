@@ -6,6 +6,8 @@
  * @fileoverview Test suite for array helper functions.
  */
 
+import {concatTyped, compare} from './lib_array.js';
+
 describe('lib_array_tests.js', () => {
 
 it('concatTyped', () => {
@@ -31,7 +33,7 @@ it('concatTyped', () => {
   ];
 
   subtests.forEach((data) => {
-    const concatenated = lib.array.concatTyped(...data[0]);
+    const concatenated = concatTyped(...data[0]);
     // Check whether result has the correct type.
     assert.isTrue(
         concatenated instanceof data[1].constructor &&
@@ -61,7 +63,7 @@ it('compare', () => {
   ];
 
   subtests.forEach((data) => {
-    assert.equal(lib.array.compare(data[0][0], data[0][1]), data[1], data[2]);
+    assert.equal(compare(data[0][0], data[0][1]), data[1], data[2]);
   });
 });
 

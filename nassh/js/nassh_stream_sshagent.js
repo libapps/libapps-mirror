@@ -7,6 +7,7 @@
  *     backends.
  */
 
+import {concatTyped} from './lib_array.js';
 import {Agent} from './nassh_agent.js';
 import {Stream} from './nassh_stream.js';
 
@@ -94,8 +95,7 @@ SshAgentStream.prototype.asyncWrite = function(data, onSuccess) {
     return;
   }
 
-  this.writeBuffer_ = lib.array.concatTyped(
-      this.writeBuffer_, new Uint8Array(data));
+  this.writeBuffer_ = concatTyped(this.writeBuffer_, new Uint8Array(data));
 
   setTimeout(this.trySendPacket_.bind(this), 0);
 

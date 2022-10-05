@@ -2,13 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Helper functions for (typed) arrays.
  */
-
-lib.array = {};
 
 /**
  * Concatenate an arbitrary number of typed arrays of the same type into a new
@@ -18,7 +14,7 @@ lib.array = {};
  * @param {...!TYPED_ARRAY} arrays
  * @return {!TYPED_ARRAY}
  */
-lib.array.concatTyped = function(...arrays) {
+export function concatTyped(...arrays) {
   let resultLength = 0;
   for (const array of arrays) {
     resultLength += array.length;
@@ -30,7 +26,7 @@ lib.array.concatTyped = function(...arrays) {
     pos += array.length;
   }
   return result;
-};
+}
 
 /**
  * Compare two array-like objects entrywise.
@@ -41,7 +37,7 @@ lib.array.concatTyped = function(...arrays) {
  * @return {boolean} true if both arrays are null or they agree entrywise;
  *     false otherwise.
  */
-lib.array.compare = function(a, b) {
+export function compare(a, b) {
   if (a === null || b === null) {
     return a === null && b === null;
   }
@@ -56,4 +52,4 @@ lib.array.compare = function(a, b) {
     }
   }
   return true;
-};
+}

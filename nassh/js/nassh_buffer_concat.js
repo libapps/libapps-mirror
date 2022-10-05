@@ -6,6 +6,7 @@
  * @fileoverview Basic buffer that concats inputs together.
  */
 
+import {concatTyped} from './lib_array.js';
 import {BufferInterface} from './nassh_buffer_interface.js';
 
 /**
@@ -22,7 +23,7 @@ export class ConcatBuffer extends BufferInterface {
   /** @inheritDoc */
   write(buffer) {
     const u8 = new Uint8Array(buffer);
-    this.buffer_ = lib.array.concatTyped(this.buffer_, u8);
+    this.buffer_ = concatTyped(this.buffer_, u8);
     this.unreadCount_ += u8.length;
   }
 
