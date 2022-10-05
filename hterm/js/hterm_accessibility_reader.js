@@ -333,7 +333,7 @@ hterm.AccessibilityReader.prototype.announceAction_ =
       const start = Math.min(this.lastCursorColumn_, cursorColumn);
       const len = Math.abs(cursorColumn - this.lastCursorColumn_);
       this.assertiveAnnounce(
-          lib.wc.substr(this.lastCursorRowString_, start, len));
+          hterm.wc.substr(this.lastCursorRowString_, start, len));
       return true;
     }
     return false;
@@ -344,7 +344,7 @@ hterm.AccessibilityReader.prototype.announceAction_ =
     // Spacebar. We manually announce this character since the screen reader may
     // not announce the whitespace in a live region.
     if (this.lastCursorColumn_ + 1 == cursorColumn) {
-      if (lib.wc.substr(cursorRowString, cursorColumn - 1, 1) == ' ' &&
+      if (hterm.wc.substr(cursorRowString, cursorColumn - 1, 1) == ' ' &&
           this.cursorChangeQueue_.length > 0 &&
           this.cursorChangeQueue_[0] == ' ') {
         this.assertiveAnnounce(' ');
@@ -358,33 +358,34 @@ hterm.AccessibilityReader.prototype.announceAction_ =
     const cursorDeleted = cursorColumn;
     // Check that the current row string is shorter than the previous. Also
     // check that the start of the strings (up to the cursor) match.
-    if (lib.wc.strWidth(cursorRowString) <=
-        lib.wc.strWidth(this.lastCursorRowString_) &&
-        lib.wc.substr(this.lastCursorRowString_, 0, cursorDeleted) ==
-        lib.wc.substr(cursorRowString, 0, cursorDeleted)) {
+    if (hterm.wc.strWidth(cursorRowString) <=
+        hterm.wc.strWidth(this.lastCursorRowString_) &&
+        hterm.wc.substr(this.lastCursorRowString_, 0, cursorDeleted) ==
+        hterm.wc.substr(cursorRowString, 0, cursorDeleted)) {
       // Find the length of the current row string ignoring space characters.
       // These may be inserted at the end of the string when deleting characters
       // so they should be ignored.
-      let lengthOfCurrentRow = lib.wc.strWidth(cursorRowString);
+      let lengthOfCurrentRow = hterm.wc.strWidth(cursorRowString);
       for (; lengthOfCurrentRow > 0; --lengthOfCurrentRow) {
         if (lengthOfCurrentRow == cursorDeleted ||
-            lib.wc.substr(cursorRowString, lengthOfCurrentRow - 1, 1) != ' ') {
+            hterm.wc.substr(cursorRowString, lengthOfCurrentRow - 1, 1)
+            != ' ') {
           break;
         }
       }
 
       const numCharsDeleted =
-          lib.wc.strWidth(this.lastCursorRowString_) - lengthOfCurrentRow;
+          hterm.wc.strWidth(this.lastCursorRowString_) - lengthOfCurrentRow;
 
       // Check that the end of the strings match.
       const lengthOfEndOfString = lengthOfCurrentRow - cursorDeleted;
-      const endOfLastRowString = lib.wc.substr(
+      const endOfLastRowString = hterm.wc.substr(
           this.lastCursorRowString_, cursorDeleted + numCharsDeleted,
           lengthOfEndOfString);
       const endOfCurrentRowString =
-          lib.wc.substr(cursorRowString, cursorDeleted, lengthOfEndOfString);
+          hterm.wc.substr(cursorRowString, cursorDeleted, lengthOfEndOfString);
       if (endOfLastRowString == endOfCurrentRowString) {
-        const deleted = lib.wc.substr(
+        const deleted = hterm.wc.substr(
             this.lastCursorRowString_, cursorDeleted, numCharsDeleted);
         if (deleted != '') {
           this.assertiveAnnounce(deleted);

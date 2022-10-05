@@ -454,7 +454,7 @@ hterm.TextAttributes.containerIsDefault = function(obj) {
  */
 hterm.TextAttributes.nodeWidth = function(node) {
   if (!node.asciiNode) {
-    return lib.wc.strWidth(node.textContent);
+    return hterm.wc.strWidth(node.textContent);
   } else {
     return node.textContent.length;
   }
@@ -472,7 +472,7 @@ hterm.TextAttributes.nodeWidth = function(node) {
  */
 hterm.TextAttributes.nodeSubstr = function(node, start, width) {
   if (!node.asciiNode) {
-    return lib.wc.substr(node.textContent, start, width);
+    return hterm.wc.substr(node.textContent, start, width);
   } else {
     return node.textContent.substr(start, width);
   }
@@ -490,7 +490,7 @@ hterm.TextAttributes.nodeSubstr = function(node, start, width) {
  */
 hterm.TextAttributes.nodeSubstring = function(node, start, end) {
   if (!node.asciiNode) {
-    return lib.wc.substring(node.textContent, start, end);
+    return hterm.wc.substring(node.textContent, start, end);
   } else {
     return node.textContent.substring(start, end);
   }
@@ -533,9 +533,9 @@ hterm.TextAttributes.splitWidecharString = function(str) {
   for (const segment of it) {
     const grapheme = segment.segment;
     const isAscii = asciiRegex.test(grapheme);
-    const strWidth = isAscii ? 1 : lib.wc.strWidth(grapheme);
+    const strWidth = isAscii ? 1 : hterm.wc.strWidth(grapheme);
     const isWideChar =
-        isAscii ? false : (lib.wc.charWidth(grapheme.codePointAt(0)) == 2);
+        isAscii ? false : (hterm.wc.charWidth(grapheme.codePointAt(0)) == 2);
 
     // Only merge non-wide characters together.  Every wide character needs to
     // be separate so it can get a unique container.

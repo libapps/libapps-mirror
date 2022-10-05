@@ -481,7 +481,7 @@ hterm.Terminal.prototype.setProfile = function(
     },
 
     'east-asian-ambiguous-as-two-column': (v) => {
-      lib.wc.regardCjkAmbiguous = v;
+      hterm.wc.regardCjkAmbiguous = v;
     },
 
     'enable-8-bit-control': (v) => {
@@ -2164,7 +2164,7 @@ hterm.Terminal.prototype.print = function(str) {
 
   let startOffset = 0;
 
-  let strWidth = lib.wc.strWidth(str);
+  let strWidth = hterm.wc.strWidth(str);
   // Fun edge case: If the string only contains zero width codepoints (like
   // combining characters), we make sure to iterate at least once below.
   if (strWidth == 0 && str) {
@@ -2190,11 +2190,11 @@ hterm.Terminal.prototype.print = function(str) {
       // If the string overflowed the line but wraparound is off, then the
       // last printed character should be the last of the string.
       // TODO: This will add to our problems with multibyte UTF-16 characters.
-      substr = lib.wc.substr(str, startOffset, count - 1) +
-          lib.wc.substr(str, strWidth - 1);
+      substr = hterm.wc.substr(str, startOffset, count - 1) +
+          hterm.wc.substr(str, strWidth - 1);
       count = strWidth;
     } else {
-      substr = lib.wc.substr(str, startOffset, count);
+      substr = hterm.wc.substr(str, startOffset, count);
     }
 
     const tokens = hterm.TextAttributes.splitWidecharString(substr);
@@ -3693,7 +3693,7 @@ hterm.Terminal.prototype.getSelectionText = function() {
 
   const rv = this.getRowsText(selection.startRow.rowIndex,
                               selection.endRow.rowIndex + 1);
-  return lib.wc.substring(rv, startOffset, lib.wc.strWidth(rv) - endOffset);
+  return hterm.wc.substring(rv, startOffset, hterm.wc.strWidth(rv) - endOffset);
 };
 
 /**

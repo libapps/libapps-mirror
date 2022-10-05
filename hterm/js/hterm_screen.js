@@ -406,7 +406,7 @@ hterm.Screen.prototype.splitNode_ = function(node, offset) {
 
   const textContent = node.textContent;
   node.textContent = hterm.TextAttributes.nodeSubstr(node, 0, offset);
-  afterNode.textContent = lib.wc.substr(textContent, offset);
+  afterNode.textContent = hterm.wc.substr(textContent, offset);
 
   if (afterNode.textContent) {
     node.parentNode.insertBefore(afterNode, node.nextSibling);
@@ -476,9 +476,9 @@ hterm.Screen.prototype.maybeClipCurrentRow = function() {
  * using hterm.Screen..commitLineOverflow().
  *
  * @param {string} str The string to insert.
- * @param {number=} wcwidth The cached lib.wc.strWidth value for |str|.  Will be
- *     calculated on demand if need be.  Passing in a cached value helps speed
- *     up processing as this is a hot codepath.
+ * @param {number=} wcwidth The cached hterm.wc.strWidth value for |str|.  Will
+ *     be calculated on demand if need be.  Passing in a cached value helps
+ *     speed up processing as this is a hot codepath.
  */
 hterm.Screen.prototype.insertString = function(str, wcwidth = undefined) {
   let cursorNode = this.cursorNode_;
@@ -489,7 +489,7 @@ hterm.Screen.prototype.insertString = function(str, wcwidth = undefined) {
   // We may alter the width of the string by prepending some missing
   // whitespaces, so we need to record the string width ahead of time.
   if (wcwidth === undefined) {
-    wcwidth = lib.wc.strWidth(str);
+    wcwidth = hterm.wc.strWidth(str);
   }
 
   // No matter what, before this function exits the cursor column will have
@@ -571,7 +571,7 @@ hterm.Screen.prototype.insertString = function(str, wcwidth = undefined) {
         this.textAttributes.matchesContainer(previousSibling)) {
       previousSibling.textContent += str;
       this.cursorNode_ = previousSibling;
-      this.cursorOffset_ = lib.wc.strWidth(previousSibling.textContent);
+      this.cursorOffset_ = hterm.wc.strWidth(previousSibling.textContent);
       return;
     }
 
@@ -589,7 +589,7 @@ hterm.Screen.prototype.insertString = function(str, wcwidth = undefined) {
         this.textAttributes.matchesContainer(nextSibling)) {
       nextSibling.textContent = str + nextSibling.textContent;
       this.cursorNode_ = nextSibling;
-      this.cursorOffset_ = lib.wc.strWidth(str);
+      this.cursorOffset_ = hterm.wc.strWidth(str);
       return;
     }
 
@@ -621,9 +621,9 @@ hterm.Screen.prototype.insertString = function(str, wcwidth = undefined) {
  * using hterm.Screen..commitLineOverflow().
  *
  * @param {string} str The source string for overwriting existing content.
- * @param {number=} wcwidth The cached lib.wc.strWidth value for |str|.  Will be
- *     calculated on demand if need be.  Passing in a cached value helps speed
- *     up processing as this is a hot codepath.
+ * @param {number=} wcwidth The cached hterm.wc.strWidth value for |str|.  Will
+ *     be calculated on demand if need be.  Passing in a cached value helps
+ *     speed up processing as this is a hot codepath.
  */
 hterm.Screen.prototype.overwriteString = function(str, wcwidth = undefined) {
   const maxLength = this.columnCount_ - this.cursorPosition.column;
@@ -632,7 +632,7 @@ hterm.Screen.prototype.overwriteString = function(str, wcwidth = undefined) {
   }
 
   if (wcwidth === undefined) {
-    wcwidth = lib.wc.strWidth(str);
+    wcwidth = hterm.wc.strWidth(str);
   }
 
   if (this.textAttributes.matchesContainer(lib.notNull(this.cursorNode_)) &&
@@ -954,7 +954,7 @@ hterm.Screen.prototype.expandSelectionWithWordBreakMatches_ =
 
   // Move start to the left.
   const rowText = this.getLineText_(row);
-  const lineUpToRange = lib.wc.substring(rowText, 0, endPosition);
+  const lineUpToRange = hterm.wc.substring(rowText, 0, endPosition);
   const leftRegularExpression = new RegExp(leftMatch + insideMatch + '$');
   const expandedStart = lineUpToRange.search(leftRegularExpression);
   if (expandedStart == -1 || expandedStart > startPosition) {
@@ -962,14 +962,14 @@ hterm.Screen.prototype.expandSelectionWithWordBreakMatches_ =
   }
 
   // Move end to the right.
-  const lineFromRange = lib.wc.substring(rowText, startPosition,
-                                         lib.wc.strWidth(rowText));
+  const lineFromRange = hterm.wc.substring(rowText, startPosition,
+                                         hterm.wc.strWidth(rowText));
   const rightRegularExpression = new RegExp('^' + insideMatch + rightMatch);
   const found = lineFromRange.match(rightRegularExpression);
   if (!found) {
     return;
   }
-  const expandedEnd = startPosition + lib.wc.strWidth(found[0]);
+  const expandedEnd = startPosition + hterm.wc.strWidth(found[0]);
   if (expandedEnd == -1 || expandedEnd < endPosition) {
     return;
   }

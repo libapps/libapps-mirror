@@ -29,7 +29,10 @@ def _get_default_paths(basedir):
     # All files in js/*.js.
     # Use relpath for nicer default output.
     # Sort to ensure hterm.js comes before hterm_other.js, etc.
-    js_files = sorted(x for x in JS_DIR.glob("*.js"))
+    js_files = sorted(
+        list(x for x in JS_DIR.glob("*.js"))
+        + list((hterm.DIR / "third_party").glob("*/*.js"))
+    )
 
     return [os.path.relpath(x) for x in most_files + js_files]
 

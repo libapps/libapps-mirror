@@ -1,5 +1,5 @@
 This is a port of wcwidth.js (which is a port of wcwidth implemented in C by
-Markus Kuhn) to the libdot framework.
+Markus Kuhn) to JavaScript.
 
 Upstream details can be found in the METADATA file.
 
@@ -18,7 +18,7 @@ THe helper script can download & extract the latest files:
 $ ./ranges.py download
 ```
 
-Then use the helper script to update the tables in [lib_wc.js](./lib_wc.js).
+Then use the helper script to update the tables in [wc.js](./wc.js).
 ```
 $ ./ranges.py update
 ```

@@ -10,7 +10,7 @@ In download mode, we'll automatically fetch the latest known release.
 In print mode, we'll display the new tables.  Useful for comparing against
 older releases and debugging this script.
 
-In update mode, we'll update lib_wc.js directly.  Useful for lazy devs.
+In update mode, we'll update wc.js directly.  Useful for lazy devs.
 
 You'll need to provide the relevant Unicode database files.
 The latest version can be found here:
@@ -324,7 +324,7 @@ def gen_east_asian_ambiguous(db):
 def find_js(js):
     """Locate the JavaScript file to update."""
     if js is None:
-        js = Path(__file__).resolve().parent / "lib_wc.js"
+        js = Path(__file__).resolve().parent / "wc.js"
 
     return js
 
@@ -402,9 +402,9 @@ def main(argv):
     cjk_db = load_east_asian()
 
     tables = (
-        ("lib.wc.combining", js_dumps(gen_combining(uni_db, prop_db))),
-        ("lib.wc.unambiguous", js_dumps(gen_east_asian(cjk_db))),
-        ("lib.wc.ambiguous", js_dumps(gen_east_asian_ambiguous(cjk_db))),
+        ("hterm.wc.combining", js_dumps(gen_combining(uni_db, prop_db))),
+        ("hterm.wc.unambiguous", js_dumps(gen_east_asian(cjk_db))),
+        ("hterm.wc.ambiguous", js_dumps(gen_east_asian_ambiguous(cjk_db))),
     )
 
     if opts.action == "print":
