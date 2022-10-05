@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Laadimine …"
 	},
-	"migrate_to_ext": {
-		"message": "Teade. Võtke kasutusele Secure Shelli laienduse uus versioon ($1).\nChrome'i rakenduste tugi on katkestatud, mistõttu ei saa see versioon enam värskendusi.\nVaadake lisateavet üleviimisjuhendist ($2)."
-	},
 	"missing_param": {
 		"message": "Puuduv parameeter: $1"
 	},

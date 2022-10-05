@@ -680,9 +680,6 @@
 	"loading_label": {
 		"message": "Laden…"
 	},
-	"migrate_to_ext": {
-		"message": "Kennisgeving: Migreer naar de Secure Shell-extensie ($1).\nChrome-apps zijn verouderd, dus deze versie ontvangt geen updates meer.\nLees de migratiehandleiding ($2) voor meer informatie."
-	},
 	"missing_param": {
 		"message": "Ontbrekende parameter: $1"
 	},

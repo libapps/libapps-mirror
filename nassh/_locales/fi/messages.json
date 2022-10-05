@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Ladataan…"
 	},
-	"migrate_to_ext": {
-		"message": "Huom. Siirry uuteen Secure Shell ‑laajennukseen ($1).\nChrome-sovellukset poistetaan käytöstä, joten tämä versio ei saa päivityksiä jatkossa.\nKatso lisätietoja siirto-oppaasta ($2)."
-	},
 	"missing_param": {
 		"message": "Puuttuva parametri: $1"
 	},

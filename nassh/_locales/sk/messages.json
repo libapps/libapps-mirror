@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Načítava sa..."
 	},
-	"migrate_to_ext": {
-		"message": "Upozornenie: Vykonajte migráciu na nové rozšírenie zabezpečeného prístupu ($1).\nAplikácie pre Chrome už nie sú podporované, takže táto verzia prestane dostávať aktualizácie.\nĎalšie podrobnosti nájdete v sprievodcovi migráciou ($2)."
-	},
 	"missing_param": {
 		"message": "Chýbajúci parameter: $1"
 	},

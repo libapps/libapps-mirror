@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Ładuję…"
 	},
-	"migrate_to_ext": {
-		"message": "Uwaga: przejdź na nowe rozszerzenie Secure Shell ($1).\nAplikacje Chrome zostały wycofane i ta wersja już nie będzie aktualizowana.\nSzczegółowe informacje znajdziesz w przewodniku po migracji ($2)."
-	},
 	"missing_param": {
 		"message": "Brak parametru: $1"
 	},

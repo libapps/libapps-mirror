@@ -677,9 +677,6 @@
 	"loading_label": {
 		"message": "Učitavanje..."
 	},
-	"migrate_to_ext": {
-		"message": "Obavijest: prijeđite na novo Secure Shell proširenje ($1).\nChromeove su aplikacije obustavljene, pa će ova verzija prestati primati ažuriranja.\nDodatne pojedinosti potražite u vodiču za premještanje ($2)."
-	},
 	"missing_param": {
 		"message": "Nedostaje parametar: $1"
 	},

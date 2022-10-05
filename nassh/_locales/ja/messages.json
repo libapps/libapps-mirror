@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "読み込んでいます…"
 	},
-	"migrate_to_ext": {
-		"message": "注: 新しい Secure Shell 拡張機能（$1）に移行してください。\nChrome アプリはサポートが終了しているため、このバージョンでの更新の受信は停止します。\n詳しくは移行ガイド（$2）をご覧ください。"
-	},
 	"missing_param": {
 		"message": "次のパラメータがありません: $1"
 	},

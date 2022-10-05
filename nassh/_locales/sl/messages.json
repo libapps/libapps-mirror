@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Nalaganje …"
 	},
-	"migrate_to_ext": {
-		"message": "Obvestilo: Začnite uporabljati novo razširitev Secure Shell ($1).\nAplikacije za Chrome so zastarele, zato bo ta različica prenehala prejemati posodobitve.\nVeč podrobnosti je na voljo v vodniku za selitev ($2)."
-	},
 	"missing_param": {
 		"message": "Manjka parameter: $1"
 	},

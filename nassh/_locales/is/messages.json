@@ -680,9 +680,6 @@
 	"loading_label": {
 		"message": "Hleður…"
 	},
-	"migrate_to_ext": {
-		"message": "Tilkynning: Skiptu yfir í nýju Secure Shell viðbótina ($1).\nChrome forrit hafa verið tekin úr notkun og því mun þessi útgáfa hætta að fá uppfærslur.\nFrekari upplýsingar fást í leiðbeiningum um flutning ($2)."
-	},
 	"missing_param": {
 		"message": "Breytu vantar: $1"
 	},

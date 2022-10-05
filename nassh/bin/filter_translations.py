@@ -61,6 +61,7 @@ def reformat(path, output=None, inplace=False):
                 return False
 
     trim_redundant_placeholders(data)
+    data.pop("migrate_to_ext", None)
 
     format_spaces = json.dumps(
         data, ensure_ascii=False, indent=4, sort_keys=True

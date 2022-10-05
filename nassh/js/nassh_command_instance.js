@@ -1076,39 +1076,6 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     setDefaultBackend(/** @type {string} */ (options['--field-trial-buffer']));
   }
 
-  // Start driving non-CrOS people to the extension variant.
-  // We do this only for newer versions so we don't flag users on EOL devices
-  // who can't migrate to the extension.
-  if (this.manifest_ && this.manifest_.app &&
-      (hterm.os != 'cros' || lib.f.getChromeMilestone() >= 90)) {
-    const extUrl = 'https://chrome.google.com/webstore/detail/' +
-        'iodihamcpbpeioajjeobimgagajmlibd';
-    const docUrl = 'https://chromium.googlesource.com/apps/libapps/+/HEAD/' +
-        'nassh/docs/app-to-ext-migration.md';
-
-    // Display in the terminal as red+bold+blink text.
-    this.io.println('');
-    this.io.println(sgrText(
-        localize('MIGRATE_TO_EXT', [
-          osc8Link(extUrl, 'link'),
-          osc8Link(docUrl, 'link'),
-        ]), {bold: true, blink: true, underline: '3', bg: '41', fg: '37'}));
-    this.io.println('');
-
-    // Display a popup a few times.
-    const showCount = this.localPrefs_.getNumber('migrate/showCount');
-    if (showCount < 5) {
-      const div = document.createElement('div');
-      div.style.whiteSpace = 'pre-wrap';
-      div.innerHTML = localize('MIGRATE_TO_EXT', [
-        `<a href="${extUrl}" target=_blank>link</a>`,
-        `<a href="${docUrl}" target=_blank>link</a>`,
-      ]);
-      this.io.showOverlay(div, 10000);
-      this.localPrefs_.set('migrate/showCount', showCount + 1);
-    }
-  }
-
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] === 'websockify') {
     this.relay_ = new RelayWebsockify(this.io, options, this.terminalLocation,

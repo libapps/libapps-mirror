@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Wird geladen…"
 	},
-	"migrate_to_ext": {
-		"message": "Hinweis: Bitte zur neuen Secure Shell-Erweiterung ($1) migrieren.\nWeil Chrome-Apps eingestellt wurden, gibt es für diese Version keine Updates mehr.\nIm Leitfaden zur Migration ($2) gibt es weitere Informationen."
-	},
 	"missing_param": {
 		"message": "Parameter \"$1\" fehlt"
 	},

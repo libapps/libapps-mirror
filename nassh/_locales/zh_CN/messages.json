@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "正在加载…"
 	},
-	"migrate_to_ext": {
-		"message": "通知：请迁移到新的安全外壳扩展 ($1)。\nChrome 应用已被弃用，因此该版本不会再收到更新。\n如需了解详情，请参阅迁移指南 ($2)。"
-	},
 	"missing_param": {
 		"message": "缺少参数：$1"
 	},

@@ -680,9 +680,6 @@
 	"loading_label": {
 		"message": "Se încarcă…"
 	},
-	"migrate_to_ext": {
-		"message": "Notificare: migrați la noua extensie Secure Shell ($1).\nAplicațiile Chrome sunt învechite, prin urmare această versiune nu va mai primi actualizări.\nPentru mai multe detalii, consultați ghidul de migrare ($2)."
-	},
 	"missing_param": {
 		"message": "Lipsește parametrul $1"
 	},

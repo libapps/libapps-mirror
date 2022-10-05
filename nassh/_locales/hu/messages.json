@@ -686,9 +686,6 @@
 	"loading_label": {
 		"message": "Betöltés…"
 	},
-	"migrate_to_ext": {
-		"message": "Megjegyzés: Álljon át az új Secure Shell-bővítmény ($1) használatára.\nA Chrome-alkalmazásokat megszüntettük, így ez a verzió nem kap többé frissítéseket.\nTovábbi információt az átállási útmutatóban ($2) talál."
-	},
 	"missing_param": {
 		"message": "Hiányzó paraméter: $1"
 	},

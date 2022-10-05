@@ -674,9 +674,6 @@
 	"loading_label": {
 		"message": "Po ngarkohet..."
 	},
-	"migrate_to_ext": {
-		"message": "Njoftim: Migroje te një prapashtesë e re e Secure Shell ($1).\nAplikacionet e Chrome janë të vjetruara, kështu që ky version nuk do të marrë më përditësime.\nShiko udhëzuesin e migrimit ($2) për më shumë detaje."
-	},
 	"missing_param": {
 		"message": "Parametri i munguar: $1"
 	},

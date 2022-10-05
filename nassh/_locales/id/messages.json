@@ -680,9 +680,6 @@
 	"loading_label": {
 		"message": "Memuat …"
 	},
-	"migrate_to_ext": {
-		"message": "Pemberitahuan: Harap migrasi ke ekstensi Secure Shell baru ($1).\nAplikasi Chrome tidak digunakan lagi, sehingga versi ini akan berhenti menerima update.\nLihat panduan migrasi ($2) untuk mengetahui detail selengkapnya."
-	},
 	"missing_param": {
 		"message": "Parameter yang tidak ada: $1"
 	},

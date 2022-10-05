@@ -680,9 +680,6 @@
 	"loading_label": {
 		"message": "Indlæser…"
 	},
-	"migrate_to_ext": {
-		"message": "Meddelelse: Migrer til den nye Secure Shell-udvidelse ($1).\nChrome-apps udfases, så denne version stopper med at modtage opdateringer.\nSe migreringsvejledningen ($2) for at få flere oplysninger."
-	},
 	"missing_param": {
 		"message": "Manglende parameter: $1"
 	},

@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Inapakia..."
 	},
-	"migrate_to_ext": {
-		"message": "Arifa: Tafadhali hamia kwenye kiendelezi kipya cha Secure Shell ($1).\nProgramu za Chrome zimeacha kutumika, kwa hivyo toleo hili litaacha kupokea masasisho.\nTafadhali angalia mwongozo wa uhamaji ($2) ili upate maelezo zaidi."
-	},
 	"missing_param": {
 		"message": "Kigezo kinakosekana: $1"
 	},

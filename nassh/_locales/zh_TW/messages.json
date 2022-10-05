@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "載入中..."
 	},
-	"migrate_to_ext": {
-		"message": "注意：請遷移至新版安全殼層擴充功能 ($1)。\nChrome 應用程式現已不適用，因此這個版本將停止接收更新。\n詳情請參閱遷移指南 ($2)。"
-	},
 	"missing_param": {
 		"message": "找不到下列參數：$1"
 	},

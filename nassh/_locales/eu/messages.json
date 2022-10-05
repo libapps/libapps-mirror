@@ -680,9 +680,6 @@
 	"loading_label": {
 		"message": "Kargatzen…"
 	},
-	"migrate_to_ext": {
-		"message": "Oharra: migratu Secure Shell-en luzapen berrira ($1).\nChrome-ren aplikazioak zaharkituta daude; beraz, bertsio honek ez du eguneratzerik jasoko.\nXehetasun gehiago lortzeko, irakurri migrazio-gida ($2)."
-	},
 	"missing_param": {
 		"message": "Parametro bat falta da: $1."
 	},

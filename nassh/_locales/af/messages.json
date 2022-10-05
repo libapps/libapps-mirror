@@ -671,9 +671,6 @@
 	"loading_label": {
 		"message": "Laai tans …"
 	},
-	"migrate_to_ext": {
-		"message": "Let wel: Migreer asseblief na die nuwe Secure Shell-uitbreiding ($1).\nChrome-programme word opgeskort en hierdie weergawe gaan dus nie meer opdaterings ontvang nie.\nSien asseblief die migrasiegids ($2) vir meer besonderhede."
-	},
 	"missing_param": {
 		"message": "Ontbrekende parameter: $1"
 	},

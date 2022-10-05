@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Đang tải..."
 	},
-	"migrate_to_ext": {
-		"message": "Lưu ý: Hãy chuyển sang tiện ích mới của giao thức Secure Shell ($1).\nỨng dụng Chrome không được dùng nữa, nên phiên bản này sẽ dừng nhận bản cập nhật.\nVui lòng xem hướng dẫn di chuyển ($2) để biết thêm thông tin chi tiết."
-	},
 	"missing_param": {
 		"message": "Thiếu tham số: $1"
 	},

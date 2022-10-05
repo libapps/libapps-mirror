@@ -677,9 +677,6 @@
 	"loading_label": {
 		"message": "Iyalayisha..."
 	},
-	"migrate_to_ext": {
-		"message": "Isaziso: Sicela uthuthele kwisandiso esisha se-Secure Shell ($1).\nIzinhlelo Zokusebenza Ze-Chrome zihoxisiwe, ngakho le nguqulo izoyeka ukuthola izibuyekezo.\nSicela ubone umhlahlandlela wokuthuthela ku-($2) ukuthola imininingwane eyengeziwe."
-	},
 	"missing_param": {
 		"message": "Uhlala olulahlekile: $1"
 	},

@@ -680,9 +680,6 @@
 	"loading_label": {
 		"message": "Memuatkan…"
 	},
-	"migrate_to_ext": {
-		"message": "Notis: Sila berhijrah kepada sambungan Secure Shell baharu ($1).\nApl Chrome akan ditamatkan, oleh itu versi ini akan berhenti menerima kemas kini.\nSila lihat panduan penghijrahan ($2) untuk mendapatkan butiran lanjut."
-	},
 	"missing_param": {
 		"message": "Parameter tiada: $1"
 	},

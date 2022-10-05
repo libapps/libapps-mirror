@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Notiek ielāde…"
 	},
-	"migrate_to_ext": {
-		"message": "Paziņojums: lūdzu, veiciet migrēšanu uz jauno Secure Shell paplašinājumu ($1).\nChrome lietotņu darbība ir pārtraukta, tādēļ šī versija vairs nesaņems atjauninājumus.\nPlašāku informāciju skatiet migrācijas ceļvedī ($2)."
-	},
 	"missing_param": {
 		"message": "Trūkst parametra $1."
 	},

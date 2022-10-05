@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Cargando…"
 	},
-	"migrate_to_ext": {
-		"message": "Aviso: Migra a la nueva extensión de Secure Shell ($1).\nComo las Apps de Chrome dejaron de estar disponibles, esta versión dejará de recibir actualizaciones.\nPara obtener más detalles, consulta la guía de migración ($2)."
-	},
 	"missing_param": {
 		"message": "Parámetro ausente: $1"
 	},

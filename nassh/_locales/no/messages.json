@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Laster inn …"
 	},
-	"migrate_to_ext": {
-		"message": "Merknad: Overfør til den nye Secure Shell-utvidelsen ($1).\nChrome-apper er avviklet, så denne versjonen kommer ikke til å få flere oppdateringer.\nSe overføringsveiledningen ($2) for mer informasjon."
-	},
 	"missing_param": {
 		"message": "Manglende parameter: $1"
 	},

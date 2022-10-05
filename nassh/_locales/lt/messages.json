@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Įkeliama..."
 	},
-	"migrate_to_ext": {
-		"message": "Pastaba. Pereikite prie naujo „Secure Shell“ plėtinio ($1).\n„Chrome“ programos nebenaudojamos, todėl ši versija nebebus atnaujinama.\nDaugiau išsamios informacijos žr. perkėlimo vadove ($2)."
-	},
 	"missing_param": {
 		"message": "Trūksta parametro: $1"
 	},

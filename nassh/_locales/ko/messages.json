@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "로드 중..."
 	},
-	"migrate_to_ext": {
-		"message": "알림: 새로운 Secure Shell 확장 프로그램($1)으로 이전하세요.\nChrome 앱은 지원 중단되므로 이 버전에서는 업데이트를 수신하지 않습니다.\n자세한 내용은 이전 가이드($2)를 참조하세요."
-	},
 	"missing_param": {
 		"message": "누락된 매개변수: $1"
 	},

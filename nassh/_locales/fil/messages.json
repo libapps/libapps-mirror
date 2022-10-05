@@ -674,9 +674,6 @@
 	"loading_label": {
 		"message": "Naglo-load..."
 	},
-	"migrate_to_ext": {
-		"message": "Abiso: Lumipat sa bagong extension ng Secure Shell ($1).\nHindi na ginagamit ang Chrome Apps, kaya hindi na makakatanggap ng mga update ang bersyong ito.\nPakitingnan ang gabay sa paglilipat ($2) para sa higit pang detalye."
-	},
 	"missing_param": {
 		"message": "Nawawalang parameter: $1"
 	},

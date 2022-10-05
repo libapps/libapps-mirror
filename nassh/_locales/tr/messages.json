@@ -680,9 +680,6 @@
 	"loading_label": {
 		"message": "Yükleniyor..."
 	},
-	"migrate_to_ext": {
-		"message": "Uyarı: Lütfen yeni Güvenli Kabuk (SSH) uzantısına ($1) geçin.\nChrome Uygulamaları kullanımdan kaldırıldığından bu sürüm artık güncelleme almayacaktır.\nAyrıntılı bilgi için geçiş rehberine ($2) bakabilirsiniz."
-	},
 	"missing_param": {
 		"message": "Eksik parametre: $1"
 	},

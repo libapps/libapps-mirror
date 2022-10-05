@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "S'està carregant..."
 	},
-	"migrate_to_ext": {
-		"message": "Avís: fes la migració a la nova extensió de Secure Shell ($1).\nLes aplicacions de Chrome han deixat d'estar disponibles i, per tant, aquesta versió deixarà de rebre actualitzacions.\nConsulta la guia de migració ($2) per obtenir més informació."
-	},
 	"missing_param": {
 		"message": "Falta el paràmetre: $1"
 	},

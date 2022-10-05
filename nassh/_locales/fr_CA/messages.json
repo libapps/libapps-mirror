@@ -665,9 +665,6 @@
 	"loading_label": {
 		"message": "Chargement en cours…"
 	},
-	"migrate_to_ext": {
-		"message": "Avis : Veuillez migrer vers la nouvelle extension Secure Shell ($1).\nLes applis Chrome ont été abandonnées. Donc, cette version ne recevra plus de mises à jour.\nVeuillez consulter le guide de migration ($2) pour en savoir plus."
-	},
 	"missing_param": {
 		"message": "Paramètre manquant : $1"
 	},

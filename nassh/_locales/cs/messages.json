@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Načítání..."
 	},
-	"migrate_to_ext": {
-		"message": "Oznámení: Přejděte na nové rozšíření Secure Shell ($1).\nAplikace pro Chrome již nejsou podporovány. Tato verze proto přestane dostávat aktualizace.\nDalší podrobnosti najdete v průvodci migrací ($2)."
-	},
 	"missing_param": {
 		"message": "Chybí parametr: $1"
 	},

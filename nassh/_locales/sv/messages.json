@@ -683,9 +683,6 @@
 	"loading_label": {
 		"message": "Läser in …"
 	},
-	"migrate_to_ext": {
-		"message": "Obs! Migrera till det nya tillägget för Secure Shell ($1).\nChrome-appar har fasats ut, så den här versionen får inga fler uppdateringar.\nI migreringsguiden ($2) finns mer information."
-	},
 	"missing_param": {
 		"message": "Parametern $1 saknas"
 	},

@@ -1039,20 +1039,6 @@
 		"description": "The text displayed in the identity dropdown list while we load identities (which are SSH private key filenames used to authenticate with servers).",
 		"message": "Loading..."
 	},
-	"MIGRATE_TO_EXT": {
-		"description": "Notice shown to users to get them to move off the deprecated program versions.",
-		"message": "Notice: Please migrate to the new Secure Shell extension ($EXTURL$).\nChrome Apps are deprecated, so this version will stop receiving updates.\nPlease see the migration guide ($DOCURL$) for more details.",
-		"placeholders": {
-			"DOCURL": {
-				"content": "$2",
-				"example": "[doc]"
-			},
-			"EXTURL": {
-				"content": "$1",
-				"example": "[link]"
-			}
-		}
-	},
 	"MISSING_PARAM": {
 		"description": "Error message displayed when a command is missing a parameter.",
 		"message": "Missing parameter: $NAME$",
