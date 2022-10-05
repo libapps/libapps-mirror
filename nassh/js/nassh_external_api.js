@@ -769,6 +769,9 @@ export function initApi() {
 
   // Get handle on FileSystem, cleanup files, and register listener.
   return getDomFileSystem().then((fileSystem) => {
+    if (!fileSystem) {
+      return;
+    }
     fileSystem_ = fileSystem;
     return new Promise((deleteDone) => {
       // Remove existing contents of '/external/' before registering listener.

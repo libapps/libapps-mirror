@@ -19,12 +19,17 @@ import {
  *
  * This will also create the /.ssh/ directory if it does not exist.
  *
- * @return {!Promise<!FileSystem>} The root filesystem handle.
+ * @return {!Promise<!FileSystem|undefined>} The root filesystem handle.
  */
 export async function getDomFileSystem() {
   const requestFS =
       globalThis.requestFileSystem || globalThis.webkitRequestFileSystem;
   const size = 16 * 1024 * 1024;
+
+  if (!requestFS) {
+    console.warn('requestFileSystem API does not exist');
+    return Promise.resolve(undefined);
+  }
 
   const quotaInfo = await new Promise((resolve, reject) => {
     navigator.webkitPersistentStorage.queryUsageAndQuota(
@@ -102,6 +107,9 @@ export async function migrateFilesystemFromDomToIndexeddb(
   }
   if (!domfs) {
     domfs = await getDomFileSystem();
+    if (!domfs) {
+      return;
+    }
   }
 
   // If we already migrated, don't do it again.  If the path doesn't exist, the
@@ -149,6 +157,9 @@ export async function syncFilesystemFromIndexeddbToDom(
   }
   if (!domfs) {
     domfs = await getDomFileSystem();
+    if (!domfs) {
+      return;
+    }
   }
   return syncDir('/.ssh');
 }
@@ -170,6 +181,9 @@ export async function syncFilesystemFromDomToIndexeddb(
   }
   if (!domfs) {
     domfs = await getDomFileSystem();
+    if (!domfs) {
+      return;
+    }
   }
 
   // NaCl doesn't seem to write to that much.
