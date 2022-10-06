@@ -27,11 +27,7 @@ def _get_default_paths(basedir):
     js_files = sorted(
         x
         for x in terminal.JS_DIR.glob("*.js")
-        if not (
-            x.name.startswith("nassh_deps")
-            or x.name.startswith("deps_")
-            or x.name == "terminal_import.js"
-        )
+        if not (x.name.startswith("deps_") or x.name == "terminal_import.js")
     )
 
     return [os.path.relpath(x) for x in most_files + js_files]

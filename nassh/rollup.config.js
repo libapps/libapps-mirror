@@ -38,15 +38,6 @@ function nassh_dep(name) {
 }
 
 export default [
-  // TODO(vapier): Kill this off.
-  {
-    input: 'js/nassh_deps_rollup_shim.js',
-    output: {
-      file: 'js/nassh_deps.rollup.js',
-      format: 'es',
-    },
-    plugins: plugins,
-  },
   nassh_dep('indexeddb-fs'),
   nassh_dep('lit'),
   nassh_dep('pkijs'),
