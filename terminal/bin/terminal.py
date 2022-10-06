@@ -34,12 +34,14 @@ class SymlinkNasshFiles:
         self.filenames = []
 
     def __enter__(self):
-        paths = {
-            p for p in (NASSH_DIR / "js").glob("*.js") if "test" not in p.name
-        }
+        nassh_js_dir = NASSH_DIR / "js"
+        paths = {p for p in nassh_js_dir.glob("*.js") if "test" not in p.name}
         # Manually adding them since they might not exist until mkdeps() is run.
-        paths.add(NASSH_DIR / "js/deps_local.concat.js")
-        paths.add(NASSH_DIR / "js/nassh_deps.rollup.js")
+        paths.add(nassh_js_dir / "deps_local.concat.js")
+        paths.update(
+            nassh_js_dir / f"deps_{x}.rollup.js"
+            for x in ("indexeddb-fs", "lit", "xterm")
+        )
 
         logging.info("symlinking nassh files")
         for path in paths:

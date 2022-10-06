@@ -5,13 +5,14 @@
 /**
  * @fileoverview exports lit element utilities.
  *
- * As nassh_deps.rollup.js is a compiled js file, it violates the linter in
+ * As the rollup ouput is a compiled js file, it violates the linter in
  * numerous ways. As a consequnce, it must be suppressed and the types imported
  * from it in this file will be undefined, so must also be suppressed.
  *
  * @suppress {moduleLoad}
  */
-import {lit} from './nassh_deps.rollup.js';
+
+import {lit} from './deps_lit.rollup.js';
 
 /** @suppress {undefinedVars} */
 export const {LitElement, classMap, createRef, css, html, ifDefined, live, ref,

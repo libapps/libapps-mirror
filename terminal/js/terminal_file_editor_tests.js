@@ -7,7 +7,7 @@
  * @suppress {moduleLoad}
  */
 
-import {createFs} from './nassh_deps.rollup.js';
+import {createFs} from './deps_indexeddb-fs.rollup.js';
 
 import './terminal_file_editor.js';
 
