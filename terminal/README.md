@@ -4,6 +4,10 @@ The chrome-untrusted://terminal System Web App is the default
 [ChromeOS Linux (crostini)](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/containers_and_vms.md)
 terminal.
 
+The
+[official ChromeOS Terminal docs](https://chromeos.dev/en/productivity/terminal)
+have more information too.
+
 # Contact
 
 The [chromium-hterm mailing list] can be used to contact other users and

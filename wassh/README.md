@@ -13,6 +13,9 @@ For details on how wassh implements various subsystems:
 * [signals](./docs/signals.md): Signal emulation.
 * [sockets](./docs/sockets.md): Network support.
 
+A presentation is also available:
+[WASI: A WASM Journey](https://docs.google.com/presentation/d/1IwykneyXqDqyJHOs0zKvHQw9_WlWVmkDg2CuFSoUCUE/preview).
+
 
 [nassh]: ../nassh/
 [ssh_client]: ../ssh_client/

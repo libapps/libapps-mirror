@@ -24,8 +24,14 @@ part of hterm, now available as shared code.
 * [hterm/](./hterm/) is a JS library that provides a terminal emulator.  It is
 reasonably fast, reasonably correct, and reasonably portable across browsers.
 
-* [nassh/](./nassh/) is the Secure Shell Chrome extension that combines hterm
-with a NaCl build of OpenSSH to provide a PuTTY-like app for Chrome users.
+* [nassh/](./nassh/) is the Chrome Secure Shell extension that combines hterm
+with a build of OpenSSH to provide a PuTTY-like app for Chrome users.
 
-* [ssh_client/](./ssh_client/) is the NaCl port of OpenSSH.  It is used by
-[nassh](./nassh/) to create the Secure Shell App.
+* [ssh_client/](./ssh_client/) is the NaCl & WASM port of OpenSSH.
+
+* [terminal/](./terminal/) is the ChromeOS Terminal application.
+
+* [wassh/](./wassh/) is the JS part of the WASM OpenSSH port.
+
+* [wasi-js-bindings/](./wasi-js-bindings/) provides JS bindings for WASI which
+is used by the WASM port.
