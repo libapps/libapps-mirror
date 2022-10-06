@@ -8,13 +8,13 @@
  * @externs
  */
 
-var asn1js$$module$js$nassh_deps_rollup = {};
+var asn1js$$module$js$deps_pkijs_rollup = {};
 
 /**
  * @param {!ArrayBuffer} buffer
  * @return {{offset: number, result: !BaseBlock}}
  */
-asn1js$$module$js$nassh_deps_rollup.fromBER = function(buffer) {};
+asn1js$$module$js$deps_pkijs_rollup.fromBER = function(buffer) {};
 
 class BaseBlock {
   constructor() {

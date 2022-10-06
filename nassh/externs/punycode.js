@@ -8,10 +8,10 @@
  * @externs
  */
 
-var punycode$$module$js$nassh_deps_rollup = {};
+var punycode$$module$js$deps_punycode_rollup = {};
 
 /**
  * @param {string} input
  * @return {string}
  */
-punycode$$module$js$nassh_deps_rollup.toASCII = function(input) {};
+punycode$$module$js$deps_punycode_rollup.toASCII = function(input) {};

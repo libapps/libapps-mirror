@@ -8,10 +8,11 @@
  * @suppress {moduleLoad}
  */
 
+import {createFs} from './deps_indexeddb-fs.rollup.js';
+
 import {
   getOrCreateDirectory, overwriteFile, readDirectory, readFile,
 } from './lib_fs.js';
-import {createFs} from './nassh_deps.rollup.js';
 
 /**
  * Request the persistent HTML5 filesystem for this extension.

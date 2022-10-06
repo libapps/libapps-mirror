@@ -13,10 +13,11 @@
  * @suppress {moduleLoad}
  */
 
+import {asn1js, pkijs} from './deps_pkijs.rollup.js';
+
 import {concatTyped, compare} from './lib_array.js';
 import {CredentialCache} from './lib_credential_cache.js';
 import {localize} from './nassh.js';
-import {asn1js, pkijs} from './nassh_deps.rollup.js';
 import {UserIO} from './nassh_agent.js';
 import {Backend} from './nassh_agent_backend.js';
 import {

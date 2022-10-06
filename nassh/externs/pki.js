@@ -8,9 +8,9 @@
  * @externs
  */
 
-var pkijs$$module$js$nassh_deps_rollup = {};
-pkijs$$module$js$nassh_deps_rollup.Certificate = Certificate;
-pkijs$$module$js$nassh_deps_rollup.RSAPublicKey = RSAPublicKey;
+var pkijs$$module$js$deps_pkijs_rollup = {};
+pkijs$$module$js$deps_pkijs_rollup.Certificate = Certificate;
+pkijs$$module$js$deps_pkijs_rollup.RSAPublicKey = RSAPublicKey;
 
 class AlgorithmIdentifier {
   constructor() {

@@ -8,13 +8,13 @@
  * @externs
  */
 
-var createFs$$module$js$nassh_deps_rollup = {};
+var createFs$$module$js$deps_indexeddb_js_rollup = {};
 
 /**
  * @param {!Object=} options
  * @return {!IndexeddbFs}
  */
-createFs$$module$js$nassh_deps_rollup.createFs = function(options) {};
+createFs$$module$js$deps_indexeddb_js_rollup.createFs = function(options) {};
 
 /** @enum {string} */
 var IndexeddbFsEntryType = {

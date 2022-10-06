@@ -7,10 +7,11 @@
  * @suppress {moduleLoad}
  */
 
+import {punycode} from './deps_punycode.rollup.js';
+
 import {
   getManifest, isCrOSSystemApp, localize, osc8Link, sgrText,
 } from './nassh.js';
-import {punycode} from './nassh_deps.rollup.js';
 import {Agent} from './nassh_agent.js';
 import {setDefaultBackend} from './nassh_buffer.js';
 import {
