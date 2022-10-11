@@ -320,7 +320,6 @@ terminal.Command.prototype.onBeforeUnload_ = function(e) {
  * @param {string} string The string to send.
  */
 terminal.Command.prototype.sendString_ = function(string) {
-console.error('sendString=[' + string + ']');
   chrome.terminalPrivate.sendInput(this.id_, string);
 };
 
