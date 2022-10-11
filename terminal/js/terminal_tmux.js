@@ -77,6 +77,8 @@ export class PseudoTmuxCommand {
             this.term_.cursorLeft(1);
             this.term_.print(' ');
             this.term_.cursorLeft(1);
+          } else {
+            this.term_.ringBell();
           }
           break;
         case '\r': {
@@ -230,7 +232,7 @@ export class TmuxControllerDriver {
     this.pseudoTmuxCommand_ = null;
     /** @const @private {!Set<!ServerWindow>} */
     this.serverWindows_ = new Set();
-    this.started_ = false;
+    this.active_ = false;
 
     /** @const @private {!Array<string>} */
     this.pendingOpenWindowRequests_ = [];
@@ -239,6 +241,10 @@ export class TmuxControllerDriver {
 
     this.onUnload_ = this.onUnload_.bind(this);
     this.onUserInput_ = this.onUserInput_.bind(this);
+  }
+
+  get active() {
+    return this.active_;
   }
 
   get channelName() {
@@ -252,16 +258,8 @@ export class TmuxControllerDriver {
     this.term_.onTmuxControlModeLine = this.onTmuxControlModeLine_.bind(this);
   }
 
-  reset() {
-    if (!this.started_) {
-      return;
-    }
-    console.warn('resetting when a tmux session has started');
-    this.onStop_();
-  }
-
   onTmuxControlModeLine_(line) {
-    if (!this.started_) {
+    if (!this.active_) {
       this.onStart_();
     }
 
@@ -277,7 +275,7 @@ export class TmuxControllerDriver {
    * Start handling tmux control mode.
    */
   onStart_() {
-    this.started_ = true;
+    this.active_ = true;
 
     window.addEventListener('unload', this.onUnload_);
 
@@ -356,7 +354,7 @@ export class TmuxControllerDriver {
    * Stop handling tmux control mode.
    */
   onStop_() {
-    this.started_ = false;
+    this.active_ = false;
 
     window.removeEventListener('unload', this.onUnload_);
     this.cleanUpPendingOpenWindowRequests_('controller has stopped');
@@ -620,7 +618,7 @@ class ServerWindow extends tmux.Window {
     // TODO(1252271): We should be able to use something like Proxy to avoid
     // spelling out the methods.
     for (const method of ['onLayoutUpdate', 'onPaneOutput',
-        'onPaneCursorUpdate', 'onPaneSyncStart']) {
+        'onPaneSyncStart']) {
       this[method] = this.clientWindowRpc_[method];
     }
   }
@@ -841,6 +839,8 @@ export class ClientWindow {
     if (this.layout_.paneId !== oldLayout?.paneId) {
       console.log(`updating paneId from ${oldLayout?.paneId} ` +
           `to ${this.layout_.paneId}`);
+      // TODO(crbug.com/1252271): We might also want to reset other status of
+      // the terminal here.
       this.term_.wipeContents();
       this.paneSyncStarted_ = false;
       // TODO(crbug.com/1252271): Ideally, we don't want to just pull in a fixed
@@ -848,13 +848,6 @@ export class ClientWindow {
       // history dynamically when the user scrolls up.
       this.controllerRpc_.syncPane(this.layout_.paneId, SYNC_PANE_HISTORY_SIZE);
     }
-  }
-
-  /** @override */
-  onPaneCursorUpdate(paneId, x, y) {
-    // TODO(1252271): avoid calling hterm's private function?
-    this.term_.scheduleSyncCursorPosition_();
-    this.term_.restoreCursor(new hterm.RowCol(y, x));
   }
 
   /** @override */

@@ -1524,10 +1524,10 @@ CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
   this.plugin_ = new NaclPlugin({
     io: this.io,
     sshClientVersion: this.sshClientVersion_,
-    onExit: (code) => {
+    onExit: async (code) => {
       syncFilesystemFromDomToIndexeddb();
 
-      this.onPluginExit(code);
+      await this.onPluginExit(code);
       this.exit(code, /* noReconnect= */ false);
     },
     secureInput: (...args) => this.secureInput(...args),
@@ -1557,8 +1557,8 @@ CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
       trace: argv.debugTrace,
     });
     this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
-    this.plugin_.run().then((code) => {
-      this.onPluginExit(code);
+    this.plugin_.run().then(async (code) => {
+      await this.onPluginExit(code);
       this.exit(code, /* noReconnect= */ false);
     });
     onComplete();
@@ -1869,8 +1869,9 @@ CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
  * plugin exits.
  *
  * @param {number} code The exit code.
+ * @return {!Promise<void>}
  */
-CommandInstance.prototype.onPluginExit = function(code) {};
+CommandInstance.prototype.onPluginExit = async function(code) {};
 
 /**
  * A user should override this if they want to handle resetting the terminal.

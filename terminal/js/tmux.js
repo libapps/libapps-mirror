@@ -78,15 +78,6 @@ export class Window {
   onPaneOutput(paneId, data) { }
 
   /**
-   * Called when there is an update for the pane cursor.
-   *
-   * @param {string} paneId
-   * @param {number} x
-   * @param {number} y
-   */
-  onPaneCursorUpdate(paneId, x, y) { }
-
-  /**
    * See `Controller.syncPane()`.
    *
    * @param {string} paneId
@@ -125,6 +116,20 @@ let WindowData;
  * @typedef {{major: number, minor: string}}
  */
 let TmuxVersion;
+
+/**
+ * Unescape double slash and \0xx from a string.
+ *
+ * @param {string} str
+ * @return {string}
+ */
+function unescapeString(str) {
+  // Unescape double slash and \0XX.
+  return str.replace(
+      /\\(?:\\|[01][0-7]{2})/g,
+      (x) => x === '\\\\' ? '\\' : String.fromCharCode(parseInt(x.slice(1), 8)),
+  );
+}
 
 /**
  * A Controller object interacts with a tmux process running in control mode.
@@ -404,18 +409,25 @@ export class Controller {
     // fullscreen process (e.g. vim) running, then tmux does not give us the
     // history within the visible area.
     //
-    // TODO(crbug.com/1252271): Try to fix the history in visible area issue.
-    let capturePaneCommand = `capture-pane -peNJt ${paneId}`;
+    // TODO(crbug.com/1252271): Try to fix the history in visible area issue. I
+    // think what we just need to also sync the origin screen when the
+    // alternate one is active.
+    let capturePaneCommand = `capture-pane -peNJCt ${paneId}`;
     if (history) {
       capturePaneCommand += ` -S -${history}`;
     }
     this.queueCommand(capturePaneCommand, (output) => {
       pane.winInfo.win.onPaneSyncStart(paneId);
-      pane.winInfo.win.onPaneOutput(paneId, output.join('\r\n'));
+      pane.winInfo.win.onPaneOutput(paneId,
+          unescapeString(output.join('\r\n')));
+    });
+
+    this.getPaneCursor(paneId, ({x, y}) => {
+      pane.winInfo.win.onPaneOutput(paneId, `\x1b[${y + 1};${x + 1}H`);
     });
 
     // Capture and send incomplete escape sequence if there is any.
-    this.queueCommand(`capture-pane -pPt ${paneId}`, (output) => {
+    this.queueCommand(`capture-pane -pPCt ${paneId}`, (output) => {
       if (output.length === 0) {
         return;
       }
@@ -424,12 +436,9 @@ export class Controller {
         // case.
         console.warn('multiple lines of incomplete escape sequences');
       }
-      pane.winInfo.win.onPaneOutput(paneId, output.join('\r\n'));
+      pane.winInfo.win.onPaneOutput(paneId,
+          unescapeString(output.join('\r\n')));
     });
-
-    this.getPaneCursor(
-        paneId,
-        ({x, y}) => pane.winInfo.win.onPaneCursorUpdate(paneId, x, y));
   }
 
   /**
@@ -708,9 +717,7 @@ export class Controller {
       return;
     }
     // Unescape characters that was converted to the octal form.
-    const data = match[2].replace(
-        /\\[01][0-7]{2}/g,
-        (x) => String.fromCharCode(parseInt(x.slice(1), 8)));
+    const data = unescapeString(match[2]);
     pane.winInfo.win.onPaneOutput(paneId, data);
   }
 

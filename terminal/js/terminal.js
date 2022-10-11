@@ -417,15 +417,12 @@ async function runNassh(term, hash, tmuxControllerDriver) {
     },
   });
 
-  nasshCommand.resetTerminal = () => {
-    term.reset();
-    // This is necessary to get us out of tmux mode if we are in one.
-    term.vt.resetParseState();
-    return true;
-  };
   if (tmuxControllerDriver) {
-    nasshCommand.onPluginExit = () => {
-      tmuxControllerDriver.reset();
+    nasshCommand.onPluginExit = async () => {
+      if (tmuxControllerDriver.active) {
+        // Send ST to end the ongoing DCS sequence.
+        await new Promise((resolve) => term.write('\x1b\\', resolve));
+      }
     };
   }
 
