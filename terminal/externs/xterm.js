@@ -64,6 +64,11 @@ class Terminal$$module$js$xterm {
   loadAddon(addon) {}
 
   /**
+   * @param {function()} callback
+   */
+  onBell(callback) {}
+
+  /**
    * @param {function(string)} callback
    */
   onBinary(callback) {}

@@ -192,6 +192,49 @@ class LinkHandler {
   }
 }
 
+class Bell {
+  constructor() {
+    this.showNotification = false;
+
+    /** @type {?Audio} */
+    this.audio_ = null;
+    /** @type {?Notification} */
+    this.notification_ = null;
+    this.coolDownUntil_ = 0;
+  }
+
+  /**
+   * Set whether a bell audio should be played.
+   *
+   * @param {boolean} value
+   */
+  set playAudio(value) {
+    this.audio_ = value ?
+        new Audio(lib.resource.getDataUrl('hterm/audio/bell')) : null;
+  }
+
+  ring() {
+    const now = Date.now();
+    if (now < this.coolDownUntil_) {
+      return;
+    }
+    this.coolDownUntil_ = now + 500;
+
+    this.audio_?.play();
+    if (this.showNotification && !document.hasFocus() && !this.notification_) {
+      this.notification_ = new Notification(
+          `\u266A ${document.title} \u266A`,
+          {icon: lib.resource.getDataUrl('hterm/images/icon-96')});
+      // Close the notification after a timeout. Note that this is different
+      // from hterm's behavior, but I think it makes more sense to do so.
+      setTimeout(() => {
+        this.notification_.close();
+        this.notification_ = null;
+      }, 5000);
+    }
+  }
+}
+
 /**
  * A terminal class that 1) uses xterm.js and 2) behaves like a `hterm.Terminal`
  * so that it can be used in existing code.
@@ -225,7 +268,7 @@ export class XtermTerminal {
 
     /** @type {?Element} */
     this.container_;
-
+    this.bell_ = new Bell();
     this.scheduleFit_ = delayedScheduler(() => this.fit_(),
         testParams ? 0 : 250);
 
@@ -250,6 +293,7 @@ export class XtermTerminal {
     this.term.onBinary((data) => this.io.onVTKeystroke(data));
     this.term.onTitleChange((title) => document.title = title);
     this.term.onSelectionChange(() => this.copySelection_());
+    this.term.onBell(() => this.ringBell());
 
     /**
      * A mapping from key combo (see encodeKeyCombo()) to a handler function.
@@ -288,6 +332,11 @@ export class XtermTerminal {
       selectionForeground: 'black',
     };
     this.observePrefs_();
+  }
+
+  /** @override */
+  ringBell() {
+    this.bell_.ring();
   }
 
   /**
@@ -510,13 +559,10 @@ export class XtermTerminal {
     // TODO(lxj): support option "lineHeight", "scrollback".
     this.prefs_.addObservers(null, {
       'audible-bell-sound': (v) => {
-        if (v) {
-          this.updateOption_('bellStyle', 'sound', false);
-          this.updateOption_('bellSound', lib.resource.getDataUrl(
-              'hterm/audio/bell'), false);
-        } else {
-          this.updateOption_('bellStyle', 'none', false);
-        }
+        this.bell_.playAudio = !!v;
+      },
+      'desktop-notification-bell': (v) => {
+        this.bell_.showNotification = v;
       },
       'background-color': (v) => {
         this.updateTheme_({background: v});
