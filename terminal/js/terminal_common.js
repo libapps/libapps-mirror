@@ -463,7 +463,8 @@ export async function sleep(ms) {
 
 /**
  * Return a new "scheduler" function. When the function is called, it will
- * schedule the `callback` to be called after `delay` time. The function does
+ * schedule the `callback` to be called after `delay` time. It also returns a
+ * promise, which is fulfilled after the callback is called. The function does
  * nothing if it is called again and the last one hasn't timed out yet.
  *
  * TODO: This can probably replace some other existing scheduling code (search
@@ -471,17 +472,20 @@ export async function sleep(ms) {
  *
  * @param {function()} callback
  * @param {number} delay
- * @return {function()} The schedule function.
+ * @return {function(): !Promise<void>} The schedule function.
  */
 export function delayedScheduler(callback, delay) {
-  let pending = false;
+  let donePromise = null;
   return () => {
-    if (!pending) {
-      pending = true;
-      setTimeout(() => {
-        pending = false;
-        callback();
-      }, delay);
+    if (!donePromise) {
+      donePromise = new Promise((resolve) => {
+        setTimeout(() => {
+          donePromise = null;
+          callback();
+          resolve();
+        }, delay);
+      });
     }
+    return donePromise;
   };
 }

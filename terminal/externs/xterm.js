@@ -5,6 +5,10 @@
 /**
  * @fileoverview Externs definitions for xterm.js used in terminal.
  *
+ * TODO(lxj): xterm actually provides typing information (in
+ * `node_modules/xterm/typing/xterm.d.ts`). Maybe we should find some way to use
+ * that.
+ *
  * @externs
  */
 
@@ -16,11 +20,47 @@ class IParser {
   registerOscHandler(ident, callback) {}
 }
 
+class IBufferLine {
+  /**
+   * @param {boolean=} trimRight
+   * @param {number=} startColumn
+   * @param {number=} endColumn
+   * @return {string}
+   */
+  translateToString(trimRight, startColumn, endColumn) {}
+}
+
+class IBuffer {
+  constructor() {
+    this.cursorY = 0;
+    this.cursorX = 0;
+  }
+
+  /**
+   * @param {number} y
+   * @return {!IBufferLine | undefined}
+   */
+  getLine(y) {}
+}
+
+class IBufferNamespace {
+  constructor() {
+    /** @type {!IBuffer} */
+    this.active;
+    /** @type {!IBuffer} */
+    this.normal;
+    /** @type {!IBuffer} */
+    this.alternate;
+  }
+}
+
 class Terminal$$module$js$xterm {
   /**
    * @param {!Object=} options
    */
   constructor(options) {
+    /** @type {!IBufferNamespace} */
+    this.buffer;
     /** @type {?HTMLElement} */
     this.element;
     /** @type {!Object} */
@@ -34,14 +74,6 @@ class Terminal$$module$js$xterm {
     this.unicode = {
       activeVersion: '',
     };
-    this._core = {
-      _renderService: {
-        dimensions: {
-          actualCellWidth: 0,
-          actualCellHeight: 0,
-        },
-      },
-    };
     this.modes = {mouseTrackingMode: ''};
   }
 
@@ -49,6 +81,10 @@ class Terminal$$module$js$xterm {
    * @param {function(!KeyboardEvent): boolean} handler
    */
   attachCustomKeyEventHandler(handler) {}
+
+  clear() {}
+
+  dispose() {}
 
   focus() {}
 
@@ -103,6 +139,12 @@ class Terminal$$module$js$xterm {
    */
   paste(data) {}
 
+  /**
+   * @param {number} start
+   * @param {number} end
+   */
+  refresh(start, end) {}
+
   reset() {}
 
   /**
@@ -113,13 +155,17 @@ class Terminal$$module$js$xterm {
 
   /**
    * @param {string|!Uint8Array} data
+   * @param {function()=} callback Optional callback that fires when the data
+   *     was processed by the parser.
    */
-  write(data) {}
+  write(data, callback) {}
 
   /**
    * @param {string|!Uint8Array} data
+   * @param {function()=} callback Optional callback that fires when the data
+   *     was processed by the parser.
    */
-  writeln(data) {}
+  writeln(data, callback) {}
 }
 
 class WebglAddon$$module$js$xterm {}

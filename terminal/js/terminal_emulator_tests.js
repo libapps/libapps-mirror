@@ -20,16 +20,11 @@ describe('terminal_emulator_tests.js', function() {
           parser: {
             registerOscHandler: () => {},
           },
-          _core: {
-            _renderService: {
-              dimensions: {
-                actualCellWidth: 10.5,
-                actualCellHeight: 20.5,
-              },
-            },
-          },
         }),
         fontManager: new MockObject(),
+        xtermInternal: new MockObject({
+          getActualCellDimensions: () => ({width: 9, height: 22}),
+        }),
       };
       const testParams = {};
       for (const prop in this.mocks) {

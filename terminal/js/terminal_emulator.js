@@ -9,6 +9,8 @@
 // TODO(b/236205389): add tests. For example, we should enable the test in
 // terminal_tests.js for XtermTerminal.
 
+// TODO(b/236205389): support option smoothScrollDuration?
+
 import {LitElement, css, html} from './lit.js';
 import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, delayedScheduler,
   fontManager, getOSInfo, sleep} from './terminal_common.js';
@@ -16,6 +18,7 @@ import {ICON_COPY} from './terminal_icons.js';
 import {TerminalTooltip} from './terminal_tooltip.js';
 import {Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
     from './xterm.js';
+import {XtermInternal} from './terminal_xterm_internal.js';
 
 
 /** @enum {number} */
@@ -82,6 +85,7 @@ const ANSI_COLOR_NAMES = [
  * @typedef {{
  *   term: !Terminal,
  *   fontManager: !FontManager,
+ *   xtermInternal: !XtermInternal,
  * }}
  */
 export let XtermTerminalTestParams;
@@ -264,6 +268,8 @@ export class XtermTerminal {
 
     // TODO: we should probably pass the initial prefs to the ctor.
     this.term = testParams?.term || new Terminal({allowProposedApi: true});
+    this.xtermInternal_ = testParams?.xtermInternal ||
+        new XtermInternal(this.term);
     this.fontManager_ = testParams?.fontManager || fontManager;
 
     /** @type {?Element} */
@@ -291,7 +297,7 @@ export class XtermTerminal {
     // prompt, which only listens to onVTKeystroke().
     this.term.onData((data) => this.io.onVTKeystroke(data));
     this.term.onBinary((data) => this.io.onVTKeystroke(data));
-    this.term.onTitleChange((title) => document.title = title);
+    this.term.onTitleChange((title) => this.setWindowTitle(title));
     this.term.onSelectionChange(() => this.copySelection_());
     this.term.onBell(() => this.ringBell());
 
@@ -335,8 +341,33 @@ export class XtermTerminal {
   }
 
   /** @override */
+  setWindowTitle(title) {
+    document.title = title;
+  }
+
+  /** @override */
   ringBell() {
     this.bell_.ring();
+  }
+
+  /** @override */
+  print(str) {
+    this.xtermInternal_.print(str);
+  }
+
+  /** @override */
+  wipeContents() {
+    this.term.clear();
+  }
+
+  /** @override */
+  newLine() {
+    this.xtermInternal_.newLine();
+  }
+
+  /** @override */
+  cursorLeft(number) {
+    this.xtermInternal_.cursorLeft(number ?? 1);
   }
 
   /**
@@ -405,6 +436,10 @@ export class XtermTerminal {
 
       return true;
     });
+
+    this.xtermInternal_.installTmuxControlModeHandler(
+        (data) => this.onTmuxControlModeLine(data));
+    this.xtermInternal_.installEscKHandler();
   }
 
   /**
@@ -412,18 +447,22 @@ export class XtermTerminal {
    *
    * @param {string|!Uint8Array} data string for UTF-16 data, Uint8Array for
    *     UTF-8 data
+   * @param {function()=} callback Optional callback that fires when the data
+   *     was processed by the parser.
    */
-  write(data) {
-    this.term.write(data);
+  write(data, callback) {
+    this.term.write(data, callback);
   }
 
   /**
    * Like `this.write()` but also write a line break.
    *
    * @param {string|!Uint8Array} data
+   * @param {function()=} callback Optional callback that fires when the data
+   *     was processed by the parser.
    */
-  writeln(data) {
-    this.term.writeln(data);
+  writeln(data, callback) {
+    this.term.writeln(data, callback);
   }
 
   get screenSize() {
@@ -455,7 +494,6 @@ export class XtermTerminal {
       this.inited_ = true;
       this.term.open(elem);
 
-      this.scheduleFit_();
       if (this.enableWebGL_) {
         this.term.loadAddon(new WebglAddon());
       }
@@ -485,6 +523,7 @@ export class XtermTerminal {
         }
       });
 
+      await this.scheduleFit_();
       this.onTerminalReady();
     })();
   }
@@ -620,12 +659,9 @@ export class XtermTerminal {
       return Math.floor((size - 2 * screenPaddingSize) / cellSize);
     };
 
-    // Unfortunately, it looks like we have to use private API from xterm.js.
-    // Maybe we should patch the FitAddon so that it works for us.
-    const dimensions = this.term._core._renderService.dimensions;
-    const cols = calc(this.container_.offsetWidth, dimensions.actualCellWidth);
-    const rows = calc(this.container_.offsetHeight,
-        dimensions.actualCellHeight);
+    const cellDimensions = this.xtermInternal_.getActualCellDimensions();
+    const cols = calc(this.container_.offsetWidth, cellDimensions.width);
+    const rows = calc(this.container_.offsetHeight, cellDimensions.height);
     if (cols >= 0 && rows >= 0) {
       this.term.resize(cols, rows);
     }
@@ -847,21 +883,6 @@ export class XtermTerminal {
       set(modifiers | Modifier.Shift, keyCode, func);
     };
 
-    // Temporary shortcut to refresh the rendering in case of rendering errors.
-    // TODO(lxj): remove after this is fixed:
-    // https://github.com/xtermjs/xterm.js/issues/3878
-    set(Modifier.Ctrl | Modifier.Shift, keyCodes.L,
-        /** @suppress {missingProperties} */
-        () => {
-          this.scheduleRefreshFont_();
-          // Refresh the cursor layer.
-          if (this.enableWebGL_) {
-            this.term?._core?._renderService?._renderer?._renderLayers[1]
-                ?._clearAll();
-          }
-        },
-    );
-
     // Ctrl+/
     set(Modifier.Ctrl, 191, (ev) => {
       ev.preventDefault();
@@ -960,6 +981,27 @@ class HtermTerminal extends hterm.Terminal {
           'font-family',
           (v) => fontManager.loadFont(/** @type {string} */(v)));
     });
+  }
+
+  /**
+   * Write data to the terminal.
+   *
+   * @param {string|!Uint8Array} data string for UTF-16 data, Uint8Array for
+   *     UTF-8 data
+   * @param {function()=} callback Optional callback that fires when the data
+   *     was processed by the parser.
+   */
+  write(data, callback) {
+    if (typeof data === 'string') {
+      this.io.print(data);
+    } else {
+      this.io.writeUTF8(data);
+    }
+    // Hterm processes the data synchronously, so we can call the callback
+    // immediately.
+    if (callback) {
+      setTimeout(callback);
+    }
   }
 }
 

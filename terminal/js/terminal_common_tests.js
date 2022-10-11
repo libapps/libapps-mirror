@@ -9,7 +9,7 @@
 import {DEFAULT_BACKGROUND_COLOR, SUPPORTED_FONT_FAMILIES,
   SUPPORTED_FONT_FAMILIES_MINIMAL, delayedScheduler, definePrefs,
   fontFamilyToCSS, getSupportedFontFamilies, normalizeCSSFontFamily,
-  normalizePrefsInPlace, sleep} from './terminal_common.js';
+  normalizePrefsInPlace} from './terminal_common.js';
 
 describe('terminal_common_tests.js', () => {
   beforeEach(function() {
@@ -63,13 +63,14 @@ describe('terminal_common_tests.js', () => {
 
   it('delayedScheduler', async function() {
     let counter = 0;
-    const schedule = delayedScheduler(() => ++counter, 0);
+    const schedule = delayedScheduler(() => ++counter, 50);
+    const promise = schedule();
     for (let i = 0; i < 10; ++i) {
       schedule();
     }
     assert.equal(counter, 0);
 
-    await sleep(0);
+    await promise;
     assert.equal(counter, 1);
   });
 
