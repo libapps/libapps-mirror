@@ -354,7 +354,12 @@ export class XtermTerminal {
     this.installUnimplementedStubs_();
     this.installEscapeSequenceHandlers_();
 
-    this.term.onResize(({cols, rows}) => this.io.onTerminalResize(cols, rows));
+    this.term.onResize(({cols, rows}) => {
+      this.io.onTerminalResize(cols, rows);
+      if (this.prefs_.get('enable-resize-status')) {
+        this.showOverlay(`${cols} × ${rows}`);
+      }
+    });
     // We could also use `this.io.sendString()` except for the nassh exit
     // prompt, which only listens to onVTKeystroke().
     this.term.onData((data) => this.io.onVTKeystroke(data));
@@ -602,16 +607,12 @@ export class XtermTerminal {
 
   /** @override */
   showOverlay(msg, timeout = 1500) {
-    if (this.notificationCenter_) {
-      this.notificationCenter_.show(msg, {timeout});
-    }
+    this.notificationCenter_?.show(msg, {timeout});
   }
 
   /** @override */
   hideOverlay() {
-    if (this.notificationCenter_) {
-      this.notificationCenter_.hide();
-    }
+    this.notificationCenter_?.hide();
   }
 
   /** @override */
