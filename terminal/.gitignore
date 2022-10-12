@@ -1,5 +1,6 @@
 # Ignore temporary symlinked nassh files for linting/testing
 /js/deps_*.js
+/js/lib*.js
 /js/nas*.js
 
 # Terminal settings page can be run from a local server if you make some of the
