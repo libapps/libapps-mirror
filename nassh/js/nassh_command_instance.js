@@ -328,9 +328,7 @@ CommandInstance.prototype.isDevVersion = function() {
  */
 CommandInstance.prototype.reconnect = function(argstr) {
   // Terminal reset.
-  if (!this.resetTerminal()) {
-    this.io.print('\x1b[!p');
-  }
+  this.io.print('\x1b[!p');
 
   this.removePlugin_();
 
@@ -1872,13 +1870,3 @@ CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
  * @return {!Promise<void>}
  */
 CommandInstance.prototype.onPluginExit = async function(code) {};
-
-/**
- * A user should override this if they want to handle resetting the terminal.
- * Otherwise, this will reset the terminal by sending reset escape code.
- *
- * @return {boolean} Return true if the function is able to reset the terminal.
- */
-CommandInstance.prototype.resetTerminal = function() {
-  return false;
-};

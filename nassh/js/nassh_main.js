@@ -111,10 +111,6 @@ window.addEventListener('DOMContentLoaded', async (event) => {
           }
         },
       });
-      nasshCommand.resetTerminal = () => {
-        terminal.reset();
-        return true;
-      };
       nasshCommand.run();
     };
     terminal.onTerminalReady = function() {
