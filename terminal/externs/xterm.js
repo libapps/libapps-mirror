@@ -154,6 +154,11 @@ class Terminal$$module$js$xterm {
   resize(cols, rows) {}
 
   /**
+   * @param {number} number
+   */
+  scrollPages(number) {}
+
+  /**
    * @param {string|!Uint8Array} data
    * @param {function()=} callback Optional callback that fires when the data
    *     was processed by the parser.

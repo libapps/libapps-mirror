@@ -239,6 +239,68 @@ class Bell {
   }
 }
 
+const A11Y_BUTTON_STYLE = `
+position: fixed;
+z-index: 10;
+right: 16px;
+`;
+
+class A11yButtons {
+  /**
+   * @param {!Terminal} term
+   * @param {!Element} elem The container element for the terminal.
+   */
+  constructor(term, elem) {
+    this.pageUpButton_ = document.createElement('button');
+    this.pageUpButton_.style.cssText = A11Y_BUTTON_STYLE;
+    this.pageUpButton_.textContent =
+        hterm.messageManager.get('HTERM_BUTTON_PAGE_UP');
+    this.pageUpButton_.addEventListener('click',
+        () => term.scrollPages(-1));
+
+    this.pageDownButton_ = document.createElement('button');
+    this.pageDownButton_.style.cssText = A11Y_BUTTON_STYLE;
+    this.pageDownButton_.textContent =
+        hterm.messageManager.get('HTERM_BUTTON_PAGE_DOWN');
+    this.pageDownButton_.addEventListener('click',
+        () => term.scrollPages(1));
+
+    this.resetPos_();
+    elem.prepend(this.pageUpButton_);
+    elem.append(this.pageDownButton_);
+
+    this.onSelectionChange_ = this.onSelectionChange_.bind(this);
+  }
+
+  /**
+   * @param {boolean} enabled
+   */
+  setEnabled(enabled) {
+    if (enabled) {
+      document.addEventListener('selectionchange', this.onSelectionChange_);
+    } else {
+      this.resetPos_();
+      document.removeEventListener('selectionchange', this.onSelectionChange_);
+    }
+  }
+
+  resetPos_() {
+    this.pageUpButton_.style.top = '-200px';
+    this.pageDownButton_.style.bottom = '-200px';
+  }
+
+  onSelectionChange_() {
+    this.resetPos_();
+
+    const selectedElement = document.getSelection().anchorNode.parentElement;
+    if (selectedElement === this.pageUpButton_) {
+      this.pageUpButton_.style.top = '16px';
+    } else if (selectedElement === this.pageDownButton_) {
+      this.pageDownButton_.style.bottom = '16px';
+    }
+  }
+}
+
 /**
  * A terminal class that 1) uses xterm.js and 2) behaves like a `hterm.Terminal`
  * so that it can be used in existing code.
@@ -323,7 +385,8 @@ export class XtermTerminal {
 
     this.io = new XtermTerminalIO(this);
     this.notificationCenter_ = null;
-
+    this.htermA11yReader_ = null;
+    this.a11yButtons_ = null;
     this.copyNotice_ = null;
 
     this.term.options.linkHandler = new LinkHandler(this.term);
@@ -370,6 +433,13 @@ export class XtermTerminal {
     this.xtermInternal_.cursorLeft(number ?? 1);
   }
 
+  /** @override */
+  setAccessibilityEnabled(enabled) {
+    this.a11yButtons_.setEnabled(enabled);
+    this.htermA11yReader_.setAccessibilityEnabled(enabled);
+    this.term.options.screenReaderMode = enabled;
+  }
+
   /**
    * Install stubs for stuff that we haven't implemented yet so that the code
    * still runs.
@@ -389,7 +459,6 @@ export class XtermTerminal {
     this.keyboard.keyMap.keyDefs[78] = {};
 
     const methodNames = [
-        'setAccessibilityEnabled',
         'setBackgroundImage',
         'setCursorPosition',
         'setCursorVisible',
@@ -499,8 +568,9 @@ export class XtermTerminal {
       }
       this.term.focus();
       (new ResizeObserver(() => this.scheduleFit_())).observe(elem);
-      // TODO: Make a11y work. Maybe we can just use hterm.AccessibilityReader.
-      this.notificationCenter_ = new hterm.NotificationCenter(document.body);
+      this.htermA11yReader_ = new hterm.AccessibilityReader(elem);
+      this.notificationCenter_ = new hterm.NotificationCenter(document.body,
+          this.htermA11yReader_);
 
       // Block right-click context menu from popping up.
       elem.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -524,6 +594,8 @@ export class XtermTerminal {
       });
 
       await this.scheduleFit_();
+      this.a11yButtons_ = new A11yButtons(this.term, elem);
+
       this.onTerminalReady();
     })();
   }
@@ -1060,6 +1132,16 @@ class TerminalCopyNotice extends LitElement {
           fill: currentColor;
         }
     `;
+  }
+
+  /** @override */
+  connectedCallback() {
+    super.connectedCallback();
+    if (!this.childNodes.length) {
+      // This is not visible since we use shadow dom. But this will allow the
+      // hterm.NotificationCenter to announce the the copy text.
+      this.append(hterm.messageManager.get('HTERM_NOTIFY_COPY'));
+    }
   }
 
   /** @override */
