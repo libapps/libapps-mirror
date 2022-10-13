@@ -366,7 +366,11 @@ export class XtermTerminal {
     this.term.onData((data) => this.io.onVTKeystroke(data));
     this.term.onBinary((data) => this.io.onVTKeystroke(data));
     this.term.onTitleChange((title) => this.setWindowTitle(title));
-    this.term.onSelectionChange(() => this.copySelection_());
+    this.term.onSelectionChange(() => {
+      if (this.prefs_.get('copy-on-select')) {
+        this.copySelection_();
+      }
+    });
     this.term.onBell(() => this.ringBell());
 
     /**
@@ -814,10 +818,14 @@ export class XtermTerminal {
       return;
     }
     navigator.clipboard?.writeText(data);
-    if (!this.copyNotice_) {
-      this.copyNotice_ = document.createElement('terminal-copy-notice');
+
+    if (this.prefs_.get('enable-clipboard-notice')) {
+      if (!this.copyNotice_) {
+        this.copyNotice_ = document.createElement('terminal-copy-notice');
+      }
+      setTimeout(() => this.showOverlay(lib.notNull(this.copyNotice_), 500),
+          200);
     }
-    setTimeout(() => this.showOverlay(lib.notNull(this.copyNotice_), 500), 200);
   }
 
   /**

@@ -275,12 +275,14 @@ export class TerminalSettingsApp extends LitElement {
                 <terminal-settings-colorpicker preference="foreground-color">
                 </terminal-settings-colorpicker>
               </li>
-              <li class="setting-container"
-                  title="${msg('HTERM_PREF_FONT_SMOOTHING')}">
-                <h4>${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}</h4>
-                <terminal-settings-checkbox preference="font-smoothing">
-                </terminal-settings-checkbox>
-              </li>
+              ${when(!xtermJs, () => html`
+                <li class="setting-container"
+                    title="${msg('HTERM_PREF_FONT_SMOOTHING')}">
+                  <h4>${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}</h4>
+                  <terminal-settings-checkbox preference="font-smoothing">
+                  </terminal-settings-checkbox>
+                </li>
+              `)}
               <li class="setting-container"
                   title="${msg('TERMINAL_PREF_ANSI_COLORS')}">
                 <h4>${msg('TERMINAL_NAME_PREF_ANSI_COLORS')}</h4>
@@ -342,18 +344,20 @@ export class TerminalSettingsApp extends LitElement {
             </ul>
           </section>
 
-          <section>
-            <h3>${msg('TERMINAL_TITLE_PREF_SCROLLBAR')}</h3>
+          ${when(!xtermJs, () => html`
+            <section>
+              <h3>${msg('TERMINAL_TITLE_PREF_SCROLLBAR')}</h3>
 
-            <ul class="section-body">
-              <li class="setting-container"
-                  title="${msg('HTERM_PREF_SCROLLBAR_VISIBLE')}">
-                <h4>${msg('TERMINAL_NAME_PREF_VISIBLE')}</h4>
-                <terminal-settings-checkbox preference="scrollbar-visible">
-                </terminal-settings-checkbox>
-              </li>
-            </ul>
-          </section>
+              <ul class="section-body">
+                <li class="setting-container"
+                    title="${msg('HTERM_PREF_SCROLLBAR_VISIBLE')}">
+                  <h4>${msg('TERMINAL_NAME_PREF_VISIBLE')}</h4>
+                  <terminal-settings-checkbox preference="scrollbar-visible">
+                  </terminal-settings-checkbox>
+                </li>
+              </ul>
+            </section>
+          `)}
         </section>
 
         <section class="terminal-settings-category"
@@ -430,12 +434,16 @@ export class TerminalSettingsApp extends LitElement {
             <h3>${msg('TERMINAL_TITLE_PREF_MOUSE')}</h3>
 
             <ul class="section-body">
-              <li class="setting-container"
-                  title="${msg('HTERM_PREF_SCROLL_ON_KEYSTROKE')}">
-                <h4>${msg('HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE')}</h4>
-                <terminal-settings-checkbox preference="scroll-on-keystroke">
-                </terminal-settings-checkbox>
-              </li>
+              ${when(!xtermJs, () => html`
+                <li class="setting-container"
+                    title="${msg('HTERM_PREF_SCROLL_ON_KEYSTROKE')}">
+                  <h4>${msg('HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE')}</h4>
+                  <terminal-settings-checkbox preference="scroll-on-keystroke">
+                  </terminal-settings-checkbox>
+                </li>
+              `)}
+              <!-- TODO(lxj): it might make more sense to move this to the
+                  behavior section. -->
               <li class="setting-container"
                   title="${msg('HTERM_PREF_SCROLL_ON_OUTPUT')}">
                 <h4>${msg('HTERM_NAME_PREF_SCROLL_ON_OUTPUT')}</h4>
