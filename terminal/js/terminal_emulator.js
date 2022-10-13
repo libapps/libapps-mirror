@@ -394,6 +394,7 @@ export class XtermTerminal {
     this.htermA11yReader_ = null;
     this.a11yButtons_ = null;
     this.copyNotice_ = null;
+    this.scrollOnOutputListener_ = null;
 
     this.term.options.linkHandler = new LinkHandler(this.term);
     this.term.options.theme = {
@@ -710,6 +711,17 @@ export class XtermTerminal {
         setHtermColorCSSVariable('foreground-color', v);
       },
       'line-height': (v) => this.updateOption_('lineHeight', v, true),
+      'scroll-on-output': (v) => {
+        if (!v) {
+          this.scrollOnOutputListener_?.dispose();
+          this.scrollOnOutputListener_ = null;
+          return;
+        }
+        if (!this.scrollOnOutputListener_) {
+          this.scrollOnOutputListener_ = this.term.onWriteParsed(
+              () => this.term.scrollToBottom());
+        }
+      },
     });
 
     for (const name of ['keybindings-os-defaults', 'pass-ctrl-n', 'pass-ctrl-t',

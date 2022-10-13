@@ -12,6 +12,10 @@
  * @externs
  */
 
+class IDisposable {
+  dispose() {}
+}
+
 class IParser {
   /**
    * @param {number} ident
@@ -101,33 +105,45 @@ class Terminal$$module$js$xterm {
 
   /**
    * @param {function()} callback
+   * @return {!IDisposable}
    */
   onBell(callback) {}
 
   /**
    * @param {function(string)} callback
+   * @return {!IDisposable}
    */
   onBinary(callback) {}
 
   /**
    * @param {function(string)} callback
+   * @return {!IDisposable}
    */
   onData(callback) {}
 
   /**
    * @param {function({cols: number, rows: number})} callback
+   * @return {!IDisposable}
    */
   onResize(callback) {}
 
   /**
    * @param {function()} callback
+   * @return {!IDisposable}
    */
   onSelectionChange(callback) {}
 
   /**
    * @param {function(string)} callback
+   * @return {!IDisposable}
    */
   onTitleChange(callback) {}
+
+  /**
+   * @param {function()} callback
+   * @return {!IDisposable}
+   */
+  onWriteParsed(callback) {}
 
   /**
    * @param {!Element} elem
@@ -157,6 +173,8 @@ class Terminal$$module$js$xterm {
    * @param {number} number
    */
   scrollPages(number) {}
+
+  scrollToBottom() {}
 
   /**
    * @param {string|!Uint8Array} data
