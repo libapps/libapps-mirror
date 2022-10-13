@@ -7,8 +7,7 @@
  * @suppress {moduleLoad}
  */
 
-import {composeTmuxUrl, definePrefs, getOSInfo, watchColors}
-    from './terminal_common.js';
+import {composeTmuxUrl, getOSInfo, watchColors} from './terminal_common.js';
 import {createEmulator} from './terminal_emulator.js';
 import {terminalImport} from './terminal_import.js';
 import {LaunchInfo, getTerminalInfoTracker} from './terminal_info.js';
@@ -193,8 +192,6 @@ terminal.init = async function(element, launchInfo) {
   };
 
   term.onTerminalReady = function() {
-    const prefs = term.getPrefs();
-    definePrefs(prefs);
     terminal.watchBackgroundImage(term);
 
     const prefKey = 'settings.accessibility';

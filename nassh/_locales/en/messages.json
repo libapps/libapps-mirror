@@ -2075,6 +2075,10 @@
 		"description": "Label text shown for preferences where users pick an image (e.g. background image).",
 		"message": "Image"
 	},
+	"TERMINAL_NAME_PREF_LINE_HEIGHT": {
+		"description": "Label text shown for the 'line-height' preference.",
+		"message": "Line height"
+	},
 	"TERMINAL_NAME_PREF_SHAPE": {
 		"description": "Label text shown for the preference where users pick a cursor shape.",
 		"message": "Shape"
@@ -2098,6 +2102,10 @@
 	"TERMINAL_PREF_BELL": {
 		"description": "Help text shown for the 'audible-bell-sound' preference. This toggles whether the terminal will play a sound to get the user's attention.",
 		"message": "Audible terminal bell."
+	},
+	"TERMINAL_PREF_LINE_HEIGHT": {
+		"description": "Help text shown for the 'line-height' preference. The terminal screen is referring to the terminal emulator's UI which is a text interface. It is made up of rows (lines) of text.",
+		"message": "The line height for each row of the terminal screen."
 	},
 	"TERMINAL_PREVIEW_LABEL": {
 		"description": "Label for the preview window that allows users to preview their preferences (like color and font choices).",

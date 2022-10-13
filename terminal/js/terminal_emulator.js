@@ -12,8 +12,8 @@
 // TODO(b/236205389): support option smoothScrollDuration?
 
 import {LitElement, css, html} from './lit.js';
-import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, delayedScheduler,
-  fontManager, getOSInfo, sleep} from './terminal_common.js';
+import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, definePrefs,
+  delayedScheduler, fontManager, getOSInfo, sleep} from './terminal_common.js';
 import {ICON_COPY} from './terminal_icons.js';
 import {TerminalTooltip} from './terminal_tooltip.js';
 import {Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
@@ -326,6 +326,7 @@ export class XtermTerminal {
     this.profileId_ = profileId;
     /** @type {!hterm.PreferenceManager} */
     this.prefs_ = new hterm.PreferenceManager(storage, profileId);
+    definePrefs(this.prefs_);
     this.enableWebGL_ = enableWebGL;
 
     // TODO: we should probably pass the initial prefs to the ctor.
@@ -708,6 +709,7 @@ export class XtermTerminal {
         this.updateTheme_({foreground: v});
         setHtermColorCSSVariable('foreground-color', v);
       },
+      'line-height': (v) => this.updateOption_('lineHeight', v, true),
     });
 
     for (const name of ['keybindings-os-defaults', 'pass-ctrl-n', 'pass-ctrl-t',
@@ -1045,6 +1047,8 @@ class HtermTerminal extends hterm.Terminal {
   /** @override */
   decorate(div) {
     super.decorate(div);
+
+    definePrefs(this.getPrefs());
 
     const fontManager = new FontManager(this.getDocument());
     fontManager.loadPowerlineCSS().then(() => {

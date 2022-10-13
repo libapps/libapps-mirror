@@ -11,8 +11,9 @@
 import {getIndexeddbFileSystem} from './nassh_fs.js';
 
 import {LitElement, createRef, css, html, ref, when} from './lit.js';
-import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT_PADDINGS,
-  TERMINAL_EMULATORS, getOSInfo} from './terminal_common.js';
+import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT,
+  SUPPORTED_LINE_HEIGHT_PADDINGS, TERMINAL_EMULATORS, getOSInfo, isXtermJs}
+    from './terminal_common.js';
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
 import {ICON_OPEN_IN_NEW} from './terminal_icons.js';
@@ -200,6 +201,8 @@ export class TerminalSettingsApp extends LitElement {
     const profileCategory =
         getOSInfo().multi_profile ? 'profile-category' : '';
 
+    const xtermJs = isXtermJs(window.preferenceManager);
+
     return html`
         <div id="left-panel">
           <h1>${msg('PREFERENCES_HEADER_TERMINAL')}</h1>
@@ -285,18 +288,31 @@ export class TerminalSettingsApp extends LitElement {
                     preference="color-palette-overrides">
                 </terminal-settings-ansi-colors>
               </li>
-              <li class="setting-container"
-                  title="${msg('HTERM_PREF_LINE_HEIGHT_PADDING_SIZE')}">
-                <h4>${msg('HTERM_NAME_PREF_LINE_HEIGHT_PADDING_SIZE')}</h4>
-                <!-- TODO(easy): Support text field entry. -->
-                <terminal-settings-dropdown
-                    preference="line-height-padding-size"
-                    title="${msg('HTERM_PREF_FONT_SIZE')}"
-                    .options="${SUPPORTED_LINE_HEIGHT_PADDINGS.map(
-                      (value) => ({value}))}"
-                >
-                </terminal-settings-dropdown>
-              </li>
+
+              ${when(xtermJs, () => html`
+                <li class="setting-container"
+                    title="${msg('TERMINAL_PREF_LINE_HEIGHT')}">
+                  <h4>${msg('TERMINAL_NAME_PREF_LINE_HEIGHT')}</h4>
+                  <terminal-settings-dropdown
+                      preference="line-height"
+                      .options="${SUPPORTED_LINE_HEIGHT.map(
+                        (value) => ({value}))}"
+                  >
+                  </terminal-settings-dropdown>
+                </li>
+              `, () => html`
+                <li class="setting-container"
+                    title="${msg('HTERM_PREF_LINE_HEIGHT_PADDING_SIZE')}">
+                  <h4>${msg('HTERM_NAME_PREF_LINE_HEIGHT_PADDING_SIZE')}</h4>
+                  <!-- TODO(easy): Support text field entry. -->
+                  <terminal-settings-dropdown
+                      preference="line-height-padding-size"
+                      .options="${SUPPORTED_LINE_HEIGHT_PADDINGS.map(
+                        (value) => ({value}))}"
+                  >
+                  </terminal-settings-dropdown>
+                </li>
+              `)}
             </ul>
           </section>
 

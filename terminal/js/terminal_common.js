@@ -50,6 +50,8 @@ export const DEFAULT_FONT_FAMILY = 'Noto Sans Mono';
 export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 16, 18, 20];
 export const SUPPORTED_LINE_HEIGHT_PADDINGS = [-2, -1.5, -1, -0.5, 0, 0.5, 1,
   1.5, 2, 3, 4, 5];
+export const SUPPORTED_LINE_HEIGHT = [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8,
+  1.9, 2];
 
 export const TERMINAL_EMULATORS = new Map([
     ['xterm.js', {lib: 'xterm.js', webgl: true}],
@@ -187,6 +189,7 @@ export function definePrefs(prefs) {
   prefs.definePreference('theme-variations', {});
   prefs.definePreference('terminal-emulator',
       TERMINAL_EMULATORS.keys().next().value);
+  prefs.definePreference('line-height', 1);
 }
 
 /**
