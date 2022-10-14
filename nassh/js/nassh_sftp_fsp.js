@@ -217,9 +217,12 @@ export class SftpFsp {
    * Remove mount.
    *
    * @param {string} fileSystemId
+   * @return {!Promise<void>}
    */
-  removeMount(fileSystemId) {
-    this.mounts_.delete(fileSystemId);
+  unmount(fileSystemId) {
+    return new Promise((resolve, reject) => {
+      this.onUnmountRequested({fileSystemId}, resolve, reject);
+    });
   }
 
   /**

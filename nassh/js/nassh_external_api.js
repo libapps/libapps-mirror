@@ -642,8 +642,8 @@ function(port) {
           post({error: false, command: 'exit', status});
           port.disconnect();
         };
-        connectOptions.sftpCallback = () => {
-          post({error: false, command: 'done'});
+        argv.sftpStartupCallback = (success, message) => {
+          post({error: !success, command: 'done', message});
           port.disconnect();
         };
         instance = new CommandInstance(argv);

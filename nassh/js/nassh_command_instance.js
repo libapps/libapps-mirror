@@ -40,11 +40,11 @@ import {Cli as nasftpCli} from './nasftp_cli.js';
  *   args: (!Array<string>|undefined),
  *   environment: (!Object<string,string>|undefined),
  *   isSftp: (boolean|undefined),
+ *   sftpStartupCallback: (function(boolean, (string|null))|undefined),
  *   basePath: (string|undefined),
  *   isMount: (boolean|undefined),
  *   fsp: (!SftpFsp|undefined),
  *   mountOptions: (!chrome.fileSystemProvider.MountOptions|undefined),
- *   onMountComplete: (function((string|null))|undefined),
  *   onExit: (function(number)|undefined),
  *   sessionStorage: (!lib.Storage|undefined),
  *   syncStorage: (!lib.Storage),
@@ -104,6 +104,9 @@ export function CommandInstance(argv) {
 
   // SFTP Client for SFTP instances.
   this.sftpClient = (this.isSftp) ? new sftpClient(argv.basePath) : null;
+
+  // Callback to receive sftp startup status.
+  this.sftpStartupCallback = argv.sftpStartupCallback;
 
   // Whether we're setting up the connection for mounting.
   this.isMount = argv.isMount || false;
@@ -1307,7 +1310,7 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
     if (this.isSftp) {
       try {
         await this.sftpClient.initConnection(this.plugin_);
-        this.onSftpInitialised(params.sftpCallback);
+        this.onSftpInitialised();
       } catch (e) {
         this.io.println(localize('NASFTP_ERROR_MESSAGE', [e]));
         this.exit(EXIT_INTERNAL_ERROR, true);
@@ -1622,7 +1625,9 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
   this.removePlugin_();
 
   if (this.isMount) {
-    this.fsp.removeMount(this.mountOptions.fileSystemId);
+    if (this.fsp) {
+      this.fsp.unmount(this.mountOptions.fileSystemId);
+    }
     if (this.argv_.onExit) {
       this.argv_.onExit(code);
     }
@@ -1747,20 +1752,25 @@ CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
 
 /**
  * SFTP Initialization handler. Mounts the SFTP connection as a file system.
- *
- * @param {function()=} callback Callback when initialization finishes.
  */
-CommandInstance.prototype.onSftpInitialised = function(callback) {
+CommandInstance.prototype.onSftpInitialised = function() {
   if (this.isMount) {
     this.mountOptions['persistent'] = false;
 
     // Mount file system.
-    chrome.fileSystemProvider.mount(this.mountOptions);
+    chrome.fileSystemProvider.mount(this.mountOptions, () => {
+      const err = lib.f.lastError();
+      if (!err) {
+        // Add this instance to list of SFTP instances.
+        this.fsp.addMount(this.mountOptions.fileSystemId, {
+          sftpClient: lib.notNull(this.sftpClient),
+          exit: this.exit.bind(this),
+        });
+      }
 
-    // Add this instance to list of SFTP instances.
-    this.fsp.addMount(this.mountOptions.fileSystemId, {
-      sftpClient: lib.notNull(this.sftpClient),
-      exit: this.exit.bind(this),
+      if (this.sftpStartupCallback) {
+        this.sftpStartupCallback(!err, err);
+      }
     });
   } else {
     // Interactive SFTP client case.
@@ -1768,10 +1778,10 @@ CommandInstance.prototype.onSftpInitialised = function(callback) {
 
     // Useful for console debugging.
     this.terminalWindow.nasftp_ = this.sftpCli_;
-  }
 
-  if (callback) {
-    callback();
+    if (this.sftpStartupCallback) {
+      this.sftpStartupCallback(true, null);
+    }
   }
 };
 

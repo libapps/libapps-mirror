@@ -120,10 +120,8 @@ terminal.init = async function(element, launchInfo) {
   const profileId = launchInfo.settingsProfileId ||
       hterm.Terminal.DEFAULT_PROFILE_ID;
 
-  const term = await createEmulator({
-    storage: new lib.Storage.TerminalPrivate(),
-    profileId,
-  });
+  const storage = new lib.Storage.TerminalPrivate();
+  const term = await createEmulator({storage, profileId});
 
   term.decorate(element);
   term.installKeyboard();
@@ -185,7 +183,7 @@ terminal.init = async function(element, launchInfo) {
     if (launchInfo.ssh) {
       // We handle the needRedirect case in another place.
       if (!launchInfo.ssh.needRedirect) {
-        runNassh(term, launchInfo.ssh, tmuxControllerDriver);
+        runNassh(term, storage, launchInfo.ssh, tmuxControllerDriver);
       }
       return;
     }
@@ -363,29 +361,62 @@ terminal.Command.prototype.exit = function(code) {
 
 /**
  * @param {!hterm.Terminal} term
+ * @param {!lib.Storage} storage
  * @param {!SSHLaunchInfo} ssh
  * @param {?TmuxControllerDriver} tmuxControllerDriver
  */
-async function runNassh(term, ssh, tmuxControllerDriver) {
+async function runNassh(term, storage, ssh, tmuxControllerDriver) {
   // Load nassh modules and ensure gnubby extension lookup is complete.
   const {CommandInstance} = await terminalImport('./nassh_command_instance.js');
 
   const profileId = ssh.hash.substr(1);
+  let fsp;
+  let sftpStartupCallback;
+  let mountOptions;
+
+  if (ssh.isMount) {
+    const {SftpFsp} = await terminalImport('./nassh_sftp_fsp.js');
+    const {PreferenceManager} =
+        await terminalImport('./nassh_preference_manager.js');
+    fsp = new SftpFsp();
+    fsp.addListeners();
+
+    const id = profileId.split(':')[1] || profileId;
+    const prefs = new PreferenceManager(storage);
+    await new Promise((resolve) => prefs.readStorage(resolve));
+    const profile = prefs.getProfile(id);
+    const displayName = profile.getString('description');
+    mountOptions = {fileSystemId: id, displayName, writable: true};
+    sftpStartupCallback = (success, message) => {
+      if (!success) {
+        term.io.showOverlay(message, null);
+      } else {
+        const msg = terminal.msg('MOUNTED_MESSAGE');
+        term.io.showOverlay(`${msg}: ${displayName}`, null);
+        window.addEventListener('beforeunload', () => {
+          fsp.unmount(id);
+        });
+      }
+    };
+  }
 
   let environment = term.getPrefs().get('environment');
   if (typeof environment !== 'object' || environment === null) {
     environment = {};
   }
 
-  /** @suppress {undefinedVars|missingProperties} */
   const nasshCommand = new CommandInstance({
     io: term.io,
     syncStorage: new lib.Storage.TerminalPrivate(),
     args: [profileId],
     environment: environment,
-    isSftp: ssh.isSftp,
+    isSftp: ssh.isMount || ssh.isSftp,
+    sftpStartupCallback,
+    isMount: ssh.isMount,
+    fsp,
+    mountOptions,
     onExit: async (code) => {
-      if (term.getPrefs().get('close-on-exit')) {
+      if (!ssh.isMount && term.getPrefs().get('close-on-exit')) {
         // We are not able to use `window.close()` here because 1) nassh
         // redirect the page and 2) blink forbids `window.close()` when the
         // history length > 1. See
