@@ -1,3 +1,41 @@
+# 0.51, 2022-10-20, WASM SFTP support.
+
+* nassh: remove resetTerminal called from reconnect.
+* wassh: sockets: document the stack.
+* rollup: Drop combined deps file.
+* rollup: Switch to split deps.
+* rollup: Split deps apart.
+* deps: Rename nassh_deps.concat.js to deps_local.concat.js.
+* wassh: sockets: Handle -4/-6 preferences with Chrome TCP APIs.
+* nassh: Drop chrome app deprecation message.
+* array: Move out of libdot.
+* ssh_client: mandoc: Update to 1.14.6.
+* l18n: Move message manager setup to hterm.initPromise.
+* fs: Move out of libdot.
+* credential_cache: Move out of libdot.
+* options: Add internal --debug-xxx options.
+* crosh: Inline call to message setup.
+* crosh: Use common setupForWebApp logic.
+* swa: Unify duplicate checks.
+* crosh: Fix pop up message for apps.
+* prefs: Drop console.log notice.
+* gnubby: Move from lib.init framework to explicit init.
+* welcome: Rework startup spam a bit.
+* wassh: sockets: Ignore IPV6_TCLASS options.
+* nassh: Mark Terminal R108-R112 dev/canary versions as "dev" versions.
+* metrics: Update endpoint for GoogMetricsReporter.
+* nasftp: Initial WASM support.
+* wassh: fs: Fix fd exhaustion bug.
+* wassh: sockets: Fix filetype of agent socket.
+* feedback: Automatically include current version for users.
+* nasftp: Generalize the sftp<->plugin interface.
+* wassh: readpassphrase: Handle ONLCR when displaying prompt.
+* wassh: Opt in 100% of dev extension users to WASM.
+* wassh: poll: Check filetype rather than class.
+* wassh: Start opting in 0.5% of runs to WASM.
+* licensing: Don't escape license quotes.
+* licensing: Merge duplicate licenses.
+
 # 0.50, 2022-09-25, WASM port forwarding support.
 
 * wassh: sockets: Stub out SO_ERROR.

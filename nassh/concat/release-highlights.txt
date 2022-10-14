@@ -1,4 +1,4 @@
-0.42
+0.50
 
 # The first line tracks the last version that went stable.
 # Only features added since then should be kept here.
@@ -10,8 +10,5 @@
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 
-# release: 0.43 (stable Oct 2021)
-% \x1b]8;;https://www.openssh.com/txt/release-8.8\x07OpenSSH upgraded to 8.8p1\x1b]8;;\x07.
-
-# release: 0.47 (stable Apr 2022)
-% \x1b]8;;https://github.com/novnc/websockify\x07Websockify proxy support\x1b]8;;\x07.
+# release: 0.51 (stable Oct 2022)
+% NaCl to WASM migration enabled for a small number of runs.
