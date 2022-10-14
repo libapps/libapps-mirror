@@ -34,6 +34,25 @@ import {fsp} from './nassh_sftp_fsp.js';
 import {Cli as nasftpCli} from './nasftp_cli.js';
 
 /**
+ * @typedef {{
+ *   io: !hterm.Terminal.IO,
+ *   args: (!Array<string>|undefined),
+ *   environment: (!Object<string,string>|undefined),
+ *   isSftp: (boolean|undefined),
+ *   basePath: (string|undefined),
+ *   isMount: (boolean|undefined),
+ *   mountOptions: (!chrome.fileSystemProvider.MountOptions|undefined),
+ *   onMountComplete: (function((string|null))|undefined),
+ *   onExit: (function(number)|undefined),
+ *   sessionStorage: (!lib.Storage|undefined),
+ *   syncStorage: (!lib.Storage),
+ *   terminalLocation: (!Location|undefined),
+ *   terminalWindow: (!Object|undefined),
+ * }}
+ */
+export let CommandInstanceArgv;
+
+/**
  * The ssh terminal command.
  *
  * This class defines a command that can be run in an hterm.Terminal instance.
@@ -43,10 +62,10 @@ import {Cli as nasftpCli} from './nasftp_cli.js';
  * If you want to use something other than this plugin to connect to a remote
  * host (like a shellinaboxd, etc), you'll want to create a brand new command.
  *
- * @param {!Object} argv The argument object passed in from the Terminal.
+ * @param {!CommandInstanceArgv} argv The command line arguments.
  * @constructor
  */
-export function CommandInstance({io, ...argv}) {
+export function CommandInstance(argv) {
   // Command arguments.
   this.argv_ = argv;
 
@@ -54,7 +73,7 @@ export function CommandInstance({io, ...argv}) {
   this.environment_ = argv.environment || {};
 
   // hterm.Terminal.IO instance (can accept another hterm.Terminal.IO instance).
-  this.io = io;
+  this.io = argv.io;
 
   // Relay manager.
   this.relay_ = null;
@@ -374,13 +393,16 @@ CommandInstance.prototype.updateWindowDimensions_ = function() {
 
 /** Prompt for destination */
 CommandInstance.prototype.promptForDestination_ = function() {
-  const connectDialog = this.io.createFrame(
-      lib.f.getURL('/html/nassh_connect_dialog.html'), null);
+  const connectDialog =
+      this.io.createFrame(lib.f.getURL('/html/nassh_connect_dialog.html'));
 
-  connectDialog.onMessage = (event) => {
-    event.data.argv.unshift(connectDialog);
-    this.dispatchMessage_('connect-dialog', this.onConnectDialog_, event.data);
-  };
+  connectDialog.onMessage =
+      // eslint-disable-next-line no-extra-parens
+      /** @type {function(this:hterm.Frame)} */ ((event) => {
+        event.data.argv.unshift(connectDialog);
+        this.dispatchMessage_(
+            'connect-dialog', this.onConnectDialog_, event.data);
+      });
 
   // Resize the connection dialog iframe to try and fit all the content,
   // but not more.  This way we don't end up with a lot of empty space.
@@ -435,9 +457,9 @@ CommandInstance.prototype.promptForDestination_ = function() {
  * @param {string} hash The new subpage to navigate to.
  */
 CommandInstance.prototype.navigate_ = function(hash) {
-  const url = new URL(this.terminalLocation);
+  const url = new URL(this.terminalLocation.href);
   url.hash = hash;
-  this.terminalLocation.replace(url);
+  this.terminalLocation.replace(url.toString());
 };
 
 /** @param {string} argstr */

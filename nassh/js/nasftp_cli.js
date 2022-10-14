@@ -162,7 +162,9 @@ export function Cli(commandInstance) {
   this.userInterrupted_ = false;
 
   // Bind user input functions.
-  this.io.sendString = this.io.onVTKeystroke = this.onInput_.bind(this);
+  this.io.sendString = this.io.onVTKeystroke =
+      /** @type {function(this:hterm.Terminal.IO, string)} */ (
+          this.onInput_.bind(this));
 
   // Set up keyboard shortcuts.
   this.terminal.keyboard.bindings.addBindings({

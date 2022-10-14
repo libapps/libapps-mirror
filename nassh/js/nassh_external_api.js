@@ -105,7 +105,7 @@ function(request, sender, sendResponse) {
       writeFile(identityFile, request.identityFile),
   ]).then(() => {
     const argv = {
-      io: io_,
+      io: lib.notNull(io_),
       syncStorage: getSyncStorage(),
       isSftp: true,
       mountOptions: {
