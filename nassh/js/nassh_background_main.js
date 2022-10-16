@@ -13,6 +13,7 @@ import {importPreferences} from './nassh_background.js';
 import {addListeners as externalAddListeners,
         initApi} from './nassh_external_api.js';
 import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
+import {probeExtensions} from './nassh_google.js';
 
 let didLaunch = false;
 
@@ -52,6 +53,9 @@ lib.init(console.log.bind(console)).then(() => {
   if (window.chrome && chrome.omnibox) {
     app.installOmnibox(chrome.omnibox);
   }
+
+  // Probe gnubby extensions.
+  probeExtensions();
 
   // Bind the FSP APIs.
   app.installFsp();
