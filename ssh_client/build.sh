@@ -156,7 +156,16 @@ if [[ "${OFFICIAL_RELEASE}" == 1 ]]; then
 else
   comp_level="-0"
 fi
-tar cf - \
-  `find plugin/ -type f | LC_ALL=C sort` \
-  `find build/pnacl* -name '*.pexe' -o -name '*.dbg.nexe' | LC_ALL=C sort` \
+# Use reproducible options since the inputs should be reproducible too.
+(
+find plugin/ -type f -print0
+find build/pnacl* -name '*.pexe' -o -name '*.dbg.nexe' -print0
+) | \
+LC_ALL=C tar \
+  --numeric-owner \
+  --owner=0 --group=0 \
+  --mtime="1970-01-01" \
+  --sort=name \
+  --null --files-from - \
+  -cf - \
   | xz -T0 ${comp_level} >"${tarname}.xz"
