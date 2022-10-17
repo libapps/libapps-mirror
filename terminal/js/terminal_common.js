@@ -346,6 +346,7 @@ export const fontManager = new FontManager(document);
  * @typedef {{
  *            alternative_emulator: (boolean|undefined),
  *            multi_profile: (boolean|undefined),
+ *            sftp: (boolean|undefined),
  *            tmux_integration: (boolean|undefined),
  *          }}
  */
@@ -374,6 +375,7 @@ async function prefetchOSInfo() {
     OS_INFO = {
       alternative_emulator: true,
       multi_profile: true,
+      sftp: true,
     };
   }
 }

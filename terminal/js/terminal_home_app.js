@@ -11,8 +11,8 @@
 import {LitElement, css, html, when} from './lit.js';
 import './terminal_button.js';
 import {DEFAULT_VM_NAME, getOSInfo} from './terminal_common.js';
-import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_OPEN_IN_NEW, ICON_PLUS,
-    ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
+import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_OPEN_IN_NEW,
+  ICON_PLUS, ICON_SETTINGS, ICON_SFTP, ICON_SSH} from './terminal_icons.js';
 import './terminal_linux_dialog.js';
 import {ProfileType, cleanupLostValues, deleteProfile, getProfileIds,
   getProfileValues, setProfileIds, setProfileValues}
@@ -113,8 +113,9 @@ export class TerminalHomeApp extends LitElement {
       }
 
       mwc-icon-button {
+        --mdc-icon-button-size: 40px;
         --mdc-icon-size: 20px;
-        margin: 0 10px;
+        --mdc-ripple-color: var(--background-color)
       }
 
       section {
@@ -135,14 +136,13 @@ export class TerminalHomeApp extends LitElement {
       ul {
         list-style-type: none;
         margin: 0;
-        padding: 0 0 0 20px;
+        padding: 0 10px 0 20px;
       }
 
       .button-icon > svg {
         fill: rgb(var(--button-color-rgb));
         height: 22px;
         margin: -6px 0;
-        padding: 0 8px 0 0;
       }
 
       .column {
@@ -267,6 +267,7 @@ export class TerminalHomeApp extends LitElement {
               ${link(c)}
               ${when(!!getOSInfo().multi_profile, () => html`
                 <mwc-icon-button
+                    title="${msg('TERMINAL_HOME_EDIT_LINUX')}"
                     aria-label="${msg('TERMINAL_HOME_EDIT_LINUX')}"
                     class="icon-fill-svg"
                     @click="${(e) => this.openLinuxDialog(c.vshProfileId)}">
@@ -292,23 +293,30 @@ export class TerminalHomeApp extends LitElement {
     } else if (this.sshConnections.length === 0) {
       sublabel = msg('TERMINAL_HOME_SSH_EMPTY');
     }
+
+    const enc = encodeURIComponent;
+    const href = (c, params = []) => {
+      if (c.settingsProfileId !== hterm.Terminal.DEFAULT_PROFILE_ID) {
+        params.push(`settings_profile=${enc(c.settingsProfileId)}`);
+      }
+      const p = params.length > 0 ? `?${params.join('&')}` : '';
+      return `terminal_ssh.html${p}#profile-id:${enc(c.id)}`;
+    };
+
     const text = (c) => html`
       <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
       <h4>${c.description}</h4>
    `;
-    const enc = encodeURIComponent;
-    const link = (c) => {
-      let param = '';
-      if (c.settingsProfileId !== hterm.Terminal.DEFAULT_PROFILE_ID) {
-        param = `?settings_profile=${enc(c.settingsProfileId)}`;
-      }
-      return html`
-        <a class="row full-width" target="_blank"
-            href="terminal_ssh.html${param}#profile-id:${enc(c.id)}">
-          ${text(c)}
-        </a>
-      `;
-    };
+    const button = (c, linkParams, label, icon) => html`
+      <a href="${href(c, linkParams)}" target="_blank">
+        <mwc-icon-button
+            title="${msg(label)}"
+            aria-label="${msg(label)}"
+            class="icon-fill-svg">
+          ${icon}
+        </mwc-icon-button>
+      </a>
+   `;
 
     return html`
       <section>
@@ -326,8 +334,17 @@ export class TerminalHomeApp extends LitElement {
           <ul>
           ${this.sshConnections.map((c) => html`
             <li class="row">
-              ${this.sshAllowed ? link(c) : text(c)}
+              ${when(this.sshAllowed, () => html`
+                <a class="row full-width" target="_blank" href="${href(c)}">
+                  ${text(c)}
+                </a>
+                ${when(!!getOSInfo().sftp, () => html`
+                  ${button(c, ['sftp=true'], 'SFTP_CLIENT_BUTTON_LABEL',
+                      ICON_SFTP)}
+                `)}
+              `, () => text(c))}
               <mwc-icon-button
+                  title="${msg('TERMINAL_HOME_EDIT_SSH')}"
                   aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}"
                   class="icon-fill-svg"
                   @click="${(e) => this.openSSHDialog(c.id)}">
@@ -368,7 +385,9 @@ export class TerminalHomeApp extends LitElement {
                 <h4 class="full-width nowrap">
                   ${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}
                 </h4>
-                <span class="row-icon icon-fill-svg">${ICON_OPEN_IN_NEW}</span>
+                <mwc-icon-button class="icon-fill-svg">
+                  ${ICON_OPEN_IN_NEW}
+                </mwc-icon-button>
               </button>
             </li>
           </ul>

@@ -40,6 +40,7 @@ export let VshLaunchInfo;
 /**
  * @typedef {{
  *   needRedirect: boolean,
+ *   isSftp: boolean,
  *   hash: string,
  * }}
  */
@@ -229,8 +230,10 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
 
   if (url.pathname === '/html/terminal_ssh.html') {
     if (url.hash) {
+      const isSftp = url.searchParams.get('sftp') === 'true' ||
+          parentLaunchInfo?.ssh?.isSftp;
       return {
-        ssh: {needRedirect: false, hash: url.hash},
+        ssh: {needRedirect: false, isSftp, hash: url.hash},
         settingsProfileId: url.searchParams.get('settings_profile') ||
             parentLaunchInfo?.settingsProfileId,
       };
@@ -248,7 +251,8 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
   if (!url.search && parentLaunchInfo) {
     if (parentLaunchInfo.ssh) {
       return {
-        ssh: {needRedirect: true, hash: parentLaunchInfo.ssh.hash},
+        ssh: /** @type {!SSHLaunchInfo} */ (
+            {...parentLaunchInfo.ssh, needRedirect: true}),
         settingsProfileId: parentLaunchInfo.settingsProfileId,
       };
     }

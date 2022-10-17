@@ -10,7 +10,8 @@
 import {composeTmuxUrl, getOSInfo, watchColors} from './terminal_common.js';
 import {createEmulator} from './terminal_emulator.js';
 import {terminalImport} from './terminal_import.js';
-import {LaunchInfo, getTerminalInfoTracker} from './terminal_info.js';
+import {LaunchInfo, SSHLaunchInfo, getTerminalInfoTracker}
+    from './terminal_info.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
     from './terminal_tmux.js';
 
@@ -182,7 +183,7 @@ terminal.init = async function(element, launchInfo) {
     if (launchInfo.ssh) {
       // We handle the needRedirect case in another place.
       if (!launchInfo.ssh.needRedirect) {
-        runNassh(term, launchInfo.ssh.hash, tmuxControllerDriver);
+        runNassh(term, launchInfo.ssh, tmuxControllerDriver);
       }
       return;
     }
@@ -383,14 +384,15 @@ terminal.watchBackgroundImage = function(term) {
 
 /**
  * @param {!hterm.Terminal} term
- * @param {string} hash This is normally taken from the url's hash. It looks
- *     like '#profile-id:xxxx'.
+ * @param {!SSHLaunchInfo} ssh
  * @param {?TmuxControllerDriver} tmuxControllerDriver
  */
-async function runNassh(term, hash, tmuxControllerDriver) {
+async function runNassh(term, ssh, tmuxControllerDriver) {
   // Load nassh modules and ensure gnubby extension lookup is complete.
   const {CommandInstance} = await terminalImport('./nassh_command_instance.js');
   await lib.init();
+
+  const profileId = ssh.hash.substr(1);
 
   let environment = term.getPrefs().get('environment');
   if (typeof environment !== 'object' || environment === null) {
@@ -401,8 +403,9 @@ async function runNassh(term, hash, tmuxControllerDriver) {
   const nasshCommand = new CommandInstance({
     io: term.io,
     syncStorage: new lib.Storage.TerminalPrivate(),
-    args: [hash.substr(1)],
+    args: [profileId],
     environment: environment,
+    isSftp: ssh.isSftp,
     onExit: async (code) => {
       if (term.getPrefs().get('close-on-exit')) {
         // We are not able to use `window.close()` here because 1) nassh

@@ -470,7 +470,9 @@ export class XtermTerminal {
     this.keyboard.keyMap.keyDefs[78] = {};
 
     const methodNames = [
+        'eraseLine',
         'setBackgroundImage',
+        'setCursorColumn',
         'setCursorPosition',
         'setCursorVisible',
     ];
