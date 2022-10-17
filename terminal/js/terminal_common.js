@@ -113,7 +113,7 @@ export const ORIGINAL_URL = new URL(document.location.href);
  */
 export function isXtermJs(prefs) {
   return !!getOSInfo().alternative_emulator &&
-    prefs.get('terminal-emulator') === 'xterm.js';
+    prefs.get('terminal-emulator').includes('xterm.js');
 }
 
 /**
