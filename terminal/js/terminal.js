@@ -193,7 +193,8 @@ terminal.init = async function(element, launchInfo) {
   };
 
   term.onTerminalReady = function() {
-    terminal.watchBackgroundImage(term);
+    // TODO(lxj): remove this after we drop hterm support.
+    term.handleOnTerminalReady();
 
     const prefKey = 'settings.accessibility';
     const prefChanged = (prefs) => {
@@ -356,30 +357,6 @@ terminal.Command.prototype.exit = function(code) {
   if (code === 0 && this.term_.getPrefs().get('close-on-exit')) {
     window.close();
   }
-};
-
-/**
- * Set background image from local storage if exists, else use pref.
- *
- * @param {!hterm.Terminal} term
- */
-terminal.watchBackgroundImage = function(term) {
-  const key = 'background-image';
-  const setBackgroundImage = (dataUrl) => {
-    term.setBackgroundImage(
-        dataUrl ? `url(${dataUrl})` : term.getPrefs().getString(key));
-  };
-  setBackgroundImage(window.localStorage.getItem(key));
-  window.addEventListener('storage', (e) => {
-    if (e.key === key) {
-      setBackgroundImage(e.newValue);
-    }
-  });
-  // hterm also observers pref, but we register after it, so we run after it,
-  // so terminal will always use a file from localStorage if it exists.
-  term.getPrefs().addObserver(key, () => {
-    setBackgroundImage(window.localStorage.getItem(key));
-  });
 };
 
 /**

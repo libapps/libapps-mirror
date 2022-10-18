@@ -301,6 +301,43 @@ class A11yButtons {
   }
 }
 
+const BACKGROUND_IMAGE_KEY = 'background-image';
+
+class BackgroundImageWatcher {
+  /**
+   * @param {!hterm.PreferenceManager} prefs
+   * @param {function(string)} onChange This is called with the background image
+   *     (could be empty) whenever it changes.
+   */
+  constructor(prefs, onChange) {
+    this.prefs_ = prefs;
+    this.onChange_ = onChange;
+  }
+
+  /**
+   * Call once to start watching for background image changes.
+   */
+  watch() {
+    window.addEventListener('storage', (e) => {
+      if (e.key === BACKGROUND_IMAGE_KEY) {
+        this.onChange_(this.getBackgroundImage());
+      }
+    });
+    this.prefs_.addObserver(BACKGROUND_IMAGE_KEY, () => {
+      this.onChange_(this.getBackgroundImage());
+    });
+  }
+
+  getBackgroundImage() {
+    const image = window.localStorage.getItem(BACKGROUND_IMAGE_KEY);
+    if (image) {
+      return `url(${image})`;
+    }
+
+    return this.prefs_.getString(BACKGROUND_IMAGE_KEY);
+  }
+}
+
 /**
  * A terminal class that 1) uses xterm.js and 2) behaves like a `hterm.Terminal`
  * so that it can be used in existing code.
@@ -399,6 +436,9 @@ export class XtermTerminal {
     this.a11yButtons_ = null;
     this.copyNotice_ = null;
     this.scrollOnOutputListener_ = null;
+    this.backgroundImageWatcher_ = new BackgroundImageWatcher(this.prefs_,
+        this.setBackgroundImage.bind(this));
+    this.webglAddon_ = null;
 
     this.term.options.linkHandler = new LinkHandler(this.term);
     this.term.options.theme = {
@@ -451,6 +491,16 @@ export class XtermTerminal {
     this.term.options.screenReaderMode = enabled;
   }
 
+  hasBackgroundImage() {
+    return !!this.container_.style.backgroundImage;
+  }
+
+  /** @override */
+  setBackgroundImage(image) {
+    this.container_.style.backgroundImage = image || '';
+    this.updateBackgroundColor_(this.prefs_.getString('background-color'));
+  }
+
   /**
    * Install stubs for stuff that we haven't implemented yet so that the code
    * still runs.
@@ -471,7 +521,6 @@ export class XtermTerminal {
 
     const methodNames = [
         'eraseLine',
-        'setBackgroundImage',
         'setCursorColumn',
         'setCursorPosition',
         'setCursorVisible',
@@ -563,6 +612,8 @@ export class XtermTerminal {
    */
   decorate(elem) {
     this.container_ = elem;
+    elem.style.backgroundSize = '100% 100%';
+
     (async () => {
       await new Promise((resolve) => this.prefs_.readStorage(resolve));
       // This will trigger all the observers to set the terminal options before
@@ -573,11 +624,15 @@ export class XtermTerminal {
           this.prefs_.get('screen-padding-size'));
       elem.style.paddingTop = elem.style.paddingLeft = `${screenPaddingSize}px`;
 
+      this.setBackgroundImage(
+          this.backgroundImageWatcher_.getBackgroundImage());
+      this.backgroundImageWatcher_.watch();
+
       this.inited_ = true;
       this.term.open(elem);
 
       if (this.enableWebGL_) {
-        this.term.loadAddon(new WebglAddon());
+        this.reloadWebglAddon_();
       }
       this.term.focus();
       (new ResizeObserver(() => this.scheduleFit_())).observe(elem);
@@ -685,7 +740,7 @@ export class XtermTerminal {
         this.bell_.showNotification = v;
       },
       'background-color': (v) => {
-        this.updateTheme_({background: v});
+        this.updateBackgroundColor_(v);
         setHtermColorCSSVariable('background-color', v);
       },
       'color-palette-overrides': (v) => {
@@ -758,6 +813,48 @@ export class XtermTerminal {
     if (cols >= 0 && rows >= 0) {
       this.term.resize(cols, rows);
     }
+  }
+
+  reloadWebglAddon_() {
+    if (this.webglAddon_) {
+      this.webglAddon_.dispose();
+    }
+    this.webglAddon_ = new WebglAddon();
+    this.term.loadAddon(this.webglAddon_);
+  }
+
+  /**
+   * Update the background color. This will also adjust the transparency based
+   * on whether there is a background image.
+   *
+   * @param {string} color
+   */
+  updateBackgroundColor_(color) {
+    const hasBackgroundImage = this.hasBackgroundImage();
+
+    // We only set allowTransparency when it is necessary becuase 1) xterm.js
+    // documentation states that allowTransparency can affect performance; 2) I
+    // find that the rendering is better with allowTransparency being false.
+    // This could be a bug with xterm.js.
+    if (!!this.term.options.allowTransparency !== hasBackgroundImage) {
+      this.term.options.allowTransparency = hasBackgroundImage;
+      if (this.enableWebGL_ && this.inited_) {
+        // Setting allowTransparency in the middle messes up webgl rendering,
+        // so we need to reload it here.
+        this.reloadWebglAddon_();
+      }
+    }
+
+    if (this.hasBackgroundImage()) {
+      const css = lib.notNull(lib.colors.normalizeCSS(color));
+      const rgb = lib.colors.crackRGB(css).slice(0, 3).join(',');
+      // Note that we still want to set the RGB part correctly even though it is
+      // completely transparent. This is because the background color without
+      // the alpha channel is used in reverse video mode.
+      color = `rgba(${rgb}, 0)`;
+    }
+
+    this.updateTheme_({background: color});
   }
 
   /**
@@ -1063,6 +1160,8 @@ export class XtermTerminal {
     setWithShiftVersion(Modifier.Ctrl, keyCodes.C, this.ctrlCKeyDownHandler_);
     setWithShiftVersion(Modifier.Ctrl, keyCodes.V, this.ctrlVKeyDownHandler_);
   }
+
+  handleOnTerminalReady() {}
 }
 
 class HtermTerminal extends hterm.Terminal {
@@ -1071,7 +1170,14 @@ class HtermTerminal extends hterm.Terminal {
     super.decorate(div);
 
     definePrefs(this.getPrefs());
+  }
 
+  /**
+   * This needs to be called in the `onTerminalReady()` callback. This is
+   * awkward, but it is temporary since we will drop support for hterm at some
+   * point.
+   */
+  handleOnTerminalReady() {
     const fontManager = new FontManager(this.getDocument());
     fontManager.loadPowerlineCSS().then(() => {
       const prefs = this.getPrefs();
@@ -1080,6 +1186,11 @@ class HtermTerminal extends hterm.Terminal {
           'font-family',
           (v) => fontManager.loadFont(/** @type {string} */(v)));
     });
+
+    const backgroundImageWatcher = new BackgroundImageWatcher(this.getPrefs(),
+        (image) => this.setBackgroundImage(image));
+    this.setBackgroundImage(backgroundImageWatcher.getBackgroundImage());
+    backgroundImageWatcher.watch();
   }
 
   /**
