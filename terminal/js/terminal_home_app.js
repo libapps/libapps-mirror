@@ -10,7 +10,7 @@
 
 import {LitElement, css, html, when} from './lit.js';
 import './terminal_button.js';
-import {DEFAULT_VM_NAME, getOSInfo} from './terminal_common.js';
+import {DEFAULT_VM_NAME, composeSshUrl, getOSInfo} from './terminal_common.js';
 import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_OPEN_IN_NEW,
   ICON_PLUS, ICON_SETTINGS, ICON_SFTP, ICON_SSH} from './terminal_icons.js';
 import './terminal_linux_dialog.js';
@@ -295,12 +295,12 @@ export class TerminalHomeApp extends LitElement {
     }
 
     const enc = encodeURIComponent;
-    const href = (c, params = []) => {
-      if (c.settingsProfileId !== hterm.Terminal.DEFAULT_PROFILE_ID) {
-        params.push(`settings_profile=${enc(c.settingsProfileId)}`);
-      }
-      const p = params.length > 0 ? `?${params.join('&')}` : '';
-      return `terminal_ssh.html${p}#profile-id:${enc(c.id)}`;
+    const href = (c, params = {}) => {
+      return composeSshUrl({
+        settingsProfileId: c.settingsProfileId,
+        hash: `#profile-id:${enc(c.id)}`,
+        ...params,
+      });
     };
 
     const text = (c) => html`
@@ -339,7 +339,7 @@ export class TerminalHomeApp extends LitElement {
                   ${text(c)}
                 </a>
                 ${when(!!getOSInfo().sftp, () => html`
-                  ${button(c, ['sftp=true'], 'SFTP_CLIENT_BUTTON_LABEL',
+                  ${button(c, {isSftp: true}, 'SFTP_CLIENT_BUTTON_LABEL',
                       ICON_SFTP)}
                 `)}
               `, () => text(c))}

@@ -98,8 +98,9 @@ export const DEFAULT_THEME = 'dark';
 export const DEFAULT_VM_NAME = 'termina';
 export const DEFAULT_CONTAINER_NAME = 'penguin';
 
-export const SETTINGS_PROFILE_PARAM_NAME = 'settings_profile';
-export const TMUX_PARAM_NAME = 'tmux';
+export const PARAM_NAME_SETTINGS_PROFILE = 'settings_profile';
+export const PARAM_NAME_SFTP = 'sftp';
+export const PARAM_NAME_TMUX = 'tmux';
 
 // Cache the url at the first opportunity. The url normally should not change,
 // so this is being defensive.
@@ -437,9 +438,34 @@ export function composeTmuxUrl(
 
   const paramValue = JSON.stringify({windowChannelName, driverChannelName});
   const settingsProfileParam = settingsProfileId ?
-      `&${SETTINGS_PROFILE_PARAM_NAME}=${settingsProfileId}` : '';
-  url.search = `?${TMUX_PARAM_NAME}=${paramValue}${settingsProfileParam}`;
+      `&${PARAM_NAME_SETTINGS_PROFILE}=${settingsProfileId}` : '';
+  url.search = `?${PARAM_NAME_TMUX}=${paramValue}${settingsProfileParam}`;
 
+  return url.toString();
+}
+
+/**
+ * @param {{
+ *   settingsProfileId: (string|null|undefined),
+ *   hash: (string|undefined),
+ *   isSftp: (boolean|undefined),
+ * }} params
+ * @return {string}
+ */
+export function composeSshUrl(params) {
+  const url = new URL(ORIGINAL_URL.origin);
+  url.pathname = '/html/terminal_ssh.html';
+  if (params.hash) {
+    url.hash = params.hash;
+  }
+  if (params.settingsProfileId &&
+        params.settingsProfileId !== hterm.Terminal.DEFAULT_PROFILE_ID) {
+    url.searchParams.append(
+        PARAM_NAME_SETTINGS_PROFILE, params.settingsProfileId);
+  }
+  if (params.isSftp) {
+    url.searchParams.append(PARAM_NAME_SFTP, 'true');
+  }
   return url.toString();
 }
 

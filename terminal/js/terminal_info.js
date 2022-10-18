@@ -3,7 +3,8 @@
 // found in the LICENSE file.
 
 import {DEFAULT_VM_NAME, DEFAULT_CONTAINER_NAME, ORIGINAL_URL,
-    SETTINGS_PROFILE_PARAM_NAME, TMUX_PARAM_NAME} from './terminal_common.js';
+  PARAM_NAME_SETTINGS_PROFILE, PARAM_NAME_SFTP, PARAM_NAME_TMUX}
+  from './terminal_common.js';
 
 /**
  * @typedef {{
@@ -230,12 +231,10 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
 
   if (url.pathname === '/html/terminal_ssh.html') {
     if (url.hash) {
-      const isSftp = url.searchParams.get('sftp') === 'true' ||
-          parentLaunchInfo?.ssh?.isSftp;
+      const isSftp = url.searchParams.get(PARAM_NAME_SFTP) === 'true';
       return {
         ssh: {needRedirect: false, isSftp, hash: url.hash},
-        settingsProfileId: url.searchParams.get('settings_profile') ||
-            parentLaunchInfo?.settingsProfileId,
+        settingsProfileId: url.searchParams.get(PARAM_NAME_SETTINGS_PROFILE),
       };
     } else {
       return {home: {}};
@@ -269,11 +268,11 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
     }
   }
 
-  if (url.searchParams.has(TMUX_PARAM_NAME)) {
+  if (url.searchParams.has(PARAM_NAME_TMUX)) {
     return {
       tmux: /** @type {!TmuxLaunchInfo} */(JSON.parse(
-        /** @type {string} */(url.searchParams.get(TMUX_PARAM_NAME)))),
-      settingsProfileId: url.searchParams.get(SETTINGS_PROFILE_PARAM_NAME),
+        /** @type {string} */(url.searchParams.get(PARAM_NAME_TMUX)))),
+      settingsProfileId: url.searchParams.get(PARAM_NAME_SETTINGS_PROFILE),
     };
   }
 
@@ -341,7 +340,7 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
       containerId,
       hasCwd: outputArgsHasCwd,
     },
-    settingsProfileId: url.searchParams.get(SETTINGS_PROFILE_PARAM_NAME) ||
+    settingsProfileId: url.searchParams.get(PARAM_NAME_SETTINGS_PROFILE) ||
         parentLaunchInfo?.settingsProfileId,
   };
 }

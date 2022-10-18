@@ -7,15 +7,17 @@
  */
 
 import {terminal} from './terminal.js';
-import {definePrefs, init, watchColors} from './terminal_common.js';
+import {composeSshUrl, definePrefs, init, watchColors}
+  from './terminal_common.js';
 import './terminal_home_app.js';
 import {getTerminalInfoTracker, setUpTitleHandler} from './terminal_info.js';
 
 const globalInit = getTerminalInfoTracker().then((tracker) => {
   if (tracker.launchInfo.ssh?.needRedirect) {
-    window.location.replace(new URL(
-        '/html/terminal_ssh.html' + tracker.launchInfo.ssh.hash,
-        window.location.href).toString());
+    window.location.replace(composeSshUrl({
+      settingsProfileId: tracker.launchInfo.settingsProfileId,
+      ...tracker.launchInfo.ssh,
+    }));
     return;
   }
   // TODO(crbug.com/999028): Make sure system web apps are not discarded as
