@@ -13,15 +13,7 @@ import {hterm, lib} from './deps_local.concat.js';
 import {localize, sgrSequence} from './nassh.js';
 import {CommandInstance, splitCommandLine} from './nassh_command_instance.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
-// Normally the FSP code is only in the background page, so load it on demand
-// so we can run our FSP tests against the APIs.  We can't use import() as
-// closure-compiler doesn't support it yet.
-import {
-  fsp, onCloseFileRequested, onCopyEntryRequested, onCreateDirectoryRequested,
-  onCreateFileRequested, onDeleteEntryRequested, onGetMetadataRequested,
-  onMoveEntryRequested, onOpenFileRequested, onReadDirectoryRequested,
-  onReadFileRequested, onTruncateRequested, onWriteFileRequested,
-} from './nassh_sftp_fsp.js';
+import {SftpFsp} from './nassh_sftp_fsp.js';
 import {
   bitsToUnixModeLine, epochToLocal, File, FileAttrs, FileXferAttrs, OpenFlags,
   StatusCodes,
@@ -2742,6 +2734,7 @@ Cli.addCommand_(['_run_test_cli'], 0, 0, '', '',
 Cli.commandTestFsp_ = function(_args) {
   // The actual test logic.
   const runTest = () => {
+    const fsp = new SftpFsp();
     const fsid = 'fsid';
     const base = '/tmp/.nasftp-tests';
     const options = {fileSystemId: fsid};
@@ -2749,9 +2742,9 @@ Cli.commandTestFsp_ = function(_args) {
     const newopts = (obj) => Object.assign(options, obj);
 
     // Initialize fsp state.
-    fsp.sftpInstances[fsid] = {
+    fsp.addMount(fsid, {
       sftpClient: /** @type {!sftpClient} */ (this.client),
-    };
+    });
 
     // Use smaller read/write sizes.  We just need to fragment requests.
     this.client.readChunkSize = 100;
@@ -2770,7 +2763,8 @@ Cli.commandTestFsp_ = function(_args) {
      * @return {!Promise<!Array<*>>}
      */
     const wrap = (method, opts) => new Promise((resolve, reject) => {
-      method(
+      method.call(
+          fsp,
           opts,
           (...args) => {
             pass(method.name, args);
@@ -2790,16 +2784,16 @@ Cli.commandTestFsp_ = function(_args) {
       .then(() => {
         this.client.basePath_ = '/';
         opts = newopts({directoryPath: base});
-        return wrap(onCreateDirectoryRequested, opts);
+        return wrap(fsp.onCreateDirectoryRequested, opts);
       })
       .then(() => {
         this.client.basePath_ = `${base}/`;
         opts = newopts({directoryPath: '/subdir'});
-        return wrap(onCreateDirectoryRequested, opts);
+        return wrap(fsp.onCreateDirectoryRequested, opts);
       })
       .then(() => {
         opts = newopts({directoryPath: '/subdir/subdir'});
-        return wrap(onCreateDirectoryRequested, opts);
+        return wrap(fsp.onCreateDirectoryRequested, opts);
       })
 
       // Symlink "sym" to "subdir".
@@ -2807,77 +2801,77 @@ Cli.commandTestFsp_ = function(_args) {
       // Copy "sym" to "newsym".
       .then(() => {
         opts = newopts({sourcePath: '/sym', targetPath: '/newsym'});
-        return wrap(onCopyEntryRequested, opts);
+        return wrap(fsp.onCopyEntryRequested, opts);
       })
       // Delete the "sym" symlink.
       .then(() => {
         opts = newopts({entryPath: '/sym', recursive: true});
-        return wrap(onDeleteEntryRequested, opts);
+        return wrap(fsp.onDeleteEntryRequested, opts);
       })
       // Delete the "newsym" symlink.
       .then(() => {
         opts = newopts({entryPath: '/newsym', recursive: true});
-        return wrap(onDeleteEntryRequested, opts);
+        return wrap(fsp.onDeleteEntryRequested, opts);
       })
       // Verify "subdir" exists.
       .then(() => {
         opts = newopts({entryPath: '/subdir', name: true, isDirectory: true});
-        return wrap(onGetMetadataRequested, opts);
+        return wrap(fsp.onGetMetadataRequested, opts);
       })
 
       // Create "x" file.
       .then(() => {
         opts = newopts({filePath: '/x'});
-        return wrap(onTruncateRequested, opts);
+        return wrap(fsp.onTruncateRequested, opts);
       })
       // Rename "x" to "new".
       .then(() => {
         opts = newopts({sourcePath: '/x', targetPath: '/new'});
-        return wrap(onMoveEntryRequested, opts);
+        return wrap(fsp.onMoveEntryRequested, opts);
       })
       // Symlink "sym" to "new".
       .then(() => this.client.symLink('new', '/sym'))
       // Delete the "sym" symlink.
       .then(() => {
         opts = newopts({entryPath: '/sym', recursive: false});
-        return wrap(onDeleteEntryRequested, opts);
+        return wrap(fsp.onDeleteEntryRequested, opts);
       })
       // Verify "new" exists.
       .then(() => {
         opts = newopts({entryPath: '/new', name: true, isDirectory: true});
-        return wrap(onGetMetadataRequested, opts);
+        return wrap(fsp.onGetMetadataRequested, opts);
       })
       // Delete the "new" file.
       .then((_entries) => {
         opts = newopts({entryPath: '/new', recursive: false});
-        return wrap(onDeleteEntryRequested, opts);
+        return wrap(fsp.onDeleteEntryRequested, opts);
       })
 
       // Create the broken "brok" symlink, then delete it.
       .then(() => this.client.symLink('brok', '/brok'))
       .then(() => {
         opts = newopts({entryPath: '/brok', recursive: false});
-        return wrap(onDeleteEntryRequested, opts);
+        return wrap(fsp.onDeleteEntryRequested, opts);
       })
 
       // Create some files in subdirs for copying later.
       .then(() => {
         opts = newopts({filePath: '/subdir/x2'});
-        return wrap(onTruncateRequested, opts);
+        return wrap(fsp.onTruncateRequested, opts);
       })
       .then(() => {
         opts = newopts({filePath: '/subdir/subdir/x3'});
-        return wrap(onTruncateRequested, opts);
+        return wrap(fsp.onTruncateRequested, opts);
       })
 
       // Create the "file" file.
       .then(() => {
         opts = newopts({filePath: '/subdir/file', requestId: 'req'});
-        return wrap(onCreateFileRequested, opts);
+        return wrap(fsp.onCreateFileRequested, opts);
       })
       .then(() => {
         opts = newopts({openRequestId: 'req'});
-        return wrap(onCloseFileRequested, opts);
+        return wrap(fsp.onCloseFileRequested, opts);
       })
 
       // Write data to "file" file.
@@ -2887,7 +2881,7 @@ Cli.commandTestFsp_ = function(_args) {
           requestId: 'write',
           mode: 'WRITE',
         });
-        return wrap(onOpenFileRequested, opts);
+        return wrap(fsp.onOpenFileRequested, opts);
       })
       .then(() => {
         // Write out more data than a single write chunk can handle.
@@ -2898,11 +2892,11 @@ Cli.commandTestFsp_ = function(_args) {
           offset: 0,
           data: encoder.encode(data),
         });
-        return wrap(onWriteFileRequested, opts);
+        return wrap(fsp.onWriteFileRequested, opts);
       })
       .then(() => {
         opts = newopts({openRequestId: 'write'});
-        return wrap(onCloseFileRequested, opts);
+        return wrap(fsp.onCloseFileRequested, opts);
       })
 
       // Read data back from "file" file.
@@ -2912,7 +2906,7 @@ Cli.commandTestFsp_ = function(_args) {
           requestId: 'read',
           mode: 'READ',
         });
-        return wrap(onOpenFileRequested, opts);
+        return wrap(fsp.onOpenFileRequested, opts);
       })
       // Don't read the entire file, just a large segment in the middle.
       .then(() => {
@@ -2920,7 +2914,7 @@ Cli.commandTestFsp_ = function(_args) {
         const length = 500;
         opts = newopts({openRequestId: 'read', offset: offset, length: length});
         // Can't use wrap() helper because onSuccess is called multiple times.
-        const method = onReadFileRequested;
+        const method = fsp.onReadFileRequested.bind(fsp);
         const chunks = [];
         return new Promise((resolve, reject) => {
           method(
@@ -2957,7 +2951,7 @@ Cli.commandTestFsp_ = function(_args) {
       })
       .then(() => {
         opts = newopts({openRequestId: 'read'});
-        return wrap(onCloseFileRequested, opts);
+        return wrap(fsp.onCloseFileRequested, opts);
       })
 
       // Create some symlinks to read back later.
@@ -2970,16 +2964,16 @@ Cli.commandTestFsp_ = function(_args) {
       // Copy the directory tree.
       .then(() => {
         opts = newopts({sourcePath: '/subdir', targetPath: '/newdir'});
-        return wrap(onCopyEntryRequested, opts);
+        return wrap(fsp.onCopyEntryRequested, opts);
       })
       // Check the contents of the source tree.
       .then(() => {
         opts = newopts({entryPath: '/newdir/subdir/x3', name: true});
-        return wrap(onGetMetadataRequested, opts);
+        return wrap(fsp.onGetMetadataRequested, opts);
       })
       .then(() => {
         opts = newopts({directoryPath: '/subdir'});
-        return wrap(onReadDirectoryRequested, opts);
+        return wrap(fsp.onReadDirectoryRequested, opts);
       })
       .then((entries) => {
         const names = entries.map((entry) => entry.name).sort();
@@ -2993,7 +2987,7 @@ Cli.commandTestFsp_ = function(_args) {
       // Make sure the symlinks were copied as symlinks.
       .then(() => {
         opts = newopts({directoryPath: '/newdir'});
-        return wrap(onReadDirectoryRequested, opts);
+        return wrap(fsp.onReadDirectoryRequested, opts);
       })
       .then((entries) => {
         const names = entries.map((entry) => entry.name).sort();
@@ -3037,7 +3031,7 @@ Cli.commandTestFsp_ = function(_args) {
       .then(() => {
         this.client.basePath_ = '/';
         opts = newopts({entryPath: base, recursive: true});
-        return wrap(onDeleteEntryRequested, opts);
+        return wrap(fsp.onDeleteEntryRequested, opts);
       })
 
       // Make it clear we're all done.

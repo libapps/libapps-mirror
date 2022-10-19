@@ -14,7 +14,7 @@ import {exportPreferences, importPreferences} from './nassh_background.js';
 import {CommandInstance} from './nassh_command_instance.js';
 import {getDomFileSystem} from './nassh_fs.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
-import {fsp, onUnmountRequested} from './nassh_sftp_fsp.js';
+import {SftpFsp} from './nassh_sftp_fsp.js';
 
 /**
  * Commands available.
@@ -48,6 +48,13 @@ function(request, sender, sendResponse) {
     id: sender.id,
   });
 });
+
+/**
+ * SftpFsp instance.
+ *
+ * @type {?SftpFsp}
+ */
+let fsp_ = null;
 
 /**
  * Filesystem handle for accessing /.ssh files.
@@ -110,6 +117,8 @@ function(request, sender, sendResponse) {
       io: lib.notNull(io_),
       syncStorage: getSyncStorage(),
       isSftp: true,
+      isMount: true,
+      fsp: lib.notNull(fsp_),
       mountOptions: {
         fileSystemId: request.fileSystemId,
         displayName: request.displayName,
@@ -144,7 +153,7 @@ function(request, sender, sendResponse) {
   const {fileSystemId} = request;
   // Always call the unmount API.  It will handle unknown mounts for us, and
   // will clean up FSP state that Chrome knows about but we don't.
-  onUnmountRequested(
+  fsp_.onUnmountRequested(
       {fileSystemId},
       () => sendResponse({error: false, message: `unmounted ${fileSystemId}`}),
       (message) => sendResponse({error: true, message: message}));
@@ -253,7 +262,7 @@ function(request, sender, sendResponse) {
   }
 
   const {fileSystemId} = request;
-  const sftpInstance = fsp.sftpInstances[fileSystemId];
+  const sftpInstance = fsp_.getMount(fileSystemId);
   if (sftpInstance === undefined) {
     sendResponse({error: true, message: `mount ${fileSystemId} not found`});
     return;
@@ -283,7 +292,7 @@ function(request, sender, sendResponse) {
   }
 
   const {fileSystemId, info} = request;
-  const sftpInstance = fsp.sftpInstances[fileSystemId];
+  const sftpInstance = fsp_.getMount(fileSystemId);
   if (sftpInstance === undefined) {
     sendResponse({error: true, message: `mount ${fileSystemId} not found`});
     return;
@@ -627,6 +636,7 @@ function(port) {
         // UI wants us to start a connection.
         const {argv, connectOptions} = msg;
         argv.io = pipeIo;
+        argv.fsp = fsp_;
         argv.syncStorage = getSyncStorage();
         argv.onExit = (status) => {
           post({error: false, command: 'exit', status});
@@ -758,9 +768,11 @@ function onConnect_(port) {
 /**
  * Initialize nassh.External.
  *
+ * @param {!SftpFsp} fsp
  * @return {!Promise<void>} When init has finished.
  */
-export function initApi() {
+export function initApi(fsp) {
+  fsp_ = fsp;
   io_ = new hterm.Terminal.IO(/** @type {!hterm.Terminal} */ ({
     setProfile: () => {},
     screenSize: {width: 0, height: 0},

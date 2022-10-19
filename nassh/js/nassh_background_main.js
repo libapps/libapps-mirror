@@ -16,6 +16,7 @@ import {addListeners as externalAddListeners,
         initApi} from './nassh_external_api.js';
 import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
 import {probeExtensions} from './nassh_google.js';
+import {SftpFsp} from './nassh_sftp_fsp.js';
 
 let didLaunch = false;
 
@@ -43,7 +44,8 @@ if (browserAction) {
  * reached from the background page's JS console.
  */
 function init() {
-  initApi();
+  const fsp = new SftpFsp();
+  initApi(fsp);
 
   const storage = getSyncStorage();
   const app = new App(storage);
@@ -60,7 +62,7 @@ function init() {
   probeExtensions();
 
   // Bind the FSP APIs.
-  app.installFsp();
+  fsp.addListeners();
 
   // If we're running as an extension, finish setup.
   if (browserAction) {

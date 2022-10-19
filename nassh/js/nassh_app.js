@@ -8,7 +8,6 @@ import {browserAction, localize, sendFeedback} from './nassh.js';
 import {
   LocalPreferenceManager, PreferenceManager,
 } from './nassh_preference_manager.js';
-import {addListeners} from './nassh_sftp_fsp.js';
 
 /**
  * The singleton app instance for the nassh packaged app, created by the
@@ -26,13 +25,6 @@ export function App(storage) {
   this.prefs_.readStorage();
   this.localPrefs_.readStorage();
 }
-
-/**
- * Set up the file system provider APIs.
- */
-App.prototype.installFsp = function() {
-  addListeners();
-};
 
 /**
  * Set up context menus.

@@ -31,7 +31,7 @@ import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
 import {Sshfe as RelaySshfe} from './nassh_relay_sshfe.js';
 import {Websockify as RelayWebsockify} from './nassh_relay_websockify.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
-import {fsp} from './nassh_sftp_fsp.js';
+import {SftpFsp} from './nassh_sftp_fsp.js';
 import {Cli as nasftpCli} from './nasftp_cli.js';
 
 /**
@@ -42,6 +42,7 @@ import {Cli as nasftpCli} from './nasftp_cli.js';
  *   isSftp: (boolean|undefined),
  *   basePath: (string|undefined),
  *   isMount: (boolean|undefined),
+ *   fsp: (!SftpFsp|undefined),
  *   mountOptions: (!chrome.fileSystemProvider.MountOptions|undefined),
  *   onMountComplete: (function((string|null))|undefined),
  *   onExit: (function(number)|undefined),
@@ -106,6 +107,9 @@ export function CommandInstance(argv) {
 
   // Whether we're setting up the connection for mounting.
   this.isMount = argv.isMount || false;
+
+  // SFTP FSP.  Must be provided if isMount is true.
+  this.fsp = argv.fsp;
 
   // Mount options for a SFTP instance.
   this.mountOptions = argv.mountOptions || null;
@@ -1618,9 +1622,7 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
   this.removePlugin_();
 
   if (this.isMount) {
-    if (fsp.sftpInstances[this.mountOptions.fileSystemId]) {
-      delete fsp.sftpInstances[this.mountOptions.fileSystemId];
-    }
+    this.fsp.removeMount(this.mountOptions.fileSystemId);
     if (this.argv_.onExit) {
       this.argv_.onExit(code);
     }
@@ -1756,10 +1758,10 @@ CommandInstance.prototype.onSftpInitialised = function(callback) {
     chrome.fileSystemProvider.mount(this.mountOptions);
 
     // Add this instance to list of SFTP instances.
-    fsp.sftpInstances[this.mountOptions.fileSystemId] = {
+    this.fsp.addMount(this.mountOptions.fileSystemId, {
       sftpClient: lib.notNull(this.sftpClient),
       exit: this.exit.bind(this),
-    };
+    });
   } else {
     // Interactive SFTP client case.
     this.sftpCli_ = new nasftpCli(this);

@@ -7,13 +7,7 @@
  */
 
 import {Client as sftpClient} from './nassh_sftp_client.js';
-import {
-  checkInstanceExists, fsp, onCloseFileRequested, onCopyEntryRequested,
-  onCreateDirectoryRequested, onCreateFileRequested, onDeleteEntryRequested,
-  onGetMetadataRequested, onMoveEntryRequested, onOpenFileRequested,
-  onReadDirectoryRequested, onReadFileRequested, onTruncateRequested,
-  onUnmountRequested, onWriteFileRequested, providerMethods, sanitizeMetadata,
-} from './nassh_sftp_fsp.js';
+import {SftpFsp, sanitizeMetadata} from './nassh_sftp_fsp.js';
 import {Packet} from './nassh_sftp_packet.js';
 import {
   File, FileAttrs, OpenFlags, StatusCodes, StatusPacket,
@@ -23,48 +17,47 @@ import {StatusError} from './nassh_sftp_status.js';
 /**
  * A mock SFTP client.
  *
- * @constructor
+ * @suppress {checkTypes}
  */
-export function MockSftpClient() {
-  this.protocolClientVersion = 3;
-  this.protocolServerVersion = null;
-  this.protocolServerExtensions = {};
-  this.openedFiles = {};
+export class MockSftpClient extends sftpClient {
+  constructor() {
+    super();
 
-  // Methods in sftp client that we mock.
-  const methods = [
-    'closeFile', 'fileStatus', 'linkStatus', 'makeDirectory', 'openDirectory',
-    'openFile', 'readDirectory', 'readLink', 'realPath', 'removeDirectory',
-    'removeFile', 'renameFile', 'scanDirectory', 'symLink',
-  ];
-  methods.forEach((method) => {
-    this[method] = (...args) => this.automock_(method, ...args);
-  });
-}
+    // Methods in sftp client that we mock.
+    const methods = [
+      'closeFile', 'fileStatus', 'linkStatus', 'makeDirectory', 'openDirectory',
+      'openFile', 'readDirectory', 'readLink', 'realPath', 'removeDirectory',
+      'removeFile', 'renameFile', 'scanDirectory', 'symLink',
+    ];
+    methods.forEach((method) => {
+      this[method] = (...args) => this.automock_(method, ...args);
+    });
+  }
 
-/**
- * Mock helper for stubbing out calls.
- *
- * @param {string} method
- * @param {!Array} args
- * @return {!Promise}
- */
-MockSftpClient.prototype.automock_ = function(method, ...args) {
-  return new Promise((resolve) => {
-    if ('return' in this[method]) {
-      let ret = this[method].return;
-      if (typeof ret == 'function') {
-        ret = ret(...args);
+  /**
+   * Mock helper for stubbing out calls.
+   *
+   * @param {string} method
+   * @param {!Array} args
+   * @return {!Promise}
+   */
+  automock_(method, ...args) {
+    return new Promise((resolve) => {
+      if ('return' in this[method]) {
+        let ret = this[method].return;
+        if (typeof ret == 'function') {
+          ret = ret(...args);
+        }
+        return resolve(ret);
       }
-      return resolve(ret);
-    }
 
-    throw new StatusError({
-      'code': StatusCodes.NO_SUCH_FILE,
-      'message': 'no mock data',
-    }, method);
-  });
-};
+      throw new StatusError({
+        'code': StatusCodes.NO_SUCH_FILE,
+        'message': 'no mock data',
+       }, method);
+    });
+  }
+}
 
 describe('nassh_sftp_fsp_tests.js', () => {
 
@@ -72,12 +65,9 @@ describe('nassh_sftp_fsp_tests.js', () => {
  * Reset any FSP state.
  */
 beforeEach(function() {
+  this.fsp = new SftpFsp();
   this.client = new MockSftpClient();
-  fsp.sftpInstances = {
-    'id': {
-      'sftpClient': this.client,
-    },
-  };
+  this.fsp.addMount('id', {'sftpClient': this.client});
 
   const packet = new Packet([
       // 32-bit request id.
@@ -97,6 +87,7 @@ beforeEach(function() {
  */
 it('fsp-known-methods', function() {
   // Check that we have some methods.
+  const providerMethods = this.fsp.providerMethods();
   assert.isAbove(providerMethods.length, 10);
 
   // Make sure every method is registered.
@@ -106,51 +97,19 @@ it('fsp-known-methods', function() {
 });
 
 /**
- * Check all calls w/invalid or unknown filesystem ids fail.
+ * Check all calls w/invalid or unknown filesystem ids are ignored.
  *
  * This shows up when the Files app state is out of sync with us.
  */
 it('fsp-invalid-fsid', function() {
-  let count = 0;
-  providerMethods.forEach((method) => {
+  this.fsp.providerMethods().forEach((method) => {
     // onMountRequested doesn't make callbacks.
     if (method.name === 'onMountRequested') {
-      ++count;
       return;
     }
 
-    method({}, assert.fail, (error) => {
-      assert.equal('FAILED', error);
-      ++count;
-    });
+    method.call(this.fsp, {}, assert.fail, assert.fail);
   });
-
-  // Make sure every error callback was actually called.
-  assert.equal(count, providerMethods.length);
-});
-
-/**
- * Verify the checkInstanceExists utility function.
- */
-it('fsp-instance-check', function() {
-  let called;
-  let ret;
-
-  // Unknown ids should error.
-  called = false;
-  ret = checkInstanceExists('1234', (error) => {
-    assert.equal('FAILED', error);
-    called = true;
-  });
-  assert.isTrue(called);
-  assert.isFalse(ret);
-
-  // Valid ids should pass.
-  fsp.sftpInstances['1234'] = {
-    sftpClient: /** @type {!sftpClient} */ ({}),
-  };
-  ret = checkInstanceExists('1234', assert.fail);
-  assert.isTrue(ret);
 });
 
 /**
@@ -232,7 +191,7 @@ it('fsp-sanitize-metadata', function() {
 it('fsp-onGetMetadata-missing', function(done) {
   const options = {fileSystemId: 'id', entryPath: '/foo'};
 
-  onGetMetadataRequested(
+  this.fsp.onGetMetadataRequested(
       options,
       (metadata) => assert.fail(),
       (error) => {
@@ -259,7 +218,7 @@ it('fsp-onGetMetadata-found', function(done) {
       size: 100,
     };
   };
-  onGetMetadataRequested(
+  this.fsp.onGetMetadataRequested(
       options,
       (metadata) => {
         assert.isFalse(metadata.isDirectory);
@@ -275,7 +234,7 @@ it('fsp-onGetMetadata-found', function(done) {
 it('fsp-onReadDirectory-missing', function(done) {
   const options = {fileSystemId: 'id', directoryPath: '/dir'};
 
-  onReadDirectoryRequested(
+  this.fsp.onReadDirectoryRequested(
       options,
       (entries, hasMore) => assert.fail(),
       (error) => {
@@ -302,7 +261,7 @@ it('fsp-onReadDirectory-empty', function(done) {
     assert.equal('handle', handle);
     done();
   };
-  onReadDirectoryRequested(
+  this.fsp.onReadDirectoryRequested(
       options,
       (entries, hasMore) => {
         assert.deepStrictEqual([], entries);
@@ -350,7 +309,7 @@ it('fsp-onReadDirectory-found', function(done) {
     assert.equal('handle', handle);
     done();
   };
-  onReadDirectoryRequested(
+  this.fsp.onReadDirectoryRequested(
       options,
       (entries, hasMore) => {
         assert.equal(2, entries.length);
@@ -422,7 +381,7 @@ it('fsp-onReadDirectory-symlinks', function(done) {
     assert.equal('handle', handle);
     done();
   };
-  onReadDirectoryRequested(
+  this.fsp.onReadDirectoryRequested(
       options,
       (entries, hasMore) => {
         assert.equal(2, entries.length);
@@ -441,7 +400,7 @@ it('fsp-onReadDirectory-symlinks', function(done) {
 it('fsp-onWriteFile-missing', function(done) {
   const options = {fileSystemId: 'id', openRequestId: 1};
 
-  onWriteFileRequested(
+  this.fsp.onWriteFileRequested(
       options,
       assert.fail,
       (error) => {
@@ -456,7 +415,7 @@ it('fsp-onWriteFile-missing', function(done) {
 it('fsp-onOpenFile-missing', function(done) {
   const options = {fileSystemId: 'id', filePath: '/foo'};
 
-  onOpenFileRequested(
+  this.fsp.onOpenFileRequested(
       options,
       assert.fail,
       (error) => {
@@ -481,7 +440,7 @@ it('fsp-onOpenFile-read', function(done) {
     assert.equal(OpenFlags.READ, pflags);
     return 'handle';
   };
-  onOpenFileRequested(
+  this.fsp.onOpenFileRequested(
       options,
       () => {
         assert.equal('handle', this.client.openedFiles[1]);
@@ -506,7 +465,7 @@ it('fsp-onOpenFile-write', function(done) {
     assert.equal(OpenFlags.WRITE, pflags);
     return 'handle';
   };
-  onOpenFileRequested(
+  this.fsp.onOpenFileRequested(
       options,
       () => {
         assert.equal('handle', this.client.openedFiles[1]);
@@ -521,7 +480,7 @@ it('fsp-onOpenFile-write', function(done) {
 it('fsp-onCreateFile-missing', function(done) {
   const options = {fileSystemId: 'id', filePath: '/foo'};
 
-  onCreateFileRequested(
+  this.fsp.onCreateFileRequested(
       options,
       assert.fail,
       (error) => {
@@ -545,7 +504,7 @@ it('fsp-onCreateFile-found', function(done) {
     assert.equal(OpenFlags.CREAT | OpenFlags.EXCL, pflags);
     return 'handle';
   };
-  onCreateFileRequested(
+  this.fsp.onCreateFileRequested(
       options,
       () => {
         assert.equal('handle', this.client.openedFiles[1]);
@@ -564,7 +523,7 @@ it('fsp-onDeleteEntry-missing-dir', function(done) {
     recursive: true,
   };
 
-  onDeleteEntryRequested(
+  this.fsp.onDeleteEntryRequested(
       options,
       assert.fail,
       (error) => {
@@ -591,7 +550,7 @@ it('fsp-onDeleteEntry-dir', function(done) {
     assert.equal('./dir', path);
     assert.isTrue(recursive);
   };
-  onDeleteEntryRequested(
+  this.fsp.onDeleteEntryRequested(
       options,
       done,
       assert.fail);
@@ -607,7 +566,7 @@ it('fsp-onDeleteEntry-missing-file', function(done) {
     recursive: false,
   };
 
-  onDeleteEntryRequested(
+  this.fsp.onDeleteEntryRequested(
       options,
       assert.fail,
       (error) => {
@@ -629,7 +588,7 @@ it('fsp-onDeleteEntry-file', function(done) {
   this.client.removeFile.return = (path) => {
     assert.equal('./path', path);
   };
-  onDeleteEntryRequested(
+  this.fsp.onDeleteEntryRequested(
       options,
       done,
       assert.fail);
@@ -652,7 +611,7 @@ it('fsp-onDeleteEntry-symlink', function(done) {
   this.client.removeFile.return = (path) => {
     assert.equal('./sym', path);
   };
-  onDeleteEntryRequested(
+  this.fsp.onDeleteEntryRequested(
       options,
       done,
       assert.fail);
@@ -664,7 +623,7 @@ it('fsp-onDeleteEntry-symlink', function(done) {
 it('fsp-onTruncate-missing', function(done) {
   const options = {fileSystemId: 'id', filePath: '/foo'};
 
-  onTruncateRequested(
+  this.fsp.onTruncateRequested(
       options,
       assert.fail,
       (error) => {
@@ -691,7 +650,7 @@ it('fsp-onTruncate-found', function(done) {
   this.client.closeFile.return = (handle) => {
     assert.equal('handle', handle);
   };
-  onTruncateRequested(
+  this.fsp.onTruncateRequested(
       options,
       () => {
         assert.deepStrictEqual([], Object.keys(this.client.openedFiles));
@@ -706,7 +665,7 @@ it('fsp-onTruncate-found', function(done) {
 it('fsp-onCloseFile-missing', function(done) {
   const options = {fileSystemId: 'id', openRequestId: 1};
 
-  onCloseFileRequested(
+  this.fsp.onCloseFileRequested(
       options,
       assert.fail,
       (error) => {
@@ -725,7 +684,7 @@ it('fsp-onCloseFile-found', function(done) {
   this.client.closeFile.return = (handle) => {
     assert.equal('handle', handle);
   };
-  onCloseFileRequested(
+  this.fsp.onCloseFileRequested(
       options,
       () => {
         assert.deepStrictEqual([], Object.keys(this.client.openedFiles));
@@ -740,7 +699,7 @@ it('fsp-onCloseFile-found', function(done) {
 it('fsp-onCreateDirectory-missing', function(done) {
   const options = {fileSystemId: 'id', directoryPath: '/foo'};
 
-  onCreateDirectoryRequested(
+  this.fsp.onCreateDirectoryRequested(
       options,
       assert.fail,
       (error) => {
@@ -759,7 +718,7 @@ it('fsp-onCreateDirectory-recursive', function(done) {
     recursive: true,
   };
 
-  onCreateDirectoryRequested(
+  this.fsp.onCreateDirectoryRequested(
       options,
       assert.fail,
       (error) => {
@@ -777,7 +736,7 @@ it('fsp-onCreateDirectory-found', function(done) {
   this.client.makeDirectory.return = (path) => {
     assert.equal('./foo', path);
   };
-  onCreateDirectoryRequested(
+  this.fsp.onCreateDirectoryRequested(
       options,
       done,
       assert.fail);
@@ -789,7 +748,7 @@ it('fsp-onCreateDirectory-found', function(done) {
 it('fsp-onMoveEntry-missing', function(done) {
   const options = {fileSystemId: 'id', sourcePath: '/src', targetPath: '/dst'};
 
-  onMoveEntryRequested(
+  this.fsp.onMoveEntryRequested(
       options,
       assert.fail,
       (error) => {
@@ -808,7 +767,7 @@ it('fsp-onMoveEntry-found', function(done) {
     assert.equal('./src', sourcePath);
     assert.equal('./dst', targetPath);
   };
-  onMoveEntryRequested(
+  this.fsp.onMoveEntryRequested(
       options,
       done,
       assert.fail);
@@ -820,7 +779,7 @@ it('fsp-onMoveEntry-found', function(done) {
 it('fsp-onReadFile-missing', function(done) {
   const options = {fileSystemId: 'id', openRequestId: 1};
 
-  onReadFileRequested(
+  this.fsp.onReadFileRequested(
       options,
       (chunk, hasMore) => assert.fail(),
       (error) => {
@@ -835,7 +794,7 @@ it('fsp-onReadFile-missing', function(done) {
 it('fsp-onCopyEntry-missing', function(done) {
   const options = {fileSystemId: 'id', sourcePath: '/src', targetPath: '/dst'};
 
-  onCopyEntryRequested(
+  this.fsp.onCopyEntryRequested(
       options,
       assert.fail,
       (error) => {
@@ -864,7 +823,7 @@ it('fsp-onCopyEntry-symlink', function(done) {
     assert.equal('/sym', target);
     assert.equal('./dst', path);
   };
-  onCopyEntryRequested(
+  this.fsp.onCopyEntryRequested(
       options,
       done,
       assert.fail);
@@ -876,14 +835,14 @@ it('fsp-onCopyEntry-symlink', function(done) {
 it('fsp-onUnmount-exit', function() {
   // Create a stub instance that has an exit method.
   let exitStatus;
-  fsp.sftpInstances['id'] = {
+  this.fsp.addMount('id', {
     sftpClient: /** @type {!sftpClient} */ ({}),
     exit: (status) => exitStatus = status,
-  };
+  });
 
   // The tests don't have access to chrome.fileSystemProvider, so stub out the
   // success & error callbacks since they won't be used currently.
-  onUnmountRequested(
+  this.fsp.onUnmountRequested(
       {fileSystemId: 'id'},
       assert.fail,
       assert.fail);
