@@ -138,7 +138,11 @@ ProfilePreferenceManager.constructor = ProfilePreferenceManager;
  */
 export function LocalPreferenceManager(storage = undefined) {
   if (!storage) {
-    storage = new lib.Storage.Local();
+    // If we have access to Chrome local storage, use it.  This allows sharing
+    // state between service workers & normal connections.  However, on the open
+    // web, we want to fallback to window.localStorage.
+    storage = globalThis.chrome?.storage?.local ?
+        new lib.Storage.Chrome(chrome.storage.local) : new lib.Storage.Local();
   }
   lib.PreferenceManager.call(this, storage, '/nassh/');
 
