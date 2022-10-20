@@ -11,6 +11,7 @@ import image from '@rollup/plugin-image';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
+import yaml from '@rollup/plugin-yaml';
 
 const plugins = [
   resolve({
@@ -20,6 +21,7 @@ const plugins = [
   terser(),
   commonjs(),
   image(),
+  yaml(),
 ];
 
 // Common output settings.

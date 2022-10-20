@@ -87,7 +87,7 @@ We don't currently use signed tags.
 Update the [ChangeLog.md](./ChangeLog.md) file with any relevant details since
 the last release.
 
-Add any significant changes to concat/release-highlights.txt, and prune any old
+Add any significant changes to release-highlights.yaml, and prune any old
 entries in here (see the comments in the file for details).
 
 See commit [e992bb2c819188421b010a7c4fdc96cfae48db31] and tag [nassh-0.9] as

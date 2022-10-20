@@ -50,8 +50,6 @@ There are a few directives that can be specified in the input file.  They are...
   'date <format>' uses the current date/time with strftime.
   'changelog <date|version> [../docs/ChangeLog.md]' loads changelog details.
   'git-rev REV' expands the symbolic revision using `git rev-parse`.
-  'head -1 FILENAME' reads the first line from a file.
-  'grep REGEX FILENAME' reads all lines from a file that match a regex.
 
   This includes a resource in the output.  Resources are output as JavaScript
   strings by default but can also be the raw contents, which is useful when you
@@ -217,39 +215,6 @@ def append_resource(name, mime, resource, header_files):
             output = subprocess.check_output(["git", "rev-parse", rev])
             data = output.decode("utf-8").strip()
             logging.info("  -> %s", data)
-
-    elif mode == "head":
-        # Peel off the first line.
-        argv = arg.split()
-        if not argv:
-            raise ValueError("Missing head settings")
-        if len(argv) != 2:
-            raise ValueError(f"Too many args to head: {arg}")
-        count, path = argv
-        path = Path(path)
-
-        # We can expand this if need comes up.
-        if count != "-1":
-            raise ValueError("Only count==-1 supported currently")
-
-        with path.open(encoding="utf-8") as f:
-            data = f.readline().strip()
-        logging.info("  -> %s", data)
-
-    elif mode == "grep":
-        # Return all lines matching a regex.
-        argv = arg.split()
-        if not argv:
-            raise ValueError("Missing grep settings")
-        if len(argv) != 2:
-            raise ValueError(f"Too many args to grep: {arg}")
-        regex, path = argv
-        path = Path(path)
-
-        with path.open(encoding="utf-8") as f:
-            lines = [x for x in f.readlines() if re.match(regex, x)]
-        data = "".join(lines)
-        logging.info("  -> %s ...", data[:80])
 
     else:
         raise ValueError(f"Unknown resource: {resource}")
