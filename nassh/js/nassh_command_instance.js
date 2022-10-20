@@ -9,6 +9,9 @@
 
 import {hterm, lib} from './deps_local.concat.js';
 import {punycode} from './deps_punycode.rollup.js';
+import {
+  IMG_VISIBILITY_URI, IMG_VISIBILITY_OFF_URI,
+} from './deps_resources.rollup.js';
 
 import {
   getManifest, isCrOSSystemApp, localize, osc8Link, sgrText,
@@ -1844,21 +1847,17 @@ CommandInstance.prototype.secureInput_ = function(
 
   // For password inputs, add a dynamic toggle.
   if (!echo) {
-    const visibilityUri = lib.resource.getDataUrl('nassh/images/visibility');
-    const visibilityOffUri = lib.resource.getDataUrl(
-        'nassh/images/visibility_off');
-
     const toggle = document.createElement('img');
-    toggle.src = visibilityUri;
+    toggle.src = IMG_VISIBILITY_URI;
     toggle.style.cursor = 'pointer';
     toggle.style.verticalAlign = 'middle';
     toggle.addEventListener('click', (e) => {
       if (input.type === 'text') {
         input.type = 'password';
-        toggle.src = visibilityUri;
+        toggle.src = IMG_VISIBILITY_URI;
       } else {
         input.type = 'text';
-        toggle.src = visibilityOffUri;
+        toggle.src = IMG_VISIBILITY_OFF_URI;
       }
     });
     span.appendChild(toggle);

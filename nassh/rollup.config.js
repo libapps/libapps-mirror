@@ -7,6 +7,7 @@
  * nassh and package them into a single, minified ES6 module.
  */
 
+import image from '@rollup/plugin-image';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
@@ -18,7 +19,17 @@ const plugins = [
   }),
   terser(),
   commonjs(),
+  image(),
 ];
+
+// Common output settings.
+const output = {
+  // This only disables the '__esModule' symbol hack.
+  esModule: false,
+  format: 'es',
+  indent: false,
+  preferConst: true,
+};
 
 /**
  * Helper for building up deps.
@@ -30,8 +41,8 @@ function nassh_dep(name) {
   return {
     input: `js/deps_${name}.shim.js`,
     output: {
+      ...output,
       file: `js/deps_${name}.rollup.js`,
-      format: 'es',
     },
     plugins: plugins,
   };
@@ -42,5 +53,6 @@ export default [
   nassh_dep('lit'),
   nassh_dep('pkijs'),
   nassh_dep('punycode'),
+  nassh_dep('resources'),
   nassh_dep('xterm'),
 ];
