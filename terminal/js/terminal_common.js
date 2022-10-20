@@ -394,15 +394,16 @@ export async function init() {
   // CrossOriginOpenerPolicy.
   lib.f.openWindow = window.open.bind(window);
 
-  hterm.messageManager.useCrlf = true;
-
   // These initialization tasks should not affect each other, so we run them
   // concurrently.
   return Promise.all([
+      hterm.initPromise.then(() => {
+        hterm.messageManager.useCrlf = true;
+        return hterm.messageManager.findAndLoadMessages(
+                   lib.f.getURL('/_locales/$1/messages.json'));
+      }),
       prefetchOSInfo(),
       // Load hterm.messageManager from /_locales/<lang>/messages.json.
-      hterm.messageManager.findAndLoadMessages(
-          lib.f.getURL('/_locales/$1/messages.json')),
       // Migrate over the DOM filesystem to the new indexeddb-fs.
       // TODO(vapier): Delete this with R110+.
       migrateFilesystemFromDomToIndexeddb().catch((e) => {
