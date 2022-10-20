@@ -10,6 +10,7 @@ import {hterm, lib} from './deps_local.concat.js';
 export const browserAction =
     globalThis.browser?.browserAction ? browser.browserAction :
     globalThis.chrome?.browserAction ? chrome.browserAction :
+    globalThis.chrome?.action ? chrome.action :
     null;
 
 hterm.initPromise.then(() => {
