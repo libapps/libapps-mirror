@@ -3,7 +3,19 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-"""Run mocha-headless-chrome with the right settings."""
+"""Run mocha-headless-chrome with the right settings.
+
+A snapshot of Chrome that we update from time to time.
+  uribase='https://dl.google.com/linux/chrome/deb'
+  filename=$(
+    curl -s "${uribase}/dists/stable/main/binary-amd64/Packages.gz" | \
+        zcat | \
+        awk '$1 == "Filename:" && $2 ~ /google-chrome-stable/ {print $NF}')
+  echo "${filename##*/}"
+  wget "${uribase}/${filename}"
+  gsutil cp -a public-read google-chrome-stable_*.deb \
+      gs://chromeos-localmirror/secureshell/distfiles/
+"""
 
 import shutil
 import sys
@@ -11,16 +23,7 @@ import sys
 import libdot
 
 
-# A snapshot of Chrome that we update from time to time.
-# $ uribase='https://dl.google.com/linux/chrome/deb'
-# $ filename=$(
-#     curl -s "${uribase}/dists/stable/main/binary-amd64/Packages.gz" | \
-#         zcat | \
-#         awk '$1 == "Filename:" && $2 ~ /google-chrome-stable/ {print $NF}')
-# $ wget "${uribase}/${filename}"
-# $ gsutil cp -a public-read google-chrome-stable_*.deb \
-#       gs://chromeos-localmirror/secureshell/distfiles/
-CHROME_VERSION = "google-chrome-stable_86.0.4240.75-1"
+CHROME_VERSION = "google-chrome-stable_108.0.5359.71-1"
 
 
 def chrome_setup():
