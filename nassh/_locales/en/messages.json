@@ -2047,6 +2047,10 @@
 		"description": "Label to open Terminal settings page.",
 		"message": "Terminal Settings"
 	},
+	"TERMINAL_INPUT_LABEL": {
+		"description": "The label for the terminal input element. This is for accessibility announcements.",
+		"message": "Terminal input"
+	},
 	"TERMINAL_NAME_PREF_ANSI_COLORS": {
 		"description": "Label text shown for the preference to set ANSI colors.  ANSI is an acronym for American National Standards Institute.  Terminals specify a default 16 colors for their display, this configuration allows users to override the default colors.",
 		"message": "ANSI colors"
@@ -2316,6 +2320,10 @@
 	"TERMINAL_TITLE_THEME": {
 		"description": "Title for terminal theme section.  This section shows a list of color themes for styling the terminal",
 		"message": "Theme"
+	},
+	"TERMINAL_TOO_MUCH_OUTPUT_MESSAGE": {
+		"description": "The message to be announced by the screen reader when there is too much output.",
+		"message": "Too much output to announce, navigate to rows manually to read."
 	},
 	"TERMINAL_TRY_AGAIN_WITH_INTERNET": {
 		"description": "Message shown to the user to ask them to try again with the Internet.",

@@ -382,6 +382,8 @@ class BackgroundImageWatcher {
   }
 }
 
+let xtermTerminalStringsLoaded = false;
+
 /**
  * A terminal class that 1) uses xterm.js and 2) behaves like a `hterm.Terminal`
  * so that it can be used in existing code.
@@ -496,6 +498,13 @@ export class XtermTerminal {
       selectionForeground: 'black',
     };
     this.observePrefs_();
+    if (!xtermTerminalStringsLoaded) {
+      xtermTerminalStringsLoaded = true;
+      Terminal.strings.promptLabel =
+          hterm.messageManager.get('TERMINAL_INPUT_LABEL');
+      Terminal.strings.tooMuchOutput =
+          hterm.messageManager.get('TERMINAL_TOO_MUCH_OUTPUT_MESSAGE');
+    }
   }
 
   /** @override */

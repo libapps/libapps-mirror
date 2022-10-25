@@ -185,6 +185,11 @@ class Terminal$$module$js$xterm {
   scrollToBottom() {}
 
   /**
+   * return {{promptLabel: string, tooMuchOutput: string}}
+   */
+  static get strings() {}
+
+  /**
    * @param {string|!Uint8Array} data
    * @param {function()=} callback Optional callback that fires when the data
    *     was processed by the parser.
