@@ -6,7 +6,7 @@
  * @fileoverview Unit tests for terminal_emulator.js.
  */
 
-import {lib} from './deps_local.concat.js';
+import {hterm, lib} from './deps_local.concat.js';
 
 import {sleep} from './terminal_common.js';
 import {A11yButtons, Modifier, XtermTerminal, XtermTerminalTestParams,
@@ -148,7 +148,7 @@ describe('terminal_emulator_tests.js', function() {
       this.terminal = new Terminal({cols: 80, rows: ROWS,
         allowProposedApi: true});
       this.htermA11yReaderMock = new MockObject();
-      this.a11yButtons = new A11yButtons(this.terminal, this.elem,
+      this.a11yButtons = new A11yButtons(this.terminal,
           /** @type {!hterm.AccessibilityReader} */(
               this.htermA11yReaderMock.proxy));
 

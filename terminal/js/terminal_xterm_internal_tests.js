@@ -6,7 +6,7 @@
  * @fileoverview Tests for terminal_xterm_internal.js
  */
 
-import {Terminal} from './xterm.js';
+import {Terminal, WebglAddon} from './xterm.js';
 import {XtermInternal} from './terminal_xterm_internal.js';
 
 const COLS = 80;
@@ -24,6 +24,8 @@ describe('terminal_xterm_internal.js', function() {
     this.terminal.open(this.elem);
     this.terminal.options.fontFamily = '"Noto Sans Mono"';
     this.terminal.options.fontSize = 16;
+    // Load the webgl addon to simulate the real runtime better.
+    this.terminal.loadAddon(new WebglAddon());
     this.xtermInternal = new XtermInternal(this.terminal);
 
     this.write = async (content) => {
@@ -108,5 +110,40 @@ describe('terminal_xterm_internal.js', function() {
 
     assert.equal(this.terminal.buffer.active.getLine(0).translateToString(true),
         'hello worldabcd');
+  });
+
+  it('enableA11y() and disableA11y()', async function() {
+    const terminalElement = this.terminal.element;
+    const pageUpButton = document.createElement('button');
+    const pageDownButton = document.createElement('button');
+    this.xtermInternal.enableA11y(pageUpButton, pageDownButton);
+
+    // Check the order of a11y elements.
+    const children = terminalElement.children;
+    assert.equal(children[0], pageUpButton);
+    const xtermAccessibility = children[1];
+    assert.isTrue(xtermAccessibility.classList.contains('xterm-accessibility'));
+    assert.equal(children[2], pageDownButton);
+    // The xterm a11y live region should be reallocated to the bottom.
+    const liveRegionContainer = children[children.length - 1];
+    const liveRegion = liveRegionContainer.querySelector('[aria-live]');
+    assert.exists(liveRegion);
+
+    // Test that the live region is still working after the re-positioning.
+    const liveRegionText = new Promise((resolve) => {
+      const observer = new MutationObserver((mutations, observer) => {
+        observer.disconnect();
+        resolve(liveRegion.textContent);
+      });
+      observer.observe(liveRegion, {childList: true});
+    });
+    this.write('hello world');
+    assert.equal(await liveRegionText, 'hello world');
+
+    this.xtermInternal.disableA11y();
+    for (const element of [pageUpButton, xtermAccessibility, pageDownButton,
+        liveRegionContainer]) {
+      assert.isFalse(element.isConnected);
+    }
   });
 });

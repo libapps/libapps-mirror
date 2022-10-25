@@ -66,6 +66,7 @@ chai.assert.fail = function(message) {};
  * @param {*} value
  * @param {string=} message
  */
+chai.assert.exists =
 chai.assert.isArray =
 chai.assert.isDefined =
 chai.assert.isEmpty =

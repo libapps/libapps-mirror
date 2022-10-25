@@ -89,6 +89,13 @@ class TmuxDcsPHandler {
 }
 
 
+const A11Y_LIVE_REGION_CSS = `
+position: absolute;
+width: 0; height: 0;
+overflow: hidden;
+left: -1000px; top: -1000px;
+`;
+
 export class XtermInternal {
   /**
    * @param {!Terminal} terminal
@@ -96,6 +103,8 @@ export class XtermInternal {
    */
   constructor(terminal) {
     this.terminal_ = terminal;
+    /** @type {!Array<!HTMLElement>} */
+    this.a11yElements_ = [];
 
     this.core_ = /** @type {{
         _renderService: {
@@ -188,5 +197,52 @@ export class XtermInternal {
   installTmuxControlModeHandler(onTmuxControlModeLine) {
     this.core_._inputHandler._parser.registerDcsHandler({final: 'p'},
         new TmuxDcsPHandler(onTmuxControlModeLine));
+  }
+
+  /**
+   * @param {!HTMLElement} a11yPageUpButton
+   * @param {!HTMLElement} a11yPageDownButton
+   */
+  enableA11y(a11yPageUpButton, a11yPageDownButton) {
+    if (this.terminal_.options.screenReaderMode) {
+      throw new Error('screenReaderMode is already true');
+    }
+    this.terminal_.options.screenReaderMode = true;
+
+    const terminalElement = this.terminal_.element;
+    const xtermA11yElement = terminalElement.querySelector(
+        '.xterm-accessibility');
+
+    // Surround xtermA11yElement with the buttons.
+    xtermA11yElement.insertAdjacentElement('beforebegin', a11yPageUpButton);
+    xtermA11yElement.insertAdjacentElement('afterend', a11yPageDownButton);
+
+    // When a screen reader user move the focus (away from the terminal input
+    // field), they normally move it upwards because the history output are at
+    // the top. So, here we re-position xterm's live region to the bottom so
+    // that it will not catch the focus.
+    const liveRegionContainer = document.createElement('div');
+    liveRegionContainer.style.cssText = A11Y_LIVE_REGION_CSS;
+    terminalElement.insertAdjacentElement('beforeend', liveRegionContainer);
+    liveRegionContainer.appendChild(
+        xtermA11yElement.querySelector('[aria-live]'));
+
+    this.a11yElements_ = [
+        a11yPageUpButton,
+        a11yPageDownButton,
+        liveRegionContainer,
+    ];
+  }
+
+  disableA11y() {
+    if (!this.terminal_.options.screenReaderMode) {
+      throw new Error('screenReaderMode is already false');
+    }
+    this.terminal_.options.screenReaderMode = false;
+
+    for (const element of this.a11yElements_) {
+      element.remove();
+    }
+    this.a11yElements_.length = 0;
   }
 }

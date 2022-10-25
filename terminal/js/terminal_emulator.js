@@ -254,29 +254,26 @@ right: 16px;
 export class A11yButtons {
   /**
    * @param {!Terminal} term
-   * @param {!Element} elem The container element for the terminal.
    * @param {!hterm.AccessibilityReader} htermA11yReader
    */
-  constructor(term, elem, htermA11yReader) {
+  constructor(term, htermA11yReader) {
     this.term_ = term;
     this.htermA11yReader_ = htermA11yReader;
-    this.pageUpButton_ = document.createElement('button');
-    this.pageUpButton_.style.cssText = A11Y_BUTTON_STYLE;
-    this.pageUpButton_.textContent =
+    this.pageUpButton = document.createElement('button');
+    this.pageUpButton.style.cssText = A11Y_BUTTON_STYLE;
+    this.pageUpButton.textContent =
         hterm.messageManager.get('HTERM_BUTTON_PAGE_UP');
-    this.pageUpButton_.addEventListener('click',
+    this.pageUpButton.addEventListener('click',
         () => this.scrollPages_(-1));
 
-    this.pageDownButton_ = document.createElement('button');
-    this.pageDownButton_.style.cssText = A11Y_BUTTON_STYLE;
-    this.pageDownButton_.textContent =
+    this.pageDownButton = document.createElement('button');
+    this.pageDownButton.style.cssText = A11Y_BUTTON_STYLE;
+    this.pageDownButton.textContent =
         hterm.messageManager.get('HTERM_BUTTON_PAGE_DOWN');
-    this.pageDownButton_.addEventListener('click',
+    this.pageDownButton.addEventListener('click',
         () => this.scrollPages_(1));
 
     this.resetPos_();
-    elem.prepend(this.pageUpButton_);
-    elem.append(this.pageDownButton_);
 
     this.onSelectionChange_ = this.onSelectionChange_.bind(this);
   }
@@ -329,18 +326,18 @@ export class A11yButtons {
   }
 
   resetPos_() {
-    this.pageUpButton_.style.top = '-200px';
-    this.pageDownButton_.style.bottom = '-200px';
+    this.pageUpButton.style.top = '-200px';
+    this.pageDownButton.style.bottom = '-200px';
   }
 
   onSelectionChange_() {
     this.resetPos_();
 
     const selectedElement = document.getSelection().anchorNode.parentElement;
-    if (selectedElement === this.pageUpButton_) {
-      this.pageUpButton_.style.top = '16px';
-    } else if (selectedElement === this.pageDownButton_) {
-      this.pageDownButton_.style.bottom = '16px';
+    if (selectedElement === this.pageUpButton) {
+      this.pageUpButton.style.top = '16px';
+    } else if (selectedElement === this.pageDownButton) {
+      this.pageDownButton.style.bottom = '16px';
     }
   }
 }
@@ -479,6 +476,7 @@ export class XtermTerminal {
     this.io = new XtermTerminalIO(this);
     this.notificationCenter_ = null;
     this.htermA11yReader_ = null;
+    this.a11yEnabled_ = false;
     this.a11yButtons_ = null;
     this.copyNotice_ = null;
     this.scrollOnOutputListener_ = null;
@@ -539,9 +537,20 @@ export class XtermTerminal {
 
   /** @override */
   setAccessibilityEnabled(enabled) {
+    if (enabled === this.a11yEnabled_) {
+      return;
+    }
+    this.a11yEnabled_ = enabled;
+
     this.a11yButtons_.setEnabled(enabled);
     this.htermA11yReader_.setAccessibilityEnabled(enabled);
-    this.term.options.screenReaderMode = enabled;
+
+    if (enabled) {
+      this.xtermInternal_.enableA11y(this.a11yButtons_.pageUpButton,
+          this.a11yButtons_.pageDownButton);
+    } else {
+      this.xtermInternal_.disableA11y();
+    }
   }
 
   hasBackgroundImage() {
@@ -715,8 +724,7 @@ export class XtermTerminal {
       });
 
       await this.scheduleFit_();
-      this.a11yButtons_ = new A11yButtons(this.term, elem,
-          this.htermA11yReader_);
+      this.a11yButtons_ = new A11yButtons(this.term, this.htermA11yReader_);
 
       this.onTerminalReady();
     })();
