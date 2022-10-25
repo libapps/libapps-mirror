@@ -247,31 +247,73 @@ z-index: 10;
 right: 16px;
 `;
 
-class A11yButtons {
+// TODO: we should subscribe to the xterm.js onscroll event, and
+// disable/enable the buttons accordingly. However, xterm.js does not seem to
+// emit the onscroll event when the viewport is scrolled by the mouse. See
+// https://github.com/xtermjs/xterm.js/issues/3864
+export class A11yButtons {
   /**
    * @param {!Terminal} term
    * @param {!Element} elem The container element for the terminal.
+   * @param {!hterm.AccessibilityReader} htermA11yReader
    */
-  constructor(term, elem) {
+  constructor(term, elem, htermA11yReader) {
+    this.term_ = term;
+    this.htermA11yReader_ = htermA11yReader;
     this.pageUpButton_ = document.createElement('button');
     this.pageUpButton_.style.cssText = A11Y_BUTTON_STYLE;
     this.pageUpButton_.textContent =
         hterm.messageManager.get('HTERM_BUTTON_PAGE_UP');
     this.pageUpButton_.addEventListener('click',
-        () => term.scrollPages(-1));
+        () => this.scrollPages_(-1));
 
     this.pageDownButton_ = document.createElement('button');
     this.pageDownButton_.style.cssText = A11Y_BUTTON_STYLE;
     this.pageDownButton_.textContent =
         hterm.messageManager.get('HTERM_BUTTON_PAGE_DOWN');
     this.pageDownButton_.addEventListener('click',
-        () => term.scrollPages(1));
+        () => this.scrollPages_(1));
 
     this.resetPos_();
     elem.prepend(this.pageUpButton_);
     elem.append(this.pageDownButton_);
 
     this.onSelectionChange_ = this.onSelectionChange_.bind(this);
+  }
+
+  /**
+   * @param {number} amount
+   */
+  scrollPages_(amount) {
+    this.term_.scrollPages(amount);
+    this.announceScreenContent_();
+  }
+
+  announceScreenContent_() {
+    const activeBuffer = this.term_.buffer.active;
+
+    let percentScrolled = 100;
+    if (activeBuffer.baseY !== 0) {
+      percentScrolled = Math.round(
+          100 * activeBuffer.viewportY / activeBuffer.baseY);
+    }
+
+    let currentScreenContent = hterm.messageManager.get(
+        'HTERM_ANNOUNCE_CURRENT_SCREEN_HEADER',
+        [percentScrolled],
+        '$1% scrolled,');
+
+    currentScreenContent += '\n';
+
+    const rowEnd = Math.min(activeBuffer.viewportY + this.term_.rows,
+        activeBuffer.length);
+    for (let i = activeBuffer.viewportY; i < rowEnd; ++i) {
+      currentScreenContent +=
+          activeBuffer.getLine(i).translateToString(true) + '\n';
+    }
+    currentScreenContent = currentScreenContent.trim();
+
+    this.htermA11yReader_.assertiveAnnounce(currentScreenContent);
   }
 
   /**
@@ -664,7 +706,8 @@ export class XtermTerminal {
       });
 
       await this.scheduleFit_();
-      this.a11yButtons_ = new A11yButtons(this.term, elem);
+      this.a11yButtons_ = new A11yButtons(this.term, elem,
+          this.htermA11yReader_);
 
       this.onTerminalReady();
     })();

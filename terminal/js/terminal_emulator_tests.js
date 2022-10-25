@@ -9,9 +9,10 @@
 import {lib} from './deps_local.concat.js';
 
 import {sleep} from './terminal_common.js';
-import {encodeKeyCombo, Modifier, XtermTerminal, XtermTerminalTestParams}
-    from './terminal_emulator.js';
+import {A11yButtons, Modifier, XtermTerminal, XtermTerminalTestParams,
+  encodeKeyCombo} from './terminal_emulator.js';
 import {MockFunction, MockObject} from './terminal_test_mocks.js';
+import {Terminal} from './xterm.js';
 
 describe('terminal_emulator_tests.js', function() {
   describe('XtermTerminal', function() {
@@ -132,6 +133,72 @@ describe('terminal_emulator_tests.js', function() {
       assert.isTrue(this.terminal.customKeyEventHandler_({...fakeEvent,
         ctrlKey: false}));
       assert.isEmpty(mockHandler.popHistory());
+    });
+  });
+
+  describe('A11yButtons', () => {
+    const ROWS = 5;
+
+    beforeEach(function() {
+      this.elem = document.createElement('div');
+      this.elem.style.height = '500px';
+      this.elem.style.width = '500px';
+      document.body.appendChild(this.elem);
+
+      this.terminal = new Terminal({cols: 80, rows: ROWS,
+        allowProposedApi: true});
+      this.htermA11yReaderMock = new MockObject();
+      this.a11yButtons = new A11yButtons(this.terminal, this.elem,
+          /** @type {!hterm.AccessibilityReader} */(
+              this.htermA11yReaderMock.proxy));
+
+      this.write = async (content) => {
+        return new Promise((resolve) => this.terminal.write(content, resolve));
+      };
+    });
+
+    afterEach(function() {
+      this.terminal.dispose();
+      document.body.removeChild(this.elem);
+    });
+
+    it('announceScreenContent_', async function() {
+      this.a11yButtons.announceScreenContent_();
+      assert.deepEqual(
+          this.htermA11yReaderMock.popMethodHistory('assertiveAnnounce'),
+          [['100% scrolled,']]);
+
+      await this.write('hello');
+      this.a11yButtons.announceScreenContent_();
+      assert.deepEqual(
+          this.htermA11yReaderMock.popMethodHistory('assertiveAnnounce'),
+          [['100% scrolled,\nhello']]);
+
+      await this.write('\r\nworld');
+      this.a11yButtons.announceScreenContent_();
+      assert.deepEqual(
+          this.htermA11yReaderMock.popMethodHistory('assertiveAnnounce'),
+          [['100% scrolled,\nhello\nworld']]);
+
+      for (let i = 0; i < ROWS; ++i) {
+        await this.write(`\r\n${i}`);
+      }
+      this.a11yButtons.announceScreenContent_();
+      assert.deepEqual(
+          this.htermA11yReaderMock.popMethodHistory('assertiveAnnounce'),
+          [['100% scrolled,\n0\n1\n2\n3\n4']]);
+
+      this.terminal.scrollLines(-1);
+      this.a11yButtons.announceScreenContent_();
+      assert.deepEqual(
+          this.htermA11yReaderMock.popMethodHistory('assertiveAnnounce'),
+          [['50% scrolled,\nworld\n0\n1\n2\n3']]);
+
+      this.terminal.scrollLines(-1);
+      this.a11yButtons.announceScreenContent_();
+      assert.deepEqual(
+          this.htermA11yReaderMock.popMethodHistory('assertiveAnnounce'),
+          [['0% scrolled,\nhello\nworld\n0\n1\n2']]);
     });
   });
 });

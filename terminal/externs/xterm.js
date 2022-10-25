@@ -38,6 +38,9 @@ class IBuffer {
   constructor() {
     this.cursorY = 0;
     this.cursorX = 0;
+    this.baseY = 0;
+    this.viewportY = 0;
+    this.length = 0;
   }
 
   /**
@@ -168,6 +171,11 @@ class Terminal$$module$js$xterm {
    * @param {number} rows
    */
   resize(cols, rows) {}
+
+  /**
+   * @param {number} number
+   */
+  scrollLines(number) {}
 
   /**
    * @param {number} number
