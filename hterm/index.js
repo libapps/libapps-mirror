@@ -12,7 +12,6 @@ import './dist/js/hterm_resources.js';
 import './js/hterm_accessibility_reader.js';
 import './js/hterm_contextmenu.js';
 import './js/hterm_find_bar.js';
-import './js/hterm_frame.js';
 import './js/hterm_keyboard.js';
 import './js/hterm_keyboard_bindings.js';
 import './js/hterm_keyboard_keymap.js';

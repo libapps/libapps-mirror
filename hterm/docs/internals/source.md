@@ -73,7 +73,6 @@ The vast majority of the code here lives under [js/].
 [hterm_accessibility_reader_tests.js]: ../../js/hterm_accessibility_reader_tests.js
 [hterm_contextmenu.js]: ../../js/hterm_contextmenu.js
 [hterm_contextmenu_tests.js]: ../../js/hterm_contextmenu_tests.js
-[hterm_frame.js]: ../../js/hterm_frame.js
 [hterm_keyboard.js]: ../../js/hterm_keyboard.js
 [hterm_keyboard_bindings.js]: ../../js/hterm_keyboard_bindings.js
 [hterm_keyboard_keymap.js]: ../../js/hterm_keyboard_keymap.js
