@@ -20,4 +20,6 @@
   --nassh-fg-color-20: rgba(var(--nassh-fg-color-rgb), 0.20);
   --nassh-fg-color-75: rgba(var(--nassh-fg-color-rgb), 0.75);
   --nassh-cursor-color-75: rgba(var(--nassh-cursor-color-rgb), 0.75);
+
+  --nassh-font-family: 'DejaVu Sans', 'Noto Sans', sans-serif;
 }

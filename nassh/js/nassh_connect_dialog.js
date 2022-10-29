@@ -1230,28 +1230,6 @@ ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
   this.updateDetailPlaceholders_();
   this.updateDescriptionPlaceholder_();
 
-  document.body.style.fontFamily = info.fontFamily;
-  document.body.style.fontSize = info.fontSize + 'px';
-
-  const cssFg = lib.notNull(lib.colors.normalizeCSS(info.foregroundColor));
-  const cssBg = lib.notNull(lib.colors.normalizeCSS(info.backgroundColor));
-  const cssCursor = lib.notNull(lib.colors.normalizeCSS(info.cursorColor));
-  const rgbFg = lib.colors.crackRGB(cssFg).slice(0, 3);
-  const rgbBg = lib.colors.crackRGB(cssBg).slice(0, 3);
-  const rgbCursor = lib.colors.crackRGB(cssCursor).slice(0, 3);
-
-  const vars = {
-    '--nassh-bg-color-rgb': rgbBg.join(', '),
-    '--nassh-fg-color-rgb': rgbFg.join(', '),
-    '--nassh-cursor-color-rgb': rgbCursor.join(', '),
-  };
-
-  for (const key in vars) {
-    if (key.startsWith('--nassh-')) {
-      document.documentElement.style.setProperty(key, vars[key]);
-    }
-  }
-
   // Tell the parent we've finished loading all the terminal details.
   this.postMessage('terminal-info-ok');
 };

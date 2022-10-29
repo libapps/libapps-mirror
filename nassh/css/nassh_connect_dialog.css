@@ -13,6 +13,8 @@ body {
   padding: 0;
   background-color: var(--nassh-bg-color);
   color: var(--nassh-fg-color);
+  font-family: var(--nassh-font-family);
+  font-size: 14px;
 }
 
 :focus {
