@@ -1233,21 +1233,18 @@ ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
   document.body.style.fontFamily = info.fontFamily;
   document.body.style.fontSize = info.fontSize + 'px';
 
-  const fg = lib.notNull(lib.colors.normalizeCSS(info.foregroundColor));
-  const bg = lib.notNull(lib.colors.normalizeCSS(info.backgroundColor));
-  const cursor = lib.notNull(lib.colors.normalizeCSS(info.cursorColor));
+  const cssFg = lib.notNull(lib.colors.normalizeCSS(info.foregroundColor));
+  const cssBg = lib.notNull(lib.colors.normalizeCSS(info.backgroundColor));
+  const cssCursor = lib.notNull(lib.colors.normalizeCSS(info.cursorColor));
+  const rgbFg = lib.colors.crackRGB(cssFg).slice(0, 3);
+  const rgbBg = lib.colors.crackRGB(cssBg).slice(0, 3);
+  const rgbCursor = lib.colors.crackRGB(cssCursor).slice(0, 3);
 
   const vars = {
-    '--nassh-bg-color': bg,
-    '--nassh-fg-color': fg,
-    '--nassh-cursor-color': cursor,
+    '--nassh-bg-color-rgb': rgbBg.join(', '),
+    '--nassh-fg-color-rgb': rgbFg.join(', '),
+    '--nassh-cursor-color-rgb': rgbCursor.join(', '),
   };
-
-  for (let i = 10; i < 100; i += 5) {
-    vars['--nassh-bg-color-' + i] = lib.colors.setAlpha(bg, i / 100);
-    vars['--nassh-fg-color-' + i] = lib.colors.setAlpha(fg, i / 100);
-    vars['--nassh-cursor-color-' + i] = lib.colors.setAlpha(cursor, i / 100);
-  }
 
   for (const key in vars) {
     if (key.startsWith('--nassh-')) {
