@@ -163,20 +163,6 @@ ConnectDialog.prototype.msg = function(name) {
 };
 
 /**
- * Align the bottom fields.
- *
- * We want a grid-like layout for these fields.  This is not easily done with
- * box layout, but since we're using a fixed width font it's a simple hack.
- */
-ConnectDialog.prototype.alignLabels_ = function() {
-  const labels = document.querySelectorAll('.aligned-dialog-labels');
-
-  let maxWidth = 0;
-  labels.forEach((el) => maxWidth = Math.max(maxWidth, el.clientWidth));
-  labels.forEach((el) => el.style.width = `${maxWidth}px`);
-};
-
-/**
  * Install various event handlers.
  */
 ConnectDialog.prototype.installHandlers_ = function() {
@@ -388,7 +374,7 @@ ConnectDialog.prototype.displayMountButton_ = function(state) {
   this.displayButton_(
       lib.notNull(document.querySelector('#mount-path')),
       state,
-      'flex');
+      'revert');
   if (!state) {
     this.displayButton_(this.mountButton_, false);
     this.displayButton_(this.unmountButton_, false);
@@ -1247,7 +1233,4 @@ ConnectDialog.prototype.onMessageName_['visible'] = function() {
   } else {
     this.shortcutList_.focus();
   }
-
-  // Now that we're visible and can calculate font metrics, align the labels.
-  this.alignLabels_();
 };

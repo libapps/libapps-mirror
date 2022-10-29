@@ -39,44 +39,66 @@
         </x-hbox>
         <br>
         <x-hbox x-align='baseline'>
-          <a x-box id='label-identity' class='aligned-dialog-labels'
-             href='../plugin/docs/ssh_config.5.html#IdentityFile' target='_blank'
-             i18n='{"_": "IDENTITY_LABEL"}'
-             >IDENTITY</a>:&nbsp;
-          <select x-box id='field-identity' type='text'
-                  aria-labelledby='label-identity'>
-            <option i18n='{"_": "LOADING_LABEL"}'>LOADING...</option>
-          </select>
-          <div x-box>&nbsp;</div>
-          <a x-box id='import-link' tabindex='0' href='go:import'
-             i18n='{"aria-label": "$id", "_": "IMPORT_LINK_LABEL"}'
-             >IMPORT...</a>
-          <input type="file" multiple id='import-file-input' tabindex="-1">
-        </x-hbox>
-        <x-hbox x-align='baseline'>
-          <a x-box id='label-argstr' class='aligned-dialog-labels'
-             href='../plugin/docs/ssh.1.html' target='_blank'
-             i18n='{"_": "SSH_ARGSTR_LABEL"}'
-             >SSH ARGUMENTS</a>:&nbsp;
-          <input x-box id='field-argstr' x-flex='1' type='text'
-                 aria-labelledby='label-argstr'
-                 i18n='{"placeholder": "$id"}'>
-        </x-hbox>
-        <x-hbox x-align='baseline'>
-          <div x-box id='label-terminal-profile' class='aligned-dialog-labels'
-               i18n='{"_": "TERMINAL_PROFILE_LABEL"}'
-               >TERMINAL PROFILE</div>:&nbsp;
-          <input x-box id='field-terminal-profile' type='text'
-                 aria-labelledby='label-terminal-profile'
-                 i18n='{"placeholder": "$id"}'>
-        </x-hbox>
-        <x-hbox x-align='baseline' id='mount-path'>
-          <div x-box id='label-mount-path' class='aligned-dialog-labels'
-               i18n='{"_": "MOUNT_PATH_LABEL"}'
-               >MOUNT PATH</div>:&nbsp;
-          <input x-box id='field-mount-path' x-flex='1' type='text'
-                 aria-labelledby='label-mount-path'
-                 i18n='{"placeholder": "$id"}'>
+          <table id='aligned-dialog-fields'>
+            <tr>
+              <td class='aligned-dialog-labels'>
+                <a id='label-identity'
+                   href='../plugin/docs/ssh_config.5.html#IdentityFile'
+                   target='_blank'
+                   i18n='{"_": "IDENTITY_LABEL"}'
+                   >IDENTITY</a>
+              </td>
+              <td>
+                <select id='field-identity' type='text'
+                        aria-labelledby='label-identity'>
+                  <option i18n='{"_": "LOADING_LABEL"}'>LOADING...</option>
+                </select>
+                <a id='import-link' tabindex='0' href='go:import'
+                   i18n='{"aria-label": "$id", "_": "IMPORT_LINK_LABEL"}'
+                   >IMPORT...</a>
+                <input type="file" multiple id='import-file-input' tabindex="-1">
+              </td>
+            </tr>
+            <tr>
+              <td class='aligned-dialog-labels'>
+                <a id='label-argstr'
+                   href='../plugin/docs/ssh.1.html' target='_blank'
+                   i18n='{"_": "SSH_ARGSTR_LABEL"}'
+                   >SSH ARGUMENTS</a>
+              </td>
+              <td>
+                <input id='field-argstr' class='aligned-dialog-fullwidth'
+                       type='text'
+                       aria-labelledby='label-argstr'
+                       i18n='{"placeholder": "$id"}'>
+              </td>
+            </tr>
+            <tr>
+              <td class='aligned-dialog-labels'>
+                <div id='label-terminal-profile'
+                     i18n='{"_": "TERMINAL_PROFILE_LABEL"}'
+                     >TERMINAL PROFILE</div>
+              </td>
+              <td>
+                <input id='field-terminal-profile' type='text'
+                       aria-labelledby='label-terminal-profile'
+                       i18n='{"placeholder": "$id"}'>
+              </td>
+            </tr>
+            <tr id='mount-path'>
+              <td class='aligned-dialog-labels'>
+                <span id='label-mount-path'
+                      i18n='{"_": "MOUNT_PATH_LABEL"}'
+                      >MOUNT PATH</span>
+              </td>
+              <td>
+                <input id='field-mount-path' class='aligned-dialog-fullwidth'
+                       type='text'
+                       aria-labelledby='label-mount-path'
+                       i18n='{"placeholder": "$id"}'>
+              </td>
+            </tr>
+          </table>
         </x-hbox>
       </x-vbox>
     </form> <!-- .dialog-billboard -->
