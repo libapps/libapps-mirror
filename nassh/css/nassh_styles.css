@@ -23,3 +23,10 @@
 
   --nassh-font-family: 'DejaVu Sans', 'Noto Sans', sans-serif;
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --nassh-bg-color-rgb: 240, 240, 240;
+    --nassh-fg-color-rgb: 16, 16, 16;
+  }
+}
