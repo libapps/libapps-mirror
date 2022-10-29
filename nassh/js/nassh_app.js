@@ -70,7 +70,7 @@ App.prototype.installContextMenus = function() {
 App.prototype.onContextMenu_ = function(info, tab = undefined) {
   switch (info.menuItemId) {
     case 'connect-dialog':
-      lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',
+      lib.f.openWindow(lib.f.getURL('/html/nassh_connect_dialog.html'), '',
                        'chrome=no,close=yes,resize=yes,minimizable=yes,' +
                        'scrollbars=yes,width=900,height=600');
       break;
@@ -300,7 +300,7 @@ App.prototype.installBrowserAction = function() {
 App.prototype.onLaunched = function() {
   const width = 900;
   const height = 600;
-  lib.f.openWindow(lib.f.getURL('/html/nassh.html'), '',
+  lib.f.openWindow(lib.f.getURL('/html/nassh_connect_dialog.html'), '',
                    'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
                    `minimizable=yes,width=${width},height=${height}`);
 };

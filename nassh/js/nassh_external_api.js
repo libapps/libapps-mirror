@@ -376,7 +376,7 @@ function(request, sender, sendResponse) {
   }
 
   request = /** @type {!NewWindowSettings} */ (Object.assign({
-    url: lib.f.getURL('/html/nassh.html'),
+    url: lib.f.getURL('/html/nassh_connect_dialog.html'),
   }, request));
 
   newWindow_(

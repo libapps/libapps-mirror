@@ -69,6 +69,7 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
   let url = lib.f.getURL('/html/nassh.html');
   switch (id) {
     case 'connect-dialog':
+      url = lib.f.getURL('/html/nassh_connect_dialog.html');
       break;
     case 'options':
       openOptionsPage();

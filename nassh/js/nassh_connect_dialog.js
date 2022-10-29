@@ -25,22 +25,17 @@ import {
  * There should only be one of these, and it assumes the connect dialog is
  * the only thing in the current window.
  *
- * @param {!MessagePort} messagePort The HTML5 message port we should use to
- *     communicate with the nassh instance.
  * @constructor
  */
-function ConnectDialog(messagePort) {
-
-  // Message port back to the terminal.
-  this.messagePort_ = messagePort;
-  this.messagePort_.onmessage = this.onMessage_.bind(this);
-  this.messagePort_.start();
-
+function ConnectDialog() {
   // Turn off spellcheck everywhere.
   const ary = document.querySelectorAll('input[type="text"]');
   for (let i = 0; i < ary.length; i++) {
     ary[i].setAttribute('spellcheck', 'false');
   }
+
+  this.location_ = document.location;
+  this.sessionStorage_ = globalThis.sessionStorage;
 
   // The nassh global pref manager.
   const storage = getSyncStorage();
@@ -86,25 +81,38 @@ function ConnectDialog(messagePort) {
 }
 
 /**
- * Global window message handler, uninstalled after proper handshake.
- *
- * @param {!Event} e
+ * Global window startup.
  */
-ConnectDialog.onWindowMessage = async function(e) {
-  if (e.data.name != 'ipc-init') {
-    console.warn('Unknown message from terminal:', e.data);
-    return;
-  }
-
-  globalThis.removeEventListener('message', ConnectDialog.onWindowMessage);
-
+ConnectDialog.onWindowStartup = async function() {
   await setupForWebApp();
-  globalThis.dialog_ = new ConnectDialog(e.data.argv[0].messagePort);
+  const dialog = new ConnectDialog();
+
+  hterm.messageManager.processI18nAttributes(document);
+  dialog.updateDetailPlaceholders_();
+  dialog.updateDescriptionPlaceholder_();
+
+  const sendVisible = () => {
+    if (!dialog.shortcutList_) {
+      setTimeout(sendVisible, 1);
+      return;
+    }
+
+    // Focus the connection dialog.
+    if (dialog.profileList_.length == 1) {
+      // Just one profile record?  It's the "New..." profile, focus the form.
+      dialog.$f('description').focus();
+    } else {
+      dialog.shortcutList_.focus();
+    }
+  };
+  sendVisible();
+
+  // Make available for debugging.
+  globalThis.dialog_ = dialog;
   loadWebFonts(document);
 };
 
-// Register the message listener.
-globalThis.addEventListener('message', ConnectDialog.onWindowMessage);
+globalThis.addEventListener('DOMContentLoaded', ConnectDialog.onWindowStartup);
 
 /**
  * Called by the preference manager when we've retrieved the current preference
@@ -474,11 +482,12 @@ ConnectDialog.prototype.startup_ = function(message, proto) {
   // Since the user has initiated this connection, register the protocol.
   registerProtocolHandler(proto);
 
-  this.localPrefs_.set(
-      'connectDialog/lastProfileId', this.currentProfileRecord_.id);
+  const id = this.currentProfileRecord_.id;
+  this.localPrefs_.set('connectDialog/lastProfileId', id);
 
   if (this.form_.checkValidity()) {
-    this.postMessage(message, [this.currentProfileRecord_.id]);
+    const uri = lib.f.getURL('/html/nassh.html');
+    this.location_.replace(`${uri}#profile-id:${id}`);
   } else {
     this.form_.reportValidity();
   }
@@ -488,13 +497,15 @@ ConnectDialog.prototype.startup_ = function(message, proto) {
  * Switch to mosh mode.
  */
 ConnectDialog.prototype.mosh = function() {
-  this.startup_('mosh', 'ssh');
+  this.location_.replace('/plugin/mosh/mosh_client.html');
 };
 
 /**
  * Mount the selected profile.
  */
 ConnectDialog.prototype.mount = function() {
+  this.sessionStorage_.setItem('nassh.isMount', 'true');
+  this.sessionStorage_.setItem('nassh.isSftp', 'true');
   this.startup_('mountProfile', 'ssh');
 };
 
@@ -518,6 +529,7 @@ ConnectDialog.prototype.unmount = function() {
  * Start a SFTP session with the selected profile.
  */
 ConnectDialog.prototype.sftpConnect = function() {
+  this.sessionStorage_.setItem('nassh.isSftp', 'true');
   this.startup_('sftpConnectToProfile', 'sftp');
 };
 
@@ -526,16 +538,6 @@ ConnectDialog.prototype.sftpConnect = function() {
  */
 ConnectDialog.prototype.connect = function() {
   this.startup_('connectToProfile', 'ssh');
-};
-
-/**
- * Send a message back to the terminal.
- *
- * @param {string} name
- * @param {?Object=} argv
- */
-ConnectDialog.prototype.postMessage = function(name, argv = null) {
-  this.messagePort_.postMessage({name: name, argv: argv});
 };
 
 /**
@@ -918,9 +920,6 @@ ConnectDialog.prototype.syncProfiles_ = function(callback) {
 ConnectDialog.prototype.onFileSystemFound_ = function(fileSystem) {
   this.fileSystem_ = fileSystem;
   this.syncIdentityDropdown_();
-
-  // Tell the parent we're ready to roll.
-  this.postMessage('ipc-init-ok');
 };
 
 /**
@@ -1191,55 +1190,5 @@ ConnectDialog.prototype.onDescriptionChanged_ = function(value, name, prefs) {
   if (this.profileMap_[prefs.id]) {
     this.profileMap_[prefs.id].textContent = value;
     this.shortcutList_.scheduleRedraw();
-  }
-};
-
-/**
- * Handle a message from the terminal.
- *
- * @param {!Event} e
- */
-ConnectDialog.prototype.onMessage_ = function(e) {
-  if (e.data.name in this.onMessageName_) {
-    this.onMessageName_[e.data.name].apply(this, e.data.argv);
-  } else {
-    console.warn('Unhandled message: ' + e.data.name, e.data);
-  }
-};
-
-/**
- * Terminal message handlers.
- *
- * @suppress {lintChecks}
- */
-ConnectDialog.prototype.onMessageName_ = {};
-
-/**
- * terminal-info: The terminal introduces itself.
- *
- * @this {ConnectDialog}
- * @param {!Object} info
- */
-ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
-  hterm.messageManager.processI18nAttributes(document);
-  this.updateDetailPlaceholders_();
-  this.updateDescriptionPlaceholder_();
-
-  // Tell the parent we've finished loading all the terminal details.
-  this.postMessage('terminal-info-ok');
-};
-
-/**
- * We're now visible, so do all the things that require visibility.
- *
- * @this {ConnectDialog}
- */
-ConnectDialog.prototype.onMessageName_['visible'] = function() {
-  // Focus the connection dialog.
-  if (this.profileList_.length == 1) {
-    // Just one profile record?  It's the "New..." profile, focus the form.
-    this.$f('description').focus();
-  } else {
-    this.shortcutList_.focus();
   }
 };

@@ -409,57 +409,11 @@ CommandInstance.prototype.updateWindowDimensions_ = function() {
 
 /** Prompt for destination */
 CommandInstance.prototype.promptForDestination_ = function() {
-  const connectDialog =
-      this.io.createFrame(lib.f.getURL('/html/nassh_connect_dialog.html'));
-
-  connectDialog.onMessage =
-      // eslint-disable-next-line no-extra-parens
-      /** @type {function(this:hterm.Frame)} */ ((event) => {
-        event.data.argv.unshift(connectDialog);
-        this.dispatchMessage_(
-            'connect-dialog', this.onConnectDialog_, event.data);
-      });
-
-  // Resize the connection dialog iframe to try and fit all the content,
-  // but not more.  This way we don't end up with a lot of empty space.
-  function resize() {
-    const body = this.iframe_.contentWindow.document.body;
-    const shortcutList = body.querySelector('#shortcut-list');
-    const dialogBillboard = body.querySelector('.dialog-billboard');
-    const dialogButtons = body.querySelector('.dialog-buttons');
-
-    this.container_.style.height = '0px';
-    let height = shortcutList.scrollHeight +
-                 dialogBillboard.scrollHeight +
-                 dialogButtons.scrollHeight;
-    // Since the document has a bit of border/padding, fudge the height
-    // slightly higher than the few main elements we calculated above.
-    height *= 1.15;
-
-    // We don't have to worry about this being too big or too small as the
-    // frame CSS has set min/max height attributes.
-    this.container_.style.height = height + 'px';
-  }
-
-  // Once the dialog has finished loading all of its data, resize it.
-  connectDialog.onLoad = function() {
-    // Shift the dialog to be relative to the bottom so the notices/links we
-    // show at the top of the are more readily visible.
-    this.container_.style.top = '';
-    this.container_.style.bottom = '10%';
-
-    const resize_ = resize.bind(this);
-    resize_();
-    globalThis.addEventListener('resize', resize_);
-    this.onClose = () => {
-      globalThis.removeEventListener('resize', resize_);
-    };
-  };
-
   // Clear retry count whenever we show the dialog.
   globalThis.sessionStorage.removeItem('googleRelay.redirectCount');
 
-  connectDialog.show();
+  const url = lib.f.getURL('/html/nassh_connect_dialog.html');
+  this.terminalLocation.replace(url);
 };
 
 /**
@@ -614,7 +568,8 @@ CommandInstance.prototype.mountProfile = function(profileID) {
           switch (ch) {
             case 'c':
             case '\x12': // ctrl-r
-              this.navigate_('');
+              this.terminalLocation.replace(
+                  lib.f.getURL('/html/nassh_connect_dialog.html'));
               break;
 
             case 'e':
@@ -1660,7 +1615,8 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
     switch (ch) {
       case 'c':
       case '\x12': // ctrl-r
-        this.navigate_('');
+        this.terminalLocation.replace(
+            lib.f.getURL('/html/nassh_connect_dialog.html'));
         break;
 
       case 'e':
@@ -1700,69 +1656,6 @@ CommandInstance.prototype.onBeforeUnload_ = function(e) {
   const msg = localize('BEFORE_UNLOAD');
   e.returnValue = msg;
   return msg;
-};
-
-/**
- * Connect dialog message handlers.
- *
- * @suppress {lintChecks} Allow non-primitive prototype property.
- */
-CommandInstance.prototype.onConnectDialog_ = {};
-
-/**
- * Sent from the dialog when the user chooses to switch to mosh.
- *
- * @this {CommandInstance}
- * @param {!hterm.Frame} dialogFrame
- * @param {string} profileID Terminal preference profile name.
- */
-CommandInstance.prototype.onConnectDialog_.mosh = function(
-    dialogFrame, profileID) {
-  dialogFrame.close();
-
-  globalThis.location.replace('/plugin/mosh/mosh_client.html');
-};
-
-/**
- * Sent from the dialog when the user chooses to mount a profile.
- *
- * @this {CommandInstance}
- * @param {!hterm.Frame} dialogFrame
- * @param {string} profileID Terminal preference profile name.
- */
-CommandInstance.prototype.onConnectDialog_.mountProfile = function(
-    dialogFrame, profileID) {
-  dialogFrame.close();
-
-  this.mountProfile(profileID);
-};
-
-/**
- * Sent from the dialog when the user chooses to connect to a profile via sftp.
- *
- * @this {CommandInstance}
- * @param {!hterm.Frame} dialogFrame
- * @param {string} profileID Terminal preference profile name.
- */
-CommandInstance.prototype.onConnectDialog_.sftpConnectToProfile =
-    function(dialogFrame, profileID) {
-  dialogFrame.close();
-
-  this.sftpConnectToProfile(profileID);
-};
-
-/**
- * Sent from the dialog when the user chooses to connect to a profile.
- *
- * @this {CommandInstance}
- * @param {!hterm.Frame} dialogFrame
- * @param {string} profileID Terminal preference profile name.
- */
-CommandInstance.prototype.onConnectDialog_.connectToProfile = function(
-    dialogFrame, profileID) {
-  dialogFrame.close();
-
-  this.connectToProfile(profileID);
 };
 
 /**

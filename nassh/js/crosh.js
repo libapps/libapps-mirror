@@ -392,7 +392,7 @@ Crosh.prototype.exit = function(code) {
     }
 
     if (ch == 'c') {
-      globalThis.location = '/html/nassh.html';
+      globalThis.location.replace('/html/nassh_connect_dialog.html');
       return;
     }
 

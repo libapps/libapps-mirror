@@ -159,7 +159,9 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
       {name: localize('TERMINAL_RESET_MENU_LABEL'),
        action: function() { terminal.reset(); }},
       {name: localize('NEW_WINDOW_MENU_LABEL'),
-       action: function() { openNewWindow(lib.f.getURL('/html/nassh.html')); }},
+       action: function() {
+         openNewWindow(lib.f.getURL('/html/nassh_connect_dialog.html'));
+       }},
       {name: localize('FAQ_MENU_LABEL'),
        action: function() {
          lib.f.openWindow('https://hterm.org/x/ssh/faq', '_blank');

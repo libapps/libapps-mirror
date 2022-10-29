@@ -657,7 +657,7 @@ export class SftpFsp {
    * @param {function(!chrome.fileSystemProvider.ProviderError)} onError
    */
   onMountRequested(onSuccess, onError) {
-    lib.f.openWindow('/html/nassh.html');
+    lib.f.openWindow('/html/nassh_connect_dialog.html');
     onSuccess();
   }
 
