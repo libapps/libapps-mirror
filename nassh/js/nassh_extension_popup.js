@@ -90,7 +90,7 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
           openas = `openas=${state}`;
         }
       }
-      url += `?promptOnReload=yes&${openas}#profile-id:${id}`;
+      url += `?${openas}#profile-id:${id}`;
       break;
     }
   }

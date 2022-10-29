@@ -290,31 +290,9 @@ CommandInstance.prototype.run = async function() {
 
   const onFileSystemFound = () => {
     const argstr = this.argv_.args.join(' ');
-
-    // This item is set before we redirect away to login to a relay server.
-    // If it's set now, it's the first time we're reloading after the redirect.
-    const pendingRelay = this.sessionStorage.getItem('nassh.pendingRelay');
-    this.sessionStorage.removeItem('nassh.pendingRelay');
-
-    if (!argstr || (this.sessionStorage.getItem('nassh.promptOnReload') &&
-                    !pendingRelay)) {
-      // If promptOnReload is set or we haven't gotten the destination
-      // as an argument then we need to ask the user for the destination.
-      //
-      // The promptOnReload session item allows us to remember that we've
-      // displayed the dialog, so we can re-display it if the user reloads
-      // the page.  (Items in sessionStorage are scoped to the tab, kept
-      // between page reloads, and discarded when the tab goes away.)
-      this.sessionStorage.setItem('nassh.promptOnReload', 'yes');
-
+    if (!argstr) {
       this.promptForDestination_();
     } else {
-      const params = new URLSearchParams(this.terminalLocation.search);
-      // An undocumented hack for extension popup to force a one-off connection.
-      if (params.get('promptOnReload') == 'yes') {
-        this.sessionStorage.setItem('nassh.promptOnReload', 'yes');
-      }
-
       this.connectToArgString(argstr);
     }
   };
@@ -1114,10 +1092,6 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
       // A false return value means we have to redirect to complete
       // initialization.  Bail out of the connect for now.  We'll resume it
       // when the relay is done with its redirect.
-
-      // If we're going to have to redirect for the relay then we should make
-      // sure not to re-prompt for the destination when we return.
-      this.sessionStorage.setItem('nassh.pendingRelay', 'yes');
 
       // If we're trying to mount the connection, remember it.
       this.sessionStorage.setItem('nassh.isMount', this.isMount);
