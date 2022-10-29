@@ -1226,7 +1226,7 @@ ConnectDialog.prototype.onMessageName_ = {};
  * @param {!Object} info
  */
 ConnectDialog.prototype.onMessageName_['terminal-info'] = function(info) {
-  hterm.messageManager.processI18nAttributes(document.body);
+  hterm.messageManager.processI18nAttributes(document);
   this.updateDetailPlaceholders_();
   this.updateDescriptionPlaceholder_();
 
