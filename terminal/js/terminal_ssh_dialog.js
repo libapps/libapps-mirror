@@ -274,7 +274,7 @@ export class TerminalSSHDialog extends LitElement {
                 ariaLabel="${msg('TERMINAL_HOME_SSH_CONNECTION_NAME')}"
                 value="${live(this.getTitle_())}"
                 @keydown="${this.onTextfieldKeydown_}"
-                @change="${(e) => this.userTitle_ = e.target.value}">
+                @input="${(e) => this.userTitle_ = e.target.value}">
             </terminal-textfield>
           </div>
           <terminal-textfield ${ref(this.commandRef_)}
