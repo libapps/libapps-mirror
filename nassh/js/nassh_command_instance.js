@@ -1198,7 +1198,8 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
   } else if (this.sshClientVersion_ === 'pnacl') {
-    if (lib.f.randomInt(0, 1000) < 5 || this.isDevVersion()) {
+    if (!isCrOSSystemApp() &&
+        (lib.f.randomInt(0, 1000) < 5 || this.isDevVersion())) {
       this.io.println(sgrText(
           'Opting in to WASM for this session.  Please report issues.\n\r' +
           'Use --ssh-client-version=pnacl to temporarily opt-out.\n\r',
