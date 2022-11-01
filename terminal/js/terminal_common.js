@@ -225,10 +225,6 @@ export function watchColors(prefs) {
   const esc = encodeURIComponent;
   const updateFavicon = (fg, bg) => {
     const link = document.querySelector('head link[rel="icon"]');
-    if (!getOSInfo().multi_profile) {
-      link.href = '../images/terminal-icon.svg';
-      return;
-    }
     link.href = `data:image/svg+xml,
       <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px"
           viewBox="0 0 48 48">
