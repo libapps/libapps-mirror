@@ -483,6 +483,8 @@ export class XtermTerminal {
     this.backgroundImageWatcher_ = new BackgroundImageWatcher(this.prefs_,
         this.setBackgroundImage.bind(this));
     this.webglAddon_ = null;
+    this.userCSSElement_ = null;
+    this.userCSSTextElement_ = null;
 
     this.term.options.linkHandler = new LinkHandler(this.term);
     this.term.options.theme = {
@@ -844,6 +846,24 @@ export class XtermTerminal {
           this.scrollOnOutputListener_ = this.term.onWriteParsed(
               () => this.term.scrollToBottom());
         }
+      },
+      'user-css': (v) => {
+        if (this.userCSSElement_) {
+          this.userCSSElement_.remove();
+        }
+        if (v) {
+          this.userCSSElement_ = document.createElement('link');
+          this.userCSSElement_.setAttribute('rel', 'stylesheet');
+          this.userCSSElement_.setAttribute('href', v);
+          document.head.appendChild(this.userCSSElement_);
+        }
+      },
+      'user-css-text': (v) => {
+        if (!this.userCSSTextElement_) {
+          this.userCSSTextElement_ = document.createElement('style');
+          document.head.appendChild(this.userCSSTextElement_);
+        }
+        this.userCSSTextElement_.textContent = v;
       },
     });
 
