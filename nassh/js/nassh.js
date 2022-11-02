@@ -72,6 +72,7 @@ export function watchBackgroundColor(prefs) {
  */
 export async function loadMessages() {
   // Load hterm.messageManager from /_locales/<lang>/messages.json.
+  await hterm.initPromise;
   hterm.messageManager.useCrlf = true;
   const url = lib.f.getURL('/_locales/$1/messages.json');
   await hterm.messageManager.findAndLoadMessages(url);
