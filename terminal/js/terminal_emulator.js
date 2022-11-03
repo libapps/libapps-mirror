@@ -588,6 +588,7 @@ export class XtermTerminal {
         'setCursorColumn',
         'setCursorPosition',
         'setCursorVisible',
+        'uninstallKeyboard',
     ];
 
     for (const name of methodNames) {

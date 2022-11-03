@@ -416,6 +416,7 @@ async function runNassh(term, storage, ssh, tmuxControllerDriver) {
     fsp,
     mountOptions,
     onExit: async (code) => {
+      term.uninstallKeyboard();
       if (!ssh.isMount && term.getPrefs().get('close-on-exit')) {
         // We are not able to use `window.close()` here because 1) nassh
         // redirect the page and 2) blink forbids `window.close()` when the
