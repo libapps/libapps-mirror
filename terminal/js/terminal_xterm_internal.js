@@ -109,8 +109,12 @@ export class XtermInternal {
     this.core_ = /** @type {{
         _renderService: {
           dimensions: {
-            actualCellHeight: number,
-            actualCellWidth: number,
+            css: {
+              cell: {
+                width: number,
+                height: number,
+              }
+            },
           },
         },
         _inputHandler: {
@@ -137,8 +141,8 @@ export class XtermInternal {
   getActualCellDimensions() {
     const dimensions = this.core_._renderService.dimensions;
     return {
-      width: dimensions.actualCellWidth,
-      height: dimensions.actualCellHeight,
+      width: dimensions.css.cell.width,
+      height: dimensions.css.cell.height,
     };
   }
 

@@ -29,7 +29,7 @@
     "csso-cli": ">=2",
     "eslint": "~8",
     "eslint-plugin-html": "~6",
-    "eslint-plugin-jsdoc": "~39",
+    "eslint-plugin-jsdoc": "^39.3.6",
     "file-loader": "~6",
     "firebase-tools": "~9",
     "git-revision-webpack-plugin": "~5",
@@ -55,10 +55,10 @@
     "val-loader": "~2",
     "webpack": "~5",
     "webpack-cli": "~4",
-    "xterm": "^5.0.0",
+    "xterm": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/xterm-3cf3520d4fe55dea7bff9e14f55a172c69963c89393bbc537f0712fc129bd3c4.tar.gz",
     "xterm-addon-unicode11": "^0.4.0",
-    "xterm-addon-web-links": "^0.7.0",
-    "xterm-addon-webgl": "^0.13.0"
+    "xterm-addon-web-links": "^0.8.0-beta.3",
+    "xterm-addon-webgl": "^0.14.0-beta.34"
   },
   "bugs": {
     "url": "https://goo.gl/vb94JY",
