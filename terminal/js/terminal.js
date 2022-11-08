@@ -199,7 +199,7 @@ terminal.init = async function(element, launchInfo) {
     const prefKey = 'settings.accessibility';
     const prefChanged = (prefs) => {
       if (prefs.hasOwnProperty(prefKey)) {
-        term.setAccessibilityEnabled(prefs[prefKey]);
+        term.setAccessibilityEnabled(prefs[prefKey] || !!getOSInfo().tast);
       }
     };
     chrome.terminalPrivate.onPrefChanged.addListener(prefChanged);
