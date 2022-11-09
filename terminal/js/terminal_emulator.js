@@ -16,6 +16,7 @@ import {hterm, lib} from './deps_local.concat.js';
 import {LitElement, css, html} from './lit.js';
 import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, definePrefs,
   delayedScheduler, fontManager, getOSInfo, sleep} from './terminal_common.js';
+import {TerminalContextMenu} from './terminal_context_menu.js';
 import {ICON_COPY} from './terminal_icons.js';
 import {TerminalTooltip} from './terminal_tooltip.js';
 import {Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
@@ -486,6 +487,13 @@ export class XtermTerminal {
     this.userCSSElement_ = null;
     this.userCSSTextElement_ = null;
 
+    this.contextMenu_ = /** @type {!TerminalContextMenu} */(
+        document.createElement('terminal-context-menu'));
+    this.contextMenu_.style.zIndex = 10;
+    this.contextMenu = {
+      setItems: (items) => this.contextMenu_.items = items,
+    };
+
     this.term.options.linkHandler = new LinkHandler(this.term);
     this.term.options.theme = {
       // The webgl cursor layer also paints the character under the cursor with
@@ -595,12 +603,6 @@ export class XtermTerminal {
       this[name] = () => console.warn(`${name}() is not implemented`);
     }
 
-    this.contextMenu = {
-      setItems: () => {
-        console.warn('.contextMenu.setItems() is not implemented');
-      },
-    };
-
     this.vt = {
       resetParseState: () => {
         console.warn('.vt.resetParseState() is not implemented');
@@ -705,17 +707,26 @@ export class XtermTerminal {
       this.notificationCenter_ = new hterm.NotificationCenter(document.body,
           this.htermA11yReader_);
 
-      // Block right-click context menu from popping up.
+      elem.appendChild(this.contextMenu_);
+
+      // Block the default context menu from popping up.
       elem.addEventListener('contextmenu', (e) => e.preventDefault());
 
       // Add a handler for pasting with the mouse.
       elem.addEventListener('mousedown', async (e) => {
+        this.contextMenu_.hide();
         if (this.term.modes.mouseTrackingMode !== 'none') {
           // xterm.js is in mouse mode and will handle the event.
           return;
         }
         const MIDDLE = 1;
         const RIGHT = 2;
+
+        if (e.button === RIGHT && e.ctrlKey) {
+          this.contextMenu_.show({x: e.clientX, y: e.clientY});
+          return;
+        }
+
         if (e.button === MIDDLE || (e.button === RIGHT &&
                 this.prefs_.getBoolean('mouse-right-click-paste'))) {
           // Paste.

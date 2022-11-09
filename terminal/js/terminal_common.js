@@ -522,3 +522,25 @@ export function delayedScheduler(callback, delay) {
     return donePromise;
   };
 }
+
+/**
+ * Position an element by setting the "top" and "left" css value. The position
+ * will be adjusted if the element's bottom right corner is outside the window.
+ *
+ * @param {!HTMLElement} element
+ * @param {{x: number, y: number}} position
+ */
+export function positionElementWithinWindow(element, position) {
+  function adjust(pos, size, boundary) {
+    if (pos + size <= boundary) {
+      return pos;
+    }
+    // The right/bottom of the element exceeds the boundary. We need to move
+    // left/up to make room for it.
+    return Math.max(0, boundary - size);
+  }
+
+  const {height, width} = element.getBoundingClientRect();
+  element.style.top = `${adjust(position.y, height, window.innerHeight)}px`;
+  element.style.left = `${adjust(position.x, width, window.innerWidth)}px`;
+}

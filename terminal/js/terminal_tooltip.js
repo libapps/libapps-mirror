@@ -7,6 +7,7 @@
  */
 
 import {LitElement, css, html} from './lit.js';
+import {positionElementWithinWindow} from './terminal_common.js';
 
 /**
  * A tooltip element that looks like the native tooltip.
@@ -55,11 +56,8 @@ export class TerminalTooltip extends LitElement {
       return;
     }
 
-    const {height, width} = this.getBoundingClientRect();
-    this.style.top = `${this.adjustPos_(cursorPosition.y + 8, height,
-        window.innerHeight)}px`;
-    this.style.left =
-        `${this.adjustPos_(cursorPosition.x + 8, width, window.innerWidth)}px`;
+    positionElementWithinWindow(this,
+        {x: cursorPosition.x, y: cursorPosition.y + 8});
     this.style.visibility = 'visible';
   }
 
@@ -73,21 +71,6 @@ export class TerminalTooltip extends LitElement {
   /** @override */
   render() {
     return html`${this.content_}`;
-  }
-
-  /**
-   * @param {number} pos
-   * @param {number} size
-   * @param {number} boundary
-   * @return {number}
-   */
-  adjustPos_(pos, size, boundary) {
-    if (pos + size <= boundary) {
-      return pos;
-    }
-    // The right/bottom of the element exceeds the boundary. We need to move
-    // left/up to make room for it.
-    return Math.max(0, boundary - size);
   }
 }
 
