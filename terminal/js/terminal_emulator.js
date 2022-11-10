@@ -334,7 +334,7 @@ export class A11yButtons {
   onSelectionChange_() {
     this.resetPos_();
 
-    const selectedElement = document.getSelection().anchorNode.parentElement;
+    const selectedElement = document.getSelection().anchorNode?.parentElement;
     if (selectedElement === this.pageUpButton) {
       this.pageUpButton.style.top = '16px';
     } else if (selectedElement === this.pageDownButton) {
