@@ -9,27 +9,20 @@
 import {lib} from './deps_local.concat.js';
 
 import {DEFAULT_BACKGROUND_COLOR, SUPPORTED_FONT_FAMILIES,
-  SUPPORTED_FONT_FAMILIES_MINIMAL, delayedScheduler, definePrefs,
-  fontFamilyToCSS, getSupportedFontFamilies, normalizeCSSFontFamily,
-  normalizePrefsInPlace} from './terminal_common.js';
+  delayedScheduler, definePrefs, fontFamilyToCSS, getSupportedFontFamilies,
+  normalizeCSSFontFamily, normalizePrefsInPlace} from './terminal_common.js';
 
 describe('terminal_common_tests.js', () => {
   beforeEach(function() {
     this.preferenceManager = new lib.PreferenceManager(
         new lib.Storage.Memory());
     this.preferenceManager.definePreference('font-family', 'invalid');
-    this.preferenceManager.definePreference('terminal-emulator', 'xterm.js');
   });
 
   it('getSupportedFontFamilies', function() {
-    this.preferenceManager.set('terminal-emulator', 'xterm.js');
     assert.equal(
         getSupportedFontFamilies(this.preferenceManager),
         SUPPORTED_FONT_FAMILIES);
-    this.preferenceManager.set('terminal-emulator', 'hterm');
-    assert.equal(
-        getSupportedFontFamilies(this.preferenceManager),
-        SUPPORTED_FONT_FAMILIES_MINIMAL);
   });
 
   it('fontFamilyToCSS', function() {

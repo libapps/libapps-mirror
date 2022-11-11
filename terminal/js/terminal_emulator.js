@@ -1326,8 +1326,7 @@ export async function createEmulator({storage, profileId}) {
     // TODO: remove the url param logic. This is temporary to make manual
     // testing a bit easier, which is also why this is not in
     // './js/terminal_info.js'.
-    const emulator = ORIGINAL_URL.searchParams.get('emulator') ||
-        await storage.getItem(`/hterm/profiles/${profileId}/terminal-emulator`);
+    const emulator = ORIGINAL_URL.searchParams.get('emulator');
     // Use the default (i.e. first) one if the pref is not set or invalid.
     config = TERMINAL_EMULATORS.get(emulator) ||
         TERMINAL_EMULATORS.values().next().value;

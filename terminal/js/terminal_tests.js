@@ -51,9 +51,7 @@ beforeEach(function() {
   document.body.appendChild(div);
   mockTerminalPrivateController = MockTerminalPrivate.start();
   mockTerminalPrivate = mockTerminalPrivateController.instance;
-  mockTerminalPrivate.prefs['crostini.terminal_settings'] = {
-    '/hterm/profiles/default/terminal-emulator': 'hterm',
-  };
+  mockTerminalPrivate.prefs['crostini.terminal_settings'] = {};
   mockTerminalPrivate.prefs['settings.accessibility'] = false;
 
   window.localStorage.clear();
@@ -86,7 +84,7 @@ it('opens-process-in-init', async function() {
   mockTerminalPrivate.prefs['settings.accessibility'] = value;
   const term = await terminal.init(div, newFakeLaunchInfo());
   await waitForPrefLoaded('settings.accessibility');
-  assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
+  assert.equal(term.a11yEnabled_, value);
 }));
 
 [true, false].map((value) => it(`set-a11y-to-${value}-on-changed`, async () => {
@@ -95,7 +93,7 @@ it('opens-process-in-init', async function() {
   await waitForPrefLoaded('settings.accessibility');
   await mockTerminalPrivate.onPrefChanged.dispatch(
       {'settings.accessibility': value});
-  assert.equal(term.accessibilityReader_.accessibilityEnabled, value);
+  assert.equal(term.a11yEnabled_, value);
 }));
 
 it('does-not-exit-on-first-output', async function() {
@@ -115,52 +113,5 @@ it('does-not-exit-on-first-output', async function() {
   await mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit',
       encoder.encode('text').buffer);
   assert.isTrue(exitCalled);
-});
-
-it('overrides-ctrl-n-keymap-and-calls-openWindow', async function() {
-  let callCount = 0;
-  mockTerminalPrivateController.addObserver('openWindow', () => {
-    ++callCount;
-  });
-
-  const term = await terminal.init(div, newFakeLaunchInfo());
-  await mockTerminalPrivateController.on('openVmshellProcess');
-
-  const keyDef = term.keyboard.keyMap.keyDefs[78]; // N.
-
-  /**
-   * Get the action with shiftKey set as indicated.
-   *
-   * @param {boolean} shiftKey
-   * @return {!hterm.Keyboard.KeyDefAction}
-   */
-  function action(shiftKey) {
-    const e = new KeyboardEvent('keydown', {shiftKey});
-    let control = keyDef.control;
-    while (typeof control == 'function') {
-      control = control.call(term.keyboard.keyMap, e, keyDef);
-    }
-    return control;
-  }
-
-  // passCtrlN = false, Ctrl+N should send char to terminal.
-  term.passCtrlN = false;
-  assert.equal('\x0e', action(false));
-
-  // passCtrlN = false, Ctrl+Shift+N should open window.
-  assert.equal(hterm.Keyboard.KeyActions.CANCEL, action(true));
-  await mockTerminalPrivateController.on('openWindow');
-  assert.equal(1, callCount);
-
-  // passCtrlN = true, Ctrl+N should open window.
-  term.passCtrlN = true;
-  assert.equal(hterm.Keyboard.KeyActions.CANCEL, action(false));
-  await mockTerminalPrivateController.on('openWindow');
-  assert.equal(2, callCount);
-
-  // passCtrlN = true, Ctrl+Shift+N should open window.
-  assert.equal(hterm.Keyboard.KeyActions.CANCEL, action(true));
-  await mockTerminalPrivateController.on('openWindow');
-  assert.equal(3, callCount);
 });
 });

@@ -14,7 +14,7 @@ import {getIndexeddbFileSystem} from './nassh_fs.js';
 
 import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT,
-  SUPPORTED_LINE_HEIGHT_PADDINGS, TERMINAL_EMULATORS, getOSInfo, isXtermJs}
+  SUPPORTED_LINE_HEIGHT_PADDINGS, getOSInfo, isXtermJs}
     from './terminal_common.js';
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
@@ -33,9 +33,6 @@ export const BELL_SOUND_CONVERTER = {
   toChecked: (value) => !!value,
   fromChecked: (checked) => checked ? 'lib-resource:hterm/audio/bell' : '',
 };
-
-const TERMINAL_EMULATOR_OPTIONS =
-    Array.from(TERMINAL_EMULATORS.keys()).map((value) => ({value}));
 
 export class TerminalSettingsApp extends LitElement {
   /** @override */
@@ -156,10 +153,6 @@ export class TerminalSettingsApp extends LitElement {
 
       terminal-settings-dropdown {
         min-width: 80px;
-      }
-
-      terminal-settings-dropdown[preference='terminal-emulator'] {
-        min-width: 200px;
       }
 
       .about-link {
@@ -487,16 +480,6 @@ export class TerminalSettingsApp extends LitElement {
             <h3>${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}</h3>
 
             <ul class="section-body">
-              ${when(!!getOSInfo().alternative_emulator, () => html`
-                <li class="setting-container">
-                  <h4>${msg('TERMINAL_NAME_PREF_TERMINAL_EMULATOR')}</h4>
-                  <terminal-settings-dropdown
-                    preference="terminal-emulator"
-                    .options="${TERMINAL_EMULATOR_OPTIONS}">
-                  </terminal-settings-dropdown>
-                </li>
-              `)}
-
               <li class="setting-container"
                   title="${msg('TERMINAL_PREF_BELL')}">
                 <h4>${msg('TERMINAL_NAME_PREF_BELL')}</h4>

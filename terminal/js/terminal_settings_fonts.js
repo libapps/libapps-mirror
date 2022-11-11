@@ -45,9 +45,6 @@ export class TerminalSettingsFonts extends LitElement {
         });
       }
     }
-
-    window.preferenceManager.addObserver(
-      'terminal-emulator', () => this.requestUpdate());
   }
 
   /** @override */

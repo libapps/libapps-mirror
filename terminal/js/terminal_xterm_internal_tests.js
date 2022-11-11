@@ -81,6 +81,12 @@ describe('terminal_xterm_internal.js', function() {
     assert.equal(this.terminal.buffer.active.getLine(0).translateToString(true),
         'hello worldabcdef',
         'after installing the handler, the string should be ignored');
+
+    this.xtermInternal.installEscKHandler();
+    await this.write('ghi\x1bk1234\x1b\\jkl');
+    assert.equal(this.terminal.buffer.active.getLine(0).translateToString(true),
+        'hello worldabcdefghijkl',
+        'installing the handler multiple times should be fine');
   });
 
   it('installTmuxControlModeHandler()', async function() {

@@ -18,8 +18,6 @@ describe('terminal_settings_fonts_tests.js', () => {
       new lib.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(
       'font-family', DEFAULT_FONT_FAMILY);
-    window.preferenceManager.definePreference(
-      'terminal-emulator', 'xterm.js');
 
     this.fontInfo = new Map();
     for (const font of SUPPORTED_FONT_FAMILIES) {

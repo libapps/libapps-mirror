@@ -2087,10 +2087,6 @@
 		"description": "Label text shown for the preference where users pick a cursor shape.",
 		"message": "Shape"
 	},
-	"TERMINAL_NAME_PREF_TERMINAL_EMULATOR": {
-		"description": "Label text shown for the preference to set the terminal emulator library.",
-		"message": "Terminal Emulator"
-	},
 	"TERMINAL_NAME_PREF_VISIBLE": {
 		"description": "Label text shown for toggle preferences controlling visibility (e.g. scrollbar visibility).",
 		"message": "Visible"

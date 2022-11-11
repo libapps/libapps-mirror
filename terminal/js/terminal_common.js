@@ -116,8 +116,7 @@ export const ORIGINAL_URL = new URL(document.location.href);
  * @return {boolean}
  */
 export function isXtermJs(prefs) {
-  return !!getOSInfo().alternative_emulator &&
-    prefs.get('terminal-emulator').includes('xterm.js');
+  return !!getOSInfo().alternative_emulator;
 }
 
 /**
@@ -191,8 +190,6 @@ export function definePrefs(prefs) {
   // Add new prefs.
   prefs.definePreference('theme', DEFAULT_THEME);
   prefs.definePreference('theme-variations', {});
-  prefs.definePreference('terminal-emulator',
-      TERMINAL_EMULATORS.keys().next().value);
   prefs.definePreference('line-height', 1);
 }
 

@@ -179,7 +179,9 @@ export class XtermInternal {
 
   /**
    * Install a ESC k (set window name) handler for tmux. The data in the
-   * sequence is ignored.
+   * sequence is ignored. Note that 1) this actually affects xterm.js globally
+   * instead of just the `Terminal` instance; 2) it is idempotent, so it is ok
+   * to call it multiple times.
    */
   installEscKHandler() {
     this.core_._inputHandler._parser._transitions.add(

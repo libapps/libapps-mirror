@@ -15,6 +15,11 @@
 
     <!-- All the unittests go below here. -->
     <script type='module'>
+      // This needs to be the first test file. Otherwise, the test
+      // "installEscKHandler()" is not able to test the case before installing the
+      // handler. See `XtermInternal.installEscKHandler()`.
+      import '../js/terminal_xterm_internal_tests.js';
+
       import '../js/terminal_tests.js';
       import '../js/terminal_common_tests.js';
       import '../js/terminal_dialog_tests.js';
@@ -42,7 +47,6 @@
       import '../js/terminal_slider_tests.js';
       import '../js/terminal_ssh_dialog_tests.js';
       import '../js/terminal_tmux_tests.js';
-      import '../js/terminal_xterm_internal_tests.js';
       import '../js/tmux_tests.js';
     </script>
 
