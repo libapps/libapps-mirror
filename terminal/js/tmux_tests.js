@@ -218,6 +218,46 @@ describe('tmux.js', function() {
       assert.deepEqual(this.onStartMock.getHistory(), [[]]);
     });
 
+    it('init_() retries successfully', async function() {
+      // Tmux prints a empty %begin/%end block at the very beginning if
+      // nothing is wrong.
+      this.interpretBeginEndBlock([]);
+
+      // Send an error for the version query.
+      await this.inputMock.whenCalled();
+      assert.isTrue(
+          this.inputMock.getHistory()[0][0].startsWith('display-message'));
+      this.interpretAllLines(['%begin', '...', '%error']);
+
+      // The controller will try again. This time send a normal response.
+      this.inputMock.popHistory();
+      await this.inputMock.whenCalled();
+      assert.isTrue(
+          this.inputMock.getHistory()[0][0].startsWith('display-message'));
+      this.interpretBeginEndBlock(['3.2a']);
+      assert.deepEqual(this.controller.tmuxVersion_, {major: 3.2, minor: 'a'});
+
+      assert.isFalse(this.controller.hasError_);
+    });
+
+    it('init_() fails to retry', async function() {
+      // Tmux prints a empty %begin/%end block at the very beginning if
+      // nothing is wrong.
+      this.interpretBeginEndBlock([]);
+
+      // Send an error for the version query.
+      for (let i = 0; i < 2; ++i) {
+        this.inputMock.popHistory();
+        await this.inputMock.whenCalled();
+        assert.isTrue(
+            this.inputMock.getHistory()[0][0].startsWith('display-message'));
+        this.interpretAllLines(['%begin', '...', '%error']);
+      }
+
+      assert.isTrue(this.controller.hasError_);
+      await this.onErrorMock.whenCalled();
+    });
+
     it('queueCommand() and %begin/%end block', async function() {
       await this.setup();
       const callbackMock = new MockFunction();

@@ -188,6 +188,7 @@ export class Controller {
     this.onStart_ = onStart;
     this.onError_ = onError;
 
+    this.firstInit_ = true;
     this.waitExit_ = false;
     this.hasError_ = false;
     this.closed_ = false;
@@ -308,6 +309,18 @@ export class Controller {
       } else {
         postInit();
       }
+    }, (lines) => {
+      // If the user presses some key immedately after running the tmux command,
+      // the user of this controller may not be able to prevent the tmux process
+      // from receiving the key. This will mess up the command we send to tmux
+      // here. Calling init_() one more time solves this problem.
+      if (this.firstInit_) {
+        this.firstInit_ = false;
+        console.warn(`First init failed: ${lines.join('\n')}`);
+        this.init_();
+        return;
+      }
+      throwUnhandledCommandError(lines);
     });
   }
 
