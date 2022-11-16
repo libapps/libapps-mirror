@@ -7,7 +7,8 @@
  */
 
 import {MockFunction, MockObject} from './terminal_test_mocks.js';
-import {Controller, LayoutType, parseWindowLayout} from './tmux.js';
+import {Controller, LayoutType, parseTmuxVersion, parseWindowLayout}
+    from './tmux.js';
 
 // TODO(crbug.com/1252271): add all the missing tests.
 
@@ -394,5 +395,14 @@ describe('tmux.js', function() {
       assert.equal(errorHistory.length, 1);
       assert.isTrue(errorHistory[0][0].includes('unknown command'));
     });
+  });
+
+  it('parseTmuxVersion()', function() {
+    assert.deepEqual(parseTmuxVersion('3'), {major: 3, minor: ''});
+    assert.deepEqual(parseTmuxVersion('3a'), {major: 3, minor: 'a'});
+    assert.deepEqual(parseTmuxVersion('3.3'), {major: 3.3, minor: ''});
+    assert.deepEqual(parseTmuxVersion('3.3a'), {major: 3.3, minor: 'a'});
+    assert.deepEqual(parseTmuxVersion('3.3-rc'), {major: 3.3, minor: ''});
+    assert.deepEqual(parseTmuxVersion('next-3.3'), {major: 3.3, minor: ''});
   });
 });

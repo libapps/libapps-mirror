@@ -267,14 +267,7 @@ export class Controller {
     // Query the tmux process version.
     this.queueCommand('display-message -p "#{version}"', (lines) => {
       try {
-        // A version number looks like this: '3.2a'. The number part is the
-        // `major` and whatever follows will be `minor`. This also works for say
-        // '3', '3.0' and '3a'.
-        const match = lines[0].match(/^([0-9]+(?:.[0-9]+)?)(.*)$/);
-        this.tmuxVersion_ = {
-          major: Number.parseFloat(match[1]),
-          minor: match[2],
-        };
+        this.tmuxVersion_ = parseTmuxVersion(lines[0]);
         console.log(`tmux version: ${JSON.stringify(this.tmuxVersion_)}`);
       } catch (error) {
         console.warn('unable to parse version from ', lines);
@@ -1006,4 +999,19 @@ function checkWindowId(winId) {
   if (!winId.match(/^(@\d+)$/)) {
     throw new Error(`incorrrect window id : ${winId}`);
   }
+}
+
+/**
+ * Parse a tmux version string (e.g. '3.3a' to `{major: 3.3, minor: 'a'}`). Note
+ * that we ignore prefixes such as 'next-' and suffixes such as '-rc'.
+ *
+ * @param {string} versionString
+ * @return {!TmuxVersion}
+ */
+export function parseTmuxVersion(versionString) {
+  const match = versionString.match(/([0-9]+(?:.[0-9]+)?)(\w*)/);
+  return {
+    major: Number.parseFloat(match[1]),
+    minor: match[2],
+  };
 }
