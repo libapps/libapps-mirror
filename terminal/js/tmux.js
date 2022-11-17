@@ -428,8 +428,9 @@ export class Controller {
           unescapeString(output.join('\r\n')));
     });
 
-    this.getPaneCursor(paneId, ({x, y}) => {
-      pane.winInfo.win.onPaneOutput(paneId, `\x1b[${y + 1};${x + 1}H`);
+    this.listPane_(paneId, ({x, y, title}) => {
+      pane.winInfo.win.onPaneOutput(paneId,
+          `\x1b[${y + 1};${x + 1}H\x1b]0;${title}\x07`);
     });
 
     // Capture and send incomplete escape sequence if there is any.
@@ -557,13 +558,14 @@ export class Controller {
    * Get a pane's cursor and pass the result to `callback`.
    *
    * @param {string} paneId
-   * @param {function({x: number, y: number})} callback
+   * @param {function({x: number, y: number, title: string})} callback
    */
-  getPaneCursor(paneId, callback) {
-    this.queueCommand(`list-panes -t ${paneId} -F '#{cursor_x} #{cursor_y}'`,
+  listPane_(paneId, callback) {
+    this.queueCommand(
+        `list-panes -t ${paneId} -F '#{cursor_x} #{cursor_y} #{pane_title}'`,
         (output) => {
-          const match = output[0].match(/^(\d+) (\d+)$/);
-          callback({x: Number(match[1]), y: Number(match[2])});
+          const match = output[0].match(/^(\d+) (\d+) (.*)$/);
+          callback({x: Number(match[1]), y: Number(match[2]), title: match[3]});
         });
   }
 
