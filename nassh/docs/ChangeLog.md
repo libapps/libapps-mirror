@@ -1,3 +1,17 @@
+# 0.52, 2022-11-28, Prepare for MV3 with refactors.
+
+* wassh: Fix timeout processing with BigInts.
+* l10n: Await hterm.initPromise before hterm.messageManager.
+* mount: Refactor for Terminal usage.
+* fsp: Convert SftpFsp to class.
+* extension: Use chrome.action API if available.
+* fs: Skip DOM FS migration when API is unavailable.
+* prefs: Switch local prefs to chrome.storage.local.
+* concat: Hack libdot & hterm into es6 module.
+* nassh: Convert window to globalThis.
+* nassh: google-smart-card: Update to latest 1.3.10.1 version.
+* init: Drop framework init logic.
+
 # 0.51, 2022-10-20, WASM SFTP support.
 
 * nassh: remove resetTerminal called from reconnect.
