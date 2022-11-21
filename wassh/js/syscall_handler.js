@@ -443,7 +443,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
 
         // If we still have work to do, wait for a wakeup or timeout.
         if (events.length === 0) {
-          const delay = timeout - Date.now();
+          const delay = timeout - BigInt(Date.now());
           if (delay > 0) {
             await sleep(delay);
           }
