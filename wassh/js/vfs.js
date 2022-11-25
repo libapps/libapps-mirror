@@ -601,6 +601,10 @@ class FdMap extends Map {
     return true;
   }
 
+  // Suppress linter for bug
+  // https://github.com/gajus/eslint-plugin-jsdoc/issues/932
+  //
+  // eslint-disable-next-line jsdoc/require-returns-check
   /**
    * Find a free file descriptor in the table.
    *
