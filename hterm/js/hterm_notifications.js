@@ -41,7 +41,8 @@ hterm.NotificationCenter = class {
         'padding: 0.923em 1.846em;' +
         'position: absolute;' +
         'user-select: none;' +
-        'transition: opacity 180ms ease-in;';
+        'transition: opacity 180ms ease-in;' +
+        'z-index: 10;';
 
     // Prevent the dialog from gaining focus.
     ele.addEventListener('mousedown', function(e) {
