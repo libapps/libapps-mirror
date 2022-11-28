@@ -23,7 +23,6 @@ class Tty extends VFS.FileHandle {
     super('/dev/tty', WASI.filetype.CHARACTER_DEVICE);
     this.term = term;
     this.handler = handler;
-    this.td = new TextDecoder();
     // TODO(vapier): Make this into a stream.
     this.data = new Uint8Array();
     this.term.io.onVTKeystroke = this.term.io.sendString =
@@ -40,7 +39,7 @@ class Tty extends VFS.FileHandle {
 
   /** @override */
   write(data) {
-    this.term.io.print(this.td.decode(data, {stream: true}));
+    this.term.io.writeUTF8(data);
     return {nwritten: data.length};
   }
 
