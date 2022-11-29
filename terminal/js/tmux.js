@@ -216,8 +216,6 @@ export class Controller {
         new Command(
             '',
             (lines) => {
-              // TODO(crbug.com/1252271): send ctrl-u to input() to clear input
-              // just in case? Or maybe we should require the user to do so.
               if (lines.length) {
                 console.warn('unexpected lines when tmux is starting: ', lines);
               }
