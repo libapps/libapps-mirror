@@ -2317,6 +2317,14 @@
 		"description": "Title for terminal theme section.  This section shows a list of color themes for styling the terminal",
 		"message": "Theme"
 	},
+	"TERMINAL_TMUX_CONTROLLER_ENCOUNTER_ERROR": {
+		"description": "Message shown to the user when the 'tmux controller' enounters an error. We will print the details of the error after this message. 'tmux' is the name of a software, and it should not be translated.",
+		"message": "Tmux controller encountered an error:"
+	},
+	"TERMINAL_TMUX_INTEGRATION_ACTIVATED": {
+		"description": "Message shown to the user when the terminal activates the 'tmux' integration mode. 'tmux' is the name of a software, and it should not be translated.",
+		"message": "Tmux integration mode activated. Press Ctrl-C to detach tmux, or input tmux commands"
+	},
 	"TERMINAL_TOO_MUCH_OUTPUT_MESSAGE": {
 		"description": "The message to be announced by the screen reader when there is too much output.",
 		"message": "Too much output to announce, navigate to rows manually to read."

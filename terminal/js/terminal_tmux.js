@@ -44,9 +44,8 @@ export class PseudoTmuxCommand {
    * Start "running" the command.
    */
   run() {
-    // TODO(1252271): Consider i18n all the user facing messages.
     this.term_.print(
-        '(Entered tmux control mode. Input tmux commands or Ctrl-C to detach)');
+        hterm.messageManager.get('TERMINAL_TMUX_INTEGRATION_ACTIVATED'));
     this.term_.newLine();
     this.prompt_();
   }
@@ -294,7 +293,7 @@ export class TmuxControllerDriver {
       },
       onError: (msg) => {
         printLines(this.term_, [
-          'Tmux controller encountered an error:',
+          hterm.messageManager.get('TERMINAL_TMUX_CONTROLLER_ENCOUNTER_ERROR'),
           ...msg.trim().split('\n'),
         ]);
       },
