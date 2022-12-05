@@ -161,19 +161,21 @@ def test_runner_main(argv, path, serve=False, mkdeps=None):
             # The standalone mocha runner doesn't have a timeout.  The headless
             # one defaults to 1 minute which is too slow for some of our suites.
             # Increase it to 5 minutes as that should be good enough for all.
-            libdot.node.run(
-                [
-                    "mocha-headless-chrome",
-                    "-e",
-                    browser,
-                    "-f",
-                    path,
-                    "--reporter",
-                    opts.reporter,
-                    "--timeout=300000",
-                ]
-                + mocha_sb_arg
-            )
+            cmd = [
+                "mocha-headless-chrome",
+                "-e",
+                browser,
+                "-f",
+                path,
+                "--reporter",
+                opts.reporter,
+                "--timeout=300000",
+            ] + mocha_sb_arg
+            # Don't bother specifying this if the user hasn't set an option
+            # since the framework takes care of providing a scratch dir.
+            if opts.profile:
+                cmd += [f"--args=user-data-dir={profile_dir}"]
+            libdot.node.run(cmd)
     finally:
         # Wait for the server if it exists.
         if serve:
