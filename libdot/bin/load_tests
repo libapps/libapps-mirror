@@ -86,8 +86,12 @@ def test_runner_main(argv, path, serve=False, mkdeps=None):
     parser = get_parser(port=8000 + sum(ord(x) for x in str(path)) % 1000)
     opts = parser.parse_args(argv)
 
-    # Try to use default X session.
-    os.environ.setdefault("DISPLAY", ":0")
+    # Try to use default X session.  We only do this when the browser is visible
+    # to workaround a bug in Chrome R96+ https://crbug.com/1280727.
+    if opts.visible:
+        os.environ.setdefault("DISPLAY", ":0")
+    else:
+        os.environ.pop("DISPLAY", None)
 
     # Ensure chai/mocha node modules exist.
     libdot.node_and_npm_setup()
