@@ -709,33 +709,16 @@ export class XtermTerminal {
 
       elem.appendChild(this.contextMenu_);
 
+      elem.addEventListener('dragover', (e) => e.preventDefault());
+      elem.addEventListener('drop',
+          (e) => this.onDrop_(/** @type {!DragEvent} */(e)));
+
       // Block the default context menu from popping up.
       elem.addEventListener('contextmenu', (e) => e.preventDefault());
 
       // Add a handler for pasting with the mouse.
-      elem.addEventListener('mousedown', async (e) => {
-        this.contextMenu_.hide();
-        if (this.term.modes.mouseTrackingMode !== 'none') {
-          // xterm.js is in mouse mode and will handle the event.
-          return;
-        }
-        const MIDDLE = 1;
-        const RIGHT = 2;
-
-        if (e.button === RIGHT && e.ctrlKey) {
-          this.contextMenu_.show({x: e.clientX, y: e.clientY});
-          return;
-        }
-
-        if (e.button === MIDDLE || (e.button === RIGHT &&
-                this.prefs_.getBoolean('mouse-right-click-paste'))) {
-          // Paste.
-          if (navigator.clipboard && navigator.clipboard.readText) {
-            const text = await navigator.clipboard.readText();
-            this.term.paste(text);
-          }
-        }
-      });
+      elem.addEventListener('mousedown',
+          (e) => this.onMouseDown_(/** @type {!MouseEvent} */(e)));
 
       await this.scheduleFit_();
       this.a11yButtons_ = new A11yButtons(this.term, this.htermA11yReader_);
@@ -998,6 +981,53 @@ export class XtermTerminal {
     // don't need to do anything.
     if (this.inited_ && !this.pendingFont_) {
       this.scheduleRefreshFont_();
+    }
+  }
+
+  /**
+   * @param {!DragEvent} e
+   */
+  onDrop_(e) {
+    e.preventDefault();
+
+    // If the shift key active, try to find a "rich" text source (but not plain
+    // text).  e.g. text/html is OK. This is the same behavior as hterm.
+    if (e.shiftKey) {
+      for (const type of e.dataTransfer.types) {
+        if (type !== 'text/plain' && type.startsWith('text/')) {
+          this.term.paste(e.dataTransfer.getData(type));
+          return;
+        }
+      }
+    }
+
+    this.term.paste(e.dataTransfer.getData('text/plain'));
+  }
+
+  /**
+   * @param {!MouseEvent} e
+   */
+  async onMouseDown_(e) {
+    this.contextMenu_.hide();
+    if (this.term.modes.mouseTrackingMode !== 'none') {
+      // xterm.js is in mouse mode and will handle the event.
+      return;
+    }
+    const MIDDLE = 1;
+    const RIGHT = 2;
+
+    if (e.button === RIGHT && e.ctrlKey) {
+      this.contextMenu_.show({x: e.clientX, y: e.clientY});
+      return;
+    }
+
+    if (e.button === MIDDLE || (e.button === RIGHT &&
+          this.prefs_.getBoolean('mouse-right-click-paste'))) {
+      // Paste.
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        const text = await navigator.clipboard.readText();
+        this.term.paste(text);
+      }
     }
   }
 
