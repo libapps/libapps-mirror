@@ -55,7 +55,7 @@
     "val-loader": "~2",
     "webpack": "~5",
     "webpack-cli": "~4",
-    "xterm": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/xterm-4403c5d2528013f4477d2df2331f2e595dd4807af667f44dbda48096a78e0173.tar.gz",
+    "xterm": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/xterm-82ed01e9b0e7c2f28910865f3156106cc8f62c34ab2002a9cdb8fd9897afc2a9.tar.gz",
     "xterm-addon-unicode11": "^0.4.0",
     "xterm-addon-web-links": "^0.8.0-beta.3",
     "xterm-addon-webgl": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/xterm-addon-webgl-9bdb3fb6eec6d00e74f208415ec855f0a495b0556da93c05c9f7a0648609c4a0.tar.gz"

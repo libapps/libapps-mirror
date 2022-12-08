@@ -428,17 +428,15 @@ export class TerminalSettingsApp extends LitElement {
           <section>
             <h3>${msg('TERMINAL_TITLE_PREF_MOUSE')}</h3>
 
+            <!-- TODO(lxj): it might make more sense to move these to the
+                behavior section. -->
             <ul class="section-body">
-              ${when(!xtermJs, () => html`
-                <li class="setting-container"
-                    title="${msg('HTERM_PREF_SCROLL_ON_KEYSTROKE')}">
-                  <h4>${msg('HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE')}</h4>
-                  <terminal-settings-checkbox preference="scroll-on-keystroke">
-                  </terminal-settings-checkbox>
-                </li>
-              `)}
-              <!-- TODO(lxj): it might make more sense to move this to the
-                  behavior section. -->
+              <li class="setting-container"
+                  title="${msg('HTERM_PREF_SCROLL_ON_KEYSTROKE')}">
+                <h4>${msg('HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE')}</h4>
+                <terminal-settings-checkbox preference="scroll-on-keystroke">
+                </terminal-settings-checkbox>
+              </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_SCROLL_ON_OUTPUT')}">
                 <h4>${msg('HTERM_NAME_PREF_SCROLL_ON_OUTPUT')}</h4>

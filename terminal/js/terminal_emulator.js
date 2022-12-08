@@ -831,6 +831,9 @@ export class XtermTerminal {
         setHtermColorCSSVariable('foreground-color', v);
       },
       'line-height': (v) => this.updateOption_('lineHeight', v, true),
+      'scroll-on-keystroke': (v) => {
+        this.updateOption_('scrollOnUserInput', v, false);
+      },
       'scroll-on-output': (v) => {
         if (!v) {
           this.scrollOnOutputListener_?.dispose();
