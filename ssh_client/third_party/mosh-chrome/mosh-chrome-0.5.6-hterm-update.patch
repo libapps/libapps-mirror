@@ -2,17 +2,26 @@ Tweak hterm APIs to match the latest release and to share code.
 
 --- a/mosh_app/mosh_window.html
 +++ b/mosh_app/mosh_window.html
-@@ -16,7 +16,7 @@
+@@ -16,7 +16,6 @@
    <title>Mosh</title>
    <script src="mosh_manifest.js" type="text/javascript"></script>
-   <script src="mosh_window.js" type="text/javascript"></script>
+-  <script src="mosh_window.js" type="text/javascript"></script>
++  <script type="module" src="mosh_window.js" type="text/javascript"></script>
 -  <script src="hterm_all.js" type="text/javascript"></script>
-+  <script src="/js/deps_local.concat.js" type="text/javascript"></script>
    <style>
      body {
        position: absolute;
 --- a/mosh_app/mosh_window.js
 +++ b/mosh_app/mosh_window.js
+@@ -15,7 +15,7 @@
+ // You should have received a copy of the GNU General Public License
+ // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-'use strict';
++import {hterm, lib} from '/js/deps_local.concat.js';
+ 
+ // Several vars will be set by the window which creates this one:
+ //   window.args - An object with Mosh arguments.
 @@ -22,7 +22,9 @@
  //   window.state - The global state object from background.js.
  
@@ -20,7 +29,7 @@ Tweak hterm APIs to match the latest release and to share code.
 -  lib.init(execMosh, console.log.bind(console));
 +  const params = new URLSearchParams(document.location.search);
 +  window.args = JSON.parse(atob(params.get('args')));
-+  execMosh();
++  hterm.initPromise.then(execMosh);
  };
  
  function execMosh() {
