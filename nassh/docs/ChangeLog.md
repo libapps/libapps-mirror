@@ -1,3 +1,8 @@
+# 0.53, 2022-12-13, Fix mosh breakage.
+
+* mosh: Update to hterm & libdot ES6 modules.
+* wassh: Class Tty should not decode the data by itself
+
 # 0.52, 2022-11-28, Prepare for MV3 with refactors.
 
 * wassh: Fix timeout processing with BigInts.
