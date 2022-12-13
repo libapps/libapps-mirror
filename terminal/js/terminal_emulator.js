@@ -984,6 +984,7 @@ export class XtermTerminal {
     // don't need to do anything.
     if (this.inited_ && !this.pendingFont_) {
       this.scheduleRefreshFont_();
+      this.scheduleFit_();
     }
   }
 
