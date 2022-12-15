@@ -387,7 +387,7 @@
 		"message": "განსაზღვრავს, დაშვებული იყოს თუ არა დისტანციური ჰოსტისთვის სურათების ჩვენება ტერმინალში.\n\nნაგულისხმევად, არჩევანის დაფიქსირებამდე, მოთხოვნას მიიღებთ."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "მითითების შემთხვევაში, გაუქმდება Chrome OS-ში მოქმედი Alt+Backspace->Delete. ამ შემთხვევაში Alt+Backspace იმუშავებს, როგორც Alt+Backspace."
+		"message": "მითითების შემთხვევაში, გაუქმდება ChromeOS-ში მოქმედი Alt+Backspace->Delete. ამ შემთხვევაში Alt+Backspace იმუშავებს, როგორც Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "აირჩიეთ AltGr კლავიშის აღმოჩენის ევრისტიკული მეთოდი.\n\n„null'“: ავტომატურად დადგენა navigator.language-ის საფუძველზე:\n      „en-us“ => „none“, სხვა შემთხვევაში => „right-alt“\n„none“: AltGr-ის ნებისმიერი სახით ემულაციის გათიშვა.\n„ctrl-alt“: ჩაითვალოს, რომ Ctrl+Alt ნიშნავს AltGr-ს.\n„left-alt“: ჩაითვალოს, რომ მარცხენა Alt ნიშნავს AltGr-ს.\n„right-alt“: ჩაითვალოს, რომ მარჯვენა Alt ნიშნავს AltGr-ს."
@@ -528,7 +528,7 @@
 		"message": "Meta კლავიშზე ხანგრძლივად დაჭერისას სხვა კლავიშის არჩევის დროს აგზავნის ESC-პრეფიქსს.\n\nმაგალითად, ჩართვის შემთხვევაში, Meta+K კომბინაციაზე დაჭერით გაიგზავნება „^[k“, როგორც ჯერ Escape-ზე, შემდეგ კი k-ზე დაჭერის შემთხვევაში. გათიშვის შემთხვევაში, გაიგზავნება მხოლოდ „k“."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "მაუსის ღილაკი, რომელიც გამოიყენება ჩასმისთვის.\n\nChrome OS-ში და X11-ისგან განსხვავებულ სხვა პლატფორმებზე, ავტომატურად დადგენის შემთხვევაში, გამოყენებული იქნება მაუსის შუა ღილაკი. X11-ზე გამოიყენება მაუსის მარჯვენა ღილაკი, რადგან შუა ღილაკი განკუთვნილია ფანჯრების მენეჯერის მიერ ჩასმისთვის.\n\n0 == მარცხენა (ძირითადი) ღილაკი.\n1 == შუა (დამხმარე) ღილაკი.\n2 == მარჯვენა (მეორეული) ღილაკი.\n\nწინამდებარე ვარიანტი არ არის დამოკიდებული მარჯვენა დაწკაპუნებით ჩასმის პარამეტრზე.\n\nმაუსის მარჯვენა/მარცხენა ხელით გამოყენების ძირითადი და მეორეული ღილაკების პარამეტრები გათვალისწინებული იქნება."
+		"message": "მაუსის ღილაკი, რომელიც გამოიყენება ჩასმისთვის.\n\nChromeOS-ში და X11-ისგან განსხვავებულ სხვა პლატფორმებზე, ავტომატურად დადგენის შემთხვევაში, გამოყენებული იქნება მაუსის შუა ღილაკი. X11-ზე გამოიყენება მაუსის მარჯვენა ღილაკი, რადგან შუა ღილაკი განკუთვნილია ფანჯრების მენეჯერის მიერ ჩასმისთვის.\n\n0 == მარცხენა (ძირითადი) ღილაკი.\n1 == შუა (დამხმარე) ღილაკი.\n2 == მარჯვენა (მეორეული) ღილაკი.\n\nწინამდებარე ვარიანტი არ არის დამოკიდებული მარჯვენა დაწკაპუნებით ჩასმის პარამეტრზე.\n\nმაუსის მარჯვენა/მარცხენა ხელით გამოყენების ძირითადი და მეორეული ღილაკების პარამეტრები გათვალისწინებული იქნება."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "ჩასმა მაუსის მარჯვენა ღილაკზე დაწკაპუნებისას.\n\nწინამდებარე ვარიანტი არ არის დამოკიდებული „mouse-paste-button“-ის პარამეტრზე.\n\nმაუსის მარჯვენა/მარცხენა ხელით გამოყენების ძირითადი და მეორეული ღილაკების პარამეტრები გათვალისწინებული იქნება."
@@ -968,6 +968,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ტერმინალის გასუფთავება"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "ერთეულის წასაშლელად დააჭირეთ წაშლის კლავიშზე."
+	},
 	"terminal_font_unavailable": {
 		"message": "„$1“ მიუწვდომელია"
 	},
@@ -980,23 +983,50 @@
 	"terminal_home_developer_settings": {
 		"message": "დეველოპერის პარამეტრები"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux-ის რედაქტირება"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH-ის რედაქტირება"
 	},
 	"terminal_home_import_identity": {
 		"message": "იმპორტირება"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux-ის სამართავად გადადით დეველოპერთა პარამეტრებზე"
+	},
+	"terminal_home_manage": {
+		"message": "მართვა"
+	},
+	"terminal_home_new_linux": {
+		"message": "ახალი Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "ახალი SSH კავშირი"
 	},
+	"terminal_home_set_up": {
+		"message": "დაყენება"
+	},
 	"terminal_home_ssh_command": {
 		"message": "ბრძანება"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "კავშირის სახელი"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH გათიშულია თქვენი ადმინისტრატორის მიერ"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "აქ გამოჩნდება კავშირები დისტანციურ მოწყობილობებთან"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "მიუთითეთ დანიშნულების ადგილი „username@hostname“-ით"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "ტერმინალის პარამეტრები"
+	},
+	"terminal_input_label": {
+		"message": "ტერმინალის შემავალი სიგნალი"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI ფერები"
@@ -1019,6 +1049,9 @@
 	"terminal_name_pref_image": {
 		"message": "სურათი"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "სტრიქონის სიმაღლე"
+	},
 	"terminal_name_pref_shape": {
 		"message": "ფორმა"
 	},
@@ -1034,11 +1067,14 @@
 	"terminal_pref_bell": {
 		"message": "ტერმინალის ხმოვანი სიგნალი."
 	},
+	"terminal_pref_line_height": {
+		"message": "სტრიქონის სიმაღლე ტერმინალის ეკრანის თითოეული მწკრივისთვის."
+	},
 	"terminal_preview_label": {
 		"message": "გადახედვა"
 	},
 	"terminal_profile_label": {
-		"message": "ამჟამინდელი პროფილი"
+		"message": "პროფილი"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ტერმინალის გადაყენება"
@@ -1051,6 +1087,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "აირჩიეთ ფონის სურათის ფაილი თქვენი კომპიუტერიდან."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "ნამდვილად გსურთ, წაშალოთ პროფილი „$1“?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ავტომატური"
@@ -1181,6 +1220,15 @@
 	"terminal_title_theme": {
 		"message": "თემა"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux კონტროლერმა დააფიქსირა შეცდომა:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "გააქტიურებულია Tmux ინტეგრაციის რეჟიმი. tmux-ის გასაცალკევებლად დააჭირეთ კლავიშთა კომბინაციას Ctrl-C, ან შეიყვანეთ tmux ბრძანებები"
+	},
+	"terminal_too_much_output_message": {
+		"message": "მეტისმეტად ბევრი გამომავალი სიგნალია გამოსაცხადებლად, წასაკითხად ხელით გადადით მწკრივებზე."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "დაუკავშირდით ინტერნეტს და ცადეთ ხელახლა."
 	},
@@ -1209,7 +1257,7 @@
 		"message": "Omnibox-დან კავშირის დასამყარებლად აკრიფეთ „ssh<Tab><პროფილის სახელი>“: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS-ში შესაძლებელია ფაილური სისტემების SFTP-ის მეშვეობით მიერთება და მათი დათვალიერება ფაილების აპის მეშვეობით. „დაკავშირების“ ნაცვლად გამოიყენეთ „SFTP-მიერთება“."
+		"message": "ChromeOS-ში შესაძლებელია ფაილური სისტემების SFTP-ის მეშვეობით მიერთება და მათი დათვალიერება ფაილების აპის მეშვეობით. „დაკავშირების“ ნაცვლად გამოიყენეთ „SFTP-მიერთება“."
 	},
 	"tip_5": {
 		"message": "ssh:// პრეფიქსიანი ბმულების მეშვეობით დაკავშირება, ან მათი სანიშნეებში შენახვა. ვრცლად: https://goo.gl/zS8EZD"

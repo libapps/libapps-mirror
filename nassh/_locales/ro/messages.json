@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Golire a terminalului"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Apăsați pe tasta Delete pentru a șterge elementul."
+	},
 	"terminal_font_unavailable": {
 		"message": "„$1” nu este disponibil"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Setări pentru dezvoltatori"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Editați containerul Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Editați o conexiune SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importați"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Accesați Opțiuni dezvoltator ca să gestionați Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Gestionați"
+	},
+	"terminal_home_new_linux": {
+		"message": "Container Linux nou"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Conexiune SSH nouă"
 	},
+	"terminal_home_set_up": {
+		"message": "Configurați"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Comandă"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Numele conexiunii"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH este dezactivat de administrator"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Conexiunile la dispozitive de la distanță vor apărea aici"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Specificați destinația cu „numeutilizator@numegazdă”"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Setări pentru terminal"
+	},
+	"terminal_input_label": {
+		"message": "Introducere la terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Culori ANSI"
@@ -1022,6 +1052,9 @@
 	"terminal_name_pref_image": {
 		"message": "Imagine"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Înălțimea rândului"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Formă"
 	},
@@ -1037,11 +1070,14 @@
 	"terminal_pref_bell": {
 		"message": "Clopoțel sonor pentru terminal."
 	},
+	"terminal_pref_line_height": {
+		"message": "Înălțimea fiecărui rând de pe ecranul terminalului."
+	},
 	"terminal_preview_label": {
 		"message": "Previzualizați"
 	},
 	"terminal_profile_label": {
-		"message": "Profil actual"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Resetare a terminalului"
@@ -1054,6 +1090,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selectați un fișier pentru imaginea de fundal de pe computer."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Sigur ștergeți profilul „$1”?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Dezactivați"
@@ -1172,6 +1211,15 @@
 	"terminal_title_theme": {
 		"message": "Temă"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Controlerul Tmux a întâmpinat o eroare:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Modul de integrare Tmux este activat. Apăsați Ctrl-C pentru a detașa sistemul tmux sau introduceți comenzi tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Prea multe date de ieșire de anunțat. Navigați manual la rânduri pentru a le citi."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Conectați-vă la internet și încercați din nou."
 	},
@@ -1200,7 +1248,7 @@
 		"message": "Conectați-vă din caseta polivalentă introducând „ssh<Tab><profile name>”: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "În sistemul de operare Chrome puteți să montați sisteme de fișiere prin SFTP și să răsfoiți cu aplicația Fișiere. Folosiți „Montare SFTP” în loc de „Conectați”."
+		"message": "În sistemul de operare Chrome puteți să montați sisteme de fișiere prin SFTP și să răsfoiți cu aplicația Fișiere. Folosiți Montare SFTP în loc de Conectați."
 	},
 	"tip_5": {
 		"message": "Conectați-vă folosind linkurile ssh:// în paginile web sau salvați un marcaj: https://goo.gl/zS8EZD"

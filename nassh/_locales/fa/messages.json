@@ -258,10 +258,10 @@
 		"message": "متغیرهای محیط"
 	},
 	"hterm_name_pref_find_result_color": {
-		"message": "رنگ برجسته کردن «نتایج جستجو»"
+		"message": "رنگ برجسته‌سازی «نتایج جستجو»"
 	},
 	"hterm_name_pref_find_result_selected_color": {
-		"message": "رنگ انتخابی برای برجسته کردن «نتایج جستجو»"
+		"message": "رنگ انتخابی برای برجسته‌سازی «نتایج جستجو»"
 	},
 	"hterm_name_pref_font_family": {
 		"message": "خانواده قلم نوشتار"
@@ -396,7 +396,7 @@
 		"message": "اینکه به میزبان راه دور اجازه دهد تصاویر را در پایانه نمایش دهد یا نه.\n\nبه‌طور پیش‌فرض، تا وقتی انتخابی صورت گیرد، پیامی نشان می‌دهیم."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "اگر تنظیم شود، بازنگاری Alt+Backspace->Delete در سیستم‌عامل Chrome واگرد می‌شود، طوری‌که Alt+Backspace همان Alt+Backspace باشد."
+		"message": "اگر تنظیم شود، بازنگاری Alt+Backspace->Delete در ChromeOS واگرد می‌شود، طوری‌که Alt+Backspace همان Alt+Backspace باشد."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "روشی برای تشخیص AltGr انتخاب کنید.\n\n'null': تشخیص خودکار براساس navigator.language:\n      «fa» => «هیچ‌کدام»، در غیراین‌صورت => 'right-alt'\n'none': غیرفعال کردن هرگونه شبیه‌سازی AltGr.\n'ctrl- alt': فرض اینکه Ctrl+Alt به‌معنای AltGr باشد.\n'left-alt': فرض اینکه Alt سمت چپ به‌معنای AltGr باشد.\n'right-alt': فرض اینکه Alt سمت راست به‌معنای AltGr باشد."
@@ -537,7 +537,7 @@
 		"message": "وقتی درحال نگه داشتن کلید «مِتا»، کلیدی فشار داده شود، پیشوند ESC را ارسال می‌کند.\n\nبرای مثال، وقتی فعال باشد، با فشار دادن Meta+K ، ترکیب ‎^[k ارسال می‌شود، درست مثل‌اینکه Escape و سپس k را تایپ کرده باشید. وقتی غیرفعال باشد، فقط k ارسال می‌شود."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "استفاده از دکمه موشواره برای جای‌گذاری.\n\nبرای شناسایی خودکار، ما در پلتفورم‌های غیر X11 (ازجمله سیستم‌عامل Chrome) از دکمه وسط موشواره استفاده می‌کنیم. در پلتفورم‌های X11، (به دلیل اینکه مدیر پنجره باید ازطریق دکمه وسط موشواره جای‌گذاری را انجام دهد)، ما از دکمه راست موشواره استفاده می‌کنیم.\n\n۰ == دکمه چپ (اصلی).\n۱ == دکمه وسط (کمکی).\n۲ == دکمه راست (ثانوی).\n\nاین گزینه مستقل از تنظیم جای‌گذاری با کلیک راست عمل می‌کند.\n\nتوجه: دکمه‌های اصلی و ثانویه متناسب با موشواره‌های ویژه افراد چپ‌دست و راست‌دست تنظیم می‌شوند."
+		"message": "از دکمه موشواره برای جای‌گذاری استفاده می‌شود.\n\nبرای شناسایی خودکار، در پلاتفرم‌های غیر X11 (ازجمله ChromeOS) از دکمه وسط موشواره استفاده می‌کنیم. در پلاتفرم‌های X11، (به‌دلیل اینکه مدیر پنجره باید ازطریق دکمه وسط موشواره جای‌گذاری را انجام دهد)، از دکمه راست موشواره استفاده می‌کنیم.\n\n0 == دکمه چپ (اصلی).\n1 == دکمه وسط (کمکی).\n2 == دکمه راست (ثانوی).\n\nاین گزینه مستقل از تنظیم جای‌گذاری با کلیک راست عمل می‌کند.\n\nتوجه: دکمه‌های اصلی و ثانویه متناسب با موشواره‌های ویژه افراد چپ‌دست و راست‌دست تنظیم می‌شوند."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "جای‌گذاری با کلیک روی دکمه راست موشواره.\n\nاین گزینه مستقل از تنظیم «mouse-paste-button» است.\n\nتوجه: دکمه‌های اصلی و ثانویه متناسب با موشواره‌های ویژه افراد چپ‌دست و راست‌دست تنظیم می‌شوند."
@@ -1040,6 +1040,9 @@
 	"terminal_clear_menu_label": {
 		"message": "پاک کردن پایانه"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "برای حذف کردن مورد، کلید حذف را فشار دهید."
+	},
 	"terminal_font_unavailable": {
 		"message": "«$1» در دسترس نیست"
 	},
@@ -1052,23 +1055,50 @@
 	"terminal_home_developer_settings": {
 		"message": "تنظیمات توسعه‌دهنده"
 	},
+	"terminal_home_edit_linux": {
+		"message": "ویرایش Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "ویرایش SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "وارد کردن"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "برای مدیریت Linux به «گزینه‌های توسعه‌دهنده» بروید"
+	},
+	"terminal_home_manage": {
+		"message": "مدیریت"
+	},
+	"terminal_home_new_linux": {
+		"message": "Linux جدید"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "اتصال «پوسته ایمن» جدید"
 	},
+	"terminal_home_set_up": {
+		"message": "راه‌اندازی"
+	},
 	"terminal_home_ssh_command": {
 		"message": "فرمان"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "نام اتصال"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "سرپرستتان «پوسته ایمن» (SSH) را غیرفعال کرده است"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "اتصال به دستگاه‌های راه دور در اینجا نشان داده می‌شود"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "مقصد را با «username@hostname» مشخص کنید"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "تنظیمات پایانه"
+	},
+	"terminal_input_label": {
+		"message": "ورودی پایانه"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "رنگ‌های ANSI"
@@ -1091,6 +1121,9 @@
 	"terminal_name_pref_image": {
 		"message": "تصویر"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "ارتفاع خط"
+	},
 	"terminal_name_pref_shape": {
 		"message": "شکل"
 	},
@@ -1106,11 +1139,14 @@
 	"terminal_pref_bell": {
 		"message": "زنگ پایانه شنیداری."
 	},
+	"terminal_pref_line_height": {
+		"message": "ارتفاع خط برای هریک از ردیف‌های صفحه نهایی."
+	},
 	"terminal_preview_label": {
 		"message": "پیش‌نمایش"
 	},
 	"terminal_profile_label": {
-		"message": "نمایه کنونی"
+		"message": "نمایه"
 	},
 	"terminal_reset_menu_label": {
 		"message": "بازنشانی پایانه"
@@ -1123,6 +1159,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "یک فایل تصویر پس‌زمینه از رایانه‌تان انتخاب کنید."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "مطمئنید می‌خواهید نمایه «$1» را حذف کنید؟"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "خودکار"
@@ -1256,6 +1295,15 @@
 	"terminal_title_theme": {
 		"message": "زمینه"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "کنترل‌کننده Tmux با خطایی مواجه شد:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "حالت ادغام Tmux فعال شد. برای جدا کردن tmux، کلیدهای Ctrl-C را فشار دهید، یا فرمان‌های tmux را وارد کنید"
+	},
+	"terminal_too_much_output_message": {
+		"message": "تعداد خروجی‌ها برای اعلان زیاد است. برای خواندن، به‌طور دستی به ردیف‌ها پیمایش کنید."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "به اینترنت متصل شوید و دوباره امتحان کنید."
 	},
@@ -1284,7 +1332,7 @@
 		"message": "با تایپ کردن «ssh<Tab><profile name>» از omnibox متصل شوید: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "«سیستم‌عامل Chrome» می‌تواند سیستم‌های فایل را ازطریق SFTP بنشاند و ازطریق برنامه Files مرور کند. به‌جای «اتصال» از «نشاندن SFTP» استفاده کنید."
+		"message": "ChromeOS می‌تواند سیستم‌های فایل را ازطریق SFTP بنشاند و ازطریق برنامه Files مرور کند. به‌جای «اتصال» از «پایه SFTP» استفاده کنید."
 	},
 	"tip_5": {
 		"message": "با استفاده از ssh:// links in web pages متصل شوید یا نشانکی را ذخیره کنید: https://goo.gl/zS8EZD"

@@ -396,7 +396,7 @@
 		"message": "リモートホストに対して、ターミナルへの画像表示を許可するかどうかを設定します。\n\nデフォルトでは、選択を行うまで確認メッセージが表示されます。"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "この設定を行うと、Chrome OS での Alt+Backspace キーから Delete キーへの再マッピングは取り消され、Alt+Backspace キーは従来どおり動作します。"
+		"message": "この設定を行うと、ChromeOS での Alt+Backspace キーから Delete キーへの再マッピングは取り消され、Alt+Backspace キーは従来どおり動作します。"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr キー検出のヒューリスティックを選択します。\n\n'null': navigator.language に基づいて自動検出します。\n      「en-us」の場合は「none」、その他の場合は「right-alt」と判定されます。\n'none': AltGr キー エミュレーションをすべて無効にします。\n'ctrl-alt': Ctrl+Alt キーを AltGr キーと見なします。\n'left-alt': 左側の Alt キーを AltGr キーと見なします。\n'right-alt': 右側の Alt キーを AltGr キーと見なします。"
@@ -537,7 +537,7 @@
 		"message": "Meta キーを押しながらキーを押したときに ESC プレフィックスを送信します。\n\nたとえば、有効にした場合は Meta+K キーを押すと、Esc キー、k キーの順に入力したものとして ^[k を送信します。無効にした場合は k のみ送信します。"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "貼り付けに使用するマウスボタンを指定します。\n\n自動検出の場合、X11 以外のプラットフォーム（Chrome OS など）ではマウスの中央ボタンを使用します。X11 ではマウスの右ボタンを使用します（ウィンドウ マネージャではマウスの中央ボタンを使って貼り付けを処理するため）。\n\n0 == 左（メイン）ボタン\n1 == 中央（予備）ボタン\n2 == 右（補助）ボタン\n\nこのオプションは、右クリックによる貼り付けの設定に関係なく動作します。\n\n注: メインと補助のボタンは、左利き用マウス、右利き用マウスに応じて適切な処理が行われます。"
+		"message": "貼り付けに使用するマウスボタンを指定します。\n\n自動検出の場合、X11 以外のプラットフォーム（ChromeOS など）ではマウスの中央ボタンを使用します。X11 ではマウスの右ボタンを使用します（ウィンドウ マネージャではマウスの中央ボタンを使って貼り付けを処理するため）。\n\n0 == 左（メイン）ボタン\n1 == 中央（予備）ボタン\n2 == 右（補助）ボタン\n\nこのオプションは、右クリックによる貼り付けの設定に関係なく動作します。\n\n注: メインと補助のボタンは、左利き用マウス、右利き用マウスに応じて適切な処理が行われます。"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "マウスの右ボタンのクリックで貼り付けます。\n\nこのオプションは、「mouse-paste-button」の設定に関係なく動作します。\n\n注: メインと補助のボタンは、左利き用マウス、右利き用マウスに応じて適切な処理が行われます。"
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ターミナル画面を消去"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "アイテムを削除するには、Delete キーを押します。"
+	},
 	"terminal_font_unavailable": {
 		"message": "「$1」は使用できません"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "デベロッパーの設定"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux を編集"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH を編集"
 	},
 	"terminal_home_import_identity": {
 		"message": "インポート"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux を管理するにはデベロッパー オプションに移動します"
+	},
+	"terminal_home_manage": {
+		"message": "管理"
+	},
+	"terminal_home_new_linux": {
+		"message": "新しい Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "新しい SSH 接続"
 	},
+	"terminal_home_set_up": {
+		"message": "設定"
+	},
 	"terminal_home_ssh_command": {
 		"message": "コマンド"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "接続名"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH は管理者によって無効になっています"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "リモート デバイスへの接続がここに表示されます"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "接続先を「username@hostname」の形式で指定してください"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "ターミナルの設定"
+	},
+	"terminal_input_label": {
+		"message": "デバイスの入力"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI カラー"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "画像"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "行の高さ"
+	},
 	"terminal_name_pref_shape": {
 		"message": "形"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "ターミナルの操作音です。"
 	},
+	"terminal_pref_line_height": {
+		"message": "ターミナル画面の各行の行の高さ。"
+	},
 	"terminal_preview_label": {
 		"message": "プレビュー"
 	},
 	"terminal_profile_label": {
-		"message": "現在のプロファイル"
+		"message": "プロフィール"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ターミナルをリセット"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "パソコンから背景画像のファイルを選択してください。"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "「$1」プロフィールを削除してもよろしいですか？"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "自動"
@@ -1196,6 +1235,15 @@
 	"terminal_title_theme": {
 		"message": "テーマ"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "tmux コントローラでエラーが発生しました。"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "tmux 統合モードが有効になりました。Ctrl+C キーを押して tmux を切断するか、tmux コマンドを入力してください。"
+	},
+	"terminal_too_much_output_message": {
+		"message": "出力内容が多すぎるため、読み上げる行に手動で移動してください。"
+	},
 	"terminal_try_again_with_internet": {
 		"message": "インターネットに接続して、もう一度お試しください。"
 	},
@@ -1224,7 +1272,7 @@
 		"message": "アドレスバーから接続するには「ssh<Tab><プロファイル名>」と入力します: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS では、ファイル システムを SFTP 経由でマウントし、ファイルアプリを使って閲覧できます。この方法を使用する場合は、[接続] ではなく [SFTP マウント] を使用してください。"
+		"message": "ChromeOS では、ファイル システムを SFTP 経由でマウントし、ファイルアプリを使って閲覧できます。この方法を使用する場合は、[接続] ではなく [SFTP マウント] を使用してください。"
 	},
 	"tip_5": {
 		"message": "ウェブページ上の ssh:// リンクを使って接続するか、ブックマークを保存します: https://goo.gl/zS8EZD"

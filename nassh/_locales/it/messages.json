@@ -390,7 +390,7 @@
 		"message": "Permette di stabilire se consentire o meno all'host remoto di visualizzare immagini nel terminale.\n\nPer impostazione predefinita, viene richiesta una conferma finché non viene fatta una scelta."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Se questa preferenza viene impostata, viene annullata la rimappatura della combinazione Alt + Backspace -> Canc in Chrome OS, in modo che Alt + Backspace corrisponda di fatto ad Alt + Backspace."
+		"message": "Se questa preferenza viene impostata, viene annullata la rimappatura della combinazione Alt + Backspace -> Canc in ChromeOS, in modo che Alt + Backspace corrisponda di fatto ad Alt + Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Consente di selezionare una funzione euristica per il rilevamento di Alt Gr.\n\n\"null\": consente di attivare il rilevamento automatico in base a navigator.language:\n      \"en-us\" => \"none\", altro => \"right-alt\"\n\"none\": consente di disattivare l'emulazione di Alt Gr.\n\"ctrl-alt\": consente di presupporre che Ctrl + Alt corrisponda ad Alt Gr.\n\"left-alt\": consente di presupporre che il tasto Alt di sinistra corrisponda ad Alt Gr.\n\"right-alt\": consente di presupporre che il tasto Alt di destra corrisponda ad Alt Gr."
@@ -531,7 +531,7 @@
 		"message": "Consente di inviare un prefisso Esc quando si preme un tasto tenendo premuto il tasto Meta.\n\nAd esempio, quando questa preferenza è attiva, se premi Meta + K, viene inviato ^[k come se avessi premuto Esc e poi K. Quando la preferenza non è attiva, viene inviato solo K."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Consente di stabilire quale pulsante del mouse usare per incollare.\n\nIn caso di rilevamento automatico verrà usato il pulsante centrale del mouse sulle piattaforme diverse da X11 (incluso Chrome OS). Su X11 verrà usato il pulsante destro del mouse (dato che la funzione per la gestione delle finestre dovrebbe usare il pulsante centrale del mouse per incollare).\n\n0 = pulsante sinistro (principale).\n1 = pulsante centrale (ausiliario).\n2 = pulsante destro (secondario).\n\nQuesta opzione è indipendente dall'impostazione relativa al clic con il pulsante destro del mouse per incollare.\n\nNota: i pulsanti principale e secondario vengono gestiti automaticamente in base al tipo di mouse, per utenti destri e mancini."
+		"message": "Consente di stabilire quale tasto del mouse usare per incollare.\n\nIn caso di rilevamento automatico verrà usato il tasto centrale del mouse sulle piattaforme diverse da X11 (incluso ChromeOS). Su X11 verrà usato il tasto destro del mouse (dato che la funzione per la gestione delle finestre dovrebbe usare il tasto centrale del mouse per incollare).\n\n0 = tasto sinistro (principale).\n1 = tasto centrale (ausiliario).\n2 = tasto destro (secondario).\n\nQuesta opzione è indipendente dall'impostazione relativa al clic con il tasto destro del mouse per incollare.\n\nNota: i tasti principale e secondario vengono gestiti automaticamente in base al tipo di mouse, per utenti destri e mancini."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Clic con il pulsante destro del mouse per incollare.\n\nQuesta opzione è indipendente dall'impostazione \"mouse-paste-button\".\n\nNota: i pulsanti principale e secondario vengono gestiti automaticamente in base al tipo di mouse, per utenti destri e mancini."
@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Cancellazione terminale"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Premi il tasto Canc per eliminare l'elemento."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" non disponibile"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Impostazioni sviluppatore"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Modifica Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Modifica SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importa"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Visita le Opzioni sviluppatore per gestire Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Gestisci"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nuovo Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nuova connessione SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Configura"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Comando"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nome connessione"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Il protocollo SSH è stato disattivato dall'amministratore"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Le connessioni a dispositivi remoti verranno visualizzate qui"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Specifica la destinazione nel formato \"nomeutente@nomehost\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Impostazioni terminale"
+	},
+	"terminal_input_label": {
+		"message": "Input terminale"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Colori ANSI"
@@ -1025,6 +1055,9 @@
 	"terminal_name_pref_image": {
 		"message": "Immagine"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Altezza riga"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1040,11 +1073,14 @@
 	"terminal_pref_bell": {
 		"message": "Suoneria del terminale udibile."
 	},
+	"terminal_pref_line_height": {
+		"message": "L'altezza di ogni riga della schermata del terminale."
+	},
 	"terminal_preview_label": {
 		"message": "Anteprima"
 	},
 	"terminal_profile_label": {
-		"message": "Profilo corrente"
+		"message": "Profilo"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Reimpostazione terminale"
@@ -1057,6 +1093,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Seleziona un file immagine di sfondo dal computer."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Vuoi eliminare il profilo \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatica"
@@ -1187,6 +1226,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Il controller tmux ha riscontrato un errore:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Modalità di integrazione tmux attivata. Premi Ctrl + C per scollegare tmux oppure inserisci comandi tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Troppe informazioni da annunciare. Vai manualmente alle righe per leggerle."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Connettiti a Internet e riprova."
 	},
@@ -1215,7 +1263,7 @@
 		"message": "Connettiti dalla omnibox digitando \"ssh<Tab><nome profilo>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS consente di montare file system tramite SFTP e sfogliare tramite l'app File. Utilizza \"Montaggio SFTP\" anziché \"Connetti\"."
+		"message": "ChromeOS consente di montare file system tramite SFTP e di sfogliare file tramite l'app File. Utilizza \"Montaggio SFTP\" anziché \"Connetti\"."
 	},
 	"tip_5": {
 		"message": "Connettiti utilizzando link ssh:// nelle pagine web oppure salva un preferito: https://goo.gl/zS8EZD"

@@ -267,7 +267,7 @@
 		"message": "Família de fonts del text"
 	},
 	"hterm_name_pref_font_size": {
-		"message": "Mida de la font"
+		"message": "Cos de font"
 	},
 	"hterm_name_pref_font_smoothing": {
 		"message": "Suavització del tipus de lletra de text"
@@ -396,7 +396,7 @@
 		"message": "Estableix si es permet que l'amfitrió remot mostri imatges al terminal.\n\nDe manera predeterminada, es mostra una sol·licitud fins que es tria una opció."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Si s'estableix, desfà el remapatge d'Alt+Retrocés > Supr a Chrome OS, de manera que la drecera Alt+Retrocés funciona com a Alt+Retrocés."
+		"message": "Si s'estableix aquesta preferència, desfà el remapatge d'Alt+Retrocés > Supr a Chrome OS, de manera que la drecera Alt+Retrocés funciona efectivament com a Alt+Retrocés."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecciona una heurística per detectar la tecla Alt Gr.\n\n\"null\": es detecta automàticament en funció de l'idioma del navegador:\n      \"en-us\" => \"none\"; en cas contrari => \"right-alt\"\n\"none\": es desactiva qualsevol emulació d'Alt Gr.\n\"ctrl-alt\": interpreta que Ctrl+Alt vol dir Alt Gr.\n\"left-alt\": interpreta que esquerra+Alt vol dir Alt Gr.\n\"right-alt\": interpreta que dreta+Alt vol dir Alt Gr."
@@ -507,7 +507,7 @@
 		"message": "Família de fonts predeterminada per al text del terminal."
 	},
 	"hterm_pref_font_size": {
-		"message": "Mida de lletra predeterminada en píxels."
+		"message": "Cos de font predeterminat en píxels."
 	},
 	"hterm_pref_font_smoothing": {
 		"message": "Propietat de suavització del tipus de lletra CSS."
@@ -537,7 +537,7 @@
 		"message": "Envia un prefix Esc en prémer una tecla mentre es manté premuda la tecla Meta.\n\nPer exemple, si s'activa, en prémer Meta+K s'envia ^[k, igual que si escrivissis Esc i després k. Si es desactiva, només s'envia k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Botó del ratolí per enganxar.\n\nPer a la detecció automàtica, s'utilitza el botó central del ratolí per a les plataformes que no són X11 (també Chrome OS). En plataformes X11, s'utilitza el botó dret del ratolí, ja que el gestor de finestres utilitza el botó central del ratolí per enganxar.\n\n0 == botó esquerre (principal).\n1 == botó central (auxiliar).\n2 == botó dret (secundari).\n\nAquesta opció és independent de l'opció per enganxar fent clic amb el botó dret.\n\nNota: els botons principal i secundari s'adapten a ratolins per a dretans i esquerrans."
+		"message": "Botó del ratolí per enganxar.\n\nPer a la detecció automàtica, s'utilitza el botó central del ratolí per a les plataformes que no són X11 (també Chrome OS). En plataformes X11, s'utilitza el botó dret del ratolí, ja que el gestor de finestres utilitza el botó central del ratolí per enganxar.\n\n0 == botó esquerre (principal).\n1 == botó central (auxiliar).\n2 == botó dret (secundari).\n\nAquesta opció és independent de l'opció per enganxar fent clic amb el botó dret.\n\nNota: els botons principal i secundari s'adapten a ratolins per a dretans i esquerrans."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Enganxa fent clic amb el botó dret del ratolí.\n\nAquesta opció és independent de l'opció de configuració \"mouse-paste-button\".\n\nNota: els botons principal i secundari s'adapten a ratolins per a dretans i esquerrans."
@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Esborra el terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Prem la tecla de supressió per suprimir l'element."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" no està disponible"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Configuració per a desenvolupadors"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Edita Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Edita l'SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importa"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Ves a Opcions per a desenvolupadors per gestionar Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Gestiona"
+	},
+	"terminal_home_new_linux": {
+		"message": "Linux nou"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nova connexió SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Configura"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Ordre"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nom de la connexió"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "L'administrador ha desactivat SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Les connexions a dispositius remots es mostraran aquí"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Especifica la destinació amb \"nomdusuari@nomdamfitrio\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Configuració del terminal"
+	},
+	"terminal_input_label": {
+		"message": "Entrada del terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Colors ANSI"
@@ -1025,6 +1055,9 @@
 	"terminal_name_pref_image": {
 		"message": "Imatge"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Alçada de línia"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1037,11 +1070,14 @@
 	"terminal_pref_bell": {
 		"message": "Timbre audible del terminal."
 	},
+	"terminal_pref_line_height": {
+		"message": "Alçada de línia de cada fila de la pantalla del terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Previsualitza"
 	},
 	"terminal_profile_label": {
-		"message": "Perfil actual"
+		"message": "Perfil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Restabliment del terminal"
@@ -1054,6 +1090,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecciona un fitxer d'imatge de fons de l'ordinador."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Confirmes que vols suprimir el perfil $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automàtic"
@@ -1178,6 +1217,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "El comandament de Tmux ha trobat un error:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "El mode d'integració de tmux està activat. Prem Ctrl+C per desconnectar tmux o introduir ordres de tmux."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Hi ha massa resultats per anunciar-los; navega per les files manualment per llegir-les."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Connecta't a Internet i torna-ho a provar."
 	},
@@ -1206,7 +1254,7 @@
 		"message": "Escriu 'ssh<Tab><profile name>': https://goo.gl/V7o8ki per connectar-te des de l'omnibox"
 	},
 	"tip_4": {
-		"message": "Chrome OS pot activar sistemes de fitxers a través d'SFTP i navegar a través de l'aplicació Fitxers. Utilitza Activació de l'SFTP en lloc de Connecta."
+		"message": "Chrome OS pot activar sistemes de fitxers a través d'SFTP i navegar a través de l'aplicació Fitxers. Utilitza Activació de l'SFTP en lloc de Connecta."
 	},
 	"tip_5": {
 		"message": "Connecta't utilitzant enllaços ssh:// a les pàgines web o desa una adreça d'interès: https://goo.gl/zS8EZD"

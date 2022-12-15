@@ -12,7 +12,7 @@
 		"message": "Als je dit tabblad sluit, wordt deze sessie beëindigd."
 	},
 	"cache_pin_prompt": {
-		"message": "De pincode voor deze SSH-sessie opslaan in het cachegeheugen? (J/N):"
+		"message": "De pincode voor deze SSH-sessie cachen? (J/N):"
 	},
 	"cancel_button_label": {
 		"message": "Annuleren"
@@ -393,7 +393,7 @@
 		"message": "Hiermee wordt bepaald of de externe host afbeeldingen mag bekijken in de terminal.\n\nStandaard vragen we hiernaar totdat een keuze wordt gemaakt."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Als deze optie is ingesteld, wordt de toewijzing van Alt + Backspace->Delete in Chrome OS ongedaan gemaakt, zodat Alt + Backspace daadwerkelijk Alt + Backspace is."
+		"message": "Als deze optie is ingesteld, wordt de toewijzing van Alt + Backspace->Delete in ChromeOS ongedaan gemaakt, zodat Alt + Backspace daadwerkelijk Alt + Backspace is."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecteer een AltGr-detectieheuristiek.\n\n'null': automatische detectie op basis van navigator.language:\n      'en-us' => 'none', anders => 'right-alt'.\n'none': zet emulatie voor AltGr uit.\n'ctrl-alt': veronderstelt dat Ctrl + Alt eigenlijk AltGr betekent.\n'left-alt': veronderstelt dat de linker-Alt eigenlijk AltGr betekent.\n'right-alt': veronderstelt dat de rechter-Alt eigenlijk AltGr betekent."
@@ -534,7 +534,7 @@
 		"message": "Hiermee stuur je een ESC-voorvoegsel als je een toets indrukt terwijl je de Meta-toets ingedrukt houdt.\n\nAls deze optie aanstaat en je bijvoorbeeld op Meta + K drukt, wordt ^[k gestuurd alsof je Escape en vervolgens k typt. Als de optie uitstaat, wordt alleen k gestuurd."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "De muisknop die je kunt gebruiken om te plakken.\n\nOp niet-X11-platforms (waaronder Chrome OS) gebruiken we de middelste muisknop voor automatisch detecteren. Op X11 gebruiken we de rechtermuisknop (aangezien de functie voor vensterbeheer de middelste muisknop gebruikt voor de plakbewerking).\n\n0 == linkermuisknop (primair).\n1 == middelste knop (supplementair).\n2 == rechtermuisknop (secundair).\n\nDeze optie is onafhankelijk van de instelling voor plakken met de rechtermuisknop.\n\nOpmerking: Met deze optie worden de primaire en secundaire knoppen verwerkt voor zowel rechts- als linkshandige muizen."
+		"message": "De muisknop die je kunt gebruiken om te plakken.\n\nOp niet-X11-platforms (waaronder ChromeOS) gebruiken we de middelste muisknop voor automatisch detecteren. Op X11 gebruiken we de rechtermuisknop (aangezien de functie voor vensterbeheer de middelste muisknop gebruikt voor de plakbewerking).\n\n0 == linkermuisknop (primair).\n1 == middelste knop (supplementair).\n2 == rechtermuisknop (secundair).\n\nDeze optie is onafhankelijk van de instelling voor plakken met de rechtermuisknop.\n\nOpmerking: Met deze optie worden de primaire en secundaire knoppen verwerkt voor zowel rechts- als linkshandige muizen."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Plakken door op de rechtermuisknop te klikken.\n\nDeze optie is onafhankelijk van de instelling 'mouse-paste-button'.\n\nOpmerking: Met deze optie worden de primaire en secundaire knoppen verwerkt voor zowel rechts- als linkshandige muizen."
@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminal wissen"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Druk op de toets Delete om het item te verwijderen."
+	},
 	"terminal_font_unavailable": {
 		"message": "'$1' is niet beschikbaar"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Ontwikkelaarsinstellingen"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux bewerken"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH bewerken"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importeren"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Ga naar de Ontwikkelaarsopties om Linux te beheren"
+	},
+	"terminal_home_manage": {
+		"message": "Beheren"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nieuwe Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nieuwe SSH-verbinding"
 	},
+	"terminal_home_set_up": {
+		"message": "Instellen"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Opdracht"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Verbindingsnaam"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH is uitgezet door je beheerder"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Verbindingen met apparaten op afstand komen hier te staan"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Geef de bestemming op met 'gebruikersnaam@hostnaam'"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminalinstellingen"
+	},
+	"terminal_input_label": {
+		"message": "Terminalinvoer"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-kleuren"
@@ -1025,6 +1055,9 @@
 	"terminal_name_pref_image": {
 		"message": "Afbeelding"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Regelhoogte"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Vorm"
 	},
@@ -1040,11 +1073,14 @@
 	"terminal_pref_bell": {
 		"message": "Hoorbare terminalbel."
 	},
+	"terminal_pref_line_height": {
+		"message": "De regelhoogte voor elke rij van het terminalscherm."
+	},
 	"terminal_preview_label": {
 		"message": "Voorbeeld"
 	},
 	"terminal_profile_label": {
-		"message": "Huidig profiel"
+		"message": "Profiel"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminal resetten"
@@ -1057,6 +1093,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecteer een bestand met een achtergrondafbeelding op je computer."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Weet je zeker dat je het profiel $1 wilt verwijderen?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatisch"
@@ -1184,6 +1223,15 @@
 	"terminal_title_theme": {
 		"message": "Thema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux-controller heeft een fout gevonden:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux-integratiemodus geactiveerd. Druk op Ctrl-C om tmux los te koppelen of geef tmux-opdrachten op"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Te veel uitvoer om aan te kondigen. Ga handmatig naar rijen om te lezen."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Maak verbinding met internet en probeer het opnieuw."
 	},
@@ -1212,7 +1260,7 @@
 		"message": "Maak verbinding vanuit de omnibox door 'ssh<Tab><profile name>' te typen: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS kan bestandssystemen activeren via SFTP en browsen via de app Bestanden. Gebruik 'SFTP activeren' in plaats van 'Verbinden'."
+		"message": "ChromeOS kan bestandssystemen activeren via SFTP en browsen via de app Bestanden. Gebruik 'SFTP activeren' in plaats van Verbinden."
 	},
 	"tip_5": {
 		"message": "Maak verbinding via ssh://-links op webpagina's of sla een bookmark op: https://goo.gl/zS8EZD"

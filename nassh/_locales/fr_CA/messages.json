@@ -522,7 +522,7 @@
 		"message": "Permet d'envoyer un préfixe Échapp. en appuyant sur une touche tout en maintenant la touche Méta enfoncée.\n\nPar exemple, lorsque cette préférence est activée, si vous appuyez sur le raccourci Méta+K, vous transmettrez ^[k comme si vous aviez appuyé sur Échapper, puis k. Lorsqu'elle est désactivée, seule la touche k sera transmise."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Permet de spécifier le bouton de la souris à utiliser pour le collage.\n\nPour la détection automatique, nous utiliserons le bouton du centre de la souris avec les plateformes non X11 (y compris Chrome OS). Sur les plateformes X11, nous utiliserons le bouton droit de la souris (puisque le gestionnaire de fenêtres doit déjà effectuer le collage au moyen du bouton du centre de la souris).\n\n0 == bouton de gauche (principal).\n1 == bouton du centre (auxiliaire).\n2 == bouton de droite (secondaire).\n\nCette option est différente du paramètre de collage par clic droit.\n\nRemarque : Les boutons principal et secondaire sont gérés en fonction de la souris utilisée (pour gaucher ou droitier)."
+		"message": "Permet de spécifier le bouton de la souris à utiliser pour le collage.\n\nPour la détection automatique, nous utiliserons le bouton du centre de la souris avec les plateformes non X11 (y compris Chrome OS). Sur les plateformes X11, nous utiliserons le bouton droit de la souris (puisque le gestionnaire de fenêtres doit déjà effectuer le collage au moyen du bouton du centre de la souris).\n\n0 == bouton de gauche (principal).\n1 == bouton du centre (auxiliaire).\n2 == bouton de droite (secondaire).\n\nCette option est différente du paramètre de collage par clic droit.\n\nRemarque : Les boutons principal et secondaire sont gérés en fonction de la souris utilisée (pour gaucher ou droitier)."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Permet de coller du contenu avec un clic sur le bouton droit de la souris.\n\nCette option est différente de la préférence « mouse-paste-button ».\n\nRemarque : Les boutons principal et secondaire sont gérés en fonction de la souris utilisée (pour gaucher ou droitier)."
@@ -971,6 +971,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Effacement de l'écran du terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Appuyez sur la touche Suppression pour supprimer l'élément."
+	},
 	"terminal_font_unavailable": {
 		"message": "« $1 » n'est pas disponible"
 	},
@@ -983,14 +986,29 @@
 	"terminal_home_developer_settings": {
 		"message": "Paramètres pour développeurs"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Modifier Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Modifier une connexion SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importer"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Accédez à Options pour les développeurs pour gérer Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Gérer"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nouveau Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nouvelle connexion SSH"
+	},
+	"terminal_home_set_up": {
+		"message": "Configurer"
 	},
 	"terminal_home_ssh": {
 		"message": "Connexions SSH"
@@ -998,11 +1016,23 @@
 	"terminal_home_ssh_command": {
 		"message": "Commande"
 	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nom de la connexion"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH est désactivé par votre administrateur"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Les connexions aux appareils distants s'afficheront ici"
+	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Spécifiez la destination au format « nom d'utilisateur@nom d'hôte »"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Paramètres du terminal"
+	},
+	"terminal_input_label": {
+		"message": "Entrée d'ordinateur"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Couleurs ANSI"
@@ -1019,6 +1049,9 @@
 	"terminal_name_pref_font": {
 		"message": "Police"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Hauteur des lignes"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forme"
 	},
@@ -1031,11 +1064,14 @@
 	"terminal_pref_bell": {
 		"message": "Permet de définir une sonnerie audible pour le terminal."
 	},
+	"terminal_pref_line_height": {
+		"message": "La hauteur de chaque rangée de l'écran du terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Aperçu"
 	},
 	"terminal_profile_label": {
-		"message": "Profil actuel"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Réinitialisation du terminal"
@@ -1048,6 +1084,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Sélectionnez une image d'arrière-plan sur votre ordinateur."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Voulez-vous vraiment supprimer le profil « $1 »?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatique"
@@ -1178,6 +1217,15 @@
 	"terminal_title_theme": {
 		"message": "Thème"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Le contrôleur tmux a rencontré une erreur :"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Mode d'intégration tmux activé. Appuyez sur Ctrl+C pour détacher tmux ou saisissez les commandes tmux."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Trop de sorties à annoncer, accédez manuellement aux lignes pour les lire."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Connectez-vous à Internet et réessayez."
 	},
@@ -1206,7 +1254,7 @@
 		"message": "Connectez-vous à partir de l'omnibox en entrant « ssh <Tabulation><nom de profil> » : https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS peut installer des systèmes de fichiers au moyen du protocole SFTP et naviguer au moyen de l'appli Fichiers. Utilisez « Installation SFTP » au lieu de « Connexion »."
+		"message": "Chrome OS peut installer des systèmes de fichiers au moyen du protocole SFTP et naviguer au moyen de l'application Fichiers. Utilisez « Installation SFTP » au lieu de « Connexion »."
 	},
 	"tip_5": {
 		"message": "Connectez vous à l'aide des liens ssh:// dans les pages Web ou enregistrez un favori : https://goo.gl/zS8EZD"

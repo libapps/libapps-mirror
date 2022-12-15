@@ -384,7 +384,7 @@
 		"message": "दूरवर्ती होस्टलाई टर्मिनलमा फोटोहरू देखाउन दिने कि नदिने भन्ने कुरा।\n\nडिफल्ट रूपमा, हामी प्रयोगकर्ताले कुनै‍ विकल्प नरोजेसम्म के गर्ने भनी सोधिरहन्छौँ।"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "यो सुविधा सेट छ भने यसले Chrome OS मा Alt+Backspace->Delete रिम्यापलाई अन्डू गर्छ। यसले गर्दा Alt+Backspace ले Alt+Backspace कै रूपमा काम गर्न थाल्छ।"
+		"message": "यो सुविधा सेट गरिएको खण्डमा यसले ChromeOS मा Alt+Backspace->Delete रिम्यापलाई अन्डू गर्छ। यसले गर्दा Alt+Backspace ले Alt+Backspace कै रूपमा काम गर्न थाल्छ।"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr कुञ्जीबाट पत्ता लाग्ने अनुमान चयन गरियोस्।\n\n'null': navigator.language का आधारमा स्वतः पत्ता लगाइयोस्:\n      'en-us' => 'none', अन्यथा => 'right-alt'\n'none': AltGr का सबै इम्युलेसन असक्षम पारियोस्।\n'ctrl-alt': Ctrl+Alt लाई AltGr मानियोस्।\n'left-alt': किबोर्डको बायाँपट्टि रहेको Alt लाई AltGr मानियोस्।\n'right-alt': किबोर्डको दायाँपट्टि रहेको Alt लाई AltGr मानियोस्।"
@@ -525,7 +525,7 @@
 		"message": "Meta कुञ्जी थिचिराखेर कुनै कुञ्जी थिच्दा ESC प्रिफिक्स पठाइयोस्।\n\nउदाहरणका लागि, यो सुविधा सक्षम पारिँदा Meta+K थिचेमा ^[k पठाइने छ। यो भनेको Escape थिचेर k टाइप गर्नु बराबर हो। यो सुविधा असक्षम पारिँदा k मात्र पठाइने छ।"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "पेस्ट गर्न प्रयोग गरिने माउस बटन।\n\nस्वतः पत्ता लगाउन, हामी X11 बाहेकका प्लेटफर्महरू (Chrome OS लगायत) मा माउसको बिचको बटन प्रयोग गर्ने छौँ। X11 प्लेटफर्महरूमा, हामी माउसको दायाँ बटन प्रयोग गर्ने छौँ (विन्डो म्यानेजर माउसको बिचको बटन प्रयोग गरी पेस्ट गर्नु पर्ने भएकाले यसो गरिएको हो)।\n\n0 == बायाँ (मुख्य) बटन।\n1 == बिचको (सहायक) बटन।\n2 == दायाँ (अतिरिक्त) बटन।\n\nयो विकल्प दायाँ क्लिक गरी पेस्ट गर्नुहोस् नामक सेटिङभन्दा बेग्लै हो।\n\nटिपोट: बायाँ तथा दायाँ हाते माउसका साहयताले मुख्य र सहायक बटनहरू स्वतः नियन्त्रण गरिन्छन्।"
+		"message": "पेस्ट गर्न प्रयोग गरिने माउस बटन।\n\nस्वतः पत्ता लगाउन, हामी X11 बाहेकका प्लेटफर्महरू (ChromeOS लगायत) मा माउसको बिचको बटन प्रयोग गर्ने छौँ। X11 प्लेटफर्महरूमा, हामी माउसको दायाँ बटन प्रयोग गर्ने छौँ (विन्डो म्यानेजर माउसको बिचको बटन प्रयोग गरी पेस्ट गर्नु पर्ने भएकाले यसो गरिएको हो)।\n\n0 == बायाँ (मुख्य) बटन।\n1 == बिचको (सहायक) बटन।\n2 == दायाँ (अतिरिक्त) बटन।\n\nयो विकल्प \"दायाँ क्लिक गरी पेस्ट गर्नुहोस्\" नामक सेटिङभन्दा बेग्लै हो।\n\nनोट: बायाँ तथा दायाँ हाते माउसका सहायताले मुख्य र सहायक बटनहरू स्वतः नियन्त्रण गरिन्छन्।"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "माउसको दायाँ बटनमा क्लिक गर्दा पेस्ट हुन्छ।\n\nयो विकल्प \"mouse-paste-button\" सेटिङभन्दा बेग्लै हो।\n\nटिपोट: बायाँ तथा दायाँ हाते माउसका साहयताले मुख्य र सहायक बटनहरू स्वतः नियन्त्रण गरिन्छन्।"
@@ -968,6 +968,9 @@
 	"terminal_clear_menu_label": {
 		"message": "टर्मिनल खाली गर्ने कार्य"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "यो वस्तु मेट्न delete की थिच्नुहोस्।"
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" उपलब्ध छैन"
 	},
@@ -980,23 +983,50 @@
 	"terminal_home_developer_settings": {
 		"message": "विकासकर्ताका सेटिङ"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux सम्पादन गर्नुहोस्"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH सम्पादन गर्नुहोस्"
 	},
 	"terminal_home_import_identity": {
 		"message": "इम्पोर्ट गर्नुहोस्"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux व्यवस्थापन गर्न विकासकर्ता विकल्पहरूमा जानुहोस्"
+	},
+	"terminal_home_manage": {
+		"message": "व्यवस्थापन गर्नुहोस्"
+	},
+	"terminal_home_new_linux": {
+		"message": "नयाँ Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "नयाँ SSH कनेक्सन"
 	},
+	"terminal_home_set_up": {
+		"message": "सेटअप गर्नुहोस्"
+	},
 	"terminal_home_ssh_command": {
 		"message": "कमान्ड"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "कनेक्सन नेम"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "तपाईंका एड्मिनले SSH अफ गर्नुभएको छ"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "रिमोट डिभाइसहरूमा गरेका कनेक्सनहरू यहाँ देखिने छन्"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"username@hostname\" प्रयोग गरी गन्तव्य तोक्नुहोस्"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "टर्मिनलका सेटिङ"
+	},
+	"terminal_input_label": {
+		"message": "टर्मिनल इनपुट"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI रङ्गहरू"
@@ -1019,6 +1049,9 @@
 	"terminal_name_pref_image": {
 		"message": "फोटो"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "लाइनको उचाइ"
+	},
 	"terminal_name_pref_shape": {
 		"message": "आकार"
 	},
@@ -1034,11 +1067,14 @@
 	"terminal_pref_bell": {
 		"message": "टर्मिनलको सुनिने घन्टी।"
 	},
+	"terminal_pref_line_height": {
+		"message": "टर्मिनल स्क्रिनको हरेक रोको उचाइ।"
+	},
 	"terminal_preview_label": {
 		"message": "पूर्वावलोकन गर्नुहोस्"
 	},
 	"terminal_profile_label": {
-		"message": "हालको प्रोफाइल"
+		"message": "प्रोफाइल"
 	},
 	"terminal_reset_menu_label": {
 		"message": "टर्मिनल रिसेट गर्नुहोस्"
@@ -1051,6 +1087,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "आफ्नो कम्प्युटरबाट कुनै ब्याकग्राउन्ड फोटो फाइल चयन गर्नुहोस्।"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "तपाईंले प्रोफाइल \"$1\" मेटाउन खोज्नुभएकै हो?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "स्वतः"
@@ -1181,6 +1220,15 @@
 	"terminal_title_theme": {
 		"message": "थिम"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux कन्ट्रोलरमा कुनै त्रुटि भयो:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux को इन्टिग्रेसन मोड एक्टिभेट गरिएको छ। Tmux डिट्याच गर्न Ctrl-C की थिच्नुहोस् वा tmux कमान्डहरू हाल्नुहोस्"
+	},
+	"terminal_too_much_output_message": {
+		"message": "घोषणा गर्नका लागि एकदमै धैरै आउटपुट भएकाले म्यानुअल तरिकाले आफूले पढ्न चाहेको रोमा जानुहोस्।"
+	},
 	"terminal_try_again_with_internet": {
 		"message": "इन्टरनेटमा कनेक्ट गर्नुहोस् अनि फेरि प्रयास गर्नुहोस्।"
 	},
@@ -1209,7 +1257,7 @@
 		"message": "'ssh<Tab><profile name>' टाइप गरेर ओम्नीबक्समा कनेक्ट गर्नुहोस्: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS ले SFTP मार्फत फाइल प्रणालीहरू माउन्ट गर्न र तिनलाई Files एपमार्फत ब्राउज गर्न सक्छ। 'कनेक्ट गर्नुहोस्' को साटो 'SFTP माउन्ट गर्नुहोस्' प्रयोग गर्नुहोस्।"
+		"message": "ChromeOS ले SFTP मार्फत फाइल सिस्टमहरू माउन्ट गर्न र तिनलाई Files एपमार्फत ब्राउज गर्न सक्छ। \"कनेक्ट गर्नुहोस्\" को साटो \"SFTP माउन्ट गर्नुहोस्\" प्रयोग गर्नुहोस्।"
 	},
 	"tip_5": {
 		"message": "वेब पृष्ठहरूमा ssh:// लिंक प्रयोग गरी कनेक्ट गर्नुहोस् वा बुकमार्क सेभ गर्नुहोस्: https://goo.gl/zS8EZD"

@@ -387,7 +387,7 @@
 		"message": "Kung papayagan ang remote na host na magpakita ng mga larawan sa terminal.\n\nBilang default, magpa-prompt kami hanggang may mapili."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Kung itatakda, maa-undo ang Chrome OS Alt+Backspace->Delete remap, para maging Alt+Backspace talaga ang Alt+Backspace."
+		"message": "Kung itatakda, maa-undo ang ChromeOS Alt+Backspace->Delete remap, para maging Alt+Backspace talaga ang Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Pumili ng AltGr detection heuristic.\n\n'null': Awtomatikong magde-detect batay sa navigator.language:\n      'en-us' => 'none', iba pa => 'right-alt'\n'none': Idi-disable ang anumang emulation ng AltGr.\n'ctrl-alt': Ipagpapalagay na ang Ctrl+Alt ay AltGr.\n'left-alt': Ipagpapalagay na ang left Alt ay AltGr.\n'right-alt': Ipagpapalagay na ang right Alt ay AltGr."
@@ -528,7 +528,7 @@
 		"message": "Magpadala ng ESC na prefix kapag pumipindot ng key habang pinipindot nang matagal ang Meta key.\n\nHalimbawa, kapag naka-enable, kapag pinindot ang Meta+K, magpapadala ng ^[k gaya kung nag-type ka ng Escape at pagkatapos ay k. Kapag naka-disable, k lang ang ipapadala."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Ang button ng mouse na ginagamit para sa pag-paste.\n\nPara sa autodetect, gagamitin namin ang gitnang button ng mouse para sa mga platform na hindi X11 (kasama na ang Chrome OS). Sa X11, gagamitin namin ang kanang button ng mouse (dahil dapat pangasiwaan ng window manager ang pag-paste sa pamamagitan ng gitnang button ng mouse).\n\n0 == kaliwang (pangunahing) button.\n1 == gitnang (karagdagang) button.\n2 == kanang (pangalawang) button.\n\nHiwalay ang opsyong ito sa setting ng pag-paste gamit ang right-click.\n\nTandaan: Pinapangasiwaan para sa iyo ang mga mouse para sa kaliwa at kanang kamay."
+		"message": "Ang button ng mouse na ginagamit para sa pag-paste.\n\nPara sa autodetect, gagamitin namin ang gitnang button ng mouse para sa mga platform na hindi X11 (kasama na ang ChromeOS). Sa X11, gagamitin namin ang kanang button ng mouse (dahil dapat pangasiwaan ng window manager ang pag-paste sa pamamagitan ng gitnang button ng mouse).\n\n0 == kaliwang (pangunahing) button.\n1 == gitnang (karagdagang) button.\n2 == kanang (pangalawang) button.\n\nHiwalay ang opsyong ito sa setting ng pag-paste gamit ang right-click.\n\nTandaan: Pinapangasiwaan para sa iyo ang mga mouse para sa kaliwa at kanang kamay."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Mag-paste sa mga pag-click ng kanang button ng mouse.\n\nHiwalay ang opsyong ito sa setting na \"mouse-paste-button.\"\n\nTandaan: Pinapangasiwaan para sa iyo ang mga mouse para sa kaliwa at kanang kamay."
@@ -1016,6 +1016,9 @@
 	"terminal_clear_menu_label": {
 		"message": "I-clear ang Terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Pindutin ang delete key para i-delete ang item."
+	},
 	"terminal_font_unavailable": {
 		"message": "Hindi available ang \"$1\""
 	},
@@ -1025,14 +1028,38 @@
 	"terminal_home_developer_settings": {
 		"message": "Mga Setting ng Developer"
 	},
+	"terminal_home_edit_linux": {
+		"message": "I-edit ang Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "I-edit ang SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "I-import"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Bisitahin ang Mga Opsyon ng Developer para pamahalaan ang Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Pamahalaan"
+	},
+	"terminal_home_new_linux": {
+		"message": "Bagong Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Bagong koneksyon sa SSH"
+	},
+	"terminal_home_set_up": {
+		"message": "I-set up"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Pangalan ng koneksyon"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Na-disable ng iyong administrator ang SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Lalabas dito ang mga koneksyon sa mga remote device"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Tukuyin ang destinasyon gamit ang \"username@hostname\""
@@ -1067,6 +1094,9 @@
 	"terminal_pref_bell": {
 		"message": "Naririnig na terminal bell."
 	},
+	"terminal_pref_line_height": {
+		"message": "Ang line height para sa bawat row ng screen ng terminal."
+	},
 	"terminal_preview_label": {
 		"message": "I-preview"
 	},
@@ -1084,6 +1114,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Pumili ng file ng imahe sa background mula sa iyong computer."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Sigurado ka bang gusto mong i-delete ang profile na \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "I-disable"
@@ -1175,6 +1208,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Nagkaroon ng error sa Tmux controller:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Na-activate ang integration mode ng Tmux. Pindutin ang Ctrl-C para i-detach ang tmux, o maglagay ng mga command sa tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Masyadong marami ang output na iaanunsyo, manual na mag-navigate sa mga row para mabasa ang mga ito."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Kumonekta sa Internet at subukan ulit."
 	},
@@ -1203,7 +1245,7 @@
 		"message": "Kumonekta mula sa omnibox sa pamamagitan ng pag-type ng 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Puwedeng mag-mount ang Chrome OS ng mga system ng file sa pamamagitan ng SFTP at mag-browse gamit ang Files app. Gamitin ang 'SFTP Mount' sa halip na 'Kumonekta.'"
+		"message": "Puwedeng mag-mount ang ChromeOS ng mga system ng file sa pamamagitan ng SFTP at mag-browse gamit ang Files app. Gamitin ang 'SFTP Mount' sa halip na 'Kumonekta.'"
 	},
 	"tip_5": {
 		"message": "Kumonekta gamit ang mga ssh:// link sa mga web page, o mag-save ng bookmark: https://goo.gl/zS8EZD"

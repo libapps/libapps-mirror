@@ -396,7 +396,7 @@
 		"message": "Дали да се разреши на отдалечения хост да показва изображения в терминала.\n\nПо подразбиране се извежда подкана за избор."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ако е зададено, отменя съответствието Alt+Backspace -> Delete в Chrome OS, така че Alt+Backspace остава непроменено."
+		"message": "Ако е зададено, отменя съответствието Alt+Backspace -> Delete в ChromeOS, така че Alt+Backspace остава непроменено."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Избиране на евристичен метод за откриване на AltGr.\n\nnull: Автоматично откриване въз основа на navigator.language:\n      en-us => none, друго => right-alt\nnone: Деактивиране на всички емулации на AltGr.\nctrl-alt: Допускане, че Ctrl + Alt означава AltGr.\nleft-alt: Допускане, че левият Alt означава AltGr.\nright-alt: Допускане, че десният Alt означава AltGr."
@@ -537,7 +537,7 @@
 		"message": "Изпращане на префикс ESC при натискане на клавиш, докато е задържан клавишът Meta.\n\nАко например тази функция е активирана и натиснете Meta+K, ще се изпрати ^[k – както ако сте натиснали Escape и след това k. Когато функцията е деактивирана, ще се изпрати само k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Бутонът на мишката, който да се използва за поставяне.\n\nПри автоматично откриване ще използваме средния бутон на мишката при платформи, различни от X11 (включително Chrome OS). Под X11 ще използваме десния бутон на мишката (тъй като мениджърът на прозорци следва да извършва поставяне чрез средния бутон на мишката).\n\n0 == левият (основният) бутон.\n1 == средният (спомагателният) бутон.\n2 == десният (вторичният) бутон.\n\nТази опция е независима от настройката за поставяне при кликване с десния бутон на мишката.\n\nЗабележка: Основният и вторичният бутони се обработват вместо вас при мишки, настроени за лява и за дясна ръка."
+		"message": "Бутонът на мишката, който да се използва за поставяне.\n\nПри автоматично откриване ще използваме средния бутон на мишката при платформи, различни от X11 (включително ChromeOS). Под X11 ще използваме десния бутон на мишката (тъй като мениджърът на прозорци следва да извършва поставяне чрез средния бутон на мишката).\n\n0 == левият (основният) бутон.\n1 == средният (спомагателният) бутон.\n2 == десният (вторичният) бутон.\n\nТази опция е независима от настройката за поставяне при кликване с десния бутон на мишката.\n\nЗабележка: Основният и вторичният бутони се обработват вместо вас при мишки, настроени за лява и за дясна ръка."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Поставяне при кликване с десния бутон на мишката.\n\nТази опция е независима от настройката mouse-paste-button.\n\nЗабележка: Основният и вторичният бутони се обработват вместо вас при мишки, настроени за лява и за дясна ръка."
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Изчистване на терминала"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Натиснете клавиша Delete, за да изтриете елемента."
+	},
 	"terminal_font_unavailable": {
 		"message": "$1 не е налице"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Настройки за програмисти"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Редактиране на контейнер в Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Редактиране на SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Импортиране"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Отворете опциите за програмисти, за да управлявате Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Управление"
+	},
+	"terminal_home_new_linux": {
+		"message": "Нов контейнер в Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Нова SSH връзка"
 	},
+	"terminal_home_set_up": {
+		"message": "Настройване"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Команда"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Име на връзката"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Администраторът ви е деактивирал SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Тук ще се показват връзките с отдалечени устройства"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Посочете местоназначението чрез potrebitelskoime@imenahost"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Настройки на терминала"
+	},
+	"terminal_input_label": {
+		"message": "Вход на терминала"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI цветове"
@@ -1028,6 +1058,9 @@
 	"terminal_name_pref_image": {
 		"message": "Изображения"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Височина на редовете"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Форма"
 	},
@@ -1043,11 +1076,14 @@
 	"terminal_pref_bell": {
 		"message": "Звънец на терминала със звук."
 	},
+	"terminal_pref_line_height": {
+		"message": "Височината на редовете за всеки ред на екрана на терминала."
+	},
 	"terminal_preview_label": {
 		"message": "Визуализация"
 	},
 	"terminal_profile_label": {
-		"message": "Текущ потребителски профил"
+		"message": "Потребителски профил"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Нулиране на настройките на терминала"
@@ -1060,6 +1096,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Изберете файл за фоновото изображение от компютъра си."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Наистина ли искате да изтриете потребителския профил „$1“?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Автоматично"
@@ -1190,6 +1229,15 @@
 	"terminal_title_theme": {
 		"message": "Тема"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "В контролера на Tmux възникна грешка:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Режимът на интегриране на Tmux е активиран. Натиснете Ctrl + C, за да отделите Tmux, или въведете команди за Tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Резултатите са твърде много, за да бъдат съобщени. Навигирайте до редовете ръчно, за да ги прочетете."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Свържете се с интернет и опитайте отново."
 	},
@@ -1218,7 +1266,7 @@
 		"message": "Свържете се от полето за всичко, като въведете „ssh<раздел><име на потребителския профил>“: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Под Chrome OS можете да свържете файлова система през SFTP и да разглеждате съдържанието ѝ посредством приложението „Файлове“. Използвайте „Свързване през SFTP“ вместо „Свързване“."
+		"message": "Под ChromeOS можете да свържете файлова система през SFTP и да разглеждате съдържанието ѝ посредством приложението „Файлове“. Използвайте „Свързване през SFTP“ вместо „Свързване“."
 	},
 	"tip_5": {
 		"message": "Свързвайте се посредством връзки с ssh:// в уеб страниците или запазвайте отметки: https://goo.gl/zS8EZD"

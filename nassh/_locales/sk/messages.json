@@ -396,7 +396,7 @@
 		"message": "Určuje, či chcete vzdialenému hostiteľovi povoliť zobrazovať obrázky v termináli.\n\nPredvolene sa zobrazuje výzva, dokým sa používateľ nerozhodne."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ak túto možnosť nastavíte, zruší sa mapovanie kombinácie klávesov Alt+Backspace->Delete v systéme Chrome OS, aby kombinácia Alt+Backspace bola skutočne Alt+Backspace."
+		"message": "Ak túto možnosť nastavíte, zruší sa mapovanie kombinácie klávesov Alt + Backspace -> Delete v systéme Chrome OS, aby kombinácia Alt + Backspace bola skutočne Alt + Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Vyberte heuristiku rozpoznávanie klávesa AltGr.\n\n„null“: Automaticky rozpoznávať na základe parametra navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n„none“: Zakázať akúkoľvek emuláciu klávesa AltrGr.\n„ctrl-alt“: Považovať kombináciu klávesov Ctrl+Alt za AltGr.\n„left-alt“: Považovať ľavý kláves Alt za AltGr.\n„right-alt“: Považovať pravý kláves Alt za AltGr."
@@ -537,7 +537,7 @@
 		"message": "Odošle predponu ESC, keď stlačíte kláves a zároveň pridržíte kláves Meta.\n\nKeď túto predvoľbu povolíte, stlačením kombinácie klávesov Meta+K odošlete ^[k, ako keby ste zadali Escape a potom k. Keď ju zakážete, odošle sa iba k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Tlačidlo myši, ktorým sa bude prilepovať.\n\nV prípade automatického rozpoznávania použijeme v platformách iných než X11 (vrátane Chrome OS) stredné tlačidlo myši. V platforme X11 použijeme pravé tlačidlo myši (keďže správca okien by mal spracúvať prilepovanie stredným tlačidlom myši).\n\n0 == ľavé (primárne) tlačidlo.\n1 == stredné (pomocné) tlačidlo.\n2 == pravé (sekundárne) tlačidlo.\n\nTáto možnosť je nezávislá od nastavenia prilepenia pravým tlačidlom myši.\n\nPoznámka: Primárne a sekundárne tlačidlá je možné ovládať myšou pre ľavákov aj pravákov."
+		"message": "Tlačidlo myši, ktorým sa bude prilepovať.\n\nV prípade automatického rozpoznávania použijeme v platformách iných než X11 (vrátane systému Chrome OS) stredné tlačidlo myši. V platforme X11 použijeme pravé tlačidlo myši (keďže správca okien by mal spracúvať prilepovanie stredným tlačidlom myši).\n\n0 == ľavé (primárne) tlačidlo.\n1 == stredné (pomocné) tlačidlo.\n2 == pravé (sekundárne) tlačidlo.\n\nTáto možnosť je nezávislá od nastavenia prilepenia pravým tlačidlom myši.\n\nPoznámka: Primárne a sekundárne tlačidlá je možné ovládať myšou pre ľavákov aj pravákov."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Prilepte kliknutím pravým tlačidlom myši.\n\nTáto možnosť je nezávislá od nastavenia Prilepenie tlačidlom myši.\n\nPoznámka: Primárne a sekundárne tlačidlá je možné ovládať myšou pre ľavákov aj pravákov."
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Vymazanie terminálu"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Ak chcete položku odstrániť, stlačte kláves Delete."
+	},
 	"terminal_font_unavailable": {
 		"message": "$1 nie je k dispozícii"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Nastavenia vývojára"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Upraviť Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Upraviť SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importovať"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Ak chcete spravovať Linux, prejdite do nastavenia Pre vývojárov"
+	},
+	"terminal_home_manage": {
+		"message": "Spravovať"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nový Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nové pripojenie SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Nastaviť"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Príkaz"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Názov pripojenia"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH zakázal váš správca"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Pripojenia k vzdialenému zariadeniu sa zobrazia tu"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Zadajte cieľ vo formáte „používateľskémeno@názovhostiteľa“"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Nastavenia terminálu"
+	},
+	"terminal_input_label": {
+		"message": "Vstup terminálu"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Farby ANSI"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "Obrázok"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Výška riadkov"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Tvar"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "Zvuk zvončeka terminálu."
 	},
+	"terminal_pref_line_height": {
+		"message": "Výška riadkov na obrazovke terminálu."
+	},
 	"terminal_preview_label": {
 		"message": "Ukážka"
 	},
 	"terminal_profile_label": {
-		"message": "Aktuálny profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Resetovanie terminálu"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Vyberte súbor obrázka na pozadí z počítača."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Naozaj chcete odstrániť profil $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automaticky"
@@ -1193,6 +1232,15 @@
 	"terminal_title_theme": {
 		"message": "Motív"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Vyskytla sa chyba ovládača tmux:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Bol aktivovaný režim integrácie tmux. Ak chcete odpojiť tmux, stlačte Ctrl a C alebo zadajte príkazy pre tmux."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Príliš veľa výstupov na prečítanie. Ručne prejdite na jednotlivé riadky, ktoré chcete prečítať."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Pripojte sa k internetu a skúste to znova."
 	},
@@ -1221,7 +1269,7 @@
 		"message": "Pripojte sa z omniboxu zadaním dopytu „ssh<Tab><profile name>“: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS môže pripájať systémy súborov prostredníctvom protokolu SFTP a prehliadať ich prostredníctvom aplikácie Súbory. Použite „Pripojenie protokolu SFTP“ namiesto „Pripojiť“."
+		"message": "Chrome OS môže pripájať systémy súborov prostredníctvom protokolu SFTP a prehliadať ich prostredníctvom aplikácie Súbory. Použite „Pripojenie protokolu SFTP“ namiesto „Pripojiť“."
 	},
 	"tip_5": {
 		"message": "Pripojte sa pomocou odkazov ssh:// na webových stránkach alebo si uložte záložku na https://goo.gl/zS8EZD"

@@ -384,7 +384,7 @@
 		"message": "ថាតើត្រូវអនុញ្ញាតឱ្យម៉ាស៊ីនពីចម្ងាយ​បង្ហាញរូបភាពនៅក្នុងស្ថានីយឬអត់។\n\nតាមលំនាំដើម យើងជំរុញរហូតទាល់តែធ្វើការជ្រើសរើសរួច។"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "ប្រសិនបើកំណត់ ត្រឡប់ការកំណត់វិញចំពោះ Alt+Backspace->លុបការកំណត់មុខងារគ្រាប់ចុចឡើងវិញរបស់ Chrome OS ដើម្បីឱ្យ Alt+Backspace ក្លាយជា Alt+Backspace ពិតប្រាកដ។"
+		"message": "ប្រសិនបើកំណត់ សូមត្រឡប់​វិញ​នូវ​ការកំណត់​ឡើង​វិញ​នៃ Alt+Backspace->Delete របស់ ChromeOS ដើម្បីឱ្យ Alt+Backspace ពិតជា Alt+Backspace។"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "ជ្រើសរើសការចាប់ឬរកឃើញ AltGr ដោយស្វ័យប្រវត្តិ។\n\n'null'៖ ការចាប់ឬរកឃើញដោយស្វ័យប្រវត្តិគឺផ្អែកលើ navigator.language៖\n      'en-us' => 'none', ផ្សេងទៀត => 'right-alt'\n'none'៖ បិទការត្រាប់តាម AltGr ទាំងឡាយ។\n'ctrl-alt'៖ សន្មតថា Ctrl+Alt មានន័យថា AltGr។\n'left-alt'៖ សន្មតថា Alt ខាងឆ្វេងមានន័យថា AltGr។\n'right-alt'៖ សន្មតថា Alt ខាងស្ដាំមានន័យថា AltGr។"
@@ -525,7 +525,7 @@
 		"message": "បញ្ជូនបុព្វបទ ESC នៅពេលចុចគ្រាប់ចុច ពេលកំពុងចុចគ្រាប់ចុច Meta ឱ្យជាប់។\n\nឧទាហរណ៍ នៅពេលបើក នោះការចុច Meta+K នឹងបញ្ជូន ^[k ដូចដែលអ្នកវាយបញ្ចូល Escape រួច k ដូច្នោះដែរ។ នៅពេលបិទ នោះនឹងបញ្ជូនតែ k ប៉ុណ្ណោះ។"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "ប៊ូតុងកណ្ដុរដែលត្រូវប្រើសម្រាប់ការដាក់ចូល។\n\nសម្រាប់ការចាប់ឬរកឃើញដោយស្វ័យប្រវត្តិ យើងនឹងប្រើ​ប៊ូតុងកណ្ដុរកណ្ដាលសម្រាប់ប្រព័ន្ធដែលមិនមែនជា X11 (រួមទាំង Chrome OS ផងដែរ)។ នៅលើ X11 យើងនឹងប្រើ​ប៊ូតុងកណ្ដុរខាងស្ដាំ (ដោយសារកម្មវិធីគ្រប់គ្រងវិនដូគួរតែចាត់ចែងការដាក់ចូលតាមរយៈប៊ូតុងកណ្ដុរកណ្ដាល)។\n\n0 == ប៊ូតុងឆ្វេង (ចម្បង)។\n1 == ប៊ូតុងកណ្ដាល (ជំនួយ)។\n2 == ប៊ូតុងស្ដាំ (បន្ទាប់បន្សំ)។\n\nជម្រើសនេះគឺដាច់ដោយឡែក​ពីការកំណត់សម្រាប់ការដាក់ចូលដោយការចុចកណ្ដុរខាងស្ដាំ។\n\nចំណាំ៖ ប៊ូតុងចម្បង និងបន្ទាប់បន្សំត្រូវបានផ្លាស់ប្ដូរឱ្យ​អ្នក​​ដោយ​ស្វ័យប្រវត្តិជា​មួ​នឹង​កណ្ដុរខាងឆ្វេង និងខាងស្ដាំ។"
+		"message": "ប៊ូតុងកណ្ដុរដែលត្រូវប្រើសម្រាប់ការដាក់ចូល។\n\nសម្រាប់​ការចាប់​ដឹង​ដោយ​ស្វ័យប្រវត្តិ យើង​នឹងប្រើ​ប៊ូតុងកណ្ដុរ​កណ្ដាល​សម្រាប់​ប្រព័ន្ធ​ដែល​មិនមែនជា X11 (រួមទាំង ChromeOS ផងដែរ)។ នៅលើ X11 យើងនឹងប្រើ​ប៊ូតុងកណ្ដុរខាងស្ដាំ (ដោយសារ​កម្មវិធី​គ្រប់គ្រង​វិនដូ​គួរតែ​ចាត់ចែង​ការដាក់ចូល​តាមរយៈ​ប៊ូតុង​កណ្ដុរ​កណ្ដាល)។\n\n0 == ប៊ូតុងឆ្វេង (ចម្បង)។\n1 == ប៊ូតុងកណ្ដាល (ជំនួយ)។\n2 == ប៊ូតុងស្ដាំ (បន្ទាប់បន្សំ)។\n\nជម្រើសនេះ​គឺដាច់​ដោយឡែក​ពីការកំណត់​សម្រាប់​ការដាក់ចូល​ដោយ​ការចុច​កណ្ដុរ​ខាងស្ដាំ។\n\nចំណាំ៖ ប៊ូតុងចម្បង និងបន្ទាប់បន្សំ​ត្រូវបាន​ចាត់ចែង​ជូន​អ្នក​សម្រាប់​កណ្ដុរ​ដែល​ប្រើ​ដៃ​ខាង​ឆ្វេង និងខាងស្ដាំ។"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "ដាក់ចូលនៅពេលចុច​ប៊ូតុងកណ្ដុរខាងស្ដាំ។\n\nជម្រើសនេះគឺដាច់ដោយឡែក​ពីការកំណត់ \"mouse-paste- button\"។\n\nចំណាំ៖ ប៊ូតុងចម្បង និងបន្ទាប់បន្សំត្រូវបានផ្លាស់ប្ដូរឱ្យ​អ្នក​​ដោយ​ស្វ័យប្រវត្តិជា​មួ​នឹង​កណ្ដុរខាងឆ្វេង និងខាងស្ដាំ។"
@@ -992,6 +992,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ការសម្អាតស្ថានីយ"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "ចុចគ្រាប់ចុច delete ដើម្បីលុបធាតុ។"
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" មិន​អាចប្រើបានទេ"
 	},
@@ -1004,23 +1007,50 @@
 	"terminal_home_developer_settings": {
 		"message": "ការកំណត់​អ្នក​អភិវឌ្ឍន៍"
 	},
+	"terminal_home_edit_linux": {
+		"message": "កែ Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "កែ SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "នាំចូល"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "ចូលមើល​ជម្រើសសម្រាប់​អ្នកអភិវឌ្ឍន៍ ដើម្បីគ្រប់គ្រង Linux"
+	},
+	"terminal_home_manage": {
+		"message": "គ្រប់គ្រង"
+	},
+	"terminal_home_new_linux": {
+		"message": "Linux ថ្មី"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "ការតភ្ជាប់ SSH ថ្មី"
 	},
+	"terminal_home_set_up": {
+		"message": "រៀបចំ"
+	},
 	"terminal_home_ssh_command": {
 		"message": "ឃ្លាបញ្ជា"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "ឈ្មោះ​នៃ​ការត​ភ្ជាប់"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH ត្រូវបានបិទ​ដោយអ្នកគ្រប់គ្រង​របស់អ្នក"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "ការតភ្ជាប់ទៅ​ឧបករណ៍​ពីចម្ងាយ​នឹងបង្ហាញ​នៅទីនេះ"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "បញ្ជាក់គោលដៅ​ដោយប្រើ \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "ការកំណត់ទែមីណាល់"
+	},
+	"terminal_input_label": {
+		"message": "ធាតុបញ្ចូលទែមីណាល់"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ពណ៌ ANSI"
@@ -1043,6 +1073,9 @@
 	"terminal_name_pref_image": {
 		"message": "រូបភាព"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "កម្ពស់​បន្ទាត់"
+	},
 	"terminal_name_pref_shape": {
 		"message": "រូបរាង"
 	},
@@ -1058,11 +1091,14 @@
 	"terminal_pref_bell": {
 		"message": "កណ្ដឹងស្ថានីយដែលអាចស្ដាប់ឮ។"
 	},
+	"terminal_pref_line_height": {
+		"message": "កម្ពស់​បន្ទាត់​សម្រាប់​ជួរដេកនីមួយៗ​នៃ​អេក្រង់​ទែមីណាល់។"
+	},
 	"terminal_preview_label": {
 		"message": "មើលសាកល្បង"
 	},
 	"terminal_profile_label": {
-		"message": "កម្រងព័ត៌មានបច្ចុប្បន្ន"
+		"message": "កម្រង​ព័ត៌មាន"
 	},
 	"terminal_reset_menu_label": {
 		"message": "កំណត់ស្ថានីយឡើងវិញ"
@@ -1075,6 +1111,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ជ្រើសរើស​ឯកសារ​រូបភាព​ផ្ទៃខាងក្រោយ​ពី​កុំព្យូទ័រ​របស់អ្នក​។"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "តើអ្នក​ប្រាកដថា​ចង់​លុប​កម្រងព័ត៌មាន \"$1\" មែនឬ?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ស្វ័យប្រវត្តិ"
@@ -1199,6 +1238,15 @@
 	"terminal_title_theme": {
 		"message": "រចនាប័ទ្ម"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "ឧបករណ៍​បញ្ជា Tmux បាន​ជួប​ប្រទះ​បញ្ហា៖"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "បាន​បើក​ដំណើរការ​មុខងារ​​រួម​បញ្ចូល Tmux។ ចុច Ctrl-C ដើម្បី​ផ្ដាច់ tmux ឬ​បញ្ចូល​ឃ្លា​បញ្ជា tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "លទ្ធផលច្រើនពេកដែលត្រូវប្រកាស សូមទៅកាន់ជួរដេកដោយផ្ទាល់ដៃ ដើម្បីអាន។"
+	},
 	"terminal_try_again_with_internet": {
 		"message": "ភ្ជាប់​អ៊ីនធឺណិត រួច​ព្យាយាម​ម្ដង​ទៀត។"
 	},
@@ -1227,7 +1275,7 @@
 		"message": "ភ្ជាប់ពី​ពហុប្រអប់​ដោយវាយបញ្ចូល 'ssh<Tab><profile name>'៖ https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS អាចភ្ជាប់ប្រព័ន្ធឯកសារតាមរយៈ SFTP និងរុករកតាមរយៈកម្មវិធី Files។ ប្រើ 'ការភ្ជាប់ SFTP' ជំនួសឱ្យ 'ភ្ជាប់'។"
+		"message": "ChromeOS អាចភ្ជាប់​ប្រព័ន្ធ​ឯកសារ​តាមរយៈ SFTP និង​រុករក​តាមរយៈ​កម្មវិធី Files។ ប្រើ 'ការភ្ជាប់ SFTP' ជំនួសឱ្យ 'ភ្ជាប់'។"
 	},
 	"tip_5": {
 		"message": "ភ្ជាប់ដោយប្រើតំណ ssh:// នៅក្នុងទំព័របណ្ដាញ ឬរក្សាទុកចំណាំ៖ https://goo.gl/zS8EZD"

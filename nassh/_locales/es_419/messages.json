@@ -396,7 +396,7 @@
 		"message": "Permite que el host remoto muestre imágenes en la terminal.\n\nDe manera predeterminada, te solicitaremos que elijas una opción."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Si se establece esta preferencia, se anula la reasignación de Alt+retroceso como \"Suprimir\" en el Sistema operativo Chrome, de modo que esta combinación funcionará efectivamente como Alt+retroceso."
+		"message": "Si se establece esta preferencia, se anula la reasignación de Alt+retroceso como \"Suprimir\" en ChromeOS, de modo que esta combinación funcionará efectivamente como Alt+retroceso."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecciona la heurística de detección de AltGr.\n\n\"null\": La autodetección se basa en navigator.language:\n\"en-us\" => \"none\", si no => \"right-alt\"\n\"none\": Inhabilita cualquier emulación de AltGr.\n\"ctrl-alt\": Asume que la combinación de teclas Ctrl+Alt es AltGr.\n\"left-alt\": Asume que la tecla Alt izquierda es AltGr.\n\"right-alt\": Asume que la tecla Alt derecha es AltGr."
@@ -537,7 +537,7 @@
 		"message": "Envía un prefijo ESC cuando se presiona una tecla mientras se mantiene presionada la tecla Meta.\n\nPor ejemplo, si se presiona la combinación de teclas Meta+K con la preferencia habilitada, se enviará ^[k como si se hubiese presionado Escape y luego k. Si la preferencia está inhabilitada, solo se enviará k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "El botón del mouse para pegar.\n\nPara la autodetección, se usa el botón del medio del mouse en las plataformas que no son X11 (lo que incluye el Sistema operativo Chrome). En las plataformas X11, se usa el botón derecho del mouse (debido a que el administrador de ventanas controla las acciones de pegado con el botón del medio del mouse).\n\n0 == botón izquierdo (principal)\n1 == botón del medio (auxiliar)\n2 == botón derecho (secundario)\n\nEsta opción es independiente de la configuración para pegar con el botón derecho.\n\nNota: En los mouses para zurdos y diestros, los botones primario y secundario se administran automáticamente."
+		"message": "El botón del mouse para pegar.\n\nPara la autodetección, se usa el botón del medio del mouse en las plataformas que no son X11 (lo que incluye ChromeOS). En las plataformas X11, se usa el botón derecho del mouse (debido a que el administrador de ventanas controla las acciones de pegado con el botón del medio del mouse).\n\n0 == botón izquierdo (principal)\n1 == botón del medio (auxiliar)\n2 == botón derecho (secundario)\n\nEsta opción es independiente de la configuración para pegar con el botón derecho.\n\nNota: En los mouses para zurdos y diestros, los botones primario y secundario se administran automáticamente."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Realiza la acción de pegado con el botón derecho del mouse.\n\nEsta opción es independiente de la configuración \"mouse-paste-button\".\n\nNota: En los mouses para zurdos y diestros, los botones primario y secundario se administran automáticamente."
@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Borrar terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Presiona la tecla de borrar para quitar el elemento."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" no está disponible"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Configuración del programador"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Editar Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Editar SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importar"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Ve a Opciones para desarrolladores para administrar Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Administrar"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nuevo Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nueva conexión SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Configurar"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Comando"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nombre de la conexión"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "El administrador inhabilitó SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Las conexiones a los dispositivos remotos aparecerán aquí"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Especifica el destino, como \"nombredeusuario@nombredehost\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Configuración de la terminal"
+	},
+	"terminal_input_label": {
+		"message": "Entrada de terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Colores ANSI"
@@ -1025,6 +1055,9 @@
 	"terminal_name_pref_image": {
 		"message": "Imagen"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Altura de línea"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1037,11 +1070,14 @@
 	"terminal_pref_bell": {
 		"message": "Campana sonora de terminal."
 	},
+	"terminal_pref_line_height": {
+		"message": "La altura de línea para cada fila de la pantalla del terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Vista previa"
 	},
 	"terminal_profile_label": {
-		"message": "Perfil actual"
+		"message": "Perfil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Restablecer terminal"
@@ -1054,6 +1090,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecciona un archivo de imagen de fondo de tu computadora."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "¿Estás seguro de que quieres borrar el perfil \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1175,6 +1214,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Se produjo un error en el controlador tmux:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Se activó el modo de integración de tmux. Presiona Ctrl + C para desconectar tmux o ingresa comandos tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Hay demasiados resultados para leer. Navega las filas manualmente para leerlos."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Conéctate a Internet y vuelve a intentarlo."
 	},
@@ -1203,7 +1251,7 @@
 		"message": "Para conectarte desde el cuadro multifunción, escribe 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "El Sistema operativo Chrome puede activar sistemas de archivos mediante SFTP y navegar mediante la app de Archivos. Usa \"SFTP Mount\" en lugar de \"Connect\"."
+		"message": "ChromeOS puede activar sistemas de archivos mediante SFTP y navegar mediante la app de Archivos. Usa \"SFTP Mount\" en lugar de \"Connect\"."
 	},
 	"tip_5": {
 		"message": "Para conectarte, usa vínculos ssh:// en páginas web o guarda un favorito: https://goo.gl/zS8EZD"

@@ -396,7 +396,7 @@
 		"message": "Ikiwa itaruhusu seva pangishi ya mbali ionyeshe picha katika sehemu ya mwisho.\n\nKwa chaguomsingi, tutakudokezea hadi utakapochagua."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Kama sera hii imewekwa, huondoa Mfumo wa Uendeshaji wa Chrome kupitia mabadiliko ya Alt+Backspace->Delete, ili Alt+Backspace iwe Alt+Backspace katika hali halisi."
+		"message": "Ikiwa kimewekwa, huondoa utendaji wa kufuta kwa kubonyeza Alt+Backspace->Delete, ili utendaji wa asili wa Alt+Backspace ubaki kama ulivyo."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Chagua mazingira ya utambuzi wa AltGr.\n\n'null': Utambuzi wa kiotomatiki unalingana na navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Zima uigaji wowote wa AltGr.\n'ctrl-alt': Chukulia kuwa Ctrl+Alt inamaanisha AltGr.\n'left-alt': Chukulia kuwa Alt ya kushoto inamaanisha AltGr.\n'right-alt': Chukulia kuwa Alt ya kulia inamaanisha AltGr."
@@ -537,7 +537,7 @@
 		"message": "Tuma kiambishi cha ESC unapobonyeza kitufe huku ukishikilia kitufe cha Meta.\n\nKwa mfano, ikiwashwa, hatua ya kubonyeza Meta+K itatuma ^[k kama kwamba umeandika Escape kisha k. Inapozimwa, itatuma k pekee."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Kitufe cha kipanya cha kutumia kubandika.\n\nKwa utambuzi wa kiotomatiki, tutatumia kitufe cha katikati cha kipanya katika mifumo isiyo ya X11 (ikiwemo mfumo wa uendeshaji wa Chrome). Kwenye X11, tutatumia kitufe cha kulia cha kipanya (kwa kuwa kidhibiti cha dirisha kinapaswa kubandika kupitia kitufe cha katikati cha kipanya).\n\n0 == kitufe cha kushoto (cha msingi).\n1 == kitufe cha katikati (kisaidizi).\n2 == kitufe cha kulia (tegemezi).\n\nChaguo hili huwashwa bila kuzingatia mipangilio ya kubandika kwa kubofya kipanya kulia.\n\nKumbuka: Vitufe vya msingi na tegemezi hushughulikiwa unapotumia vipanya vya kushoto na kulia."
+		"message": "Kitufe cha kipanya cha kutumia kubandika.\n\nKwa utambuzi wa kiotomatiki, tutatumia kitufe cha katikati cha kipanya katika mifumo isiyo ya X11 (ikiwa ni pamoja na mfumo wa uendeshaji wa Chrome). Kwenye X11, tutatumia kitufe cha kulia cha kipanya (kwa kuwa kidhibiti cha dirisha kinapaswa kubandika kupitia kitufe cha katikati cha kipanya).\n\n0 == kitufe cha kushoto (cha msingi).\n1 == kitufe cha katikati (kisaidizi).\n2 == kitufe cha kulia (tegemezi).\n\nChaguo hili huwashwa bila kuzingatia mipangilio ya kubandika kwa kubofya kipanya kulia.\n\nKumbuka: Vitufe vya msingi na tegemezi hushughulikiwa unapotumia vipanya vya kushoto na kulia."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Kubandika kupitia mibofyo ya kitufe cha kulia cha kipanya.\n\nChaguo hili hutumika bila kuzingatia mipangilio ya \"mouse-paste-button\".\n\nKumbuka: Vitufe vya msingi na tegemezi hushughulikiwa unapotumia vipanya vya kushoto na kulia."
@@ -1052,6 +1052,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Kuondoa Kituo"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Bonyeza kitufe cha kufuta ili ufute kipengee."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" haipatikani"
 	},
@@ -1064,23 +1067,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Mipangilio ya msanidi programu"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Badilisha Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Badilisha muunganisho wa SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Ingiza"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Tembelea Chaguo za wasanidi programu ili udhibiti Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Dhibiti"
+	},
+	"terminal_home_new_linux": {
+		"message": "Linux Mpya"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Muunganisho mpya wa SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Weka mipangilio"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Amri"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Jina la muunganisho"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Seva ya SSH imezimwa na msimamizi wako"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Miunganisho kwenye vifaa vilivyo mbali itaonekana hapa"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Bainisha kituo kwa kutumia \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Mipangilio ya Terminal"
+	},
+	"terminal_input_label": {
+		"message": "Vifaa vya kuingiza sauti kwenye kituo"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Rangi za ANSI"
@@ -1103,6 +1133,9 @@
 	"terminal_name_pref_image": {
 		"message": "Picha"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Urefu wa mstari"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Umbo"
 	},
@@ -1118,11 +1151,14 @@
 	"terminal_pref_bell": {
 		"message": "Kengele inayosikika ya sehemu ya mwisho."
 	},
+	"terminal_pref_line_height": {
+		"message": "Urefu wa mstari kwa kila safu mlalo ya skrini ya sehemu ya mwisho"
+	},
 	"terminal_preview_label": {
 		"message": "Onyesho la kuchungulia"
 	},
 	"terminal_profile_label": {
-		"message": "Wasifu wa sasa"
+		"message": "Wasifu"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Kubadilisha Mipangilio ya Kituo"
@@ -1135,6 +1171,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Chagua faili ya picha ya mandharinyuma kutoka kwenye kompyuta yako."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Je, una uhakika kwamba unataka kufuta wasifu \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Otomatiki"
@@ -1265,6 +1304,15 @@
 	"terminal_title_theme": {
 		"message": "Mandhari"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Kidhibiti cha tmux kimepata hitilafu:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Hali ya kujumuisha tmux imewashwa. Bonyeza Ctrl-C ili uondoe tmux au uweke amri za tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Kuna data nyingi ya kutangaza, sogeza kwenye safu mlalo wewe mwenyewe ili usome."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Unganisha kwenye Intaneti kisha ujaribu tena."
 	},
@@ -1293,7 +1341,7 @@
 		"message": "Unganisha kutoka sanduku kuu kwa kuandika 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Mfumo wa uendeshaji wa Chrome unaweza kupachika mifumo ya faili kupitia SFTP na kuvinjari kupitia programu ya Faili. Tumia 'Upachikaji wa SFTP ' badala ya 'Kuunganisha'."
+		"message": "Mfumo wa uendeshaji wa Chrome unaweza kupachika mifumo ya faili kupitia SFTP na kuvinjari kupitia programu ya Faili. Tumia 'Sehemu ya Kupachika ya SFTP' badala ya 'Kuunganisha'."
 	},
 	"tip_5": {
 		"message": "Unganisha ukitumia viungo vya ssh:// katika kurasa za wavuti au uhifadhi alamisho: https://goo.gl/zS8EZD"

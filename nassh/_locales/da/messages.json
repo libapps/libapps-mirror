@@ -393,7 +393,7 @@
 		"message": "Angiv, om den eksterne host må vise billeder i terminalen.\n\nVi spørger som standard, indtil der foretages et valg."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Hvis den angives, annulleres Chrome OS-tilknytningen af Alt+Backspace->Slet, så Alt+Backspace faktisk er Alt+Backspace."
+		"message": "Hvis den er angivet, annulleres ChromeOS-tilknytningen af Alt + Backspace -> Delete, så Alt + Backspace faktisk er Alt + Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Vælg en registreringsheuristik for AltGr.\n\n\"null\": Registrer automatisk baseret på navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n\"none\": Deaktiver alle AltGr-emuleringer.\n\"ctrl-alt\": Gå ud fra, at Ctrl+Alt er AltGr.\n\"left-alt\": Gå ud fra, at venstre Alt-tast er AltGr.\n\"right-alt\": Gå ud fra, at højre Alt-tast er AltGr."
@@ -534,7 +534,7 @@
 		"message": "Send et ESC-præfiks, når du trykker på en tast, mens du holder metatasten nede.\n\nNår dette er aktiveret, og du f.eks. trykker på Meta-K, sendes ^[k, som om du har tastet Escape og derefter k. Når dette er deaktiveret, sendes kun k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Den museknap, der skal bruges til indsætning.\n\nVed automatisk registrering bruger vi den midterste museknap til platforme, der ikke er X11, (bl.a. Chrome OS). På X11 bruger vi den højre museknap (da vinduesadministratoren burde indsætte via den midterste museknap).\n\n0 == venstre (primær) knap.\n1 == midterste (ekstra) knap.\n2 == højre (sekundær) knap.\n\nDenne valgmulighed er uafhængig af indstillingen for indsætning med højreklik.\n\nBemærk! De primære og sekundære knapper justeres, afhængigt af om du bruger venstre eller højre hånd til musen."
+		"message": "Den museknap, der skal bruges til indsætning.\n\nVed automatisk registrering bruger vi den midterste museknap til platforme, der ikke er X11, (bl.a. ChromeOS). På X11 bruger vi den højre museknap (da vinduesadministratoren bør indsætte via den midterste museknap).\n\n0 == venstre (primær) knap.\n1 == midterste (ekstra) knap.\n2 == højre (sekundær) knap.\n\nDenne valgmulighed er uafhængig af indstillingen for indsætning med højreklik.\n\nBemærk! De primære og sekundære knapper justeres, afhængigt af om du bruger venstre eller højre hånd til musen."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Indsæt med klik på højre museknap.\n\nDenne valgmulighed er uafhængig af indstillingen \"mus-indsæt-knap\".\n\nBemærk! De primære og sekundære knapper justeres, afhængigt af om du bruger venstre eller højre hånd til musen."
@@ -1076,6 +1076,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminalen er ryddet"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Tryk på Delete-tasten for at slette elementet."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" er ikke tilgængelig"
 	},
@@ -1085,17 +1088,41 @@
 	"terminal_home_developer_settings": {
 		"message": "Indstillinger for udviklere"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Rediger Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Rediger SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importér"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Gå til Indstillinger for udviklere for at administrere Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Administrer"
+	},
+	"terminal_home_new_linux": {
+		"message": "Ny Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Ny SSH-forbindelse"
 	},
+	"terminal_home_set_up": {
+		"message": "Konfigurer"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Kommando"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Forbindelsesnavn"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH er blevet deaktiveret af din administrator"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Forbindelser til fjernenheder vises her"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Angiv destinationen ved hjælp af \"username@hostname\""
@@ -1124,6 +1151,9 @@
 	"terminal_name_pref_image": {
 		"message": "Billede"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Linjehøjde"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Form"
 	},
@@ -1139,11 +1169,14 @@
 	"terminal_pref_bell": {
 		"message": "Hørbar terminalklokke"
 	},
+	"terminal_pref_line_height": {
+		"message": "Linjehøjden for hver række på terminalskærmen."
+	},
 	"terminal_preview_label": {
 		"message": "Forhåndsvisning"
 	},
 	"terminal_profile_label": {
-		"message": "Nuværende profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminalen er nulstillet"
@@ -1156,6 +1189,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Vælg et baggrundsbillede fra din computer."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Er du sikker på, at du vil slette profilen \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatisk"
@@ -1283,6 +1319,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux-controlleren stødte på en fejl:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux-integrationstilstanden er aktiveret. Tryk på Ctrl-C for at frigøre tmux, eller indtast tmux-kommandoer"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Der er for meget output til at læse højt, gå til rækkerne manuelt for at læse dem."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Opret forbindelse til internettet, og prøv igen."
 	},
@@ -1311,7 +1356,7 @@
 		"message": "Opret forbindelse via omnifeltet ved at angive 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS kan isætte filsystemer via SFTP og gennemse via appen Filer. Brug \"SFTP-isætning\" i stedet for \"Opret forbindelse\"."
+		"message": "ChromeOS kan tilslutte filsystemer via SFTP og gennemse via appen Filer. Brug \"SFTP-tilslutning\" i stedet for \"Kontakt\"."
 	},
 	"tip_5": {
 		"message": "Opret forbindelse ved hjælp af ssh://-links på websider, eller gem et bogmærke: https://goo.gl/zS8EZD"

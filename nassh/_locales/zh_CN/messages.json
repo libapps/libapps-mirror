@@ -396,7 +396,7 @@
 		"message": "是否允许远程主机在终端中显示图片。\n\n默认情况下，我们会发出提示，直到用户做出选择为止。"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "设置完成后，系统将撤消 Chrome 操作系统中的 Alt+退格键->Delete 这项重映射，Alt+退格键将不再有映射。"
+		"message": "设置完毕后，系统将撤消 ChromeOS 中的 Alt+退格键->Delete 这项重映射，Alt+退格键将不再有映射。"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "选择一种启发法来进行 AltGr 检测。\n\n“null”：根据 navigator.language 自动检测：\n      “en-us”=>“none”，其他 =>“right-alt”\n“none”：停用所有 AltGr 模拟。\n“ctrl-alt”：假设 Ctrl+Alt 表示 AltGr。\n“left-alt”：假设左 Alt 键表示 AltGr。\n“right-alt”：假设右 Alt 键表示 AltGr。"
@@ -537,7 +537,7 @@
 		"message": "在按住 Meta 键的同时按某个键会传送 ESC 前缀。\n\n例如：当您启用此设置后，按 Meta+K 会传送 ^[k，这和您依次按 Esc 键和 K 键的效果一样。当您停用此设置后，按 Meta+K 会仅传送 K 键。"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "指定用于执行粘贴操作的鼠标按键。\n\n自动检测时，我们将在非 X11 平台（包括 Chrome 操作系统）上使用鼠标中键。在 X11 平台上，我们将使用鼠标右键（因为窗口管理器需要使用鼠标中键处理粘贴操作）。\n\n0 == 左键（主要）。\n1 == 中键（辅助）。\n2 == 右键（次要）。\n\n此选项不受“mouse-right-click-paste”设置的影响。\n\n注意：无论您使用的是左手鼠标还是右手鼠标，此选项都能正确处理主要按键和次要按键。"
+		"message": "指定用于执行粘贴操作的鼠标按键。\n\n自动检测时，我们将在 X11 以外的平台（包括 ChromeOS）上使用鼠标中键。在 X11 平台上，我们将使用鼠标右键（因为窗口管理器需要使用鼠标中键处理粘贴操作）。\n\n0 == 左键（主要）。\n1 == 中键（辅助）。\n2 == 右键（次要）。\n\n此选项不受“右键点击粘贴”设置的影响。\n\n注意：无论您使用的是左手鼠标还是右手鼠标，此选项都能正确处理主要按键和次要按键。"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "点击鼠标右键时执行粘贴操作。\n\n此选项不受“mouse-paste-button”设置的影响。\n\n注意：无论您使用的是左手鼠标还是右手鼠标，此选项都能正确处理主要按键和次要按键。"
@@ -986,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "清空终端屏幕"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "按 Delete 键即可删除这项内容。"
+	},
 	"terminal_font_unavailable": {
 		"message": "无法加载“$1”"
 	},
@@ -998,23 +1001,50 @@
 	"terminal_home_developer_settings": {
 		"message": "开发者设置"
 	},
+	"terminal_home_edit_linux": {
+		"message": "修改 Linux 容器"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "修改 SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "导入"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "访问“开发者选项”即可管理 Linux"
+	},
+	"terminal_home_manage": {
+		"message": "管理"
+	},
+	"terminal_home_new_linux": {
+		"message": "新建 Linux 容器"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "新建 SSH 连接"
 	},
+	"terminal_home_set_up": {
+		"message": "设置"
+	},
 	"terminal_home_ssh_command": {
 		"message": "命令"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "连接名称"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH 已被您的管理员停用"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "与远程设备的连接关系会显示在此处"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "请使用“username@hostname”指定目的地"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "终端设置"
+	},
+	"terminal_input_label": {
+		"message": "终端输入"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI 颜色"
@@ -1037,6 +1067,9 @@
 	"terminal_name_pref_image": {
 		"message": "图片"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "行高"
+	},
 	"terminal_name_pref_shape": {
 		"message": "形状"
 	},
@@ -1052,11 +1085,14 @@
 	"terminal_pref_bell": {
 		"message": "听得见的终端铃声。"
 	},
+	"terminal_pref_line_height": {
+		"message": "终端屏幕上每一行的行高。"
+	},
 	"terminal_preview_label": {
 		"message": "预览"
 	},
 	"terminal_profile_label": {
-		"message": "当前配置文件"
+		"message": "配置文件"
 	},
 	"terminal_reset_menu_label": {
 		"message": "重置终端设置"
@@ -1069,6 +1105,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "请从您的计算机中选择一个背景图片文件。"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "确定要删除配置文件“$1”吗？"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "自动"
@@ -1202,6 +1241,15 @@
 	"terminal_title_theme": {
 		"message": "主题背景"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux 控制器遇到了错误："
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux 集成模式已启用。按 Ctrl-C 分离 tmux，或者输入 tmux 命令"
+	},
+	"terminal_too_much_output_message": {
+		"message": "输出太多，无法朗读，请手动切换到各行以便朗读。"
+	},
 	"terminal_try_again_with_internet": {
 		"message": "请连接到互联网，然后重试。"
 	},
@@ -1230,7 +1278,7 @@
 		"message": "您可通过在多功能框中输入“ssh<Tab 键><配置文件名称>”来连接到 https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome 操作系统可通过 SFTP 装载文件系统，并通过“文件”应用进行浏览。请使用“装载 SFTP”而非“连接”。"
+		"message": "ChromeOS 可通过 SFTP 装载文件系统，并通过“文件”应用进行浏览。请使用“装载 SFTP”而非“连接”。"
 	},
 	"tip_5": {
 		"message": "在网页中使用 ssh:// 链接进行连接，或者保存书签：https://goo.gl/zS8EZD"

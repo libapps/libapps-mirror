@@ -396,7 +396,7 @@
 		"message": "원격 호스트가 터미널의 이미지를 표시하도록 허용할지 선택합니다.\n\n기본적으로 선택이 이루어질 때까지 메시지가 표시됩니다."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "설정하면 Chrome OS의 Alt + 백스페이스-> Delete 재배치가 실행취소되므로 Alt + 백스페이스가 원래대로 작동하게 됩니다."
+		"message": "설정하면 ChromeOS의 Alt + 백스페이스-> Delete 재배치가 실행취소되므로 Alt + 백스페이스가 원래대로 작동하게 됩니다."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr 감지 휴리스틱을 선택합니다.\n\n'null': navigator.language를 기준으로 자동 감지합니다.\n      'en-us' => 'none', 기타 => 'right-alt'\n'none': AltGr 에뮬레이션을 사용 중지합니다.\n'ctrl-alt': Ctrl + Alt가 AltGr이라고 가정합니다.\n'left-alt': 왼쪽 Alt가 AltGr이라고 가정합니다.\n'right-alt': 오른쪽 Alt가 AltGr이라고 가정합니다."
@@ -537,7 +537,7 @@
 		"message": "메타 키를 누르고 있는 동안 키를 누르면 ESC 접두어를 전송합니다.\n\n예를 들어 사용 설정된 경우 메타 + K 키를 누르면 Esc와 k를 입력한 것처럼 ^[k가 전송됩니다. 사용 중지된 경우 k만 전송됩니다."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "붙여넣기에 사용할 마우스 버튼입니다.\n\n자동 감지의 경우 X11이 아닌 플랫폼(Chrome OS 포함)에서 가운데 마우스 버튼이 사용됩니다. X11에서는 마우스 오른쪽 버튼이 사용됩니다. 창 관리자에서 마우스 가운데 버튼이 붙여넣기에 사용되기 때문입니다.\n\n0 == 왼쪽(기본) 버튼\n1 == 가운데(예비) 버튼\n2 == 오른쪽(보조) 버튼\n\n이 옵션은 마우스 오른쪽 버튼 클릭으로 붙여넣기 설정과 관계없이 작동됩니다.\n\n참고: 왼손잡이용 및 오른손잡이용 마우스에서 기본 버튼과 보조 버튼을 사용할 수 있게 처리됩니다."
+		"message": "붙여넣기에 사용할 마우스 버튼입니다.\n\n자동 감지의 경우 X11이 아닌 플랫폼(ChromeOS 포함)에서 가운데 마우스 버튼이 사용됩니다. X11에서는 마우스 오른쪽 버튼이 사용됩니다. 창 관리자에서 마우스 가운데 버튼이 붙여넣기에 사용되기 때문입니다.\n\n0 == 왼쪽(기본) 버튼\n1 == 가운데(예비) 버튼\n2 == 오른쪽(보조) 버튼\n\n이 옵션은 마우스 오른쪽 버튼 클릭으로 붙여넣기 설정과 관계없이 작동됩니다.\n\n참고: 왼손잡이용 및 오른손잡이용 마우스에서 기본 버튼과 보조 버튼을 사용할 수 있게 처리됩니다."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "마우스 오른쪽 버튼 클릭으로 붙여넣습니다.\n\n이 옵션은 'mouse-paste-button' 설정과 관계없이 작동됩니다.\n\n참고: 왼손잡이용 및 오른손잡이용 마우스에서 기본 버튼과 보조 버튼을 사용할 수 있게 처리됩니다."
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "터미널 삭제"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Delete 키를 눌러서 항목을 삭제합니다."
+	},
 	"terminal_font_unavailable": {
 		"message": "‘$1’ 글꼴을 사용할 수 없습니다."
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "개발자 설정"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux 수정"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH 수정"
 	},
 	"terminal_home_import_identity": {
 		"message": "가져오기"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "개발자 옵션으로 가서 Linux 관리하기"
+	},
+	"terminal_home_manage": {
+		"message": "관리"
+	},
+	"terminal_home_new_linux": {
+		"message": "새 Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "새 SSH 연결"
 	},
+	"terminal_home_set_up": {
+		"message": "설정"
+	},
 	"terminal_home_ssh_command": {
 		"message": "명령어"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "연결 이름"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "관리자가 SSH를 사용 중지했습니다."
+	},
+	"terminal_home_ssh_empty": {
+		"message": "원격 기기 연결이 여기 표시됩니다."
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "'username@hostname'으로 대상을 지정하지 않았습니다."
 	},
 	"terminal_home_terminal_settings": {
 		"message": "터미널 설정"
+	},
+	"terminal_input_label": {
+		"message": "터미널 입력"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI 색상"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "이미지"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "줄 높이"
+	},
 	"terminal_name_pref_shape": {
 		"message": "모양"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "터미널 벨을 들을 수 있습니다."
 	},
+	"terminal_pref_line_height": {
+		"message": "터미널 화면 내 각 행의 줄 높이입니다."
+	},
 	"terminal_preview_label": {
 		"message": "미리보기"
 	},
 	"terminal_profile_label": {
-		"message": "현재 프로필"
+		"message": "프로필"
 	},
 	"terminal_reset_menu_label": {
 		"message": "터미널 초기화"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "컴퓨터에서 배경 이미지 파일을 선택하세요."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "\"$1\" 프로필을 삭제하시겠습니까?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "자동"
@@ -1190,6 +1229,15 @@
 	"terminal_title_theme": {
 		"message": "테마"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "tmux 컨트롤러에 오류가 발생했습니다."
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "tmux 통합 모드가 활성화되었습니다. tmux를 분리하거나 tmux 명령어를 입력하려면 Ctrl-C를 누르세요."
+	},
+	"terminal_too_much_output_message": {
+		"message": "공지할 내용이 너무 많습니다. 읽으려면 행으로 직접 이동하세요."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "인터넷에 연결하고 다시 시도해 보세요."
 	},
@@ -1218,7 +1266,7 @@
 		"message": "검색주소창에 'ssh<Tab><프로필 이름>'을 입력하여 연결하세요(참고: https://goo.gl/V7o8ki)."
 	},
 	"tip_4": {
-		"message": "Chrome OS에서 SFTP를 통해 파일 시스템을 마운트하고 파일 앱을 통해 탐색할 수 있습니다. '연결' 대신 'SFTP 마운트'를 사용하세요."
+		"message": "ChromeOS에서 SFTP를 통해 파일 시스템을 마운트하고 파일 앱을 통해 탐색할 수 있습니다. '연결' 대신 'SFTP 마운트'를 사용하세요."
 	},
 	"tip_5": {
 		"message": "웹페이지에서 ssh:// 링크를 사용하여 연결하거나 북마크를 저장하세요(참고: https://goo.gl/zS8EZD)."

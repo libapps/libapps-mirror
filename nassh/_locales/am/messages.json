@@ -72,7 +72,7 @@
 		"message": "መግለጫ"
 	},
 	"field_description_placeholder": {
-		"message": "username@hostname ወይም ነፃ ቅርጽ ያለው ጽሑፍ"
+		"message": "username@hostname ወይም ነፃ ቅርጽ ያለው ጽሁፍ"
 	},
 	"field_hostname_aria_label": {
 		"message": "የአስተናጋጅ ስም"
@@ -195,7 +195,7 @@
 		"message": "በመውጣት ወቅት መስኮትን ዝጋ"
 	},
 	"hterm_name_pref_color_palette_overrides": {
-		"message": "መነሻ የቀለም ቤተ-ስዕል"
+		"message": "መነሻ የቀለም ቤተ-ሥዕል"
 	},
 	"hterm_name_pref_copy_on_select": {
 		"message": "ራስ-ሰር ቅጂ የተመረጠ ይዘት"
@@ -234,10 +234,10 @@
 		"message": "የጽሑፍ ብልጭ ድርግም ማለትን አንቃ"
 	},
 	"hterm_name_pref_enable_bold": {
-		"message": "የደማቅ ጽሑፍ ባህሪ"
+		"message": "የደማቅ ጽሁፍ ባህሪ"
 	},
 	"hterm_name_pref_enable_bold_as_bright": {
-		"message": "ከደማቅ ጽሑፍ ጋር ብሩሕ ቀለማት ይጠቀሙ"
+		"message": "ከደማቅ ጽሁፍ ጋር ብሩሕ ቀለማት ይጠቀሙ"
 	},
 	"hterm_name_pref_enable_clipboard_notice": {
 		"message": "ይዘትን በመቅዳት ወቅት ማሳወቂያ አሳይ"
@@ -369,7 +369,7 @@
 		"message": "ብጁ CSS (URI)"
 	},
 	"hterm_name_pref_user_css_text": {
-		"message": "ብጁ CSS (የመስመር ውስጥ ጽሑፍ)"
+		"message": "ብጁ CSS (የመስመር ውስጥ ጽሁፍ)"
 	},
 	"hterm_name_pref_word_break_match_left": {
 		"message": "ራስ-ሰር የምርጫ ማስቆም (ወደ ግራ)"
@@ -396,7 +396,7 @@
 		"message": "የርቀት አስተናጋጁ ምስሎችን በማሳያው ውስጥ እንዲያሳይ ይፈቀድለት እንደሆነ።\n\nበነባሪነት አንድ ምርጫ እስኪደረግ ድረስ እንጠይቃለን።"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "ከተዋቀረ የChrome OS Alt+Backspace->Delete ማዛመጃውን ይቀለብሳል፣ በዚህም alt+backspace በእርግጥ alt+backspace ይሆናል።"
+		"message": "ከተዋቀረ የChromeOS Alt+Backspace->Delete ማዛመጃውን ይቀለብሳል፣ በዚህም Alt+Backspace በእርግጥ Alt+Backspace ይሆናል።"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "አንድ የAltGr ማግኛ ራስ-አስተማሪን ይምረጡ።\n\n'null': በnavigator.language ላይ ተመስርተው በራስ-ያግኙ፦\n      'en-us' => 'none', else => 'right-alt'\n'none': ማንኛውም የAltGr ማስመሰልን ያሰናክሉ።\n'ctrl- alt': Ctrl+Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'left-alt': የግራ Alt ማለት AltGr እንደሆነ ይቁጠሩ።\n'right-alt': የቀኝ Alt ማለት AltGr እንደሆነ ይቁጠሩ።"
@@ -408,10 +408,10 @@
 		"message": "የAlt ቁልፉ እንዴት እንደሚሰራ ይቆጣጠራል።\n\n  escape፦ የESC ቅድመ-ቅጥያ ላክ።\n  8-bit፦ በxterm ላይ እንዳለው ቁምፊ በተተየበው ቁምፊ ላይ 128 አክል።\n  browser-key፦ የቁልፍ ጭነት ክስተቱን ይጠብቁና አሳሹ ምን እንደሚል ይመልከቱ። (ይህ አሳሹ ለአንዳንድ የAlt ተከታታዮች ነባሪ እርምጃ በሚያከናውንባቸው የመሣሪያ ስርዓቶች ላይ በደንብ አይሠራም።)"
 	},
 	"hterm_pref_audible_bell_sound": {
-		"message": "የማሳያው ደወል ድምጽ ዩአርኤል። ምንም ለማይሰማ ደወል ባዶ ሕብረቁምፊ።"
+		"message": "የማሳያው ደወል ድምፅ ዩአርኤል። ምንም ለማይሰማ ደወል ባዶ ሕብረቁምፊ።"
 	},
 	"hterm_pref_background_color": {
-		"message": "ሌላ ምንም የቀለም አይነታዎች ለሌለው ጽሑፍ የጀርባው ቀለም።"
+		"message": "ሌላ ምንም የቀለም አይነታዎች ለሌለው ጽሁፍ የጀርባው ቀለም።"
 	},
 	"hterm_pref_background_image": {
 		"message": "የጀርባው ምስል የCSS እሴት። ምንም ምስል ላለማስቀመጥ ባዶ እንደሆነ ይተዉት።\n\nለምሳሌ፦\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
@@ -474,10 +474,10 @@
 		"message": "እውነት ከሆነ የብልጭታ አይነታውን ያክብሩ። እሱን ችላ ለማለት ሐሰት።"
 	},
 	"hterm_pref_enable_bold": {
-		"message": "እውነት ከሆነ የደማቅ/ብሩህ አይነታ ላለው ጽሑፍ የደማቅ ክብደት ቅርጸ-ቁምፊውን ይጠቀሙ። የመደበኛ ክብደት ቅርጸ-ቁምፊውን ለመጠቀም ሐሰት። በራስ-ለማግኘት አልቦ።"
+		"message": "እውነት ከሆነ የደማቅ/ብሩህ አይነታ ላለው ጽሁፍ የደማቅ ክብደት ቅርጸ-ቁምፊውን ይጠቀሙ። የመደበኛ ክብደት ቅርጸ-ቁምፊውን ለመጠቀም ሐሰት። በራስ-ለማግኘት አልቦ።"
 	},
 	"hterm_pref_enable_bold_as_bright": {
-		"message": "እውነት ከሆነ የደማቅ አይነታው ላለው ማንኛውም ጽሑፍ ብሩህ ቀለማትን (በባለ16 ቀለም ቤተ-ስዕል ላይ 8-15) ይጠቀሙ። አለበለዚያ ሐሰት።"
+		"message": "እውነት ከሆነ የደማቅ አይነታው ላለው ማንኛውም ጽሁፍ ብሩህ ቀለማትን (በባለ16 ቀለም ቤተ-ሥዕል ላይ 8-15) ይጠቀሙ። አለበለዚያ ሐሰት።"
 	},
 	"hterm_pref_enable_clipboard_notice": {
 		"message": "አስተናጋጁ ወደ የቅንጥብ ሰሌዳው ሲጽፍ በማሳያ ውስጥ መልዕክት አሳይ።"
@@ -504,7 +504,7 @@
 		"message": "የተመረጠውን የተገኘ ውጤት ለማጉላት የጀርባው ቀለም።"
 	},
 	"hterm_pref_font_family": {
-		"message": "ለማሳያው ጽሑፍ ነባሪው የቅርጸ-ቁምፊ ቤተሰብ።"
+		"message": "ለማሳያው ጽሁፍ ነባሪው የቅርጸ-ቁምፊ ቤተሰብ።"
 	},
 	"hterm_pref_font_size": {
 		"message": "ነባሪው የቅርጸ-ቁምፊ መጠን በፒክሰል።"
@@ -513,7 +513,7 @@
 		"message": "የCSS ቅርጸ-ቁምፊ ማለስለሻ ንብረት።"
 	},
 	"hterm_pref_foreground_color": {
-		"message": "ሌላ ምንም የቀለም አይነታዎች ለሌለው ጽሑፍ የፊት ቀለም።"
+		"message": "ሌላ ምንም የቀለም አይነታዎች ለሌለው ጽሁፍ የፊት ቀለም።"
 	},
 	"hterm_pref_hide_mouse_while_typing": {
 		"message": "ሲተይቡ መዳፊቱ በራስ-ሰር ይደበቅ እንደሆነ። በነብሪነት የመሣሪያ ሥርዓቱ/ሥርዓተ ክወናውን ይህን ይቆጣጠር እንደሆነ በራስ-ያግኙ።\n\nማስታወሻ፦ የእርስዎ ሥርዓተ ክወና ይህን ቅንብር ሊሽረው ይችላል፣ እና እርስዎ ሁልጊዜ ማሰናከል ላይችሉ ይችላሉ።"
@@ -537,7 +537,7 @@
 		"message": "የዲበ ቁልፉን ተጭነው ሳለ አንድ ቁልፍ ሲጫኑ የESC ቅድመ-ቅጥያ ይላኩ።\n\nለምሳሌ፣ ሲነቃ Meta+K መጫን ልክ k እንደተየቡ አድርጎ ^[k ይልካል። ሲሰናከል k ብቻ ነው የሚላከው።"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "ለመለጠፍ ሥራ ላይ የሚውለው የመዳፊት አዝራር።\n\nበራስ-ሰር ለማግኘት የመሃል መዳፊት አዝራሩን የX11 መሣሪያ ሥርዓቶች ላልሆኑ (Chrome OS ጨምሮ) እንጠቀምበታለን። X11 ላይ የቀኝ መዳፊት አዝራሩን እንጠቀማለን (የመስኮት አቀናባሪ በመሃል መዳፊት አዝራር መያዝ ስላለበት)።\n\n0 == የግራ (ዋና) አዝራር።\n1 == የመሃል (ደጋፊ) አዝራር።\n2 == የቀኝ (ሁለተኛ) አዝራር።\n\nይህ አማራጭ ከቀኝ ጠቅታ መለጠፍ ቅንብሩ የተለየ ነው።\n\nማስታወሻ፦ ዋናዎቹ እና ሁለተኛ ደረጃዎቹ አዝራሮች ከግራ እና ከቀኝ እጅ መዳፊቶች ጋር ለእርስዎ ይስተናገዳሉ።"
+		"message": "ለመለጠፍ ስራ ላይ የሚውለው የመዳፊት አዝራር።\n\nበራስ-ሰር ለማግኘት የX11 መሣሪያ ስርዓቶች ላልሆኑ (ChromeOS ጨምሮ) የመሃል መዳፊት አዝራሩን እንጠቀማለን። X11 ላይ የቀኝ መዳፊት አዝራሩን እንጠቀማለን (የመስኮት አስተዳዳሪ መለጠፍን በመሃል መዳፊት አዝራር መያዝ ስላለበት)።\n\n0 == የግራ (ዋና) አዝራር።\n1 == የመሃል (ደጋፊ) አዝራር።\n2 == የቀኝ (ሁለተኛ) አዝራር።\n\nይህ አማራጭ ከቀኝ ጠቅታ መለጠፍ ቅንብሩ የተለየ ነው።\n\nማስታወሻ፦ ዋናዎቹ እና ሁለተኛ ደረጃዎቹ አዝራሮች ከግራ እና ከቀኝ እጅ መዳፊቶች ጋር ለእርስዎ ይስተናገዳሉ።"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "በቀኝ የመዳፊት አዝራር ጠቅታዎች ላይ ይለጥፉ።\n\nይህ አማራጭ ከ«የመዳፊት-ጠቅታ-ለጥፍ» ቅንብሩ ነፃ ነው።\n\nማስታወሻ፦ ዋናዎቹ እና ሁለተኛ ደረጃዎቹ አዝራሮች ከግራ እና ከቀኝ እጅ መዳፊቶች ጋር ለእርስዎ ይስተናገዳሉ።"
@@ -570,7 +570,7 @@
 		"message": "Meta+V ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nበአንዳንድ ስርዓቶች ላይ ይህ ይዘትን ለመለጠፍ ስራ ላይ ይውላል።"
 	},
 	"hterm_pref_paste_on_drop": {
-		"message": "እውነት ከሆነ ጎትቶ ጣል ማድረግ ተርሚናሉ ላይ ይለጥፋል።\nሐሰት ከሆነ የተጣለው ጽሑፍ ችላ ይባላል።"
+		"message": "እውነት ከሆነ ጎትቶ ጣል ማድረግ ተርሚናሉ ላይ ይለጥፋል።\nሐሰት ከሆነ የተጣለው ጽሁፍ ችላ ይባላል።"
 	},
 	"hterm_pref_screen_border_color": {
 		"message": "በተርሚናል ማያ ገጹ ክፈፍ አካባቢ ያለ ቀለም።\n\nይህ በማያ ገጹ ጫፎች ላይ የሚታዩ መስመሮችን ለመፍጠር በተርሚናል ማያ ገጹ ክፈፍ አካባቢ ያለውን ቀለም ይቆጣጠራል።"
@@ -588,7 +588,7 @@
 		"message": "በተርሚናል ውጽዓት ላይ ወደ ታች ይሸበለል እንደሆነ።"
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "ተለዋጭ የማያ ገጽ ቋጡን ሲጠቀሙ እና DECCKM (የመተግበሪያ ጠቋሚ ቁልፎች) ገቢር ሲሆን የመዳፊት ጎማ ሽብለላ ክስተቶች የቀስት ቁልፎችን ያስመስላሉ።\n\nየShift ቁልፉን በመያዝ ለጊዜው ሊሰናከል ይችላል።\n\nይህ ጠሪዎችን (ያነሰ) ሲጠቀሙ ወይም የመመሪያ ገጾችን ወይም ጽሑፍ አቀናባሪዎችን (vi/nano) ሲያነብቡ ወይም ማያ ገጽ/tmuxን ሲጠቀሙ በተደጋጋሚነት ይመጣል።"
+		"message": "ተለዋጭ የማያ ገጽ ቋጡን ሲጠቀሙ እና DECCKM (የመተግበሪያ ጠቋሚ ቁልፎች) ገቢር ሲሆን የመዳፊት ጎማ ሽብለላ ክስተቶች የቀስት ቁልፎችን ያስመስላሉ።\n\nየShift ቁልፉን በመያዝ ለጊዜው ሊሰናከል ይችላል።\n\nይህ ጠሪዎችን (ያነሰ) ሲጠቀሙ ወይም የመመሪያ ገጾችን ወይም ጽሁፍ አቀናባሪዎችን (vi/nano) ሲያነብቡ ወይም ማያ ገጽ/tmuxን ሲጠቀሙ በተደጋጋሚነት ይመጣል።"
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "በፒክሰል ሲለካ የመዳፊት አሸብላይ ጎማ ክስተቶች ማባዣ።\n\nገጹ በምን ያህል ፍጥነት እንደሚሸበለል ይቀይራል።"
@@ -609,7 +609,7 @@
 		"message": "በተርሚናል ሰነዱ ውስጥ የሚካተተው የተጠቃሚ ቅጥ ሉህ ዩአርኤል።"
 	},
 	"hterm_pref_user_css_text": {
-		"message": "ለተርሚናሉ ቅጥ የሚሰራ ብጁ የCSS ጽሑፍ።"
+		"message": "ለተርሚናሉ ቅጥ የሚሰራ ብጁ የCSS ጽሁፍ።"
 	},
 	"hterm_pref_word_break_match_left": {
 		"message": "ከአንድ ምርጫ በስተግራ (መጀመሪያ) ማዛመድን የሚያቆም መደበኛ የሒሳብ ሐረግ።\n\nይህ በመደበኛነት የተወሰኑ ቁምፊዎችን ውድቅ የሚያደርግ የቁምፊ መደብ ነው።\nዱካዎች በተደጋጋሚነት በእነዚህ ስለሚጀምሩ «~» እና «.» በነባሪነት እንፈቅዳለን።"
@@ -837,13 +837,13 @@
 		"message": "$1ን ማንበብ አልተሳካም፦ $2"
 	},
 	"nasftp_error_internal": {
-		"message": "ያልተስተናገድ ውስጣዊ ስሕተት፣ እባክዎ ሳንካ ያስገቡ፦ $1"
+		"message": "ያልተስተናገድ ውስጣዊ ስህተት፣ እባክዎ ሳንካ ያስገቡ፦ $1"
 	},
 	"nasftp_error_invalid_number": {
 		"message": "$1: $2: ልክ ያልኾነ ቁጥር: $3"
 	},
 	"nasftp_error_message": {
-		"message": "ስሕተት፦ $1"
+		"message": "ስህተት፦ $1"
 	},
 	"nasftp_error_missing_protocol_extension": {
 		"message": "$1፦ አስፈላጊ የ«$2» ቅጥያ በዚህ አገልጋይ አይገኝም"
@@ -998,6 +998,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ተርሚናልን ማጽዳት"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "ንጥሉን ለማጥፋት ሰርዝ የሚለውን ቁልፍ ይጫኑ።"
+	},
 	"terminal_font_unavailable": {
 		"message": "«$1» አይገኝም"
 	},
@@ -1010,14 +1013,29 @@
 	"terminal_home_developer_settings": {
 		"message": "የገንቢ ቅንብሮች"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linuxን አርትዕ"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "ኤስኤስኤች ያርትዑ"
 	},
 	"terminal_home_import_identity": {
 		"message": "አስመጣ"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "ሊኑክስን ለማቀናበር የገንቢ አማራጮችን ይጎብኙ"
+	},
+	"terminal_home_manage": {
+		"message": "አቀናብር"
+	},
+	"terminal_home_new_linux": {
+		"message": "አዲስ Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "አዲስ የኤስኤስኤች ግንኙነት"
+	},
+	"terminal_home_set_up": {
+		"message": "አዋቅር"
 	},
 	"terminal_home_ssh": {
 		"message": "ኤስኤስኤች"
@@ -1025,11 +1043,23 @@
 	"terminal_home_ssh_command": {
 		"message": "ትዕዛዝ"
 	},
+	"terminal_home_ssh_connection_name": {
+		"message": "የግንኙነት ስም"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "ኤስኤስኤች በአስተዳዳሪዎ ተሰናክሏል"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "ከርቀት መሣሪያዎች ጋር ያሉ ግንኙነቶች እዚህ ይመጣሉ"
+	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "መድረሻውን በ\"username@hostname\" ይግለጹ"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "የተርሚናል ቅንብሮች"
+	},
+	"terminal_input_label": {
+		"message": "የተርሚናል ግብዓት"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "የANSI ቀለማት"
@@ -1052,6 +1082,9 @@
 	"terminal_name_pref_image": {
 		"message": "ምስል"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "የመስመር ቁመት"
+	},
 	"terminal_name_pref_shape": {
 		"message": "ቅርፅ"
 	},
@@ -1067,11 +1100,14 @@
 	"terminal_pref_bell": {
 		"message": "ተስሚ የጣቢያ ደውል"
 	},
+	"terminal_pref_line_height": {
+		"message": "የተርሚናል ማያ ገጹ እያንዳንዱ ረድፍ የመስመር ቁመት።"
+	},
 	"terminal_preview_label": {
 		"message": "ቅድመ-ዕይታ"
 	},
 	"terminal_profile_label": {
-		"message": "የአሁኑ መገለጫ"
+		"message": "መገለጫ"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ተርሚናልን ዳግም ማስጀመር"
@@ -1084,6 +1120,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "የጀርባ ምስል ፋይል ከኮምፒውተርዎ ይምረጡ።"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "የ«$1» መገለጫን መሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ራስ-ሰር"
@@ -1206,7 +1245,7 @@
 		"message": "ማሸብለያ አሞሌ"
 	},
 	"terminal_title_pref_text": {
-		"message": "ጽሑፍ"
+		"message": "ጽሁፍ"
 	},
 	"terminal_title_settings": {
 		"message": "ቅንብሮች"
@@ -1216,6 +1255,9 @@
 	},
 	"terminal_title_theme": {
 		"message": "ገፅታ"
+	},
+	"terminal_too_much_output_message": {
+		"message": "ለማሳወቅ እጅግ ብዙ ውጽዓት ስለሆነ ለማንበብ ወደ ረድፎች በራስ ይሂዱ።"
 	},
 	"terminal_try_again_with_internet": {
 		"message": "ከበይነመረቡ ጋር ይገናኙና እንደገና ይሞክሩ።"
@@ -1245,7 +1287,7 @@
 		"message": "«Ssh <Tab> <profile name>» ን በመተየብ ከ ኦምኒቦክስ ይገናኙ፦ https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS በSFTP በኩል የፋይል ሥርዓቶችን ማፈናጠጥ እና በፋይሎች መተግበሪያው በኩል ማሰስ ይችላል። ከ«ተገናኝ» ይልቅ «SFTP ማፈናጠጥ»ን ይጠቀሙ።"
+		"message": "ChromeOS በኤስኤፍቲፒ በኩል የፋይል ሥርዓቶችን ማፈናጠጥ እና በፋይሎች መተግበሪያው በኩል ማሰስ ይችላል። ከ«ተገናኝ» ይልቅ «ኤስኤፍቲፒ ማፈናጠጥ»ን ይጠቀሙ።"
 	},
 	"tip_5": {
 		"message": "በድረ-ገጾች ውስጥ የ ssh:// አገናኞችን በመጠቀም ይገናኙ ወይም አንድ ዕልባት ያስቀምጡ፦ https://goo.gl/zS8EZD"

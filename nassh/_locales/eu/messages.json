@@ -393,7 +393,7 @@
 		"message": "Urruneko ostalariari terminalean irudiak bistaratzeko baimena ematen zaion ala ez zehazten du.\n\nModu lehenetsian, galdetzen jarraituko dugu aukera bat hautatu arte."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ezartzen bada, Alt + Atzera->Ezabatu esleipena kentzen du Chrome OS-n; horrela, Alt + Atzera lasterbideak Alt + Atzera gisa funtzionatuko du."
+		"message": "Ezartzen bada, ChromeOS-ko Alt + Atzera->Ezabatu esleipena kenduko da; horrela, Alt + Atzera lasterbideak Alt + Atzera gisa funtzionatuko du."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Hautatu Alt Gr tekla hautemateko analisi heuristiko bat.\n\n\"null\": navigator.language propietatearen araberako hautemate automatikoa.\n      \"en-us\" => \"none\"; bestela => \"right-alt\".\n\"none'\": desgaitu Alt Gr teklaren bidezko emulazio guztiak.\n\"ctrl-alt\": \"Ktrl + Alt\" eta \"Alt Gr\" baliokideak direla interpretatzen du.\n\"left-alt\": ezkerreko \"Alt\" eta \"Alt Gr\" baliokideak direla interpretatzen du.\n\"right-alt\": eskuineko \"Alt\" eta \"Alt Gr\" baliokideak direla interpretatzen du."
@@ -534,7 +534,7 @@
 		"message": "Bidali IHES teklaren aurrizki bat, Meta tekla sakatuta eduki bitartean beste tekla bat sakatzean.\n\nAdibidez, gaituta badago eta Meta + K sakatzen bada, ^[k bidaliko da (Ihes + K sakatu izan bazenu bezala). Desgaituta badago, berriz, \"k\" baino ez da bidaliko."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Edukia itsasteko erabiltzen den saguaren botoia.\n\nHautemate automatikorako, saguaren erdiko botoia erabiltzen da X11 ez darabilten plataformetan (Chrome OS barne). X11 darabilten plataformetan, berriz, saguaren eskuineko botoia erabiltzen da (leiho-kudeatzaileak erdiko botoia erabiltzen baitu edukia itsasteko).\n\n0 == ezkerreko botoia (nagusia).\n1 == erdiko botoia (osagarria).\n2 == eskuineko botoia (bigarren mailakoa).\n\nAukera hau ez da eskuineko botoiarekin itsasteko ezarpenaren araberakoa.\n\nOharra: botoi nagusia eta bigarren-mailako botoia zure ordez kudeatzen dira pertsona eskuin eta ezkerrentzako saguetan."
+		"message": "Edukia itsasteko erabiltzen den saguaren botoia.\n\nHautemate automatikorako, saguaren erdiko botoia erabiltzen da X11 ez darabilten plataformetan (ChromeOS barne). X11 darabilten plataformetan, berriz, saguaren eskuineko botoia erabiltzen da, leiho-kudeatzaileak erdiko botoia erabiltzen baitu edukia itsasteko.\n\n0: ezkerreko botoia (nagusia).\n1: erdiko botoia (osagarria).\n2: eskuineko botoia (bigarren mailakoa).\n\nAukera hau ez da eskuineko botoiarekin itsasteko ezarpenaren araberakoa.\n\nOharra: botoi nagusia eta bigarren-mailako botoia zure ordez kudeatzen dira pertsona eskuin eta ezkerrentzako saguetan."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Itsatsi saguaren eskuineko botoiarekin klik egitean.\n\nAukera hau ez da \"mouse-paste-button\" ezarpenaren araberakoa.\n\nOharra: botoi nagusia eta bigarren-mailako botoia zure ordez kudeatzen dira pertsona eskuin eta ezkerrentzako saguetan."
@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Garbitu terminala"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Elementua ezabatzeko, sakatu \"Ezabatu\" tekla."
+	},
 	"terminal_font_unavailable": {
 		"message": "$1 ez dago erabilgarri"
 	},
@@ -995,14 +998,29 @@
 	"terminal_home_developer_settings": {
 		"message": "Garatzaileen ezarpenak"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Editatu Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Editatu SSH bidezko konexio bat"
 	},
 	"terminal_home_import_identity": {
 		"message": "Inportatu"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux kudeatzeko, joan Garatzaileentzako aukerak atalera"
+	},
+	"terminal_home_manage": {
+		"message": "Kudeatu"
+	},
+	"terminal_home_new_linux": {
+		"message": "Linux berria"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "SSHko konexio berria"
+	},
+	"terminal_home_set_up": {
+		"message": "Konfiguratu"
 	},
 	"terminal_home_ssh": {
 		"message": "SSH bidezko konexioa"
@@ -1010,11 +1028,23 @@
 	"terminal_home_ssh_command": {
 		"message": "Agindua"
 	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Konexioaren izena"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Administratzaileak desgaitu du SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Urruneko gailuetara egindako konexioak agertuko dira hemen"
+	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Zehaztu helmuga \"erabiltzaileizena@ostalariizena\" formatuan"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminalaren ezarpenak"
+	},
+	"terminal_input_label": {
+		"message": "Terminaleko sarrera"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI koloreak"
@@ -1037,6 +1067,9 @@
 	"terminal_name_pref_image": {
 		"message": "Irudia"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Lerro-altuera"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1052,11 +1085,14 @@
 	"terminal_pref_bell": {
 		"message": "Terminalaren txirrina entzun egin daiteke."
 	},
+	"terminal_pref_line_height": {
+		"message": "Terminalaren pantailako errenkaden lerro-altuera."
+	},
 	"terminal_preview_label": {
 		"message": "Aurreikusi"
 	},
 	"terminal_profile_label": {
-		"message": "Profil hau"
+		"message": "Profila"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Berrezarri terminala"
@@ -1069,6 +1105,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Hautatu atzeko planoko irudi-fitxategia ordenagailutik."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Ziur \"$1\" profila ezabatu nahi duzula?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatikoa"
@@ -1202,6 +1241,15 @@
 	"terminal_title_theme": {
 		"message": "Gaia"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux kontrolagailuak errore bat izan du:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux-en integrazio modua aktibatu da. Tmux banantzeko, sakatu Ktrl + C. Bestela, idatzi tmux-eko aginduak."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Datu gehiegi daude esateko. Nabigatu errenkada batetik bestera eskuz, ozen irakurri ahal izateko."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Konektatu Internetera eta saiatu berriro."
 	},
@@ -1230,7 +1278,7 @@
 		"message": "\"ssh<Tab><profile name>\" idatzita arakatzaileko barratik konektatu nahi baduzu, joan https://goo.gl/V7o8ki helbidera"
 	},
 	"tip_4": {
-		"message": "Chrome OS-k SFTParen bidez instala ditzake fitxategi-sistemak, eta Fitxategiak aplikazioaren bidez arakatu. Erabili \"SFTP bidezko instalazioa\" \"Konektatu\" ordez."
+		"message": "ChromeOS-ek SFTParen bidez munta ditzake fitxategi-sistemak, eta Fitxategiak aplikazioaren bidez arakatu. Erabili \"SFTP bidezko muntaketa\" \"Konektatu\" ordez."
 	},
 	"tip_5": {
 		"message": "Web-orrietan ssh:// motako estekak erabilita konektatzeko edo laster-markak gordetzeko, joan https://goo.gl/zS8EZD helbidera"

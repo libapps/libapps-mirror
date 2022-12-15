@@ -393,7 +393,7 @@
 		"message": "Ákvarða hvort leyfa eigi fjartengdum hýsli að birta myndir í skipanaglugga.\n\nSjálfgefið er kvaðning birt þar til eitthvað er valið."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ef þetta er stillt afturkallar það endurtengingu Chrome OS Alt+Backspace->Delete þannig að Alt+Backspace sé í raun Alt+Backspace."
+		"message": "Ef þetta er stillt afturkallar það endurtengingu ChromeOS Alt+bakklykill->Delete þannig að Alt+bakklykill sé í raun Alt+bakklykill."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Velja AltGr-greiningarleiðbeiningar.\n\n„null“: Greina sjálfkrafa samkvæmt „navigator.language“:\n      „en-us“ => „one“, annars => „right-alt“\n„none“: Slökkva á allri AltGr-hermingu.\n„ctrl-alt“: Gera ráð fyrir að Ctrl+Alt merki AltGr.\n„left-alt“: Gera ráð fyrir að vinstra Alt merki AltGr.\n„right-alt“: Gera ráð fyrir að hægra Alt merki AltGr."
@@ -534,7 +534,7 @@
 		"message": "Senda ESC-forskeyti þegar ýtt er á lykil á meðan ýtt er á Meta-lykilinn.\n\nÞegar kveikt er á þessu og ýtt er á Meta+K er ^[k sent eins og ef ýtt hefði verið á Escape og svo k, svo dæmi sé tekið. Ef slökkt er á þessu verður aðeins k sent."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Músarhnappur sem á að nota til að líma.\n\nÍ sjálfvirkri greiningu er miðhnappur músarinnar notaður fyrir önnur kerfi en X11 (þar á meðal Chrome OS). Í X11 er hægri músarhnappurinn notaður (þar sem það ætti að vera hægt að líma með miðhnappi músarinnar í gluggastjórnun).\n\n0 == vinstri hnappur (aðalhnappur).\n1 == miðhnappur (aukahnappur).\n2 == hægri hnappur (annar hnappur).\n\nÞessi valkostur er óháður stillingu fyrir límingu með því að hægrismella.\n\nAthugaðu að aðal- og aukahnapparnir eru stilltir eftir því hvort þú notar vinstri- eða hægrihandarmús."
+		"message": "Músarhnappur sem á að nota til að líma.\n\nÍ sjálfvirkri greiningu er miðhnappur músarinnar notaður fyrir önnur kerfi en X11 (þar á meðal ChromeOS). Í X11 er hægri músarhnappurinn notaður (þar sem það ætti að vera hægt að líma með miðhnappi músarinnar í gluggastjórnun).\n\n0 == vinstri hnappur (aðalhnappur).\n1 == miðhnappur (aukahnappur).\n2 == hægri hnappur (annar hnappur).\n\nÞessi valkostur er óháður stillingu fyrir límingu með því að hægrismella.\n\nAthugaðu að aðal- og aukahnapparnir eru stilltir eftir því hvort þú notar vinstri- eða hægrihandarmús."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Líma við hægri músarsmell.\n\nÞessi valkostur er óháður stillingunni „mouse-paste-button“.\n\nAthugaðu að aðal- og aukahnapparnir eru stilltir eftir því hvort þú notar vinstri- eða hægrihandarmús."
@@ -1037,6 +1037,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Hreinsa skipanaglugga"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Ýttu á Delete-takkann til að eyða atriðinu."
+	},
 	"terminal_font_unavailable": {
 		"message": "„$1“ er ekki tiltækt"
 	},
@@ -1049,23 +1052,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Forritarastillingar"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Breyta Linux."
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Breyta SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Flytja inn"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Opnaðu forritunarkosti til að stjórna Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Stjórna"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nýtt Linux."
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Ný SSH-tenging"
 	},
+	"terminal_home_set_up": {
+		"message": "Setja upp"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Skipun"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Heiti tengingar"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Kerfisstjóri hefur slökkt á SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Tengingar við fjartengd tæki munu birtist hér"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Tilgreina áfangastað með „username@hostname“"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Útstöðvarstillingar"
+	},
+	"terminal_input_label": {
+		"message": "Útstöðvarinntak"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-litir"
@@ -1088,6 +1118,9 @@
 	"terminal_name_pref_image": {
 		"message": "Mynd"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Línuhæð"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Lögun"
 	},
@@ -1103,11 +1136,14 @@
 	"terminal_pref_bell": {
 		"message": "Bjölluhljóð skipanaglugga."
 	},
+	"terminal_pref_line_height": {
+		"message": "Línuhæð hverrar línu í skipanaglugganum."
+	},
 	"terminal_preview_label": {
 		"message": "Forskoða"
 	},
 	"terminal_profile_label": {
-		"message": "Núverandi snið"
+		"message": "Prófíll"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Endurstilla skipanaglugga"
@@ -1120,6 +1156,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Veldu skrá með bakgrunnsmynd úr tölvunni þinni."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Viltu örugglega eyða prófílnum „$1“?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Sjálfvirkt"
@@ -1253,6 +1292,15 @@
 	"terminal_title_theme": {
 		"message": "Þema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Villa kom upp í tmux-stýringu:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Samþættingarstilling tmux virkjuð. Ýttu á Ctrl+C til að aftengja tmux eða setja inn tmux-skipanir"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Of mikið úttak til að tilkynna, flettu handvirkt í línur til að lesa."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Tengstu internetinu og reyndu aftur."
 	},
@@ -1281,7 +1329,7 @@
 		"message": "Tengstu af veffangastikunni með því að slá inn 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Stýrikerfi Chrome getur tengt skráakerfi í gegnum SFTP og flett í þeim með forritinu „Skrár“. Notaðu „SFTP-tenging“ í stað „Tengja“."
+		"message": "ChromeOS getur tengt skráakerfi í gegnum SFTP og flett í þeim með forritinu „Skrár“. Notaðu „SFTP-tenging“ í stað „Tengja“."
 	},
 	"tip_5": {
 		"message": "Þú getur tengt með því að nota ssh:// tengla á vefsvæðum eða vista bókamerki: https://goo.gl/zS8EZD"

@@ -393,7 +393,7 @@
 		"message": "Menentukan apakah akan mengizinkan host jarak jauh untuk menampilkan gambar di terminal.\n\nSecara default, kami meminta hingga pilihan dibuat."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Jika ditetapkan, pemetaan ulang Chrome OS Alt+Backspace->Delete akan diurungkan, sehingga Alt+Backspace memang Alt+Backspace."
+		"message": "Jika disetel, pemetaan ulang ChromeOS Alt+Backspace->Delete akan diurungkan, sehingga Alt+Backspace memang Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Memilih heuristik deteksi AltGr.\n\n'null': Mendeteksi otomatis berdasarkan navigator.language:\n      'en-us' => 'none', lainnya => 'right-alt'\n'none': Menonaktifkan semua emulasi AltGr.\n'ctrl-alt': Mengasumsikan Ctrl+Alt berarti AltGr.\n'left-alt': Mengasumsikan Alt kiri berarti AltGr.\n'right-alt': Mengasumsikan Alt kanan berarti AltGr."
@@ -534,7 +534,7 @@
 		"message": "Mengirim prefiks ESC saat menekan tombol sambil menahan tombol Meta.\n\nMisalnya, jika diaktifkan, tindakan menekan Meta+K akan mengirim ^[k seolah-olah Anda mengetik Escape lalu k. Jika dinonaktifkan, hanya k yang akan dikirim."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Tombol mouse untuk menempel.\n\nUntuk deteksi otomatis, kami akan menggunakan tombol tengah mouse untuk platform non-X11 (termasuk Chrome OS). Di X11, kami akan menggunakan tombol kanan mouse (karena pengelola jendela akan menangani penempelan melalui tombol tengah mouse).\n\n0 == tombol kiri (utama).\n1 == tombol tengah (tambahan).\n2 == tombol kanan (sekunder).\n\nOpsi ini tidak bergantung pada setelan tempel dengan klik kanan.\n\nCatatan: Tombol utama & sekunder akan ditangani dengan sesuai tergantung mouse untuk tangan kanan atau kiri."
+		"message": "Tombol mouse untuk menempelkan.\n\nUntuk deteksi otomatis, kami akan menggunakan tombol tengah mouse untuk platform non-X11 (termasuk ChromeOS). Di X11, kami akan menggunakan tombol kanan mouse (karena pengelola jendela akan menangani penempelan melalui tombol tengah mouse).\n\n0 == tombol kiri (utama).\n1 == tombol tengah (tambahan).\n2 == tombol kanan (sekunder).\n\nOpsi ini tidak bergantung pada setelan tempel dengan klik kanan.\n\nCatatan: Tombol utama & sekunder dapat disesuaikan tergantung mouse untuk tangan kanan atau kiri."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Tempel dengan klik kanan tombol mouse.\n\nOpsi ini tidak bergantung pada setelan \"mouse-paste-button\".\n\nCatatan: Tombol utama & sekunder akan ditangani dengan sesuai tergantung mouse untuk tangan kanan atau kiri."
@@ -609,13 +609,13 @@
 		"message": "Teks CSS khusus untuk mengatur gaya terminal."
 	},
 	"hterm_pref_word_break_match_left": {
-		"message": "Ekspresi reguler untuk menghentikan pencocokan ke sebelah kiri (awal) pilihan.\n\nBiasanya, ini merupakan kelas karakter untuk menolak karakter tertentu.\nKami mengizinkan \"~\" dan \".\" secara default karena jalur biasanya dimulai dengan ini."
+		"message": "Regular expression untuk menghentikan pencocokan ke sebelah kiri (awal) pilihan.\n\nBiasanya, ini merupakan kelas karakter untuk menolak karakter tertentu.\nKami mengizinkan \"~\" dan \".\" secara default karena jalur biasanya dimulai dengan ini."
 	},
 	"hterm_pref_word_break_match_middle": {
-		"message": "Ekspresi reguler untuk mencocokkan semua karakter di tengah.\n\nBiasanya, ini merupakan kelas karakter untuk menolak karakter tertentu.\n\nDigunakan untuk meluaskan pilihan yang mengelilingi titik awal."
+		"message": "Regular expression untuk mencocokkan semua karakter di tengah.\n\nBiasanya, ini merupakan kelas karakter untuk menolak karakter tertentu.\n\nDigunakan untuk meluaskan pilihan yang mengelilingi titik awal."
 	},
 	"hterm_pref_word_break_match_right": {
-		"message": "Ekspresi reguler untuk menghentikan pencocokan ke sebelah kanan (akhir) pilihan.\n\nBiasanya, ini merupakan karakter kelas untuk menolak karakter tertentu."
+		"message": "Regular expression untuk menghentikan pencocokan ke sebelah kanan (akhir) pilihan.\n\nBiasanya, ini merupakan karakter kelas untuk menolak karakter tertentu."
 	},
 	"hterm_space_character": {
 		"message": "Spasi"
@@ -1025,6 +1025,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Penghapusan Terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Tekan tombol Delete untuk menghapus item."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" tidak tersedia"
 	},
@@ -1037,17 +1040,41 @@
 	"terminal_home_import_identity": {
 		"message": "Impor"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Buka Opsi Developer untuk mengelola Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Kelola"
+	},
+	"terminal_home_new_linux": {
+		"message": "Linux Baru"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Koneksi SSH baru"
 	},
+	"terminal_home_set_up": {
+		"message": "Siapkan"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Perintah"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nama koneksi"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH dinonaktifkan oleh administrator Anda"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Koneksi ke perangkat jarak jauh akan muncul di sini"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Tentukan tujuan dengan \"namapengguna@namahost\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Setelan Terminal"
+	},
+	"terminal_input_label": {
+		"message": "Input terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Warna ANSI"
@@ -1064,6 +1091,9 @@
 	"terminal_name_pref_image": {
 		"message": "Gambar"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Tinggi baris"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Bentuk"
 	},
@@ -1079,11 +1109,14 @@
 	"terminal_pref_bell": {
 		"message": "Bel terminal dapat didengar."
 	},
+	"terminal_pref_line_height": {
+		"message": "Tinggi baris untuk setiap baris layar terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Pratinjau"
 	},
 	"terminal_profile_label": {
-		"message": "Profil saat ini"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Reset Terminal"
@@ -1096,6 +1129,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Pilih file gambar latar dari komputer."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Yakin ingin menghapus profil \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Otomatis"
@@ -1205,6 +1241,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Pengontrol tmux mengalami error:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Mode integrasi tmux diaktifkan. Tekan Ctrl-C untuk melepaskan tmux, atau masukkan perintah tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Terlalu banyak output untuk diumumkan. Buka baris secara manual untuk membaca."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Hubungkan ke Internet, lalu coba lagi."
 	},
@@ -1233,7 +1278,7 @@
 		"message": "Hubungkan dari omnibox dengan mengetik 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS dapat memasang sistem file melalui SFTP dan mencari melalui aplikasi File. Gunakan 'Pasang SFTP', bukan 'Hubungkan'."
+		"message": "ChromeOS dapat memasang sistem file melalui SFTP dan mencari file melalui aplikasi File. Gunakan 'Pasang SFTP', bukan 'Hubungkan'."
 	},
 	"tip_5": {
 		"message": "Hubungkan menggunakan link ssh:// di halaman web, atau simpan bookmark: https://goo.gl/zS8EZD"

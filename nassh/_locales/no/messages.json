@@ -537,7 +537,7 @@
 		"message": "Sender et ESC-prefiks når du trykker på en tast samtidig som du holder inne Meta-tasten.\n\nEksempel: Når innstillingen er slått på og du trykker på Meta+K, sendes ^[k som om du hadde trykket på Escape og deretter på K-tasten. Når innstillingen er slått av, sendes bare K-tasten."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Museknappen som skal brukes for å lime inn.\n\nVed automatisk gjenkjenning bruker vi den midtre museknappen på ikke-X11-plattformer (inkludert Chrome OS). På X11 bruker vi den høyre museknappen (siden vindusbehandleren bør lime inn med den midtre museknappen).\n\n0 == venstre (primær) knapp.\n1 == midtre (ekstra) knapp.\n2 == høyre (sekundær) knapp.\n\nDette alternativet er uavhengig av «right-click-paste»-innstillingen.\n\nMerk: Primær- og sekundærknappene håndteres for deg med både høyrehendt og venstrehendt mus."
+		"message": "Museknappen som skal brukes for å lime inn.\n\nVed automatisk gjenkjenning bruker vi den midtre museknappen på ikke-X11-plattformer (inkludert Chrome OS). På X11 bruker vi den høyre museknappen (siden vindusbehandleren bør lime inn med den midtre museknappen).\n\n0 == venstre (primær) knapp.\n1 == midtre (ekstra) knapp.\n2 == høyre (sekundær) knapp.\n\nDette alternativet er uavhengig av «right-click-paste»-innstillingen.\n\nMerk: Primær- og sekundærknappene blir håndtert for deg enten du bruker høyrehendt eller venstrehendt mus."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Lim inn ved å klikke med høyre museknapp.\n\nDette alternativet er uavhengig av «mouse-paste-button»-innstillingen.\n\nMerk: Primær- og sekundærknappene håndteres for deg med både høyrehendt og venstrehendt mus."
@@ -912,7 +912,7 @@
 		"message": "Knappen under prøver å registrere behandlere for alle protokollene vi støtter. Dette lar oss for eksempel støtte ssh://-linker direkte. Nettleseren spør deg for hver protokoll, så du må bekrefte/godta dem individuelt etter hvert som du blir spurt. Hvis du ikke får noen spørsmål fra nettleseren, finner du tips til feilsøking i neste del."
 	},
 	"protocol_register_explain_settings": {
-		"message": "Hvis vi allerede har registrert behandlere, eller hvis tidligere registreringsforsøk ble avvist, vises ingen flere beskjeder. Åpne dialogboksen under, og kontrollér innstillingene for registrerte behandlere i delene ssh/sftp/osv. Hvis dette programmet er blokkert, kan du slette de innstillingene. Da kan du prøve å registrere på nytt. Hvis programmet allerede er registrert, men ikke er satt som standardbehandler, kan du bytte standardbehandler også."
+		"message": "Hvis vi allerede har registrert behandlere, eller hvis tidligere registreringsforsøk ble avvist, vises ingen flere beskjeder. Åpne dialogboksen under, og kontroller innstillingene for registrerte behandlere i delene ssh/sftp/osv. Hvis dette programmet er blokkert, kan du slette de innstillingene. Da kan du prøve å registrere på nytt. Hvis programmet allerede er registrert, men ikke er satt som standardbehandler, kan du bytte standardbehandler også."
 	},
 	"protocol_register_options_link": {
 		"message": "Protokollregister"
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Tøm terminalen"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Trykk på Delete-tasten for å slette elementet."
+	},
 	"terminal_font_unavailable": {
 		"message": "«$1» er ikke tilgjengelig"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Utviklerinnstillinger"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Rediger Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Rediger SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importér"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Gå til Utvikleralternativer for å administrere Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Administrer"
+	},
+	"terminal_home_new_linux": {
+		"message": "Ny Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Ny SSH-tilkobling"
 	},
+	"terminal_home_set_up": {
+		"message": "Konfigurer"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Kommando"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Tilkoblingsnavn"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Administratoren din har deaktivert SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Tilkoblinger til eksterne enheter vises her"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Angi destinasjonen med «brukernavn@vertsnavn»"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminalinnstillinger"
+	},
+	"terminal_input_label": {
+		"message": "Terminalinndata"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-farger"
@@ -1028,6 +1058,9 @@
 	"terminal_name_pref_image": {
 		"message": "Bilde"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Linjehøyde"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Form"
 	},
@@ -1043,11 +1076,14 @@
 	"terminal_pref_bell": {
 		"message": "Hørbar terminalklokke."
 	},
+	"terminal_pref_line_height": {
+		"message": "Linjehøyden for hver rad på terminalskjermen."
+	},
 	"terminal_preview_label": {
 		"message": "Forhåndsvisning"
 	},
 	"terminal_profile_label": {
-		"message": "Nåværende profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Tilbakestill terminalen"
@@ -1060,6 +1096,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Velg en bakgrunnsbildefil fra datamaskinen."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Er du sikker på at du vil slette profilen «$1»?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatisk"
@@ -1189,6 +1228,15 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Det oppsto en feil i tmux-kontrolleren:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Modus for tmux-integrering er aktivert. Trykk på Ctrl-C for å koble fra tmux, eller skriv inn tmux-kommandoer"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Det er for mye utdata til at alt kan leses opp. Naviger til enkeltrader manuelt for å få dem opplest."
 	},
 	"terminal_try_again_with_internet": {
 		"message": "Koble til internett og prøv på nytt."

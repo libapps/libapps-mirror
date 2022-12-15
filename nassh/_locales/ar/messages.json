@@ -396,7 +396,7 @@
 		"message": "يمكنك اختيار ما إذا كنت تريد السماح للمضيف البعيد بعرض الصور في الوحدة الطرفية.\n\nنعرض تلقائيًا رسالة مطالبة بذلك إلى أن يتم الاختيار."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "في حال ضبط الإعداد، يتم التراجع عن عملية إعادة ربط \"Alt+Backspace->Delete\" في نظام التشغيل Chrome، وبذلك يصبح Alt+Backspace هو Alt+Backspace فعلاً."
+		"message": "في حال ضبط الإعداد، يتم التراجع عن عملية إعادة الضبط \"Alt+Backspace->Delete\" في نظام التشغيل ChromeOS، وبذلك يصبح Alt+Backspace هو Alt+Backspace فعلاً."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "يمكنك اختيار موجِّه رصد AltGr.\n\n'null': الرصد التلقائي المستنِد إلى navigator.language:\n      'en-us' => 'none'، غير ذلك => 'right-alt'\n'none': إيقاف أي محاكاة مرتبطة بالزر AltGr.\n'ctrl-alt': افتراض أن Ctrl+Alt يعني AltGr.\n'left-alt': افتراض أن زر Alt الأيسر يعني AltGr.\n'right-alt': افتراض أن زر Alt الأيمن يعني AltGr."
@@ -483,7 +483,7 @@
 		"message": "يمكنك اختيار ما إذا كنت تريد إظهار رسالة في الوحدة الطرفية عندما يُجري المضيف عملية كتابة إلى الحافظة."
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "يمكنك السماح للمضيف البعيد بالكتابة مباشرةً إلى حافظة النظام المحلي.\nولا يسمح بإمكانية الوصول للقراءة مطلقًا بغض النظر عن هذا الإعداد.\n\nيتم استخدام ذلك للتحكم في إمكانية الوصول إلى ميزات، مثل \"OSC-52\"."
+		"message": "يمكنك السماح للمضيف البعيد بالكتابة مباشرةً إلى حافظة النظام المحلي.\nولا يتم منح الإذن بالقراءة مطلقًا بغض النظر عن هذا الإعداد.\n\nيتم استخدام ذلك للتحكم في إمكانية الوصول إلى ميزات، مثل \"OSC-52\"."
 	},
 	"hterm_pref_enable_csi_j_3": {
 		"message": "يمكنك اختيار ما إذا كان يمكن لوظيفة \"محو الأسطر المحفوظة\" (وضع 3) لأمر \"محو العرض\" (CSI-J) محو المخزن المؤقت للتمرير للخلف في الوحدة الطرفية.\n\nيُعدّ تفعيل هذا الوضع تلقائيًا إجراءً آمنًا."
@@ -537,7 +537,7 @@
 		"message": "يمكنك إرسال بادئة ESC عند الضغط على مفتاح أثناء الضغط مع الاستمرار على مفتاح Meta.\n\nعلى سبيل المثال، عند التفعيل، سيؤدي الضغط على Meta+K إلى إرسال ^[k كما لو كنت كتبت Escape ثم k. وعند الإيقاف، سيتم إرسال k فقط."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "زر الماوس المُستخدَم للصق\n\nبالنسبة إلى ميزة \"الرصد التلقائي\"، سنستخدم زر الماوس الأوسط من أجل الأنظمة الأساسية التي ليست على نظام النافذة \"X11\" (بما في ذلك نظام التشغيل Chrome). أمّا بالنسبة إلى نظام النافذة \"X11\"، فسنستخدم زر الماوس الأيمن (بما أنه على مدير النوافذ اللصق باستخدام زر الماوس الأوسط).\n\n0 == الزر الأيسر (الأساسي)\n1 == الزر الأوسط (الإضافي)\n2 == الزر الأيمن (الثانوي)\n\nهذا الخيار مستقِلّ عن إعداد اللصق من خلال النقر بزر الماوس الأيمن.\n\nملاحظة: يسهل تعامل مستخدمي اليد اليمنى واليسرى مع زر الماوس الأيسر والأيمن."
+		"message": "يُستخدَم زر الماوس هذا للّصق.\n\nبالنسبة إلى ميزة \"الرصد التلقائي\"، سنستخدم زر الماوس الأوسط مع الأنظمة الأساسية التي لا تستخدم بروتوكول العرض عن بُعد X11 (بما في ذلك نظام التشغيل ChromeOS). وعلى الأنظمة الأساسية التي تستخدم بروتوكول العرض عن بُعد X11، سنستخدم زر الماوس الأيمن (لأنّه من المفترض أن يستخدم برنامج Window Manager (مدير النوافذ) زر الماوس الأوسط للّصق).\n\n0 == الزر الأيسر (الأساسي)\n1 == الزر الأوسط (الإضافي)\n2 == الزر الأيمن (الثانوي)\n\nهذا الخيار مستقِلّ عن الإعداد المخصَّص للّصق من خلال النقر بزر الماوس الأيمن.\n\nملاحظة: سيتم ضبط الزر الأساسي والثانوي حسب الماوس المُخصَّص لليد اليسرى أو اليمنى."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "يمكنك اللصق من خلال النقر على زر الماوس الأيمن.\n\nهذا الخيار مستقِلّ عن إعداد \"mouse-paste-button\".\n\nملاحظة: يسهل تعامل مستخدمي اليد اليمنى واليسرى مع زر الماوس الأيسر والأيمن."
@@ -1001,6 +1001,9 @@
 	"terminal_clear_menu_label": {
 		"message": "محو الوحدة الطرفية"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "اضغط على مفتاح الحذف لحذف العنصر."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" غير متاح"
 	},
@@ -1013,14 +1016,29 @@
 	"terminal_home_developer_settings": {
 		"message": "إعدادات مطوّر البرامج"
 	},
+	"terminal_home_edit_linux": {
+		"message": "تعديل حاوية Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "تعديل بروتوكول النقل الآمن (SSH)"
 	},
 	"terminal_home_import_identity": {
 		"message": "استيراد"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "يمكنك الانتقال إلى ميزة \"خيارات المطورين\" لإدارة نظام التشغيل Linux."
+	},
+	"terminal_home_manage": {
+		"message": "إدارة"
+	},
+	"terminal_home_new_linux": {
+		"message": "حاوية Linux جديدة"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "اتصال جديد من خلال بروتوكول النقل الآمن (SSH)"
+	},
+	"terminal_home_set_up": {
+		"message": "بدء الإعداد"
 	},
 	"terminal_home_ssh": {
 		"message": "بروتوكول النقل الآمن (SSH)"
@@ -1028,11 +1046,23 @@
 	"terminal_home_ssh_command": {
 		"message": "الأمر"
 	},
+	"terminal_home_ssh_connection_name": {
+		"message": "اسم الاتصال"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "أوقف المشرف \"بروتوكول النقل الآمن\" (SSH)."
+	},
+	"terminal_home_ssh_empty": {
+		"message": "ستظهر هنا عمليات الاتصال بالأجهزة البعيدة."
+	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "يُرجى تحديد الوجهة بالتنسيق \"username@hostname\"."
 	},
 	"terminal_home_terminal_settings": {
 		"message": "إعدادات الوحدة الطرفية"
+	},
+	"terminal_input_label": {
+		"message": "إدخال Terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ألوان \"المعهد الأمريكي للمعايير الوطنية (ANSI)\""
@@ -1055,6 +1085,9 @@
 	"terminal_name_pref_image": {
 		"message": "صورة"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "ارتفاع السطر"
+	},
 	"terminal_name_pref_shape": {
 		"message": "شكل المؤشر"
 	},
@@ -1070,11 +1103,14 @@
 	"terminal_pref_bell": {
 		"message": "جرس طرفي مسموع"
 	},
+	"terminal_pref_line_height": {
+		"message": "يشير هذا إلى ارتفاع السطر لكل صف من صفوف الشاشة الطرفية."
+	},
 	"terminal_preview_label": {
 		"message": "معاينة"
 	},
 	"terminal_profile_label": {
-		"message": "الملف الشخصي الحالي"
+		"message": "الملف الشخصي"
 	},
 	"terminal_reset_menu_label": {
 		"message": "إعادة ضبط الوحدة الطرفية"
@@ -1087,6 +1123,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "اختَر ملفًا لصورة خلفية من جهاز الكمبيوتر."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "هل تريد فعلاً حذف الملف الشخصي \"$1\"؟"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "تلقائي"
@@ -1214,6 +1253,15 @@
 	"terminal_title_theme": {
 		"message": "المظهر"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "حدث خطأ في وحدة تحكُّم Tmux:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "تم تفعيل وضع دمج Tmux. اضغط على Ctrl-C لفصل أوامر Tmux أو إدخالها."
+	},
+	"terminal_too_much_output_message": {
+		"message": "عدد النتائج أكبر من أن تتم قراءتها. يُرجى الانتقال إلى الصفوف يدويًا لقراءة النتائج."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "يُرجى الاتصال بالإنترنت ثم إعادة المحاولة."
 	},
@@ -1242,7 +1290,7 @@
 		"message": "يمكنك إجراء الربط من خلال المربع المتعدّد الاستخدامات عن طريق كتابة 'ssh<مفتاح Tab><اسم الملف الشخصي>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "يمكن لنظام التشغيل Chrome تثبيت أنظمة الملفات من خلال بروتوكول النقل الآمن للملفات (SFTP) والتصفُّح باستخدام تطبيق \"الملفات\". ويمكنك استخدام \"تثبيت SFTP\" بدلاً من \"اتصال\"."
+		"message": "يمكن لنظام التشغيل ChromeOS تثبيت أنظمة الملفات من خلال بروتوكول SFTP والتصفُّح باستخدام تطبيق \"الملفات\". يمكنك استخدام الزر \"تثبيت SFTP\" بدلاً من الزر \"اتصال\"."
 	},
 	"tip_5": {
 		"message": "الاتصال باستخدام روابط ssh:// في صفحات الويب أو حفظ إشارة مرجعية: https://goo.gl/zS8EZD"

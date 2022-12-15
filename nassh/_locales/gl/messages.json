@@ -396,7 +396,7 @@
 		"message": "Define se se permite que o host remoto mostre imaxes no terminal.\n\nDe forma predeterminada, seguiremos preguntando ata que se tome unha decisión."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Se se define esta preferencia, desfaise a reasignación de Alt+Retroceso->Suprimir de Chrome OS, polo que Alt+Retroceso funcionará como Alt+Retroceso."
+		"message": "Se se define esta preferencia, desfaise a reasignación de Alt + Retroceso->Suprimir de ChromeOS, polo que Alt + Retroceso funcionará como Alt + Retroceso."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecciona un método heurístico de detección de Alt Gr.\n\n\"null\": detección automática segundo navigator.language:\n      \"en-us\" => \"none\", noutro caso => \"right-alt\"\n\"none\": desactiva a emulación de Alt Gr.\n\"ctrl-alt\": considera que Control+Alt é Alt Gr.\n\"left-alt\": considera que Alt esquerda é Alt Gr.\n\"right-alt\": considera que Alt dereita é Alt Gr."
@@ -537,7 +537,7 @@
 		"message": "Enviar un prefixo ESC ao premer unha tecla mentres se mantén premida a tecla Meta.\n\nPor exemplo, cando se activa, ao premer Meta+K enviarase ^[k como se premeses Escape e despois k. Cando se desactiva, só se enviará k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "O botón do rato que se utiliza para pegar contido.\n\nPara a detección automática, débese usar o botón central do rato nas plataformas que non sexan X11 (incluídas as plataformas Chrome OS). Nas plataformas X11 débese usar o botón dereito do rato, xa que o xestor de ventás debe utilizar o botón central do rato para pegar contido.\n\n0 == botón esquerdo (principal).\n1 == botón central (auxiliar).\n2 == botón dereito (secundario).\n\nEste valor é independente da opción de configuración para pegar contido co botón dereito.\n\nNota: Os botóns principal e secundario xestiónanse mediante ratos para usuarios destros e zurdos."
+		"message": "O botón do rato que se utiliza para pegar contido.\n\nPara a detección automática, débese usar o botón central do rato nas plataformas que non sexan X11 (incluídas as plataformas ChromeOS). Nas plataformas X11 débese usar o botón dereito do rato, xa que o xestor de ventás debe utilizar o botón central do rato para pegar contido.\n\n0 == botón esquerdo (principal).\n1 == botón central (auxiliar).\n2 == botón dereito (secundario).\n\nEste valor é independente da opción de configuración para pegar contido co botón dereito.\n\nNota: Os botóns principal e secundario xestiónanse mediante ratos para usuarios destros e zurdos."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Pegar facendo clic co botón dereito do rato.\n\nEsta opción é independente da opción de configuración \"mouse-paste-button\".\n\nNota: Os botóns principal e secundario xestiónanse mediante ratos para usuarios destros e zurdos."
@@ -879,7 +879,7 @@
 		"message": "<url><match>usuario@nomedohost[:port]</match></url> Conéctate a un perfil gardado ou a un sistema ssh novo"
 	},
 	"open_as_window_tip": {
-		"message": "[Consello profesional] Utiliza a opción Abrir como ventá ou Pantalla completa para evitar que o terminal se peche ao premer Control+W.\n[Consello profesional] Consulta $1 para obter máis información."
+		"message": "[Consello avanzado] Utiliza a opción Abrir como ventá ou Pantalla completa para evitar que o terminal se peche ao premer Control+W.\n[Consello avanzado] Consulta $1 para obter máis información."
 	},
 	"plugin_loading": {
 		"message": "Cargando programa $1..."
@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Borrar terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Preme a tecla Suprimir para eliminar o elemento."
+	},
 	"terminal_font_unavailable": {
 		"message": "$1 non está dispoñible"
 	},
@@ -995,23 +998,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Configuración de programador"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Editar contedor Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Editar SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importar"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Para xestionar Linux, accede a Opcións de programador"
+	},
+	"terminal_home_manage": {
+		"message": "Xestionar"
+	},
+	"terminal_home_new_linux": {
+		"message": "Novo contedor Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nova conexión SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Configurar"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Comando"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nome da conexión"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "O teu administrador desactivou SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "As conexións a dispositivos remotos mostraranse aquí"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Indica o destino co formato \"nomedousuario@nomedohost\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Configuración do terminal"
+	},
+	"terminal_input_label": {
+		"message": "Introdución de texto terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Cores ANSI"
@@ -1034,6 +1064,9 @@
 	"terminal_name_pref_image": {
 		"message": "Imaxe"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Altura das liñas"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "Timbre audible do terminal."
 	},
+	"terminal_pref_line_height": {
+		"message": "A altura de cada fila da pantalla do emulador de terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Vista previa"
 	},
 	"terminal_profile_label": {
-		"message": "Perfil actual"
+		"message": "Perfil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Restablecemento do terminal"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecciona un ficheiro de imaxe de fondo do teu ordenador."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Seguro que queres eliminar o perfil $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1190,6 +1229,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "O controlador de tmux detectou un erro:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Activouse o modo de integración de tmux. Preme Control + C para quitar tmux ou incluír comandos de tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Hai demasiado contido para anuncialo. Navega polas filas manualmente para lelo."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Conéctate a Internet e téntao de novo."
 	},
@@ -1218,7 +1266,7 @@
 		"message": "Escribe ssh<Tab><profile name> para conectarte desde omnibox: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS pode instalar sistemas de ficheiros a través de SFTP e navegar usando a aplicación Ficheiros. Utiliza a opción Instalación de SFTP en lugar de Conectar."
+		"message": "ChromeOS pode instalar sistemas de ficheiros a través de SFTP e navegar usando a aplicación Ficheiros. Utiliza a opción Instalación de SFTP en lugar de Conectar."
 	},
 	"tip_5": {
 		"message": "Conéctate mediante ligazóns ssh:// en páxinas web ou garda un marcador: https://goo.gl/zS8EZD"
@@ -1254,7 +1302,7 @@
 		"message": "Cambios principais desde a versión $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Consello profesional aleatorio n.º $1: $2"
+		"message": "Consello avanzado aleatorio núm. $1: $2"
 	},
 	"welcome_version": {
 		"message": "Dámosche a benvida á versión $2 de $1."

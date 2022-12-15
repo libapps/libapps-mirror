@@ -396,7 +396,7 @@
 		"message": "Legt fest, ob bei dem Remote-Host Bilder im Terminal angezeigt werden.\n\nStandardmäßig erfolgt eine Aufforderung, bis eine Wahl getroffen wurde."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Durch diese Einstellung wird Alt + Rücktaste nicht mehr die Funktion einer herkömmlichen ENTF-Taste (Löschen nach rechts) in Chrome OS zugewiesen, sodass über die Tastenkombination tatsächlich Alt + Rücktaste ausgeführt und nach links gelöscht wird."
+		"message": "Durch diese Einstellung wird Alt + Rücktaste nicht mehr die Funktion einer herkömmlichen ENTF-Taste (Löschen nach rechts) in ChromeOS zugewiesen, sodass über die Tastenkombination tatsächlich Alt + Rücktaste ausgeführt und nach links gelöscht wird."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Wähle eine Alt Gr-Erkennungsheuristik aus.\n\n„null“: Automatische Erkennung basiert auf navigator.language:\n      „en-us“ => „none“, sonst => „right-alt“\n„none“: Deaktiviert jegliche Alt Gr-Emulation.\n„ctrl-alt“: Es wird angenommen, dass Strg + Alt für Alt Gr steht.\n„left-alt“: Es wird angenommen, dass Alt für Alt Gr steht.\n„right-alt“: Es wird angenommen, dass Alt für Alt Gr steht."
@@ -537,7 +537,7 @@
 		"message": "Ein ESC-Präfix senden, wenn gleichzeitig eine Taste sowie die Meta-Taste gedrückt werden.\n\nWenn diese Option aktiviert ist, wird zum Beispiel beim Drücken der Meta-Taste und der k-Taste \"^[k\" gesendet, als wäre Escape und dann \"k\" gedrückt worden. Ist sie deaktiviert, wird nur \"k\" gesendet."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Die Maustaste zum Einfügen.\n\nFür die automatische Erkennung verwenden wir auf Nicht-X11-Plattformen, einschließlich Chrome OS, die mittlere Maustaste. Unter X11 verwenden wir die rechte Maustaste, da die mittlere Maustaste vom Fenstermanager zum Einfügen verwendet werden sollte.\n\n0 == linke (primäre) Taste.\n1 == mittlere (Hilfs-)Taste.\n2 == rechte (sekundäre) Taste.\n\nDiese Option ist unabhängig von der Einstellung \"right-click paste\".\n\nHinweis: Funktioniert für primäre und sekundäre Tasten bei Mäusen für Rechts- und Linkshänder."
+		"message": "Die Maustaste zum Einfügen.\n\nFür die automatische Erkennung verwenden wir auf Nicht-X11-Plattformen, einschließlich ChromeOS, die mittlere Maustaste. Unter X11 verwenden wir die rechte Maustaste, da die mittlere Maustaste vom Fenstermanager zum Einfügen verwendet werden sollte.\n\n0 == linke (primäre) Taste.\n1 == mittlere (Hilfs-)Taste.\n2 == rechte (sekundäre) Taste.\n\nDiese Option ist unabhängig von der Einstellung \"right-click paste\".\n\nHinweis: Funktioniert für primäre und sekundäre Tasten bei Mäusen für Rechts- und Linkshänder."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Einfügen beim Klicken mit der rechten Maustaste.\n\nDiese Option ist unabhängig von der Einstellung \"mouse-paste-button\".\n\nHinweis: Funktioniert für primäre und sekundäre Tasten bei Mäusen für Rechts- und Linkshänder."
@@ -989,6 +989,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminal löschen"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Drücke die Löschtaste, um das Element zu löschen."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ist nicht verfügbar"
 	},
@@ -1001,23 +1004,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Entwicklereinstellungen"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux-Container bearbeiten"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH bearbeiten"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importieren"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Entwickleroptionen aufrufen, um Linux zu verwalten"
+	},
+	"terminal_home_manage": {
+		"message": "Verwalten"
+	},
+	"terminal_home_new_linux": {
+		"message": "Neuer Linux-Container"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Neue SSH-Verbindung"
 	},
+	"terminal_home_set_up": {
+		"message": "Einrichten"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Befehl"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Verbindungsname"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH wurde von deinem Administrator deaktiviert"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Hier werden Verbindungen zu Remote-Geräten angezeigt"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Gib das Ziel mit „username@hostname“ an"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminaleinstellungen"
+	},
+	"terminal_input_label": {
+		"message": "Terminaleingabe"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-Farben"
@@ -1040,6 +1070,9 @@
 	"terminal_name_pref_image": {
 		"message": "Bild"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Zeilenhöhe"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Form"
 	},
@@ -1055,11 +1088,14 @@
 	"terminal_pref_bell": {
 		"message": "Hörbarer Terminalton."
 	},
+	"terminal_pref_line_height": {
+		"message": "Die Höhe für jede Zeile des Terminalbildschirms."
+	},
 	"terminal_preview_label": {
 		"message": "Vorschau"
 	},
 	"terminal_profile_label": {
-		"message": "Aktuelles Profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminal zurücksetzen"
@@ -1072,6 +1108,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Wähle als Hintergrundbild eine Datei von deinem Computer aus."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Soll das Profil „$1“ wirklich gelöscht werden?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Deaktivieren"
@@ -1184,6 +1223,15 @@
 	"terminal_title_theme": {
 		"message": "Design"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Beim tmux-Controller ist ein Fehler aufgetreten:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "tmux-Integrationsmodus aktiviert. Drücke Strg + C, um „tmux“ zu trennen, oder gib „tmux“-Befehle ein."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Es können nicht so viele Inhalte wiedergegeben werden. Rufe die Zeilen zum Vorlesen manuell auf."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Stelle eine Internetverbindung her und versuche es noch einmal."
 	},
@@ -1212,7 +1260,7 @@
 		"message": "Es kann eine Verbindung über Omnibox hergestellt werden, indem du „ssh<Tab><Profilname>“ eingibst: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS kann Dateisysteme über SFTP bereitstellen und über die App \"Dateien\" suchen. Verwende \"SFTP-Bereitstellung\" statt \"Verbinden\"."
+		"message": "ChromeOS kann Dateisysteme über SFTP bereitstellen und über die App „Dateien“ suchen. Verwende „SFTP-Bereitstellung“ statt „Verbinden“."
 	},
 	"tip_5": {
 		"message": "Mithilfe von \"ssh://\"-Links auf Webseiten lassen sich Verbindungen herstellen oder es kann ein Lesezeichen gespeichert werden: https://goo.gl/zS8EZD"

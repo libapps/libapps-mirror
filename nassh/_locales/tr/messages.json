@@ -393,7 +393,7 @@
 		"message": "Uzak ana makinenin terminalde resimleri görüntülemesine izin verilip verilmeyeceğini belirler.\n\nVarsayılan olarak, seçim yapılana kadar sormaya devam ederiz."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ayarlanırsa Chrome OS Alt+Geri tuşu->Delete tuşu farklı işlev atamasını geri alır. Böylece Alt+Geri tuşu, Alt+Geri tuşu olarak kalır."
+		"message": "Ayarlanırsa ChromeOS Alt+Geri tuşu->Delete tuşu farklı işlev atamasını geri alır. Böylece Alt+Geri tuşu, Alt+Geri tuşu olarak kalır."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr sezgisel algılama seçin.\n\n'null': navigator.language ayarına dayalı olarak otomatik algıla:\n      'en-us' => 'none', değilse => 'right-alt'\n'none': Tüm AltGr emülasyonlarını devre dışı bırak.\n'ctrl-alt': Ctrl+Alt, AltGr demektir.\n'left-alt': Sol Alt, AltGr demektir.\n'right-alt': Sağ Alt, AltGr demektir."
@@ -534,7 +534,7 @@
 		"message": "Meta tuşunu basılı tutarken bir tuşa bastığınızda bir ESC öneki gönderir.\n\nÖrneğin, tercih etkinleştirildiğinde Meta+K tuşlarına basılması, Escape'in ardından k tuşuna basmışsınız gibi ^[k değerini gönderir. Devre dışı bırakıldığında yalnızca k gönderilir."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Yapıştırmak için kullanılacak fare düğmesi.\n\nOtomatik algılama için X11 dışındaki platformlarda (Chrome OS de dahil olmak üzere) orta fare düğmesini kullanacağız. X11'de sağ fare tuşunu kullanacağız (bunun nedeni, pencere yöneticisinin yapıştırma işlemini orta fare tuşuyla yapacak olmasıdır).\n\n0 == sol (birincil) düğme.\n1 == orta (yardımcı) düğme.\n2 == sağ (ikincil) düğme.\n\nBu seçenek \"sağ tıklayıp yapıştırma\" ayarından bağımsızdır.\n\nNot: Hem birincil hem de ikincil tuşlar, sol ve sağ elli kullanım için ayarlanmış farelerde doğru şekilde kullanılır."
+		"message": "Yapıştırmak için kullanılacak fare düğmesi.\n\nOtomatik algılama için X11 dışındaki platformlarda (ChromeOS de dahil olmak üzere) orta fare düğmesini kullanacağız. X11'de sağ fare tuşunu kullanacağız (bunun nedeni, pencere yöneticisinin yapıştırma işlemini orta fare tuşuyla yapacak olmasıdır).\n\n0 == sol (birincil) düğme.\n1 == orta (yardımcı) düğme.\n2 == sağ (ikincil) düğme.\n\nBu seçenek \"sağ tıklayıp yapıştırma\" ayarından bağımsızdır.\n\nNot: Hem birincil hem de ikincil tuşlar, sol ve sağ elli kullanım için ayarlanmış farelerde doğru şekilde kullanılır."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Sağ fare tuşu tıklamasında yapıştır.\n\nBu seçenek \"mouse-paste-button\" ayarından bağımsızdır.\n\nNot: Hem birincil hem de ikincil tuşlar, sol ve sağ elli kullanım için ayarlanmış farelerde doğru şekilde kullanılır."
@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminali Temizle"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Öğeyi silmek için sil düğmesine basın."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" kullanılamıyor"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Geliştirici Ayarları"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux'u düzenle"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH'yi düzenle"
 	},
 	"terminal_home_import_identity": {
 		"message": "İçe aktar"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux'u yönetmek için Geliştirici Seçenekleri'ne gidin"
+	},
+	"terminal_home_manage": {
+		"message": "Yönet"
+	},
+	"terminal_home_new_linux": {
+		"message": "Yeni Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Yeni SSH bağlantısı"
 	},
+	"terminal_home_set_up": {
+		"message": "Kur"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Komut"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Bağlantı adı"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH, yöneticiniz tarafından devre dışı bırakıldı"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Uzak cihaz bağlantıları burada görünür"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"kullanciadi@anamakineadi\" ile hedefi belirleyin"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminal Ayarları"
+	},
+	"terminal_input_label": {
+		"message": "Terminal girişi"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI renkleri"
@@ -1028,6 +1058,9 @@
 	"terminal_name_pref_image": {
 		"message": "Resim"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Satır yüksekliği"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Şekil"
 	},
@@ -1043,11 +1076,14 @@
 	"terminal_pref_bell": {
 		"message": "Duyulabilir terminal zili."
 	},
+	"terminal_pref_line_height": {
+		"message": "Terminal ekranının her satırı için satır yüksekliği."
+	},
 	"terminal_preview_label": {
 		"message": "Önizle"
 	},
 	"terminal_profile_label": {
-		"message": "Geçerli profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminali Sıfırla"
@@ -1060,6 +1096,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Bilgisayarınızdan bir arka plan resim dosyası seçin."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "\"$1\" adlı profili silmek istediğinizden emin misiniz?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Otomatik"
@@ -1190,6 +1229,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux denetleyici bir hatayla karşılaştı:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux entegrasyon modu etkinleştirildi. Tmux'u çıkarmak için Ctrl-C tuşlarına basın veya tmux komutlarını girin"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Duyuru için çok fazla çıkış var. Okumak için satırlara manuel olarak gidin."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "İnternete bağlanıp tekrar deneyin."
 	},
@@ -1218,7 +1266,7 @@
 		"message": "'ssh<Tab><profile name>' yazarak çok amaçlı adres çubuğundan bağlanın: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS, dosya sistemlerini SFTP aracılığıyla ekleyebilir ve Dosyalar uygulaması üzerinden göz atabilir. \"Bağlan\" yerine \"SFTP Ekle\"yi kullanın."
+		"message": "ChromeOS, dosya sistemlerini SFTP aracılığıyla ekleyebilir ve Dosyalar uygulaması üzerinden göz atabilir. \"Bağlan\" yerine \"SFTP Ekle\"yi kullanın."
 	},
 	"tip_5": {
 		"message": "Web sayfalarında ssh:// bağlantılarını kullanarak bağlanın veya yer işareti kaydedin: https://goo.gl/zS8EZD"

@@ -390,7 +390,7 @@
 		"message": "ຈະອະນຸຍາດໃຫ້ໂຮສທາງໄກສະແດງຮູບໃນເທີມິນອນຫຼືບໍ່.\n\nຕາມຄ່າເລີ່ມຕົ້ນ, ພວກເຮົາຈະເຕືນບອກຈົນກວ່າມີການເລືອກ."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "ຖ້າຕັ້ງຄ່າ, ລະບົບຈະຍົກເລີກການຈັດແຜນທີ່ຄືນໃໝ່ Chrome OS Alt+Backspace->Delete, ເພື່ອໃຫ້ Alt+Backspace ເປັນ Alt+Backspace ຈິງໆ."
+		"message": "ຖ້າຕັ້ງຄ່າ, ລະບົບຈະຍົກເລີກການຈັດແຜນທີ່ Chrome OS Alt+Backspace->Delete ຄືນໃໝ່ ເພື່ອໃຫ້ Alt+Backspace ເປັນ Alt+Backspace ແທ້ໆ."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "ເລືອກຮິວຣິສຕິກການກວດຫາ AltGr.\n\n'null': ກວດຫາໂດຍອັດຕະໂນມັດອີງຕາມ navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': ປິດການນຳໃຊ້ການຈຳລອງ AltGr ໃດໆກໍຕາມ.\n'ctrl-alt': ໃຫ້ Ctrl+Alt ໝາຍເຖິງ AltGr.\n'left-alt': ໃຫ້ Alt ທາງຊ້າຍໝາຍເຖິງ AltGr.\n'right-alt': ໃຫ້ Alt ທາງຂວາໝາຍເຖິງ AltGr."
@@ -531,7 +531,7 @@
 		"message": "ສົ່ງຄຳນຳໜ້າ ESC ໃນເວລາກົດປຸ່ມໃນຂະນະທີ່ກົດປຸ່ມ Meta ຄ້າງໄວ້.\n\nຕົວຢ່າງ: ເມື່ອເປີດການນຳໃຊ້, ການກົດ Meta+K ຈະສົ່ງ ^[k ຄືກັບວ່າທ່ານໄດ້ພິມ Escape ແລ້ວພິມ k. ເມື່ອປິດການນຳໃຊ້, ຈະສົ່ງແຕ່ k ເທົ່ານັ້ນ."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "ປຸ່ມເມົ້າເພື່ອໃຊ້ສຳລັບການວາງ.\n\nສຳລັບການກວດຫາອັດຕະໂນມັດ, ພວກເຮົາຈະໃຊ້ປຸ່ມເມົ້າເຄິ່ງກາງສຳລັບແພລດຟອມທີ່ບໍ່ແມ່ນ X11 (ຮວມທັງ Chrome OS). ໃນ X11, ພວກເຮົາຈະໃຊ້ປຸ່ມເມົ້າຂວາ (ເພາະວ່າຕົວຈັດການໜ້າຈໍຄວນຈັດການການວາງຜ່ານປຸ່ມເມົ້າເຄິ່ງກາງ).\n\n0 == ປຸ່ມຊ້າຍ (ຫຼັກ).\n1 == ປຸ່ມເຄິ່ງກາງ (ຊ່ວຍ).\n2 == ປຸ່ມຂວາ (ສຳຮອງ).\n\nຕົວເລືອກນີ້ບໍ່ຂຶ້ນກັບການຕັ້ງຄ່າສຳລັບການວາງໂດຍໃຊ້ການຄລິກຂວາ.\n\nໝາຍເຫດ: ມີການຈັດການປຸ່ມຫຼັກ ແລະ ປຸ່ມສຳຮອງໃຫ້ທ່ານດ້ວຍເມົ້າຖະໜັດຊ້າຍ ແລະ ຂວາ."
+		"message": "ປຸ່ມເມົ້າເພື່ອໃຊ້ສຳລັບການວາງ.\n\nສຳລັບການກວດຫາອັດຕະໂນມັດ, ພວກເຮົາຈະໃຊ້ປຸ່ມເມົ້າເຄິ່ງກາງສຳລັບແພລດຟອມທີ່ບໍ່ແມ່ນ X11 (ຮວມທັງ ChromeOS). ໃນ X11, ພວກເຮົາຈະໃຊ້ປຸ່ມເມົ້າຂວາ (ເພາະວ່າຕົວຈັດການໜ້າຈໍຄວນຈັດການການວາງຜ່ານປຸ່ມເມົ້າເຄິ່ງກາງ).\n\n0 == ປຸ່ມຊ້າຍ (ຫຼັກ).\n1 == ປຸ່ມເຄິ່ງກາງ (ຊ່ວຍ).\n2 == ປຸ່ມຂວາ (ສຳຮອງ).\n\nຕົວເລືອກນີ້ບໍ່ຂຶ້ນກັບການຕັ້ງຄ່າສຳລັບການວາງໂດຍໃຊ້ການຄລິກຂວາ.\n\nໝາຍເຫດ: ມີການຈັດການປຸ່ມຫຼັກ ແລະ ປຸ່ມສຳຮອງໃຫ້ທ່ານດ້ວຍເມົ້າຖະໜັດຊ້າຍ ແລະ ຂວາ."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "ການວາງເມື່ອຄລິກຂວາໃສ່ປຸ່ມເມົ້າ.\n\nຕົວເລືອກນີ້ບໍ່ຂຶ້ນກັບການຕັ້ງຄ່າ \"ປຸ່ມວາງໂດຍໃຊ້ເມົ້າ\".\n\nໝາຍເຫດ: ມີການຈັດການປຸ່ມຫຼັກ ແລະ ປຸ່ມສຳຮອງໃຫ້ທ່ານດ້ວຍເມົ້າຖະໜັດຊ້າຍ ແລະ ຂວາ."
@@ -1025,6 +1025,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ການລຶບລ້າງເທີມິນອນ"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "ກົດປຸ່ມລຶບເພື່ອລຶບລາຍການ."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ບໍ່ພ້ອມນຳໃຊ້"
 	},
@@ -1037,23 +1040,50 @@
 	"terminal_home_developer_settings": {
 		"message": "ການຕັ້ງຄ່າສຳລັບນັກພັດທະນາ"
 	},
+	"terminal_home_edit_linux": {
+		"message": "ແກ້ໄຂ Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "ແກ້ໄຂ SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "ນຳເຂົ້າ"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "ເຂົ້າເບິ່ງຕົວເລືອກນັກພັດທະນາເພື່ອຈັດການ Linux"
+	},
+	"terminal_home_manage": {
+		"message": "ຈັດການ"
+	},
+	"terminal_home_new_linux": {
+		"message": "Linux ໃໝ່"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "ການເຊື່ອມຕໍ່ SSH ໃໝ່"
 	},
+	"terminal_home_set_up": {
+		"message": "ຕັ້ງຄ່າ"
+	},
 	"terminal_home_ssh_command": {
 		"message": "ຄຳສັ່ງ"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "ຊື່ການເຊື່ອມຕໍ່"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "ຜູ້ເບິ່ງແຍງລະບົບຂອງທ່ານໄດ້ປິດການນຳໃຊ້ SSH ໄວ້"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "ການເຊື່ອມຕໍ່ກັບອຸປະກອນຈາກໄລຍະໄກຈະປາກົດຢູ່ທີ່ນີ້"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "ລະບຸປາຍທາງດ້ວຍ \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "ການຕັ້ງຄ່າເທີມິນອນ"
+	},
+	"terminal_input_label": {
+		"message": "ອິນພຸດປາຍທາງ"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ສີ ANSI"
@@ -1076,6 +1106,9 @@
 	"terminal_name_pref_image": {
 		"message": "ຮູບພາບ"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "ຄວາມສູງຂອງແຖວ"
+	},
 	"terminal_name_pref_shape": {
 		"message": "ຮູບຮ່າງ"
 	},
@@ -1091,11 +1124,14 @@
 	"terminal_pref_bell": {
 		"message": "ກະດິ່ງເທີມິນອນທີ່ມີສຽງ."
 	},
+	"terminal_pref_line_height": {
+		"message": "ຄວາມສູງຂອງແຖວແຕ່ລະແຖວຂອງ Terminal ໜ້າຈໍ."
+	},
 	"terminal_preview_label": {
 		"message": "ຕົວຢ່າງ"
 	},
 	"terminal_profile_label": {
-		"message": "ໂປຣໄຟລ໌ປັດຈຸບັນ"
+		"message": "ໂປຣໄຟລ໌"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ການຣີເຊັດເທີມິນອນ"
@@ -1108,6 +1144,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ເລືອກໄຟລ໌ພາບພື້ນຫລັງຈາກຄອມພິວເຕີຂອງທ່ານ."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "ທ່ານແນ່ໃຈບໍວ່າທ່ານຕ້ອງການລຶບໂປຣໄຟລ໌ \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ອັດຕະໂນມັດ"
@@ -1232,6 +1271,15 @@
 	"terminal_title_theme": {
 		"message": "ຮູບແບບສີສັນ"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "ຕົວຄວບຄຸມ Tmux ພົບຂໍ້ຜິດພາດ:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "ເປີດໃຊ້ໂໝດການເຊື່ອມໂຍງ Tmux ແລ້ວ. ກົດ Ctrl-C ເພື່ອແຍກ tmux ຫຼື ໃສ່ຄໍາສັ່ງ tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "ມີເອົ້າພຸດຫຼາຍເກີນກວ່າຈະປະກາດໄດ້, ກະລຸນານຳທາງໄປຫາແຖວດ້ວຍຕົນເອງເພື່ອອ່ານ."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "ກະລຸນາເຊື່ອມຕໍ່ອິນເຕີເນັດແລ້ວລອງໃໝ່."
 	},
@@ -1260,7 +1308,7 @@
 		"message": "ເຊື່ອມຕໍ່ຈາກ omnibox ໂດຍການພິມ 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS ສາມາດເຊື່ອມຕໍ່ລະບົບໄຟລ໌ຜ່ານ SFTP ແລະ ຊອກຫາຜ່ານແອັບ Files ໄດ້. ກະລຸນາໃຊ້ 'ເຊື່ອມຕໍ່ SFTP' ແທນ 'ເຊື່ອມຕໍ່'."
+		"message": "ChromeOS ສາມາດເຊື່ອມຕໍ່ລະບົບໄຟລ໌ຜ່ານ SFTP ແລະ ຊອກຫາຜ່ານແອັບ Files ໄດ້. ກະລຸນາໃຊ້ 'ເຊື່ອມຕໍ່ SFTP' ແທນ 'ເຊື່ອມຕໍ່'."
 	},
 	"tip_5": {
 		"message": "ເຊື່ອມຕໍ່ໂດຍໃຊ້ ssh:// links ໃນໜ້າເວັບ ຫຼື ບັນທຶກບຸກມາກ: https://goo.gl/zS8EZD"

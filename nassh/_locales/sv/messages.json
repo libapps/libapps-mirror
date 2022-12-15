@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Rensa terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Du kan radera objektet genom att trycka på tangenten Radera."
+	},
 	"terminal_font_unavailable": {
 		"message": "$1 är inte tillgängligt"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Inställningar för utvecklare"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Redigera Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Redigera SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importera"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Öppna Utvecklaralternativ för att hantera Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Hantera"
+	},
+	"terminal_home_new_linux": {
+		"message": "Ny Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Ny SSH-anslutning"
 	},
+	"terminal_home_set_up": {
+		"message": "Konfigurera"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Kommando"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Anslutningsnamn"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH har inaktiverats av administratören"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Anslutningar till fjärrenheter visas här"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Ange destination i formatet användarnamn@värdnamn"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminalinställningar"
+	},
+	"terminal_input_label": {
+		"message": "Terminalindata"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-färger"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "Bild"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Radhöjd"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Form"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "Ljudsignal."
 	},
+	"terminal_pref_line_height": {
+		"message": "Höjden för varje rad på terminalskärmen."
+	},
 	"terminal_preview_label": {
 		"message": "Förhandsvisa"
 	},
 	"terminal_profile_label": {
-		"message": "Aktuell profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Återställ terminal"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Välj en fil på datorn som bakgrundsbild."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Vill du radera profilen $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Inaktivera"
@@ -1186,6 +1225,15 @@
 	},
 	"terminal_title_theme": {
 		"message": "Tema"
+	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux-kontrollen upptäckte ett fel:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Läget för tmux-integrering har aktiverats. Tryck på Ctrl + C för att koppla från tmux eller mata in tmux-kommandon"
+	},
+	"terminal_too_much_output_message": {
+		"message": "För mycket utdata för att läsa upp. Navigera manuellt till rader för att läsa dem."
 	},
 	"terminal_try_again_with_internet": {
 		"message": "Anslut till internet och försök igen."

@@ -396,7 +396,7 @@
 		"message": "Дозволити або заборонити віддаленому хосту показувати зображення в терміналі.\n\nЗа умовчанням ми надсилатимемо запит, доки ви не зробите вибір."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Якщо цей параметр налаштовано, комбінація Alt+Backspace в ОС Chrome не використовується для заміни клавіші Delete, тобто Alt+Backspace виконує функцію Alt+Backspace."
+		"message": "Якщо цей параметр налаштовано, комбінація Alt + Backspace у ChromeOS не використовується для заміни клавіші Delete, тобто Alt + Backspace виконує функцію Alt + Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Виберіть евристичний підхід до виявлення комбінації клавіш AltGr.\n\nnull: автоматичне виявлення залежно від мови користувача:\n      en-us => none, else => right-alt\nnone: вимикає емуляцію AltGr.\nctrl-alt: Ctrl+Alt означає AltGr.\nleft-alt: ліва клавіша Alt означає AltGr.\nright-alt: права клавіша Alt означає AltGr."
@@ -537,7 +537,7 @@
 		"message": "Надсилає префікс ESC, якщо натиснути клавішу, утримуючи мета-клавішу.\n\nНаприклад, коли цей параметр увімкнено, якщо натиснути мета-клавішу+K, буде надіслано ^[k так, ніби ви ввели Escape, а тоді – k. Якщо цей параметр вимкнено, буде надіслано лише k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Кнопка миші для опції \"вставити\".\n\nЯкщо функцію автоматичного визначення ввімкнено, для всіх платформ, окрім X11 (зокрема, ОС Chrome) використовуватиметься середня кнопка миші. На платформах X11 використовуватиметься права кнопка миші (оскільки за допомогою середньої кнопки вставляється вміст диспетчера вікон).\n\n0 == ліва (основна) кнопка.\n1 == середня (допоміжна) кнопка.\n2 == права (другорядна) кнопка.\n\nЦя опція не залежить від параметра \"Вставляти натисканням правої кнопки миші\".\n\nПримітка: функції основної й другорядної кнопок відповідають налаштуванням миші для правої та лівої руки."
+		"message": "Кнопка миші для опції вставлення.\n\nЯкщо функцію автоматичного визначення ввімкнено, для всіх платформ, окрім X11 (зокрема ChromeOS), використовуватиметься середня кнопка миші. На платформах X11 використовуватиметься права кнопка миші (оскільки за допомогою середньої кнопки вставляється вміст диспетчера вікон).\n\n0 == ліва (основна) кнопка.\n1 == середня (допоміжна) кнопка.\n2 == права (другорядна) кнопка.\n\nЦя опція не залежить від параметрів для вставлення за допомогою правої кнопки миші.\n\nПримітка: функції основної й другорядної кнопок відповідають налаштуванням миші для правої та лівої руки."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Вставляти натисканням правої кнопки миші.\n\nЦя опція не залежить від параметра \"Вставити натисканням кнопки миші\".\n\nПримітка: функції основної й другорядної кнопок відповідають налаштуванням миші для правої та лівої руки."
@@ -1043,6 +1043,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Очищення термінала"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Щоб видалити елемент меню, натисніть клавішу Delete."
+	},
 	"terminal_font_unavailable": {
 		"message": "Шрифт \"$1\" недоступний."
 	},
@@ -1055,23 +1058,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Налаштування розробника"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Змінити контейнер Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Редагувати SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Імпортувати"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Щоб керувати ОС Linux, перейдіть у Параметри розробника"
+	},
+	"terminal_home_manage": {
+		"message": "Керувати"
+	},
+	"terminal_home_new_linux": {
+		"message": "Новий контейнер Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Нове підключення SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Налаштувати"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Команда"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Назва підключення"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Адміністратор вимкнув SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Тут показуватимуться підключення до віддалених пристроїв"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Введіть місце призначення у форматі \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Налаштування термінала"
+	},
+	"terminal_input_label": {
+		"message": "Елемент введення на терміналі"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Кольори ANSI"
@@ -1094,6 +1124,9 @@
 	"terminal_name_pref_image": {
 		"message": "Зображення"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Висота рядка"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Форма"
 	},
@@ -1109,11 +1142,14 @@
 	"terminal_pref_bell": {
 		"message": "Чутний дзвінок термінала."
 	},
+	"terminal_pref_line_height": {
+		"message": "Висота кожного рядка на екрані термінала."
+	},
 	"terminal_preview_label": {
 		"message": "Попередній перегляд"
 	},
 	"terminal_profile_label": {
-		"message": "Поточний профіль"
+		"message": "Профіль"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Скинути налаштування термінала"
@@ -1126,6 +1162,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Виберіть файл фонового зображення на комп'ютері."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Видалити профіль \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Авто"
@@ -1259,6 +1298,15 @@
 	"terminal_title_theme": {
 		"message": "Тема"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "У контролері Tmux сталася помилка:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Увімкнено режим інтеграції Tmux. Натисніть комбінацію клавіш Ctrl + C, щоб від’єднати Tmux, або введіть команди Tmux."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Забагато вихідних даних для зчитування. Щоб зчитати їх, переходьте до рядків вручну."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Підключіться до Інтернету й повторіть спробу."
 	},
@@ -1287,7 +1335,7 @@
 		"message": "Щоб підключитися з універсального вікна пошуку, введіть \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "ОС Chrome може підключати файлові системи через протокол SFTP та переглядати їх через додаток Файли. Натисніть \"Підключити через SFTP\" замість \"Підключитися\"."
+		"message": "ChromeOS може підключати файлові системи через протокол SFTP та переглядати їх через додаток Файли. Натисніть \"Підключити протокол SFTP\" замість \"Підключити\"."
 	},
 	"tip_5": {
 		"message": "Підключайтеся за допомогою посилань ssh:// на веб-сторінках або збережіть закладку: https://goo.gl/zS8EZD"

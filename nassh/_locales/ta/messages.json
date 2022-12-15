@@ -393,7 +393,7 @@
 		"message": "படங்களை டெர்மினலில் காட்ட, தொலைநிலை ஹோஸ்ட்டை அனுமதிக்க வேண்டுமா என்பதைக் குறிப்பிடும்.\n\nஇயல்பாக, தேர்வுசெய்யும் வரை கேட்கப்படும்."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "அமைத்தால், Chrome OS Alt+Backspace->Delete ரீமேப்பைச் செயல்தவிர்க்கும், இதனால் Alt+Backspace என்பது Alt+Backspace ஆகவே இருக்கும்."
+		"message": "அமைத்தால் ChromeOS Alt+Backspace->Delete ரீமேப்பைச் செயல்தவிர்க்கும், இதனால் Alt+Backspace என்பது Alt+Backspace ஆகவே இருக்கும்."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr கண்டறிதல் ஹியூரிஸ்டிக்கைத் தேர்ந்தெடுக்கவும்.\n\n'null': navigator.languageஜை அடிப்படையாகக் கொண்டு தானாகக் கண்டறி:\n      'en-us' => 'none', இல்லை எனில் => 'right-alt'\n'none': ஏதேனும் AltGr மாதிரி இயக்கத்தை முடக்கவும்.\n'ctrl-alt': Ctrl+Alt என்பதை AltGr எனக் கொள்ளவும்.\n'left-alt': இடது Alt விசையை AltGr எனக் கொள்ளவும்.\n'right-alt': வலது Alt விசையை AltGr எனக் கொள்ளவும்."
@@ -534,7 +534,7 @@
 		"message": "Meta விசையைப் பிடித்துக்கொண்டு ஒரு விசையை அழுத்தினால் ESC முன்னொட்டை அனுப்பும்.\n\nஎடுத்துக்காட்டாக, இயக்கப்பட்டிருக்கும்போது​​Meta+Kவை அழுத்தினால், எஸ்கேப்பையும் kவையும் அழுத்தியதைப் போல, ^[k அனுப்பப்படும். முடக்கப்பட்டால் k மட்டும் அனுப்பப்படும்."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "ஒட்டுவதற்குப் பயன்படும் மவுஸ் பட்டன்.\n\nதானாகக் கண்டறிய, X11 அல்லாத பிளாட்ஃபார்ம்களுக்கு (Chrome OS உட்பட) மவுஸின் நடு பட்டனைப் பயன்படுத்துவோம். ஒட்டுவதற்கு மவுஸின் நடு பட்டனை விண்டோ மேனேஜர் பயன்படுத்துவதால் X11ல் மவுஸின் வலது பட்டனைப் பயன்படுத்துவோம்.\n\n0 == இடது (முதன்மை) பட்டன்.\n1 == நடு (துணை) பட்டன்.\n2 == வலது (இரண்டாம் நிலை) பட்டன்.\n\nஇந்த விருப்பம் வலது கிளிக் செய்து ஒட்டுவதற்கான அமைப்பைச் சார்ந்ததல்ல.\n\nகவனத்திற்கு: முதன்மை & இரண்டாம் நிலை பட்டன்கள் இடதுகை & வலதுகை மவுஸ்களைக் கையாளும்."
+		"message": "ஒட்டுவதற்குப் பயன்படும் மவுஸ் பட்டன்.\n\nதானாகக் கண்டறிய X11 அல்லாத பிளாட்ஃபார்ம்களுக்கு (ChromeOS உட்பட) மவுஸின் நடு பட்டனைப் பயன்படுத்துவோம். ஒட்டுவதற்கு மவுஸின் நடு பட்டனை விண்டோ மேனேஜர் பயன்படுத்துவதால் X11ல் மவுஸின் வலது பட்டனைப் பயன்படுத்துவோம்.\n\n0 == இடது (முதன்மை) பட்டன்.\n1 == நடு (துணை) பட்டன்.\n2 == வலது (இரண்டாம் நிலை) பட்டன்.\n\nஇந்த விருப்பம் வலது கிளிக் செய்து ஒட்டுவதற்கான அமைப்பைச் சார்ந்ததல்ல.\n\nகவனத்திற்கு: முதன்மை மற்றும் இரண்டாம் நிலை பட்டன்கள் இடதுகை மற்றும் வலதுகை மவுஸ்களின் அடிப்படையில் கையாளப்படும்."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "மவுஸின் வலது பட்டனைக் கிளிக் செய்யும்போது ஒட்டும்.\n\nஇந்த விருப்பம் \"mouse-paste-button\" அமைப்பைச் சார்ந்ததல்ல.\n\nகவனத்திற்கு: முதன்மை & இரண்டாம் நிலை பட்டன்கள் இடதுகை & வலதுகை மவுஸ்களைக் கையாளும்."
@@ -1040,6 +1040,9 @@
 	"terminal_clear_menu_label": {
 		"message": "டெர்மினலை அழி"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "எதையேனும் நீக்க ‘Delete’ பட்டனை அழுத்தவும்."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" கிடைக்கவில்லை"
 	},
@@ -1052,23 +1055,50 @@
 	"terminal_home_developer_settings": {
 		"message": "டெவெலப்பர் அமைப்புகள்"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linuxஸை மாற்று"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSHஐத் திருத்து"
 	},
 	"terminal_home_import_identity": {
 		"message": "இறக்கு"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linuxஸை நிர்வகிக்க டெவெலப்பர் விருப்பங்களைப் பார்க்கவும்"
+	},
+	"terminal_home_manage": {
+		"message": "நிர்வகியுங்கள்"
+	},
+	"terminal_home_new_linux": {
+		"message": "புதிய Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "புதிய SSH இணைப்பு"
 	},
+	"terminal_home_set_up": {
+		"message": "அமை"
+	},
 	"terminal_home_ssh_command": {
 		"message": "கட்டளை"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "இணைப்பின் பெயர்"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "உங்கள் நிர்வாகி SSHஐ முடக்கியுள்ளார்"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "தொலைநிலை சாதனங்களுக்கான இணைப்புகள் இங்கே காட்டப்படும்"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"username@hostname\" என்ற வடிவில் இலக்கைக் குறிப்பிடவும்"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "டெர்மினல் அமைப்புகள்"
+	},
+	"terminal_input_label": {
+		"message": "டெர்மினல் உள்ளீடு"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI வண்ணங்கள்"
@@ -1088,6 +1118,9 @@
 	"terminal_name_pref_image": {
 		"message": "படம்"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "வரியின் உயரம்"
+	},
 	"terminal_name_pref_shape": {
 		"message": "வடிவம்"
 	},
@@ -1103,11 +1136,14 @@
 	"terminal_pref_bell": {
 		"message": "கேட்கக்கூடிய டெர்மினல் மணியோசை."
 	},
+	"terminal_pref_line_height": {
+		"message": "டெர்மினல் திரையிலுள்ள ஒவ்வொரு வரிக்குமான உயரம்."
+	},
 	"terminal_preview_label": {
 		"message": "முன்னோட்டம்"
 	},
 	"terminal_profile_label": {
-		"message": "தற்போதைய சுயவிவரம்"
+		"message": "சுயவிவரம்"
 	},
 	"terminal_reset_menu_label": {
 		"message": "டெர்மினலை ரீசெட் செய்"
@@ -1120,6 +1156,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "கம்ப்யூட்டரிலிருந்து பின்புலப் பட ஃபைலைத் தேர்ந்தெடுக்கவும்."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "\"$1\" சுயவிவரத்தை நிச்சயமாக நீக்க விரும்புகிறீர்களா?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "தானியங்கு"
@@ -1253,6 +1292,15 @@
 	"terminal_title_theme": {
 		"message": "தீம்"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux கண்ட்ரோலரில் பிழை ஏற்பட்டது:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux ஒருங்கிணைப்புப் பயன்முறை இயக்கப்பட்டது. tmuxஸில் இருந்து வெளியேற Ctrl-C அழுத்தவும் அல்லது tmux கட்டளைகளை டைப் செய்யவும்"
+	},
+	"terminal_too_much_output_message": {
+		"message": "அறிவிக்க முடியாத அளவிற்கு நிறைய இருப்பதால், வரிசைகளுக்குச் சென்று படிக்கவும்."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "இணையத்துடன் இணைத்து மீண்டும் முயலவும்."
 	},
@@ -1281,7 +1329,7 @@
 		"message": "'ssh<Tab><profile name>' என உள்ளிட்டு ஆம்னிபாக்ஸிலிருந்து இணைக்கலாம்: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS ஆல் SFTP வழியாக ஃபைல் முறைமைகளைப் பொருத்த முடியும், \"ஃபைல்கள் \" ஆப்ஸ் வழியாகத் தேட முடியும். 'இணை' என்பதற்குப் பதிலாக, 'SFTP பொருத்து' என்பதைப் பயன்படுத்தவும்."
+		"message": "ChromeOSஸினால் SFTP மூலம் ஃபைல் சிஸ்டங்களை அணுகச் செய்ய முடிவதுடன் Files ஆப்ஸ் மூலம் உலாவவும் முடியும். 'இணை' என்பதற்குப் பதில் 'SFTP மவுண்ட்' என்பதைப் பயன்படுத்தவும்."
 	},
 	"tip_5": {
 		"message": "இணையப் பக்கங்களில் ssh:// இணைப்புகளைப் பயன்படுத்தி இணைக்கலாம் அல்லது புத்தகக்குறியைச் சேமிக்கலாம்: https://goo.gl/zS8EZD"

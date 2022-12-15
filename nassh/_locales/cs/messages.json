@@ -396,7 +396,7 @@
 		"message": "Určuje, zda má mít vzdálený hostitel povoleno zobrazovat v terminálu obrázky.\n\nVe výchozím nastavení zobrazujeme výzvu, dokud si uživatel nevybere."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Tato možnost ruší přemapování Alt+Backspace -> Delete systému Chrome OS, aby Alt+Backspace opravdu fungovalo jako Alt+Backspace."
+		"message": "Tato možnost ruší přemapování Alt+Backspace -> Delete systému ChromeOS, aby Alt+Backspace opravdu fungovalo jako Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Vyberte heuristiku detekce klávesy AltGr.\n\n'null': Zjistit automaticky podle hodnoty navigator.language:\n      'en-us' => 'none', jinak => 'right-alt'\nnone: Zakázat veškerou emulaci pomocí klávesy AltGr.\nctrl-alt: Předpokládat, že Ctrl + Alt znamená AltGr.\nleft-alt: Předpokládat, že levý Alt znamená AltGr.\nright-alt: Předpokládat, že pravý Alt znamená AltGr."
@@ -537,7 +537,7 @@
 		"message": "Při stisknutí klávesy s podrženou klávesou Meta odeslat předponu ESC.\n\nPokud je tato možnost zapnutá, při stisknutí Meta+K se například odešle ^[k, jako kdybyste stiskli Escape a potom K. Pokud je vypnutá, odešle se jen K."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Tlačítko myši, které se má používat k vložení.\n\nV případě automatické detekce použijeme u platforem jiných než X11 (včetně Chrome OS) prostřední tlačítko myši. Na platformě X11 použijeme pravé tlačítko myši (protože ve správci oken by se k vložení mělo používat prostřední tlačítko).\n\n0 == levé (primární) tlačítko.\n1 == prostřední (pomocné) tlačítko.\n2 == pravé (sekundární) tlačítko.\n\nTato volba je nezávislá na nastavení vložení pravým tlačítkem myši.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
+		"message": "Tlačítko myši, které se má používat k vložení.\n\nV případě automatické detekce použijeme u platforem jiných než X11 (včetně ChromeOS) prostřední tlačítko myši. Na platformě X11 použijeme pravé tlačítko myši (protože ve správci oken by se k vložení mělo používat prostřední tlačítko).\n\n0 == levé (primární) tlačítko.\n1 == prostřední (pomocné) tlačítko.\n2 == pravé (sekundární) tlačítko.\n\nTato volba je nezávislá na nastavení vložení pravým tlačítkem myši.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Vložení kliknutím pravým tlačítkem.\n\nTato možnost je nezávislá na nastavení mouse-paste-button.\n\nPoznámka: Toto nastavení bude fungovat správně u myší pro leváky i pro praváky."
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Vymazat terminál"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Položku lze smazat stisknutím klávesy Delete."
+	},
 	"terminal_font_unavailable": {
 		"message": "Písmo $1 není k dispozici"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Nastavení vývojáře"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Upravit Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Upravit SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importovat"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux můžete spravovat v sekci Pro vývojáře"
+	},
+	"terminal_home_manage": {
+		"message": "Spravovat"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nový Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nové připojení SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Nastavit"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Příkaz"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Název připojení"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH je deaktivováno administrátorem"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Tady se zobrazí připojení ke vzdáleným zařízením"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Zadejte cíl ve formátu uživatelské_jméno@název_hostitele"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Nastavení terminálu"
+	},
+	"terminal_input_label": {
+		"message": "Vstup terminálu"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Barvy ANSI"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "Obrázek"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Výška řádků"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Tvar"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "Slyšitelný zvonek terminálu."
 	},
+	"terminal_pref_line_height": {
+		"message": "Výška řádků na obrazovce terminálu."
+	},
 	"terminal_preview_label": {
 		"message": "Náhled"
 	},
 	"terminal_profile_label": {
-		"message": "Aktuální profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Resetovat terminál"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Vyberte soubor obrázku pozadí z počítače."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Opravdu chcete smazat profil $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Zakázat"
@@ -1187,6 +1226,15 @@
 	"terminal_title_theme": {
 		"message": "Motiv"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "V ovladači Tmux došlo k chybě:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Byl aktivován režim integrace Tmux. Stisknutím kombinace kláves Ctrl+C odpojíte ovladač Tmux nebo zadáte příkazy Tmux."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Příliš mnoho výstupu k přečtení. Ručně přejděte na jednotlivé řádky, které chcete přečíst."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Připojte se k internetu a zkuste to znovu."
 	},
@@ -1200,7 +1248,7 @@
 		"message": "Přiřazení kláves a zkratek můžete změnit: https://goo.gl/LWRndr"
 	},
 	"tip_12": {
-		"message": "Používejte k ověření SSH karty Yubikey a další chytré karty: https://goo.gl/Hu2o3v"
+		"message": "K ověření SSH používejte autentizační zařízení Yubikey nebo čipové karty: https://goo.gl/Hu2o3v"
 	},
 	"tip_13": {
 		"message": "Zobrazovat obrázky v obsahu: https://goo.gl/MnSysj"
@@ -1215,7 +1263,7 @@
 		"message": "Zadáním adresy „ssh<Tab><název profilu>“ se můžete připojit z omniboxu: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS umožňuje připojit systémy souborů pomocí SFTP a procházet je v aplikaci Soubory. Namísto tlačítka „Připojit“ použijte tlačítko „Připojení SFTP“."
+		"message": "ChromeOS umožňuje připojit systémy souborů pomocí SFTP a procházet je v aplikaci Soubory. Namísto tlačítka „Připojit“ použijte tlačítko „Připojení SFTP“."
 	},
 	"tip_5": {
 		"message": "Připojujte se pomocí odkazů ssh:// na webových stránkách, nebo si uložte záložku: https://goo.gl/zS8EZD"

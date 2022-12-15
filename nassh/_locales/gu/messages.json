@@ -393,7 +393,7 @@
 		"message": "રિમોટ હોસ્ટને ટર્મિનલમાં છબીઓને પ્રદર્શિત કરવાની મંજૂરી આપવી કે નહીં.\n\nડિફૉલ્ટ તરીકે, જ્યાં સુધી પસંદગી કરવામાં ન આવે, ત્યાં સુધી અમે સંકેત આપીએ છીએ."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "જો સેટ કર્યું હોય, તો Chrome OS Alt+Backspace->Delete રિમૅપને રદ કરે છે, જેથી Alt+Backspace એ ખરેખર Alt-Backspace જ રહે."
+		"message": "જો સેટ કર્યું હોય, તો ChromeOS Alt+Backspace->Delete રિમૅપને રદ કરે છે, જેથી Alt+Backspace એ ખરેખર Alt+Backspace જ રહે."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr શોધ heuristic પસંદ કરો.\n\n'null': navigator.language આધારિત ઑટોમૅટિક રીતે શોધ:\n      'en-us' => 'none', નહીં તો => 'right-alt'\n'none': કોઈ પણ AltGr સંબંધિત ઇમ્યુલેશન બંધ કરો.\n'ctrl-alt': ધારો કે Ctrl+Alt એટલે AltGr.\n'left-alt': ધારો કે ડાબી Alt એટલે AltGr.\n'right-alt': ધારો કે જમણી Alt એટલે AltGr."
@@ -534,7 +534,7 @@
 		"message": "કોઈ કી દબાવતી વખતે Meta કી દબાવી રાખીને ESC પ્રીફિક્સ મોકલો.\n\nઉદાહરણ તરીકે, જ્યારે ચાલુ કરવામાં આવે, ત્યારે Meta+K તમે Escape પછી k ટાઇપ કર્યું હોય તે રીતે ^[k મોકલશે. બંધ કરવામાં આવે ત્યારે ફક્ત k મોકલશે."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "પેસ્ટ કરવા માટે માઉસ બટનનો ઉપયોગ કરવો.\n\nઑટોમૅટિક રીતે શોધવા માટે, બિન-X11 પ્લૅટફૉર્મ (Chrome OS સહિત) માટે આપણે માઉસના વચલા બટનનો ઉપયોગ કરીશું. X11 પર, આપણે માઉસના જમણા બટનનો ઉપયોગ કરીશું (કારણ કે વિંડો મેનેજરે માઉસના વચલા બટન દ્વારા પેસ્ટની ક્રિયા હૅન્ડલ કરવી જોઈએ).\n\n0 == ડાબું (પ્રાથમિક) બટન.\n1 == વચલું (વધારાનું) બટન.\n2 == જમણું (બીજું) બટન.\n\nઆ વિકલ્પ રાઇટ ક્લિક કરીને પેસ્ટ કરવા માટેના સેટિંગથી અલગ છે.\n\nનોંધ: મુખ્ય બટન અને બીજું બટન, ડાબા અને જમણા હાથવાળા માઉસ માટે આપવામાં આવ્યા છે, જેથી તમે તેને સરળતાથી હૅન્ડલ કરી શકો."
+		"message": "પેસ્ટ કરવા માટે માઉસ બટનનો ઉપયોગ કરવો.\n\nઑટોમૅટિક રીતે શોધવા માટે, X11 સિવાયના પ્લૅટફૉર્મ (ChromeOS સહિત) માટે આપણે માઉસના વચલા બટનનો ઉપયોગ કરીશું. X11 પર, આપણે માઉસના જમણા બટનનો ઉપયોગ કરીશું (કારણ કે વિન્ડો મેનેજરે માઉસના વચલા બટન દ્વારા પેસ્ટની ક્રિયા હૅન્ડલ કરવી જોઈએ).\n\n0 == ડાબું (મુખ્ય) બટન.\n1 == વચલું (વધારાનું) બટન.\n2 == જમણું (ગૌણ) બટન.\n\nઆ વિકલ્પ રાઇટ ક્લિક કરીને પેસ્ટ કરવા માટેના સેટિંગથી અલગ છે.\n\nનોંધ: મુખ્ય બટન અને ગૌણ બટનને તમે ડાબા અને જમણા હાથથી ચાલતા માઉસ વડે હૅન્ડલ કરી શકો છો."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "માઉસના જમણા બટનના ક્લિકથી પેસ્ટ કરો.\n\nઆ વિકલ્પ \"mouse-paste-button\"ના સેટિંગથી અલગ છે.\n\nનોંધ: મુખ્ય બટન અને બીજું બટન, ડાબા અને જમણા હાથવાળા માઉસ માટે આપવામાં આવ્યા છે, જેથી તમે તેને સરળતાથી હૅન્ડલ કરી શકો."
@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ટર્મિનલ સાફ કરો"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "આઇટમ ડિલીટ કરવા માટે Delete કી દબાવો."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ઉપલબ્ધ નથી"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "ડેવલપર સેટિંગ"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux કન્ટેનરમાં ફેરફાર કરો"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSHમાં ફેરફાર કરો"
 	},
 	"terminal_home_import_identity": {
 		"message": "આયાત કરો"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux મેનેજ કરવા માટે ડેવલપરના વિકલ્પોની મુલાકાત લો"
+	},
+	"terminal_home_manage": {
+		"message": "મેનેજ કરો"
+	},
+	"terminal_home_new_linux": {
+		"message": "નવું Linux કન્ટેનર"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "નવું SSH કનેક્શન"
 	},
+	"terminal_home_set_up": {
+		"message": "સેટ કરો"
+	},
 	"terminal_home_ssh_command": {
 		"message": "આદેશ"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "કનેક્શનનું નામ"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "તમારા ઍડમિનિસ્ટ્રેટર દ્વારા SSH બંધ કરવામાં આવ્યું છે"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "રિમોટ ડિવાઇસ સાથેના કનેક્શન અહીં દેખાશે"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"username@hostname\" સાથે સ્થાનનો ઉલ્લેખ કરો"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "ટર્મિનલ સેટિંગ"
+	},
+	"terminal_input_label": {
+		"message": "ટર્મિનલ ઇનપુટ"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI રંગો"
@@ -1028,6 +1058,9 @@
 	"terminal_name_pref_image": {
 		"message": "છબી"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "લાઇનની ઊંચાઈ"
+	},
 	"terminal_name_pref_shape": {
 		"message": "આકાર"
 	},
@@ -1043,11 +1076,14 @@
 	"terminal_pref_bell": {
 		"message": "ટર્મિનલની સાંભળી શકાય તેવી ઘંટડી."
 	},
+	"terminal_pref_line_height": {
+		"message": "ટર્મિનલ સ્ક્રીનની પ્રત્યેક પંક્તિ માટે લાઇનની ઊંચાઈ."
+	},
 	"terminal_preview_label": {
 		"message": "પ્રીવ્યૂ કરો"
 	},
 	"terminal_profile_label": {
-		"message": "વર્તમાન પ્રોફાઇલ"
+		"message": "પ્રોફાઇલ"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ટર્મિનલ રીસેટ કરો"
@@ -1190,6 +1226,15 @@
 	"terminal_title_theme": {
 		"message": "થીમ"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux કન્ટ્રોલરમાં ભૂલ આવી:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmuxનો એકીકરણ મોડ સક્રિય કરવામાં આવ્યો. tmuxને ડિટૅચ કરવા માટે, Ctrl-C દબાવો અથવા tmux આદેશો ઇનપુટ કરો"
+	},
+	"terminal_too_much_output_message": {
+		"message": "ઘોષણા કરવા માટે ઘણું વધુ આઉટપુટ છે, વાંચવા માટે પંક્તિઓ પર મેન્યુઅલી નૅવિગેટ કરો."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "ઇન્ટરનેટ સાથે કનેક્ટ કરો અને ફરી પ્રયાસ કરો."
 	},
@@ -1218,7 +1263,7 @@
 		"message": "'ssh<Tab><profile name>' ટાઇપ કરીને ઑમ્નિબૉક્સ પરથી કનેક્ટ કરો: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS ફાઇલ સિસ્ટમને SFTP મારફતે માઉન્ટ કરી શકે છે અને Files ઍપ મારફતે બ્રાઉઝ કરી શકે છે. 'કનેક્ટ કરો'ને બદલે 'SFTP માઉન્ટ'નો ઉપયોગ કરો."
+		"message": "ChromeOS ફાઇલ સિસ્ટમને SFTP મારફતે માઉન્ટ કરી શકે છે અને Files ઍપ મારફતે બ્રાઉઝ કરી શકે છે. 'કનેક્ટ કરો'ને બદલે 'SFTP માઉન્ટ'નો ઉપયોગ કરો."
 	},
 	"tip_5": {
 		"message": "વેબપેજમાં ssh:// લિંકનો ઉપયોગ કરીને કનેક્ટ કરો અથવા બુકમાર્ક સાચવો: https://goo.gl/zS8EZD"

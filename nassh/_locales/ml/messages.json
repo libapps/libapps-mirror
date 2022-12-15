@@ -393,7 +393,7 @@
 		"message": "ടെർമിനലിൽ ചിത്രങ്ങൾ പ്രദർശിപ്പിക്കാൻ റിമോട്ട് ഹോസ്റ്റിനെ അനുവദിക്കണോ എന്നത്.\n\nഡിഫോൾട്ടായി, ഒരു തിരഞ്ഞെടുപ്പ് നടത്തുന്നത് വരെ ഞങ്ങൾ നിർദ്ദേശം നൽകും."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "സജ്ജീകരിച്ചിട്ടുണ്ടെങ്കിൽ, Chrome OS Alt+Backspace->Delete റീമാപ്പിനെ പഴയപടിയാക്കുന്നു, അതിനാൽ Alt+Backspace തീർച്ചയായും Alt+Backspace ആയി മാറുന്നു."
+		"message": "സജ്ജീകരിച്ചിട്ടുണ്ടെങ്കിൽ, ChromeOS Alt+Backspace->Delete റീമാപ്പ് പഴയപടിയാക്കുന്നു, Alt+Backspace വീണ്ടും Alt+Backspace ആയി മാറുന്നു."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "ഒരു AltGr തിരിച്ചറിയൽ ഹ്യൂറിസ്റ്റിക് തിരഞ്ഞെടുക്കുക.\n\n'null': navigator.language-നെ അടിസ്ഥാനമാക്കി സ്വയമേവ കണ്ടെത്തൽ:\n      'en-us' => 'none', അല്ലെങ്കിൽ => 'right-alt'\n'none': എല്ലാ AltGr അനുകരണവും പ്രവർത്തനരഹിതമാക്കുക.\n'ctrl-alt': Ctrl+Alt അർത്ഥമാക്കുന്നത് AltGr ആണെന്ന് അനുമാനിക്കുക.\n'left-alt': ഇടത് Alt അർത്ഥമാക്കുന്നത് AltGr ആണെന്ന് അനുമാനിക്കുക.\n'right-alt': വലത് Alt അർത്ഥമാക്കുന്നത് AltGr ആണെന്ന് അനുമാനിക്കുക."
@@ -534,7 +534,7 @@
 		"message": "Meta കീ അമർത്തിപ്പിടിച്ച് ഒരു കീ അമർത്തുമ്പോൾ, ഒരു ESC പ്രിഫിക്‌സ് അയയ്‌ക്കുക.\n\nഉദാഹരണത്തിന്, പ്രവർത്തനക്ഷമമാക്കിയിരിക്കുമ്പോൾ, Meta+K അമർത്തുന്നത്, നിങ്ങൾ എ‌സ്‌കേപ്പിന് ശേഷം k ടൈപ്പ് ചെയ്‌തത് പോലെ ^[k അയയ്‌ക്കും. പ്രവർത്തനരഹിതമായിരിക്കുമ്പോൾ k മാത്രം അയയ്‌ക്കുകയും ചെയ്യുന്നു."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "ഒട്ടിക്കാൻ ഉപയോഗിക്കുന്ന മൗസ് ബട്ടൺ.\n\nസ്വയമേവ കണ്ടെത്തുന്നതിന്, X11 ഇതര പ്ലാറ്റ്‌ഫോമുകൾക്ക് (Chrome OS ഉൾപ്പെടെ), ഞങ്ങൾ മൗസിന്റെ മധ്യഭാഗത്തെ ബട്ടൺ ഉപയോഗിക്കും. പ്ലാറ്റ്‌ഫോം X11 ആണെങ്കിൽ, ഞങ്ങൾ മൗസിന്റെ വലത് ഭാഗത്തെ ബട്ടൺ ഉപയോഗിക്കും (കാരണം വിൻഡോ മാനേജർ, ഒട്ടിക്കുന്നതിനായി മൗസിന്റെ മധ്യഭാഗത്തെ ബട്ടണാണ് ഉപയോഗിക്കുക).\n\n0 == ഇടത് (പ്രാഥമികം) ബട്ടൺ.\n1 == മധ്യ (സഹായകം) ബട്ടൺ.\n2 == വലത് (ദ്വിതീയം) ബട്ടൺ.\n\nവലത്-ക്ലിക്ക്-ഒട്ടിക്കൽ ക്രമീകരണം എന്തുതന്നെ ആയാലും ഈ ഓപ്ഷൻ പ്രവർത്തിക്കും.\n\nശ്രദ്ധിക്കുക: ഇടത് കൈകൊണ്ടോ വലത് കൈകൊണ്ടോ ഉപയോഗിക്കുന്ന മൗസുകൾ ഉപയോഗിച്ച് പ്രാഥമിക, ദ്വിതീയ ബട്ടണുകൾ നിയന്ത്രിക്കുന്നു."
+		"message": "ഒട്ടിക്കാൻ ഉപയോഗിക്കുന്ന മൗസ് ബട്ടൺ.\n\nസ്വയമേവ കണ്ടെത്തുന്നതിന്, X11 ഇതര പ്ലാറ്റ്‌ഫോമുകൾക്ക് (ChromeOS ഉൾപ്പെടെ), ഞങ്ങൾ മൗസിന്റെ മധ്യഭാഗത്തെ ബട്ടൺ ഉപയോഗിക്കും. പ്ലാറ്റ്‌ഫോം X11 ആണെങ്കിൽ, ഞങ്ങൾ മൗസിന്റെ വലത് ഭാഗത്തെ ബട്ടൺ ഉപയോഗിക്കും (കാരണം വിൻഡോ മാനേജർ, ഒട്ടിക്കുന്നതിനായി മൗസിന്റെ മധ്യഭാഗത്തെ ബട്ടണാണ് ഉപയോഗിക്കുക).\n\n0 == ഇടത് (പ്രാഥമികം) ബട്ടൺ.\n1 == മധ്യ (സഹായകം) ബട്ടൺ.\n2 == വലത് (ദ്വിതീയം) ബട്ടൺ.\n\nവലത്-ക്ലിക്ക്-ഒട്ടിക്കൽ ക്രമീകരണം എന്തുതന്നെ ആയാലും ഈ ഓപ്ഷൻ പ്രവർത്തിക്കും.\n\nശ്രദ്ധിക്കുക: ഇടത് കൈകൊണ്ടോ വലത് കൈകൊണ്ടോ ഉപയോഗിക്കുന്ന മൗസുകൾ ഉപയോഗിച്ച് പ്രാഥമിക, ദ്വിതീയ ബട്ടണുകൾ നിയന്ത്രിക്കുന്നു."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "വലത് മൗസ് ക്ലിക്ക് ചെയ്‌തുള്ള ഒട്ടിക്കൽ.\n\nmouse-paste-button ക്രമീകരണം എന്തുതന്നെ ആയാലും ഈ ഓപ്ഷൻ പ്രവർത്തിക്കും.\n\nശ്രദ്ധിക്കുക: ഇടത് കൈകൊണ്ടോ വലത് കൈകൊണ്ടോ ഉപയോഗിക്കുന്ന മൗസുകൾ ഉപയോഗിച്ച് പ്രാഥമിക, ദ്വിതീയ ബട്ടണുകൾ നിയന്ത്രിക്കുന്നു."
@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ടെർമിനൽ മായ്‌ക്കുക"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "ഇനം ഇല്ലാതാക്കാൻ delete കീ അമർത്തുക."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ലഭ്യമല്ല"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "ഡെവലപ്പർ ക്രമീകരണം"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux എഡിറ്റ് ചെയ്യുക"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH എഡിറ്റ് ചെയ്യുക"
 	},
 	"terminal_home_import_identity": {
 		"message": "ഇമ്പോർട്ട് ചെയ്യുക"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux മാനേജ് ചെയ്യാൻ ഡെവലപ്പർ ഓപ്ഷനുകൾ സന്ദർശിക്കുക"
+	},
+	"terminal_home_manage": {
+		"message": "മാനേജ് ചെയ്യുക"
+	},
+	"terminal_home_new_linux": {
+		"message": "പുതിയ Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "പുതിയ SSH കണക്ഷൻ"
 	},
+	"terminal_home_set_up": {
+		"message": "സജ്ജീകരിക്കുക"
+	},
 	"terminal_home_ssh_command": {
 		"message": "കമാൻഡ്"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "കണക്ഷന്റെ പേര്"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "നിങ്ങളുടെ അഡ്‌മിൻ SSH പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നു"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "വിദൂര ഉപകരണങ്ങളിലേക്കുള്ള കണക്ഷനുകൾ ഇവിടെ ദൃശ്യമാകും"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"username@hostname\" ഉപയോഗിച്ച് ലക്ഷ്യസ്ഥാനം വ്യക്തമാക്കുക"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "ടെർമിനൽ ക്രമീകരണം"
+	},
+	"terminal_input_label": {
+		"message": "ടെർമിനൽ ഇൻപുട്ട്"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI വർണ്ണങ്ങൾ"
@@ -1025,6 +1055,9 @@
 	"terminal_name_pref_image": {
 		"message": "ചിത്രം"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "ലൈനിന്റെ ഉയരം"
+	},
 	"terminal_name_pref_shape": {
 		"message": "രൂപം"
 	},
@@ -1040,11 +1073,14 @@
 	"terminal_pref_bell": {
 		"message": "കേൾക്കാൻ കഴിയുന്ന ടെർമിനൽ ബെൽ."
 	},
+	"terminal_pref_line_height": {
+		"message": "ടെർമിനൽ സ്‌ക്രീനിലെ ഓരോ വരിയുടെയും ലെെനിന്റെ ഉയരം."
+	},
 	"terminal_preview_label": {
 		"message": "പ്രിവ്യൂ ചെയ്യുക"
 	},
 	"terminal_profile_label": {
-		"message": "നിലവിലെ പ്രൊഫൈൽ"
+		"message": "പ്രൊഫൈൽ"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ടെർമിനൽ റീസെറ്റ് ചെയ്യുക"
@@ -1057,6 +1093,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "നിങ്ങളുടെ കമ്പ്യൂട്ടറിൽ നിന്ന് ഒരു പശ്ചാത്തല ചിത്രം തിരഞ്ഞെടുക്കുക."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "\"$1\" എന്ന പ്രൊഫൈൽ ഇല്ലാതാക്കണമെന്ന് തീർച്ചയാണോ?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "സ്വയമേവ"
@@ -1187,6 +1226,15 @@
 	"terminal_title_theme": {
 		"message": "തീം"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux കൺട്രോളറിൽ ഒരു പിശകുണ്ടായി:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux ഏകീകരണ മോഡ് സജീവമാക്കി. tmux നീക്കം ചെയ്യാൻ Ctrl-C അമർത്തുക, അല്ലെങ്കിൽ tmux കമന്റുകൾ നൽകുക"
+	},
+	"terminal_too_much_output_message": {
+		"message": "അനൗൺസ് ചെയ്യാൻ നിരവധി ഔട്ട്പുട്ട് ഉണ്ട്, അവ വായിക്കാൻ വരികളിലേക്ക് നേരിട്ട് നാവിഗേറ്റ് ചെയ്യുക."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "ഇന്റർനെറ്റിലേക്ക് കണക്റ്റ് ചെയ്ത ശേഷം വീണ്ടും ശ്രമിക്കുക."
 	},
@@ -1215,7 +1263,7 @@
 		"message": "'ssh<Tab><profile name>' എന്ന് ടൈപ്പ് ചെയ്‌ത് ഓംനിബോക്‌സിൽ നിന്ന് കണക്റ്റ് ചെയ്യുക: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "SFTP വഴി ഫയൽ സിസ്റ്റങ്ങൾ മൗണ്ട് ചെയ്യാനും Files ആപ്പ് വഴി ബ്രൗസ് ചെയ്യാനും Chrome OS-നാകും. 'കണക്റ്റ് ചെയ്യുക' എന്നതിന് പകരം, 'SFTP മൗണ്ട്' ഉപയോഗിക്കുക."
+		"message": "SFTP വഴി ഫയൽ സിസ്റ്റങ്ങൾ മൗണ്ട് ചെയ്യാനും Files ആപ്പ് വഴി ബ്രൗസ് ചെയ്യാനും ChromeOS-നാകും. 'കണക്റ്റ് ചെയ്യുക' എന്നതിന് പകരം, 'SFTP മൗണ്ട്' ഉപയോഗിക്കുക."
 	},
 	"tip_5": {
 		"message": "വെബ് പേജുകളിൽ ssh:// ലിങ്കുകൾ ഉപയോഗിച്ച് കണക്റ്റ് ചെയ്യുക അല്ലെങ്കിൽ ഒരു ബുക്ക്‌മാർക്ക് സംരക്ഷിക്കുക: https://goo.gl/zS8EZD"

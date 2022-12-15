@@ -399,7 +399,7 @@
 		"message": "העדפה זו קובעת אם לאפשר למארח המרוחק להציג תמונות בטרמינל.\n\nברירת המחדל היא להציג הודעה עד שנבחרת אפשרות."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "אם ההעדפה מוגדרת, היא מבטלת את המיפוי מחדש ב-Chrome OS של ‏Alt+Backspace->Delete, כך שהקשה על Alt+Backspace גורמת לביצוע הפעולה הרגילה שמשויכת ל-Alt+Backspace."
+		"message": "אם ההעדפה מוגדרת, היא מבטלת את המיפוי מחדש של ‏Alt+Backspace->Delete ב-ChromeOS, כך שהקשה על Alt+Backspace גורמת לביצוע הפעולה הרגילה שמשויכת ל-Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "בחירת היוריסטיקה לזיהוי AltGr.\n\n‎'null': ביצוע זיהוי אוטומטי המבוסס על navigator.language:‎\n      'en-us' => 'none', else => 'right-alt'\n‎'none': השבתת כל אמולציה של AltGr.‎\n‎'ctrl-alt': הנחה שהמשמעות של Ctrl+Alt היא AltGr.‎\n‎'left-alt': הנחה שהמשמעות של left Alt היא AltGr.‎\n‎'right-alt': הנחה שהמשמעות של right Alt היא AltGr.‎"
@@ -540,7 +540,7 @@
 		"message": "שליחה של תחילית ESC כשמקישים על מקש תוך כדי הקשה על מקש ה-Meta.\n\nלדוגמה, אם האפשרות הזו מופעלת, הקשה על Meta+K תשלח ‎^[k – בדומה להקלדת Escape ולאחר מכן k. אם האפשרות מושבתת, ההקשה תשלח רק k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "לחצן העכבר המשמש להדבקה.\n\nלזיהוי אוטומטי נשתמש בלחצן העכבר האמצעי בפלטפורמות שאינן X11 (כולל Chrome OS). ב-X11 נשתמש בלחצן העכבר הימני (מפני שמנהל החלונות אמור לבצע את ההדבקה באמצעות לחצן העכבר האמצעי).\n\n0 – לחצן שמאלי (ראשי).\n1 – לחצן אמצעי (עזר).\n2 – לחצן ימני (משני).\n\nהאפשרות הזו לא תלויה בהגדרה של הדבקה עם לחיצה ימנית.\n\nהערה: הלחצן הראשי והלחצן המשני משתנים באופן אוטומטי בעכברים לימניים ולשמאליים."
+		"message": "לחצן העכבר המשמש להדבקה.\n\nלזיהוי אוטומטי נשתמש בלחצן העכבר האמצעי בפלטפורמות שאינן X11 (כולל ChromeOS). ב-X11 נשתמש בלחצן העכבר הימני (כי מנהל החלונות אמור לבצע את ההדבקה באמצעות לחצן העכבר האמצעי).\n\n0 – לחצן שמאלי (ראשי).\n1 – לחצן אמצעי (עזר).\n2 – לחצן ימני (משני).\n\nהאפשרות הזו לא תלויה בהגדרה של הדבקה באמצעות לחיצה ימנית.\n\nהערה: הלחצן הראשי והלחצן המשני מותאמים באופן אוטומטי בעכברים לימניים ולשמאליים."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "לחיצה על לחצן העכבר הימני מבצעת הדבקה.\n\nהאפשרות הזו לא תלויה בהגדרה \"mouse-paste-button\".\n\nהערה: הלחצן הראשי והלחצן המשני משתנים באופן אוטומטי בעכברים לימניים ולשמאליים."
@@ -986,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ניקוי טרמינל"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "יש להקיש על המקש Delete כדי למחוק את הפריט."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" לא זמין"
 	},
@@ -995,23 +998,50 @@
 	"terminal_home_developer_settings": {
 		"message": "הגדרות המפתח"
 	},
+	"terminal_home_edit_linux": {
+		"message": "עריכת המאגר ל-Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "עריכת SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "ייבוא"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "כדי לנהל את Linux, יש לעבור לאפשרויות למפתחים"
+	},
+	"terminal_home_manage": {
+		"message": "ניהול"
+	},
+	"terminal_home_new_linux": {
+		"message": "מאגר חדש ל-Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "חיבור SSH חדש"
 	},
+	"terminal_home_set_up": {
+		"message": "הגדרה"
+	},
 	"terminal_home_ssh_command": {
 		"message": "פקודה"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "שם החיבור"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "האדמין השבית את ה‑SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "כאן יופיעו חיבורים למכשירים המחוברים לרשת אחרת"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "צריך לציין את היעד באמצעות התבנית 'username@hostname'"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "הגדרות הטרמינל"
+	},
+	"terminal_input_label": {
+		"message": "קלט בטרמינל"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "צבעי ANSI"
@@ -1034,6 +1064,9 @@
 	"terminal_name_pref_image": {
 		"message": "תמונה"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "גובה השורה"
+	},
 	"terminal_name_pref_shape": {
 		"message": "צורה"
 	},
@@ -1049,11 +1082,14 @@
 	"terminal_pref_bell": {
 		"message": "צליל ההתראה של הטרמינל מושמע."
 	},
+	"terminal_pref_line_height": {
+		"message": "גובה השורה של כל שורה במסך הטרמינל."
+	},
 	"terminal_preview_label": {
 		"message": "תצוגה מקדימה"
 	},
 	"terminal_profile_label": {
-		"message": "הפרופיל הנוכחי"
+		"message": "פרופיל"
 	},
 	"terminal_reset_menu_label": {
 		"message": "איפוס הטרמינל"
@@ -1066,6 +1102,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "בחירת קובץ של תמונת רקע מהמחשב שלך"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "בחרת למחוק את הפרופיל '$1'. להמשיך?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "אוטומטי"
@@ -1196,6 +1235,15 @@
 	"terminal_title_theme": {
 		"message": "עיצוב"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "אירעה שגיאה בבקר של Tumx:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "מצב השילוב של Tumx מופעל. יש להקיש על Ctrl+C כדי לנתק את Tmux או להזין פקודות Tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "הפלט גדול מדי ולא ניתן להכריז עליו. צריך לעבור לשורות באופן ידני כדי לקרוא אותן."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "יש להתחבר לאינטרנט ולנסות שוב."
 	},
@@ -1224,7 +1272,7 @@
 		"message": "כדי להתחבר מסרגל הכתובות יש להקליד 'ssh<Tab><שם הפרופיל>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS יכול לטעון מערכות קבצים דרך SFTP ולאפשר עיון דרך האפליקציה 'קבצים'. יש להשתמש ב-'טעינת SFTP' במקום ב'חיבור'."
+		"message": "ב-ChromeOS יש אפשרות לטעון מערכות קבצים דרך SFTP ולעיין דרך האפליקציה 'קבצים'. יש להשתמש ב'טעינת SFTP' במקום ב'חיבור'."
 	},
 	"tip_5": {
 		"message": "יש להתחבר בעזרת קישורי ssh://‎ בדפי אינטרנט או לשמור סימניה: https://goo.gl/zS8EZD"

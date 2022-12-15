@@ -393,7 +393,7 @@
 		"message": "Sama ada hendak membenarkan hos jauh memaparkan imej dalam terminal atau tidak.\n\nSecara lalai, kami akan menggesa sehingga pilihan dibuat."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Jika ditetapkan, membuat asal pemetaan semula Alt+Backspace->Delete OS Chrome, supaya Alt+Backspace benar-benar Alt+Backspace."
+		"message": "Jika ditetapkan, membuat asal pemetaan semula Alt+Backspace->Delete ChromeOS, supaya Alt+Backspace benar-benar Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Pilih swakaji pengesanan AltGr.\n\n'null': Autokesan berdasarkan navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Lumpuhkan sebarang emulasi AltGr.\n'ctrl-alt': Anggap Ctrl+Alt bermakna AltGr.\n'left-alt': Anggap Alt kiri bermaksud AltGr.\n'right-alt': Anggap Alt kanan bermaksud AltGr."
@@ -534,7 +534,7 @@
 		"message": "Hantar awalan ESC apabila menekan kekunci semasa menahan kekunci Meta.\n\nMisalnya, apabila didayakan, tindakan menekan Meta+K akan menghantar ^[k seolah-olah anda menaip Escape kemudian k. Apabila dilumpuhkan, hanya k akan dihantar."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Butang tetikus yang digunakan untuk membuat penampalan.\n\nUntuk autokesan, kami akan menggunakan butang tengah tetikus bagi platform bukan X11 (termasuk OS Chrome). Pada platform X11, kami akan menggunakan butang kanan tetikus (memandangkan pengurus tetingkap harus mengendalikan penampalan melalui butang tengah tetikus).\n\n0 == butang kiri (utama).\n1 == butang tengah (tambahan).\n2 == butang kanan (kedua).\n\nPilihan ini adalah berasingan daripada tetapan tampal klik kanan.\n\nNota: Butang utama & kedua dikendalikan untuk anda dengan tetikus tangan kiri & kanan."
+		"message": "Butang tetikus yang digunakan untuk membuat penampalan.\n\nUntuk autokesan, kami akan menggunakan butang tengah tetikus bagi platform bukan X11 (termasuk ChromeOS). Pada platform X11, kami akan menggunakan butang kanan tetikus (memandangkan pengurus tetingkap seharusnya mengendalikan penampalan melalui butang tengah tetikus).\n\n0 == butang kiri (utama).\n1 == butang tengah (tambahan).\n2 == butang kanan (kedua).\n\nPilihan ini adalah berasingan daripada tetapan tampal klik kanan.\n\nNota: Butang utama & kedua dikendalikan untuk anda dengan tetikus tangan kiri & kanan."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Tampal apabila butang kanan tetikus diklik.\n\nPilihan ini bebas daripada tetapan \"mouse-paste-button\".\n\nNota: Butang utama & kedua dikendalikan untuk anda dengan tetikus tangan kiri & kanan."
@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Pengosongan Terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Tekan kekunci delete untuk memadam item."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" tidak tersedia"
 	},
@@ -998,17 +1001,41 @@
 	"terminal_home_edit_ssh": {
 		"message": "Edit SS"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Lawati Pilihan Pembangun untuk mengurus Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Urus"
+	},
+	"terminal_home_new_linux": {
+		"message": "Linux baharu"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Sambungan SSH baharu"
 	},
+	"terminal_home_set_up": {
+		"message": "Sediakan"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Perintah"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nama sambungan"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH dilumpuhkan oleh pentadbir anda"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Sambungan kepada peranti jauh akan dipaparkan di sini"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Tentukan destinasi dengan \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Tetapan Terminal"
+	},
+	"terminal_input_label": {
+		"message": "Input terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Warna ANSI"
@@ -1031,6 +1058,9 @@
 	"terminal_name_pref_image": {
 		"message": "Imej"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Tinggi baris"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Bentuk"
 	},
@@ -1046,11 +1076,14 @@
 	"terminal_pref_bell": {
 		"message": "Loceng terminal boleh didengar."
 	},
+	"terminal_pref_line_height": {
+		"message": "Tinggi baris untuk setiap baris skrin terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Pratonton"
 	},
 	"terminal_profile_label": {
-		"message": "Profil semasa"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Penetapan Semula Terminal"
@@ -1063,6 +1096,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Pilih fail imej latar belakang daripada komputer anda."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Adakah anda pasti mahu memadamkan \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Lumpuhkan"
@@ -1190,6 +1226,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Pengawal tmux mengalami ralat:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Mod penyepaduan tmux diaktifkan. Tekan Ctrl-C untuk menceraikan tmux atau masukkan perintah tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Terlalu banyak output untuk diumumkan, navigasi ke baris secara manual untuk membaca."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Sambungkan kepada Internet dan cuba lagi."
 	},
@@ -1218,7 +1263,7 @@
 		"message": "Sambungkan daripada kotak omni dengan menaip 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "OS Chrome boleh melekapkan sistem fail melalui SFTP dan menyemak imbas melalui apl Files. Gunakan 'Lekapan SFTP' dan bukannya 'Sambung'."
+		"message": "ChromeOS boleh melekapkan sistem fail melalui SFTP dan menyemak imbas melalui apl Files. Gunakan 'Lekapan SFTP' dan bukannya 'Sambung'."
 	},
 	"tip_5": {
 		"message": "Sambung dengan menggunakan pautan ssh:// dalam halaman web atau simpan penanda halaman: https://goo.gl/zS8EZD"

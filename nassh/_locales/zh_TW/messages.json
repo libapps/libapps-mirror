@@ -396,7 +396,7 @@
 		"message": "設定是否要允許遠端主機在終端機顯示圖片。\n\n根據預設，我們會持續顯示提示，直到完成設定為止。"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "設定後將取消 Chrome 作業系統 Alt + Backspace 鍵與 Delete 鍵的對應關係，讓 Alt + Backspace 鍵確實做為 Alt + Backspace 鍵使用。"
+		"message": "設定後將取消 ChromeOS 中 Alt + Backspace 鍵與 Delete 鍵的對應關係，讓 Alt + Backspace 鍵確實做為 Alt + Backspace 鍵使用。"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "選取 AltGr 偵測試誤法。\n\n「null」：根據 navigator.language 自動偵測：\n      「en-us」=>「none」，其他 =>「right-alt」\n「none」：禁止任何 AltGr 模擬。\n「ctrl-alt」：假設 Ctrl + Alt 鍵表示 AltGr。\n「left-alt」：假設左邊 Alt 鍵表示 AltGr。\n「right-alt」：假設右邊 Alt 鍵表示 AltGr。"
@@ -537,7 +537,7 @@
 		"message": "按住 Meta 鍵並按下另一個鍵會傳送 ESC 鍵前置詞。\n\n舉例來說，如果已啟用這項設定，按下 Meta + K 鍵就會傳送 ^[k，效果等同於依序按下 Escape 鍵和 K 鍵。如果停用這項設定，則只會傳送 K 鍵。"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "用於執行貼上動作的滑鼠按鍵。\n\n設為自動偵測時，如果不是 X11 平台 (包括 Chrome 作業系統)，我們會使用滑鼠中鍵；如果是 X11 平台，則會使用滑鼠右鍵 (因為視窗管理員需透過滑鼠中鍵處理貼上動作)。\n\n0 == 左鍵 (主要鍵)。\n1 == 中鍵 (輔助鍵)。\n2 == 右鍵 (次要鍵)。\n\n這個選項不會受到使用滑鼠右鍵貼上的設定影響。\n\n注意：這項設定可自動調換左/右手用滑鼠的主要鍵和次要鍵。"
+		"message": "用於執行貼上動作的滑鼠按鍵。\n\n設為自動偵測時，如果不是 X11 平台 (包括 ChromeOS)，我們會使用滑鼠中鍵；如果是 X11 平台，則會使用滑鼠右鍵 (因為視窗管理員需透過滑鼠中鍵處理貼上動作)。\n\n0 == 左鍵 (主要鍵)。\n1 == 中鍵 (輔助鍵)。\n2 == 右鍵 (次要鍵)。\n\n這個選項不會受到使用滑鼠右鍵貼上的設定影響。\n\n注意：這項設定可自動調換左/右手用滑鼠的主要鍵和次要鍵。"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "按一下滑鼠右鍵時執行貼上動作。\n\n這個選項不會受到「mouse-paste-button」的設定影響。\n\n注意：這項設定可自動調換左/右手用滑鼠的主要鍵和次要鍵。"
@@ -986,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "清除終端機"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "按下 Delete 鍵以刪除項目。"
+	},
 	"terminal_font_unavailable": {
 		"message": "「$1」無法使用"
 	},
@@ -998,23 +1001,50 @@
 	"terminal_home_developer_settings": {
 		"message": "開發人員設定"
 	},
+	"terminal_home_edit_linux": {
+		"message": "編輯 Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "編輯 SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "匯入"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "造訪「開發人員選項」以管理 Linux"
+	},
+	"terminal_home_manage": {
+		"message": "管理"
+	},
+	"terminal_home_new_linux": {
+		"message": "新增 Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "新 SSH 連線"
 	},
+	"terminal_home_set_up": {
+		"message": "設定"
+	},
 	"terminal_home_ssh_command": {
 		"message": "指令"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "連線名稱"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "你的系統管理員已停用 SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "這裡會顯示遠端裝置的連線"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "請使用「username@hostname」指定目的地"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "終端機設定"
+	},
+	"terminal_input_label": {
+		"message": "終端機輸入"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI 顏色"
@@ -1037,6 +1067,9 @@
 	"terminal_name_pref_image": {
 		"message": "圖片"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "行高"
+	},
 	"terminal_name_pref_shape": {
 		"message": "形狀"
 	},
@@ -1052,11 +1085,14 @@
 	"terminal_pref_bell": {
 		"message": "終端機提示音。"
 	},
+	"terminal_pref_line_height": {
+		"message": "終端機畫面每列之間的行高。"
+	},
 	"terminal_preview_label": {
 		"message": "預覽"
 	},
 	"terminal_profile_label": {
-		"message": "目前的設定檔"
+		"message": "設定檔"
 	},
 	"terminal_reset_menu_label": {
 		"message": "重設終端機"
@@ -1069,6 +1105,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "請從電腦中選取背景圖片檔。"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "確定要刪除設定檔「$1」嗎？"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "自動"
@@ -1199,6 +1238,15 @@
 	"terminal_title_theme": {
 		"message": "主題"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux 控制器發生錯誤："
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux 整合模式已啟用。按下 Ctrl + C 鍵即可卸離 Tmux 或輸入 Tmux 指令"
+	},
+	"terminal_too_much_output_message": {
+		"message": "太多輸出項目無法朗讀，請手動切換每一列以使用朗讀功能。"
+	},
 	"terminal_try_again_with_internet": {
 		"message": "請連線至網際網路，然後再試一次。"
 	},
@@ -1227,7 +1275,7 @@
 		"message": "在網址列輸入「ssh<Tab><profile name>」以連線：https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome 作業系統可透過 SFTP 掛接檔案系統，並透過「檔案」應用程式瀏覽。請使用 [SFTP 掛接]，而不要使用 [連線]。"
+		"message": "ChromeOS 可透過 SFTP 掛接檔案系統，並透過「檔案」應用程式瀏覽。請使用「SFTP 掛接」，而不要使用「連線」。"
 	},
 	"tip_5": {
 		"message": "在網頁中使用 ssh:// 連結進行連線，或儲存為書籤：https://goo.gl/zS8EZD"

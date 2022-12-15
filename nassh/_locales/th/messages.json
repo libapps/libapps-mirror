@@ -393,7 +393,7 @@
 		"message": "ไม่ว่าจะอนุญาตให้โฮสต์ระยะไกลแสดงรูปภาพในเทอร์มินัลหรือไม่ก็ตาม\n\nโดยค่าเริ่มต้นเราจะแสดงหน้าต่างแจ้งเตือนจนกว่าคุณจะทำการเลือก"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "หากตั้งค่า ระบบจะยกเลิกการรีแมป Chrome OS Alt+Backspace->Delete เพื่อให้ Alt+Backspace เป็น Alt+Backspace จริงๆ"
+		"message": "หากตั้งค่า ระบบจะเลิกทำการรีแมป ChromeOS Alt+Backspace->Delete เพื่อให้ Alt+Backspace เป็น Alt+Backspace จริงๆ"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "เลือกฮิวริสติกการตรวจหา AltGr\n\n\"null\": ตรวจหาอัตโนมัติโดยอิงตาม navigator.language:\n      \"en-us\" => \"none\", else => \"right-alt\"\n\"none\": ปิดใช้การจำลอง AltGr ทั้งหมด\n\"ctrl- alt\": ให้ Ctrl+Alt หมายถึง AltGr\n\"left-alt\": ให้ Alt ทางซ้ายหมายถึง AltGr\n\"right-alt\": ให้ Alt ทางขวาหมายถึง AltGr"
@@ -534,7 +534,7 @@
 		"message": "ส่งคำนำหน้า ESC เมื่อกดแป้นระหว่างที่กดแป้น Meta ค้างไว้\n\nเช่น เมื่อเปิดใช้ การกด Meta+K จะส่ง ^[k เหมือนกับว่าคุณกด Escape แล้วตามด้วย k เมื่อปิดใช้ ระบบจะส่งเฉพาะ k ออกไป"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "ปุ่มเมาส์ที่ใช้สำหรับการวาง\n\nสำหรับการตรวจหาอัตโนมัติ เราจะใช้ปุ่มกลางของเมาส์สำหรับแพลตฟอร์มที่ไม่ใช่ X11 (ซึ่งรวมถึง Chrome OS) ส่วนใน X11 เราจะใช้ปุ่มขวาของเมาส์ (เนื่องจากตัวจัดการหน้าต่างควรจัดการการวางเมื่อใช้ปุ่มกลางของเมาส์)\n\n0 == ปุ่มทางซ้าย (หลัก)\n1 == ปุ่มกลาง (เสริม)\n2 == ปุ่มทางขวา (รอง)\n\nตัวเลือกนี้ไม่เกี่ยวข้องกับการตั้งค่าสำหรับการวางด้วยการคลิกขวา\n\nหมายเหตุ: ปุ่มหลักและปุ่มรองจะจัดการด้วยเมาส์แบบถนัดซ้ายและขวา"
+		"message": "ปุ่มเมาส์ที่ใช้สำหรับการวาง\n\nสำหรับการตรวจหาอัตโนมัติ เราจะใช้ปุ่มกลางของเมาส์สำหรับแพลตฟอร์มที่ไม่ใช่ X11 (ซึ่งรวมถึง ChromeOS) ส่วนใน X11 เราจะใช้ปุ่มขวาของเมาส์ (เนื่องจากตัวจัดการหน้าต่างควรจัดการการวางเมื่อใช้ปุ่มกลางของเมาส์)\n\n0 == ปุ่มทางซ้าย (หลัก)\n1 == ปุ่มกลาง (เสริม)\n2 == ปุ่มทางขวา (รอง)\n\nตัวเลือกนี้ไม่เกี่ยวข้องกับการตั้งค่าสำหรับการวางด้วยการคลิกขวา\n\nหมายเหตุ: ปุ่มหลักและปุ่มรองจะจัดการด้วยเมาส์แบบถนัดซ้ายและขวา"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "วางเมื่อคลิกปุ่มขวาของเมาส์\n\nตัวเลือกนี้ไม่เกี่ยวข้องกับการตั้งค่า \"mouse-paste-button\"\n\nหมายเหตุ: ปุ่มหลักและปุ่มรองจะจัดการด้วยเมาส์แบบถนัดซ้ายและขวา"
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "การล้างเทอร์มินัล"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "กดปุ่ม Delete เพื่อลบรายการ"
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ไม่พร้อมใช้งาน"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "การตั้งค่าสำหรับนักพัฒนาซอฟต์แวร์"
 	},
+	"terminal_home_edit_linux": {
+		"message": "แก้ไข Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "แก้ไข SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "นำเข้า"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "ไปที่ตัวเลือกสำหรับนักพัฒนาแอปเพื่อจัดการ Linux"
+	},
+	"terminal_home_manage": {
+		"message": "จัดการ"
+	},
+	"terminal_home_new_linux": {
+		"message": "Linux ใหม่"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "การเชื่อมต่อ SSH ใหม่"
 	},
+	"terminal_home_set_up": {
+		"message": "ตั้งค่า"
+	},
 	"terminal_home_ssh_command": {
 		"message": "คำสั่ง"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "ชื่อการเชื่อมต่อ"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "ผู้ดูแลระบบปิดใช้ SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "การเชื่อมต่อกับอุปกรณ์ระยะไกลจะปรากฏที่นี่"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "ระบุปลายทางด้วย \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "การตั้งค่าเทอร์มินัล"
+	},
+	"terminal_input_label": {
+		"message": "อินพุตเทอร์มินัล"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "สีของ ANSI"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "รูปภาพ"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "ความสูงของเส้นบรรทัด"
+	},
 	"terminal_name_pref_shape": {
 		"message": "รูปร่าง"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "กระดิ่งเทอร์มินัลที่มีเสียง"
 	},
+	"terminal_pref_line_height": {
+		"message": "ความสูงของเส้นบรรทัดสําหรับแต่ละแถวของหน้าจอเทอร์มินัล"
+	},
 	"terminal_preview_label": {
 		"message": "ดูตัวอย่าง"
 	},
 	"terminal_profile_label": {
-		"message": "โปรไฟล์ปัจจุบัน"
+		"message": "โปรไฟล์"
 	},
 	"terminal_reset_menu_label": {
 		"message": "การรีเซ็ตเทอร์มินัล"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "เลือกไฟล์ภาพพื้นหลังจากคอมพิวเตอร์ของคุณ"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "แน่ใจไหมว่าต้องการลบโปรไฟล์ \"$1\""
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "อัตโนมัติ"
@@ -1187,6 +1226,15 @@
 	"terminal_title_theme": {
 		"message": "ธีม"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "ตัวควบคุม tmux พบข้อผิดพลาด:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "เปิดใช้งานโหมดการผสานรวมของ tmux แล้ว กด Ctrl-C เพื่อปลด tmux ออก หรือป้อนคำสั่งสำหรับ tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "มีเอาต์พุตมากเกินกว่าที่จะแจ้งได้ โปรดไปยังแถวที่ต้องการอ่านด้วยตนเอง"
+	},
 	"terminal_try_again_with_internet": {
 		"message": "เชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง"
 	},
@@ -1215,7 +1263,7 @@
 		"message": "เชื่อมต่อจากแถบอเนกประสงค์โดยพิมพ์ \"ssh<Tab><profile name>'\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS ต่อเชื่อมระบบไฟล์ได้ผ่าน SFTP และเรียกดูได้ผ่านแอป Files ใช้ \"ต่อเชื่อม SFTP\" แทน \"เชื่อมต่อ\""
+		"message": "ChromeOS ต่อเชื่อมระบบไฟล์ได้ผ่าน SFTP และเรียกดูได้ผ่านแอป Files ใช้ \"ต่อเชื่อม SFTP\" แทน \"เชื่อมต่อ\""
 	},
 	"tip_5": {
 		"message": "เชื่อมต่อโดยใช้ลิงก์ ssh:// ในหน้าเว็บ หรือบันทึกบุ๊กมาร์กที่ https://goo.gl/zS8EZD"

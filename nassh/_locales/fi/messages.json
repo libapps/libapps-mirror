@@ -396,7 +396,7 @@
 		"message": "Saako etäisäntä näyttää kuvia terminaalissa\n\nOletuksena lähetämme kehotteita, kunnes valinta tehdään."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Jos määritetty, tämä kumoaa Chrome-käyttöjärjestelmän Alt+Askelpalautin->Del-uudelleenmäärityksen, jolloin Alt+Askelpalautin on oikeasti Alt+Askelpalautin."
+		"message": "Jos määritetty, tämä kumoaa ChromeOS:n Alt+Askelpalautin->Del-uudelleenmäärityksen, jolloin Alt+Askelpalautin on oikeasti Alt+Askelpalautin."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Valitse heuristinen AltGr-tunnistus.\n\nnull: Tunnista automaattisesti navigator.language-arvon perusteella:\n      en-us => none, muut arvot => right-alt.\nnone: Laita kaikki AltGr-emulointi pois päältä.\nctrl-alt: Oleta, että Ctrl+Alt on AltGr.\nleft-alt: Oleta, että vasen Alt on AltGr.\nright-alt: Oleta, että oikea Alt on AltGr."
@@ -537,7 +537,7 @@
 		"message": "Lähetä ESC-etuliite, kun näppäintä painetaan Meta-näppäimen ollessa painettuna.\n\nKun se on päällä, esimerkiksi Meta+K-yhdistelmä lähettää ^[k-yhdistelmän, aivan kuten Esc- ja k-näppäimen painaminen. Jos se on pois päältä, lähetetään vain k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Hiiren liittämispainike\n\nJos painike tunnistetaan automaattisesti, muissa kuin X11-käyttöympäristöissä (myös Chrome-käyttöjärjestelmässä) käytetään hiiren keskimmäistä painiketta. X11:ssä käytetään hiiren oikeaa painiketta (sillä ikkunahallinnan pitäisi käyttää liittämiseen hiiren keskimmäistä painiketta).\n\n0 == vasen (ensisijainen) painike\n1 == keskimmäinen (täydentävä) painike\n2 == oikea (toissijainen) painike\n\nTämä asetus ei riipu mouse-right-click-paste-asetuksesta.\n\nHuom. Ensi- ja toissijainen painike toimivat sekä vasen- että oikeakätisellä hiirellä."
+		"message": "Hiiren liittämispainike.\n\nJos painike tunnistetaan automaattisesti, muissa kuin X11-käyttöympäristöissä (myös ChromeOS:ssä) käytetään hiiren keskimmäistä painiketta. X11:ssä käytetään hiiren oikeaa painiketta (sillä ikkunahallinnan pitäisi käyttää liittämiseen hiiren keskimmäistä painiketta).\n\n0 == vasen (ensisijainen) painike\n1 == keskimmäinen (täydentävä) painike\n2 == oikea (toissijainen) painike\n\nTämä valinta ei riipu kakkospainikkeella liittämisen asetuksesta.\n\nHuom. Ensi- ja toissijainen painike toimivat sekä vasen- että oikeakätisellä hiirellä."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Liittäminen hiiren oikean painikkeen painalluksella\n\nTämä asetus ei riipu mouse-paste-button-asetuksesta.\n\nHuom. Ensi- ja toissijainen painike toimivat sekä vasen- että oikeakätisellä hiirellä."
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminaalin tyhjennys"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Poista kohde painamalla poistopainiketta."
+	},
 	"terminal_font_unavailable": {
 		"message": "$1 ei ole käytettävissä"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Kehittäjän asetukset"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Muokkaa Linuxia"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Muokkaa SSH:ta"
 	},
 	"terminal_home_import_identity": {
 		"message": "Tuo"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Katso kehittäjäasetukset, joilla voit ylläpitää Linuxia"
+	},
+	"terminal_home_manage": {
+		"message": "Ylläpidä"
+	},
+	"terminal_home_new_linux": {
+		"message": "Uusi Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Uusi SSH-yhteys"
 	},
+	"terminal_home_set_up": {
+		"message": "Ota käyttöön"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Komento"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Yhteyden nimi"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Järjestelmänvalvoja on poistanut SSH:n käytöstä"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Yhteydet etälaitteisiin näkyvät täällä"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Määritä kohteeksi \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminaalin asetukset"
+	},
+	"terminal_input_label": {
+		"message": "Terminaalin sisääntulo"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-värit"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "Kuva"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Rivikorkeus"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Muoto"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "Terminaalin äänimerkki"
 	},
+	"terminal_pref_line_height": {
+		"message": "Terminaalinäytön rivien rivikorkeus."
+	},
 	"terminal_preview_label": {
 		"message": "Esikatselu"
 	},
 	"terminal_profile_label": {
-		"message": "Nykyinen profiili"
+		"message": "Profiili"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminaalin nollaus"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Valitse taustakuvatiedosto tietokoneelta."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Haluatko varmasti poistaa profiilin \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automaattinen"
@@ -1196,6 +1235,15 @@
 	"terminal_title_theme": {
 		"message": "Teema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux-ohjaimen virhe:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux-integrointitila aktivoitu. Irrota tmux painamalla Ctrl + C tai kirjoita tmux-komennot."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Ilmoitettavaa ulostulon sisältöä on liikaa, siirry lukemaan riveille manuaalisesti."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Muodosta internetyhteys ja yritä uudelleen."
 	},
@@ -1224,7 +1272,7 @@
 		"message": "Muodosta yhteys omniboxista käsin kirjoittamalla 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Voit ottaa tiedostojärjestelmiä käyttöön Chrome-käyttöjärjestelmässä SFTP:llä ja selata niitä Tiedostot-sovelluksella. Valitse SFTP-käyttöönotto Yhdistä-valinnan sijaan."
+		"message": "Voit ottaa tiedostojärjestelmiä käyttöön ChromeOS:ssä SFTP:llä ja selata niitä Tiedostot-sovelluksella. Valitse SFTP-käyttöönotto Yhdistä-valinnan sijaan."
 	},
 	"tip_5": {
 		"message": "Muodosta yhteys verkkosivuilla ssh://-linkeillä tai tallenna kirjanmerkki: https://goo.gl/zS8EZD"

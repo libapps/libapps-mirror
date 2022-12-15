@@ -396,7 +396,7 @@
 		"message": "Permite ou não que o host remoto exiba imagens no terminal.\n\nPor padrão, isso é perguntado ao usuário até que uma escolha seja feita."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Se essa opção estiver definida, o Chrome OS desfará o remapeamento de Alt+Backspace->Delete de forma que Alt+Backspace realmente seja Alt+Backspace."
+		"message": "Se essa opção estiver definida, o ChromeOS vai desfazer o remapeamento de Alt+Backspace->Delete de forma que Alt+Backspace realmente seja Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecione uma heurística de detecção AltGr.\n\n\"null\": detecção automática com base em navigator.language:\n      \"en-us\" => \"none\", caso contrário => \"right-alt\"\n\"none\": desativar qualquer emulação relacionada a AltGr.\n\"ctrl-alt\": pressupor que Ctrl+Alt significa AltGr.\n\"left-alt\": pressupor que Alt esquerdo significa AltGr.\n\"right-alt\": pressupor que Alt direito significa AltGr."
@@ -516,7 +516,7 @@
 		"message": "A cor do primeiro plano do texto sem outros atributos de cor."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Define se o cursor do mouse será ocultado automaticamente ao digitar. Por padrão, há detecção automática se isso é realizado pela plataforma/SO.\n\nObservação: seu sistema operacional pode modificar essa configuração e, portanto, pode não ser possível desativá-la."
+		"message": "Define se o cursor do mouse será ocultado automaticamente ao digitar. Por padrão, há detecção automática se isso é realizado pela plataforma/SO.\n\nObservação: seu sistema operacional pode ignorar essa configuração e, por isso, pode não ser possível desativá-la."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Se definida como verdadeira, as teclas Home/End controlam a barra de rolagem do terminal e Shift+Home/Shift+End são enviadas ao host remoto. Se definida como falsa, as teclas Home/End são enviadas ao host remoto, e Shift+Home/Shift+End rolam a tela."
@@ -537,7 +537,7 @@
 		"message": "Envia um prefixo ESC ao pressionar uma tecla mantendo a tecla Meta pressionada.\n\nPor exemplo, quando ativada, pressionar Meta+K enviará ^[k como se você tivesse pressionado Escape e depois k. Quando desativada, apenas k será enviada."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "O botão do mouse usado para colar.\n\nPara detecção automática, usaremos o botão do meio em plataformas não X11 (incluindo o Chrome OS). Na plataforma X11, como o gerenciador de janelas precisa colar usando o botão do meio, usaremos o botão direito do mouse.\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEssa opção é independente da configuração de colar usando o botão direito.\n\nObservação: os botões primário e secundário mudam automaticamente de acordo com as configurações de mouse destro e canhoto."
+		"message": "O botão do mouse usado para colar.\n\nPara detecção automática, vamos usar o botão do meio em plataformas não X11 (incluindo o ChromeOS). Na plataforma X11, como o gerenciador de janelas precisa colar usando o botão do meio, usaremos o botão direito do mouse.\n\n0 == botão esquerdo (principal).\n1 == botão do meio (auxiliar).\n2 == botão direito (secundário).\n\nEssa opção é independente da configuração de colar usando o botão direito.\n\nObservação: os botões primário e secundário mudam automaticamente de acordo com as configurações de mouse destro e canhoto."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Colar ao clicar com o botão direito do mouse.\n\nEssa opção é independente da configuração \"mouse-paste-button\".\n\nObservação: os botões primário e secundário mudam automaticamente de acordo com as configurações de mouse destro e canhoto."
@@ -852,7 +852,7 @@
 		"message": "$1: comando desconhecido"
 	},
 	"nasftp_error_unknown_option": {
-		"message": "$1: sinalização desconhecida $2"
+		"message": "$1: flag desconhecida $2"
 	},
 	"nasftp_force_quit": {
 		"message": "Forçar encerramento"
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Limpeza de terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Pressione a tecla Delete para excluir o item."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" não está disponível"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Configurações do desenvolvedor"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Editar Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Editar SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importar"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Acesse as Opções do desenvolvedor para gerenciar o Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Gerenciar"
+	},
+	"terminal_home_new_linux": {
+		"message": "Novo Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nova conexão SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Configurar"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Comando"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nome da conexão"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "O SSH foi desativado pelo administrador"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "As conexões com dispositivos remotos serão mostradas aqui"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Especifique o destino com \"nomedeusuario@nomedohost\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Configurações do terminal"
+	},
+	"terminal_input_label": {
+		"message": "Entrada do terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Cores ANSI"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "Imagem"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Altura da linha"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "Sino audível do terminal."
 	},
+	"terminal_pref_line_height": {
+		"message": "Altura de cada linha da tela do terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Visualizar"
 	},
 	"terminal_profile_label": {
-		"message": "Perfil atual"
+		"message": "Perfil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Redefinição de terminal"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecione um arquivo de imagem de plano de fundo do seu computador."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Tem certeza de que você quer excluir o perfil \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1187,6 +1226,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "O controlador do tmux encontrou um erro:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Modo de integração do tmux ativado. Pressione Ctrl+C para remover o tmux ou insira comandos dele"
+	},
+	"terminal_too_much_output_message": {
+		"message": "A saída é muito grande para anunciar. Navegue pelas linhas manualmente para ler."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Conecte-se à Internet e tente novamente."
 	},
@@ -1215,7 +1263,7 @@
 		"message": "Conectar pela omnibox digitando \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki (link em inglês)"
 	},
 	"tip_4": {
-		"message": "O Chrome OS pode ativar sistemas de arquivos por meio de SFTP e navegar usando o app Arquivos. Utilize \"Ativar SFTP\" em vez de \"Conectar\"."
+		"message": "O ChromeOS pode ativar sistemas de arquivos por meio de SFTP e navegar usando o app Arquivos. Utilize \"Ativar SFTP\" em vez de \"Conectar\"."
 	},
 	"tip_5": {
 		"message": "Conecte usando links ssh:// em páginas da Web ou salve um favorito: https://goo.gl/zS8EZD (link em inglês)"

@@ -108,7 +108,7 @@
 		"message": "Inline images disabled"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "If set, undoes the Chrome OS Alt+Backspace->Delete remap, so that Alt+Backspace is indeed Alt+Backspace."
+		"message": "If set, undoes the ChromeOS Alt+Backspace->Delete remap so that Alt+Backspace indeed is Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Select an AltGr detection heuristic.\n\n'null': Auto-detect based on navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Disable any AltGr emulation.\n'ctrl-alt': Assume Ctrl+Alt means AltGr.\n'left-alt': Assume left Alt means AltGr.\n'right-alt': Assume right Alt means AltGr."
@@ -162,7 +162,7 @@
 		"message": "Whether common OS keyboard bindings should be respected instead of always capturing for HTerm's own use."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "The mouse button to use for pasting.\n\nFor auto-detect, we'll use the middle mouse button for non-X11 platforms (including Chrome OS). On X11, we'll use the right mouse button (since the window manager should handle pasting via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: The primary and secondary buttons are handled for you with left- and right-handed mice."
+		"message": "The mouse button to use for pasting.\n\nFor autodetect, we'll use the middle mouse button for non-X11 platforms (including ChromeOS). On X11, we'll use the right mouse button (since the window manager should handle pasting via the middle mouse button).\n\n0 == left (primary) button.\n1 == middle (auxiliary) button.\n2 == right (secondary) button.\n\nThis option is independent of the setting for right-click paste.\n\nNote: The primary and secondary buttons are handled for you with left- and right-handed mice."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Paste on right mouse button clicks.\n\nThis option is independent of the 'mouse-paste-button' setting.\n\nNote: The primary and secondary buttons are handled for you with left- and right-handed mice."
@@ -305,6 +305,9 @@
 	"terminal_home_developer_settings": {
 		"message": "Developer settings"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Visit Developer options to manage Linux"
+	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Specify the destination with 'username@hostname'"
 	},
@@ -328,6 +331,9 @@
 	},
 	"terminal_settings_background_image_error_size": {
 		"message": "The image is too large"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Are you sure that you want to delete profile ‘$1’?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Are you sure that you want to reset the theme to its defaults?"
@@ -386,6 +392,12 @@
 	"terminal_title_pref_keyboard_mouse": {
 		"message": "Keyboard and mouse"
 	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux integration mode activated. Press Ctrl-C to detach tmux or input tmux commands"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Too much output to announce; navigate to rows manually to read."
+	},
 	"tip_12": {
 		"message": "Use Yubikeys and other smart cards for SSH authentication: https://goo.gl/Hu2o3v"
 	},
@@ -393,7 +405,7 @@
 		"message": "Holding Ctrl (Cmd on macOS) while right-clicking brings up a context menu."
 	},
 	"tip_4": {
-		"message": "Chrome OS can mount file systems via SFTP and browse via the Files app. Use 'SFTP mount' instead of 'Connect'."
+		"message": "ChromeOS can mount file systems via SFTP and browse via the Files app. Use 'SFTP mount' instead of 'Connect'."
 	},
 	"tip_6": {
 		"message": "Colour your output/prompt using basic 16 colours & 256 colours & full 24-bit colours: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"

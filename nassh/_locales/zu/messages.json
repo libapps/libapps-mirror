@@ -390,7 +390,7 @@
 		"message": "Ukuthi uvumele yini umsingathi wokulawula-kude ukubonisa izithombe kutheminali.\n\nNgokuzenzakalelayo, sixwayisa kuze kube yilapho kwenziwe isinqumo."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Uma kusethiwe, kuhlehlisa i-Chrome OS Alt+Backspace->Delete kokumepha kabusha, ukuze u-Alt+Backspace abe ngu-Alt+Backspace."
+		"message": "Uma kusethiwe, kuhlehlisa i-Chrome OS Alt+Backspace->Delete ukumepha kabusha, ukuze u-Alt+Backspace abe ngu-Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Khetha ukuthola i-AltGr heuristic.\n\n'null': Thola ngokuzenzekelayo ngokususelwe ku-navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': Khubaza noma yikuphi ukulingisa i-AltGr.\n'ctrl-alt': U-Ctrl+Alt usho u-AltGr.\n'left-alt': Iya ngakwesokunxele u-Alt usho AltGr.\n'right-alt': Iya ngakwesokudla u-Alt usho AltGr."
@@ -531,7 +531,7 @@
 		"message": "Thumela isiqalo se-ESC lapho ucindezela ukhiye ngenkathi ubambe ukhiye we-Meta.\n\nNgokwesibonelo, lapho kunikwe amandla, ukucindezela u-Meta+K kuzothumela okuthi ^[k sengathi uthayiphe u-Escape no-k. Lapho kukhutshaziwe, u-k kuphela ozothunyelwa."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Inkinobho yegundane yokusetshenziselwa ukunamathisela.\n\nUkuthola ngokuzenzekelayo, sizosebenzisa inkinobho yegundane ephakathi nendawo ezinkundleni ezingezona eze-X11 (okuhlanganisa i-Chrome OS). Kweze-X11, sizosebenzisa inkinobho yegundane engakwesokudla (njengoba umphathi wewindi kufanele asingathe ukunamathisela ngenkinobho yegundane ephakathi nendawo).\n\n0 == inkinobho (eyinhloko) engakwesokunxele.\n1 == inkinobho (yesikhashana) ephakathi nendawo.\n2 == inkinobho (yesibili) engakwesokudla.\n\nLe nketho ayincikile kwisethingi yokunamathisela kokuchofoza ngakwesokudla.\n\nQaphela: Izinkinobho eziyinhloko nezesibili uphathelwa zona ngegundane eliphathwa ngakwesokunxele nangakwesokudla."
+		"message": "Inkinobho yegundane yokusetshenziselwa ukunamathisela.\n\nUkuthola ngokuzenzekelayo, sizosebenzisa inkinobho yegundane ephakathi nendawo ezinkundleni ezingezona eze-X11 (okuhlanganisa i-Chrome OS). Ku-X11, sizosebenzisa inkinobho yegundane engakwesokudla (njengoba umphathi wewindi kufanele asingathe ukunamathisela ngenkinobho yegundane ephakathi nendawo).\n\n0 == inkinobho (eyinhloko) engakwesokunxele.\n1 == inkinobho (yesikhashana) ephakathi nendawo.\n2 == inkinobho (yesibili) engakwesokudla.\n\nLe nketho ayincikile kwisethingi yokunamathisela kokuchofoza ngakwesokudla.\n\nQaphela: Izinkinobho eziyinhloko nezesibili uphathelwa zona ngegundane eliphathwa ngakwesokunxele nangakwesokudla."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Namathisela ngokuchofoza ngakwesokudla kwinkinobho yegundane .\n\nLe nketho ayisekelwe kwisethingi \"yenkinobho yokunamathisela ngegundane\".\n\nQaphela: Izinkinobho eziyinhloko nezesibili uphathelwa zona ngegundane eliphathwa ngakwesokunxele nangakwesokudla."
@@ -1013,6 +1013,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Ukusula itheminali"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Cindezela ukhiye wokusula ukuze usule lento."
+	},
 	"terminal_font_unavailable": {
 		"message": "I-\"$1\" ayitholakali"
 	},
@@ -1028,14 +1031,29 @@
 	"terminal_home_developer_settings": {
 		"message": "Amasethingi Kanjiniyela"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Hlela i-Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Hlela i-SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Ngenisa"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Vakashela Izinketho Zikanjiniyela ukuze uphathe i-Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Phatha"
+	},
+	"terminal_home_new_linux": {
+		"message": "I-Linux entsha"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Uxhumano olusha lwe-SSH"
+	},
+	"terminal_home_set_up": {
+		"message": "Setha"
 	},
 	"terminal_home_ssh": {
 		"message": "I-SSH"
@@ -1043,11 +1061,23 @@
 	"terminal_home_ssh_command": {
 		"message": "Umyalo"
 	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Igama loxhumano"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "I-SSH ikhutshazwe ngumlawuli wakho."
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Ukuxhuma kumadivayisi akude kuzovela lapha"
+	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Cacisa indawo oya kuyo ngokuthi \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Amasethingi Etheminali"
+	},
+	"terminal_input_label": {
+		"message": "Okokufaka kwetheminali"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Imibala ye-ANSI"
@@ -1070,6 +1100,9 @@
 	"terminal_name_pref_image": {
 		"message": "Isithombe"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Ubude bomugqa"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Umumo"
 	},
@@ -1085,11 +1118,14 @@
 	"terminal_pref_bell": {
 		"message": "Isikhalisi setheminali esizwakalayo."
 	},
+	"terminal_pref_line_height": {
+		"message": "Ubude bomugqa womugqa ngamunye wesikrini setheminali."
+	},
 	"terminal_preview_label": {
 		"message": "Buka kuqala"
 	},
 	"terminal_profile_label": {
-		"message": "Iphrofayela yamanje"
+		"message": "Iphrofayela"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Ukusetha kabusha itheminali"
@@ -1102,6 +1138,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Khetha ifayela lomfanekiso ongemuva ovela kukhompuyutha yakho."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Ingabe uqinisekile ukuthi ufuna ukusula iphrofayela ethi \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Okuzenzakalelayo"
@@ -1232,6 +1271,15 @@
 	"terminal_title_theme": {
 		"message": "Itimu"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Isilawuli se-Tmux sihlangabezane nephutha:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Imodi yokuhlanganisa ye-Tmux yenziwe yasebenza. Cindezela u-Ctrl-C ukuze ukhiphe i-tmux, noma faka imiyalo ye-tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Okukhiphayo kuningi kakhulu ongamenyezelwa, funa emigqeni ngokwenza ukuze ufunde."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Xhuma ku-inthanethi bese uphinde uzame."
 	},
@@ -1260,7 +1308,7 @@
 		"message": "Xhumeka kusuka ku-omnibox ngokuthayipha ukuthi 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "I-Chrome OS ingakhweza amasistimu wefayela nge-SFTP futhi iphequlule ngezinhlelo zokusebenza zamafayela. Sebenzisa okuthi 'SFTP Mount' esikhundleni sokuthi 'Xhuma'."
+		"message": "I-Chrome OS ingakhweza amasistimu wefayela nge-SFTP futhi ibhrawuze ngama-app amafayela. Sebenzisa okuthi 'Ukukhweza kwe-SFTP' esikhundleni sokuthi 'Xhuma'."
 	},
 	"tip_5": {
 		"message": "Xhuma usebenzisa okuthi sh:// links emakhasini ewebhu, noma londoloza ibhukhimakhi: https://goo.gl/zS8EZD"

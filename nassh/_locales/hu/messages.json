@@ -399,7 +399,7 @@
 		"message": "Annak szabályozása, hogy a távoli gazdagép megjeleníthet-e képeket a terminálon.\n\nAlapértelmezés szerint addig kérdezünk rá, amíg nem születik döntés."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ha be van állítva, semmissé teszi a Chrome OS Alt + Backspace billentyűparancsának a Delete billentyű szerinti viselkedését, így az Alt + Backspace valóban az Alt + Backspace billentyűparancsnak felel meg."
+		"message": "Ha be van állítva, semmissé teszi a ChromeOS Alt + Backspace billentyűparancsának a Delete billentyű szerinti viselkedését, így az Alt + Backspace valóban az Alt + Backspace billentyűparancsnak felel meg."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr-észlelési heurisztika kiválasztása.\n\n„null”: Automatikus észlelés a „navigator.language” alapján:\n      „en-us” => „none”, egyébként => „right-alt”\n„none”: Az AltGr billentyű emulálásának letiltása.\n„ctrl-alt”: A Ctrl + Alt billentyűkombináció AltGr billentyűként kezelése.\n„left-alt”: A bal oldali Alt billentyű AltGr billentyűként kezelése.\n„right-alt”: A jobb oldali Alt billentyű AltGr billentyűként kezelése."
@@ -540,7 +540,7 @@
 		"message": "ESC-előtag elküldése olyankor, amikor megnyomják valamelyik billentyűt a Meta gomb nyomva tartása közben.\n\nHa engedélyezve van, akkor például a Meta + K elküldi a „^[k” értéket, mintha csak megnyomta volna az Escape, majd a k billentyűket. Letiltása esetén csak a k kerül elküldésre."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "A beillesztési művelethez használt egérgomb.\n\nAutomatikus észlelés esetén a középső egérgombot használjuk a nem X11-es operációs rendszereknél (ilyen például a Chrome OS). X11-es rendszereken a jobb egérgombot használjuk (mivel az ablakkezelő a középső egérgombbal hajtja végre a beillesztést).\n\n0 == bal (elsődleges) gomb.\n1 == középső (kiegészítő) gomb.\n2 == jobb (másodlagos) gomb.\n\nEz a beállítás független a jobb kattintással való beillesztés beállításától.\n\nMegjegyzés: Az elsődleges és másodlagos gombok a bal- és jobbkezes egereken is előre beállítottak."
+		"message": "A beillesztési művelethez használt egérgomb.\n\nAutomatikus észlelés esetén a középső egérgombot használjuk a nem X11-es operációs rendszereknél (ilyen például a ChromeOS). X11-es rendszereken a jobb egérgombot használjuk (mivel az ablakkezelő a középső egérgombbal hajtja végre a beillesztést).\n\n0 == bal (elsődleges) gomb.\n1 == középső (kiegészítő) gomb.\n2 == jobb (másodlagos) gomb.\n\nEz a beállítás független a jobb kattintással való beillesztés beállításától.\n\nMegjegyzés: Az elsődleges és másodlagos gombok a bal- és jobbkezes egereken is előre beállítottak."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Beillesztés a jobb egérgomb megnyomásával.\n\nEz a beállítás független a „mouse-paste-button” beállítástól.\n\nMegjegyzés: Az elsődleges és másodlagos gombok a bal- és jobbkezes egereken is előre beállítottak."
@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminálképernyő törlése"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Az elem törléséhez nyomja meg a Delete billentyűt."
+	},
 	"terminal_font_unavailable": {
 		"message": "A(z) „$1” nem áll rendelkezésre"
 	},
@@ -995,23 +998,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Fejlesztői beállítások"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux módosítása"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH szerkesztése"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importálás"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "A Linux kezeléséhez lépjen a Fejlesztői beállításokhoz"
+	},
+	"terminal_home_manage": {
+		"message": "Kezelés"
+	},
+	"terminal_home_new_linux": {
+		"message": "Új Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Új SSH-kapcsolat"
 	},
+	"terminal_home_set_up": {
+		"message": "Beállítás"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Parancs"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Kapcsolat neve"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "A rendszergazda letiltotta az SSH használatát"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "A távoli eszközökkel létesített kapcsolatok itt jelennek meg"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Adja meg a célt a következőképpen: „felhasznalonev@gazdagepnev”"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminálbeállítások"
+	},
+	"terminal_input_label": {
+		"message": "Terminál bemenete"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-színek"
@@ -1034,6 +1064,9 @@
 	"terminal_name_pref_image": {
 		"message": "Kép"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Sormagasság"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Alak"
 	},
@@ -1049,11 +1082,14 @@
 	"terminal_pref_bell": {
 		"message": "Hallható terminálcsengő."
 	},
+	"terminal_pref_line_height": {
+		"message": "A terminál képernyőjén megjelenő sorok magassága."
+	},
 	"terminal_preview_label": {
 		"message": "Előnézet"
 	},
 	"terminal_profile_label": {
-		"message": "Aktuális profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminál visszaállítása"
@@ -1066,6 +1102,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Válasszon a számítógépén található háttérképfájlok közül."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Biztosan törli a(z) „$1” profilt?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatikus"
@@ -1199,6 +1238,15 @@
 	"terminal_title_theme": {
 		"message": "Téma"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "A Tmux vezérlője hibát észlelt:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux-integrációs mód aktiválva. Nyomja meg a Ctrl + C billentyűkombinációt a tmux leválasztásához, vagy adjon meg tmux-parancsokat."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Túl sok a kimenet a bejelentéshez. Az olvasáshoz navigáljon manuálisan a sorokhoz."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Csatlakozzon az internethez, és próbálja újra."
 	},
@@ -1227,7 +1275,7 @@
 		"message": "Ha a cím- és keresősávból szeretne csatlakozni, írja be az „ssh<Lap><profilnév>” parancsot: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "A Chrome OS képes fájlrendszerek csatolására SFTP használatával, ezt követően pedig a Fájlok alkalmazással lehet tallózni. A „Csatlakozás” gomb helyett használja az „SFTP csatlakoztatása” lehetőséget."
+		"message": "A ChromeOS képes fájlrendszerek csatolására SFTP használatával, ezt követően pedig a Fájlok alkalmazással lehet tallózni. A „Csatlakozás” gomb helyett használja az „SFTP csatlakoztatása” lehetőséget."
 	},
 	"tip_5": {
 		"message": "Csatlakozás a weboldalakon lévő ssh:// linkek használatával, illetve könyvjelző mentése: https://goo.gl/zS8EZD"

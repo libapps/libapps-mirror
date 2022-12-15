@@ -387,7 +387,7 @@
 		"message": "آیا ریموٹ میزبان کو ٹرمینل میں تصاویر ڈسپلے کرنے کی اجازت دی جاتی ہے۔\n\nبذریعہ ڈیفالٹ، ہم ایک انتخاب کئے جانے تک پرامپٹ کرتے ہیں۔"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "سیٹ کئے جانے پر، Chrome OS میں Alt+Backspace->Delete سے کی گئی تبدیلی کالعدم ہو جاتی ہے، جس کی وجہ سے Alt+Backspace دوبارہ Alt+Backspace کی طرح کام کرنے لگتا ہے۔"
+		"message": "سیٹ کئے جانے پر، ChromeOS میں Alt+Backspace->Delete سے کی گئی تبدیلی کالعدم ہو جاتی ہے، جس کی وجہ سے Alt+Backspace دوبارہ Alt+Backspace کی طرح کام کرنے لگتا ہے۔"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "ایک AltGr شناخت کا انکشاف منتخب کریں۔\n\n'‎navigator.language :'null کی بنیاد پر ازخود شناخت کریں:\n      'en-us' => 'کوئی نہیں'، ورنہ => 'right-alt'\n'کوئی نہیں': کوئی بھی AltGr امیولیشن غیر فعال کریں۔\n'ctrl-alt': مان لیں Ctrl+Alt کا مطلب AltGr ہے۔\n'left-alt': مان لیں بائیں Alt کا مطلب AltGr ہے۔\n'right-alt': مان لیں دائیں Alt کا مطلب AltGr ہے۔"
@@ -528,7 +528,7 @@
 		"message": "Meta کلید کو پکڑے رکھتے ہوئے کسی کلید کو دبانے پر ایک ESC سابقہ بھیجیں۔\n\nمثال کے طور پر، فعال ہونے پر، Meta+K کو دبانے سے ‎^[k بھیجا جائے گا، ویسے ہی Escape کے بعد k ٹائپ کرنے پر ہوتا ہے۔ غیر فعال ہونے پر، صرف k بھیجا جائے گا۔"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "پیسٹ کرنے کیلئے استعمال ہونے والا ماؤس کا بٹن۔\n\nخودکار شناخت کیلئے، ہم غیر X11 پلیٹ فارمز کیلئے ماؤس کے بیچ کا بٹن کا استعمال کریں گے (Chrome OS سمیت)۔ X11 پر، ہم ماؤس کا دایاں بٹن استعمال کریں گے (کیونکہ ونڈو مینیجر کو ماؤس کے بیچ والے بٹن سے پیسٹ کرنا ہینڈل کرنا چاہیے)۔\n\n0 == بایاں (بنیادی) بٹن۔\n1 == درمیانہ (معاون) بٹن۔\n2 == دایاں (ثانوی) بٹن۔\n\nیہ اختیار 'دائیں طرف کلک کر کے پیسٹ کریں' کی ترتیب سے آزاد ہے۔\n\nنوٹ: پرائمری اور سیکنڈری بٹنز کو آپ کیلئے بائیں اور دائیں ہاتھ والے ماؤس سے ہینڈل کیا جاتا ہے۔"
+		"message": "پیسٹ کرنے کیلئے استعمال ہونے والا ماؤس کا بٹن۔\n\nخودکار شناخت کیلئے، ہم غیر X11 پلیٹ فارمز کیلئے ماؤس کے بیچ کے بٹن کا استعمال کریں گے (ChromeOS سمیت)۔ X11 پر، ہم ماؤس کا دایاں بٹن استعمال کریں گے (کیونکہ ونڈو مینیجر کو ماؤس کے بیچ والے بٹن سے پیسٹ کرنا ہینڈل کرنا چاہیے)۔\n\n0 == بایاں (بنیادی) بٹن۔\n1 == درمیانہ (معاون) بٹن۔\n2 == دایاں (ثانوی) بٹن۔\n\nیہ اختیار 'دائیں طرف کلک کر کے پیسٹ کریں' کی ترتیب سے آزاد ہے۔\n\nنوٹ: پرائمری اور سیکنڈری بٹنز کو آپ کیلئے بائیں اور دائیں ہاتھ والے ماؤس سے ہینڈل کیا جاتا ہے۔"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "ماؤس کے دائیں بٹن پر کلک کر کے پیسٹ کریں۔\n\nیہ اختیار \"mouse-paste-button\" ترتیب سے آزاد ہے۔\n\nنوٹ: پرائمری اور سیکنڈری بٹنز کو آپ کیلئے بائیں اور دائیں ہاتھ والے ماؤس سے ہینڈل کیا جاتا ہے۔"
@@ -1022,6 +1022,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ٹرمینل صاف کریں"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "آئٹم کو حذف کرنے کے لیے Delete کلید دبائیں۔"
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" دستیاب نہیں ہے"
 	},
@@ -1034,23 +1037,50 @@
 	"terminal_home_developer_settings": {
 		"message": "ڈیولپر کی ترتیبات"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux میں ترمیم کریں"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH میں ترمیم کریں"
 	},
 	"terminal_home_import_identity": {
 		"message": "درآمد کریں"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux کا نظم کرنے کے لیے ڈویلپر کے اختیارات ملاحظہ کریں"
+	},
+	"terminal_home_manage": {
+		"message": "نظم کریں"
+	},
+	"terminal_home_new_linux": {
+		"message": "نیا Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "نیا SSH کنکشن"
 	},
+	"terminal_home_set_up": {
+		"message": "سیٹ اپ کریں"
+	},
 	"terminal_home_ssh_command": {
 		"message": "کمانڈ"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "کنکشن کا نام"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "آپ کے منتظم نے SSH کو غیر فعال کر دیا"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "ریموٹ آلات سے متعلق کنکشنز یہاں ظاہر ہوں گے"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"username@hostname\" کی مدد سے منزل کا تعین کریں"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "ٹرمینل کی ترتیبات"
+	},
+	"terminal_input_label": {
+		"message": "ٹرمینل ان پٹ"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI رنگ"
@@ -1073,6 +1103,9 @@
 	"terminal_name_pref_image": {
 		"message": "تصویر"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "لائن کی اونچائی"
+	},
 	"terminal_name_pref_shape": {
 		"message": "شکل"
 	},
@@ -1088,11 +1121,14 @@
 	"terminal_pref_bell": {
 		"message": "ٹرمینل کی قابل سماعت گھنٹی۔"
 	},
+	"terminal_pref_line_height": {
+		"message": "ٹرمینل اسکرین کی ہر قطار کے لیے لائن کی اونچائی۔"
+	},
 	"terminal_preview_label": {
 		"message": "پیش منظر"
 	},
 	"terminal_profile_label": {
-		"message": "موجودہ پروفائل"
+		"message": "پروفائل"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ٹرمینل ری سیٹ کریں"
@@ -1105,6 +1141,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "اپنے کمپیوٹر سے پس منظر کی تصویری فائل منتخب کریں۔"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "کیا آپ واقعی \"$1\" پروفائل کو حذف کرنا چاہتے ہیں؟"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "خودکار"
@@ -1238,6 +1277,15 @@
 	"terminal_title_theme": {
 		"message": "تھیم"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux کنٹرولر کو ایک خرابی کا سامنا کرنا پڑا:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux انٹیگریشن موڈ فعال ہو گیا۔ tmux کو الگ کرنے کے لیے Ctrl-C دبائیں یا tmux کمانڈز شامل کریں"
+	},
+	"terminal_too_much_output_message": {
+		"message": "اعلان کرنے کے لیے بہت زیادہ آؤٹ پٹ، پڑھنے کے لیے دستی طور پر قطاروں پر نیویگیٹ کریں۔"
+	},
 	"terminal_try_again_with_internet": {
 		"message": "انٹرنیٹ سے منسلک کریں اور دوبارہ کوشش کریں۔"
 	},
@@ -1266,7 +1314,7 @@
 		"message": "‎'ssh<Tab><profile name>'‎ ٹائپ کر کے اومنی باکس سے منسلک کریں: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS فائل سسٹمز کو SFTP کے ذریعے ماؤنٹ اور فائلز ایپ کے ذریعے براؤز کر سکتی ہے۔ 'منسلک کریں' کی بجائے 'SFTP ماؤنٹ کریں' کا استعمال کریں۔"
+		"message": "ChromeOS فائل سسٹمز کو SFTP کے ذریعے ماؤنٹ اور فائلز ایپ کے ذریعے براؤز کر سکتی ہے۔ 'منسلک کریں' کی بجائے 'SFTP ماؤنٹ کریں' کا استعمال کریں۔"
 	},
 	"tip_5": {
 		"message": "ویب صفحات میں ‎ssh://‎ لنکس کا استعمال کر کے منسلک کریں یا ایک بُک مارک محفوظ کریں: https://goo.gl/zS8EZD"

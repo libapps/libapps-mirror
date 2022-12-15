@@ -249,10 +249,10 @@
 		"message": "Қоршаған ортаның айнымалы мәндері"
 	},
 	"hterm_name_pref_find_result_color": {
-		"message": "Іздеу нәтижелерін бөлектеу түсі"
+		"message": "Іздеу нәтижелерін ерекшелеу түсі"
 	},
 	"hterm_name_pref_find_result_selected_color": {
-		"message": "Таңдалған іздеу нәтижелерін бөлектеу түсі"
+		"message": "Таңдалған іздеу нәтижелерін ерекшелеу түсі"
 	},
 	"hterm_name_pref_font_family": {
 		"message": "Мәтін қаріптерінің тобы"
@@ -489,10 +489,10 @@
 		"message": "Қоршаған орта айнымалы мәндерінің бастапқы жиыны, мысалы, нысан."
 	},
 	"hterm_pref_find_result_color": {
-		"message": "Іздеу нәтижелерін бөлектеуге арналған фондық түс."
+		"message": "Іздеу нәтижелерін ерекшелеуге арналған фондық түс."
 	},
 	"hterm_pref_find_result_selected_color": {
-		"message": "Таңдалған іздеу нәтижелерін бөлектеуге арналған фондық түс."
+		"message": "Таңдалған іздеу нәтижелерін ерекшелеуге арналған фондық түс."
 	},
 	"hterm_pref_font_family": {
 		"message": "Терминал мәтініне арналған әдепкі қаріптер тобы."
@@ -974,6 +974,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Терминалды өшіру"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Элементті жою үшін \"Жою\" түймесін басыңыз."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" қолжетімсіз"
 	},
@@ -986,23 +989,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Әзірлеуші параметрлері"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux контейнерін өзгерту"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH-ті өзгерту"
 	},
 	"terminal_home_import_identity": {
 		"message": "Импорттау"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux-ты басқару үшін Әзірлеуші опцияларына кіріңіз."
+	},
+	"terminal_home_manage": {
+		"message": "Басқару"
+	},
+	"terminal_home_new_linux": {
+		"message": "Жаңа Linux контейнері"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Жаңа SSH байланысы"
 	},
+	"terminal_home_set_up": {
+		"message": "Реттеу"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Пәрмен"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Байланыс атауы"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Әкімшіңіз SSH протоколын өшіріп қойған."
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Қашықтағы құрылғыларға қосылу нүктелері осы жерде көрсетіледі."
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Белгіленген орынды \"username@hostname\" форматында көрсетіңіз."
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Терминал параметрлері"
+	},
+	"terminal_input_label": {
+		"message": "Терминалға енгізілген элемент"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI түстері"
@@ -1025,6 +1055,9 @@
 	"terminal_name_pref_image": {
 		"message": "Кескін"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Жол биіктігі"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Пішін"
 	},
@@ -1040,11 +1073,14 @@
 	"terminal_pref_bell": {
 		"message": "Терминалдың қоңырауы естіледі."
 	},
+	"terminal_pref_line_height": {
+		"message": "Терминал экранының әр жолының биіктігі."
+	},
 	"terminal_preview_label": {
-		"message": "Алдын ала қарау"
+		"message": "Алдын ала көру"
 	},
 	"terminal_profile_label": {
-		"message": "Ағымдағы профиль"
+		"message": "Профиль"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Терминалды бастапқы күйге қайтару"
@@ -1057,6 +1093,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Компьютерден фондық кескін файлын таңдаңыз."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "\"$1\" профилін шынымен жойғыңыз келе ме?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Авто"
@@ -1189,6 +1228,15 @@
 	},
 	"terminal_title_theme": {
 		"message": "Тақырып"
+	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux контроллерінде қате пайда болды:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux интеграция режимі іске қосылды. Tmux бағдарламалық құралын ажырату немесе tmux пәрмендерін енгізу үшін Ctrl-C пернелерін басыңыз."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Хабарлайтын дерек саны тым көп, оқу үшін жолдарға қолмен өтіңіз."
 	},
 	"terminal_try_again_with_internet": {
 		"message": "Интернетке қосылып, әрекетті қайталап көріңіз."

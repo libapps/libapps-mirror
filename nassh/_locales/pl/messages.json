@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Wyczyść terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Aby usunąć element, naciśnij klawisz usuwania."
+	},
 	"terminal_font_unavailable": {
 		"message": "Czcionka „$1” jest niedostępna"
 	},
@@ -995,23 +998,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Ustawienia programisty"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Edytuj kontener Linuksa"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Edytuj SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importuj"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Aby zarządzać systemem Linux, otwórz Opcje programisty"
+	},
+	"terminal_home_manage": {
+		"message": "Zarządzaj"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nowy kontener Linuksa"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nowe połączenie SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Konfiguracja"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Polecenie"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nazwa połączenia"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Protokół SSH wyłączył administrator"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Tutaj wyświetlą się połączenia z urządzeniami zdalnymi"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Podaj miejsce docelowe zawierające ciąg „nazwa_użytkownika@nazwa_hosta”"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Ustawienia terminala"
+	},
+	"terminal_input_label": {
+		"message": "Pole wpisywania w terminalu"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Kolory ANSI"
@@ -1034,6 +1064,9 @@
 	"terminal_name_pref_image": {
 		"message": "Obraz"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Wysokość wiersza"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Kształt"
 	},
@@ -1049,11 +1082,14 @@
 	"terminal_pref_bell": {
 		"message": "Sygnał dźwiękowy terminala."
 	},
+	"terminal_pref_line_height": {
+		"message": "Wysokość każdego wiersza okna terminala."
+	},
 	"terminal_preview_label": {
 		"message": "Podgląd"
 	},
 	"terminal_profile_label": {
-		"message": "Bieżący profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Zresetuj terminal"
@@ -1066,6 +1102,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Wybierz obraz tła z komputera."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Czy na pewno chcesz usunąć profil „$1”?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Wyłącz"
@@ -1192,6 +1231,15 @@
 	},
 	"terminal_title_theme": {
 		"message": "Motyw"
+	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Kontroler tmux napotkał błąd:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Włączono tryb integracji tmux. Naciśnij Ctrl+C, aby odłączyć tmux, lub wpisz polecenia tmux."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Danych wyjściowych jest za dużo i nie można ich przeczytać na głos. Aby je odczytać, przejdź do wierszy ręcznie."
 	},
 	"terminal_try_again_with_internet": {
 		"message": "Połącz się z internetem i spróbuj ponownie."

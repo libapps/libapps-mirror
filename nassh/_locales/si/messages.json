@@ -390,7 +390,7 @@
 		"message": "දුරස්ථ ධාරකයට පර්යන්තය තුළ රූප සංදර්ශන කිරීමට ඉඩ දෙන්නේද යන්න.\n\nපෙරනිමියෙන්, තේරීමක් කරන තෙක් අපි ප්‍රේරණ යවමු."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "සැකසුවේ නම්, Chrome OS Alt+Backspace->Delete ප්‍රතිසිතියම අස් කරයි, එවිට Alt+Backspace නිශ්චිතව Alt+Backspace වෙයි."
+		"message": "සැකසුවේ නම්, ChromeOS Alt+Backspace->Delete යළිඅනුරූපණය අස් කරයි, එවිට Alt+Backspace නිශ්චිතව Alt+Backspace වෙයි."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr අනාවරණ ස්වයංගවේෂණයක් තෝරන්න.\n\n'නිෂ්ඵල': navigator.language ට අනුව ස්වයං-අනාවරණ කරන්න:\n      'en-us' => 'කිසික් නැත', else => 'right-alt'\n'කිසිවක් නැත': කිසියම් AltGr අනුකරණය අබල කරන්න.\n'ctrl-alt': Ctrl+Alt යනු AltGr බවට අනුමාන කරයි.\n'left-alt': වම් Alt යනු AltGr බවට අනුමාන කරයි.\n'right-alt': දකුණු Alt යනු AltGr බවට අනුමාන කරයි."
@@ -531,7 +531,7 @@
 		"message": "Meta යතුර ඔබා ගෙන සිටින අතරතුර යතුරක් ඔබන විට ESC උපසර්ගයක් යවන්න.\n\nඋදාහරණයක් වශයෙන්, සබල කළ විට, Meta+K එබීම ^[k ඔබ Escape සහ පසුව k එබූ ලෙස යවයි. අබල කළ විට, k පවණක් යැවේ."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "ඇලවීම සඳහා භාවිත කරන මූසික බොත්තම.\n\nස්වයං-අනාවරණය සඳහා, අපි X11 නොවන වේදිකා (Chrome OS ඇතුළුව) සඳහා මැද මූසික බොත්තම භාවිත කරමු. X11 මත, අපි දකුණු මූසික බොත්තම භාවිත කරමු (කවුළු කළමනාකරු මැද මූසික බොත්තම හරහා ඇලවීම හසුරුවීම සිදු කළ යුතු බැවින්).\n\n0 == වම් (ප්‍රාථමික) බොත්තම.\n1 == මැද (අතිරේක) බොත්තම.\n2 == දකුණු (ද්විතීයික) බොත්තම.\n\nමෙම විකල්පය දකුණු ක්ලික් කිරීමෙන් ඇලවීම සඳහා වන සැකසීමෙන් ස්වාධීන වෙයි.\n\nසටහන: වමත් සහ දකුණත් මූසික මගින් ඔබට ප්‍රාථමික සහ ද්විතියික බොත්තම් හසුරුවනු ලැබේ."
+		"message": "ඇලවීම සඳහා භාවිතා කරන මූසික බොත්තම.\n\nස්වයං-අනාවරණය සඳහා, අපි X11 නොවන වේදිකා (ChromeOS ඇතුළුව) සඳහා මැද මූසික බොත්තම භාවිතා කරමු. X11 මත, අපි දකුණු මූසික බොත්තම භාවිතා කරමු (කවුළු කළමනාකරු මැද මූසික බොත්තම හරහා ඇලවීම හසුරුවීම සිදු කළ යුතු බැවින්).\n\n0 == වම් (ප්‍රාථමික) බොත්තම.\n1 == මැද (අතිරේක) බොත්තම.\n2 == දකුණු (ද්විතීයික) බොත්තම.\n\nමෙම විකල්පය දකුණු ක්ලික් කිරීමෙන් ඇලවීම සඳහා වන සැකසීමෙන් ස්වාධීන වෙයි.\n\nසටහන: වමත් සහ දකුණත් මූසික මගින් ඔබට ප්‍රාථමික සහ ද්විතියික බොත්තම් හසුරුවනු ලැබේ."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "දකුණු මූසික බොත්තම් ක්ලික් කිරීම්වලදී අලවන්න.\n\nමෙම විකල්පය \"mouse-paste-button\" සැකසීමෙන් ස්වාධීන වෙයි.\n\nසටහන: වමත් සහ දකුණත් මූසික මගින් ඔබට ප්‍රාථමික සහ ද්විතියික බොත්තම් හසුරුවනු ලැබේ."
@@ -1049,6 +1049,9 @@
 	"terminal_clear_menu_label": {
 		"message": "පර්යන්ත හිස් කිරීම"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "අයිතමය මැකීමට මකන්න යතුර ඔබන්න."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" නොලැබේ"
 	},
@@ -1061,23 +1064,50 @@
 	"terminal_home_developer_settings": {
 		"message": "සංවර්ධක සැකසීම්"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux සංස්කරණය කරන්න"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH සංස්කරණය කරන්න"
 	},
 	"terminal_home_import_identity": {
 		"message": "ආයාත කරන්න"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux කළමනාකරණය කිරීමට සංවර්ධක විකල්ප වෙත පිවිසෙන්න"
+	},
+	"terminal_home_manage": {
+		"message": "කළමනාකරණය කරන්න"
+	},
+	"terminal_home_new_linux": {
+		"message": "නව Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "නව SSH සම්බන්ධතාව"
 	},
+	"terminal_home_set_up": {
+		"message": "පිහිටුවන්න"
+	},
 	"terminal_home_ssh_command": {
 		"message": "විධානය"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "සම්බන්ධතා නම"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH ඔබගේ පරිපාලක විසින් අබල කර ඇත"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "දුරස්ථ උපාංග වෙත සම්බන්ධතා මෙහි දිස් වනු ඇත"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"username@hostname\" සමගින් ගමනාන්තය සඳහන් කරන්න"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "පර්යන්ත සැකසීම්"
+	},
+	"terminal_input_label": {
+		"message": "ටර්මිනල් ආදානය"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI වර්ණ"
@@ -1100,6 +1130,9 @@
 	"terminal_name_pref_image": {
 		"message": "රූපය"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "රේඛාවේ උස"
+	},
 	"terminal_name_pref_shape": {
 		"message": "හැඩය"
 	},
@@ -1115,11 +1148,14 @@
 	"terminal_pref_bell": {
 		"message": "ශ්‍රව්‍ය පර්යන්ත සීනුව."
 	},
+	"terminal_pref_line_height": {
+		"message": "පර්යන්ත තිරයේ එක් එක් පේළිය සඳහා රේඛා උස."
+	},
 	"terminal_preview_label": {
 		"message": "පෙරදසුන"
 	},
 	"terminal_profile_label": {
-		"message": "වත්මන් පැතිකඩ"
+		"message": "පැතිකඩ"
 	},
 	"terminal_reset_menu_label": {
 		"message": "පර්යන්ත යළි සැකසීම"
@@ -1132,6 +1168,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ඔබේ පරිගණකයෙන් පසුබිම් රූප ගොනුවක් තෝරන්න."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "ඔබට \"$1\" පැතිකඩ මැකීමට අවශ්‍ය බව විශ්වාසද?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ස්වයං"
@@ -1265,6 +1304,15 @@
 	"terminal_title_theme": {
 		"message": "තේමාව"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux පාලකයට දෝෂයක් ඇති විය:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux ඒකාබද්ධ කිරීමේ ප්‍රකාරය සක්‍රිය කර ඇත. tmux විසන්ධි කිරීමට Ctrl-C ඔබන්න, නැතහොත් tmux විධාන ආදානය කරන්න"
+	},
+	"terminal_too_much_output_message": {
+		"message": "නිවේදනය කිරීමට ප්‍රතිදානය වැඩියි, කියවීමට පේළි හස්තීයව සංචාලනය කරන්න."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "අන්තර්ජාලයට සබැඳි කර නැවත උත්සාහ කරන්න."
 	},
@@ -1293,7 +1341,7 @@
 		"message": "'ssh<Tab><profile name>' ටයිප් කිරීමෙන් omnibox වෙතින් සම්බන්ධ වන්න: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS හට SFTP හරහා ගොනු පද්ධති නැංවිමටත් Files යෙදුම හරහා බ්‍රවුස් කිරීමටත් හැකිය. 'සම්බන්ධ කරන්න' වෙනුවට 'SFTP නැංවුම' භාවිත කරන්න."
+		"message": "ChromeOS හට SFTP හරහා ගොනු පද්ධති නැංවිමටත් Files යෙදුම හරහා බ්‍රවුස් කිරීමටත් හැක. 'සම්බන්ධ කරන්න' වෙනුවට 'SFTP නැංවුම' භාවිතා කරන්න."
 	},
 	"tip_5": {
 		"message": "වෙබ් පිටු තුළ ssh:// සබැඳි භාවිත කර සම්බන්ධ කරන්න, නැති නම් පිටුසනක් සුරකින්න: https://goo.gl/zS8EZD"

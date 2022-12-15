@@ -396,7 +396,7 @@
 		"message": "Norāda, vai atļaut rādīt terminālī attēlus no attālā saimniekdatora.\n\nPēc noklusējuma uzvedne tiek rādīta, līdz tiek veikta izvēle."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ja šī preference ir iestatīta, tiek atcelta Chrome OS taustiņu Alt+Backspace->Delete pārkartēšana, lai taustiņu kombinācija Alt+Backspace nozīmētu Alt+Backspace."
+		"message": "Ja šī preference ir iestatīta, tiek atsaukta Chrome OS taustiņu Alt+Backspace->Delete pārkartēšana, lai taustiņu kombinācija Alt+Backspace nozīmētu Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Atlasiet AltGr noteikšanas heiristikas metodi.\n\n'null': automātiskās noteikšanas pamatā ir navigator.language:\n      'en-us' => 'none', else => 'right-alt'\n'none': atspējot jebkādu ar AltGr saistītu emulāciju.\n'ctrl- alt': pieņemt, ka Ctrl+Alt nozīmē AltGr.\n'left-alt': pieņemt, ka kreisais Alt taustiņš nozīmē AltGr.\n'right-alt': pieņemt, ka labais Alt taustiņš nozīmē AltGr."
@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Notīrīt termināli"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Lai dzēstu vienumu, nospiediet dzēšanas taustiņu."
+	},
 	"terminal_font_unavailable": {
 		"message": "Fonts $1 nav pieejams"
 	},
@@ -995,23 +998,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Izstrādātāja iestatījumi"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Rediģēt Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Rediģēt SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importēt"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Apmeklējiet izstrādātāju opciju sadaļu, lai pārvaldītu Linux."
+	},
+	"terminal_home_manage": {
+		"message": "Pārvaldīt"
+	},
+	"terminal_home_new_linux": {
+		"message": "Jaunais Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Jauns SSH savienojums"
 	},
+	"terminal_home_set_up": {
+		"message": "Iestatīt"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Komanda"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Savienojuma nosaukums"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Jūsu administrators ir atspējojis SSH."
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Šeit būs redzami savienojumi ar attālajām ierīcēm."
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Norādiet galamērķi šādā formātā: “username@hostname”."
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Termināļa iestatījumi"
+	},
+	"terminal_input_label": {
+		"message": "Termināļa ievades lauks"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI krāsas"
@@ -1034,6 +1064,9 @@
 	"terminal_name_pref_image": {
 		"message": "Attēls"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Rindiņu augstums"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1049,11 +1082,14 @@
 	"terminal_pref_bell": {
 		"message": "Termināla skaņas zvans"
 	},
+	"terminal_pref_line_height": {
+		"message": "Katras termināļa ekrāna rindiņas augstums."
+	},
 	"terminal_preview_label": {
 		"message": "Priekšskatījums"
 	},
 	"terminal_profile_label": {
-		"message": "Pašreizējais profils"
+		"message": "Profils"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Atiestatīt termināli"
@@ -1066,6 +1102,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Atlasiet fona attēla failu datorā."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Vai tiešām vēlaties dzēst profilu “$1”?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automātiski"
@@ -1198,6 +1237,15 @@
 	},
 	"terminal_title_theme": {
 		"message": "Motīvs"
+	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Radās kļūda tmux kontrollerī:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Ir aktivizēts tmux integrācijas režīms. Nospiediet Ctrl-C, lai atsaistītu tmux, vai ievadiet tmux komandas."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Pārāk liels izvades teksta apjoms. Lai to noklausītos, manuāli pārvietojieties starp rindām."
 	},
 	"terminal_try_again_with_internet": {
 		"message": "Izveidojiet savienojumu ar internetu un mēģiniet vēlreiz."

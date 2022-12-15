@@ -384,7 +384,7 @@
 		"message": "Of die afstandgasheer toegelaat moet word om prente in die terminaal te wys.\n\nBy verstek vra ons totdat 'n keuse gemaak word."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Indien gestel, word die herafbeelding van Chrome-bedryfstelsel se Alt+Backspace->Delete ontdoen, sodat Alt+Backspace inderdaad Alt+Backspace is."
+		"message": "Indien gestel, word die herafbeelding van ChromeOS se Alt+Backspace->Delete ontdoen, sodat Alt+Backspace inderdaad Alt+Backspace is."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Kies 'n AltGr-bespeuringheuristiek.\n\n\"null\": Outobespeur gegrond op navigator.language:\n      \"en-us\" => 'none', else => \"right-alt\"\n\"none\": Deaktiveer enige AltGr-emulering.\n\"ctrl-alt\": Aanvaar Ctrl+Alt beteken AltGr.\n\"left-alt\": Aanvaar links-Alt beteken AltGr.\n\"right-alt\": Aanvaar regs-Alt beteken AltGr."
@@ -525,7 +525,7 @@
 		"message": "Stuur 'n ESC-voorvoegsel wanneer jy 'n sleutel druk terwyl jy die Meta-sleutel hou.\n\nByvoorbeeld, wanneer dit geaktiveer is, sal Meta+K as jy dit druk ^[k stuur asof jy Escape en dan k getik het. Wanneer dit gedeaktiveer is, sal net k gestuur word."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Die muisknoppie om vir plak te gebruik.\n\nVir outobespeur sal ons die muis se middelknoppie vir nie-X11-platforms (insluitend Chrome-bedryfstelsel) gebruik. Op X11 sal ons die muis se regterknoppie gebruik (omdat die vensterbestuurder plak via die muis se middelknoppie moet hanteer).\n\n0 == linker- (primêre) knoppie.\n1 == middel- (hulp-) knoppie.\n2 == regter- (sekondêre) knoppie.\n\nHierdie opsie is onafhanklik van die regsklik-plak-instelling.\n\nLet wel: Die primêre en sekondêre knoppies word met links- en regshandige muise vir jou gehanteer."
+		"message": "Die muisknoppie om vir plak te gebruik.\n\nVir outobespeur sal ons die muis se middelknoppie vir nie-X11-platforms (insluitend ChromeOS) gebruik. Op X11 sal ons die muis se regterknoppie gebruik (omdat die vensterbestuurder plak met die muis se middelknoppie moet hanteer).\n\n0 == linker- (primêre) knoppie.\n1 == middel- (hulp-) knoppie.\n2 == regter- (sekondêre) knoppie.\n\nHierdie opsie is onafhanklik van die regsklik-plakinstelling.\n\nLet wel: Die primêre en sekondêre knoppies word met links- en regshandige muise vir jou gehanteer."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Plak is op muis se regterknoppieklikke.\n\nHierdie opsie is onafhanklik van die \"mouse-paste-button\"-instelling.\n\nLet wel: Die primêre en sekondêre knoppies word met links- en regshandige muise vir jou gehanteer."
@@ -1016,6 +1016,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Maak terminaalskerm skoon"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Druk die uitveesleutel om die item uit te vee."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" is nie beskikbaar nie"
 	},
@@ -1028,23 +1031,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Ontwikkelaarinstellings"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Wysig Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Wysig SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Voer in"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Besoek Ontwikkelaaropsies om Linux te bestuur"
+	},
+	"terminal_home_manage": {
+		"message": "Bestuur"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nuwe Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nuwe SSH-verbinding"
 	},
+	"terminal_home_set_up": {
+		"message": "Stel op"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Opdrag"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Verbindingnaam"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Jou admin het SSH gedeaktiveer"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Verbindings aan afstandtoestelle sal hier verskyn"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Spesifiseer die bestemming met \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminaalinstellings"
+	},
+	"terminal_input_label": {
+		"message": "Terminaalinvoer"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-kleure"
@@ -1064,6 +1094,9 @@
 	"terminal_name_pref_image": {
 		"message": "Prent"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Reëlhoogte"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Vorm"
 	},
@@ -1079,11 +1112,14 @@
 	"terminal_pref_bell": {
 		"message": "Hoorbare terminaalklokkie."
 	},
+	"terminal_pref_line_height": {
+		"message": "Die reëlhoogte van elke ry van die terminaalskerm."
+	},
 	"terminal_preview_label": {
 		"message": "Voorskou"
 	},
 	"terminal_profile_label": {
-		"message": "Huidige profiel"
+		"message": "Profiel"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Terminaal is teruggestel"
@@ -1096,6 +1132,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Kies 'n agtergrondprentlêer op jou rekenaar."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Is jy seker jy wil profiel \"$1\" uitvee?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Outomaties"
@@ -1229,6 +1268,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux-beheerder het ’n fout teëgekom:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux-integrasiemodus is geaktiveer. Druk Ctrl-C om tmux los te maak, of voer tmux-opdragte in"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Te veel uitvoer om aan te kondig; navigeer handmatig na rye om te lees."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Koppel aan die internet en probeer weer."
 	},
@@ -1257,7 +1305,7 @@
 		"message": "Koppel van die omniboks af deur \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki in te tik"
 	},
 	"tip_4": {
-		"message": "Chrome-bedryfstelsel kan lêerstelsels via SFTP monteer en via die Lêers-program deurblaai. Gebruik \"SFTP-monteer\" pleks van \"Koppel\"."
+		"message": "ChromeOS kan lêerstelsels via SFTP monteer en via die Lêers-program deurblaai. Gebruik \"SFTP-monteer\" pleks van \"Koppel\"."
 	},
 	"tip_5": {
 		"message": "Koppel deur ssh://-skakels in webblaaie te gebruik, of stoor 'n boekmerk: https://goo.gl/zS8EZD"

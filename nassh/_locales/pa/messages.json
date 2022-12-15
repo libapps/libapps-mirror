@@ -387,7 +387,7 @@
 		"message": "ਟਰਮੀਨਲ ਵਿੱਚ ਚਿੱਤਰ ਦਿਖਾਉਣ ਲਈ ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਇਜਾਜ਼ਤ ਦੇਣੀ ਹੈ ਜਾਂ ਨਹੀਂ।\n\nਪੂਰਵ-ਨਿਰਧਾਰਤ ਤੌਰ 'ਤੇ, ਅਸੀਂ ਉਦੋਂ ਤੱਕ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ ਜਦੋਂ ਤੱਕ ਕੋਈ ਪਸੰਦ ਨਹੀਂ ਚੁਣੀ ਜਾਂਦੀ ਹੈ।"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "ਜੇ ਸੈੱਟ ਹੈ, Chrome OS ਵਿੱਚ Alt+Backspace->Delete ਦੀ ਮੁੜ-ਮੈਪਿੰਗ ਨੂੰ ਅਣਕੀਤਾ ਕਰਦਾ ਹੈ, ਇਸ ਲਈ Alt+Backspace ਅਸਲ ਵਿੱਚ Alt+Backspace ਵਾਂਗ ਕੰਮ ਕਰਨ ਲੱਗਦਾ ਹੈ।"
+		"message": "ਜੇ ਸੈੱਟ ਹੈ, ਤਾਂ Chrome OS ਵਿੱਚ Alt+Backspace->Delete ਦੀ ਮੁੜ-ਮੈਪਿੰਗ ਨੂੰ ਅਣਕੀਤਾ ਕਰਦਾ ਹੈ, ਇਸ ਲਈ Alt+Backspace ਅਸਲ ਵਿੱਚ Alt+Backspace ਵਾਂਗ ਕੰਮ ਕਰਨ ਲੱਗਦਾ ਹੈ।"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr ਪਤਾ ਲਗਾਉਣ ਵਾਲੇ ਅੰਦਾਜ਼ੇ ਨੂੰ ਚੁਣੋ।\n\n'null': navigator.language ਦੇ ਆਧਾਰ 'ਤੇ ਸਵੈ ਪਤਾ ਲਗਾਓ:\n      'en-us' => 'none', else => 'right-alt'\n'none': ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ ਦੀ AltGr ਬਰਾਬਰੀ ਨੂੰ ਬੰਦ ਕਰੋ।\n'ctrl-alt': Ctrl+Alt ਦਾ ਮਤਲਬ AltGr ਮੰਨੋ।\n'left-alt': ਖੱਬੇ Alt ਦਾ ਮਤਲਬ AltGr ਮੰਨੋ।\n'right-alt': ਸੱਜੇ Alt ਦਾ ਮਤਲਬ AltGr ਮੰਨੋ।"
@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ਟਰਮੀਨਲ ਕਲੀਅਰ"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "ਆਈਟਮ ਨੂੰ ਮਿਟਾਉਣ ਲਈ delete ਕੁੰਜੀ ਦਬਾਓ।"
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ਉਪਲਬਧ ਨਹੀਂ ਹੈ"
 	},
@@ -986,23 +989,50 @@
 	"terminal_home_developer_settings": {
 		"message": "ਵਿਕਾਸਕਾਰ ਸੈਟਿੰਗਾਂ"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux ਦਾ ਸੰਪਾਦਨ ਕਰੋ"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH ਦਾ ਸੰਪਾਦਨ ਕਰੋ"
 	},
 	"terminal_home_import_identity": {
 		"message": "ਆਯਾਤ ਕਰੋ"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਲਈ ਵਿਕਾਸਕਾਰ ਚੋਣਾਂ 'ਤੇ ਜਾਓ"
+	},
+	"terminal_home_manage": {
+		"message": "ਪ੍ਰਬੰਧਨ ਕਰੋ"
+	},
+	"terminal_home_new_linux": {
+		"message": "ਨਵਾਂ Linux ਕੰਟੇਨਰ"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "ਨਵਾਂ SSH ਕਨੈਕਸ਼ਨ"
 	},
+	"terminal_home_set_up": {
+		"message": "ਸੈੱਟਅੱਪ ਕਰੋ"
+	},
 	"terminal_home_ssh_command": {
 		"message": "ਆਦੇਸ਼"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "ਕਨੈਕਸ਼ਨ ਦਾ ਨਾਮ"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "ਤੁਹਾਡੇ ਪ੍ਰਸ਼ਾਸਕ ਵੱਲੋਂ SSH ਨੂੰ ਬੰਦ ਕੀਤਾ ਗਿਆ ਹੈ"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "ਰਿਮੋਟ ਡੀਵਾਈਸਾਂ ਦੇ ਕਨੈਕਸ਼ਨ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"username@hostname\" ਨਾਲ ਮੰਜ਼ਿਲ ਨੂੰ ਨਿਰਧਾਰਿਤ ਕਰੋ"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "ਟਰਮੀਨਲ ਸੈਟਿੰਗਾਂ"
+	},
+	"terminal_input_label": {
+		"message": "ਟਰਮੀਨਲ ਇਨਪੁੱਟ"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI ਰੰਗ"
@@ -1025,6 +1055,9 @@
 	"terminal_name_pref_image": {
 		"message": "ਚਿੱਤਰ"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "ਲਾਈਨ ਦੀ ਉਚਾਈ"
+	},
 	"terminal_name_pref_shape": {
 		"message": "ਆਕ੍ਰਿਤੀ"
 	},
@@ -1040,11 +1073,14 @@
 	"terminal_pref_bell": {
 		"message": "ਸੁਣਨਯੋਗ ਟਰਮੀਨਲ ਘੰਟੀ।"
 	},
+	"terminal_pref_line_height": {
+		"message": "ਟਰਮੀਨਲ ਸਕ੍ਰੀਨ ਦੀ ਹਰੇਕ ਕਤਾਰ ਲਈ ਲਾਈਨ ਦੀ ਉਚਾਈ।"
+	},
 	"terminal_preview_label": {
 		"message": "ਪੂਰਵ-ਝਲਕ"
 	},
 	"terminal_profile_label": {
-		"message": "ਮੌਜੂਦਾ ਪ੍ਰੋਫਾਈਲ"
+		"message": "ਪ੍ਰੋਫਾਈਲ"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ਟਰਮੀਨਲ ਰੀਸੈੱਟ"
@@ -1057,6 +1093,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ਆਪਣੇ ਕੰਪਿਊਟਰ ਤੋਂ ਕੋਈ ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਫ਼ਾਈਲ ਚੁਣੋ।"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "ਕੀ ਤੁਸੀਂ ਪੱਕਾ \"$1\" ਪ੍ਰੋਫਾਈਲ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ਸਵੈਚਲਿਤ"
@@ -1184,6 +1223,15 @@
 	"terminal_title_theme": {
 		"message": "ਥੀਮ"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux ਕੰਟਰੋਲਰ ਵਿੱਚ ਕੋਈ ਗੜਬੜ ਆਈ:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux ਏਕੀਕਰਨ ਮੋਡ ਕਿਰਿਆਸ਼ੀਲ ਕੀਤਾ ਗਿਆ। tmux ਨੂੰ ਵੱਖ ਕਰਨ ਲਈ Ctrl-C ਦਬਾਓ, ਜਾਂ tmux ਆਦੇਸ਼ਾਂ ਨੂੰ ਇਨਪੁੱਟ ਕਰੋ"
+	},
+	"terminal_too_much_output_message": {
+		"message": "ਘੋਸ਼ਣਾ ਕਰਨ ਲਈ ਬਹੁਤ ਜ਼ਿਆਦਾ ਆਊਟਪੁੱਟ ਹਨ, ਇਸ ਲਈ ਪੜ੍ਹਨ ਲਈ ਕਤਾਰਾਂ 'ਤੇ ਹੱਥੀਂ ਨੈਵੀਗੇਟ ਕਰੋ।"
+	},
 	"terminal_try_again_with_internet": {
 		"message": "ਇੰਟਰਨੈੱਟ ਨਾਲ ਕਨੈਕਟ ਕਰ ਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
 	},
@@ -1212,7 +1260,7 @@
 		"message": "'ssh<Tab><profile name>' ਟਾਈਪ ਕਰਕੇ ਓਮਨੀਬਾਕਸ ਤੋਂ ਕਨੈਕਟ ਕਰੋ: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS SFTP ਰਾਹੀਂ ਫ਼ਾਈਲ ਸਿਸਟਮਾਂ ਨੂੰ ਮਾਊਂਟ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ 'ਫ਼ਾਈਲਾਂ' ਐਪ ਰਾਹੀਂ ਬ੍ਰਾਊਜ਼ ਕਰ ਸਕਦਾ ਹੈ। 'ਕਨੈਕਟ ਕਰੋ' ਦੀ ਬਜਾਏ 'SFTP ਮਾਊਂਟ ਕਰੋ' ਵਰਤੋ।"
+		"message": "Chrome OS SFTP ਰਾਹੀਂ ਫ਼ਾਈਲ ਸਿਸਟਮਾਂ ਨੂੰ ਮਾਊਂਟ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ Files ਐਪ ਰਾਹੀਂ ਬ੍ਰਾਊਜ਼ ਕਰ ਸਕਦਾ ਹੈ। 'ਕਨੈਕਟ ਕਰੋ' ਦੀ ਬਜਾਏ 'SFTP ਮਾਊਂਟ ਕਰੋ' ਵਰਤੋ।"
 	},
 	"tip_5": {
 		"message": "ਵੈੱਬ ਪੰਨਿਆਂ ਵਿੱਚ ssh:// ਲਿੰਕ ਵਰਤ ਕੇ ਕਨੈਕਟ ਕਰੋ, ਜਾਂ ਕੋਈ ਬੁੱਕਮਾਰਕ ਰੱਖਿਅਤ ਕਰੋ: https://goo.gl/zS8EZD"

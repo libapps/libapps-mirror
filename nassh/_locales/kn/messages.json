@@ -393,7 +393,7 @@
 		"message": "ಟರ್ಮಿನಲ್‌ನಲ್ಲಿ ಚಿತ್ರಗಳನ್ನು ಪ್ರದರ್ಶಿಸಲು ರಿಮೋಟ್ ಹೋಸ್ಟ್‌ಗೆ ಅನುಮತಿಸಬೇಕೇ.\n\nಡೀಫಾಲ್ಟ್ ಆಗಿ, ಆಯ್ಕೆ ಮಾಡುವವರೆಗೆ ನಾವು ಪ್ರಾಂಪ್ಟ್ ಮಾಡುತ್ತೇವೆ."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "ಇದನ್ನು ಹೊಂದಿಸಿದರೆ, Chrome OS Alt+ಬ್ಯಾಕ್‌ಸ್ಪೇಸ್->ಅಳಿಸಿ ಮರುನಕ್ಷೆ ಮಾಡುವಿಕೆಯನ್ನು ರದ್ದುಗೊಳಿಸುತ್ತದೆ, ಇದರಿಂದ Alt+ಬ್ಯಾಕ್‌ಸ್ಪೇಸ್ ನಿಜವಾಗಿಯೂ Alt+ಬ್ಯಾಕ್‌ಸ್ಪೇಸ್ ಆಗಿರುತ್ತದೆ."
+		"message": "ಇದನ್ನು ಸೆಟ್ ಮಾಡಿದರೆ, ChromeOS Alt+ಬ್ಯಾಕ್‌ಸ್ಪೇಸ್->ಅಳಿಸಿ ರೀಮ್ಯಾಪ್ ಅನ್ನು ರದ್ದುಗೊಳಿಸುತ್ತದೆ, ಇದರಿಂದ Alt+ಬ್ಯಾಕ್‌ಸ್ಪೇಸ್ ನಿಜವಾಗಿಯೂ Alt+ಬ್ಯಾಕ್‌ಸ್ಪೇಸ್ ಆಗಿರುತ್ತದೆ."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr ಪತ್ತೆಹಚ್ಚುವಿಕೆ ಹ್ಯೂರಿಸ್ಟಿಕ್ ಒಂದನ್ನು ಆಯ್ಕೆ ಮಾಡಿ.\n\n'ಶೂನ್ಯ': navigator.language ಆಧಾರದ ಮೇಲೆ ಸ್ವಯಂ-ಪತ್ತೆಮಾಡಿ:\n      'en-us' => 'ಯಾವುದೂ ಇಲ್ಲ', ಇಲ್ಲದಿದ್ದರೆ => 'right-alt'\n'ಯಾವುದೂ ಇಲ್ಲ': ಯಾವುದೇ AltGr ಸಂಬಂಧಿತ ಅನುಕರಣೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ.\n'ctrl-alt': Ctrl+Alt ಎಂದರೆ AltGr ಎಂದು ಭಾವಿಸಿ.\n'left-alt': ಎಡ Alt ಎಂದರೆ AltGr ಎಂದು ಭಾವಿಸಿ.\n'right-alt': ಬಲ Alt ಎಂದರೆ AltGr ಎಂದು ಭಾವಿಸಿ."
@@ -534,7 +534,7 @@
 		"message": "Meta ಕೀ ಅನ್ನು ಒತ್ತಿ ಹಿಡಿದಿರುವಾಗ ಕೀ ಅನ್ನು ಒತ್ತುವುದರ ಮೂಲಕ ESC ಪೂರ್ವಪ್ರತ್ಯಯವನ್ನು ಕಳುಹಿಸಲಾಗುವುದು.\n\nಉದಾಹರಣೆಗೆ, ಇದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ, Meta+K ಅನ್ನು ಒತ್ತಿದರೆ ^[k ಅನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತದೆ (Escape ಕೀ ಟೈಪ್ ಮಾಡಿದ ನಂತರ k ಕೀಲಿಯನ್ನು ಟೈಪ್ ಮಾಡಿದಾಗಲೂ ಹೀಗೆಯೇ ಆಗುತ್ತದೆ). ಇದನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದಾಗ, k ಅನ್ನು ಮಾತ್ರ ಕಳುಹಿಸಲಾಗುತ್ತದೆ."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "ಅಂಟಿಸುವುದಕ್ಕಾಗಿ ಬಳಸಲು ಮೌಸ್ ಬಟನ್.\n\nಸ್ವಯಂಪತ್ತೆಹಚ್ಚುವಿಕೆಗಾಗಿ, X11-ಅಲ್ಲದ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್‌ಗಳಲ್ಲಿ (Chrome OS ಸೇರಿದ ಹಾಗೆ) ನಾವು ಮೌಸ್‌ನ ಮಧ್ಯದ ಬಟನ್ ಅನ್ನು ಬಳಸುತ್ತೇವೆ. X11 ನಲ್ಲಿ, ನಾವು ಮೌಸ್‌ನ ಬಲ ಬಟನ್ ಅನ್ನು ಬಳಸುತ್ತೇವೆ (ಏಕೆಂದರೆ, ವಿಂಡೋ ನಿರ್ವಾಹಕವು ಮೌಸ್‌ನ ಮಧ್ಯದ ಬಟನ್‌ನ ಮೂಲಕ ಅಂಟಿಸಬೇಕಾಗುತ್ತದೆ).\n\n0 == ಎಡ (ಪ್ರಾಥಮಿಕ) ಬಟನ್.\n1 == ಮಧ್ಯದ (ಪೂರಕ) ಬಟನ್.\n2 == ಬಲ (ಸೆಕೆಂಡರಿ) ಬಟನ್.\n\nಈ ಆಯ್ಕೆಯು ಬಲ-ಕ್ಲಿಕ್ ಪೇಸ್ಟ್ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಪರಿಗಣಿಸುವುದಿಲ್ಲ.\n\nಗಮನಿಸಿ: ಪ್ರಾಥಮಿಕ ಮತ್ತು ದ್ವಿತೀಯ ಬಟನ್‌ಗಳನ್ನು ಎಡ ಮತ್ತು ಬಲಗೈ ಮೌಸ್‌ಗಳೊಂದಿಗೆ ನಿಮಗಾಗಿ ನಿರ್ವಹಿಸಲಾಗುತ್ತದೆ."
+		"message": "ಪೇಸ್ಟ್ ಮಾಡುವುದಕ್ಕಾಗಿ ಬಳಸುವ ಮೌಸ್ ಬಟನ್.\n\nಸ್ವಯಂಪತ್ತೆಹಚ್ಚುವಿಕೆಗಾಗಿ, X11-ಅಲ್ಲದ ಪ್ಲ್ಯಾಟ್‌ಫಾರ್ಮ್‌ಗಳಲ್ಲಿ (ChromeOS ಸೇರಿದಂತೆ) ನಾವು ಮೌಸ್‌ನ ಮಧ್ಯದ ಬಟನ್ ಅನ್ನು ಬಳಸುತ್ತೇವೆ. X11 ನಲ್ಲಿ, ನಾವು ಮೌಸ್‌ನ ಬಲ ಬಟನ್ ಅನ್ನು ಬಳಸುತ್ತೇವೆ (ಏಕೆಂದರೆ, ವಿಂಡೋ ನಿರ್ವಾಹಕವು ಮೌಸ್‌ನ ಮಧ್ಯದ ಬಟನ್‌ನ ಮೂಲಕ ಪೇಸ್ಟ್ ಮಾಡಬೇಕಾಗುತ್ತದೆ).\n\n0 == ಎಡ (ಪ್ರೈಮರಿ) ಬಟನ್.\n1 == ಮಧ್ಯದ (ಆಕ್ಸಿಲರಿ) ಬಟನ್.\n2 == ಬಲ (ಸೆಕೆಂಡರಿ) ಬಟನ್.\n\nಈ ಆಯ್ಕೆಯು ಬಲ-ಕ್ಲಿಕ್ ಪೇಸ್ಟ್ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಪರಿಗಣಿಸುವುದಿಲ್ಲ.\n\nಗಮನಿಸಿ: ಪ್ರೈಮರಿ ಮತ್ತು ಸಕೆಂಡರಿ ಬಟನ್‌ಗಳನ್ನು ಎಡ ಮತ್ತು ಬಲಗೈ ಮೈಸ್ ಮೂಲಕ ನಿಮಗಾಗಿ ನಿರ್ವಹಿಸಲಾಗುತ್ತದೆ."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "ಬಲ ಮೌಸ್ ಬಟನ್ ಕ್ಲಿಕ್‌ಗಳಲ್ಲಿ ಅಂಟಿಸಿ.\n\nಈ ಆಯ್ಕೆಯು \"ಮೌಸ್-ಪೇಸ್ಟ್-ಬಟನ್\" ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಪರಿಗಣಿಸುವುದಿಲ್ಲ.\n\nಗಮನಿಸಿ: ಪ್ರಾಥಮಿಕ ಮತ್ತು ದ್ವಿತೀಯ ಬಟನ್‌ಗಳನ್ನು ಎಡ ಮತ್ತು ಬಲಗೈ ಮೌಸ್‌ಗಳೊಂದಿಗೆ ನಿಮಗಾಗಿ ನಿರ್ವಹಿಸಲಾಗುತ್ತದೆ."
@@ -1043,6 +1043,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ಟರ್ಮಿನಲ್‌ ತೆರವುಗೊಳಿಸುವಿಕೆ"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "ಐಟಂ ಅನ್ನು ಅಳಿಸಲು ಅಳಿಸು ಕೀ ಅನ್ನು ಒತ್ತಿರಿ."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" ಲಭ್ಯವಿಲ್ಲ"
 	},
@@ -1055,23 +1058,50 @@
 	"terminal_home_developer_settings": {
 		"message": "ಡೆವಲಪರ್ ಸೆಟ್ಟಿಂಗ್‍ಗಳು"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux ಅನ್ನು ಎಡಿಟ್ ಮಾಡಿ"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH ಎಡಿಟ್ ಮಾಡಿ"
 	},
 	"terminal_home_import_identity": {
 		"message": "ಆಮದು ಮಾಡಿ"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux ಅನ್ನು ನಿರ್ವಹಿಸಲು, ಡೆವಲಪರ್ ಆಯ್ಕೆಗಳಿಗೆ ಭೇಟಿ ನೀಡಿ."
+	},
+	"terminal_home_manage": {
+		"message": "ನಿರ್ವಹಿಸಿ"
+	},
+	"terminal_home_new_linux": {
+		"message": "ಹೊಸ Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "ಹೊಸ SSH ಸಂಪರ್ಕ"
 	},
+	"terminal_home_set_up": {
+		"message": "ಸೆಟಪ್"
+	},
 	"terminal_home_ssh_command": {
 		"message": "ಕಮಾಂಡ್"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "ಸಂಪರ್ಕದ ಹೆಸರು"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "ನಿಮ್ಮ ನಿರ್ವಾಹಕರು SSH ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದ್ದಾರೆ."
+	},
+	"terminal_home_ssh_empty": {
+		"message": "ರಿಮೋಟ್ ಸಾಧನಗಳ ಕನೆಕ್ಷನ್‌ಗಳು ಇಲ್ಲಿ ಗೋಚರಿಸುತ್ತವೆ."
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "ಡೆಸ್ಟಿನೇಶನ್ ಅನ್ನು \"username@hostname\" ಬಳಸಿ ನಿರ್ದಿಷ್ಟಪಡಿಸಿ"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "ಟರ್ಮಿನಲ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
+	},
+	"terminal_input_label": {
+		"message": "ಟರ್ಮಿನಲ್ ಇನ್‌ಪುಟ್"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI ಬಣ್ಣಗಳು"
@@ -1094,6 +1124,9 @@
 	"terminal_name_pref_image": {
 		"message": "ಚಿತ್ರ"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "ಸಾಲಿನ ಎತ್ತರ"
+	},
 	"terminal_name_pref_shape": {
 		"message": "ಆಕಾರ"
 	},
@@ -1109,11 +1142,14 @@
 	"terminal_pref_bell": {
 		"message": "ಆಲಿಸಬಹುದಾದ ಟರ್ಮಿನಲ್ ಬೆಲ್."
 	},
+	"terminal_pref_line_height": {
+		"message": "ಟರ್ಮಿನಲ್ ಸ್ಕ್ರೀನ್‌ನ ಪ್ರತಿ ಅಡ್ಡಸಾಲಿನ ಎತ್ತರ."
+	},
 	"terminal_preview_label": {
 		"message": "ಪೂರ್ವವೀಕ್ಷಣೆ"
 	},
 	"terminal_profile_label": {
-		"message": "ಪ್ರಸ್ತುತ ಪ್ರೊಫೈಲ್"
+		"message": "ಪ್ರೊಫೈಲ್"
 	},
 	"terminal_reset_menu_label": {
 		"message": "ಟರ್ಮಿನಲ್‌ ಮರುಹೊಂದಿಸುವಿಕೆ"
@@ -1126,6 +1162,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್‌ನಿಂದ ಹಿನ್ನೆಲೆ ಚಿತ್ರದ ಫೈಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "ನೀವು ಖಂಡಿತವಾಗಿಯೂ \"$1\" ಪ್ರೊಫೈಲ್ ಅನ್ನು ಅಳಿಸಲು ಬಯಸುವಿರಾ?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ಸ್ವಯಂಚಾಲಿತ"
@@ -1259,6 +1298,15 @@
 	"terminal_title_theme": {
 		"message": "ಥೀಮ್"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux ಕಂಟ್ರೋಲರ್ ದೋಷವನ್ನು ಎದುರಿಸಿದೆ:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux ಇಂಟಿಗ್ರೇಶನ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ. tmux ಅನ್ನು ಬೇರ್ಪಡಿಸಲು Ctrl-C ಒತ್ತಿರಿ ಅಥವಾ tmux ಕಮಾಂಡ್‌ಗಳನ್ನು ಸೇರಿಸಿ"
+	},
+	"terminal_too_much_output_message": {
+		"message": "ಓದಿ ಹೇಳಲು ತುಂಬಾ ಔಟ್‌ಪುಟ್ ಇರುವ ಕಾರಣ, ನೀವು ಓದಲು ಬಯಸುವ ಸಾಲುಗಳಿಗೆ ಹಸ್ತಚಾಲಿತವಾಗಿ ನ್ಯಾವಿಗೇಟ್ ಮಾಡಿ."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "ಇಂಟರ್ನೆಟ್‌ಗೆ ಕನೆಕ್ಟ್ ಮಾಡಿ ಹಾಗೂ ಪುನಃ ಪ್ರಯತ್ನಿಸಿ."
 	},
@@ -1287,7 +1335,7 @@
 		"message": "'ssh<Tab><profile name>': https://goo.gl/V7o8ki ಟೈಪ್ ಮಾಡುವ ಮೂಲಕ ಆಮ್ನಿಬಾಕ್ಸ್‌ನಿಂದ ಕನೆಕ್ಟ್ ಮಾಡಿ"
 	},
 	"tip_4": {
-		"message": "SFTP ಮೂಲಕ Chrome OS ಫೈಲ್ ಸಿಸ್ಟಂಗಳನ್ನು ಅಳವಡಿಸಬಹುದು ಮತ್ತು ಫೈಲ್‌ಗಳ ಆ್ಯಪ್‌ನ ಮೂಲಕ ಬ್ರೌಸ್ ಮಾಡಬಹುದು. 'ಕನೆಕ್ಟ್' ಬದಲಿಗೆ 'SFTP ಅಳವಡಿಕೆ' ಬಳಸಿ."
+		"message": "ChromeOS, SFTP ಮೂಲಕ ಫೈಲ್ ಸಿಸ್ಟಂಗಳನ್ನು ಮೌಂಟ್ ಮಾಡಬಹುದು ಮತ್ತು Files ಆ್ಯಪ್‌ನ ಮೂಲಕ ಬ್ರೌಸ್ ಮಾಡಬಹುದು. 'ಕನೆಕ್ಟ್' ಬದಲಿಗೆ 'SFTP ಮೌಂಟ್' ಬಳಸಿ."
 	},
 	"tip_5": {
 		"message": "ವೆಬ್‌ ಪುಟಗಳಲ್ಲಿ ssh:// ಲಿಂಕ್‌ಗಳನ್ನು ಬಳಸಿ ಕನೆಕ್ಟ್ ಮಾಡಿ ಅಥವಾ ಬುಕ್‌ಮಾರ್ಕ್ ಅನ್ನು ಉಳಿಸಿ: https://goo.gl/zS8EZD"

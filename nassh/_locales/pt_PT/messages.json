@@ -396,7 +396,7 @@
 		"message": "Se permite que o anfitrião remoto apresente imagens no terminal.\n\nPor predefinição, perguntamos até escolher uma opção."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Se esta opção estiver definida, anula o remapeamento de Alt+Retrocesso->Eliminar no Chrome OS para que Alt+Retrocesso seja mesmo Alt+Retrocesso."
+		"message": "Se esta opção estiver definida, anula o remapeamento de Alt+Retrocesso->Eliminar no ChromeOS para que Alt+Retrocesso seja mesmo Alt+Retrocesso."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecione um algoritmo de deteção de AltGr.\n\n\"null\": detetar automaticamente com base em navigator.language:\n      \"en-us\" => \"none\", outro => \"right-alt\"\n\"none\": desativar qualquer emulação de AltGr.\n\"ctrl-alt\": assumir que Ctrl+Alt significa AltGr.\n\"left-alt\": assumir que Alt da esquerda significa AltGr.\n\"right-alt\": assumir que Alt da direita significa AltGr."
@@ -537,7 +537,7 @@
 		"message": "Envie um prefixo ESC ao premir uma tecla enquanto mantém premida a tecla Meta.\n\nPor exemplo, se estiver ativado, premir Meta+K envia ^[k como se tivesse digitado Escape, seguido de k. Se estiver desativado, apenas k é enviado."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "O botão do rato a utilizar para colar.\n\nPara a deteção automática, vamos utilizar o botão central do rato para outras plataformas que não o X11 (incluindo o Chrome OS). No X11, vamos utilizar o botão direito do rato (uma vez que o gestor de janela deverá utilizar o botão central do rato para colar).\n\n0 == botão esquerdo (principal).\n1 == botão central (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da definição para colar ao clicar com o botão direito do rato.\n\nNota: os botões primário e secundário são processados para si com ratos para utilizadores canhotos e destros."
+		"message": "O botão do rato a usar para colar.\n\nPara a deteção automática, vamos usar o botão central do rato para outras plataformas que não o X11 (incluindo o ChromeOS). No X11, vamos usar o botão direito do rato (uma vez que o gestor de janela deverá usar o botão central do rato para colar).\n\n0 == botão esquerdo (principal).\n1 == botão central (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da definição para colar ao clicar com o botão direito do rato.\n\nNota: os botões principal e secundário são processados para si com ratos para utilizadores canhotos e destros."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Cole ao clicar no botão do lado direito do rato.\n\nEsta opção é independente da definição \"mouse-paste-button\".\n\nNota: os botões primário e secundário são processados para si com ratos para utilizadores canhotos e destros."
@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Apagar terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Prima a tecla Eliminar para eliminar o item."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" não está disponível"
 	},
@@ -995,23 +998,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Definições do programador"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Editar Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Editar SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importar"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Visite as Opções de programador para gerir o Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Gerir"
+	},
+	"terminal_home_new_linux": {
+		"message": "Novo Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nova ligação SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Configurar"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Comando"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nome da ligação"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "O SSH foi desativado pelo seu administrador"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "As ligações a dispositivos remotos aparecem aqui"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Especifique o destino com \"nomedeutilizador@nomedoanfitriao\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Definições do terminal"
+	},
+	"terminal_input_label": {
+		"message": "Entrada do terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Cores ANSI"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "Imagem"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Altura da linha"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "Campainha do terminal audível."
 	},
+	"terminal_pref_line_height": {
+		"message": "A altura de cada linha do ecrã do terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Pré-visualização"
 	},
 	"terminal_profile_label": {
-		"message": "Perfil atual"
+		"message": "Perfil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Repor terminal"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecione um ficheiro de imagem de fundo no computador."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Quer mesmo eliminar o perfil \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1190,6 +1229,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "O controlador tmux encontrou um erro:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Modo de integração do tmux ativado. Prima Ctrl-C para desanexar o tmux ou introduza comandos do tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Demasiados resultados para anunciar. Navegue manualmente para as linhas para ler."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Estabeleça ligação à Internet e tente novamente."
 	},
@@ -1218,7 +1266,7 @@
 		"message": "Estabeleça ligação a partir da caixa geral ao introduzir \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "O Chrome OS pode montar sistemas de ficheiros através de SFTP e procurar através da app Files. Utilize \"Montar SFTP\" em vez de \"Ligar\"."
+		"message": "O ChromeOS pode montar sistemas de ficheiros através de SFTP e procurar através da app Files. Use \"Montar SFTP\" em vez de \"Ligar\"."
 	},
 	"tip_5": {
 		"message": "Estabeleça ligação através de links ssh:// em páginas Web ou guarde um marcador: https://goo.gl/zS8EZD"

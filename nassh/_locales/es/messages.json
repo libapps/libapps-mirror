@@ -396,7 +396,7 @@
 		"message": "Define si se permite o no que el host remoto muestre imágenes en el terminal.\n\nDe forma predeterminada, seguiremos preguntando hasta que se tome una decisión."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Si se habilita, deshace la reasignación Alt + Retroceso->Supr de Chrome OS, de forma que la combinación Alt + Retroceso funcionará como Alt + Retroceso."
+		"message": "Si se habilita, deshace la reasignación de Alt + Retroceso a Supr de ChromeOS, de forma que la combinación Alt + Retroceso funcionará como Alt + Retroceso."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Selecciona un método heurístico de detección de Alt Gr.\n\nnull: detección automática según navigator.language:\n      en-us => none, en otro caso => right-alt\nnone: inhabilita la emulación de Alt Gr.\nctrl-alt: interpreta que Ctrl + Alt es Alt Gr.\nleft-alt: interpreta que Alt izquierda es Alt Gr.\nright-alt: interpreta que Alt derecha es Alt Gr."
@@ -537,7 +537,7 @@
 		"message": "Envía un prefijo ESC al pulsar una tecla mientras se mantiene pulsada la tecla Meta.\n\nPor ejemplo, si este ajuste está habilitado, al pulsar Meta + K se enviará ^[k como si hubieras pulsado Escape y, después, K. Si está inhabilitado, solo se envía la K."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "El botón del ratón que se utiliza para pegar.\n\nPara la detección automática, se debe usar el botón central del ratón en las plataformas que no sean X11 (incluidas las plataformas Chrome OS). En las plataformas X11 se debe usar el botón derecho del ratón, ya que el administrador de ventanas debe utilizar el botón central del ratón para pegar.\n\n0 == botón izquierdo (principal).\n1 == botón central (auxiliar).\n2 == botón derecho (secundario).\n\nEsta opción es independiente del ajuste para pegar con el botón derecho.\n\nNota: En los ratones para diestros y zurdos, los botones principal y secundario se controlan automáticamente."
+		"message": "El botón del ratón que se utiliza para pegar.\n\nPara la detección automática, se debe usar el botón central del ratón en las plataformas que no sean X11 (incluido ChromeOS). En las plataformas X11, se debe usar el botón derecho del ratón, ya que el administrador de ventanas debería utilizar el botón central del ratón para pegar.\n\n0 == botón izquierdo (principal).\n1 == botón central (auxiliar).\n2 == botón derecho (secundario).\n\nEsta opción es independiente del ajuste para pegar con el botón derecho.\n\nNota: En los ratones para zurdos y diestros, los botones principal y secundario se controlan automáticamente."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Pegar haciendo clic con el botón derecho del ratón.\n\nEsta opción es independiente del ajuste mouse-paste-button.\n\nNota: En los ratones para diestros y zurdos, los botones principal y secundario se controlan automáticamente."
@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Borrar terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Pulsa la tecla Eliminar para suprimir el elemento."
+	},
 	"terminal_font_unavailable": {
 		"message": "$1 no está disponible"
 	},
@@ -995,23 +998,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Configuración del desarrollador"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Editar Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Editar SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importar"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Ve a Opciones para desarrolladores para gestionar Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Gestionar"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nuevo Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nueva conexión SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Configurar"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Comando"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nombre de la conexión"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Tu administrador ha inhabilitado SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Las conexiones a dispositivos remotos aparecerán aquí"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Especifica el destino con nombredeusuario@nombredehost"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Configuración del terminal"
+	},
+	"terminal_input_label": {
+		"message": "Entrada del terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Colores ANSI"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "Imagen"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Interlineado"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1043,11 +1076,14 @@
 	"terminal_pref_bell": {
 		"message": "Timbre del terminal audible."
 	},
+	"terminal_pref_line_height": {
+		"message": "El interlineado de cada fila de la pantalla del terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Vista previa"
 	},
 	"terminal_profile_label": {
-		"message": "Perfil actual"
+		"message": "Perfil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Restablecer terminal"
@@ -1060,6 +1096,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecciona en tu ordenador un archivo de imagen de fondo."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "¿Seguro que quieres eliminar el perfil $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Inhabilitar"
@@ -1184,6 +1223,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "El controlador de tmux ha encontrado un error:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Modo de integración de tmux activado. Pulsa Ctrl + C para desvincular tmux o introduce comandos de tmux."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Hay demasiadas salidas que anunciar. Desplázate manualmente hasta las filas para leerlas."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Conéctate a Internet e inténtalo de nuevo."
 	},
@@ -1212,7 +1260,7 @@
 		"message": "Conéctate desde el omnibox escribiendo \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS puede montar sistemas de archivos a través de SFTP y navegar usando la aplicación Archivos. Utiliza la opción Montaje de SFTP en lugar de Conectar."
+		"message": "ChromeOS puede montar sistemas de archivos mediante SFTP y navegar usando la aplicación Archivos. Utiliza la opción Montaje de SFTP en lugar de Conectar."
 	},
 	"tip_5": {
 		"message": "Utiliza enlaces ssh:// en las páginas web para conectarte. O bien, guarda un marcador: https://goo.gl/zS8EZD"
@@ -1236,7 +1284,7 @@
 		"message": "Versión de SSH desconocida: $1"
 	},
 	"unmount_button_label": {
-		"message": "Desconectar SFTP"
+		"message": "Desmontar SFTP"
 	},
 	"welcome_changelog": {
 		"message": "Registro de cambios/Notas de la versión: $1"

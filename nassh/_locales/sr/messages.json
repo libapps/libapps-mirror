@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Брисање терминала"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Притисните тастер Избриши да бисте избрисали ставку."
+	},
 	"terminal_font_unavailable": {
 		"message": "Фонт $1 није доступан"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Подешавања програмера"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Измените Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Измени SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Увези"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Посетите Опције за програмера да бисте управљали Linux-ом"
+	},
+	"terminal_home_manage": {
+		"message": "Управљај"
+	},
+	"terminal_home_new_linux": {
+		"message": "Нови Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Нова SSH веза"
 	},
+	"terminal_home_set_up": {
+		"message": "Подеси"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Команда"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Назив везе"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Администратор је онемогућио SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Везе са удаљеним уређајима ће се приказати овде"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Наведите одредиште користећи korisnickoime@imehosta"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Подешавања терминала"
+	},
+	"terminal_input_label": {
+		"message": "Унос на терминалу"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI боје"
@@ -1031,6 +1061,9 @@
 	"terminal_name_pref_image": {
 		"message": "Слика"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Висина линије"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Облик"
 	},
@@ -1046,11 +1079,14 @@
 	"terminal_pref_bell": {
 		"message": "Звоно терминала се оглашава."
 	},
+	"terminal_pref_line_height": {
+		"message": "Висина линије за сваки ред екрана терминала."
+	},
 	"terminal_preview_label": {
 		"message": "Преглед"
 	},
 	"terminal_profile_label": {
-		"message": "Актуелни профил"
+		"message": "Профил"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Ресетовање терминала"
@@ -1063,6 +1099,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Изаберите фајл слике у позадини са рачунара."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Желите ли стварно да избришете профил $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Аутоматски"
@@ -1196,6 +1235,15 @@
 	"terminal_title_theme": {
 		"message": "Тема"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Дошло је до грешке на tmux контролеру:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux режим интеграције је активиран. Притисните Ctrl-C да бисте одвојили tmux или унели tmux команде"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Превише излаза за најављивање. Прелазите ручно у редове за читање."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Повежите се на интернет и пробајте поново."
 	},
@@ -1224,7 +1272,7 @@
 		"message": "Повежите из омнибокса тако што ћете унети „ssh<Tab><profile name>“: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome ОС може да прикључи системе датотека путем SFTP-а и да прегледа помоћу апликације Датотеке. Користите „Прикључивање протокола SFTP“ уместо „Повежи“."
+		"message": "Chrome ОС може да прикључи системе датотека путем SFTP-а и да прегледа помоћу апликације Датотеке. Користите Прикључивање протокола SFTP уместо Повежи."
 	},
 	"tip_5": {
 		"message": "Повежите помоћу ssh:// линкова на веб-страницама или сачувајте обележивач: https://goo.gl/zS8EZD"

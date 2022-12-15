@@ -396,7 +396,7 @@
 		"message": "Määrab, kas lubada kaughostil terminalis pilte kuvada.\n\nVaikimisi esitatakse viip, kuni tehakse valik."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Kui see määratakse, võetakse tagasi Chrome OS-i klahvikombinatsiooni Alt + tagasilükkeklahv -> kustutamisklahv ümbermuutmine, nii et Alt + tagasilükkeklahv on ka tegelikult Alt + tagasilükkeklahv."
+		"message": "Kui see määratakse, võetakse tagasi ChromeOS-i klahvikombinatsiooni Alt + tagasilükkeklahv -> kustutamisklahv ümbermuutmine, nii et Alt + tagasilükkeklahv on ka tegelikult Alt + tagasilükkeklahv."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Valige klahvi AltGr tuvastamise heuristika.\n\n„null”: automaatne tuvastamine toimub järgmise põhjal: navigator.language:\n      „en-us” => „Disable”, muul juhul => „right-alt”\n„none”: keelatakse AltGr-iga seotud emuleerimine.\n„ctrl-alt”: oletatakse, et Ctrl + Alt tähendab klahvi AltGr.\n„left-alt”: oletatakse, et vasakpoolne Alt tähendab klahvi AltGr.\n„right-alt”: oletatakse, et parempoolne Alt tähendab klahvi AltGr."
@@ -537,7 +537,7 @@
 		"message": "Võimaldab metaklahvi all hoides ja muud klahvi vajutades saata ESC-eesliite.\n\nNäide: kui seade on lubatud ning vajutate metaklahvi ja klahvi K, saadetakse ^[k – nagu oleksite sisestanud paomärgi ja seejärel tähe k. Kui seade on keelatud, saadetakse ainult täht k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Kleepimiseks kasutatav hiirenupp.\n\nAutomaatseks tuvastuseks kasutame mitte-X11 platvormide puhul (sh Chrome OS) keskmist hiirenuppu. X11-s kasutame parempoolset hiirenuppu (kuna aknahaldur peaks kleepimiseks kasutama keskmist hiirenuppu).\n\n0 == vasak (peamine) nupp.\n1 == keskmine (lisa-) nupp.\n2 == parem (teisene) nupp.\n\nSee valik ei olene paremklikiga kleepimise seadest.\n\nMärkus. Peamist ja teisest nuppu saab kasutada nii vasaku- kui ka paremakäehiirte puhul."
+		"message": "Kleepimiseks kasutatav hiirenupp.\n\nAutomaatseks tuvastuseks kasutame mitte-X11 platvormide puhul (sh ChromeOS) keskmist hiirenuppu. X11-s kasutame parempoolset hiirenuppu (kuna aknahaldur peaks kleepimiseks kasutama keskmist hiirenuppu).\n\n0 == vasak (peamine) nupp.\n1 == keskmine (lisa-) nupp.\n2 == parem (teisene) nupp.\n\nSee valik ei olene paremklikiga kleepimise seadest.\n\nMärkus. Peamist ja teisest nuppu saab kasutada nii vasaku- kui ka paremakäehiirte puhul."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Kleepimine parempoolse hiirenupu klõpsamisel.\n\nSee valik sõltub seadest „mouse-paste-button”.\n\nMärkus. Peamist ja teisest nuppu saab kasutada nii vasaku- kui ka paremakäehiirte puhul."
@@ -980,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Tühjenda terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Üksuse kustutamiseks vajutage kustutusklahvi."
+	},
 	"terminal_font_unavailable": {
 		"message": "„$1” ei ole saadaval"
 	},
@@ -992,23 +995,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Arendaja seaded"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linuxi muutmine"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Muuda SSH-d"
 	},
 	"terminal_home_import_identity": {
 		"message": "Impordi"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linuxi haldamiseks avage jaotis Arendaja valikud"
+	},
+	"terminal_home_manage": {
+		"message": "Haldamine"
+	},
+	"terminal_home_new_linux": {
+		"message": "Uus Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Uus SSH-ühendus"
 	},
+	"terminal_home_set_up": {
+		"message": "Seadistamine"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Käsk"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Ühenduse nimi"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Administraator on SSH keelanud"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Ühendused kaugseadmetega kuvatakse siin"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Täpsustage sihtkohta nimega „kasutajanimi@hostinimi“"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Terminali seaded"
+	},
+	"terminal_input_label": {
+		"message": "Terminalisisend"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI-värvid"
@@ -1028,6 +1058,9 @@
 	"terminal_name_pref_image": {
 		"message": "Pilt"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Rea kõrgus"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Kuju"
 	},
@@ -1043,11 +1076,14 @@
 	"terminal_pref_bell": {
 		"message": "Terminali kuuldav kell."
 	},
+	"terminal_pref_line_height": {
+		"message": "Terminalikuva iga rea kõrgus."
+	},
 	"terminal_preview_label": {
 		"message": "Eelvaade"
 	},
 	"terminal_profile_label": {
-		"message": "Praegune profiil"
+		"message": "Profiil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Lähtesta terminal"
@@ -1060,6 +1096,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Valige oma arvutist taustkujutise fail."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Kas soovite kindlasti profiili „$1“ kustutada?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automaatne"
@@ -1181,6 +1220,15 @@
 	"terminal_title_theme": {
 		"message": "Teema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmuxi kontrolleris ilmnes viga:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmuxi integratsioonirežiim aktiveeriti. Tmuxi eemaldamiseks vajutage klahvikombinatsiooni Ctrl + C või sisestage tmuxi käsud."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Ettelugemiseks on liiga palju teksti. Lugemiseks liikuge ridadele käsitsi."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Looge ühendus internetiga ja proovige uuesti."
 	},
@@ -1209,7 +1257,7 @@
 		"message": "Looge ühendus omnikastikesest, sisestades käsu „ssh<Tab><profile name>”: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS saab failisüsteeme ühendada SFTP kaudu ja sirvida rakenduse Failid kaudu. Kasutage käsku „Ühenda SFTP”, mitte „Ühenda”."
+		"message": "ChromeOS saab failisüsteeme ühendada SFTP kaudu ja sirvida rakenduse Failid kaudu. Kasutage käsku „Ühenda SFTP”, mitte „Ühenda”."
 	},
 	"tip_5": {
 		"message": "Looge ühendus veebilehtedel olevate ssh:// linkide kaudu või salvestage järjehoidja: https://goo.gl/zS8EZD"

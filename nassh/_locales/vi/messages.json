@@ -396,7 +396,7 @@
 		"message": "Xác định xem có cho phép máy chủ từ xa hiển thị hình ảnh trên thiết bị đầu cuối hay không.\n\nTheo mặc định, chúng tôi sẽ nhắc cho đến khi bạn lựa chọn."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Nếu đã đặt, thì tùy chọn này sẽ hủy việc ánh xạ lại tổ hợp phím Alt+Backspace của Chrome OS thành phím Delete để Alt+Backspace đúng là Alt+Backspace."
+		"message": "Nếu được đặt, tuỳ chọn này sẽ huỷ việc ánh xạ lại tổ hợp phím Alt + Backspace của Chrome OS thành phím Delete để Alt + Backspace đúng là Alt + Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Chọn phương pháp nghiệm suy phát hiện AltGr.\n\n'null': Tự động phát hiện dựa trên navigator.language:\n      'en-us' => 'none', nếu không => 'right-alt'\n'none': Tắt mọi chức năng mô phỏng AltGr.\n'ctrl-alt': Giả định Ctrl+Alt là AltGr.\n'left-alt': Giả định phím Alt bên trái là AltGr.\n'right-alt': Giả định phím Alt bên phải là AltGr."
@@ -537,7 +537,7 @@
 		"message": "Gửi tiền tố ESC khi nhấn một phím trong lúc giữ phím Meta.\n\nChẳng hạn, khi đặt thành bật, thao tác nhấn phím Meta+K sẽ gửi ^[k như thể bạn đã nhập phím Escape rồi đến phím k. Khi đặt thành tắt, hệ thống chỉ gửi k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Nút chuột dùng để dán.\n\nĐể tự động phát hiện, chúng tôi sẽ dùng nút chuột giữa cho các nền tảng không phải nền tảng X11 (bao gồm cả Chrome OS). Trên nền tảng X11, chúng tôi sẽ dùng nút chuột phải (vì trình quản lý cửa sổ sẽ thực hiện thao tác dán bằng nút chuột giữa).\n\n0 == nút trái (chính).\n1 == nút giữa (bổ trợ).\n2 == nút phải (phụ).\n\nTùy chọn này không phụ thuộc vào cách cài đặt thao tác dán bằng cách nhấp chuột phải.\n\nLưu ý: Các nút chuột chính và phụ sẽ thay đổi tùy theo việc bạn thuận tay trái hay phải."
+		"message": "Nút chuột dùng để dán.\n\nĐể tự động phát hiện, chúng tôi sẽ dùng nút chuột giữa cho các nền tảng không phải X11 (bao gồm cả Chrome OS). Trên nền tảng X11, chúng tôi sẽ dùng nút chuột phải (vì trình quản lý cửa sổ sẽ thực hiện thao tác dán bằng nút chuột giữa).\n\n0 == nút trái (chính).\n1 == nút giữa (bổ trợ).\n2 == nút phải (phụ).\n\nTuỳ chọn này không phụ thuộc vào chế độ cài đặt thao tác dán bằng nút chuột phải.\n\nLưu ý: Các nút chuột chính và phụ sẽ thay đổi tuỳ theo việc bạn thuận tay trái hay phải."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Dán bằng cách nhấp vào nút chuột phải.\n\nTùy chọn này không phụ thuộc vào cách cài đặt thao tác \"mouse-paste-button\".\n\nLưu ý: Các nút chuột chính và phụ sẽ thay đổi tùy theo việc bạn thuận tay trái hay phải."
@@ -951,7 +951,7 @@
 		"message": "Chọn"
 	},
 	"send_feedback_label": {
-		"message": "Gửi phản hồi"
+		"message": "Gửi ý kiến phản hồi"
 	},
 	"sftp_client_button_label": {
 		"message": "Giao thức truyền tệp bảo mật (SFTP)"
@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Xóa thiết bị đầu cuối"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Nhấn phím delete để xoá mục này."
+	},
 	"terminal_font_unavailable": {
 		"message": "Không tải được \"$1\""
 	},
@@ -995,23 +998,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Cài đặt của nhà phát triển"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Chỉnh sửa vùng chứa Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Chỉnh sửa SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Nhập"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Hãy truy cập phần Tuỳ chọn cho nhà phát triển để quản lý Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Quản lý"
+	},
+	"terminal_home_new_linux": {
+		"message": "Vùng chứa Linux mới"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Kết nối SSH mới"
 	},
+	"terminal_home_set_up": {
+		"message": "Thiết lập"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Lệnh"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Tên kết nối"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "Quản trị viên của bạn đã tắt SSH"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Các kết nối với thiết bị từ xa sẽ xuất hiện ở đây"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Chỉ định đích đến với \"tennguoidung@tenmaychu\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Cài đặt của thiết bị đầu cuối"
+	},
+	"terminal_input_label": {
+		"message": "Đầu vào thiết bị đầu cuối"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Màu theo Viện Tiêu chuẩn Quốc gia Hoa Kỳ (ANSI)"
@@ -1034,6 +1064,9 @@
 	"terminal_name_pref_image": {
 		"message": "Hình ảnh"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Chiều cao dòng"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Hình dạng"
 	},
@@ -1049,11 +1082,14 @@
 	"terminal_pref_bell": {
 		"message": "Chuông có thể nghe thấy của thiết bị đầu cuối."
 	},
+	"terminal_pref_line_height": {
+		"message": "Chiều cao dòng cho mỗi hàng của màn hình thiết bị đầu cuối."
+	},
 	"terminal_preview_label": {
 		"message": "Xem trước"
 	},
 	"terminal_profile_label": {
-		"message": "Cấu hình hiện tại"
+		"message": "Cấu hình"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Đặt lại thiết bị đầu cuối"
@@ -1066,6 +1102,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Chọn một tệp hình nền trên máy tính."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Bạn có chắc chắn muốn xoá cấu hình \"$1\" không?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Tự động"
@@ -1196,6 +1235,15 @@
 	"terminal_title_theme": {
 		"message": "Giao diện"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Bộ điều khiển Tmux đã gặp lỗi:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Đã kích hoạt chế độ tích hợp Tmux. Nhấn tổ hợp phím Ctrl + C để gỡ Tmux hoặc nhập các lệnh Tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Quá nhiều đầu ra để thông báo, hãy chuyển đến các hàng theo cách thủ công để đọc."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Hãy kết nối Internet rồi thử lại."
 	},
@@ -1224,7 +1272,7 @@
 		"message": "Kết nối từ thanh địa chỉ bằng cách nhập 'ssh<Tab><tên hồ sơ>': https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS có thể kết nối các hệ thống tệp thông qua SFTP và duyệt qua ứng dụng Files. Hãy sử dụng 'Kết nối SFTP' thay vì 'Kết nối'."
+		"message": "Chrome OS có thể kết nối các hệ thống tệp bằng SFTP và duyệt qua tệp bằng ứng dụng Files. Hãy dùng nút \"Kết nối SFTP\" thay vì nút \"Kết nối\"."
 	},
 	"tip_5": {
 		"message": "Kết nối bằng các đường liên kết ssh:// trong các trang web hoặc lưu dấu trang: https://goo.gl/zS8EZD"

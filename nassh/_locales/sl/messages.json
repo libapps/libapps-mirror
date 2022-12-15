@@ -396,7 +396,7 @@
 		"message": "Določa, ali naj se oddaljenemu gostitelju dovoli prikazovanje slik v terminalu.\n\nPrivzeto je prikazan poziv, dokler ni uveljavljena izbira."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Če je to nastavljeno, razveljavi preslikavo kombinacije tipk Alt + vračalka -> Delete v sistemu Chrome OS, tako da se s kombinacijo tipk Alt + vračalka dejansko izvrši kombinacija Alt + vračalka."
+		"message": "Če je to nastavljeno, razveljavi preslikavo kombinacije tipk Alt + vračalka -> Delete v sistemu ChromeOS, tako da se s kombinacijo tipk Alt + vračalka dejansko izvrši kombinacija Alt + vračalka."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Izbira hevrističnega postopka za zaznavanje tipke AltGr.\n\n»null«: Samodejno zaznavanje na podlagi parametra »navigator.language«:\n      »en-us« => »none«, drugo => »right-alt«\n»none«: Onemogočanje emulacij tipke AltGr.\n»ctrl- alt«: Predvidevanje, da kombinacija tipk Ctrl + Alt pomeni tipko AltGr.\n»left-alt«: Predvidevanje, da leva tipka Alt pomeni tipko AltGr.\n»right-alt«: Predvidevanje, da desna tipka Alt pomeni tipko AltGr."
@@ -537,7 +537,7 @@
 		"message": "Pošiljanje predpone ESC ob pritisku tipke in pridržanju metatipke.\n\nČe je omogočeno, se na primer ob pritisku metatipke in tipke K pošlje ^[k, kot da ste natipkali Escape in nato k. Če je onemogočeno, se pošlje samo k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Gumb miške, uporabljen za lepljenje.\n\nZa samozaznavanje bomo uporabili srednjo miškino tipko za okolja, ki niso X11 (tudi Chrome OS). V okoljih X11 bomo uporabili desno miškino tipko (ker naj bi upravitelj oken obravnaval lepljenje s srednjo miškino tipko).\n\n0 == leva (primarna) tipka.\n1 == sredinska (pomožna) tipka.\n2 == desna (sekundarna) tipka.\n\nTa možnost je neodvisna od nastavitve »right-click-paste«.\n\nOpomba: Primarni in sekundarni gumb sta obravnavana za levičarje in za desničarje."
+		"message": "Gumb miške, uporabljen za lepljenje.\n\nZa samozaznavanje bomo uporabili srednjo miškino tipko za okolja, ki niso X11 (tudi ChromeOS). V okoljih X11 bomo uporabili desno miškino tipko (ker naj bi upravitelj oken obravnaval lepljenje s srednjo miškino tipko).\n\n0 == leva (primarna) tipka.\n1 == sredinska (pomožna) tipka.\n2 == desna (sekundarna) tipka.\n\nTa možnost je neodvisna od nastavitve za lepljenje s klikom desne miškine tipke.\n\nOpomba: Primarni in sekundarni gumb sta obravnavana za levičarje in za desničarje."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Lepljenje ob klikih desne miškine tipke.\n\nTa možnost je neodvisna od nastavitve »mouse-paste-button«.\n\nOpomba: Primarni in sekundarni gumb sta obravnavana za levičarje in za desničarje."
@@ -1073,6 +1073,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Brisanje vsebine zaslona terminala"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Pritisnite tipko za brisanje, če želite izbrisati element."
+	},
 	"terminal_font_unavailable": {
 		"message": "Pisava »$1« ni na voljo"
 	},
@@ -1085,23 +1088,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Nastavitve za razvijalce"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Urejanje Linuxa"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Uredi SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Uvozi"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Odprite možnosti za razvijalce, če želite upravljati Linux."
+	},
+	"terminal_home_manage": {
+		"message": "Upravljanje"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nov Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nova povezava SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Nastavitev"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Ukaz"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Ime povezave"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH je onemogočil skrbnik."
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Povezave z oddaljenimi napravami bodo prikazane tukaj."
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Določite cilj z »username@hostname«"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Nastavitve terminala"
+	},
+	"terminal_input_label": {
+		"message": "Vnos v terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Barve ANSI"
@@ -1124,6 +1154,9 @@
 	"terminal_name_pref_image": {
 		"message": "Slika"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Višina vrstice"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Oblika"
 	},
@@ -1139,11 +1172,14 @@
 	"terminal_pref_bell": {
 		"message": "Slišen zvonec terminala."
 	},
+	"terminal_pref_line_height": {
+		"message": "Višina vrstice za posamezno vrstico zaslona terminala."
+	},
 	"terminal_preview_label": {
 		"message": "Predogled"
 	},
 	"terminal_profile_label": {
-		"message": "Trenutni profil"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Ponastavitev terminala"
@@ -1156,6 +1192,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "V računalniku izberite datoteko s sliko ozadja."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Ali ste prepričani, da želite izbrisati profil »$1«?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Samodejno"
@@ -1286,6 +1325,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "V krmilniku tmux je prišlo do napake:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Aktiviran je način integracije tmux. Pritisnite Ctrl-C, če želite odpeti tmux ali vnesti ukaze za tmux."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Izhodnih podatkov je preveč za objavo. Ročno se premaknite na vrstice, če jih želite prebrati."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Vzpostavite internetno povezavo in poskusite znova."
 	},
@@ -1314,7 +1362,7 @@
 		"message": "Povezavo lahko vzpostavite v naslovni vrstici tako, da vnesete »ssh<Tab><profile name>«: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "OS Chrome omogoča vpetje datotečnih sistemov prek SFTP-ja in brskanje z aplikacijo Datoteke. Namesto možnosti »Poveži« uporabite »Vpenjanje SFTP-ja«."
+		"message": "ChromeOS omogoča vpetje datotečnih sistemov prek SFTP-ja in brskanje z aplikacijo Datoteke. Namesto možnosti »Poveži« uporabite »Vpenjanje SFTP-ja«."
 	},
 	"tip_5": {
 		"message": "Povežite se s povezavami ssh:// na spletnih straneh ali dodajte zaznamek: https://goo.gl/zS8EZD"

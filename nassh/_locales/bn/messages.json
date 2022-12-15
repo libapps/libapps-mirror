@@ -393,7 +393,7 @@
 		"message": "রিমোট হোস্ট টার্মিনালে ছবি দেখাতে পারবে কিনা তা নির্ধারণ করে।\n\nডিফল্ট হিসেবে, বেছে না নেওয়া পর্যন্ত প্রম্পট করা হয়।"
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "এটি সেট করা হলে, Chrome OS-এ Alt+Backspace->Delete রিম্যাপ আগের অবস্থায় ফিরে যায়। এর ফলে Alt+Backspace কী দিয়ে সত্যিই Alt+Backspace কীয়ের কাজ হয়।"
+		"message": "সেট করা হলে, ChromeOS-এ 'Alt+Backspace->Delete' রিম্যাপ আগের অবস্থায় ফিরে যায়, যাতে Alt+Backspace কী দিয়ে প্রকৃতপক্ষেই Alt+Backspace কীয়ের কাজ হয়।"
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr কী শনাক্তকরণের একটি হিউরিস্টিক পদ্ধতি বেছে নিন।\n\n'null': navigator.language-এর উপর ভিত্তি করে অটোমেটিক শনাক্ত করুন:\n      'en-us' => 'none', নয়ত => 'right-alt'\n'none': যেকোনও AltGr কী সংক্রান্ত অনুকরণ বন্ধ করুন।\n'ctrl-alt': Ctrl+Alt মানে AltGr কী বলে ধরে নিন।\n'left-alt': কীবোর্ডের বাঁদিকের Alt কী মানে AltGr বলে ধরে নিন।\n'right-alt': কীবোর্ডের ডানদিকের Alt কী মানে AltGr বলে ধরে নিন।"
@@ -534,7 +534,7 @@
 		"message": "Meta কী ধরে থেকে আরেকটি কী প্রেস করার সময় একটি ESC প্রিফিক্স পাঠানো হয়।\n\nযেমন, আপনি Escape টাইপ করে k টিপলে যেমন হয়, তেমনই চালু করা অবস্থায় Meta+K টিপলে ^[k পাঠানো হবে। বন্ধ করা থাকলে, শুধু k পাঠানো হবে।"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "পেস্ট করার কাজে ব্যবহার করার জন্য মাউসের বোতাম।\n\nঅটোমেটিক শনাক্ত করতে, X11 ছাড়া অন্যান্য প্ল্যাটফর্মে (Chrome OS সহ) আমরা মাঝখানের মাউস বোতামটি ব্যবহার করব। X11 প্ল্যাটফর্মে মাউসের ডানদিকের বোতাম ব্যবহার করব (যেহেতু মাউসের মাঝখানের বোতাম দিয়ে উইন্ডো ম্যানেজার পেস্ট করা ম্যানেজ করে)।\n\n০ == বাঁদিকের (প্রাথমিক) বোতাম।\n১ == মাঝখানের (অতিরিক্ত) বোতাম।\n২ == ডানদিকের (সেকেন্ডারি) বোতাম।\n\nএই বিকল্প 'ডানদিকে ক্লিক করে পেস্ট করুন'-এর সেটিং থেকে সম্পূর্ণ আলাদা।\n\nমনে রাখবেন: বাঁহাতি ও ডান-হাতি মাউসের সাহায্যে প্রাথমিক এবং সেকেন্ডারি বোতামগুলি আপনার জন্য নিয়ন্ত্রিত হয়।"
+		"message": "পেস্ট করার কাজে ব্যবহার করার জন্য মাউসের বোতাম।\n\nঅটোমেটিক শনাক্ত করতে, X11 ছাড়া অন্যান্য প্ল্যাটফর্মে (ChromeOS সহ) আমরা মাঝখানের মাউস বোতামটি ব্যবহার করব। X11 প্ল্যাটফর্মে মাউসের ডানদিকের বোতাম ব্যবহার করব (যেহেতু মাউসের মাঝখানের বোতাম দিয়ে উইন্ডো ম্যানেজার পেস্ট করা ম্যানেজ করে)।\n\n০ == বাঁদিকের (প্রাথমিক) বোতাম।\n১ == মাঝখানের (অতিরিক্ত) বোতাম।\n২ == ডানদিকের (সেকেন্ডারি) বোতাম।\n\nএই বিকল্প 'ডানদিকে ক্লিক করে পেস্ট করুন'-এর সেটিং থেকে সম্পূর্ণ আলাদা।\n\nমনে রাখবেন: বাঁহাতি ও ডান-হাতি মাউসের সাহায্যে প্রাথমিক এবং সেকেন্ডারি বোতামগুলি আপনার জন্য ম্যানেজ করা হয়।"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "মাউসে ডানদিকের বোতাম ক্লিক করলে পেস্ট হবে।\n\nএই বিকল্পটি \"mouse-paste-button\" সেটিংয়ের উপর নির্ভরশীল নয়।\n\nমনে রাখবেন: বাঁহাতি ও ডান-হাতি মাউসের সাহায্যে প্রাথমিক এবং সেকেন্ডারি বোতামগুলি আপনার জন্য নিয়ন্ত্রিত হয়।"
@@ -977,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "টার্মিনাল স্ক্রিনে যা দেখানো হচ্ছে তা মুছে দিন"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "আইটেম মোছার জন্য 'ডিলিট কী' প্রেস করুন।"
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" পাওয়া যাচ্ছে না"
 	},
@@ -989,23 +992,50 @@
 	"terminal_home_developer_settings": {
 		"message": "'ডেভেলপার' সেটিংস"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux এডিট করুন"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH এডিট করুন"
 	},
 	"terminal_home_import_identity": {
 		"message": "ইমপোর্ট করুন"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux ম্যানেজ করতে ডেভেলপার বিকল্প দেখুন"
+	},
+	"terminal_home_manage": {
+		"message": "ম্যানেজ করুন"
+	},
+	"terminal_home_new_linux": {
+		"message": "নতুন Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "নতুন SSH কানেকশন"
 	},
+	"terminal_home_set_up": {
+		"message": "সেট আপ করুন"
+	},
 	"terminal_home_ssh_command": {
 		"message": "কমান্ড"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "কানেকশনের নাম"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "আপনার অ্যাডমিনিস্ট্রেটর SSH বন্ধ করেছে"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "রিমোট ডিভাইসের কানেকশন এখানে দেখা যাবে"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"username@hostname\" ব্যবহার করে গন্তব্য নির্দিষ্ট করুন"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "'টার্মিনাল' সেটিংস"
+	},
+	"terminal_input_label": {
+		"message": "Terminal ইনপুট"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI রঙ"
@@ -1028,6 +1058,9 @@
 	"terminal_name_pref_image": {
 		"message": "ছবি"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "লাইনের উচ্চতা"
+	},
 	"terminal_name_pref_shape": {
 		"message": "আকৃতি"
 	},
@@ -1043,11 +1076,14 @@
 	"terminal_pref_bell": {
 		"message": "শোনা যায় এমন টার্মিনাল ঘণ্টা।"
 	},
+	"terminal_pref_line_height": {
+		"message": "টার্মিনাল স্ক্রিনের প্রতিটি সারির লাইনের উচ্চতা।"
+	},
 	"terminal_preview_label": {
 		"message": "প্রিভিউ"
 	},
 	"terminal_profile_label": {
-		"message": "বর্তমান প্রোফাইল"
+		"message": "প্রোফাইল"
 	},
 	"terminal_reset_menu_label": {
 		"message": "টার্মিনাল রিসেট করুন"
@@ -1060,6 +1096,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "আপনার কম্পিউটার থেকে একটি ব্যাকগ্রাউন্ডের ছবির ফাইল বেছে নিন।"
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "আপনি কি \"$1\" প্রোফাইল সত্যিই মুছে দিতে চান?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "অটো"
@@ -1193,6 +1232,15 @@
 	"terminal_title_theme": {
 		"message": "থিম"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux কন্ট্রোলারে কোনও সমস্যা হয়েছে:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux ইন্টিগ্রেশন মোড চালু আছে। tmux বিচ্ছিন্ন করতে অথবা tmux কমান্ড ইনপুট করতে Ctrl-C প্রেস করুন"
+	},
+	"terminal_too_much_output_message": {
+		"message": "ঘোষণা করার জন্য অনেক বেশি আউটপুট, পড়ার জন্য ম্যানুয়ালি সারি নেভিগেট করুন।"
+	},
 	"terminal_try_again_with_internet": {
 		"message": "ইন্টারনেটের সাথে কানেক্ট করে আবার চেষ্টা করুন।"
 	},
@@ -1221,7 +1269,7 @@
 		"message": "'ssh<Tab><profile name>' টাইপ করে ওমনিবক্স থেকে কানেক্ট করুন: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "SFTP-র মাধ্যমে Chrome OS ফাইল সিস্টেম মাউন্ট করতে পারে এবং Files অ্যাপ দিয়ে ব্রাউজ করতে পারে। 'কানেক্ট করুন' বোতামের পরিবর্তে 'SFTP মাউন্ট করুন' ব্যবহার করুন।"
+		"message": "SFTP-র মাধ্যমে ChromeOS ফাইল সিস্টেম মাউন্ট করতে পারে এবং Files অ্যাপের মাধ্যমে ব্রাউজ করতে পারে। 'কানেক্ট করুন' বোতামের পরিবর্তে 'SFTP মাউন্ট করুন' ব্যবহার করুন।"
 	},
 	"tip_5": {
 		"message": "ওয়েব পৃষ্ঠায় ssh:// লিঙ্ক ব্যবহার করে কানেক্ট করুন বা বুকমার্ক হিসাবে সেভ করুন: https://goo.gl/zS8EZD"

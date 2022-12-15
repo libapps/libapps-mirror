@@ -387,7 +387,7 @@
 		"message": "Nëse lejohet që pritësi në distancë të shfaqë imazhet në terminal.\n\nSi parazgjedhje, ne e kërkojmë derisa të bëhet një zgjedhje."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Nëse caktohet, zhbën rishoqërimin e Alt+Backspace->Delete në Chrome OS, kështu që Alt+Backspace është në të vërtetë Alt+Backspace."
+		"message": "Nëse caktohet, zhbën rishoqërimin e Alt+Backspace->Delete në ChromeOS, kështu që Alt+Backspace është në të vërtetë Alt+Backspace."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Zgjidh një mënyrë deduktive zbulimi për AltGr.\n\n\"null\": Zbulo automatikisht në bazë të gjuhës së navigatorit:\n      \"en-us\" => \"none\", ose => \"right-alt\"\n\"none\": Çaktivizo çdo imitim të tastit AltGr.\n\"ctrl-alt\": Supozo se Ctrl+Alt nënkupton AltGr.\n\"left-alt\": Supozo se Alt i majtë nënkupton AltGr.\n\"right-alt\": Supozo se Alt i djathtë nënkupton AltGr."
@@ -528,7 +528,7 @@
 		"message": "Dërgo një parashtesë ESC kur shtyp një tast ndërkohë që mban të shtypur tastin Meta.\n\nPër shembull, kur është aktivizuar, shtypja e Meta+K do të dërgojë ^[k ashtu si kur shtyp Esc dhe më pas k. Kur është çaktivizuar, do të dërgohet vetëm k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Butoni i miut për përdorim për ngjitje.\n\nPër zbulimin automatik do të përdorim butonin e mesit të miut për platformat jo X11 (duke përfshirë Chrome OS). Në X11, ne do të përdorim butonin e djathtë të miut (pasi menaxheri i dritares duhet ta menaxhojë ngjitjen nëpërmjet butonit të mesit të miut).\n\n0 == butoni i majtë (parësor).\n1 == butoni i mesit (ndihmës).\n2 == butoni i djathtë (dytësor).\n\nKy opsion është i pavarur nga cilësimi për ngjitjen me klikimin me butonin djathtas.\n\nShënim. Butonat parësorë dhe dytësorë menaxhohen për ty me minjtë e krahut të majtë dhe të djathtë."
+		"message": "Butoni i miut për përdorim për ngjitje.\n\nPër zbulimin automatik do të përdorim butonin e mesit të miut për platformat jo X11 (duke përfshirë ChromeOS). Në X11, ne do të përdorim butonin e djathtë të miut (pasi menaxheri i dritares duhet ta menaxhojë ngjitjen nëpërmjet butonit të mesit të miut).\n\n0 == butoni i majtë (parësor).\n1 == butoni i mesit (ndihmës).\n2 == butoni i djathtë (dytësor).\n\nKy opsion është i pavarur nga cilësimi për ngjitjen me klikimin me butonin djathtas.\n\nShënim. Butonat parësorë dhe dytësorë menaxhohen për ty me minjtë e krahut të majtë dhe të djathtë."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Ngjit me klikimet e butonit të djathtë të miut.\n\nKy opsion është i pavarur nga cilësimi i \"mouse-paste-button\".\n\nShënim. Butonat parësorë dhe dytësorë menaxhohen për ty me minjtë e krahut të majtë dhe të djathtë."
@@ -983,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Pastro terminalin"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Shtyp tastin DELETE për ta fshirë artikullin."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" nuk ofrohet"
 	},
@@ -995,14 +998,29 @@
 	"terminal_home_developer_settings": {
 		"message": "Cilësimet e zhvilluesit"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Modifiko Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Modifiko SSH-në"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importo"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Vizito \"Opsionet e zhvilluesit\" për të menaxhuar Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Menaxho"
+	},
+	"terminal_home_new_linux": {
+		"message": "Kontejner i ri i Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Lidhje e re SSH"
+	},
+	"terminal_home_set_up": {
+		"message": "Konfiguro"
 	},
 	"terminal_home_ssh": {
 		"message": "SSH-ja"
@@ -1010,11 +1028,23 @@
 	"terminal_home_ssh_command": {
 		"message": "Komanda"
 	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Emri i lidhjes"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH-ja është çaktivizuar nga administratori yt"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Lidhjet me pajisjet në distancë do të shfaqen këtu"
+	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Specifiko destinacionin me \"username@hostname\""
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Cilësimet e terminalit"
+	},
+	"terminal_input_label": {
+		"message": "Hyrja e terminalit"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Ngjyrat ANSI"
@@ -1037,6 +1067,9 @@
 	"terminal_name_pref_image": {
 		"message": "Imazh"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Lartësia e rreshtit"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1052,11 +1085,14 @@
 	"terminal_pref_bell": {
 		"message": "Zilja e dëgjueshme e terminalit."
 	},
+	"terminal_pref_line_height": {
+		"message": "Lartësia e rreshtit për çdo rresht të ekranit të terminalit."
+	},
 	"terminal_preview_label": {
 		"message": "Pamja paraprake"
 	},
 	"terminal_profile_label": {
-		"message": "Profili aktual"
+		"message": "Profili"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Rivendosja e terminalit"
@@ -1069,6 +1105,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Zgjidh një skedar të imazhit të sfondit nga kompjuteri yt."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "E konfirmon që dëshiron ta fshish profilin \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatik"
@@ -1202,6 +1241,15 @@
 	"terminal_title_theme": {
 		"message": "Tema"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Kontrolluesi i Tmux ndeshi një gabim:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Modaliteti i integrimit të Tmux u aktivizua. Shtyp Ctrl-C për të shkëputur Tmux ose fut komandat e Tmux"
+	},
+	"terminal_too_much_output_message": {
+		"message": "Ka shumë përmbajtje për të lexuar. Navigo në mënyrë manuale te rreshtat për t'i lexuar."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Lidhu me internetin dhe provo sërish"
 	},
@@ -1230,7 +1278,7 @@
 		"message": "Lidhu nga shiriti omnibox duke shkruar \"ssh<Tab><emri i profilit>\": https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Sistemi operativ i Chrome mund të montojë sisteme skedarësh përmes SFTP dhe të shfletojë përmes aplikacionit Files. Përdor \"Montimi i protokollit SFTP\" në vend të \"Lidhu\"."
+		"message": "ChromeOS mund të montojë sisteme skedarësh përmes SFTP dhe të shfletojë përmes aplikacionit Files. Përdor \"Montimi i protokollit SFTP\" në vend të \"Lidhu\"."
 	},
 	"tip_5": {
 		"message": "Lidhu duke përdorur lidhjet ssh:// në faqet e uebit ose ruaj një faqeshënues: https://goo.gl/zS8EZD"

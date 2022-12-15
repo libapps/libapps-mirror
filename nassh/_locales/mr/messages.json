@@ -393,7 +393,7 @@
 		"message": "रिमोट होस्टला टर्मिनलमधील इमेज दाखवण्याची अनुमती द्यायची का.\n\nबाय डीफॉल्ट, निवड करेपर्यंत आम्ही सुचवतो."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "सेट केले असल्यास, Chrome OS Alt+Backspace->Delete रीमॅप पहिल्यासारखे करते, जेणेकरून Alt+Backspace निश्चितच Alt+Backspace असेल."
+		"message": "सेट केले असल्यास, ChromeOS Alt+Backspace->Delete रीमॅप पहिल्यासारखे करते, जेणेकरून Alt+Backspace निश्चितच Alt+Backspace असेल."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "AltGr डिटेक्शन ह्यूरिस्टिक निवडा.\n\n'null': navigator.language नुसार ऑटोडिटेक्ट:\n      'en-us' => 'none', else => 'right-alt'\n'none': AltGr शी संबंधित कोणतेही अनुकरण बंद करा.\n'ctrl-alt': Ctrl+Alt म्हणजे AltGr आहे असे गृहीत धरा.\n'left-alt': डावे Alt म्हणजे AltGr आहे असे गृहीत धरा.\n'right-alt': उजवे Alt म्हणजे AltGr आहे असे गृहीत धरा."
@@ -534,7 +534,7 @@
 		"message": "Meta की धरून ठेवली असताना एखादी की दाबून ESC उपसर्ग पाठवा.\n\nउदाहरणार्थ, सुरू केलेले असताना, Meta+K दाबल्याने जणू काही तुम्ही Escape आणि त्यानंतर k दाबल्याप्रमाणे ^[k पाठवले जाईल. बंद केलेले असताना फक्त k पाठवले जाईल."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "पेस्ट करण्यासाठी वापरले जाणारे माउसचे बटण.\n\nऑटोडिटेक्ट करण्यासाठी, X11 नसलेल्या प्लॅटफॉर्म (Chrome OS च्या समावेशासह) साठी आम्ही माउसचे मधले बटण वापरू. विंडो व्यवस्थापकाने माउसचे मधले बटण वापरून पेस्ट करणे हाताळले पाहिजे म्हणून X11 वर आम्ही माउसचे उजवे बटण वापरू.\n\n0 == डावे (प्राथमिक) बटण.\n1 == मधले (अतिरिक्त) बटण.\n2 == उजवे (दुय्यम) बटण.\n\nहा पर्याय राइट क्लिक पेस्ट साठीच्या सेटिंगपासून स्वतंत्र आहे.\n\nटीप: प्राथमिक आणि दुय्यम बटणे ही तुमच्यासाठी डावीकडील आणि उजवीकडील माउसने हाताळली जातात."
+		"message": "पेस्ट करण्यासाठी वापरले जाणारे माउसचे बटण.\n\nऑटोडिटेक्ट करण्यासाठी, X11 नसलेल्या प्लॅटफॉर्म (ChromeOS च्या समावेशासह) करिता आम्ही माउसचे मधले बटण वापरू. विंडो व्यवस्थापकाने माउसचे मधले बटण वापरून पेस्ट करणे हाताळले पाहिजे म्हणून X11 वर आम्ही माउसचे उजवे बटण वापरू.\n\n0 == डावे (प्राथमिक) बटण.\n1 == मधले (अतिरिक्त) बटण.\n2 == उजवे (दुय्यम) बटण.\n\nहा पर्याय राइट क्लिक करून पेस्ट करा या सेटिंगपेक्षा वेगळा आहे.\n\nटीप: प्राथमिक आणि दुय्यम बटणे ही तुमच्यासाठी डावीकडील आणि उजवीकडील माउसने हाताळली जातात."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "उजव्या माउस बटणाच्या क्लिकवर पेस्ट करा.\n\nहा पर्याय \"माउस-पेस्ट-बटण\" या सेटिंगपासून स्वतंत्र आहे.\n\nटीप: प्राथमिक आणि दुय्यम बटणे ही तुमच्यासाठी डावीकडील आणि उजवीकडील माउसने हाताळली जातात."
@@ -1007,6 +1007,9 @@
 	"terminal_clear_menu_label": {
 		"message": "टर्मिनल साफ करा"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "आयटम हटवण्यासाठी डिलीट की दाबा."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" उपलब्ध नाही"
 	},
@@ -1019,23 +1022,50 @@
 	"terminal_home_developer_settings": {
 		"message": "डेव्हलपर सेटिंग्ज"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Linux संपादित करा"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "SSH संपादित करा"
 	},
 	"terminal_home_import_identity": {
 		"message": "इंपोर्ट करा"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Linux व्यवस्थापित करण्यासाठी डेव्हलपर पर्याय यांना भेट द्या"
+	},
+	"terminal_home_manage": {
+		"message": "व्यवस्थापित करा"
+	},
+	"terminal_home_new_linux": {
+		"message": "नवीन Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "नवीन SSH कनेक्शन"
 	},
+	"terminal_home_set_up": {
+		"message": "सेट करा"
+	},
 	"terminal_home_ssh_command": {
 		"message": "कमांड"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "कनेक्शनचे नाव"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "तुमच्या अ‍ॅडमिनिस्ट्रेटरने SSH बंद केले आहे"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "रिमोट डिव्हाइसची कनेक्शन येथे दिसतील"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "\"username@hostname\" वापरून डेस्टिनेशन नमूद करा"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "टर्मिनल सेटिंग्ज"
+	},
+	"terminal_input_label": {
+		"message": "टर्मिनल इनपुट"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "ANSI रंग"
@@ -1058,6 +1088,9 @@
 	"terminal_name_pref_image": {
 		"message": "इमेज"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "ओळीची उंची"
+	},
 	"terminal_name_pref_shape": {
 		"message": "आकार"
 	},
@@ -1073,11 +1106,14 @@
 	"terminal_pref_bell": {
 		"message": "ऐकता येण्यासारखी टर्मिनल बेल."
 	},
+	"terminal_pref_line_height": {
+		"message": "टर्मिनल स्क्रीनच्या प्रत्येक पंक्तीमधील ओळीची उंची."
+	},
 	"terminal_preview_label": {
 		"message": "पूर्वावलोकन"
 	},
 	"terminal_profile_label": {
-		"message": "सद्य प्रोफाइल"
+		"message": "प्रोफाइल"
 	},
 	"terminal_reset_menu_label": {
 		"message": "टर्मिनल रीसेट करा"
@@ -1090,6 +1126,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "तुमच्‍या कॉंप्युटरमधून एखादी बॅकग्राउंड इमेज फाइल निवडा."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "तुम्हाला \"$1\" प्रोफाइल नक्की हटवायची आहे का?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ऑटो"
@@ -1223,6 +1262,15 @@
 	"terminal_title_theme": {
 		"message": "थीम"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux नियंत्रकामध्ये एरर आली:"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Tmux इंटिग्रेशन मोड अ‍ॅक्टिव्हेट केला आहे. tmux डिटॅच करण्यासाठी किंवा tmux कमांड इनपुट करण्यासाठी Ctrl-C दाबा"
+	},
+	"terminal_too_much_output_message": {
+		"message": "घोषणा करण्यासाठी खूप जास्त आउटपुट, वाचण्यासाठी पंक्तींवर मॅन्युअली नेव्हिगेट करा."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "इंटरनेटशी कनेक्‍ट करा आणि पुन्हा प्रयत्न करा."
 	},
@@ -1251,7 +1299,7 @@
 		"message": "'ssh<Tab><profile name>' टाइप करून ऑम्निबॉक्सवरून कनेक्ट करा: https://goo.gl/V7o8ki"
 	},
 	"tip_4": {
-		"message": "Chrome OS हे SFTP मार्फत फाइल सिस्टम माउंट करू शकते आणि Files अ‍ॅपमार्फत ब्राउझ करू शकते. 'कनेक्ट' ऐवजी 'SFTP माउंट' वापरा."
+		"message": "ChromeOS SFTP द्वारे फाइल सिस्टीम माउंट करू शकते आणि File अ‍ॅपद्वारे ब्राउझ करू शकते. 'कनेक्ट' ऐवजी 'SFTP माउंट' वापरा."
 	},
 	"tip_5": {
 		"message": "वेब पेजमध्ये ssh:// लिंक वापरून कनेक्ट करा किंवा बुकमार्क सेव्ह करा: https://goo.gl/zS8EZD"

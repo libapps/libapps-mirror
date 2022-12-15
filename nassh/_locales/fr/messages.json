@@ -396,7 +396,7 @@
 		"message": "Permet de spécifier si l'hôte distant affiche les images sur le terminal.\n\nPar défaut, une invite apparaît tant que l'utilisateur n'a pas fait de choix."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Si la préférence est configurée, elle annule le remappage Chrome OS Alt+Retour arrière->Suppr, de sorte que le raccourci Alt+Retour arrière corresponde effectivement à Alt+Retour arrière."
+		"message": "Si la préférence est configurée, elle annule le remappage ChromeOS Alt+Retour arrière -> Suppr, de sorte que le raccourci Alt+Retour arrière corresponde effectivement à Alt+Retour arrière."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Permet de sélectionner une heuristique de détection Alt Gr.\n\n\"null\" : active l'autodétection en fonction de l'attribut navigator.language :\n      \"en-us\" => \"none\", sinon => \"right-alt\"\n\"none\" : désactive toute émulation liée à Alt Gr.\n\"ctrl-alt\" : suppose que Ctrl+Alt signifie Alt Gr.\n\"left-alt\" : suppose qu'Alt gauche signifie Alt Gr.\n\"right-alt\" : suppose qu'Alt droite signifie Alt Gr."
@@ -537,7 +537,7 @@
 		"message": "Permet d'envoyer un préfixe ESC lorsque l'utilisateur appuie sur une touche tout en maintenant la touche Méta enfoncée.\n\nPar exemple, si la préférence est activée, le fait d'appuyer sur Méta+K enverra ^[k comme si vous aviez appuyé sur Échap, puis k. Lorsqu'elle est désactivée, seule la touche k est envoyée."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Bouton de souris pour coller le contenu du presse-papiers.\n\nPour l'autodétection, le bouton central de la souris est utilisé sur les plates-formes autres que X11 (dont Chrome OS). Sur les plates-formes X11, c'est le bouton droit de la souris qui est utilisé (puisque le gestionnaire de fenêtre devrait coller le contenu du presse-papiers avec le bouton central de la souris).\n\n0 == bouton gauche (primaire).\n1 == bouton central (auxiliaire).\n2 == bouton droit (secondaire).\n\nCette option est indépendante du paramètre de collage par clic droit.\n\nRemarque : Ce paramètre fonctionne correctement avec les souris pour droitier et pour gaucher."
+		"message": "Bouton de souris pour coller le contenu du presse-papiers.\n\nPour l'autodétection, le bouton central de la souris est utilisé sur les plates-formes autres que X11 (dont ChromeOS). Sur les plates-formes X11, c'est le bouton droit de la souris qui est utilisé (puisque le gestionnaire de fenêtre devrait coller le contenu du presse-papiers avec le bouton central de la souris).\n\n0 == bouton gauche (primaire).\n1 == bouton central (auxiliaire).\n2 == bouton droit (secondaire).\n\nCette option est indépendante du paramètre de collage par clic droit.\n\nRemarque : Ce paramètre fonctionne correctement avec les souris pour droitier et pour gaucher."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Permet de coller le contenu du presse-papiers en cas de clic sur le bouton droit de la souris.\n\nCette option est indépendante du paramètre \"mouse-paste-button\".\n\nRemarque : Ce paramètre fonctionne correctement avec les souris pour droitier et pour gaucher."
@@ -995,6 +995,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Effacement de l'écran du terminal"
 	},
+	"terminal_dropdown_delete_item_text": {
+		"message": "Appuyez sur la touche Suppr pour supprimer l'élément."
+	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" n'est pas disponible"
 	},
@@ -1007,23 +1010,50 @@
 	"terminal_home_developer_settings": {
 		"message": "Paramètres du développeur"
 	},
+	"terminal_home_edit_linux": {
+		"message": "Modifier le conteneur Linux"
+	},
 	"terminal_home_edit_ssh": {
 		"message": "Modifier la connexion SSH"
 	},
 	"terminal_home_import_identity": {
 		"message": "Importer"
 	},
+	"terminal_home_linux_not_enabled": {
+		"message": "Accédez à \"Options pour les développeurs\" pour gérer Linux"
+	},
+	"terminal_home_manage": {
+		"message": "Gérer"
+	},
+	"terminal_home_new_linux": {
+		"message": "Nouveau conteneur Linux"
+	},
 	"terminal_home_new_ssh_connection": {
 		"message": "Nouvelle connexion SSH"
 	},
+	"terminal_home_set_up": {
+		"message": "Configurer"
+	},
 	"terminal_home_ssh_command": {
 		"message": "Commande"
+	},
+	"terminal_home_ssh_connection_name": {
+		"message": "Nom de connexion"
+	},
+	"terminal_home_ssh_disabled_by_policy": {
+		"message": "SSH est désactivé par votre administrateur"
+	},
+	"terminal_home_ssh_empty": {
+		"message": "Les connexions aux appareils distants s'afficheront ici"
 	},
 	"terminal_home_ssh_specify_destination": {
 		"message": "Spécifiez la destination (\"nomd'utilisateur@nomd'hôte\")"
 	},
 	"terminal_home_terminal_settings": {
 		"message": "Paramètres du terminal"
+	},
+	"terminal_input_label": {
+		"message": "Entrée du terminal"
 	},
 	"terminal_name_pref_ansi_colors": {
 		"message": "Couleurs ANSI"
@@ -1043,6 +1073,9 @@
 	"terminal_name_pref_font": {
 		"message": "Police"
 	},
+	"terminal_name_pref_line_height": {
+		"message": "Hauteur de ligne"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forme"
 	},
@@ -1055,11 +1088,14 @@
 	"terminal_pref_bell": {
 		"message": "Permet de définir une sonnerie audible pour le terminal."
 	},
+	"terminal_pref_line_height": {
+		"message": "Hauteur de chaque ligne de l'écran du terminal."
+	},
 	"terminal_preview_label": {
 		"message": "Aperçu"
 	},
 	"terminal_profile_label": {
-		"message": "Profil actuel"
+		"message": "Profil"
 	},
 	"terminal_reset_menu_label": {
 		"message": "Réinitialisation des paramètres du terminal"
@@ -1072,6 +1108,9 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Sélectionnez un fichier d'image de fond sur votre ordinateur."
+	},
+	"terminal_settings_delete_profile_dialog_message": {
+		"message": "Voulez-vous vraiment supprimer le profil \"$1\" ?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Désactiver"
@@ -1199,6 +1238,15 @@
 	"terminal_title_theme": {
 		"message": "Thème"
 	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Le contrôleur tmux a rencontré une erreur :"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "Mode d'intégration tmux activé. Appuyez sur Ctrl+C pour dissocier tmux ou saisissez des commandes tmux."
+	},
+	"terminal_too_much_output_message": {
+		"message": "Trop de contenu à annoncer. Accédez aux lignes manuellement pour les lire."
+	},
 	"terminal_try_again_with_internet": {
 		"message": "Connectez-vous à Internet et réessayez."
 	},
@@ -1227,7 +1275,7 @@
 		"message": "Connectez-vous à partir de l'omnibox en saisissant \"ssh<Tab><nom de profil>\" (https://goo.gl/V7o8ki)"
 	},
 	"tip_4": {
-		"message": "Chrome OS peut installer des systèmes de fichiers via SFTP et les parcourir via l'application Files. Utilisez \"Installation SFTP\" au lieu de \"Se connecter\"."
+		"message": "ChromeOS peut installer des systèmes de fichiers via SFTP et les parcourir via l'application Files. Utilisez \"Installation SFTP\" au lieu de \"Se connecter\"."
 	},
 	"tip_5": {
 		"message": "Connectez-vous à l'aide des liens \"ssh://\" dans des pages Web ou enregistrez un favori (https://goo.gl/zS8EZD)"
