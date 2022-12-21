@@ -7,7 +7,7 @@
 #   https://source.chromium.org/chromium/infra/infra/+/HEAD:go/src/infra/tools/dirmd/proto/dir_metadata.proto
 
 buganizer {
-  component_id: 146364  # Security > SSH > Clients > Chrome Secure Shell
+  component_id: 146364  # Security > SSH > Chrome Secure Shell
 }
 
 monorail {
