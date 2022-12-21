@@ -68,6 +68,7 @@ export class TerminalHomeApp extends LitElement {
       containers: {state: true},
       crostiniEnabled: {state: true},
       sshAllowed: {state: true},
+      settingsProfiles: {state: true},
     };
   }
 
@@ -203,6 +204,7 @@ export class TerminalHomeApp extends LitElement {
     this.containers = [];
     this.crostiniEnabled = true;
     this.sshAllowed = true;
+    this.settingsProfiles = [];
 
     window.storage.addObserver(this.onSettingsChanged.bind(this));
     this.onSettingsChanged({});
@@ -267,7 +269,7 @@ export class TerminalHomeApp extends LitElement {
           ${this.containers.map((c) => html`
             <li class="row">
               ${link(c)}
-              ${when(!!getOSInfo().multi_profile, () => html`
+              ${when(this.settingsProfiles.length > 1, () => html`
                 <mwc-icon-button
                     title="${msg('TERMINAL_HOME_EDIT_LINUX')}"
                     aria-label="${msg('TERMINAL_HOME_EDIT_LINUX')}"
@@ -423,6 +425,7 @@ export class TerminalHomeApp extends LitElement {
         }
       }
       this.sshConnections = sshConnections;
+      this.settingsProfiles = await getProfileIds(ProfileType.HTERM);
     });
   }
 
