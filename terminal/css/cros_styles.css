@@ -85,6 +85,15 @@ html:not(body) {
   --cros-highlight-color-hover-rgb: var(--cros-highlight-color-hover-light-rgb);
   --cros-highlight-color-hover: var(--cros-highlight-color-hover-light);
 
+  --cros-ripple-color-light-rgb: 0, 0, 0;
+  --cros-ripple-color-light: rgb(var(--cros-ripple-color-light-rgb));
+
+  --cros-ripple-color-dark-rgb: 255, 255, 255;
+  --cros-ripple-color-dark: rgba(var(--cros-ripple-color-dark-rgb));
+
+  --cros-ripple-color-rgb: var(--cros-ripple-color-light-rgb);
+  --cros-ripple-color: var(--cros-ripple-color-light);
+
   --cros-button-background-color-primary-rgb: var(--cros-color-prominent-rgb);
   --cros-button-background-color-primary: var(--cros-color-prominent);
 
@@ -249,6 +258,9 @@ html:not(body) {
 
   --cros-highlight-color-hover-rgb: var(--cros-highlight-color-hover-dark-rgb);
   --cros-highlight-color-hover: var(--cros-highlight-color-hover-dark);
+
+  --cros-ripple-color-rgb: var(--cros-ripple-color-dark-rgb);
+  --cros-ripple-color: var(--cros-ripple-color-dark);
 
   --cros-button-label-color-primary-rgb: var(--google-grey-900-rgb);
   --cros-button-label-color-primary: var(--google-grey-900);

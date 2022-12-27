@@ -11,19 +11,19 @@
 import {html} from './lit.js';
 
 /**
- * From https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Acontent_copy%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
- *
- * @type {!TemplateResult}
- */
-export const ICON_COPY = html`<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M9 43.95q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.8h3v30.15h23.7v3Zm6-6q-1.2 0-2.1-.9-.9-.9-.9-2.1v-28q0-1.2.9-2.1.9-.9 2.1-.9h22q1.2 0 2.1.9.9.9.9 2.1v28q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h22v-28H15v28Zm0 0v-28 28Z"/></svg>`;
-
-/**
  * Imported from
  * https://fonts.google.com/icons?selected=Material%20Icons%3Acancel%3A.
  *
  * @type {!TemplateResult}
  */
-export const ICON_CANCEL = html`<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>`;
+export const ICON_CANCEL = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>`;
+
+/**
+ * From https://fonts.google.com/icons?selected=Material+Icons:close
+ *
+ * @type {!TemplateResult}
+ */
+export const ICON_CLOSE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></svg>`;
 
 /**
  * Code / Developers svg icon.
@@ -31,6 +31,13 @@ export const ICON_CANCEL = html`<svg xmlns="http://www.w3.org/2000/svg" height="
  * @type {!TemplateResult}
  */
 export const ICON_CODE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M8.2 6.2L4.4 10L8.2 13.8L6.8 15.2L1.6 10L6.8 4.8L8.2 6.2Z M11.3 13.8L15.1 10L11.3 6.2L12.7 4.8L17.9 10L12.7 15.2L11.3 13.8Z"/></svg>`;
+
+/**
+ * From https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Acontent_copy%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
+ *
+ * @type {!TemplateResult}
+ */
+export const ICON_COPY = html`<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M9 43.95q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.8h3v30.15h23.7v3Zm6-6q-1.2 0-2.1-.9-.9-.9-.9-2.1v-28q0-1.2.9-2.1.9-.9 2.1-.9h22q1.2 0 2.1.9.9.9.9 2.1v28q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h22v-28H15v28Zm0 0v-28 28Z"/></svg>`;
 
 /**
  * Edit svg icon.

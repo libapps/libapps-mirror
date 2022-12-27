@@ -1,0 +1,118 @@
+// Copyright 2023 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+/**
+ * @fileoverview Exports an element: terminal-settings-profile-header.
+ *
+ * @suppress {moduleLoad}
+ */
+
+import {hterm} from './deps_local.concat.js';
+
+import {LitElement, createRef, css, html, ref} from './lit.js';
+import './terminal_dialog.js';
+import {ICON_PLUS} from './terminal_icons.js';
+import {ProfileType, getProfileIds, setProfileIds}
+  from './terminal_profiles.js';
+import './terminal_textfield.js';
+
+export class TerminalSettingsProfileHeader extends LitElement {
+  /** @override */
+  static get properties() {
+    return {
+      confirmDeleteMsg_: {state: true},
+    };
+  }
+
+  /** @override */
+  static get styles() {
+    return css`
+      :host {
+        display: block;
+      }
+
+      h2 {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 32px;
+        margin: 18px 0 8px 0;
+      }
+
+      mwc-icon-button {
+        float: right;
+        margin: 0 6px 0 0;
+        --mdc-icon-button-size: 24px;
+        --mdc-icon-size: 20px;
+        --mdc-ripple-color: var(--cros-ripple-color);
+      }
+    `;
+  }
+
+  constructor() {
+    super();
+
+    this.newProfileInputRef_ = createRef();
+    this.newProfileDialogRef_ = createRef();
+  }
+
+  /** @override */
+  render() {
+    const msg = hterm.messageManager.get.bind(hterm.messageManager);
+    return html`
+      <mwc-icon-button @click="${this.openNewDialog_}">
+        ${ICON_PLUS}
+      </mwc-icon-button>
+      <h2>${msg('TERMINAL_PROFILE_LABEL')}</h2>
+      <terminal-dialog ${ref(this.newProfileDialogRef_)}
+          @close="${this.onNewDialogClose_}">
+        <div slot="title">
+          ${msg('TERMINAL_PROFILE_LABEL')}
+        </div>
+        <terminal-textfield ${ref(this.newProfileInputRef_)}
+            @keydown="${this.onNewProfileKeydown_}">
+        </terminal-textfield>
+      </terminal-dialog>
+    `;
+  }
+
+
+  /** @private */
+  openNewDialog_() {
+    this.newProfileInputRef_.value.value = '';
+    this.newProfileDialogRef_.value.show();
+  }
+
+  /**
+   * @param {!Event} e
+   * @private
+   */
+  onNewProfileKeydown_(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      this.newProfileDialogRef_.value.accept();
+    }
+  }
+
+  /**
+   * @param {!Event} e
+   * @private
+   */
+  async onNewDialogClose_(e) {
+    if (!e.detail.accept) {
+      return;
+    }
+    const profile = this.newProfileInputRef_.value.value;
+    const profiles = await getProfileIds(ProfileType.HTERM);
+    if (!profiles.includes(profile)) {
+      profiles.push(profile);
+      await setProfileIds(ProfileType.HTERM, profiles);
+    }
+    this.dispatchEvent(new CustomEvent('settings-profile-add', {
+      detail: {profile},
+    }));
+  }
+}
+
+customElements.define('terminal-settings-profile-header',
+    TerminalSettingsProfileHeader);

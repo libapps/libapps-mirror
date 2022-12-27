@@ -19,13 +19,15 @@ import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT,
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
 import {ICON_OPEN_IN_NEW} from './terminal_icons.js';
+import {ProfileType, getProfileIds} from './terminal_profiles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_background_image.js';
 import './terminal_settings_category_selector.js';
 import './terminal_settings_checkbox.js';
 import './terminal_settings_colorpicker.js';
 import './terminal_settings_fonts.js';
-import './terminal_settings_profile_selector.js';
+import './terminal_settings_profile_header.js';
+import './terminal_settings_profile_item.js';
 import './terminal_settings_row.js';
 import './terminal_settings_theme.js';
 
@@ -39,13 +41,19 @@ export class TerminalSettingsApp extends LitElement {
   static get properties() {
     return {
       activeCategory_: {type: String},
+      activeProfileCategory_: {type: String},
+      settingsProfiles_: {state: true},
     };
   }
 
   constructor() {
     super();
 
-    this.activeCategory_ = 'appearance';
+    this.activeCategory_ = 'profile';
+    this.activeProfileCategory_ = 'appearance';
+    this.settingsProfiles_ = [hterm.Terminal.DEFAULT_PROFILE_ID];
+    this.activeSettingsProfile_ = hterm.Terminal.DEFAULT_PROFILE_ID;
+    this.updateSettingsProfiles_();
 
     this.fileSystemPromise_ = getIndexeddbFileSystem();
     this.sshKnownHostEditorRef_ = createRef();
@@ -90,13 +98,22 @@ export class TerminalSettingsApp extends LitElement {
         min-width: 192px;
       }
 
-      terminal-settings-profile-selector {
+      #right-panel {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      terminal-settings-profile-header {
         padding-left: 32px;
+      }
+
+      .terminal-settings-category.profile {
+        overflow: visible;
       }
 
       .terminal-settings-category {
         display: none;
-        flex-grow: 1;
         overflow: auto;
         padding: 4px 40px;
       }
@@ -193,27 +210,40 @@ export class TerminalSettingsApp extends LitElement {
             }),
         );
 
-    const profileCategory =
-        getOSInfo().multi_profile ? 'profile-category' : '';
-
     const xtermJs = isXtermJs(window.preferenceManager);
 
     return html`
-        <div id="left-panel">
-          <h1>${msg('PREFERENCES_HEADER_TERMINAL')}</h1>
-          ${when(!!getOSInfo().multi_profile, () => html`
-            <terminal-settings-profile-selector>
-            </terminal-settings-profile-selector>
-          `)}
+      <div id="left-panel">
+        <h1>${msg('PREFERENCES_HEADER_TERMINAL')}</h1>
+        ${when(!!getOSInfo().multi_profile, () => html`
+          <terminal-settings-profile-header
+              @settings-profile-add=${this.onSettingsProfileAdd_}>
+          </terminal-settings-profile-header>
           <terminal-settings-category-selector
-              @category-change="${this.onCategoryChange_}">
-            <div data-name="appearance" class="${profileCategory}">
+              @category-change=${this.onCategoryChange_}>
+            ${this.settingsProfiles_.map((profile) => html`
+              <terminal-settings-profile-item
+                  data-name="profile"
+                  .profile="${profile}"
+                  @settings-profile-click=${this.onSettingsProfileClick_}
+                  @settings-profile-delete=${this.onSettingsProfileDelete_}>
+              </terminal-settings-profile-item>
+            `)}
+            <div data-name="ssh">SSH</div>
+            <div data-name="about">
+              ${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}
+            </div>
+          </terminal-settings-category-selector>
+        `, () => html`
+          <terminal-settings-category-selector
+              @category-change=${this.onCategoryChange_}>
+            <div data-name="appearance">
               ${msg('TERMINAL_TITLE_PREF_APPEARANCE')}
             </div>
-            <div data-name="mousekeyboard" class="${profileCategory}">
+            <div data-name="mousekeyboard">
               ${msg('TERMINAL_TITLE_PREF_KEYBOARD_MOUSE')}
             </div>
-            <div data-name="behavior" class="${profileCategory}">
+            <div data-name="behavior">
               ${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}
             </div>
             <div data-name="ssh">SSH</div>
@@ -221,10 +251,30 @@ export class TerminalSettingsApp extends LitElement {
               ${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}
             </div>
           </terminal-settings-category-selector>
-        </div>
+        `)}
+      </div>
+      <div id="right-panel">
+
+        ${when(!!getOSInfo().multi_profile, () => html`
+          <section class="terminal-settings-category profile"
+              ?active-category="${this.activeCategory_ === 'profile'}">
+            <terminal-settings-category-selector tabs
+                @category-change=${this.onProfileCategoryChange_}>
+              <div data-name="appearance">
+                ${msg('TERMINAL_TITLE_PREF_APPEARANCE')}
+              </div>
+              <div data-name="mousekeyboard">
+                ${msg('TERMINAL_TITLE_PREF_KEYBOARD_MOUSE')}
+              </div>
+              <div data-name="behavior">
+                ${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}
+              </div>
+            </terminal-settings-category-selector>
+          </section>
+        `)}
 
         <section class="terminal-settings-category"
-            ?active-category="${this.activeCategory_ === 'appearance'}">
+            ?active-category="${this.isActive_('appearance')}">
           <section>
             <h3>${msg('TERMINAL_TITLE_THEME')}</h3>
             <terminal-settings-theme></terminal-settings-theme>
@@ -356,7 +406,7 @@ export class TerminalSettingsApp extends LitElement {
         </section>
 
         <section class="terminal-settings-category"
-            ?active-category="${this.activeCategory_ === 'mousekeyboard'}">
+            ?active-category="${this.isActive_('mousekeyboard')}">
           <section>
             <h3>${msg('HTERM_TITLE_PREF_KEYBOARD')}</h3>
 
@@ -474,7 +524,7 @@ export class TerminalSettingsApp extends LitElement {
         </section>
 
         <section class="terminal-settings-category"
-            ?active-category="${this.activeCategory_ === 'behavior'}">
+            ?active-category="${this.isActive_('behavior')}">
             <h3>${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}</h3>
 
             <ul class="section-body">
@@ -540,7 +590,21 @@ export class TerminalSettingsApp extends LitElement {
             </li>
           </ul>
         </section>
+      </div>
     `;
+  }
+
+  /**
+   * @param {string} category
+   * @return {boolean}
+   */
+  isActive_(category) {
+    if (getOSInfo().multi_profile) {
+      return this.activeCategory_ === 'profile' &&
+           this.activeProfileCategory_ === category;
+    } else {
+      return this.activeCategory_ === category;
+    }
   }
 
   /**
@@ -549,6 +613,72 @@ export class TerminalSettingsApp extends LitElement {
    */
   onCategoryChange_(e) {
     this.activeCategory_ = e.detail.category;
+  }
+
+  /**
+   * @param {!Event} e
+   * @private
+   */
+  onProfileCategoryChange_(e) {
+    this.activeProfileCategory_ = e.detail.category;
+  }
+
+  async updateSettingsProfiles_() {
+    const profiles = await getProfileIds(ProfileType.HTERM);
+    this.settingsProfiles_ = [hterm.Terminal.DEFAULT_PROFILE_ID,
+        ...profiles.filter((i) => i !== hterm.Terminal.DEFAULT_PROFILE_ID)];
+  }
+
+  /**
+   * @param {!Event} e
+   * @private
+   */
+  onSettingsProfileClick_(e) {
+    const profile = e.detail.profile;
+    const i = this.settingsProfiles_.indexOf(profile);
+    if (i === -1) {
+      console.error(`Could not switch to profile ${profile}`);
+      return;
+    }
+    this.activeSettingsProfile_ = profile;
+    window.preferenceManager.setProfile(profile);
+  }
+
+  /**
+   * @param {string} profile
+   */
+  clickProfile_(profile) {
+    const i = this.settingsProfiles_.indexOf(profile);
+    if (i === -1) {
+      console.error(`Could not click profile ${profile}`);
+      return;
+    }
+    this.shadowRoot.querySelectorAll(
+        'terminal-settings-profile-item')[i].click();
+  }
+
+  /**
+   * @param {!Event} e
+   * @private
+   */
+  async onSettingsProfileAdd_(e) {
+    await this.updateSettingsProfiles_();
+    this.clickProfile_(e.detail.profile);
+  }
+
+  /**
+   * @param {!Event} e
+   * @private
+   */
+  async onSettingsProfileDelete_(e) {
+    let active = this.activeSettingsProfile_;
+    const activeIndex = this.settingsProfiles_.indexOf(active);
+    await this.updateSettingsProfiles_();
+    // If active profile is deleted, then select previous.
+    if (active === e.detail.profile) {
+      active = this.settingsProfiles_[activeIndex - 1];
+    }
+    this.clickProfile_(active);
   }
 }
 

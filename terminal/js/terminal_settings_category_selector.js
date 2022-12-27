@@ -15,7 +15,7 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
   /** @override */
   static get styles() {
     return css`
-      ::slotted(div) {
+      ::slotted(*) {
         border-radius: 0 16px 16px 0;
         cursor: pointer;
         font-size: 13px;
@@ -27,23 +27,41 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
         user-select: none;
       }
 
-      ::slotted(div.profile-category) {
-        padding-left: 40px;
-      }
-
-      ::slotted(div:hover) {
+      ::slotted(:hover) {
         background-color: var(--cros-textfield-background-color);
       }
 
-      ::slotted(div[active]) {
+      ::slotted([active]) {
         background-color: var(--cros-highlight-color);
         color: rgb(26, 115, 232);
       }
 
-      ::slotted(div:focus-visible) {
+      ::slotted(:focus-visible) {
         border-color: var(--cros-color-prominent);
       }
-    `;
+
+      ::slotted(terminal-settings-profile-item) {
+        padding-left: 52px;
+      }
+
+      :host([tabs]) {
+        border-bottom: 1px solid var(--cros-separator-color);
+        display: flex;
+        margin-top: 18px;
+      }
+
+      :host([tabs]) ::slotted(*) {
+        border-radius: 0;
+        margin: 0 16px 0 0;
+        padding: 0 8px;
+      }
+
+      :host([tabs]) ::slotted([active]) {
+        background-color: inherit;
+        border-bottom: 2px solid var(--cros-color-prominent);
+      }
+
+`;
   }
 
   constructor() {
@@ -60,18 +78,27 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
 
   /** @override */
   firstUpdated(changedProperties) {
-    super.firstUpdated(changedProperties);
-
-    for (const option of this.children) {
-      option.addEventListener('click', () => this.activate_(option));
-      option.addEventListener('keydown', (e) => {
-        if (e.code == 'Enter' || e.code == 'Space') {
-          this.activate_(option);
-        }
-      });
-      option.setAttribute('tabindex', 0);  // Make option focusable.
-      option.setAttribute('role', 'link');
-    }
+    this.addEventListener('click', (e) => {
+      if (e.target.parentElement !== this) {
+        return;
+      }
+      this.activate_(/** @type {!Element} */(e.target));
+    });
+    this.addEventListener('keydown', (e) => {
+      if (e.target.parentElement !== this) {
+        return;
+      }
+      if (e.code == 'Enter' || e.code == 'Space') {
+        this.activate_(/** @type {!Element} */(e.target));
+      }
+    });
+    this.shadowRoot.querySelector('slot').addEventListener(
+        'slotchange', (e) => {
+          for (const option of this.children) {
+            option.setAttribute('tabindex', 0);  // Make option focusable.
+            option.setAttribute('role', 'link');
+          }
+        });
     if (this.firstElementChild) {
       this.activate_(this.firstElementChild);
     }
