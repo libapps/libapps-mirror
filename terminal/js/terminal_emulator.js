@@ -1104,6 +1104,12 @@ export class XtermTerminal {
    * @return {boolean} Return false if xterm.js should not handle the key event.
    */
   customKeyEventHandler_(ev) {
+    // Without this, <alt-tab> (or <alt-shift-tab) is consumed by xterm.js
+    // (instead the OS) when terminal is full screen.
+    if (ev.altKey && ev.keyCode === 9) {
+      return false;
+    }
+
     const modifiers = (ev.shiftKey ? Modifier.Shift : 0) |
         (ev.altKey ? Modifier.Alt : 0) |
         (ev.ctrlKey ? Modifier.Ctrl : 0) |
