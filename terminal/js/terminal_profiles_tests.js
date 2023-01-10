@@ -5,8 +5,8 @@
 import {lib} from './deps_local.concat.js';
 
 import {ProfileType, cleanupLostValues, deleteProfile, getProfileIds,
-  getProfileValues, setProfileIds, setProfileValues}
-  from './terminal_profiles.js';
+  getProfileValues, resetTerminalProfileToDefault, setProfileIds,
+  setProfileValues} from './terminal_profiles.js';
 
 describe('terminal_profiles.js', function() {
   beforeEach(async function() {
@@ -86,5 +86,24 @@ describe('terminal_profiles.js', function() {
     assert.deepEqual(
         await getProfileValues(ProfileType.VSH, 'p1', names, undefined),
         [undefined, undefined, undefined]);
+
+    // resetTerminalProfileToDefault()
+    await window.storage.clear();
+    await window.storage.setItems({
+      '/nassh/profiles/p1/k1': 'p1k1',
+      '/nassh/profiles/p1/terminal-profile': 'other',
+      '/nassh/profiles/p2/terminal-profile': 'deleted',
+      '/vsh/profiles/p1/k1': 'p1k1',
+      '/vsh/profiles/p1/terminal-profile': 'deleted',
+      '/vsh/profiles/p2/terminal-profile': 'other',
+    });
+
+    await resetTerminalProfileToDefault('deleted');
+    assert.deepEqual(await window.storage.getItems(), {
+      '/nassh/profiles/p1/k1': 'p1k1',
+      '/nassh/profiles/p1/terminal-profile': 'other',
+      '/vsh/profiles/p1/k1': 'p1k1',
+      '/vsh/profiles/p2/terminal-profile': 'other',
+    });
   });
 });

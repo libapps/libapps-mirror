@@ -2160,8 +2160,12 @@
 		"message": "Create new profile"
 	},
 	"TERMINAL_SETTINGS_PROFILE_DELETE_DIALOG_MESSAGE": {
-		"description": "Message for the delete profile dialog. The confirmation dialog is shown when a user clicks to delete a settings profile.",
-		"message": "Are you sure you want to delete profile \"$PROFILE$\"?",
+		"description": "Message for the delete profile dialog. The confirmation dialog is shown when a user clicks to delete a settings profile.  Do not translate the word 'default'.",
+		"message": "Any connection using this profile will be changed to the default profile"
+	},
+	"TERMINAL_SETTINGS_PROFILE_DELETE_DIALOG_TITLE": {
+		"description": "Title for the delete profile dialog. The confirmation dialog is shown when a user clicks to delete a settings profile.",
+		"message": "Remove $PROFILE$?",
 		"placeholders": {
 			"PROFILE": {
 				"content": "$1",

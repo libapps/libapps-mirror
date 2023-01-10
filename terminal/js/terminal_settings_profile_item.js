@@ -12,8 +12,9 @@ import {hterm} from './deps_local.concat.js';
 
 import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import './terminal_dialog.js';
-import {ICON_CLOSE} from './terminal_icons.js';
-import {ProfileType, deleteProfile} from './terminal_profiles.js';
+import {ICON_CLOSE, ICON_ERROR} from './terminal_icons.js';
+import {ProfileType, deleteProfile, resetTerminalProfileToDefault}
+  from './terminal_profiles.js';
 
 export class TerminalSettingsProfileItem extends LitElement {
   /** @override */
@@ -44,10 +45,11 @@ export class TerminalSettingsProfileItem extends LitElement {
         display: block;
       }
 
-      .icon svg {
-        fill: var(--cros-textfield-label-color);
-        height: 16px;
-        width: 16px;
+      terminal-dialog svg {
+        fill: var(--cros-color-alert);
+        height: 36px;
+        margin: 0 0 16px;
+        width: 36px;
       }
     `;
   }
@@ -68,6 +70,8 @@ export class TerminalSettingsProfileItem extends LitElement {
   /** @override */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
+    const title = msg(
+        'TERMINAL_SETTINGS_PROFILE_DELETE_DIALOG_TITLE', [this.profile]);
     return html`
       ${when(this.profile !== hterm.Terminal.DEFAULT_PROFILE_ID, () => html`
         <mwc-icon-button @click=${this.openDeleteDialog_}>
@@ -79,7 +83,10 @@ export class TerminalSettingsProfileItem extends LitElement {
           acceptText="${msg('DELETE_BUTTON_LABEL')}"
           @click=${(e) => e.stopPropagation()}
           @close=${this.onDeleteDialogClose_}>
-        <div slot="title">${msg('DELETE_BUTTON_LABEL')}</div>
+        <div slot="title">
+          <div>${ICON_ERROR}</div>
+          ${title}
+        </div>
         ${this.confirmDeleteMsg_}
       </terminal-dialog>
     `;
@@ -105,6 +112,7 @@ export class TerminalSettingsProfileItem extends LitElement {
       return;
     }
     await deleteProfile(ProfileType.HTERM, this.profile);
+    await resetTerminalProfileToDefault(this.profile);
     this.dispatchEvent(new CustomEvent('settings-profile-delete', {
       detail: {profile: this.profile},
     }));

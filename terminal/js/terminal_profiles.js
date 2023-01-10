@@ -119,3 +119,21 @@ export async function cleanupLostValues(profileType) {
                !ids.includes(parts[3]);
       }));
 }
+
+/**
+ * Reset all NASSH and VSH profiles using terminalProfile to use the default
+ * terminal profile.
+ *
+ * @param {string} terminalProfile
+ * @return {!Promise<void>}
+ */
+export async function resetTerminalProfileToDefault(terminalProfile) {
+  const profileTypes = [ProfileType.NASSH, ProfileType.VSH];
+  const items = await window.storage.getItems(null);
+  await window.storage.removeItems(
+      Object.entries(items).filter(([key, value]) => {
+        const parts = key.split('/');
+        return profileTypes.includes(parts[1]) && parts[2] === 'profiles' &&
+             parts[4] === 'terminal-profile' && value === terminalProfile;
+      }).map(([key, value]) => key));
+}

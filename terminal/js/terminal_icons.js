@@ -47,6 +47,13 @@ export const ICON_COPY = html`<svg xmlns="http://www.w3.org/2000/svg" height="48
 export const ICON_EDIT = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M17.4 3.9L16 2.6C15.3 1.8 14 1.8 13.2 2.6L10.4 5.4L2 13.8V18H6.2L17.4 6.8C18.2 6 18.2 4.7 17.4 3.9ZM4 16V14.6L11.8 6.8L13.2 8.2L5.4 16L4 16Z"/></svg>`;
 
 /**
+ * From https://fonts.google.com/icons?selected=Material+Icons:error_outline:
+ *
+ * @type {!TemplateResult}
+ */
+export const ICON_ERROR = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>`;
+
+/**
  * Imported from
  * https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aexpand_more%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
  *
