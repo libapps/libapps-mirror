@@ -92,7 +92,7 @@ export class TerminalSettingsProfileItem extends LitElement {
   openDeleteDialog_(e) {
     e.stopPropagation();
     this.confirmDeleteMsg_ = hterm.messageManager.get(
-        'TERMINAL_SETTINGS_DELETE_PROFILE_DIALOG_MESSAGE', [this.profile]);
+        'TERMINAL_SETTINGS_PROFILE_DELETE_DIALOG_MESSAGE', [this.profile]);
     this.deleteProfileDialogRef_.value.show();
   }
 

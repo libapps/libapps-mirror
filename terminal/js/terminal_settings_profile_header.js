@@ -67,9 +67,10 @@ export class TerminalSettingsProfileHeader extends LitElement {
       <terminal-dialog ${ref(this.newProfileDialogRef_)}
           @close="${this.onNewDialogClose_}">
         <div slot="title">
-          ${msg('TERMINAL_PROFILE_LABEL')}
+          ${msg('TERMINAL_SETTINGS_PROFILE_CREATE_DIALOG_TITLE')}
         </div>
         <terminal-textfield ${ref(this.newProfileInputRef_)}
+            label="${msg('TERMINAL_PROFILE_NAME_LABEL')}"
             @keydown="${this.onNewProfileKeydown_}">
         </terminal-textfield>
       </terminal-dialog>

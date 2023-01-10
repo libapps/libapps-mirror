@@ -2115,6 +2115,10 @@
 		"description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts.",
 		"message": "Profile"
 	},
+	"TERMINAL_PROFILE_NAME_LABEL": {
+		"description": "Label for the current terminal emulator profile name. Profiles are used to customize things like color and fonts.",
+		"message": "Profile name"
+	},
 	"TERMINAL_RESET_MENU_LABEL": {
 		"description": "The menu label to reset the active terminal settings.",
 		"message": "Terminal Reset"
@@ -2130,16 +2134,6 @@
 	"TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP": {
 		"description": "Help text shown for the 'background-image' preference.",
 		"message": "Select a background image file from your computer."
-	},
-	"TERMINAL_SETTINGS_DELETE_PROFILE_DIALOG_MESSAGE": {
-		"description": "Message for the delete profile dialog. The confirmation dialog is shown when a user clicks to delete a settings profile.",
-		"message": "Are you sure you want to delete profile \"$PROFILE$\"?",
-		"placeholders": {
-			"PROFILE": {
-				"content": "$1",
-				"example": "MyCustomProfile"
-			}
-		}
 	},
 	"TERMINAL_SETTINGS_DROPDOWN_ALT_GR_MODE_AUTO": {
 		"description": "Label for AltGr key mode 'Auto' option. See TERMINAL_PREF_ALT_GR_MODE.",
@@ -2160,6 +2154,20 @@
 	"TERMINAL_SETTINGS_DROPDOWN_CURSOR_SHAPE_UNDERLINE": {
 		"description": "Label for cursor shape drowdown 'Underline' option. See HTERM_PREF_CURSOR_SHAPE.",
 		"message": "Underline"
+	},
+	"TERMINAL_SETTINGS_PROFILE_CREATE_DIALOG_TITLE": {
+		"description": "Title for the create profile dialog. The dialog is shown when a user clicks to create a settings profile.",
+		"message": "Create new profile"
+	},
+	"TERMINAL_SETTINGS_PROFILE_DELETE_DIALOG_MESSAGE": {
+		"description": "Message for the delete profile dialog. The confirmation dialog is shown when a user clicks to delete a settings profile.",
+		"message": "Are you sure you want to delete profile \"$PROFILE$\"?",
+		"placeholders": {
+			"PROFILE": {
+				"content": "$1",
+				"example": "MyCustomProfile"
+			}
+		}
 	},
 	"TERMINAL_SETTINGS_RESET_DIALOG_MESSAGE": {
 		"description": "Message for the settings theme reset dialog. The confirmation dialog is shown when a user clicks to reset a theme and restore the default colors and settings.",
