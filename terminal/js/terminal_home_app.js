@@ -14,9 +14,8 @@ import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import './terminal_button.js';
 import {DEFAULT_VM_NAME, composeSshUrl, getOSInfo} from './terminal_common.js';
 import './terminal_context_menu.js';
-import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_MORE_VERT, ICON_MOUNT,
-  ICON_OPEN_IN_NEW, ICON_PLUS, ICON_SETTINGS, ICON_SFTP, ICON_SSH}
-  from './terminal_icons.js';
+import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_MORE_VERT, ICON_OPEN_IN_NEW,
+  ICON_PLUS, ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
 import './terminal_linux_dialog.js';
 import {ProfileType, cleanupLostValues, deleteProfile, getProfileIds,
   getProfileValues, setProfileIds, setProfileValues}
@@ -321,17 +320,6 @@ export class TerminalHomeApp extends LitElement {
       <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
       <h4>${c.description}</h4>
    `;
-    const button = (c, linkParams, label, icon) => html`
-      <a href="${href(c, linkParams)}" target="_blank">
-        <mwc-icon-button
-            title="${msg(label)}"
-            aria-label="${msg(label)}"
-            class="icon-fill-svg">
-          ${icon}
-        </mwc-icon-button>
-      </a>
-   `;
-
     return html`
       <section>
         <div class="${this.sshConnections.length ? 'line' : ''}">
@@ -352,12 +340,6 @@ export class TerminalHomeApp extends LitElement {
                 <a class="row full-width" target="_blank" href="${href(c)}">
                   ${text(c)}
                 </a>
-                ${when(!!getOSInfo().sftp, () => html`
-                  ${button(c, {isMount: true}, 'MOUNT_BUTTON_LABEL',
-                      ICON_MOUNT)}
-                  ${button(c, {isSftp: true}, 'SFTP_CLIENT_BUTTON_LABEL',
-                      ICON_SFTP)}
-                `)}
               `, () => text(c))}
               <mwc-icon-button
                   title="${msg('HTERM_OPTIONS_BUTTON_LABEL')}"
@@ -576,18 +558,37 @@ export class TerminalHomeApp extends LitElement {
    */
   showSSHMore(sshConnection, event) {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
-    const menu = this.shadowRoot.querySelector('terminal-context-menu');
-    menu.items = [
-      {
-        name: msg('TERMINAL_HOME_EDIT_SSH'),
-        action: () => this.openSSHDialog(sshConnection.id),
-      },
-      {
-        name: msg('REMOVE_LABEL'),
-        action: () => this.openSSHDeleteDialog(sshConnection),
-      },
-    ];
-    menu.show({x: event.clientX, y: event.clientY});
+    const openTab = (params) => chrome.terminalPrivate.openWindow({
+      url: composeSshUrl({
+        settingsProfileId: sshConnection.settingsProfileId,
+        hash: `#profile-id:${encodeURIComponent(sshConnection.id)}`,
+        ...params,
+      }),
+      asTab: true,
+    });
+
+    const items = [{
+      name: msg('TERMINAL_HOME_EDIT_SSH'),
+      action: () => this.openSSHDialog(sshConnection.id),
+    }];
+    if (this.sshAllowed && getOSInfo().sftp) {
+      items.push(
+          {
+            name: msg('SFTP_CLIENT_BUTTON_LABEL'),
+            action: () => openTab({isSftp: true}),
+          },
+          {
+            name: msg('TERMINAL_HOME_MOUNT'),
+            action: () => openTab({isMount: true}),
+          });
+    }
+    items.push({
+      name: msg('REMOVE_LABEL'),
+      action: () => this.openSSHDeleteDialog(sshConnection),
+    });
+
+    this.sshConnectionMenuRef_.value.items = items;
+    this.sshConnectionMenuRef_.value.show({x: event.clientX, y: event.clientY});
   }
 }
 

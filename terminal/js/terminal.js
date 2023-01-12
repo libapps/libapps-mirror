@@ -391,8 +391,13 @@ async function runNassh(term, storage, ssh, tmuxControllerDriver) {
       if (!success) {
         term.io.showOverlay(message, null);
       } else {
-        const msg = terminal.msg('MOUNTED_MESSAGE');
-        term.io.showOverlay(`${msg}: ${displayName}`, null);
+        const mountedMsg = document.createElement('div');
+        mountedMsg.innerHTML = `
+          <h3>${terminal.msg('MOUNTED_MESSAGE')}</h3>
+          ${terminal.msg('TERMINAL_HOME_MOUNTED_TAB_CLOSE_MESSAGE')}
+          <p>`;
+        document.body.appendChild(mountedMsg);
+        term.io.showOverlay(mountedMsg, null);
         window.addEventListener('beforeunload', () => {
           fsp.unmount(id);
         });
