@@ -58,9 +58,6 @@ html:not(body) {
   --cros-bg-color-rgb: var(--cros-bg-color-light-rgb);
   --cros-bg-color: var(--cros-bg-color-light);
 
-  --cros-bg-color-dropped-elevation-2-rgb: var(--google-grey-200-rgb);
-  --cros-bg-color-dropped-elevation-2: var(--google-grey-200);
-
   --cros-app-shield-color-rgb: var(--google-grey-300-rgb);
   --cros-app-shield-color: rgb(var(--cros-app-shield-color-rgb));
 
@@ -237,9 +234,6 @@ html:not(body) {
 
   --cros-bg-color-rgb: var(--cros-bg-color-dark-rgb);
   --cros-bg-color: var(--cros-bg-color-dark);
-
-  --cros-bg-color-dropped-elevation-2-rgb: 0, 0, 0;
-  --cros-bg-color-dropped-elevation-2: rgb(var(--cros-bg-color-dropped-elevation-2-rgb));
 
   --cros-app-shield-color-rgb: 0, 0, 0;
   --cros-app-shield-color: rgb(var(--cros-app-shield-color-rgb));

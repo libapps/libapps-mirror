@@ -126,7 +126,7 @@ export class TerminalTextfieldElement extends LitElement {
       }
 
       :host([blendIn]:hover) #container {
-        box-shadow: 0 0 0 1px var(--cros-bg-color-dropped-elevation-2);
+        box-shadow: 0 0 0 1px var(--cros-separator-color);
       }
 
       :host([blendIn]:focus) #container {

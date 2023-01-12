@@ -177,7 +177,7 @@ export class TerminalSettingsApp extends LitElement {
       }
 
       .icon svg {
-        fill: rgb(95,99,104);
+        fill: var(--cros-color-secondary);
         height: 20px;
         width: 20px;
       }

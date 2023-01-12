@@ -285,7 +285,7 @@ export class TerminalSettingsThemeElement extends LitElement {
       }
 
       .theme-inner {
-        border: 1px solid var(--cros-bg-color-dropped-elevation-2);
+        border: 1px solid var(--cros-separator-color);
         border-radius: 8px;
         cursor: pointer;
         height: 88px;
@@ -339,7 +339,7 @@ export class TerminalSettingsThemeElement extends LitElement {
 
       .theme[active-theme] .label {
         background-color: var(--cros-highlight-color);
-        color: var(--google-blue-600);
+        color: var(--cros-color-prominent);
       }
 
       .reset {

@@ -33,7 +33,7 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
 
       ::slotted([active]) {
         background-color: var(--cros-highlight-color);
-        color: rgb(26, 115, 232);
+        color: var(--cros-color-prominent);
       }
 
       ::slotted(:focus-visible) {
