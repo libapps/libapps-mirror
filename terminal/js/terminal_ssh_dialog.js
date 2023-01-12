@@ -253,15 +253,6 @@ export class TerminalSSHDialog extends LitElement {
       this.suppressCommandError_ = false;
     }
 
-    let deleteButton;
-    if (this.nasshProfileId_) {
-      deleteButton = html`
-          <terminal-button @click=${this.onDeleteClick_}>
-            ${msg('DELETE_BUTTON_LABEL')}
-          </terminal-button>
-      `;
-    }
-
     const identityLabel = msg('IDENTITY_LABEL');
     const settingsProfileLabel = msg('TERMINAL_PROFILE_LABEL');
 
@@ -313,7 +304,6 @@ export class TerminalSSHDialog extends LitElement {
               @keydown="${this.onTextfieldKeydown_}">
           </terminal-textfield>
           <div slot="buttons">
-            ${deleteButton}
             <span></span>
             <terminal-button class="cancel"
                 @click="${(e) => this.dialogRef_.value.cancel()}">
@@ -409,14 +399,6 @@ export class TerminalSSHDialog extends LitElement {
     if (!event.target.hasAttribute('disabled')) {
       this.dialogRef_.value.accept();
     }
-  }
-
-  /**
-   * @param {!Event} event
-   */
-  onDeleteClick_(event) {
-    this.dialogRef_.value.cancel();
-    deleteProfile(ProfileType.NASSH, this.nasshProfileId_);
   }
 
   /** @param {!Event} event */

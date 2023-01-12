@@ -45,6 +45,8 @@ export class TerminalContextMenu extends LitElement {
           box-shadow: 0 1px 2px 0 var(--cros-shadow-color-key),
                       0 2px 6px 2px var(--cros-shadow-color-ambient);
           box-sizing: border-box;
+          color: rgb(var(--cros-color-primary));
+          font-family: var(--cros-body-1-font-family);
           line-height: 32px;
           list-style: none;
           margin: 0;

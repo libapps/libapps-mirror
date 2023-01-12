@@ -10,11 +10,13 @@
 
 import {hterm, lib} from './deps_local.concat.js';
 
-import {LitElement, css, html, when} from './lit.js';
+import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import './terminal_button.js';
 import {DEFAULT_VM_NAME, composeSshUrl, getOSInfo} from './terminal_common.js';
-import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_MOUNT, ICON_OPEN_IN_NEW,
-  ICON_PLUS, ICON_SETTINGS, ICON_SFTP, ICON_SSH} from './terminal_icons.js';
+import './terminal_context_menu.js';
+import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_MORE_VERT, ICON_MOUNT,
+  ICON_OPEN_IN_NEW, ICON_PLUS, ICON_SETTINGS, ICON_SFTP, ICON_SSH}
+  from './terminal_icons.js';
 import './terminal_linux_dialog.js';
 import {ProfileType, cleanupLostValues, deleteProfile, getProfileIds,
   getProfileValues, setProfileIds, setProfileValues}
@@ -69,6 +71,7 @@ export class TerminalHomeApp extends LitElement {
       crostiniEnabled: {state: true},
       sshAllowed: {state: true},
       settingsProfiles: {state: true},
+      sshConnectionDeleteDialogTitle_: {state: true},
     };
   }
 
@@ -205,6 +208,13 @@ export class TerminalHomeApp extends LitElement {
     this.crostiniEnabled = true;
     this.sshAllowed = true;
     this.settingsProfiles = [];
+    this.sshConnectionDeleteDialogTitle_ = '';
+    this.sshDeleteProfileId_ = '';
+
+    this.sshConnectionMenuRef_ = createRef();
+    window.addEventListener('mousedown', () => {
+      this.sshConnectionMenuRef_.value.hide();
+    });
 
     window.storage.addObserver(this.onSettingsChanged.bind(this));
     this.onSettingsChanged({});
@@ -334,7 +344,7 @@ export class TerminalHomeApp extends LitElement {
           </div>
           ${sublabel ? html`<h4 class="sublabel">${sublabel}</h4>` : undefined}
         </div>
-        ${this.sshConnections.length === 0 ? undefined : html`
+        ${when(this.sshConnections.length > 0, () => html`
           <ul>
           ${this.sshConnections.map((c) => html`
             <li class="row">
@@ -350,16 +360,16 @@ export class TerminalHomeApp extends LitElement {
                 `)}
               `, () => text(c))}
               <mwc-icon-button
-                  title="${msg('TERMINAL_HOME_EDIT_SSH')}"
-                  aria-label="${msg('TERMINAL_HOME_EDIT_SSH')}"
+                  title="${msg('HTERM_OPTIONS_BUTTON_LABEL')}"
+                  aria-label="${msg('HTERM_OPTIONS_BUTTON_LABEL')}"
                   class="icon-fill-svg"
-                  @click="${(e) => this.openSSHDialog(c.id)}">
-                ${ICON_EDIT}
+                  @click="${(e) => this.showSSHMore(c, e)}">
+                ${ICON_MORE_VERT}
               </mwc-icon-button>
             </li>
           `)}
           </ul>
-        `}
+        `)}
       </section>
     `;
   }
@@ -402,6 +412,11 @@ export class TerminalHomeApp extends LitElement {
       <terminal-linux-dialog @close=${this.updateVshProfiles_}>
       </terminal-linux-dialog>
       <terminal-ssh-dialog></terminal-ssh-dialog>
+      <terminal-context-menu ${ref(this.sshConnectionMenuRef_)}>
+      </terminal-context-menu>
+      <terminal-dialog @close=${this.onSSHDeleteDialogClose}>
+        <div slot="title">${this.sshConnectionDeleteDialogTitle_}</div>
+      </terminal-dialog>
     `;
   }
 
@@ -529,6 +544,50 @@ export class TerminalHomeApp extends LitElement {
    */
   openSSHDialog(nasshProfileId = '') {
     this.shadowRoot.querySelector('terminal-ssh-dialog').show(nasshProfileId);
+  }
+
+  /**
+   * Open the ssh delete dialog to confirm deleting a connection.
+   *
+   * @param {{id, description, settingsProfileId}} sshConnection
+   */
+  openSSHDeleteDialog(sshConnection) {
+    this.sshDeleteProfileId_ = sshConnection.id;
+    this.sshConnectionDeleteDialogTitle_ = hterm.messageManager.get(
+        'TERMINAL_SETTINGS_PROFILE_DELETE_DIALOG_TITLE',
+        [sshConnection.description]);
+    this.shadowRoot.querySelector('terminal-dialog').show();
+  }
+
+  /**
+   * @param {!Event} event
+   */
+  onSSHDeleteDialogClose(event) {
+    if (event.detail.accept) {
+      deleteProfile(ProfileType.NASSH, this.sshDeleteProfileId_);
+    }
+  }
+
+  /**
+   * Show the ssh connection more context menu.
+   *
+   * @param {{id, description, settingsProfileId}} sshConnection
+   * @param {!Event} event
+   */
+  showSSHMore(sshConnection, event) {
+    const msg = hterm.messageManager.get.bind(hterm.messageManager);
+    const menu = this.shadowRoot.querySelector('terminal-context-menu');
+    menu.items = [
+      {
+        name: msg('TERMINAL_HOME_EDIT_SSH'),
+        action: () => this.openSSHDialog(sshConnection.id),
+      },
+      {
+        name: msg('REMOVE_LABEL'),
+        action: () => this.openSSHDeleteDialog(sshConnection),
+      },
+    ];
+    menu.show({x: event.clientX, y: event.clientY});
   }
 }
 
