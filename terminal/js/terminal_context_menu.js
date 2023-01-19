@@ -29,6 +29,8 @@ export class TerminalContextMenu extends LitElement {
      * @public {!Array<{name: string, action: function()}>}
      */
     this.items = [];
+
+    this.hideBound_ = this.hide.bind(this);
   }
 
   /** @override */
@@ -78,10 +80,18 @@ export class TerminalContextMenu extends LitElement {
   show(cursorPosition) {
     positionElementWithinWindow(this, cursorPosition);
     this.style.visibility = 'visible';
+    // Delay adding listeners until any existing events have finished.
+    setTimeout(() => {
+      const options = {capture: true};
+      this.ownerDocument.addEventListener('click', this.hideBound_, options);
+      this.ownerDocument.addEventListener('keydown', this.hideBound_, options);
+    });
   }
 
   hide() {
     this.style.visibility = 'hidden';
+    this.ownerDocument.removeEventListener('click', this.hideBound_);
+    this.ownerDocument.removeEventListener('keydown', this.hideBound_);
   }
 
   /** @override */

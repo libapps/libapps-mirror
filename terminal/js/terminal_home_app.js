@@ -211,9 +211,6 @@ export class TerminalHomeApp extends LitElement {
     this.sshDeleteProfileId_ = '';
 
     this.sshConnectionMenuRef_ = createRef();
-    window.addEventListener('mousedown', () => {
-      this.sshConnectionMenuRef_.value.hide();
-    });
 
     window.storage.addObserver(this.onSettingsChanged.bind(this));
     this.onSettingsChanged({});

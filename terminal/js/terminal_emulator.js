@@ -1012,7 +1012,6 @@ export class XtermTerminal {
    * @param {!MouseEvent} e
    */
   async onMouseDown_(e) {
-    this.contextMenu_.hide();
     if (this.term.modes.mouseTrackingMode !== 'none') {
       // xterm.js is in mouse mode and will handle the event.
       return;
