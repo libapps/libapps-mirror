@@ -80,18 +80,23 @@ export class TerminalContextMenu extends LitElement {
   show(cursorPosition) {
     positionElementWithinWindow(this, cursorPosition);
     this.style.visibility = 'visible';
+
+    // Hide on any click or keydown event.
+    const options = {capture: true};
+    const onEvent = () => {
+      this.ownerDocument.removeEventListener('click', onEvent, options);
+      this.ownerDocument.removeEventListener('keydown', onEvent, options);
+      this.hide();
+    };
     // Delay adding listeners until any existing events have finished.
     setTimeout(() => {
-      const options = {capture: true};
-      this.ownerDocument.addEventListener('click', this.hideBound_, options);
-      this.ownerDocument.addEventListener('keydown', this.hideBound_, options);
+      this.ownerDocument.addEventListener('click', onEvent, options);
+      this.ownerDocument.addEventListener('keydown', onEvent, options);
     });
   }
 
   hide() {
     this.style.visibility = 'hidden';
-    this.ownerDocument.removeEventListener('click', this.hideBound_);
-    this.ownerDocument.removeEventListener('keydown', this.hideBound_);
   }
 
   /** @override */
