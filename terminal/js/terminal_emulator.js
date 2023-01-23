@@ -697,6 +697,7 @@ export class XtermTerminal {
 
       this.inited_ = true;
       this.term.open(elem);
+      this.xtermInternal_.addDimensionsObserver(() => this.scheduleFit_());
 
       if (this.enableWebGL_) {
         this.reloadWebglAddon_();
@@ -786,7 +787,7 @@ export class XtermTerminal {
     };
 
     this.prefs_.addObserver('font-size', (v) => {
-      this.updateOption_('fontSize', v, true);
+      this.term.options.fontSize = v;
       setHtermCSSVariable('font-size', `${v}px`);
     });
 
@@ -814,7 +815,9 @@ export class XtermTerminal {
         }
         this.updateTheme_(colors);
       },
-      'cursor-blink': (v) => this.updateOption_('cursorBlink', v, false),
+      'cursor-blink': (v) => {
+        this.term.options.cursorBlink = v;
+      },
       'cursor-color': (v) => this.updateTheme_({cursor: v}),
       'cursor-shape': (v) => {
         let shape;
@@ -823,16 +826,18 @@ export class XtermTerminal {
         } else {
           shape = v.toLowerCase();
         }
-        this.updateOption_('cursorStyle', shape, false);
+        this.term.options.cursorStyle = shape;
       },
       'font-family': (v) => this.updateFont_(v),
       'foreground-color': (v) => {
         this.updateTheme_({foreground: v});
         setHtermColorCSSVariable('foreground-color', v);
       },
-      'line-height': (v) => this.updateOption_('lineHeight', v, true),
+      'line-height': (v) => {
+        this.term.options.lineHeight = v;
+      },
       'scroll-on-keystroke': (v) => {
-        this.updateOption_('scrollOnUserInput', v, false);
+        this.term.options.scrollOnUserInput = v;
       },
       'scroll-on-output': (v) => {
         if (!v) {
@@ -959,23 +964,6 @@ export class XtermTerminal {
   }
 
   /**
-   * Update one xterm.js option. Use updateTheme_()/updateFont_() for
-   * theme/font.
-   *
-   * @param {string} key
-   * @param {*} value
-   * @param {boolean} scheduleFit
-   */
-  updateOption_(key, value, scheduleFit) {
-    // TODO: xterm supports updating multiple options at the same time. We
-    // should probably do that.
-    this.term.options[key] = value;
-    if (scheduleFit) {
-      this.scheduleFit_();
-    }
-  }
-
-  /**
    * Called when there is a "fontloadingdone" event. We need this because
    * `FontManager.loadFont()` does not guarantee loading all the font files.
    */
@@ -984,7 +972,6 @@ export class XtermTerminal {
     // don't need to do anything.
     if (this.inited_ && !this.pendingFont_) {
       this.scheduleRefreshFont_();
-      this.scheduleFit_();
     }
   }
 
@@ -1095,7 +1082,6 @@ export class XtermTerminal {
       this.refreshFont_();
     }
     this.pendingFont_ = null;
-    this.scheduleFit_();
   }
 
   /**
@@ -1154,7 +1140,7 @@ export class XtermTerminal {
         break;
     }
 
-    this.updateOption_('fontSize', Math.max(1, newFontSize), true);
+    this.term.options.fontSize = Math.max(1, newFontSize);
   }
 
   /** @param {!KeyboardEvent} ev */

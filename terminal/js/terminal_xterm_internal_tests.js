@@ -38,10 +38,26 @@ describe('terminal_xterm_internal.js', function() {
     document.body.removeChild(this.elem);
   });
 
-  it('getActualCellDimensions()', async function() {
+  it('addDimensionsObserver() and getActualCellDimensions()', async function() {
     const {width, height} = this.xtermInternal.getActualCellDimensions();
     assert.isAbove(width, 0);
     assert.isAbove(height, 0);
+
+    let dimensionsChanged = false;
+    const promise = new Promise((resolve) => {
+      this.xtermInternal.addDimensionsObserver(() => {
+        dimensionsChanged = true;
+        resolve();
+      });
+    });
+    assert.equal(dimensionsChanged, false);
+    this.terminal.options.fontSize += 1;
+    await promise;
+
+    const {width: width2, height: height2} =
+        this.xtermInternal.getActualCellDimensions();
+    assert.isAbove(width2, width);
+    assert.isAbove(height2, height);
   });
 
   it('print()', async function() {

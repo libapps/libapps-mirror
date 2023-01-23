@@ -58,13 +58,11 @@ describe('terminal_emulator_tests.js', function() {
             [['font one']]);
         assert.equal(this.mocks.term.baseObj.options.fontFamily, undefined);
         assert.isNotNull(this.terminal.pendingFont_);
-        assert.equal(this.mocks.term.popMethodHistory('resize').length, 0);
 
         await updateFontPromise;
         assert.equal(this.mocks.term.baseObj.options.fontFamily, 'font one');
         assert.isNull(this.terminal.pendingFont_);
         await sleep(0);
-        assert.equal(this.mocks.term.popMethodHistory('resize').length, 1);
       });
 
       it('refresh font when the font is the same', async function() {
@@ -75,14 +73,12 @@ describe('terminal_emulator_tests.js', function() {
             [['font one']]);
         assert.equal(this.mocks.term.baseObj.options.fontFamily, 'font one');
         assert.isNotNull(this.terminal.pendingFont_);
-        assert.equal(this.mocks.term.popMethodHistory('resize').length, 0);
 
         await updateFontPromise;
         // Note the extra space at the end.
         assert.equal(this.mocks.term.baseObj.options.fontFamily, 'font one ');
         assert.isNull(this.terminal.pendingFont_);
         await sleep(0);
-        assert.equal(this.mocks.term.popMethodHistory('resize').length, 1);
       });
 
       it('aborts if pendingFont_ was changed', async function() {
@@ -92,7 +88,6 @@ describe('terminal_emulator_tests.js', function() {
             [['font one']]);
         assert.equal(this.mocks.term.baseObj.options.fontFamily, undefined);
         assert.isNotNull(this.terminal.pendingFont_);
-        assert.equal(this.mocks.term.popMethodHistory('resize').length, 0);
 
         this.terminal.pendingFont_ = 'font two';
 
@@ -100,7 +95,6 @@ describe('terminal_emulator_tests.js', function() {
         assert.equal(this.mocks.term.baseObj.options.fontFamily, undefined);
         assert.equal(this.terminal.pendingFont_, 'font two');
         await sleep(0);
-        assert.equal(this.mocks.term.popMethodHistory('resize').length, 0);
       });
     });
 

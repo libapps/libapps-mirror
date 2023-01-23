@@ -23,6 +23,18 @@ const BUFFER_SIZE = 4096;
 let IParams;
 
 /**
+ * @typedef {{
+ *            css: {
+ *              cell: {
+ *                width: number,
+ *                height: number,
+ *              }
+ *            },
+ *          }}
+ */
+export let IRenderDimensions;
+
+/**
  * A handler for tmux's DCS P sequence.
  *
  * Also see IDcsHandler at
@@ -108,14 +120,8 @@ export class XtermInternal {
 
     this.core_ = /** @type {{
         _renderService: {
-          dimensions: {
-            css: {
-              cell: {
-                width: number,
-                height: number,
-              }
-            },
-          },
+          dimensions: !IRenderDimensions,
+          onDimensionsChange: function(function(!IRenderDimensions)),
         },
         _inputHandler: {
           nextLine: function(),
@@ -133,6 +139,16 @@ export class XtermInternal {
     this.encodeBuffer_ = new Uint32Array(BUFFER_SIZE);
     this.scheduleFullRefresh_ = delayedScheduler(
         () => this.terminal_.refresh(0, this.terminal_.rows), 10);
+  }
+
+  /**
+   * Register a callback to be called when the dimensions change. This should
+   * only be called after the terminal opened an element.
+   *
+   * @param {function()} callback
+   */
+  addDimensionsObserver(callback) {
+    this.core_._renderService.onDimensionsChange((d) => callback());
   }
 
   /**
