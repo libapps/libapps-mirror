@@ -658,6 +658,7 @@ export class SftpFsp {
    */
   onMountRequested(onSuccess, onError) {
     lib.f.openWindow('/html/nassh.html');
+    onSuccess();
   }
 
   /**
