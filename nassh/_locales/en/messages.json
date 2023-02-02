@@ -2012,8 +2012,8 @@
 		"message": "Mount to Files"
 	},
 	"TERMINAL_HOME_MOUNTED_TAB_CLOSE_MESSAGE": {
-		"description": "Message displayed after a file system is mounted informing users that closing the current tab will unmount. Note, translate 'Files App' as the ChromeOS Files app.",
-		"message": "Closing this tab will remove the Files app mount connection"
+		"description": "Message displayed after a file system is mounted informing users that closing the current tab will unmount. Note, translate 'Files' as the ChromeOS Files app.",
+		"message": "Keep this tab open. Closing this tab will remove the mount connection from Files."
 	},
 	"TERMINAL_HOME_NEW_LINUX": {
 		"description": "Title for a dialog to create a New Linux container.",
