@@ -78,6 +78,26 @@ terminal.onCtrlN = function(e, k) {
 };
 
 /**
+ * Either send a ^T or open a new tab in the current terminal window.
+ *
+ * @this {!hterm.Keyboard.KeyMap}
+ * @param {!KeyboardEvent} e The event to process.
+ * @param {!hterm.Keyboard.KeyDef} k
+ * @return {!hterm.Keyboard.KeyDefFunction|string} Key action or sequence.
+ */
+terminal.onCtrlT = function(e, k) {
+  if (this.keyboard.terminal.passCtrlT) {
+    return function(e, k) {
+      chrome.terminalPrivate.openWindow(
+          {asTab: true, url: '/html/terminal.html'});
+      return hterm.Keyboard.KeyActions.CANCEL;
+    };
+  }
+
+  return '\x14';
+};
+
+/**
  * Adds bindings for terminal such as options page and some extra ChromeOS
  * system key bindings when 'keybindings-os-defaults' pref is set. Reloads
  * current bindings if needed.
@@ -129,6 +149,7 @@ terminal.init = async function(element, launchInfo) {
   const runTerminal = async function() {
     term.onOpenOptionsPage = terminal.openOptionsPage;
     term.keyboard.keyMap.keyDefs[78].control = terminal.onCtrlN;
+    term.keyboard.keyMap.keyDefs[84].control = terminal.onCtrlT;
     terminal.addBindings(term);
     term.setCursorPosition(0, 0);
     term.setCursorVisible(true);

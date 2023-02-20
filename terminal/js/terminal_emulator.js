@@ -590,6 +590,7 @@ export class XtermTerminal {
       },
     };
     this.keyboard.keyMap.keyDefs[78] = {};
+    this.keyboard.keyMap.keyDefs[84] = {};
 
     const methodNames = [
         'eraseLine',
@@ -1224,8 +1225,14 @@ export class XtermTerminal {
       set(Modifier.Ctrl, keyCodes.N, newWindow);
     }
 
+    /** @param {!KeyboardEvent} ev */
+    const newTab = (ev) => {
+      ev.preventDefault();
+      chrome.terminalPrivate.openWindow(
+          {asTab: true, url: '/html/terminal.html'});
+    };
     if (this.prefs_.get('pass-ctrl-t')) {
-      setWithShiftVersion(Modifier.Ctrl, keyCodes.T, noop);
+      setWithShiftVersion(Modifier.Ctrl, keyCodes.T, newTab);
     }
 
     if (this.prefs_.get('pass-ctrl-w')) {
