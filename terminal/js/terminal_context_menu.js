@@ -16,14 +16,18 @@ export class TerminalContextMenu extends LitElement {
   /** @override */
   static get properties() {
     return {
-      items: {
-        attribute: false,
-      },
+      label: {attribute: false},
+      items: {attribute: false},
     };
   }
 
   constructor() {
     super();
+
+    /**
+     * @public {string}
+     */
+    this.label = '';
 
     /**
      * @public {!Array<{name: string, action: function()}>}
@@ -62,7 +66,11 @@ export class TerminalContextMenu extends LitElement {
           white-space: nowrap;
         }
 
-        li:hover {
+        ul:focus, li:focus {
+          outline: none;
+        }
+
+        li:focus, li:hover {
           background-color: var(--cros-highlight-color-hover);
         }
     `;
@@ -77,22 +85,30 @@ export class TerminalContextMenu extends LitElement {
   /**
    * @param {{x: number, y: number}} cursorPosition
    */
-  show(cursorPosition) {
+  async show(cursorPosition) {
+    // Ensure render is finished before we show.
+    await this.updateComplete;
+
     positionElementWithinWindow(this, cursorPosition);
     this.style.visibility = 'visible';
 
     // Hide on any click or keydown event.
     const options = {capture: true};
-    const onEvent = () => {
-      this.ownerDocument.removeEventListener('click', onEvent, options);
-      this.ownerDocument.removeEventListener('keydown', onEvent, options);
+    const removeAndHide = () => {
+      this.ownerDocument.removeEventListener('click', onClick, options);
+      this.ownerDocument.removeEventListener('keydown', onKeydown, options);
       this.hide();
     };
-    // Delay adding listeners until any existing events have finished.
-    setTimeout(() => {
-      this.ownerDocument.addEventListener('click', onEvent, options);
-      this.ownerDocument.addEventListener('keydown', onEvent, options);
-    });
+    const onClick = removeAndHide;
+    // Esc or char key will hide the menu, but allow Tab, etc for navigation.
+    const onKeydown = (e) => {
+      if (e.keyCode == 0x1b || (e.keyCode > 0x20 && e.keyCode < 0x80)) {
+        removeAndHide();
+      }
+    };
+    this.ownerDocument.addEventListener('click', onClick, options);
+    this.ownerDocument.addEventListener('keydown', onKeydown, options);
+    this.renderRoot.querySelector('ul').focus();
   }
 
   hide() {
@@ -102,17 +118,23 @@ export class TerminalContextMenu extends LitElement {
   /** @override */
   render() {
     return html`
-        <ul>
-          ${this.items.map((i) => html`
-              <li @mousedown="${(e) => e.stopPropagation()}"
-                  @mouseup="${(e) => e.stopPropagation()}"
-                  @click="${(e) => {
-                    this.hide();
-                    i.action();
-                  }}">
-                ${i.name}
-              </li>`)}
-        </ul>
+      <ul tabindex="0" role="menu" aria-label="${this.label}">
+        ${this.items.map((i) => html`
+          <li tabindex="0" role="menuitem"
+              @click=${(e) => {
+                this.hide();
+                i.action();
+              }}
+              @keydown=${(e) => {
+                if (['Enter', 'Space'].includes(e.code)) {
+                  this.hide();
+                  i.action();
+                }
+              }}
+          >
+          ${i.name}
+          </li>`)}
+      </ul>
     `;
   }
 }

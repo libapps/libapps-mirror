@@ -584,8 +584,10 @@ export class TerminalHomeApp extends LitElement {
       action: () => this.openSSHDeleteDialog(sshConnection),
     });
 
+    this.sshConnectionMenuRef_.value.label = msg('HTERM_OPTIONS_BUTTON_LABEL');
     this.sshConnectionMenuRef_.value.items = items;
-    this.sshConnectionMenuRef_.value.show({x: event.clientX, y: event.clientY});
+    const rect = event.target.getBoundingClientRect();
+    this.sshConnectionMenuRef_.value.show({x: rect.left, y: rect.bottom});
   }
 }
 

@@ -16,6 +16,14 @@ class CSSResult {}
 
 /** @extends {HTMLElement} */
 class LitElement$$module$js$lit{
+  constructor() {
+    /** @type {!Element} */
+    this.renderRoot;
+
+    /** @type {!Promise<boolean>} */
+    this.updateComplete;
+  }
+
   /**
    * @return {!Object<string, PropertyDeclaration>}
    * @protected
@@ -68,9 +76,6 @@ class LitElement$$module$js$lit{
    * @return {!Promise<void>}
    */
   requestUpdate(propertyName, oldValue) {}
-
-  /** @return {!Promise<boolean>} */
-  updateComplete() {}
 
   /** @param {!Map<string,*>} changedProperties */
   updated(changedProperties) {}
