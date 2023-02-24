@@ -59,16 +59,15 @@ export class TerminalSettingsProfileHeader extends LitElement {
   /** @override */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
+    const title = msg('TERMINAL_SETTINGS_PROFILE_CREATE_DIALOG_TITLE');
     return html`
-      <mwc-icon-button @click="${this.openNewDialog_}">
+      <mwc-icon-button aria-label="${title}" @click="${this.openNewDialog_}">
         ${ICON_PLUS}
       </mwc-icon-button>
       <h2>${msg('TERMINAL_PROFILE_LABEL')}</h2>
       <terminal-dialog ${ref(this.newProfileDialogRef_)}
           @close="${this.onNewDialogClose_}">
-        <div slot="title">
-          ${msg('TERMINAL_SETTINGS_PROFILE_CREATE_DIALOG_TITLE')}
-        </div>
+        <div slot="title">${title}</div>
         <terminal-textfield ${ref(this.newProfileInputRef_)}
             label="${msg('TERMINAL_PROFILE_NAME_LABEL')}"
             @keydown="${this.onNewProfileKeydown_}">

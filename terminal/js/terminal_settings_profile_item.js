@@ -33,7 +33,6 @@ export class TerminalSettingsProfileItem extends LitElement {
       }
 
       mwc-icon-button {
-        display: none;
         float: right;
         margin: 4px -20px 0 0;
         --mdc-icon-button-size: 24px;
@@ -41,8 +40,17 @@ export class TerminalSettingsProfileItem extends LitElement {
         --mdc-ripple-color: var(--cros-ripple-color);
       }
 
-      :host(:hover) mwc-icon-button {
-        display: block;
+      mwc-icon-button svg {
+        fill: var(--cros-bg-color);
+      }
+
+      :host([active]) mwc-icon-button svg {
+        fill: var(--cros-highlight-color)
+      }
+
+      :host(:hover) mwc-icon-button svg,
+      :host(:focus) mwc-icon-button svg {
+        fill: currentcolor;
       }
 
       terminal-dialog svg {
@@ -73,11 +81,6 @@ export class TerminalSettingsProfileItem extends LitElement {
     const title = msg(
         'TERMINAL_SETTINGS_PROFILE_DELETE_DIALOG_TITLE', [this.profile]);
     return html`
-      ${when(this.profile !== hterm.Terminal.DEFAULT_PROFILE_ID, () => html`
-        <mwc-icon-button @click=${this.openDeleteDialog_}>
-          ${ICON_CLOSE}
-        </mwc-icon-button>
-      `)}
       ${this.profile}
       <terminal-dialog ${ref(this.deleteProfileDialogRef_)}
           acceptText="${msg('DELETE_BUTTON_LABEL')}"
@@ -89,6 +92,12 @@ export class TerminalSettingsProfileItem extends LitElement {
         </div>
         ${this.confirmDeleteMsg_}
       </terminal-dialog>
+      ${when(this.profile !== hterm.Terminal.DEFAULT_PROFILE_ID, () => html`
+        <mwc-icon-button aria-label="${title}" role="button"
+            @click=${this.openDeleteDialog_}>
+          ${ICON_CLOSE}
+        </mwc-icon-button>
+      `)}
     `;
   }
 
