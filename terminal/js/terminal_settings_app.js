@@ -224,6 +224,7 @@ export class TerminalSettingsApp extends LitElement {
             ${this.settingsProfiles_.map((profile) => html`
               <terminal-settings-profile-item
                   data-name="profile"
+                  aria-label="${profile}"
                   .profile="${profile}"
                   @settings-profile-click=${this.onSettingsProfileClick_}
                   @settings-profile-delete=${this.onSettingsProfileDelete_}>
