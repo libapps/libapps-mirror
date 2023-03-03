@@ -27,7 +27,7 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
         user-select: none;
       }
 
-      ::slotted(:hover) {
+      ::slotted(:hover), ::slotted(:focus) {
         background-color: var(--cros-textfield-background-color);
       }
 
