@@ -168,4 +168,9 @@ describe('terminal_xterm_internal.js', function() {
       assert.isFalse(element.isConnected);
     }
   });
+
+  it('setScrollbarVisible()', async function() {
+    assert.isTrue(this.xtermInternal.setScrollbarVisible(true));
+    assert.isTrue(this.xtermInternal.setScrollbarVisible(false));
+  });
 });

@@ -390,20 +390,18 @@ export class TerminalSettingsApp extends LitElement {
             </ul>
           </section>
 
-          ${when(!xtermJs, () => html`
-            <section>
-              <h3>${msg('TERMINAL_TITLE_PREF_SCROLLBAR')}</h3>
+          <section>
+            <h3>${msg('TERMINAL_TITLE_PREF_SCROLLBAR')}</h3>
 
-              <ul class="section-body">
-                <li class="setting-container"
-                    title="${msg('HTERM_PREF_SCROLLBAR_VISIBLE')}">
-                  <h4>${msg('TERMINAL_NAME_PREF_VISIBLE')}</h4>
-                  <terminal-settings-checkbox preference="scrollbar-visible">
-                  </terminal-settings-checkbox>
-                </li>
-              </ul>
-            </section>
-          `)}
+            <ul class="section-body">
+              <li class="setting-container"
+                  title="${msg('HTERM_PREF_SCROLLBAR_VISIBLE')}">
+                <h4>${msg('TERMINAL_NAME_PREF_VISIBLE')}</h4>
+                <terminal-settings-checkbox preference="scrollbar-visible">
+                </terminal-settings-checkbox>
+              </li>
+            </ul>
+          </section>
         </section>
 
         <section class="terminal-settings-category"

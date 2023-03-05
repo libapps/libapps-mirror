@@ -724,6 +724,9 @@ export class XtermTerminal {
 
       await this.scheduleFit_();
       this.a11yButtons_ = new A11yButtons(this.term, this.htermA11yReader_);
+      if (!this.prefs_.get('scrollbar-visible')) {
+        this.xtermInternal_.setScrollbarVisible(false);
+      }
 
       this.onTerminalReady();
     })();
@@ -850,6 +853,9 @@ export class XtermTerminal {
           this.scrollOnOutputListener_ = this.term.onWriteParsed(
               () => this.term.scrollToBottom());
         }
+      },
+      'scrollbar-visible': (v) => {
+        this.xtermInternal_.setScrollbarVisible(v);
       },
       'user-css': (v) => {
         if (this.userCSSElement_) {

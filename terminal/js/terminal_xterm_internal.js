@@ -267,4 +267,18 @@ export class XtermInternal {
     }
     this.a11yElements_.length = 0;
   }
+
+  /**
+   * @param {boolean} visible
+   * @return {boolean} return false if it fails. This normally means that you
+   *     hasn't called `terminal.open()`.
+   */
+  setScrollbarVisible(visible) {
+    const viewport = this.terminal_.element?.querySelector('.xterm-viewport');
+    if (!viewport) {
+      return false;
+    }
+    viewport.style.overflowY = visible ? '' : 'hidden';
+    return true;
+  }
 }
