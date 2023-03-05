@@ -34,7 +34,7 @@ export const Modifier = {
 
 // This is just a static map from key names to key codes. It helps make the code
 // a bit more readable.
-const keyCodes = hterm.Parser.identifiers.keyCodes;
+export const keyCodes = hterm.Parser.identifiers.keyCodes;
 
 /**
  * Encode a key combo (i.e. modifiers + a normal key) to an unique number.
@@ -83,6 +83,25 @@ const ANSI_COLOR_NAMES = [
     'brightCyan',
     'brightWhite',
 ];
+
+/**
+ * The value is the CSI code to send when no modifier keys are pressed.
+ *
+ * @type {!Map<number, string>}
+ */
+const ARROW_AND_SIX_PACK_KEYS = new Map([
+    [keyCodes.UP, '\x1b[A'],
+    [keyCodes.DOWN, '\x1b[B'],
+    [keyCodes.RIGHT, '\x1b[C'],
+    [keyCodes.LEFT, '\x1b[D'],
+    // 6-pack keys.
+    [keyCodes.INSERT, '\x1b[2~'],
+    [keyCodes.DEL, '\x1b[3~'],
+    [keyCodes.HOME, '\x1b[H'],
+    [keyCodes.END, '\x1b[F'],
+    [keyCodes.PAGE_UP, '\x1b[5~'],
+    [keyCodes.PAGE_DOWN, '\x1b[6~'],
+]);
 
 /**
  * @typedef {{
@@ -471,8 +490,7 @@ export class XtermTerminal {
     this.scheduleResetKeyDownHandlers_ =
         delayedScheduler(() => this.resetKeyDownHandlers_(), 250);
 
-    this.term.attachCustomKeyEventHandler(
-        this.customKeyEventHandler_.bind(this));
+    this.term.attachCustomKeyEventHandler((ev) => !this.handleKeyEvent_(ev));
 
     this.io = new XtermTerminalIO(this);
     this.notificationCenter_ = null;
@@ -1005,7 +1023,7 @@ export class XtermTerminal {
   /**
    * @param {!MouseEvent} e
    */
-  async onMouseDown_(e) {
+  onMouseDown_(e) {
     if (this.term.modes.mouseTrackingMode !== 'none') {
       // xterm.js is in mouse mode and will handle the event.
       return;
@@ -1020,11 +1038,14 @@ export class XtermTerminal {
 
     if (e.button === MIDDLE || (e.button === RIGHT &&
           this.prefs_.getBoolean('mouse-right-click-paste'))) {
-      // Paste.
-      if (navigator.clipboard && navigator.clipboard.readText) {
-        const text = await navigator.clipboard.readText();
-        this.term.paste(text);
-      }
+      this.pasteFromClipboard_();
+    }
+  }
+
+  async pasteFromClipboard_() {
+    const text = await navigator.clipboard?.readText?.();
+    if (text) {
+      this.term.paste(text);
     }
   }
 
@@ -1093,28 +1114,102 @@ export class XtermTerminal {
 
   /**
    * @param {!KeyboardEvent} ev
-   * @return {boolean} Return false if xterm.js should not handle the key event.
+   * @return {boolean} Return true if the key event is handled.
    */
-  customKeyEventHandler_(ev) {
+  handleKeyEvent_(ev) {
     // Without this, <alt-tab> (or <alt-shift-tab) is consumed by xterm.js
-    // (instead the OS) when terminal is full screen.
+    // (instead of the OS) when terminal is full screen.
     if (ev.altKey && ev.keyCode === 9) {
-      return false;
+      return true;
     }
 
     const modifiers = (ev.shiftKey ? Modifier.Shift : 0) |
         (ev.altKey ? Modifier.Alt : 0) |
         (ev.ctrlKey ? Modifier.Ctrl : 0) |
         (ev.metaKey ? Modifier.Meta : 0);
+
+    if (this.handleArrowAndSixPackKeys_(ev, modifiers)) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      return true;
+    }
+
     const handler = this.keyDownHandlers_.get(
         encodeKeyCombo(modifiers, ev.keyCode));
     if (handler) {
       if (ev.type === 'keydown') {
         handler(ev);
       }
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Handle arrow keys and the "six pack keys" (e.g. home, insert...) because
+   * xterm.js does not always handle them correctly with modifier keys.
+   *
+   * The behavior here is mostly the same as hterm, but there are some
+   * differences. For example, we send a code instead of scrolling the screen
+   * with shift+up/down to follow the behavior of xterm and other popular
+   * terminals (e.g. gnome-terminal).
+   *
+   * We don't use `this.keyDownHandlers_` for this because it needs one entry
+   * per modifier combination.
+   *
+   * @param {!KeyboardEvent} ev
+   * @param {number} modifiers
+   * @return {boolean} Return true if the key event is handled.
+   */
+  handleArrowAndSixPackKeys_(ev, modifiers) {
+    let code = ARROW_AND_SIX_PACK_KEYS.get(ev.keyCode);
+    if (!code) {
       return false;
     }
 
+    // For this case, we need to consider the "application cursor mode". We will
+    // just let xterm.js handle it.
+    if (modifiers === 0) {
+      return false;
+    }
+
+    if (ev.type !== 'keydown') {
+      // Do nothing for non-keydown event, and also don't let xterm.js handle
+      // it.
+      return true;
+    }
+
+    // Special handling if only shift is depressed.
+    if (modifiers === Modifier.Shift) {
+      switch (ev.keyCode) {
+        case keyCodes.INSERT:
+          this.pasteFromClipboard_();
+          return true;
+        case keyCodes.PAGE_UP:
+          this.term.scrollPages(-1);
+          return true;
+        case keyCodes.PAGE_DOWN:
+          this.term.scrollPages(1);
+          return true;
+        case keyCodes.HOME:
+          this.term.scrollToTop();
+          return true;
+        case keyCodes.END:
+          this.term.scrollToBottom();
+          return true;
+      }
+    }
+
+    const mod = `;${modifiers + 1}`;
+    if (code.length === 3) {
+      // Convert code from "CSI x" to "CSI 1 mod x";
+      code = '\x1b[1' + mod + code[2];
+    } else {
+      // Convert code from "CSI ... ~" to "CSI ... mod ~";
+      code = code.slice(0, -1) + mod + '~';
+    }
+    this.io.onVTKeystroke(code);
     return true;
   }
 

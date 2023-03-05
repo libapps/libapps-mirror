@@ -184,6 +184,8 @@ class Terminal$$module$js$xterm {
 
   scrollToBottom() {}
 
+  scrollToTop() {}
+
   /**
    * return {{promptLabel: string, tooMuchOutput: string}}
    */

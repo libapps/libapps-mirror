@@ -10,7 +10,7 @@ import {hterm, lib} from './deps_local.concat.js';
 
 import {sleep} from './terminal_common.js';
 import {A11yButtons, Modifier, XtermTerminal, XtermTerminalTestParams,
-  encodeKeyCombo} from './terminal_emulator.js';
+  encodeKeyCombo, keyCodes} from './terminal_emulator.js';
 import {MockFunction, MockObject} from './terminal_test_mocks.js';
 import {Terminal} from './xterm.js';
 
@@ -28,9 +28,10 @@ describe('terminal_emulator_tests.js', function() {
         xtermInternal: new MockObject({
           getActualCellDimensions: () => ({width: 9, height: 22}),
         }),
+        onVTKeystroke: new MockFunction(),
       };
       const testParams = {};
-      for (const prop in this.mocks) {
+      for (const prop of ['term', 'fontManager', 'xtermInternal']) {
         testParams[prop] = this.mocks[prop].proxy;
       }
 
@@ -40,6 +41,8 @@ describe('terminal_emulator_tests.js', function() {
         enableWebGL: true,
         testParams: /** @type {!XtermTerminalTestParams} */(testParams),
       });
+
+      this.terminal.io.onVTKeystroke = this.mocks.onVTKeystroke.proxy;
 
       // Some hacking because we don't run the decorate() function. Maybe we
       // should just run it.
@@ -98,35 +101,88 @@ describe('terminal_emulator_tests.js', function() {
       });
     });
 
-    it('customKeyEventHandler_', async function() {
-      const mockHandler = new MockFunction();
-      const fakeEvent = {
-        type: 'keydown',
-        keyCode: 65,
-        ctrlKey: true,
-      };
-      this.terminal.keyDownHandlers_.set(encodeKeyCombo(Modifier.Ctrl, 65),
-          mockHandler.proxy);
-      assert.isFalse(this.terminal.customKeyEventHandler_(fakeEvent));
-      const history = mockHandler.popHistory();
-      assert.equal(history.length, 1);
-      assert.equal(history[0][0], fakeEvent);
+    describe('handleKeyEvent_', function() {
+      it('keyDownHandlers_', async function() {
+        const mockHandler = new MockFunction();
+        const fakeEvent = {
+          type: 'keydown',
+          keyCode: 65,
+          ctrlKey: true,
+        };
+        this.terminal.keyDownHandlers_.set(encodeKeyCombo(Modifier.Ctrl, 65),
+            mockHandler.proxy);
+        assert.isTrue(this.terminal.handleKeyEvent_(fakeEvent));
+        const history = mockHandler.popHistory();
+        assert.equal(history.length, 1);
+        assert.equal(history[0][0], fakeEvent);
 
-      assert.isFalse(this.terminal.customKeyEventHandler_({...fakeEvent,
-        type: 'keypress'}));
-      assert.isEmpty(mockHandler.popHistory());
+        assert.isTrue(this.terminal.handleKeyEvent_({...fakeEvent,
+          type: 'keypress'}));
+        assert.isEmpty(mockHandler.popHistory());
 
-      assert.isTrue(this.terminal.customKeyEventHandler_({...fakeEvent,
-        shiftKey: true}));
-      assert.isEmpty(mockHandler.popHistory());
+        assert.isFalse(this.terminal.handleKeyEvent_({...fakeEvent,
+          shiftKey: true}));
+        assert.isEmpty(mockHandler.popHistory());
 
-      assert.isTrue(this.terminal.customKeyEventHandler_({...fakeEvent,
-        keyCode: 66}));
-      assert.isEmpty(mockHandler.popHistory());
+        assert.isFalse(this.terminal.handleKeyEvent_({...fakeEvent,
+          keyCode: 66}));
+        assert.isEmpty(mockHandler.popHistory());
 
-      assert.isTrue(this.terminal.customKeyEventHandler_({...fakeEvent,
-        ctrlKey: false}));
-      assert.isEmpty(mockHandler.popHistory());
+        assert.isFalse(this.terminal.handleKeyEvent_({...fakeEvent,
+          ctrlKey: false}));
+        assert.isEmpty(mockHandler.popHistory());
+      });
+
+      it('arrow keys and 6 pack keys', async function() {
+        const check = (ev, handled, vtKeystroke) => {
+          const mockPreventDefault = new MockFunction();
+          const mockStopPropagation = new MockFunction();
+          assert.equal(this.terminal.handleKeyEvent_({
+            type: 'keydown',
+            preventDefault: mockPreventDefault.proxy,
+            stopPropagation: mockStopPropagation.proxy,
+            ...ev,
+          }), handled);
+          const history = this.mocks.onVTKeystroke.popHistory();
+          if (vtKeystroke) {
+            assert.deepEqual(history, [[vtKeystroke]]);
+          } else {
+            assert.isEmpty(history);
+          }
+          assert.equal(mockPreventDefault.getHistory().length, handled ? 1 : 0);
+          assert.equal(mockStopPropagation.getHistory().length,
+              handled ? 1 : 0);
+        };
+
+        check({keyCode: keyCodes.UP}, false, null);
+        check({keyCode: keyCodes.UP, shiftKey: true}, true, '\x1b[1;2A');
+        check({keyCode: keyCodes.UP, altKey: true}, true, '\x1b[1;3A');
+        check({keyCode: keyCodes.UP, shiftKey: true, altKey: true}, true,
+            '\x1b[1;4A');
+
+        check({keyCode: keyCodes.INSERT}, false, null);
+        check({keyCode: keyCodes.INSERT, altKey: true}, true, '\x1b[2;3~');
+        check({keyCode: keyCodes.INSERT, shiftKey: true, altKey: true}, true,
+            '\x1b[2;4~');
+
+        check({keyCode: keyCodes.HOME}, false, null);
+        check({keyCode: keyCodes.HOME, altKey: true}, true, '\x1b[1;3H');
+        check({keyCode: keyCodes.HOME, shiftKey: true, altKey: true}, true,
+            '\x1b[1;4H');
+
+        // Shift+HOME should scroll the page.
+        assert.equal(this.mocks.term.getMethodHistory('scrollToTop').length, 0);
+        check({keyCode: keyCodes.HOME, shiftKey: true}, true, null);
+        assert.equal(this.mocks.term.getMethodHistory('scrollToTop').length, 1);
+
+        // For non-keydown event, if a modifier key is depressed, we do nothing
+        // but `handleKeyEvent_()` will return true to prevent xterm.js from
+        // handling it.
+        check({type: 'keypress', keyCode: keyCodes.HOME, altKey: true}, true,
+            undefined);
+        // If there is no modifiers, we still pass through it to xterm.js.
+        check({type: 'keypress', keyCode: keyCodes.HOME}, false, null);
+      });
     });
   });
 
