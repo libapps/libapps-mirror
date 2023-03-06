@@ -324,7 +324,9 @@ export class TerminalSettingsApp extends LitElement {
                   <div class="label">
                     ${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}
                   </div>
-                  <terminal-settings-checkbox preference="font-smoothing">
+                  <terminal-settings-checkbox
+                      ariaLabel="${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}"
+                      preference="font-smoothing">
                   </terminal-settings-checkbox>
                 </li>
               `)}
@@ -389,7 +391,9 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CURSOR_BLINK')}">
                 <div class="label">${msg('TERMINAL_NAME_PREF_BLINKING')}</div>
-                <terminal-settings-checkbox preference="cursor-blink">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('TERMINAL_NAME_PREF_BLINKING')}"
+                    preference="cursor-blink">
                 </terminal-settings-checkbox>
               </li>
             </ul>
@@ -402,7 +406,9 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container"
                   title="${msg('HTERM_PREF_SCROLLBAR_VISIBLE')}">
                 <div class="label">${msg('TERMINAL_NAME_PREF_VISIBLE')}</div>
-                <terminal-settings-checkbox preference="scrollbar-visible">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('TERMINAL_NAME_PREF_VISIBLE')}"
+                    preference="scrollbar-visible">
                 </terminal-settings-checkbox>
               </li>
             </ul>
@@ -421,25 +427,33 @@ export class TerminalSettingsApp extends LitElement {
                   ${msg('HTERM_NAME_PREF_KEYBINDINGS_OS_DEFAULTS')}
                 </div>
                 <terminal-settings-checkbox
+                    ariaLabel="${
+                        msg('HTERM_NAME_PREF_KEYBINDINGS_OS_DEFAULTS')}"
                     preference="keybindings-os-defaults">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_CTRL_N')}">
                 <div class="label">${msg('HTERM_NAME_PREF_PASS_CTRL_N')}</div>
-                <terminal-settings-checkbox preference="pass-ctrl-n">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_PASS_CTRL_N')}"
+                    preference="pass-ctrl-n">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_CTRL_T')}">
                 <div class="label">${msg('HTERM_NAME_PREF_PASS_CTRL_T')}</div>
-                <terminal-settings-checkbox preference="pass-ctrl-t">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_PASS_CTRL_T')}"
+                    preference="pass-ctrl-t">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_CTRL_W')}">
                 <div class="label">${msg('HTERM_NAME_PREF_PASS_CTRL_W')}</div>
-                <terminal-settings-checkbox preference="pass-ctrl-w">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_PASS_CTRL_W')}"
+                    preference="pass-ctrl-w">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
@@ -447,7 +461,9 @@ export class TerminalSettingsApp extends LitElement {
                 <div class="label">
                   ${msg('HTERM_NAME_PREF_PASS_CTRL_TAB')}
                 </div>
-                <terminal-settings-checkbox preference="pass-ctrl-tab">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_PASS_CTRL_TAB')}"
+                    preference="pass-ctrl-tab">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
@@ -455,7 +471,9 @@ export class TerminalSettingsApp extends LitElement {
                 <div class="label">
                   ${msg('HTERM_NAME_PREF_PASS_CTRL_NUMBER')}
                 </div>
-                <terminal-settings-checkbox preference="pass-ctrl-number">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_PASS_CTRL_NUMBER')}"
+                    preference="pass-ctrl-number">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
@@ -463,7 +481,9 @@ export class TerminalSettingsApp extends LitElement {
                 <div class="label">
                   ${msg('HTERM_NAME_PREF_PASS_ALT_NUMBER')}
                 </div>
-                <terminal-settings-checkbox preference="pass-alt-number">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_PASS_ALT_NUMBER')}"
+                    preference="pass-alt-number">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
@@ -472,13 +492,17 @@ export class TerminalSettingsApp extends LitElement {
                   ${msg('HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM')}
                 </div>
                 <terminal-settings-checkbox
+                    ariaLabel="${
+                        msg('HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM')}"
                     preference="ctrl-plus-minus-zero-zoom">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CTRL_C_COPY')}">
                 <div class="label">${msg('HTERM_NAME_PREF_CTRL_C_COPY')}</div>
-                <terminal-settings-checkbox preference="ctrl-c-copy">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_CTRL_C_COPY')}"
+                    preference="ctrl-c-copy">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
@@ -486,7 +510,9 @@ export class TerminalSettingsApp extends LitElement {
                 <div class="label">
                   ${msg('HTERM_NAME_PREF_CTRL_V_PASTE')}
                 </div>
-                <terminal-settings-checkbox preference="ctrl-v-paste">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_CTRL_V_PASTE')}"
+                    preference="ctrl-v-paste">
                 </terminal-settings-checkbox>
               </li>
             </ul>
@@ -502,7 +528,10 @@ export class TerminalSettingsApp extends LitElement {
                 <div class="label">
                   ${msg('HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE')}
                 </div>
-                <terminal-settings-checkbox preference="scroll-on-keystroke">
+                <terminal-settings-checkbox
+                    ariaLabel="${
+                        msg('HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE')}"
+                    preference="scroll-on-keystroke">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
@@ -510,7 +539,9 @@ export class TerminalSettingsApp extends LitElement {
                 <div class="label">
                   ${msg('HTERM_NAME_PREF_SCROLL_ON_OUTPUT')}
                 </div>
-                <terminal-settings-checkbox preference="scroll-on-output">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_SCROLL_ON_OUTPUT')}"
+                    preference="scroll-on-output">
                 </terminal-settings-checkbox>
               </li>
             </ul>
@@ -524,7 +555,9 @@ export class TerminalSettingsApp extends LitElement {
                 <div class="label">
                   ${msg('HTERM_NAME_PREF_COPY_ON_SELECT')}
                 </div>
-                <terminal-settings-checkbox preference="copy-on-select">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_COPY_ON_SELECT')}"
+                    preference="copy-on-select">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
@@ -533,6 +566,8 @@ export class TerminalSettingsApp extends LitElement {
                   ${msg('HTERM_NAME_PREF_ENABLE_CLIPBOARD_NOTICE')}
                 </div>
                 <terminal-settings-checkbox
+                    ariaLabel="${
+                        msg('HTERM_NAME_PREF_ENABLE_CLIPBOARD_NOTICE')}"
                     preference="enable-clipboard-notice">
                 </terminal-settings-checkbox>
               </li>
@@ -542,6 +577,8 @@ export class TerminalSettingsApp extends LitElement {
                   ${msg('HTERM_NAME_PREF_MOUSE_RIGHT_CLICK_PASTE')}
                 </div>
                 <terminal-settings-checkbox
+                    ariaLabel="${
+                        msg('HTERM_NAME_PREF_MOUSE_RIGHT_CLICK_PASTE')}"
                     preference="mouse-right-click-paste">
                 </terminal-settings-checkbox>
               </li>
@@ -558,6 +595,7 @@ export class TerminalSettingsApp extends LitElement {
                   title="${msg('TERMINAL_PREF_BELL')}">
                 <div class="label">${msg('TERMINAL_NAME_PREF_BELL')}</div>
                 <terminal-settings-checkbox
+                    ariaLabel="${msg('TERMINAL_NAME_PREF_BELL')}"
                     preference="audible-bell-sound"
                     .converter=${BELL_SOUND_CONVERTER}>
                 </terminal-settings-checkbox>
@@ -567,7 +605,10 @@ export class TerminalSettingsApp extends LitElement {
                 <div class="label">
                   ${msg('HTERM_NAME_PREF_ENABLE_RESIZE_STATUS')}
                 </div>
-                <terminal-settings-checkbox preference="enable-resize-status">
+                <terminal-settings-checkbox
+                    ariaLabel="${
+                        msg('HTERM_NAME_PREF_ENABLE_RESIZE_STATUS')}"
+                    preference="enable-resize-status">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
@@ -575,7 +616,9 @@ export class TerminalSettingsApp extends LitElement {
                 <div class="label">
                   ${msg('HTERM_NAME_PREF_CLOSE_ON_EXIT')}
                 </div>
-                <terminal-settings-checkbox preference="close-on-exit">
+                <terminal-settings-checkbox
+                    ariaLabel="${msg('HTERM_NAME_PREF_CLOSE_ON_EXIT')}"
+                    preference="close-on-exit">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
@@ -584,6 +627,8 @@ export class TerminalSettingsApp extends LitElement {
                   ${msg('HTERM_NAME_PREF_DESKTOP_NOTIFICATION_BELL')}
                 </div>
                 <terminal-settings-checkbox
+                    ariaLabel="${
+                        msg('HTERM_NAME_PREF_DESKTOP_NOTIFICATION_BELL')}"
                     preference="desktop-notification-bell">
                 </terminal-settings-checkbox>
               </li>

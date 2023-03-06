@@ -7,7 +7,7 @@
  *
  * @suppress {moduleLoad}
  */
-import {css, html} from './lit.js';
+import {css, html, ifDefined} from './lit.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 
@@ -23,6 +23,9 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   static get properties() {
     return {
       preference: {
+        type: String,
+      },
+      ariaLabel: {
         type: String,
       },
       // The preference value, which does not have to be a boolean. See property
@@ -47,6 +50,7 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
      *           fromChecked: function(boolean): *}}
      */
     this.converter = DEFAULT_CONVERTER;
+    this.ariaLabel = undefined;
   }
 
   /** @override */
@@ -110,6 +114,7 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   render() {
     return html`
         <input id="checkbox" type="checkbox" @change="${this.onUiChanged_}"
+            aria-label="${ifDefined(this.ariaLabel)}"
             .checked="${this.converter.toChecked(this.value)}" />
     `;
   }
