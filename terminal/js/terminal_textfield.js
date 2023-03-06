@@ -91,6 +91,10 @@ export class TerminalTextfieldElement extends LitElement {
         width: 100%;
       }
 
+      input::placeholder, slot[name=inline-prefix] {
+        color: var(--cros-color-secondary);
+      }
+
       #underline {
         border-bottom: 2px solid var(--cros-color-prominent);
         bottom: 0;
