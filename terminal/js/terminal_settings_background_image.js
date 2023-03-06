@@ -76,6 +76,7 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
 
     const select = html`
       <terminal-button id='bg-select' class="button-left-margin"
+        ariaLabel="${msg('SELECT_LABEL')} ${msg('TERMINAL_NAME_PREF_IMAGE')}"
         aria-description="${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP')}"
         @click="${this.onOpenFile_}">
         ${msg('SELECT_LABEL')}
@@ -84,8 +85,9 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
     const previewRemove = html`
       <img src="${this.imagePreviewSrc_}" @click="${this.onOpenFile_}">
       <terminal-button id="bg-remove" class="button-left-margin"
-         @click="${this.onRemove_}">
-        ${msg('REMOVE_LABEL')}
+          ariaLabel="${msg('REMOVE_LABEL')} ${msg('TERMINAL_NAME_PREF_IMAGE')}"
+          @click="${this.onRemove_}">
+       ${msg('REMOVE_LABEL')}
       </terminal-button>
     `;
     return html`

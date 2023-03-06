@@ -10,7 +10,7 @@
 
 import {hterm} from './deps_local.concat.js';
 
-import {html, LitElement} from './lit.js';
+import {LitElement, html, ifDefined} from './lit.js';
 import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS, fontManager,
   getSupportedFontFamilies} from './terminal_common.js';
 import './terminal_dropdown.js';
@@ -22,6 +22,9 @@ export class TerminalSettingsFonts extends LitElement {
       loadedFonts_: {
         state: true,
       },
+      ariaLabel: {
+        type: String,
+      },
     };
   }
 
@@ -29,6 +32,7 @@ export class TerminalSettingsFonts extends LitElement {
     super();
 
     this.loadedFonts_ = [];
+    this.ariaLabel = undefined;
     // Tests might overwrite this.
     this.fontManager_ = fontManager;
   }
@@ -59,7 +63,9 @@ export class TerminalSettingsFonts extends LitElement {
         }),
     );
     return html`
-        <terminal-settings-dropdown preference="font-family"
+        <terminal-settings-dropdown
+            ariaLabel="${ifDefined(this.ariaLabel)}"
+            preference="font-family"
             title="${hterm.messageManager.get('HTERM_PREF_FONT_FAMILY')}"
             .options="${options}">
         </terminal-settings-dropdown>

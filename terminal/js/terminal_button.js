@@ -8,12 +8,15 @@
  * @suppress {moduleLoad}
  */
 
-import {LitElement, css, html} from './lit.js';
+import {LitElement, css, html, ifDefined} from './lit.js';
 
 export class TerminalButtonElement extends LitElement {
   /** @override */
   static get properties() {
     return {
+      ariaLabel: {
+        type: String,
+      },
       disabled: {
         type: Boolean,
       },
@@ -104,12 +107,16 @@ export class TerminalButtonElement extends LitElement {
 
   constructor() {
     super();
+    this.ariaLabel = undefined;
     this.disabled = false;
   }
 
   /** @override */
   render() {
-    return html`<button><slot></slot></button>`;
+    return html`
+      <button aria-label="${ifDefined(this.ariaLabel)}">
+        <slot></slot>
+      </button>`;
   }
 
   /** @override */

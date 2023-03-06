@@ -285,7 +285,9 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container"
                   title="${msg('HTERM_PREF_BACKGROUND_COLOR')}">
                 <div class="label">${msg('TERMINAL_NAME_PREF_COLOR')}</div>
-                <terminal-settings-colorpicker preference="background-color"
+                <terminal-settings-colorpicker
+                    ariaLabel="${msg('TERMINAL_NAME_PREF_COLOR')}"
+                    preference="background-color"
                     disableTransparency>
                 </terminal-settings-colorpicker>
               </li>
@@ -303,10 +305,14 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container">
                 <div class="label">${msg('TERMINAL_NAME_PREF_FONT')}</div>
-                <terminal-settings-fonts></terminal-settings-fonts>
+                <terminal-settings-fonts
+                    ariaLabel="${msg('TERMINAL_NAME_PREF_FONT')}">
+                </terminal-settings-fonts>
                 <!-- TODO(lxj@google.com): We should allow user to input a
                     text size not in the list. -->
-                <terminal-settings-dropdown preference="font-size"
+                <terminal-settings-dropdown
+                    ariaLabel="${msg('HTERM_NAME_PREF_FONT_SIZE')}"
+                    preference="font-size"
                     title="${msg('HTERM_PREF_FONT_SIZE')}"
                     .options="${SUPPORTED_FONT_SIZES.map((value) => ({value}))}"
                 >
@@ -315,7 +321,9 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container"
                   title="${msg('HTERM_PREF_FOREGROUND_COLOR')}">
                 <div class="label">${msg('TERMINAL_NAME_PREF_COLOR')}</div>
-                <terminal-settings-colorpicker preference="foreground-color">
+                <terminal-settings-colorpicker
+                    ariaLabel="${msg('TERMINAL_NAME_PREF_COLOR')}"
+                    preference="foreground-color">
                 </terminal-settings-colorpicker>
               </li>
               ${when(!xtermJs, () => html`
@@ -347,6 +355,7 @@ export class TerminalSettingsApp extends LitElement {
                     ${msg('TERMINAL_NAME_PREF_LINE_HEIGHT')}
                   </div>
                   <terminal-settings-dropdown
+                      ariaLabel="${msg('TERMINAL_NAME_PREF_LINE_HEIGHT')}"
                       preference="line-height"
                       .options="${SUPPORTED_LINE_HEIGHT.map(
                         (value) => ({value}))}"
@@ -361,6 +370,8 @@ export class TerminalSettingsApp extends LitElement {
                   </div>
                   <!-- TODO(easy): Support text field entry. -->
                   <terminal-settings-dropdown
+                      ariaLabel="${
+                          msg('HTERM_NAME_PREF_LINE_HEIGHT_PADDING_SIZE')}"
                       preference="line-height-padding-size"
                       .options="${SUPPORTED_LINE_HEIGHT_PADDINGS.map(
                         (value) => ({value}))}"
@@ -378,14 +389,18 @@ export class TerminalSettingsApp extends LitElement {
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CURSOR_SHAPE')}">
                 <div class="label">${msg('TERMINAL_NAME_PREF_SHAPE')}</div>
-                <terminal-settings-dropdown preference="cursor-shape"
+                <terminal-settings-dropdown
+                    ariaLabel="${msg('TERMINAL_NAME_PREF_SHAPE')}"
+                    preference="cursor-shape"
                     .options="${cursorShapeOptions}">
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CURSOR_COLOR')}">
                 <div class="label">${msg('TERMINAL_NAME_PREF_COLOR')}</div>
-                <terminal-settings-colorpicker preference="cursor-color">
+                <terminal-settings-colorpicker
+                    ariaLabel="${msg('TERMINAL_NAME_PREF_COLOR')}"
+                    preference="cursor-color">
                 </terminal-settings-colorpicker>
               </li>
               <li class="setting-container"

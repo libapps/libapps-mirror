@@ -10,7 +10,7 @@
 
 import {lib} from './deps_local.concat.js';
 
-import {LitElement, css, html} from './lit.js';
+import {LitElement, css, html, ifDefined} from './lit.js';
 import {CHROME_VERSION} from './terminal_common.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';
 import './terminal_button.js';
@@ -78,6 +78,9 @@ export class TerminalColorpickerElement extends LitElement {
       value: {
         type: String,
         reflect: true,
+      },
+      ariaLabel: {
+        type: String,
       },
       inputInDialog: {
         type: Boolean,
@@ -180,11 +183,13 @@ export class TerminalColorpickerElement extends LitElement {
     const input = html`
         <terminal-textfield id="hexinput"
             .value="${cssToHex(/** @type {string} */(this.value))}"
+            ariaLabel="${ifDefined(this.ariaLabel)}"
             @change="${this.onInputChange_}"
             @keydown="${this.onInputKeydown_}"/>`;
     return html`
         <div id="smallview">
           <div id="swatch" tabindex="0"
+              aria-label="${ifDefined(this.ariaLabel)}"
               @blur="${this.onSwatchBlur_}"
               @click="${this.onSwatchActivated_}"
               @focus="${this.onSwatchFocus_}"
@@ -232,6 +237,7 @@ export class TerminalColorpickerElement extends LitElement {
   constructor() {
     super();
 
+    this.ariaLabel = undefined;
     /** If true, hex input is shown in dialog rather than next to swatch. */
     this.inputInDialog = false;
     /** If true, transparency is not shown. */
@@ -382,6 +388,9 @@ export class TerminalSettingsColorpickerElement extends
         type: String,
         reflect: true,
       },
+      ariaLabel: {
+        type: String,
+      },
       disableTransparency: {
         type: Boolean,
       },
@@ -393,6 +402,7 @@ export class TerminalSettingsColorpickerElement extends
     return html`
         <terminal-colorpicker @change="${this.scheduleUpdate_}"
             value="${this.value}"
+            ariaLabel="${ifDefined(this.ariaLabel)}"
             ?disableTransparency="${this.disableTransparency}"/>
     `;
   }
@@ -400,6 +410,7 @@ export class TerminalSettingsColorpickerElement extends
   constructor() {
     super();
 
+    this.ariaLabel = undefined;
     /** If true, transparency is not shown. */
     this.disableTransparency = false;
     /** @private {string} */

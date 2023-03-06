@@ -386,6 +386,8 @@ export class TerminalSettingsThemeElement extends LitElement {
               ?active-theme="${this.theme_.id === t.id}"
               ?reset-theme="${this.theme_.hasVariations()}">
             <div class="theme-inner" tabindex="0"
+                aria-label="${
+                    msg('TERMINAL_TITLE_THEME')} ${msg(t.translationKey)}"
                 @click="${this.onClicked_}"
                 @keydown="${this.onKeydown_}">
               <div class="preview" aria-hidden="true"
