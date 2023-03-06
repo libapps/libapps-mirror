@@ -193,7 +193,7 @@ export class TerminalHomeApp extends LitElement {
       }
 
       .sublabel {
-        color: rgba(var(--foreground-color-rgb), 0.5);
+        color: rgba(var(--foreground-color-rgb), 0.8);
         margin: -10px 0 0 0;
         padding: 0 20px 20px 20px;
       }
