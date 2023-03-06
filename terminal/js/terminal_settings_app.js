@@ -87,8 +87,9 @@ export class TerminalSettingsApp extends LitElement {
         padding-left: 24px;
       }
 
-      h4 {
+      .label {
         color: var(--cros-menu-label-color);
+        flex-grow: 1;
         font-weight: 400;
         line-height: 24px;
         margin: 12px 0;
@@ -152,10 +153,6 @@ export class TerminalSettingsApp extends LitElement {
         flex-wrap: nowrap;
         margin: 0 0 0 32px;
         padding: 0;
-      }
-
-      .setting-container>h4:first-child {
-        flex-grow: 1;
       }
 
       terminal-settings-ansi-colors {
@@ -287,14 +284,14 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container"
                   title="${msg('HTERM_PREF_BACKGROUND_COLOR')}">
-                <h4>${msg('TERMINAL_NAME_PREF_COLOR')}</h4>
+                <div class="label">${msg('TERMINAL_NAME_PREF_COLOR')}</div>
                 <terminal-settings-colorpicker preference="background-color"
                     disableTransparency>
                 </terminal-settings-colorpicker>
               </li>
               <li class="setting-container"
                   title="${msg('TERMINAL_SETTINGS_BACKGROUND_IMAGE_HELP')}">
-                <h4>${msg('TERMINAL_NAME_PREF_IMAGE')}</h4>
+                <div class="label">${msg('TERMINAL_NAME_PREF_IMAGE')}</div>
                 <terminal-settings-background-image />
               </li>
             </ul>
@@ -305,7 +302,7 @@ export class TerminalSettingsApp extends LitElement {
 
             <ul class="section-body">
               <li class="setting-container">
-                <h4>${msg('TERMINAL_NAME_PREF_FONT')}</h4>
+                <div class="label">${msg('TERMINAL_NAME_PREF_FONT')}</div>
                 <terminal-settings-fonts></terminal-settings-fonts>
                 <!-- TODO(lxj@google.com): We should allow user to input a
                     text size not in the list. -->
@@ -317,21 +314,25 @@ export class TerminalSettingsApp extends LitElement {
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_FOREGROUND_COLOR')}">
-                <h4>${msg('TERMINAL_NAME_PREF_COLOR')}</h4>
+                <div class="label">${msg('TERMINAL_NAME_PREF_COLOR')}</div>
                 <terminal-settings-colorpicker preference="foreground-color">
                 </terminal-settings-colorpicker>
               </li>
               ${when(!xtermJs, () => html`
                 <li class="setting-container"
                     title="${msg('HTERM_PREF_FONT_SMOOTHING')}">
-                  <h4>${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}</h4>
+                  <div class="label">
+                    ${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}
+                  </div>
                   <terminal-settings-checkbox preference="font-smoothing">
                   </terminal-settings-checkbox>
                 </li>
               `)}
               <li class="setting-container"
                   title="${msg('TERMINAL_PREF_ANSI_COLORS')}">
-                <h4>${msg('TERMINAL_NAME_PREF_ANSI_COLORS')}</h4>
+                <div class="label">
+                  ${msg('TERMINAL_NAME_PREF_ANSI_COLORS')}
+                </div>
                 <terminal-settings-ansi-colors
                     preference="color-palette-overrides">
                 </terminal-settings-ansi-colors>
@@ -340,7 +341,9 @@ export class TerminalSettingsApp extends LitElement {
               ${when(xtermJs, () => html`
                 <li class="setting-container"
                     title="${msg('TERMINAL_PREF_LINE_HEIGHT')}">
-                  <h4>${msg('TERMINAL_NAME_PREF_LINE_HEIGHT')}</h4>
+                  <div class="label">
+                    ${msg('TERMINAL_NAME_PREF_LINE_HEIGHT')}
+                  </div>
                   <terminal-settings-dropdown
                       preference="line-height"
                       .options="${SUPPORTED_LINE_HEIGHT.map(
@@ -351,7 +354,9 @@ export class TerminalSettingsApp extends LitElement {
               `, () => html`
                 <li class="setting-container"
                     title="${msg('HTERM_PREF_LINE_HEIGHT_PADDING_SIZE')}">
-                  <h4>${msg('HTERM_NAME_PREF_LINE_HEIGHT_PADDING_SIZE')}</h4>
+                  <div class="label">
+                    ${msg('HTERM_NAME_PREF_LINE_HEIGHT_PADDING_SIZE')}
+                  </div>
                   <!-- TODO(easy): Support text field entry. -->
                   <terminal-settings-dropdown
                       preference="line-height-padding-size"
@@ -370,20 +375,20 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CURSOR_SHAPE')}">
-                <h4>${msg('TERMINAL_NAME_PREF_SHAPE')}</h4>
+                <div class="label">${msg('TERMINAL_NAME_PREF_SHAPE')}</div>
                 <terminal-settings-dropdown preference="cursor-shape"
                     .options="${cursorShapeOptions}">
                 </terminal-settings-dropdown>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CURSOR_COLOR')}">
-                <h4>${msg('TERMINAL_NAME_PREF_COLOR')}</h4>
+                <div class="label">${msg('TERMINAL_NAME_PREF_COLOR')}</div>
                 <terminal-settings-colorpicker preference="cursor-color">
                 </terminal-settings-colorpicker>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CURSOR_BLINK')}">
-                <h4>${msg('TERMINAL_NAME_PREF_BLINKING')}</h4>
+                <div class="label">${msg('TERMINAL_NAME_PREF_BLINKING')}</div>
                 <terminal-settings-checkbox preference="cursor-blink">
                 </terminal-settings-checkbox>
               </li>
@@ -396,7 +401,7 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container"
                   title="${msg('HTERM_PREF_SCROLLBAR_VISIBLE')}">
-                <h4>${msg('TERMINAL_NAME_PREF_VISIBLE')}</h4>
+                <div class="label">${msg('TERMINAL_NAME_PREF_VISIBLE')}</div>
                 <terminal-settings-checkbox preference="scrollbar-visible">
                 </terminal-settings-checkbox>
               </li>
@@ -412,63 +417,75 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container"
                   title="${msg('HTERM_PREF_KEYBINDINGS_OS_DEFAULTS')}">
-                <h4>${msg('HTERM_NAME_PREF_KEYBINDINGS_OS_DEFAULTS')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_KEYBINDINGS_OS_DEFAULTS')}
+                </div>
                 <terminal-settings-checkbox
                     preference="keybindings-os-defaults">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_CTRL_N')}">
-                <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_N')}</h4>
+                <div class="label">${msg('HTERM_NAME_PREF_PASS_CTRL_N')}</div>
                 <terminal-settings-checkbox preference="pass-ctrl-n">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_CTRL_T')}">
-                <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_T')}</h4>
+                <div class="label">${msg('HTERM_NAME_PREF_PASS_CTRL_T')}</div>
                 <terminal-settings-checkbox preference="pass-ctrl-t">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_CTRL_W')}">
-                <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_W')}</h4>
+                <div class="label">${msg('HTERM_NAME_PREF_PASS_CTRL_W')}</div>
                 <terminal-settings-checkbox preference="pass-ctrl-w">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_CTRL_TAB')}">
-                <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_TAB')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_PASS_CTRL_TAB')}
+                </div>
                 <terminal-settings-checkbox preference="pass-ctrl-tab">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_CTRL_NUMBER')}">
-                <h4>${msg('HTERM_NAME_PREF_PASS_CTRL_NUMBER')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_PASS_CTRL_NUMBER')}
+                </div>
                 <terminal-settings-checkbox preference="pass-ctrl-number">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_PASS_ALT_NUMBER')}">
-                <h4>${msg('HTERM_NAME_PREF_PASS_ALT_NUMBER')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_PASS_ALT_NUMBER')}
+                </div>
                 <terminal-settings-checkbox preference="pass-alt-number">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM')}">
-                <h4>${msg('HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_CTRL_PLUS_MINUS_ZERO_ZOOM')}
+                </div>
                 <terminal-settings-checkbox
                     preference="ctrl-plus-minus-zero-zoom">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CTRL_C_COPY')}">
-                <h4>${msg('HTERM_NAME_PREF_CTRL_C_COPY')}</h4>
+                <div class="label">${msg('HTERM_NAME_PREF_CTRL_C_COPY')}</div>
                 <terminal-settings-checkbox preference="ctrl-c-copy">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CTRL_V_PASTE')}">
-                <h4>${msg('HTERM_NAME_PREF_CTRL_V_PASTE')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_CTRL_V_PASTE')}
+                </div>
                 <terminal-settings-checkbox preference="ctrl-v-paste">
                 </terminal-settings-checkbox>
               </li>
@@ -482,13 +499,17 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container"
                   title="${msg('HTERM_PREF_SCROLL_ON_KEYSTROKE')}">
-                <h4>${msg('HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_SCROLL_ON_KEYSTROKE')}
+                </div>
                 <terminal-settings-checkbox preference="scroll-on-keystroke">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_SCROLL_ON_OUTPUT')}">
-                <h4>${msg('HTERM_NAME_PREF_SCROLL_ON_OUTPUT')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_SCROLL_ON_OUTPUT')}
+                </div>
                 <terminal-settings-checkbox preference="scroll-on-output">
                 </terminal-settings-checkbox>
               </li>
@@ -500,20 +521,26 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container"
                   title="${msg('HTERM_PREF_COPY_ON_SELECT')}">
-                <h4>${msg('HTERM_NAME_PREF_COPY_ON_SELECT')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_COPY_ON_SELECT')}
+                </div>
                 <terminal-settings-checkbox preference="copy-on-select">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_ENABLE_CLIPBOARD_NOTICE')}">
-                <h4>${msg('HTERM_NAME_PREF_ENABLE_CLIPBOARD_NOTICE')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_ENABLE_CLIPBOARD_NOTICE')}
+                </div>
                 <terminal-settings-checkbox
                     preference="enable-clipboard-notice">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_MOUSE_RIGHT_CLICK_PASTE')}">
-                <h4>${msg('HTERM_NAME_PREF_MOUSE_RIGHT_CLICK_PASTE')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_MOUSE_RIGHT_CLICK_PASTE')}
+                </div>
                 <terminal-settings-checkbox
                     preference="mouse-right-click-paste">
                 </terminal-settings-checkbox>
@@ -529,7 +556,7 @@ export class TerminalSettingsApp extends LitElement {
             <ul class="section-body">
               <li class="setting-container"
                   title="${msg('TERMINAL_PREF_BELL')}">
-                <h4>${msg('TERMINAL_NAME_PREF_BELL')}</h4>
+                <div class="label">${msg('TERMINAL_NAME_PREF_BELL')}</div>
                 <terminal-settings-checkbox
                     preference="audible-bell-sound"
                     .converter=${BELL_SOUND_CONVERTER}>
@@ -537,19 +564,25 @@ export class TerminalSettingsApp extends LitElement {
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_ENABLE_RESIZE_STATUS')}">
-                <h4>${msg('HTERM_NAME_PREF_ENABLE_RESIZE_STATUS')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_ENABLE_RESIZE_STATUS')}
+                </div>
                 <terminal-settings-checkbox preference="enable-resize-status">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CLOSE_ON_EXIT')}">
-                <h4>${msg('HTERM_NAME_PREF_CLOSE_ON_EXIT')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_CLOSE_ON_EXIT')}
+                </div>
                 <terminal-settings-checkbox preference="close-on-exit">
                 </terminal-settings-checkbox>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_DESKTOP_NOTIFICATION_BELL')}">
-                <h4>${msg('HTERM_NAME_PREF_DESKTOP_NOTIFICATION_BELL')}</h4>
+                <div class="label">
+                  ${msg('HTERM_NAME_PREF_DESKTOP_NOTIFICATION_BELL')}
+                </div>
                 <terminal-settings-checkbox
                     preference="desktop-notification-bell">
                 </terminal-settings-checkbox>
@@ -584,7 +617,7 @@ export class TerminalSettingsApp extends LitElement {
           <ul class="section-body">
             <li class="setting-container about-link" role="link"
                 @click="${() => lib.f.openWindow('/html/licenses.html')}">
-                <h4>${msg('LICENSES')}</h4>
+                <div class="label">${msg('LICENSES')}</div>
                 <span class="icon">${ICON_OPEN_IN_NEW}</span>
             </li>
           </ul>
