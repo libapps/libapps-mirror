@@ -100,15 +100,15 @@ export class TerminalContextMenu extends LitElement {
       this.hide();
     };
     const onClick = removeAndHide;
-    // Esc or char key will hide the menu, but allow Tab, etc for navigation.
+    // Esc or char key will hide the menu, but allow Tab, Arrows for navigation.
     const onKeydown = (e) => {
-      if (e.keyCode == 0x1b || (e.keyCode > 0x20 && e.keyCode < 0x80)) {
+      if (e.keyCode == 0x1b || e.keyCode >= 0x30) {
         removeAndHide();
       }
     };
     this.ownerDocument.addEventListener('click', onClick, options);
     this.ownerDocument.addEventListener('keydown', onKeydown, options);
-    this.renderRoot.querySelector('ul').focus();
+    this.renderRoot.querySelector('li').focus();
   }
 
   hide() {
@@ -130,8 +130,17 @@ export class TerminalContextMenu extends LitElement {
                   this.hide();
                   i.action();
                 }
-              }}
-          >
+                if (e.code === 'ArrowUp') {
+                  e.preventDefault();
+                  (e.target.previousElementSibling ||
+                   e.target.parentElement.lastElementChild).focus();
+                } else if (e.code === 'ArrowDown') {
+                  e.preventDefault();
+                  (e.target.nextElementSibling ||
+                   e.target.parentElement.firstElementChild).focus();
+                }
+              }
+          }>
           ${i.name}
           </li>`)}
       </ul>
