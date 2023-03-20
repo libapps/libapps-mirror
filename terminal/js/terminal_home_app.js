@@ -105,11 +105,12 @@ export class TerminalHomeApp extends LitElement {
         margin: 0;
       }
 
-      h4 {
+      .rowlabel {
         color: rgb(var(--foreground-color-rgb));
         flex: 1;
         font-size: 13px;
         font-weight: 400;
+        margin: 16px 0;
         padding-right: 16px;
       }
 
@@ -194,6 +195,8 @@ export class TerminalHomeApp extends LitElement {
 
       .sublabel {
         color: rgba(var(--foreground-color-rgb), 0.8);
+        font-size: 13px;
+        font-weight: 500;
         margin: -10px 0 0 0;
         padding: 0 20px 20px 20px;
       }
@@ -241,7 +244,7 @@ export class TerminalHomeApp extends LitElement {
 
     const text = (c) => html`
       <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
-      <h4>${containerLabel(c)}</h4>
+      <div class="rowlabel">${containerLabel(c)}</div>
    `;
     const href = (c) => {
       const enc = encodeURIComponent;
@@ -266,11 +269,13 @@ export class TerminalHomeApp extends LitElement {
               ${buttonText}
             </terminal-button>
           </div>
-          ${this.crostiniEnabled ? undefined : html`
-            <h4 class="sublabel">${msg('TERMINAL_HOME_LINUX_NOT_ENABLED')}</h4>
-          `}
+          ${when(!this.crostiniEnabled, () => html`
+            <div class="sublabel">
+              ${msg('TERMINAL_HOME_LINUX_NOT_ENABLED')}
+            </div>
+          `)}
         </div>
-        ${this.containers.length === 0 ? undefined : html`
+        ${when(this.containers.length > 0, () => html`
           <ul>
           ${this.containers.map((c) => html`
             <li class="row">
@@ -287,7 +292,7 @@ export class TerminalHomeApp extends LitElement {
             </li>
           `)}
           </ul>
-        `}
+        `)}
       </section>
     `;
   }
@@ -315,7 +320,7 @@ export class TerminalHomeApp extends LitElement {
 
     const text = (c) => html`
       <span class="row-icon icon-fill-svg">${ICON_SSH}</span>
-      <h4>${c.description}</h4>
+      <div class="rowlabel">${c.description}</div>
    `;
     return html`
       <section>
@@ -327,7 +332,9 @@ export class TerminalHomeApp extends LitElement {
               ${msg('TERMINAL_HOME_ADD_SSH')}
             </terminal-button>
           </div>
-          ${sublabel ? html`<h4 class="sublabel">${sublabel}</h4>` : undefined}
+          ${when(!!sublabel, () => html`
+            <div class="sublabel">${sublabel}</div>
+          `)}
         </div>
         ${when(this.sshConnections.length > 0, () => html`
           <ul>
@@ -368,18 +375,18 @@ export class TerminalHomeApp extends LitElement {
               <button class="row full-width"
                   @click="${this.onOpenTerminalSettings}">
                 <span class="row-icon icon-fill-svg">${ICON_SETTINGS}</span>
-                <h4 class="full-width nowrap">
+                <div class="full-width nowrap rowlabel">
                   ${msg('TERMINAL_HOME_TERMINAL_SETTINGS')}
-                </h4>
+                </div>
               </button>
             </li>
             <li>
               <button class="row full-width"
                   @click="${this.onOpenSystemSettings}">
                 <span class="row-icon icon-fill-svg">${ICON_CODE}</span>
-                <h4 class="full-width nowrap">
+                <div class="full-width nowrap rowlabel">
                   ${msg('TERMINAL_HOME_DEVELOPER_SETTINGS')}
-                </h4>
+                </div>
                 <mwc-icon-button class="icon-fill-svg">
                   ${ICON_OPEN_IN_NEW}
                 </mwc-icon-button>

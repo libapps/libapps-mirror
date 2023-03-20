@@ -22,7 +22,8 @@ describe('terminal_home_app_tests.js', () => {
       for (let i = 0; i < 3; i++) {
         await this.el.updateComplete;
       }
-      return this.el.shadowRoot.querySelectorAll('h3, h4');
+      return this.el.shadowRoot.querySelectorAll(
+          'h3, h4, .rowlabel, .sublabel');
     };
   });
 
@@ -61,7 +62,7 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_DEVELOPER_SETTINGS', rows[6].innerText);
 
     // One container and two ssh connections == 3 links
-    const links = this.el.shadowRoot.querySelectorAll('li a h4');
+    const links = this.el.shadowRoot.querySelectorAll('li a .rowlabel');
     assert.equal(3, links.length);
 
     // Buttons for Add SSH, and Manage (Linux).
@@ -126,7 +127,7 @@ describe('terminal_home_app_tests.js', () => {
 
     // Even though Crostini isn't enabled, we still have a container so should
     // have a link.
-    const links = this.el.shadowRoot.querySelectorAll('li a h4');
+    const links = this.el.shadowRoot.querySelectorAll('li a .rowlabel');
     assert.equal(1, links.length);
 
     // Buttons for Add SSH, and Set up (Linux).
