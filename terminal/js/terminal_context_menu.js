@@ -33,6 +33,7 @@ export class TerminalContextMenu extends LitElement {
      * @public {!Array<{name: string, action: function()}>}
      */
     this.items = [];
+    this.selected_ = -1;
 
     this.hideBound_ = this.hide.bind(this);
   }
@@ -108,17 +109,39 @@ export class TerminalContextMenu extends LitElement {
     };
     this.ownerDocument.addEventListener('click', onClick, options);
     this.ownerDocument.addEventListener('keydown', onKeydown, options);
-    this.renderRoot.querySelector('li').focus();
+    this.renderRoot.querySelector('ul').focus();
+    this.selected_ = -1;
   }
 
   hide() {
     this.style.visibility = 'hidden';
   }
 
+  /** @param {!Event} event */
+  onKeydown_(event) {
+    switch (event.code) {
+      case 'ArrowUp':
+        this.selected_--;
+        if (this.selected_ < 0) {
+          this.selected_ = this.items.length - 1;
+        }
+        break;
+      case 'ArrowDown':
+        this.selected_ = (this.selected_ + 1) % this.items.length;
+        break;
+      default:
+        return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    this.renderRoot.querySelectorAll('li')[this.selected_].focus();
+  }
+
   /** @override */
   render() {
     return html`
-      <ul tabindex="0" role="menu" aria-label="${this.label}">
+      <ul tabindex="0" role="menu" aria-label="${this.label}"
+          @keydown=${this.onKeydown_}>
         ${this.items.map((i) => html`
           <li tabindex="0" role="menuitem"
               @click=${(e) => {
@@ -127,17 +150,9 @@ export class TerminalContextMenu extends LitElement {
               }}
               @keydown=${(e) => {
                 if (['Enter', 'Space'].includes(e.code)) {
+                  e.preventDefault();
                   this.hide();
                   i.action();
-                }
-                if (e.code === 'ArrowUp') {
-                  e.preventDefault();
-                  (e.target.previousElementSibling ||
-                   e.target.parentElement.lastElementChild).focus();
-                } else if (e.code === 'ArrowDown') {
-                  e.preventDefault();
-                  (e.target.nextElementSibling ||
-                   e.target.parentElement.firstElementChild).focus();
                 }
               }
           }>
