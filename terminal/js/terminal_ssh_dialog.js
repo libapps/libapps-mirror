@@ -120,7 +120,8 @@ export function parseSSHDestination(destination) {
     return null;
   }
 
-  // Match ssh://username@hostname[:port].
+  // Match ssh://username@hostname[:port]. Openssh does not seem to support ipv6
+  // as the hostname in this format, so we will also not support it.
   const sshUrlMatch =
       destination.match(/^ssh:\/\/(.+)@([^:@]+)(?::(\d+))?$/i);
   if (sshUrlMatch) {
@@ -133,9 +134,15 @@ export function parseSSHDestination(destination) {
   }
 
   // Match username@hostname
-  const match = destination.match(/^(.+)@([^:@]+)$/);
+  const match = destination.match(/^(.+)@([^@]+)$/);
   if (match) {
-    const [username, hostname] = match.slice(1);
+    const username = match[1];
+    let hostname = match[2];
+    // This is to remove the possible "[]" surrounding the ipv6 address.
+    // Openssh does not seem to support this format though.
+    if (hostname.startsWith('[') && hostname.endsWith(']')) {
+      hostname = hostname.slice(1, -1);
+    }
     return {username, hostname, port: null};
   }
 
