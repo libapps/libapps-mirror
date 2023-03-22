@@ -19,7 +19,8 @@ import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT,
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
 import {ICON_OPEN_IN_NEW} from './terminal_icons.js';
-import {ProfileType, getProfileIds} from './terminal_profiles.js';
+import {ProfileType, getProfileIds, setProfileIds}
+    from './terminal_profiles.js';
 import './terminal_settings_ansi_colors.js';
 import './terminal_settings_background_image.js';
 import './terminal_settings_category_selector.js';
@@ -716,9 +717,14 @@ export class TerminalSettingsApp extends LitElement {
   }
 
   async updateSettingsProfiles_() {
-    const profiles = await getProfileIds(ProfileType.HTERM);
-    this.settingsProfiles_ = [hterm.Terminal.DEFAULT_PROFILE_ID,
+    let profiles = await getProfileIds(ProfileType.HTERM);
+    // Ensure 'default' is the first.
+    if (profiles.lastIndexOf(hterm.Terminal.DEFAULT_PROFILE_ID) != 0) {
+      profiles = [hterm.Terminal.DEFAULT_PROFILE_ID,
         ...profiles.filter((i) => i !== hterm.Terminal.DEFAULT_PROFILE_ID)];
+      setProfileIds(ProfileType.HTERM, profiles);
+    }
+    this.settingsProfiles_ = profiles;
   }
 
   /**
