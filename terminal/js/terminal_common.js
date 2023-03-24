@@ -225,7 +225,6 @@ export function watchColors(prefs) {
     link.href = `data:image/svg+xml,
       <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px"
           viewBox="0 0 48 48">
-        <circle cx="24" cy="24" r="24" fill="${esc(bg)}"/>
         <polyline points="7,17 20,24 7,31" stroke-width="5" fill="none"
             stroke="${esc(fg)}"/>
         <line x1="23" y1="36" x2="38" y2="36" stroke-width="5"
