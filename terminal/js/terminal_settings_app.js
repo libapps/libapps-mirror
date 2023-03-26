@@ -14,8 +14,8 @@ import {getIndexeddbFileSystem} from './nassh_fs.js';
 
 import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT,
-  SUPPORTED_LINE_HEIGHT_PADDINGS, getOSInfo, isXtermJs}
-    from './terminal_common.js';
+  SUPPORTED_LINE_HEIGHT_PADDINGS, backgroundImageLocalStorageKeyForProfileId,
+  getOSInfo, isXtermJs} from './terminal_common.js';
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
 import {ICON_OPEN_IN_NEW} from './terminal_icons.js';
@@ -769,11 +769,17 @@ export class TerminalSettingsApp extends LitElement {
    * @private
    */
   async onSettingsProfileDelete_(e) {
+    const deleted = e.detail.profile;
+    // Clear any background images.
+    window.localStorage.removeItem(
+      backgroundImageLocalStorageKeyForProfileId(deleted));
+
+    // Set new active profile.
     let active = this.activeSettingsProfile_;
     const activeIndex = this.settingsProfiles_.indexOf(active);
     await this.updateSettingsProfiles_();
     // If active profile is deleted, then select previous.
-    if (active === e.detail.profile) {
+    if (active === deleted) {
       active = this.settingsProfiles_[activeIndex - 1];
     }
     this.clickProfile_(active);

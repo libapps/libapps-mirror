@@ -166,6 +166,27 @@ export function normalizeCSSFontFamily(cssFontFamily) {
 }
 
 /**
+ * Local storage key for background image.
+ *
+ * @param {!lib.PreferenceManager} prefs The preference manager.
+ * @return {string}
+ */
+export function backgroundImageLocalStorageKey(prefs) {
+  return backgroundImageLocalStorageKeyForProfileId(
+    prefs.prefix.split('/')[3]);
+}
+
+/**
+ * Local storage key for background image.
+ *
+ * @param {string} profileId profile ID
+ * @return {string}
+ */
+export function backgroundImageLocalStorageKeyForProfileId(profileId) {
+  return 'background-image-' + profileId;
+}
+
+/**
  * Change default values for some existing prefs and define new ones. Note that
  * for the new prefs, you might get incorrect value if this is called after
  * `prefs.readStorage()`.
@@ -191,6 +212,16 @@ export function definePrefs(prefs) {
   prefs.definePreference('theme', DEFAULT_THEME);
   prefs.definePreference('theme-variations', {});
   prefs.definePreference('line-height', 1);
+
+  // Background image multi-profile migration.
+  // TODO(joelhockey): Remove after M120.
+  const oldKey = 'background-image';
+  const newKey = 'background-image-default';
+  const img = window.localStorage.getItem(oldKey);
+  if (img) {
+    window.localStorage.setItem(newKey, img);
+    window.localStorage.removeItem(oldKey);
+  }
 }
 
 /**

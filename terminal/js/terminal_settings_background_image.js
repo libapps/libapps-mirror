@@ -12,8 +12,7 @@ import {hterm} from './deps_local.concat.js';
 
 import {css, html, LitElement} from './lit.js';
 import './terminal_button.js';
-
-const PREFERENCE = 'background-image';
+import {backgroundImageLocalStorageKey} from './terminal_common.js';
 
 export class TerminalSettingsBackgroundImageElement extends LitElement {
   static get is() { return 'terminal-settings-background-image'; }
@@ -65,9 +64,19 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
   constructor() {
     super();
     /** @private {string} */
-    this.imagePreviewSrc_ = window.localStorage.getItem(PREFERENCE) || '';
+    this.key_ = '';
+    /** @private {string} */
+    this.imagePreviewSrc_ = '';
     /** @private {string} */
     this.errorMsg_ = '';
+    window.preferenceManager.addPrefixObserver(this.profileChanged_.bind(this));
+    this.profileChanged_();
+  }
+
+  /** @private */
+  profileChanged_() {
+    this.key_ = backgroundImageLocalStorageKey(window.preferenceManager);
+    this.imagePreviewSrc_ = window.localStorage.getItem(this.key_) || '';
   }
 
   /** @override */
@@ -107,7 +116,7 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
   onRemove_(event) {
     this.imagePreviewSrc_ = '';
     this.errorMsg_ = '';
-    window.localStorage.removeItem(PREFERENCE);
+    window.localStorage.removeItem(this.key_);
   }
 
   /** @param {!Event} event */
@@ -124,7 +133,7 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
   /** @param {string} dataUrl */
   onFileLoad_(dataUrl) {
     try {
-      window.localStorage.setItem(PREFERENCE, dataUrl);
+      window.localStorage.setItem(this.key_, dataUrl);
       this.imagePreviewSrc_ = dataUrl;
     } catch (e) {
       console.error(e);

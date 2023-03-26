@@ -6,15 +6,21 @@
  * @fileoverview Terminal Settings Background Image Element unit tests.
  */
 
+import {lib} from './deps_local.concat.js';
+
 import {TerminalSettingsBackgroundImageElement}
     from './terminal_settings_background_image.js';
+
+const key = 'background-image-test';
 
 describe('terminal_settings_background_image_tests.js', () => {
   const svgDataUrl = 'data:image/svg+xml;base64,' +
       'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLz4=';
 
   beforeEach(function() {
-    window.localStorage.removeItem('background-image');
+    window.preferenceManager = new lib.PreferenceManager(
+      new lib.Storage.Memory(), '/hterm/profiles/test/');
+    window.localStorage.removeItem(key);
 
     this.el = null;
     this.createElement = async function() {
@@ -34,25 +40,26 @@ describe('terminal_settings_background_image_tests.js', () => {
     if (this.el) {
       document.body.removeChild(this.el);
     }
+    window.localStorage.removeItem(key);
   });
 
   it('shows-preview-local-storage-if-exists', async function() {
     await this.createElement();
     assert.equal(this.el.imagePreviewSrc_, '');
 
-    window.localStorage.setItem('background-image', svgDataUrl);
+    window.localStorage.setItem(key, svgDataUrl);
     await this.createElement();
     assert.equal(this.el.imagePreviewSrc_, svgDataUrl);
   });
 
   it('clears-storage-and-preview-on-remove-click', async function() {
-    window.localStorage.setItem('background-image', svgDataUrl);
+    window.localStorage.setItem(key, svgDataUrl);
     await this.createElement();
 
     this.el.shadowRoot.querySelector('#bg-remove').click();
 
     await this.el.updateComplete;
-    assert.isNull(window.localStorage.getItem('background-image'));
+    assert.isNull(window.localStorage.getItem(key));
     assert.equal('', this.el.imagePreviewSrc_);
   });
 
@@ -64,7 +71,7 @@ describe('terminal_settings_background_image_tests.js', () => {
     assert.isNull(this.el.shadowRoot.querySelector('#bg-remove'));
 
     // Image from local storage.
-    window.localStorage.setItem('background-image', svgDataUrl);
+    window.localStorage.setItem(key, svgDataUrl);
     await this.createElement();
 
     assert.isNull(this.el.shadowRoot.querySelector('#bg-select'));
@@ -75,7 +82,7 @@ describe('terminal_settings_background_image_tests.js', () => {
   it('updates-preview-and-local-storage-when-file-selected', async function() {
     await this.createElement();
     this.el.onFileLoad_(svgDataUrl);
-    assert.equal(svgDataUrl, window.localStorage.getItem('background-image'));
+    assert.equal(svgDataUrl, window.localStorage.getItem(key));
     assert.equal(svgDataUrl, this.el.imagePreviewSrc_);
   });
 });

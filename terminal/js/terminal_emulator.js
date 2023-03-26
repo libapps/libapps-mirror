@@ -14,13 +14,15 @@
 import {hterm, lib} from './deps_local.concat.js';
 
 import {LitElement, css, html} from './lit.js';
-import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS, definePrefs,
-  delayedScheduler, fontManager, getOSInfo, sleep} from './terminal_common.js';
+import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS,
+  backgroundImageLocalStorageKey, definePrefs, delayedScheduler, fontManager,
+  getOSInfo, sleep}
+  from './terminal_common.js';
 import {TerminalContextMenu} from './terminal_context_menu.js';
 import {ICON_COPY} from './terminal_icons.js';
 import {TerminalTooltip} from './terminal_tooltip.js';
 import {Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
-    from './xterm.js';
+  from './xterm.js';
 import {XtermInternal} from './terminal_xterm_internal.js';
 
 
@@ -373,6 +375,7 @@ class BackgroundImageWatcher {
   constructor(prefs, onChange) {
     this.prefs_ = prefs;
     this.onChange_ = onChange;
+    this.localStorageKey_ = backgroundImageLocalStorageKey(prefs);
   }
 
   /**
@@ -380,7 +383,7 @@ class BackgroundImageWatcher {
    */
   watch() {
     window.addEventListener('storage', (e) => {
-      if (e.key === BACKGROUND_IMAGE_KEY) {
+      if (e.key === this.localStorageKey_) {
         this.onChange_(this.getBackgroundImage());
       }
     });
@@ -390,7 +393,7 @@ class BackgroundImageWatcher {
   }
 
   getBackgroundImage() {
-    const image = window.localStorage.getItem(BACKGROUND_IMAGE_KEY);
+    const image = window.localStorage.getItem(this.localStorageKey_);
     if (image) {
       return `url(${image})`;
     }

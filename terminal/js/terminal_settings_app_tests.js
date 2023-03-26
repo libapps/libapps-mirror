@@ -81,6 +81,14 @@ describe('terminal_settings_app.js', function() {
     assert.equal(window.preferenceManager.prefix, '/hterm/profiles/red/');
   });
 
+  it('clears-background-image-local-storage-on-delete', async function() {
+    window.localStorage.setItem('background-image-test', 'test');
+    await this.el.onSettingsProfileDelete_(
+      new CustomEvent('', {detail: {profile: 'test'}}));
+
+    assert.isNull(window.localStorage.getItem('background-image-test'));
+  });
+
   it('selects-correct-profile-after-delete', async function() {
     const deleteProfile = async (profile) => {
       const profiles = this.el.settingsProfiles_.filter((p) => p !== profile);
