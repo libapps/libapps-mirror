@@ -12,10 +12,7 @@ ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
 DEBUG=0
 OFFICIAL_RELEASE=0
-
-# pnacl tries to use "python" instead of "python2".
-export PNACLPYTHON=python2
-python2 --version >/dev/null
+BUILD_NACL=1
 
 for i in $@; do
   case $i in
@@ -24,6 +21,9 @@ for i in $@; do
       ;;
     "--official-release")
       OFFICIAL_RELEASE=1
+      ;;
+    "--wasm-only")
+      BUILD_NACL=0
       ;;
     *)
       echo "usage: $0 [--debug]"
@@ -36,15 +36,11 @@ cd "$(dirname "$0")"
 mkdir -p output
 
 # Build the toolchain packages.
-pkgs=(
+tc_pkgs=(
   # Build tools.
   gnuconfig
   mandoc
   bazel-0.17
-
-  # NaCl toolchain.
-  naclsdk
-  glibc-compat
 
   # WASM toolchain.
   binaryen
@@ -52,8 +48,8 @@ pkgs=(
   wasi-sdk
   wasmtime
 )
-for pkg in "${pkgs[@]}"; do
-  ./third_party/${pkg}/build
+for tc_pkg in "${tc_pkgs[@]}"; do
+  ./third_party/${tc_pkg}/build
 done
 
 # The plugin packages.
@@ -63,12 +59,6 @@ pkgs=(
   ldns
   $(printf 'openssh-%s ' "${SSH_VERSIONS[@]}")
 )
-
-# Build the NaCl packages.
-for pkg in "${pkgs[@]}"; do
-  ./third_party/${pkg}/build --toolchain pnacl
-done
-./third_party/mosh-chrome/build
 
 ./wassh-libc-sup/build
 # Build the WASM packages.
@@ -131,6 +121,30 @@ for version in "${SSH_VERSIONS[@]}"; do
 done
 make -f Makefile.wasm-opt -j${ncpus} -O
 popd >/dev/null
+
+if [[ ${BUILD_NACL} == 0 ]]; then
+  exit
+fi
+
+# pnacl tries to use "python" instead of "python2".
+export PNACLPYTHON=python2
+python2 --version >/dev/null
+
+# Build the NaCl toolchain packages.
+tc_pkgs=(
+  # NaCl toolchain.
+  naclsdk
+  glibc-compat
+)
+for tc_pkg in "${tc_pkgs[@]}"; do
+  ./third_party/${tc_pkg}/build
+done
+
+# Build the NaCl packages.
+for pkg in "${pkgs[@]}"; do
+  ./third_party/${pkg}/build --toolchain pnacl
+done
+./third_party/mosh-chrome/build
 
 # Build the PNaCl programs.
 BUILD_ARGS=()
