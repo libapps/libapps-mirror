@@ -125,6 +125,21 @@ function ctl(ch) {
 }
 
 /**
+ * Create a notification following hterm's style.
+ *
+ * @param {string} title
+ * @param {?string=} body
+ * @return {!Notification}
+ */
+function createNotification(title, body) {
+  const options = {icon: lib.resource.getDataUrl('hterm/images/icon-96')};
+  if (body) {
+    options.body = body;
+  }
+  return new Notification(`\u266A ${title} \u266A`, options);
+}
+
+/**
  * A "terminal io" class for xterm. We don't want the vanilla hterm.Terminal.IO
  * because it always convert utf8 data to strings, which is not necessary for
  * xterm.
@@ -250,9 +265,7 @@ class Bell {
 
     this.audio_?.play();
     if (this.showNotification && !document.hasFocus() && !this.notification_) {
-      this.notification_ = new Notification(
-          `\u266A ${document.title} \u266A`,
-          {icon: lib.resource.getDataUrl('hterm/images/icon-96')});
+      this.notification_ = createNotification(document.title);
       // Close the notification after a timeout. Note that this is different
       // from hterm's behavior, but I think it makes more sense to do so.
       setTimeout(() => {
@@ -653,6 +666,17 @@ export class XtermTerminal {
       const decoder = new TextDecoder();
       const bytes = lib.codec.stringToCodeUnitArray(data);
       this.copyString_(decoder.decode(bytes));
+
+      return true;
+    });
+
+    // URxvt perl modules. We only support "notify".
+    this.term.parser.registerOscHandler(777, (args) => {
+      // Match 'notify;<title>[;<message>]'.
+      const match = args.match(/^notify;([^;]*)(?:;(.*))?$/);
+      if (match) {
+        createNotification(match[1], match[2]);
+      }
 
       return true;
     });
