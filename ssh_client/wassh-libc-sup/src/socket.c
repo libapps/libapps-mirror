@@ -5,6 +5,7 @@
 // Implementation for socket().
 
 #include <errno.h>
+#include <netinet/in.h>
 #include <sys/socket.h>
 
 #include "bh-syscalls.h"
@@ -13,10 +14,12 @@
 int socket(int domain, int c_type, int protocol) {
   _ENTER("domain=%i type=%i protocol=%i", domain, c_type, protocol);
 
-  // We don't support anything here currently.
+  // We don't support much here currently.
   // 0: The default for most things.
   // -1: Our fake delayed hostname logic from getaddrinfo.
-  if (protocol != 0 && protocol != -1) {
+  if (protocol != 0 && protocol != -1 &&
+      !(c_type == SOCK_STREAM && protocol == IPPROTO_TCP) &&
+      !(c_type == SOCK_DGRAM && protocol == IPPROTO_UDP)) {
     _EXIT("|protocol| unknown");
     errno = EINVAL;
     return -1;
