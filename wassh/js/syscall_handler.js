@@ -161,13 +161,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /** @override */
-  handle_fd_fdstat_get(fd) {
+  async handle_fd_fdstat_get(fd) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
       return WASI.errno.EBADF;
     }
 
-    const stat = fh.stat();
+    const stat = await fh.stat();
     return /** @type {!WASI_t.fdstat} */ ({
       fs_filetype: WASI.filetype.UNKNOWN,
       fs_flags: 0,
