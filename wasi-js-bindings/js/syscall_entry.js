@@ -851,13 +851,20 @@ export class WasiPreview1 extends Base {
   }
 
   /** @override */
-  sys_sock_recv(fd, ri_data, ri_flags, ro_datalen_ptr, ro_flags_ptr) {
-    return WASI.errno.ENOSYS;
+  sys_sock_recv(fd, ri_data_ptr, ri_data_len, ri_flags, ro_datalen_ptr,
+                ro_flags_ptr) {
+    if (ri_flags !== 0) {
+      return WASI.errno.ENOTSUP;
+    }
+    return this.sys_fd_read(fd, ri_data_ptr, ri_data_len, ro_datalen_ptr);
   }
 
   /** @override */
-  sys_sock_send(fd, si_data, si_flags, so_datalen_ptr) {
-    return WASI.errno.ENOSYS;
+  sys_sock_send(fd, si_data_ptr, si_data_len, si_flags, so_datalen_ptr) {
+    if (si_flags !== 0) {
+      return WASI.errno.ENOTSUP;
+    }
+    return this.sys_fd_write(fd, si_data_ptr, si_data_len, so_datalen_ptr);
   }
 
   /** @override */
