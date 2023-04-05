@@ -186,11 +186,7 @@ export class Socket extends VFS.PathHandle {
  * A TCP/IP based socket backed by the chrome.sockets.tcp API.
  */
 export class ChromeTcpSocket extends Socket {
-  /**
-   * @param {number} domain
-   * @param {number} type
-   * @param {number} protocol
-   */
+  /** @override */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
@@ -434,11 +430,7 @@ ChromeTcpSocket.eventRouter_ = null;
  * A TCP/IP based listening socket backed by the chrome.sockets.tcpServer API.
  */
 export class ChromeTcpListenSocket extends Socket {
-  /**
-   * @param {number} domain
-   * @param {number} type
-   * @param {number} protocol
-   */
+  /** @override */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
@@ -759,11 +751,7 @@ export class RelaySocket extends Socket {
  * @see https://wicg.github.io/direct-sockets/
  */
  export class WebTcpSocket extends Socket {
-  /**
-   * @param {number} domain
-   * @param {number} type
-   * @param {number} protocol
-   */
+  /** @override */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
