@@ -763,6 +763,27 @@ export class RelaySocket extends Socket {
     this.tcpNoDelay_ = false;
   }
 
+  /**
+   * @param {!TCPSocket} socket
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async setTcpSocket_(socket) {
+    this.socket_ = socket;
+    try {
+      const {readable, writable, remoteAddress, remotePort} =
+          await this.socket_.opened;
+      this.directSocketsReader_ = readable.getReader();
+      this.directSocketsWriter_ = writable.getWriter();
+      this.address = remoteAddress;
+      this.port = remotePort;
+    } catch (e) {
+      this.socket_ = null;
+      console.warn('setTcpSocket_ failed.', e);
+      return WASI.errno.ENETUNREACH;
+    }
+    return WASI.errno.ESUCCESS;
+  }
+
   /** @override */
   async connect(address, port) {
     this.debug(`connect(${address}, ${port})`);
@@ -780,24 +801,21 @@ export class RelaySocket extends Socket {
       options.keepAliveDelay = 75000;
     }
 
-    this.socket_ = new TCPSocket(address, port, options);
-
-    try {
-      const {readable, writable} = await this.socket_.opened;
-      this.directSocketsReader_ = readable.getReader();
-      this.directSocketsWriter_ = writable.getWriter();
-    } catch (e) {
-      this.socket_ = null;
-      console.warn('Connecting failed.', e);
-      return WASI.errno.ENETUNREACH;
-    }
-
-    this.address = address;
-    this.port = port;
-
+    this.setTcpSocket_(new TCPSocket(address, port, options));
     this.pollData_();
 
     return WASI.errno.ESUCCESS;
+  }
+
+  /** @override */
+  async bind(address, port) {
+    const handle = new WebTcpServerSocket(
+        this.domain, this.filetype, this.protocol);
+    const result = await handle.bind(address, port);
+    if (result === WASI.errno.ESUCCESS) {
+      return handle;
+    }
+    return result;
   }
 
   /**
@@ -819,19 +837,25 @@ export class RelaySocket extends Socket {
       return;
     }
 
-    this.directSocketsReader_.releaseLock();
-    this.directSocketsWriter_.releaseLock();
+    if (this.directSocketsReader_) {
+      await this.directSocketsReader_.cancel('closing');
+      this.directSocketsReader_.releaseLock();
+      this.directSocketsReader_ = null;
+    }
 
-    this.directSocketsReader_ = null;
-    this.directSocketsWriter_ = null;
+    if (this.directSocketsWriter_) {
+      await this.directSocketsWriter_.abort('closing');
+      this.directSocketsWriter_.releaseLock();
+      this.directSocketsWriter_ = null;
+    }
 
     try {
       await this.socket_.close();
-      this.socket_ = null;
     } catch (e) {
       console.warn('Error with closing socket.', e);
     }
 
+    this.socket_ = null;
     this.address = null;
     this.port = null;
   }
@@ -955,6 +979,139 @@ export class RelaySocket extends Socket {
   /** @override */
   static isSupported() {
     return window?.TCPSocket !== undefined;
+  }
+}
+
+/**
+ * A TCP/IP based server socket backed by the Direct Sockets API.
+ */
+export class WebTcpServerSocket extends Socket {
+  /** @override */
+  constructor(domain, type, protocol) {
+    super(domain, type, protocol);
+
+    this.socket_ = null;
+
+    this.incomingConnectionReader_ = null;
+
+    this.clients_ = [];
+    this.callback_ = null;
+  }
+
+  /** @override */
+  async bind(address, port) {
+    this.address = address;
+    this.port = port;
+    return WASI.errno.ESUCCESS;
+  }
+
+  /** @override */
+  async listen(backlog) {
+    if (this.address == null || this.port == null) {
+      return WASI.errno.EINVAL;
+    }
+    this.socket_ = new TCPServerSocket(
+        this.address, {localPort : this.port, backlog});
+    try {
+      const {readable, localAddress, localPort} = await this.socket_.opened;
+      // Update the local address/port with the actual address/port from
+      // TCPServerSocketOpenInfo.
+      this.address = localAddress;
+      this.port = localPort;
+      this.incomingConnectionReader_ = readable.getReader();
+      this.pollConnection_();
+      return WASI.errno.ESUCCESS;
+    } catch (e) {
+      this.socket_ = null;
+      console.warn('listen failed. ', e);
+      return WASI.errno.EADDRINUSE;
+    }
+  }
+
+  /**
+   * Polls incoming connection.
+   * Adds created connection to clients_.
+   */
+  async pollConnection_() {
+    while (true) {
+      const {value:acceptedSocket, done} =
+          await this.incomingConnectionReader_.read();
+      if (done) {
+        break;
+      }
+      if (acceptedSocket !== undefined) {
+        const socket = new WebTcpSocket(
+            this.domain, this.filetype, this.protocol);
+        await socket.setTcpSocket_(acceptedSocket);
+        socket.pollData_();
+        this.clients_.push(socket);
+        if (this.callback_) {
+          this.callback_();
+        }
+        if (this.receiveListener_) {
+          this.receiveListener_();
+        }
+      }
+    }
+  }
+
+  /** @override */
+  async accept() {
+    const result = this.clients_.shift();
+    if (result !== undefined) {
+      return result;
+    }
+
+    return new Promise((resolve) => {
+      this.callback_ = () => {
+        resolve(this.clients_.shift());
+        this.callback_ = null;
+      };
+    });
+  }
+
+  /**
+   * @return {!Promise<!chrome.socket.SocketInfo>}
+   */
+  async getSocketInfo() {
+    // Return a stub socketInfo.
+    if (this.socket_ === null) {
+      return /** @type {!chrome.socket.SocketInfo} */ ({
+        connected: false,
+        socketType: 'tcp',
+      });
+    }
+
+    const info = await this.socket_.opened;
+    return /** @type {!chrome.socket.SocketInfo} **/ ({
+      connected: true,
+      localAddress: info.localAddress,
+      localPort: info.localPort,
+      socketType: 'tcp',
+    });
+  }
+
+  /** @override */
+  async close() {
+    if (this.socket_ === null) {
+      return;
+    }
+
+    if (this.incomingConnectionReader_) {
+      await this.incomingConnectionReader_.cancel('closing');
+      this.incomingConnectionReader_.releaseLock();
+      this.incomingConnectionReader_ = null;
+    }
+
+    try {
+      await this.socket_.close();
+    } catch (e) {
+      console.warn('Error with closing socket.', e);
+    }
+
+    this.socket_ = null;
+    this.address = null;
+    this.port = null;
   }
 }
 

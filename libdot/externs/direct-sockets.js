@@ -4,6 +4,7 @@
 
 /**
  * @fileoverview Externs definition for the Direct Sockets API.
+ * @see https://wicg.github.io/direct-sockets/
  * @externs
  */
 
@@ -45,3 +46,37 @@ TCPSocket.TCPSocketOpenInfo;
  * }}
  */
 TCPSocket.TcpSocketOptions;
+
+class TCPServerSocket {
+  /**
+   * @param {string} localAddress
+   * @param {TCPServerSocket.TcpServerSocketOptions} options
+   */
+  constructor(localAddress, options) {
+    /** @type {Promise<TCPServerSocket.TCPServerSocketOpenInfo>} */
+    this.opened;
+
+    /** @type {Promise<void>} */
+    this.closed;
+  }
+
+  close() {}
+}
+
+/**
+ * @typedef {{
+ *   readable: ReadableStream,
+ *   localAddress: string,
+ *   localPort: number,
+ * }}
+ */
+TCPServerSocket.TCPServerSocketOpenInfo;
+
+/**
+ * @typedef {{
+ *   localPort: (number|undefined),
+ *   backlog: (number|undefined),
+ *   ipv6Only: (boolean|undefined),
+ * }}
+ */
+TCPServerSocket.TcpServerSocketOptions;
