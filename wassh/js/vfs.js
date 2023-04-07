@@ -725,27 +725,15 @@ export class VFS {
    * @return {!WASI_t.errno|!PathHandler}
    */
   findHandler_(path) {
-    let handler = this.paths_.get(path);
-    if (!handler) {
-      // Let the parent directory handle it.
-      const parts = path.split('/');
-      let parent = '/';
-      for (let i = 0; i < parts.length - 1; ++i) {
-        if (i > 1) {
-          parent += '/';
-        }
-        parent += parts[i];
-        if (this.paths_.has(parent)) {
-          handler = this.paths_.get(parent);
-        }
+    let search_path = path;
+    do {
+      if (this.paths_.has(search_path)) {
+        return this.paths_.get(search_path);
       }
+      search_path = search_path.substring(0, search_path.lastIndexOf('/'));
+    } while (search_path !== '');
 
-      if (!handler) {
-        return WASI.errno.ENOENT;
-      }
-    }
-
-    return handler;
+    return this.paths_.get('/') || WASI.errno.ENOENT;
   }
 
   /**
