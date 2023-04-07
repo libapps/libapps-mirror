@@ -27,8 +27,8 @@ class TCPSocket {
 
 /**
  * @typedef {{
- *   readable: ReadableStream,
- *   writable: WritableStream,
+ *   readable: ReadableStream<ArrayBuffer>,
+ *   writable: WritableStream<ArrayBuffer>,
  *   remoteAddress: string,
  *   remotePort: number,
  *   localAddress: string,
@@ -65,7 +65,7 @@ class TCPServerSocket {
 
 /**
  * @typedef {{
- *   readable: ReadableStream,
+ *   readable: ReadableStream<TCPSocket>,
  *   localAddress: string,
  *   localPort: number,
  * }}
