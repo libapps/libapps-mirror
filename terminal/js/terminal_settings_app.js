@@ -677,7 +677,8 @@ export class TerminalSettingsApp extends LitElement {
           <h3>${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}</h3>
           <ul class="section-body">
             <li class="setting-container about-link" role="link"
-                @click="${() => lib.f.openWindow('/html/licenses.html')}">
+                @click="${() => lib.f.openWindow(
+                    '/html/licenses.html', '_blank', 'popup')}">
                 <div class="label">${msg('LICENSES')}</div>
                 <span class="icon">${ICON_OPEN_IN_NEW}</span>
             </li>
