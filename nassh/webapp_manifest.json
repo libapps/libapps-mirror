@@ -1,6 +1,17 @@
 {
   "name": "Secure Shell",
+  "id": "/",
+  "scope": "/",
   "start_url": "html/nassh.html",
+  "display": "standalone",
+  "permissions_policy": {
+    "cross-origin-isolated": [
+      "self"
+    ],
+    "direct-sockets": [
+      "self"
+    ]
+  },
   "icons": [
     {
       "src": "images/dev/icon-512.png",
@@ -12,16 +23,5 @@
       "sizes": "192x192",
       "type": "image/png"
     }
-  ],
-  "display": "standalone",
-  "scope": "/",
-  "isolated_storage": true,
-  "permissions_policy": {
-    "cross-origin-isolated": [
-      "self"
-    ],
-    "direct-sockets": [
-      "self"
-    ]
-  }
+  ]
 }

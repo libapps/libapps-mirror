@@ -6,8 +6,8 @@ import {hterm, lib} from './deps_local.concat.js';
 
 import {
   disableTabDiscarding, getSyncStorage, loadWebFonts, localize,
-  openOptionsPage, runtimeSendMessage, sanitizeScriptUrl, sendFeedback,
-  setupForWebApp, watchBackgroundColor,
+  openOptionsPage, runtimeSendMessage, sendFeedback, setupForWebApp,
+  watchBackgroundColor,
 } from './nassh.js';
 import {CommandInstance} from './nassh_command_instance.js';
 
@@ -52,12 +52,6 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
         console.warn('Failed to request persistent storage.');
       }
     }
-  }
-
-  // Register stub service worker for PWAs.
-  if (navigator?.serviceWorker?.register) {
-    navigator.serviceWorker.register(
-      sanitizeScriptUrl('../js/pwa_service_worker.js'), {scope: '/'});
   }
 
   const params = new URLSearchParams(document.location.search);
