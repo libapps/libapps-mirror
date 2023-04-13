@@ -12,7 +12,7 @@ import {hterm} from './deps_local.concat.js';
 
 import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import './terminal_button.js';
-import {DEFAULT_VM_NAME, composeSshUrl, getOSInfo} from './terminal_common.js';
+import {DEFAULT_VM_NAME, composeSshUrl} from './terminal_common.js';
 import './terminal_context_menu.js';
 import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_MORE_VERT, ICON_OPEN_IN_NEW,
   ICON_PLUS, ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
@@ -564,7 +564,7 @@ export class TerminalHomeApp extends LitElement {
       name: msg('TERMINAL_HOME_EDIT_SSH'),
       action: () => this.openSSHDialog(sshConnection.id),
     }];
-    if (this.sshAllowed && getOSInfo().sftp) {
+    if (this.sshAllowed) {
       items.push(
           {
             name: msg('SFTP_CLIENT_BUTTON_LABEL'),

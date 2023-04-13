@@ -367,7 +367,6 @@ export const fontManager = new FontManager(document);
  * @typedef {{
  *            alternative_emulator: (boolean|undefined),
  *            multi_profile: (boolean|undefined),
- *            sftp: (boolean|undefined),
  *            tmux_integration: (boolean|undefined),
  *          }}
  */
