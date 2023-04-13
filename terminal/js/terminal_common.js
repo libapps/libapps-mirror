@@ -394,8 +394,6 @@ async function prefetchOSInfo() {
     // Set it to something approriate for the testing environment.
     OS_INFO = {
       alternative_emulator: true,
-      multi_profile: true,
-      sftp: true,
     };
   }
 }

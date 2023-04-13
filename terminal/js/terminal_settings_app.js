@@ -15,7 +15,7 @@ import {getIndexeddbFileSystem} from './nassh_fs.js';
 import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT,
   SUPPORTED_LINE_HEIGHT_PADDINGS, backgroundImageLocalStorageKeyForProfileId,
-  getOSInfo, isXtermJs} from './terminal_common.js';
+  isXtermJs} from './terminal_common.js';
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
 import {ICON_OPEN_IN_NEW} from './terminal_icons.js';
@@ -213,29 +213,32 @@ export class TerminalSettingsApp extends LitElement {
     return html`
       <div id="left-panel">
         <h1>${msg('PREFERENCES_HEADER_TERMINAL')}</h1>
-        ${when(!!getOSInfo().multi_profile, () => html`
-          <terminal-settings-profile-header
-              @settings-profile-add=${this.onSettingsProfileAdd_}>
-          </terminal-settings-profile-header>
-          <terminal-settings-category-selector
-              @category-change=${this.onCategoryChange_}>
-            ${this.settingsProfiles_.map((profile) => html`
-              <terminal-settings-profile-item
-                  data-name="profile"
-                  aria-label="${profile}"
-                  .profile="${profile}"
-                  @settings-profile-click=${this.onSettingsProfileClick_}
-                  @settings-profile-delete=${this.onSettingsProfileDelete_}>
-              </terminal-settings-profile-item>
-            `)}
-            <div data-name="ssh">SSH</div>
-            <div data-name="about">
-              ${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}
-            </div>
-          </terminal-settings-category-selector>
-        `, () => html`
-          <terminal-settings-category-selector
-              @category-change=${this.onCategoryChange_}>
+        <terminal-settings-profile-header
+            @settings-profile-add=${this.onSettingsProfileAdd_}>
+        </terminal-settings-profile-header>
+        <terminal-settings-category-selector
+            @category-change=${this.onCategoryChange_}>
+          ${this.settingsProfiles_.map((profile) => html`
+            <terminal-settings-profile-item
+                data-name="profile"
+                aria-label="${profile}"
+                .profile="${profile}"
+                @settings-profile-click=${this.onSettingsProfileClick_}
+                @settings-profile-delete=${this.onSettingsProfileDelete_}>
+            </terminal-settings-profile-item>
+          `)}
+          <div data-name="ssh">SSH</div>
+          <div data-name="about">
+            ${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}
+          </div>
+        </terminal-settings-category-selector>
+      </div>
+      <div id="right-panel">
+
+        <section class="terminal-settings-category profile"
+            ?active-category="${this.activeCategory_ === 'profile'}">
+          <terminal-settings-category-selector tabs
+              @category-change=${this.onProfileCategoryChange_}>
             <div data-name="appearance">
               ${msg('TERMINAL_TITLE_PREF_APPEARANCE')}
             </div>
@@ -245,32 +248,8 @@ export class TerminalSettingsApp extends LitElement {
             <div data-name="behavior">
               ${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}
             </div>
-            <div data-name="ssh">SSH</div>
-            <div data-name="about">
-              ${msg('TERMINAL_SETTINGS_ABOUT_LABEL')}
-            </div>
           </terminal-settings-category-selector>
-        `)}
-      </div>
-      <div id="right-panel">
-
-        ${when(!!getOSInfo().multi_profile, () => html`
-          <section class="terminal-settings-category profile"
-              ?active-category="${this.activeCategory_ === 'profile'}">
-            <terminal-settings-category-selector tabs
-                @category-change=${this.onProfileCategoryChange_}>
-              <div data-name="appearance">
-                ${msg('TERMINAL_TITLE_PREF_APPEARANCE')}
-              </div>
-              <div data-name="mousekeyboard">
-                ${msg('TERMINAL_TITLE_PREF_KEYBOARD_MOUSE')}
-              </div>
-              <div data-name="behavior">
-                ${msg('TERMINAL_TITLE_PREF_BEHAVIOR')}
-              </div>
-            </terminal-settings-category-selector>
-          </section>
-        `)}
+        </section>
 
         <section class="terminal-settings-category"
             ?active-category="${this.isActive_('appearance')}">
@@ -693,12 +672,8 @@ export class TerminalSettingsApp extends LitElement {
    * @return {boolean}
    */
   isActive_(category) {
-    if (getOSInfo().multi_profile) {
-      return this.activeCategory_ === 'profile' &&
-           this.activeProfileCategory_ === category;
-    } else {
-      return this.activeCategory_ === category;
-    }
+    return this.activeCategory_ === 'profile' &&
+         this.activeProfileCategory_ === category;
   }
 
   /**
