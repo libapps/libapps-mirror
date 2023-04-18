@@ -14,14 +14,12 @@
 import {hterm, lib} from './deps_local.concat.js';
 
 import {LitElement, css, html} from './lit.js';
-import {FontManager, ORIGINAL_URL, TERMINAL_EMULATORS,
-  backgroundImageLocalStorageKey, definePrefs, delayedScheduler, fontManager,
-  getOSInfo, sleep}
-  from './terminal_common.js';
+import {FontManager, ORIGINAL_URL, backgroundImageLocalStorageKey, definePrefs,
+  delayedScheduler, fontManager, getOSInfo, sleep} from './terminal_common.js';
 import {TerminalContextMenu} from './terminal_context_menu.js';
 import {ICON_COPY} from './terminal_icons.js';
 import {TerminalTooltip} from './terminal_tooltip.js';
-import {Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
+import {Terminal, CanvasAddon, Unicode11Addon, WebLinksAddon, WebglAddon}
   from './xterm.js';
 import {XtermInternal} from './terminal_xterm_internal.js';
 
@@ -429,11 +427,10 @@ export class XtermTerminal {
    * @param {{
    *   storage: !lib.Storage,
    *   profileId: string,
-   *   enableWebGL: boolean,
    *   testParams: (!XtermTerminalTestParams|undefined),
    * }} args
    */
-  constructor({storage, profileId, enableWebGL, testParams}) {
+  constructor({storage, profileId, testParams}) {
     this.ctrlCKeyDownHandler_ = this.ctrlCKeyDownHandler_.bind(this);
     this.ctrlVKeyDownHandler_ = this.ctrlVKeyDownHandler_.bind(this);
     this.zoomKeyDownHandler_ = this.zoomKeyDownHandler_.bind(this);
@@ -443,13 +440,18 @@ export class XtermTerminal {
     /** @type {!hterm.PreferenceManager} */
     this.prefs_ = new hterm.PreferenceManager(storage, profileId);
     definePrefs(this.prefs_);
-    this.enableWebGL_ = enableWebGL;
 
     // TODO: we should probably pass the initial prefs to the ctor.
     this.term = testParams?.term || new Terminal({allowProposedApi: true});
     this.xtermInternal_ = testParams?.xtermInternal ||
         new XtermInternal(this.term);
     this.fontManager_ = testParams?.fontManager || fontManager;
+
+    this.renderAddonType_ = WebglAddon;
+    if (!document.createElement('canvas').getContext('webgl')) {
+      console.warn('Webgl is not supported. Fall back to canvas renderer');
+      this.renderAddonType_ = CanvasAddon;
+    }
 
     /** @type {?Element} */
     this.container_;
@@ -517,7 +519,7 @@ export class XtermTerminal {
     this.scrollOnOutputListener_ = null;
     this.backgroundImageWatcher_ = new BackgroundImageWatcher(this.prefs_,
         this.setBackgroundImage.bind(this));
-    this.webglAddon_ = null;
+    this.renderAddon_ = null;
     this.userCSSElement_ = null;
     this.userCSSTextElement_ = null;
 
@@ -745,9 +747,7 @@ export class XtermTerminal {
       this.term.open(elem);
       this.xtermInternal_.addDimensionsObserver(() => this.scheduleFit_());
 
-      if (this.enableWebGL_) {
-        this.reloadWebglAddon_();
-      }
+      this.reloadRenderAddon_();
       this.term.focus();
       (new ResizeObserver(() => this.scheduleFit_())).observe(elem);
       this.htermA11yReader_ = new hterm.AccessibilityReader(elem);
@@ -952,12 +952,12 @@ export class XtermTerminal {
     }
   }
 
-  reloadWebglAddon_() {
-    if (this.webglAddon_) {
-      this.webglAddon_.dispose();
+  reloadRenderAddon_() {
+    if (this.renderAddon_) {
+      this.renderAddon_.dispose();
     }
-    this.webglAddon_ = new WebglAddon();
-    this.term.loadAddon(this.webglAddon_);
+    this.renderAddon_ = new this.renderAddonType_();
+    this.term.loadAddon(this.renderAddon_);
   }
 
   /**
@@ -975,10 +975,10 @@ export class XtermTerminal {
     // This could be a bug with xterm.js.
     if (!!this.term.options.allowTransparency !== hasBackgroundImage) {
       this.term.options.allowTransparency = hasBackgroundImage;
-      if (this.enableWebGL_ && this.inited_) {
-        // Setting allowTransparency in the middle messes up webgl rendering,
-        // so we need to reload it here.
-        this.reloadWebglAddon_();
+      if (this.inited_) {
+        // Setting allowTransparency in the middle messes up rendering, so we
+        // need to reload it here.
+        this.reloadRenderAddon_();
       }
     }
 
@@ -1480,34 +1480,25 @@ class HtermTerminal extends hterm.Terminal {
  * @return {!Promise<!hterm.Terminal>}
  */
 export async function createEmulator({storage, profileId}) {
-  let config = TERMINAL_EMULATORS.get('hterm');
+  let emulator_type = 'hterm';
 
   if (getOSInfo().alternative_emulator) {
     // TODO: remove the url param logic. This is temporary to make manual
-    // testing a bit easier, which is also why this is not in
-    // './js/terminal_info.js'.
-    const emulator = ORIGINAL_URL.searchParams.get('emulator');
-    // Use the default (i.e. first) one if the pref is not set or invalid.
-    config = TERMINAL_EMULATORS.get(emulator) ||
-        TERMINAL_EMULATORS.values().next().value;
-    console.log('Terminal emulator config: ', config);
+    // testing a bit easier.
+    if (ORIGINAL_URL.searchParams.get('emulator') !== 'hterm') {
+      emulator_type = 'xterm.js';
+    }
+    console.log('Terminal emulator type: ', emulator_type);
   }
 
-  switch (config.lib) {
-    case 'xterm.js':
-      {
-        const terminal = new XtermTerminal({
-          storage,
-          profileId,
-          enableWebGL: config.webgl,
-        });
-        return terminal;
-      }
-    case 'hterm':
-      return new HtermTerminal({profileId, storage});
-    default:
-      throw new Error('incorrect emulator config');
+  if (emulator_type === 'hterm') {
+    return new HtermTerminal({profileId, storage});
   }
+
+  return new XtermTerminal({
+    storage,
+    profileId,
+  });
 }
 
 class TerminalCopyNotice extends LitElement {

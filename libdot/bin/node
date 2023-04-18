@@ -17,7 +17,7 @@ import libdot
 # Allow a long line for easy automated updating.
 # pylint: disable=line-too-long
 NODE_MODULES_HASH = (
-    "7ba7922c19bbf9df60d316121cf314ebaea046c8ddcf9ba3a41f92a8607738a7"
+    "a98c76bf5c11b1fa8caadcdda9c4945d5436b619e3b41868adf91f739b7ec06f"
 )
 # pylint: enable=line-too-long
 

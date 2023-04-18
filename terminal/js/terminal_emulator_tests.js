@@ -38,7 +38,6 @@ describe('terminal_emulator_tests.js', function() {
       this.terminal = new XtermTerminal({
         storage: new lib.Storage.Memory(),
         profileId: 'test',
-        enableWebGL: true,
         testParams: /** @type {!XtermTerminalTestParams} */(testParams),
       });
 

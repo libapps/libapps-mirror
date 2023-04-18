@@ -8,5 +8,5 @@
 import {xterm} from './deps_xterm.rollup.js';
 
 /** @suppress {undefinedVars} */
-export const {Terminal, Unicode11Addon, WebLinksAddon, WebglAddon}
+export const {Terminal, CanvasAddon, Unicode11Addon, WebLinksAddon, WebglAddon}
     = xterm;

@@ -55,12 +55,6 @@ export const SUPPORTED_LINE_HEIGHT_PADDINGS = [-2, -1.5, -1, -0.5, 0, 0.5, 1,
 export const SUPPORTED_LINE_HEIGHT = [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8,
   1.9, 2];
 
-export const TERMINAL_EMULATORS = new Map([
-    ['xterm.js', {lib: 'xterm.js', webgl: true}],
-    ['xterm.js (disable WebGl)', {lib: 'xterm.js', webgl: false}],
-    ['hterm', {lib: 'hterm', webgl: false}],
-]);
-
 // Numeric chrome version (e.g. 78). `null` if fail to detect.
 export const CHROME_VERSION = (function() {
   const matches = navigator.userAgent.match(/Chrome\/(\d+)/);
