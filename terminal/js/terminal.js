@@ -157,22 +157,20 @@ terminal.init = async function(element, launchInfo) {
     /** @type {?TmuxControllerDriver} */
     let tmuxControllerDriver = null;
 
-    if (getOSInfo().tmux_integration) {
-      tmuxControllerDriver = new TmuxControllerDriver({
-        term,
-        onOpenWindow: ({driver, channelName}) => {
-          chrome.terminalPrivate.openWindow({
-            url: composeTmuxUrl({
-              windowChannelName: channelName,
-              driverChannelName: driver.channelName,
-              settingsProfileId: launchInfo.settingsProfileId,
-            }),
-            asTab: true,
-          });
-        },
-      });
-      tmuxControllerDriver.install();
-    }
+    tmuxControllerDriver = new TmuxControllerDriver({
+      term,
+      onOpenWindow: ({driver, channelName}) => {
+        chrome.terminalPrivate.openWindow({
+          url: composeTmuxUrl({
+            windowChannelName: channelName,
+            driverChannelName: driver.channelName,
+            settingsProfileId: launchInfo.settingsProfileId,
+          }),
+          asTab: true,
+        });
+      },
+    });
+    tmuxControllerDriver.install();
 
     if (launchInfo.tmux) {
       const {windowChannelName, driverChannelName} = launchInfo.tmux;
