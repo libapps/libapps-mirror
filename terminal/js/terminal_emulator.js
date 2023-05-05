@@ -448,8 +448,8 @@ export class XtermTerminal {
     this.fontManager_ = testParams?.fontManager || fontManager;
 
     this.renderAddonType_ = WebglAddon;
-    if (!document.createElement('canvas').getContext('webgl')) {
-      console.warn('Webgl is not supported. Fall back to canvas renderer');
+    if (!document.createElement('canvas').getContext('webgl2')) {
+      console.warn('Webgl2 is not supported. Fall back to canvas renderer');
       this.renderAddonType_ = CanvasAddon;
     }
 
