@@ -54,7 +54,7 @@ print_seq() {
     tmux_dcs "${seq}"
     ;;
   *)
-    echo "${seq}"
+    printf '%s' "${seq}"
     ;;
   esac
 }
