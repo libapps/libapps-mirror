@@ -283,11 +283,19 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
   // We are launching the terminal with vsh.
   const args = url.searchParams.getAll('args[]');
   const outputArgs = [];
+  let passthroughArgs = [];
   let containerId = {};
   let inputArgsHasCwd = false;
   let outputArgsHasCwd = false;
 
-  for (const arg of args) {
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (arg == '--') {
+      // Swallow all following args and stop parsing.
+      passthroughArgs = args.splice(i);
+      break;
+    }
+
     if (arg.startsWith('--vm_name=')) {
       const value = arg.split('=', 2)[1];
       if (value) {
@@ -337,6 +345,8 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
     outputArgs.push(`--cwd=terminal_id:${parentTerminalId}`);
     outputArgsHasCwd = true;
   }
+
+  outputArgs.push(...passthroughArgs);
 
   return {
     vsh: {

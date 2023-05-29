@@ -314,7 +314,7 @@ terminal.Command.prototype.run = function(launchInfo) {
   if (launchInfo.crosh) {
     chrome.terminalPrivate.openTerminalProcess('crosh', [], pidInit);
   } else {
-    const args = [...launchInfo.vsh.args, `--startup_id=${this.id_}`];
+    const args = [`--startup_id=${this.id_}`, ...launchInfo.vsh.args];
     chrome.terminalPrivate.openVmshellProcess(args, (id) => {
       pidInit(id);
       launchInfo.vsh.terminalId = id;
