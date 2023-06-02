@@ -27,6 +27,11 @@ You can also specify `ssh-fe@google.com`.
 The host to use as a relay server.  All connections will be made via this
 server.
 
+## `--proxy-host-fallback=<host>`
+
+The host to use as a fallback relay server for `--relay-method=direct` when
+`--proxy-host` fails.
+
 ## `--proxy-port=<port>`
 
 The port to connect to on the relay server.

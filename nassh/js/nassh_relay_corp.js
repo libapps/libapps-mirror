@@ -21,6 +21,7 @@ export class Corp extends Relay {
   /** @inheritDoc */
   constructor(io, options, location, storage, localPrefs) {
     super(io, options, location, storage, localPrefs);
+    this.proxyHostFallback = options['--proxy-host-fallback'];
     this.useSecure = options['--use-ssl'];
     this.useWebsocket = !options['--use-xhr'];
     this.reportAckLatency = options['--report-ack-latency'];
@@ -198,12 +199,21 @@ export class Corp extends Relay {
     }
 
     // Query for endpoint. On failure we might as well continue and attempt
-    // to connect to /cookie using the default proxy URL. For some proxy
-    // implementations this may work, and there is no harm to try.
+    // to connect to /cookie using one of the proxy hosts from the config
+    // instead of from the /endpoint response.
     try {
       endpoint = await this.fetchEndpoint(proxyUrl);
     } catch (e) {
       console.warn('Query endpoint failed', e);
+      if (this.proxyHostFallback) {
+        try {
+          endpoint = `${this.proxyHostFallback}:${this.proxyPort}`;
+          proxyUrl = `${protocol}://${endpoint}/endpoint`;
+          endpoint = await this.fetchEndpoint(proxyUrl);
+        } catch (e) {
+          console.warn('Fallback query endpoint failed', e);
+        }
+      }
     }
 
     // Validate cookie. This will fail if ticket or full cookie not set.
