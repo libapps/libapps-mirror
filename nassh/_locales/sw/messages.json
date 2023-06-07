@@ -522,7 +522,7 @@
 		"message": "Ikiwa ndivyo, kitufe cha Home au End kitadhibiti upau wa kusogeza pembeni na vitufe vya Shift+Home au Shift+End vitatumwa kwenye seva pangishi ya mbali. Ikiwa sivyo, basi vitufe vya Home au End vitatumwa kwenye seva pangishi ya mbali na Shift+Home au Shift+End vitatumika kusogeza."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Ramani ya mifuatano ya vitufe vya kutekeleza hatua muhimu. Mifuatano ya vitufe hujumuisha vitufe vya sufuri au vitufe zaidi vya urekebishaji vikifuatwa na msimbo wa vitufe. Misimbo ya vitufe inaweza kuwa nambari ya desimali au heksadesimali au kitambulishi cha kitufe. Hatua za vitufe zinaweza kubainisha mfuatano ili kutuma maelezo kwenye seva pangishi au kitambulishi cha hatua. Kwa ufafanuzi kamili wa muundo, angalia https://goo.gl/LWRndr.\n\nMifano ya mifuatano ya vitufe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hamjambo Nyote'\"\n}"
+		"message": "Ramani ya mifuatano ya vitufe vya kutekeleza hatua muhimu. Mifuatano ya vitufe hujumuisha vitufe vya sufuri au vitufe zaidi vya urekebishaji vikifuatwa na msimbo wa vitufe. Misimbo ya vitufe inaweza kuwa nambari ya desimali au heksadesimali au kitambulishi cha kitufe. Hatua za vitufe zinaweza kubainisha mfuatano ili kutuma maelezo kwenye seva pangishi au kitambulishi cha hatua. Kwa ufafanuzi kamili wa muundo, angalia https://hterm.org/x/docs/keyboard-bindings.\n\nMifano ya mifuatano ya vitufe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hamjambo Nyote'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ikiwa shurutisho za kawaida za Mfumo wa Uendeshaji wa kibodi ni sharti zizingatiwe badala ya kunasa kila wakati kwa matumizi ya hterm."
@@ -1323,40 +1323,40 @@
 		"message": "Wakati inatumika kwenye dirisha, Ctrl+Shift+N inaweza kufungua kipindi kingine."
 	},
 	"tip_11": {
-		"message": "Unaweza kuunganisha tena funguo au njia za mkato: https://goo.gl/LWRndr"
+		"message": "Unaweza kuunganisha tena funguo au njia za mkato: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Tumia Yubikeys na kadi zingine mahiri kwa uthibitishaji wa ssh: https://goo.gl/Hu2o3v"
+		"message": "Tumia Yubikeys na kadi zingine mahiri kwa uthibitishaji wa ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Onyesha picha kulingana na maandishi: https://goo.gl/MnSysj"
+		"message": "Onyesha picha kulingana na maandishi: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Hatua ya Kushikilia Ctrl (Amri kwenye macOS) huku ukibofya kulia italeta menyu."
 	},
 	"tip_2": {
-		"message": "Onyesha arifa katika kivinjari ukitumia hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Onyesha arifa katika kivinjari ukitumia hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Unganisha kutoka sanduku kuu kwa kuandika 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
+		"message": "Unganisha kutoka sanduku kuu kwa kuandika 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Mfumo wa uendeshaji wa Chrome unaweza kupachika mifumo ya faili kupitia SFTP na kuvinjari kupitia programu ya Faili. Tumia 'Sehemu ya Kupachika ya SFTP' badala ya 'Kuunganisha'."
 	},
 	"tip_5": {
-		"message": "Unganisha ukitumia viungo vya ssh:// katika kurasa za wavuti au uhifadhi alamisho: https://goo.gl/zS8EZD"
+		"message": "Unganisha ukitumia viungo vya ssh:// katika kurasa za wavuti au uhifadhi alamisho: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Tia rangi kwenye data au vidokezo ukitumia kipengele cha msingi cha rangi 16, rangi 256 na rangi kamili za biti 24: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Nakili kwenye ubao wa kunakili kutoka emacs/vim/etc... ukitumia OSC-52: https://goo.gl/XSnyLo"
+		"message": "Nakili kwenye ubao wa kunakili kutoka emacs/vim/etc... ukitumia OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Piga gumzo na watumiaji wa hterm/Secure Shell kupitia chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Umepata hitilafu? Unaomba kipengele kipya? Tufahamishe: https://goo.gl/vb94JY"
+		"message": "Umepata hitilafu? Unaomba kipengele kipya? Tufahamishe: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Hitilafu isiyotarajiwa imetokea, tafadhali angalia kidhibiti JavaScript kwa maelezo zaidi."

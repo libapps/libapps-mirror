@@ -519,7 +519,7 @@
 		"message": "Egiazko gisa ezartzen bada, \"Hasiera\" edo \"Amaiera\" teklak terminalaren korritze-barra kontrolatuko du, eta \"Maius + Hasiera\" edo \"Maius + Amaiera\" lasterbideak urruneko ostalarira bidaliko dira. Gezurrezko gisa ezartzen bada, berriz, \"Hasiera\" eta \"Amaiera\" tekla urruneko ostalarira bidaliko da, eta \"Maius + Hasiera\" edo \"Maius + Amaiera\" lasterbideak korritze-barra kontrolatuko du."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Teklen ekintzei esleitutako sekuentzien mapa bat. Tekla-sekuentziek zero tekla aldatzaile edo gehiago dituzte, eta, ondoren, tekla-kode bat. Tekla-kodeak zenbaki hamartarrak edo hexadezimalak izan daitezke, edo teklaren identifikatzaile bat. Teklen ekintzak ostalarira bidaliko den kate gisa zehatz daitezke, edo ekintza-identifikatzaile gisa. Formatuari buruzko azalpen osoa ikusteko, joan https://goo.gl/LWRndr helbidera.\n\nHona hemen teklatuko aginduen adibide batzuk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Kaixo denoi'\"\n}"
+		"message": "Teklen ekintzei esleitutako sekuentzien mapa bat. Tekla-sekuentziek zero tekla aldatzaile edo gehiago dituzte, eta, ondoren, tekla-kode bat. Tekla-kodeak zenbaki hamartarrak edo hexadezimalak izan daitezke, edo teklaren identifikatzaile bat. Teklen ekintzak ostalarira bidaliko den kate gisa zehatz daitezke, edo ekintza-identifikatzaile gisa. Formatuari buruzko azalpen osoa ikusteko, joan https://hterm.org/x/docs/keyboard-bindings helbidera.\n\nHona hemen teklatuko aginduen adibide batzuk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Kaixo denoi'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Sistema eragilearen teklatuko agindu arruntak errespetatu behar diren ala ez zehazten du, hterm erabiltzeko erreserbatutakoen ordez."
@@ -1260,40 +1260,40 @@
 		"message": "Ktrl + Maius + N lasterbideak beste saio bat ireki dezake leiho batean exekutatzen denean."
 	},
 	"tip_11": {
-		"message": "Teklak edo lasterbideak berriro esleitzeko, joan https://goo.gl/LWRndr helbidera"
+		"message": "Teklak edo lasterbideak berriro esleitzeko, joan https://hterm.org/x/docs/keyboard-bindings helbidera"
 	},
 	"tip_12": {
-		"message": "SSHren autentifikaziorako Yubikey-ak eta beste txartel adimendun batzuk erabiltzeko, joan https://goo.gl/Hu2o3v helbidera"
+		"message": "SSHren autentifikaziorako Yubikey-ak eta beste txartel adimendun batzuk erabiltzeko, joan https://hterm.org/x/ssh/docs/hwkey helbidera"
 	},
 	"tip_13": {
-		"message": "Irudi txertatuak bistaratzeko, joan https://goo.gl/MnSysj helbidera"
+		"message": "Irudi txertatuak bistaratzeko, joan https://hterm.org/x/faq/inline-images helbidera"
 	},
 	"tip_14": {
 		"message": "Ktrl sakatuta mantentzen baduzu saguaren eskuineko botoiarekin klik egiten duzun bitartean, laster-menu bat irekiko da."
 	},
 	"tip_2": {
-		"message": "Arakatzailean jakinarazpenak bistaratzeko hterm-notify erabili nahi baduzu, joan https://goo.gl/ZNxGdF helbidera"
+		"message": "Arakatzailean jakinarazpenak bistaratzeko hterm-notify erabili nahi baduzu, joan https://hterm.org/x/faq/notify-sh helbidera"
 	},
 	"tip_3": {
-		"message": "\"ssh<Tab><profile name>\" idatzita arakatzaileko barratik konektatu nahi baduzu, joan https://goo.gl/V7o8ki helbidera"
+		"message": "\"ssh<Tab><profile name>\" idatzita arakatzaileko barratik konektatu nahi baduzu, joan https://hterm.org/x/ssh/faq/omnibox helbidera"
 	},
 	"tip_4": {
 		"message": "ChromeOS-ek SFTParen bidez munta ditzake fitxategi-sistemak, eta Fitxategiak aplikazioaren bidez arakatu. Erabili \"SFTP bidezko muntaketa\" \"Konektatu\" ordez."
 	},
 	"tip_5": {
-		"message": "Web-orrietan ssh:// motako estekak erabilita konektatzeko edo laster-markak gordetzeko, joan https://goo.gl/zS8EZD helbidera"
+		"message": "Web-orrietan ssh:// motako estekak erabilita konektatzeko edo laster-markak gordetzeko, joan https://hterm.org/x/ssh/faq/bookmarks helbidera"
 	},
 	"tip_6": {
 		"message": "Oinarrizko 16 kolore, 256 kolore edo 24 biteko koloreak erabilita irteerak edo eskaerak koloreztatzeko, joan http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html helbidera"
 	},
 	"tip_7": {
-		"message": "OSC-52 erabilita emacs, vim eta beste editore batzuen edukia arbelean kopiatzeko, joan https://goo.gl/XSnyLo helbidera"
+		"message": "OSC-52 erabilita emacs, vim eta beste editore batzuen edukia arbelean kopiatzeko, joan https://hterm.org/x/faq/osc52 helbidera"
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org helbide elektronikoaren bidez hterm-en eta Secure Shell-en beste erabiltzaile batzuekin txateatzeko, joan https://goo.gl/RYHiK helbidera"
 	},
 	"tip_9": {
-		"message": "Akats bat aurkitu duzu?  Eginbide berri bat eskatu nahi duzu?  Azal iezaguzu zer egin nahi duzun. Horretarako, joan https://goo.gl/vb94JY helbidera."
+		"message": "Akats bat aurkitu duzu?  Eginbide berri bat eskatu nahi duzu?  Azal iezaguzu zer egin nahi duzun. Horretarako, joan https://hterm.org/x/ssh/newbug helbidera."
 	},
 	"unexpected_error": {
 		"message": "Ustekabeko errore bat gertatu da. Xehetasun gehiago lortzeko, eman begiratu bat JavaScript-en kontsolari."

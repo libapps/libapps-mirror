@@ -513,7 +513,7 @@
 		"message": "Nëse është e vërtetë, tastet Home/End kontrollojnë shiritin e lëvizjes së terminalit dhe Shift+Home/Shift+End dërgohen te pritësi në distancë. Nëse nuk është e vërtetë, atëherë Home/End dërgohen te pritësi në distancë dhe Shift+Home/Shift+End kryejnë lëvizjen."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Një hartë e sekuencave të tasteve të veprimeve të tasteve. Sekuencat e tasteve përfshijnë zero ose më shumë taste modifikues të ndjekura nga kodi i tastit. Kodet e tasteve mund të jenë numra dhjetorë ose heksadhjetorë ose një identifikues tasti. Veprimet e tasteve mund të specifikohen si varg për t'u dërguar te pritësi ose identifikues veprimi. Për një shpjegim të plotë të formatit, shiko https://goo.gl/LWRndr.\n\nShembuj të lidhjeve me tastet:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Një hartë e sekuencave të tasteve të veprimeve të tasteve. Sekuencat e tasteve përfshijnë zero ose më shumë taste modifikues të ndjekura nga kodi i tastit. Kodet e tasteve mund të jenë numra dhjetorë ose heksadhjetorë ose një identifikues tasti. Veprimet e tasteve mund të specifikohen si varg për t'u dërguar te pritësi ose identifikues veprimi. Për një shpjegim të plotë të formatit, shiko https://hterm.org/x/docs/keyboard-bindings.\n\nShembuj të lidhjeve me tastet:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Nëse lidhjet e zakonshme me tastierën me sistemin operativ duhet të respektohen në vend që të regjistrohen për përdorim nga hterm."
@@ -1260,40 +1260,40 @@
 		"message": "Kur ekzekutohet në një dritare, Ctrl+Shift+N mund të hapë një sesion tjetër."
 	},
 	"tip_11": {
-		"message": "Mund ta ndryshosh sjelljen e tasteve/shkurtoreve: https://goo.gl/LWRndr"
+		"message": "Mund ta ndryshosh sjelljen e tasteve/shkurtoreve: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Përdor Yubikeys dhe karta të tjera inteligjente për vërtetimin e SSH-së: https://goo.gl/Hu2o3v"
+		"message": "Përdor Yubikeys dhe karta të tjera inteligjente për vërtetimin e SSH-së: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Shfaq imazhet e ndërfutura: https://goo.gl/MnSysj"
+		"message": "Shfaq imazhet e ndërfutura: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Mbajtja shtypur e tastit Ctrl (Cmd në macOS) kur klikon me të djathtin hap një meny kontekstuale."
 	},
 	"tip_2": {
-		"message": "Shfaq njoftimet në shfletues duke përdorur hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Shfaq njoftimet në shfletues duke përdorur hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Lidhu nga shiriti omnibox duke shkruar \"ssh<Tab><emri i profilit>\": https://goo.gl/V7o8ki"
+		"message": "Lidhu nga shiriti omnibox duke shkruar \"ssh<Tab><emri i profilit>\": https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS mund të montojë sisteme skedarësh përmes SFTP dhe të shfletojë përmes aplikacionit Files. Përdor \"Montimi i protokollit SFTP\" në vend të \"Lidhu\"."
 	},
 	"tip_5": {
-		"message": "Lidhu duke përdorur lidhjet ssh:// në faqet e uebit ose ruaj një faqeshënues: https://goo.gl/zS8EZD"
+		"message": "Lidhu duke përdorur lidhjet ssh:// në faqet e uebit ose ruaj një faqeshënues: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Përdor ngjyrën për daljen/kërkesën duke përdorur 16 ngjyrat bazë dhe 256 ngjyrat dhe ngjyrat e plota me 24 bite: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopjo te kujtesa e fragmenteve nga emacs/vim/etc... duke përdorur OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopjo te kujtesa e fragmenteve nga emacs/vim/etc... duke përdorur OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Bisedo me përdoruesit e hterm/Secure Shell që ke shokë nëpërmjet chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Gjete një defekt në kod?  Kërko një veçori të re?  Na trego: https://goo.gl/vb94JY"
+		"message": "Gjete një defekt në kod?  Kërko një veçori të re?  Na trego: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Ndodhi një gabim i papritur. Kontrollo panelin e JavaScript-it për më shumë detaje."

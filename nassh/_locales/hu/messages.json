@@ -525,7 +525,7 @@
 		"message": "Ha igaz, a Home/End a terminál görgetősávját irányítja, a Shift + Home/Shift + End billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Home/End lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift + Home/Shift + End görget."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Billentyűsorozatok hozzárendelése a billentyűműveletekhez. A billentyűsorozatok nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűk lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://goo.gl/LWRndr címre.\n\nPéldák billentyűsorozatokra:\n{\n  \"Ctrl + Alt +K\": \"clearTerminal\",\n  \"Ctrl +Shift +L\": \"PASS\",\n  \"Ctrl +H\": \"'Helló Világ\\n'\"\n}"
+		"message": "Billentyűsorozatok hozzárendelése a billentyűműveletekhez. A billentyűsorozatok nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűk lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://hterm.org/x/docs/keyboard-bindings címre.\n\nPéldák billentyűsorozatokra:\n{\n  \"Ctrl + Alt +K\": \"clearTerminal\",\n  \"Ctrl +Shift +L\": \"PASS\",\n  \"Ctrl +H\": \"'Helló Világ\\n'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Annak meghatározása, hogy az operációs rendszer gyakori billentyűkombinációi legyenek-e figyelembe véve ahelyett, hogy mindig a hterm saját használatára lennének lefoglalva."
@@ -1257,40 +1257,40 @@
 		"message": "Amikor ablakban fut, a Ctrl + Shift + N billentyűparanccsal lehet új munkamenetet indítani."
 	},
 	"tip_11": {
-		"message": "Módosíthatja a billentyűket/billentyűparancsokat: https://goo.gl/LWRndr"
+		"message": "Módosíthatja a billentyűket/billentyűparancsokat: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Az SSH-hitelesítéshez használhat YubiKeyt és egyéb intelligens kártyákat: https://goo.gl/Hu2o3v"
+		"message": "Az SSH-hitelesítéshez használhat YubiKeyt és egyéb intelligens kártyákat: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Képek szövegközi megjelenítése: https://goo.gl/MnSysj"
+		"message": "Képek szövegközi megjelenítése: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Ha nyomva tartja a Ctrl (macOS esetén a Cmd) billentyűt a jobb gombbal való kattintás során, akkor megjelenik egy helyi menü."
 	},
 	"tip_2": {
-		"message": "Értesítések megjelenítése a böngészőben a hterm-notify szkripttel: https://goo.gl/ZNxGdF"
+		"message": "Értesítések megjelenítése a böngészőben a hterm-notify szkripttel: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Ha a cím- és keresősávból szeretne csatlakozni, írja be az „ssh<Lap><profilnév>” parancsot: https://goo.gl/V7o8ki"
+		"message": "Ha a cím- és keresősávból szeretne csatlakozni, írja be az „ssh<Lap><profilnév>” parancsot: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "A ChromeOS képes fájlrendszerek csatolására SFTP használatával, ezt követően pedig a Fájlok alkalmazással lehet tallózni. A „Csatlakozás” gomb helyett használja az „SFTP csatlakoztatása” lehetőséget."
 	},
 	"tip_5": {
-		"message": "Csatlakozás a weboldalakon lévő ssh:// linkek használatával, illetve könyvjelző mentése: https://goo.gl/zS8EZD"
+		"message": "Csatlakozás a weboldalakon lévő ssh:// linkek használatával, illetve könyvjelző mentése: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "A kimenet/kérdés színezése 16 alapszín, 256 szín vagy a teljes 24 bites színskála használatával: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "A vágólap tartalmának másolása az emacs/vim/etc… elérési útról OSC-52 használatával: https://goo.gl/XSnyLo"
+		"message": "A vágólap tartalmának másolása az emacs/vim/etc… elérési útról OSC-52 használatával: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Csevegés hterm/Secure Shell-felhasználókkal a chromium-hterm@chromium.org fórumon: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Programhibát talált?  Új funkció megvalósítását szeretné kérni?  Tudassa velünk: https://goo.gl/vb94JY"
+		"message": "Programhibát talált?  Új funkció megvalósítását szeretné kérni?  Tudassa velünk: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Váratlan hiba történt. Ha további részletekre kíváncsi, nézze meg a JavaScript-konzolt."

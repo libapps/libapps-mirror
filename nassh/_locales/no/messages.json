@@ -522,7 +522,7 @@
 		"message": "Hvis «true» (sant) er valgt, kontrollerer Home/End terminalens rullefelt, og Shift+Home/Shift+End sendes til den eksterne verten. Hvis «false» (usant) er valgt, sendes Home/End til den eksterne verten, og Shift+Home/Shift+End ruller."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En oversikt over tastesekvenser for tastehandlinger. Tastesekvensene har null eller flere modifikatortaster som etterfølges av en tastekode. Tastekoder kan være desimaltall, heksadesimaltall eller tasteidentifikatorer. Tastehandlinger kan angis som strenger som sendes til verten, eller som funksjonsidentifikatorer. Du finner en fullstendig forklaring av formatet på https://goo.gl/LWRndr.\n\nEksempler på tastekombinasjoner:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hei, verden'\"\n}"
+		"message": "En oversikt over tastesekvenser for tastehandlinger. Tastesekvensene har null eller flere modifikatortaster som etterfølges av en tastekode. Tastekoder kan være desimaltall, heksadesimaltall eller tasteidentifikatorer. Tastehandlinger kan angis som strenger som sendes til verten, eller som funksjonsidentifikatorer. Du finner en fullstendig forklaring av formatet på https://hterm.org/x/docs/keyboard-bindings.\n\nEksempler på tastekombinasjoner:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hei, verden'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Om vanlige hurtigtaster for operativsystemet skal respekteres i stedet for at de alltid fanges opp for intern bruk i hterm."
@@ -1248,40 +1248,40 @@
 		"message": "Når du kjører i et vindu, kan du trykke på Ctrl+Shift+N for å åpne en ny økt."
 	},
 	"tip_11": {
-		"message": "Du kan binde taster/hurtigtaster på nytt: https://goo.gl/LWRndr"
+		"message": "Du kan binde taster/hurtigtaster på nytt: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Bruk Yubikeys og andre smartkort for ssh-autentisering: https://goo.gl/Hu2o3v"
+		"message": "Bruk Yubikeys og andre smartkort for ssh-autentisering: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Vis bilder innebygd: https://goo.gl/MnSysj"
+		"message": "Vis bilder innebygd: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Hvis du holder inne Ctrl (Cmd på macOS) samtidig som du høyreklikker, får du opp en kontekstuell meny."
 	},
 	"tip_2": {
-		"message": "Vis varsler i nettleseren med hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Vis varsler i nettleseren med hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Koble til fra multifunksjonsfeltet ved å skrive inn «ssh<Tab><profilnavn>»: https://goo.gl/V7o8ki"
+		"message": "Koble til fra multifunksjonsfeltet ved å skrive inn «ssh<Tab><profilnavn>»: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS kan sette inn filsystemer via SFTP og bla gjennom dem via Filer-appen. Bruk «SFTP Mount» i stedet for «Connect»."
 	},
 	"tip_5": {
-		"message": "Koble til med «ssh://»-linker på nettsider, eller lagre et bokmerke: https://goo.gl/zS8EZD"
+		"message": "Koble til med «ssh://»-linker på nettsider, eller lagre et bokmerke: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Legg til farger for utdata/ledetekst med 16 farger, 256 farger eller 24-bits farger: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopiér fra Emacs/Vim/osv. til utklippstavlen med OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopiér fra Emacs/Vim/osv. til utklippstavlen med OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chat med andre hterm / Secure Shell-brukere via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Har du funnet en feil? Vil du be oss om å legge til en ny funksjon? Si fra til oss: https://goo.gl/vb94JY"
+		"message": "Har du funnet en feil? Vil du be oss om å legge til en ny funksjon? Si fra til oss: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Det har oppstått en uventet feil. Du finner mer informasjon i JavaScript-konsollen."

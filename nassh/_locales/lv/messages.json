@@ -522,7 +522,7 @@
 		"message": "Ja ir iestatīta vērtība “true”, ar taustiņiem Home/End tiek kontrolēta termināļa ritjosla, bet taustiņu kombinācijas Shift+Home/Shift+End tiek nodotas attālajam saimniekdatoram. Ja ir iestatīta vērtība “false”, taustiņi Home/End tiek nodoti attālajam saimniekdatoram, bet ar taustiņu kombinācijām Shift+Home/Shift+End notiek ritināšana."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Karte ar taustiņu kombināciju veiktajām taustiņu darbībām. Taustiņu kombinācijās ir ietverts nulles taustiņš vai citi modificētājtaustiņi un taustiņa kods. Taustiņu kodi var būt decimāli vai heksadecimāli skaitļi vai taustiņa identifikators. Taustiņu darbības var būt norādītas kā virkne, ko sūtīt saimniekdatoram, vai kā darbības identifikators. Visu formāta skaidrojumu skatiet vietnē https://goo.gl/LWRndr.\n\nSaistīto taustiņu piemēri:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Karte ar taustiņu kombināciju veiktajām taustiņu darbībām. Taustiņu kombinācijās ir ietverts nulles taustiņš vai citi modificētājtaustiņi un taustiņa kods. Taustiņu kodi var būt decimāli vai heksadecimāli skaitļi vai taustiņa identifikators. Taustiņu darbības var būt norādītas kā virkne, ko sūtīt saimniekdatoram, vai kā darbības identifikators. Visu formāta skaidrojumu skatiet vietnē https://hterm.org/x/docs/keyboard-bindings.\n\nSaistīto taustiņu piemēri:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Norāda, vai jāņem vērā bieži lietotie OS saistītie taustiņi, nevis vienmēr jāuztver komandas “hterm” lietojums."
@@ -1257,40 +1257,40 @@
 		"message": "Nospiežot taustiņu kombināciju Ctrl+Shift+N atvērtā logā, var atvērt jaunu sesiju."
 	},
 	"tip_11": {
-		"message": "Varat atkārtoti saistīt īsinājumtaustiņus šeit: https://goo.gl/LWRndr."
+		"message": "Varat atkārtoti saistīt īsinājumtaustiņus šeit: https://hterm.org/x/docs/keyboard-bindings."
 	},
 	"tip_12": {
-		"message": "Izmantojiet Yubikeys un citas viedkartes SSH autentifikācijai: https://goo.gl/Hu2o3v."
+		"message": "Izmantojiet Yubikeys un citas viedkartes SSH autentifikācijai: https://hterm.org/x/ssh/docs/hwkey."
 	},
 	"tip_13": {
-		"message": "Rādīt iekļautus attēlus: https://goo.gl/MnSysj"
+		"message": "Rādīt iekļautus attēlus: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Turot nospiestu taustiņu Ctrl (Cmd uz macOS tastatūras) un vienlaikus noklikšķinot ar labo peles taustiņu, tiek parādīta kontekstizvēlne."
 	},
 	"tip_2": {
-		"message": "Rādiet paziņojumus pārlūkprogrammā, izmantojot hterm-notify: https://goo.gl/ZNxGdF."
+		"message": "Rādiet paziņojumus pārlūkprogrammā, izmantojot hterm-notify: https://hterm.org/x/faq/notify-sh."
 	},
 	"tip_3": {
-		"message": "Izveidojiet savienojumu no universālā lodziņa, ierakstot “ssh<Tab><profile name>”: https://goo.gl/V7o8ki"
+		"message": "Izveidojiet savienojumu no universālā lodziņa, ierakstot “ssh<Tab><profile name>”: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Operētājsistēmā Chrome OS var iekļaut failu sistēmas, izmantojot SFTP, un veikt pārlūkošanu, izmantojot lietotni Faili. Izmantojiet funkciju “SFTP iekļaušana”, nevis “Savienojuma izveide”."
 	},
 	"tip_5": {
-		"message": "Izveidojiet savienojumu, izmantojot ssh:// saites tīmekļa lapās, vai saglabājiet grāmatzīmi: https://goo.gl/zS8EZD."
+		"message": "Izveidojiet savienojumu, izmantojot ssh:// saites tīmekļa lapās, vai saglabājiet grāmatzīmi: https://hterm.org/x/ssh/faq/bookmarks."
 	},
 	"tip_6": {
 		"message": "Iekrāsojiet izvadi/uzvedni, izmantojot 16 pamatkrāsas, 256 krāsas un pilnas 24 bitu krāsas: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html."
 	},
 	"tip_7": {
-		"message": "Kopējiet saturu starpliktuvē no emacs/vim/etc..., izmantojot OSC-52: https://goo.gl/XSnyLo."
+		"message": "Kopējiet saturu starpliktuvē no emacs/vim/etc..., izmantojot OSC-52: https://hterm.org/x/faq/osc52."
 	},
 	"tip_8": {
 		"message": "Tērzējiet ar citiem hterm/Secure Shell lietotājiem, izmantojot chromium-hterm@chromium.org: https://goo.gl/RYHiK."
 	},
 	"tip_9": {
-		"message": "Vai atradāt kļūdu? Vai vēlaties pieprasīt jaunu funkciju? Informējiet mūs: https://goo.gl/vb94JY."
+		"message": "Vai atradāt kļūdu? Vai vēlaties pieprasīt jaunu funkciju? Informējiet mūs: https://hterm.org/x/ssh/newbug."
 	},
 	"unexpected_error": {
 		"message": "Radās neparedzēta kļūda. Plašāku informāciju skatiet JavaScript konsolē."

@@ -522,7 +522,7 @@
 		"message": "如果設為 True，Home/End 鍵可操控終端機捲軸，且系統會將 Shift + Home/Shift + End 鍵傳送至遠端主機。如果設為 False，系統會將 Home/End 鍵傳送至遠端主機，且可使用 Shift + Home/Shift + End 鍵捲動畫面。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "按鍵序列與按鍵動作的對應。按鍵序列包含 0 或多個輔助鍵，後面加上按鍵碼。按鍵碼可以是十進位/十六進位數字或按鍵 ID。按鍵動作可以是要傳送至主機的指定字串，也可以是動作 ID。如需完整的格式說明，請參閱 https://goo.gl/LWRndr。\n\n按鍵繫結關係範例：\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "按鍵序列與按鍵動作的對應。按鍵序列包含 0 或多個輔助鍵，後面加上按鍵碼。按鍵碼可以是十進位/十六進位數字或按鍵 ID。按鍵動作可以是要傳送至主機的指定字串，也可以是動作 ID。如需完整的格式說明，請參閱 https://hterm.org/x/docs/keyboard-bindings。\n\n按鍵繫結關係範例：\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "設定是否要遵守一般 OS 鍵盤繫結，而非一律擷取 hterm 本身的使用方式。"
@@ -1257,40 +1257,40 @@
 		"message": "在視窗中執行作業時，按下 Ctrl + Shift + N 鍵可開啟另一個工作階段。"
 	},
 	"tip_11": {
-		"message": "你可以重新繫結按鍵/快速鍵：https://goo.gl/LWRndr"
+		"message": "你可以重新繫結按鍵/快速鍵：https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "使用 Yubikeys 和其他智慧型卡片進行 SSH 驗證：https://goo.gl/Hu2o3v"
+		"message": "使用 Yubikeys 和其他智慧型卡片進行 SSH 驗證：https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "以內嵌的方式顯示圖片：https://goo.gl/MnSysj"
+		"message": "以內嵌的方式顯示圖片：https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "按住 Ctrl 鍵 (macOS 則為 Cmd 鍵) 並按一下滑鼠右鍵，即可顯示內容選單。"
 	},
 	"tip_2": {
-		"message": "使用 hterm-notify 在瀏覽器中顯示通知：https://goo.gl/ZNxGdF"
+		"message": "使用 hterm-notify 在瀏覽器中顯示通知：https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "在網址列輸入「ssh<Tab><profile name>」以連線：https://goo.gl/V7o8ki"
+		"message": "在網址列輸入「ssh<Tab><profile name>」以連線：https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS 可透過 SFTP 掛接檔案系統，並透過「檔案」應用程式瀏覽。請使用「SFTP 掛接」，而不要使用「連線」。"
 	},
 	"tip_5": {
-		"message": "在網頁中使用 ssh:// 連結進行連線，或儲存為書籤：https://goo.gl/zS8EZD"
+		"message": "在網頁中使用 ssh:// 連結進行連線，或儲存為書籤：https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "使用基本的 16 色、256 色和完整的 24 位元色彩，讓你的輸出/提示內容更繽紛：http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "使用 OSC-52 從 emacs 或 vim 等來源複製內容到剪貼簿：https://goo.gl/XSnyLo"
+		"message": "使用 OSC-52 從 emacs 或 vim 等來源複製內容到剪貼簿：https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "透過 chromium-hterm@chromium.org 與其他 hterm/安全殼層使用者進行即時通訊：https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "發現錯誤或想提出新功能建議嗎？歡迎與我們聯絡：https://goo.gl/vb94JY"
+		"message": "發現錯誤或想提出新功能建議嗎？歡迎與我們聯絡：https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "發生非預期的錯誤，請查看 JavaScript 控制台瞭解詳情。"

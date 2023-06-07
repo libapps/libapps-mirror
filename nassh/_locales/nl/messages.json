@@ -519,7 +519,7 @@
 		"message": "Als 'true' is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden Shift + Home/Shift + End naar de externe host gestuurd. Als 'false' is ingesteld, worden Home/End naar de externe host gestuurd en wordt met Shift + Home/Shift + End gescrolld."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die naar de host wordt gestuurd, of een actie-ID. Zie https://goo.gl/LWRndr voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl + Alt + K\": \"clearTerminal\",\n  \"Ctrl + Shift + L\": \"PASS\",\n  \"Ctrl + H\": \"'Hello World'\"\n}"
+		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die naar de host wordt gestuurd, of een actie-ID. Zie https://hterm.org/x/docs/keyboard-bindings voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl + Alt + K\": \"clearTerminal\",\n  \"Ctrl + Shift + L\": \"PASS\",\n  \"Ctrl + H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Hiermee bepaal je of veelgebruikte OS-sneltoetsen moeten worden gerespecteerd of dat deze altijd voor hterm zelf moeten worden gebruikt."
@@ -1242,40 +1242,40 @@
 		"message": "Als de pagina in een venster wordt uitgevoerd, kun je met Ctrl + Shift + N nog een sessie openen."
 	},
 	"tip_11": {
-		"message": "Je kunt de functionaliteit van toetsen/sneltoetsen aanpassen: https://goo.gl/LWRndr"
+		"message": "Je kunt de functionaliteit van toetsen/sneltoetsen aanpassen: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Gebruik Yubikeys en andere smartcards voor SSH-verificatie: https://goo.gl/Hu2o3v"
+		"message": "Gebruik Yubikeys en andere smartcards voor SSH-verificatie: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Afbeeldingen inline tonen: https://goo.gl/MnSysj"
+		"message": "Afbeeldingen inline tonen: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Als je met de rechtermuisknop klikt terwijl je de Ctrl-toets (Cmd op macOS) ingedrukt houdt, wordt er een contextmenu weergegeven."
 	},
 	"tip_2": {
-		"message": "Geef meldingen in de browser weer met hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Geef meldingen in de browser weer met hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Maak verbinding vanuit de omnibox door 'ssh<Tab><profile name>' te typen: https://goo.gl/V7o8ki"
+		"message": "Maak verbinding vanuit de omnibox door 'ssh<Tab><profile name>' te typen: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS kan bestandssystemen activeren via SFTP en browsen via de app Bestanden. Gebruik 'SFTP activeren' in plaats van Verbinden."
 	},
 	"tip_5": {
-		"message": "Maak verbinding via ssh://-links op webpagina's of sla een bookmark op: https://goo.gl/zS8EZD"
+		"message": "Maak verbinding via ssh://-links op webpagina's of sla een bookmark op: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Geef je uitvoer/prompt een kleur met de standaard 16 kleuren en 256 kleuren en volledige 24-bits kleuren: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopieer naar je klembord via emacs/vim/etc... met OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopieer naar je klembord via emacs/vim/etc... met OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chat met andere gebruikers van hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Heb je een bug gevonden? Wil je een nieuwe functie aanvragen? Laat het ons weten: https://goo.gl/vb94JY"
+		"message": "Heb je een bug gevonden? Wil je een nieuwe functie aanvragen? Laat het ons weten: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Er is een onverwachte fout opgetreden. Controleer de JavaScript-console voor meer informatie."

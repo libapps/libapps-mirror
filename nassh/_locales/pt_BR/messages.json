@@ -522,7 +522,7 @@
 		"message": "Se definida como verdadeira, as teclas Home/End controlam a barra de rolagem do terminal e Shift+Home/Shift+End são enviadas ao host remoto. Se definida como falsa, as teclas Home/End são enviadas ao host remoto, e Shift+Home/Shift+End rolam a tela."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Um mapa de sequência de teclas para ações de teclas. As sequências incluem zero ou mais teclas modificadoras seguidas por um código de tecla. Esses códigos podem ser números decimais, hexadecimais ou um identificador de tecla. Ações de teclas podem ser especificadas como uma string enviada ao host ou um identificador de ação. Para ver uma explicação completa do formato, acesse https://goo.gl/LWRndr (link em inglês).\n\nAmostras de mapeamento de teclas:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Olá, mundo'\"\n}"
+		"message": "Um mapa de sequência de teclas para ações de teclas. As sequências incluem zero ou mais teclas modificadoras seguidas por um código de tecla. Esses códigos podem ser números decimais, hexadecimais ou um identificador de tecla. Ações de teclas podem ser especificadas como uma string enviada ao host ou um identificador de ação. Para ver uma explicação completa do formato, acesse https://hterm.org/x/docs/keyboard-bindings (link em inglês).\n\nAmostras de mapeamento de teclas:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Olá, mundo'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Define se vinculações de teclado comuns do SO precisam ser respeitadas em vez de sempre capturar para uso próprio do hterm."
@@ -1245,40 +1245,40 @@
 		"message": "Quando executado em uma janela, Ctrl+Shift+N pode abrir outra sessão."
 	},
 	"tip_11": {
-		"message": "Você pode reassociar teclas/atalhos: https://goo.gl/LWRndr (link em inglês)"
+		"message": "Você pode reassociar teclas/atalhos: https://hterm.org/x/docs/keyboard-bindings (link em inglês)"
 	},
 	"tip_12": {
-		"message": "Use o Yubikeys e outros cartões inteligentes para autenticação SSH: https://goo.gl/Hu2o3v (link em inglês)"
+		"message": "Use o Yubikeys e outros cartões inteligentes para autenticação SSH: https://hterm.org/x/ssh/docs/hwkey (link em inglês)"
 	},
 	"tip_13": {
-		"message": "Exibir imagens in-line: https://goo.gl/MnSysj (link em inglês)"
+		"message": "Exibir imagens in-line: https://hterm.org/x/faq/inline-images (link em inglês)"
 	},
 	"tip_14": {
 		"message": "Para abrir um menu de contexto, mantenha a tecla Ctrl (Cmd no macOS) pressionada e, ao mesmo tempo, clique com o botão direito do mouse."
 	},
 	"tip_2": {
-		"message": "Exibir notificações no navegador usando hterm-notify: https://goo.gl/ZNxGdF (link em inglês)"
+		"message": "Exibir notificações no navegador usando hterm-notify: https://hterm.org/x/faq/notify-sh (link em inglês)"
 	},
 	"tip_3": {
-		"message": "Conectar pela omnibox digitando \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki (link em inglês)"
+		"message": "Conectar pela omnibox digitando \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox (link em inglês)"
 	},
 	"tip_4": {
 		"message": "O ChromeOS pode ativar sistemas de arquivos por meio de SFTP e navegar usando o app Arquivos. Utilize \"Ativar SFTP\" em vez de \"Conectar\"."
 	},
 	"tip_5": {
-		"message": "Conecte usando links ssh:// em páginas da Web ou salve um favorito: https://goo.gl/zS8EZD (link em inglês)"
+		"message": "Conecte usando links ssh:// em páginas da Web ou salve um favorito: https://hterm.org/x/ssh/faq/bookmarks (link em inglês)"
 	},
 	"tip_6": {
 		"message": "Deixe seu prompt mais colorido usando 16 cores, 256 cores e cores de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html (link em inglês)"
 	},
 	"tip_7": {
-		"message": "Copie para a área de transferência de emacs/vim/etc. usando OSC-52: https://goo.gl/XSnyLo (link em inglês)"
+		"message": "Copie para a área de transferência de emacs/vim/etc. usando OSC-52: https://hterm.org/x/faq/osc52 (link em inglês)"
 	},
 	"tip_8": {
 		"message": "Converse com usuários de hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK (link em inglês)"
 	},
 	"tip_9": {
-		"message": "Encontrou um bug?  Quer pedir um novo recurso?  Fale conosco: https://goo.gl/vb94JY"
+		"message": "Encontrou um bug?  Quer pedir um novo recurso?  Fale conosco: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Ocorreu um erro inesperado. Verifique o Console JavaScript para saber mais detalhes."

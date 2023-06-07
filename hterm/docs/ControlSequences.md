@@ -25,7 +25,7 @@ However, for entries marked "won't support", it means we don't consider them
 relevant and will probably never be implemented.
 
 If you come across missing features or have other requests, feel free to file
-a bug at <https://goo.gl/vb94JY>.
+a bug at <https://hterm.org/x/newbug>.
 
 ## General Guidelines
 

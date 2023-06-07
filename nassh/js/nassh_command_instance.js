@@ -223,7 +223,7 @@ CommandInstance.prototype.run = async function() {
 
     this.io.println(localize(
         'WELCOME_FAQ',
-        [sgrText(osc8Link('https://goo.gl/muppJj'), style)]));
+        [sgrText(osc8Link('https://hterm.org/x/ssh/faq'), style)]));
 
     if (hterm.windowType !== 'app' &&
         hterm.windowType !== 'popup' &&
@@ -231,7 +231,7 @@ CommandInstance.prototype.run = async function() {
       this.io.println('');
       this.io.println(localize(
           'OPEN_AS_WINDOW_TIP',
-          [sgrText(osc8Link('https://goo.gl/muppJj'), style)]));
+          [sgrText(osc8Link('https://hterm.org/x/ssh/faq'), style)]));
     }
 
     // Show some release highlights the first couple of runs with a new version.

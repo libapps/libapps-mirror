@@ -522,7 +522,7 @@
 		"message": "Jos tosi, Home- ja End-näppäimiä käytetään terminaalin vierityspalkin ohjaamiseen ja yhdistelmä Vaihto+Home tai Vaihto+End lähetetään etäisännälle. Jos epätosi, Home- ja End-näppäimet lähetetään etäisännälle ja Vaihto+Home tai Vaihto+End vierittävät."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Näppäinyhdistelmien ja niihin liittyvien näppäintoimintojen kartta. Näppäinyhdistelmä sisältää muokkausnäppäimen painalluksia (nolla tai useampia) sekä niitä seuraavan näppäinkoodin. Näppäinkoodit voivat olla desimaali- tai heksadesimaalilukuja tai näppäintunnisteita. Näppäintoiminnot voidaan määrittää isännälle lähetettäväksi merkkijonoksi tai toimintotunnisteeksi. Voit lukea kattavan esittelyn täältä: https://goo.gl/LWRndr.\n\nEsimerkkejä:\n{\n  \"Ctrl+Alt-K\": \"clearTerminal\",\n  \"Ctrl+Shift-L\": \"PASS\",\n  \"Ctrl+H\": \"'Hei maailma'\"\n}"
+		"message": "Näppäinyhdistelmien ja niihin liittyvien näppäintoimintojen kartta. Näppäinyhdistelmä sisältää muokkausnäppäimen painalluksia (nolla tai useampia) sekä niitä seuraavan näppäinkoodin. Näppäinkoodit voivat olla desimaali- tai heksadesimaalilukuja tai näppäintunnisteita. Näppäintoiminnot voidaan määrittää isännälle lähetettäväksi merkkijonoksi tai toimintotunnisteeksi. Voit lukea kattavan esittelyn täältä: https://hterm.org/x/docs/keyboard-bindings.\n\nEsimerkkejä:\n{\n  \"Ctrl+Alt-K\": \"clearTerminal\",\n  \"Ctrl+Shift-L\": \"PASS\",\n  \"Ctrl+H\": \"'Hei maailma'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Pitääkö yleisiä käyttöjärjestelmän sidontoja noudattaa htermin omaan käyttöön kaappauksen sijaan."
@@ -1254,40 +1254,40 @@
 		"message": "Käyttökerran aikana Ctrl+Vaihto+N avaa uuden sellaisen."
 	},
 	"tip_11": {
-		"message": "Voit yhdistää painikkeita tai pikakomentoja uudelleen: https://goo.gl/LWRndr"
+		"message": "Voit yhdistää painikkeita tai pikakomentoja uudelleen: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Käytä Yubikeysia ja muita älykortteja SSH-todennukseen: https://goo.gl/Hu2o3v"
+		"message": "Käytä Yubikeysia ja muita älykortteja SSH-todennukseen: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Näytä upotetut kuvat: https://goo.gl/MnSysj"
+		"message": "Näytä upotetut kuvat: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Kun pidät Controlin (Cmd macOS:ssä) painettuna ja klikkaat kakkospainikkeella, kontekstivalikko avautuu."
 	},
 	"tip_2": {
-		"message": "Näytä ilmoituksia selaimessa hterm-notify-ominaisuudella: https://goo.gl/ZNxGdF"
+		"message": "Näytä ilmoituksia selaimessa hterm-notify-ominaisuudella: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Muodosta yhteys omniboxista käsin kirjoittamalla 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
+		"message": "Muodosta yhteys omniboxista käsin kirjoittamalla 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Voit ottaa tiedostojärjestelmiä käyttöön ChromeOS:ssä SFTP:llä ja selata niitä Tiedostot-sovelluksella. Valitse SFTP-käyttöönotto Yhdistä-valinnan sijaan."
 	},
 	"tip_5": {
-		"message": "Muodosta yhteys verkkosivuilla ssh://-linkeillä tai tallenna kirjanmerkki: https://goo.gl/zS8EZD"
+		"message": "Muodosta yhteys verkkosivuilla ssh://-linkeillä tai tallenna kirjanmerkki: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Väritä kirjoitus tai kehotteet 16 perusvärillä, 256 värillä tai täysillä 24-bittisillä väreillä: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopioi sisältöä leikepöydälle emacs/vim/etc… ‑sijainnista tai vastaavasta OSC-52:lla: https://goo.gl/XSnyLo"
+		"message": "Kopioi sisältöä leikepöydälle emacs/vim/etc… ‑sijainnista tai vastaavasta OSC-52:lla: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Keskustele muiden htermin ja Secure Shellin käyttäjien kanssa chromium-hterm@chromium.org-ryhmässä: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Kerro meille virheestä tai lähetä ominaisuuspyyntö: https://goo.gl/vb94JY"
+		"message": "Kerro meille virheestä tai lähetä ominaisuuspyyntö: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Tapahtui odottamaton virhe. Katso lisätietoja JavaScript-konsolista."

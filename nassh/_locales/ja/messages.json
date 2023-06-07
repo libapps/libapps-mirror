@@ -522,7 +522,7 @@
 		"message": "true の場合は、Home / End キーでターミナルのスクロールバーを制御し、Shift+Home / Shift+End キーをリモートホストに送信します。false の場合は、Home / End キーをリモートホストに送信し、Shift+Home / Shift+End キーでスクロールします。"
 	},
 	"hterm_pref_keybindings": {
-		"message": "キーシーケンスとキーアクションをマッピングします。キーシーケンスは、0 個以上の修飾キーと、それに続く 1 つのキーコードで構成されます。キーコードには 10 進数または 16 進数、あるいはキーの識別子を指定します。キーアクションは、ホストに送信する文字列、またはアクションの識別子として指定します。形式について詳しくは https://goo.gl/LWRndr をご覧ください。\n\nキー バインディングの例:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "キーシーケンスとキーアクションをマッピングします。キーシーケンスは、0 個以上の修飾キーと、それに続く 1 つのキーコードで構成されます。キーコードには 10 進数または 16 進数、あるいはキーの識別子を指定します。キーアクションは、ホストに送信する文字列、またはアクションの識別子として指定します。形式について詳しくは https://hterm.org/x/docs/keyboard-bindings をご覧ください。\n\nキー バインディングの例:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "hterm での処理より、OS の一般的なキーボード バインディングを優先するかどうかを設定します。"
@@ -1254,40 +1254,40 @@
 		"message": "ウィンドウでの実行中に、Ctrl+Shift+N キーを使って別のセッションを開くことができます。"
 	},
 	"tip_11": {
-		"message": "キーやショートカットをバインドし直すことができます: https://goo.gl/LWRndr"
+		"message": "キーやショートカットをバインドし直すことができます: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "YubiKey や他のスマートカードを使用して SSH 認証を行います: https://goo.gl/Hu2o3v"
+		"message": "YubiKey や他のスマートカードを使用して SSH 認証を行います: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "画像をインライン表示します: https://goo.gl/MnSysj"
+		"message": "画像をインライン表示します: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Ctrl キー（Mac OS の場合は Cmd キー）を押しながら右クリックすると、コンテキスト メニューが表示されます。"
 	},
 	"tip_2": {
-		"message": "ブラウザに通知を表示するには hterm-notify を使用します: https://goo.gl/ZNxGdF"
+		"message": "ブラウザに通知を表示するには hterm-notify を使用します: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "アドレスバーから接続するには「ssh<Tab><プロファイル名>」と入力します: https://goo.gl/V7o8ki"
+		"message": "アドレスバーから接続するには「ssh<Tab><プロファイル名>」と入力します: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS では、ファイル システムを SFTP 経由でマウントし、ファイルアプリを使って閲覧できます。この方法を使用する場合は、[接続] ではなく [SFTP マウント] を使用してください。"
 	},
 	"tip_5": {
-		"message": "ウェブページ上の ssh:// リンクを使って接続するか、ブックマークを保存します: https://goo.gl/zS8EZD"
+		"message": "ウェブページ上の ssh:// リンクを使って接続するか、ブックマークを保存します: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "基本の 16 色、256 色、24 ビット フルカラーを使って出力またはメッセージを表示できます: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "emacs、vim などからクリップボードにコピーするには OSC-52 を使用します: https://goo.gl/XSnyLo"
+		"message": "emacs、vim などからクリップボードにコピーするには OSC-52 を使用します: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org を使って hterm ユーザーや Secure Shell ユーザーとチャットできます: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "バグを見つけた場合や新機能の要望がある場合は、ぜひご報告ください: https://goo.gl/vb94JY"
+		"message": "バグを見つけた場合や新機能の要望がある場合は、ぜひご報告ください: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "予期しないエラーが発生しました。詳しくは JavaScript コンソールをご確認ください。"

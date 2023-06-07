@@ -137,7 +137,7 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
        action: function() { openNewWindow(lib.f.getURL('/html/nassh.html')); }},
       {name: localize('FAQ_MENU_LABEL'),
        action: function() {
-         lib.f.openWindow('https://goo.gl/muppJj', '_blank');
+         lib.f.openWindow('https://hterm.org/x/ssh/faq', '_blank');
        }},
       {name: localize('CLEAR_KNOWN_HOSTS_MENU_LABEL'),
        action: function() { openOptionsPage('ssh-files'); }},

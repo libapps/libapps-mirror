@@ -513,7 +513,7 @@
 		"message": "Kung true, ang Home/End ang kokontrol sa terminal scrollbar at ang Shift+Home/Shift+End ang ipapadala sa remote na host. Kung false, ang Home/End ang ipapadala sa remote na host at ang Shift+Home/Shift+End ang magso-scroll."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Isang mapa ng key sequence sa mga pagkilos ng key. Kabilang sa mga key sequence ang zero o higit pang modifier key na sinusundan ng key code. Ang mga key code ay puwedeng maging mga decimal o hexadecimal number, o key identifier. Matutukoy ang mga pagkilos ng key bilang string na ipapadala sa host, o action identifier. Para sa kumpletong paliwanag ng format, tingnan ang https://goo.gl/LWRndr.\n\nMga sample na keybinding:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal,\"\n  \"Ctrl+Shift+L\": \"PASS,\"\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Isang mapa ng key sequence sa mga pagkilos ng key. Kabilang sa mga key sequence ang zero o higit pang modifier key na sinusundan ng key code. Ang mga key code ay puwedeng maging mga decimal o hexadecimal number, o key identifier. Matutukoy ang mga pagkilos ng key bilang string na ipapadala sa host, o action identifier. Para sa kumpletong paliwanag ng format, tingnan ang https://hterm.org/x/docs/keyboard-bindings.\n\nMga sample na keybinding:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal,\"\n  \"Ctrl+Shift+L\": \"PASS,\"\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Kung dapat kilalanin ang mga karaniwang binding ng OS keyboard sa halip na palaging kunin para sa sariling paggamit ng hterm."
@@ -1227,40 +1227,40 @@
 		"message": "Kapag pinapatakbo sa isang window, makakapagbukas ang Ctrl+Shift+N ng isa pang session."
 	},
 	"tip_11": {
-		"message": "Puwede mong i-rebind ang mga key/shortcut sa: https://goo.gl/LWRndr"
+		"message": "Puwede mong i-rebind ang mga key/shortcut sa: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Gamitin ang Yubikeys at iba pang smart card para sa pag-authenticate ng ssh: https://goo.gl/Hu2o3v"
+		"message": "Gamitin ang Yubikeys at iba pang smart card para sa pag-authenticate ng ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Magpakita ng mga larawan inline: https://goo.gl/MnSysj"
+		"message": "Magpakita ng mga larawan inline: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "May lalabas na menu ng konteksto kapag pinindot nang matagal ang Ctrl (Cmd sa macOS) habang nagra-right click."
 	},
 	"tip_2": {
-		"message": "Ipakita ang mga notification sa browser gamit ang hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Ipakita ang mga notification sa browser gamit ang hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Kumonekta mula sa omnibox sa pamamagitan ng pag-type ng 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
+		"message": "Kumonekta mula sa omnibox sa pamamagitan ng pag-type ng 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Puwedeng mag-mount ang ChromeOS ng mga system ng file sa pamamagitan ng SFTP at mag-browse gamit ang Files app. Gamitin ang 'SFTP Mount' sa halip na 'Kumonekta.'"
 	},
 	"tip_5": {
-		"message": "Kumonekta gamit ang mga ssh:// link sa mga web page, o mag-save ng bookmark: https://goo.gl/zS8EZD"
+		"message": "Kumonekta gamit ang mga ssh:// link sa mga web page, o mag-save ng bookmark: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Lagyan ng kulay ang iyong output/prompt gamit ang mga pangunahing 16 at 256 na kulay at ang buong 24-bit na mga kulay: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopyahin sa iyong clipboard mula sa emacs/vim/atbp... gamit ang OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopyahin sa iyong clipboard mula sa emacs/vim/atbp... gamit ang OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Makipag-chat sa mga kapwa user ng hterm/Secure Shell sa pamamagitan ng chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "May nakitang bug?  Hihiling ng bagong feature?  Ipagbigay-alam sa amin: https://goo.gl/vb94JY"
+		"message": "May nakitang bug?  Hihiling ng bagong feature?  Ipagbigay-alam sa amin: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Nagkaroon ng hindi inaasahang error, pakitingnan ang JavaScript console para sa higit pang detalye."

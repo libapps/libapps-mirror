@@ -516,7 +516,7 @@
 		"message": "Uma kuyiqiniso, u-Home/End ulawula ibha yokuskrola yetheminali futhi u-Shift+Home/Shift+End uthunyelwa kumsingathi wokulawula kude. Uma kungamanga, u-Home/End uthunyelwa kumsingathi wokulawula kude futhi u-Shift+Home/Shift+End uyaskrola."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Imephu yokulandelana kokhiye kwizenzo zokhiye. Ukulandelana kokhiye kufaka phakathi okhiye bokushintsha abayiqanda noma ngaphezulu kulandelwa ikhodi yokhiye. Amakhodi wokhiye angaba izinombolo ze-decimal noma ze-hexadecimal, noma inkomba yokhiye. Izenzo zokhiye zingacaciswa njengeyunithi yezinhlamvu yokuthumela kumsingathi, noma inkomba yesenzo. Ukuthola incazelo egcwele yefomethi, bona ku-https://goo.gl/LWRndr.\n\nIsampula lokubhophezela okhiye:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Sawubona Mhlaba'\"\n}"
+		"message": "Imephu yokulandelana kokhiye kwizenzo zokhiye. Ukulandelana kokhiye kufaka phakathi okhiye bokushintsha abayiqanda noma ngaphezulu kulandelwa ikhodi yokhiye. Amakhodi wokhiye angaba izinombolo ze-decimal noma ze-hexadecimal, noma inkomba yokhiye. Izenzo zokhiye zingacaciswa njengeyunithi yezinhlamvu yokuthumela kumsingathi, noma inkomba yesenzo. Ukuthola incazelo egcwele yefomethi, bona ku-https://hterm.org/x/docs/keyboard-bindings.\n\nIsampula lokubhophezela okhiye:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Sawubona Mhlaba'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ukuthi ukubophezela kwekhibhodi ye-OS kufanele kuhlonishwe yini esikhundleni sokuthathela ukusetshenziswa kwe-hterm ngokwayo."
@@ -1290,40 +1290,40 @@
 		"message": "Lapho kusebenza kwiwindi, u-Ctrl+Shift+N ungakwazi ukuvula enye iseshini."
 	},
 	"tip_11": {
-		"message": "Ungashintsha ukuziphatha kokhiye/izinqamuleli: https://goo.gl/LWRndr"
+		"message": "Ungashintsha ukuziphatha kokhiye/izinqamuleli: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Sebenzisa i-Yubikeys namanye amakhadi asmathi ukufakazela ubuqiniso be-ssh: https://goo.gl/Hu2o3v"
+		"message": "Sebenzisa i-Yubikeys namanye amakhadi asmathi ukufakazela ubuqiniso be-ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Bonisa izithombe emgqeni: https://goo.gl/MnSysj"
+		"message": "Bonisa izithombe emgqeni: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Ukubamba u-Ctrl (u-Cmd ku-macOS) ngenkathi uchofoza ngakwesokudla kuletha imenyu yokuqukethwe."
 	},
 	"tip_2": {
-		"message": "Bonisa izaziso kwisiphequluli usebenzisa i-hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Bonisa izaziso kwisiphequluli usebenzisa i-hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Xhumeka kusuka ku-omnibox ngokuthayipha ukuthi 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
+		"message": "Xhumeka kusuka ku-omnibox ngokuthayipha ukuthi 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "I-Chrome OS ingakhweza amasistimu wefayela nge-SFTP futhi ibhrawuze ngama-app amafayela. Sebenzisa okuthi 'Ukukhweza kwe-SFTP' esikhundleni sokuthi 'Xhuma'."
 	},
 	"tip_5": {
-		"message": "Xhuma usebenzisa okuthi sh:// links emakhasini ewebhu, noma londoloza ibhukhimakhi: https://goo.gl/zS8EZD"
+		"message": "Xhuma usebenzisa okuthi sh:// links emakhasini ewebhu, noma londoloza ibhukhimakhi: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Faka umbala kokukhiphayo kwakho/isexwayiso usebenzisa imibala eyinhloko engu-16 nengu-256 kanye nemibala engu-24-bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopishela ebhodini lakho lokunamathisela kusuka ku-emacs/vim/etc... usebenzisa i-OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopishela ebhodini lakho lokunamathisela kusuka ku-emacs/vim/etc... usebenzisa i-OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Xoxa nabasebenzisi be-hterm/Secure Shell users nge-chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Uthole isiphazamisi?  Cela isici esisha?  Sazise: https://goo.gl/vb94JY"
+		"message": "Uthole isiphazamisi?  Cela isici esisha?  Sazise: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Iphutha elingalindelekile livelile, sicela uhlole ikhonsoli ye-JavaScript ngemininingwane eminingi."

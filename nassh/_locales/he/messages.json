@@ -525,7 +525,7 @@
 		"message": "אם ההעדפה מקבלת את הערך True, המקשים Home או End שולטים בסרגל הגלילה בטרמינל והקשה על Shift+Home או Shift+End נשלחת אל המארח המרוחק. אם ההעדפה מקבלת את הערך False, הקשה על Home או End נשלחת אל המארח המרוחק והמקשים Shift+Home/Shift+End משמשים לצורך גלילה."
 	},
 	"hterm_pref_keybindings": {
-		"message": "מיפוי של צירופי המקשים לפעולות מקשים. צירופי מקשים כוללים אפס או יותר מקשי צירוף ואחריהם קוד מקש. קודי המקשים יכולים להיות מספרים עשרוניים, מספרים הקסדצימליים או מזהי מקשים. אפשר לציין פעולות מקשים כמחרוזת לשליחה אל המארח או כמזהה פעולה. הסבר מלא לגבי הפורמט זמין בכתובת https://goo.gl/LWRndr.\n\nדוגמאות לצירופי מקשים:\n{\n‎  \"Ctrl+Alt+K\": \"clearTerminal\",‎\n‎  \"Ctrl+Shift+L\": \"PASS\",‎\n‎  \"Ctrl+H\": \"'Hello World'\"‎\n}"
+		"message": "מיפוי של צירופי המקשים לפעולות מקשים. צירופי מקשים כוללים אפס או יותר מקשי צירוף ואחריהם קוד מקש. קודי המקשים יכולים להיות מספרים עשרוניים, מספרים הקסדצימליים או מזהי מקשים. אפשר לציין פעולות מקשים כמחרוזת לשליחה אל המארח או כמזהה פעולה. הסבר מלא לגבי הפורמט זמין בכתובת https://hterm.org/x/docs/keyboard-bindings.\n\nדוגמאות לצירופי מקשים:\n{\n‎  \"Ctrl+Alt+K\": \"clearTerminal\",‎\n‎  \"Ctrl+Shift+L\": \"PASS\",‎\n‎  \"Ctrl+H\": \"'Hello World'\"‎\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "ההעדפה הזו קובעת אם קיצורי המקשים הנפוצים של מערכת ההפעלה מיושמים, או ההגדרות של hterm תמיד יקבלו עדיפות."
@@ -1254,40 +1254,40 @@
 		"message": "במהלך הפעלה בחלון, אפשר להקיש על Ctrl+Shift+N כדי לפתוח סשן חדש."
 	},
 	"tip_11": {
-		"message": "אפשר לקשר מחדש מקשים/מקשי קיצור: https://goo.gl/LWRndr"
+		"message": "אפשר לקשר מחדש מקשים/מקשי קיצור: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "כדאי להשתמש ב-Yubikeys ובכרטיסים חכמים אחרים לאימות ssh‏: https://goo.gl/Hu2o3v"
+		"message": "כדאי להשתמש ב-Yubikeys ובכרטיסים חכמים אחרים לאימות ssh‏: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "טוב לדעת: ניתן להציג תמונות במצב מוטבע, פרטים בכתובת https://goo.gl/MnSysj"
+		"message": "טוב לדעת: ניתן להציג תמונות במצב מוטבע, פרטים בכתובת https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "הקשה ממושכת על Ctrl (‏Cmd ב-macOS) בזמן לחיצה ימנית מציגה את תפריט ההקשר."
 	},
 	"tip_2": {
-		"message": "אפשר להציג הודעות בדפדפן בעזרת hterm-notify‏: https://goo.gl/ZNxGdF"
+		"message": "אפשר להציג הודעות בדפדפן בעזרת hterm-notify‏: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "כדי להתחבר מסרגל הכתובות יש להקליד 'ssh<Tab><שם הפרופיל>': https://goo.gl/V7o8ki"
+		"message": "כדי להתחבר מסרגל הכתובות יש להקליד 'ssh<Tab><שם הפרופיל>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ב-ChromeOS יש אפשרות לטעון מערכות קבצים דרך SFTP ולעיין דרך האפליקציה 'קבצים'. יש להשתמש ב'טעינת SFTP' במקום ב'חיבור'."
 	},
 	"tip_5": {
-		"message": "יש להתחבר בעזרת קישורי ssh://‎ בדפי אינטרנט או לשמור סימניה: https://goo.gl/zS8EZD"
+		"message": "יש להתחבר בעזרת קישורי ssh://‎ בדפי אינטרנט או לשמור סימניה: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "אפשר לצבוע את הפלט/הודעה ב-16 צבעים בסיסיים, 256 צבעים וצבעי 24 ביט מלאים: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "אפשר להעתיק אל הלוח מ-emacs/vim/etc...‎ בעזרת OSC-52‏: https://goo.gl/XSnyLo"
+		"message": "אפשר להעתיק אל הלוח מ-emacs/vim/etc...‎ בעזרת OSC-52‏: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "אפשר לשוחח בצ'אט עם משתמשי hterm/Secure Shell אחרים דרך chromium-hterm@chromium.org:‏ https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "מצאת באג? רוצה לבקש תכונה חדשה? נשמח לשמוע: https://goo.gl/vb94JY"
+		"message": "מצאת באג? רוצה לבקש תכונה חדשה? נשמח לשמוע: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "אירעה שגיאה לא צפויה. יש לעיין בלוח JavaScript לקבלת פרטים נוספים."

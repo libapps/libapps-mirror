@@ -507,7 +507,7 @@
 		"message": "Si cette préférence est définie sur vrai, les touches Début/Fin contrôlent la barre de défilement du terminal, et les raccourcis Majuscule+Début et Majuscule+Fin sont envoyés à l'hôte à distance. Si la préférence est définie sur faux, les touches Début/Fin sont alors transmises à l'hôte à distance, et les raccourcis Majuscule+Début et Majuscule+Fin contrôlent le défilement."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Une carte des séquences aux actions de touches. Les séquences de touches comprennent ou non des touches de modification suivies par un code de touche. Les codes de touche peuvent être des nombres décimaux ou hexadécimaux, ou un identifiant de touche. Les actions de touche peuvent être spécifiées en tant que chaînes à transmettre à l'hôte ou en tant qu'identifiant d'action. Pour obtenir une explication complète du format, consultez https://goo.gl/LWRndr.\n\nExemples de combinaisons de touches :\n{\n  \"Ctrl+Alt+K\" : \"clearTerminal\",\n  \"Ctrl+Shift+L\" : \"PASS\",\n  \"Ctrl+H\" : \"'Bonjour Monde'\"\n}"
+		"message": "Une carte des séquences aux actions de touches. Les séquences de touches comprennent ou non des touches de modification suivies par un code de touche. Les codes de touche peuvent être des nombres décimaux ou hexadécimaux, ou un identifiant de touche. Les actions de touche peuvent être spécifiées en tant que chaînes à transmettre à l'hôte ou en tant qu'identifiant d'action. Pour obtenir une explication complète du format, consultez https://hterm.org/x/docs/keyboard-bindings.\n\nExemples de combinaisons de touches :\n{\n  \"Ctrl+Alt+K\" : \"clearTerminal\",\n  \"Ctrl+Shift+L\" : \"PASS\",\n  \"Ctrl+H\" : \"'Bonjour Monde'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Permet de spécifier si les combinaisons de touches de SE courantes doivent être utilisées au lieu de celles réservées à l'utilisation du terminal hterm."
@@ -1236,40 +1236,40 @@
 		"message": "Lors qu'une fenêtre est active, vous pouvez utiliser le raccourci Ctrl+Majuscule+N pour ouvrir une autre session."
 	},
 	"tip_11": {
-		"message": "Vous pouvez recombiner des touches et des raccourcis : https://goo.gl/LWRndr"
+		"message": "Vous pouvez recombiner des touches et des raccourcis : https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Utilisez des Yubikeys et d'autres cartes intelligentes pour l'authentification SSH : https://goo.gl/Hu2o3v"
+		"message": "Utilisez des Yubikeys et d'autres cartes intelligentes pour l'authentification SSH : https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Affichez des images intégrées : https://goo.gl/MnSysj"
+		"message": "Affichez des images intégrées : https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Obtenez un menu contextuel en maintenant la touche Ctrl (Cmd sur macOS) enfoncée tout en cliquant-droit."
 	},
 	"tip_2": {
-		"message": "Vous pouvez afficher les notifications dans le navigateur en utilisant hterm-notify : https://goo.gl/ZNxGdF"
+		"message": "Vous pouvez afficher les notifications dans le navigateur en utilisant hterm-notify : https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Connectez-vous à partir de l'omnibox en entrant « ssh <Tabulation><nom de profil> » : https://goo.gl/V7o8ki"
+		"message": "Connectez-vous à partir de l'omnibox en entrant « ssh <Tabulation><nom de profil> » : https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS peut installer des systèmes de fichiers au moyen du protocole SFTP et naviguer au moyen de l'application Fichiers. Utilisez « Installation SFTP » au lieu de « Connexion »."
 	},
 	"tip_5": {
-		"message": "Connectez vous à l'aide des liens ssh:// dans les pages Web ou enregistrez un favori : https://goo.gl/zS8EZD"
+		"message": "Connectez vous à l'aide des liens ssh:// dans les pages Web ou enregistrez un favori : https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Colorez votre sortie/invite à l'aide des 16 couleurs de base, des 256 couleurs et de l'ensemble de couleurs 24 bits : http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Permet de copier votre presse-papiers d'emacs, de vim, etc., en utilisant OSC-52 : https://goo.gl/XSnyLo"
+		"message": "Permet de copier votre presse-papiers d'emacs, de vim, etc., en utilisant OSC-52 : https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Clavardez avec des utilisateurs de hterm/Secure Shell par l'intermédiaire de chromium-hterm@chromium.org : https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Vous avez trouvé un bogue?  Vous voulez demander une nouvelle fonctionnalité?  Faites-le-nous savoir : https://goo.gl/vb94JY"
+		"message": "Vous avez trouvé un bogue?  Vous voulez demander une nouvelle fonctionnalité?  Faites-le-nous savoir : https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Une erreur inattendue s'est produite. Veuillez consulter la console JavaScript pour en savoir plus."

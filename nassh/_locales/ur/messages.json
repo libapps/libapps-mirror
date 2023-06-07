@@ -513,7 +513,7 @@
 		"message": "درست ہونے پر، Home/End سے ٹرمینل سکرول بار کو کنٹرول کیا جاتا ہے اور Shift+Home/Shift+End کو ریموٹ میزبان پر بھیج دیا جاتا ہے۔ غلط ہونے پر، Home/End کو ریموٹ میزبان پر بھیج دیا جاتا ہے اور Shift+Home/Shift+End سے سکرول کیا جاتا ہے۔"
 	},
 	"hterm_pref_keybindings": {
-		"message": "کلید کی کارروائیوں کیلئے کلید کی ترتیب کا نقشہ۔ کلید کی ترتیبات میں صفر یا اس سے زیادہ موڈیفائر کلیدیں شامل ہوتی ہیں اور اس کے بعد کلید کا کوڈ آتا ہے۔ کلید کے کوڈز اعشاری یا شش اعشاری اعداد یا ایک کلید شناخت کار ہو سکتے ہیں۔ کلید کی کارروائیوں کا تعین میزبان کو بھیجی جانے والی اسٹرنگ یا کارروائی کے شناخت کار کے طور پر کیا جا سکتا ہے۔ فارمیٹ کی مکمل وضاحت کیلئے، https://goo.gl/LWRndr دیکھیں۔\n\nنمونہ کی بائنڈنگز:\n{\n  ‎\"Ctrl+Alt+K\": \"clearTerminal\",‎\n  ‎\"Ctrl+Shift+L\": \"PASS\",‎\n  ‎\"Ctrl+H\": \"'Hello World'\"‎\n}"
+		"message": "کلید کی کارروائیوں کیلئے کلید کی ترتیب کا نقشہ۔ کلید کی ترتیبات میں صفر یا اس سے زیادہ موڈیفائر کلیدیں شامل ہوتی ہیں اور اس کے بعد کلید کا کوڈ آتا ہے۔ کلید کے کوڈز اعشاری یا شش اعشاری اعداد یا ایک کلید شناخت کار ہو سکتے ہیں۔ کلید کی کارروائیوں کا تعین میزبان کو بھیجی جانے والی اسٹرنگ یا کارروائی کے شناخت کار کے طور پر کیا جا سکتا ہے۔ فارمیٹ کی مکمل وضاحت کیلئے، https://hterm.org/x/docs/keyboard-bindings دیکھیں۔\n\nنمونہ کی بائنڈنگز:\n{\n  ‎\"Ctrl+Alt+K\": \"clearTerminal\",‎\n  ‎\"Ctrl+Shift+L\": \"PASS\",‎\n  ‎\"Ctrl+H\": \"'Hello World'\"‎\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "آیا ہمیشہ hterm کے خود کے استعمال کو کیپچر کرنے کی بجائے OS کی بورڈ کی عام بائنڈنگز پر عمل کیا جانا چاہیے۔"
@@ -1296,40 +1296,40 @@
 		"message": "کسی ونڈو میں چلنے پر، Ctrl+Shift+N دوسرا سیشن کھول سکتا ہے۔"
 	},
 	"tip_11": {
-		"message": "آپ کلیدوں/شارٹ کٹس کو ری بائنڈ کر سکتے ہیں: https://goo.gl/LWRndr"
+		"message": "آپ کلیدوں/شارٹ کٹس کو ری بائنڈ کر سکتے ہیں: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ssh کی تصدیق کیلئے Yubikeys اور دیگر اسمارٹ کارڈز استعمال کریں: https://goo.gl/Hu2o3v"
+		"message": "ssh کی تصدیق کیلئے Yubikeys اور دیگر اسمارٹ کارڈز استعمال کریں: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "تصاویر ان لائن ڈسپلے کریں: https://goo.gl/MnSysj"
+		"message": "تصاویر ان لائن ڈسپلے کریں: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "دائیں طرف کلک کرنے کے دوران Ctrl کو (macOS پر Cmd) پکڑے رکھنے سے سیاق و سباق مینو دکھائی دیتا ہے۔"
 	},
 	"tip_2": {
-		"message": "hterm-notify کا استعمال کر کے براؤزر میں اطلاعات ڈسپلے کریں: https://goo.gl/ZNxGdF"
+		"message": "hterm-notify کا استعمال کر کے براؤزر میں اطلاعات ڈسپلے کریں: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "‎'ssh<Tab><profile name>'‎ ٹائپ کر کے اومنی باکس سے منسلک کریں: https://goo.gl/V7o8ki"
+		"message": "‎'ssh<Tab><profile name>'‎ ٹائپ کر کے اومنی باکس سے منسلک کریں: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS فائل سسٹمز کو SFTP کے ذریعے ماؤنٹ اور فائلز ایپ کے ذریعے براؤز کر سکتی ہے۔ 'منسلک کریں' کی بجائے 'SFTP ماؤنٹ کریں' کا استعمال کریں۔"
 	},
 	"tip_5": {
-		"message": "ویب صفحات میں ‎ssh://‎ لنکس کا استعمال کر کے منسلک کریں یا ایک بُک مارک محفوظ کریں: https://goo.gl/zS8EZD"
+		"message": "ویب صفحات میں ‎ssh://‎ لنکس کا استعمال کر کے منسلک کریں یا ایک بُک مارک محفوظ کریں: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "بنیادی 16 رنگ اور 256 رنگوں اور پورے 24 بِٹ والے رنگوں کا استعمال کر کے اپنے آؤٹ پٹ/پرامپٹ کو رنگ کریں: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "OSC-52 کا استعمال کر کے emacs/vim/وغیرہ... سے اپنے کلپ بورڈ کر کاپی کریں: https://goo.gl/XSnyLo"
+		"message": "OSC-52 کا استعمال کر کے emacs/vim/وغیرہ... سے اپنے کلپ بورڈ کر کاپی کریں: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org کے ذریعے hterm/محفوظ شیل صارفین کے ساتھ چیٹ کریں: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "بَگ ملا؟  ایک نئی خصوصیت کی درخواست دیں؟  ہمیں مطلع کریں: https://goo.gl/vb94JY"
+		"message": "بَگ ملا؟  ایک نئی خصوصیت کی درخواست دیں؟  ہمیں مطلع کریں: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "ایک غیر متوقع خرابی پیش آ گئی۔ مزید تفصیلات کیلئے، براہ کرم JavaScript کونسول چیک کریں۔"

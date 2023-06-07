@@ -522,7 +522,7 @@
 		"message": "እውነት ከሆነ Home/End የተርሚናል መሸብለያውን ይቆጣጠራል፣ እና Shift+Home/Shift+End ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ Home/End ወደ የርቀት አስተናጋጁ ይላኩና Shift+Home/Shift+End ይሸበልላል።"
 	},
 	"hterm_pref_keybindings": {
-		"message": "ከቁልፍ እርምጃዎች ጋር የተሳሰረ የቁልፍ ተከታታይ ካርታ። የቁልፍ ተከታታዮች ዜሮ ወይም ተጨማሪ ቀያሪ ቁልፎችን ያካትቱና የቁልፍ ኮድን ያስከትላሉ። ቁልፍ ኮዶች የአሥርዮሽ ወይም አሥራስድስትዮሽ ቁጥሮች ወይም የቁልፍ ለዪ ሊሆኑ ይችላሉ። ቁልፍ እርምጃዎች ወደ ተቆጣጣሪ የሚላክ ሕብረቁምፊ ወይም የእርምጃ ለዪ ሊገለጽላቸው ይችላል። ሙሉው የቅርጸት ማብራሪያ ለማግኘት https://goo.gl/LWRndr ይመልከቱ።\n\nየናሙና ቁልፍ ማስተሳሰሪያዎች፦\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\\n'\"\n}"
+		"message": "ከቁልፍ እርምጃዎች ጋር የተሳሰረ የቁልፍ ተከታታይ ካርታ። የቁልፍ ተከታታዮች ዜሮ ወይም ተጨማሪ ቀያሪ ቁልፎችን ያካትቱና የቁልፍ ኮድን ያስከትላሉ። ቁልፍ ኮዶች የአሥርዮሽ ወይም አሥራስድስትዮሽ ቁጥሮች ወይም የቁልፍ ለዪ ሊሆኑ ይችላሉ። ቁልፍ እርምጃዎች ወደ ተቆጣጣሪ የሚላክ ሕብረቁምፊ ወይም የእርምጃ ለዪ ሊገለጽላቸው ይችላል። ሙሉው የቅርጸት ማብራሪያ ለማግኘት https://hterm.org/x/docs/keyboard-bindings ይመልከቱ።\n\nየናሙና ቁልፍ ማስተሳሰሪያዎች፦\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\\n'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "የተለመደ የስርዓተ ክወና ቁልፍ ሰሌዳ ማሰሪያዎች ለhterm የራሱ አጠቃቀም ፎቶ ከማንሳት ይልቅ መከበር እንዳለባቸው እና እንደሌለባቸው።"
@@ -1269,40 +1269,40 @@
 		"message": "በአንድ መስኮት ውስጥ ሲያሄዱ Ctrl+Shift+N ሌላ ክፍለ-ጊዜ ሊከፍት ይችላል።"
 	},
 	"tip_11": {
-		"message": "ቁልፎች/አቋራጮችን ዳግም ማስተሳሰር ይችላሉ፦ https://goo.gl/LWRndr"
+		"message": "ቁልፎች/አቋራጮችን ዳግም ማስተሳሰር ይችላሉ፦ https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ለssh ማረጋገጫ Yubikeysን እና ሌሎች ዘመናዊ ካርዶችን ይጠቀሙ፦ https://goo.gl/Hu2o3v"
+		"message": "ለssh ማረጋገጫ Yubikeysን እና ሌሎች ዘመናዊ ካርዶችን ይጠቀሙ፦ https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "ምስሎችን በውስጠ-መስመር አሳይ፦ https://goo.gl/MnSysj"
+		"message": "ምስሎችን በውስጠ-መስመር አሳይ፦ https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "በቀኝ ጠቅ እያደረጉ ሳለ Ctrlን (በmacOS ላይ Cmdን) መያዝ የአውድ ምናሌን ያመጣል።"
 	},
 	"tip_2": {
-		"message": "hterm-notifyን በመጠቀም ማሳወቂያዎችን በአሳሹ ውስጥ ይታዩ፦ https://goo.gl/ZNxGdF"
+		"message": "hterm-notifyን በመጠቀም ማሳወቂያዎችን በአሳሹ ውስጥ ይታዩ፦ https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "«Ssh <Tab> <profile name>» ን በመተየብ ከ ኦምኒቦክስ ይገናኙ፦ https://goo.gl/V7o8ki"
+		"message": "«Ssh <Tab> <profile name>» ን በመተየብ ከ ኦምኒቦክስ ይገናኙ፦ https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS በኤስኤፍቲፒ በኩል የፋይል ሥርዓቶችን ማፈናጠጥ እና በፋይሎች መተግበሪያው በኩል ማሰስ ይችላል። ከ«ተገናኝ» ይልቅ «ኤስኤፍቲፒ ማፈናጠጥ»ን ይጠቀሙ።"
 	},
 	"tip_5": {
-		"message": "በድረ-ገጾች ውስጥ የ ssh:// አገናኞችን በመጠቀም ይገናኙ ወይም አንድ ዕልባት ያስቀምጡ፦ https://goo.gl/zS8EZD"
+		"message": "በድረ-ገጾች ውስጥ የ ssh:// አገናኞችን በመጠቀም ይገናኙ ወይም አንድ ዕልባት ያስቀምጡ፦ https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "መሠረታዊ የ16 ቀለሞች እና 256 ቀለሞች ወይም ሙሉ ባለ24-ቢት ቀለሞችን በመጠቀም የእርስዎን ውጽዓት/ጥያቄን ያቅልሙ፦ http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "ከemacs/vim/ወዘተ ወደ የእርስዎ ቅንጥብ ሰሌዳ ይቅዱ... OSC-52ን በመጠቀም፦ https://goo.gl/XSnyLo"
+		"message": "ከemacs/vim/ወዘተ ወደ የእርስዎ ቅንጥብ ሰሌዳ ይቅዱ... OSC-52ን በመጠቀም፦ https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "በchromium-hterm@chromium.org በኩል ከሌሎች ባልደረባ የhterm/Secure Shell ተጠቃሚዎች ጋር ይወያዩ፦ https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "ሳንካ አገኙ?  አዲስ ባህሪ ይጠይቁ?  ያሳውቁን፦ https://goo.gl/vb94JY"
+		"message": "ሳንካ አገኙ?  አዲስ ባህሪ ይጠይቁ?  ያሳውቁን፦ https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "አንድ ያልተጠበቀ ስህተት ተከስቷል፣ ተጨማሪ ዝርዝሮችን ለማግኘት እባክዎ የጃቫስክሪፕት መሥሪያውን ይፈትሹ።"

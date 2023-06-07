@@ -519,7 +519,7 @@
 		"message": "Jika benar, Home/End akan mengontrol scroll bar terminal dan Shift+Home/Shift+End akan dikirim ke host jarak jauh. Jika salah, Home/End akan dikirim ke host jarak jauh dan Shift+Home/Shift+End akan men-scroll."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Peta berisi urutan tombol untuk tindakan tombol. Urutan tombol mencakup nol atau kunci pengubah lainnya yang diikuti oleh kode tombol. Kode tombol dapat berupa angka desimal atau heksadesimal, atau ID tombol. Tindakan tombol dapat ditentukan sebagai string untuk dikirim ke host, atau ID tindakan. Untuk penjelasan selengkapnya mengenai format, lihat https://goo.gl/LWRndr.\n\nContoh binding tombol:\n{\n  \"Ctrl+Alt-K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'HELLO\\n'\"\n}"
+		"message": "Peta berisi urutan tombol untuk tindakan tombol. Urutan tombol mencakup nol atau kunci pengubah lainnya yang diikuti oleh kode tombol. Kode tombol dapat berupa angka desimal atau heksadesimal, atau ID tombol. Tindakan tombol dapat ditentukan sebagai string untuk dikirim ke host, atau ID tindakan. Untuk penjelasan selengkapnya mengenai format, lihat https://hterm.org/x/docs/keyboard-bindings.\n\nContoh binding tombol:\n{\n  \"Ctrl+Alt-K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'HELLO\\n'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Menentukan apakah binding keyboard OS umum harus dipatuhi, bukan selalu mengambil gambar untuk penggunaan hterm sendiri."
@@ -1260,40 +1260,40 @@
 		"message": "Saat berjalan di jendela, menekan tombol Ctrl+Shift+N dapat membuka sesi lainnya."
 	},
 	"tip_11": {
-		"message": "Anda dapat mengubah binding kunci/pintasan: https://goo.gl/LWRndr"
+		"message": "Anda dapat mengubah binding kunci/pintasan: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Gunakan Yubikeys dan kartu smart lain untuk autentikasi ssh: https://goo.gl/Hu2o3v"
+		"message": "Gunakan Yubikeys dan kartu smart lain untuk autentikasi ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Tampilkan gambar inline: https://goo.gl/MnSysj"
+		"message": "Tampilkan gambar inline: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Menekan tombol Ctrl (Cmd di macOS) sambil mengklik kanan akan membuka menu konteks."
 	},
 	"tip_2": {
-		"message": "Tampilkan notifikasi di browser menggunakan hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Tampilkan notifikasi di browser menggunakan hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Hubungkan dari omnibox dengan mengetik 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
+		"message": "Hubungkan dari omnibox dengan mengetik 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS dapat memasang sistem file melalui SFTP dan mencari file melalui aplikasi File. Gunakan 'Pasang SFTP', bukan 'Hubungkan'."
 	},
 	"tip_5": {
-		"message": "Hubungkan menggunakan link ssh:// di halaman web, atau simpan bookmark: https://goo.gl/zS8EZD"
+		"message": "Hubungkan menggunakan link ssh:// di halaman web, atau simpan bookmark: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Beri warna masukan/permintaan Anda menggunakan warna 16 & 256 dasar & warna 24-bit lengkap: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Salin ke papan klip dari emacs/vim/etc... menggunakan OSC-52: https://goo.gl/XSnyLo"
+		"message": "Salin ke papan klip dari emacs/vim/etc... menggunakan OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chat dengan sesama pengguna hterm/Secure Shell melalui chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Menemukan bug? Ingin meminta fitur baru? Beri tahu kami di: https://goo.gl/vb94JY"
+		"message": "Menemukan bug? Ingin meminta fitur baru? Beri tahu kami di: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Terjadi error yang tidak terduga, harap periksa konsol JavaScript untuk detail selengkapnya."

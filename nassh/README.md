@@ -14,10 +14,10 @@ The [chromium-hterm mailing list] can be used to contact other users and
 developers for questions.
 
 Our existing set of bugs/feature requests can be found at
-<https://goo.gl/VkasRC>.
+<https://hterm.org/x/bugs>.
 
-To file an actual report, you can use <https://goo.gl/vb94JY>.  This will route
-to the right people.
+To file an actual report, you can use <https://hterm.org/x/ssh/newbug>.
+This will route to the right people.
 
 # Documentation
 

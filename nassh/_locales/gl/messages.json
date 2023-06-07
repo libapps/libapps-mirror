@@ -522,7 +522,7 @@
 		"message": "Se se define como true (verdadeiro), as teclas Inicio e Fin controlarán a barra de desprazamento do terminal e as combinacións Maiúsculas+Inicio ou Fin enviaranse ao host remoto. Se se define como false (falso), enviaranse ao host remoto as teclas Inicio e Fin e as combinacións Maiúsculas+Inicio ou Fin controlarán o desprazamento."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Un mapa de secuencias de teclas con accións de teclas. As secuencias de teclas inclúen cero ou máis teclas modificadoras seguidas dun código de tecla. Os códigos de teclas poden ser números decimais ou hexadecimais, ou ben un identificador de tecla. As accións de teclas poden especificarse como unha cadea para enviar ao host ou un identificador de acción. Accede a https://goo.gl/LWRndr para consultar unha explicación completa do formato.\n\nExemplos de vinculacións de teclas:\n{\n  \"Control+Alt+K\": \"clearTerminal\",\n  \"Control+Maiúsculas+L\": \"PASS\",\n  \"Control+H\": \"'Ola, mundo'\"\n}"
+		"message": "Un mapa de secuencias de teclas con accións de teclas. As secuencias de teclas inclúen cero ou máis teclas modificadoras seguidas dun código de tecla. Os códigos de teclas poden ser números decimais ou hexadecimais, ou ben un identificador de tecla. As accións de teclas poden especificarse como unha cadea para enviar ao host ou un identificador de acción. Accede a https://hterm.org/x/docs/keyboard-bindings para consultar unha explicación completa do formato.\n\nExemplos de vinculacións de teclas:\n{\n  \"Control+Alt+K\": \"clearTerminal\",\n  \"Control+Maiúsculas+L\": \"PASS\",\n  \"Control+H\": \"'Ola, mundo'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Define se se deben respectar as vinculacións do teclado habitual do sistema operativo en lugar de capturalas sempre para que as utilice hterm."
@@ -1248,40 +1248,40 @@
 		"message": "Cando se está executando nunha ventá, Control+Maiúsculas+N pode abrir outra sesión."
 	},
 	"tip_11": {
-		"message": "Podes vincular teclas e atallos de novo: https://goo.gl/LWRndr"
+		"message": "Podes vincular teclas e atallos de novo: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Utiliza Yubikeys e outras tarxetas intelixentes para a autenticación ssh: https://goo.gl/Hu2o3v"
+		"message": "Utiliza Yubikeys e outras tarxetas intelixentes para a autenticación ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Mostra imaxes inseridas: https://goo.gl/MnSysj"
+		"message": "Mostra imaxes inseridas: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Se mantés premido Control (Cmd en macOS) mentres fas clic co botón dereito, aparece un menú contextual."
 	},
 	"tip_2": {
-		"message": "Usa hterm-notify para mostrar notificacións no navegador: https://goo.gl/ZNxGdF"
+		"message": "Usa hterm-notify para mostrar notificacións no navegador: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Escribe ssh<Tab><profile name> para conectarte desde omnibox: https://goo.gl/V7o8ki"
+		"message": "Escribe ssh<Tab><profile name> para conectarte desde omnibox: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS pode instalar sistemas de ficheiros a través de SFTP e navegar usando a aplicación Ficheiros. Utiliza a opción Instalación de SFTP en lugar de Conectar."
 	},
 	"tip_5": {
-		"message": "Conéctate mediante ligazóns ssh:// en páxinas web ou garda un marcador: https://goo.gl/zS8EZD"
+		"message": "Conéctate mediante ligazóns ssh:// en páxinas web ou garda un marcador: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Dálles cor ás túas saídas ou solicitudes usando 16 cores básicas, 256 cores ou cores de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Copia contido no portapapeis desde emacs, vim ou outros editores de texto con OSC-52: https://goo.gl/XSnyLo"
+		"message": "Copia contido no portapapeis desde emacs, vim ou outros editores de texto con OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chatea con outros usuarios de hterm ou Secure Shell a través de chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Atopaches un erro?  Queres solicitar unha nova función?  Infórmanos: https://goo.gl/vb94JY"
+		"message": "Atopaches un erro?  Queres solicitar unha nova función?  Infórmanos: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Produciuse un erro inesperado. Para obter máis información, accede á consola de JavaScript."

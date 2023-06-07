@@ -516,7 +516,7 @@
 		"message": "සත්‍ය නම්, Home/End යතුර පර්යන්ත අනුචලන තීරුව පාලන කරන අතර Shift+Home/Shift+End දුරස්ථ ධාරකයට යැවේ. අසත්‍ය නම්, එවිට Home/End දුරස්ථ ධාරකයට යැවෙන අතර Shift+Home/Shift+End අනුචලන කරයි."
 	},
 	"hterm_pref_keybindings": {
-		"message": "යතුරු ක්‍රියා වෙත යතුරු අනුක්‍රමයේ සිතියමක්. යතුරු අනුක්‍රමවලට යතුරු කේතයකට පසුව සංස්කාරක යතුරු බින්දුවක් හෝ වැඩි ගණනක් ඇතුළු වෙයි. යතුරු කේත දශාංශ හෝ ෂෂ්ඨ දශාංශ අංක, හෝ යතුරු හැඳුනුම්කාරයක් විය හැක. යතුරු ක්‍රියා ධාරකය වෙත යැවෙන තන්තුවක් හෝ ක්‍රියා හැඳුනුම්කාරකයක් ලෙස සඳහන් කළ හැක. ආකෘතියේ පූර්ණ විදහා දැක්වීමකට, https://goo.gl/LWRndr බලන්න.\n\nනියැදි යතුරු බැඳීම්:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'ආයුබෝවන් ලෝක වැසියනි'\"\n}"
+		"message": "යතුරු ක්‍රියා වෙත යතුරු අනුක්‍රමයේ සිතියමක්. යතුරු අනුක්‍රමවලට යතුරු කේතයකට පසුව සංස්කාරක යතුරු බින්දුවක් හෝ වැඩි ගණනක් ඇතුළු වෙයි. යතුරු කේත දශාංශ හෝ ෂෂ්ඨ දශාංශ අංක, හෝ යතුරු හැඳුනුම්කාරයක් විය හැක. යතුරු ක්‍රියා ධාරකය වෙත යැවෙන තන්තුවක් හෝ ක්‍රියා හැඳුනුම්කාරකයක් ලෙස සඳහන් කළ හැක. ආකෘතියේ පූර්ණ විදහා දැක්වීමකට, https://hterm.org/x/docs/keyboard-bindings බලන්න.\n\nනියැදි යතුරු බැඳීම්:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'ආයුබෝවන් ලෝක වැසියනි'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "hterm හි භාවිතය සැම විටම ග්‍රහණ කිරීම වෙනුවට පොදු OS යතුරු පුවරු බැඳීම්වලට ගරු කළ යුතුද යන්න."
@@ -1323,40 +1323,40 @@
 		"message": "කවුළුවක් තුළ ධාවන වන විට, Ctrl+Shift+N හට තවත් සැසියක් විවෘත කළ හැක."
 	},
 	"tip_11": {
-		"message": "ඔබට යතුරු/කෙටිමං යළි බැඳිය හැක: https://goo.gl/LWRndr"
+		"message": "ඔබට යතුරු/කෙටිමං යළි බැඳිය හැක: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ssh සත්‍යාපනය සඳහා Yubikeys සහ අනෙකුත් ස්මාර්ට් කාඩ්පත් භාවිත කරන්න: https://goo.gl/Hu2o3v"
+		"message": "ssh සත්‍යාපනය සඳහා Yubikeys සහ අනෙකුත් ස්මාර්ට් කාඩ්පත් භාවිත කරන්න: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "රූප පේළිගතව සංදර්ශන කරන්න: https://goo.gl/MnSysj"
+		"message": "රූප පේළිගතව සංදර්ශන කරන්න: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "දකුණට ක්ලික් කරන අතරතුර Ctrl (macOS මත Cmd) ඔබා ගෙන සිටීම ප්‍රකරණ මෙනුව උඩට ගෙන එයි."
 	},
 	"tip_2": {
-		"message": "hterm-notify භාවිත කර බ්‍රවුසරය තුළ දැනුම්දීම් සංදර්ශන කරන්න: https://goo.gl/ZNxGdF"
+		"message": "hterm-notify භාවිත කර බ්‍රවුසරය තුළ දැනුම්දීම් සංදර්ශන කරන්න: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "'ssh<Tab><profile name>' ටයිප් කිරීමෙන් omnibox වෙතින් සම්බන්ධ වන්න: https://goo.gl/V7o8ki"
+		"message": "'ssh<Tab><profile name>' ටයිප් කිරීමෙන් omnibox වෙතින් සම්බන්ධ වන්න: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS හට SFTP හරහා ගොනු පද්ධති නැංවිමටත් Files යෙදුම හරහා බ්‍රවුස් කිරීමටත් හැක. 'සම්බන්ධ කරන්න' වෙනුවට 'SFTP නැංවුම' භාවිතා කරන්න."
 	},
 	"tip_5": {
-		"message": "වෙබ් පිටු තුළ ssh:// සබැඳි භාවිත කර සම්බන්ධ කරන්න, නැති නම් පිටුසනක් සුරකින්න: https://goo.gl/zS8EZD"
+		"message": "වෙබ් පිටු තුළ ssh:// සබැඳි භාවිත කර සම්බන්ධ කරන්න, නැති නම් පිටුසනක් සුරකින්න: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "මූලික වර්ණ 16 සහ වර්ණ 256 සහ පූර්ණ බිටු 24 ක වර්ණ භාවිත කර ඔබේ ප්‍රතිදානය/ප්‍රේරකය වර්ණ ගන්වන්න: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "OSC-52: https://goo.gl/XSnyLo භාවිත කර emacs/vim/etc... වෙතින් ඔබේ පසුරු පුවරුව පිටපත් කරන්න"
+		"message": "OSC-52: https://hterm.org/x/faq/osc52 භාවිත කර emacs/vim/etc... වෙතින් ඔබේ පසුරු පුවරුව පිටපත් කරන්න"
 	},
 	"tip_8": {
 		"message": "අනෙකුත් hterm/සුරක්ෂිත ෂෙල් පරිශීලකයින් සමඟ chromium-hterm@chromium.org හරහා පරීක්ෂා කර ගන්න: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "දෝෂයක් සොයා ගත්තේද?  නව විශේෂාංගයක් ඉල්ලන්නේද?  අපට දන්වන්න: https://goo.gl/vb94JY"
+		"message": "දෝෂයක් සොයා ගත්තේද?  නව විශේෂාංගයක් ඉල්ලන්නේද?  අපට දන්වන්න: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "අනපේක්ෂිත දෝෂයක් සිදු විය, වැඩි විස්තර සඳහා ජාවාස්ක්‍රිප්ට් කොන්සෝලය පරීක්ෂා කරන්න."

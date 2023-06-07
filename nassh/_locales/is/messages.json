@@ -519,7 +519,7 @@
 		"message": "Ef rétt þá stjórnar Home/End flettistiku skipanalínu og Shift+Home/Shift+End eru send til fjartengds hýsils. Ef rangt eru Home/End send til fjartengds hýsils og Shift+Home/Shift+End flettir."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Tenging lyklarunu við lyklaaðgerðir. Lyklarunur geta falið í sér núll eða fleiri breytilykla og þar á eftir lykilkóða. Lyklakóðar geta verið í tugakerfi eða sextándakerfi, eða lykilauðkenni. Hægt er að tilgreina lyklaaðgerðir sem streng sem sendur er til hýsils eða sem aðgerðarauðkenni. Ítarleg útskýring á sniðinu er á https://goo.gl/LWRndr.\n\nDæmi um lyklatengingar:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Halló, heimur'\"\n}"
+		"message": "Tenging lyklarunu við lyklaaðgerðir. Lyklarunur geta falið í sér núll eða fleiri breytilykla og þar á eftir lykilkóða. Lyklakóðar geta verið í tugakerfi eða sextándakerfi, eða lykilauðkenni. Hægt er að tilgreina lyklaaðgerðir sem streng sem sendur er til hýsils eða sem aðgerðarauðkenni. Ítarleg útskýring á sniðinu er á https://hterm.org/x/docs/keyboard-bindings.\n\nDæmi um lyklatengingar:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Halló, heimur'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ákvarða hvort virða eigi algengar lyklaborðsflýtiskipanir stýrikerfis í stað þess að hterm vinni þær sjálft í hvert skipti."
@@ -1311,40 +1311,40 @@
 		"message": "Þegar keyrt er í glugga getur Ctrl+Shift+N opnað aðra lotu."
 	},
 	"tip_11": {
-		"message": "Hægt er að endurtengja lykla/flýtileiðir: https://goo.gl/LWRndr"
+		"message": "Hægt er að endurtengja lykla/flýtileiðir: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Nota YubiKey-lykla og aðra snjallkortalesara fyrir SSH-sannvottun: https://goo.gl/Hu2o3v"
+		"message": "Nota YubiKey-lykla og aðra snjallkortalesara fyrir SSH-sannvottun: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Birta innfelldar myndir: https://goo.gl/MnSysj"
+		"message": "Birta innfelldar myndir: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Ef þú heldur inni Ctrl (Cmd í macOS) á meðan þú hægrismellir birtist efnisvalmynd."
 	},
 	"tip_2": {
-		"message": "Birta tilkynningar í vafranum með hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Birta tilkynningar í vafranum með hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Tengstu af veffangastikunni með því að slá inn 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
+		"message": "Tengstu af veffangastikunni með því að slá inn 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS getur tengt skráakerfi í gegnum SFTP og flett í þeim með forritinu „Skrár“. Notaðu „SFTP-tenging“ í stað „Tengja“."
 	},
 	"tip_5": {
-		"message": "Þú getur tengt með því að nota ssh:// tengla á vefsvæðum eða vista bókamerki: https://goo.gl/zS8EZD"
+		"message": "Þú getur tengt með því að nota ssh:// tengla á vefsvæðum eða vista bókamerki: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Lita úttak/kvaðningu með 16 grunnlitum og 256 litum og fullum 24 bita litum: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Afritaðu klippiborðið úr emacs/vim/etc... með OSC-52: https://goo.gl/XSnyLo"
+		"message": "Afritaðu klippiborðið úr emacs/vim/etc... með OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Spjallaðu við aðra notendur hterm/Secure Shell með chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Rakstu á villu?  Viltu biðja um nýja eiginleika?  Láttu okkur vita: https://goo.gl/vb94JY"
+		"message": "Rakstu á villu?  Viltu biðja um nýja eiginleika?  Láttu okkur vita: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Óvænt villa kom upp. Frekari upplýsingar er að finna á JavaScript-stjórnborðinu."

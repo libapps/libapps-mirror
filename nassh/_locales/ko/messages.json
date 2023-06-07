@@ -522,7 +522,7 @@
 		"message": "True인 경우 Home/End 키를 사용해 터미널 스크롤바를 제어하고 Shift 키와 Home/End 키를 함께 누르면 원격 호스트에 전송됩니다. False인 경우 Home/End 키를 누르면 원격 호스트로 전송되고 Shift 키와 Home/End 키를 함께 누르면 스크롤됩니다."
 	},
 	"hterm_pref_keybindings": {
-		"message": "키 동작의 키 시퀀스 맵입니다. 키 시퀀스에는 0개 이상의 특수키와 키 코드가 포함됩니다. 키 코드에는 십진수 또는 16진수 숫자 또는 키 식별자를 사용할 수 있습니다. 키 동작은 호스트에 전송할 문자열 또는 동작 식별자로 지정할 수 있습니다. https://goo.gl/LWRndr 페이지에서 형식에 관해 자세히 알아볼 수 있습니다.\n\n샘플 키 바인딩:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "키 동작의 키 시퀀스 맵입니다. 키 시퀀스에는 0개 이상의 특수키와 키 코드가 포함됩니다. 키 코드에는 십진수 또는 16진수 숫자 또는 키 식별자를 사용할 수 있습니다. 키 동작은 호스트에 전송할 문자열 또는 동작 식별자로 지정할 수 있습니다. https://hterm.org/x/docs/keyboard-bindings 페이지에서 형식에 관해 자세히 알아볼 수 있습니다.\n\n샘플 키 바인딩:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "hterm 자체 사용을 항상 캡처하는 대신 일반 OS 키보드 바인딩을 따를지 설정합니다."
@@ -1248,40 +1248,40 @@
 		"message": "창에서 실행 중인 경우, Ctrl + Shift + N 키를 눌러 다른 세션을 열 수 있습니다."
 	},
 	"tip_11": {
-		"message": "키/단축키를 다시 바인딩할 수 있습니다. https://goo.gl/LWRndr"
+		"message": "키/단축키를 다시 바인딩할 수 있습니다. https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "다음 페이지를 참조하여 Yubikeys 및 기타 스마트 카드를 SSH 인증에 사용하세요. https://goo.gl/Hu2o3v"
+		"message": "다음 페이지를 참조하여 Yubikeys 및 기타 스마트 카드를 SSH 인증에 사용하세요. https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "다음 페이지를 참조하여 이미지를 인라인으로 표시하세요. https://goo.gl/MnSysj"
+		"message": "다음 페이지를 참조하여 이미지를 인라인으로 표시하세요. https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "컨텍스트 메뉴를 불러오려면 마우스 오른쪽 버튼을 클릭한 상태에서 Ctrl(macOS의 경우 Cmd) 키를 누르세요."
 	},
 	"tip_2": {
-		"message": "hterm-notify를 사용하여 브라우저에 알림을 표시하세요(참고: https://goo.gl/ZNxGdF)."
+		"message": "hterm-notify를 사용하여 브라우저에 알림을 표시하세요(참고: https://hterm.org/x/faq/notify-sh)."
 	},
 	"tip_3": {
-		"message": "검색주소창에 'ssh<Tab><프로필 이름>'을 입력하여 연결하세요(참고: https://goo.gl/V7o8ki)."
+		"message": "검색주소창에 'ssh<Tab><프로필 이름>'을 입력하여 연결하세요(참고: https://hterm.org/x/ssh/faq/omnibox)."
 	},
 	"tip_4": {
 		"message": "ChromeOS에서 SFTP를 통해 파일 시스템을 마운트하고 파일 앱을 통해 탐색할 수 있습니다. '연결' 대신 'SFTP 마운트'를 사용하세요."
 	},
 	"tip_5": {
-		"message": "웹페이지에서 ssh:// 링크를 사용하여 연결하거나 북마크를 저장하세요(참고: https://goo.gl/zS8EZD)."
+		"message": "웹페이지에서 ssh:// 링크를 사용하여 연결하거나 북마크를 저장하세요(참고: https://hterm.org/x/ssh/faq/bookmarks)."
 	},
 	"tip_6": {
 		"message": "기본 16색, 256색 및 전체 24비트 색상을 사용하여 출력/프롬프트 색상을 지정하세요. http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "OSC-52를 사용하여 emacs/vim 등의 내용을 클립보드에 복사하세요(참고: https://goo.gl/XSnyLo)."
+		"message": "OSC-52를 사용하여 emacs/vim 등의 내용을 클립보드에 복사하세요(참고: https://hterm.org/x/faq/osc52)."
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org를 통해 다른 hterm/Secure Shell 사용자와 채팅하세요(참고: https://goo.gl/RYHiK)."
 	},
 	"tip_9": {
-		"message": "버그를 발견하셨나요? 아니면 새로운 기능을 요청하고 싶으신가요? Google에 알려 주세요. https://goo.gl/vb94JY"
+		"message": "버그를 발견하셨나요? 아니면 새로운 기능을 요청하고 싶으신가요? Google에 알려 주세요. https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "예기치 않은 오류가 발생했습니다. 더 자세한 정보를 보려면 자바스크립트 콘솔을 확인하시기 바랍니다."

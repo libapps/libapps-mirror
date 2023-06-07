@@ -532,7 +532,7 @@ hterm.PreferenceManager.defaultPreferences = {
       `more modifier keys followed by a key code. Key codes can be decimal ` +
       `or hexadecimal numbers, or a key identifier. Key actions can be ` +
       `specified as a string to send to the host, or an action identifier. ` +
-      `For a full explanation of the format, see https://goo.gl/LWRndr.\n` +
+      `For a full explanation of the format, see https://hterm.org/x/docs/keyboard-bindings.\n` +
       `\n` +
       `Sample keybindings:\n` +
       `{\n` +

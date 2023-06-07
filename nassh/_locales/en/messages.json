@@ -803,7 +803,7 @@
 	},
 	"HTERM_PREF_KEYBINDINGS": {
 		"description": "Help text shown for the 'keybindings' preference. The example keybindings should not be translated; you can translate the 'Hello World' text, but you must not change the quote style.",
-		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host, or an action identifier. For a full explanation of the format, see https://goo.gl/LWRndr.\n\nSample keybindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers, or a key identifier. Key actions can be specified as a string to send to the host, or an action identifier. For a full explanation of the format, see https://hterm.org/x/docs/keyboard-bindings.\n\nSample keybindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"HTERM_PREF_KEYBINDINGS_OS_DEFAULTS": {
 		"description": "Help text shown for the 'keybindings-os-defaults' preference. 'OS' is 'operating system' and may be translated accordingly. 'hterm' should not be translated. 'own use' means that the program will capture & process the keyboard shortcuts itself and prevent the OS from doing anything.",
@@ -1755,7 +1755,7 @@
 		"placeholders": {
 			"URL": {
 				"content": "$1",
-				"example": "https://goo.gl/mHrbej"
+				"example": "https://hterm.org/x/faq/reserved-accelerators"
 			}
 		}
 	},
@@ -2363,15 +2363,15 @@
 	},
 	"TIP_11": {
 		"description": "Helpful tip shown to user advertising features. 'rebind' means changing the behavior of a specific shortcut.",
-		"message": "You can rebind keys/shortcuts: https://goo.gl/LWRndr"
+		"message": "You can rebind keys/shortcuts: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"TIP_12": {
 		"description": "Helpful tip shown to user advertising features. Do not translate 'Yubikeys' as it's a product name.",
-		"message": "Use Yubikeys and other smart cards for ssh authentication: https://goo.gl/Hu2o3v"
+		"message": "Use Yubikeys and other smart cards for ssh authentication: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"TIP_13": {
 		"description": "Helpful tip shown to user advertising features. 'inline' means the images will be displayed directly instead of being downloaded.",
-		"message": "Display images inline: https://goo.gl/MnSysj"
+		"message": "Display images inline: https://hterm.org/x/faq/inline-images"
 	},
 	"TIP_14": {
 		"description": "Helpful tip shown to user advertising features. Ctrl/Cmd refer to keyboard buttons. 'macOS' is Apple's operating system also known as 'Mac OS X' and should only be translated if an official translation exists. 'Right clicking' refers to clicking with the mouse. 'Context menu' is the popup menu with items for the user to pick from. Everything may be translated as makes sense.",
@@ -2379,11 +2379,11 @@
 	},
 	"TIP_2": {
 		"description": "Helpful tip shown to user advertising features. Do not translate 'hterm-notify' as it's the name of a program.",
-		"message": "Display notifications in the browser using hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Display notifications in the browser using hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"TIP_3": {
 		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh' string. '<Tab>' represents the keyboard Tab key which the user needs to press after typing 'ssh', and may be translaed accordingly. 'profile name' may be translated, but make it clear that the 'profile name' is something the user needs to enter/replace (like the angle brackets do in the English string). It is a user-defined description for their saved connections.",
-		"message": "Connect from the omnibox by typing 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
+		"message": "Connect from the omnibox by typing 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"TIP_4": {
 		"description": "Helpful tip shown to user advertising features. 'SFTP Mount' and 'Connect' refer to button labels and should be translated using the same text as the MOUNT_BUTTON_LABEL and CONNECT_BUTTON_LABEL messages.",
@@ -2391,7 +2391,7 @@
 	},
 	"TIP_5": {
 		"description": "Helpful tip shown to user advertising features. Do not translate the 'ssh://' part as it refers to a web link.",
-		"message": "Connect using ssh:// links in web pages, or save a bookmark: https://goo.gl/zS8EZD"
+		"message": "Connect using ssh:// links in web pages, or save a bookmark: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"TIP_6": {
 		"description": "Helpful tip shown to user advertising features",
@@ -2399,7 +2399,7 @@
 	},
 	"TIP_7": {
 		"description": "Helpful tip shown to user advertising features. Do not translate 'emacs' or 'vim' (they are the names of text editors), and do not translate 'OSC-52' (it refers to a terminal specification).",
-		"message": "Copy to your clipboard from emacs/vim/etc... using OSC-52: https://goo.gl/XSnyLo"
+		"message": "Copy to your clipboard from emacs/vim/etc... using OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"TIP_8": {
 		"description": "Helpful tip shown to user advertising features",
@@ -2407,7 +2407,7 @@
 	},
 	"TIP_9": {
 		"description": "Helpful tip shown to user advertising features",
-		"message": "Found a bug?  Request a new feature?  Let us know: https://goo.gl/vb94JY"
+		"message": "Found a bug?  Request a new feature?  Let us know: https://hterm.org/x/ssh/newbug"
 	},
 	"UNEXPECTED_ERROR": {
 		"description": "Generic message displayed when we encounter an unexpected error.",
@@ -2437,7 +2437,7 @@
 		"placeholders": {
 			"URL": {
 				"content": "$1",
-				"example": "https://goo.gl/YnmXOs"
+				"example": "https://hterm.org/x/ssh/changelog"
 			}
 		}
 	},
@@ -2447,7 +2447,7 @@
 		"placeholders": {
 			"URL": {
 				"content": "$1",
-				"example": "https://goo.gl/muppJj"
+				"example": "https://hterm.org/x/ssh/faq"
 			}
 		}
 	},

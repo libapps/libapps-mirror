@@ -522,7 +522,7 @@
 		"message": "Nustačius kaip „true“, klavišais „Home“ arba „End“ valdoma terminalo slinkimo juosta, o klavišais „Shift“ + „Home“ arba „Shift“ + „End“ siunčiama nuotoliniam prieglobos serveriui. Nustačius kaip „false“, klavišais „Home“ arba „End“ siunčiama nuotoliniam prieglobos serveriui, o klavišais „Shift“ + „Home“ arba „Shift“ + „End“ slenkama."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Klavišų sekos atliekant veiksmus klavišais žemėlapis. Į klavišų sekas įtraukiama nulis ar daugiau modifikavimo klavišų su klavišų kodais. Klavišų kodai gali būti dešimtainiai arba šešioliktainiai skaičiai arba klavišo identifikatorius. Klavišų veiksmai gali būti nurodyti kaip eilutė, siunčiama prieglobos serveriui, arba veiksmo identifikatorius. Jei reikia išsamaus formato paaiškinimo, žr. https://goo.gl/LWRndr.\n\nKlavišų susiejimų pavyzdžiai:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Sveikas, pasauli'\"\n}"
+		"message": "Klavišų sekos atliekant veiksmus klavišais žemėlapis. Į klavišų sekas įtraukiama nulis ar daugiau modifikavimo klavišų su klavišų kodais. Klavišų kodai gali būti dešimtainiai arba šešioliktainiai skaičiai arba klavišo identifikatorius. Klavišų veiksmai gali būti nurodyti kaip eilutė, siunčiama prieglobos serveriui, arba veiksmo identifikatorius. Jei reikia išsamaus formato paaiškinimo, žr. https://hterm.org/x/docs/keyboard-bindings.\n\nKlavišų susiejimų pavyzdžiai:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Sveikas, pasauli'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ar reikia paisyti įprastų susietų OS klaviatūros klavišų vietoje naudojamų „hterm“."
@@ -1305,40 +1305,40 @@
 		"message": "Vykdant lange, paspaudus „Ctrl“ + „Shift“ + N gali būti atidarytas kitas seansas."
 	},
 	"tip_11": {
-		"message": "Galite pakartotinai susieti raktus ar sparčiuosius klavišus: https://goo.gl/LWRndr"
+		"message": "Galite pakartotinai susieti raktus ar sparčiuosius klavišus: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Naudokite „Yubikeys“ ir kitas išmaniąsias korteles SSH tapatybei nustatyti: https://goo.gl/Hu2o3v"
+		"message": "Naudokite „Yubikeys“ ir kitas išmaniąsias korteles SSH tapatybei nustatyti: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Pateikite įterptų vaizdų: https://goo.gl/MnSysj"
+		"message": "Pateikite įterptų vaizdų: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Laikant paspaudus „Ctrl“ („Cmd“, jei naudojate „Mac“ OS) ir spustelėjus dešiniuoju pelės klavišu pateikiamas kontekstinis meniu."
 	},
 	"tip_2": {
-		"message": "Pateikite pranešimus naršyklėje naudodami „hterm-notify“: https://goo.gl/ZNxGdF"
+		"message": "Pateikite pranešimus naršyklėje naudodami „hterm-notify“: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Prisijunkite iš „omnibox“ įvesdami „ssh<Tab><profile name>“: https://goo.gl/V7o8ki"
+		"message": "Prisijunkite iš „omnibox“ įvesdami „ssh<Tab><profile name>“: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "„ChromeOS“ gali įdėti failų sistemas per SFTP ir naršyti naudodama Failų programą. Naudokite „SFTP įdėjimas“ vietoje „Prisijungti“."
 	},
 	"tip_5": {
-		"message": "Prisijunkite naudodami nuorodas ssh:// tinklalapiuose arba išsaugokite žymę: https://goo.gl/zS8EZD"
+		"message": "Prisijunkite naudodami nuorodas ssh:// tinklalapiuose arba išsaugokite žymę: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Nuspalvinkite išvestį ar raginimą naudodami 16 pagrindinių spalvų ir 256 spalvas bei 24 bitų spalvas: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Nukopijuokite į iškarpinę iš „emacs/vim/etc...“ naudodami OSC-52: https://goo.gl/XSnyLo"
+		"message": "Nukopijuokite į iškarpinę iš „emacs/vim/etc...“ naudodami OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Kalbėkite su kitais „hterm“ ar „Secure Shell“ naudotojais naudodami adresą chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Radote riktą? Norite pateikti naujos funkcijos užklausą? Praneškite mums: https://goo.gl/vb94JY"
+		"message": "Radote riktą? Norite pateikti naujos funkcijos užklausą? Praneškite mums: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Įvyko nenumatyta klaida. Jei reikia daugiau išsamios informacijos, žr. „JavaScript“ pultą."

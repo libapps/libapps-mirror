@@ -516,7 +516,7 @@
 		"message": "Se il valore è vero, con i tasti Inizio/Fine è possibile controllare la barra di scorrimento del terminale e i tasti Maiusc + Inizio/Maiusc + Fine vengono inviati all'host remoto. Se il valore è falso, i tasti Inizio/Fine vengono inviati all'host remoto, mentre i tasti Maiusc + Inizio/Maiusc + Fine consentono di scorrere."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Un'associazione di sequenze di tasti ad azioni dei tasti. Le sequenze di tasti includono zero o più tasti di modifica seguiti dal codice di un tasto. I codici dei tasti possono essere numeri decimali o esadecimali oppure identificatori di tasti. Le azioni dei tasti possono essere specificate sotto forma di stringa da inviare all'host o di identificatore di azioni. Per avere una spiegazione completa del formato, visita la pagina https://goo.gl/LWRndr.\n\nEsempi di associazioni di tasti:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Un'associazione di sequenze di tasti ad azioni dei tasti. Le sequenze di tasti includono zero o più tasti di modifica seguiti dal codice di un tasto. I codici dei tasti possono essere numeri decimali o esadecimali oppure identificatori di tasti. Le azioni dei tasti possono essere specificate sotto forma di stringa da inviare all'host o di identificatore di azioni. Per avere una spiegazione completa del formato, visita la pagina https://hterm.org/x/docs/keyboard-bindings.\n\nEsempi di associazioni di tasti:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Consente di stabilire se le comuni associazioni da tastiera del sistema operativo debbano essere rispettate invece che acquisire sempre l'uso di hterm."
@@ -1245,40 +1245,40 @@
 		"message": "All'interno di una finestra premi Ctrl + Maiusc + N per aprire un'altra sessione."
 	},
 	"tip_11": {
-		"message": "Riassocia tasti/scorciatoie: https://goo.gl/LWRndr"
+		"message": "Riassocia tasti/scorciatoie: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Usa Yubikeys e altre smart card per l'autenticazione ssh: https://goo.gl/Hu2o3v"
+		"message": "Usa Yubikeys e altre smart card per l'autenticazione ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Visualizza le immagini in linea: https://goo.gl/MnSysj"
+		"message": "Visualizza le immagini in linea: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Tieni premuto Ctrl (Cmd su macOS) mentre fai clic con il pulsante destro del mouse per visualizzare un menu contestuale."
 	},
 	"tip_2": {
-		"message": "Visualizza le notifiche nel browser utilizzando hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Visualizza le notifiche nel browser utilizzando hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Connettiti dalla omnibox digitando \"ssh<Tab><nome profilo>\": https://goo.gl/V7o8ki"
+		"message": "Connettiti dalla omnibox digitando \"ssh<Tab><nome profilo>\": https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS consente di montare file system tramite SFTP e di sfogliare file tramite l'app File. Utilizza \"Montaggio SFTP\" anziché \"Connetti\"."
 	},
 	"tip_5": {
-		"message": "Connettiti utilizzando link ssh:// nelle pagine web oppure salva un preferito: https://goo.gl/zS8EZD"
+		"message": "Connettiti utilizzando link ssh:// nelle pagine web oppure salva un preferito: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Colora il tuo output/messaggio con i 16 colori di base, 256 colori e i colori completi a 24 bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Copia negli appunti da emacs/vim/ecc… utilizzando OSC-52: https://goo.gl/XSnyLo"
+		"message": "Copia negli appunti da emacs/vim/ecc… utilizzando OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chatta con altri utenti hterm/Secure Shell tramite chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Hai trovato un bug? Vuoi richiedere una nuova funzionalità? Contattaci: https://goo.gl/vb94JY"
+		"message": "Hai trovato un bug? Vuoi richiedere una nuova funzionalità? Contattaci: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Si è verificato un errore imprevisto. Per ulteriori informazioni, controlla la console JavaScript."

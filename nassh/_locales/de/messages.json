@@ -522,7 +522,7 @@
 		"message": "Wenn \"true\" festgelegt ist, wird mit Pos1/Ende die Bildlaufleiste des Terminals gesteuert und Umschalttaste + Pos1/Ende an den Remote-Host gesendet. Bei \"false\" werden Pos1/Ende an den Remote-Host gesendet und mit Umschalttaste + Pos1/Ende wird gescrollt."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Eine Karte mit Tastenkombinationen für Schlüsselfunktionen. Tastenkombinationen bestehen aus keiner bis mehreren Modifikatortasten, gefolgt von einem Tastencode. Tastencodes können Dezimal- oder Hexadezimalzahlen oder eine Schlüsselkennung sein. Schlüsselfunktionen können als String definiert sein, der an den Host gesendet wird, oder als eine Aktionskennung. Eine vollständige Erklärung des Formats findest du unter https://goo.gl/LWRndr.\n\nBeispiele für Tastenbelegungen:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Eine Karte mit Tastenkombinationen für Schlüsselfunktionen. Tastenkombinationen bestehen aus keiner bis mehreren Modifikatortasten, gefolgt von einem Tastencode. Tastencodes können Dezimal- oder Hexadezimalzahlen oder eine Schlüsselkennung sein. Schlüsselfunktionen können als String definiert sein, der an den Host gesendet wird, oder als eine Aktionskennung. Eine vollständige Erklärung des Formats findest du unter https://hterm.org/x/docs/keyboard-bindings.\n\nBeispiele für Tastenbelegungen:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Legt fest, ob allgemeine Tastaturbelegungen des Betriebssystems beachtet werden oder immer die eigene Verwendung durch HTerm erfasst wird."
@@ -1242,40 +1242,40 @@
 		"message": "Wenn ein Fenster geöffnet ist, kann durch Strg + Umschalttaste + N eine weitere Sitzung geöffnet werden."
 	},
 	"tip_11": {
-		"message": "Tasten/Tastenkombinationen können neu zugewiesen werden: https://goo.gl/LWRndr"
+		"message": "Tasten/Tastenkombinationen können neu zugewiesen werden: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Es können Yubikeys und andere Smartcards für die SSH-Authentifizierung verwendet werden: https://goo.gl/Hu2o3v"
+		"message": "Es können Yubikeys und andere Smartcards für die SSH-Authentifizierung verwendet werden: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Bilder inline anzeigen: https://goo.gl/MnSysj"
+		"message": "Bilder inline anzeigen: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Die Strg-Taste gedrückt halten (Befehlstaste bei Mac OS) und gleichzeitig mit der rechten Maustaste klicken, um ein Kontextmenü zu öffnen."
 	},
 	"tip_2": {
-		"message": "Benachrichtigungen können mithilfe von \"hterm-notify\" im Browser angezeigt werden: https://goo.gl/ZNxGdF"
+		"message": "Benachrichtigungen können mithilfe von \"hterm-notify\" im Browser angezeigt werden: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Es kann eine Verbindung über Omnibox hergestellt werden, indem du „ssh<Tab><Profilname>“ eingibst: https://goo.gl/V7o8ki"
+		"message": "Es kann eine Verbindung über Omnibox hergestellt werden, indem du „ssh<Tab><Profilname>“ eingibst: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS kann Dateisysteme über SFTP bereitstellen und über die App „Dateien“ suchen. Verwende „SFTP-Bereitstellung“ statt „Verbinden“."
 	},
 	"tip_5": {
-		"message": "Mithilfe von \"ssh://\"-Links auf Webseiten lassen sich Verbindungen herstellen oder es kann ein Lesezeichen gespeichert werden: https://goo.gl/zS8EZD"
+		"message": "Mithilfe von \"ssh://\"-Links auf Webseiten lassen sich Verbindungen herstellen oder es kann ein Lesezeichen gespeichert werden: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Die Ausgabe/Eingabeaufforderung kann mithilfe von 16 Farben , 256 Farben und 24-Bit-Vollfarben gestaltet werden: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Inhalte in die Zwischenablage kopieren, beispielsweise von Emacs oder Vim, verwende OSC-52: https://goo.gl/XSnyLo"
+		"message": "Inhalte in die Zwischenablage kopieren, beispielsweise von Emacs oder Vim, verwende OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Über chromium-hterm@chromium.org mit anderen HTerm-/Secure Shell-Nutzern chatten: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Hast du einen Fehler gefunden? Möchtest du eine neue Funktion anfragen? Lass es uns wissen: https://goo.gl/vb94JY"
+		"message": "Hast du einen Fehler gefunden? Möchtest du eine neue Funktion anfragen? Lass es uns wissen: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Ein unerwarteter Fehler ist aufgetreten. Weitere Informationen findest du in der JavaScript-Konsole."

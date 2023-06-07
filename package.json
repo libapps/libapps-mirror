@@ -62,7 +62,7 @@
     "xterm-addon-webgl": "^0.14.0"
   },
   "bugs": {
-    "url": "https://goo.gl/vb94JY",
+    "url": "https://hterm.org/x/newbug",
     "email": "chromium-hterm@chromium.org"
   },
   "homepage": "https://chromium.googlesource.com/apps/libapps"

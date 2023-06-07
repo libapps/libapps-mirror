@@ -522,7 +522,7 @@
 		"message": "Ak nastavíte hodnotu pravda, klávesy Home a End budú ovládať posúvač terminálu a kombinácie klávesov Shift+Home a Shift+End sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu nepravda, klávesy Home a End sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift+Home a Shift+End budú ovládať posúvač."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapovanie kombinácie klávesov na akcie. Kombinácia klávesov zahŕňa nula alebo viac klávesov modifikátora nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla či identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať hostiteľovi, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na https://goo.gl/LWRndr.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Mapovanie kombinácie klávesov na akcie. Kombinácia klávesov zahŕňa nula alebo viac klávesov modifikátora nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla či identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať hostiteľovi, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na https://hterm.org/x/docs/keyboard-bindings.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Určuje, či sa majú bežné klávesové skratky operačného systému zachovať alebo vždy odosielať na použitie terminálom hterm."
@@ -1251,40 +1251,40 @@
 		"message": "Stlačením kombinácie klávesov Ctrl+Shift+N počas zobrazenia v okne otvoríte novú reláciu."
 	},
 	"tip_11": {
-		"message": "Klávesom alebo skratkám môžete pridružiť nové funkcie: https://goo.gl/LWRndr"
+		"message": "Klávesom alebo skratkám môžete pridružiť nové funkcie: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Na overenie totožnosti prostredníctvom protokolu ssh použite Yubikey a ďalšie inteligentné karty: https://goo.gl/Hu2o3v"
+		"message": "Na overenie totožnosti prostredníctvom protokolu ssh použite Yubikey a ďalšie inteligentné karty: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Zobrazujte vložené obrázky na https://goo.gl/MnSysj"
+		"message": "Zobrazujte vložené obrázky na https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Kontextovú ponuku zobrazíte pridržaním klávesa Ctrl (Cmd v systéme macOS) a súčasným kliknutím pravým tlačidlom."
 	},
 	"tip_2": {
-		"message": "Ak chcete zobrazovať upozornenia v prehliadači, použite parameter hterm-notify na https://goo.gl/ZNxGdF"
+		"message": "Ak chcete zobrazovať upozornenia v prehliadači, použite parameter hterm-notify na https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Pripojte sa z omniboxu zadaním dopytu „ssh<Tab><profile name>“: https://goo.gl/V7o8ki"
+		"message": "Pripojte sa z omniboxu zadaním dopytu „ssh<Tab><profile name>“: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS môže pripájať systémy súborov prostredníctvom protokolu SFTP a prehliadať ich prostredníctvom aplikácie Súbory. Použite „Pripojenie protokolu SFTP“ namiesto „Pripojiť“."
 	},
 	"tip_5": {
-		"message": "Pripojte sa pomocou odkazov ssh:// na webových stránkach alebo si uložte záložku na https://goo.gl/zS8EZD"
+		"message": "Pripojte sa pomocou odkazov ssh:// na webových stránkach alebo si uložte záložku na https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Zafarbite si výstup alebo príkazový riadok základnými 16 a 256 farbami a úplnými 24-bitovými farbami na http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopírujte schránku z editorov emacs/vim/etc... pomocou OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopírujte schránku z editorov emacs/vim/etc... pomocou OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Četujte so spriaznenými používateľmi hterm alebo zabezpečeného prístupu prostredníctvom funkcie chromium-hterm@chromium.org na https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Našli ste chybu? Požadujete novú funkciu? Dajte nám vedieť na https://goo.gl/vb94JY"
+		"message": "Našli ste chybu? Požadujete novú funkciu? Dajte nám vedieť na https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Vyskytla sa neočakávaná chyba. Ďalšie podrobnosti nájdete v konzole JavaScript."

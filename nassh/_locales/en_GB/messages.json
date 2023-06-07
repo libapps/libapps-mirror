@@ -399,7 +399,7 @@
 		"message": "Too much output to announce; navigate to rows manually to read."
 	},
 	"tip_12": {
-		"message": "Use Yubikeys and other smart cards for SSH authentication: https://goo.gl/Hu2o3v"
+		"message": "Use Yubikeys and other smart cards for SSH authentication: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_14": {
 		"message": "Holding Ctrl (Cmd on macOS) while right-clicking brings up a context menu."
@@ -411,13 +411,13 @@
 		"message": "Colour your output/prompt using basic 16 colours & 256 colours & full 24-bit colours: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Copy to your clipboard from Emacs/Vim/etc. using OSC-52: https://goo.gl/XSnyLo"
+		"message": "Copy to your clipboard from Emacs/Vim/etc. using OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chat with fellow HTerm/Secure Shell users via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Found a bug? Want to request a new feature? Let us know: https://goo.gl/vb94JY"
+		"message": "Found a bug? Want to request a new feature? Let us know: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "An unexpected error occurred; please check the JavaScript console for more details."

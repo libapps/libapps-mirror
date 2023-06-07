@@ -519,7 +519,7 @@
 		"message": "Dacă preferința este activată, tastele Home/End controlează bara de derulare a terminalului, iar Shift+Home/Shift+End sunt trimise gazdei la distanță. Dacă este dezactivată, tastele Home/End sunt trimise gazdei de la distanță și Shift+Home/Shift+End derulează."
 	},
 	"hterm_pref_keybindings": {
-		"message": "O mapare a secvenței de taste la acțiunea corespunzătoare. Secvențele de taste includ zero sau mai multe taste de modificare, urmate de un cod de tastă. Codurile de taste pot include numere zecimale sau hexazecimale ori un identificator de tastă. Acțiunile pot fi specificate cu un șir de trimis gazdei sau printr-un identificator de acțiune. Pentru o explicație completă a formatului, accesați https://goo.gl/LWRndr.\n\nExemple de corespondențe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World\\n'\"\n}"
+		"message": "O mapare a secvenței de taste la acțiunea corespunzătoare. Secvențele de taste includ zero sau mai multe taste de modificare, urmate de un cod de tastă. Codurile de taste pot include numere zecimale sau hexazecimale ori un identificator de tastă. Acțiunile pot fi specificate cu un șir de trimis gazdei sau printr-un identificator de acțiune. Pentru o explicație completă a formatului, accesați https://hterm.org/x/docs/keyboard-bindings.\n\nExemple de corespondențe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World\\n'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Dacă asocierile frecvente cu tastatura sistemului de operare trebuie respectate în locul capturării permanente pentru utilizarea de către hterm."
@@ -1230,40 +1230,40 @@
 		"message": "Când rulează într-o fereastră, Ctrl+Shift+N poate deschide o altă sesiune."
 	},
 	"tip_11": {
-		"message": "Puteți să asociați din nou tastele / comenzile rapide: https://goo.gl/LWRndr"
+		"message": "Puteți să asociați din nou tastele / comenzile rapide: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Folosiți Yubikeys și alte carduri inteligente pentru autentificare ssh: https://goo.gl/Hu2o3v"
+		"message": "Folosiți Yubikeys și alte carduri inteligente pentru autentificare ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Afișați imaginile inline: https://goo.gl/MnSysj"
+		"message": "Afișați imaginile inline: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Dacă țineți apăsată tasta Ctrl (Cmd pe macOS) și dați clic dreapta, veți afișa un meniu contextual."
 	},
 	"tip_2": {
-		"message": "Afișați notificările în browser folosind hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Afișați notificările în browser folosind hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Conectați-vă din caseta polivalentă introducând „ssh<Tab><profile name>”: https://goo.gl/V7o8ki"
+		"message": "Conectați-vă din caseta polivalentă introducând „ssh<Tab><profile name>”: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "În sistemul de operare Chrome puteți să montați sisteme de fișiere prin SFTP și să răsfoiți cu aplicația Fișiere. Folosiți Montare SFTP în loc de Conectați."
 	},
 	"tip_5": {
-		"message": "Conectați-vă folosind linkurile ssh:// în paginile web sau salvați un marcaj: https://goo.gl/zS8EZD"
+		"message": "Conectați-vă folosind linkurile ssh:// în paginile web sau salvați un marcaj: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Colorați ieșirea/solicitarea folosind 16 culori de bază, 256 de culori și culori complete pe 24 de biți: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Copiați în clipboard din emacs/vim/etc. folosind OSC-52: https://goo.gl/XSnyLo"
+		"message": "Copiați în clipboard din emacs/vim/etc. folosind OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Discutați cu alți utilizatori hterm/Secure Shell pe chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Ați găsit o eroare?  Solicitați o funcție nouă?  Anunțați-ne: https://goo.gl/vb94JY"
+		"message": "Ați găsit o eroare?  Solicitați o funcție nouă?  Anunțați-ne: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "A apărut o eroare neașteptată. Consultați consola JavaScript pentru mai multe detalii."

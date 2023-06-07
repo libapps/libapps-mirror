@@ -112,7 +112,7 @@ newer versions of the plugin and quick version comparison.
 Support for older versions is not permanent and there is no guarantee that newer
 releases will continue to bundle them.  If you encounter problems with the
 default version and selecting a previous version makes things work, you need to
-[report a bug](https://goo.gl/vb94JY).
+[report a bug](https://hterm.org/x/ssh/newbug).
 
 Here are some versions that might be available:
 

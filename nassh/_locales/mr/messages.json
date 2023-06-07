@@ -519,7 +519,7 @@
 		"message": "सत्य असल्यास, Home/End टर्मिनल स्क्रोलबार नियंत्रित करते आणि Shift+Home/Shift+End रिमोट होस्टकडे पाठवले जातात. असत्य असल्यास, Home/End रिमोट होस्टकडे पाठवले जातात आणि Shift+Home/Shift+End स्क्रोल करते."
 	},
 	"hterm_pref_keybindings": {
-		"message": "की कृतींसाठी की अनुक्रमांचा नकाशा. की अनुक्रमांमध्ये शून्य किंवा त्याहून अधिक मॉडिफायर की आणि त्यानंतर की कोडचा समावेश असतो. की कोड दशांश किंवा हेक्झाडेसिमल संख्या किंवा की आयडेंटिफायर असू शकतात. की कृती होस्टकडे पाठवण्यासाठी स्ट्रिंग म्हणून किंवा कृती आयडेंटिफायर म्हणून नमूद केल्या जाऊ शकतात. फॉरमॅटच्या पूर्ण स्पष्टीकरणासाठी, https://goo.gl/LWRndr पहा.\n\nनमुना कीबाइंडिंग:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'हॅलो जग'\"\n}"
+		"message": "की कृतींसाठी की अनुक्रमांचा नकाशा. की अनुक्रमांमध्ये शून्य किंवा त्याहून अधिक मॉडिफायर की आणि त्यानंतर की कोडचा समावेश असतो. की कोड दशांश किंवा हेक्झाडेसिमल संख्या किंवा की आयडेंटिफायर असू शकतात. की कृती होस्टकडे पाठवण्यासाठी स्ट्रिंग म्हणून किंवा कृती आयडेंटिफायर म्हणून नमूद केल्या जाऊ शकतात. फॉरमॅटच्या पूर्ण स्पष्टीकरणासाठी, https://hterm.org/x/docs/keyboard-bindings पहा.\n\nनमुना कीबाइंडिंग:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'हॅलो जग'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "नेहमी hterm च्या स्वतःच्या वापरासाठी कॅप्चर करण्याऐवजी सामान्य OS कीबोर्ड बाइंडिंगचा आदर केला जावा का."
@@ -1281,40 +1281,40 @@
 		"message": "विंडोमध्ये रन करत असताना, Ctrl+Shift+N दुसरे सेशन उघडू शकते."
 	},
 	"tip_11": {
-		"message": "तुम्ही की/शॉर्टकट रिबाइंड करू शकता: https://goo.gl/LWRndr"
+		"message": "तुम्ही की/शॉर्टकट रिबाइंड करू शकता: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ssh ऑथेंटिकेशनसाठी Yubikeys आणि इतर स्मार्ट कार्डे वापरा: https://goo.gl/Hu2o3v"
+		"message": "ssh ऑथेंटिकेशनसाठी Yubikeys आणि इतर स्मार्ट कार्डे वापरा: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "इमेज इनलाइन डिस्प्ले करा: https://goo.gl/MnSysj"
+		"message": "इमेज इनलाइन डिस्प्ले करा: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "राइट क्लिक करत असताना Ctrl (macOS वर Cmd) धरून ठेवल्याने काँटेक्स्ट मेनू उघडेल."
 	},
 	"tip_2": {
-		"message": "hterm-notify वापरून ब्राउझरमध्ये सूचना डिस्प्ले करा: https://goo.gl/ZNxGdF"
+		"message": "hterm-notify वापरून ब्राउझरमध्ये सूचना डिस्प्ले करा: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "'ssh<Tab><profile name>' टाइप करून ऑम्निबॉक्सवरून कनेक्ट करा: https://goo.gl/V7o8ki"
+		"message": "'ssh<Tab><profile name>' टाइप करून ऑम्निबॉक्सवरून कनेक्ट करा: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS SFTP द्वारे फाइल सिस्टीम माउंट करू शकते आणि File अ‍ॅपद्वारे ब्राउझ करू शकते. 'कनेक्ट' ऐवजी 'SFTP माउंट' वापरा."
 	},
 	"tip_5": {
-		"message": "वेब पेजमध्ये ssh:// लिंक वापरून कनेक्ट करा किंवा बुकमार्क सेव्ह करा: https://goo.gl/zS8EZD"
+		"message": "वेब पेजमध्ये ssh:// लिंक वापरून कनेक्ट करा किंवा बुकमार्क सेव्ह करा: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "तुमच्या आउटपुट/सूचनेला प्राथमिक १६ रंग आणि २५६ रंग तसेच संपूर्ण २४-बिट रंग वापरून रंग द्या: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "emacs/vim/etc वरून तुमच्या क्लिपबोर्डवर कॉपी करा... OSC-52 वापरून: https://goo.gl/XSnyLo"
+		"message": "emacs/vim/etc वरून तुमच्या क्लिपबोर्डवर कॉपी करा... OSC-52 वापरून: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org मार्फत सहकारी hterm/Secure Shell वापरकर्त्यांसोबत चॅट करा- https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "बग सापडला का?  नवीन वैशिष्ट्याची विनंती करायची का?  आम्हाला कळवा: https://goo.gl/vb94JY"
+		"message": "बग सापडला का?  नवीन वैशिष्ट्याची विनंती करायची का?  आम्हाला कळवा: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "एक अनपेक्षित एरर आली, अधिक तपशिलांसाठी कृपया JavaScript कन्सोल तपासा."

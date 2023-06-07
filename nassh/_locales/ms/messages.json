@@ -519,7 +519,7 @@
 		"message": "Jika benar, Home/End mengawal bar tatal terminal dan Shift+Home/Shift+End akan dihantar kepada hos jauh. Jika palsu, maka Home/End akan dihantar kepada hos jauh dan Shift+Home/Shift+End akan menatal."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Peta jujukan kekunci kepada tindakan kekunci. Jujukan kekunci merangkumi sifar atau beberapa kekunci pengubah suai yang diikuti oleh kod kunci. Kod kunci boleh terdiri daripada nombor perpuluhan atau perenambelasan atau pengecam kekunci. Tindakan kekunci boleh ditetapkan sebagai rentetan untuk dihantar kepada hos atau sebagai pengecam tindakan. Untuk mendapatkan penjelasan lengkap berkenaan format ini, layari https://goo.gl/LWRndr.\n\nContoh pengikatan kekunci:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Peta jujukan kekunci kepada tindakan kekunci. Jujukan kekunci merangkumi sifar atau beberapa kekunci pengubah suai yang diikuti oleh kod kunci. Kod kunci boleh terdiri daripada nombor perpuluhan atau perenambelasan atau pengecam kekunci. Tindakan kekunci boleh ditetapkan sebagai rentetan untuk dihantar kepada hos atau sebagai pengecam tindakan. Untuk mendapatkan penjelasan lengkap berkenaan format ini, layari https://hterm.org/x/docs/keyboard-bindings.\n\nContoh pengikatan kekunci:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Sama ada pengikatan papan kekunci OS lazim harus diterima berbanding sentiasa menangkap untuk penggunaan sendiri hterm."
@@ -1245,40 +1245,40 @@
 		"message": "Apabila dijalankan dalam tetingkap, Ctrl+Shift+N boleh membuka sesi lain."
 	},
 	"tip_11": {
-		"message": "Anda boleh mengikat semula kekunci/pintasan: https://goo.gl/LWRndr"
+		"message": "Anda boleh mengikat semula kekunci/pintasan: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Gunakan Yubikey dan kad pintar lain untuk pengesahan ssh: https://goo.gl/Hu2o3v"
+		"message": "Gunakan Yubikey dan kad pintar lain untuk pengesahan ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Paparkan imej dalam baris: https://goo.gl/MnSysj"
+		"message": "Paparkan imej dalam baris: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Tindakan menahan Ctrl (Cmd pada macOS) semasa mengklik kanan akan memaparkan menu konteks."
 	},
 	"tip_2": {
-		"message": "Paparkan pemberitahuan dalam penyemak imbas dengan menggunakan hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Paparkan pemberitahuan dalam penyemak imbas dengan menggunakan hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Sambungkan daripada kotak omni dengan menaip 'ssh<Tab><profile name>': https://goo.gl/V7o8ki"
+		"message": "Sambungkan daripada kotak omni dengan menaip 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS boleh melekapkan sistem fail melalui SFTP dan menyemak imbas melalui apl Files. Gunakan 'Lekapan SFTP' dan bukannya 'Sambung'."
 	},
 	"tip_5": {
-		"message": "Sambung dengan menggunakan pautan ssh:// dalam halaman web atau simpan penanda halaman: https://goo.gl/zS8EZD"
+		"message": "Sambung dengan menggunakan pautan ssh:// dalam halaman web atau simpan penanda halaman: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Warnakan output/gesaan anda menggunakan warna asas 16 warna & 256 warna & warna 24 bit penuh: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Salin ke papan klip anda daripada emacs/vim/etc... menggunakan OSC-52: https://goo.gl/XSnyLo"
+		"message": "Salin ke papan klip anda daripada emacs/vim/etc... menggunakan OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Sembang sesama pengguna hterm/Secure Shell melalui chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Menjumpai pepijat?  Ingin meminta ciri baharu?  Beritahu kami: https://goo.gl/vb94JY"
+		"message": "Menjumpai pepijat?  Ingin meminta ciri baharu?  Beritahu kami: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Ralat tak dijangka telah berlaku, sila semak konsol JavaScript untuk mendapatkan butiran lanjut."

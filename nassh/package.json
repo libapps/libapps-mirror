@@ -19,7 +19,7 @@
     "third_party"
   ],
   "bugs": {
-    "url": "https://goo.gl/vb94JY",
+    "url": "https://hterm.org/x/ssh/newbug",
     "email": "chromium-hterm@chromium.org"
   },
   "homepage": "https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh",

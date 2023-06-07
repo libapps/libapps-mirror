@@ -522,7 +522,7 @@
 		"message": "Si s'estableix en \"true\", amb les tecles Inici i Fi es controla la barra de desplaçament del terminal, i Maj+Inici i Maj+Fi s'envien a l'amfitrió remot. Si s'estableix en \"false\", les funcions d'aquestes tecles s'intercanvien."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Una assignació de seqüència de tecles amb l'acció corresponent. Les seqüències de tecles inclouen zero o més tecles modificadores seguides d'un codi de tecla. Els codis de tecla poden ser nombres decimals o hexadecimals, o bé un identificador de tecla. Les accions de tecles es poden especificar com a cadena, a fi d'enviar-la a l'amfitrió, o bé com a identificador d'acció. Per veure l'explicació completa del format, consulta https://goo.gl/LWRndr.\n\nExemples de seqüències de tecles i les accions corresponents:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Majt+L\": \"PASS\",\n  \"Ctrl+H\": \"Hola a tothom\"\n}"
+		"message": "Una assignació de seqüència de tecles amb l'acció corresponent. Les seqüències de tecles inclouen zero o més tecles modificadores seguides d'un codi de tecla. Els codis de tecla poden ser nombres decimals o hexadecimals, o bé un identificador de tecla. Les accions de tecles es poden especificar com a cadena, a fi d'enviar-la a l'amfitrió, o bé com a identificador d'acció. Per veure l'explicació completa del format, consulta https://hterm.org/x/docs/keyboard-bindings.\n\nExemples de seqüències de tecles i les accions corresponents:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Majt+L\": \"PASS\",\n  \"Ctrl+H\": \"Hola a tothom\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Estableix si es respecta la vinculació de tecles del sistema operatiu en lloc de capturar-les sempre perquè les utilitzi hterm."
@@ -1236,40 +1236,40 @@
 		"message": "Quan s'executi en una finestra, la combinació de tecles Ctrl+Maj+N pot obrir una altra sessió."
 	},
 	"tip_11": {
-		"message": "Pots reassignar les tecles o dreceres: https://goo.gl/LWRndr"
+		"message": "Pots reassignar les tecles o dreceres: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Fes servir Yubikeys i altres targetes intel·ligents per a l'autenticació SSH: https://goo.gl/Hu2o3v"
+		"message": "Fes servir Yubikeys i altres targetes intel·ligents per a l'autenticació SSH: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Mostra les imatges entre línies: https://goo.gl/MnSysj"
+		"message": "Mostra les imatges entre línies: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Si mantens premuda la tecla Ctrl (Cmd a macOS) mentre fas clic amb el botó dret, es mostra un menú contextual."
 	},
 	"tip_2": {
-		"message": "Utilitza hterm-notify per mostrar notificacions al navegador: https://goo.gl/ZNxGdF"
+		"message": "Utilitza hterm-notify per mostrar notificacions al navegador: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Escriu 'ssh<Tab><profile name>': https://goo.gl/V7o8ki per connectar-te des de l'omnibox"
+		"message": "Escriu 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox per connectar-te des de l'omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS pot activar sistemes de fitxers a través d'SFTP i navegar a través de l'aplicació Fitxers. Utilitza Activació de l'SFTP en lloc de Connecta."
 	},
 	"tip_5": {
-		"message": "Connecta't utilitzant enllaços ssh:// a les pàgines web o desa una adreça d'interès: https://goo.gl/zS8EZD"
+		"message": "Connecta't utilitzant enllaços ssh:// a les pàgines web o desa una adreça d'interès: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Dona-li color a la sortida o els advertiments amb els 16 colors bàsics, 256 colors addicionals i els colors de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Utilitza OSC-52 per copiar al porta-retalls des d'emacs/vim/etc.: https://goo.gl/XSnyLo"
+		"message": "Utilitza OSC-52 per copiar al porta-retalls des d'emacs/vim/etc.: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Xateja amb altres usuaris hterm i Secure Shell a través de chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Has trobat un error? Vols una nova funció? Fes-nos-ho saber: https://goo.gl/vb94JY"
+		"message": "Has trobat un error? Vols una nova funció? Fes-nos-ho saber: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "S'ha produït un error inesperat. Consulta la consola de JavaScript per obtenir més detalls."

@@ -510,7 +510,7 @@
 		"message": "Indien waar, beheer Home/End die terminaal se rolbalk en word Shift+Home/Shift+End na die afstandgasheer gestuur. Indien vals, word Home/End na die afstandgasheer gestuur en Shift+Home/Shift+End rollees."
 	},
 	"hterm_pref_keybindings": {
-		"message": "'n Kaart van sleutelsekwensie na sleutelhandelinge. Sleutelsekwensies sluit nul- of wysigersleutels in gevolg deur 'n sleutelkode. Sleutelkodes kan desimale of heksadesimale syfers wees, of 'n sleutelidentifiseerder. Sleutelhandelinge kan as 'n string gespesifiseer word om na die gasheer te stuur, of 'n handelingidentifiseerder. Sien https://goo.gl/LWRndr vir 'n volledige verduideliking van die formaat.\n\nVoorbeeldsleutelbindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hallo Wêreld'\"\n}"
+		"message": "'n Kaart van sleutelsekwensie na sleutelhandelinge. Sleutelsekwensies sluit nul- of wysigersleutels in gevolg deur 'n sleutelkode. Sleutelkodes kan desimale of heksadesimale syfers wees, of 'n sleutelidentifiseerder. Sleutelhandelinge kan as 'n string gespesifiseer word om na die gasheer te stuur, of 'n handelingidentifiseerder. Sien https://hterm.org/x/docs/keyboard-bindings vir 'n volledige verduideliking van die formaat.\n\nVoorbeeldsleutelbindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hallo Wêreld'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Of gewone bedryfstelselsleutelbordbindings gerespekteer moet word eerder as om altyd vasgevang te word vir hterm se eie gebruik."
@@ -1287,40 +1287,40 @@
 		"message": "Terwyl dit in 'n venster loop, kan Ctrl+Shift+N 'n ander sessie oopmaak."
 	},
 	"tip_11": {
-		"message": "Jy kan sleutels/kortpaaie herbind: https://goo.gl/LWRndr"
+		"message": "Jy kan sleutels/kortpaaie herbind: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Gebruik Yubikeys en ander slimkaarte vir ssh-stawing: https://goo.gl/Hu2o3v"
+		"message": "Gebruik Yubikeys en ander slimkaarte vir ssh-stawing: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Wys prente direk: https://goo.gl/MnSysj"
+		"message": "Wys prente direk: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "As jy Ctrl (Cmd op macOS) hou terwyl jy regsklik sal die inhoudkieslys verskyn."
 	},
 	"tip_2": {
-		"message": "Wys kennisgewings in die blaaier met hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Wys kennisgewings in die blaaier met hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Koppel van die omniboks af deur \"ssh<Tab><profile name>\": https://goo.gl/V7o8ki in te tik"
+		"message": "Koppel van die omniboks af deur \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox in te tik"
 	},
 	"tip_4": {
 		"message": "ChromeOS kan lêerstelsels via SFTP monteer en via die Lêers-program deurblaai. Gebruik \"SFTP-monteer\" pleks van \"Koppel\"."
 	},
 	"tip_5": {
-		"message": "Koppel deur ssh://-skakels in webblaaie te gebruik, of stoor 'n boekmerk: https://goo.gl/zS8EZD"
+		"message": "Koppel deur ssh://-skakels in webblaaie te gebruik, of stoor 'n boekmerk: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Kleur jou uitvoer/porboodskap met 16 basiese kleure en 256 kleure en volle 24-bis-kleure: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopieer na jou knipbord vanaf emacs/vim/ens. … met OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopieer na jou knipbord vanaf emacs/vim/ens. … met OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Klets met medegebruikers van hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "'n Fout gekry?  Versoek 'n nuwe kenmerk?  Laat weet ons: https://goo.gl/vb94JY"
+		"message": "'n Fout gekry?  Versoek 'n nuwe kenmerk?  Laat weet ons: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "'n Onvoorsiene fout het voorgekom. Gaan die JavaScript-konsole na vir meer besonderhede."

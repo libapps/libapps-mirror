@@ -107,7 +107,7 @@ For Googlers, at this point the process is:
 [Automatic Updates]: #automatic-updates
 [Updating Translations]: #updating-translations
 
-[new-bug]: https://goo.gl/vb94JY
+[new-bug]: https://hterm.org/x/ssh/newbug
 [Chrome i18n]: https://developer.chrome.com/extensions/i18n
 [copybara]: http://go/copybara
 [hterm_messages]: http://source/piper///depot/google3/third_party/javascript/hterm_messages/

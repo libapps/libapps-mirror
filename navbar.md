@@ -6,7 +6,7 @@
 * [Home][home]
 * [FAQ](/nassh/docs/FAQ.md)
 * [Contact](https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm)
-* [Bugs](https://goo.gl/VkasRC)
+* [Bugs](https://hterm.org/x/bugs)
 * [hterm](/hterm/)
 * [nassh](/nassh/)
 * [ssh_client](/ssh_client/)

@@ -522,7 +522,7 @@
 		"message": "Če je omogočeno, tipki Home/End upravljata drsno vrstico terminala, kombinaciji Shift + Home/Shift + End pa sta poslani oddaljenemu gostitelju. Če je onemogočeno, sta tipki Home/End poslani oddaljenemu gostitelju, kombinaciji Shift + Home/Shift + End pa upravljata drsenje."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Preslikava zaporedij tipk na dejanja tipk. Zaporedja tipk vključujejo nič ali več modifikatorskih tipk in kodo tipke. Kode tipk so lahko desetiške ali šestnajstiške številke oziroma identifikator tipke. Dejanja tipk so lahko določena kot niz, ki se pošlje gostitelju, ali identifikator dejanja. Celotno pojasnilo oblike zapisa je na voljo tukaj: https://goo.gl/LWRndr.\n\nPrimer povezav tipk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Pozdravljen, svet\"\n}"
+		"message": "Preslikava zaporedij tipk na dejanja tipk. Zaporedja tipk vključujejo nič ali več modifikatorskih tipk in kodo tipke. Kode tipk so lahko desetiške ali šestnajstiške številke oziroma identifikator tipke. Dejanja tipk so lahko določena kot niz, ki se pošlje gostitelju, ali identifikator dejanja. Celotno pojasnilo oblike zapisa je na voljo tukaj: https://hterm.org/x/docs/keyboard-bindings.\n\nPrimer povezav tipk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Pozdravljen, svet\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Določa, ali naj se upoštevajo običajne povezave tipk tipkovnice operacijskega sistema namesto stalnega zajemanja za lastno uporabo hterma."
@@ -1344,40 +1344,40 @@
 		"message": "Med izvajanjem v oknu lahko s kombinacijo tipk Ctrl + Shift + N odprete novo sejo."
 	},
 	"tip_11": {
-		"message": "Tipke/bližnjice lahko znova povežete: https://goo.gl/LWRndr"
+		"message": "Tipke/bližnjice lahko znova povežete: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Uporaba pametnih kartic Yubikey in drugih za preverjanje pristnosti za ssh: https://goo.gl/Hu2o3v"
+		"message": "Uporaba pametnih kartic Yubikey in drugih za preverjanje pristnosti za ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Prikaz slik v vrstici: https://goo.gl/MnSysj"
+		"message": "Prikaz slik v vrstici: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Če želite odpreti kontekstni meni, pridržite tipko Ctrl (tipko Cmd v sistemu macOS) in kliknite z desnim gumbom."
 	},
 	"tip_2": {
-		"message": "Obvestila v brskalniku lahko prikažete z možnostjo hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Obvestila v brskalniku lahko prikažete z možnostjo hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Povezavo lahko vzpostavite v naslovni vrstici tako, da vnesete »ssh<Tab><profile name>«: https://goo.gl/V7o8ki"
+		"message": "Povezavo lahko vzpostavite v naslovni vrstici tako, da vnesete »ssh<Tab><profile name>«: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS omogoča vpetje datotečnih sistemov prek SFTP-ja in brskanje z aplikacijo Datoteke. Namesto možnosti »Poveži« uporabite »Vpenjanje SFTP-ja«."
 	},
 	"tip_5": {
-		"message": "Povežite se s povezavami ssh:// na spletnih straneh ali dodajte zaznamek: https://goo.gl/zS8EZD"
+		"message": "Povežite se s povezavami ssh:// na spletnih straneh ali dodajte zaznamek: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Pobarvajte izhodne nize/pozive z osnovnimi 16 barvami, 256 barvami in polnimi 24-bitni barvami: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopirajte v odložišče iz urejevalnikov besedila emac/vim/ipd. z nizom OSC-52: https://goo.gl/XSnyLo"
+		"message": "Kopirajte v odložišče iz urejevalnikov besedila emac/vim/ipd. z nizom OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Klepetajte z drugimi uporabniki hterma/varne lupine prek naslova chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Ste našli napako?  Zahtevate novo funkcijo?  Pišite nam: https://goo.gl/vb94JY"
+		"message": "Ste našli napako?  Zahtevate novo funkcijo?  Pišite nam: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Nepričakovana napaka. Podrobnosti najdete v konzoli za JavaScript."

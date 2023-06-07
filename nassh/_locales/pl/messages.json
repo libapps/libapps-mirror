@@ -522,7 +522,7 @@
 		"message": "Jeśli wybrano wartość „prawda”, klawisze Home/End przewijają terminal, a kombinacje Shift+Home/End są wysyłane do zdalnego hosta. Jeśli wybrano „fałsz”, klawisze Home/End są wysyłane do zdalnego hosta, a kombinacje Shift+Home/End przewijają."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapowanie sekwencji klawiszy na działania. Sekwencje klawiszy zawierają zero lub więcej klawiszy modyfikujących, a po nich kod klawisza. Kody klawiszy mogą mieć postać liczb dziesiętnych lub szesnastkowych albo identyfikatorów klawiszy. Działania mogą mieć postać ciągu znaków, który jest wysyłany do hosta, albo postać identyfikatora działania. Pełny opis formatu znajdziesz na https://goo.gl/LWRndr\n\nPrzykładowe powiązania klawiszy:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PRZEKAŻ\",\n  \"Ctrl+H\": \"Witaj, świecie\"\n}"
+		"message": "Mapowanie sekwencji klawiszy na działania. Sekwencje klawiszy zawierają zero lub więcej klawiszy modyfikujących, a po nich kod klawisza. Kody klawiszy mogą mieć postać liczb dziesiętnych lub szesnastkowych albo identyfikatorów klawiszy. Działania mogą mieć postać ciągu znaków, który jest wysyłany do hosta, albo postać identyfikatora działania. Pełny opis formatu znajdziesz na https://hterm.org/x/docs/keyboard-bindings\n\nPrzykładowe powiązania klawiszy:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PRZEKAŻ\",\n  \"Ctrl+H\": \"Witaj, świecie\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Określa, czy hterm ma respektować typowe powiązania klawiszy systemu operacyjnego, zamiast przechwytywać je na własny użytek."
@@ -1251,40 +1251,40 @@
 		"message": "Naciskając Ctrl+Shift+N podczas pracy w oknie, możesz otworzyć nową sesję."
 	},
 	"tip_11": {
-		"message": "Możesz ponownie powiązać klawisze/skróty: https://goo.gl/LWRndr"
+		"message": "Możesz ponownie powiązać klawisze/skróty: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Używanie Yubikey i innych kart inteligentnych do uwierzytelniania ssh: https://goo.gl/Hu2o3v"
+		"message": "Używanie Yubikey i innych kart inteligentnych do uwierzytelniania ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Wyświetlanie obrazów w tekście: https://goo.gl/MnSysj"
+		"message": "Wyświetlanie obrazów w tekście: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Przytrzymanie Ctrl (Cmd w macOS) podczas kliknięcia prawym przyciskiem powoduje otwarcie menu kontekstowego."
 	},
 	"tip_2": {
-		"message": "Powiadomienia możesz wyświetlać w przeglądarce, korzystając z polecenia hterm-notify: https://goo.gl/ZNxGdF"
+		"message": "Powiadomienia możesz wyświetlać w przeglądarce, korzystając z polecenia hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Aby połączyć się z poziomu omniboksa, wpisz „ssh<Karta><nazwa profilu>”: https://goo.gl/V7o8ki"
+		"message": "Aby połączyć się z poziomu omniboksa, wpisz „ssh<Karta><nazwa profilu>”: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS pozwala podłączać systemy plików przez SFTP i przeglądać je w aplikacji Pliki. Użyj polecenia „Podłącz SFTP” zamiast „Połącz”."
 	},
 	"tip_5": {
-		"message": "Połącz się, korzystając z linków ssh:// na stronach internetowych, lub zapisz zakładkę: https://goo.gl/zS8EZD"
+		"message": "Połącz się, korzystając z linków ssh:// na stronach internetowych, lub zapisz zakładkę: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Możesz pokolorować wynik lub komunikat, używając podstawowych 16 kolorów, 256 kolorów lub pełnych kolorów 24-bitowych: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Zawartość edytora emacs/vim/etc i innych możesz skopiować do schowka, korzystając z sekwencji OSC-52: https://goo.gl/XSnyLo"
+		"message": "Zawartość edytora emacs/vim/etc i innych możesz skopiować do schowka, korzystając z sekwencji OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Z innymi użytkownikami hterm / bezpiecznej powłoki możesz rozmawiać w grupie chromium-hterm na chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Widzisz błąd? Chcesz zaproponować nową funkcję? Daj nam znać: https://goo.gl/vb94JY"
+		"message": "Widzisz błąd? Chcesz zaproponować nową funkcję? Daj nam znać: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Wystąpił nieoczekiwany błąd. Aby dowiedzieć się więcej, sprawdź konsolę JavaScript."

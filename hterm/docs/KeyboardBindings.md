@@ -228,7 +228,7 @@ files to check out:
 [Keyboard Event Viewer]: https://w3c.github.io/uievents/tools/key-event-viewer.html
 [keyCode]: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
 [Secure Shell]: https://chrome.google.com/webstore/detail/iodihamcpbpeioajjeobimgagajmlibd
-[feature request]: https://goo.gl/vb94JY
+[feature request]: https://hterm.org/x/newbug
 
 [hterm_parser.js]: ../js/hterm_parser.js
 [hterm_parser_identifiers.js]: ../js/hterm_parser_identifiers.js

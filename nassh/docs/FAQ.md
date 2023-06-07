@@ -88,7 +88,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 ### What should I do if I notice a bug?
 
   First, please continue reading this FAQ to make sure your issue isn't
-  mentioned.  Then check the bug list at <https://goo.gl/VkasRC>.
+  mentioned.  Then check the bug list at <https://hterm.org/x/bugs>.
 
   If you don't see the issue there, you can search the archives of the
   [chromium-hterm mailing list].
@@ -96,8 +96,8 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   If all else fails then join the [chromium-hterm mailing list] and post
   about what you've found.
 
-  To file an actual report, you can use <https://goo.gl/vb94JY>.  This will
-  route to the right people.
+  To file an actual report, you can use <https://hterm.org/x/ssh/newbug>.
+  This will route to the right people.
 
   If your bug involves some mis-interpreted escape sequence and you want
   to file a really useful bug report, then add in a recording of the
@@ -116,10 +116,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
   Yes.  First, you need to subscribe to the [chromium-hterm mailing list].
   Subscribers have access to the "Dev" versions in the Chrome Web Store, which
-  are located here:
-
-  * [App for ChromeOS](https://goo.gl/cFZlv)
-  * [Extension for all systems](https://goo.gl/9NCCZQ)
+  are located <https://goo.gl/9NCCZQ>.
 
   Note: You'll also need to sign in to the Chrome Web Store using the same
   account that joined the mailing list.  Otherwise, the link will result in a
@@ -132,10 +129,10 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
 ### Where is the source code?
 
-  The hterm source is here: <https://goo.gl/8qndhN>.  This includes the
-  front-end code for Secure Shell.
+  The source is in here: <https://chromium.googlesource.com/apps/libapps/>.
+  This includes the front-end code for Secure Shell.
 
-  The Native Client wrapper around ssh is here: <https://goo.gl/4tZCMI>.
+  The Native Client wrapper around ssh is in [ssh_client/](/ssh_client/).
 
 ### Is there a changelog?
 
@@ -595,8 +592,7 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 
   Some common preferences are listed in questions that follow.  For the full
   list, you'll have to read through the "definePreferences" call in
-  hterm_preference_manager.js.  It's here: <https://goo.gl/xZa38d>, around line
-  130.
+  [hterm_preference_manager.js](/hterm/js/hterm_preference_manager.js).
 
 
 ### How do I change the audible bell sound?
@@ -1102,7 +1098,7 @@ The prompt makes it sound like it will delete & reset everything, but it won't.
   Emacs uses these sequences (on purpose) to enable and disable cursor blink.
 
   If you prefer a steady cursor in emacs, set visible-cursor to nil as
-  described in <https://goo.gl/muppJj>.
+  described in <https://hterm.org/x/ssh/faq>.
 
 
 ### Why does the color scheme look funny in emacs/vi/vim?

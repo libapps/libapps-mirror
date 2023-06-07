@@ -160,7 +160,7 @@ Crosh.init = function() {
      }},
     {name: Crosh.msg('FAQ_MENU_LABEL'),
      action: function() {
-       lib.f.openWindow('https://goo.gl/muppJj', '_blank');
+       lib.f.openWindow('https://hterm.org/x/ssh/faq', '_blank');
      }},
     {name: Crosh.msg('HTERM_OPTIONS_BUTTON_LABEL'),
      action: function() { openOptionsPage(); }},
