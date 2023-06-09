@@ -1,3 +1,19 @@
+# 0.54, 2023-06-13, MV3 migration & require Chrome 108+.
+
+* connect dialog: Update pattern= to work with RegExp v flag.
+* nassh: Switch iframe settings to manifest csp.
+* Update shortlink URIs.
+* relay: Allow for fallback endpoint proxy.
+* pwa: Update IWA manifest and remove service worker.
+* manifest: update to MV3.
+* wassh: vfs: Search for handlers right to left in VFS.findHandler_.
+* wassh: sockets: Add WebTcpServerSocket based on TCPServerSocket.
+* wassh: handle_fd_fdstat_get: Await PathHandler.stat() Promise.
+* wassh-libc-sup: socket: Support more protocol values.
+* fsp: Call onSuccess for SftpFsp onMountRequested.
+* wassh: fd_fdstat_set_flags: Verify fd is a valid file descriptor.
+* l10n: Update translations.
+
 # 0.53, 2022-12-13, Fix mosh breakage.
 
 * mosh: Update to hterm & libdot ES6 modules.
