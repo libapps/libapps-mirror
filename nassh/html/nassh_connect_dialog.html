@@ -25,7 +25,7 @@
                  required pattern='^.+$'>
           <input x-box x-flex='1' id='field-hostname' type='text'
                  i18n='{"aria-label": "$id", "title": "=aria-label"}'
-                 required pattern='^(>crosh|[A-Za-z0-9-.:\u0080-\uffff]+)$'>
+                 required pattern='^(>crosh|[A-Za-z0-9\-.:\u0080-\uffff]+)$'>
           <input x-box id='field-port' type='number' min='1' max='65535'
                  i18n='{"aria-label": "$id", "title": "=aria-label"}'
                  min='1' max='65535'>
@@ -33,7 +33,7 @@
         <x-hbox>
           <input x-box id='field-nassh-options' x-flex='1' type='text'
                  i18n='{"aria-label": "$id", "title": "=aria-label", "placeholder": "$id"}'
-                 pattern='^\s*(--(no-)?(config|debug-[a-z-]+|field-trial-[a-z-]+|proxy-host|proxy-mode|proxy-port|proxy-user|relay-method|relay-protocol|report-ack-latency|report-connect-attempts|resume-connection|ssh-client-version|ssh-agent|use-ssl|use-xhr|welcome)(=[^\s]+)?(\s+|$))*$'>
+                 pattern='^\s*(--(no-)?(config|debug-[a-z\-]+|field-trial-[a-z\-]+|proxy-host|proxy-mode|proxy-port|proxy-user|relay-method|relay-protocol|report-ack-latency|report-connect-attempts|resume-connection|ssh-client-version|ssh-agent|use-ssl|use-xhr|welcome)(=[^\s]+)?(\s+|$))*$'>
         </x-hbox>
         <br>
         <x-hbox x-align='baseline'>
