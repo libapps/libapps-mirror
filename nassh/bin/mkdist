@@ -205,8 +205,8 @@ def mkzip(
                 icons[size] = re.sub(r"/dev/", "/stable/", icons[size])
 
         _update_icons(data["icons"])
-        if "browser_action" in data:
-            _update_icons(data["browser_action"]["default_icon"])
+        if "action" in data:
+            _update_icons(data["action"]["default_icon"])
 
     # Workaround a bug in CWS where it can't handle partial translations.
     # b/153099839
