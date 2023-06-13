@@ -1070,6 +1070,12 @@
 	"terminal_home_manage": {
 		"message": "مدیریت"
 	},
+	"terminal_home_mount": {
+		"message": "نصب کردن در Files"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "این برگه را باز نگه دارید. درصورت بستن این برگه، اتصال نصب برنامه Files حذف خواهد شد"
+	},
 	"terminal_home_new_linux": {
 		"message": "Linux جدید"
 	},
@@ -1148,6 +1154,9 @@
 	"terminal_profile_label": {
 		"message": "نمایه"
 	},
+	"terminal_profile_name_label": {
+		"message": "نام نمایه"
+	},
 	"terminal_reset_menu_label": {
 		"message": "بازنشانی پایانه"
 	},
@@ -1159,9 +1168,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "یک فایل تصویر پس‌زمینه از رایانه‌تان انتخاب کنید."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "مطمئنید می‌خواهید نمایه «$1» را حذف کنید؟"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "خودکار"
@@ -1177,6 +1183,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "زیرخط"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "ایجاد نمایه جدید"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "اتصال‌هایی که از این نمایه استفاده می‌کند به نمایه پیش‌فرض (default) تغییر خواهد یافت"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 حذف شود؟"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "مطمئنید می‌خواهید زمینه را به پیش‌فرض‌های آن بازنشانی کنید؟"
@@ -1290,7 +1305,7 @@
 		"message": "تنظیمات"
 	},
 	"terminal_title_terminal": {
-		"message": "پایانه"
+		"message": "ترمینال"
 	},
 	"terminal_title_theme": {
 		"message": "زمینه"

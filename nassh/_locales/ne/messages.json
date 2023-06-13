@@ -927,7 +927,7 @@
 		"message": "हटाउनुहोस्"
 	},
 	"request_pin_prompt": {
-		"message": "'$2 ($3)' मा $1 कुञ्जी अनलक गर्न PIN प्रविष्टि गर्नुहोस् (तपाईं $4 पटक प्रयास गर्न सक्नुहुन्छ):"
+		"message": "'$2 ($3)' मा $1 कुञ्जी अनलक गर्न PIN हाल्नुहोस् (तपाईं $4 पटक प्रयास गर्न सक्नुहुन्छ):"
 	},
 	"restore_prefs": {
 		"message": "ब्याकअप रिस्टोर गर्नुहोस्"
@@ -997,6 +997,12 @@
 	},
 	"terminal_home_manage": {
 		"message": "व्यवस्थापन गर्नुहोस्"
+	},
+	"terminal_home_mount": {
+		"message": "\"फाइलहरू\" एप माउन्ट गर्नुहोस्"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "यो ट्याब खुला राखिराख्नुहोस्। तपाईंले यो ट्याब बन्द गर्नुभयो भने \"फाइलहरू\" एप अनमाउन्ट हुने छ।"
 	},
 	"terminal_home_new_linux": {
 		"message": "नयाँ Linux"
@@ -1076,6 +1082,9 @@
 	"terminal_profile_label": {
 		"message": "प्रोफाइल"
 	},
+	"terminal_profile_name_label": {
+		"message": "प्रोफाइलको नाम"
+	},
 	"terminal_reset_menu_label": {
 		"message": "टर्मिनल रिसेट गर्नुहोस्"
 	},
@@ -1087,9 +1096,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "आफ्नो कम्प्युटरबाट कुनै ब्याकग्राउन्ड फोटो फाइल चयन गर्नुहोस्।"
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "तपाईंले प्रोफाइल \"$1\" मेटाउन खोज्नुभएकै हो?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "स्वतः"
@@ -1105,6 +1111,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "अन्डरलाइन"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "नयाँ प्रोफाइल बनाउनुहोस्"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "यो प्रोफाइल प्रयोग गरिएका सबै कनेक्सन परिवर्तन गरी default प्रोफाइल बनाइने छ"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 हटाउने हो?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "तपाईंले थिमका मानहरू रिसेट गरी तिनलाई डिफल्ट मान बनाउन खोज्नुभएकै हो?"

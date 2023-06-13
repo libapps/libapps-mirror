@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "ম্যানেজ করুন"
 	},
+	"terminal_home_mount": {
+		"message": "ChromeOS Files অ্যাপে মাউন্ট করুন"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "এই ট্যাবটি খোলা রাখুন। এই ট্যাবটি বন্ধ করলে Files অ্যাপ থেকে মাউন্ট কানেকশন সরানো হবে।"
+	},
 	"terminal_home_new_linux": {
 		"message": "নতুন Linux"
 	},
@@ -1085,6 +1091,9 @@
 	"terminal_profile_label": {
 		"message": "প্রোফাইল"
 	},
+	"terminal_profile_name_label": {
+		"message": "প্রোফাইলের নাম"
+	},
 	"terminal_reset_menu_label": {
 		"message": "টার্মিনাল রিসেট করুন"
 	},
@@ -1096,9 +1105,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "আপনার কম্পিউটার থেকে একটি ব্যাকগ্রাউন্ডের ছবির ফাইল বেছে নিন।"
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "আপনি কি \"$1\" প্রোফাইল সত্যিই মুছে দিতে চান?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "অটো"
@@ -1114,6 +1120,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "আন্ডারলাইন"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "নতুন প্রোফাইল তৈরি করা"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "এই প্রোফাইল ব্যবহার করে এমন যেকোনও প্রোফাইল default প্রোফাইলে পরিবর্তন করা হবে"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 সরাবেন?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "আপনি কি সত্যিই থিমটিকে আবার ডিফল্টে সেট করতে চান?"

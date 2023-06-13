@@ -1055,6 +1055,12 @@
 	"terminal_home_manage": {
 		"message": "ຈັດການ"
 	},
+	"terminal_home_mount": {
+		"message": "ສ່ວນເຊື່ອມຕໍ່ກັບໄຟລ໌"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "ໃຫ້ເປີດແຖບນີ້ໄວ້. ການປິດແຖບນີ້ຈະລຶບການເຊື່ອມຕໍ່ສ່ວນເຊື່ອມຕໍ່ອອກຈາກໄຟລ໌."
+	},
 	"terminal_home_new_linux": {
 		"message": "Linux ໃໝ່"
 	},
@@ -1133,6 +1139,9 @@
 	"terminal_profile_label": {
 		"message": "ໂປຣໄຟລ໌"
 	},
+	"terminal_profile_name_label": {
+		"message": "ຊື່ໂປຣໄຟລ໌"
+	},
 	"terminal_reset_menu_label": {
 		"message": "ການຣີເຊັດເທີມິນອນ"
 	},
@@ -1144,9 +1153,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ເລືອກໄຟລ໌ພາບພື້ນຫລັງຈາກຄອມພິວເຕີຂອງທ່ານ."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "ທ່ານແນ່ໃຈບໍວ່າທ່ານຕ້ອງການລຶບໂປຣໄຟລ໌ \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ອັດຕະໂນມັດ"
@@ -1162,6 +1168,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "ຂີດກ້ອງ"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "ສ້າງໂປຣໄຟລ໌ໃໝ່"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "ການເຊື່ອມຕໍ່ໃດກໍຕາມທີ່ໃຊ້ໂປຣໄຟລ໌ນີ້ຈະຖືກປ່ຽນເປັນໂປຣໄຟລ໌ເລີ່ມຕົ້ນ"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "ລຶບ $1 ອອກບໍ?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "ທ່ານແນ່ໃຈບໍ່ວ່າທ່ານຕ້ອງການຣີເຊັດຮູບແບບສີສັນເປັນຄ່າເລີ່ມຕົ້ນຂອງມັນ?"

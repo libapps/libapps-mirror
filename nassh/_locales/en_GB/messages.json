@@ -332,9 +332,6 @@
 	"terminal_settings_background_image_error_size": {
 		"message": "The image is too large"
 	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Are you sure that you want to delete profile ‘$1’?"
-	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Are you sure that you want to reset the theme to its defaults?"
 	},

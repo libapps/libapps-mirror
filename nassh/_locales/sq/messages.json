@@ -1013,6 +1013,12 @@
 	"terminal_home_manage": {
 		"message": "Menaxho"
 	},
+	"terminal_home_mount": {
+		"message": "Monto te \"Skedarët\""
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Mbaje të hapur këtë skedë. Mbyllja e kësaj skede do të heqë lidhjen e montimit nga aplikacioni \"Skedarët\"."
+	},
 	"terminal_home_new_linux": {
 		"message": "Kontejner i ri i Linux"
 	},
@@ -1094,6 +1100,9 @@
 	"terminal_profile_label": {
 		"message": "Profili"
 	},
+	"terminal_profile_name_label": {
+		"message": "Emri i profilit"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Rivendosja e terminalit"
 	},
@@ -1105,9 +1114,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Zgjidh një skedar të imazhit të sfondit nga kompjuteri yt."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "E konfirmon që dëshiron ta fshish profilin \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatik"
@@ -1123,6 +1129,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Nënvizo"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Krijo një profil të ri"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Çdo lidhje që përdor këtë profil do të kalojë te profili \"default\""
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Të hiqet $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Je i sigurt që dëshiron ta rivendosësh temën te parazgjedhjet?"

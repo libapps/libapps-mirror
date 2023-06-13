@@ -1016,6 +1016,12 @@
 	"terminal_home_manage": {
 		"message": "管理"
 	},
+	"terminal_home_mount": {
+		"message": "装载到“文件”应用"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "请让此标签页保持打开状态。关闭它会从“文件”应用内移除装载连接。"
+	},
 	"terminal_home_new_linux": {
 		"message": "新建 Linux 容器"
 	},
@@ -1094,6 +1100,9 @@
 	"terminal_profile_label": {
 		"message": "配置文件"
 	},
+	"terminal_profile_name_label": {
+		"message": "配置文件名称"
+	},
 	"terminal_reset_menu_label": {
 		"message": "重置终端设置"
 	},
@@ -1105,9 +1114,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "请从您的计算机中选择一个背景图片文件。"
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "确定要删除配置文件“$1”吗？"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "自动"
@@ -1123,6 +1129,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "下划线"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "创建新的配置文件"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "所有使用此配置文件的连接都将改用 default 配置文件"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "移除“$1”？"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "确定要将主题背景重置为默认设置吗？"

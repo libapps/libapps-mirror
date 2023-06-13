@@ -135,10 +135,10 @@
 		"message": "ቀጣይ"
 	},
 	"hterm_button_page_down": {
-		"message": "ገጽ ወደ ታች"
+		"message": "ገፅ ወደ ታች"
 	},
 	"hterm_button_page_up": {
-		"message": "ገጽ ወደ ላይ"
+		"message": "ገፅ ወደ ላይ"
 	},
 	"hterm_button_previous": {
 		"message": "ቀዳሚ"
@@ -303,7 +303,7 @@
 		"message": "የመዳፊት ቀኝ ጠቅታዎች ይዘት ይለጥፋሉ"
 	},
 	"hterm_name_pref_page_keys_scroll": {
-		"message": "ገጽ ወደ ላይ/ታች ቁልፍ መሸብለያ ባህሪ"
+		"message": "ገፅ ወደ ላይ/ታች ቁልፍ መሸብለያ ባህሪ"
 	},
 	"hterm_name_pref_pass_alt_number": {
 		"message": "Alt+1..9 የመቀየሪያ ትር/መተግበሪያ ባህሪ"
@@ -333,13 +333,13 @@
 		"message": "ለመለጠፍ መጎተት እና ጣል ማድረግን ይፍቀዱ"
 	},
 	"hterm_name_pref_screen_border_color": {
-		"message": "የማያ ገጽ ክፈፍ ቀለም"
+		"message": "የማያ ገፅ ክፈፍ ቀለም"
 	},
 	"hterm_name_pref_screen_border_size": {
-		"message": "የማያ ገጽ ክፈፍ መጠን"
+		"message": "የማያ ገፅ ክፈፍ መጠን"
 	},
 	"hterm_name_pref_screen_padding_size": {
-		"message": "የማያ ገጽ ድብዳብ መጠን"
+		"message": "የማያ ገፅ ድብዳብ መጠን"
 	},
 	"hterm_name_pref_scroll_on_keystroke": {
 		"message": "ከቁልፍ ጭረት በኋላ ወደ ግርጌ ይሸብልሉ"
@@ -528,7 +528,7 @@
 		"message": "የተለመደ የስርዓተ ክወና ቁልፍ ሰሌዳ ማሰሪያዎች ለhterm የራሱ አጠቃቀም ፎቶ ከማንሳት ይልቅ መከበር እንዳለባቸው እና እንደሌለባቸው።"
 	},
 	"hterm_pref_line_height_padding_size": {
-		"message": "በእያንዳንዱ የተርሚናሉ ማያ ገጽ መካከል ያለው የድብዳብ መጠን በፒክሰል።"
+		"message": "በእያንዳንዱ የተርሚናሉ ማያ ገፅ መካከል ያለው የድብዳብ መጠን በፒክሰል።"
 	},
 	"hterm_pref_media_keys_are_fkeys": {
 		"message": "እውነት ከሆነ የሚዲያ ቁልፎችን ወደ የF ቁፍል እኩያቸውን ይለውጡ። ሐሰት ከሆነ አሳሹ ቁልፎቹን ይቆጣጠር።"
@@ -543,16 +543,16 @@
 		"message": "በቀኝ የመዳፊት አዝራር ጠቅታዎች ላይ ይለጥፉ።\n\nይህ አማራጭ ከ«የመዳፊት-ጠቅታ-ለጥፍ» ቅንብሩ ነፃ ነው።\n\nማስታወሻ፦ ዋናዎቹ እና ሁለተኛ ደረጃዎቹ አዝራሮች ከግራ እና ከቀኝ እጅ መዳፊቶች ጋር ለእርስዎ ይስተናገዳሉ።"
 	},
 	"hterm_pref_page_keys_scroll": {
-		"message": "እውነት ከሆነ ገጽ ላይ/ታች የተርሚናሉን ማሸብለያ ይቆጣጠራል፣ እና Shift+ገጽ ላይ/Shift-ገጽ ታች ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ ገጽ ላይ/ታች ወደ የርቀት አስተናጋጁ ይላኩና Shift+ገጽ ላይ/Shift+ገጽ ታች ያሸበልላል።"
+		"message": "እውነት ከሆነ ገፅ ላይ/ታች የተርሚናሉን ማሸብለያ ይቆጣጠራል፣ እና Shift+ገፅ ላይ/Shift-ገፅ ታች ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ ገፅ ላይ/ታች ወደ የርቀት አስተናጋጁ ይላኩና Shift+ገፅ ላይ/Shift+ገፅ ታች ያሸበልላል።"
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Alt+1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Alt+1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
+		"message": "Alt+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Alt+1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Alt+1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ ዓይነት ላይ የተመሠረተ ይሆናል።"
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Ctrl+N ወደ አሳሽ መተላለፍ አለመተላለፉ።\n\nእውነት ከሆነ Ctrl+N እንደ «አዲስ ትር» የቁልፍ ሰሌዳ አቋራጭ ሆኖ በአሳሹ ይስተናገዳል። ሐሰት ከሆነ Ctrl+N ወደ ተቆጣጣሪ ይላካል።"
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta-1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
+		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta-1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ ዓይነት ላይ የተመሠረተ ይሆናል።"
 	},
 	"hterm_pref_pass_ctrl_t": {
 		"message": "Ctrl+T ወደ አሳሽ መተላለፍ አለመተላለፉ።\n\nእውነት ከሆነ Ctrl+T እንደ «አዲስ ትር» የቁልፍ ሰሌዳ አቋራጭ ሆኖ በአሳሹ ይስተናገዳል። ሐሰት ከሆነ Ctrl+T ወደ አስተናጋጁ ይላካል።"
@@ -564,7 +564,7 @@
 		"message": "Ctrl+W ወደ አሳሽ መተላለፍ አለመተላለፉ።\n\nእውነት ከሆነ Ctrl+W እንደ «ዝጋ ትር» የቁልፍ ሰሌዳ አቋራጭ ሆኖ በአሳሹ ይስተናገዳል። ሐሰት ከሆነ Ctrl+W ወደ ተቆጣጣሪው ይላካል።"
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta+1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ አይነት ላይ የተመሠረተ ይሆናል።"
+		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta+1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ ዓይነት ላይ የተመሠረተ ይሆናል።"
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Meta+V ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nበአንዳንድ ስርዓቶች ላይ ይህ ይዘትን ለመለጠፍ ስራ ላይ ይውላል።"
@@ -576,7 +576,7 @@
 		"message": "በተርሚናል ማያ ገጹ ክፈፍ አካባቢ ያለ ቀለም።\n\nይህ በማያ ገጹ ጫፎች ላይ የሚታዩ መስመሮችን ለመፍጠር በተርሚናል ማያ ገጹ ክፈፍ አካባቢ ያለውን ቀለም ይቆጣጠራል።"
 	},
 	"hterm_pref_screen_border_size": {
-		"message": "በተርሚናል ማያ ገጽ አካባቢ ያለው የክፈፍ መጠን በፒክሴሎች።\n\nይህ በማያ ገጹ ጫፎች ላይ የሚታዩ መስመሮችን ለመፍጠር በተርሚናል ማያ ገጹ ክፈፍ አካባቢ ያለውን መጠን ይቆጣጠራል።"
+		"message": "በተርሚናል ማያ ገፅ አካባቢ ያለው የክፈፍ መጠን በፒክሴሎች።\n\nይህ በማያ ገጹ ጫፎች ላይ የሚታዩ መስመሮችን ለመፍጠር በተርሚናል ማያ ገጹ ክፈፍ አካባቢ ያለውን መጠን ይቆጣጠራል።"
 	},
 	"hterm_pref_screen_padding_size": {
 		"message": "በተርሚናል ማያ ገጹ ጠርዝ ዙሪያ ላይ ያለው የድብዳብ መጠን በፒክሰል።\n\nተጠቃሚው አንዳንድ የሚታይ ድብዳብ በማያ ገጹ ጠርዞች ላይ ማከል እንዲችል ይህ በተርሚናል ማያ ገጹ ዙሪያ ያለውን መጠን ይቆጣጠራል።"
@@ -588,7 +588,7 @@
 		"message": "በተርሚናል ውጽዓት ላይ ወደ ታች ይሸበለል እንደሆነ።"
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "ተለዋጭ የማያ ገጽ ቋጡን ሲጠቀሙ እና DECCKM (የመተግበሪያ ጠቋሚ ቁልፎች) ገቢር ሲሆን የመዳፊት ጎማ ሽብለላ ክስተቶች የቀስት ቁልፎችን ያስመስላሉ።\n\nየShift ቁልፉን በመያዝ ለጊዜው ሊሰናከል ይችላል።\n\nይህ ጠሪዎችን (ያነሰ) ሲጠቀሙ ወይም የመመሪያ ገጾችን ወይም ጽሁፍ አቀናባሪዎችን (vi/nano) ሲያነብቡ ወይም ማያ ገጽ/tmuxን ሲጠቀሙ በተደጋጋሚነት ይመጣል።"
+		"message": "ተለዋጭ የማያ ገፅ ቋጡን ሲጠቀሙ እና DECCKM (የመተግበሪያ ጠቋሚ ቁልፎች) ገቢር ሲሆን የመዳፊት ጎማ ሽብለላ ክስተቶች የቀስት ቁልፎችን ያስመስላሉ።\n\nየShift ቁልፉን በመያዝ ለጊዜው ሊሰናከል ይችላል።\n\nይህ ጠሪዎችን (ያነሰ) ሲጠቀሙ ወይም የመመሪያ ገጾችን ወይም ጽሁፍ አቀናባሪዎችን (vi/nano) ሲያነብቡ ወይም ማያ ገፅ/tmuxን ሲጠቀሙ በተደጋጋሚነት ይመጣል።"
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "በፒክሰል ሲለካ የመዳፊት አሸብላይ ጎማ ክስተቶች ማባዣ።\n\nገጹ በምን ያህል ፍጥነት እንደሚሸበለል ይቀይራል።"
@@ -714,7 +714,7 @@
 		"message": "የዱካዎች ባለቤት ቀይር"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "አሁን ያለውን የጣቢያ ማያ ገጽ አጽዳ።"
+		"message": "አሁን ያለውን የጣቢያ ማያ ገፅ አጽዳ።"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "አንድ ፋይል ወደ ቅንጥብ ሰሌዳው ይቅዱ (ነባሪ፦ ከጅምሩ 10 ሜቢባይት)"
@@ -747,7 +747,7 @@
 		"message": "ፋይሎችን ያወርዳል"
 	},
 	"nasftp_cmd_help_help": {
-		"message": "ይህ የእገዛ ማያ ገጽ"
+		"message": "ይህ የእገዛ ማያ ገፅ"
 	},
 	"nasftp_cmd_list": {
 		"message": "ዝርዝር"
@@ -1028,6 +1028,12 @@
 	"terminal_home_manage": {
 		"message": "አቀናብር"
 	},
+	"terminal_home_mount": {
+		"message": "ወደ ፋይሎች አፈናጥጥ"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "ይህን ትር ክፍት እንደሆነ ያቆዩት። ይህን ትር መዝጋት የማፈናጥጥ ግንኙነትን ከፋይሎች ያስወግደዋል።"
+	},
 	"terminal_home_new_linux": {
 		"message": "አዲስ Linux"
 	},
@@ -1109,6 +1115,9 @@
 	"terminal_profile_label": {
 		"message": "መገለጫ"
 	},
+	"terminal_profile_name_label": {
+		"message": "የመገለጫ ስም"
+	},
 	"terminal_reset_menu_label": {
 		"message": "ተርሚናልን ዳግም ማስጀመር"
 	},
@@ -1120,9 +1129,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "የጀርባ ምስል ፋይል ከኮምፒውተርዎ ይምረጡ።"
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "የ«$1» መገለጫን መሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ራስ-ሰር"
@@ -1138,6 +1144,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "ከግርጌ አስምር"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "አዲስ መገለጫ ይፍጠሩ"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "ይህን መገለጫ የሚጠቀም ማንኛውም ግንኙነት ወደ default መገለጫው የሚለወጥ ይሆናል።"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 ይወገድ?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "ገጽታውን ወደ ነባሪው ዳግም ለማቀናበር እንደሚፈልጉ እርግጠኛ ነዎት?"
@@ -1255,6 +1270,12 @@
 	},
 	"terminal_title_theme": {
 		"message": "ገፅታ"
+	},
+	"terminal_tmux_controller_encounter_error": {
+		"message": "Tmux መቆጣጠሪያ ስህተት አጋጥሞታል፦"
+	},
+	"terminal_tmux_integration_activated": {
+		"message": "የTmux የውህደት ሁነታ ገብሯል። tmuxን ለማላቀቅ ወይም የtmux ትዕዛዞችን ለማስገባት Ctrl-Cን ይጫኑ"
 	},
 	"terminal_too_much_output_message": {
 		"message": "ለማሳወቅ እጅግ ብዙ ውጽዓት ስለሆነ ለማንበብ ወደ ረድፎች በራስ ይሂዱ።"

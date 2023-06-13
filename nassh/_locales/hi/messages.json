@@ -1064,6 +1064,12 @@
 	"terminal_home_manage": {
 		"message": "मैनेज करें"
 	},
+	"terminal_home_mount": {
+		"message": "Files में माउंट करें"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "इस टैब को खुला रखें. इस टैब को बंद करने पर, Files से माउंट किया गया कनेक्शन हटा दिया जाएगा."
+	},
 	"terminal_home_new_linux": {
 		"message": "नया Linux कंटेनर"
 	},
@@ -1145,6 +1151,9 @@
 	"terminal_profile_label": {
 		"message": "प्रोफ़ाइल"
 	},
+	"terminal_profile_name_label": {
+		"message": "प्रोफ़ाइल नाम"
+	},
 	"terminal_reset_menu_label": {
 		"message": "टर्मिनल रीसेट करें"
 	},
@@ -1156,9 +1165,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "अपने कंप्यूटर से बैकग्राउंड की इमेज वाली कोई फ़ाइल चुनें."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "क्या आपको वाकई \"$1\" प्रोफ़ाइल मिटानी है?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "अपने-आप"
@@ -1174,6 +1180,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "अंडरलाइन करें"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "नई प्रोफ़ाइल बनाएं"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "इस प्रोफ़ाइल का इस्तेमाल करने वाले हर कनेक्शन की सेटिंग, default प्रोफ़ाइल में बदल जाएगी"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "क्या $1 को हटाना है?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "क्या आप वाकई थीम को डिफ़ॉल्ट पर रीसेट करना चाहते हैं?"

@@ -1097,6 +1097,12 @@
 	"terminal_home_manage": {
 		"message": "Upravljanje"
 	},
+	"terminal_home_mount": {
+		"message": "Učitaj u Datoteke"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Ostavite tu karticu otvorenu. Zatvaranjem te kartice uklonit ćete vezu za učitavanje iz Datoteka."
+	},
 	"terminal_home_new_linux": {
 		"message": "Novi Linux"
 	},
@@ -1169,6 +1175,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Ime profila"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Vrati terminal na zadano"
 	},
@@ -1180,9 +1189,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Odaberite datoteku pozadinske slike s računala."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Jeste li sigurni da želite izbrisati profil $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatski"
@@ -1198,6 +1204,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Podcrtavanje"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Izrada novog profila"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Sve veze koje koriste ovaj profil promijenit će se na zadani profil"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Ukloniti $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Jeste li sigurni da želite vratiti zadanu temu?"

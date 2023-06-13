@@ -462,7 +462,7 @@
 		"message": "Textmarkörens form när den är synlig. Detta kan ändras under körning med escape-sekvenser i terminalen."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "När detta är sant skapas en webbavisering vid klockljud i bakgrunden i en terminal. https://www.w3.org/TR/notifications/\n\nAnvändaren måste ha tillåtit aviseringar. När alternativet är inställt på sant frågar hterm efter behörighet om det behövs. Frågan om behörighet kanske inte visas i webbläsaren om den inte utlöstes av något som användaren gjort.\n\nChrome-tillägg med aviseringsbehörighet kan visa aviseringar."
+		"message": "När detta är sant skapas en webbavisering vid klockljud i bakgrunden i en terminal. https://www.w3.org/TR/notifications/\n\nAnvändaren måste ha tillåtit aviseringar. När alternativet är inställt på sant frågar hterm efter behörighet om det behövs. Begäran om behörighet kanske inte visas i webbläsaren om den inte utlöstes av något som användaren gjort.\n\nChrome-tillägg med aviseringsbehörighet kan visa aviseringar."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "Om tvetydiga östasiatiska tecken har tvåkolumnsbredd eller inte."
@@ -1010,6 +1010,12 @@
 	"terminal_home_manage": {
 		"message": "Hantera"
 	},
+	"terminal_home_mount": {
+		"message": "Montera i Filer"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Håll den här fliken öppen. Om du stänger den här fliken tas kopplingen till monteringen bort från Filer."
+	},
 	"terminal_home_new_linux": {
 		"message": "Ny Linux"
 	},
@@ -1088,6 +1094,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profilnamn"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Återställ terminal"
 	},
@@ -1100,9 +1109,6 @@
 	"terminal_settings_background_image_help": {
 		"message": "Välj en fil på datorn som bakgrundsbild."
 	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Vill du radera profilen $1?"
-	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Inaktivera"
 	},
@@ -1114,6 +1120,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Understruket"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Skapa en ny profil"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Alla anslutningar som använder profilen ändras till defaultprofilen"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Vill du ta bort $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Vill du återställa temat till standardinställningarna?"

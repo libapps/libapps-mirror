@@ -1079,6 +1079,12 @@
 	"terminal_home_manage": {
 		"message": "කළමනාකරණය කරන්න"
 	},
+	"terminal_home_mount": {
+		"message": "Files වෙත නංවන්න"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "මෙම පටිත්ත විවෘතව තබන්න. මෙම පටිත්ත වැසීමෙන් Files වෙතින් නැංවීමේ සම්බන්ධතාවය ඉවත් කරනු ඇත."
+	},
 	"terminal_home_new_linux": {
 		"message": "නව Linux"
 	},
@@ -1157,6 +1163,9 @@
 	"terminal_profile_label": {
 		"message": "පැතිකඩ"
 	},
+	"terminal_profile_name_label": {
+		"message": "පැතිකඩ නම"
+	},
 	"terminal_reset_menu_label": {
 		"message": "පර්යන්ත යළි සැකසීම"
 	},
@@ -1168,9 +1177,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ඔබේ පරිගණකයෙන් පසුබිම් රූප ගොනුවක් තෝරන්න."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "ඔබට \"$1\" පැතිකඩ මැකීමට අවශ්‍ය බව විශ්වාසද?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ස්වයං"
@@ -1186,6 +1192,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "යට ඉර"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "නව පැතිකඩ තනන්න"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "මෙම පැතිකඩ භාවිතා කරන ඕනෑම සම්බන්ධතාවයක් පෙරනිමි පැතිකඩ වෙත වෙනස් කරනු ඇත"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 ඉවත් කරන්න ද?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "ඔබට තේමාව එහි පෙරනිමිවලට යළි සැකසීමට අවශ්‍ය බව ඔබට තහවුරුද?"

@@ -1019,6 +1019,12 @@
 	"terminal_home_manage": {
 		"message": "Verwalten"
 	},
+	"terminal_home_mount": {
+		"message": "In „Dateien“ bereitstellen"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Diesen Tab geöffnet lassen. Wenn du diesen Tab schließt, wird die Bereitstellung aus Files entfernt."
+	},
 	"terminal_home_new_linux": {
 		"message": "Neuer Linux-Container"
 	},
@@ -1097,6 +1103,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profilname"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Terminal zurücksetzen"
 	},
@@ -1109,9 +1118,6 @@
 	"terminal_settings_background_image_help": {
 		"message": "Wähle als Hintergrundbild eine Datei von deinem Computer aus."
 	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Soll das Profil „$1“ wirklich gelöscht werden?"
-	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Deaktivieren"
 	},
@@ -1123,6 +1129,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Unterstreichen"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Neues Profil erstellen"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Jede Verbindung mit diesem Profil wird in das Default-Profil geändert"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 entfernen?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Soll das Design wirklich auf die Standardeinstellungen zurückgesetzt werden?"

@@ -15,7 +15,7 @@
 		"message": "ఈ SSH సెషన్‌కి కాష్ పిన్ ఇదేనా? (y/N):"
 	},
 	"cancel_button_label": {
-		"message": "రద్దు చేయి"
+		"message": "రద్దు చేయండి"
 	},
 	"changelog": {
 		"message": "మార్పు లాగ్"
@@ -54,7 +54,7 @@
 		"message": "[DEL]"
 	},
 	"delete_button_label": {
-		"message": "తొలగించు"
+		"message": "తొలగించండి"
 	},
 	"disconnect_message": {
 		"message": "$1 స్టేటస్ కోడ్‌తో ప్రోగ్రామ్ ఎగ్జిట్ అయింది."
@@ -741,7 +741,7 @@
 		"message": "రిమోట్ పాత్‌ను వేరే రిమోట్ పాత్‌కు కాపీ చేయండి"
 	},
 	"nasftp_cmd_del_help": {
-		"message": "ఫైళ్లను తొలగించు"
+		"message": "ఫైళ్లను తొలగించండి"
 	},
 	"nasftp_cmd_df_help": {
 		"message": "డిస్క్ గణాంకాలను చూపు"
@@ -1008,7 +1008,7 @@
 		"message": "బ్యాకప్‌ని పునరుద్ధరించండి"
 	},
 	"save_label": {
-		"message": "సేవ్ చేయి"
+		"message": "సేవ్ చేయండి"
 	},
 	"select_label": {
 		"message": "ఎంచుకోండి"
@@ -1044,7 +1044,7 @@
 		"message": "టెర్మినల్ క్లియర్"
 	},
 	"terminal_dropdown_delete_item_text": {
-		"message": "ఐటెమ్‌ను తొలగించడానికి 'తొలగించు' కీని నొక్కండి."
+		"message": "ఐటెమ్‌ను తొలగించడానికి 'తొలగించండి' కీని నొక్కండి."
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" అందుబాటులో లేదు"
@@ -1072,6 +1072,12 @@
 	},
 	"terminal_home_manage": {
 		"message": "మేనేజ్ చేయండి"
+	},
+	"terminal_home_mount": {
+		"message": "ఫైల్స్‌కు మౌంట్ చేయండి"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "ఈ ట్యాబ్‌ను తెరిచి ఉంచండి. ఈ ట్యాబ్‌ను మూసివేయడం వలన Files నుండి మౌంట్ కనెక్షన్ తీసివేయబడుతుంది."
 	},
 	"terminal_home_new_linux": {
 		"message": "కొత్త Linux"
@@ -1151,6 +1157,9 @@
 	"terminal_profile_label": {
 		"message": "ప్రొఫైల్"
 	},
+	"terminal_profile_name_label": {
+		"message": "ప్రొఫైల్ పేరు"
+	},
 	"terminal_reset_menu_label": {
 		"message": "టెర్మినల్ రీసెట్"
 	},
@@ -1162,9 +1171,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "మీ కంప్యూటర్ నుండి ఒక బ్యాక్‌గ్రౌండ్ ఇమేజ్ ఫైల్‌ను ఎంచుకోండి."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "మీరు ఖచ్చితంగా \"$1\" ప్రొఫైల్‌ను తొలగించాలనుకుంటున్నారా?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ఆటో"
@@ -1181,6 +1187,15 @@
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "కింది గీత"
 	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "కొత్త ప్రొఫైల్‌ను క్రియేట్ చేయండి"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "ఈ ప్రొఫైల్‌ను ఉపయోగించే ఏదైనా కనెక్షన్ డిఫాల్ట్ ప్రొఫైల్‌కు మార్చబడుతుంది"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1‌ను తీసివేయాలా?"
+	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "మీరు ఖచ్చితంగా థీమ్‌ను దాని డిఫాల్ట్‌లకు సెట్ చేయాలనుకుంటున్నారా?"
 	},
@@ -1188,7 +1203,7 @@
 		"message": "థీమ్‌ను రీసెట్ చేయండి"
 	},
 	"terminal_settings_reset_label": {
-		"message": "రీసెట్ చేయి"
+		"message": "రీసెట్ చేయండి"
 	},
 	"terminal_theme_classic_label": {
 		"message": "క్లాసిక్"

@@ -1082,6 +1082,12 @@
 	"terminal_home_manage": {
 		"message": "Dhibiti"
 	},
+	"terminal_home_mount": {
+		"message": "Pachika kwenye programu ya Faili"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Usifunge kichupo hiki. Kufunga kichupo hiki kutaondoa muunganisho wa kupachika kwenye programu ya Faili."
+	},
 	"terminal_home_new_linux": {
 		"message": "Linux Mpya"
 	},
@@ -1160,6 +1166,9 @@
 	"terminal_profile_label": {
 		"message": "Wasifu"
 	},
+	"terminal_profile_name_label": {
+		"message": "Jina la wasifu"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Kubadilisha Mipangilio ya Kituo"
 	},
@@ -1171,9 +1180,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Chagua faili ya picha ya mandharinyuma kutoka kwenye kompyuta yako."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Je, una uhakika kwamba unataka kufuta wasifu \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Otomatiki"
@@ -1189,6 +1195,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Piga mstari chini"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Unda wasifu mpya"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Muunganisho wowote unaotumia wasifu huu utabadilishwa kuwa wasifu chaguomsingi"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Ungependa kuondoa $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Je, una uhakika ungependa kurudisha mandhari katika hali chaguomsingi?"

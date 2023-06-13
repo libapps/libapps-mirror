@@ -998,6 +998,12 @@
 	"terminal_home_manage": {
 		"message": "მართვა"
 	},
+	"terminal_home_mount": {
+		"message": "მიერთება ფაილების აპში"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "ამ ჩანართის გახსნილად დატოვება. ამ ჩანართის დახურვა გააუქმებს მიერთებას ფაილების აპში."
+	},
 	"terminal_home_new_linux": {
 		"message": "ახალი Linux"
 	},
@@ -1076,6 +1082,9 @@
 	"terminal_profile_label": {
 		"message": "პროფილი"
 	},
+	"terminal_profile_name_label": {
+		"message": "პროფილის სახელი"
+	},
 	"terminal_reset_menu_label": {
 		"message": "ტერმინალის გადაყენება"
 	},
@@ -1087,9 +1096,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "აირჩიეთ ფონის სურათის ფაილი თქვენი კომპიუტერიდან."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "ნამდვილად გსურთ, წაშალოთ პროფილი „$1“?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ავტომატური"
@@ -1105,6 +1111,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "ხაზგასმა"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "ახალი პროფილის შექმნა"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "კავშირები, რომლებიც ამ პროფილს იყენებს (ასეთის არსებობის შემთხვევაში), გადავა ნაგულისხმევი პროფილის გამოყენებაზე"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "გსურთ, წაიშალოს $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "ნამდვილად გსურთ თემის დაბრუნება ნაგულისხმევ მნიშვნელობებზე?"

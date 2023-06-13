@@ -1010,6 +1010,12 @@
 	"terminal_home_manage": {
 		"message": "Haldamine"
 	},
+	"terminal_home_mount": {
+		"message": "Ühenda rakendusega Failid"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Hoidke see vaheleht avatuna. Selle vahelehe sulgemisel eemaldatakse rakenduse Failid ühendus."
+	},
 	"terminal_home_new_linux": {
 		"message": "Uus Linux"
 	},
@@ -1085,6 +1091,9 @@
 	"terminal_profile_label": {
 		"message": "Profiil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profiili nimi"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Lähtesta terminal"
 	},
@@ -1097,9 +1106,6 @@
 	"terminal_settings_background_image_help": {
 		"message": "Valige oma arvutist taustkujutise fail."
 	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Kas soovite kindlasti profiili „$1“ kustutada?"
-	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automaatne"
 	},
@@ -1111,6 +1117,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Jooni alla"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Uue profiili loomine"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Kõik seda profiili kasutavad ühendused kasutavad edaspidi profiili Default"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Kas soovite profiili $1 eemaldada?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Kas soovite kindlasti taastada teema vaikeseaded?"

@@ -1013,6 +1013,12 @@
 	"terminal_home_manage": {
 		"message": "Pārvaldīt"
 	},
+	"terminal_home_mount": {
+		"message": "Piekļūt, izmantojot lietotni Faili"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Neaizveriet šo cilni. Aizverot šo cilni, tiks noņemta piekļuve, izmantojot lietotni Faili."
+	},
 	"terminal_home_new_linux": {
 		"message": "Jaunais Linux"
 	},
@@ -1091,6 +1097,9 @@
 	"terminal_profile_label": {
 		"message": "Profils"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profila nosaukums"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Atiestatīt termināli"
 	},
@@ -1102,9 +1111,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Atlasiet fona attēla failu datorā."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Vai tiešām vēlaties dzēst profilu “$1”?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automātiski"
@@ -1120,6 +1126,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Pasvītrojums"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Jauna profila izveide"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Visi ar šo profilu saistītie pakalpojumi tiks saistīti ar noklusējuma profilu."
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Vai noņemt profilu $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Vai tiešām vēlaties atiestatīt motīva noklusējuma vērtības?"

@@ -1010,6 +1010,12 @@
 	"terminal_home_manage": {
 		"message": "Spravovať"
 	},
+	"terminal_home_mount": {
+		"message": "Pripojiť k Súborom"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Túto kartu nechajte otvorenú. Zatvorením tejto karty odstránite pripojenie k aplikácii Súbory."
+	},
 	"terminal_home_new_linux": {
 		"message": "Nový Linux"
 	},
@@ -1088,6 +1094,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Názov profilu"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Resetovanie terminálu"
 	},
@@ -1099,9 +1108,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Vyberte súbor obrázka na pozadí z počítača."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Naozaj chcete odstrániť profil $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automaticky"
@@ -1117,6 +1123,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Podčiarknuté"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Vytvorenie nového profilu"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Všetky pripojenia používajúce tento profil sa zmenia na predvolený profil"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Chcete $1 odstrániť?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Naozaj chcete resetovať motív na predvolené nastavenia?"

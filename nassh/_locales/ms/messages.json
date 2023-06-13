@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "Urus"
 	},
+	"terminal_home_mount": {
+		"message": "Lekap pada Files"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Pastikan tab ini dibuka. Tindakan menutup tab ini akan mengalih keluar sambungan lekapan daripada Files."
+	},
 	"terminal_home_new_linux": {
 		"message": "Linux baharu"
 	},
@@ -1085,6 +1091,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Nama profil"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Penetapan Semula Terminal"
 	},
@@ -1097,9 +1106,6 @@
 	"terminal_settings_background_image_help": {
 		"message": "Pilih fail imej latar belakang daripada komputer anda."
 	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Adakah anda pasti mahu memadamkan \"$1\"?"
-	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Lumpuhkan"
 	},
@@ -1111,6 +1117,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Garis bawah"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Buat profil baharu"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Sebarang sambungan yang menggunakan profil ini akan ditukar kepada profil lalai"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Alih keluar $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Adakah anda pasti anda mahu menetapkan semula tema kepada tetapan lalai?"

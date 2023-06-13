@@ -1013,6 +1013,12 @@
 	"terminal_home_manage": {
 		"message": "Kudeatu"
 	},
+	"terminal_home_mount": {
+		"message": "Muntatu Fitxategiak aplikazioan"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Eduki fitxa hau irekita. Hura itxiz gero, Fitxategiak aplikazioan muntatzeko konexioa kenduko da."
+	},
 	"terminal_home_new_linux": {
 		"message": "Linux berria"
 	},
@@ -1094,6 +1100,9 @@
 	"terminal_profile_label": {
 		"message": "Profila"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profilaren izena"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Berrezarri terminala"
 	},
@@ -1105,9 +1114,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Hautatu atzeko planoko irudi-fitxategia ordenagailutik."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Ziur \"$1\" profila ezabatu nahi duzula?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatikoa"
@@ -1123,6 +1129,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Azpimarratua"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Sortu profil bat"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Profil hau darabilten konexio guztiak profil lehenetsira aldatuko dira"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 kendu nahi duzu?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Ziur gaiaren balio lehenetsiak berrezarri nahi dituzula?"

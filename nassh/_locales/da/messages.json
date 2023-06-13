@@ -1103,6 +1103,12 @@
 	"terminal_home_manage": {
 		"message": "Administrer"
 	},
+	"terminal_home_mount": {
+		"message": "Slut til Filer"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Hold denne fane åben. Hvis du lukker denne fane, ophæves tilslutningen til appen Filer."
+	},
 	"terminal_home_new_linux": {
 		"message": "Ny Linux"
 	},
@@ -1178,6 +1184,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profilnavn"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Terminalen er nulstillet"
 	},
@@ -1190,9 +1199,6 @@
 	"terminal_settings_background_image_help": {
 		"message": "Vælg et baggrundsbillede fra din computer."
 	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Er du sikker på, at du vil slette profilen \"$1\"?"
-	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatisk"
 	},
@@ -1204,6 +1210,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Understregning"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Opret en ny profil"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Alle forbindelser, der anvender denne profil, ændres til default-profilen"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Vil du fjerne $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Er du sikker på, at du vil nulstille temaet til dets standardværdier?"

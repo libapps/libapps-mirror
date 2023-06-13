@@ -1013,6 +1013,12 @@
 	"terminal_home_manage": {
 		"message": "ניהול"
 	},
+	"terminal_home_mount": {
+		"message": "טעינה באפליקציה 'קבצים'"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "אין לסגור את הכרטיסייה הזו. אם הכרטיסייה הזו תיסגר, יוסר החיבור לטעינה מהאפליקציה 'קבצים'."
+	},
 	"terminal_home_new_linux": {
 		"message": "מאגר חדש ל-Linux"
 	},
@@ -1091,6 +1097,9 @@
 	"terminal_profile_label": {
 		"message": "פרופיל"
 	},
+	"terminal_profile_name_label": {
+		"message": "שם הפרופיל"
+	},
 	"terminal_reset_menu_label": {
 		"message": "איפוס הטרמינל"
 	},
@@ -1102,9 +1111,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "בחירת קובץ של תמונת רקע מהמחשב שלך"
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "בחרת למחוק את הפרופיל '$1'. להמשיך?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "אוטומטי"
@@ -1120,6 +1126,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "קו תחתון"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "יצירת פרופיל חדש"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "כל חיבור שנעשה באמצעות הפרופיל הזה ישתנה לפרופיל default"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "להסיר את $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "לאפס את העיצוב להגדרת ברירת המחדל?"

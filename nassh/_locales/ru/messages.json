@@ -1010,6 +1010,12 @@
 	"terminal_home_manage": {
 		"message": "Настройки"
 	},
+	"terminal_home_mount": {
+		"message": "Подключить через Файлы"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Не закрывайте эту вкладку. Иначе подключение через приложение \"Файлы\" будет удалено."
+	},
 	"terminal_home_new_linux": {
 		"message": "Новый контейнер Linux"
 	},
@@ -1088,6 +1094,9 @@
 	"terminal_profile_label": {
 		"message": "Профиль"
 	},
+	"terminal_profile_name_label": {
+		"message": "Название профиля"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Сбросить настройки терминала"
 	},
@@ -1099,9 +1108,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Выберите файл фонового изображения на компьютере."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Удалить профиль \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Авто"
@@ -1117,6 +1123,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Символ нижнего подчеркивания"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Создание профиля"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Все связанные с этим профилем сервисы будут переключены на другой профиль"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Удалить профиль \"$1\"?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Сбросить настройки темы?"

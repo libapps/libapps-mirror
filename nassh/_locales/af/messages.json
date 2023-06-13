@@ -1046,6 +1046,12 @@
 	"terminal_home_manage": {
 		"message": "Bestuur"
 	},
+	"terminal_home_mount": {
+		"message": "Monteer in Lêers"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Hou hierdie oortjie oop. As hierdie oortjie toegemaak word, sal die monteringverbinding van Lêers verwyder word."
+	},
 	"terminal_home_new_linux": {
 		"message": "Nuwe Linux"
 	},
@@ -1121,6 +1127,9 @@
 	"terminal_profile_label": {
 		"message": "Profiel"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profielnaam"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Terminaal is teruggestel"
 	},
@@ -1132,9 +1141,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Kies 'n agtergrondprentlêer op jou rekenaar."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Is jy seker jy wil profiel \"$1\" uitvee?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Outomaties"
@@ -1150,6 +1156,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Onderstreep"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Skep ’n nuwe profiel"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Enige verbinding wat hierdie profiel gebruik, sal na die verstekprofiel verander word"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Verwyder $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Is jy seker jy wil die tema na sy verstekkleure terugstel?"

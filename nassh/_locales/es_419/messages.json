@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "Administrar"
 	},
+	"terminal_home_mount": {
+		"message": "Activar en Archivos"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Mantén esta pestaña abierta. Si cierras esta pestaña, se quitará la conexión de activación de Archivos."
+	},
 	"terminal_home_new_linux": {
 		"message": "Nuevo Linux"
 	},
@@ -1079,6 +1085,9 @@
 	"terminal_profile_label": {
 		"message": "Perfil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Nombre del perfil"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Restablecer terminal"
 	},
@@ -1090,9 +1099,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecciona un archivo de imagen de fondo de tu computadora."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "¿Estás seguro de que quieres borrar el perfil \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1108,6 +1114,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Subrayar"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Crea un perfil nuevo"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Todas las conexiones que usen este perfil se cambiarán al perfil predeterminado"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "¿Deseas quitar $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "¿Confirmas que quieres restablecer el tema a su configuración predeterminada?"

@@ -1025,6 +1025,12 @@
 	"terminal_home_manage": {
 		"message": "Gérer"
 	},
+	"terminal_home_mount": {
+		"message": "Installer dans Fichiers"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Laissez cet onglet ouvert. Si vous le fermez, la connexion d'installation sera supprimée de Fichiers."
+	},
 	"terminal_home_new_linux": {
 		"message": "Nouveau conteneur Linux"
 	},
@@ -1097,6 +1103,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Nom du profil"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Réinitialisation des paramètres du terminal"
 	},
@@ -1109,9 +1118,6 @@
 	"terminal_settings_background_image_help": {
 		"message": "Sélectionnez un fichier d'image de fond sur votre ordinateur."
 	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Voulez-vous vraiment supprimer le profil \"$1\" ?"
-	},
 	"terminal_settings_dropdown_alt_gr_mode_disable": {
 		"message": "Désactiver"
 	},
@@ -1123,6 +1129,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Trait de soulignement"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Créer un profil"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Toute connexion utilisant ce profil sera basculée vers le profil par défaut"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Supprimer $1 ?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Voulez-vous vraiment rétablir les paramètres par défaut du thème ?"

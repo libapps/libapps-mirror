@@ -1013,6 +1013,12 @@
 	"terminal_home_manage": {
 		"message": "Kezelés"
 	},
+	"terminal_home_mount": {
+		"message": "Csatlakozás a Fájlok alkalmazáshoz…"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Tartsa megnyitva ezt a lapot. A lap bezárásával eltávolítja a Fájlok alkalmazással csatlakoztatott távoli mappát."
+	},
 	"terminal_home_new_linux": {
 		"message": "Új Linux"
 	},
@@ -1091,6 +1097,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profilnév"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Terminál visszaállítása"
 	},
@@ -1102,9 +1111,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Válasszon a számítógépén található háttérképfájlok közül."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Biztosan törli a(z) „$1” profilt?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatikus"
@@ -1120,6 +1126,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Aláhúzott"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Új profil létrehozása"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Az ezt a profilt használó összes kapcsolat a default profilt fogja használni"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Eltávolítja a következőt: $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Biztosan visszaállítja az alapértelmezett témabeállításokat?"

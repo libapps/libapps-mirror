@@ -1010,6 +1010,12 @@
 	"terminal_home_manage": {
 		"message": "Ylläpidä"
 	},
+	"terminal_home_mount": {
+		"message": "Kiinnitä Tiedostot-sovellukseen"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Pidä tämä välilehti auki. Jos suljet tämän välilehden, sen kiinnitys poistetaan Filesistä."
+	},
 	"terminal_home_new_linux": {
 		"message": "Uusi Linux"
 	},
@@ -1088,6 +1094,9 @@
 	"terminal_profile_label": {
 		"message": "Profiili"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profiilin nimi"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Terminaalin nollaus"
 	},
@@ -1099,9 +1108,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Valitse taustakuvatiedosto tietokoneelta."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Haluatko varmasti poistaa profiilin \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automaattinen"
@@ -1117,6 +1123,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Alleviivaa"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Luo uusi profiili"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Kaikki tätä profiilia käyttävät yhteydet vaihdetaan default-profiiliin"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Poistetaanko $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Haluatko varmasti palauttaa oletusteeman?"

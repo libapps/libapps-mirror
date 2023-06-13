@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "മാനേജ് ചെയ്യുക"
 	},
+	"terminal_home_mount": {
+		"message": "Files-ലേക്ക് മൗണ്ട് ചെയ്യുക"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "ഈ ടാബ് തുറന്ന് വയ്ക്കുക. ഈ ടാബ് അടയ്‌ക്കുന്നത്, Files-ൽ നിന്നുള്ള മൗണ്ട് കണക്ഷൻ നീക്കം ചെയ്യും."
+	},
 	"terminal_home_new_linux": {
 		"message": "പുതിയ Linux"
 	},
@@ -1082,6 +1088,9 @@
 	"terminal_profile_label": {
 		"message": "പ്രൊഫൈൽ"
 	},
+	"terminal_profile_name_label": {
+		"message": "പ്രൊഫൈലിന്റെ പേര്"
+	},
 	"terminal_reset_menu_label": {
 		"message": "ടെർമിനൽ റീസെറ്റ് ചെയ്യുക"
 	},
@@ -1093,9 +1102,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "നിങ്ങളുടെ കമ്പ്യൂട്ടറിൽ നിന്ന് ഒരു പശ്ചാത്തല ചിത്രം തിരഞ്ഞെടുക്കുക."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "\"$1\" എന്ന പ്രൊഫൈൽ ഇല്ലാതാക്കണമെന്ന് തീർച്ചയാണോ?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "സ്വയമേവ"
@@ -1111,6 +1117,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "അടിവരയിടുക"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "പുതിയ പ്രൊഫൈൽ സൃഷ്ടിക്കുക"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "ഈ പ്രൊഫൈൽ ഉപയോഗിക്കുന്ന ഏതൊരു കണക്ഷനും default പ്രൊഫൈലിലേക്ക് മാറും"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 നീക്കം ചെയ്യണോ?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "തീം അതിന്റെ ഡിഫോൾട്ട് ക്രമീകരണത്തിലേക്ക് റീസെറ്റ് ചെയ്യണമെന്ന് തീർച്ചയാണോ?"

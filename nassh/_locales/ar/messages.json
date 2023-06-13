@@ -1031,6 +1031,12 @@
 	"terminal_home_manage": {
 		"message": "إدارة"
 	},
+	"terminal_home_mount": {
+		"message": "التثبيت في تطبيق \"الملفات\""
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "يُرجى ترك علامة التبويب هذه مفتوحة. سيؤدي إغلاق علامة التبويب هذه إلى إلغاء التثبيت في تطبيق \"الملفات\"."
+	},
 	"terminal_home_new_linux": {
 		"message": "حاوية Linux جديدة"
 	},
@@ -1112,6 +1118,9 @@
 	"terminal_profile_label": {
 		"message": "الملف الشخصي"
 	},
+	"terminal_profile_name_label": {
+		"message": "اسم الملف الشخصي"
+	},
 	"terminal_reset_menu_label": {
 		"message": "إعادة ضبط الوحدة الطرفية"
 	},
@@ -1123,9 +1132,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "اختَر ملفًا لصورة خلفية من جهاز الكمبيوتر."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "هل تريد فعلاً حذف الملف الشخصي \"$1\"؟"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "تلقائي"
@@ -1141,6 +1147,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "تسطير"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "إنشاء ملف شخصي جديد"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "أي عملية ربط تتم باستخدام هذا الملف الشخصي سيتم نقلها إلى الملف الشخصي للإعدادات التلقائية (default)."
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "هل تريد إزالة \"$1\"؟"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "هل تريد فعلاً إعادة ضبط المظهر على الإعدادات التلقائية؟"

@@ -459,7 +459,7 @@
 		"message": "ಗೋಚರಿಸುವ ಪಠ್ಯ ಕರ್ಸರ್‌ನ ಆಕಾರ. ಟರ್ಮಿನಲ್ ಎಸ್ಕೇಪ್ ಅನುಕ್ರಮಗಳ ಮೂಲಕ ಇದನ್ನು ರನ್‌ಟೈಮ್‌ನಲ್ಲಿ ಬದಲಾಯಿಸಬಹುದು."
 	},
 	"hterm_pref_desktop_notification_bell": {
-		"message": "ಸರಿ ಎಂದಾದರೆ, ಟರ್ಮಿನಲ್ ಬೆಲ್‌ಗಳು ಹಿನ್ನೆಲೆಯಲ್ಲಿ ವೆಬ್‌ ಅಧಿಸೂಚನೆಯೊಂದನ್ನು ರಚಿಸುತ್ತವೆ. https://www.w3.org/TR/notifications/\n\nಅಧಿಸೂಚನೆಗಳನ್ನು ಪ್ರದರ್ಶಿಸಲು ಬಳಕೆದಾರರ ಅನುಮತಿ ಬೇಕಾಗುತ್ತದೆ. ಈ ಆಯ್ಕೆಯನ್ನು ಸರಿ ಎಂದು ಹೊಂದಿಸಿದ್ದರೆ, ಅಗತ್ಯವಿದ್ದರೆ ಬಳಕೆದಾರರ ಅನುಮತಿ ಕೇಳಲು hterm ಪ್ರಯತ್ನಿಸುತ್ತದೆ. ಈ ಅನುಮತಿ ವಿನಂತಿಯು ಬಳಕೆದಾರರ ಕ್ರಮದಿಂದ ಟ್ರಿಗರ್ ಆಗದೇ ಇದ್ದರೆ ಬ್ರೌಸರ್‌ಗಳು ಇದನ್ನು ತೋರಿಸದೇ ಇರಬಹುದು.\n\n\"ಅಧಿಸೂಚನೆಗಳು\" ಎಂಬ ಅನುಮತಿ ಹೊಂದಿರುವ Chrome ವಿಸ್ತರಣೆಗಳು ಅಧಿಸೂಚನೆಗಳನ್ನು ಪ್ರದರ್ಶಿಸಲು ಅನುಮತಿಯನ್ನು ಹೊಂದಿರುತ್ತವೆ."
+		"message": "ಸರಿ ಎಂದಾದರೆ, ಟರ್ಮಿನಲ್ ಬೆಲ್‌ಗಳು ಹಿನ್ನೆಲೆಯಲ್ಲಿ ವೆಬ್‌ ಅಧಿಸೂಚನೆಯೊಂದನ್ನು ರಚಿಸುತ್ತವೆ. https://www.w3.org/TR/notifications/\n\nಅಧಿಸೂಚನೆಗಳನ್ನು ಪ್ರದರ್ಶಿಸಲು ಬಳಕೆದಾರರ ಅನುಮತಿ ಬೇಕಾಗುತ್ತದೆ. ಈ ಆಯ್ಕೆಯನ್ನು ಸರಿ ಎಂದು ಹೊಂದಿಸಿದ್ದರೆ, ಅಗತ್ಯವಿದ್ದರೆ ಬಳಕೆದಾರರ ಅನುಮತಿ ಕೇಳಲು hterm ಪ್ರಯತ್ನಿಸುತ್ತದೆ. ಈ ಅನುಮತಿ ವಿನಂತಿಯು ಬಳಕೆದಾರರ ಕ್ರಮದಿಂದ ಟ್ರಿಗರ್ ಆಗದೇ ಇದ್ದರೆ ಬ್ರೌಸರ್‌ಗಳು ಇದನ್ನು ತೋರಿಸದೇ ಇರಬಹುದು.\n\n\"ಅಧಿಸೂಚನೆಗಳು\" ಎಂಬ ಅನುಮತಿ ಹೊಂದಿರುವ Chrome ಎಕ್ಸ್‌ಟೆನ್ಷನ್‌‌ಗಳು ಅಧಿಸೂಚನೆಗಳನ್ನು ಪ್ರದರ್ಶಿಸಲು ಅನುಮತಿಯನ್ನು ಹೊಂದಿರುತ್ತವೆ."
 	},
 	"hterm_pref_east_asian_ambiguous_as_two_column": {
 		"message": "ಪೂರ್ವ ಏಷ್ಯಾದ ಅಸ್ಪಷ್ಟ ಅಕ್ಷರಗಳು ಎರಡು ಕಾಲಮ್‌ಗಳಷ್ಟು ಅಗಲ ಇವೆಯೇ."
@@ -630,7 +630,7 @@
 		"message": "ಎನ್‌ಕೋಡಿಂಗ್‌"
 	},
 	"hterm_title_pref_extensions": {
-		"message": "ವಿಸ್ತರಣೆಗಳು"
+		"message": "ಎಕ್ಸ್‌ಟೆನ್ಷನ್‌‌ಗಳು"
 	},
 	"hterm_title_pref_keyboard": {
 		"message": "ಕೀಬೋರ್ಡ್"
@@ -846,13 +846,13 @@
 		"message": "ಅಂಕಿ‍ಅಂಶ"
 	},
 	"nasftp_cmd_stat_extensions_header": {
-		"message": "ವಿಸ್ತರಣೆಗಳು:"
+		"message": "ಎಕ್ಸ್‌ಟೆನ್ಷನ್‌‌ಗಳು:"
 	},
 	"nasftp_cmd_stat_help": {
 		"message": "ಫೈಲ್‌ನ ಸ್ಥಿತಿಯನ್ನು ತೋರಿಸಿ"
 	},
 	"nasftp_cmd_stat_summary": {
-		"message": "  ಫೈಲ್: $1\n  ಗಾತ್ರ: $2 ಬೈಟ್‌ಗಳು\n   UID: $3\n   GID: $4\nಪ್ರವೇಶ: $5\n ಪ್ರವೇಶಿಸಿದ ಸಮಯ: $6\n ಮಾರ್ಪಡಿಸಿದ ಸಮಯ: $7"
+		"message": "ಫೈಲ್: $1\n  ಗಾತ್ರ: $2 ಬೈಟ್‌ಗಳು\n   UID: $3\n   GID: $4\nಆ್ಯಕ್ಸೆಸ್: $5\n ಪ್ರವೇಶಿಸಿದ ಸಮಯ: $6\n ಮಾರ್ಪಡಿಸಿದ ಸಮಯ: $7"
 	},
 	"nasftp_cmd_symlink": {
 		"message": "ಸಿಮ್‍‍‍ಲಿಂಕ್"
@@ -870,7 +870,7 @@
 		"message": "ಆವೃತ್ತಿ"
 	},
 	"nasftp_cmd_version_extensions_header": {
-		"message": "  ಸರ್ವರ್ ವಿಸ್ತರಣೆಗಳು:"
+		"message": "ಸರ್ವರ್ ಎಕ್ಸ್‌ಟೆನ್ಷನ್‌‌ಗಳು:"
 	},
 	"nasftp_cmd_version_help": {
 		"message": "ಪ್ರಸ್ತುತ ಪ್ರೊಟೊಕಾಲ್ ಆವೃತ್ತಿಯನ್ನು ತೋರಿಸಿ"
@@ -1073,6 +1073,12 @@
 	"terminal_home_manage": {
 		"message": "ನಿರ್ವಹಿಸಿ"
 	},
+	"terminal_home_mount": {
+		"message": "Files ಗೆ ಮೌಂಟ್ ಮಾಡಿ"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "ಈ ಟ್ಯಾಬ್ ಅನ್ನು ತೆರೆದಿಡಿ. ಈ ಟ್ಯಾಬ್ ಅನ್ನು ಮುಚ್ಚುವುದರಿಂದ Files ಆ್ಯಪ್ ಮೌಂಟ್ ಕನೆಕ್ಷನ್ ಅನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ."
+	},
 	"terminal_home_new_linux": {
 		"message": "ಹೊಸ Linux"
 	},
@@ -1151,6 +1157,9 @@
 	"terminal_profile_label": {
 		"message": "ಪ್ರೊಫೈಲ್"
 	},
+	"terminal_profile_name_label": {
+		"message": "ಪ್ರೊಫೈಲ್ ಹೆಸರು"
+	},
 	"terminal_reset_menu_label": {
 		"message": "ಟರ್ಮಿನಲ್‌ ಮರುಹೊಂದಿಸುವಿಕೆ"
 	},
@@ -1162,9 +1171,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್‌ನಿಂದ ಹಿನ್ನೆಲೆ ಚಿತ್ರದ ಫೈಲ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "ನೀವು ಖಂಡಿತವಾಗಿಯೂ \"$1\" ಪ್ರೊಫೈಲ್ ಅನ್ನು ಅಳಿಸಲು ಬಯಸುವಿರಾ?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ಸ್ವಯಂಚಾಲಿತ"
@@ -1180,6 +1186,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "ಅಡಿಗೆರೆ"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "ಹೊಸ ಪ್ರೊಫೈಲ್ ಅನ್ನು ರಚಿಸಿ"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "ಈ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಬಳಸುವ ಯಾವುದೇ ಕನೆಕ್ಷನ್ ಅನ್ನು ಡೀಫಾಲ್ಟ್ ಪ್ರೊಫೈಲ್‌ಗೆ ಬದಲಾಯಿಸಲಾಗುತ್ತದೆ"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 ಅನ್ನು ತೆಗೆದುಹಾಕಬೇಕೆ?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "ಈ ಥೀಮ್ ಅನ್ನು ಖಂಡಿತವಾಗಿಯೂ ಡೀಫಾಲ್ಟ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಹೊಂದಿಸಲು ಬಯಸುತ್ತೀರಾ?"

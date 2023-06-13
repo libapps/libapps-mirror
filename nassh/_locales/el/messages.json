@@ -1016,6 +1016,12 @@
 	"terminal_home_manage": {
 		"message": "Διαχείριση"
 	},
+	"terminal_home_mount": {
+		"message": "Προσάρτηση στα Αρχεία"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Διατηρήστε ανοικτή αυτήν την καρτέλα. Εάν κλείσετε αυτήν την καρτέλα, θα καταργηθεί η σύνδεση προσάρτησης από τα Αρχεία."
+	},
 	"terminal_home_new_linux": {
 		"message": "Νέο Linux"
 	},
@@ -1094,6 +1100,9 @@
 	"terminal_profile_label": {
 		"message": "Προφίλ"
 	},
+	"terminal_profile_name_label": {
+		"message": "Όνομα προφίλ"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Επαναφορά τερματικού"
 	},
@@ -1105,9 +1114,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Επιλέξτε ένα αρχείο εικόνας φόντου από τον υπολογιστή σας."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Είστε βέβαιοι ότι θέλετε να διαγράψετε το προφίλ \"$1\";"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Αυτόματη"
@@ -1123,6 +1129,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Υπογράμμιση"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Δημιουργία νέου προφίλ"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Τυχόν σύνδεση που χρησιμοποιεί αυτό το προφίλ θα αλλάξει στο προφίλ default"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Κατάργηση $1;"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Είστε σίγουροι ότι θέλετε να επαναφέρετε το θέμα στις προεπιλεγμένες ρυθμίσεις;"

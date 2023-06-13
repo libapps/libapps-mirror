@@ -1073,6 +1073,12 @@
 	"terminal_home_manage": {
 		"message": "Керувати"
 	},
+	"terminal_home_mount": {
+		"message": "Підключити до Файлів"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Не закривайте цю вкладку, інакше додаток Файли буде від’єднано."
+	},
 	"terminal_home_new_linux": {
 		"message": "Новий контейнер Linux"
 	},
@@ -1151,6 +1157,9 @@
 	"terminal_profile_label": {
 		"message": "Профіль"
 	},
+	"terminal_profile_name_label": {
+		"message": "Назва профілю"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Скинути налаштування термінала"
 	},
@@ -1162,9 +1171,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Виберіть файл фонового зображення на комп'ютері."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Видалити профіль \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Авто"
@@ -1180,6 +1186,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Підкреслений"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Створити новий профіль"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Будь-яке підключення, здійснене за допомогою цього профілю, буде змінено на підключення через профіль за умовчанням"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Вилучити профіль \"$1\"?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Установити тему за умовчанням?"

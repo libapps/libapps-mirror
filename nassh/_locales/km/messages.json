@@ -1022,6 +1022,12 @@
 	"terminal_home_manage": {
 		"message": "គ្រប់គ្រង"
 	},
+	"terminal_home_mount": {
+		"message": "ភ្ជាប់​ទៅ Files"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "រក្សា​ឱ្យ​ផ្ទាំង​នេះបើក។ ការ​បិទ​ផ្ទាំង​នេះ​នឹង​ដក​ការ​តភ្ជាប់ចេញ​ពី​ Files។"
+	},
 	"terminal_home_new_linux": {
 		"message": "Linux ថ្មី"
 	},
@@ -1100,6 +1106,9 @@
 	"terminal_profile_label": {
 		"message": "កម្រង​ព័ត៌មាន"
 	},
+	"terminal_profile_name_label": {
+		"message": "ឈ្មោះកម្រងព័ត៌មាន"
+	},
 	"terminal_reset_menu_label": {
 		"message": "កំណត់ស្ថានីយឡើងវិញ"
 	},
@@ -1111,9 +1120,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ជ្រើសរើស​ឯកសារ​រូបភាព​ផ្ទៃខាងក្រោយ​ពី​កុំព្យូទ័រ​របស់អ្នក​។"
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "តើអ្នក​ប្រាកដថា​ចង់​លុប​កម្រងព័ត៌មាន \"$1\" មែនឬ?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ស្វ័យប្រវត្តិ"
@@ -1129,6 +1135,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "គូសពីក្រោម"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "បង្កើត​កម្រង​ព័ត៌មាន​ថ្មី"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "គ្រប់ការ​តភ្ជាប់​ដែល​ប្រើ​កម្រងព័ត៌មាន​នេះ​នឹង​ត្រូវ​បាន​ប្ដូរ​ទៅ​កម្រងព័ត៌មាន​លំនាំដើម"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "ដក $1 ចេញ​ឬ?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "តើអ្នកពិតជាចង់កំណត់រចនាប័ទ្មទៅលំនាំដើមវិញមែនឬ?"

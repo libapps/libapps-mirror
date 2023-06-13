@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "Gestisci"
 	},
+	"terminal_home_mount": {
+		"message": "Monta in File"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Tieni aperta questa scheda. Se la chiudi, verrà rimossa la cartella del computer remoto da File."
+	},
 	"terminal_home_new_linux": {
 		"message": "Nuovo Linux"
 	},
@@ -1082,6 +1088,9 @@
 	"terminal_profile_label": {
 		"message": "Profilo"
 	},
+	"terminal_profile_name_label": {
+		"message": "Nome del profilo"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Reimpostazione terminale"
 	},
@@ -1093,9 +1102,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Seleziona un file immagine di sfondo dal computer."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Vuoi eliminare il profilo \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatica"
@@ -1111,6 +1117,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Sottolineato"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Crea nuovo profilo"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Le connessioni che utilizzano questo profilo verranno impostate sul profilo default"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Rimuovere $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Vuoi reimpostare il tema predefinito?"

@@ -1061,6 +1061,12 @@
 	"terminal_home_manage": {
 		"message": "Tvarkyti"
 	},
+	"terminal_home_mount": {
+		"message": "Prisijungti prie programos „Failai“"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Palikite šį skirtuką atidarytą. Uždarius šį skirtuką, prisijungimo iš programos „Failai“ ryšys bus pašalintas."
+	},
 	"terminal_home_new_linux": {
 		"message": "Naujas „Linux“ sudėtinis failas"
 	},
@@ -1139,6 +1145,9 @@
 	"terminal_profile_label": {
 		"message": "Profilis"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profilio pavadinimas"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Terminalo nustatymas iš naujo"
 	},
@@ -1150,9 +1159,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Pasirinkite fono vaizdo failą iš kompiuterio."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Ar tikrai norite ištrinti profilį „$1“?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatinis"
@@ -1168,6 +1174,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Pabrauktas"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Naujo profilio kūrimas"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Bet kokiam ryšiui naudojamas šis profilis bus pakeistas į numatytąjį profilį"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Pašalinti „$1“?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Ar tikrai norite iš naujo nustatyti numatytuosius temos nustatymus?"

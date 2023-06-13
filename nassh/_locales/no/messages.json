@@ -1010,6 +1010,12 @@
 	"terminal_home_manage": {
 		"message": "Administrer"
 	},
+	"terminal_home_mount": {
+		"message": "Fest til filer"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Hold denne fanen åpen. Hvis du lukker denne fanen, fjernes festet kobling fra Filer."
+	},
 	"terminal_home_new_linux": {
 		"message": "Ny Linux"
 	},
@@ -1085,6 +1091,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profilnavn"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Tilbakestill terminalen"
 	},
@@ -1096,9 +1105,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Velg en bakgrunnsbildefil fra datamaskinen."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Er du sikker på at du vil slette profilen «$1»?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatisk"
@@ -1114,6 +1120,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Understreking"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Opprett ny profil"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Alle tilkoblinger der denne profilen brukes, endres til standardprofilen"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Vil du fjerne $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Er du sikker på at du vil tilbakestille temaet til standardverdiene?"

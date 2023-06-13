@@ -1010,6 +1010,12 @@
 	"terminal_home_manage": {
 		"message": "관리"
 	},
+	"terminal_home_mount": {
+		"message": "파일에 마운트"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "이 탭을 열어 둡니다. 이 탭을 닫으면 파일에서 마운트 연결이 삭제됩니다."
+	},
 	"terminal_home_new_linux": {
 		"message": "새 Linux"
 	},
@@ -1088,6 +1094,9 @@
 	"terminal_profile_label": {
 		"message": "프로필"
 	},
+	"terminal_profile_name_label": {
+		"message": "프로필 이름"
+	},
 	"terminal_reset_menu_label": {
 		"message": "터미널 초기화"
 	},
@@ -1099,9 +1108,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "컴퓨터에서 배경 이미지 파일을 선택하세요."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "\"$1\" 프로필을 삭제하시겠습니까?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "자동"
@@ -1117,6 +1123,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "밑줄"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "새 프로필 만들기"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "이 프로필을 사용하는 모든 연결이 기본 프로필로 변경됩니다."
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1을(를) 삭제하시겠습니까?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "테마를 기본값으로 재설정하시겠습니까?"

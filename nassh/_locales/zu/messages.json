@@ -1046,6 +1046,12 @@
 	"terminal_home_manage": {
 		"message": "Phatha"
 	},
+	"terminal_home_mount": {
+		"message": "Khweza ku-Files"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Gcina le thebhu ivuliwe. Ukuvala le thebhu kuzosusa uxhumo lokukhweza kusuka ku-Files."
+	},
 	"terminal_home_new_linux": {
 		"message": "I-Linux entsha"
 	},
@@ -1127,6 +1133,9 @@
 	"terminal_profile_label": {
 		"message": "Iphrofayela"
 	},
+	"terminal_profile_name_label": {
+		"message": "Igama lephrofayela"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Ukusetha kabusha itheminali"
 	},
@@ -1138,9 +1147,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Khetha ifayela lomfanekiso ongemuva ovela kukhompuyutha yakho."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Ingabe uqinisekile ukuthi ufuna ukusula iphrofayela ethi \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Okuzenzakalelayo"
@@ -1156,6 +1162,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Dwebela"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Sungula iphrofayela entsha"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Noma yikuphi ukuxhumana okusebenzisa le phrofayela kuzoshintshwa kube yiphrofayela ezenzakalelayo"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Susa u-$1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Uqinisekile ukuthi ufuna ukusetha kabusha itimu ibe okuzenzakalelayo kwayo?"

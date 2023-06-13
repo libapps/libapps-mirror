@@ -531,7 +531,7 @@
 		"message": "सत्य असल्यास, मीडिया की चे Fkey त्यांच्या सममूल्यांमध्ये रूपांतर करा. असत्य असल्यास, ब्राउझरला की हाताळू द्या."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Meta की धरून ठेवली असताना एखादी की दाबून ESC उपसर्ग पाठवा.\n\nउदाहरणार्थ, सुरू केलेले असताना, Meta+K दाबल्याने जणू काही तुम्ही Escape आणि त्यानंतर k दाबल्याप्रमाणे ^[k पाठवले जाईल. बंद केलेले असताना फक्त k पाठवले जाईल."
+		"message": "Meta की धरून ठेवली असताना एखादी की प्रेस करून ESC प्रीफिक्स पाठवा.\n\nउदाहरणार्थ, सुरू केलेले असताना, Meta+K प्रेस केल्यावर जणू काही तुम्ही Escape आणि त्यानंतर k प्रेस केल्याप्रमाणे ^[k पाठवले जाईल. बंद केलेले असताना फक्त k पाठवले जाईल."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "पेस्ट करण्यासाठी वापरले जाणारे माउसचे बटण.\n\nऑटोडिटेक्ट करण्यासाठी, X11 नसलेल्या प्लॅटफॉर्म (ChromeOS च्या समावेशासह) करिता आम्ही माउसचे मधले बटण वापरू. विंडो व्यवस्थापकाने माउसचे मधले बटण वापरून पेस्ट करणे हाताळले पाहिजे म्हणून X11 वर आम्ही माउसचे उजवे बटण वापरू.\n\n0 == डावे (प्राथमिक) बटण.\n1 == मधले (अतिरिक्त) बटण.\n2 == उजवे (दुय्यम) बटण.\n\nहा पर्याय राइट क्लिक करून पेस्ट करा या सेटिंगपेक्षा वेगळा आहे.\n\nटीप: प्राथमिक आणि दुय्यम बटणे ही तुमच्यासाठी डावीकडील आणि उजवीकडील माउसने हाताळली जातात."
@@ -1008,7 +1008,7 @@
 		"message": "टर्मिनल साफ करा"
 	},
 	"terminal_dropdown_delete_item_text": {
-		"message": "आयटम हटवण्यासाठी डिलीट की दाबा."
+		"message": "आयटम हटवण्यासाठी हटवा ही की प्रेस करा."
 	},
 	"terminal_font_unavailable": {
 		"message": "\"$1\" उपलब्ध नाही"
@@ -1036,6 +1036,12 @@
 	},
 	"terminal_home_manage": {
 		"message": "व्यवस्थापित करा"
+	},
+	"terminal_home_mount": {
+		"message": "Files वर माउंट करा"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "हा टॅब उघडा ठेवा. हा टॅब बंद केल्याने Files मधून माउंट कनेक्शन काढून टाकले जाईल."
 	},
 	"terminal_home_new_linux": {
 		"message": "नवीन Linux"
@@ -1115,6 +1121,9 @@
 	"terminal_profile_label": {
 		"message": "प्रोफाइल"
 	},
+	"terminal_profile_name_label": {
+		"message": "प्रोफाइलचे नाव"
+	},
 	"terminal_reset_menu_label": {
 		"message": "टर्मिनल रीसेट करा"
 	},
@@ -1126,9 +1135,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "तुमच्‍या कॉंप्युटरमधून एखादी बॅकग्राउंड इमेज फाइल निवडा."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "तुम्हाला \"$1\" प्रोफाइल नक्की हटवायची आहे का?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ऑटो"
@@ -1144,6 +1150,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "अधोरेखित करा"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "नवीन प्रोफाइल तयार करा"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "ही प्रोफाइल वापरणारे कोणतेही कनेक्शन डीफॉल्ट प्रोफाइलमध्ये बदलले जाईल"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 काढून टाकायची का?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "तुम्हाला नक्की थीम तिच्या डीफॉल्टवर रीसेट करायची आहे का?"
@@ -1266,7 +1281,7 @@
 		"message": "Tmux नियंत्रकामध्ये एरर आली:"
 	},
 	"terminal_tmux_integration_activated": {
-		"message": "Tmux इंटिग्रेशन मोड अ‍ॅक्टिव्हेट केला आहे. tmux डिटॅच करण्यासाठी किंवा tmux कमांड इनपुट करण्यासाठी Ctrl-C दाबा"
+		"message": "Tmux इंटिग्रेशन मोड अ‍ॅक्टिव्हेट केला आहे. tmux डिटॅच करण्यासाठी किंवा tmux कमांड इनपुट करण्यासाठी Ctrl-C प्रेस करा"
 	},
 	"terminal_too_much_output_message": {
 		"message": "घोषणा करण्यासाठी खूप जास्त आउटपुट, वाचण्यासाठी पंक्तींवर मॅन्युअली नेव्हिगेट करा."
@@ -1329,7 +1344,7 @@
 		"message": "ChangeLog/माहितीपत्रक: $1"
 	},
 	"welcome_faq": {
-		"message": "वारंवार विचारल्या जाणार्‍या प्रश्नांची उत्तरे: $1 (उघडण्यासाठी Ctrl की दाबून लिंकवर क्लिक करा)"
+		"message": "वारंवार विचारल्या जाणार्‍या प्रश्नांची उत्तरे: $1 (उघडण्यासाठी Ctrl की प्रेस करून लिंकवर क्लिक करा)"
 	},
 	"welcome_release_highlights": {
 		"message": "$1 पासून मोठे बदल:"

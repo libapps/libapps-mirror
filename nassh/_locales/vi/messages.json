@@ -267,7 +267,7 @@
 		"message": "Bộ phông chữ cho văn bản"
 	},
 	"hterm_name_pref_font_size": {
-		"message": "Kích thước phông chữ"
+		"message": "Cỡ chữ"
 	},
 	"hterm_name_pref_font_smoothing": {
 		"message": "Làm mịn phông chữ"
@@ -507,7 +507,7 @@
 		"message": "Bộ phông chữ mặc định cho văn bản trên thiết bị đầu cuối."
 	},
 	"hterm_pref_font_size": {
-		"message": "Kích thước phông chữ mặc định tính bằng pixel."
+		"message": "Cỡ chữ mặc định tính bằng pixel."
 	},
 	"hterm_pref_font_smoothing": {
 		"message": "Thuộc tính font-smoothing của CSS."
@@ -996,7 +996,7 @@
 		"message": "[Mặc định]"
 	},
 	"terminal_home_developer_settings": {
-		"message": "Cài đặt của nhà phát triển"
+		"message": "Chế độ cài đặt của nhà phát triển"
 	},
 	"terminal_home_edit_linux": {
 		"message": "Chỉnh sửa vùng chứa Linux"
@@ -1012,6 +1012,12 @@
 	},
 	"terminal_home_manage": {
 		"message": "Quản lý"
+	},
+	"terminal_home_mount": {
+		"message": "Kết nối với ứng dụng Files"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Tiếp tục mở thẻ này. Nếu bạn đóng thẻ này, kết nối với ứng dụng Files sẽ bị xoá."
 	},
 	"terminal_home_new_linux": {
 		"message": "Vùng chứa Linux mới"
@@ -1091,6 +1097,9 @@
 	"terminal_profile_label": {
 		"message": "Cấu hình"
 	},
+	"terminal_profile_name_label": {
+		"message": "Tên hồ sơ"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Đặt lại thiết bị đầu cuối"
 	},
@@ -1102,9 +1111,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Chọn một tệp hình nền trên máy tính."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Bạn có chắc chắn muốn xoá cấu hình \"$1\" không?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Tự động"
@@ -1120,6 +1126,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Gạch dưới"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Tạo hồ sơ mới"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Mọi kết nối sử dụng hồ sơ này sẽ được thay đổi thành hồ sơ default"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Xoá $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Bạn có chắc chắn muốn đặt lại giao diện này về các giá trị mặc định không?"

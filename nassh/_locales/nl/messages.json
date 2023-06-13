@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "Beheren"
 	},
+	"terminal_home_mount": {
+		"message": "Activeren in Bestanden"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Houd dit tabblad open. Als je dit tabblad sluit, wordt de activeringskoppeling verwijderd uit Bestanden."
+	},
 	"terminal_home_new_linux": {
 		"message": "Nieuwe Linux"
 	},
@@ -1082,6 +1088,9 @@
 	"terminal_profile_label": {
 		"message": "Profiel"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profielnaam"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Terminal resetten"
 	},
@@ -1093,9 +1102,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecteer een bestand met een achtergrondafbeelding op je computer."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Weet je zeker dat je het profiel $1 wilt verwijderen?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automatisch"
@@ -1111,6 +1117,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Onderstrepen"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Nieuw profiel maken"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Elke verbinding met dit profiel wordt gewijzigd in het standaardprofiel"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 verwijderen?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Weet je zeker dat je de standaardinstellingen van het thema wilt herstellen?"

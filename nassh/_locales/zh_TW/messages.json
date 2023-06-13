@@ -1016,6 +1016,12 @@
 	"terminal_home_manage": {
 		"message": "管理"
 	},
+	"terminal_home_mount": {
+		"message": "掛接到「檔案」"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "請將這個分頁保持開啟。關閉這個分頁將移除「檔案」應用程式的掛接連線。"
+	},
 	"terminal_home_new_linux": {
 		"message": "新增 Linux"
 	},
@@ -1094,6 +1100,9 @@
 	"terminal_profile_label": {
 		"message": "設定檔"
 	},
+	"terminal_profile_name_label": {
+		"message": "設定檔名稱"
+	},
 	"terminal_reset_menu_label": {
 		"message": "重設終端機"
 	},
@@ -1105,9 +1114,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "請從電腦中選取背景圖片檔。"
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "確定要刪除設定檔「$1」嗎？"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "自動"
@@ -1123,6 +1129,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "底線"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "建立新設定檔"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "使用這個設定檔的所有連線，都會變更為 default 設定檔"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "確定要移除「$1」嗎？"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "確定要將主題重設為預設值嗎？"

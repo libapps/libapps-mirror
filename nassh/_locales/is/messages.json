@@ -393,7 +393,7 @@
 		"message": "Ákvarða hvort leyfa eigi fjartengdum hýsli að birta myndir í skipanaglugga.\n\nSjálfgefið er kvaðning birt þar til eitthvað er valið."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "Ef þetta er stillt afturkallar það endurtengingu ChromeOS Alt+bakklykill->Delete þannig að Alt+bakklykill sé í raun Alt+bakklykill."
+		"message": "Ef þetta er stillt breytir það Alt+bakklykill->Delete í ChromeOS þannig að Alt+bakklykill verður í raun Alt+bakklykill."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Velja AltGr-greiningarleiðbeiningar.\n\n„null“: Greina sjálfkrafa samkvæmt „navigator.language“:\n      „en-us“ => „one“, annars => „right-alt“\n„none“: Slökkva á allri AltGr-hermingu.\n„ctrl-alt“: Gera ráð fyrir að Ctrl+Alt merki AltGr.\n„left-alt“: Gera ráð fyrir að vinstra Alt merki AltGr.\n„right-alt“: Gera ráð fyrir að hægra Alt merki AltGr."
@@ -1067,6 +1067,12 @@
 	"terminal_home_manage": {
 		"message": "Stjórna"
 	},
+	"terminal_home_mount": {
+		"message": "Tengja í Skrám"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Halda þessum flipa opnum. Ef þessum flipa er lokað verður tenging Skráa fjarlægð."
+	},
 	"terminal_home_new_linux": {
 		"message": "Nýtt Linux."
 	},
@@ -1145,6 +1151,9 @@
 	"terminal_profile_label": {
 		"message": "Prófíll"
 	},
+	"terminal_profile_name_label": {
+		"message": "Heiti prófíls"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Endurstilla skipanaglugga"
 	},
@@ -1156,9 +1165,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Veldu skrá með bakgrunnsmynd úr tölvunni þinni."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Viltu örugglega eyða prófílnum „$1“?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Sjálfvirkt"
@@ -1174,6 +1180,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Undirstrikun"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Búa til nýjan prófíl"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Allar tengingar sem nota þennan prófíl verða fluttar yfir á sjálfgefinn prófíl"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Viltu fjarlægja $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Viltu örugglega endurstilla þemað á sjálfgildi?"

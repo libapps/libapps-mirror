@@ -237,7 +237,7 @@
 		"message": "Comportamento do texto a negrito"
 	},
 	"hterm_name_pref_enable_bold_as_bright": {
-		"message": "Utilizar cores vivas com texto a negrito"
+		"message": "Usar cores vivas com texto a negrito"
 	},
 	"hterm_name_pref_enable_clipboard_notice": {
 		"message": "Mostrar notificação ao copiar conteúdo"
@@ -267,7 +267,7 @@
 		"message": "Família de tipos de letra do texto"
 	},
 	"hterm_name_pref_font_size": {
-		"message": "Tamanho do tipo de letra do texto"
+		"message": "Tamanho da letra do texto"
 	},
 	"hterm_name_pref_font_smoothing": {
 		"message": "Suavização do tipo de letra do texto"
@@ -285,7 +285,7 @@
 		"message": "Vinculações/atalhos de teclado"
 	},
 	"hterm_name_pref_keybindings_os_defaults": {
-		"message": "Utilizar vinculações/atalhos de teclado do SO predefinidos"
+		"message": "Usar vinculações/atalhos de teclado do SO predefinidos"
 	},
 	"hterm_name_pref_line_height_padding_size": {
 		"message": "Tamanho do preenchimento da altura da linha"
@@ -1013,6 +1013,12 @@
 	"terminal_home_manage": {
 		"message": "Gerir"
 	},
+	"terminal_home_mount": {
+		"message": "Montar no Files"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Mantenha este separador aberto. Ao fechar este separador, remove a ligação de montagem da app Files."
+	},
 	"terminal_home_new_linux": {
 		"message": "Novo Linux"
 	},
@@ -1088,6 +1094,9 @@
 	"terminal_profile_label": {
 		"message": "Perfil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Nome do perfil"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Repor terminal"
 	},
@@ -1099,9 +1108,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecione um ficheiro de imagem de fundo no computador."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Quer mesmo eliminar o perfil \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1117,6 +1123,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Sublinhado"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Crie um novo perfil"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Qualquer ligação com este perfil será alterada para o perfil default"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Remover $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Tem a certeza de que pretende repor o tema para os valores predefinidos?"

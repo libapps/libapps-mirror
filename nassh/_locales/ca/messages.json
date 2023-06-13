@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "Gestiona"
 	},
+	"terminal_home_mount": {
+		"message": "Munta a Fitxers"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Deixa aquesta pestanya oberta. En tancar-la, se suprimirà la connexió de muntatge de Fitxers."
+	},
 	"terminal_home_new_linux": {
 		"message": "Linux nou"
 	},
@@ -1079,6 +1085,9 @@
 	"terminal_profile_label": {
 		"message": "Perfil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Nom del perfil"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Restabliment del terminal"
 	},
@@ -1090,9 +1099,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecciona un fitxer d'imatge de fons de l'ordinador."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Confirmes que vols suprimir el perfil $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automàtic"
@@ -1108,6 +1114,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Subratlla"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Crea un perfil nou"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Les connexions que utilitzin aquest perfil es canviaran al perfil default"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Vols suprimir $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Confirmes que vols restablir el tema als valors predeterminats?"

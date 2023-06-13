@@ -1004,6 +1004,12 @@
 	"terminal_home_manage": {
 		"message": "ਪ੍ਰਬੰਧਨ ਕਰੋ"
 	},
+	"terminal_home_mount": {
+		"message": "Files ਵਿੱਚ ਲਿਜਾਓ"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "ਇਸ ਟੈਬ ਨੂੰ ਖੋਲ੍ਹ ਕੇ ਰੱਖੋ। ਇਸ ਟੈਬ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ Files ਤੋਂ ਮਾਊਂਟ ਕਨੈਕਸ਼ਨ ਹਟ ਜਾਵੇਗਾ।"
+	},
 	"terminal_home_new_linux": {
 		"message": "ਨਵਾਂ Linux ਕੰਟੇਨਰ"
 	},
@@ -1082,6 +1088,9 @@
 	"terminal_profile_label": {
 		"message": "ਪ੍ਰੋਫਾਈਲ"
 	},
+	"terminal_profile_name_label": {
+		"message": "ਪ੍ਰੋਫਾਈਲ ਨਾਮ"
+	},
 	"terminal_reset_menu_label": {
 		"message": "ਟਰਮੀਨਲ ਰੀਸੈੱਟ"
 	},
@@ -1093,9 +1102,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "ਆਪਣੇ ਕੰਪਿਊਟਰ ਤੋਂ ਕੋਈ ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਫ਼ਾਈਲ ਚੁਣੋ।"
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "ਕੀ ਤੁਸੀਂ ਪੱਕਾ \"$1\" ਪ੍ਰੋਫਾਈਲ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "ਸਵੈਚਲਿਤ"
@@ -1111,6 +1117,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "ਅੰਡਰਲਾਈਨ"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "ਨਵਾਂ ਪ੍ਰੋਫਾਈਲ ਬਣਾਓ"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "ਇਸ ਪ੍ਰੋਫਾਈਲ ਨੂੰ ਵਰਤ ਰਹੇ ਕਿਸੇ ਵੀ ਕਨੈਕਸ਼ਨ ਨੂੰ default ਪ੍ਰੋਫਾਈਲ ਵਿੱਚ ਬਦਲਿਆ ਜਾਵੇਗਾ"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "ਕੀ $1 ਨੂੰ ਹਟਾਉਣਾ ਹੈ?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "ਕੀ ਤੁਸੀਂ ਪੱਕਾ ਥੀਮ ਨੂੰ ਇਸ ਦੇ ਪੂਰਵ-ਨਿਰਧਾਰਤਾਂ 'ਤੇ ਸੈੱਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"

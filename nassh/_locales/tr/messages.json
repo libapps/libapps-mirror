@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "Yönet"
 	},
+	"terminal_home_mount": {
+		"message": "Dosyalar'a ekle"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Bu sekmeyi açık tutun. Bu sekme kapatıldığında, ekleme bağlantısı Dosyalar'dan kaldırılır."
+	},
 	"terminal_home_new_linux": {
 		"message": "Yeni Linux"
 	},
@@ -1085,6 +1091,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Profil adı"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Terminali Sıfırla"
 	},
@@ -1096,9 +1105,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Bilgisayarınızdan bir arka plan resim dosyası seçin."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "\"$1\" adlı profili silmek istediğinizden emin misiniz?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Otomatik"
@@ -1114,6 +1120,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Altı Çizili"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Yeni profil oluşturun"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Bu profili kullanan tüm bağlantılar default profile geçirilecek"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 kaldırılsın mı?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Temayı varsayılan ayarlarına sıfırlamak istediğinizden emin misiniz?"

@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "મેનેજ કરો"
 	},
+	"terminal_home_mount": {
+		"message": "Files પર માઉન્ટ કરો"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "આ ટૅબ ખુલ્લું રાખો. આ ટૅબ બંધ કરવાથી Filesમાંથી માઉન્ટ કનેક્શન કાઢી નાખવામાં આવશે."
+	},
 	"terminal_home_new_linux": {
 		"message": "નવું Linux કન્ટેનર"
 	},
@@ -1085,6 +1091,9 @@
 	"terminal_profile_label": {
 		"message": "પ્રોફાઇલ"
 	},
+	"terminal_profile_name_label": {
+		"message": "પ્રોફાઇલનું નામ"
+	},
 	"terminal_reset_menu_label": {
 		"message": "ટર્મિનલ રીસેટ કરો"
 	},
@@ -1111,6 +1120,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "નીચે લીટી દોરો"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "નવી પ્રોફાઇલ બનાવો"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "આ પ્રોફાઇલનો ઉપયોગ કરનારા કોઈપણ કનેક્શનને default પ્રોફાઇલ પર બદલવામાં આવશે"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 કાઢી નાખીએ?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "શું તમે ખરેખર થીમને તેની ડિફૉલ્ટ પર રીસેટ કરવા માગો છો?"

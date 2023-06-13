@@ -546,13 +546,13 @@
 		"message": "Se definida como verdadeira, as teclas Page Up/Page Down controlam a barra de rolagem do terminal e Shift+Page Up/Shift+Page Down são enviadas ao host remoto. Se definida como falsa, as teclas Page Up/Page Down são enviadas ao host remoto e Shift+Page Up/Shift Page+Down rolam a tela."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Define se as teclas Alt+1 a 9 são transmitidas ao navegador.\n\nÉ útil ao executar o hterm em uma guia do navegador para que você não perca os atalhos \"alternar para guia/app\" do Chrome. Quando a execução não for em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe definida como verdadeira, as teclas Alt+1 a 9 serão controladas pelo navegador. Se definida como falsa, essas teclas serão enviadas ao host. Se for nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
+		"message": "Define se as teclas Alt+1 a 9 são transmitidas ao navegador.\n\nÉ útil ao executar o hterm em uma guia do navegador para que você não perca os atalhos \"mudar para guia/app\" do Chrome. Quando a execução não for em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe definida como verdadeira, as teclas Alt+1 a 9 serão controladas pelo navegador. Se definida como falsa, essas teclas serão enviadas ao host. Se for nula, a detecção será automática, com base na plataforma do navegador e no tipo de janela."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Define se as teclas Ctrl+N são transmitidas ao navegador.\n\nSe verdadeira, o comando Ctrl+N será tratado pelo navegador como o atalho \"nova janela\". Se falsa, Ctrl+N será enviado para o host."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Define se as teclas Ctrl+1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar o hterm em uma guia do navegador para que você não perca os atalhos \"alternar para guia\" do Chrome. Quando não for executado em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe verdadeira, as teclas Ctrl+1 a 9 serão controladas pelo navegador. Se falsa, essas teclas serão enviadas ao host. Se nula, a detecção será automática com base na plataforma do navegador e no tipo de janela."
+		"message": "Define se as teclas Ctrl+1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar o hterm em uma guia do navegador para que você não perca os atalhos \"mudar para guia\" do Chrome. Quando não for executado em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe verdadeira, as teclas Ctrl+1 a 9 serão controladas pelo navegador. Se falsa, essas teclas serão enviadas ao host. Se nula, a detecção será automática com base na plataforma do navegador e no tipo de janela."
 	},
 	"hterm_pref_pass_ctrl_t": {
 		"message": "Define se as teclas Ctrl+T são transmitidas ao navegador.\n\nSe verdadeira, o comando Ctrl+T será tratado pelo navegador como o atalho \"nova guia\". Se falsa, Ctrl+T será enviado para o host."
@@ -564,7 +564,7 @@
 		"message": "Define se as teclas Ctrl+W são transmitidas ao navegador.\n\nSe verdadeira, o comando Ctrl+W será tratado pelo navegador como o atalho \"fechar guia\". Se falsa, Ctrl+W será enviado para o host."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "Define se as teclas Meta+1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar o hterm em uma guia do navegador para que você não perca os atalhos \"alternar para guia\" do Chrome. Quando não for executado em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe verdadeira, as teclas Meta+1 a 9 serão gerenciadas pelo navegador. Se falsa, essas teclas serão enviadas ao host. Se nula, a detecção será automática com base na plataforma do navegador e no tipo de janela."
+		"message": "Define se as teclas Meta+1 a 9 são transmitidas ao navegador.\n\nIsso é útil ao executar o hterm em uma guia do navegador para que você não perca os atalhos \"mudar para guia\" do Chrome. Quando não for executado em uma guia, é melhor enviar essas teclas ao host para que elas possam ser usadas em vim ou emacs.\n\nSe verdadeira, as teclas Meta+1 a 9 serão gerenciadas pelo navegador. Se falsa, essas teclas serão enviadas ao host. Se nula, a detecção será automática com base na plataforma do navegador e no tipo de janela."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "Define se Meta+V é transmitido ao navegador.\n\nEm alguns sistemas, isso é usado para colar conteúdo."
@@ -1010,6 +1010,12 @@
 	"terminal_home_manage": {
 		"message": "Gerenciar"
 	},
+	"terminal_home_mount": {
+		"message": "Conectar ao app Arquivos"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Deixe esta guia aberta. Se ela for fechada, a conexão do app Arquivos vai ser removida."
+	},
 	"terminal_home_new_linux": {
 		"message": "Novo Linux"
 	},
@@ -1088,6 +1094,9 @@
 	"terminal_profile_label": {
 		"message": "Perfil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Nome do perfil"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Redefinição de terminal"
 	},
@@ -1099,9 +1108,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Selecione um arquivo de imagem de plano de fundo do seu computador."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Tem certeza de que você quer excluir o perfil \"$1\"?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Automático"
@@ -1117,6 +1123,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Sublinhado"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Criar novo perfil"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Qualquer conexão que use este perfil vai ser modificada para o perfil padrão"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Remover $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Tem certeza de que você quer redefinir o tema para as configurações padrão?"

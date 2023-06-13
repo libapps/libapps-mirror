@@ -1010,6 +1010,12 @@
 	"terminal_home_manage": {
 		"message": "Управљај"
 	},
+	"terminal_home_mount": {
+		"message": "Приступи у Фајловима"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Не затварајте ову картицу. Ако затворите ову картицу, уклонићете везу прикључивања из Фајлова."
+	},
 	"terminal_home_new_linux": {
 		"message": "Нови Linux"
 	},
@@ -1088,6 +1094,9 @@
 	"terminal_profile_label": {
 		"message": "Профил"
 	},
+	"terminal_profile_name_label": {
+		"message": "Назив профила"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Ресетовање терминала"
 	},
@@ -1099,9 +1108,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Изаберите фајл слике у позадини са рачунара."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Желите ли стварно да избришете профил $1?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Аутоматски"
@@ -1117,6 +1123,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Подвуци"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Направите нови профил"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Свака веза која користи овај профил ће бити промењена у подразумевани профил"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Желите да уклоните $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Желите ли стварно да ресетујете тему на подразумеване вредности?"

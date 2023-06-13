@@ -1046,6 +1046,12 @@
 	"terminal_home_manage": {
 		"message": "Kelola"
 	},
+	"terminal_home_mount": {
+		"message": "Pasang ke File"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Biarkan tab ini tetap terbuka. Menutup tab ini akan menghapus folder komputer jarak jauh dari File."
+	},
 	"terminal_home_new_linux": {
 		"message": "Linux Baru"
 	},
@@ -1118,6 +1124,9 @@
 	"terminal_profile_label": {
 		"message": "Profil"
 	},
+	"terminal_profile_name_label": {
+		"message": "Nama profil"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Reset Terminal"
 	},
@@ -1130,9 +1139,6 @@
 	"terminal_settings_background_image_help": {
 		"message": "Pilih file gambar latar dari komputer."
 	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Yakin ingin menghapus profil \"$1\"?"
-	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Otomatis"
 	},
@@ -1144,6 +1150,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Garis bawah"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Buat profil baru"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Semua koneksi yang menggunakan profil ini akan diubah menjadi profil default"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Hapus $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Yakin ingin mereset tema ke default?"

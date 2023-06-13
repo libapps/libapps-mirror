@@ -1007,6 +1007,12 @@
 	"terminal_home_manage": {
 		"message": "Управление"
 	},
+	"terminal_home_mount": {
+		"message": "Свързване с „Файлове“"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "Не затваряйте този раздел. Затварянето му ще премахне връзката за свързване с „Файлове“."
+	},
 	"terminal_home_new_linux": {
 		"message": "Нов контейнер в Linux"
 	},
@@ -1085,6 +1091,9 @@
 	"terminal_profile_label": {
 		"message": "Потребителски профил"
 	},
+	"terminal_profile_name_label": {
+		"message": "Име на потребителския профил"
+	},
 	"terminal_reset_menu_label": {
 		"message": "Нулиране на настройките на терминала"
 	},
@@ -1096,9 +1105,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "Изберете файл за фоновото изображение от компютъра си."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "Наистина ли искате да изтриете потребителския профил „$1“?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "Автоматично"
@@ -1114,6 +1120,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "Долна черта"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "Създаване на нов потребителски профил"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "Всяка връзка, направена чрез този потребителски профил, ще бъде променена така, че да ползва стандартния"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "Да се премахне ли $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "Наистина ли искате да възстановите повторно стандартните настройки за темата?"

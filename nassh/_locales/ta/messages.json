@@ -1070,6 +1070,12 @@
 	"terminal_home_manage": {
 		"message": "நிர்வகியுங்கள்"
 	},
+	"terminal_home_mount": {
+		"message": "Files ஆப்ஸில் இணை"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "இந்தப் பிரிவைத் திறந்தே வைத்திருக்கவும். இந்தப் பிரிவை மூடுவது ChromeOS Files ஆப்ஸிலிருந்து மவுண்ட் இணைப்பை அகற்றும்."
+	},
 	"terminal_home_new_linux": {
 		"message": "புதிய Linux"
 	},
@@ -1145,6 +1151,9 @@
 	"terminal_profile_label": {
 		"message": "சுயவிவரம்"
 	},
+	"terminal_profile_name_label": {
+		"message": "சுயவிவரப் பெயர்"
+	},
 	"terminal_reset_menu_label": {
 		"message": "டெர்மினலை ரீசெட் செய்"
 	},
@@ -1156,9 +1165,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "கம்ப்யூட்டரிலிருந்து பின்புலப் பட ஃபைலைத் தேர்ந்தெடுக்கவும்."
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "\"$1\" சுயவிவரத்தை நிச்சயமாக நீக்க விரும்புகிறீர்களா?"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "தானியங்கு"
@@ -1174,6 +1180,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "அடிக்கோடிடு"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "புதிய சுயவிவரத்தை உருவாக்குங்கள்"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "இந்தச் சுயவிவரத்தைப் பயன்படுத்தும் அனைத்து இணைப்புகளும் இயல்புச் சுயவிவரத்திற்கு மாற்றப்படும்"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 ஐ அகற்றவா?"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "தீமினை அதன் ஆரம்பநிலை அமைப்புகளுக்கு நிச்சயமாக மீட்டமைக்க வேண்டுமா?"

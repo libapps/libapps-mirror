@@ -1052,6 +1052,12 @@
 	"terminal_home_manage": {
 		"message": "نظم کریں"
 	},
+	"terminal_home_mount": {
+		"message": "فائلز پر ماؤنٹ کریں"
+	},
+	"terminal_home_mounted_tab_close_message": {
+		"message": "اس ٹیب کو کھلا رکھیں۔ اس ٹیب کو بند کرنے سے فائلز سے ماؤنٹ کنکشن ختم ہو جائے گا۔"
+	},
 	"terminal_home_new_linux": {
 		"message": "نیا Linux"
 	},
@@ -1130,6 +1136,9 @@
 	"terminal_profile_label": {
 		"message": "پروفائل"
 	},
+	"terminal_profile_name_label": {
+		"message": "پروفائل کا نام"
+	},
 	"terminal_reset_menu_label": {
 		"message": "ٹرمینل ری سیٹ کریں"
 	},
@@ -1141,9 +1150,6 @@
 	},
 	"terminal_settings_background_image_help": {
 		"message": "اپنے کمپیوٹر سے پس منظر کی تصویری فائل منتخب کریں۔"
-	},
-	"terminal_settings_delete_profile_dialog_message": {
-		"message": "کیا آپ واقعی \"$1\" پروفائل کو حذف کرنا چاہتے ہیں؟"
 	},
 	"terminal_settings_dropdown_alt_gr_mode_auto": {
 		"message": "خودکار"
@@ -1159,6 +1165,15 @@
 	},
 	"terminal_settings_dropdown_cursor_shape_underline": {
 		"message": "انڈر لائن"
+	},
+	"terminal_settings_profile_create_dialog_title": {
+		"message": "نئی پروفائل تخلیق کریں"
+	},
+	"terminal_settings_profile_delete_dialog_message": {
+		"message": "اس پروفائل کا استعمال کرنے والا کوئی بھی کنکشن ڈیفالٹ پروفائل میں تبدیل ہو جائے گا"
+	},
+	"terminal_settings_profile_delete_dialog_title": {
+		"message": "$1 کو ہٹائیں؟"
 	},
 	"terminal_settings_reset_dialog_message": {
 		"message": "کیا آپ واقعی تھیم کو اس کے ڈیفالٹس پر ری سیٹ کرنا چاہتے ہیں؟"
@@ -1305,7 +1320,7 @@
 		"message": "تصاویر ان لائن ڈسپلے کریں: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
-		"message": "دائیں طرف کلک کرنے کے دوران Ctrl کو (macOS پر Cmd) پکڑے رکھنے سے سیاق و سباق مینو دکھائی دیتا ہے۔"
+		"message": "دائیں طرف کلک کرنے کے دوران Ctrl کو (macOS پر Cmd) پکڑے رکھنے سے سیاق و سباق مینیو دکھائی دیتا ہے۔"
 	},
 	"tip_2": {
 		"message": "hterm-notify کا استعمال کر کے براؤزر میں اطلاعات ڈسپلے کریں: https://hterm.org/x/faq/notify-sh"
@@ -1359,6 +1374,6 @@
 		"message": "لکھنے کا سائز (KiB)"
 	},
 	"zoom_warning": {
-		"message": "براہ کرم Chrome مینو->زوم کو ‎100% پر سیٹ کریں"
+		"message": "براہ کرم Chrome مینیو->زوم کو ‎100% پر سیٹ کریں"
 	}
 }
