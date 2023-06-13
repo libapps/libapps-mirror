@@ -35,6 +35,15 @@ export class Relay {
     this.proxyHost = options['--proxy-host'];
     /** @type {number} */
     this.proxyPort = options['--proxy-port'] || this.defaultProxyPort;
+    /**
+     * If provided, this host value is used in init() by the proxy to redirect
+     * to the best geolocated instance.  The `host` parameter in openSocket()
+     * is what is used when making the actual connection, not this value, but
+     * they will typically be the same.
+     *
+     * @type {string|undefined}
+     */
+    this.remoteHost = options['--proxy-remote-host'];
     /** @type {string} */
     this.username = options['--proxy-user'];
     /** @type {boolean} */

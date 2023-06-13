@@ -93,6 +93,24 @@ Across those phases are some major steps:
     socket for reading and writing binary data to the ssh sever via the
     established relay server session.
 
+### /endpoint Protocol {#corp-relay-endpoint}
+
+Make a `GET` request to `PROTOCOL://ENDPOINT_HOST:ENDPOINT_PORT/endpoint` to
+find the cookie server to talk to.  This allows the server to redirect to the
+best geolocated server.
+
+`PROTOCOL` may be `http` or `https`.  Secure Shell defaults to `http`.
+
+`ENDPOINT_HOST` is the user-specified hostname for the endpoint server.
+This system could offer other services too which is why the port is not fixed.
+
+`ENDPOINT_PORT` is the port on the server to connect to which defaults to 8022.
+
+The [query string] settings:
+
+*   `host=SSH_HOST`: The ssh server hostname.  Optional parameter which may be
+    used to route to the best geolocated proxy.
+
 ### /cookie Protocol {#corp-relay-cookie}
 
 Make a `GET` request to `PROTOCOL://COOKIE_HOST:COOKIE_PORT/cookie` to find the
@@ -113,6 +131,8 @@ The [query string] settings:
     more details.
 *   `ext=EXT_ID` (required for `method=js-redirect`): The Chrome extension id
     that the cookie server should redirect to when it is finished.
+*   `host=SSH_HOST`: The ssh server hostname.  Optional parameter which may be
+    used to route to the best geolocated proxy.
 *   `path=PATH` (required for `method=js-redirect`): The path under the
     extension that the cookie server should redirect to when it is finished.
 *   `origin=ORIGIN` (required for `method=close`): The origin sending the
@@ -516,6 +536,7 @@ Then use connect to the server on port `8080` with `--proxy-mode=websockify`.
 [method field]: #corp-relay-method
 [/connect]: #corp-relay-connect
 [/cookie]: #corp-relay-cookie
+[/endpoint]: #corp-relay-endpoint
 [/proxy]: #corp-relay-proxy
 [/read]: #corp-relay-read
 [/write]: #corp-relay-write

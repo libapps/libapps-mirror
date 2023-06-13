@@ -36,6 +36,11 @@ The host to use as a fallback relay server for `--relay-method=direct` when
 
 The port to connect to on the relay server.
 
+## `--proxy-remote-host=<host>`
+
+The remote ssh server for the proxy to connect to.  This may be used by the
+proxy to redirect to the best geolocated proxy instance.
+
 ## `--proxy-user=<username>`
 
 The username to use when talking to the relay server itself.

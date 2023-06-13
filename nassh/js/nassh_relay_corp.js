@@ -44,6 +44,9 @@ export class Corp extends Relay {
     if (this.relayProtocol === 'v2') {
       template += '&version=2&method=js-redirect';
     }
+    if (this.remoteHost) {
+      template += '&host=%(remote_host)';
+    }
     return template;
   }
 
@@ -60,6 +63,7 @@ export class Corp extends Relay {
         host: this.proxyHost,
         port: this.proxyPort,
         protocol: this.useSecure ? 'https' : 'http',
+        remote_host: this.remoteHost,
         // This returns us to nassh_google_relay.html so we can pick the relay
         // host out of the reply.  From there we continue on to the resumePath.
         return_to: this.location.host,
@@ -185,7 +189,8 @@ export class Corp extends Relay {
   async authenticateDirect() {
     const protocol = this.useSecure ? 'https' : 'http';
     let endpoint = `${this.proxyHost}:${this.proxyPort}`;
-    let proxyUrl = `${protocol}://${endpoint}/endpoint`;
+    const params = this.remoteHost ? `?host=${this.remoteHost}` : '';
+    let proxyUrl = `${protocol}://${endpoint}/endpoint${params}`;
 
     // Since the proxy settings are coming from the user, make sure we catch bad
     // values (hostnames/etc...) directly.
@@ -208,7 +213,7 @@ export class Corp extends Relay {
       if (this.proxyHostFallback) {
         try {
           endpoint = `${this.proxyHostFallback}:${this.proxyPort}`;
-          proxyUrl = `${protocol}://${endpoint}/endpoint`;
+          proxyUrl = `${protocol}://${endpoint}/endpoint${params}`;
           endpoint = await this.fetchEndpoint(proxyUrl);
         } catch (e) {
           console.warn('Fallback query endpoint failed', e);

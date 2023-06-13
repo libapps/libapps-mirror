@@ -427,50 +427,84 @@ describe('default-proxy-host', () => {
   const tests = [
     // Proxy host unrelated to Google.
     ['--proxy-host=proxy.example.com', 'example.com',
-     undefined, 'proxy.example.com', 'root', modeOld, undefined],
+     undefined, 'proxy.example.com', 'root',
+     undefined, undefined, modeOld, undefined],
 
     // Default Google settings.
     ['--config=google', 'example.com',
-     '443', 'ssh-relay.corp.google.com', 'root', modeOld, false],
+     '443', 'ssh-relay.corp.google.com', 'root',
+     'ssh-relay-fallback.corp.google.com', '', modeOld, false],
 
     // Default cloudtop Google settings.
     ['--config=google', 'example.c.googlers.com',
-     '443', 'sup-ssh-relay.corp.google.com', 'root', modev4, true],
+     '443', 'ssh-relay-router.corp.google.com', 'root',
+     'sup-ssh-relay.corp.google.com', 'example.c.googlers.com', modev4, true],
 
     // Default internal GCE settings.
     ['--config=google', 'example.internal.gcpnode.com',
-     '443', 'sup-ssh-relay.corp.google.com', 'root', modev4, true],
+     '443', 'ssh-relay-router.corp.google.com', 'root',
+     'sup-ssh-relay.corp.google.com', 'example.internal.gcpnode.com',
+     modev4, true],
     ['--config=google', 'example.proxy.gcpnode.com',
-     '443', 'sup-ssh-relay.corp.google.com', 'root', modev4, true],
+     '443', 'ssh-relay-router.corp.google.com', 'root',
+     'sup-ssh-relay.corp.google.com', 'example.proxy.gcpnode.com',
+     modev4, true],
 
     // Explicit proxy settings override defaults.
     ['--config=google --proxy-host=example.com', 'example.c.googlers.com',
-     '443', 'example.com', 'root', modev4, true],
+     '443', 'example.com', 'root',
+     'sup-ssh-relay.corp.google.com', 'example.c.googlers.com', modev4, true],
 
     // Username settings.
     ['--config=google --proxy-host=example.com --proxy-user=user',
-     'example.c.googlers.com', '443', 'example.com', 'user', modev4, true],
+     'example.c.googlers.com', '443', 'example.com', 'user',
+     'sup-ssh-relay.corp.google.com', 'example.c.googlers.com', modev4, true],
+
+    // Proxy fallback settings.
+    ['--config=google --proxy-host-fallback=fallback.com', 'example.com',
+     '443', 'ssh-relay.corp.google.com', 'root',
+     'fallback.com', '', modeOld, false],
+    ['--config=google --proxy-host-fallback=fallback.com',
+     'example.c.googlers.com', '443', 'ssh-relay-router.corp.google.com',
+     'root', 'fallback.com', 'example.c.googlers.com', modev4, true],
+
+    // Remote host settings.
+    ['--config=google --proxy-remote-host=remote.com', 'example.com',
+     '443', 'ssh-relay.corp.google.com', 'root',
+     'ssh-relay-fallback.corp.google.com', 'remote.com', modeOld, false],
+    ['--config=google --proxy-remote-host=remote.com', 'example.c.googlers.com',
+     '443', 'ssh-relay-router.corp.google.com', 'root',
+     'sup-ssh-relay.corp.google.com', 'remote.com', modev4, true],
 
     // Mode settings.
     ['--config=google --proxy-mode=foo', 'example.com',
-     '443', 'ssh-relay.corp.google.com', 'root', 'foo', false],
+     '443', 'ssh-relay.corp.google.com', 'root',
+     'ssh-relay-fallback.corp.google.com', '', 'foo', false],
     ['--config=google --proxy-mode=foo', 'example.internal.gcpnode.com',
-     '443', 'sup-ssh-relay.corp.google.com', 'root', 'foo', false],
+     '443', 'ssh-relay-router.corp.google.com', 'root',
+     'sup-ssh-relay.corp.google.com', 'example.internal.gcpnode.com',
+     'foo', false],
 
     // Resume settings.
     ['--config=google --resume-connection', 'example.com',
-     '443', 'ssh-relay.corp.google.com', 'root', modeOld, true],
+     '443', 'ssh-relay.corp.google.com', 'root',
+     'ssh-relay-fallback.corp.google.com', '', modeOld, true],
     ['--config=google --no-resume-connection', 'example.internal.gcpnode.com',
-     '443', 'sup-ssh-relay.corp.google.com', 'root', modev4, false],
+     '443', 'ssh-relay-router.corp.google.com', 'root',
+     'sup-ssh-relay.corp.google.com', 'example.internal.gcpnode.com',
+     modev4, false],
   ];
 
-  tests.forEach(([options, host, port, relay, user, mode, resume]) => {
+  tests.forEach(([options, host, port, relay, user, fallback, remote, mode,
+      resume]) => {
     it(`default relay for '${options}' & '${host}'`, () => {
       let rv = tokenizeOptions(options);
       rv = postProcessOptions(rv, host, 'root', false);
       assert.equal(port, rv['--proxy-port']);
       assert.equal(relay, rv['--proxy-host']);
       assert.equal(user, rv['--proxy-user']);
+      assert.equal(fallback, rv['--proxy-host-fallback']);
+      assert.equal(remote, rv['--proxy-remote-host']);
       assert.equal(mode, rv['--proxy-mode']);
       assert.equal(resume, rv['--resume-connection']);
     });
