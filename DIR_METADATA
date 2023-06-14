@@ -10,6 +10,10 @@ buganizer {
   component_id: 146364  # Security > SSH > Chrome Secure Shell
 }
 
+buganizer_public {
+  component_id: 1262883  # ChromeOS Public Tracker > Apps > Apps Platform > Secure Shell
+}
+
 monorail {
   component: "Platform>Apps>Default>Hterm"
 }
