@@ -263,6 +263,7 @@ export class TerminalSSHDialog extends LitElement {
     const identityLabel = msg('IDENTITY_LABEL');
     const settingsProfileLabel = msg('TERMINAL_PROFILE_LABEL');
 
+    const example = 'username@hostname -p <port> -R 1234:localhost:5678';
     return html`
         <terminal-dialog ${ref(this.dialogRef_)}
             @close="${this.onDialogClose_}">
@@ -280,7 +281,8 @@ export class TerminalSSHDialog extends LitElement {
               @keydown="${this.onTextfieldKeydown_}"
               @change="${() => this.suppressCommandError_ = false}"
               @input="${this.onCommandUpdated_}"
-              placeholder="username@hostname -p <port> -R 1234:localhost:5678">
+              placeholder="${example}"
+              title="${example}">
             <span slot="inline-prefix">ssh&nbsp</span>
           </terminal-textfield>
           <div id="settings-profile-container"

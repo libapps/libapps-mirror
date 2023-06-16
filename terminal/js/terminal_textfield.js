@@ -26,6 +26,9 @@ export class TerminalTextfieldElement extends LitElement {
       placeholder: {
         type: String,
       },
+      title: {
+        type: String,
+      },
       value: {
         type: String,
       },
@@ -165,6 +168,7 @@ export class TerminalTextfieldElement extends LitElement {
     this.label = undefined;
     this.ariaLabel = undefined;
     this.placeholder = '';
+    this.title = '';
     this.value = '';
     this.blendIn = false;
     this.fitContent = false;
@@ -217,6 +221,7 @@ export class TerminalTextfieldElement extends LitElement {
             <input ${ref(this.inputRef_)} type="text"
                 .placeholder="${this.placeholder}"
                 .value="${live(this.value)}"
+                .title="${this.title}"
                 @change=${(e) => redispatchEvent(this, e)}
                 @input=${this.onInput_}
                 spellcheck="false"
