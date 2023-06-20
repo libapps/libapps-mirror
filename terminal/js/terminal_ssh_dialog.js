@@ -233,6 +233,7 @@ export class TerminalSSHDialog extends LitElement {
     this.dialogRef_ = createRef();
     this.commandRef_ = createRef();
     this.relayArgsRef_ = createRef();
+    this.mountPathRef_ = createRef();
     this.identityDropdownRef_ = createRef();
     this.settingsProfileDropdownRef_ = createRef();
     this.okRef_ = createRef();
@@ -312,6 +313,11 @@ export class TerminalSSHDialog extends LitElement {
               label="${msg('FIELD_NASSH_OPTIONS_PLACEHOLDER')}"
               @keydown="${this.onTextfieldKeydown_}">
           </terminal-textfield>
+          <terminal-textfield ${ref(this.mountPathRef_)} id="mount-path"
+              label="${msg('MOUNT_PATH_LABEL')}"
+              placeholder="${msg('FIELD_MOUNT_PATH_PLACEHOLDER')}"
+              @keydown="${this.onTextfieldKeydown_}">
+          </terminal-textfield>
           <div slot="buttons">
             <span></span>
             <terminal-button class="cancel"
@@ -350,16 +356,23 @@ export class TerminalSSHDialog extends LitElement {
     let relayArgs = '';
     let identity = this.DEFAULT_IDENTITY.value;
     let settingsProfile = '';
+    let mountPath = '';
     this.userTitle_ = '';
 
     if (this.nasshProfileId_) {
-      [command, this.userTitle_, relayArgs, identity, settingsProfile] =
+      [command,
+       this.userTitle_,
+       relayArgs,
+       identity,
+       settingsProfile,
+       mountPath] =
           await getProfileValues(ProfileType.NASSH, this.nasshProfileId_, [
             'terminalSSHDialogCommand',
             'description',
             'nassh-options',
             'identity',
             'terminal-profile',
+            'mount-path',
           ], '');
 
       // We might have some old SSH profile without the "command". In this case,
@@ -387,6 +400,7 @@ export class TerminalSSHDialog extends LitElement {
     this.commandRef_.value.value = command;
     this.parsedCommand_ = parseCommand(/** @type {string} */(command));
     this.relayArgsRef_.value.value = relayArgs;
+    this.mountPathRef_.value.value = mountPath;
     this.identityDropdownRef_.value.value = identity;
     this.suppressCommandError_ = !this.nasshProfileId_;
 
@@ -482,6 +496,7 @@ export class TerminalSSHDialog extends LitElement {
         'port': parsedDestination.port,
         'argstr': this.parsedCommand_.argstr,
         'nassh-options': this.relayArgsRef_.value.value,
+        'mount-path': this.mountPathRef_.value.value,
         'identity': this.identityDropdownRef_.value.value,
       };
       values['terminal-profile'] =

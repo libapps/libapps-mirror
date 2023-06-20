@@ -94,6 +94,7 @@ export const DEFAULT_THEME = 'dark';
 export const DEFAULT_VM_NAME = 'termina';
 export const DEFAULT_CONTAINER_NAME = 'penguin';
 
+export const PARAM_NAME_MOUNT_PATH = 'mount_path';
 export const PARAM_NAME_MOUNT = 'mount';
 export const PARAM_NAME_SETTINGS_PROFILE = 'settings_profile';
 export const PARAM_NAME_SFTP = 'sftp';
@@ -464,6 +465,7 @@ export function composeTmuxUrl(
  *   hash: (string|undefined),
  *   isSftp: (boolean|undefined),
  *   isMount: (boolean|undefined),
+ *   mountPath: (?string|undefined),
  * }} params
  * @return {string}
  */
@@ -483,6 +485,9 @@ export function composeSshUrl(params) {
   }
   if (params.isMount) {
     url.searchParams.append(PARAM_NAME_MOUNT, 'true');
+  }
+  if (params.mountPath) {
+    url.searchParams.append(PARAM_NAME_MOUNT_PATH, params.mountPath);
   }
   return url.toString();
 }

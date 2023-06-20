@@ -437,6 +437,7 @@ async function runNassh(term, storage, ssh, tmuxControllerDriver) {
     isSftp: ssh.isMount || ssh.isSftp,
     sftpStartupCallback,
     isMount: ssh.isMount,
+    basePath: ssh.mountPath,
     fsp,
     mountOptions,
     onExit: async (code) => {

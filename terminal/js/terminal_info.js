@@ -5,8 +5,8 @@
 import {hterm} from './deps_local.concat.js';
 
 import {DEFAULT_VM_NAME, DEFAULT_CONTAINER_NAME, ORIGINAL_URL,
-  PARAM_NAME_MOUNT, PARAM_NAME_SETTINGS_PROFILE, PARAM_NAME_SFTP,
-  PARAM_NAME_TMUX} from './terminal_common.js';
+  PARAM_NAME_MOUNT, PARAM_NAME_MOUNT_PATH, PARAM_NAME_SETTINGS_PROFILE,
+  PARAM_NAME_SFTP, PARAM_NAME_TMUX} from './terminal_common.js';
 
 /**
  * @typedef {{
@@ -45,6 +45,7 @@ export let VshLaunchInfo;
  *   needRedirect: boolean,
  *   isSftp: boolean,
  *   isMount: boolean,
+ *   mountPath: (?string|undefined),
  *   hash: string,
  * }}
  */
@@ -236,8 +237,9 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
     if (url.hash) {
       const isSftp = url.searchParams.get(PARAM_NAME_SFTP) === 'true';
       const isMount = url.searchParams.get(PARAM_NAME_MOUNT) === 'true';
+      const mountPath = url.searchParams.get(PARAM_NAME_MOUNT_PATH);
       return {
-        ssh: {needRedirect: false, isSftp, isMount, hash: url.hash},
+        ssh: {needRedirect: false, isSftp, isMount, mountPath, hash: url.hash},
         settingsProfileId: url.searchParams.get(PARAM_NAME_SETTINGS_PROFILE),
       };
     } else {

@@ -421,8 +421,9 @@ export class TerminalHomeApp extends LitElement {
         const settingsProfileId =
             items[`/nassh/profiles/${id}/terminal-profile`] ||
             hterm.Terminal.DEFAULT_PROFILE_ID;
+        const mountPath = items[`/nassh/profiles/${id}/mount-path`] || '';
         if (description) {
-          sshConnections.push({id, description, settingsProfileId});
+          sshConnections.push({id, description, settingsProfileId, mountPath});
         }
       }
       this.sshConnections = sshConnections;
@@ -555,6 +556,7 @@ export class TerminalHomeApp extends LitElement {
       url: composeSshUrl({
         settingsProfileId: sshConnection.settingsProfileId,
         hash: `#profile-id:${encodeURIComponent(sshConnection.id)}`,
+        mountPath: sshConnection.mountPath,
         ...params,
       }),
       asTab: true,
