@@ -43,19 +43,19 @@ App.prototype.installContextMenus = function() {
       'type': 'normal',
       'id': 'connect-dialog',
       'title': localize('CONNECTION_DIALOG_NAME'),
-      'contexts': ['browser_action'],
+      'contexts': ['action'],
     },
     {
       'type': 'normal',
       'id': 'mosh',
       'title': localize('MOSH_NAME'),
-      'contexts': ['browser_action'],
+      'contexts': ['action'],
     },
     {
       'type': 'normal',
       'id': 'feedback',
       'title': localize('SEND_FEEDBACK_LABEL'),
-      'contexts': ['browser_action'],
+      'contexts': ['action'],
     },
   ];
   entries.forEach((entry) => chrome.contextMenus.create(entry));
