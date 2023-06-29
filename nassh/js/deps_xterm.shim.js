@@ -8,8 +8,9 @@
 
 import {Terminal} from 'xterm';
 import {CanvasAddon} from 'xterm-addon-canvas';
+import {SearchAddon} from 'xterm-addon-search';
 import {Unicode11Addon} from 'xterm-addon-unicode11';
 import {WebglAddon} from 'xterm-addon-webgl';
 import {WebLinksAddon} from 'xterm-addon-web-links';
-export const xterm = {Terminal, CanvasAddon, Unicode11Addon, WebLinksAddon,
-  WebglAddon};
+export const xterm = {Terminal, CanvasAddon, SearchAddon, Unicode11Addon,
+  WebLinksAddon, WebglAddon};
