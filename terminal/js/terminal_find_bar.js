@@ -49,6 +49,7 @@ export class TerminalFindBar extends LitElement {
           border-radius: 2px;
           box-shadow: 0 2px 2px 1px rgba(var(--google-grey-600-rgb), .1);
           background: white;
+          font-family: Roboto;
           padding: 5px 15px;
           width: 320px;
         }
@@ -57,14 +58,15 @@ export class TerminalFindBar extends LitElement {
           background-color: inherit;
           border: none;
           flex-grow: 1;
+          font-family: inherit;
           margin: 8px 0;
           min-width: 100px;
           outline: none;
         }
 
         #counter {
-          color: var(--google-grey-800);
-          font-size: smaller;
+          color: var(--google-grey-700);
+          font-size: 12px;
           user-select: none;
         }
 
