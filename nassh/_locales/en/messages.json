@@ -245,6 +245,10 @@
 		"description": "Button label for closing the currently focused visual element.",
 		"message": "Close"
 	},
+	"HTERM_BUTTON_CLOSE_FIND_BAR": {
+		"description": "Button label for closing the find bar.",
+		"message": "Close find bar"
+	},
 	"HTERM_BUTTON_FIND": {
 		"description": "Button label for finding text in the terminal output.",
 		"message": "Find"
