@@ -61,6 +61,22 @@ class IBufferNamespace {
   }
 }
 
+class ITerminalAddon {};
+
+/**
+ * @typedef {{
+ *            matchBackground: ?string,
+ *          }}
+ */
+let ISearchDecorationOptions;
+
+/**
+ * @typedef {{
+ *            decorations: ?ISearchDecorationOptions,
+ *          }}
+ */
+let ISearchOptions;
+
 class Terminal$$module$js$xterm {
   /**
    * @param {!Object=} options
@@ -91,6 +107,8 @@ class Terminal$$module$js$xterm {
 
   clear() {}
 
+  clearSelection() {}
+
   dispose() {}
 
   focus() {}
@@ -102,7 +120,7 @@ class Terminal$$module$js$xterm {
   hasSelection() {}
 
   /**
-   * @param {!WebglAddon$$module$js$xterm} addon
+   * @param {!ITerminalAddon} addon
    */
   loadAddon(addon) {}
 
@@ -173,6 +191,13 @@ class Terminal$$module$js$xterm {
   resize(cols, rows) {}
 
   /**
+   * @param {number} column
+   * @param {number} row
+   * @param {number} length
+   */
+  select(column, row, length) {}
+
+  /**
    * @param {number} number
    */
   scrollLines(number) {}
@@ -206,4 +231,25 @@ class Terminal$$module$js$xterm {
   writeln(data, callback) {}
 }
 
-class WebglAddon$$module$js$xterm {}
+class WebglAddon$$module$js$xterm extends ITerminalAddon {}
+
+class SearchAddon$$module$js$xterm extends ITerminalAddon {
+  clearDecorations() {}
+
+  /**
+   * @param {string} term
+   * @param {?ISearchOptions} searchOptions
+   */
+  findPrevious(term, searchOptions) {}
+
+  /**
+   * @param {string} term
+   * @param {?ISearchOptions} searchOptions
+   */
+  findNext(term, searchOptions) {}
+
+  /**
+   * @param {function({resultIndex: number, resultCount: number})} callback
+   */
+  onDidChangeResults(callback) {}
+}

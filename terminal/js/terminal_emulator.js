@@ -6,9 +6,6 @@
  * @fileoverview For supporting xterm.js and the terminal emulator.
  */
 
-// TODO(b/236205389): add tests. For example, we should enable the test in
-// terminal_tests.js for XtermTerminal.
-
 // TODO(b/236205389): support option smoothScrollDuration?
 
 import {hterm, lib} from './deps_local.concat.js';
@@ -17,10 +14,11 @@ import {LitElement, css, html} from './lit.js';
 import {FontManager, ORIGINAL_URL, backgroundImageLocalStorageKey, definePrefs,
   delayedScheduler, fontManager, getOSInfo, sleep} from './terminal_common.js';
 import {TerminalContextMenu} from './terminal_context_menu.js';
+import {TerminalFindBar} from './terminal_find_bar.js';
 import {ICON_COPY} from './terminal_icons.js';
 import {TerminalTooltip} from './terminal_tooltip.js';
-import {Terminal, CanvasAddon, Unicode11Addon, WebLinksAddon, WebglAddon}
-  from './xterm.js';
+import {Terminal, CanvasAddon, SearchAddon, Unicode11Addon, WebLinksAddon,
+  WebglAddon} from './xterm.js';
 import {XtermInternal} from './terminal_xterm_internal.js';
 
 
@@ -103,11 +101,28 @@ const ARROW_AND_SIX_PACK_KEYS = new Map([
     [keyCodes.PAGE_DOWN, '\x1b[6~'],
 ]);
 
+// A z-index large enough to be on the very top.
+const TOP_MOST_Z_INDEX = 10;
+
+const SEARCH_OPTIONS = {
+  decorations: {
+    // We don't use `activeMatchBackground` here. The search addon starts the
+    // serach from the current selection if there is one. Setting
+    // `activeMatchBackbround` gives the false impression that the search starts
+    // at the "active match", which is not the case if the user changes the
+    // current selection by themselves.
+    //
+    // This is similar to what Chrome's find bar use.
+    matchBackground: '#f0e13a',
+  },
+};
+
 /**
  * @typedef {{
  *   term: !Terminal,
  *   fontManager: !FontManager,
  *   xtermInternal: !XtermInternal,
+ *   searchAddon: !SearchAddon,
  * }}
  */
 export let XtermTerminalTestParams;
@@ -276,7 +291,7 @@ class Bell {
 
 const A11Y_BUTTON_STYLE = `
 position: fixed;
-z-index: 10;
+z-index: ${TOP_MOST_Z_INDEX};
 right: 16px;
 `;
 
@@ -459,10 +474,25 @@ export class XtermTerminal {
     this.scheduleFit_ = delayedScheduler(() => this.fit_(),
         testParams ? 0 : 250);
 
-    this.term.loadAddon(
-        new WebLinksAddon((e, uri) => lib.f.openWindow(uri, '_blank')));
-    this.term.loadAddon(new Unicode11Addon());
-    this.term.unicode.activeVersion = '11';
+    if (!testParams) {
+      this.term.loadAddon(
+          new WebLinksAddon((e, uri) => lib.f.openWindow(uri, '_blank')));
+      this.term.loadAddon(new Unicode11Addon());
+      this.term.unicode.activeVersion = '11';
+    }
+
+    // This tracks whether an search is in progress. Note that you can get false
+    // negative. For example, when the the terminal has new output, the search
+    // addon will start search automatically, but this variable will not be set
+    // to true.
+    this.searchInProgress_ = false;
+
+    this.searchAddon_ = testParams?.searchAddon || new SearchAddon();
+    this.searchAddon_.onDidChangeResults(({resultIndex, resultCount}) => {
+      this.searchInProgress_ = false;
+      this.findBar_.setCounter(resultIndex, resultCount);
+    });
+    this.term.loadAddon(this.searchAddon_);
 
     this.pendingFont_ = null;
     this.scheduleRefreshFont_ = delayedScheduler(
@@ -485,7 +515,10 @@ export class XtermTerminal {
     this.term.onBinary((data) => this.io.onVTKeystroke(data));
     this.term.onTitleChange((title) => this.setWindowTitle(title));
     this.term.onSelectionChange(() => {
-      if (this.prefs_.get('copy-on-select')) {
+      // The search addon might change the current selection to a match. This is
+      // a best effort attempt (because `searchInProgress` can have false
+      // nagative) to avoid copying when this happens.
+      if (!this.searchInProgress_ && this.prefs_.get('copy-on-select')) {
         this.copySelection_();
       }
     });
@@ -525,10 +558,19 @@ export class XtermTerminal {
 
     this.contextMenu_ = /** @type {!TerminalContextMenu} */(
         document.createElement('terminal-context-menu'));
-    this.contextMenu_.style.zIndex = 10;
+    this.contextMenu_.style.zIndex = TOP_MOST_Z_INDEX;
     this.contextMenu = {
       setItems: (items) => this.contextMenu_.items = items,
     };
+
+    this.findBar_ = /** @type {!TerminalFindBar} */(
+        document.createElement('terminal-find-bar'));
+    Object.assign(this.findBar_.style, {
+      position: 'absolute',
+      right: '16px',
+      top: '0',
+      zIndex: TOP_MOST_Z_INDEX,
+    });
 
     this.term.options.linkHandler = new LinkHandler(this.term);
     this.term.options.theme = {
@@ -755,6 +797,10 @@ export class XtermTerminal {
           this.htermA11yReader_);
 
       elem.appendChild(this.contextMenu_);
+      elem.appendChild(this.findBar_);
+
+      this.findBar_.addEventListener('find-bar',
+          (e) => this.onFindBarEvent_(e));
 
       elem.addEventListener('dragover', (e) => e.preventDefault());
       elem.addEventListener('drop',
@@ -1067,6 +1113,64 @@ export class XtermTerminal {
           this.prefs_.getBoolean('mouse-right-click-paste'))) {
       this.pasteFromClipboard_();
     }
+  }
+
+  onFindBarEvent_(e) {
+    switch (e.detail.type) {
+      case 'find':
+        {
+          const value = e.target.value;
+          if (!value) {
+            break;
+          }
+          this.searchInProgress_ = true;
+          // The selection is the starting point of the search. If there is no
+          // current selection, we will try to select something so that the
+          // search starts from the current viewport.
+          if (!this.term.hasSelection()) {
+            this.selectCloestOffScreenChar_(!e.detail.backward);
+          }
+
+          if (e.detail.backward) {
+            this.searchAddon_.findPrevious(value, SEARCH_OPTIONS);
+          } else {
+            this.searchAddon_.findNext(value, SEARCH_OPTIONS);
+          }
+        }
+        break;
+      case 'close':
+        this.term.clearSelection();
+        this.searchAddon_.clearDecorations();
+        this.term.focus();
+        break;
+    }
+  }
+
+  /**
+   * If `top` is true, select the last character on the row right above the top
+   * of the viewport. Otherwise, select the first character on the row right
+   * below the bottom of the viewport.
+   *
+   * @param {boolean} top
+   * @return {boolean} return false if we cannot select the character because
+   *     the row does not exist.
+   */
+  selectCloestOffScreenChar_(top) {
+    // viewportY is the row number of the top of the viewport.
+    const {viewportY, length} = this.term.buffer.active;
+    if (top) {
+      if (viewportY > 0) {
+        this.term.select(this.term.cols - 1, viewportY - 1, 1);
+        return true;
+      }
+    } else {
+      const row = viewportY + this.term.rows;
+      if (row < length) {
+        this.term.select(0, row, 1);
+        return true;
+      }
+    }
+    return false;
   }
 
   async pasteFromClipboard_() {
@@ -1413,6 +1517,8 @@ export class XtermTerminal {
 
     setWithShiftVersion(Modifier.Ctrl, keyCodes.C, this.ctrlCKeyDownHandler_);
     setWithShiftVersion(Modifier.Ctrl, keyCodes.V, this.ctrlVKeyDownHandler_);
+
+    set(Modifier.Ctrl | Modifier.Shift, keyCodes.F, () => this.findBar_.show());
   }
 
   handleOnTerminalReady() {}

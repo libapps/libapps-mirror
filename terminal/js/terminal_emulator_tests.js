@@ -19,6 +19,14 @@ describe('terminal_emulator_tests.js', function() {
     beforeEach(async function() {
       this.mocks = {
         term: new MockObject({
+          buffer: {
+            active: {
+              viewPortY: 50,
+              length: 1000,
+            },
+          },
+          cols: 100,
+          rows: 10,
           options: {},
           parser: {
             registerOscHandler: () => {},
@@ -28,10 +36,12 @@ describe('terminal_emulator_tests.js', function() {
         xtermInternal: new MockObject({
           getActualCellDimensions: () => ({width: 9, height: 22}),
         }),
+        searchAddon: new MockObject(),
         onVTKeystroke: new MockFunction(),
       };
       const testParams = {};
-      for (const prop of ['term', 'fontManager', 'xtermInternal']) {
+      for (const prop of ['term', 'fontManager', 'xtermInternal',
+          'searchAddon']) {
         testParams[prop] = this.mocks[prop].proxy;
       }
 
@@ -182,6 +192,64 @@ describe('terminal_emulator_tests.js', function() {
         // If there is no modifiers, we still pass through it to xterm.js.
         check({type: 'keypress', keyCode: keyCodes.HOME}, false, null);
       });
+    });
+
+
+    it('selectCloestOffScreenChar_', function() {
+      this.setBuffer = (viewportY, length) => {
+        this.mocks.term.proxy.buffer = {
+          active: {
+            viewportY,
+            length,
+          },
+        };
+      };
+
+      // Failed to select pass the top.
+      this.setBuffer(0, 100);
+      assert.isFalse(this.terminal.selectCloestOffScreenChar_(true));
+
+      // Failed to select pass the bottom.
+      this.setBuffer(0, 10);
+      assert.isFalse(this.terminal.selectCloestOffScreenChar_(false));
+      this.setBuffer(100, 110);
+      assert.isFalse(this.terminal.selectCloestOffScreenChar_(false));
+
+      // Select successfully.
+      assert.isEmpty(this.mocks.term.popMethodHistory('select'));
+      this.setBuffer(1, 100);
+      assert.isTrue(this.terminal.selectCloestOffScreenChar_(true));
+      assert.deepEqual(this.mocks.term.popMethodHistory('select'),
+          [[99, 0, 1]]);
+      this.setBuffer(10, 100);
+      assert.isTrue(this.terminal.selectCloestOffScreenChar_(true));
+      assert.deepEqual(this.mocks.term.popMethodHistory('select'),
+          [[99, 9, 1]]);
+      this.setBuffer(99, 110);
+      assert.isTrue(this.terminal.selectCloestOffScreenChar_(false));
+      assert.deepEqual(this.mocks.term.popMethodHistory('select'),
+          [[0, 109, 1]]);
+      this.setBuffer(50, 110);
+      assert.isTrue(this.terminal.selectCloestOffScreenChar_(false));
+      assert.deepEqual(this.mocks.term.popMethodHistory('select'),
+          [[0, 60, 1]]);
+    });
+
+    it('searchInProgress_', async function() {
+      assert.isFalse(this.terminal.searchInProgress_);
+      this.terminal.onFindBarEvent_({
+        target: {
+          value: 'abc',
+        },
+        detail: {
+          type: 'find',
+          backward: false,
+        },
+      });
+      assert.isTrue(this.terminal.searchInProgress_);
+      this.mocks.searchAddon.getMethodHistory(
+          'onDidChangeResults').slice(-1)[0][0](0, 0);
+      assert.isFalse(this.terminal.searchInProgress_);
     });
   });
 
