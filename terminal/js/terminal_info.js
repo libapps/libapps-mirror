@@ -45,7 +45,7 @@ export let VshLaunchInfo;
  *   needRedirect: boolean,
  *   isSftp: boolean,
  *   isMount: boolean,
- *   mountPath: (?string|undefined),
+ *   mountPath: string,
  *   hash: string,
  * }}
  */
@@ -237,7 +237,7 @@ export function resolveLaunchInfo(parentLaunchInfo, url = ORIGINAL_URL) {
     if (url.hash) {
       const isSftp = url.searchParams.get(PARAM_NAME_SFTP) === 'true';
       const isMount = url.searchParams.get(PARAM_NAME_MOUNT) === 'true';
-      const mountPath = url.searchParams.get(PARAM_NAME_MOUNT_PATH);
+      const mountPath = url.searchParams.get(PARAM_NAME_MOUNT_PATH) ?? '';
       return {
         ssh: {needRedirect: false, isSftp, isMount, mountPath, hash: url.hash},
         settingsProfileId: url.searchParams.get(PARAM_NAME_SETTINGS_PROFILE),
