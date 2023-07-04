@@ -14,8 +14,9 @@ import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import './terminal_button.js';
 import {DEFAULT_VM_NAME, composeSshUrl} from './terminal_common.js';
 import './terminal_context_menu.js';
-import {ICON_CODE, ICON_EDIT, ICON_LINUX, ICON_MORE_VERT, ICON_OPEN_IN_NEW,
-  ICON_PLUS, ICON_SETTINGS, ICON_SSH} from './terminal_icons.js';
+import {ICON_CODE, ICON_DOMAIN, ICON_EDIT, ICON_LINUX, ICON_MORE_VERT,
+  ICON_OPEN_IN_NEW, ICON_PLUS, ICON_SETTINGS,
+  ICON_SSH} from './terminal_icons.js';
 import './terminal_linux_dialog.js';
 import {ProfileType, cleanupVshSyncPrefs, deleteProfile, getProfileIds,
   getVshProfiles, setVshProfiles} from './terminal_profiles.js';
@@ -244,6 +245,12 @@ export class TerminalHomeApp extends LitElement {
     const text = (c) => html`
       <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
       <div class="rowlabel">${containerLabel(c)}</div>
+      ${c.terminal_policy_disabled ? html`
+        <span class="row-icon icon-fill-path"
+            title="${msg(`TERMINAL_DISABLED_TOOLTIP`)}">
+          ${ICON_DOMAIN}
+        </span>
+      ` : ''}
    `;
     const href = (c) => {
       const enc = encodeURIComponent;
@@ -278,7 +285,7 @@ export class TerminalHomeApp extends LitElement {
           <ul>
           ${this.containers.map((c) => html`
             <li class="row">
-              ${link(c)}
+              ${c.terminal_policy_disabled ? text(c) : link(c)}
               ${when(this.settingsProfiles.length > 1, () => html`
                 <mwc-icon-button
                     title="${msg('TERMINAL_HOME_EDIT_LINUX')}"

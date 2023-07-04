@@ -33,6 +33,14 @@ export const ICON_CLOSE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="
 export const ICON_CODE = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M8.2 6.2L4.4 10L8.2 13.8L6.8 15.2L1.6 10L6.8 4.8L8.2 6.2Z M11.3 13.8L15.1 10L11.3 6.2L12.7 4.8L17.9 10L12.7 15.2L11.3 13.8Z"/></svg>`;
 
 /**
+ * Enterprise policy icon.
+ * From https://chromium.googlesource.com/chromium/src/+/1108a3371b975ac75279816a0c68169c11d0b5e2/ui/webui/resources/cr_elements/icons.html#26
+ *
+ * @type {!TemplateResult}
+ */
+export const ICON_DOMAIN = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2,3 L2,17 L11.8267655,17 L13.7904799,17 L18,17 L18,7 L12,7 L12,3 L2,3 Z M8,13 L10,13 L10,15 L8,15 L8,13 Z M4,13 L6,13 L6,15 L4,15 L4,13 Z M8,9 L10,9 L10,11 L8,11 L8,9 Z M4,9 L6,9 L6,11 L4,11 L4,9 Z M12,9 L16,9 L16,15 L12,15 L12,9 Z M12,11 L14,11 L14,13 L12,13 L12,11 Z M8,5 L10,5 L10,7 L8,7 L8,5 Z M4,5 L6,5 L6,7 L4,7 L4,5 Z"/></svg>`;
+
+/**
  * From https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Acontent_copy%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4048
  *
  * @type {!TemplateResult}

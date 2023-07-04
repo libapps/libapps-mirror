@@ -1961,6 +1961,10 @@
 		"description": "The menu label to clear the terminal screen.",
 		"message": "Terminal Clear"
 	},
+	"TERMINAL_DISABLED_TOOLTIP": {
+		"description": "Tooltip shown over the enterprise policy icon when a guest is disabled by policy.",
+		"message": "This VM has been disabled by your administrator"
+	},
 	"TERMINAL_DROPDOWN_DELETE_ITEM_TEXT": {
 		"description": "The text which tells the user how to use the keyboard to delete an item from a dropdown menu. This could be used in a tooltip or be announced by a screen reader.",
 		"message": "Press the delete key to delete the item."
