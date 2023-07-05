@@ -50,6 +50,10 @@ export class TerminalTextfieldElement extends LitElement {
       error: {
         type: String,
       },
+      // The type for the <input>. The default is "text".
+      inputType: {
+        type: String,
+      },
       focused_: {
         state: true,
       },
@@ -174,6 +178,8 @@ export class TerminalTextfieldElement extends LitElement {
     this.fitContent = false;
     /** @type {string|undefined} */
     this.error;
+    /** @type {string|undefined} */
+    this.inputType;
     this.focused_ = false;
 
     this.rulerRef_ = createRef();
@@ -218,7 +224,7 @@ export class TerminalTextfieldElement extends LitElement {
         <div id="container">
           <div id="input-container">
             <slot name="inline-prefix"></slot>
-            <input ${ref(this.inputRef_)} type="text"
+            <input ${ref(this.inputRef_)} type="${this.inputType || 'text'}"
                 .placeholder="${this.placeholder}"
                 .value="${live(this.value)}"
                 .title="${this.title}"

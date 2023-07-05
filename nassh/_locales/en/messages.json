@@ -2095,6 +2095,10 @@
 		"description": "Label text shown for the 'line-height' preference.",
 		"message": "Line height"
 	},
+	"TERMINAL_NAME_PREF_SCROLLBACK_LIMIT": {
+		"description": "Label text shown for the 'scrollback-limit' preference. Scrollback-limit controls how many lines of past terminal output are kept in the buffer. The user can scrollback and see those lines.",
+		"message": "Scrollback limit"
+	},
 	"TERMINAL_NAME_PREF_SHAPE": {
 		"description": "Label text shown for the preference where users pick a cursor shape.",
 		"message": "Shape"

@@ -31,6 +31,7 @@ import './terminal_settings_profile_header.js';
 import './terminal_settings_profile_item.js';
 import './terminal_settings_row.js';
 import './terminal_settings_theme.js';
+import './terminal_settings_scrollback_limit.js';
 
 export const BELL_SOUND_CONVERTER = {
   toChecked: (value) => !!value,
@@ -605,6 +606,14 @@ export class TerminalSettingsApp extends LitElement {
                         msg('HTERM_NAME_PREF_ENABLE_RESIZE_STATUS')}"
                     preference="enable-resize-status">
                 </terminal-settings-checkbox>
+              </li>
+              <li class="setting-container"
+                  title="${msg('TERMINAL_NAME_PREF_SCROLLBACK_LIMIT')}">
+                <div class="label">
+                  ${msg('TERMINAL_NAME_PREF_SCROLLBACK_LIMIT')}
+                </div>
+                <terminal-settings-scrollback-limit>
+                </terminal-settings-scrollback-limit>
               </li>
               <li class="setting-container"
                   title="${msg('HTERM_PREF_CLOSE_ON_EXIT')}">

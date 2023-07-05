@@ -886,7 +886,6 @@ export class XtermTerminal {
       setHtermCSSVariable('font-size', `${v}px`);
     });
 
-    // TODO(lxj): support option "lineHeight", "scrollback".
     this.prefs_.addObservers(null, {
       'audible-bell-sound': (v) => {
         this.bell_.playAudio = !!v;
@@ -930,6 +929,14 @@ export class XtermTerminal {
       },
       'line-height': (v) => {
         this.term.options.lineHeight = v;
+      },
+      'scrollback-limit': (v) => {
+        if (typeof v !== 'number' || v < 0) {
+          // xterm.js does not have an "unlimited" option, so we just use a
+          // large number here.
+          v = 10000000;
+        }
+        this.term.options.scrollback = v;
       },
       'scroll-on-keystroke': (v) => {
         this.term.options.scrollOnUserInput = v;

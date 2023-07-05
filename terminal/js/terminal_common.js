@@ -207,6 +207,8 @@ export function definePrefs(prefs) {
   prefs.definePreference('theme', DEFAULT_THEME);
   prefs.definePreference('theme-variations', {});
   prefs.definePreference('line-height', 1);
+  // Negative value means "unlimited".
+  prefs.definePreference('scrollback-limit', 10000);
 
   // Background image multi-profile migration.
   // TODO(joelhockey): Remove after M120.
