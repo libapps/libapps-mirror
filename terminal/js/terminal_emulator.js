@@ -1470,8 +1470,9 @@ export class XtermTerminal {
       chrome.terminalPrivate.openWindow(
           {asTab: true, url: '/html/terminal.html'});
     };
+    set(Modifier.Ctrl | Modifier.Shift, keyCodes.T, newTab);
     if (this.prefs_.get('pass-ctrl-t')) {
-      setWithShiftVersion(Modifier.Ctrl, keyCodes.T, newTab);
+      set(Modifier.Ctrl, keyCodes.T, newTab);
     }
 
     if (this.prefs_.get('pass-ctrl-w')) {
@@ -1526,6 +1527,9 @@ export class XtermTerminal {
     setWithShiftVersion(Modifier.Ctrl, keyCodes.V, this.ctrlVKeyDownHandler_);
 
     set(Modifier.Ctrl | Modifier.Shift, keyCodes.F, () => this.findBar_.show());
+
+    // ctrl+alt+. for switching between logged-in users.
+    set(Modifier.Ctrl | Modifier.Alt, 190, noop);
   }
 
   handleOnTerminalReady() {}
