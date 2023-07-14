@@ -60,17 +60,19 @@ export class Plugin {
     this.streams_ = new StreamSet();
   }
 
-  /** @param {function()} onComplete */
-  init(onComplete) {
+  /**
+   * @return {!Promise<void>} When the plugin has been initialized.
+   */
+  init() {
     this.io.onVTKeystroke = this.onVTKeystroke_.bind(this);
     this.io.sendString = this.sendString_.bind(this);
     this.io.onTerminalResize = this.onTerminalResize_.bind(this);
 
-    this.plugin_ = globalThis.document.createElement('embed');
+    const plugin = this.plugin_ = globalThis.document.createElement('embed');
     // Height starts at 1px, and is changed to 0 after inserting into body.
     // This modification to the plugin ensures that the 'load' event fires
     // when it is running in the background page.
-    this.plugin_.style.cssText =
+    plugin.style.cssText =
         ('position: absolute;' +
          'top: -99px' +
          'width: 0;' +
@@ -78,23 +80,26 @@ export class Plugin {
 
     const pluginURL = `../plugin/${this.sshClientVersion_}/ssh_client.nmf`;
 
-    this.plugin_.setAttribute('src', pluginURL);
-    this.plugin_.setAttribute('type', 'application/x-nacl');
-    this.plugin_.addEventListener('load', onComplete);
-    this.plugin_.addEventListener('message', this.onMessage_.bind(this));
+    return new Promise((resolve, reject) => {
+      plugin.setAttribute('src', pluginURL);
+      plugin.setAttribute('type', 'application/x-nacl');
+      plugin.addEventListener('load', resolve);
+      plugin.addEventListener('message', this.onMessage_.bind(this));
 
-    const errorHandler = (ev) => {
-      this.io.println(localize('PLUGIN_LOADING_FAILED'));
-      console.error('loading plugin failed', ev);
-      this.onExit_(-1 /* CommandInstance.EXIT_INTERNAL_ERROR */);
-    };
-    this.plugin_.addEventListener('crash', errorHandler);
-    this.plugin_.addEventListener('error', errorHandler);
+      const errorHandler = (ev) => {
+        this.io.println(localize('PLUGIN_LOADING_FAILED'));
+        console.error('loading plugin failed', ev);
+        this.onExit_(-1 /* CommandInstance.EXIT_INTERNAL_ERROR */);
+        reject();
+      };
+      plugin.addEventListener('crash', errorHandler);
+      plugin.addEventListener('error', errorHandler);
 
-    document.body.insertBefore(this.plugin_, document.body.firstChild);
-    // Force a relayout. Workaround for load event not being called on <embed>
-    // for a NaCl module. https://crbug.com/699930
-    this.plugin_.style.height = '0';
+      document.body.insertBefore(plugin, document.body.firstChild);
+      // Force a relayout. Workaround for load event not being called on <embed>
+      // for a NaCl module. https://crbug.com/699930
+      plugin.style.height = '0';
+    });
   }
 
   /**

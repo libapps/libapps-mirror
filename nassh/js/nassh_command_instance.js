@@ -1553,9 +1553,9 @@ CommandInstance.prototype.initWasmPlugin_ =
 
 /**
  * @param {!Object} argv Plugin arguments.
- * @param {function()} onComplete
+ * @return {!Promise<void>}
  */
-CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
+CommandInstance.prototype.initNaclPlugin_ = async function(argv) {
   syncFilesystemFromIndexeddbToDom();
 
   this.plugin_ = new NaclPlugin({
@@ -1574,7 +1574,7 @@ CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
     isSftp: this.isSftp,
     sftpClient: this.sftpClient,
   });
-  this.plugin_.init(onComplete);
+  return this.plugin_.init();
 };
 
 /**
@@ -1585,7 +1585,7 @@ CommandInstance.prototype.initNaclPlugin_ = function(argv, onComplete) {
 CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
   this.io.print(localize('PLUGIN_LOADING', [this.sshClientVersion_]));
   if (this.sshClientVersion_.startsWith('pnacl')) {
-    this.initNaclPlugin_(argv, () => {
+    this.initNaclPlugin_(argv).then(() => {
       this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
       onComplete();
     });
