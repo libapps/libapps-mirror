@@ -792,10 +792,10 @@ export function initApi(fsp) {
           {},
           (f) => { f.removeRecursively(deleteDone, deleteDone); },
           deleteDone);
-    }).then(() => {
-      // We can start processing messages now.
-      handlersReady = true;
     });
+  }).finally(() => {
+    // We can start processing messages now.
+    handlersReady = true;
   });
 }
 
