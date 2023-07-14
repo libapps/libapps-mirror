@@ -1301,26 +1301,25 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
     this.authAgent_ = new Agent(backendIDs, this.io.terminal_, forwardAgent);
   }
 
-  this.initPlugin_(argv, async () => {
-    this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
+  await this.initPlugin_(argv);
+  this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
-    this.io.println(localize('CONNECTING',
-                              [`${params.username}@${disp_hostname}`]));
+  this.io.println(localize('CONNECTING',
+                           [`${params.username}@${disp_hostname}`]));
 
-    lib.notNull(this.plugin_);
-    if (this.plugin_ instanceof NaclPlugin) {
-      this.plugin_.send('startSession', [argv]);
+  lib.notNull(this.plugin_);
+  if (this.plugin_ instanceof NaclPlugin) {
+    this.plugin_.send('startSession', [argv]);
+  }
+  if (this.isSftp) {
+    try {
+      await this.sftpClient.initConnection(this.plugin_);
+      this.onSftpInitialised();
+    } catch (e) {
+      this.io.println(localize('NASFTP_ERROR_MESSAGE', [e]));
+      this.exit(EXIT_INTERNAL_ERROR, true);
     }
-    if (this.isSftp) {
-      try {
-        await this.sftpClient.initConnection(this.plugin_);
-        this.onSftpInitialised();
-      } catch (e) {
-        this.io.println(localize('NASFTP_ERROR_MESSAGE', [e]));
-        this.exit(EXIT_INTERNAL_ERROR, true);
-      }
-    }
-  });
+  }
 };
 
 /**
@@ -1579,16 +1578,13 @@ CommandInstance.prototype.initNaclPlugin_ = async function(argv) {
 
 /**
  * @param {!Object} argv Plugin arguments.
- * @param {function()} onComplete
  * @return {!Promise<void>}
  */
-CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
+CommandInstance.prototype.initPlugin_ = async function(argv) {
   this.io.print(localize('PLUGIN_LOADING', [this.sshClientVersion_]));
   if (this.sshClientVersion_.startsWith('pnacl')) {
-    this.initNaclPlugin_(argv).then(() => {
-      this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
-      onComplete();
-    });
+    await this.initNaclPlugin_(argv);
+    this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
   } else {
     await this.initWasmPlugin_(argv.arguments, argv.environment, {
       trace: argv.debugTrace,
@@ -1598,7 +1594,6 @@ CommandInstance.prototype.initPlugin_ = async function(argv, onComplete) {
       await this.onPluginExit(code);
       this.exit(code, /* noReconnect= */ false);
     });
-    onComplete();
   }
 };
 
