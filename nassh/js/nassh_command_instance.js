@@ -87,7 +87,7 @@ export function CommandInstance(argv) {
   // chrome-untrusted:// doesn't have access to any socket APIs yet, so
   // fallback to NaCl there as well.
   const naclSupported =
-      navigator.mimeTypes['application/x-pnacl'] !== undefined ||
+      (navigator.mimeTypes ?? {})['application/x-pnacl'] !== undefined ||
       globalThis.SharedArrayBuffer === undefined ||
       isCrOSSystemApp();
   // The version of the ssh client to load.
