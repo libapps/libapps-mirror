@@ -21,7 +21,7 @@ window.onload = async function() {
  * Callback by terminal init.
  */
 const run = async function() {
-  const params = new URLSearchParams(document.location.search);
+  const params = new URLSearchParams(globalThis.location.search);
   const trace = (params.get('trace') ?? 'false') === 'true';
   const debug = trace;
   const user = params.get('user') ?? 'vapier';

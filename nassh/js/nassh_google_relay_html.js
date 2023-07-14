@@ -42,7 +42,7 @@ const showRelayError = function(msg) {
 
 /** On load. */
 globalThis.addEventListener('DOMContentLoaded', (event) => {
-  const hash = document.location.hash.substr(1);
+  const hash = globalThis.location.hash.substr(1);
 
   if (hash.indexOf('@') != -1) {
     // URLs containing '@' are legacy v1 redirects.
@@ -89,5 +89,5 @@ globalThis.addEventListener('DOMContentLoaded', (event) => {
   globalThis.sessionStorage.setItem(
       'googleRelay.redirectCount', count.toString());
 
-  document.location.replace(url);
+  globalThis.location.replace(url);
 });

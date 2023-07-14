@@ -125,7 +125,7 @@ export function CommandInstance(argv) {
   this.syncStorage = argv.syncStorage;
 
   // Terminal Location reference (can accept another hterm tab's location).
-  this.terminalLocation = argv.terminalLocation || document.location;
+  this.terminalLocation = argv.terminalLocation || globalThis.location;
 
   // Terminal Window reference (can accept another hterm tab's window).
   this.terminalWindow = argv.terminalWindow || globalThis;
@@ -1714,7 +1714,7 @@ CommandInstance.prototype.onConnectDialog_.mosh = function(
     dialogFrame, profileID) {
   dialogFrame.close();
 
-  document.location.replace('/plugin/mosh/mosh_client.html');
+  globalThis.location.replace('/plugin/mosh/mosh_client.html');
 };
 
 /**

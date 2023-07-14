@@ -25,7 +25,7 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
     const manifest = getManifest();
     const storage = getSyncStorage();
 
-    const params = new URLSearchParams(document.location.search);
+    const params = new URLSearchParams(globalThis.location.search);
     const profileId = params.get('profileId') ??
         localize('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
 
@@ -108,7 +108,7 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
       };
 
     // If the user wants a specific page, navigate to it now.
-    const page = document.location.hash;
+    const page = globalThis.location.hash;
     if (page) {
       PreferencesEditor.switchSettingsPage(page.substr(1));
     }
@@ -288,7 +288,7 @@ PreferencesEditor.prototype.onRestoreClick = function(e) {
       asJson: true,
       prefs: prefs,
     });
-    document.location.reload();
+    globalThis.location.reload();
   };
 
   input.click();

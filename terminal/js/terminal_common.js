@@ -102,7 +102,7 @@ export const PARAM_NAME_TMUX = 'tmux';
 
 // Cache the url at the first opportunity. The url normally should not change,
 // so this is being defensive.
-export const ORIGINAL_URL = new URL(document.location.href);
+export const ORIGINAL_URL = new URL(globalThis.location.href);
 
 /**
  * Returns whether we are using xterm.js for emulator.

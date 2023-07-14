@@ -104,7 +104,7 @@ ConfigDialog.prototype.refresh_ = function() {
  * Event when the window finishes loading.
  */
 globalThis.addEventListener('DOMContentLoaded', (event) => {
-  const params = new URLSearchParams(document.location.search);
+  const params = new URLSearchParams(globalThis.location.search);
   const profileId = lib.notNull(params.get('profile-id'));
   document.title = `SFTP: ${profileId}`;
   runtimeSendMessage({

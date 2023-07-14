@@ -54,7 +54,7 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
     }
   }
 
-  const params = new URLSearchParams(document.location.search);
+  const params = new URLSearchParams(globalThis.location.search);
 
   // Allow users to bookmark links that open as a window.
   const openas = params.get('openas');
@@ -63,7 +63,7 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
       // Delete the 'openas' string so we don't get into a loop.  We want to
       // preserve the rest of the query string when opening the window.
       params.delete('openas');
-      const url = new URL(document.location.toString());
+      const url = new URL(globalThis.location.toString());
       url.search = params.toString();
       openNewWindow(url.href).then(() => globalThis.close);
       return;
@@ -100,7 +100,7 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
       const nasshCommand = new CommandInstance({
         io: terminal.io,
         syncStorage: storage,
-        args: [document.location.hash.substr(1)],
+        args: [globalThis.location.hash.substr(1)],
         environment: environment,
         onExit: (code) => {
           if (terminal.getPrefs().get('close-on-exit')) {

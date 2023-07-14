@@ -14,7 +14,7 @@ import {
  * so we do it like this instead.
  */
 globalThis.addEventListener('DOMContentLoaded', async (event) => {
-  const params = new URLSearchParams(document.location.search);
+  const params = new URLSearchParams(globalThis.location.search);
 
   // Make it easy to re-open as a window.
   const openas = params.get('openas');
@@ -23,7 +23,7 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
       // Delete the 'openas' string so we don't get into a loop.  We want to
       // preserve the rest of the query string when opening the window.
       params.delete('openas');
-      const url = new URL(document.location.toString());
+      const url = new URL(globalThis.location.toString());
       url.search = params.toString();
       Crosh.openNewWindow_(url.href).then(() => globalThis.close());
       return;
@@ -92,7 +92,7 @@ Crosh.msg = function(name, args) {
  * @return {boolean}
  */
 Crosh.init = function() {
-  const params = new URLSearchParams(document.location.search);
+  const params = new URLSearchParams(globalThis.location.search);
   const profileId = params.get('profile');
   const storage = getSyncStorage();
   const terminal = new hterm.Terminal({profileId, storage});
@@ -156,7 +156,7 @@ Crosh.init = function() {
     {name: Crosh.msg('NEW_WINDOW_MENU_LABEL'),
      action: function() {
        // Preserve the full URI in case it has args like for vmshell.
-       Crosh.openNewWindow_(document.location.href);
+       Crosh.openNewWindow_(globalThis.location.href);
      }},
     {name: Crosh.msg('FAQ_MENU_LABEL'),
      action: function() {
@@ -236,9 +236,9 @@ Crosh.prototype.run = function() {
   if (hterm.windowType !== 'app' &&
       hterm.windowType !== 'popup' &&
       !isCrOSSystemApp()) {
-    const params = new URLSearchParams(document.location.search);
+    const params = new URLSearchParams(globalThis.location.search);
     params.set('openas', 'window');
-    const url = new URL(document.location.toString());
+    const url = new URL(globalThis.location.toString());
     url.search = params.toString();
     this.io.println(Crosh.msg(
         'OPEN_AS_WINDOW_TIP',
@@ -362,12 +362,12 @@ Crosh.prototype.exit = function(code) {
     const ch = string.toLowerCase();
     if (ch == 'r' || ch == ' ' || ch == '\x0d' /* enter */ ||
         ch == '\x12' /* ctrl-r */) {
-      document.location.reload();
+      globalThis.location.reload();
       return;
     }
 
     if (ch == 'c') {
-      document.location = '/html/nassh.html';
+      globalThis.location = '/html/nassh.html';
       return;
     }
 

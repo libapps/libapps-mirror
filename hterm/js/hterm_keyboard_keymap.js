@@ -843,7 +843,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlN_ = function(e) {
   }
 
   if (e.shiftKey) {
-    lib.f.openWindow(document.location.href, '',
+    lib.f.openWindow(globalThis.location.href, '',
                      'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
                      `minimizable=yes,width=${globalThis.innerWidth}` +
                      `,height=${globalThis.innerHeight}`);
@@ -888,7 +888,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlV_ = function(e) {
  */
 hterm.Keyboard.KeyMap.prototype.onMetaN_ = function(e) {
   if (e.shiftKey) {
-    lib.f.openWindow(document.location.href, '',
+    lib.f.openWindow(globalThis.location.href, '',
                      'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
                      `minimizable=yes,width=${globalThis.outerWidth}` +
                      `,height=${globalThis.outerHeight}`);
