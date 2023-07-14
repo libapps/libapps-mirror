@@ -45,6 +45,7 @@ import {Cli as nasftpCli} from './nasftp_cli.js';
  *   isMount: (boolean|undefined),
  *   fsp: (!SftpFsp|undefined),
  *   mountOptions: (!chrome.fileSystemProvider.MountOptions|undefined),
+ *   sshClientVersion: (string|undefined),
  *   onExit: (function(number)|undefined),
  *   sessionStorage: (!lib.Storage|undefined),
  *   syncStorage: (!lib.Storage),
@@ -660,6 +661,7 @@ CommandInstance.prototype.mountProfile = function(profileID) {
             displayName: prefs.get('description'),
             writable: true,
           },
+          sshClientVersion: this.sshClientVersion_,
         },
         connectOptions: params,
       });
