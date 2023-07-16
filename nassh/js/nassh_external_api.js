@@ -112,7 +112,7 @@ function(request, sender, sendResponse) {
   Promise.all([
       writeFile(knownHosts, request.knownHosts),
       writeFile(identityFile, request.identityFile),
-  ]).then(() => {
+  ]).then(async () => {
     const argv = {
       io: lib.notNull(io_),
       syncStorage: getSyncStorage(),
@@ -132,7 +132,7 @@ function(request, sender, sendResponse) {
       argstr: `-i${identityFile} -oUserKnownHostsFile=${knownHosts}`,
     };
     const instance = new CommandInstance(argv);
-    instance.connectTo(connectOptions);
+    await instance.connectTo(connectOptions);
     // TODO(vapier): Plumb back up success/failure.
     sendResponse({error: false, message: 'createSftpInstance'});
   }).catch((e) => {
@@ -653,7 +653,10 @@ function(port) {
             inputResolve = resolve;
           });
         };
-        instance.connectTo(connectOptions);
+        instance.connectTo(connectOptions).catch((e) => {
+          console.error(e);
+          post({error: true, message: e.message, stack: e.stack});
+        });
         break;
       }
 

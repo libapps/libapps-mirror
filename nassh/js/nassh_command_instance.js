@@ -1003,6 +1003,7 @@ CommandInstance.prototype.sftpConnectToDestination = function(destination) {
  *     prefsToConnectParams_ helper.
  * @param {function(!Object, !Object): !Promise<void>=} finalize Call this
  *     instead of the normal connectToFinalize_.
+ * @return {!Promise<void>}
  */
 CommandInstance.prototype.connectTo = async function(params, finalize) {
   if (params.hostname == '>crosh') {
@@ -1178,11 +1179,11 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
   const refresh = options['cert-refresh'] ?
       gcseRefreshCert(this.io) : Promise.resolve();
   // Even if refreshing went horribly, attempt the connection anyways.
-  refresh.finally(() => {
+  return refresh.finally(() => {
     if (finalize) {
-      finalize(params, options);
+      return finalize(params, options);
     } else {
-      this.connectToFinalize_(params, options);
+      return this.connectToFinalize_(params, options);
     }
   });
 };
