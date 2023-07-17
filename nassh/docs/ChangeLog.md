@@ -1,3 +1,15 @@
+# 0.55, 2023-07-20, MV3 regression fixes.
+
+* mount: Pass ssh client version down.
+* nassh: Do not assume navigator.mimeTypes exists.
+* api: Make handlers available regardless of DOM fs.
+* extension: Fix context menu context.
+* connect dialog: Move css var init to pure css.
+* connect dialog: Set title too.
+* relay: Update corp sup proxy for regionalization.
+* mkdist: Update icon path for MV3.
+* l10n: Update translations.
+
 # 0.54, 2023-06-13, MV3 migration & require Chrome 108+.
 
 * connect dialog: Update pattern= to work with RegExp v flag.
