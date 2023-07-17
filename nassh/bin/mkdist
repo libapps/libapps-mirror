@@ -200,9 +200,7 @@ def mkzip(
 
     basename = _hack_localize(name).replace(" ", "")
 
-    if not stable:
-        name += " (dev)"
-    else:
+    if stable:
         # Point the icons to the stable version.
         def _update_icons(icons):
             for size in icons.keys():
@@ -211,15 +209,6 @@ def mkzip(
         _update_icons(data["icons"])
         if "action" in data:
             _update_icons(data["action"]["default_icon"])
-
-    # Workaround a bug in CWS where it can't handle partial translations.
-    # b/153099839
-    if (
-        "__MSG_nassh_product_name__" in name
-        and name != "__MSG_nassh_product_name__"
-    ):
-        name = _hack_localize(name)
-    data["name"] = name
 
     basename += archive_suffix + "-" + version
     zipfile = f"{basename}.zip"
