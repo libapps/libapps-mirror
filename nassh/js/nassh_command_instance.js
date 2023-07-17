@@ -345,8 +345,9 @@ CommandInstance.prototype.isDevVersion = function() {
   }
 
   // For the normal extension, check the manifest build type.
-  return (!!this.manifest_.name.match(/\((dev|tot)\)/) ||
-          this.manifest_.version_name === 'ToT');
+  // We set version_name to "ToT" in git itself, to the build date in the dev
+  // version, and clear it in the stable version.
+  return this.manifest_.version_name !== undefined;
 };
 
 /**

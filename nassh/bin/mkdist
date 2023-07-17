@@ -184,10 +184,14 @@ def mkzip(
     version = version_mangle(version)
     data["version"] = version
 
+    # NB: The version_name must be cleared for the stable version as our
+    # CommandInstance.prototype.isDevVersion API relies on it.
     if version_name:
         data["version_name"] = version_name
+        assert not stable, "Non-stable versions must set version_name"
     else:
         data.pop("version_name", None)
+        assert stable, "Stable versions must not set version_name"
 
     # Hack up localized name for the filesystem.
     def _hack_localize(s: str) -> str:
