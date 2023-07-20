@@ -1,3 +1,12 @@
+# 0.56, 2023-07-27, MV3 regression fixes.
+
+* wassh: Always create /.ssh.
+* fs: Create parent /.ssh for key.
+* command: Chain connectTo into refresh & finalize calls.
+* plugin: Change init callbacks to promises.
+* nacl: Change plugin init from callbacks to promises.
+* pull default location from globalThis.
+
 # 0.55, 2023-07-20, MV3 regression fixes.
 
 * mount: Pass ssh client version down.
