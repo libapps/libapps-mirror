@@ -226,6 +226,7 @@ export async function importIdentityFiles(fileSystem, files) {
 export async function getIdentityFileNames(fileSystem) {
   const identityDir = '/.ssh/identity';
   // Make sure the directory exists.  This makes reading empty dirs easier.
+  await fileSystem.createDirectory('/.ssh');
   await fileSystem.createDirectory(identityDir);
   const entries = await fileSystem.readDirectory(identityDir);
   return entries.files.filter((entry) => {
