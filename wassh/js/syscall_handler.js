@@ -96,6 +96,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
 
     const sshdir = new VFS.IndexeddbFsDirectoryHandler(
         '/.ssh', this.fileSystem_);
+    await this.fileSystem_.createDirectory('/.ssh');
     this.vfs.addHandler(sshdir);
 
     const cwd = new VFS.CwdHandler('/');
