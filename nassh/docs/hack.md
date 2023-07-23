@@ -219,6 +219,7 @@ The vast majority of the code here lives under [js/].
 * [css/]: Any CSS needed for styling UI.
   * [nassh_box.css]: Common utility styling code.
   * [nassh_connect_dialog.css]: Styling for the connection dialog.
+  * [nassh_popup.css]: Styling for the extension popup page.
   * [nassh_preferences_editor.css]: Styling for the extensions options page.
 * dist/: Builds of the Chrome extension.
 * [docs/]: Documentation files.
@@ -499,6 +500,7 @@ Here's a random list of documents which would be useful to people.
 [chrome-bootstrap.css]: ../third_party/chrome-bootstrap/chrome-bootstrap.css
 [nassh_box.css]: ../css/nassh_box.css
 [nassh_connect_dialog.css]: ../css/nassh_connect_dialog.css
+[nassh_popup.css]: ../css/nassh_popup.css
 [nassh_preferences_editor.css]: ../css/nassh_preferences_editor.css
 
 [crosh.html]: ../html/crosh.html
