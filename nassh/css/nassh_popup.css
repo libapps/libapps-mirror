@@ -9,8 +9,9 @@
  */
 
 body {
-  background-color: black;
-  color: white;
+  background-color: var(--nassh-bg-color);
+  color: var(--nassh-fg-color);
+  font-family: var(--nassh-font-family);
   height: 100%;
   margin: 0;
   padding: 0.5em 0 0.5em 0;
@@ -25,7 +26,6 @@ div.links {
 }
 div.links:focus,
 div.links:hover {
-  background-color: rgba(255, 0, 0, 0.5);
-  font-weight: bold;
+  background-color: var(--nassh-cursor-color);
   text-decoration: underline;
 }

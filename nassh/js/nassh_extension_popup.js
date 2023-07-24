@@ -38,7 +38,6 @@ function popup() {
 
   // Load the theme first so the style doesn't flicker.
   this.htermPrefs_.readStorage(() => {
-    this.updateTheme_();
     this.prefs_.readStorage(() => {
       // If there aren't any connections yet, pop open the connection dialog
       // automatically.  This will force users to register one first.
@@ -327,26 +326,4 @@ popup.prototype.populateList_ = function() {
     // make the window slightly bigger so the user won't notice.
     setTimeout(() => document.body.style.height = `${height + 2}px`, 50);
   }
-};
-
-/**
- * Style the popup with the right colors.
- */
-popup.prototype.updateTheme_ = function() {
-  let style = document.body.style;
-  style.color = this.htermPrefs_.getString('foreground-color');
-  style.backgroundColor = this.htermPrefs_.getString('background-color');
-  style.fontSize = this.htermPrefs_.getNumber('font-size') + 'px';
-  style.fontFamily = this.htermPrefs_.getString('font-family');
-  if (style.webkitFontSmoothing !== undefined) {
-    style.webkitFontSmoothing = this.htermPrefs_.getString('font-smoothing');
-  }
-
-  style = document.createElement('style');
-  style.textContent = (
-      'div.links:hover {' +
-      `  background-color: ${this.htermPrefs_.getString('cursor-color')};` +
-      '}'
-  );
-  document.head.appendChild(style);
 };
