@@ -8,19 +8,12 @@
  * Styles used by the config dialog box.
  */
 
-/* Default colors here will be updated on the fly. */
-:root {
-  --nassh-bg-color: rgb(16, 16, 16);
-  --nassh-fg-color: rgb(240, 240, 240);
-  --nassh-cursor-color: rgba(255, 0, 0, 0.5);
-}
-
 body {
   margin: 0;
   padding: 0.5em;
   background-color: var(--nassh-bg-color);
   color: var(--nassh-fg-color);
-  font-family: courier;
+  font-family: var(--nassh-font-family);
   font-size: smaller;
 }
 
