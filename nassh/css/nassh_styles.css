@@ -1,0 +1,23 @@
+/*
+ * Copyright 2023 The ChromiumOS Authors
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+/**
+ * Common styles used by all nassh UIs.
+ */
+
+/* Default colors here will be updated on the fly. */
+:root {
+  --nassh-bg-color-rgb: 16, 16, 16;
+  --nassh-bg-color: rgb(var(--nassh-bg-color-rgb));
+  --nassh-fg-color-rgb: 240, 240, 240;
+  --nassh-fg-color: rgb(var(--nassh-fg-color-rgb));
+  --nassh-cursor-color-rgb: 255, 0, 0;
+  --nassh-cursor-color: rgba(var(--nassh-cursor-color-rgb), 0.5);
+
+  --nassh-fg-color-20: rgba(var(--nassh-fg-color-rgb), 0.20);
+  --nassh-fg-color-75: rgba(var(--nassh-fg-color-rgb), 0.75);
+  --nassh-cursor-color-75: rgba(var(--nassh-cursor-color-rgb), 0.75);
+}
