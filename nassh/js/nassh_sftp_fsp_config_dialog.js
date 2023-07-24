@@ -36,11 +36,6 @@ ConfigDialog.prototype.updateLabels_ = function() {
   lib.i18n.getAcceptLanguages().then((languages) => {
     const mm = new lib.MessageManager(languages);
     mm.processI18nAttributes(document.body);
-
-    const labels = document.querySelectorAll('.aligned-dialog-labels');
-    let maxWidth = 0;
-    labels.forEach((el) => maxWidth = Math.max(maxWidth, el.clientWidth));
-    labels.forEach((el) => el.style.width = `${maxWidth}px`);
   });
 };
 

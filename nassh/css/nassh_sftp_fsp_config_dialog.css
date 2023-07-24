@@ -27,8 +27,22 @@ input, select {
   background-color: rgba(255, 255, 255, 0.95); /* yes, white */
 }
 
+/**
+ * The various settings that we want to keep visually aligned.
+ */
+table#aligned-dialog-fields {
+  border: 0px;
+  width: 100%;
+}
+
 .aligned-dialog-labels {
   text-align: right;
-  display: block;
   white-space: nowrap;
+  /* NB: Keep in sync with .aligned-dialog-fullwidth width. */
+  width: 1%;
+}
+
+.aligned-dialog-fullwidth {
+  /* NB: Keep in sync with .aligned-dialog-labels width. */
+  width: 99%;
 }
