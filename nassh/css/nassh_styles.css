@@ -14,7 +14,7 @@
   --nassh-bg-color: rgb(var(--nassh-bg-color-rgb));
   --nassh-fg-color-rgb: 240, 240, 240;
   --nassh-fg-color: rgb(var(--nassh-fg-color-rgb));
-  --nassh-cursor-color-rgb: 255, 0, 0;
+  --nassh-cursor-color-rgb: 138, 180, 248;
   --nassh-cursor-color: rgba(var(--nassh-cursor-color-rgb), 0.5);
 
   --nassh-fg-color-20: rgba(var(--nassh-fg-color-rgb), 0.20);
