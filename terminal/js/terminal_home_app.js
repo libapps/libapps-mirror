@@ -14,8 +14,8 @@ import {LitElement, createRef, css, html, ref, when} from './lit.js';
 import './terminal_button.js';
 import {DEFAULT_VM_NAME, composeSshUrl} from './terminal_common.js';
 import './terminal_context_menu.js';
-import {ICON_CODE, ICON_DOMAIN, ICON_EDIT, ICON_LINUX, ICON_MORE_VERT,
-  ICON_OPEN_IN_NEW, ICON_PLUS, ICON_SETTINGS,
+import {ICON_BRUSCHETTA, ICON_CODE, ICON_DOMAIN, ICON_EDIT, ICON_LINUX,
+  ICON_MORE_VERT, ICON_OPEN_IN_NEW, ICON_PLUS, ICON_SETTINGS,
   ICON_SSH} from './terminal_icons.js';
 import './terminal_linux_dialog.js';
 import {ProfileType, cleanupVshSyncPrefs, deleteProfile, getProfileIds,
@@ -44,11 +44,18 @@ const PREF_PATH_SSH_ALLOWED = 'crostini.terminal_ssh_allowed_by_policy';
 const PREF_PATH_CONTAINERS = 'crostini.containers';
 
 /**
+ * The vm_type for a Bruschetta VM.
+ *
+ * @type {number}
+ */
+const VM_TYPE_BRUSCHETTA = 3;
+
+/**
  * If we're told what the name should be use that, otherwise container label is
  * <container_name> for termina, else <vm_name>:<container_name>.
  *
  * @param {{vm_name: string, container_name: string,
- *     terminal_label: ?string}} container
+ *     terminal_label: ?string, vm_type: ?number}} container
  * @return {string}
  */
 function containerLabel(container) {
@@ -243,7 +250,9 @@ export class TerminalHomeApp extends LitElement {
       ? msg('TERMINAL_HOME_MANAGE') : msg('TERMINAL_HOME_SET_UP');
 
     const text = (c) => html`
-      <span class="row-icon icon-fill-path">${ICON_LINUX}</span>
+      <span class="row-icon icon-fill-path">${
+        (c.vm_type == VM_TYPE_BRUSCHETTA) ? ICON_BRUSCHETTA
+                                          : ICON_LINUX}</span>
       <div class="rowlabel">${containerLabel(c)}</div>
       ${c.terminal_policy_disabled ? html`
         <span class="row-icon icon-fill-path"
