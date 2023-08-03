@@ -298,6 +298,28 @@ lib.f.lastError = function(defaultMsg = null) {
  * @return {?Window} The newly opened window.
  */
 lib.f.openWindow = function(url, name = undefined, features = undefined) {
+  // If this context doesn't have an open function, fallback to extension APIs.
+  // For example, the background extension service worker.
+  if (globalThis.open === undefined) {
+    if (name === '_blank') {
+      chrome.tabs.create({url});
+    } else {
+      let type = chrome.windows.CreateType.NORMAL;
+      // TODO(vapier): features can encode width & height too.
+      if (features !== undefined && features.includes('chrome=no')) {
+        type = chrome.windows.CreateType.POPUP;
+      }
+      chrome.windows.create({
+        focused: true,
+        type,
+        url,
+      });
+    }
+    // We could perhaps return the tab/window from above, the return value is
+    // rarely used by callers, so let's be lazy for now.
+    return undefined;
+  }
+
   // We create the window first without the URL loaded.
   const win = globalThis.open(undefined, name, features);
 
