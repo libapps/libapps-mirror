@@ -31,8 +31,22 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
 
     case 'fullscreen':
     case 'maximized':
-      chrome.windows.getCurrent((win) => {
-        chrome.windows.update(win.id, {state: openas});
+      chrome.windows.getCurrent({populate: true}, (win) => {
+        if (win.tabs.length > 1) {
+          // If the current window has multiple tabs, create a new window and
+          // move this tab to it.  This avoids confusion if the current window
+          // has non-secure shell tabs in it.
+          chrome.tabs.getCurrent((tab) => {
+            chrome.windows.create({
+              focused: win.focused,
+              state: openas,
+              tabId: tab.id,
+            });
+          });
+        } else {
+          // If the current window only has 1 tab, reuse the window.
+          chrome.windows.update(win.id, {state: openas});
+        }
       });
       break;
   }
