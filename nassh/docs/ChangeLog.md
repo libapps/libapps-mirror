@@ -1,3 +1,18 @@
+# 0.57, 2023-08-10, MV3 regression fixes & UI reworks.
+
+* nasftp: Autocomplete common prefixes.
+* launcher: Avoid changing current window state with multiple tabs.
+* openWindow: Leverage extension APIs if window.open is missing.
+* fsp: Switch extra fields to a table for alignment.
+* connect: Switch extra fields to a table for alignment.
+* fsp: Switch to common styles.
+* connect: Support light & dark mode dynamically.
+* css: Change cursor style to align better with Chrome.
+* popup: Stop changing dialog theme based on terminal theme.
+* connect: Stop changing dialog theme based on terminal theme.
+* css: Split theme vars into dedicated file.
+* popup: Move css to a dedicated file.
+
 # 0.56, 2023-07-27, MV3 regression fixes.
 
 * wassh: Always create /.ssh.
