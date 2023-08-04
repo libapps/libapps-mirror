@@ -52,6 +52,20 @@ it('zpad', () => {
 });
 
 /**
+ * Check longestCommonPrefix behavior.
+ */
+it('longestCommonPrefix', () => {
+  assert.equal(lib.f.longestCommonPrefix([]), 0);
+  assert.equal(lib.f.longestCommonPrefix(['a']), 1);
+  assert.equal(lib.f.longestCommonPrefix(['abcdef']), 6);
+
+  const elements = ['test.c', 'test.cc', 'test.py'];
+  assert.equal(lib.f.longestCommonPrefix(elements), 5);
+  assert.equal(lib.f.longestCommonPrefix(elements, 1), 5);
+  assert.equal(lib.f.longestCommonPrefix(elements, 60), 60);
+});
+
+/**
  * Check basic getStack behavior.
  */
 it('getStack', () => {

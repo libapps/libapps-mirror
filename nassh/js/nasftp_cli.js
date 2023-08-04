@@ -776,23 +776,31 @@ Cli.prototype.completeFinishMatches_ = async function(
 
     case 1: {
       // Exactly one match -- complete it.
-      if (arg) {
-        let complete = matches[0].substr(arg.length);
-        // If we're completing a directory, don't finish the argument.  This
-        // allows quick completion of subdirs by pressing Tab multiple times.
-        // This is a bit of a heuristic, but we don't use / for anything else
-        // atm, so it's OK.
-        if (!complete.endsWith('/')) {
-          complete += ' ';
-        }
-        this.io.print(complete);
-        this.stdin_ += complete;
+      let complete = matches[0].substr(arg.length);
+      // If we're completing a directory, don't finish the argument.  This
+      // allows quick completion of subdirs by pressing Tab multiple times.
+      // This is a bit of a heuristic, but we don't use / for anything else
+      // atm, so it's OK.
+      if (!complete.endsWith('/')) {
+        complete += ' ';
       }
+      this.io.print(complete);
+      this.stdin_ += complete;
       break;
     }
 
     default: {
-      // More than one match -- show them all.
+      // More than one match.
+      // See if there's a common prefix we can autocomplete first.
+      const partial = lib.f.longestCommonPrefix(matches);
+      if (partial > arg.length) {
+        const complete = matches[0].substr(arg.length, partial - arg.length);
+        this.io.print(complete);
+        this.stdin_ += complete;
+        break;
+      }
+
+      // Show all the completions.
       this.terminal.ringBell();
       this.io.println('');
       // Figure out the max width of the matches so we can print them all in

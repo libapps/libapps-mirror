@@ -123,6 +123,39 @@ lib.f.zpad = function(number, length) {
 };
 
 /**
+ * Find the longest common prefix of a bunch of strings.
+ *
+ * @param {!Array<string>} elements The strings to check.
+ * @param {number=} start Offset to start search.  There is no checking that
+ *     earlier portions of the strings match.
+ * @return {number} Length of longest common prefix.
+ */
+lib.f.longestCommonPrefix = function(elements, start = 0) {
+  if (elements.length === 0) {
+    return start;
+  }
+
+  while (true) {
+    // Grab the next character to check.
+    const c = elements[0][start];
+
+    // If we walked off the end of the string, can't be longer than this.
+    if (c === undefined) {
+      break;
+    }
+
+    // Check all the other strings if they match.
+    if (!elements.slice(1).every((ele) => ele[start] === c)) {
+      break;
+    }
+
+    ++start;
+  }
+
+  return start;
+};
+
+/**
  * Return the current call stack after skipping a given number of frames.
  *
  * This method is intended to be used for debugging only.  It returns an
