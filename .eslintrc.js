@@ -195,7 +195,6 @@ module.exports = {
     'jsdoc/implements-on-classes': 'error',
     // Can't turn on until require-description is enabled.
     'jsdoc/match-description': 'off',
-    'jsdoc/newline-after-description': 'error',
     // This is only for TypeScript which we don't care about.
     'jsdoc/no-types': 'off',
     // This would be nice to turn on, but requires a lot more research.

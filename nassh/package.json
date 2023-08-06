@@ -29,15 +29,15 @@
     "test": "./bin/load_tests"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "~15",
+    "@rollup/plugin-terser": "~0",
     "chai": "~4",
-    "eslint": "~7",
-    "http-server": "~0",
+    "eslint": "~8",
+    "http-server": "~14",
     "license-checker": "~25",
-    "mocha": "~8",
-    "mocha-headless-chrome": "~3",
-    "rollup": ">=1.16",
-    "rollup-plugin-node-resolve": ">=5",
-    "rollup-plugin-terser": ">=5",
+    "mocha": "~10",
+    "mocha-headless-chrome": "~4",
+    "rollup": "~2",
     "terser": "~5"
   },
   "dependencies": {
@@ -46,8 +46,11 @@
     "lit": "^2.2.1",
     "pkijs": "~2.1",
     "punycode": "~2",
-    "xterm": "^4.18.0",
-    "xterm-addon-fit": "^0.5.0",
-    "xterm-addon-webgl": "^0.11.4"
+    "xterm": "~5.1.0",
+    "xterm-addon-canvas": "^0.3.0",
+    "xterm-addon-search": "^0.12.0",
+    "xterm-addon-unicode11": "^0.5.0",
+    "xterm-addon-web-links": "^0.8.0",
+    "xterm-addon-webgl": "^0.14.0"
   }
 }

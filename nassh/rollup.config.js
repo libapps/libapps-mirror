@@ -7,9 +7,9 @@
  * nassh and package them into a single, minified ES6 module.
  */
 
-import {terser} from 'rollup-plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import terser from '@rollup/plugin-terser';
 
 const plugins = [
   resolve({
