@@ -56,17 +56,14 @@ BANNED_LICENSES = {
 assert not BANNED_LICENSES & ALLOWED_LICENSES
 
 
-def mkdeps(rollup=True):
+def mkdeps(local_only: bool = False):
     """Build the dependencies."""
     # NB: We assume hterm mkdist runs libdot mkdist.
     libdot.run([libdot.LIBAPPS_DIR / "hterm" / "bin" / "mkdist"])
-    libdot.concat.concat(
-        nassh.DIR / "concat" / "deps_local.concat",
-        nassh.DIR / "js" / "deps_local.concat.js",
-        es_module=True,
-    )
-    if rollup:
-        libdot.node.run(["rollup", "-c"], cwd=nassh.DIR)
+    extra_env = {}
+    if local_only:
+        extra_env = {"LIBAPPS_DEPS_ONLY": "1"}
+    libdot.node.run(["rollup", "-c"], cwd=nassh.DIR, extra_env=extra_env)
 
     # Hack up the local tree for wassh integration.
     # NB: We can't create loops or deep directory trees as loading unpacked
@@ -236,11 +233,10 @@ def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--skip-rollup",
-        dest="rollup",
-        action="store_false",
-        default=True,
-        help="Skip (re)building of rollup dependencies.",
+        "--local-only",
+        action="store_true",
+        default=False,
+        help="Only rollup local (libapps) dependencies.",
     )
     return parser
 
@@ -252,10 +248,10 @@ def main(argv):
     libdot.node_and_npm_setup()
     nassh.fonts.fonts_update()
     nassh.plugin.plugin_update()
-    mkdeps(rollup=opts.rollup)
+    mkdeps(local_only=opts.local_only)
     nassh.generate_changelog.generate_changelog()
 
-    if opts.rollup:
+    if not opts.local_only:
         logging.info("Concatenating licenses...")
         # We use nassh's package.json, but reuse libapps' node_modules.
         libdot.symlink(

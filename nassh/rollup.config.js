@@ -12,6 +12,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 import yaml from '@rollup/plugin-yaml';
+import concat from 'rollup-plugin-concat';
 
 const plugins = [
   resolve({
@@ -50,7 +51,30 @@ function nassh_dep(name) {
   };
 }
 
-export default [
+let targets = [
+  // Local deps libdot & hterm.
+  {
+    input: 'dist/.deps_local.concat.js',
+    output: {
+      ...output,
+      file: 'js/deps_local.concat.js',
+      outro: "export {hterm, lib};",
+    },
+    plugins: [
+      concat({
+        groupedFiles: [
+          {
+            files: [
+              '../libdot/dist/js/libdot.js',
+              '../hterm/dist/js/hterm.js',
+            ],
+            outputFile: 'dist/.deps_local.concat.js',
+          },
+        ],
+      }),
+    ],
+  },
+
   nassh_dep('indexeddb-fs'),
   nassh_dep('lit'),
   nassh_dep('pkijs'),
@@ -58,3 +82,9 @@ export default [
   nassh_dep('resources'),
   nassh_dep('xterm'),
 ];
+
+if (process.env.LIBAPPS_DEPS_ONLY !== undefined) {
+  targets = targets.slice(0, 1);
+}
+
+export default [...targets];
