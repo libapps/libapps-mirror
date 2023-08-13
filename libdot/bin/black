@@ -74,10 +74,15 @@ def get_parser() -> argparse.ArgumentParser:
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__, short_options=False)
     parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Fix formatting issues.",
+    )
+    parser.add_argument(
         "--gerrit-comments-file",
         help="Save errors for posting files to Gerrit.",
     )
-    parser.add_argument("paths", nargs="*", help="Paths to lint.")
+    parser.add_argument("paths", nargs="*", help="Paths to format.")
     return parser
 
 
@@ -91,6 +96,7 @@ def main(argv: List[str]) -> int:
         if perform(
             argv=args,
             paths=opts.paths,
+            fix=opts.fix,
             gerrit_comments_file=opts.gerrit_comments_file,
         )
         else 1
