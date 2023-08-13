@@ -3,7 +3,7 @@
 # found in the LICENSE file.
 
 libdot/dist/js/libdot.js
-@include hterm/concat/hterm.concat
+hterm/dist/js/hterm.js
 
 @resource nassh/images/visibility image/svg+xml;utf8 < ../images/visibility.svg
 @resource nassh/images/visibility_off image/svg+xml;utf8 < ../images/visibility_off.svg

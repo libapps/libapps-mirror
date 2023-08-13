@@ -58,7 +58,8 @@ assert not BANNED_LICENSES & ALLOWED_LICENSES
 
 def mkdeps(rollup=True):
     """Build the dependencies."""
-    libdot.run([libdot.BIN_DIR / "mkdist"])
+    # NB: We assume hterm mkdist runs libdot mkdist.
+    libdot.run([libdot.LIBAPPS_DIR / "hterm" / "bin" / "mkdist"])
     libdot.concat.concat(
         nassh.DIR / "concat" / "deps_local.concat",
         nassh.DIR / "js" / "deps_local.concat.js",
