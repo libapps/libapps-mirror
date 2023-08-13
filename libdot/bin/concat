@@ -32,44 +32,13 @@ There are a few directives that can be specified in the input file.  They are...
   directory to the directory where the FILE was found.  This is to make certain
   that any scripts executed by an included @resource directive happen relative
   to a known location.
-
-@resource NAME TYPE SOURCE
-
-  NAME - The resource NAME is that name that you'd use to fetch the resource
-  with lib.resource.get(name).
-
-  TYPE - If the resource type is 'raw' then the resource will be included
-  without any munging.  Otherwise, the resource will be wrapped in a
-  JavaScript string. If you specify the type as a valid mimetype then you'll
-  be able to get the resource as a 'data:' url easily from
-  lib.resource.getDataUrl(...).  If the type ends with ';base64', then the
-  input will automatically be base64 encoded.
-
-  SOURCE - There are a variety of source formats that are supported.
-  '< FILENAME' is interpreted as a file to read.
-  'date <format>' uses the current date/time with strftime.
-  'changelog <date|version> [../docs/ChangeLog.md]' loads changelog details.
-  'git-rev REV' expands the symbolic revision using `git rev-parse`.
-
-  This includes a resource in the output.  Resources are output as JavaScript
-  strings by default but can also be the raw contents, which is useful when you
-  want to include a JSON resource.
-
-  The resource directive depends on libdot/js/lib_resource.js, but the
-  dependency is not automatically injected.  It's up to your input file to
-  include it.
 """
 
 import argparse
-import base64
-import datetime
 import logging
 import os
 from pathlib import Path
-import re
-import subprocess
 import sys
-import textwrap
 
 import libdot
 
@@ -97,140 +66,6 @@ def echo_results(output_to, data, header_files, es_module):
         libdot.unlink(output_to)
         with open(output_to, "w", encoding="utf-8") as f:
             f.write(data)
-
-
-def append_string(s):
-    """Create a JavaScript string from |s|.
-
-    The output is surrounded in single quote ("'") characters and wrapped to 79
-    columns.  Wrapped lines are joined with a plus ("+").
-
-    Newlines in the input are stripped.
-
-    Lines with embedded escapes or spaces won't be wrapped at all.
-
-    Single quotes found in the input are escaped.
-    """
-    ret = ""
-    if "\\" in s or " " in s:
-        lines = s.splitlines()
-    else:
-        lines = textwrap.wrap(s, 76)
-    for line in lines:
-        line = line.replace("'", r"\'")
-        ret += f"'{line}' +\n"
-    return ret[:-3]
-
-
-def append_resource(name, mime, resource, header_files):
-    """Convert data into a format that can be included in JavaScript.
-
-    This makes the resource available via lib.resource.get(...), and depends
-    on libdot/js/lib_resource.js.
-    """
-    mode, arg = resource.split(" ", 1)
-    if mode == "<":
-        # Resource is the contents of an existing file.
-        source = arg
-
-        if source.startswith("."):
-            source = Path(source).resolve()
-        else:
-            source = libdot.LIBAPPS_DIR / source
-
-        # NB: Use os.path.relpath as it's diff than Path.relative_to.
-        header_files.append(os.path.relpath(source, libdot.LIBAPPS_DIR))
-
-        data = source.read_bytes()
-
-        if "base64" in mime.split(";"):
-            data = base64.b64encode(data)
-
-        # Since we're going to be appending the content directly to the output
-        # below, we need to make sure it's a string.  If the input is not in a
-        # compatible format (e.g. binary), then we won't be able to append it
-        # to the output directly anyways (and why we have base64 support).
-        data = data.decode("utf-8")
-
-        # For text formats, escape characters that the textwrap module will
-        # consume on us.  This preserves the content when we output it.
-        if mime == "text/plain":
-            # Escape \ first since JS handles that itself.
-            data = data.replace("\\", "\\\\")
-            for codepoint in range(9, 14):
-                data = data.replace(chr(codepoint), f"\\x{codepoint:02x}")
-
-    elif mode == "date":
-        # Resource is a date/time stamp.
-        data = datetime.datetime.utcnow().strftime(arg)
-        logging.info("  -> %s", data)
-
-    elif mode == "changelog":
-        # Resource is querying a changelog file.
-        argv = arg.split()
-        if not argv:
-            raise ValueError("Missing changelog key")
-
-        key = argv[0]
-        if len(argv) == 1:
-            path = Path("../docs/ChangeLog.md")
-        elif len(argv) == 2:
-            path = Path(argv[1])
-        else:
-            raise ValueError(f"Too many args to changelog: {arg}")
-
-        # The first line of a changelog should look like:
-        # # 0.8.44.1, 2018-06-22, Extension startup fix.
-        with path.open(encoding="utf-8") as f:
-            line = f.readline()
-        line = line.lstrip("#")
-
-        fields = line.split(",")
-        if key == "version":
-            data = fields[0]
-        elif key == "date":
-            data = fields[1]
-        else:
-            raise ValueError(f"Unknown changelog key: {key}")
-
-        data = data.strip()
-        logging.info("  -> %s", data)
-
-    elif mode == "git-rev":
-        # Look up current git revision.
-        argv = arg.split()
-        if not argv:
-            raise ValueError("Missing git rev")
-        if len(argv) != 1:
-            raise ValueError(f"Too many args to git-rev: {arg}")
-        rev = argv[0]
-
-        # See if there's an env var (e.g. ebuilds).
-        vcsid = os.getenv("VCSID")
-        if vcsid:
-            data = vcsid
-            logging.info("  -> %s [$VCSID]", data)
-        else:
-            # Query git directly.
-            output = subprocess.check_output(["git", "rev-parse", rev])
-            data = output.decode("utf-8").strip()
-            logging.info("  -> %s", data)
-
-    else:
-        raise ValueError(f"Unknown resource: {resource}")
-
-    ret = f"lib.resource.add('{name}', '{mime}',\n"
-
-    if mime == "raw":
-        # The resource should be the raw contents of the file or command output.
-        # Great for json data.
-        ret += data
-
-    else:
-        # Resource should be wrapped in a JS string.
-        ret += append_string(data)
-
-    return ret + "\n);\n\n"
 
 
 def process_concat_line(line, seen_files, header_files):
@@ -270,10 +105,6 @@ def process_concat_line(line, seen_files, header_files):
 
         # Make sure we always emit a trailing newline even if the input didn't.
         ret = ret.rstrip() + "\n"
-
-    elif mode == "@resource":
-        name, mime, resource = arg.split(" ", 2)
-        ret += append_resource(name, mime, resource, header_files)
 
     else:
         raise ValueError(f"Unknown directive: {line}")
