@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-@include libdot/concat/libdot.concat
+libdot/dist/js/libdot.js
 @include hterm/concat/hterm.concat
 
 @resource nassh/images/visibility image/svg+xml;utf8 < ../images/visibility.svg

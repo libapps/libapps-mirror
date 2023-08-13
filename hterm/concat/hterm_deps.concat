@@ -4,4 +4,4 @@
 
 # This file lists the hterm dependencies on libdot.
 
-@include libdot/concat/libdot.concat
+libdot/dist/js/libdot.js
