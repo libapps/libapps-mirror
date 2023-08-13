@@ -22,7 +22,7 @@ def get_parser():
         "-o",
         "--output",
         type=Path,
-        default=libdot.DIR / "js",
+        default=libdot.DIR / "dist" / "js",
         help="Output directory. (default: %(default)s)",
     )
     return parser

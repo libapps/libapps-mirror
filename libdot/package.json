@@ -2,8 +2,8 @@
   "name": "libdot",
   "version": "9.0.0",
   "description": "Grab bag of JS utility libraries",
-  "main": "js/libdot.js",
-  "unpkg": "js/libdot.min.js",
+  "main": "dist/js/libdot.js",
+  "unpkg": "dist/js/libdot.min.js",
   "repository": {
     "type": "git",
     "url": "https://chromium.googlesource.com/apps/libapps.git"
@@ -12,9 +12,9 @@
   "license": "BSD-3-Clause",
   "files": [
     "README.md",
-    "js/libdot.js",
-    "js/libdot.min.js",
-    "js/libdot.min.js.map"
+    "dist/js/libdot.js",
+    "dist/js/libdot.min.js",
+    "dist/js/libdot.min.js.map"
   ],
   "bugs": {
     "url": "https://hterm.org/x/newbug",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot",
   "scripts": {
-    "prepare": "./bin/mkdist && cd js && terser libdot.js --compress --mangle --output libdot.min.js --source-map url=libdot.min.js.map,includeSources",
+    "prepare": "./bin/mkdist && cd dist/js && terser libdot.js --compress --mangle --output libdot.min.js --source-map url=libdot.min.js.map,includeSources",
     "test": "./bin/load_tests"
   },
   "devDependencies": {
