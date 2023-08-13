@@ -294,7 +294,7 @@ def process_concat_line(line, seen_files, header_files):
             # Strip out the 'use strict' directive as we add it ourselves and
             # a lot of tools get confused when it shows up more than once.
             try:
-                i = lines[0:10].index("'use strict';\n")
+                i = lines[0:50].index("'use strict';\n")
                 lines.pop(i)
                 while lines[i] == "\n":
                     lines.pop(i)
