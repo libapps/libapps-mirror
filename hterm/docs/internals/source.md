@@ -4,7 +4,6 @@ The vast majority of the code here lives under [js/].
 
 * [audio/]: Audio files (e.g. the bell alert).
 * [bin/]: Tools for building/testing hterm.
-* concat/: Compiled output of other projects we use.
 * dist/: Builds of the hterm for integration with other projects.
 * [docs/]: Documentation files.
 * [etc/]: Scripts/snippets for hterm users to leverage terminal features.

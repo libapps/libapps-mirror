@@ -3,23 +3,8 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-"""Build the library deliverables.
+"""Build the library deliverables."""
 
-The deliverables (things published for use by third parties) are...
-
-hterm_deps.js: Code that hterm depends on from outside of the hterm/ directory.
-If you also depend on some or all of these files you may want to make this file
-yourself.
-
-hterm.js: The hterm code and bundled resources.
-
-hterm_resources.js: Only the bundled resources (e.g. audio & icon).
-
-hterm_all.js: hterm_deps.js + hterm.js.  Most apps can just use this.
-"""
-
-import argparse
-from pathlib import Path
 import sys
 
 import hterm
@@ -28,39 +13,17 @@ import libdot  # pylint: disable=wrong-import-order
 
 def get_parser():
     """Get a command line parser."""
-    parser = libdot.ArgumentParser(
-        description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
-        type=Path,
-        default=hterm.DIR / "dist" / "js",
-        help="Output directory. (default: %(default)s)",
-    )
-    parser.add_argument(
-        "dist_files", nargs="*", help="Only process these concat files."
-    )
+    parser = libdot.ArgumentParser(description=__doc__)
     return parser
 
 
 def main(argv):
     """The main func!"""
     parser = get_parser()
-    opts = parser.parse_args(argv)
-
-    if not opts.dist_files:
-        opts.dist_files = list((hterm.DIR / "concat").glob("*.concat"))
-    else:
-        opts.dist_files = [x.resolve() for x in opts.dist_files]
+    _opts = parser.parse_args(argv)
 
     libdot.run([libdot.BIN_DIR / "mkdist"])
     libdot.node.run(["rollup", "-c"], cwd=hterm.DIR)
-    for concat_file in opts.dist_files:
-        libdot.concat.concat(
-            concat_file, opts.output / f"{concat_file.stem}.js"
-        )
 
 
 if __name__ == "__main__":

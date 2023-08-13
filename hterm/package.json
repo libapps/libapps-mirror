@@ -2,8 +2,8 @@
   "name": "hterm",
   "version": "1.92.1",
   "description": "A reasonably correct & fast terminal emulator.",
-  "main": "js/hterm_all.js",
-  "unpkg": "js/hterm_all.min.js",
+  "main": "dist/js/hterm_all.js",
+  "unpkg": "dist/js/hterm_all.min.js",
   "repository": {
     "type": "git",
     "url": "https://chromium.googlesource.com/apps/libapps.git"
@@ -13,9 +13,9 @@
   "files": [
     "docs",
     "html/hterm.html",
-    "js/hterm_all.js",
-    "js/hterm_all.min.js",
-    "js/hterm_all.min.js.map",
+    "dist/js/hterm_all.js",
+    "dist/js/hterm_all.min.js",
+    "dist/js/hterm_all.min.js.map",
     "README.md"
   ],
   "bugs": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm",
   "scripts": {
-    "prepare": "./bin/mkdist -o js concat/hterm_all.concat && cd js && terser hterm_all.js --compress --mangle --output hterm_all.min.js --source-map url=hterm_all.min.js.map,includeSources",
+    "prepare": "./bin/mkdist && cd dist/js && terser hterm_all.js --compress --mangle --output hterm_all.min.js --source-map url=hterm_all.min.js.map,includeSources",
     "test": "./bin/load_tests"
   },
   "devDependencies": {
