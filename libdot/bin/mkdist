@@ -5,8 +5,6 @@
 
 """Build the library deliverables."""
 
-import argparse
-from pathlib import Path
 import sys
 
 import libdot
@@ -16,14 +14,6 @@ def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(
         description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
-        type=Path,
-        default=libdot.DIR / "dist" / "js",
-        help="Output directory. (default: %(default)s)",
     )
     return parser
 
@@ -31,13 +21,10 @@ def get_parser():
 def main(argv):
     """The main func!"""
     parser = get_parser()
-    opts = parser.parse_args(argv)
+    _opts = parser.parse_args(argv)
 
     # TODO(vapier): Move more logic out of package.json here, maybe?
     libdot.node.run(["rollup", "-c"], cwd=libdot.DIR)
-    libdot.concat.concat(
-        libdot.DIR / "concat" / "libdot.concat", opts.output / "libdot.js"
-    )
 
 
 if __name__ == "__main__":
