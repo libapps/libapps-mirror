@@ -87,6 +87,17 @@ let targets = [
       ...plugins,
     ],
   },
+
+  // Main lib (ES6).
+  {
+    input: 'dist/js/libdot.js',
+    output: {
+      ...output,
+      file: 'index.js',
+      outro: 'export {lib};',
+    },
+    plugins,
+  },
 ];
 
 if (process.env.LIBAPPS_DEPS_ONLY !== undefined) {
