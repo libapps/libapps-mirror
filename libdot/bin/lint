@@ -330,6 +330,7 @@ def main(
         ".txt",
         ".vim",
         ".xml",
+        ".yaml",
     }
     text_files = [
         x
