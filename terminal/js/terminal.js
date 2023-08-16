@@ -59,74 +59,6 @@ terminal.openOptionsPage = function() {
 };
 
 /**
- * Either send a ^N or open a new tabbed terminal window.
- *
- * @this {!hterm.Keyboard.KeyMap}
- * @param {!KeyboardEvent} e The event to process.
- * @param {!hterm.Keyboard.KeyDef} k
- * @return {!hterm.Keyboard.KeyDefFunction|string} Key action or sequence.
- */
-terminal.onCtrlN = function(e, k) {
-  if (e.shiftKey || this.keyboard.terminal.passCtrlN) {
-    return function(e, k) {
-      chrome.terminalPrivate.openWindow();
-      return hterm.Keyboard.KeyActions.CANCEL;
-    };
-  }
-
-  return '\x0e';
-};
-
-/**
- * Either send a ^T or open a new tab in the current terminal window.
- *
- * @this {!hterm.Keyboard.KeyMap}
- * @param {!KeyboardEvent} e The event to process.
- * @param {!hterm.Keyboard.KeyDef} k
- * @return {!hterm.Keyboard.KeyDefFunction|string} Key action or sequence.
- */
-terminal.onCtrlT = function(e, k) {
-  if (this.keyboard.terminal.passCtrlT) {
-    return function(e, k) {
-      chrome.terminalPrivate.openWindow(
-          {asTab: true, url: '/html/terminal.html'});
-      return hterm.Keyboard.KeyActions.CANCEL;
-    };
-  }
-
-  return '\x14';
-};
-
-/**
- * Adds bindings for terminal such as options page and some extra ChromeOS
- * system key bindings when 'keybindings-os-defaults' pref is set. Reloads
- * current bindings if needed.
- *
- * @param {!hterm.Terminal} term
- */
-terminal.addBindings = function(term) {
-  Object.assign(hterm.Keyboard.Bindings.OsDefaults['cros'], {
-    // Dock window left/right.
-    'Alt+BRACKET_LEFT': 'PASS',
-    'Alt+BRACKET_RIGHT': 'PASS',
-    // Maximize/minimize window.
-    'Alt+EQUAL': 'PASS',
-    'Alt+MINUS': 'PASS',
-  });
-  if (term.getPrefs().get('keybindings-os-defaults')) {
-    term.keyboard.bindings.clear();
-    term.keyboard.bindings.addBindings(
-        /** @type {!Object} */ (term.getPrefs().get('keybindings') || {}),
-        true);
-  }
-
-  term.keyboard.bindings.addBinding('Ctrl+Shift+P', function() {
-    terminal.openOptionsPage();
-    return hterm.Keyboard.KeyActions.CANCEL;
-  });
-};
-
-/**
  * Static initializer.
  *
  * This constructs a new hterm.Terminal instance and instructs it to run
@@ -148,11 +80,6 @@ terminal.init = async function(element, launchInfo) {
   watchColors(term.getPrefs());
   const runTerminal = async function() {
     term.onOpenOptionsPage = terminal.openOptionsPage;
-    term.keyboard.keyMap.keyDefs[78].control = terminal.onCtrlN;
-    term.keyboard.keyMap.keyDefs[84].control = terminal.onCtrlT;
-    terminal.addBindings(term);
-    term.setCursorPosition(0, 0);
-    term.setCursorVisible(true);
 
     /** @type {?TmuxControllerDriver} */
     let tmuxControllerDriver = null;

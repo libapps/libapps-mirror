@@ -1549,6 +1549,8 @@ class HtermTerminal extends hterm.Terminal {
    * point.
    */
   handleOnTerminalReady() {
+    this.addBindings_();
+
     const fontManager = new FontManager(this.getDocument());
     fontManager.loadPowerlineCSS().then(() => {
       const prefs = this.getPrefs();
@@ -1583,6 +1585,75 @@ class HtermTerminal extends hterm.Terminal {
     if (callback) {
       setTimeout(callback);
     }
+  }
+
+  /**
+   * Adds bindings for terminal such as options page and some extra ChromeOS
+   * system key bindings when 'keybindings-os-defaults' pref is set. Reloads
+   * current bindings if needed.
+   */
+  addBindings_() {
+    this.keyboard.keyMap.keyDefs[78].control = HtermTerminal.onCtrlN_;
+    this.keyboard.keyMap.keyDefs[84].control = HtermTerminal.onCtrlT_;
+
+    Object.assign(hterm.Keyboard.Bindings.OsDefaults['cros'], {
+      // Dock window left/right.
+      'Alt+BRACKET_LEFT': 'PASS',
+      'Alt+BRACKET_RIGHT': 'PASS',
+      // Maximize/minimize window.
+      'Alt+EQUAL': 'PASS',
+      'Alt+MINUS': 'PASS',
+    });
+    if (this.getPrefs().get('keybindings-os-defaults')) {
+      this.keyboard.bindings.clear();
+      this.keyboard.bindings.addBindings(
+          /** @type {!Object} */ (this.getPrefs().get('keybindings') || {}),
+          true);
+    }
+
+    this.keyboard.bindings.addBinding('Ctrl+Shift+P', () => {
+      this.onOpenOptionsPage();
+      return hterm.Keyboard.KeyActions.CANCEL;
+    });
+  }
+
+  /**
+   * Either send a ^N or open a new tabbed terminal window.
+   *
+   * @this {!hterm.Keyboard.KeyMap}
+   * @param {!KeyboardEvent} e The event to process.
+   * @param {!hterm.Keyboard.KeyDef} k
+   * @return {!hterm.Keyboard.KeyDefFunction|string} Key action or sequence.
+   */
+  static onCtrlN_(e, k) {
+    if (e.shiftKey || this.keyboard.terminal.passCtrlN) {
+      return function(e, k) {
+        chrome.terminalPrivate.openWindow();
+        return hterm.Keyboard.KeyActions.CANCEL;
+      };
+    }
+
+    return '\x0e';
+  }
+
+  /**
+   * Either send a ^T or open a new tab in the current terminal window.
+   *
+   * @this {!hterm.Keyboard.KeyMap}
+   * @param {!KeyboardEvent} e The event to process.
+   * @param {!hterm.Keyboard.KeyDef} k
+   * @return {!hterm.Keyboard.KeyDefFunction|string} Key action or sequence.
+   */
+  static onCtrlT_(e, k) {
+    if (this.keyboard.terminal.passCtrlT) {
+      return function(e, k) {
+        chrome.terminalPrivate.openWindow(
+            {asTab: true, url: '/html/terminal.html'});
+        return hterm.Keyboard.KeyActions.CANCEL;
+      };
+    }
+
+    return '\x14';
   }
 }
 
