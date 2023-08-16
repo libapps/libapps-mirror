@@ -76,14 +76,36 @@ describe('terminal_xterm_internal.js', function() {
     assert.equal(buffer.cursorY, 1);
   });
 
-  it('cursorLeft()', async function() {
-    await this.write('012');
+  it('moveCursor()', async function() {
+    await this.write('012\r\n345');
     const buffer = this.terminal.buffer.active;
     assert.equal(buffer.cursorX, 3);
+    assert.equal(buffer.cursorY, 1);
+    this.xtermInternal.moveCursor(-1, 0);
+    assert.equal(buffer.cursorX, 2);
+    assert.equal(buffer.cursorY, 1);
+    this.xtermInternal.moveCursor(-1, -1);
+    assert.equal(buffer.cursorX, 1);
     assert.equal(buffer.cursorY, 0);
-    this.xtermInternal.cursorLeft(1);
-    assert.equal(this.terminal.buffer.active.cursorX, 2);
+    this.xtermInternal.moveCursor(2, 3);
+    assert.equal(buffer.cursorX, 3);
+    assert.equal(buffer.cursorY, 3);
+  });
+
+  it('setCursor()', async function() {
+    const buffer = this.terminal.buffer.active;
+    assert.equal(buffer.cursorX, 0);
     assert.equal(buffer.cursorY, 0);
+    this.xtermInternal.setCursor(10, 20);
+    assert.equal(buffer.cursorX, 10);
+    assert.equal(buffer.cursorY, 20);
+  });
+
+  it('eraseInBufferLine()', async function() {
+    await this.write('012345');
+    this.xtermInternal.eraseInBufferLine(0, 2, 4);
+    assert.equal(this.terminal.buffer.active.getLine(0).translateToString(true),
+        '01  45');
   });
 
   it('installEscKHandler()', async function() {

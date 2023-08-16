@@ -126,7 +126,10 @@ export class XtermInternal {
         _inputHandler: {
           nextLine: function(),
           print: function(!Uint32Array, number, number),
+          _eraseInBufferLine: function(number, number, number, boolean,
+            boolean),
           _moveCursor: function(number, number),
+          _setCursor: function(number, number),
           _parser: {
             registerDcsHandler: function(!Object, !TmuxDcsPHandler),
             _transitions: {
@@ -186,10 +189,35 @@ export class XtermInternal {
   }
 
   /**
-   * @param {number} number
+   * Move the cursor relative to the current position.
+   *
+   * @param {number} x Can be negative.
+   * @param {number} y Can be negative.
    */
-  cursorLeft(number) {
-    this.core_._inputHandler._moveCursor(-number, 0);
+  moveCursor(x, y) {
+    this.core_._inputHandler._moveCursor(x, y);
+    this.scheduleFullRefresh_();
+  }
+
+  /**
+   * @param {number} y The row number
+   * @param {number} start The starting column
+   * @param {number} end The ending column (not inclusive)
+   */
+  eraseInBufferLine(y, start, end) {
+    this.core_._inputHandler._eraseInBufferLine(y, start, end,
+        /* clearWrap= */false, /* respectProtect= */false);
+    this.scheduleFullRefresh_();
+  }
+
+  /**
+   * Set the absolute position of the cursor.
+   *
+   * @param {number} x
+   * @param {number} y
+   */
+  setCursor(x, y) {
+    this.core_._inputHandler._setCursor(x, y);
     this.scheduleFullRefresh_();
   }
 

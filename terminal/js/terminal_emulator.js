@@ -524,6 +524,12 @@ export class XtermTerminal {
     });
     this.term.onBell(() => this.ringBell());
 
+    // This is for supporting `this.keyboard.bindings.addBindings()`, which is
+    // used by nasftp_cli.js.
+    this.htermKeyBindings_ = new hterm.Keyboard.Bindings();
+    this.keyboard = {
+      bindings: this.htermKeyBindings_,
+    };
     /**
      * A mapping from key combo (see encodeKeyCombo()) to a handler function.
      *
@@ -614,13 +620,43 @@ export class XtermTerminal {
   }
 
   /** @override */
+  clearHome() {
+    for (let i = 0; i < this.term.rows; ++i) {
+      this.xtermInternal_.eraseInBufferLine(i, 0, this.term.cols);
+    }
+    this.xtermInternal_.setCursor(0, 0);
+  }
+
+  /** @override */
+  eraseToLeft() {
+    const {cursorX, cursorY} = this.term.buffer.active;
+    this.xtermInternal_.eraseInBufferLine(cursorY, 0, cursorX + 1);
+  }
+
+  /** @override */
+  eraseLine() {
+    const {cursorY} = this.term.buffer.active;
+    this.xtermInternal_.eraseInBufferLine(cursorY, 0, this.term.cols);
+  }
+
+  /** @override */
+  setCursorPosition(row, column) {
+    this.xtermInternal_.setCursor(column, row);
+  }
+
+  /** @override */
+  setCursorColumn(column) {
+    this.xtermInternal_.setCursor(column, this.term.buffer.active.cursorY);
+  }
+
+  /** @override */
   newLine() {
     this.xtermInternal_.newLine();
   }
 
   /** @override */
   cursorLeft(number) {
-    this.xtermInternal_.cursorLeft(number ?? 1);
+    this.xtermInternal_.moveCursor(-(number ?? 1), 0);
   }
 
   /** @override */
@@ -656,24 +692,7 @@ export class XtermTerminal {
    * still runs.
    */
   installUnimplementedStubs_() {
-    this.keyboard = {
-      keyMap: {
-        keyDefs: [],
-      },
-      bindings: {
-        clear: () => {},
-        addBinding: () => {},
-        addBindings: () => {},
-        OsDefaults: {},
-      },
-    };
-    this.keyboard.keyMap.keyDefs[78] = {};
-    this.keyboard.keyMap.keyDefs[84] = {};
-
     const methodNames = [
-        'eraseLine',
-        'setCursorColumn',
-        'setCursorPosition',
         'setCursorVisible',
         'uninstallKeyboard',
     ];
@@ -1272,6 +1291,10 @@ export class XtermTerminal {
       return true;
     }
 
+    if (this.handleHtermKeyBindings_(ev)) {
+      return true;
+    }
+
     const handler = this.keyDownHandlers_.get(
         encodeKeyCombo(modifiers, ev.keyCode));
     if (handler) {
@@ -1282,6 +1305,57 @@ export class XtermTerminal {
     }
 
     return false;
+  }
+
+  /**
+   * @param {!KeyboardEvent} ev
+   * @return {boolean} Return true if the key event is handled.
+   */
+  handleHtermKeyBindings_(ev) {
+    // The logic here is a simplified version of
+    // hterm.Keyboard.prototype.onKeyDown_;
+    const htermKeyDown = {
+      keyCode: ev.keyCode,
+      shift: ev.shiftKey,
+      ctrl: ev.ctrlKey,
+      alt: ev.altKey,
+      meta: ev.metaKey,
+    };
+    const htermBinding = this.htermKeyBindings_.getBinding(htermKeyDown);
+
+    if (!htermBinding) {
+      return false;
+    }
+
+    // If there is a handler but the event is not keydown (e.g. keypress,
+    // keyup), we just do nothing.
+    if (ev.type !== 'keydown') {
+      ev.preventDefault();
+      ev.stopPropagation();
+      return true;
+    }
+
+    let action;
+    if (typeof htermBinding.action === 'function') {
+      action = htermBinding.action.call(this.keyboard, this, htermKeyDown);
+    } else {
+      action = htermBinding.action;
+    }
+
+    const KeyActions = hterm.Keyboard.KeyActions;
+    switch (action) {
+      case KeyActions.DEFAULT:
+        return false;
+      case KeyActions.PASS:
+        return true;
+      default:
+        console.warn(`KeyAction ${action} is not supported`);
+        // Fall through.
+      case KeyActions.CANCEL:
+        ev.preventDefault();
+        ev.stopPropagation();
+        return true;
+    }
   }
 
   /**
