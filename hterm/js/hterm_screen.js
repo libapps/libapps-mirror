@@ -740,7 +740,7 @@ hterm.Screen.prototype.deleteChars = function(count) {
  *
  * @param {!Node} row X-ROW to begin search for first row of line.
  * @return {!Node} The X-ROW that is at the beginning of the line.
- **/
+ */
 hterm.Screen.prototype.getLineStartRow_ = function(row) {
   while (row.previousSibling &&
          row.previousSibling.hasAttribute('line-overflow')) {
@@ -755,7 +755,7 @@ hterm.Screen.prototype.getLineStartRow_ = function(row) {
  *
  * @param {!Node} row First X-ROW of line.
  * @return {string} Text content of line.
- **/
+ */
 hterm.Screen.prototype.getLineText_ = function(row) {
   let rowText = '';
   let rowOrNull = row;
@@ -775,7 +775,7 @@ hterm.Screen.prototype.getLineText_ = function(row) {
  *
  * @param {!Node} node Node to get X-ROW ancestor for.
  * @return {?Node} X-ROW ancestor of node, or null if not found.
- **/
+ */
 hterm.Screen.prototype.getXRowAncestor_ = function(node) {
   let nodeOrNull = node;
   while (nodeOrNull) {
@@ -795,7 +795,7 @@ hterm.Screen.prototype.getXRowAncestor_ = function(node) {
  * @param {!Node} node Node to get position of.
  * @param {number} offset Offset into node.
  * @return {number} Position within line of character at offset within node.
- **/
+ */
 hterm.Screen.prototype.getPositionWithOverflow_ = function(row, node, offset) {
   if (!node) {
     return -1;
@@ -824,7 +824,7 @@ hterm.Screen.prototype.getPositionWithOverflow_ = function(row, node, offset) {
  * @param {!Node} node Node to get position for.
  * @param {number} offset Offset within node to get position for.
  * @return {number} Position within row of character at offset within node.
- **/
+ */
 hterm.Screen.prototype.getPositionWithinRow_ = function(row, node, offset) {
   if (node.parentNode != row) {
     // If we traversed to the top node, then there's nothing to find here.
@@ -853,7 +853,7 @@ hterm.Screen.prototype.getPositionWithinRow_ = function(row, node, offset) {
  * @param {!Node} row X-ROW at beginning of line.
  * @param {number} position Position within line to retrieve node and offset.
  * @return {?Array} Two element array containing node and offset respectively.
- **/
+ */
 hterm.Screen.prototype.getNodeAndOffsetWithOverflow_ = function(row, position) {
   while (row && position > hterm.TextAttributes.nodeWidth(row)) {
     if (row.hasAttribute('line-overflow') && row.nextSibling) {
@@ -873,14 +873,14 @@ hterm.Screen.prototype.getNodeAndOffsetWithOverflow_ = function(row, position) {
  * @param {!Node} row X-ROW to get position within.
  * @param {number} position Position within row to retrieve node and offset.
  * @return {?Array} Two element array containing node and offset respectively.
- **/
+ */
 hterm.Screen.prototype.getNodeAndOffsetWithinRow_ = function(row, position) {
   for (let i = 0; i < row.childNodes.length; i++) {
     const node = row.childNodes[i];
     const nodeTextWidth = hterm.TextAttributes.nodeWidth(node);
     if (position <= nodeTextWidth) {
       if (node.nodeName === 'SPAN') {
-        /** Drill down to node contained by SPAN. **/
+        // Drill down to node contained by SPAN.
         return this.getNodeAndOffsetWithinRow_(node, position);
       } else {
         return [node, position];
@@ -899,7 +899,7 @@ hterm.Screen.prototype.getNodeAndOffsetWithinRow_ = function(row, position) {
  * @param {number} start Start position of range within line.
  * @param {number} end End position of range within line.
  * @param {!Range} range Range to modify.
- **/
+ */
 hterm.Screen.prototype.setRange_ = function(row, start, end, range) {
   const startNodeAndOffset = this.getNodeAndOffsetWithOverflow_(row, start);
   if (startNodeAndOffset == null) {

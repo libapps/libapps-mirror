@@ -100,6 +100,7 @@
  * This implementation assumes that characters are encoded in ISO 10646.
  */
 
+/** @const */
 hterm.wc = {};
 
 // Width of a nul character.
