@@ -45,6 +45,13 @@ def src_configure(metadata):
         "sys/cdefs.h",
     ]
 
+    if not tc.chost.startswith("wasm"):
+        # OpenSSH dynamically allocates fd_set and passes it to select() which
+        # is implemented in our custom plugin.  There doesn't seem to be any
+        # other use of fd_set's in NaCl, and the header respects us overriding,
+        # so increase the default from NaCl's 64.  b/260531419
+        EXTRA_CFLAGS += ["-DFD_SETSIZE=4096"]
+
     EXTRA_CONFIGURE_FLAGS = [
         # Log related settings.
         "--disable-lastlog",
