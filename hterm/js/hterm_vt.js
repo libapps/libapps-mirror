@@ -2040,9 +2040,8 @@ hterm.VT.OSC['8'] = function(parseState) {
   let id = null;
   let uri = null;
 
-  if (args.length != 2 || args[1].length == 0) {
-    // Reset link.
-  } else {
+  // If it doesn't take this exact form, we'll fall thru & reset the link.
+  if (args.length === 2 && args[1].length) {
     // Pull out any colon separated parameters in the first argument.
     const params = args[0].split(':');
     id = '';
