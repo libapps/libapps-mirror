@@ -5,8 +5,10 @@
 'use strict';
 
 /**
- * Namespace for color utilities.
+ * @fileoverview Color utilities.
  */
+
+/** @const */
 lib.colors = {};
 
 /**

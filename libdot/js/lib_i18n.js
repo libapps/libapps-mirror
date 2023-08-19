@@ -5,10 +5,12 @@
 'use strict';
 
 /**
- * Wrappers over the browser i18n helpers.
+ * @fileoverview Wrappers over the browser i18n helpers.
  *
  * Arguably some of these functions should be l10n, but oh well.
  */
+
+/** @const */
 lib.i18n = {};
 
 /**

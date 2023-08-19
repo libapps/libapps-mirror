@@ -5,7 +5,7 @@
 'use strict';
 
 /**
- * Storage for canned resources.
+ * @fileoverview Storage for canned resources.
  *
  * These are usually non-JavaScript things that are collected during a build
  * step and converted into a series of 'lib.resource.add(...)' calls.  See
@@ -15,9 +15,12 @@
  * This is global storage, so you should prefix your resource names to avoid
  * collisions.
  */
-lib.resource = {
-  resources_: {},
-};
+
+/** @const */
+lib.resource = {};
+
+/** @const */
+lib.resource.resources_ = {};
 
 /** @typedef {{type: string, name: string, data: *}} */
 lib.resource.ResourceRecord;

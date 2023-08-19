@@ -5,8 +5,10 @@
 'use strict';
 
 /**
- * Grab bag of utility functions.
+ * @fileoverview Grab bag of utility functions.
  */
+
+/** @const */
 lib.f = {};
 
 /**

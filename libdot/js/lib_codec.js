@@ -4,6 +4,7 @@
 
 'use strict';
 
+/** @const */
 lib.codec = {};
 
 /**
