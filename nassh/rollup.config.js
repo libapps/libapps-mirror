@@ -51,6 +51,15 @@ function nassh_dep(name) {
 }
 
 let targets = [
+  {
+    input: '../libdot/index.js',
+    output: {
+      ...output,
+      file: 'dist/libdot.js',
+    },
+    plugins: plugins,
+  },
+
   nassh_dep('indexeddb-fs'),
   nassh_dep('lit'),
   nassh_dep('pkijs'),

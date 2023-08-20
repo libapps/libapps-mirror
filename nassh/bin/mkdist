@@ -35,7 +35,6 @@ INCLUDE_PATTERNS = (
     "_platform_specific",
     "plugin/*/*",
     "hterm/index.js",
-    "libdot/index.js",
     "wasi-js-bindings/*",
     "wassh/js/*",
 )
@@ -158,6 +157,10 @@ def copyfiles(tmpdir, extra_exclude=()):
                     shutil.copytree(path, dst)
                 else:
                     shutil.copy(path, dst)
+
+    dst = tmpdir / "libdot" / "index.js"
+    dst.parent.mkdir(exist_ok=True)
+    shutil.copy(DIST_DIR / "libdot.js", dst)
 
 
 def mkzip(
