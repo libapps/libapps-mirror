@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import {lib} from '../../libdot/index.js';
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {terminal} from './terminal.js';
 import {MockTabsController, MockTerminalPrivate}

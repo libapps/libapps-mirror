@@ -10,7 +10,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 import {
   IMG_VISIBILITY_URI, IMG_VISIBILITY_OFF_URI,
 } from './deps_resources.rollup.js';

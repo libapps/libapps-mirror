@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {setupForWebApp} from './nassh.js';
 

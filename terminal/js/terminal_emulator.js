@@ -9,7 +9,7 @@
 // TODO(b/236205389): support option smoothScrollDuration?
 
 import {lib} from '../../libdot/index.js';
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {LitElement, css, html} from './lit.js';
 import {FontManager, ORIGINAL_URL, backgroundImageLocalStorageKey, definePrefs,

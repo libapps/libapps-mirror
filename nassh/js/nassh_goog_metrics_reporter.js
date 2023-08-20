@@ -8,7 +8,7 @@
  * Corp SSH relays. It will never be used for non-Googlers.
  */
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {LocalPreferenceManager} from './nassh_preference_manager.js';
 

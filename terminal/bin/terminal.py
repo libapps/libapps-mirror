@@ -37,7 +37,6 @@ class SymlinkNasshFiles:
         nassh_js_dir = NASSH_DIR / "js"
         paths = {p for p in nassh_js_dir.glob("*.js") if "test" not in p.name}
         # Manually adding them since they might not exist until mkdeps() is run.
-        paths.add(nassh_js_dir / "deps_local.concat.js")
         paths.update(
             nassh_js_dir / f"deps_{x}.rollup.js"
             for x in ("indexeddb-fs", "lit", "xterm")

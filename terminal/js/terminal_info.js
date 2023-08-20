@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {DEFAULT_VM_NAME, DEFAULT_CONTAINER_NAME, ORIGINAL_URL,
   PARAM_NAME_MOUNT, PARAM_NAME_MOUNT_PATH, PARAM_NAME_SETTINGS_PROFILE,

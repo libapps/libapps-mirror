@@ -9,7 +9,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 import {punycode} from './deps_punycode.rollup.js';
 import {
   IMG_VISIBILITY_URI, IMG_VISIBILITY_OFF_URI, RELEASE_LAST_VERSION,

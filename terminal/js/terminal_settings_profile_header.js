@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {LitElement, createRef, css, html, ref} from './lit.js';
 import './terminal_dialog.js';

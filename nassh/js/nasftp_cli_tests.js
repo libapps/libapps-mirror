@@ -8,7 +8,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {Cli, ProgressBar} from './nasftp_cli.js';
 import {CommandInstance} from './nassh_command_instance.js';

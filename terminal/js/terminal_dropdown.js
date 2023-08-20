@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {LitElement, classMap, css, html, ifDefined, when} from './lit.js';
 import {ICON_CANCEL} from './terminal_icons.js';

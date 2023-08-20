@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {css, html} from './lit.js';
 import {TerminalSettingsElement} from './terminal_settings_element.js';

@@ -9,7 +9,7 @@
  */
 
 import {lib} from '../../libdot/index.js';
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {getIndexeddbFileSystem} from './nassh_fs.js';
 

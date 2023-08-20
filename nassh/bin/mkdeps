@@ -60,16 +60,14 @@ def mkdeps(local_only: bool = False):
     """Build the dependencies."""
     # NB: We assume hterm mkdist runs libdot mkdist.
     libdot.run([libdot.LIBAPPS_DIR / "hterm" / "bin" / "mkdist"])
-    extra_env = {}
-    if local_only:
-        extra_env = {"LIBAPPS_DEPS_ONLY": "1"}
-    libdot.node.run(["rollup", "-c"], cwd=nassh.DIR, extra_env=extra_env)
+    if not local_only:
+        libdot.node.run(["rollup", "-c"], cwd=nassh.DIR)
 
     # Hack up the local tree for wassh integration.
     # NB: We can't create loops or deep directory trees as loading unpacked
     # extensions will make Chrome walk the entire tree and be very slow.
 
-    for project in ("libdot", "wasi-js-bindings", "wassh"):
+    for project in ("hterm", "libdot", "wasi-js-bindings", "wassh"):
         src = nassh.LIBAPPS_DIR / project
         dst = nassh.DIR / project
         dst.mkdir(exist_ok=True)

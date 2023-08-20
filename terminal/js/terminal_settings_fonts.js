@@ -8,7 +8,7 @@
  * @suppress {moduleLoad}
  */
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {LitElement, html, ifDefined} from './lit.js';
 import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS, fontManager,

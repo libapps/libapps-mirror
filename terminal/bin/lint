@@ -57,8 +57,8 @@ def main(argv):
         + [
             # TODO(vapier): We want to turn this on at some point.
             "--jscomp_off=strictMissingProperties",
-            "js/deps_local.concat.js",
             "../libdot/index.js",
+            "../hterm/index.js",
         ]
     )
     return libdot.lint.main(

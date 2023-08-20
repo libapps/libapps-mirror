@@ -10,7 +10,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {sanitizeScriptUrl} from './nassh.js';
 import {Agent} from './nassh_agent.js';

@@ -6,7 +6,7 @@
  * @fileoverview Misc logic for Google-specific integration.
  */
 
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {localize, runtimeSendMessage} from './nassh.js';
 

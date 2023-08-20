@@ -7,7 +7,7 @@
  */
 
 import {lib} from '../../libdot/index.js';
-import {hterm} from './deps_local.concat.js';
+import {hterm} from '../../hterm/index.js';
 
 import {definePrefs} from './terminal_common.js';
 import {ProfileType, setProfileIds} from './terminal_profiles.js';
