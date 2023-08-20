@@ -8,7 +8,8 @@
  * @suppress {moduleLoad}
  */
 
-import {hterm, lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
+import {hterm} from './deps_local.concat.js';
 
 import {LitElement, css, html, unsafeCSS} from './lit.js';
 import {DEFAULT_THEME, DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR,

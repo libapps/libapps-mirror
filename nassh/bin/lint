@@ -66,6 +66,7 @@ def main(argv):
             # TODO(vapier): We want to turn this on at some point.
             "--jscomp_off=strictMissingProperties",
             os.path.relpath(DEPS_FILE),
+            os.path.relpath(libdot.DIR / "index.js"),
             # Let closure compiler itself do the expansion.
             WJB_DIR / "js" / "**.js",
             WASSH_DIR / "js" / "**.js",

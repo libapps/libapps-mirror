@@ -6,7 +6,7 @@
  * @fileoverview Terminal Settings Theme Element unit tests.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsThemeElement} from './terminal_settings_theme.js';

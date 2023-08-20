@@ -6,7 +6,7 @@
  * @fileoverview Unit tests for <terminal-settings-scrollback-limit>
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsScrollbackLimit}

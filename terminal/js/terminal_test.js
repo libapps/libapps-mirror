@@ -6,7 +6,7 @@
  * @fileoverview Test framework setup when run inside the browser.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {init} from './terminal_common.js';
 

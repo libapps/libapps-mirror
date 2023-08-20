@@ -6,7 +6,7 @@
  * @fileoverview Terminal Settings Background Image Element unit tests.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {TerminalSettingsBackgroundImageElement}
     from './terminal_settings_background_image.js';

@@ -7,7 +7,8 @@
  * @suppress {moduleLoad}
  */
 
-import {hterm, lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
+import {hterm} from './deps_local.concat.js';
 
 import {composeTmuxUrl, getOSInfo, watchColors} from './terminal_common.js';
 import {createEmulator} from './terminal_emulator.js';

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 /**
  * The SFTP Status Error extends the Error class. It takes a StatusPacket and

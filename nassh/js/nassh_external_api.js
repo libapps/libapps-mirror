@@ -6,7 +6,9 @@
  * @fileoverview A remote API for external apps/extensions.
  */
 
-import {hterm, lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from './deps_local.concat.js';
 
 import {overwriteFile} from './lib_fs.js';
 import {getSyncStorage} from './nassh.js';

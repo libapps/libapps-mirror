@@ -6,7 +6,7 @@
  * @fileoverview Terminal Settings ANSI Colors Element unit tests.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {TerminalSettingsAnsiColorsElement as Element} from
     './terminal_settings_ansi_colors.js';

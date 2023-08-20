@@ -19,6 +19,7 @@ js/*.rollup.js
 node_modules
 
 # wassh related dev paths.
+/libdot
 /nassh
 /ssh_client
 /wasi-js-bindings

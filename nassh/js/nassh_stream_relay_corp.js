@@ -6,7 +6,7 @@
  * @fileoverview Stream for connecting to a ssh server via a Corp relay.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {base64ToBase64Url, base64UrlToBase64, localize} from './nassh.js';
 import {newBuffer} from './nassh_buffer.js';

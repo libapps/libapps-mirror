@@ -6,7 +6,8 @@
  * @fileoverview Unit tests for terminal_emulator.js.
  */
 
-import {hterm, lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
+import {hterm} from './deps_local.concat.js';
 
 import {sleep} from './terminal_common.js';
 import {A11yButtons, Modifier, XtermTerminal, XtermTerminalTestParams,

@@ -6,7 +6,7 @@
  * @fileoverview SFTP utility tests.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {Packet} from './nassh_sftp_packet.js';
 

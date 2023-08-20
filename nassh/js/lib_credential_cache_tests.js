@@ -6,7 +6,7 @@
  * @fileoverview Test suite for the session-local, encrypted cache.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {CredentialCache} from './lib_credential_cache.js';
 

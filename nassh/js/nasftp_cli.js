@@ -8,7 +8,9 @@
  *                only.
  */
 
-import {hterm, lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from './deps_local.concat.js';
 
 import {localize, sgrSequence} from './nassh.js';
 import {CommandInstance, splitCommandLine} from './nassh_command_instance.js';

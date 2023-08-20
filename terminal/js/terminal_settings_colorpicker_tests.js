@@ -6,7 +6,7 @@
  * @fileoverview Terminal Settings Colorpicker Element unit tests.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {TerminalSettingsColorpickerElement as Element, TOO_WHITE_BOX_SHADOW,
   FOCUS_BOX_SHADOW} from './terminal_settings_colorpicker.js';

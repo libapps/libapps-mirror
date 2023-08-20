@@ -8,7 +8,9 @@
  * @suppress {checkTypes} FileHandle$$module$wassh$js$vfs naming confusion.
  */
 
-import {hterm, lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from './deps_local.concat.js';
 
 import {sanitizeScriptUrl} from './nassh.js';
 import {Agent} from './nassh_agent.js';

@@ -6,7 +6,7 @@
  * @fileoverview unit tests for terminal_common.js
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {DEFAULT_BACKGROUND_COLOR, SUPPORTED_FONT_FAMILIES,
   delayedScheduler, definePrefs, fontFamilyToCSS, getSupportedFontFamilies,

@@ -7,7 +7,7 @@
  * a Uint8Array.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 /**
  * A general-purpose cache for user credentials in the form of a Uint8Array.

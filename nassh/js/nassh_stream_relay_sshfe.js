@@ -6,7 +6,7 @@
  * @fileoverview Stream for connecting to a ssh server via a SSH-FE relay.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {base64ToBase64Url, runtimeSendMessage} from './nassh.js';
 import {Message} from './nassh_agent_message.js';

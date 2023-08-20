@@ -6,7 +6,7 @@
  * @fileoverview Handles the onload event for google_relay.html.
  */
 
-import {lib} from './deps_local.concat.js';
+import {lib} from '../../libdot/index.js';
 
 import {base64UrlToBase64} from './nassh.js';
 

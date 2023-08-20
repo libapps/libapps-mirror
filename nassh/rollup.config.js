@@ -58,14 +58,14 @@ let targets = [
     output: {
       ...output,
       file: 'js/deps_local.concat.js',
-      outro: "export {hterm, lib};",
+      intro: "import {lib} from '../../libdot/index.js';",
+      outro: "export {hterm};",
     },
     plugins: [
       concat({
         groupedFiles: [
           {
             files: [
-              '../libdot/dist/js/libdot.js',
               '../hterm/dist/js/hterm.js',
             ],
             outputFile: 'dist/.deps_local.concat.js',
