@@ -8,6 +8,8 @@
  * Verify color parsing logic.
  */
 
+import {lib} from '../index.js';
+
 describe('lib_color_tests.js', () => {
 
 it('rgbToX11', () => {

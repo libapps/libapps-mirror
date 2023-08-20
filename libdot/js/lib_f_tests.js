@@ -6,6 +6,8 @@
  * @fileoverview Utility functions test suite.
  */
 
+import {lib} from '../index.js';
+
 describe('lib_f_tests.js', () => {
 
 it('replaceVars', () => {

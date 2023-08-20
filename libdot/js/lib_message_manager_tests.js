@@ -6,6 +6,8 @@
  * @fileoverview Message manager test suite.
  */
 
+import {lib} from '../index.js';
+
 describe('lib_message_manager_tests.js', () => {
 
 /**

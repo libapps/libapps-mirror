@@ -6,6 +6,8 @@
  * @fileoverview Common storage API tests.
  */
 
+import {lib} from '../index.js';
+
 /**
  * Testsuite for the generic storage API.
  *

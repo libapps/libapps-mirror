@@ -19,3 +19,15 @@ default$$module$package_json.gitDate;
 
 /** @type {string} */
 default$$module$package_json.version;
+
+/** @const */
+const module$__$libdot$dist$js$libdot_resources = {};
+
+/** @type {string} */
+module$__$libdot$dist$js$libdot_resources.gitCommitHash;
+
+/** @type {string} */
+module$__$libdot$dist$js$libdot_resources.gitDate;
+
+/** @type {string} */
+module$__$libdot$dist$js$libdot_resources.version;

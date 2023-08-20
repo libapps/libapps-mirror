@@ -151,6 +151,7 @@ def _get_default_paths(basedir: Path) -> List[Path]:
     # Sort to ensure lib.js comes before lib_array.js, etc.
     js_files = sorted(
         list((libdot.DIR / "html").glob("*.html"))
+        + [libdot.DIR / "index.js"]
         + list((libdot.DIR / "js").glob("*.js"))
     )
 

@@ -192,9 +192,14 @@ def test_runner_main(argv, path, serve=False, mkdeps=None):
     logging.info("Tests took %s", delta)
 
 
+def _mkdeps(_opts) -> None:
+    """Build the required deps for the test suite."""
+    subprocess.check_call([libdot.BIN_DIR / "mkdist"])
+
+
 def main(argv):
     """The main func!"""
-    return test_runner_main(argv, TEST_PAGE, serve=True)
+    return test_runner_main(argv, TEST_PAGE, serve=True, mkdeps=_mkdeps)
 
 
 if __name__ == "__main__":

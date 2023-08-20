@@ -6,6 +6,7 @@
  * @fileoverview Test suite for local storage.
  */
 
+import {lib} from '../index.js';
 import {storageApiTest} from './lib_storage_tests.js';
 
 describe('lib_storage_local_tests.js', () => {

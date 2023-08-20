@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Storage for canned resources.
  *
@@ -13,6 +11,8 @@
  * This is global storage, so you should prefix your resource names to avoid
  * collisions.
  */
+
+import {lib} from '../index.js';
 
 /** @const */
 lib.resource = {};

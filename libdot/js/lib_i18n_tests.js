@@ -6,6 +6,8 @@
  * @fileoverview i18n functions test suite.
  */
 
+import {lib} from '../index.js';
+
 describe('lib_i18n_tests.js', () => {
 
 /**

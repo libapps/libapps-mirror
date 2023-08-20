@@ -2,13 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Wrappers over the browser i18n helpers.
  *
  * Arguably some of these functions should be l10n, but oh well.
  */
+
+import {lib} from '../index.js';
 
 /** @const */
 lib.i18n = {};

@@ -52,6 +52,12 @@ def main(argv):
         for x in sorted(glob.glob(os.path.join(nassh.DIR, "externs", "*.js")))
     ]
 
+    libdot_files = [os.path.relpath(libdot.DIR / "index.js")] + sorted(
+        os.path.relpath(x)
+        for x in libdot.DIR.glob("js/*.js")
+        if "_test" not in x.name and x.name.startswith("lib")
+    )
+
     hterm_files = [
         os.path.relpath(HTERM_DIR / "index.js"),
         os.path.relpath(HTERM_DIR / "third_party" / "wcwidth" / "wc.js"),
@@ -67,8 +73,8 @@ def main(argv):
         + [
             # TODO(vapier): We want to turn this on at some point.
             "--jscomp_off=strictMissingProperties",
-            os.path.relpath(libdot.DIR / "index.js"),
         ]
+        + libdot_files
         + hterm_files
         + [
             # Let closure compiler itself do the expansion.

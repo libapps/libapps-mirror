@@ -7,6 +7,8 @@
  * @suppress {missingProperties} https://github.com/google/closure-compiler/issues/946
  */
 
+import {lib} from '../index.js';
+
 describe('lib_event_tests.js', () => {
 
 it('complete', () => {

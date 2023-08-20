@@ -6,6 +6,8 @@
  * @fileoverview Unit tests for lib.PreferenceManager.
  */
 
+import {lib} from '../index.js';
+
 describe('lib_preference_manager_tests.js', () => {
 
 /**

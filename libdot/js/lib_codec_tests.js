@@ -6,6 +6,8 @@
  * @fileoverview Various codec test suites.
  */
 
+import {lib} from '../index.js';
+
 describe('lib_codec_tests.js', () => {
 
 /**

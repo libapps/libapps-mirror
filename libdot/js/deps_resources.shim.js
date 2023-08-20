@@ -7,7 +7,9 @@
  * @suppress {moduleLoad,undefinedVars} closure compiler can't handle this.
  */
 
-import pkg from '../package.json';
+import {gitDate, version} from '../package.json';
 
-lib.resource.add('libdot/changelog/version', 'text/plain', pkg.version);
-lib.resource.add('libdot/changelog/date', 'text/plain', pkg.gitDate);
+export {
+  gitDate as gitDate,
+  version as version,
+};

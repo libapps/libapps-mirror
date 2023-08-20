@@ -6,6 +6,7 @@
  * @fileoverview Test suite for Chrome storage.
  */
 
+import {lib} from '../index.js';
 import {storageApiTest} from './lib_storage_tests.js';
 
 describe('lib_storage_chrome_tests.js', () => {

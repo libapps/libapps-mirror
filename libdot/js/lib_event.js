@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {lib} from '../index.js';
 
 /**
  * An event is a JavaScript function with addListener and removeListener
