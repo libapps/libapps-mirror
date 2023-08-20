@@ -147,6 +147,18 @@ let targets = [
       ...plugins,
     ],
   },
+
+  // Main lib (ES6).
+  {
+    input: 'dist/js/hterm.js',
+    output: {
+      ...output,
+      file: 'index.js',
+      intro: 'import {lib} from "../libdot/index.js";',
+      outro: 'export {hterm};',
+    },
+    plugins,
+  },
 ];
 
 if (process.env.LIBAPPS_DEPS_ONLY !== undefined) {
