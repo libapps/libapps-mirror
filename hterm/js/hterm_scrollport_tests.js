@@ -6,6 +6,7 @@
  * @fileoverview Scrollport test suite.
  */
 
+import {hterm} from '../index.js';
 import {MockRowProvider} from './hterm_mock_row_provider.js';
 
 describe('hterm_scrollport_tests.js', () => {

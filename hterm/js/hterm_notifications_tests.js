@@ -6,6 +6,8 @@
  * @fileoverview hterm notifications unit tests.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_notifications_tests.js', () => {
 
 beforeEach(function() {

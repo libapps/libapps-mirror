@@ -17,6 +17,10 @@
  * information contained in the pre-recorded sessions.
  */
 
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from '../index.js';
+
 /*
  * (This documentation moved out of JSDoc block due to use of '@@')
  *

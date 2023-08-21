@@ -6,6 +6,8 @@
  * @fileoverview hterm.Terminal.IO unit tests.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_terminal_io_tests.js', () => {
 
 /**

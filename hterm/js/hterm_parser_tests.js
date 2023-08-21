@@ -6,6 +6,8 @@
  * @fileoverview hterm.Parser unit tests.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_parser_tests.js', () => {
 
 /**

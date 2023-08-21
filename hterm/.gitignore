@@ -1,7 +1,6 @@
 # Stuff we build for distribution
 dist
 /hterm-*.tgz
-/index.js
 
 # npm related dirs.
 node_modules

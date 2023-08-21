@@ -7,6 +7,10 @@
  * @suppress {moduleLoad}
  */
 
+// NB: This path is relative to the dist/js/ output dir.
+// All other paths in this file are relative to this source file.
+import {lib} from '../../../libdot/index.js';
+
 import auBell from '../audio/bell.ogg';
 import htmlFindBar from '../html/find_bar.html';
 import htmlFindScreen from '../html/find_screen.html';

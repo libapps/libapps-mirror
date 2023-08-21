@@ -6,6 +6,9 @@
  * @fileoverview hterm.Terminal unit tests.
  */
 
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from '../index.js';
 import {MockNotification} from './hterm_mock_notification.js';
 import {MockTerminalMouseEvent} from './hterm_mock_terminal_mouseevent.js';
 

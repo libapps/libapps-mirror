@@ -13,6 +13,9 @@ import terminal  # pylint: disable=wrong-import-order
 import libdot
 
 
+HTERM_DIR = libdot.LIBAPPS_DIR / "hterm"
+
+
 def _get_default_paths(basedir):
     """Get list of paths to lint by default."""
     most_files = sorted(
@@ -51,6 +54,15 @@ def main(argv):
     ):
         externs.append(f"--externs={os.path.relpath(path)}")
 
+    hterm_files = [
+        os.path.relpath(HTERM_DIR / "index.js"),
+        os.path.relpath(HTERM_DIR / "third_party" / "wcwidth" / "wc.js"),
+    ] + sorted(
+        os.path.relpath(x)
+        for x in HTERM_DIR.glob("js/*.js")
+        if "_test" not in x.name and x.name.startswith("hterm")
+    )
+
     closure_args = (
         list(libdot.lint.DEFAULT_CLOSURE_ARGS)
         + externs
@@ -58,8 +70,8 @@ def main(argv):
             # TODO(vapier): We want to turn this on at some point.
             "--jscomp_off=strictMissingProperties",
             "../libdot/index.js",
-            "../hterm/index.js",
         ]
+        + hterm_files
     )
     return libdot.lint.main(
         argv,

@@ -6,6 +6,8 @@
  * @fileoverview Unit tests for the hterm.Screen class.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_screen_tests.js', () => {
 
 /**

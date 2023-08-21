@@ -6,6 +6,8 @@
  * @fileoverview hterm.AccessibilityReader unit tests.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_accessibility_reader_tests.js', () => {
 
 /**

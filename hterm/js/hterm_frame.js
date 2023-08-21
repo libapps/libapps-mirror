@@ -2,10 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
- * First draft of the interface between the terminal and a third party dialog.
+ * @fileoverview Interface between the terminal and a third party dialog.
  *
  * This is rough.  It's just the terminal->dialog layer.  To complete things
  * we'll also need a command->terminal layer.  That will have to facilitate
@@ -13,6 +11,10 @@
  *
  * I imagine this class will change significantly when that happens.
  */
+
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from '../index.js';
 
 /**
  * Construct a new frame for the given terminal.

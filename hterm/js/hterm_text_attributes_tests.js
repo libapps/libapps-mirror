@@ -6,6 +6,8 @@
  * @fileoverview Unit tests for hterm.TextAttributes.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_text_attributes_tests.js', () => {
 
 /**

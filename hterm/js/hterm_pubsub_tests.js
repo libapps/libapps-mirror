@@ -6,6 +6,8 @@
  * @fileoverview hterm.Pubsub unit tests.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_pubsub_tests.js', () => {
 
 /**

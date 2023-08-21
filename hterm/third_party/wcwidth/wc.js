@@ -2,14 +2,14 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview
  * This JavaScript library is ported from the wcwidth.js module of node.js.
  * The original implementation can be found at:
  * https://npmjs.org/package/wcwidth.js
  */
+
+import {hterm} from '../../index.js';
 
 /**
  * JavaScript porting of Markus Kuhn's wcwidth() implementation

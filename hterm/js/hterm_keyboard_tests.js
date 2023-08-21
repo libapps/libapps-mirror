@@ -8,6 +8,8 @@
  * Test that KeyDefActions are resolved correctly.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_keyboard_tests.js', () => {
 
 /**

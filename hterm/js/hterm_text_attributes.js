@@ -2,7 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from '../index.js';
 
 /**
  * Constructor for TextAttribute objects.

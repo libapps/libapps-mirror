@@ -6,6 +6,10 @@
  * @fileoverview hterm.FindBar unit tests.
  */
 
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from '../index.js';
+
 describe('hterm_find_bar_tests.js', () => {
 
 /**

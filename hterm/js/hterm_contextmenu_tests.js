@@ -6,6 +6,8 @@
  * @fileoverview hterm.ContextMenu unit tests.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_contextmenu_tests.js', () => {
 
 /**

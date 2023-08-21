@@ -14,6 +14,7 @@ import libdot
 
 
 JS_DIR = nassh.DIR / "js"
+HTERM_DIR = libdot.LIBAPPS_DIR / "hterm"
 WASSH_DIR = libdot.LIBAPPS_DIR / "wassh"
 WJB_DIR = libdot.LIBAPPS_DIR / "wasi-js-bindings"
 
@@ -50,6 +51,16 @@ def main(argv):
         f"--externs={os.path.relpath(x)}"
         for x in sorted(glob.glob(os.path.join(nassh.DIR, "externs", "*.js")))
     ]
+
+    hterm_files = [
+        os.path.relpath(HTERM_DIR / "index.js"),
+        os.path.relpath(HTERM_DIR / "third_party" / "wcwidth" / "wc.js"),
+    ] + sorted(
+        os.path.relpath(x)
+        for x in HTERM_DIR.glob("js/*.js")
+        if "_test" not in x.name and x.name.startswith("hterm")
+    )
+
     closure_args = (
         list(libdot.lint.DEFAULT_CLOSURE_ARGS)
         + externs
@@ -57,7 +68,9 @@ def main(argv):
             # TODO(vapier): We want to turn this on at some point.
             "--jscomp_off=strictMissingProperties",
             os.path.relpath(libdot.DIR / "index.js"),
-            os.path.relpath(libdot.LIBAPPS_DIR / "hterm" / "index.js"),
+        ]
+        + hterm_files
+        + [
             # Let closure compiler itself do the expansion.
             WJB_DIR / "js" / "**.js",
             WASSH_DIR / "js" / "**.js",

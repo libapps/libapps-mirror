@@ -2,12 +2,14 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview Declares the hterm.* namespace and some basic shared utilities
  * that are too small to deserve dedicated files.
  */
+
+import {lib} from '../../libdot/index.js';
+
+/** @const */
 const hterm = {};
 
 /**
@@ -450,3 +452,5 @@ hterm.RowCol = class {
     return `[hterm.RowCol: ${this.row}, ${this.column}, ${this.overflow}]`;
   }
 };
+
+export {hterm};

@@ -6,6 +6,10 @@
  * @fileoverview Preference manager tests.
  */
 
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from '../index.js';
+
 /**
  * The main body of translations.
  */

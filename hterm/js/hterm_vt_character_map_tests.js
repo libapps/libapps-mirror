@@ -6,6 +6,8 @@
  * @fileoverview Unit tests for hterm.VT.CharacterMap and friends.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_vt_character_map_tests.js', () => {
 
 /**

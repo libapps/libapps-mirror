@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {hterm} from '../../index.js';
+
 describe('3pp_wc_tests.js', () => {
 
 it('strWidth-test', () => {

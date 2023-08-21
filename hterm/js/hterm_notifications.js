@@ -2,13 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview A UI for managing user notifications.  It's a distinct UI space
  *     from the terminal itself to help users clearly distinguish between remote
  *     output.  This makes it hard for the remote to spoof the user.
  */
+
+import {hterm} from '../index.js';
 
 /**
  * Class that controls everything about the notification center.

@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview This class represents a single terminal screen full of text.
  *
@@ -33,6 +31,10 @@
  * because that is the class using the hterm.Screen in the context of an
  * hterm.ScrollPort.
  */
+
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from '../index.js';
 
 /**
  * Create a new screen instance.

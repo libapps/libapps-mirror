@@ -15,7 +15,7 @@ import libdot  # pylint: disable=wrong-import-order
 JS_DIR = hterm.DIR / "js"
 
 # Path to generated deps file that hterm uses for libdot/etc...
-DEPS_FILE = os.path.join(hterm.DIR, "dist", "js", "hterm_deps.js")
+DEPS_FILE = os.path.join(hterm.DIR, "dist", "js", "hterm_resources.js")
 
 
 def _get_default_paths(basedir):
@@ -30,7 +30,8 @@ def _get_default_paths(basedir):
     # Use relpath for nicer default output.
     # Sort to ensure hterm.js comes before hterm_other.js, etc.
     js_files = sorted(
-        list(x for x in JS_DIR.glob("*.js"))
+        [hterm.DIR / "index.js"]
+        + list(x for x in JS_DIR.glob("*.js"))
         + list((hterm.DIR / "third_party").glob("*/*.js"))
     )
 
@@ -45,11 +46,20 @@ def mkdeps(_opts):
 
 def main(argv):
     """The main func!"""
-    closure_args = list(libdot.lint.DEFAULT_CLOSURE_ARGS) + [
-        # TODO(vapier): We want to turn this on at some point.
-        "--jscomp_off=strictMissingProperties",
-        os.path.relpath(DEPS_FILE),
-    ]
+    libdot_files = [os.path.relpath(libdot.DIR / "index.js")] + sorted(
+        os.path.relpath(x)
+        for x in libdot.DIR.glob("js/*.js")
+        if "_test" not in x.name and x.name.startswith("lib")
+    )
+
+    closure_args = (
+        list(libdot.lint.DEFAULT_CLOSURE_ARGS)
+        + [
+            # TODO(vapier): We want to turn this on at some point.
+            "--jscomp_off=strictMissingProperties",
+        ]
+        + libdot_files
+    )
     return libdot.lint.main(
         argv,
         basedir=hterm.DIR,

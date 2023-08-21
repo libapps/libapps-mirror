@@ -8,6 +8,8 @@
  * Tests that key events are dispatched correctly.
  */
 
+import {hterm} from '../index.js';
+
 describe('hterm_keyboard_keymap_tests.js', () => {
 
   /**

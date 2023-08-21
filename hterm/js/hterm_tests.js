@@ -6,6 +6,7 @@
  * @fileoverview hterm unit tests.  Specifically for core/high-level functions.
  */
 
+import {hterm} from '../index.js';
 import {MockNotification} from './hterm_mock_notification.js';
 
 describe('hterm_tests.js', () => {
