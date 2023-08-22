@@ -59,6 +59,18 @@ let targets = [
     },
     plugins: plugins,
   },
+  {
+    input: '../hterm/index.js',
+    output: {
+      ...output,
+      file: 'dist/hterm.js',
+    },
+    external: [
+      '../../../libdot/index.js',
+      '../../libdot/index.js',
+    ],
+    plugins: plugins,
+  },
 
   nassh_dep('indexeddb-fs'),
   nassh_dep('lit'),
