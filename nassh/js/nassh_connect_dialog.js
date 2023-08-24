@@ -982,7 +982,10 @@ ConnectDialog.prototype.onDocumentKeyDown_ = function(e) {
     case 'p':  // Chrome print (!shift) and OS print (shift).
     case 'o':  // Open (!shift) and bookmark manager (shift).
     case 't':  // New tab (!shift) and new incognito tab (shift).
-      if (e.ctrlKey && !e.altKey && !e.metaKey) {
+      // macOS puts these shortcuts behind the command (meta) key.
+      if (((hterm.os !== 'mac' && e.ctrlKey && !e.metaKey) ||
+           (hterm.os === 'mac' && !e.ctrlKey && e.metaKey)) &&
+          !e.altKey) {
         cancel = true;
       }
       break;
@@ -992,7 +995,11 @@ ConnectDialog.prototype.onDocumentKeyDown_ = function(e) {
     case 'h':  // History.
     case 's':  // Save.
     case 'u':  // View source.
-      if (e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey) {
+      // These are the shortcuts on most platforms, but not macOS.  Since the
+      // macOS versions are much more complicated, don't bother trying to block
+      // them as it's much less likely they pressed them by accident.
+      if (hterm.os !== 'mac' && e.ctrlKey &&
+          !e.altKey && !e.metaKey && !e.shiftKey) {
         cancel = true;
       }
       break;

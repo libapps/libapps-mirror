@@ -145,7 +145,9 @@ popup.prototype.mouseClickLink_ = function(e) {
 
   // Figure out whether to open a window or a tab.
   let newWindow;
-  if (e.ctrlKey || e.type === 'auxclick') {
+  if ((hterm.os !== 'mac' && e.ctrlKey) ||
+      (hterm.os === 'mac' && e.metaKey) ||
+      e.type === 'auxclick') {
     newWindow = false;
   } else if (e.shiftKey) {
     newWindow = true;
@@ -167,7 +169,8 @@ popup.prototype.keyupLink_ = function(e) {
     case 'Enter': {
       // Figure out whether to open a window or a tab.
       let newWindow;
-      if (e.ctrlKey) {
+      if ((hterm.os !== 'mac' && e.ctrlKey) ||
+          (hterm.os === 'mac' && e.metaKey)) {
         newWindow = false;
       } else if (e.shiftKey) {
         newWindow = true;
