@@ -1,3 +1,8 @@
+# 0.58, 2023-08-31, Some minor fixes.
+
+* connect/popup: Handle macOS command key better.
+* ssh_client: openssh: Increase fd_set size to 4096.
+
 # 0.57, 2023-08-10, MV3 regression fixes & UI reworks.
 
 * nasftp: Autocomplete common prefixes.

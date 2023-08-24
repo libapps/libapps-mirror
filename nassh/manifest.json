@@ -6,7 +6,7 @@
     "extension_pages": "frame-ancestors 'self'; script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
   },
   "name": "__MSG_nassh_product_name__",
-  "version": "0.57",
+  "version": "0.58",
   "version_name": "ToT",
   "default_locale": "en",
   "icons": {
