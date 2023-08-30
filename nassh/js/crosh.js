@@ -14,6 +14,15 @@ import {
  * so we do it like this instead.
  */
 globalThis.addEventListener('DOMContentLoaded', async (event) => {
+  // If we're being opened by a link from another page, clear the opener setting
+  // so we can't reach back into them.  They should have used noopener, but help
+  // cover if they don't.
+  if (globalThis.opener !== null) {
+    globalThis.opener = null;
+    globalThis.location.reload();
+    return;
+  }
+
   const params = new URLSearchParams(globalThis.location.search);
 
   // Make it easy to re-open as a window.

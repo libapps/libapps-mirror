@@ -1,5 +1,6 @@
 # 0.58, 2023-08-31, Some minor fixes.
 
+* launcher: Clear own opener to break linkage with opener.
 * connect/popup: Handle macOS command key better.
 * ssh_client: openssh: Increase fd_set size to 4096.
 
