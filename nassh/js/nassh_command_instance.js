@@ -1640,14 +1640,16 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
     console.log(localize('DISCONNECT_MESSAGE', [code]));
     return;
   }
+
+  const io = this.io.push();
   const container = document.createElement('div');
   container.appendChild(new Text(localize('DISCONNECT_MESSAGE', [code])));
   container.appendChild(document.createElement('br'));
   container.appendChild(new Text(localize(
       noReconnect ? 'CONNECT_OR_EXIT_MESSAGE' : 'RECONNECT_MESSAGE')));
-  this.io.showOverlay(container, null);
+  io.showOverlay(container, null);
 
-  this.io.onVTKeystroke = (string) => {
+  io.onVTKeystroke = (string) => {
     const ch = string.toLowerCase();
     switch (ch) {
       case 'c':
@@ -1659,7 +1661,8 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
       case 'x':
       case '\x1b': // ESC
       case '\x17': // ctrl-w
-        this.io.hideOverlay();
+        io.hideOverlay();
+        io.pop();
         if (this.argv_.onExit) {
           this.argv_.onExit(code);
         }
@@ -1669,7 +1672,8 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
       case ' ':
       case '\x0d': // enter
         if (!noReconnect) {
-          this.io.hideOverlay();
+          io.hideOverlay();
+          io.pop();
           this.reconnect(this.terminalLocation.hash.substr(1));
         }
     }
