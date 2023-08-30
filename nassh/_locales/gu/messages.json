@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "બંધ કરો"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "શોધો બાર બંધ કરો"
+	},
 	"hterm_button_find": {
 		"message": "શોધો"
 	},
@@ -519,7 +522,7 @@
 		"message": "જો True હોય તો, Home/End ટર્મિનલ સ્ક્રોલબારને નિયંત્રિત કરે છે અને Shift+Home/Shift+End રિમોટ હોસ્ટને મોકલવામાં આવે છે. જો False હોય તો, Home/End રિમોટ હોસ્ટને મોકલવામાં આવે છે અને Shift+Home/Shift+End સ્ક્રોલ કરે છે."
 	},
 	"hterm_pref_keybindings": {
-		"message": "કી અનુક્રમથી કી ક્રિયાઓ સુધીનો નકશો. કી અનુક્રમોમાં શૂન્ય અથવા વધુ મૉડિફાયર કી અને ત્યાર બાદ એક કી કોડ શામેલ હોય છે. કી કોડ દશાંશ અથવા હેક્ઝાડેસિમલ નંબર અથવા એક કી ઓળખકર્તા હોઈ શકે છે. હોસ્ટને અથવા ક્રિયા ઓળખકર્તાને મોકલવા માટે કી ક્રિયાઓને સ્ટ્રિંગ તરીકે ઉલ્લેખિત કરી શકાય છે. ફોર્મેટની પૂર્ણ સમજૂતી માટે, https://hterm.org/x/docs/keyboard-bindings જુઓ.\n\nકીબાઇન્ડિંગનો નમૂનો:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "કી અનુક્રમથી કી ક્રિયાઓ સુધીનો નકશો. કી અનુક્રમોમાં શૂન્ય અથવા વધુ મૉડિફાયર કી અને ત્યાર બાદ એક કી કોડ શામેલ હોય છે. કી કોડ દશાંશ અથવા હેક્સાડેસિમલ નંબર અથવા એક કી ઓળખકર્તા હોઈ શકે છે. હોસ્ટને અથવા ક્રિયા ઓળખકર્તાને મોકલવા માટે કી ક્રિયાઓને સ્ટ્રિંગ તરીકે ઉલ્લેખિત કરી શકાય છે. ફૉર્મેટની પૂર્ણ સમજૂતી માટે, https://hterm.org/x/docs/keyboard-bindings જુઓ.\n\nકીબાઇન્ડિંગનો નમૂનો:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "હંમેશાં htermના પોતાના ઉપયોગ માટે કૅપ્ચર કરવાને બદલે, સામાન્ય OS કીબોર્ડ બાઇન્ડિંગને માનવા જોઈએ કે નહીં."
@@ -977,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ટર્મિનલ સાફ કરો"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "તમારા ઍડમિનિસ્ટ્રેટર દ્વારા આ VM બંધ કરવામાં આવ્યું છે"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "આઇટમ ડિલીટ કરવા માટે Delete કી દબાવો."
 	},
@@ -1066,6 +1072,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "લાઇનની ઊંચાઈ"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "સ્ક્રોલબૅક કરવાની મર્યાદા"
 	},
 	"terminal_name_pref_shape": {
 		"message": "આકાર"
@@ -1296,7 +1305,7 @@
 		"message": "chromium-hterm@chromium.org દ્વારા સાથી hterm/Secure Shell વપરાશકર્તા સાથે ચૅટ કરો: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "ખામી મળી?  નવી સુવિધાની વિનંતી કરવી છે?  અમને જણાવો: https://hterm.org/x/ssh/newbug"
+		"message": "કોઈ બગ મળ્યો છે?  નવી સુવિધા માટે વિનંતી કરીએ?  અમને જણાવો: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "અનપેક્ષિત ભૂલ આવી, કૃપા કરીને વધુ વિગતો માટે JavaScript કન્સોલ જુઓ."

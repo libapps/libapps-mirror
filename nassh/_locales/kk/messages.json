@@ -119,6 +119,9 @@
 	"hterm_button_close": {
 		"message": "Жабу"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Іздеу жолағын жабу"
+	},
 	"hterm_button_find": {
 		"message": "Табу"
 	},
@@ -513,7 +516,7 @@
 		"message": "Мән \"true\" болса, Home/End терминалдың айналдыру жолағын басқарады, ал Shift+Home/Shift+End қашықтағы хосқа жіберіледі. Мән \"false\" болса, онда Home/End қашықтағы хосқа жіберіледі, ал Shift+Home/Shift+End айналдырады."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Перне әрекеттеріне қатысты пернелер ретінің картасы. Пернелердің реттеріне нөл немесе одан көп өзгерткіш пернелер кіреді, олардан кейін перне коды жүреді. Перне кодтары ондық немесе он алтылық сандар не перне идентификаторы болуы мүмкін. Перне әрекеттері хосқа жіберілетін жол немесе әрекет идентификаторы ретінде көрсетілуі мүмкін. Пішімді толық түсіну үшін қараңыз: https://hterm.org/x/docs/keyboard-bindings.\n\nПернелерді байланыстыру мысалдары:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"Hello World\"\n}."
+		"message": "Перне әрекеттеріне қатысты пернелер ретінің картасы. Пернелердің реттеріне нөл немесе одан көп өзгерткіш пернелер кіреді, олардан кейін перне коды жүреді. Перне кодтары ондық немесе он алтылық сандар не перне идентификаторы болуы мүмкін. Перне әрекеттері хосқа жіберілетін жол немесе әрекет идентификаторы ретінде көрсетілуі мүмкін. Форматты толық түсіну үшін қараңыз: https://hterm.org/x/docs/keyboard-bindings.\n\nПернелерді байланыстыру мысалдары:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"Hello World\"\n}."
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Операциялық жүйеге жалпы пернетақта пәрмендерін hterm үшін ұстап қалмай, әдеттегідей қолдана беруге бола ма – соны анықтайды."
@@ -974,6 +977,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Терминалды өшіру"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Бұл виртуалдық машинаны әкімшіңіз өшіріп қойды."
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Элементті жою үшін \"Жою\" түймесін басыңыз."
 	},
@@ -1063,6 +1069,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Жол биіктігі"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Артқа айналдыру шегі"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Пішін"
@@ -1263,40 +1272,40 @@
 		"message": "Терезеде орындалса, Ctrl+Shift+N тағы бір сеансты ашады."
 	},
 	"tip_11": {
-		"message": "Пернелерді/тіркесімдерді қайта байланыстыруға болады: https://hterm.org/x/docs/keyboard-bindings."
+		"message": "Пернелерді/тіркесімдерді қайта байланыстыруға болады: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ssh аутентификациясы үшін Yubikeys және басқа да смарт карталарды қолдану: https://hterm.org/x/ssh/docs/hwkey."
+		"message": "SSH аутентификация үшін Yubikeys және басқа да смарт карталарды қолданыңыз: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Ендірілген кескіндерді көрсету: https://hterm.org/x/faq/inline-images."
+		"message": "Ендірілген кескіндерді көрсетіңіз: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Ctrl пернесін (macOS-та Cmd) ұстап тұрып, тінтуірдің оң жақ түймесін басу арқылы контекстік мәзірді ашуға болады."
 	},
 	"tip_2": {
-		"message": "Hterm-notify көмегімен хабарландыруларды браузерде көрсету: https://hterm.org/x/faq/notify-sh."
+		"message": "Hterm-notify көмегімен хабарландыруларды браузерде көрсетіңіз: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "'ssh<Tab><профиль атын>' теріп, omnibox арқылы қосылу: https://hterm.org/x/ssh/faq/omnibox."
+		"message": "'ssh<Tab><профиль атын>' теріп, omnibox арқылы қосылыңыз: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS файлдық жүйелерді SFTP арқылы орнатып, оларды Files қолданбасы арқылы шолады. \"Қосылу\" орнына \"SFTP орнату\" түймесін пайдаланыңыз."
 	},
 	"tip_5": {
-		"message": "Веб-беттердегі ssh:// сілтемелері арқылы қосылыңыз немесе бетбелгіні сақтап қойыңыз: https://hterm.org/x/ssh/faq/bookmarks."
+		"message": "Веб-беттердегі ssh:// сілтемелері арқылы қосылыңыз немесе бетбелгіні сақтап қойыңыз: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Негізгі 16 түсті және 256 түс пен толық 24 биттік түстерді пайдаланып, нәтижеңізді/сұрауыңызды бояңыз: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html."
 	},
 	"tip_7": {
-		"message": "OSC-52 пайдаланып, emacs/vim/etc... арқылы буферге көшіріңіз: https://hterm.org/x/faq/osc52."
+		"message": "OSC-52 пайдаланып, emacs/vim/etc... арқылы буферге көшіріңіз: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Hterm/Secure Shell басқа пайдаланушыларымен chromium-hterm@chromium.org арқылы араласыңыз: https://goo.gl/RYHiK."
 	},
 	"tip_9": {
-		"message": "Қате табылды ма?  Жаңа функция сұрау керек пе?  Бізге айтыңыз: https://hterm.org/x/ssh/newbug."
+		"message": "Қате табылды ма?  Жаңа функция сұрау керек пе?  Бізге айтыңыз: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Күтпеген қате шықты. Қосымша ақпарат үшін JavaScript консолін тексеріңіз."

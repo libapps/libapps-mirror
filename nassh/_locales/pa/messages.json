@@ -119,6 +119,9 @@
 	"hterm_button_close": {
 		"message": "ਬੰਦ ਕਰੋ"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "ਖੋਜ ਪੱਟੀ ਬੰਦ ਕਰੋ"
+	},
 	"hterm_button_find": {
 		"message": "ਲੱਭੋ"
 	},
@@ -513,7 +516,7 @@
 		"message": "ਜੇ ਸਹੀ ਹੈ, ਤਾਂ Home/End ਟਰਮੀਨਲ ਸਕ੍ਰੋਲਬਾਰ ਨੂੰ ਕੰਟਰੋਲ ਕਰਦਾ ਹੈ ਅਤੇ Shift+Home/Shift+End ਨੂੰ ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤਾ ਜਾਂਦਾ ਹੈ। ਜੇ ਗਲਤ ਹੈ, ਫਿਰ Home/End ਰਿਮੋਟ ਹੋਸਟ ਨੂੰ ਭੇਜ ਦਿੱਤੇ ਜਾਂਦੇ ਹਨ ਅਤੇ Shift+Home/Shift+End ਨਾਲ ਸਕ੍ਰੋਲ ਹੁੰਦਾ ਹੈ।"
 	},
 	"hterm_pref_keybindings": {
-		"message": "ਕੁੰਜੀ ਕਾਰਵਾਈਆਂ ਲਈ ਕੁੰਜੀ ਤਰਤੀਬ ਦੀ ਮੈਪਿੰਗ। ਕੁੰਜੀ ਤਰਤੀਬ ਵਿੱਚ ਸਿਫ਼ਰ ਜਾਂ ਹੋਰ ਸੋਧਕ ਕੁੰਜੀਆਂ ਸ਼ਾਮਲ ਹੁੰਦੀਆਂ ਹਨ ਜਿਨ੍ਹਾਂ ਤੋਂ ਬਾਅਦ ਇੱਕ ਕੁੰਜੀ ਕੋਡ ਆਉਂਦਾ ਹੈ। ਕੁੰਜੀ ਕੋਡ ਦਸ਼ਮਕ ਜਾਂ ਛੇ-ਦਸ਼ਮਲਵ ਨੰਬਰ ਜਾਂ ਕੋਈ ਕੁੰਜੀ ਪਛਾਣਕਰਤਾ ਹੋ ਸਕਦਾ ਹੈ। ਕੁੰਜੀ ਕਾਰਵਾਈਆਂ ਹੋਸਟ ਜਾਂ ਕਿਸੇ ਕਾਰਵਾਈ ਪਛਾਣਕਰਤਾ ਨੂੰ ਭੇਜਣ ਲਈ ਕਿਸੇ ਸਤਰ ਵਜੋਂ ਨਿਰਧਾਰਤ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ। ਫਾਰਮੈਟ ਦੀ ਪੂਰੀ ਵਿਆਖਿਆ ਲਈ, https://hterm.org/x/docs/keyboard-bindings ਦੇਖੋ।\n\nਕੁੰਜੀਆਂ ਦੇ ਕੰਮ ਕਰਨ ਦਾ ਨਮੂਨਾ:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "ਕੁੰਜੀ ਕਾਰਵਾਈਆਂ ਲਈ ਕੁੰਜੀ ਤਰਤੀਬ ਦੀ ਮੈਪਿੰਗ। ਕੁੰਜੀ ਤਰਤੀਬ ਵਿੱਚ ਸਿਫ਼ਰ ਜਾਂ ਹੋਰ ਸੋਧਕ ਕੁੰਜੀਆਂ ਸ਼ਾਮਲ ਹੁੰਦੀਆਂ ਹਨ ਜਿਨ੍ਹਾਂ ਤੋਂ ਬਾਅਦ ਇੱਕ ਕੁੰਜੀ ਕੋਡ ਆਉਂਦਾ ਹੈ। ਕੁੰਜੀ ਕੋਡ ਦਸ਼ਮਲਵ ਜਾਂ ਛੇ-ਦਸ਼ਮਲਵ ਪ੍ਰਨਾਲੀ ਨੰਬਰ ਜਾਂ ਕੋਈ ਕੁੰਜੀ ਪਛਾਣਕਰਤਾ ਹੋ ਸਕਦੇ ਹਨ। ਕੁੰਜੀ ਕਾਰਵਾਈਆਂ ਹੋਸਟ ਜਾਂ ਕਿਸੇ ਕਾਰਵਾਈ ਪਛਾਣਕਰਤਾ ਨੂੰ ਭੇਜਣ ਲਈ ਕਿਸੇ ਸਤਰ ਵਜੋਂ ਨਿਰਧਾਰਿਤ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ। ਫਾਰਮੈਟ ਦੀ ਪੂਰੀ ਵਿਆਖਿਆ ਲਈ, https://hterm.org/x/docs/keyboard-bindings ਦੇਖੋ।\n\nਕੁੰਜੀਆਂ ਦੇ ਕੰਮ ਕਰਨ ਦਾ ਨਮੂਨਾ:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "hterm ਦੀ ਆਪਣੀ ਵਰਤੋਂ ਲਈ ਹਮੇਸ਼ਾਂ ਕੈਪਚਰ ਕਰਨ ਦੀ ਬਜਾਏ ਆਮ OS ਕੀ-ਬੋਰਡ ਬਾਇੰਡਿੰਗਾਂ ਨੂੰ ਸਵੀਕਾਰ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ ਜਾਂ ਨਹੀਂ।"
@@ -977,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ਟਰਮੀਨਲ ਕਲੀਅਰ"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "ਇਸ VM ਨੂੰ ਤੁਹਾਡੇ ਪ੍ਰਸ਼ਾਸਕ ਵੱਲੋਂ ਬੰਦ ਕੀਤਾ ਗਿਆ ਹੈ"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "ਆਈਟਮ ਨੂੰ ਮਿਟਾਉਣ ਲਈ delete ਕੁੰਜੀ ਦਬਾਓ।"
 	},
@@ -1063,6 +1069,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "ਲਾਈਨ ਦੀ ਉਚਾਈ"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "ਸਕ੍ਰੋਲਬੈਕ ਸੀਮਾ"
 	},
 	"terminal_name_pref_shape": {
 		"message": "ਆਕ੍ਰਿਤੀ"
@@ -1257,40 +1266,40 @@
 		"message": "ਕਿਸੇ ਵਿੰਡੋ ਵਿੱਚ ਚਲਾਉਣ ਵੇਲੇ Ctrl-Shift-N ਹੋਰ ਸੈਸ਼ਨ ਖੋਲ੍ਹ ਸਕਦਾ ਹੈ।"
 	},
 	"tip_11": {
-		"message": "ਇੱਥੇ ਤੁਸੀਂ ਕੁੰਜੀਆਂ ਨੂੰ ਮੁੜ-ਨਿਰਧਾਰਤ/ਸ਼ਾਰਟਕੱਟ ਬਣਾ ਸਕਦੇ ਹੋ: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "ਤੁਸੀਂ ਕੁੰਜੀਆਂ/ਸ਼ਾਰਟਕੱਟਾਂ ਨੂੰ ਮੁੜ-ਨਿਰਧਾਰਿਤ ਕਰ ਸਕਦੇ ਹੋ: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ssh ਪ੍ਰਮਾਣੀਕਰਨ ਲਈ Yubikeys ਅਤੇ ਹੋਰ ਸਮਾਰਟ ਕਾਰਡ ਵਰਤੋ: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "ssh ਪ੍ਰਮਾਣੀਕਰਨ ਲਈ Yubikeys ਅਤੇ ਹੋਰ ਸਮਾਰਟ ਕਾਰਡਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "ਚਿੱਤਰ ਇਨਲਾਈਨ ਦਿਖਾਓ: https://hterm.org/x/faq/inline-images"
+		"message": "ਚਿੱਤਰਾਂ ਨੂੰ ਇਨਲਾਈਨ ਦਿਖਾਓ: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "ਸੱਜਾ-ਕਲਿੱਕ ਕਰਨ ਦੌਰਾਨ Ctrl (macOS 'ਤੇ Cmd) ਨੂੰ ਦਬਾ ਕੇ ਰੱਖਣ ਨਾਲ ਸੰਦਰਭੀ ਮੀਨੂ ਸਾਹਮਣੇ ਆਉਂਦਾ ਹੈ।"
 	},
 	"tip_2": {
-		"message": "hterm-notify ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਸੂਚਨਾਵਾਂ ਦਿਖਾਓ: https://hterm.org/x/faq/notify-sh"
+		"message": "hterm-notify ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਸੂਚਨਾਵਾਂ ਦਿਖਾਓ: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "'ssh<Tab><profile name>' ਟਾਈਪ ਕਰਕੇ ਓਮਨੀਬਾਕਸ ਤੋਂ ਕਨੈਕਟ ਕਰੋ: https://hterm.org/x/ssh/faq/omnibox"
+		"message": "'ssh<Tab><profile name>' ਟਾਈਪ ਕਰ ਕੇ ਓਮਨੀਬਾਕਸ ਤੋਂ ਕਨੈਕਟ ਕਰੋ: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS SFTP ਰਾਹੀਂ ਫ਼ਾਈਲ ਸਿਸਟਮਾਂ ਨੂੰ ਮਾਊਂਟ ਕਰ ਸਕਦਾ ਹੈ ਅਤੇ Files ਐਪ ਰਾਹੀਂ ਬ੍ਰਾਊਜ਼ ਕਰ ਸਕਦਾ ਹੈ। 'ਕਨੈਕਟ ਕਰੋ' ਦੀ ਬਜਾਏ 'SFTP ਮਾਊਂਟ ਕਰੋ' ਵਰਤੋ।"
 	},
 	"tip_5": {
-		"message": "ਵੈੱਬ ਪੰਨਿਆਂ ਵਿੱਚ ssh:// ਲਿੰਕ ਵਰਤ ਕੇ ਕਨੈਕਟ ਕਰੋ, ਜਾਂ ਕੋਈ ਬੁੱਕਮਾਰਕ ਰੱਖਿਅਤ ਕਰੋ: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "ਵੈੱਬ ਪੰਨਿਆਂ ਵਿੱਚ ssh:// ਲਿੰਕਾਂ ਦੀ ਵਰਤੋਂ ਕਰ ਕੇ ਕਨੈਕਟ ਕਰੋ, ਜਾਂ ਕੋਈ ਬੁੱਕਮਾਰਕ ਰੱਖਿਅਤ ਕਰੋ: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "ਮੂਲ 16 ਰੰਗਾਂ ਅਤੇ 256 ਰੰਗਾਂ ਅਤੇ ਪੂਰੇ 24-ਬਿਟ ਰੰਗਾਂ ਨੂੰ ਵਰਤ ਕੇ ਆਪਣੇ ਆਊਟਪੁੱਟ/ਉਤਪ੍ਰੇਰਕਾਂ ਨੂੰ ਰੰਗੋ: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "OSC-52: https://hterm.org/x/faq/osc52 ਨੂੰ ਵਰਤਦੇ ਹੋਏ emacs/vim/etc... ਤੋਂ ਆਪਣੇ ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕਰੋ"
+		"message": "OSC-52 ਦੀ ਵਰਤੋਂ ਕਰ ਕੇ emacs/vim/etc... ਤੋਂ ਆਪਣੇ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org ਰਾਹੀਂ ਸਾਥੀ hterm/Secure Shell ਵਰਤੋਕਾਰਾਂ ਨਾਲ ਚੈਟ ਕਰੋ: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "ਕੋਈ ਬੱਗ ਮਿਲਿਆ? ਕਿਸੇ ਨਵੀਂ ਵਿਸ਼ੇਸ਼ਤਾ ਲਈ ਬੇਨਤੀ ਕਰਨੀ ਹੈ? ਸਾਨੂੰ ਇੱਥੇ ਦੱਸੋ: https://hterm.org/x/ssh/newbug"
+		"message": "ਕੀ ਕੋਈ ਬੱਗ ਮਿਲਿਆ?  ਕੀ ਨਵੀਂ ਵਿਸ਼ੇਸ਼ਤਾ ਦੀ ਬੇਨਤੀ ਕਰਨੀ ਹੈ?  ਸਾਨੂੰ ਇੱਥੇ ਦੱਸੋ: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "ਕੋਈ ਅਣਕਿਆਸੀ ਗੜਬੜ ਹੋਈ, ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਵੇਰਵਿਆਂ ਲਈ JavaScript ਕੰਸੋਲ ਵੇਖੋ।"

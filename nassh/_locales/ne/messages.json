@@ -116,6 +116,9 @@
 	"hterm_button_close": {
 		"message": "बन्द गर्नुहोस्"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "फाइन्ड बार बन्द गर्नुहोस्"
+	},
 	"hterm_button_find": {
 		"message": "फेला पार्नुहोस्"
 	},
@@ -510,7 +513,7 @@
 		"message": "यसको मान true छ भने Home/End कुञ्जीले टर्मिनलको स्क्रोलबार तलमाथि सार्छ भने Shift+Home/Shift+End दूरवर्ती होस्टमा पठाइन्छन्। यसको मान false छ भने Home/End दूरवर्ती होस्टमा पठाइन्छन् भने Shift+Home/Shift+End को प्रयोग गरी तलमाथि स्क्रोल गर्न मिल्छ।"
 	},
 	"hterm_pref_keybindings": {
-		"message": "कुञ्जीको क्रम र कुञ्जीका कारबाहीको म्याप। कुञ्जीका क्रमअन्तर्गत शून्य वा सोभन्दा बढी परिमार्जक कुञ्जी समावेश हुन्छन्। परिमार्जक कुञ्जीपछि कुञ्जीको कोड आउँछ। कुञ्जीका कोड दशमलव वा हेक्साडेसिमल सङ्ख्या वा कुञ्जीको पहिचानकर्ता हुन सक्छ। कुञ्जीका कारबाहीलाई होस्टमा पठाइने स्ट्रिङ वा कारबाहीको पहिचानकर्ताका रूपमा तोक्न सकिन्छ। यो ढाँचाका बारेमा पूर्ण जानकारीका लागि https://hterm.org/x/docs/keyboard-bindings हेर्नुहोस्।\n\nकिबाइन्डिङका नमुनाहरू:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "कीको क्रम र कीका कारबाहीको म्याप। कीका क्रमअन्तर्गत शून्य वा सोभन्दा बढी मोडिफायर की समावेश हुन्छन्। मोडिफायर कीपछि कीको कोड आउँछ। कीका कोड दशमलव वा हेक्साडेसिमल सङ्ख्या वा कीको आइडेन्टिफायर हुन सक्छ। कीका कारबाहीलाई होस्टमा पठाइने स्ट्रिङ वा कारबाहीको आइडेन्टिफायरका रूपमा तोक्न सकिन्छ। यो ढाँचाको पूर्ण जानकारीका लागि https://hterm.org/x/docs/keyboard-bindings हेर्नुहोस्।\n\nकिबाइन्डिङका नमुनाहरू:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "सधैँ hterm को आफ्नो प्रयोगलाई क्याप्चर गर्नुको साटो OS को किबोर्डका सामान्य सर्टकटहरू लागू गर्नु पर्छ कि पर्दैन भन्ने कुरा।"
@@ -968,6 +971,9 @@
 	"terminal_clear_menu_label": {
 		"message": "टर्मिनल खाली गर्ने कार्य"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "तपाईंका एड्मिनले यो VM अफ गर्नुभएको छ"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "यो वस्तु मेट्न delete की थिच्नुहोस्।"
 	},
@@ -1057,6 +1063,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "लाइनको उचाइ"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "स्क्रोलब्याकको सीमा"
 	},
 	"terminal_name_pref_shape": {
 		"message": "आकार"
@@ -1254,7 +1263,7 @@
 		"message": "कुनै विन्डोमा विज्ञापन चलिरहेको छ भने Ctrl+Shift+N प्रयोग गरी अर्को सत्र खोल्न सकिन्छ।"
 	},
 	"tip_11": {
-		"message": "तपाईं कुञ्जी/सर्टकटहरू रिबाइन्ड गर्न सक्नुहुन्छ: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "तपाईं की/सर्टकटहरू रिबाइन्ड गर्न सक्नुहुन्छ: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
 		"message": "SSH प्रमाणीकरण गर्न Yubikeys तथा अन्य स्मार्ट कार्ड प्रयोग गर्नुहोस्: https://hterm.org/x/ssh/docs/hwkey"
@@ -1287,7 +1296,7 @@
 		"message": "chromium-hterm@chromium.org मा गई hterm/Secure Shell का सहकर्मी प्रयोगकर्तासँग च्याट गर्नुहोस्: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "बग फेला पार्नुभयो?  नयाँ सुविधाका लागि अनुरोध गर्न चाहनुहुन्छ?  हामीलाई जानकारी दिनुहोस्: https://hterm.org/x/ssh/newbug"
+		"message": "बग फेला पार्नुभयो?  नयाँ सुविधाका लागि अनुरोध गर्न चाहनुहुन्छ?  हामीलाई जानकारी गराउनुहोस्: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "कुनै अनपेक्षित त्रुटि भयो, थप विवरणका लागि कृपया JavaScript कन्सोल हेर्नुहोस्।"

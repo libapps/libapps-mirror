@@ -113,6 +113,9 @@
 	"hterm_button_close": {
 		"message": "Fermer"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Fermer la barre de recherche"
+	},
 	"hterm_button_find": {
 		"message": "Trouver"
 	},
@@ -507,7 +510,7 @@
 		"message": "Si cette préférence est définie sur vrai, les touches Début/Fin contrôlent la barre de défilement du terminal, et les raccourcis Majuscule+Début et Majuscule+Fin sont envoyés à l'hôte à distance. Si la préférence est définie sur faux, les touches Début/Fin sont alors transmises à l'hôte à distance, et les raccourcis Majuscule+Début et Majuscule+Fin contrôlent le défilement."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Une carte des séquences aux actions de touches. Les séquences de touches comprennent ou non des touches de modification suivies par un code de touche. Les codes de touche peuvent être des nombres décimaux ou hexadécimaux, ou un identifiant de touche. Les actions de touche peuvent être spécifiées en tant que chaînes à transmettre à l'hôte ou en tant qu'identifiant d'action. Pour obtenir une explication complète du format, consultez https://hterm.org/x/docs/keyboard-bindings.\n\nExemples de combinaisons de touches :\n{\n  \"Ctrl+Alt+K\" : \"clearTerminal\",\n  \"Ctrl+Shift+L\" : \"PASS\",\n  \"Ctrl+H\" : \"'Bonjour Monde'\"\n}"
+		"message": "Une carte des actions associées aux séquences de touche. Les séquences de touches comprennent zéro, une ou plusieurs touches de modification suivies d'un code de touche. Les codes de touche peuvent être des nombres décimaux ou hexadécimaux, ou des identifiants de touche. Les actions de touches peuvent être précisées dans une chaîne à envoyer à l'hôte ou par un identifiant d'action. Une explication complète du format est offerte à l'adresse https://hterm.org/x/docs/keyboard-bindings.\n\nExemples de combinaisons de touches :\n{\n  \"Ctrl+Alt+K\" : \"clearTerminal\",\n  \"Ctrl+Shift+L\" : \"PASS\",\n  \"Ctrl+H\" : \"'Bonjour tout le monde'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Permet de spécifier si les combinaisons de touches de SE courantes doivent être utilisées au lieu de celles réservées à l'utilisation du terminal hterm."
@@ -971,6 +974,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Effacement de l'écran du terminal"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Cette MV a été désactivée par votre administrateur"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Appuyez sur la touche Suppression pour supprimer l'élément."
 	},
@@ -1057,6 +1063,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Hauteur des lignes"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Limite de défilement"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Forme"
@@ -1251,7 +1260,7 @@
 		"message": "Lors qu'une fenêtre est active, vous pouvez utiliser le raccourci Ctrl+Majuscule+N pour ouvrir une autre session."
 	},
 	"tip_11": {
-		"message": "Vous pouvez recombiner des touches et des raccourcis : https://hterm.org/x/docs/keyboard-bindings"
+		"message": "Vous pouvez relier les touches/raccourcis : https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
 		"message": "Utilisez des Yubikeys et d'autres cartes intelligentes pour l'authentification SSH : https://hterm.org/x/ssh/docs/hwkey"
@@ -1263,28 +1272,28 @@
 		"message": "Obtenez un menu contextuel en maintenant la touche Ctrl (Cmd sur macOS) enfoncée tout en cliquant-droit."
 	},
 	"tip_2": {
-		"message": "Vous pouvez afficher les notifications dans le navigateur en utilisant hterm-notify : https://hterm.org/x/faq/notify-sh"
+		"message": "Affichez les notifications dans le navigateur à l'aide de hterm-notify : https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Connectez-vous à partir de l'omnibox en entrant « ssh <Tabulation><nom de profil> » : https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Connectez-vous à partir de l'omnibox en entrant 'ssh<Tab><nom du profil>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS peut installer des systèmes de fichiers au moyen du protocole SFTP et naviguer au moyen de l'application Fichiers. Utilisez « Installation SFTP » au lieu de « Connexion »."
 	},
 	"tip_5": {
-		"message": "Connectez vous à l'aide des liens ssh:// dans les pages Web ou enregistrez un favori : https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "Connectez-vous à l'aide des liens ssh:// dans les pages Web ou enregistrez un favori : https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Colorez votre sortie/invite à l'aide des 16 couleurs de base, des 256 couleurs et de l'ensemble de couleurs 24 bits : http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Permet de copier votre presse-papiers d'emacs, de vim, etc., en utilisant OSC-52 : https://hterm.org/x/faq/osc52"
+		"message": "Copiez dans votre presse-papiers d'emacs/vim/ etc., en utilisant OSC-52 : https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Clavardez avec des utilisateurs de hterm/Secure Shell par l'intermédiaire de chromium-hterm@chromium.org : https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Vous avez trouvé un bogue?  Vous voulez demander une nouvelle fonctionnalité?  Faites-le-nous savoir : https://hterm.org/x/ssh/newbug"
+		"message": "Vous avez trouvé un bogue?  Vous voulez demander une nouvelle fonctionnalité?  Dites-nous : https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Une erreur inattendue s'est produite. Veuillez consulter la console JavaScript pour en savoir plus."

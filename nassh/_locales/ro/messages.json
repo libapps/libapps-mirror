@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "Închideți"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Închideți bara de căutare"
+	},
 	"hterm_button_find": {
 		"message": "Căutați"
 	},
@@ -977,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Golire a terminalului"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Această mașină virtuală a fost dezactivată de administrator"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Apăsați pe tasta Delete pentru a șterge elementul."
 	},
@@ -1060,6 +1066,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Înălțimea rândului"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Limita de derulare"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Formă"
@@ -1257,10 +1266,10 @@
 		"message": "Dacă țineți apăsată tasta Ctrl (Cmd pe macOS) și dați clic dreapta, veți afișa un meniu contextual."
 	},
 	"tip_2": {
-		"message": "Afișați notificările în browser folosind hterm-notify: https://hterm.org/x/faq/notify-sh"
+		"message": "Afișați notificările în browser folosind https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Conectați-vă din caseta polivalentă introducând „ssh<Tab><profile name>”: https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Conectați-vă din caseta polivalentă introducând „ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "În sistemul de operare Chrome puteți să montați sisteme de fișiere prin SFTP și să răsfoiți cu aplicația Fișiere. Folosiți Montare SFTP în loc de Conectați."

@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "بستن"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "بستن نوار جستجو"
+	},
 	"hterm_button_find": {
 		"message": "پیدا کردن"
 	},
@@ -522,7 +525,7 @@
 		"message": "اگر «درست» باشد، دکمه‌های Home/End نوار پیمایش پایانه را کنترل می‌کند و دکمه‌های Shift+Home/Shift+End به میزبان راه‌دور ارسال می‌شود. اگر «نادرست» باشد، دکمه‌های Home/End به میزبان راه‌دور ارسال می‌شود و Shift+Home /Shift+End عمل پیمایش را انجام می‌دهد."
 	},
 	"hterm_pref_keybindings": {
-		"message": "نگاشتی از توالی کلید به کنش‌های کلید. توالی کلید شامل صفر یا چند کلید تغییردهنده به همراه کد یک کلید است. کدهای کلید می‌تواند اعداد بر مبنای اعشاری یا شانزده‌تایی، یا یک شناسه کلید باشد. می‌توان برای عملکردهای کلید، رشته‌ای برای ارسال به میزبان یا یک شناسه عملکرد تعیین کرد. برای توضیحات کامل این قالب، به https://hterm.org/x/docs/keyboard-bindings مراجعه کنید.\n\nنمونه اتصال کلید‌ها:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\"،\n  \"Ctrl+Shift+L\": \"PASS\"،\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "نگاشتی از توالی کلید به کنش‌های کلید. توالی کلید شامل صفر یا چند کلید تغییردهنده به‌همراه کد یک کلید است. کدهای کلید می‌تواند اعداد بر مبنای اعشاری یا شانزده‌شانزدهی، یا یک شناسه کلید باشد. می‌توان برای عملکردهای کلید، رشته‌ای برای ارسال به میزبان یا یک شناسه عملکرد تعیین کرد. برای توضیحات کامل این قالب، به https://hterm.org/x/docs/keyboard-bindings مراجعه کنید.\n\nنمونه اتصال کلید‌ها:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\"،\n  \"Ctrl+Shift+L\": \"PASS\"،\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "اینکه به‌جای ضبط همیشگی برای استفاده خود hterm باید اتصالات معمول صفحه‌کلید OS درنظر گرفته شود یا نه."
@@ -1040,6 +1043,9 @@
 	"terminal_clear_menu_label": {
 		"message": "پاک کردن پایانه"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "سرپرست شما این ماشین مجازی را غیرفعال کرده است"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "برای حذف کردن مورد، کلید حذف را فشار دهید."
 	},
@@ -1129,6 +1135,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "ارتفاع خط"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "محدودیت پیمایش به‌عقب"
 	},
 	"terminal_name_pref_shape": {
 		"message": "شکل"
@@ -1332,7 +1341,7 @@
 		"message": "می‌توانید کلیدها/ میان‌برها را دوباره مرتبط کنید: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "برای اصالت‌سنجی ssh از Yubikeys و سایر کارت‌های هوشمند استفاده می‌کند: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "از Yubikeys و سایر کارت‌های هوشمند برای اصالت‌سنجی ssh استفاده می‌کند: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "نمایش به‌خط تصاویر: https://hterm.org/x/faq/inline-images"
@@ -1341,7 +1350,7 @@
 		"message": "با نگه داشتن کلید Ctrl (کلید Cmd در سیستم‌عامل Mac) و کلیک راست کردن، منوی بافتی نشان داده می‌شود."
 	},
 	"tip_2": {
-		"message": "با استفاده از hterm-notify، اعلان‌ها را در مرورگر نمایش دهید: https://hterm.org/x/faq/notify-sh"
+		"message": "با‌استفاده از hterm-notify، اعلان‌ها را در مرورگر نمایش دهید: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
 		"message": "با تایپ کردن «ssh<Tab><profile name>» از omnibox متصل شوید: https://hterm.org/x/ssh/faq/omnibox"
@@ -1350,19 +1359,19 @@
 		"message": "ChromeOS می‌تواند سیستم‌های فایل را ازطریق SFTP بنشاند و ازطریق برنامه Files مرور کند. به‌جای «اتصال» از «پایه SFTP» استفاده کنید."
 	},
 	"tip_5": {
-		"message": "با استفاده از ssh:// links in web pages متصل شوید یا نشانکی را ذخیره کنید: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "بااستفاده ازپیوندهای ‎ssh://‎ در صفحه‌های وب متصل شوید یا نشانک ذخیره کنید: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "با استفاده از ۱۶ رنگ اصلی، ۲۵۶ رنگ، و رنگ‌های کامل ۲۴ بیتی، خروجی/ فرمان را رنگ کنید: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "با استفاده از OSC-52، از emacs/vim/etc...‎ در بریده‌دان کپی کنید: https://hterm.org/x/faq/osc52"
+		"message": "بااستفاده از OSC-52 از emacs،‏ vim و غیره، نوشتار را در بریده‌دان کپی کنید: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "ازطریق chromium-hterm@chromium.org، با کاربران همکار hterm/Secure Shell گپ بزنید: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "اشکالی پیدا کردید؟ می‌خواهید ویژگی جدیدی درخواست کنید؟ به ما اطلاع دهید: https://hterm.org/x/ssh/newbug"
+		"message": "اشکالی پیدا کرده‌اید؟  می‌خواهید ویژگی جدیدی را درخواست کنید؟  به ما اطلاع دهید: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "خطای غیرمنتظره‌ای روی داد، برای جزئیات بیشتر لطفاً کنسول جاوااسکریپت را بررسی کنید."

@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Sluiten"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Zoekbalk sluiten"
+	},
 	"hterm_button_find": {
 		"message": "Zoeken"
 	},
@@ -519,7 +522,7 @@
 		"message": "Als 'true' is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden Shift + Home/Shift + End naar de externe host gestuurd. Als 'false' is ingesteld, worden Home/End naar de externe host gestuurd en wordt met Shift + Home/Shift + End gescrolld."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die naar de host wordt gestuurd, of een actie-ID. Zie https://hterm.org/x/docs/keyboard-bindings voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl + Alt + K\": \"clearTerminal\",\n  \"Ctrl + Shift + L\": \"PASS\",\n  \"Ctrl + H\": \"'Hello World'\"\n}"
+		"message": "Een toetsencombinatie toewijzen aan toetsacties. Toetsencombinaties bestaan uit nul of meer functietoetsen gevolgd door een toetscode. Toetscodes kunnen bestaan uit decimale of hexadecimale getallen of een toets-ID. Een toetsactie kan een opgegeven tekenreeks zijn die naar de host wordt gestuurd, of een actie-ID. Zie https://hterm.org/x/docs/keyboard-bindings voor een volledige uitleg van de indeling.\n\nVoorbeelden van sneltoetsen:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Hiermee bepaal je of veelgebruikte OS-sneltoetsen moeten worden gerespecteerd of dat deze altijd voor hterm zelf moeten worden gebruikt."
@@ -977,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminal wissen"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Deze VM is uitgezet door je beheerder"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Druk op de toets Delete om het item te verwijderen."
 	},
@@ -1063,6 +1069,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Regelhoogte"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Limiet voor terugscrollen"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Vorm"
@@ -1263,13 +1272,13 @@
 		"message": "Gebruik Yubikeys en andere smartcards voor SSH-verificatie: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Afbeeldingen inline tonen: https://hterm.org/x/faq/inline-images"
+		"message": "Toon afbeeldingen inline: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Als je met de rechtermuisknop klikt terwijl je de Ctrl-toets (Cmd op macOS) ingedrukt houdt, wordt er een contextmenu weergegeven."
 	},
 	"tip_2": {
-		"message": "Geef meldingen in de browser weer met hterm-notify: https://hterm.org/x/faq/notify-sh"
+		"message": "Toon meldingen in de browser met hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
 		"message": "Maak verbinding vanuit de omnibox door 'ssh<Tab><profile name>' te typen: https://hterm.org/x/ssh/faq/omnibox"
@@ -1290,7 +1299,7 @@
 		"message": "Chat met andere gebruikers van hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Heb je een bug gevonden? Wil je een nieuwe functie aanvragen? Laat het ons weten: https://hterm.org/x/ssh/newbug"
+		"message": "Bug gevonden?  Nieuwe functie aanvragen?  Laat het ons weten: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Er is een onverwachte fout opgetreden. Controleer de JavaScript-console voor meer informatie."

@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Zavřít"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Zavřít vyhledávací lištu"
+	},
 	"hterm_button_find": {
 		"message": "Najít"
 	},
@@ -522,7 +525,7 @@
 		"message": "Při hodnotě true budou Home a End ovládat posuvník terminálu a Shift+Home a Shift+End se budou odesílat na vzdálený hostitelský server. Při hodnotě false se budou Home a End odesílat na vzdálený hostitelský server a Shift+Home a Shift+End budou ovládat posuvník."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapování kombinací kláves na akce. Kombinace kláves tvoří nulu, jednu nebo několik modifikačních kláves následovaných kódem klávesy. Kódy kláves mohou být decimální nebo hexadecimální čísla nebo identifikátory kláves. Akce kláves lze zadat jako řetězec, který se má odeslat na hostitelský server, nebo jako identifikátor akce. Pro úplné vysvětlení formátu viz https://hterm.org/x/docs/keyboard-bindings.\n\nUkázkové mapování kláves:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Ahoj světe'\"\n}"
+		"message": "Mapování kombinací kláves na akce. Kombinace kláves tvoří nulu, jednu nebo několik modifikačních kláves následovaných kódem klávesy. Kódy kláves mohou být decimální nebo hexadecimální čísla nebo identifikátory kláves. Akce kláves lze zadat jako řetězec, který se má odeslat na hostitelský server, nebo jako identifikátor akce. Úplné vysvětlení formátu najdete na stránce https://hterm.org/x/docs/keyboard-bindings.\n\nUkázkové mapování kláves:\n{\n  \"Ctrl-Alt-K\": \"clearTerminal\",\n  \"Ctrl-Shift-L\": \"PASS\",\n  \"Ctrl-H\": \"'Ahoj světe'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Určuje, zda se mají respektovat běžná mapování kláves operačního systému (namísto jejich zachytávání pro vlastní použití terminálem hterm)."
@@ -980,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Vymazat terminál"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Tento virtuální počítač byl zakázán administrátorem"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Položku lze smazat stisknutím klávesy Delete."
 	},
@@ -1069,6 +1075,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Výška řádků"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Limit posunutí zpět"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Tvar"
@@ -1263,10 +1272,10 @@
 		"message": "Přiřazení kláves a zkratek můžete změnit: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "K ověření SSH používejte autentizační zařízení Yubikey nebo čipové karty: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "K ověření SSH používejte autentizační zařízení Yubikey nebo čipové karty: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Zobrazovat obrázky v obsahu: https://hterm.org/x/faq/inline-images"
+		"message": "Zobrazujte obrázky v obsahu: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Když při kliknutí pravým tlačítkem podržíte klávesu Ctrl (Cmd na macOS), zobrazí se kontextová nabídka."
@@ -1293,7 +1302,7 @@
 		"message": "Chatujte s dalšími uživateli terminálu hterm / Secure Shell v diskusní skupině chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Našli jste chybu? Chcete požádat o novou funkci? Dejte nám vědět: https://hterm.org/x/ssh/newbug"
+		"message": "Našli jste chybu?  Chcete požádat o novou funkci?  Dejte nám vědět: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Došlo k neočekávané chybě. Další informace najdete v konzoli JavaScriptu."

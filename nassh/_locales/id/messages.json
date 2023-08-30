@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "Tutup"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Tutup kotak temukan"
+	},
 	"hterm_button_find": {
 		"message": "Temukan"
 	},
@@ -519,7 +522,7 @@
 		"message": "Jika benar, Home/End akan mengontrol scroll bar terminal dan Shift+Home/Shift+End akan dikirim ke host jarak jauh. Jika salah, Home/End akan dikirim ke host jarak jauh dan Shift+Home/Shift+End akan men-scroll."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Peta berisi urutan tombol untuk tindakan tombol. Urutan tombol mencakup nol atau kunci pengubah lainnya yang diikuti oleh kode tombol. Kode tombol dapat berupa angka desimal atau heksadesimal, atau ID tombol. Tindakan tombol dapat ditentukan sebagai string untuk dikirim ke host, atau ID tindakan. Untuk penjelasan selengkapnya mengenai format, lihat https://hterm.org/x/docs/keyboard-bindings.\n\nContoh binding tombol:\n{\n  \"Ctrl+Alt-K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'HELLO\\n'\"\n}"
+		"message": "Peta berisi urutan tombol untuk tindakan tombol. Urutan tombol mencakup nol atau tombol pengubah lainnya yang diikuti oleh kode tombol. Kode tombol dapat berupa angka desimal atau heksadesimal, atau ID tombol. Tindakan tombol dapat ditentukan sebagai string untuk dikirim ke host, atau ID tindakan. Untuk penjelasan selengkapnya mengenai format, lihat https://hterm.org/x/docs/keyboard-bindings.\n\nContoh pintasan tombol keyboard:\n{\n  \"Ctrl+Alt-K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Halo Dunia\\n'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Menentukan apakah binding keyboard OS umum harus dipatuhi, bukan selalu mengambil gambar untuk penggunaan hterm sendiri."
@@ -1025,6 +1028,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Penghapusan Terminal"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "VM ini telah dinonaktifkan oleh administrator Anda"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Tekan tombol Delete untuk menghapus item."
 	},
@@ -1099,6 +1105,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Tinggi baris"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Batas scrollback"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Bentuk"
@@ -1275,10 +1284,10 @@
 		"message": "Saat berjalan di jendela, menekan tombol Ctrl+Shift+N dapat membuka sesi lainnya."
 	},
 	"tip_11": {
-		"message": "Anda dapat mengubah binding kunci/pintasan: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "Anda dapat mengubah perilaku tombol/pintasan: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Gunakan Yubikeys dan kartu smart lain untuk autentikasi ssh: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Gunakan Yubikeys dan kartu smart lainnya untuk autentikasi ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "Tampilkan gambar inline: https://hterm.org/x/faq/inline-images"
@@ -1308,7 +1317,7 @@
 		"message": "Chat dengan sesama pengguna hterm/Secure Shell melalui chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Menemukan bug? Ingin meminta fitur baru? Beri tahu kami di: https://hterm.org/x/ssh/newbug"
+		"message": "Menemukan bug?  Ingin meminta fitur baru?  Beri tahu kami: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Terjadi error yang tidak terduga, harap periksa konsol JavaScript untuk detail selengkapnya."

@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "Itxi"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Itxi bilaketa-barra"
+	},
 	"hterm_button_find": {
 		"message": "Bilatu"
 	},
@@ -519,7 +522,7 @@
 		"message": "Egiazko gisa ezartzen bada, \"Hasiera\" edo \"Amaiera\" teklak terminalaren korritze-barra kontrolatuko du, eta \"Maius + Hasiera\" edo \"Maius + Amaiera\" lasterbideak urruneko ostalarira bidaliko dira. Gezurrezko gisa ezartzen bada, berriz, \"Hasiera\" eta \"Amaiera\" tekla urruneko ostalarira bidaliko da, eta \"Maius + Hasiera\" edo \"Maius + Amaiera\" lasterbideak korritze-barra kontrolatuko du."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Teklen ekintzei esleitutako sekuentzien mapa bat. Tekla-sekuentziek zero tekla aldatzaile edo gehiago dituzte, eta, ondoren, tekla-kode bat. Tekla-kodeak zenbaki hamartarrak edo hexadezimalak izan daitezke, edo teklaren identifikatzaile bat. Teklen ekintzak ostalarira bidaliko den kate gisa zehatz daitezke, edo ekintza-identifikatzaile gisa. Formatuari buruzko azalpen osoa ikusteko, joan https://hterm.org/x/docs/keyboard-bindings helbidera.\n\nHona hemen teklatuko aginduen adibide batzuk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Kaixo denoi'\"\n}"
+		"message": "Teklen ekintzei esleitutako sekuentzien mapa bat. Tekla-sekuentziek zero tekla aldatzaile edo gehiago dituzte, eta, ondoren, tekla-kode bat. Tekla-kodeak zenbaki hamartarrak edo hamaseitarrak izan daitezke, edo teklaren identifikatzaile bat. Teklen ekintzak ostalarira bidaliko den kate gisa zehatz daitezke, edo ekintza-identifikatzaile gisa. Formatuari buruzko azalpen osoa ikusteko, joan https://hterm.org/x/docs/keyboard-bindings helbidera.\n\nHona hemen teklatuko aginduen adibide batzuk:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Kaixo denoi'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Sistema eragilearen teklatuko agindu arruntak errespetatu behar diren ala ez zehazten du, hterm erabiltzeko erreserbatutakoen ordez."
@@ -983,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Garbitu terminala"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Administratzaileak makina birtual hau desgaitu du"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Elementua ezabatzeko, sakatu \"Ezabatu\" tekla."
 	},
@@ -1075,6 +1081,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Lerro-altuera"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Atzera egiteko muga"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"

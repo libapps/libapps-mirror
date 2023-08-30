@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "বন্ধ করুন"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "সার্চ বার বন্ধ করুন"
+	},
 	"hterm_button_find": {
 		"message": "খুঁজুন"
 	},
@@ -519,7 +522,7 @@
 		"message": "'ট্রু' হলে, Home/End টার্মিনাল স্ক্রলবারকে নিয়ন্ত্রণ করে এবং Shift+Home/Shift+End রিমোট হোস্টে পাঠানো হয়। 'ফলস' হলে, Home/End রিমোট হোস্টে পাঠানো হয় এবং Shift+Home/Shift+End স্ক্রল করে।"
 	},
 	"hterm_pref_keybindings": {
-		"message": "'কী সিকোয়েন্স' থেকে 'কী অ্যাকশনের' একটি ম্যাপ। 'কী সিকোয়েন্সের' মধ্যে শূন্য অথবা একাধিক মডিফায়ার কীয়ের পরে 'কী কোড' থাকে। 'কী কোড' ডেসিমেল বা হেক্সাডেসিমেল নম্বর অথবা 'কী শনাক্তকারী' হতে পারে। হোস্টে পাঠানো যাবে এমন স্ট্রিং অথবা অ্যাকশন শনাক্তকারী হিসেবে 'কী অ্যাকশন' উল্লেখ করা যেতে পারে। ফর্ম্যাটের সম্পূর্ণ ব্যাখ্যার জন্য https://hterm.org/x/docs/keyboard-bindings দেখুন।\n\nকী-বাইন্ডিংয়ের নমুনা:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "'কী' সিকোয়েন্স থেকে 'কী' অ্যাকশনের একটি ম্যাপ। 'কী' সিকোয়েন্সের মধ্যে শূন্য অথবা একাধিক পরিবর্তক 'কী'র পরে 'কী' কোড থাকে। 'কী' কোড ডেসিমেল বা হেক্সাডেসিমেল নম্বর অথবা 'কী' শনাক্তকারী হতে পারে। হোস্টে পাঠানো যায় এমন স্ট্রিং অথবা অ্যাকশন শনাক্তকারী হিসেবে 'কী' অ্যাকশন নির্দিষ্ট করা যেতে পারে। ফর্ম্যাটের সম্পূর্ণ ব্যাখ্যার জন্য https://hterm.org/x/docs/keyboard-bindings দেখুন।\n\nকী-বাইন্ডিংয়ের নমুনা:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "সবসময় hterm-এর নিজস্ব ব্যবহার ক্যাপচার করার পরিবর্তে সাধারণ OS কীবোর্ড বাইন্ডিং মেনে চলা হবে কিনা তা নির্ধারণ করে।"
@@ -977,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "টার্মিনাল স্ক্রিনে যা দেখানো হচ্ছে তা মুছে দিন"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "এই VM আপনার অ্যাডমিনিস্ট্রেটর বন্ধ করে দিয়েছে"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "আইটেম মোছার জন্য 'ডিলিট কী' প্রেস করুন।"
 	},
@@ -1066,6 +1072,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "লাইনের উচ্চতা"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "স্ক্রলব্যাক করার সীমা"
 	},
 	"terminal_name_pref_shape": {
 		"message": "আকৃতি"
@@ -1266,40 +1275,40 @@
 		"message": "কোনও উইন্ডোতে রান করার সময় Ctrl+Shift+N টিপে আরেকটি সেশন খোলা যাবে।"
 	},
 	"tip_11": {
-		"message": "আপনি কী/শর্টকাটের আচরণে পরিবর্তন করতে পারেন: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "আপনি 'কী'/শর্টকাট আবার নির্ধারণ করতে পারবেন: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ssh যাচাইকরণের জন্য Yubikeys এবং অন্যান্য স্মার্ট কার্ড ব্যবহার করুন: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "ssh যাচাইকরণের জন্য Yubikeys ও অন্যান্য স্মার্ট কার্ড ব্যবহার করুন: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "ইনলাইনে ছবি প্রদর্শন করুন: https://hterm.org/x/faq/inline-images"
+		"message": "সরাসরি ছবি দেখান: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Ctrl (macOS-এ Cmd) প্রেস করা অবস্থায় ডানদিকের বোতাম ক্লিক করলে সংশ্লিষ্ট মেনু খুলে যায়।"
 	},
 	"tip_2": {
-		"message": "ব্রাউজারে hterm-notify ব্যবহার করে বিজ্ঞপ্তি দেখান: https://hterm.org/x/faq/notify-sh"
+		"message": "hterm-notify ব্যবহার করে ব্রাউজারে বিজ্ঞপ্তি দেখান: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "'ssh<Tab><profile name>' টাইপ করে ওমনিবক্স থেকে কানেক্ট করুন: https://hterm.org/x/ssh/faq/omnibox"
+		"message": "'ssh<Tab><profile name>' টাইপ করে বহুউপযোগী ক্ষেত্র থেকে কানেক্ট করুন: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "SFTP-র মাধ্যমে ChromeOS ফাইল সিস্টেম মাউন্ট করতে পারে এবং Files অ্যাপের মাধ্যমে ব্রাউজ করতে পারে। 'কানেক্ট করুন' বোতামের পরিবর্তে 'SFTP মাউন্ট করুন' ব্যবহার করুন।"
 	},
 	"tip_5": {
-		"message": "ওয়েব পৃষ্ঠায় ssh:// লিঙ্ক ব্যবহার করে কানেক্ট করুন বা বুকমার্ক হিসাবে সেভ করুন: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "ওয়েব পৃষ্ঠায় ssh:// লিঙ্ক ব্যবহার করে কানেক্ট করুন অথবা বুকমার্ক সেভ করুন: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "আউটপুট/প্রম্পট, প্রাথমিক ১৬ ও ২৫৬টি রঙ বা পুরো ২৪-বিট রঙে দেখান: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "emacs/vim/ইত্যাদি… থেকে OSC-52 ব্যবহার করে কপি করুন: https://hterm.org/x/faq/osc52"
+		"message": "OSC-52 ব্যবহার করে emacs/vim/etc... থেকে আপনার ক্লিপবোর্ডে কপি করুন: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org আইডি ব্যবহার করে অন্যান্য hterm/Secure Shell ব্যবহারকারীর সাথে চ্যাট করুন: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "কোনও ত্রুটি পাওয়া গেছে? নতুন ফিচারের জন্য অনুরোধ করতে চান? আমাদের জানান: https://hterm.org/x/ssh/newbug"
+		"message": "সমস্যা হয়েছে?  নতুন ফিচারের জন্য অনুরোধ করবেন?  আমাদের জানান: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "একটি অপ্রত্যাশিত সমস্যা হয়েছে, আরও তথ্যের জন্য জাভাস্ক্রিপ্ট কনসোল দেখুন।"

@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "关闭"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "关闭查找栏"
+	},
 	"hterm_button_find": {
 		"message": "查找"
 	},
@@ -986,6 +989,9 @@
 	"terminal_clear_menu_label": {
 		"message": "清空终端屏幕"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "此虚拟机已被您的管理员停用"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "按 Delete 键即可删除这项内容。"
 	},
@@ -1075,6 +1081,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "行高"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "回滚限制"
 	},
 	"terminal_name_pref_shape": {
 		"message": "形状"
@@ -1281,7 +1290,7 @@
 		"message": "使用 Yubikey 和其他智能卡进行 SSH 身份验证：https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "内嵌显示图片：https://hterm.org/x/faq/inline-images"
+		"message": "就地显示图片：https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "在按住 Ctrl 键（如果是 macOS，则按住 Cmd 键）的同时点击右键会显示上下文菜单。"
@@ -1290,7 +1299,7 @@
 		"message": "借助 hterm-notify 在浏览器中显示通知：https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "您可通过在多功能框中输入“ssh<Tab 键><配置文件名称>”来连接到 https://hterm.org/x/ssh/faq/omnibox"
+		"message": "通过在多功能框中输入“ssh<Tab 键><配置文件名称>”来连接到 https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS 可通过 SFTP 装载文件系统，并通过“文件”应用进行浏览。请使用“装载 SFTP”而非“连接”。"
@@ -1308,7 +1317,7 @@
 		"message": "通过 chromium-hterm@chromium.org 与其他 hterm/SSH 用户聊天：https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "发现了错误？想请求新功能？请告诉我们：https://hterm.org/x/ssh/newbug"
+		"message": "发现了错误？想请求添加新功能？请通过以下网址告知我们：https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "发生了意外错误。有关详情，请查看 JavaScript 控制台。"

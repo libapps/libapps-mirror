@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Đóng"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Đóng thanh tìm kiếm"
+	},
 	"hterm_button_find": {
 		"message": "Tìm"
 	},
@@ -522,7 +525,7 @@
 		"message": "Nếu đặt là true, thì phím Home/End sẽ điều khiển thanh cuộn của thiết bị đầu cuối và tổ hợp phím Shift+Home/Shift+End sẽ được gửi đến máy chủ từ xa. Nếu đặt là false, thì phím Home/End sẽ được gửi đến máy chủ từ xa và tổ hợp phím Shift+Home/Shift+End sẽ dùng để cuộn."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Một sơ đồ chuỗi phím cho các thao tác của phím. Chuỗi phím bao gồm phím 0 hoặc các phím bổ trợ khác, theo sau là một mã phím. Các mã phím có thể là số thập phân, thập lục phân hoặc một giá trị nhận dạng phím. Các thao tác do phím thực hiện có thể là một chuỗi được chỉ định để gửi đến máy chủ hoặc là một giá trị nhận dạng thao tác. Để xem thông tin giải thích đầy đủ về định dạng, hãy truy cập vào https://hterm.org/x/docs/keyboard-bindings.\n\nCác hình thức liên kết phím mẫu:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Xin chào thế giới'\"\n}"
+		"message": "Một sơ đồ chuỗi phím cho các thao tác của phím. Chuỗi phím bao gồm phím 0 hoặc các phím bổ trợ khác, theo sau là một mã phím. Các mã phím có thể là số thập phân, thập lục phân hoặc một giá trị nhận dạng phím. Các thao tác do phím thực hiện có thể là một chuỗi được chỉ định để gửi đến máy chủ hoặc là một giá trị nhận dạng thao tác. Để xem thông tin giải thích đầy đủ về định dạng, hãy truy cập vào https://hterm.org/x/docs/keyboard-bindings.\n\nCác hình thức liên kết phím mẫu:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Xác định xem các hình thức liên kết thông thường của bàn phím trên hệ điều hành có được tuân thủ thay vì luôn giữ để dùng riêng cho hterm hay không."
@@ -983,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Xóa thiết bị đầu cuối"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Quản trị viên của bạn đã tắt máy ảo này"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Nhấn phím delete để xoá mục này."
 	},
@@ -1072,6 +1078,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Chiều cao dòng"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Giới hạn cuộn ngược"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Hình dạng"
@@ -1272,37 +1281,37 @@
 		"message": "Bạn có thể liên kết lại phím/phím tắt: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Sử dụng Yubikeys và các thẻ thông minh khác để xác thực SSH: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Sử dụng Yubikey và các thẻ thông minh khác để xác thực SSH: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Hiển thị hình ảnh cùng dòng: https://hterm.org/x/faq/inline-images"
+		"message": "Hiện hình ảnh cùng dòng: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Thao tác giữ phím Ctrl (Cmd trên macOS) trong khi nhấp chuột phải sẽ làm xuất hiện trình đơn ngữ cảnh."
 	},
 	"tip_2": {
-		"message": "Hiện thông báo trong trình duyệt bằng hterm-notify: https://hterm.org/x/faq/notify-sh"
+		"message": "Hiện thông báo trong trình duyệt bằng cách sử dụng hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Kết nối từ thanh địa chỉ bằng cách nhập 'ssh<Tab><tên hồ sơ>': https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Kết nối từ thanh địa chỉ bằng cách nhập \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS có thể kết nối các hệ thống tệp bằng SFTP và duyệt qua tệp bằng ứng dụng Files. Hãy dùng nút \"Kết nối SFTP\" thay vì nút \"Kết nối\"."
 	},
 	"tip_5": {
-		"message": "Kết nối bằng các đường liên kết ssh:// trong các trang web hoặc lưu dấu trang: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "Kết nối bằng đường liên kết ssh:// trong các trang web hoặc lưu dấu trang: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Hiển thị màu cho dữ liệu đầu ra/lời nhắc của bạn bằng 16 màu cơ bản và 256 màu cùng với toàn bộ màu 24 bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Sao chép vào bảng nhớ tạm nội dung từ emacs/vim/v.v. bằng OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Sao chép vào bảng nhớ tạm nội dung từ emacs/vim/v.v... bằng OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Trò chuyện với người dùng hterm/Secure Shell thông qua chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Bạn tìm thấy lỗi? Bạn muốn yêu cầu tính năng mới? Hãy cho chúng tôi biết: https://hterm.org/x/ssh/newbug"
+		"message": "Bạn tìm thấy lỗi?  Bạn muốn có tính năng mới?  Hãy truy cập vào https://hterm.org/x/ssh/newbug và cho chúng tôi biết"
 	},
 	"unexpected_error": {
 		"message": "Đã xảy ra lỗi không mong muốn, vui lòng kiểm tra bảng điều khiển JavaScript để biết thêm chi tiết."

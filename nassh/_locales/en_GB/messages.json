@@ -158,6 +158,9 @@
 	"hterm_pref_hide_mouse_while_typing": {
 		"message": "Whether to automatically hide the mouse cursor when typing. By default, auto-detect whether the platform/OS handles this.\n\nNote: Your operating system might override this setting and thus you might not always be able to disable it."
 	},
+	"hterm_pref_keybindings": {
+		"message": "A map of key sequence to key actions. Key sequences include zero or more modifier keys followed by a key code. Key codes can be decimal or hexadecimal numbers or a key identifier. Key actions can be specified as a string to send to the host or an action identifier. For a full explanation of the format, see https://hterm.org/x/docs/keyboard-bindings.\n\nSample keybindings:\n{\n  'Ctrl+Alt+K': 'clearTerminal',\n  'Ctrl+Shift+L': 'PASS',\n  'Ctrl+H': '\"Hello World\"'\n}"
+	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Whether common OS keyboard bindings should be respected instead of always capturing for HTerm's own use."
 	},
@@ -404,11 +407,14 @@
 	"tip_4": {
 		"message": "ChromeOS can mount file systems via SFTP and browse via the Files app. Use 'SFTP mount' instead of 'Connect'."
 	},
+	"tip_5": {
+		"message": "Connect using ssh:// links in web pages or save a bookmark: https://hterm.org/x/ssh/faq/bookmarks"
+	},
 	"tip_6": {
 		"message": "Colour your output/prompt using basic 16 colours & 256 colours & full 24-bit colours: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Copy to your clipboard from Emacs/Vim/etc. using OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Copy to your clipboard from emacs/vim/etc… using OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chat with fellow HTerm/Secure Shell users via chromium-hterm@chromium.org: https://goo.gl/RYHiK"

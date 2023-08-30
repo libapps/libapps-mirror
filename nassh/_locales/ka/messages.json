@@ -119,6 +119,9 @@
 	"hterm_button_close": {
 		"message": "დახურვა"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "ძიების ზოლის დახურვა"
+	},
 	"hterm_button_find": {
 		"message": "პოვნა"
 	},
@@ -968,6 +971,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ტერმინალის გასუფთავება"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "ეს ვირტუალური მოწყობილობა გათიშულია თქვენი ადმინისტრატორის მიერ"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "ერთეულის წასაშლელად დააჭირეთ წაშლის კლავიშზე."
 	},
@@ -1057,6 +1063,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "სტრიქონის სიმაღლე"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "უკუგადაადგილების ლიმიტი"
 	},
 	"terminal_name_pref_shape": {
 		"message": "ფორმა"
@@ -1257,7 +1266,7 @@
 		"message": "მალსახმობი კლავიშების შესახებ ვრცლად შეგიძლიათ გეცნოთ აქ: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "SSH-ავტორიზაციისთვის YubiKey და სხვა გონიერი ბარათების გამოყენება. ვრცლად: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "SSH-ავტორიზაციისთვის YubiKey და სხვა გონიერი ბარათების გამოყენება: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "სურათების ჩართული სახით ჩვენება: https://hterm.org/x/faq/inline-images"
@@ -1266,22 +1275,22 @@
 		"message": "მარჯვენა დაწკაპუნებისას Ctrl-ზე (macOS-ზე — Cmd-ზე) ხანგრძლივად დაჭერისას გამოჩნდება კონტექსტური მენიუ."
 	},
 	"tip_2": {
-		"message": "ბრაუზერში შეტყობინებების ჩვენება hterm-notify-ს მეშვეობით. ვრცლად: https://hterm.org/x/faq/notify-sh"
+		"message": "ბრაუზერში შეტყობინებების ჩვენება hterm-notify-ს მეშვეობით: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Omnibox-დან კავშირის დასამყარებლად აკრიფეთ „ssh<Tab><პროფილის სახელი>“: https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Omnibox-იდან კავშირის დასამყარებლად „ssh<Tab><პროფილის სახელის>“ აკრეფა: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS-ში შესაძლებელია ფაილური სისტემების SFTP-ის მეშვეობით მიერთება და მათი დათვალიერება ფაილების აპის მეშვეობით. „დაკავშირების“ ნაცვლად გამოიყენეთ „SFTP-მიერთება“."
 	},
 	"tip_5": {
-		"message": "ssh:// პრეფიქსიანი ბმულების მეშვეობით დაკავშირება, ან მათი სანიშნეებში შენახვა. ვრცლად: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "ვებგვერდებში ssh:// პრეფიქსიანი ბმულების მეშვეობით დაკავშირება, ან სანიშნის შენახვა: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "გამოტანილი ტექსტის/მოთხოვნის ფერის შეცვლა შესაძლებელია 16-ფერიანი და 256-ფერიანი პალიტრებისა, ასევე, 24-ბიტიანი ფერების მეშვეობით. ვრცლად: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "დააკოპირეთ კონტენტი გაცვლის ბუფერში emacs/vim/etc...-დან OSC-52-ის მეშვეობით: https://hterm.org/x/faq/osc52"
+		"message": "emacs/vim/etc..-დან კონტენტის თქვენს გაცვლის ბუფერში კოპირება OSC-52-ის მეშვეობით: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "ესაუბრეთ hterm/Secure Shell-ის სხვა მომხმარებლებს chromium-hterm@chromium.org-ის მეშვეობით. ვრცლად: https://goo.gl/RYHiK"

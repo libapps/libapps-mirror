@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "ዝጋ"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "የአግኝ አሞሌን ዝጋ"
+	},
 	"hterm_button_find": {
 		"message": "አግኝ"
 	},
@@ -483,7 +486,7 @@
 		"message": "አስተናጋጁ ወደ የቅንጥብ ሰሌዳው ሲጽፍ በማሳያ ውስጥ መልዕክት አሳይ።"
 	},
 	"hterm_pref_enable_clipboard_write": {
-		"message": "የርቀት አስተናጋጁ በቀጥታ ወደ አካባቢያዊ የስርዓት ቅንጥብ ሰሌዳ እንዲጽፍ ፍቀድ።\nይህ ቅንብር ምንም ይሁን ምን የንባብ መዳረሻ በጭራሽ አይሰጥም።\n\nእንደ OSC-52 ያሉ የባህሪያት መዳረሻን ለመቆጣጠር ይህ ስራ ላይ ይውላል።"
+		"message": "የርቀት አስተናጋጁ በቀጥታ ወደ አካባቢያዊ የስርዓት ቅንጥብ ሰሌዳ እንዲጽፍ ፍቀድ።\nይህ ቅንብር ምንም ይሁን ምን የንባብ መዳረሻ በጭራሽ አይሰጥም።\n\nእንደ OSC-52 ያሉ የባህሪያት መዳረሻን ለመቆጣጠር ይህ ሥራ ላይ ይውላል።"
 	},
 	"hterm_pref_enable_csi_j_3": {
 		"message": "የማሳያን ደምስስ ትዕዛዙ (CSI-J) የተቀመጡ መስመሮችን ደምስስ ተግባሩ (ሁነታ 3) የተርሚናል ኋላ ሽብለላ ቋቱን ያጸዳው እንደሆነ።\n\nይህን በነባሪ ማንቃት ለደህንነት አስተማማኝ ነው።"
@@ -522,7 +525,7 @@
 		"message": "እውነት ከሆነ Home/End የተርሚናል መሸብለያውን ይቆጣጠራል፣ እና Shift+Home/Shift+End ወደ የርቀት አስተናጋጁ ይላካሉ። ሐሰት ከሆነ Home/End ወደ የርቀት አስተናጋጁ ይላኩና Shift+Home/Shift+End ይሸበልላል።"
 	},
 	"hterm_pref_keybindings": {
-		"message": "ከቁልፍ እርምጃዎች ጋር የተሳሰረ የቁልፍ ተከታታይ ካርታ። የቁልፍ ተከታታዮች ዜሮ ወይም ተጨማሪ ቀያሪ ቁልፎችን ያካትቱና የቁልፍ ኮድን ያስከትላሉ። ቁልፍ ኮዶች የአሥርዮሽ ወይም አሥራስድስትዮሽ ቁጥሮች ወይም የቁልፍ ለዪ ሊሆኑ ይችላሉ። ቁልፍ እርምጃዎች ወደ ተቆጣጣሪ የሚላክ ሕብረቁምፊ ወይም የእርምጃ ለዪ ሊገለጽላቸው ይችላል። ሙሉው የቅርጸት ማብራሪያ ለማግኘት https://hterm.org/x/docs/keyboard-bindings ይመልከቱ።\n\nየናሙና ቁልፍ ማስተሳሰሪያዎች፦\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\\n'\"\n}"
+		"message": "ለቁልፍ እርምጃዎች የቁልፍ ቅደም ተከተል ካርታ። የቁልፍ ቅደም ተከተሎች ዜሮ ወይም ተጨማሪ አሻሻይ ቁልፎችን የቁልፍ ኮድን በማስከተል ያካትታሉ። ቁልፍ ኮዶች አሥርዮሽ ወይም አሥራስድስትዮሽ ቁጥሮች ወይም የቁልፍ ለዪ ሊሆኑ ይችላሉ። ቁልፍ እርምጃዎች ሕብረቁምፊ ወደ አስተናጋጁ ለመላክ ወይም የእርምጃ ለዪ ተብለው ሊገለጹ ይችላሉ። ለቅርጸቱ ሙሉ ማብራሪያ https://hterm.org/x/docs/keyboard-bindings ይመልከቱ።\n\nየናሙና ቁልፍ ማጣመሪያዎች፦\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\\n'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "የተለመደ የስርዓተ ክወና ቁልፍ ሰሌዳ ማሰሪያዎች ለhterm የራሱ አጠቃቀም ፎቶ ከማንሳት ይልቅ መከበር እንዳለባቸው እና እንደሌለባቸው።"
@@ -537,7 +540,7 @@
 		"message": "የዲበ ቁልፉን ተጭነው ሳለ አንድ ቁልፍ ሲጫኑ የESC ቅድመ-ቅጥያ ይላኩ።\n\nለምሳሌ፣ ሲነቃ Meta+K መጫን ልክ k እንደተየቡ አድርጎ ^[k ይልካል። ሲሰናከል k ብቻ ነው የሚላከው።"
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "ለመለጠፍ ስራ ላይ የሚውለው የመዳፊት አዝራር።\n\nበራስ-ሰር ለማግኘት የX11 መሣሪያ ስርዓቶች ላልሆኑ (ChromeOS ጨምሮ) የመሃል መዳፊት አዝራሩን እንጠቀማለን። X11 ላይ የቀኝ መዳፊት አዝራሩን እንጠቀማለን (የመስኮት አስተዳዳሪ መለጠፍን በመሃል መዳፊት አዝራር መያዝ ስላለበት)።\n\n0 == የግራ (ዋና) አዝራር።\n1 == የመሃል (ደጋፊ) አዝራር።\n2 == የቀኝ (ሁለተኛ) አዝራር።\n\nይህ አማራጭ ከቀኝ ጠቅታ መለጠፍ ቅንብሩ የተለየ ነው።\n\nማስታወሻ፦ ዋናዎቹ እና ሁለተኛ ደረጃዎቹ አዝራሮች ከግራ እና ከቀኝ እጅ መዳፊቶች ጋር ለእርስዎ ይስተናገዳሉ።"
+		"message": "ለመለጠፍ ሥራ ላይ የሚውለው የመዳፊት አዝራር።\n\nበራስ-ሰር ለማግኘት የX11 መሣሪያ ስርዓቶች ላልሆኑ (ChromeOS ጨምሮ) የመሃል መዳፊት አዝራሩን እንጠቀማለን። X11 ላይ የቀኝ መዳፊት አዝራሩን እንጠቀማለን (የመስኮት አስተዳዳሪ መለጠፍን በመሃል መዳፊት አዝራር መያዝ ስላለበት)።\n\n0 == የግራ (ዋና) አዝራር።\n1 == የመሃል (ደጋፊ) አዝራር።\n2 == የቀኝ (ሁለተኛ) አዝራር።\n\nይህ አማራጭ ከቀኝ ጠቅታ መለጠፍ ቅንብሩ የተለየ ነው።\n\nማስታወሻ፦ ዋናዎቹ እና ሁለተኛ ደረጃዎቹ አዝራሮች ከግራ እና ከቀኝ እጅ መዳፊቶች ጋር ለእርስዎ ይስተናገዳሉ።"
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "በቀኝ የመዳፊት አዝራር ጠቅታዎች ላይ ይለጥፉ።\n\nይህ አማራጭ ከ«የመዳፊት-ጠቅታ-ለጥፍ» ቅንብሩ ነፃ ነው።\n\nማስታወሻ፦ ዋናዎቹ እና ሁለተኛ ደረጃዎቹ አዝራሮች ከግራ እና ከቀኝ እጅ መዳፊቶች ጋር ለእርስዎ ይስተናገዳሉ።"
@@ -567,7 +570,7 @@
 		"message": "Meta+1..9 ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nይህ htermን በአሳሽ ትር ላይ ሲያሄዱ ጠቃሚ ነው፣ በዚህም የChrome «ወደ ትር ቀይር» ቁልፍ ሰሌዳ አቋራጮችን አያጡም። በትር ላይ እያሄዱ ካልሆኑ እነዚህን ቁልፎች በvim ወይም emacs ውስጥ መጠቀም እንዲቻል ወደ አስተናጋጁ ቢላኩ ይሻላል።\n\nእውነት ከሆነ Meta+1..9 በአሳሹ ነው የሚስተናገደው። ሐሰት ከሆነ Meta-1..9 ወደ አስተናጋጁ ነው የሚላከው። አልቦ ከሆነ ራስ-ማግኘት በአሳሹ መሣሪያ ሥርዓት እና በመስኮቱ ዓይነት ላይ የተመሠረተ ይሆናል።"
 	},
 	"hterm_pref_pass_meta_v": {
-		"message": "Meta+V ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nበአንዳንድ ስርዓቶች ላይ ይህ ይዘትን ለመለጠፍ ስራ ላይ ይውላል።"
+		"message": "Meta+V ወደ አሳሹ ይተላለፍ እንደሆነ።\n\nበአንዳንድ ስርዓቶች ላይ ይህ ይዘትን ለመለጠፍ ሥራ ላይ ይውላል።"
 	},
 	"hterm_pref_paste_on_drop": {
 		"message": "እውነት ከሆነ ጎትቶ ጣል ማድረግ ተርሚናሉ ላይ ይለጥፋል።\nሐሰት ከሆነ የተጣለው ጽሁፍ ችላ ይባላል።"
@@ -615,7 +618,7 @@
 		"message": "ከአንድ ምርጫ በስተግራ (መጀመሪያ) ማዛመድን የሚያቆም መደበኛ የሒሳብ ሐረግ።\n\nይህ በመደበኛነት የተወሰኑ ቁምፊዎችን ውድቅ የሚያደርግ የቁምፊ መደብ ነው።\nዱካዎች በተደጋጋሚነት በእነዚህ ስለሚጀምሩ «~» እና «.» በነባሪነት እንፈቅዳለን።"
 	},
 	"hterm_pref_word_break_match_middle": {
-		"message": "በመሃል ውስጥ ካሉ ቁምፊዎች ሁሉ ጋር የሚያዛምድ የሒሳብ መግለጫ።\n\nይህ በመደበኛነት የተወሰኑ ቁምፊዎችን ውድቅ የሚያደርግ የቁምፊ መደብ ነው።\n\nበመጀመሪያው ነጥቡ ዙሪያ ያለውን ምርጫ ለማስፋት ስራ ላይ የሚውል።"
+		"message": "በመሃል ውስጥ ካሉ ቁምፊዎች ሁሉ ጋር የሚያዛምድ የሒሳብ መግለጫ።\n\nይህ በመደበኛነት የተወሰኑ ቁምፊዎችን ውድቅ የሚያደርግ የቁምፊ መደብ ነው።\n\nበመጀመሪያው ነጥቡ ዙሪያ ያለውን ምርጫ ለማስፋት ሥራ ላይ የሚውል።"
 	},
 	"hterm_pref_word_break_match_right": {
 		"message": "ከአንድ ምርጫ በስተቀኝ (መጨረሻ) ማዛመድን የሚያቆም መደበኛ የሒሳብ ሐረግ።\n\nይህ በመደበኛነት የተወሰኑ ቁምፊዎችን ውድቅ የሚያደርግ የቁምፊ መደብ ነው።"
@@ -998,6 +1001,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ተርሚናልን ማጽዳት"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "ይህ VM በእርስዎ አስተዳዳሪ ተሰናክሏል"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "ንጥሉን ለማጥፋት ሰርዝ የሚለውን ቁልፍ ይጫኑ።"
 	},
@@ -1090,6 +1096,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "የመስመር ቁመት"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "የኋላ ሽብለላ ገደብ"
 	},
 	"terminal_name_pref_shape": {
 		"message": "ቅርፅ"
@@ -1290,40 +1299,40 @@
 		"message": "በአንድ መስኮት ውስጥ ሲያሄዱ Ctrl+Shift+N ሌላ ክፍለ-ጊዜ ሊከፍት ይችላል።"
 	},
 	"tip_11": {
-		"message": "ቁልፎች/አቋራጮችን ዳግም ማስተሳሰር ይችላሉ፦ https://hterm.org/x/docs/keyboard-bindings"
+		"message": "ቁልፎችን/አቋራጮችን ዳግም ማጣመር ይችላሉ፦ https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ለssh ማረጋገጫ Yubikeysን እና ሌሎች ዘመናዊ ካርዶችን ይጠቀሙ፦ https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Yubikeysን እና ሌሎች ዘመናዊ ካርዶችን ለኤስኤስኤች ማረጋገጫ ይጠቀሙ፦ https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "ምስሎችን በውስጠ-መስመር አሳይ፦ https://hterm.org/x/faq/inline-images"
+		"message": "ምስሎችን በውስጠ መስመር አሳይ፦ https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "በቀኝ ጠቅ እያደረጉ ሳለ Ctrlን (በmacOS ላይ Cmdን) መያዝ የአውድ ምናሌን ያመጣል።"
 	},
 	"tip_2": {
-		"message": "hterm-notifyን በመጠቀም ማሳወቂያዎችን በአሳሹ ውስጥ ይታዩ፦ https://hterm.org/x/faq/notify-sh"
+		"message": "hterm-notifyን በመጠቀም ማሳወቂያዎችን በአሳሹ ውስጥ አሳይ፦ https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "«Ssh <Tab> <profile name>» ን በመተየብ ከ ኦምኒቦክስ ይገናኙ፦ https://hterm.org/x/ssh/faq/omnibox"
+		"message": "ከኦምኒቦክስ «ssh<Tab><profile name>»ን በመፃፍ ይገናኙ፦ https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS በኤስኤፍቲፒ በኩል የፋይል ሥርዓቶችን ማፈናጠጥ እና በፋይሎች መተግበሪያው በኩል ማሰስ ይችላል። ከ«ተገናኝ» ይልቅ «ኤስኤፍቲፒ ማፈናጠጥ»ን ይጠቀሙ።"
 	},
 	"tip_5": {
-		"message": "በድረ-ገጾች ውስጥ የ ssh:// አገናኞችን በመጠቀም ይገናኙ ወይም አንድ ዕልባት ያስቀምጡ፦ https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "ssh:// links በድረ-ገጾች ውስጥ በመጠቀም ይገናኙ ወይም ዕልባትን ያስቀምጡ፦ https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "መሠረታዊ የ16 ቀለሞች እና 256 ቀለሞች ወይም ሙሉ ባለ24-ቢት ቀለሞችን በመጠቀም የእርስዎን ውጽዓት/ጥያቄን ያቅልሙ፦ http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "ከemacs/vim/ወዘተ ወደ የእርስዎ ቅንጥብ ሰሌዳ ይቅዱ... OSC-52ን በመጠቀም፦ https://hterm.org/x/faq/osc52"
+		"message": "ከemacs/vim/etc... ወደ እርስዎ ቅንጥብ ሰሌዳ OSC-52ን በመጠቀም ይቅዱ፦ https://hterm.org/x/faq/osc52ን"
 	},
 	"tip_8": {
 		"message": "በchromium-hterm@chromium.org በኩል ከሌሎች ባልደረባ የhterm/Secure Shell ተጠቃሚዎች ጋር ይወያዩ፦ https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "ሳንካ አገኙ?  አዲስ ባህሪ ይጠይቁ?  ያሳውቁን፦ https://hterm.org/x/ssh/newbug"
+		"message": "ሳንካ አግኝተዋል?  አዲስ ባህሪ ይጠየቅ?  https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "አንድ ያልተጠበቀ ስህተት ተከስቷል፣ ተጨማሪ ዝርዝሮችን ለማግኘት እባክዎ የጃቫስክሪፕት መሥሪያውን ይፈትሹ።"

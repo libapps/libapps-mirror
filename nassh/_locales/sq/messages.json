@@ -119,6 +119,9 @@
 	"hterm_button_close": {
 		"message": "Mbyll"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Mbyll shiritin e gjetjes"
+	},
 	"hterm_button_find": {
 		"message": "Gjej"
 	},
@@ -513,7 +516,7 @@
 		"message": "Nëse është e vërtetë, tastet Home/End kontrollojnë shiritin e lëvizjes së terminalit dhe Shift+Home/Shift+End dërgohen te pritësi në distancë. Nëse nuk është e vërtetë, atëherë Home/End dërgohen te pritësi në distancë dhe Shift+Home/Shift+End kryejnë lëvizjen."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Një hartë e sekuencave të tasteve të veprimeve të tasteve. Sekuencat e tasteve përfshijnë zero ose më shumë taste modifikues të ndjekura nga kodi i tastit. Kodet e tasteve mund të jenë numra dhjetorë ose heksadhjetorë ose një identifikues tasti. Veprimet e tasteve mund të specifikohen si varg për t'u dërguar te pritësi ose identifikues veprimi. Për një shpjegim të plotë të formatit, shiko https://hterm.org/x/docs/keyboard-bindings.\n\nShembuj të lidhjeve me tastet:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Një hartë e sekuencave të tasteve të veprimeve të tasteve. Sekuencat e tasteve përfshijnë zero ose më shumë taste modifikues të ndjekura nga kodi i tastit. Kodet e tasteve mund të jenë numra dhjetorë ose hekzadecimalë ose një identifikues tasti. Veprimet e tasteve mund të specifikohen si varg për t'u dërguar te pritësi ose identifikues veprimi. Për një shpjegim të plotë të formatit, shiko https://hterm.org/x/docs/keyboard-bindings.\n\nShembuj të lidhjeve me tastet:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Nëse lidhjet e zakonshme me tastierën me sistemin operativ duhet të respektohen në vend që të regjistrohen për përdorim nga hterm."
@@ -983,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Pastro terminalin"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Kjo pajisje virtuale është çaktivizuar nga administratori"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Shtyp tastin DELETE për ta fshirë artikullin."
 	},
@@ -1075,6 +1081,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Lartësia e rreshtit"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Kufiri i lëvizjes prapa"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
@@ -1290,7 +1299,7 @@
 		"message": "Shfaq njoftimet në shfletues duke përdorur hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Lidhu nga shiriti omnibox duke shkruar \"ssh<Tab><emri i profilit>\": https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Lidhu nga shiriti omnibox duke shkruar \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS mund të montojë sisteme skedarësh përmes SFTP dhe të shfletojë përmes aplikacionit Files. Përdor \"Montimi i protokollit SFTP\" në vend të \"Lidhu\"."
@@ -1308,7 +1317,7 @@
 		"message": "Bisedo me përdoruesit e hterm/Secure Shell që ke shokë nëpërmjet chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Gjete një defekt në kod?  Kërko një veçori të re?  Na trego: https://hterm.org/x/ssh/newbug"
+		"message": "Gjete një defekt në kod?  Kërko një veçori të re?  Na informo: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Ndodhi një gabim i papritur. Kontrollo panelin e JavaScript-it për më shumë detaje."

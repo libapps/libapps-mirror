@@ -122,6 +122,9 @@
 	"hterm_button_close": {
 		"message": "បិទ"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "បិទ​របារ​ស្វែង​រក"
+	},
 	"hterm_button_find": {
 		"message": "រក"
 	},
@@ -510,7 +513,7 @@
 		"message": "ប្រសិនបើពិត នោះ Home/End នឹងគ្រប់គ្រងរបាររំកិលស្ថានីយ ហើយ Shift+Home/Shift+End ត្រូវបានបញ្ជូនទៅម៉ាស៊ីនពីចម្ងាយ។ ប្រសិនបើមិនពិត នោះ Home/End ត្រូវបានបញ្ជូនទៅម៉ាស៊ីនពីចម្ងាយ ហើយ Shift+Home/Shift+End នឹងរំកិល។"
 	},
 	"hterm_pref_keybindings": {
-		"message": "ផែនទីនៃលំដាប់គ្រាប់ចុចរហូតដល់សកម្មភាពគ្រាប់ចុច។ លំដាប់គ្រាប់ចុចរួមបញ្ចូលសូន្យ ឬប៊ូតុងឧបករណ៍កែសម្រួលច្រើនទៀត ដែលមានកូដគ្រាប់ចុចនៅបន្ទាប់ពីនោះ។ កូដគ្រាប់ចុចអាចជាលេខគោលដប់ប្រាំមួយ ឬលេខទសភាគ ឬព័ត៌មានសម្គាល់គ្រាប់ចុច។ អាចបញ្ជាក់សកម្មភាពគ្រាប់ចុចជាជួរអក្សរមួយ ដើម្បីបញ្ជូនទៅម៉ាស៊ីន ឬព័ត៌មានសម្គាល់សកម្មភាព។ សម្រាប់ការពន្យល់ពេញលេញអំពីទម្រង់ សូមមើល https://hterm.org/x/docs/keyboard-bindings។\n\nការចងគ្រាប់ចុចគំរូ៖\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'សួស្ដី ពិភពលោក'\"\n}"
+		"message": "ការកំណត់លំដាប់គ្រាប់ចុចសម្រាប់សកម្មភាពគ្រាប់ចុច។ លំដាប់គ្រាប់ចុចរួមបញ្ចូលសូន្យ ឬប៊ូតុងឧបករណ៍កែសម្រួលច្រើនទៀត ដែលមានលេខកូដគ្រាប់ចុចនៅបន្ទាប់ពីនោះ។ លេខកូដគ្រាប់ចុចអាចជាលេខគោលដប់ប្រាំមួយឬគោលដប់ ឬលេខកូដសម្គាល់គ្រាប់ចុច។ អាចកំណត់សកម្មភាពគ្រាប់ចុចជាជួរអក្សរសម្រាប់បញ្ជូនទៅម៉ាស៊ីន ឬជាលេខកូដសម្គាល់សកម្មភាព។ ដើម្បីទទួលបានការពន្យល់ពេញលេញអំពីទម្រង់ សូមមើល https://hterm.org/x/docs/keyboard-bindings។\n\nការកំណត់គ្រាប់ចុចគំរូ៖\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'សួស្ដី ពិភពលោក'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "ថាតើគួរតែគោរពតាមការចងក្ដារចុចប្រព័ន្ធប្រតិបត្តិការទូទៅជំនួសឱ្យការថតការប្រើប្រាស់ផ្ទាល់របស់ hterm ជានិច្ចឬអត់។"
@@ -992,6 +995,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ការសម្អាតស្ថានីយ"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "VM នេះត្រូវបាន​បិទ​ដោយអ្នកគ្រប់គ្រង​របស់អ្នក"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "ចុចគ្រាប់ចុច delete ដើម្បីលុបធាតុ។"
 	},
@@ -1081,6 +1087,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "កម្ពស់​បន្ទាត់"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "ដែនកំណត់នៃ​ការរំកិល​ថយក្រោយ"
 	},
 	"terminal_name_pref_shape": {
 		"message": "រូបរាង"
@@ -1272,7 +1281,7 @@
 		"message": "នៅពេលដំណើរការនៅក្នុងវិនដូ, Ctrl+Shift+N អាចបើកវគ្គមួយផ្សេងទៀត។"
 	},
 	"tip_11": {
-		"message": "អ្នកអាចប្ដូរសកម្មភាពគ្រាប់ចុច/ផ្លូវកាត់បាន៖ https://hterm.org/x/docs/keyboard-bindings"
+		"message": "អ្នកអាចកំណត់គ្រាប់ចុច/ផ្លូវកាត់ឡើងវិញបាន៖ https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
 		"message": "ប្រើ Yubikey និងកាតឆ្លាតវៃផ្សេងទៀតសម្រាប់ការផ្ទៀងផ្ទាត់ ssh៖ https://hterm.org/x/ssh/docs/hwkey"
@@ -1284,10 +1293,10 @@
 		"message": "ការចុច Ctrl (Cmd នៅលើ macOS) ​ឱ្យជាប់ នៅពេលចុចកណ្ដុរខាងស្ដាំនឹងបង្ហាញម៉ឺនុយ​បរិបទ។"
 	},
 	"tip_2": {
-		"message": "បង្ហាញ​ការ​ជូនដំណឹងនៅក្នុងកម្មវិធីរុករកតាមអ៊ីនធឺណិតដោយប្រើ hterm-notify៖ https://hterm.org/x/faq/notify-sh"
+		"message": "បង្ហាញ​ការជូនដំណឹងនៅក្នុងកម្មវិធីរុករកតាមអ៊ីនធឺណិតដោយប្រើ hterm-notify៖ https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "ភ្ជាប់ពី​ពហុប្រអប់​ដោយវាយបញ្ចូល 'ssh<Tab><profile name>'៖ https://hterm.org/x/ssh/faq/omnibox"
+		"message": "ភ្ជាប់ពី​ប្រអប់ពហុមុខងារ​ដោយវាយបញ្ចូល 'ssh<Tab><profile name>'៖ https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS អាចភ្ជាប់​ប្រព័ន្ធ​ឯកសារ​តាមរយៈ SFTP និង​រុករក​តាមរយៈ​កម្មវិធី Files។ ប្រើ 'ការភ្ជាប់ SFTP' ជំនួសឱ្យ 'ភ្ជាប់'។"
@@ -1305,7 +1314,7 @@
 		"message": "ជជែកជាមួយអ្នកប្រើប្រាស់ hterm/Secure Shell ដូចគ្នាតាមរយៈ chromium-hterm@chromium.org៖ https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "រកឃើញបញ្ហាមែនទេ?  ស្នើសុំមុខងារថ្មីមែនទេ?  សូមជម្រាបឱ្យយើងដឹងតាមរយៈ៖ https://hterm.org/x/ssh/newbug"
+		"message": "រកឃើញបញ្ហាមែនទេ?  ស្នើសុំមុខងារថ្មីមែនទេ?  សូម​ប្រាប់ឱ្យយើង​ដឹង៖ https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "មានបញ្ហាដែល​មិន​បាន​រំពឹង​ទុក​បានកើតឡើង។ សូមពិនិត្យខនសូល JavaScript ដើម្បីទទួលបានព័ត៌មានលម្អិតបន្ថែម។"

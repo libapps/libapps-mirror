@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "Funga"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Funga upau wa kutafutia"
+	},
 	"hterm_button_find": {
 		"message": "Tafuta"
 	},
@@ -522,7 +525,7 @@
 		"message": "Ikiwa ndivyo, kitufe cha Home au End kitadhibiti upau wa kusogeza pembeni na vitufe vya Shift+Home au Shift+End vitatumwa kwenye seva pangishi ya mbali. Ikiwa sivyo, basi vitufe vya Home au End vitatumwa kwenye seva pangishi ya mbali na Shift+Home au Shift+End vitatumika kusogeza."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Ramani ya mifuatano ya vitufe vya kutekeleza hatua muhimu. Mifuatano ya vitufe hujumuisha vitufe vya sufuri au vitufe zaidi vya urekebishaji vikifuatwa na msimbo wa vitufe. Misimbo ya vitufe inaweza kuwa nambari ya desimali au heksadesimali au kitambulishi cha kitufe. Hatua za vitufe zinaweza kubainisha mfuatano ili kutuma maelezo kwenye seva pangishi au kitambulishi cha hatua. Kwa ufafanuzi kamili wa muundo, angalia https://hterm.org/x/docs/keyboard-bindings.\n\nMifano ya mifuatano ya vitufe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hamjambo Nyote'\"\n}"
+		"message": "Ramani ya mifuatano ya vitufe vya kutekeleza hatua muhimu. Mifuatano ya vitufe hujumuisha vitufe vya sufuri au vitufe zaidi vya kurekebisha vikifuatwa na msimbo wa vitufe. Misimbo ya vitufe inaweza kuwa nambari ya desimali au heksadesimali au kitambulishi cha kitufe. Hatua za vitufe zinaweza kubainisha mfuatano ili kutuma maelezo kwenye seva pangishi au kitambulishi cha hatua. Kwa ufafanuzi kamili wa muundo, angalia https://hterm.org/x/docs/keyboard-bindings.\n\nMifano ya mifuatano ya vitufe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hamjambo Nyote'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ikiwa shurutisho za kawaida za Mfumo wa Uendeshaji wa kibodi ni sharti zizingatiwe badala ya kunasa kila wakati kwa matumizi ya hterm."
@@ -1052,6 +1055,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Kuondoa Kituo"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "VM hii imezimwa na msimamizi wako"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Bonyeza kitufe cha kufuta ili ufute kipengee."
 	},
@@ -1141,6 +1147,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Urefu wa mstari"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Kikomo cha kusogeza nyuma"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Umbo"
@@ -1338,7 +1347,7 @@
 		"message": "Wakati inatumika kwenye dirisha, Ctrl+Shift+N inaweza kufungua kipindi kingine."
 	},
 	"tip_11": {
-		"message": "Unaweza kuunganisha tena funguo au njia za mkato: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "Unaweza kuunganisha tena vitufe/njia za mkato: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
 		"message": "Tumia Yubikeys na kadi zingine mahiri kwa uthibitishaji wa ssh: https://hterm.org/x/ssh/docs/hwkey"
@@ -1371,7 +1380,7 @@
 		"message": "Piga gumzo na watumiaji wa hterm/Secure Shell kupitia chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Umepata hitilafu? Unaomba kipengele kipya? Tufahamishe: https://hterm.org/x/ssh/newbug"
+		"message": "Je, umepata hitilafu?  Ungependa kuomba kipengele kipya?  Tufahamishe: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Hitilafu isiyotarajiwa imetokea, tafadhali angalia kidhibiti JavaScript kwa maelezo zaidi."

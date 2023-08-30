@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "Tutup"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Tutup bar carian"
+	},
 	"hterm_button_find": {
 		"message": "Cari"
 	},
@@ -983,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Pengosongan Terminal"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "VM ini telah dilumpuhkan oleh pentadbir anda"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Tekan kekunci delete untuk memadam item."
 	},
@@ -1066,6 +1072,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Tinggi baris"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Had tatal balik"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Bentuk"
@@ -1287,13 +1296,13 @@
 		"message": "Warnakan output/gesaan anda menggunakan warna asas 16 warna & 256 warna & warna 24 bit penuh: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Salin ke papan klip anda daripada emacs/vim/etc... menggunakan OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Salin pada papan keratan anda daripada emacs/vim/etc... menggunakan OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Sembang sesama pengguna hterm/Secure Shell melalui chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Menjumpai pepijat?  Ingin meminta ciri baharu?  Beritahu kami: https://hterm.org/x/ssh/newbug"
+		"message": "Pepijat ditemukan?  Minta ciri baharu?  Maklumkan kepada kami: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Ralat tak dijangka telah berlaku, sila semak konsol JavaScript untuk mendapatkan butiran lanjut."

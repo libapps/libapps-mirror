@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "ปิด"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "ปิดแถบค้นหา"
+	},
 	"hterm_button_find": {
 		"message": "ค้นหา"
 	},
@@ -519,7 +522,7 @@
 		"message": "หากเป็น \"จริง\" การกด Home/End จะควบคุมแถบเลื่อนเทอร์มินัลและ Shift+Home/Shift+End จะส่งไปยังโฮสต์ระยะไกล หากเป็น \"เท็จ\" การกด Home/End จะส่งไปยังโฮสต์ระยะไกล และ Shift+Home/Shift+End จะเป็นการเลื่อน"
 	},
 	"hterm_pref_keybindings": {
-		"message": "การจับคู่การกดแป้นติดต่อกันกับการทำงานของแป้น การกดแป้นติดต่อกันจะมีคีย์ตัวปรับแต่ง 0 คีย์ขึ้นไปแล้วตามด้วยรหัสคีย์ โดยรหัสคีย์อาจเป็นเลขทศนิยมหรือเลขฐานสิบหก หรือเป็นตัวระบุคีย์ก็ได้ การทำงานของแป้นอาจได้รับการกำหนดเป็นสตริงเพื่อส่งไปยังโฮสต์หรือตัวระบุการทำงาน ดูคำอธิบายโดยละเอียดเกี่ยวกับรูปแบบได้ที่ https://hterm.org/x/docs/keyboard-bindings\n\nตัวอย่างการเชื่อมโยงแป้น:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'สวัสดี'\"\n}"
+		"message": "การจับคู่การกดแป้นติดต่อกันกับการทำงานของแป้น การกดแป้นติดต่อกันจะมีคีย์ตัวปรับแต่ง 0 คีย์ขึ้นไปแล้วตามด้วยรหัสคีย์ โดยรหัสคีย์อาจเป็นเลขทศนิยมหรือเลขฐานสิบหก หรือเป็นตัวระบุคีย์ก็ได้ การทำงานของแป้นอาจกำหนดให้เป็นสตริงเพื่อส่งไปยังโฮสต์หรือเป็นตัวระบุการทำงานก็ได้ ดูคำอธิบายโดยละเอียดเกี่ยวกับรูปแบบได้ที่ https://hterm.org/x/docs/keyboard-bindings\n\nตัวอย่างการเชื่อมโยงแป้น\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'สวัสดีชาวโลก'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "กำหนดว่าจะให้ระบบดำเนินการตามการเชื่อมโยงแป้นพิมพ์ของระบบปฏิบัติการโดยทั่วไปแทนการบันทึกไว้ทุกครั้งเพื่อการใช้งานของ hterm เองหรือไม่"
@@ -980,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "การล้างเทอร์มินัล"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "ผู้ดูแลระบบปิดใช้ VM นี้"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "กดปุ่ม Delete เพื่อลบรายการ"
 	},
@@ -1069,6 +1075,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "ความสูงของเส้นบรรทัด"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "ขีดจำกัดการเลื่อนกลับ"
 	},
 	"terminal_name_pref_shape": {
 		"message": "รูปร่าง"
@@ -1260,7 +1269,7 @@
 		"message": "เมื่อเรียกใช้ในหน้าต่าง การกดปุ่ม Ctrl+Shift+N จะเปิดอีกเซสชันหนึ่งขึ้นมา"
 	},
 	"tip_11": {
-		"message": "คุณจะเชื่อมโยงแป้น/แป้นพิมพ์ลัดอีกครั้งได้ที่ https://hterm.org/x/docs/keyboard-bindings"
+		"message": "คุณสามารถเชื่อมโยงแป้น/แป้นพิมพ์ลัดอีกครั้ง: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
 		"message": "ใช้ Yubikey และสมาร์ทการ์ดอื่นๆ สำหรับการตรวจสอบสิทธิ์ SSH: https://hterm.org/x/ssh/docs/hwkey"
@@ -1272,28 +1281,28 @@
 		"message": "การกด Ctrl (Cmd ใน macOS) ค้างไว้พร้อมคลิกขวาจะเปิดเมนูตามบริบท"
 	},
 	"tip_2": {
-		"message": "แสดงการแจ้งเตือนในเบราว์เซอร์โดยใช้ hterm-notify ได้ที่ https://hterm.org/x/faq/notify-sh"
+		"message": "แสดงการแจ้งเตือนในเบราว์เซอร์โดยใช้ hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "เชื่อมต่อจากแถบอเนกประสงค์โดยพิมพ์ \"ssh<Tab><profile name>'\": https://hterm.org/x/ssh/faq/omnibox"
+		"message": "เชื่อมต่อจากแถบอเนกประสงค์โดยพิมพ์ \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS ต่อเชื่อมระบบไฟล์ได้ผ่าน SFTP และเรียกดูได้ผ่านแอป Files ใช้ \"ต่อเชื่อม SFTP\" แทน \"เชื่อมต่อ\""
 	},
 	"tip_5": {
-		"message": "เชื่อมต่อโดยใช้ลิงก์ ssh:// ในหน้าเว็บ หรือบันทึกบุ๊กมาร์กที่ https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "เชื่อมต่อโดยใช้ลิงก์ ssh:// ในหน้าเว็บ หรือบันทึกบุ๊กมาร์ก: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "ให้สีเอาต์พุต/ข้อความแจ้งโดยใช้สีหลัก 16 สี 256 สี และสี 24 บิตแบบเต็มได้ที่ http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "คัดลอกจาก emacs/vim/ฯลฯ ไปที่คลิปบอร์ด... โดยใช้ OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "คัดลอกจาก emacs/vim/ฯลฯ... ไปยังคลิปบอร์ด โดยใช้ OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "แชทกับผู้ใช้ hterm/Secure Shell ผ่าน chromium-hterm@chromium.org ได้ที่ https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "หากพบข้อบกพร่องหรือต้องการส่งคำขอฟีเจอร์ใหม่ บอกเราได้ที่ https://hterm.org/x/ssh/newbug"
+		"message": "หากพบข้อบกพร่อง  หรือต้องการขอฟีเจอร์ใหม่  คุณแจ้งให้เราทราบได้ที่ https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "เกิดข้อผิดพลาดที่ไม่คาดคิด โปรดดูรายละเอียดเพิ่มเติมจากคอนโซล JavaScript"

@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Sule"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Sule leiuriba"
+	},
 	"hterm_button_find": {
 		"message": "Otsi"
 	},
@@ -522,7 +525,7 @@
 		"message": "Kui see on seatud väärtusele Tõene, juhivad klahvid Home/End terminali kerimisriba ning kombinatsioonid tõstuklahv + Home / tõstuklahv + End saadetakse kaughostile. Kui see on seatud väärtusele Väär, saadetakse klahvide Home/End vajutused kaughostile ja kombinatsioone tõstuklahv + Home / tõstuklahv + End kasutatakse kerimiseks."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Vastendatud klahvikombinatsioonide ja klahvitoimingute kaart. Klahvikombinatsioonid võivad (aga ei pruugi) sisaldada üht või mitut muuteklahvi, millele järgneb klahvikood. Klahvikoodid võivad olla kümnend- või kuueteistkümnendarvud või klahvi identifikaatorid. Klahvitoimingud saab määrata hostile saadetava stringi või toimingu identifikaatorina. Vormingu täieliku selgituse leiate siit: https://hterm.org/x/docs/keyboard-bindings.\n\nKlahvikombinatsioonide näited:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Vastendatud klahvikombinatsioonide ja klahvitoimingute kaart. Klahvikombinatsioonid võivad (aga ei pruugi) sisaldada üht või mitut muuteklahvi, millele järgneb klahvikood. Klahvikoodid võivad olla kümnend- või kuueteistkümnendarvud või klahvi identifikaatorid. Klahvitoimingud saab määrata hostile saadetava stringi või toimingu identifikaatorina. Vormingu täieliku selgituse leiate aadressilt https://hterm.org/x/docs/keyboard-bindings.\n\nKlahvikombinatsioonide näited.\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\"\n  \"Ctrl+Shift+L\": \"PASS\"\n  \"Ctrl+H\": \"Tere, maailm!\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Määrab, kas järgida tuleks operatsioonisüsteemi tavapäraseid klaviatuuriseoseid, selle asemel et jäädvustada kombinatsioonid alati htermis kasutamiseks."
@@ -980,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Tühjenda terminal"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "See virtuaalmasin on teie administraatori poolt keelatud"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Üksuse kustutamiseks vajutage kustutusklahvi."
 	},
@@ -1066,6 +1072,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Rea kõrgus"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Tagasikerimise piirang"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Kuju"
@@ -1254,34 +1263,34 @@
 		"message": "Aknas käitamisel avab klahvikombinatsioon Ctrl + tõstuklahv + N uue seansi."
 	},
 	"tip_11": {
-		"message": "Klahve/otseteid saab uuesti siduda: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "Klahvide/otseteede uuesti sidumine: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Kasutage SSH autentimiseks Yubikeysid ja teisi kiipkaarte: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "SSH autentimiseks Yubikeyde ja teiste kiipkaartide kasutamine: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Kujutised kuvatakse tekstisiseselt: https://hterm.org/x/faq/inline-images"
+		"message": "Kujutiste kuvamine tekstisiseselt: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Klahvi Ctrl (macOS-i puhul klahvi Cmd) allhoidmisel ja paremklõpsamisel kuvatakse kontekstimenüü."
 	},
 	"tip_2": {
-		"message": "Kuvage märguanded brauseris käsuga hterm-notify: https://hterm.org/x/faq/notify-sh"
+		"message": "Märguannete kuvamine brauseris käsuga hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Looge ühendus omnikastikesest, sisestades käsu „ssh<Tab><profile name>”: https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Ühenduse loomine omnikastikesest käsu „ssh<Tab><profile name>“ sisestamisega: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS saab failisüsteeme ühendada SFTP kaudu ja sirvida rakenduse Failid kaudu. Kasutage käsku „Ühenda SFTP”, mitte „Ühenda”."
 	},
 	"tip_5": {
-		"message": "Looge ühendus veebilehtedel olevate ssh:// linkide kaudu või salvestage järjehoidja: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "Ühenduse loomine veebilehtedel olevate ssh://-linkide kaudu või järjehoidja salvestamine: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Määrake väljundi/viiba värv 16 põhivärvi, 256 värvi või täieliku 24-bitise värvivaliku abil: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopeerige lõikelauale: emacs/vim/jms …, kasutades üksust OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Tekstiredaktorist emacs/vim/jms lõikelauale kopeerimine, kasutades funktsiooni OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Vestelge teiste htermi / Secure Shelli kasutajatega: chromium-hterm@chromium.org – https://goo.gl/RYHiK"

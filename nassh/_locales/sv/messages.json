@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Stäng"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Stäng sökfältet"
+	},
 	"hterm_button_find": {
 		"message": "Sök"
 	},
@@ -980,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Rensa terminal"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Denna VM har inaktiverats av administratören"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Du kan radera objektet genom att trycka på tangenten Radera."
 	},
@@ -1069,6 +1075,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Radhöjd"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Gräns för bakåtscrollning"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Form"
@@ -1263,7 +1272,7 @@
 		"message": "Du kan ändra funktionen för tangenter/kortkommandon: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Använd smartkort från till exempel Yubikey för autentisering med ssh: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Använd smartkort från till exempel Yubikey för autentisering med SSH: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "Visa infogade bilder: https://hterm.org/x/faq/inline-images"
@@ -1272,7 +1281,7 @@
 		"message": "Om du håller ned Ctrl (Cmd på macOS) när du högerklickar öppnas en snabbmeny,"
 	},
 	"tip_2": {
-		"message": "Du kan visa aviseringar i webbläsaen med hterm-notify: https://hterm.org/x/faq/notify-sh"
+		"message": "Du kan visa aviseringar i webbläsaren med hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
 		"message": "Du kan ansluta från adressfältet genom att skriva ssh<Tab><profile name>: https://hterm.org/x/ssh/faq/omnibox"
@@ -1293,7 +1302,7 @@
 		"message": "Chatta med andra som använder hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Har du hittat ett fel? Har du förslag på nya funktioner? Hör av dig: https://hterm.org/x/ssh/newbug"
+		"message": "Har du hittat ett fel?  Vill du begära en ny funktion?  Berätta för oss om det: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Ett oväntat fel uppstod. Du hittar mer information i JavaScript-konsolen."

@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Sulje"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Sulje hakupalkki"
+	},
 	"hterm_button_find": {
 		"message": "Etsi"
 	},
@@ -980,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminaalin tyhjennys"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Järjestelmänvalvoja on poistanut tämän virtuaalikoneen käytöstä"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Poista kohde painamalla poistopainiketta."
 	},
@@ -1069,6 +1075,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Rivikorkeus"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Taaksepäin vierittämisen raja"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Muoto"
@@ -1302,7 +1311,7 @@
 		"message": "Keskustele muiden htermin ja Secure Shellin käyttäjien kanssa chromium-hterm@chromium.org-ryhmässä: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Kerro meille virheestä tai lähetä ominaisuuspyyntö: https://hterm.org/x/ssh/newbug"
+		"message": "Löysitkö virheen?  Haluatko pyytää uutta ominaisuutta?  Kerro meille: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Tapahtui odottamaton virhe. Katso lisätietoja JavaScript-konsolista."

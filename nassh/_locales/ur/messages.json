@@ -119,6 +119,9 @@
 	"hterm_button_close": {
 		"message": "بند کریں"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "تلاش بار بند کریں"
+	},
 	"hterm_button_find": {
 		"message": "تلاش کریں"
 	},
@@ -513,7 +516,7 @@
 		"message": "درست ہونے پر، Home/End سے ٹرمینل سکرول بار کو کنٹرول کیا جاتا ہے اور Shift+Home/Shift+End کو ریموٹ میزبان پر بھیج دیا جاتا ہے۔ غلط ہونے پر، Home/End کو ریموٹ میزبان پر بھیج دیا جاتا ہے اور Shift+Home/Shift+End سے سکرول کیا جاتا ہے۔"
 	},
 	"hterm_pref_keybindings": {
-		"message": "کلید کی کارروائیوں کیلئے کلید کی ترتیب کا نقشہ۔ کلید کی ترتیبات میں صفر یا اس سے زیادہ موڈیفائر کلیدیں شامل ہوتی ہیں اور اس کے بعد کلید کا کوڈ آتا ہے۔ کلید کے کوڈز اعشاری یا شش اعشاری اعداد یا ایک کلید شناخت کار ہو سکتے ہیں۔ کلید کی کارروائیوں کا تعین میزبان کو بھیجی جانے والی اسٹرنگ یا کارروائی کے شناخت کار کے طور پر کیا جا سکتا ہے۔ فارمیٹ کی مکمل وضاحت کیلئے، https://hterm.org/x/docs/keyboard-bindings دیکھیں۔\n\nنمونہ کی بائنڈنگز:\n{\n  ‎\"Ctrl+Alt+K\": \"clearTerminal\",‎\n  ‎\"Ctrl+Shift+L\": \"PASS\",‎\n  ‎\"Ctrl+H\": \"'Hello World'\"‎\n}"
+		"message": "کلید کی کارروائیوں کیلئے کلید کی ترتیب کا نقشہ۔ کلید کی ترتیبات میں صفر یا اس سے زیادہ موڈیفائر کلیدیں شامل ہوتی ہیں اور اس کے بعد کلید کا کوڈ آتا ہے۔ کلید کے کوڈز اعشاری یا شش اعشاری اعداد یا ایک کلید شناخت کار ہو سکتے ہیں۔ کلید کی کارروائیوں کا تعین میزبان کو بھیجی جانے والی اسٹرنگ یا کارروائی کے شناخت کار کے طور پر کیا جا سکتا ہے۔ فارمیٹ کی مکمل وضاحت کیلئے، https://hterm.org/x/docs/keyboard-bindings دیکھیں۔\n\nنمونہ کی بائنڈنگز:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "آیا ہمیشہ hterm کے خود کے استعمال کو کیپچر کرنے کی بجائے OS کی بورڈ کی عام بائنڈنگز پر عمل کیا جانا چاہیے۔"
@@ -1022,6 +1025,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ٹرمینل صاف کریں"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "آپ کا منتظم اس VM کو غیر فعال کر چکا ہے"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "آئٹم کو حذف کرنے کے لیے Delete کلید دبائیں۔"
 	},
@@ -1111,6 +1117,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "لائن کی اونچائی"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "اسکرول بیک کی حد"
 	},
 	"terminal_name_pref_shape": {
 		"message": "شکل"
@@ -1323,7 +1332,7 @@
 		"message": "دائیں طرف کلک کرنے کے دوران Ctrl کو (macOS پر Cmd) پکڑے رکھنے سے سیاق و سباق مینیو دکھائی دیتا ہے۔"
 	},
 	"tip_2": {
-		"message": "hterm-notify کا استعمال کر کے براؤزر میں اطلاعات ڈسپلے کریں: https://hterm.org/x/faq/notify-sh"
+		"message": "hterm-notify کا استعمال کر کے براؤزر میں اطلاعات ڈسپلے کری: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
 		"message": "‎'ssh<Tab><profile name>'‎ ٹائپ کر کے اومنی باکس سے منسلک کریں: https://hterm.org/x/ssh/faq/omnibox"
@@ -1338,13 +1347,13 @@
 		"message": "بنیادی 16 رنگ اور 256 رنگوں اور پورے 24 بِٹ والے رنگوں کا استعمال کر کے اپنے آؤٹ پٹ/پرامپٹ کو رنگ کریں: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "OSC-52 کا استعمال کر کے emacs/vim/وغیرہ... سے اپنے کلپ بورڈ کر کاپی کریں: https://hterm.org/x/faq/osc52"
+		"message": "OSC-52 کا استعمال کر کے emacs/vim/etc... سے اپنے کلپ بورڈ میں کاپی کریں: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org کے ذریعے hterm/محفوظ شیل صارفین کے ساتھ چیٹ کریں: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "بَگ ملا؟  ایک نئی خصوصیت کی درخواست دیں؟  ہمیں مطلع کریں: https://hterm.org/x/ssh/newbug"
+		"message": "بَگ ملا؟  ایک نئی خصوصیت کی درخواست دیں؟  ہمیں بتائیں: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "ایک غیر متوقع خرابی پیش آ گئی۔ مزید تفصیلات کیلئے، براہ کرم JavaScript کونسول چیک کریں۔"

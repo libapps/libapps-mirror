@@ -119,6 +119,9 @@
 	"hterm_button_close": {
 		"message": "Maak toe"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Maak vindbalk toe"
+	},
 	"hterm_button_find": {
 		"message": "Soek"
 	},
@@ -510,7 +513,7 @@
 		"message": "Indien waar, beheer Home/End die terminaal se rolbalk en word Shift+Home/Shift+End na die afstandgasheer gestuur. Indien vals, word Home/End na die afstandgasheer gestuur en Shift+Home/Shift+End rollees."
 	},
 	"hterm_pref_keybindings": {
-		"message": "'n Kaart van sleutelsekwensie na sleutelhandelinge. Sleutelsekwensies sluit nul- of wysigersleutels in gevolg deur 'n sleutelkode. Sleutelkodes kan desimale of heksadesimale syfers wees, of 'n sleutelidentifiseerder. Sleutelhandelinge kan as 'n string gespesifiseer word om na die gasheer te stuur, of 'n handelingidentifiseerder. Sien https://hterm.org/x/docs/keyboard-bindings vir 'n volledige verduideliking van die formaat.\n\nVoorbeeldsleutelbindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hallo Wêreld'\"\n}"
+		"message": "’n Kaart van sleutelvolgorde na sleutelhandelinge. Sleutelvolgordes sluit nul- of wysigersleutels in gevolg deur ’n sleutelkode. Sleutelkodes kan desimale of heksadesimale syfers wees, of ’n sleutelidentifiseerder. Sleutelhandelinge kan gespesifiseer word as ’n string om na die gasheer te stuur, of ’n handelingidentifiseerder. Sien https://hterm.org/x/docs/keyboard-bindings vir ’n volledige verduideliking van die formaat.\n\nVoorbeeldsleutelbindings:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": '\"Hallo Wêreld\"'\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Of gewone bedryfstelselsleutelbordbindings gerespekteer moet word eerder as om altyd vasgevang te word vir hterm se eie gebruik."
@@ -1016,6 +1019,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Maak terminaalskerm skoon"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Hierdie VM is deur jou administrateur gedeaktiveer"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Druk die uitveesleutel om die item uit te vee."
 	},
@@ -1102,6 +1108,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Reëlhoogte"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Terugrollimiet"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Vorm"
@@ -1305,10 +1314,10 @@
 		"message": "Jy kan sleutels/kortpaaie herbind: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Gebruik Yubikeys en ander slimkaarte vir ssh-stawing: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Gebruik Yubikeys en ander slimkaarte vir SSH-stawing: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Wys prente direk: https://hterm.org/x/faq/inline-images"
+		"message": "Wys prente inlyn: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "As jy Ctrl (Cmd op macOS) hou terwyl jy regsklik sal die inhoudkieslys verskyn."
@@ -1317,25 +1326,25 @@
 		"message": "Wys kennisgewings in die blaaier met hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Koppel van die omniboks af deur \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox in te tik"
+		"message": "Koppel van die omniboks af deur 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox in te tik"
 	},
 	"tip_4": {
 		"message": "ChromeOS kan lêerstelsels via SFTP monteer en via die Lêers-program deurblaai. Gebruik \"SFTP-monteer\" pleks van \"Koppel\"."
 	},
 	"tip_5": {
-		"message": "Koppel deur ssh://-skakels in webblaaie te gebruik, of stoor 'n boekmerk: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "Koppel deur ssh://-skakels in webblaaie te gebruik, of stoor ’n boekmerk: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Kleur jou uitvoer/porboodskap met 16 basiese kleure en 256 kleure en volle 24-bis-kleure: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopieer na jou knipbord vanaf emacs/vim/ens. … met OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Kopieer na jou knipbord vanaf emacs/vim/ens … met OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Klets met medegebruikers van hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "'n Fout gekry?  Versoek 'n nuwe kenmerk?  Laat weet ons: https://hterm.org/x/ssh/newbug"
+		"message": "’n Fout gekry?  Versoek ’n nuwe kenmerk?  Laat weet ons: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "'n Onvoorsiene fout het voorgekom. Gaan die JavaScript-konsole na vir meer besonderhede."

@@ -12,7 +12,7 @@
 		"message": "Se fechar este separador, irá encerrar a sessão."
 	},
 	"cache_pin_prompt": {
-		"message": "Pretende colocar o PIN em cache para esta sessão SSH? (y/N):"
+		"message": "Quer colocar o PIN em cache para esta sessão SSH? (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Cancelar"
@@ -42,7 +42,7 @@
 		"message": "Ligar"
 	},
 	"connect_or_exit_message": {
-		"message": "Pretende escolher outra ligação (C) ou sair (X)?"
+		"message": "Quer escolher outra ligação (C) ou sair (X)?"
 	},
 	"connecting": {
 		"message": "A ligar a $1…"
@@ -127,6 +127,9 @@
 	},
 	"hterm_button_close": {
 		"message": "Fechar"
+	},
+	"hterm_button_close_find_bar": {
+		"message": "Fechar barra Localizar"
 	},
 	"hterm_button_find": {
 		"message": "Localizar"
@@ -516,7 +519,7 @@
 		"message": "A cor de primeiro plano para o texto sem outro atributo de cor."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Se pretende ocultar automaticamente o cursor do rato ao digitar. Por predefinição, deteta automaticamente se a plataforma/o SO processa isto.\n\nNota: o seu sistema operativo pode substituir esta definição, pelo que nem sempre a poderá desativar."
+		"message": "Se quer ocultar automaticamente o cursor do rato ao digitar. Por predefinição, deteta automaticamente se a plataforma/o SO processa isto.\n\nNota: o seu sistema operativo pode substituir esta definição, pelo que nem sempre a poderá desativar."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Se definido como verdadeiro, as teclas Home/End controlam a barra de deslocamento do terminal e o comando Shift+Home/Shift+End é enviado para o anfitrião remoto. Se definido como falso, as teclas Home/End são enviadas para o anfitrião remoto e o comando Shift+Home/Shift+End efetua o deslocamento."
@@ -603,7 +606,7 @@
 		"message": "A codificação do terminal predefinida (DOCS).\n\nA ISO-2022 ativa as traduções dos mapas de carateres (tais como mapas de gráficos).\nA UTF-8 desativa o suporte para as mesmas.\n\nA variante de bloqueio significa que não é possível alterar a codificação no tempo de execução através de sequências de escape do terminal.\n\nDeve utilizar a UTF-8, a menos que se depare com uma renderização danificada das aplicações antigas."
 	},
 	"hterm_pref_use_default_window_copy": {
-		"message": "Se pretende utilizar o comportamento de cópia do navegador/SO padrão.\n\nPermita ao navegador/SO processar o evento de cópia diretamente, o que pode melhorar a compatibilidade com alguns sistemas (onde a cópia não funciona), mas torna a seleção de texto menos robusta.\n\nPor exemplo, linhas compridas que tenham sido automaticamente agrupadas serão copiadas com as novas linhas nas mesmas."
+		"message": "Se quer utilizar o comportamento de cópia do navegador/SO padrão.\n\nPermita ao navegador/SO processar o evento de cópia diretamente, o que pode melhorar a compatibilidade com alguns sistemas (onde a cópia não funciona), mas torna a seleção de texto menos robusta.\n\nPor exemplo, linhas compridas que tenham sido automaticamente agrupadas serão copiadas com as novas linhas nas mesmas."
 	},
 	"hterm_pref_user_css": {
 		"message": "O URL da folha de estilos do utilizador a incluir no documento do terminal."
@@ -930,7 +933,7 @@
 		"message": "Tamanho de leitura (KiB)"
 	},
 	"reconnect_message": {
-		"message": "Pretende voltar a ligar (R) (predefinição), escolher outra ligação (C) ou sair (X)?"
+		"message": "Quer voltar a ligar (R) (predefinição), escolher outra ligação (C) ou sair (X)?"
 	},
 	"relay_auth_error": {
 		"message": "Erro ao autenticar com o servidor de transmissão: $1"
@@ -982,6 +985,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "Apagar terminal"
+	},
+	"terminal_disabled_tooltip": {
+		"message": "Esta VM (máquina virtual) foi desativada pelo seu administrador"
 	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Prima a tecla Eliminar para eliminar o item."
@@ -1070,6 +1076,9 @@
 	"terminal_name_pref_line_height": {
 		"message": "Altura da linha"
 	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Limite de deslocamento para trás"
+	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
 	},
@@ -1134,7 +1143,7 @@
 		"message": "Remover $1?"
 	},
 	"terminal_settings_reset_dialog_message": {
-		"message": "Tem a certeza de que pretende repor o tema para os valores predefinidos?"
+		"message": "Tem a certeza de que quer repor o tema para os valores predefinidos?"
 	},
 	"terminal_settings_reset_dialog_title": {
 		"message": "Reponha o tema"
@@ -1266,7 +1275,7 @@
 		"message": "Pode voltar a vincular teclas/atalhos: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Utilize Yubikeys e outros cartões inteligentes para autenticação SSH: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Use Yubikeys e outros cartões inteligentes para autenticação SSH: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "Apresente imagens inline: https://hterm.org/x/faq/inline-images"
@@ -1278,25 +1287,25 @@
 		"message": "Apresente notificações no navegador através de hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Estabeleça ligação a partir da caixa geral ao introduzir \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Ligue a partir da caixa geral ao introduzir \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "O ChromeOS pode montar sistemas de ficheiros através de SFTP e procurar através da app Files. Use \"Montar SFTP\" em vez de \"Ligar\"."
 	},
 	"tip_5": {
-		"message": "Estabeleça ligação através de links ssh:// em páginas Web ou guarde um marcador: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "Ligue através de links ssh:// em páginas Web ou guarde um marcador: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Dê cor à saída/pedido com 16 cores básicas, 256 cores e cores completas de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Copie para a área de transferência a partir de Emacs/Vim/etc. com OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Copie para a área de transferência a partir de emacs/vim/etc… com OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Converse no chat com outros utilizadores de hterm/Secure Shell através de chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Encontrou um erro? Pretende solicitar uma nova funcionalidade? Informe-nos: https://hterm.org/x/ssh/newbug"
+		"message": "Encontrou um erro?  Quer pedir uma nova funcionalidade?  Informe-nos: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Ocorreu um erro inesperado. Verifique a Consola de JavaScript para obter mais detalhes."

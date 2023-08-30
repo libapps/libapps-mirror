@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Schließen"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Suchleiste schließen"
+	},
 	"hterm_button_find": {
 		"message": "Suchen"
 	},
@@ -989,6 +992,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminal löschen"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Diese VM wurde von Ihrem Administrator deaktiviert"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Drücke die Löschtaste, um das Element zu löschen."
 	},
@@ -1078,6 +1084,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Zeilenhöhe"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Scrollback-Limit"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Form"
@@ -1257,10 +1266,10 @@
 		"message": "Wenn ein Fenster geöffnet ist, kann durch Strg + Umschalttaste + N eine weitere Sitzung geöffnet werden."
 	},
 	"tip_11": {
-		"message": "Tasten/Tastenkombinationen können neu zugewiesen werden: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "Du kannst Tasten/Tastenkürzel neu zuweisen: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Es können Yubikeys und andere Smartcards für die SSH-Authentifizierung verwendet werden: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Verwende Yubikeys und andere Smartcards für die SSH-Authentifizierung: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "Bilder inline anzeigen: https://hterm.org/x/faq/inline-images"
@@ -1269,28 +1278,28 @@
 		"message": "Die Strg-Taste gedrückt halten (Befehlstaste bei Mac OS) und gleichzeitig mit der rechten Maustaste klicken, um ein Kontextmenü zu öffnen."
 	},
 	"tip_2": {
-		"message": "Benachrichtigungen können mithilfe von \"hterm-notify\" im Browser angezeigt werden: https://hterm.org/x/faq/notify-sh"
+		"message": "Benachrichtigungen im Browser mit hterm-notify anzeigen: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Es kann eine Verbindung über Omnibox hergestellt werden, indem du „ssh<Tab><Profilname>“ eingibst: https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Stelle eine Verbindung über die Omnibox her, indem du „ssh<Tab><profile name>“ eingibst: https://hterm.org/x/ssh/faq/Omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS kann Dateisysteme über SFTP bereitstellen und über die App „Dateien“ suchen. Verwende „SFTP-Bereitstellung“ statt „Verbinden“."
 	},
 	"tip_5": {
-		"message": "Mithilfe von \"ssh://\"-Links auf Webseiten lassen sich Verbindungen herstellen oder es kann ein Lesezeichen gespeichert werden: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "Stelle eine Verbindung mit ssh://-Links in Webseiten her oder speichere ein Lesezeichen: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Die Ausgabe/Eingabeaufforderung kann mithilfe von 16 Farben , 256 Farben und 24-Bit-Vollfarben gestaltet werden: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Inhalte in die Zwischenablage kopieren, beispielsweise von Emacs oder Vim, verwende OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Kopiere Inhalte in deine Zwischenablage von emacs/vim/etc und verwende OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Über chromium-hterm@chromium.org mit anderen HTerm-/Secure Shell-Nutzern chatten: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Hast du einen Fehler gefunden? Möchtest du eine neue Funktion anfragen? Lass es uns wissen: https://hterm.org/x/ssh/newbug"
+		"message": "Du hast einen Programmfehler gefunden?  Oder möchtest eine neue Funktion vorschlagen?  Lass es uns wissen: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Ein unerwarteter Fehler ist aufgetreten. Weitere Informationen findest du in der JavaScript-Konsole."

@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "إغلاق"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "إغلاق شريط البحث"
+	},
 	"hterm_button_find": {
 		"message": "بحث"
 	},
@@ -522,7 +525,7 @@
 		"message": "في حال اختيار القيمة \"true\"، يتحكَّم المفتاحان \"Home/End\" في شريط التمرير الطرفي ويتم إرسال \"Shift+Home/Shift+End\" إلى المضيف البعيد. وفي حال اختيار القيمة \"false\"، سيتم حينئذٍ إرسال \"Home/End\" إلى المضيف البعيد وسيتم تمرير \"Shift+Home/Shift+End\"."
 	},
 	"hterm_pref_keybindings": {
-		"message": "ربط تسلسل المفاتيح بإجراءات المفاتيح. تتضمَّن تسلسلات المفاتيح قيمة صفرية أو المزيد من مفاتيح التعديل متبوعة برمز مفتاح. ويمكن أن تكون رموز المفاتيح أرقامًا عشرية أو سداسية عشرية أو مُعرِّف مفتاح. ويمكن تحديد إجراءات المفاتيح على أنها سلسلة لإرسالها إلى المضيف، أو إلى مُعرِّف الإجراء. وللحصول على توضيح كامل حول التنسيق، يُرجى الاطِّلاع على https://hterm.org/x/docs/keyboard-bindings.\n\nنموذج عمليات ربط المفاتيح:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\"\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "ربط تسلسلات المفاتيح بإجراءات المفاتيح: تتضمَّن التسلسلات مفاتيح تعديل بقيمة صفر أو أكثر متبوعة برمز مفتاح. ويمكن أن تكون رموز المفاتيح أرقامًا عشرية أو سداسية عشرية أو مُعرِّف مفتاح. ويمكن تحديد إجراءات المفاتيح على أنّها سلسلة لإرسالها إلى المضيف، أو إلى مُعرِّف إجراء. وللحصول على توضيح كامل عن التنسيق، يُرجى الاطِّلاع على الرابط https://hterm.org/x/docs/keyboard-bindings.\n\nنموذج عمليات ربط المفاتيح:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\"\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "يمكنك اختيار ما إذا كان يُفترَض مراعاة روابط لوحة مفاتيح أنظمة التشغيل الشائعة بدلاً من قصر استخدامها على hterm دائمًا."
@@ -969,7 +972,7 @@
 		"message": "اختيار"
 	},
 	"send_feedback_label": {
-		"message": "إرسال تعليقات"
+		"message": "إرسال ملاحظات"
 	},
 	"sftp_client_button_label": {
 		"message": "بروتوكول النقل الآمن للملفات (SFTP)"
@@ -1000,6 +1003,9 @@
 	},
 	"terminal_clear_menu_label": {
 		"message": "محو الوحدة الطرفية"
+	},
+	"terminal_disabled_tooltip": {
+		"message": "أوقف المشرف هذا الجهاز الافتراضي."
 	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "اضغط على مفتاح الحذف لحذف العنصر."
@@ -1093,6 +1099,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "ارتفاع السطر"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "الحد الأقصى لعدد الأسطر التي يتم عرضها عند الانتقال للخلف"
 	},
 	"terminal_name_pref_shape": {
 		"message": "شكل المؤشر"
@@ -1287,40 +1296,40 @@
 		"message": "عند التشغيل في نافذة، يمكن للمفاتيح Ctrl+Shift+N فتح جلسة أخرى."
 	},
 	"tip_11": {
-		"message": "يمكنك إعادة ربط المفاتيح/الاختصارات: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "لإعادة ربط المفاتيح/الاختصارات، يُرجى الاطّلاع على الرابط https://hterm.org/x/docs/keyboard-bindings."
 	},
 	"tip_12": {
-		"message": "يمكنك استخدام \"Yubikeys\" وغيره من البطاقات الذكية من أجل مصادقة \"SSH\" عن طريق: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "لاستخدام مفاتيح Yubikey وغيرها من البطاقات الذكية لمصادقة بروتوكول النقل الآمن (SSH)، يُرجى الاطّلاع على الرابط https://hterm.org/x/ssh/docs/hwkey."
 	},
 	"tip_13": {
-		"message": "عرض الصور المضمّنة من خلال: https://hterm.org/x/faq/inline-images"
+		"message": "لعرض الصور المضمَّنة، يُرجى الاطّلاع على الرابط https://hterm.org/x/faq/inline-images."
 	},
 	"tip_14": {
 		"message": "يمكنك الضغط مع الاستمرار على Ctrl (مفتاح Cmd على نظام التشغيل Mac) أثناء النقر بزر الماوس الأيمن لإظهار قائمة سياقات."
 	},
 	"tip_2": {
-		"message": "عرض الإشعارات في المتصفِّح باستخدام hterm-notify‏: https://hterm.org/x/faq/notify-sh"
+		"message": "لعرض الإشعارات في المتصفّح باستخدام hterm-notify، يُرجى الاطّلاع على الرابط https://hterm.org/x/faq/notify-sh."
 	},
 	"tip_3": {
-		"message": "يمكنك إجراء الربط من خلال المربع المتعدّد الاستخدامات عن طريق كتابة 'ssh<مفتاح Tab><اسم الملف الشخصي>': https://hterm.org/x/ssh/faq/omnibox"
+		"message": "لإجراء الربط من خلال المربّع المتعدد الاستخدامات عن طريق كتابة 'ssh<Tab><profile name>‎'، يُرجى الاطّلاع على الرابط https://hterm.org/x/ssh/faq/omnibox."
 	},
 	"tip_4": {
 		"message": "يمكن لنظام التشغيل ChromeOS تثبيت أنظمة الملفات من خلال بروتوكول SFTP والتصفُّح باستخدام تطبيق \"الملفات\". يمكنك استخدام الزر \"تثبيت SFTP\" بدلاً من الزر \"اتصال\"."
 	},
 	"tip_5": {
-		"message": "الاتصال باستخدام روابط ssh:// في صفحات الويب أو حفظ إشارة مرجعية: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "لإجراء الربط باستخدام روابط ssh://‎ في صفحات الويب، أو حفظ إشارة مرجعية، يُرجى الاطّلاع على الرابط https://hterm.org/x/ssh/faq/bookmarks."
 	},
 	"tip_6": {
 		"message": "تغيير لون المخرجات أو رسائل المطالبة باستخدام 16 لونًا أساسيًا و256 لونًا وألوان 24 بت كاملة: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "نسخ إلى الحافظة من emacs/vim/etc... باستخدام OSC-52‏: https://hterm.org/x/faq/osc52"
+		"message": "للنسخ إلى الحافظة من emacs/vim/etc...‎ باستخدام OSC-52، يُرجى الاطّلاع على الرابط https://hterm.org/x/faq/osc52."
 	},
 	"tip_8": {
 		"message": "الدردشة مع الزملاء من مستخدمي hterm/Secure Shell على chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "هل وجدت خللاً؟  هل ترغب في طلب ميزة جديدة؟  يُرجى إخبارنا بذلك: https://hterm.org/x/ssh/newbug"
+		"message": "هل عثرت على خطأ؟  هل تريد طلب ميزة جديدة؟  يُرجى إعلامنا بذلك من خلال الرابط https://hterm.org/x/ssh/newbug."
 	},
 	"unexpected_error": {
 		"message": "حدث خطأ غير متوقع، يُرجى التحقق من وحدة تحكّم JavaScript للحصول على المزيد من التفاصيل."

@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "סגירה"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "סגירת סרגל החיפוש"
+	},
 	"hterm_button_find": {
 		"message": "חיפוש"
 	},
@@ -986,6 +989,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ניקוי טרמינל"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "ה-VM הזה הושבת על-ידי האדמין"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "יש להקיש על המקש Delete כדי למחוק את הפריט."
 	},
@@ -1072,6 +1078,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "גובה השורה"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "מגבלה לגלילה אחורה"
 	},
 	"terminal_name_pref_shape": {
 		"message": "צורה"
@@ -1272,37 +1281,37 @@
 		"message": "אפשר לקשר מחדש מקשים/מקשי קיצור: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "כדאי להשתמש ב-Yubikeys ובכרטיסים חכמים אחרים לאימות ssh‏: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "ניתן להשתמש ב-Yubikeys ובכרטיסים חכמים אחרים לאימות SSH:‏ https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "טוב לדעת: ניתן להציג תמונות במצב מוטבע, פרטים בכתובת https://hterm.org/x/faq/inline-images"
+		"message": "ניתן להציג תמונות במצב מוטבע: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "הקשה ממושכת על Ctrl (‏Cmd ב-macOS) בזמן לחיצה ימנית מציגה את תפריט ההקשר."
 	},
 	"tip_2": {
-		"message": "אפשר להציג הודעות בדפדפן בעזרת hterm-notify‏: https://hterm.org/x/faq/notify-sh"
+		"message": "ניתן להציג הודעות בדפדפן בעזרת hterm-notify:‏ https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "כדי להתחבר מסרגל הכתובות יש להקליד 'ssh<Tab><שם הפרופיל>': https://hterm.org/x/ssh/faq/omnibox"
+		"message": "כדי להתחבר מסרגל הכתובות, מקלידים 'ssh <שם הפרופיל>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ב-ChromeOS יש אפשרות לטעון מערכות קבצים דרך SFTP ולעיין דרך האפליקציה 'קבצים'. יש להשתמש ב'טעינת SFTP' במקום ב'חיבור'."
 	},
 	"tip_5": {
-		"message": "יש להתחבר בעזרת קישורי ssh://‎ בדפי אינטרנט או לשמור סימניה: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "ניתן להתחבר בעזרת קישורי ssh://‎ בדפי אינטרנט או לשמור סימנייה: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "אפשר לצבוע את הפלט/הודעה ב-16 צבעים בסיסיים, 256 צבעים וצבעי 24 ביט מלאים: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "אפשר להעתיק אל הלוח מ-emacs/vim/etc...‎ בעזרת OSC-52‏: https://hterm.org/x/faq/osc52"
+		"message": "ניתן להעתיק אל הלוח מ-emacs, מ-vim וכו' בעזרת OSC-52:‏ https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "אפשר לשוחח בצ'אט עם משתמשי hterm/Secure Shell אחרים דרך chromium-hterm@chromium.org:‏ https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "מצאת באג? רוצה לבקש תכונה חדשה? נשמח לשמוע: https://hterm.org/x/ssh/newbug"
+		"message": "מצאת באג?  רוצה לבקש תכונה חדשה?  אפשר להודיע לנו בכתובת: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "אירעה שגיאה לא צפויה. יש לעיין בלוח JavaScript לקבלת פרטים נוספים."

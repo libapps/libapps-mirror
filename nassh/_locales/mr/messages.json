@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "बंद करा"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "शोध बार बंद करा"
+	},
 	"hterm_button_find": {
 		"message": "शोधा"
 	},
@@ -1007,6 +1010,9 @@
 	"terminal_clear_menu_label": {
 		"message": "टर्मिनल साफ करा"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "तुमच्या अ‍ॅडमिनिस्ट्रेटरने हे VM बंद केले आहे"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "आयटम हटवण्यासाठी हटवा ही की प्रेस करा."
 	},
@@ -1096,6 +1102,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "ओळीची उंची"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "मागे स्क्रोल करण्याची मर्यादा"
 	},
 	"terminal_name_pref_shape": {
 		"message": "आकार"
@@ -1299,7 +1308,7 @@
 		"message": "तुम्ही की/शॉर्टकट रिबाइंड करू शकता: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ssh ऑथेंटिकेशनसाठी Yubikeys आणि इतर स्मार्ट कार्डे वापरा: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "ssh ऑथेंटिकेशनसाठी Yubikeys आणि इतर स्मार्ट कार्ड वापरा: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "इमेज इनलाइन डिस्प्ले करा: https://hterm.org/x/faq/inline-images"
@@ -1323,13 +1332,13 @@
 		"message": "तुमच्या आउटपुट/सूचनेला प्राथमिक १६ रंग आणि २५६ रंग तसेच संपूर्ण २४-बिट रंग वापरून रंग द्या: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "emacs/vim/etc वरून तुमच्या क्लिपबोर्डवर कॉपी करा... OSC-52 वापरून: https://hterm.org/x/faq/osc52"
+		"message": "OSC-52 वापरून, emacs/vim/etc वरून तुमच्या क्लिपबोर्डवर कॉपी करा...: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org मार्फत सहकारी hterm/Secure Shell वापरकर्त्यांसोबत चॅट करा- https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "बग सापडला का?  नवीन वैशिष्ट्याची विनंती करायची का?  आम्हाला कळवा: https://hterm.org/x/ssh/newbug"
+		"message": "बग आढळला आहे का?  नवीन वैशिष्ट्याची विनंती करायची आहे का?  आम्हाला कळवा: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "एक अनपेक्षित एरर आली, अधिक तपशिलांसाठी कृपया JavaScript कन्सोल तपासा."

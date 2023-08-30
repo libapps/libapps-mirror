@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Zavrieť"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Zavrieť panel vyhľadávania"
+	},
 	"hterm_button_find": {
 		"message": "Hľadať"
 	},
@@ -522,7 +525,7 @@
 		"message": "Ak nastavíte hodnotu pravda, klávesy Home a End budú ovládať posúvač terminálu a kombinácie klávesov Shift+Home a Shift+End sa odošlú vzdialenému hostiteľovi. Ak nastavíte hodnotu nepravda, klávesy Home a End sa odošlú vzdialenému hostiteľovi a kombinácie klávesov Shift+Home a Shift+End budú ovládať posúvač."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapovanie kombinácie klávesov na akcie. Kombinácia klávesov zahŕňa nula alebo viac klávesov modifikátora nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla či identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať hostiteľovi, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na https://hterm.org/x/docs/keyboard-bindings.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "Mapovanie sekvencie klávesov na akcie. Sekvencie klávesov zahŕňaju nulu alebo viac klávesov modifikátora nasledovaných kódom klávesa. Kódy klávesov môžu byť decimálne alebo hexadecimálne čísla či identifikátory klávesov. Akcie klávesov je možné zadať ako reťazec, ktorý sa má odoslať hostiteľovi, alebo ako identifikátor akcie. Úplné vysvetlenie formátu nájdete na https://hterm.org/x/docs/keyboard-bindings.\n\nUkážka mapovania klávesov:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Určuje, či sa majú bežné klávesové skratky operačného systému zachovať alebo vždy odosielať na použitie terminálom hterm."
@@ -980,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Vymazanie terminálu"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Tento virtuálny počítač bol zakázaný správcom"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Ak chcete položku odstrániť, stlačte kláves Delete."
 	},
@@ -1069,6 +1075,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Výška riadkov"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Limit posúvania späť"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Tvar"
@@ -1266,10 +1275,10 @@
 		"message": "Stlačením kombinácie klávesov Ctrl+Shift+N počas zobrazenia v okne otvoríte novú reláciu."
 	},
 	"tip_11": {
-		"message": "Klávesom alebo skratkám môžete pridružiť nové funkcie: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "Klávesom alebo skratkám môžete priradiť nové funkcie: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Na overenie totožnosti prostredníctvom protokolu ssh použite Yubikey a ďalšie inteligentné karty: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Na overenie prostredníctvom protokolu SSH použite kľúče Yubikey a ďalšie inteligentné karty: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "Zobrazujte vložené obrázky na https://hterm.org/x/faq/inline-images"
@@ -1278,10 +1287,10 @@
 		"message": "Kontextovú ponuku zobrazíte pridržaním klávesa Ctrl (Cmd v systéme macOS) a súčasným kliknutím pravým tlačidlom."
 	},
 	"tip_2": {
-		"message": "Ak chcete zobrazovať upozornenia v prehliadači, použite parameter hterm-notify na https://hterm.org/x/faq/notify-sh"
+		"message": "Ak chcete zobrazovať upozornenia v prehliadači, použite parameter hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Pripojte sa z omniboxu zadaním dopytu „ssh<Tab><profile name>“: https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Pripojte sa z omniboxu zadaním dopytu 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS môže pripájať systémy súborov prostredníctvom protokolu SFTP a prehliadať ich prostredníctvom aplikácie Súbory. Použite „Pripojenie protokolu SFTP“ namiesto „Pripojiť“."
@@ -1293,13 +1302,13 @@
 		"message": "Zafarbite si výstup alebo príkazový riadok základnými 16 a 256 farbami a úplnými 24-bitovými farbami na http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopírujte schránku z editorov emacs/vim/etc... pomocou OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Kopírujte do schránky z editorov emacs/vim/etc... pomocou parametra OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Četujte so spriaznenými používateľmi hterm alebo zabezpečeného prístupu prostredníctvom funkcie chromium-hterm@chromium.org na https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Našli ste chybu? Požadujete novú funkciu? Dajte nám vedieť na https://hterm.org/x/ssh/newbug"
+		"message": "Našli ste chybu?  Chcete požiadať o novú funkciu?  Dajte nám vedieť na https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Vyskytla sa neočakávaná chyba. Ďalšie podrobnosti nájdete v konzole JavaScript."

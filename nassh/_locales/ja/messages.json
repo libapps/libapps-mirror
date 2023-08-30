@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "閉じる"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "検索バーを閉じる"
+	},
 	"hterm_button_find": {
 		"message": "検索"
 	},
@@ -980,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ターミナル画面を消去"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "この VM は管理者により無効にされています"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "アイテムを削除するには、Delete キーを押します。"
 	},
@@ -1069,6 +1075,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "行の高さ"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "スクロールバック制限"
 	},
 	"terminal_name_pref_shape": {
 		"message": "形"
@@ -1302,7 +1311,7 @@
 		"message": "chromium-hterm@chromium.org を使って hterm ユーザーや Secure Shell ユーザーとチャットできます: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "バグを見つけた場合や新機能の要望がある場合は、ぜひご報告ください: https://hterm.org/x/ssh/newbug"
+		"message": "バグを見つけた場合や新機能のご要望がある場合は、お知らせください: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "予期しないエラーが発生しました。詳しくは JavaScript コンソールをご確認ください。"

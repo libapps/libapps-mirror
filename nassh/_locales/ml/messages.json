@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "അടയ്ക്കുക"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "കണ്ടെത്തുക ബാർ അടയ്‌ക്കുക"
+	},
 	"hterm_button_find": {
 		"message": "കണ്ടെത്തുക"
 	},
@@ -977,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "ടെർമിനൽ മായ്‌ക്കുക"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "നിങ്ങളുടെ അഡ്‌മിൻ ഈ VM പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നു"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "ഇനം ഇല്ലാതാക്കാൻ delete കീ അമർത്തുക."
 	},
@@ -1063,6 +1069,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "ലൈനിന്റെ ഉയരം"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "സ്ക്രോൾബാക്ക് പരിധി"
 	},
 	"terminal_name_pref_shape": {
 		"message": "രൂപം"
@@ -1266,7 +1275,7 @@
 		"message": "ssh പരിശോധിച്ചുറപ്പിക്കലിന് Yubikeys, മറ്റ് സ്‌മാർട്ട്‌ കാർഡുകൾ എന്നിവ ഉപയോഗിക്കുക: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "ഇൻലൈനിൽ ചിത്രങ്ങൾ പ്രദർശിപ്പിക്കുക: https://hterm.org/x/faq/inline-images"
+		"message": "ഇൻലൈനായി ചിത്രങ്ങൾ പ്രദർശിപ്പിക്കുക: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "വലത് ക്ലിക്ക് ചെയ്യുമ്പോൾ Ctrl ബട്ടൺ (macOS-ൽ Cmd) അമർത്തുന്നത് ഒരു സന്ദർഭ മെനു ലഭ്യമാക്കുന്നു."
@@ -1275,7 +1284,7 @@
 		"message": "hterm-notify ഉപയോഗിച്ച് ബ്രൗസറിൽ അറിയിപ്പുകൾ പ്രദർശിപ്പിക്കുക: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "'ssh<Tab><profile name>' എന്ന് ടൈപ്പ് ചെയ്‌ത് ഓംനിബോക്‌സിൽ നിന്ന് കണക്റ്റ് ചെയ്യുക: https://hterm.org/x/ssh/faq/omnibox"
+		"message": "'ssh<Tab><profile name>' എന്ന് ടൈപ്പ് ചെയ്‌ത് ഒമ്‌നിബോക്‌സിൽ നിന്ന് കണക്റ്റ് ചെയ്യുക: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "SFTP വഴി ഫയൽ സിസ്റ്റങ്ങൾ മൗണ്ട് ചെയ്യാനും Files ആപ്പ് വഴി ബ്രൗസ് ചെയ്യാനും ChromeOS-നാകും. 'കണക്റ്റ് ചെയ്യുക' എന്നതിന് പകരം, 'SFTP മൗണ്ട്' ഉപയോഗിക്കുക."
@@ -1287,13 +1296,13 @@
 		"message": "അടിസ്ഥാന 16 വർണ്ണങ്ങളും 256 വർണ്ണങ്ങളും പൂർണ്ണ 24-ബിറ്റ് വർണ്ണങ്ങളും ഉപയോഗിച്ച് നിങ്ങളുടെ ഔട്ട്‌പുട്ടിന്/നിർദ്ദേശത്തിന് വർണ്ണം കൊടുക്കുക: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "OSC-52: https://hterm.org/x/faq/osc52 ഉപയോഗിച്ച് emacs/vim/മുതലാവയിൽ നിന്ന് നിങ്ങളുടെ ക്ലിപ്പ്‌ബോർഡിലേക്ക് പകർത്തുക"
+		"message": "OSC-52 ഉപയോഗിച്ച് emacs/vim/etc... -ൽ നിന്ന് നിങ്ങളുടെ ക്ലിപ്പ്‌ബോർഡിലേക്ക് പകർത്തുക: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "chromium-hterm@chromium.org: https://goo.gl/RYHiK വഴി സഹ hterm/Secure Shell ഉപയോക്താക്കളുമായി ചാറ്റ് ചെയ്യുക"
 	},
 	"tip_9": {
-		"message": "ഒരു ബഗ് കണ്ടെത്തിയോ? പുതിയ ഫീച്ചറിന് അഭ്യർത്ഥിക്കണോ? ഞങ്ങളെ അറിയിക്കുക: https://hterm.org/x/ssh/newbug"
+		"message": "ബഗ് കണ്ടെത്തിയോ?  പുതിയ ഫീച്ചർ അഭ്യർത്ഥിക്കണോ?  ഞങ്ങളെ അറിയിക്കുക: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "പ്രതീക്ഷിക്കാത്ത ഒരു പിശകുണ്ടായി, കൂടുതൽ വിശദാംശങ്ങള്‍ക്ക് JavaScript കൺസോൾ പരിശോധിക്കുക."

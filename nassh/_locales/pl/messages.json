@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Zamknij"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Zamknij pasek wyszukiwania"
+	},
 	"hterm_button_find": {
 		"message": "Znajdź"
 	},
@@ -522,7 +525,7 @@
 		"message": "Jeśli wybrano wartość „prawda”, klawisze Home/End przewijają terminal, a kombinacje Shift+Home/End są wysyłane do zdalnego hosta. Jeśli wybrano „fałsz”, klawisze Home/End są wysyłane do zdalnego hosta, a kombinacje Shift+Home/End przewijają."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Mapowanie sekwencji klawiszy na działania. Sekwencje klawiszy zawierają zero lub więcej klawiszy modyfikujących, a po nich kod klawisza. Kody klawiszy mogą mieć postać liczb dziesiętnych lub szesnastkowych albo identyfikatorów klawiszy. Działania mogą mieć postać ciągu znaków, który jest wysyłany do hosta, albo postać identyfikatora działania. Pełny opis formatu znajdziesz na https://hterm.org/x/docs/keyboard-bindings\n\nPrzykładowe powiązania klawiszy:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PRZEKAŻ\",\n  \"Ctrl+H\": \"Witaj, świecie\"\n}"
+		"message": "Mapowanie sekwencji klawiszy na działania. Sekwencje klawiszy zawierają 0 lub więcej klawiszy modyfikujących, a po nich kod klawisza. Kody klawiszy mogą mieć postać liczb dziesiętnych lub szesnastkowych albo identyfikatorów klawiszy. Działania mogą mieć postać ciągu znaków, który jest wysyłany do hosta, albo postać identyfikatora działania. Pełny opis formatu znajdziesz na https://hterm.org/x/docs/keyboard-bindings.\n\nPrzykładowe powiązania klawiszy:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PRZEKAŻ\",\n  \"Ctrl+H\": \"Witaj, świecie\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Określa, czy hterm ma respektować typowe powiązania klawiszy systemu operacyjnego, zamiast przechwytywać je na własny użytek."
@@ -983,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Wyczyść terminal"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Ta maszyna wirtualna została wyłączona przez administratora"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Aby usunąć element, naciśnij klawisz usuwania."
 	},
@@ -1072,6 +1078,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Wysokość wiersza"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Limit przewijania"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Kształt"
@@ -1299,7 +1308,7 @@
 		"message": "Z innymi użytkownikami hterm / bezpiecznej powłoki możesz rozmawiać w grupie chromium-hterm na chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Widzisz błąd? Chcesz zaproponować nową funkcję? Daj nam znać: https://hterm.org/x/ssh/newbug"
+		"message": "Widzisz błąd?  Chcesz poprosić o nową funkcję?  Daj nam znać: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Wystąpił nieoczekiwany błąd. Aby dowiedzieć się więcej, sprawdź konsolę JavaScript."

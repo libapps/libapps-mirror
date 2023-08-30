@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Tanca"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Tanca la barra de cerca"
+	},
 	"hterm_button_find": {
 		"message": "Cerca"
 	},
@@ -522,7 +525,7 @@
 		"message": "Si s'estableix en \"true\", amb les tecles Inici i Fi es controla la barra de desplaçament del terminal, i Maj+Inici i Maj+Fi s'envien a l'amfitrió remot. Si s'estableix en \"false\", les funcions d'aquestes tecles s'intercanvien."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Una assignació de seqüència de tecles amb l'acció corresponent. Les seqüències de tecles inclouen zero o més tecles modificadores seguides d'un codi de tecla. Els codis de tecla poden ser nombres decimals o hexadecimals, o bé un identificador de tecla. Les accions de tecles es poden especificar com a cadena, a fi d'enviar-la a l'amfitrió, o bé com a identificador d'acció. Per veure l'explicació completa del format, consulta https://hterm.org/x/docs/keyboard-bindings.\n\nExemples de seqüències de tecles i les accions corresponents:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Majt+L\": \"PASS\",\n  \"Ctrl+H\": \"Hola a tothom\"\n}"
+		"message": "Assignació d'una seqüència de tecles a l'acció corresponent. Les seqüències de tecles inclouen zero o més tecles modificadores seguides d'un codi de tecla. Els codis de tecla poden ser números decimals o hexadecimals, o bé un identificador de tecla. Les accions de tecles es poden especificar com a cadena, a fi d'enviar-la a l'amfitrió, o bé com a identificador d'acció. Per veure l'explicació completa del format, consulta https://hterm.org/x/docs/keyboard-bindings.\n\nExemples de vinculació de tecles:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Majt+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hola a tothom\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Estableix si es respecta la vinculació de tecles del sistema operatiu en lloc de capturar-les sempre perquè les utilitzi hterm."
@@ -977,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Esborra el terminal"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Aquesta VM ha estat desactivada pel teu administrador"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Prem la tecla de supressió per suprimir l'element."
 	},
@@ -1063,6 +1069,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Alçada de línia"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Límit de desplaçament"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
@@ -1257,7 +1266,7 @@
 		"message": "Fes servir Yubikeys i altres targetes intel·ligents per a l'autenticació SSH: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Mostra les imatges entre línies: https://hterm.org/x/faq/inline-images"
+		"message": "Mostra les imatges inserides: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Si mantens premuda la tecla Ctrl (Cmd a macOS) mentre fas clic amb el botó dret, es mostra un menú contextual."
@@ -1266,7 +1275,7 @@
 		"message": "Utilitza hterm-notify per mostrar notificacions al navegador: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Escriu 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox per connectar-te des de l'omnibox"
+		"message": "Escriu \"ssh<Tab><profile name>\" per connectar-te des de l'omnibox: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "Chrome OS pot activar sistemes de fitxers a través d'SFTP i navegar a través de l'aplicació Fitxers. Utilitza Activació de l'SFTP en lloc de Connecta."
@@ -1278,13 +1287,13 @@
 		"message": "Dona-li color a la sortida o els advertiments amb els 16 colors bàsics, 256 colors addicionals i els colors de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Utilitza OSC-52 per copiar al porta-retalls des d'emacs/vim/etc.: https://hterm.org/x/faq/osc52"
+		"message": "Utilitza OSC-52 per copiar al porta-retalls des d'Emacs, Vim, etc.: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Xateja amb altres usuaris hterm i Secure Shell a través de chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Has trobat un error? Vols una nova funció? Fes-nos-ho saber: https://hterm.org/x/ssh/newbug"
+		"message": "Has trobat un error?  Vols demanar una funció nova?  Fes-nos-ho saber: https://hterm.org/x/ssh/newbug."
 	},
 	"unexpected_error": {
 		"message": "S'ha produït un error inesperat. Consulta la consola de JavaScript per obtenir més detalls."

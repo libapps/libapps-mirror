@@ -122,6 +122,9 @@
 	"hterm_button_close": {
 		"message": "Chiudi"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Chiudi barra di ricerca"
+	},
 	"hterm_button_find": {
 		"message": "Trova"
 	},
@@ -977,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Cancellazione terminale"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Questa VM è stata disattivata dall'amministratore"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Premi il tasto Canc per eliminare l'elemento."
 	},
@@ -1063,6 +1069,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Altezza riga"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Limite di scrollback"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
@@ -1260,13 +1269,13 @@
 		"message": "All'interno di una finestra premi Ctrl + Maiusc + N per aprire un'altra sessione."
 	},
 	"tip_11": {
-		"message": "Riassocia tasti/scorciatoie: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "Puoi riassociare tasti/scorciatoie: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Usa Yubikeys e altre smart card per l'autenticazione ssh: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Usa YubiKey e altre smart card per l'autenticazione ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Visualizza le immagini in linea: https://hterm.org/x/faq/inline-images"
+		"message": "Visualizza le immagini incorporate: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Tieni premuto Ctrl (Cmd su macOS) mentre fai clic con il pulsante destro del mouse per visualizzare un menu contestuale."
@@ -1275,7 +1284,7 @@
 		"message": "Visualizza le notifiche nel browser utilizzando hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Connettiti dalla omnibox digitando \"ssh<Tab><nome profilo>\": https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Connettiti dalla omnibox digitando \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS consente di montare file system tramite SFTP e di sfogliare file tramite l'app File. Utilizza \"Montaggio SFTP\" anziché \"Connetti\"."
@@ -1287,13 +1296,13 @@
 		"message": "Colora il tuo output/messaggio con i 16 colori di base, 256 colori e i colori completi a 24 bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Copia negli appunti da emacs/vim/ecc… utilizzando OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Copia negli appunti da emacs/vim/ecc. utilizzando OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chatta con altri utenti hterm/Secure Shell tramite chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Hai trovato un bug? Vuoi richiedere una nuova funzionalità? Contattaci: https://hterm.org/x/ssh/newbug"
+		"message": "Hai trovato un bug?  Vuoi richiedere una nuova funzionalità?  Contattaci: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Si è verificato un errore imprevisto. Per ulteriori informazioni, controlla la console JavaScript."

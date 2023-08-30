@@ -122,6 +122,9 @@
 	"hterm_button_close": {
 		"message": "Vala"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Vala ibha yokuthola"
+	},
 	"hterm_button_find": {
 		"message": "Thola"
 	},
@@ -1013,6 +1016,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Ukusula itheminali"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Le VM ikhutshazwe ngumlawuli wakho"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Cindezela ukhiye wokusula ukuze usule lento."
 	},
@@ -1108,6 +1114,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Ubude bomugqa"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Umkhawulo wokuskrolela emuva"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Umumo"
@@ -1326,7 +1335,7 @@
 		"message": "I-Chrome OS ingakhweza amasistimu wefayela nge-SFTP futhi ibhrawuze ngama-app amafayela. Sebenzisa okuthi 'Ukukhweza kwe-SFTP' esikhundleni sokuthi 'Xhuma'."
 	},
 	"tip_5": {
-		"message": "Xhuma usebenzisa okuthi sh:// links emakhasini ewebhu, noma londoloza ibhukhimakhi: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "Xhuma usebenzisa amalinki we-ssh:// emakhasini ewebhu, noma londoloza ibhukhimakhi: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Faka umbala kokukhiphayo kwakho/isexwayiso usebenzisa imibala eyinhloko engu-16 nengu-256 kanye nemibala engu-24-bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
@@ -1338,7 +1347,7 @@
 		"message": "Xoxa nabasebenzisi be-hterm/Secure Shell users nge-chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Uthole isiphazamisi?  Cela isici esisha?  Sazise: https://hterm.org/x/ssh/newbug"
+		"message": "Uthole isiphazamisi?  Cela isakhi esisha?  Sazise: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Iphutha elingalindelekile livelile, sicela uhlole ikhonsoli ye-JavaScript ngemininingwane eminingi."

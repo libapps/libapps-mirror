@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Затвори"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Затвори траку за тражење"
+	},
 	"hterm_button_find": {
 		"message": "Пронађи"
 	},
@@ -980,6 +983,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Брисање терминала"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Администратор је онемогућио ову виртуелну машину"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Притисните тастер Избриши да бисте избрисали ставку."
 	},
@@ -1069,6 +1075,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Висина линије"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Ограничење враћања"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Облик"
@@ -1275,13 +1284,13 @@
 		"message": "Користите Yubikeys и друге паметне картице за ssh потврду идентитета: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Прикажите слике у тексту: https://hterm.org/x/faq/inline-images"
+		"message": "Омогућите приказ слика у тексту: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Држањем Ctrl (Cmd на macOS-у) уз десни клик отвара се контекстуални мени."
 	},
 	"tip_2": {
-		"message": "Прикажите обавештења у прегледачу помоћу hterm-notify: https://hterm.org/x/faq/notify-sh"
+		"message": "Омогућите приказ обавештења у прегледачу помоћу hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
 		"message": "Повежите из омнибокса тако што ћете унети „ssh<Tab><profile name>“: https://hterm.org/x/ssh/faq/omnibox"
@@ -1296,13 +1305,13 @@
 		"message": "Обојте садржај/упит помоћу 16 основних боја и 256 боја и комплетних 24-битних боја: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Копирајте у привремену меморију из уређивача текста Emacs/Vim/итд. помоћу OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Копирајте у привремену меморију из уређивача текста emacs/vim/итд. помоћу OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Ћаскајте са другим корисницима hterm-а/Secure Shell-а путем chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Пронашли сте грешку?  Желите да затражите нову функцију?  Јавите нам: https://hterm.org/x/ssh/newbug"
+		"message": "Пронашли сте грешку?  Желите да затражите нову функцију?  Обавестите нас: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Дошло је до неочекиване грешке. Више детаља потражите на JavaScript конзоли."

@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Bezárás"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Keresősáv bezárása"
+	},
 	"hterm_button_find": {
 		"message": "Keresés"
 	},
@@ -525,7 +528,7 @@
 		"message": "Ha igaz, a Home/End a terminál görgetősávját irányítja, a Shift + Home/Shift + End billentyűparancsokat pedig elküldi a szolgáltatás a távoli gazdagépnek. Ha hamis, akkor a Home/End lenyomását küldi el a szolgáltatás a távoli gazdagépnek, míg a Shift + Home/Shift + End görget."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Billentyűsorozatok hozzárendelése a billentyűműveletekhez. A billentyűsorozatok nulla vagy több módosító billentyűt tartalmaznak, melyeket billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűk lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://hterm.org/x/docs/keyboard-bindings címre.\n\nPéldák billentyűsorozatokra:\n{\n  \"Ctrl + Alt +K\": \"clearTerminal\",\n  \"Ctrl +Shift +L\": \"PASS\",\n  \"Ctrl +H\": \"'Helló Világ\\n'\"\n}"
+		"message": "Billentyűkombinációk hozzárendelése a billentyűműveletekhez. A billentyűkombinációk nulla vagy több módosító billentyűt tartalmaznak, melyeket egy billentyűkód követ. A billentyűkódok decimális vagy hexadecimális számok, illetve billentyűazonosítók lehetnek. A billentyűműveletek a gazdagép számára küldendő karakterláncokként vagy műveletazonosítókként határozhatók meg. A formátum teljes leírásának megtekintéséhez látogasson el a https://hterm.org/x/docs/keyboard-bindings címre.\n\nPéldák billentyűparancsokra:\n{\n  \"Ctrl + Alt + K\": \"clearTerminal\",\n  \"Ctrl + Shift + L\": \"PASS\",\n  \"Ctrl + H\": \"'Helló, Világ!'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Annak meghatározása, hogy az operációs rendszer gyakori billentyűkombinációi legyenek-e figyelembe véve ahelyett, hogy mindig a hterm saját használatára lennének lefoglalva."
@@ -983,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminálképernyő törlése"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "A rendszergazda letiltotta ezt a VM-et"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Az elem törléséhez nyomja meg a Delete billentyűt."
 	},
@@ -1072,6 +1078,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Sormagasság"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Visszagörgetési korlát"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Alak"
@@ -1275,7 +1284,7 @@
 		"message": "Módosíthatja a billentyűket/billentyűparancsokat: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Az SSH-hitelesítéshez használhat YubiKeyt és egyéb intelligens kártyákat: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Az SSH-hitelesítéshez használhat YubiKey-eket és egyéb intelligens kártyákat: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "Képek szövegközi megjelenítése: https://hterm.org/x/faq/inline-images"
@@ -1284,7 +1293,7 @@
 		"message": "Ha nyomva tartja a Ctrl (macOS esetén a Cmd) billentyűt a jobb gombbal való kattintás során, akkor megjelenik egy helyi menü."
 	},
 	"tip_2": {
-		"message": "Értesítések megjelenítése a böngészőben a hterm-notify szkripttel: https://hterm.org/x/faq/notify-sh"
+		"message": "Értesítések megjelenítése a böngészőben a hterm-notify programmal: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
 		"message": "Ha a cím- és keresősávból szeretne csatlakozni, írja be az „ssh<Lap><profilnév>” parancsot: https://hterm.org/x/ssh/faq/omnibox"
@@ -1305,7 +1314,7 @@
 		"message": "Csevegés hterm/Secure Shell-felhasználókkal a chromium-hterm@chromium.org fórumon: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Programhibát talált?  Új funkció megvalósítását szeretné kérni?  Tudassa velünk: https://hterm.org/x/ssh/newbug"
+		"message": "Programhibát talált?  Új funkciót szeretne?  Ossza meg velünk: https://hterm.org/x/ssh/newbug."
 	},
 	"unexpected_error": {
 		"message": "Váratlan hiba történt. Ha további részletekre kíváncsi, nézze meg a JavaScript-konzolt."

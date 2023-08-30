@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Zatvori"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Zatvori traku za traženje"
+	},
 	"hterm_button_find": {
 		"message": "Potraži"
 	},
@@ -1073,6 +1076,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Izbriši zaslon terminala"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Vaš administrator je onemogućio ovaj VM"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Pritisnite tipku za brisanje da biste izbrisali stavku."
 	},
@@ -1156,6 +1162,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Visina crte"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Ograničenje pomicanja"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Oblik"
@@ -1365,16 +1374,16 @@
 		"message": "Kontekstni se izbornik otvara tako da prilikom desnog klika držite tipku Ctrl (Cmd na macOS-u)."
 	},
 	"tip_2": {
-		"message": "Za prikaz obavijesti u pregledniku upotrijebite skriptu hterm-notify: https://hterm.org/x/faq/notify-sh"
+		"message": "Za prikaz obavijesti u pregledniku upotrijebite hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Za povezivanje iz višenamjenskog okvira unesite 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Za povezivanje iz višenamjenskog okvira unesite ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS može učitati datotečne sustave putem SFTP-a i pregledavati ih putem aplikacije Datoteke. Upotrijebite \"Učitavanje SFTP-a\" umjesto \"Poveži\"."
 	},
 	"tip_5": {
-		"message": "Povežite se putem ssh:// veza u web-stranicama ili spremite oznaku: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "Povežite se putem ssh:// veza na web-stranicama ili spremite oznaku: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Obojite svoj izlaz/upit pomoću osnovnih 16 boja, 256 boja i potpune 24-bitne palete: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
@@ -1386,7 +1395,7 @@
 		"message": "Chatajte s drugima koji koriste hterm/Secure Shell putem chromium-hterm@chromium.org: https://goo.gl/RYHiK."
 	},
 	"tip_9": {
-		"message": "Pronašli ste pogrešku? Želite zatražiti novu značajku? Javite nam se: https://hterm.org/x/ssh/newbug"
+		"message": "Pronašli ste programsku pogrešku?  Želite li zatražiti novu značajku?  Javite nam: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Pojavila se neočekivana pogreška. Više pojedinosti provjerite na konzoli JavaScripta."

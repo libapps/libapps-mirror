@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "Uždaryti"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Uždaryti radimo juostą"
+	},
 	"hterm_button_find": {
 		"message": "Rasti"
 	},
@@ -522,7 +525,7 @@
 		"message": "Nustačius kaip „true“, klavišais „Home“ arba „End“ valdoma terminalo slinkimo juosta, o klavišais „Shift“ + „Home“ arba „Shift“ + „End“ siunčiama nuotoliniam prieglobos serveriui. Nustačius kaip „false“, klavišais „Home“ arba „End“ siunčiama nuotoliniam prieglobos serveriui, o klavišais „Shift“ + „Home“ arba „Shift“ + „End“ slenkama."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Klavišų sekos atliekant veiksmus klavišais žemėlapis. Į klavišų sekas įtraukiama nulis ar daugiau modifikavimo klavišų su klavišų kodais. Klavišų kodai gali būti dešimtainiai arba šešioliktainiai skaičiai arba klavišo identifikatorius. Klavišų veiksmai gali būti nurodyti kaip eilutė, siunčiama prieglobos serveriui, arba veiksmo identifikatorius. Jei reikia išsamaus formato paaiškinimo, žr. https://hterm.org/x/docs/keyboard-bindings.\n\nKlavišų susiejimų pavyzdžiai:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Sveikas, pasauli'\"\n}"
+		"message": "Klavišų sekos atliekant veiksmus klavišais schema. Į klavišų sekas įtraukiama nulis ar daugiau modifikavimo klavišų su klavišų kodais. Klavišų kodai gali būti dešimtainiai arba šešioliktainiai skaičiai arba klavišo identifikatorius. Klavišų veiksmai gali būti nurodyti kaip eilutė, siunčiama prieglobos serveriui, arba veiksmo identifikatorius. Jei reikia išsamaus formato paaiškinimo, žr. https://hterm.org/x/docs/keyboard-bindings.\n\nKlavišų susiejimų pavyzdžiai:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Sveikas, pasauli'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ar reikia paisyti įprastų susietų OS klaviatūros klavišų vietoje naudojamų „hterm“."
@@ -1031,6 +1034,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminalo valymas"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Šią virtualiąją mašiną išjungė administratorius"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Paspauskite ištrynimo klavišą, kad ištrintumėte elementą."
 	},
@@ -1120,6 +1126,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Eilutės aukštis"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Atgalinės slinkties apribojimas"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
@@ -1320,10 +1329,10 @@
 		"message": "Vykdant lange, paspaudus „Ctrl“ + „Shift“ + N gali būti atidarytas kitas seansas."
 	},
 	"tip_11": {
-		"message": "Galite pakartotinai susieti raktus ar sparčiuosius klavišus: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "Galite iš naujo susieti klavišus ar sparčiuosius klavišus: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Naudokite „Yubikeys“ ir kitas išmaniąsias korteles SSH tapatybei nustatyti: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "Naudokite „Yubikey“ ir kitas išmaniąsias korteles SSH autentifikavimui atlikti: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "Pateikite įterptų vaizdų: https://hterm.org/x/faq/inline-images"
@@ -1347,13 +1356,13 @@
 		"message": "Nuspalvinkite išvestį ar raginimą naudodami 16 pagrindinių spalvų ir 256 spalvas bei 24 bitų spalvas: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Nukopijuokite į iškarpinę iš „emacs/vim/etc...“ naudodami OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Nukopijuokite į iškarpinę iš „emacs“, „vim“ ir pan. naudodami OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Kalbėkite su kitais „hterm“ ar „Secure Shell“ naudotojais naudodami adresą chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Radote riktą? Norite pateikti naujos funkcijos užklausą? Praneškite mums: https://hterm.org/x/ssh/newbug"
+		"message": "Radote riktą?  Norite pateikti naujos funkcijos užklausą?  Praneškite mums: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Įvyko nenumatyta klaida. Jei reikia daugiau išsamios informacijos, žr. „JavaScript“ pultą."

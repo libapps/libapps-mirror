@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Κλείσιμο"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Κλείσιμο γραμμής εύρεσης"
+	},
 	"hterm_button_find": {
 		"message": "Εύρεση"
 	},
@@ -986,6 +989,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Διαγραφή δεδομένων τερματικού"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Αυτό το VM έχει απενεργοποιηθεί από τον διαχειριστή σας"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Πατήστε το πλήκτρο delete για να διαγράψετε το στοιχείο."
 	},
@@ -1075,6 +1081,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Ύψος γραμμής"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Όριο κύλισης προς τα πίσω"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Σχήμα"
@@ -1281,13 +1290,13 @@
 		"message": "Χρησιμοποιήστε Yubikey και άλλες έξυπνες κάρτες για έλεγχο ταυτότητας ssh: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Προβολή εικόνων εντός του κειμένου: https://hterm.org/x/faq/inline-images"
+		"message": "Απευθείας προβολή εικόνων: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Εάν κρατήσετε πατημένο το πλήκτρο Ctrl (Cmd σε macOS) ενώ κάνετε δεξί κλικ, θα εμφανιστεί ένα μενού περιβάλλοντος."
 	},
 	"tip_2": {
-		"message": "Προβολή ειδοποιήσεων στο πρόγραμμα περιήγησης, με χρήση του hterm-notify: https://hterm.org/x/faq/notify-sh"
+		"message": "Προβολή ειδοποιήσεων στο πρόγραμμα περιήγησης με χρήση του hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
 		"message": "Συνδεθείτε από το κύριο πλαίσιο πληκτρολογώντας 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
@@ -1302,13 +1311,13 @@
 		"message": "Χρωματίστε τα στοιχεία εξόδου/το μήνυμα προτροπής σας χρησιμοποιώντας βασικά 16 χρώματα και 256 χρώματα και το πλήρες φάσμα χρωμάτων 24-bit: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Κάντε αντιγραφή στο πρόχειρό σας από emacs/vim/κ.λπ.… χρησιμοποιώντας OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Κάντε αντιγραφή στο πρόχειρό σας από emacs/vim/κ.λπ.… χρησιμοποιώντας το OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Συζητήστε με άλλους hterm/Ασφαλείς χρήστες κελύφους μέσω του chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Εντοπίσατε  κάποιο σφάλμα; Θέλετε να ζητήσετε μια νέα λειτουργία;  Ενημερώστε μας: https://hterm.org/x/ssh/newbug"
+		"message": "Εντοπίσατε κάποιο σφάλμα;  Θέλετε να ζητήσετε κάποια νέα λειτουργία;  Ενημερώστε μας: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Παρουσιάστηκε μη αναμενόμενο σφάλμα, ελέγξτε την κονσόλα JavaScript για περισσότερες λεπτομέρειες."

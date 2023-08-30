@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "Aizvērt"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Aizvērt atrašanas joslu"
+	},
 	"hterm_button_find": {
 		"message": "Atrast"
 	},
@@ -348,7 +351,7 @@
 		"message": "Ritināt līdz apakšai pēc jaunas izejas"
 	},
 	"hterm_name_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Emulēt bulttaustiņus, izmantojot ritenīti"
+		"message": "Emulēt bultiņas, izmantojot ritenīti"
 	},
 	"hterm_name_pref_scroll_wheel_move_multiplier": {
 		"message": "Peles ritenīša kustības"
@@ -588,7 +591,7 @@
 		"message": "Norāda, vai termināļa izvaddatos notiek ritināšana līdz apakšai."
 	},
 	"hterm_pref_scroll_wheel_may_send_arrow_keys": {
-		"message": "Ja tiek izmantots alternatīvs ekrāna buferis un ir aktīva funkcija DECCKM (lietojumprogrammas kursora taustiņi), ritinot ar peli, tiek imitētas bulttaustiņu darbības.\n\nŠo iestatījumu var īslaicīgi atspējot, turot nospiestu taustiņu Shift.\n\nTas tiek izmantots, lietojot lapu programmas (less), lasot manuāli veidotas lapas vai teksta redaktorus (vi/nano) vai lietojot screen vai tmux."
+		"message": "Ja tiek izmantots alternatīvs ekrāna buferis un ir aktīva funkcija DECCKM (lietojumprogrammas kursora taustiņi), ritinot ar peli, tiek imitētas bultiņu darbības.\n\nŠo iestatījumu var īslaicīgi atspējot, turot nospiestu taustiņu Shift.\n\nTas tiek izmantots, lietojot lapu programmas (less), lasot manuāli veidotas lapas vai teksta redaktorus (vi/nano) vai lietojot screen vai tmux."
 	},
 	"hterm_pref_scroll_wheel_move_multiplier": {
 		"message": "Peles ritenīša kustību notikumu reizinātājs, mērot pikseļos.\n\nTiek mainīts lapas ritināšanas ātrums."
@@ -983,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Notīrīt termināli"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Jūsu administrators ir atspējojis šo virtuālo mašīnu."
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Lai dzēstu vienumu, nospiediet dzēšanas taustiņu."
 	},
@@ -1072,6 +1078,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Rindiņu augstums"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Ritināšanas ierobežojums"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
@@ -1272,19 +1281,19 @@
 		"message": "Nospiežot taustiņu kombināciju Ctrl+Shift+N atvērtā logā, var atvērt jaunu sesiju."
 	},
 	"tip_11": {
-		"message": "Varat atkārtoti saistīt īsinājumtaustiņus šeit: https://hterm.org/x/docs/keyboard-bindings."
+		"message": "Varat atkārtoti saistīt taustiņus/īsinājumtaustiņus: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "Izmantojiet Yubikeys un citas viedkartes SSH autentifikācijai: https://hterm.org/x/ssh/docs/hwkey."
+		"message": "Izmantojiet Yubikeys un citas viedkartes SSH autentifikācijai: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
-		"message": "Rādīt iekļautus attēlus: https://hterm.org/x/faq/inline-images"
+		"message": "Rādiet iekļautus attēlus: https://hterm.org/x/faq/inline-images"
 	},
 	"tip_14": {
 		"message": "Turot nospiestu taustiņu Ctrl (Cmd uz macOS tastatūras) un vienlaikus noklikšķinot ar labo peles taustiņu, tiek parādīta kontekstizvēlne."
 	},
 	"tip_2": {
-		"message": "Rādiet paziņojumus pārlūkprogrammā, izmantojot hterm-notify: https://hterm.org/x/faq/notify-sh."
+		"message": "Rādiet paziņojumus pārlūkprogrammā, izmantojot hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
 		"message": "Izveidojiet savienojumu no universālā lodziņa, ierakstot “ssh<Tab><profile name>”: https://hterm.org/x/ssh/faq/omnibox"
@@ -1293,19 +1302,19 @@
 		"message": "Operētājsistēmā Chrome OS var iekļaut failu sistēmas, izmantojot SFTP, un veikt pārlūkošanu, izmantojot lietotni Faili. Izmantojiet funkciju “SFTP iekļaušana”, nevis “Savienojuma izveide”."
 	},
 	"tip_5": {
-		"message": "Izveidojiet savienojumu, izmantojot ssh:// saites tīmekļa lapās, vai saglabājiet grāmatzīmi: https://hterm.org/x/ssh/faq/bookmarks."
+		"message": "Izveidojiet savienojumu, izmantojot ssh:// saites tīmekļa lapās, vai saglabājiet grāmatzīmi: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Iekrāsojiet izvadi/uzvedni, izmantojot 16 pamatkrāsas, 256 krāsas un pilnas 24 bitu krāsas: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html."
 	},
 	"tip_7": {
-		"message": "Kopējiet saturu starpliktuvē no emacs/vim/etc..., izmantojot OSC-52: https://hterm.org/x/faq/osc52."
+		"message": "Kopējiet saturu starpliktuvē no emacs/vim/etc..., izmantojot OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Tērzējiet ar citiem hterm/Secure Shell lietotājiem, izmantojot chromium-hterm@chromium.org: https://goo.gl/RYHiK."
 	},
 	"tip_9": {
-		"message": "Vai atradāt kļūdu? Vai vēlaties pieprasīt jaunu funkciju? Informējiet mūs: https://hterm.org/x/ssh/newbug."
+		"message": "Vai atradāt kļūdu?  Vai vēlaties pieprasīt jaunu funkciju?  Informējiet mūs: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Radās neparedzēta kļūda. Plašāku informāciju skatiet JavaScript konsolē."

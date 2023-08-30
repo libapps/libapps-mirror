@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Luk"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Luk søgefelt"
+	},
 	"hterm_button_next": {
 		"message": "Næste"
 	},
@@ -519,7 +522,7 @@
 		"message": "Hvis den er angivet som Sand, styrer Home og End terminalens rullepanel, og Shift+Home og Shift+End sendes til den eksterne host. Hvis den er angivet som Falsk, sendes Home og End til den eksterne host, og Shift+Home og Shift+End ruller."
 	},
 	"hterm_pref_keybindings": {
-		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller et tast-id. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller et handlings-id. Se en komplet forklaring af formatet på https://hterm.org/x/docs/keyboard-bindings.\n\nEksempler på tastbindinger:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"Hello World\"\n}"
+		"message": "En oversigt over tasterækkefølgen for tastehandlinger. Tasterækkefølgen omfatter nul eller flere ændringstaster efterfulgt af en tastekode. Tastekoder kan være decimaltal eller hexadecimaltal eller et tast-id. Tastehandlinger kan specificeres som en streng, der skal sendes til hosten, eller et handlings-id. Se en komplet forklaring af formatet på https://hterm.org/x/docs/keyboard-bindings.\n\nEksempler på tastbindinger:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Angiv, om almindelige OS-tastaturbindinger skal respekteres i stedet for altid at anvende registrering til hterms egen brug."
@@ -1076,6 +1079,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminalen er ryddet"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Denne VM er blevet deaktiveret af din administrator"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Tryk på Delete-tasten for at slette elementet."
 	},
@@ -1159,6 +1165,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Linjehøjde"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Grænse for tilbagerulning"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Form"
@@ -1353,7 +1362,7 @@
 		"message": "Ved kørsel i et andet vindue kan du trykke på Ctrl+Shift+N for at åbne en ny session."
 	},
 	"tip_11": {
-		"message": "Du kan ændre tilknytningen mellem taster og genveje: https://hterm.org/x/docs/keyboard-bindings"
+		"message": "Rediger tilknytningen mellem taster og genveje: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
 		"message": "Brug Yubikeys og andre smartkort til ssh-godkendelse: https://hterm.org/x/ssh/docs/hwkey"
@@ -1368,7 +1377,7 @@
 		"message": "Vis notifikationer i browseren ved hjælp af hterm-notify: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Opret forbindelse via omnifeltet ved at angive 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Opret forbindelse via omnifeltet ved at angive \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS kan tilslutte filsystemer via SFTP og gennemse via appen Filer. Brug \"SFTP-tilslutning\" i stedet for \"Kontakt\"."
@@ -1380,13 +1389,13 @@
 		"message": "Sæt kulør på dit output/din meddelelse med 16 farver, 256 farver og 24-bit farver: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Kopiér til udklipsholderen fra emacs/vim/etc... ved hjælp af OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Kopiér til udklipsholderen fra emacs/vim/etc… ved hjælp af OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chat med andre hterm-/Secure Shell-brugere via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Har du fundet en fejl? Ønsker du en ny funktion? Giv os besked: https://hterm.org/x/ssh/newbug"
+		"message": "Har du fundet en fejl?  Vil du anmode om en ny funktion?  Kontakt os: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Der opstod en uventet fejl. Du kan få flere oplysninger i JavaScript-konsollen."

@@ -125,6 +125,9 @@
 	"hterm_button_close": {
 		"message": "Kapat"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Bulma çubuğunu kapat"
+	},
 	"hterm_button_find": {
 		"message": "Bul"
 	},
@@ -519,7 +522,7 @@
 		"message": "True (Doğru) değerine ayarlanırsa Home/End denetimleri terminal kaydırma çubuğunu kontrol eder ve Üst Karakter+Home/Üst Karakter+End denetimleri uzak ana makineye gönderilir. False (Yanlış) değerine ayarlanırsa Home/End denetimleri uzak ana makineye gönderilir, Üst Karakter+Home/Üst Karakter+End denetimleri kaydırma yapar."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Tuş işlemleri için tuş sırasının bir haritası. Tuş sıraları, sıfır veya daha fazla değiştirici tuş ile ardından gelen bir tuş kodundan oluşur. Tuş kodları ondalık veya onaltılık sayılar ya da bir tuş tanımlayıcı olabilir. Tuş işlemlerine, ana makineye gönderilecek bir dize ya da işlem tanımlayıcı belirlenebilir. Biçimin tam açıklaması için https://hterm.org/x/docs/keyboard-bindings adresine bakın.\n\nÖrnek tuş ilişkilendirmeleri:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Üst Karakter+L\": \"BAŞARILI\",\n  \"Ctrl+H\": \"'Merhaba Dünya\\n'\"\n}"
+		"message": "Tuş işlemleri için tuş sırasının bir haritası. Tuş sıraları, sıfır veya daha fazla değiştirici tuş ile ardından gelen bir tuş kodundan oluşur. Tuş kodları ondalık veya onaltılık sayılar ya da bir tuş tanımlayıcı olabilir. Tuş işlemlerine, ana makineye gönderilecek bir dize ya da işlem tanımlayıcı belirlenebilir. Biçimin tam açıklaması için https://goo.gl/LWRndr adresine bakın.\n\nÖrnek tuş ilişkilendirmeleri:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Üst Karakter+L\": \"BAŞARILI\",\n  \"Ctrl+H\": \"'Merhaba Dünya\\n'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Sürekli hterm'in kendi kullanımı için yakalamak yerine yaygın OS klavye bağlamalarına uyulup uyulmayacağı."
@@ -977,6 +980,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Terminali Temizle"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Bu VM, yöneticiniz tarafından devre dışı bırakıldı"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Öğeyi silmek için sil düğmesine basın."
 	},
@@ -1066,6 +1072,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Satır yüksekliği"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Geri kaydırma sınırı"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Şekil"
@@ -1266,7 +1275,7 @@
 		"message": "Tuşları/kısayolları yeniden birleştirebilirsiniz: https://hterm.org/x/docs/keyboard-bindings"
 	},
 	"tip_12": {
-		"message": "ssh kimlik doğrulaması için Yubikeys'i ve diğer akıllı kartları kullanın: https://hterm.org/x/ssh/docs/hwkey"
+		"message": "SSH kimlik doğrulaması için Yubikeys'i ve diğer akıllı kartları kullanın: https://hterm.org/x/ssh/docs/hwkey"
 	},
 	"tip_13": {
 		"message": "Resimleri satır içinde görüntüleyin: https://hterm.org/x/faq/inline-images"
@@ -1296,7 +1305,7 @@
 		"message": "Diğer hterm/Secure Shell kullanıcılarıyla chromium-hterm@chromium.org üzerinden sohbet edin: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Hata mı buldunuz? Yeni bir özellik mi istiyorsunuz? Bize bildirin: https://hterm.org/x/ssh/newbug"
+		"message": "Bir hatayla mı karşılaştınız?  Yeni bir özellik isteğinde mi bulunacaksınız?  Bize şu adresten bildirebilirsiniz: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Beklenmeyen bir hata oluştu, lütfen daha fazla ayrıntı için JavaScript konsolunu kontrol edin."

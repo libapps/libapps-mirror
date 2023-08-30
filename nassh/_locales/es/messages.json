@@ -128,6 +128,9 @@
 	"hterm_button_close": {
 		"message": "Cerrar"
 	},
+	"hterm_button_close_find_bar": {
+		"message": "Cerrar barra de búsqueda"
+	},
 	"hterm_button_find": {
 		"message": "Buscar"
 	},
@@ -522,7 +525,7 @@
 		"message": "Si se le asigna el valor true, las teclas Inicio y Fin controlarán la barra de desplazamiento del terminal y Mayús + Inicio/Fin se enviarán al host remoto. Si se le asigna el valor false, las teclas Inicio y Fin se enviarán al host remoto y Mayús + Inicio/Fin controlarán la barra de desplazamiento."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Una asociación de secuencias de teclas con acciones de teclas. Las secuencias pueden estar vacías o incluir teclas modificadoras seguidas de un código de tecla. Los códigos de tecla pueden ser números decimales o hexadecimales, o identificadores de teclas. Se pueden especificar acciones de teclas en forma de cadena que se envía al host o de identificadores de acciones. Puedes ver una explicación completa del formato en https://hterm.org/x/docs/keyboard-bindings.\n\nEjemplos de asignaciones de teclas:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Mayús+L\": \"PASS\",\n  \"Ctrl+H\": \"'¡Hola, mundo!'\"\n}"
+		"message": "Una asociación de secuencias de teclas con acciones de teclas. Las secuencias pueden estar vacías o incluir teclas modificadoras seguidas de un código de tecla. Los códigos de tecla pueden ser números decimales o hexadecimales, o identificadores de teclas. Se pueden especificar acciones de teclas en forma de cadena que se envía al host o de identificadores de acciones. Puedes ver una explicación completa del formato en https://hterm.org/x/docs/keyboard-bindings.\n\nEjemplos de asignaciones de teclas:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hola, mundo'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Define si las asignaciones de teclas habituales del SO se deben respetar en lugar de capturarlas siempre para que las use hterm."
@@ -983,6 +986,9 @@
 	"terminal_clear_menu_label": {
 		"message": "Borrar terminal"
 	},
+	"terminal_disabled_tooltip": {
+		"message": "Tu administrador ha inhabilitado esta VM"
+	},
 	"terminal_dropdown_delete_item_text": {
 		"message": "Pulsa la tecla Eliminar para suprimir el elemento."
 	},
@@ -1069,6 +1075,9 @@
 	},
 	"terminal_name_pref_line_height": {
 		"message": "Interlineado"
+	},
+	"terminal_name_pref_scrollback_limit": {
+		"message": "Límite de desplazamiento"
 	},
 	"terminal_name_pref_shape": {
 		"message": "Forma"
@@ -1269,28 +1278,28 @@
 		"message": "Si mantienes pulsada la tecla Ctrl (Cmd en macOS) mientras haces clic con el botón derecho, se abre un menú contextual."
 	},
 	"tip_2": {
-		"message": "Utiliza hterm-notify para mostrar notificaciones en el navegador: https://hterm.org/x/faq/notify-sh"
+		"message": "Usa hterm-notify para mostrar notificaciones en el navegador: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "Conéctate desde el omnibox escribiendo \"ssh<Tab><profile name>\": https://hterm.org/x/ssh/faq/omnibox"
+		"message": "Escribe \"ssh<Tab><profile name>\" para conectarte desde el omnibox: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS puede montar sistemas de archivos mediante SFTP y navegar usando la aplicación Archivos. Utiliza la opción Montaje de SFTP en lugar de Conectar."
 	},
 	"tip_5": {
-		"message": "Utiliza enlaces ssh:// en las páginas web para conectarte. O bien, guarda un marcador: https://hterm.org/x/ssh/faq/bookmarks"
+		"message": "Usa enlaces ssh:// en las páginas web para conectarte o guarda un marcador: https://hterm.org/x/ssh/faq/bookmarks"
 	},
 	"tip_6": {
 		"message": "Da color a tus salidas o solicitudes usando 16 colores básicos, 256 colores o colores de 24 bits: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "Para copiar contenido en el portapapeles desde emacs, vim, etc., usa OSC-52: https://hterm.org/x/faq/osc52"
+		"message": "Usa OSC-52 para copiar contenido en el portapapeles desde emacs/vim/etc.: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
 		"message": "Chatea con otros usuarios de hterm y Secure Shell a través de chromium-hterm@chromium.org: https://goo.gl/RYHiK"
 	},
 	"tip_9": {
-		"message": "Si detectas un error o quieres solicitar una nueva función, ponte en contacto con nosotros: https://hterm.org/x/ssh/newbug"
+		"message": "¿Has detectado un error?  ¿Quieres solicitar una nueva función?  Ponte en contacto con nosotros: https://hterm.org/x/ssh/newbug"
 	},
 	"unexpected_error": {
 		"message": "Se ha producido un error inesperado. Para obtener más información, consulta la consola de JavaScript."
