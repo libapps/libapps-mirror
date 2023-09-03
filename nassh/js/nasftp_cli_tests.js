@@ -777,6 +777,8 @@ describe('nasftp-no-complete-commands', () => {
     'llist',
     'lls',
     'lpwd',
+    'mput',
+    'mreput',
   ];
   for (const command of commands) {
     it(command, async function() {

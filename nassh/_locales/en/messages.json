@@ -1349,6 +1349,14 @@
 		"description": "Help text for the 'move' and 'rename' commands which renames files on the remote server.",
 		"message": "Rename a file"
 	},
+	"NASFTP_CMD_MPUT": {
+		"description": "Name of the 'mput' ('multiple put') command which uploads files. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "mput"
+	},
+	"NASFTP_CMD_MPUT_HELP": {
+		"description": "Help text for the 'mput' ('multiple put') command which uploads files.",
+		"message": "Upload multiple files"
+	},
 	"NASFTP_CMD_MREGET": {
 		"description": "Name of the 'mreget' ('multiple resume get') command which resumes download of multiple files from the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "mreget"
@@ -1356,6 +1364,14 @@
 	"NASFTP_CMD_MREGET_HELP": {
 		"description": "Help text for the 'mreget' ('multiple resume get') command which resumes download of multiple files from the remote server.",
 		"message": "Resume downloading multiple files"
+	},
+	"NASFTP_CMD_MREPUT": {
+		"description": "Name of the 'mreput' ('multiple resume put') command which resumes file uploads. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "mreput"
+	},
+	"NASFTP_CMD_MREPUT_HELP": {
+		"description": "Help text for the 'mreput' ('multiple resume put') command which resumes file uploads.",
+		"message": "Resume uploading multiple files"
 	},
 	"NASFTP_CMD_PROMPT": {
 		"description": "Name of the 'prompt' command which sets the user's interactive prompt string. This is the status message shown whenever the program prompts the user to enter a command. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",

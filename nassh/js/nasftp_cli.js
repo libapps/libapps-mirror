@@ -2454,6 +2454,36 @@ Cli.addCommand_(['move', 'mv', 'ren', 'rename'], 2, 2, '', '<src> <dst>',
                 Cli.commandMove_, Cli.completeMove_);
 
 /**
+ * User command to upload multiple files.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @param {!Object} opts The set of seen options.
+ * @return {!Promise<void>}
+ */
+Cli.commandMput_ = async function(args, opts) {
+  opts.resume = opts.a || args.cmd === 'mreput';
+  opts.fsync = opts.f;
+
+  // Construct base command for chaining.
+  const basecmd = [args.cmd.slice(1)];
+  if (opts.resume) {
+    basecmd.push('-a');
+  }
+  if (opts.fsync) {
+    basecmd.push('-f');
+  }
+
+  // Pretend the user typed in 'put' without any arguments.
+  // This command is basically a forced alias to 'put' for people who don't
+  // immediately realize that 'put' already supports multiple files, and for
+  // people used to OpenSSH sftp that has a dedicated mput command.
+  return this.dispatchCommand_(basecmd);
+};
+Cli.addCommand_(['mput', 'mreput'], 0, 0, 'af', '',
+                Cli.commandMput_);
+
+/**
  * User command to control the prompt.
  *
  * @this {Cli}
