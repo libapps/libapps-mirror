@@ -695,7 +695,7 @@ Client.prototype.readChunks = function(
   };
 
   // Process the resulting chunk of data.
-  const processChunk = (chunk) => {
+  const processChunk = async (chunk) => {
     // See if we've reached the end of the file.
     if (chunk.length == 0) {
       return;
@@ -714,7 +714,7 @@ Client.prototype.readChunks = function(
     const ret = doRead();
 
     // Let the caller process this chunk.
-    if (callback(chunk) === false) {
+    if (await callback(chunk) === false) {
       canceled = true;
       return Promise.reject();
     }

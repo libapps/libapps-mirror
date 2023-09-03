@@ -111,6 +111,128 @@ ProgressBar.prototype.summarize = function(max) {
 };
 
 /**
+ * Wrapper around various web methods for downloading files.
+ *
+ * @abstract
+ */
+class FileWriter {
+  /**
+   * @param {string} name The local filename to save as.
+   * @param {{
+   *   document: (!Document|undefined),
+   *   window: (!Window|undefined),
+   * }=} options
+   */
+  constructor(name, {document, window} = {}) {
+    this.name = name;
+  }
+
+  /** @return {!Promise<void>} */
+  async init() {}
+
+  /** @param {!ArrayBuffer} chunk */
+  async write(chunk) {}
+
+  /** @return {!Promise<void>} */
+  async close() {}
+}
+
+/**
+ * File downloader using HTML <a> tag.
+ *
+ * Pro: Very little user interaction.  The filename is provided, automatically
+ *     used, and if there's a collision, a diff filename is automatically used.
+ * Con: The entire file is buffered in memory before saving.  This can cause
+ *     Chrome to basically OOM the system.
+ */
+class AnchorTagFileWriter extends FileWriter {
+  /** @override */
+  constructor(name, {document}) {
+    super(name);
+    this.document = document;
+    this.chunks = [];
+    this.a = null;
+  }
+
+  /** @override */
+  async init() {
+    this.a = this.document.createElement('a');
+    this.a.download = this.name;
+
+    // Need to add to the DOM to process events properly.
+    this.document.body.appendChild(this.a);
+  }
+
+  /** @override */
+  async write(chunk) {
+    this.chunks.push(chunk);
+  }
+
+  /** @override */
+  async close() {
+    // Create a base64 encoded URI.
+    const blob = new Blob(this.chunks);
+    this.a.href = URL.createObjectURL(blob);
+    this.a.click();
+    this.a.remove();
+    URL.revokeObjectURL(this.a.href);
+  }
+}
+
+/**
+ * File downloader using File System APIs.
+ *
+ * Pro: No memory limitations.
+ * Con: Requires user interaction for every file (to pick where to save).
+ *      Collisions require user confirmation to overwrite, or they have to
+ *      manually pick a diff name.  Not all browsers support this (yet?).
+ */
+class FileSystemApiFileWriter extends FileWriter {
+  /** @override */
+  constructor(name, {window}) {
+    super(name);
+    this.window = window;
+    this.stream = null;
+  }
+
+  /** @override */
+  async init() {
+    const fsFileHandle = await this.window.showSaveFilePicker({
+      suggestedName: this.name,
+    });
+    this.stream = await fsFileHandle.createWritable();
+  }
+
+  /** @override */
+  async write(chunk) {
+    return this.stream.write(chunk);
+  }
+
+  /** @override */
+  async close() {
+    return this.stream.close();
+  }
+}
+
+/**
+ * Get an appropriate FileWriter object for the file to transfer.
+ *
+ * @param {string} name The local filename to use.
+ * @param {!File|!FileAttrs} attrs The remote file attributes.
+ * @param {!Object} options Options to pass to the file writer.
+ * @return {!FileWriter} The file writer.
+ */
+function getFileWriter(name, attrs, options) {
+  // For small files, use the old method as it requires less user interaction.
+  if ((attrs.size !== undefined && attrs.size < 10 * 1024 * 1024) ||
+      globalThis.showSaveFilePicker === undefined) {
+    return new AnchorTagFileWriter(name, {document: options.document});
+  } else {
+    return new FileSystemApiFileWriter(name, {window: options.window});
+  }
+}
+
+/**
  * The command line sftp client.
  *
  * @param {!CommandInstance} commandInstance The command instance to bind.
@@ -1783,32 +1905,22 @@ Cli.addCommand_(['df'], 0, null, 'hi', '[paths...]',
 /**
  * User command to download a single file.
  *
- * TODO(vapier): Files are buffered completely in memory, so large files can
- * cause the tab to OOM.  Probably best to stick to like <10 MB for now.
- *
  * @this {Cli}
  * @param {!Array<string>} args The command arguments.
  * @return {!Promise<void>}
  */
-Cli.commandGet_ = function(args) {
-  const doc = this.terminal.getDocument();
-  const a = doc.createElement('a');
-
+Cli.commandGet_ = async function(args) {
   const src = args.shift();
   const dst = args.length == 0 ? this.basename(src) : args.shift();
-  a.download = dst;
 
   this.io.println(localize('NASFTP_CMD_GET_DOWNLOAD_FILE', [
     this.escapeString_(src),
     this.escapeString_(dst),
   ]));
 
-  // Need to add to the DOM to process events properly.
-  doc.body.appendChild(a);
-
+  let writer;
   let spinner;
   let offset = 0;
-  const chunks = [];
   const handleChunk = (chunk) => {
     if (this.userInterrupted_) {
       return false;
@@ -1816,23 +1928,24 @@ Cli.commandGet_ = function(args) {
 
     offset += chunk.length;
     spinner.update(offset);
-    chunks.push(chunk);
+    return writer.write(chunk);
   };
 
   return this.client.fileStatus(this.makePath_(src))
-    .then((attrs) => {
+    .then(async (attrs) => {
       spinner = new ProgressBar(this.terminal, attrs.size);
-      return this.client.readFile(this.makePath_(src), handleChunk);
-    })
-    .then(() => {
-      spinner.finish(true);
-
-      // Create a base64 encoded URI.
-      const blob = new Blob(chunks);
-      a.href = URL.createObjectURL(blob);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(a.href);
+      writer = getFileWriter(dst, attrs, {
+        document: this.terminal.getDocument(),
+        window: globalThis,
+      });
+      await writer.init();
+      return this.client.readFile(this.makePath_(src), handleChunk)
+        .then(() => spinner.finish(true))
+        .catch((e) => {
+          spinner.finish(false);
+          throw e;
+        })
+        .finally(() => writer.close());
     });
 };
 /**

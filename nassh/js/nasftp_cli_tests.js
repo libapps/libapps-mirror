@@ -284,6 +284,34 @@ it('nasftp-get-fetch-one-missing', async function() {
   assert.deepStrictEqual(checked, ['./foo']);
 });
 
+it('nasftp-get-almost-fetch-one', async function() {
+  // The stat passes, so we start the process, but thent he open call fails,
+  // so we clean up & return.
+  this.client.fileStatus.return = (path) => {
+    return {
+      size: 20 * 1024 * 1024,
+    };
+  };
+  const chunks = [];
+  let closed = false;
+  // Enough of a stub to handle open & close.  If we want to test deeper, should
+  // expand & formalize this mock a bit more.
+  const origShowSaveFilePicker = globalThis.showSaveFilePicker;
+  globalThis.showSaveFilePicker = async (options) => {
+    return /** @type {!FileSystemFileHandle} */ ({
+      createWritable: async (options) => {
+        return /** @type {!FileSystemWritableFileStream} */ ({
+          write: async (chunk) => chunks.push(chunk),
+          close: async () => closed = true,
+        });
+      },
+    });
+  };
+  await this.cli.dispatchCommand_('get foo');
+  assert.isTrue(closed);
+  globalThis.showSaveFilePicker = origShowSaveFilePicker;
+});
+
 /**
  * Check help command.
  */
