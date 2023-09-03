@@ -10,7 +10,7 @@ import {lib} from '../../libdot/index.js';
 
 import {hterm} from '../../hterm/index.js';
 
-import {Cli, ProgressBar} from './nasftp_cli.js';
+import {Cli, defaultColorMap, ProgressBar} from './nasftp_cli.js';
 import {CommandInstance} from './nassh_command_instance.js';
 import {MockSftpClient} from './nassh_sftp_fsp_tests.js';
 import {FileAttrs} from './nassh_sftp_packet_types.js';
@@ -518,9 +518,18 @@ describe('nasftp-complete-input', () => {
     ['asdf -', {arg: 'asdf', matches: []}],
 
     // Stop completing options.
-    ['ls -- -', {arg: '-', matches: [], skip: 0}],
+    ['ls -- -', {arg: '-', matches: [], colorize: {}, skip: 0}],
     // But still complete paths.
-    ['ls -- ', {arg: '', matches: ['Desktop/', 'test.c', 'Videos/'], skip: 0}],
+    ['ls -- ', {
+      arg: '',
+      matches: ['Desktop/', 'test.c', 'Videos/'],
+      colorize: {
+        'Desktop/': defaultColorMap['dir'],
+        'Videos/': defaultColorMap['dir'],
+        'test.c': null,
+      },
+      skip: 0,
+    }],
 
     // Complete known commands.
     ['hel', {arg: 'hel', matches: ['help']}],

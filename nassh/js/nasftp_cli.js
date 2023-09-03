@@ -571,6 +571,7 @@ Cli.prototype.onBackspaceKey_ = function() {
  * @typedef {{
  *   arg: string,
  *   matches: !Array<string>,
+ *   colorize: (!Object<string, string>|undefined),
  *   skip: (number|undefined),
  * }}
  */
@@ -675,15 +676,20 @@ Cli.prototype.completeRemotePath_ = async function(
         .finally(() => this.client.closeFile(handle));
       });
 
+  const fullPaths = matches.map((entry) => {
+    let ret = parent + entry.filename;
+    if (entry.isDirectory) {
+      ret += '/';
+    }
+    return ret;
+  });
   return /** @type {!Cli.Completion} */ ({
     arg: input,
-    matches: matches.map((entry) => {
-      let ret = parent + entry.filename;
-      if (entry.isDirectory) {
-        ret += '/';
-      }
-      return ret;
-    }),
+    matches: fullPaths,
+    colorize: matches.reduce((color, entry, i) => {
+      color[fullPaths[i]] = this.getColorForAttrs_(entry);
+      return color;
+    }, {}),
     skip: parent.length,
   });
 };
@@ -761,8 +767,8 @@ Cli.prototype.onTabKey_ = function() {
       if (!result) {
         result = {arg: this.stdin_, matches: []};
       }
-      const {arg, matches, skip} = result;
-      return this.completeFinishMatches_(arg, matches, skip);
+      const {arg, matches, colorize, skip} = result;
+      return this.completeFinishMatches_(arg, matches, colorize, skip);
     })
     .finally(() => this.holdInput_ = false);
 
@@ -826,12 +832,13 @@ Cli.prototype.completeInputBuffer_ = async function(buffer) {
  *
  * @param {string} arg The specific argument that is being completed.
  * @param {!Array<string>} matches All the matching completions.
+ * @param {?Object<string, string>=} colorize How to color each completion.
  * @param {number=} skip How many leading characters to skip when showing
  *     completions.  This provides tigher output when the prefix is the same
  *     among all completions.
  */
 Cli.prototype.completeFinishMatches_ = async function(
-    arg, matches, skip = 0) {
+    arg, matches, colorize = {}, skip = 0) {
   // Workaround closure compiler that ignores !undefined assertion.
   const skip_ = lib.notUndefined(skip);
 
@@ -880,7 +887,14 @@ Cli.prototype.completeFinishMatches_ = async function(
       const perLine = Math.floor(this.terminal.screenSize.width / maxWidth);
       let lineCount = 0;
       matches.sort().forEach((complete) => {
+        const color = colorize[complete];
+        if (color) {
+          this.io.print(color);
+        }
         this.io.print(complete.substr(skip_).padEnd(maxWidth));
+        if (color) {
+          this.io.print(this.colorMap_['reset']);
+        }
         if (++lineCount >= perLine) {
           this.io.println('');
           lineCount = 0;
@@ -962,7 +976,7 @@ Cli.prototype.onDownArrowKey_ = function() {
 /**
  * Color settings for the interface.
  */
-const defaultColorMap = {
+export const defaultColorMap = {
   'reset': {},
   'bold': {bold: true},
   'prompt': {bold: true, fg: 30},
@@ -983,6 +997,31 @@ const defaultColorMap = {
 Object.entries(defaultColorMap).forEach(([key, setting]) => {
   defaultColorMap[key] = sgrSequence(setting);
 });
+
+/**
+ * Return color for a path based on its attributes.
+ *
+ * @param {!File|!FileAttrs} attrs The path attributes.
+ * @return {?string} The color.
+ */
+Cli.prototype.getColorForAttrs_ = function(attrs) {
+  // NB: Check link before others.
+  if (attrs.isLink) {
+    return this.colorMap_['sym'];
+  } else if (attrs.isDirectory) {
+    return this.colorMap_['dir'];
+  } else if (attrs.isCharacterDevice) {
+    return this.colorMap_['char'];
+  } else if (attrs.isBlockDevice) {
+    return this.colorMap_['block'];
+  } else if (attrs.isFifo) {
+    return this.colorMap_['fifo'];
+  } else if (attrs.isSocket) {
+    return this.colorMap_['socket'];
+  } else {
+    return null;
+  }
+};
 
 /**
  * Helper to show the CLI prompt to the user.
@@ -1987,23 +2026,12 @@ Cli.commandList_ = function(args, opts) {
           entries.forEach((entry) => {
             let filename = entry.filename;
             if (opts.all || !filename.startsWith('.')) {
-              let color;
-              if (entry.isDirectory) {
-                filename += '/';
-                color = this.colorMap_['dir'];
-              } else if (entry.isLink) {
-                color = this.colorMap_['sym'];
-              } else if (entry.isCharacterDevice) {
-                color = this.colorMap_['char'];
-              } else if (entry.isBlockDevice) {
-                color = this.colorMap_['block'];
-              } else if (entry.isFifo) {
-                color = this.colorMap_['fifo'];
-              } else if (entry.isSocket) {
-                color = this.colorMap_['socket'];
-              }
+              const color = this.getColorForAttrs_(entry);
               if (color) {
                 this.io.print(color);
+              }
+              if (entry.isDirectory) {
+                filename += '/';
               }
               this.rawprint_(filename);
               if (color) {
