@@ -1119,7 +1119,7 @@
 	},
 	"NASFTP_CMD_CLEAR_HELP": {
 		"description": "Help text for the 'clear' command. This is used to clear all content from the screen.",
-		"message": "Clear the current terminal screen."
+		"message": "Clear the current terminal screen"
 	},
 	"NASFTP_CMD_CLIP": {
 		"description": "Name of the 'clip' command which copies text to the user's clipboard (for copying & pasting). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
@@ -1144,7 +1144,7 @@
 		"message": "color"
 	},
 	"NASFTP_CMD_COLOR_HELP": {
-		"description": "Help text for the 'color' command.",
+		"description": "Help text for the 'color' command which controls use of color in program output.",
 		"message": "Toggle color usage"
 	},
 	"NASFTP_CMD_COPY": {
@@ -1152,7 +1152,7 @@
 		"message": "copy"
 	},
 	"NASFTP_CMD_COPY_HELP": {
-		"description": "Help text for the 'copy' command.",
+		"description": "Help text for the 'copy' command which remotely copies files (from one place on the server to another place on the server).",
 		"message": "Copy a remote path to a different remote path"
 	},
 	"NASFTP_CMD_DEL": {
@@ -1160,15 +1160,15 @@
 		"message": "del"
 	},
 	"NASFTP_CMD_DEL_HELP": {
-		"description": "Help text for the 'del' command.",
+		"description": "Help text for the 'del' command which deletes files on the remote server.",
 		"message": "Delete files"
 	},
 	"NASFTP_CMD_DF": {
-		"description": "Name of the 'df' command which remotes disk statistics (free space/etc...). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'df' ('disk free') command which displays remotes disk statistics (free space/etc...). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "df"
 	},
 	"NASFTP_CMD_DF_HELP": {
-		"description": "Help text for the 'df' command.",
+		"description": "Help text for the 'df' ('disk free') command which displays remotes disk statistics (free space/etc...).",
 		"message": "Show disk statistics"
 	},
 	"NASFTP_CMD_DF_SUMMARY": {
@@ -1300,11 +1300,11 @@
 		"message": "List local directory details"
 	},
 	"NASFTP_CMD_LN": {
-		"description": "Name of the 'ln' command which creates hard and soft links. Links are computing terms for 'shortcuts'. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'ln' ('link') command which creates hard and soft links. Links are computing terms for 'shortcuts'. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "ln"
 	},
 	"NASFTP_CMD_LN_HELP": {
-		"description": "Help text for the 'ln' command. 'link' is a computing term for 'shortcut'. 'path' and 'target' are file system paths the user will be entering as arguments where the path will be a hard link bound to the target.",
+		"description": "Help text for the 'ln' ('link') command. 'link' is a computing term for 'shortcut'. 'path' and 'target' are file system paths the user will be entering as arguments where the path will be a hard link bound to the target.",
 		"message": "Create a link at path pointing to the target"
 	},
 	"NASFTP_CMD_LPWD": {
@@ -1334,11 +1334,11 @@
 		"message": "Download multiple files"
 	},
 	"NASFTP_CMD_MKDIR": {
-		"description": "Name of the 'mkdir' command which creaties directories on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'mkdir' ('make directory') command which creaties directories on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "mkdir"
 	},
 	"NASFTP_CMD_MKDIR_HELP": {
-		"description": "Help text for the 'mkdir' command.",
+		"description": "Help text for the 'mkdir' ('make directory') command which creaties directories on the remote server.",
 		"message": "Create directories"
 	},
 	"NASFTP_CMD_MOVE": {
@@ -1346,7 +1346,7 @@
 		"message": "move"
 	},
 	"NASFTP_CMD_MOVE_HELP": {
-		"description": "Help text for the 'move' and 'rename' commands.",
+		"description": "Help text for the 'move' and 'rename' commands which renames files on the remote server.",
 		"message": "Rename a file"
 	},
 	"NASFTP_CMD_MREGET": {
@@ -1370,11 +1370,11 @@
 		"message": "put"
 	},
 	"NASFTP_CMD_PUT_HELP": {
-		"description": "Help text for the 'put' command.",
+		"description": "Help text for the 'put' command which uploads files.",
 		"message": "Upload files"
 	},
 	"NASFTP_CMD_PUT_UPLOAD_FILE": {
-		"description": "Output for the 'put' command.",
+		"description": "Output for the 'put' command which uploads files.",
 		"message": "Uploading file: $SRC$ as $DST$ ($SIZE$)",
 		"placeholders": {
 			"DST": {
@@ -1418,7 +1418,7 @@
 		"message": "readlink"
 	},
 	"NASFTP_CMD_READLINK_HELP": {
-		"description": "Help text for the 'readlink' command.",
+		"description": "Help text for the 'readlink' command which reads symbolic links (i.e. shortcuts).",
 		"message": "Read symlinks"
 	},
 	"NASFTP_CMD_REALPATH": {
@@ -1442,27 +1442,27 @@
 		"message": "rename"
 	},
 	"NASFTP_CMD_REPUT": {
-		"description": "Name of the 'reput' command which resumes file uploads. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'reput' ('resume put') command which resumes file uploads. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "reput"
 	},
 	"NASFTP_CMD_REPUT_HELP": {
-		"description": "Help text for the 'reput' command.",
+		"description": "Help text for the 'reput' ('resume put') command which resumes file uploads.",
 		"message": "Resume uploading files"
 	},
 	"NASFTP_CMD_RM": {
-		"description": "Name of the 'rm' command which removes files on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'rm' ('remove') command which removes files on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "rm"
 	},
 	"NASFTP_CMD_RMDIR": {
-		"description": "Name of the 'rmdir' command which deletes empty directories on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'rmdir' ('remove directory') command which deletes empty directories on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "rmdir"
 	},
 	"NASFTP_CMD_RMDIR_HELP": {
-		"description": "Help text for the 'rmdir' command.",
+		"description": "Help text for the 'rmdir' ('remove directory') command which deletes empty directories on the remote server.",
 		"message": "Delete empty directories"
 	},
 	"NASFTP_CMD_RM_HELP": {
-		"description": "Help text for the 'rm' command.",
+		"description": "Help text for the 'rm' ('remove') command which removes files on the remote server.",
 		"message": "Remove files"
 	},
 	"NASFTP_CMD_SHOW": {
@@ -1496,7 +1496,7 @@
 		}
 	},
 	"NASFTP_CMD_STAT_HELP": {
-		"description": "Help text for the 'stat' command.",
+		"description": "Help text for the 'stat' command which shows extensive path metadata (e.g. size, ownership, timestamps).",
 		"message": "Show file status"
 	},
 	"NASFTP_CMD_STAT_SUMMARY": {
@@ -1534,7 +1534,7 @@
 		}
 	},
 	"NASFTP_CMD_SYMLINK": {
-		"description": "Name of the 'symlink' command which creates symbolic links on the remote server (i.e. shortcuts). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'symlink' ('symbolic link') command which creates symbolic links on the remote server (i.e. shortcuts). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "symlink"
 	},
 	"NASFTP_CMD_SYMLINK_HELP": {
@@ -1546,7 +1546,7 @@
 		"message": "truncate"
 	},
 	"NASFTP_CMD_TRUNCATE_HELP": {
-		"description": "Help text for the 'truncate' command.",
+		"description": "Help text for the 'truncate' command which truncates files to 0 bytes.",
 		"message": "Truncate paths to 0 bytes"
 	},
 	"NASFTP_CMD_VERSION": {
