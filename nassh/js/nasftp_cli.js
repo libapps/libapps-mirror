@@ -121,14 +121,20 @@ class FileWriter {
    * @param {{
    *   document: (!Document|undefined),
    *   window: (!Window|undefined),
+   *   size: number,
+   *   cli: (!Cli|undefined),
    * }=} options
    */
-  constructor(name, {document, window} = {}) {
+  constructor(name, {size, document, window, cli} = {}) {
     this.name = name;
+    this.size = size;
   }
 
-  /** @return {!Promise<void>} */
-  async init() {}
+  /**
+   * @param {boolean} resume
+   * @return {!Promise<number>}
+   */
+  async init(resume) {}
 
   /** @param {!ArrayBuffer} chunk */
   async write(chunk) {}
@@ -147,20 +153,26 @@ class FileWriter {
  */
 class AnchorTagFileWriter extends FileWriter {
   /** @override */
-  constructor(name, {document}) {
-    super(name);
+  constructor(name, {size, document}) {
+    super(name, {size});
     this.document = document;
     this.chunks = [];
     this.a = null;
   }
 
   /** @override */
-  async init() {
+  async init(resume) {
+    if (resume) {
+      return Promise.reject('unimplemented');
+    }
+
     this.a = this.document.createElement('a');
     this.a.download = this.name;
 
     // Need to add to the DOM to process events properly.
     this.document.body.appendChild(this.a);
+
+    return 0;
   }
 
   /** @override */
@@ -183,24 +195,47 @@ class AnchorTagFileWriter extends FileWriter {
  * File downloader using File System APIs.
  *
  * Pro: No memory limitations.
- * Con: Requires user interaction for every file (to pick where to save).
- *      Collisions require user confirmation to overwrite, or they have to
- *      manually pick a diff name.  Not all browsers support this (yet?).
+ * Con: Requires user interaction to open initial directory.  Collisions result
+ *      in silent clobbering.  Not all browsers support this (yet?).
  */
 class FileSystemApiFileWriter extends FileWriter {
   /** @override */
-  constructor(name, {window}) {
-    super(name);
+  constructor(name, {size, window, cli}) {
+    super(name, {size});
     this.window = window;
+    this.cli = cli;
     this.stream = null;
   }
 
   /** @override */
-  async init() {
-    const fsFileHandle = await this.window.showSaveFilePicker({
-      suggestedName: this.name,
+  async init(resume) {
+    if (this.cli.lcwd === null) {
+      await this.cli.dispatchCommand_(['lcd']);
+    }
+
+    const fsDirHandle = this.cli.lcwd;
+    const fsFileHandle = await fsDirHandle.getFileHandle(
+        this.name, {create: true});
+
+    // See if we've already completed.  If we get a writable handle, Chrome will
+    // create a tempfile with its contents, and this is wasteful when resuming a
+    // completed file.
+    const file = await fsFileHandle.getFile();
+    if (resume && this.size <= file.size) {
+      return file.size;
+    }
+
+    this.stream = await fsFileHandle.createWritable({
+      keepExistingData: true,
     });
-    this.stream = await fsFileHandle.createWritable();
+
+    if (resume) {
+      await this.stream.seek(file.size);
+      return file.size;
+    } else {
+      await this.stream.truncate(0);
+      return 0;
+    }
   }
 
   /** @override */
@@ -210,7 +245,9 @@ class FileSystemApiFileWriter extends FileWriter {
 
   /** @override */
   async close() {
-    return this.stream.close();
+    if (this.stream !== null) {
+      return this.stream.close();
+    }
   }
 }
 
@@ -223,12 +260,12 @@ class FileSystemApiFileWriter extends FileWriter {
  * @return {!FileWriter} The file writer.
  */
 function getFileWriter(name, attrs, options) {
-  // For small files, use the old method as it requires less user interaction.
-  if ((attrs.size !== undefined && attrs.size < 10 * 1024 * 1024) ||
-      globalThis.showSaveFilePicker === undefined) {
-    return new AnchorTagFileWriter(name, {document: options.document});
+  if (globalThis.showDirectoryPicker === undefined) {
+    return new AnchorTagFileWriter(
+        name, {size: attrs.size, document: options.document});
   } else {
-    return new FileSystemApiFileWriter(name, {window: options.window});
+    return new FileSystemApiFileWriter(
+        name, {size: attrs.size, window: options.window, cli: options.cli});
   }
 }
 
@@ -1912,9 +1949,12 @@ Cli.addCommand_(['df'], 0, null, 'hi', '[paths...]',
  *
  * @this {Cli}
  * @param {!Array<string>} args The command arguments.
+ * @param {!Object} opts The set of seen options.
  * @return {!Promise<void>}
  */
-Cli.commandGet_ = async function(args) {
+Cli.commandGet_ = async function(args, opts) {
+  opts.resume = opts.a || args.cmd === 'reget';
+
   const src = args.shift();
   const dst = args.length == 0 ? this.basename(src) : args.shift();
 
@@ -1942,9 +1982,10 @@ Cli.commandGet_ = async function(args) {
       writer = getFileWriter(dst, attrs, {
         document: this.terminal.getDocument(),
         window: globalThis,
+        cli: this,
       });
-      await writer.init();
-      return this.client.readFile(this.makePath_(src), handleChunk)
+      offset = await writer.init(opts.resume);
+      return this.client.readFile(this.makePath_(src), handleChunk, offset)
         .then(() => spinner.finish(true))
         .catch((e) => {
           spinner.finish(false);
@@ -1962,12 +2003,12 @@ Cli.commandGet_ = async function(args) {
  */
 Cli.completeGet_ = async function(args) {
   // Only complete the first argument.
-  if (args.length <= 2) {
+  if (args.length <= 2 || (args.length === 3 && args[1] === '-a')) {
     return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
-Cli.addCommand_(['get'], 1, 2, '', '<remote name> [local name]',
+Cli.addCommand_(['get', 'reget'], 1, 2, 'a', '<remote name> [local name]',
                 Cli.commandGet_, Cli.completeGet_);
 
 /**
@@ -2328,10 +2369,18 @@ Cli.addCommand_(['lpwd'], 0, 0, '', '',
  * @return {!Promise<void>}
  */
 Cli.commandMget_ = async function(args, opts) {
+  opts.resume = opts.a || args.cmd === 'mreget';
+
+  // Construct base command for chaining.
+  const basecmd = [args.cmd.slice(1)];
+  if (opts.resume) {
+    basecmd.push('-a');
+  }
+
   // Create a chain of promises by processing each path in serial.
   return args.reduce((chain, path) => chain.then(() => {
     // Pretend the user typed in 'get' for each file.
-    return this.dispatchCommand_([args.cmd.slice(1), path]);
+    return this.dispatchCommand_([...basecmd, path]);
   }), Promise.resolve());
 };
 /**
@@ -2344,7 +2393,7 @@ Cli.commandMget_ = async function(args, opts) {
 Cli.completeMget_ = async function(args) {
   return this.completeResolvedRemotePath_(args);
 };
-Cli.addCommand_(['mget'], 1, null, '', '<remote paths...>',
+Cli.addCommand_(['mget', 'mreget'], 1, null, 'a', '<remote paths...>',
                 Cli.commandMget_, Cli.completeMget_);
 
 /**

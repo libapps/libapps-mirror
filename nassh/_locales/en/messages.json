@@ -1349,6 +1349,14 @@
 		"description": "Help text for the 'move' and 'rename' commands.",
 		"message": "Rename a file"
 	},
+	"NASFTP_CMD_MREGET": {
+		"description": "Name of the 'mreget' ('multiple resume get') command which resumes download of multiple files from the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "mreget"
+	},
+	"NASFTP_CMD_MREGET_HELP": {
+		"description": "Help text for the 'mreget' ('multiple resume get') command which resumes download of multiple files from the remote server.",
+		"message": "Resume downloading multiple files"
+	},
 	"NASFTP_CMD_PROMPT": {
 		"description": "Name of the 'prompt' command which sets the user's interactive prompt string. This is the status message shown whenever the program prompts the user to enter a command. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "prompt"
@@ -1420,6 +1428,14 @@
 	"NASFTP_CMD_REALPATH_HELP": {
 		"description": "Help text for the 'realpath' command. 'Canonicalize' is the standard computing term that is like normalization.",
 		"message": "Canonicalize paths"
+	},
+	"NASFTP_CMD_REGET": {
+		"description": "Name of the 'reget' ('resume get') command which resumes download of a single file from the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "reget"
+	},
+	"NASFTP_CMD_REGET_HELP": {
+		"description": "Help text for the 'reget' ('resume get') command which resumes download of a single file from the remote server.",
+		"message": "Resume downloading one file"
 	},
 	"NASFTP_CMD_RENAME": {
 		"description": "Name of the 'rename' command which renames files on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",

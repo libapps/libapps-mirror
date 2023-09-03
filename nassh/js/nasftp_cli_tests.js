@@ -113,6 +113,7 @@ after(function() {
  * Reset the terminal back to a good state before each run.
  */
 beforeEach(function() {
+  delete globalThis.showDirectoryPicker;
   this.terminal.reset();
   this.instance = new MockSftpCommandInstance(this.terminal);
   this.cli = new Cli(this.instance);
@@ -284,6 +285,7 @@ it('nasftp-get-not-enough-args', async function() {
     assert.fail();
   };
   await this.cli.dispatchCommand_('get');
+  await this.cli.dispatchCommand_('reget');
 });
 
 it('nasftp-get-fetch-one-missing', async function() {
@@ -299,32 +301,53 @@ it('nasftp-get-fetch-one-missing', async function() {
   assert.deepStrictEqual(checked, ['./foo']);
 });
 
+it('nasftp-reget-fetch-one-missing', async function() {
+  const checked = [];
+  this.client.fileStatus.return = (path) => {
+    checked.push(path);
+    throw new StatusError({
+      'code': StatusCodes.NO_SUCH_FILE,
+      'message': path,
+     }, 'fileStatus');
+  };
+  await this.cli.dispatchCommand_('reget foo');
+  assert.deepStrictEqual(checked, ['./foo']);
+});
+
 it('nasftp-get-almost-fetch-one', async function() {
   // The stat passes, so we start the process, but thent he open call fails,
   // so we clean up & return.
   this.client.fileStatus.return = (path) => {
     return {
-      size: 20 * 1024 * 1024,
+      size: 1 * 1024 * 1024,
     };
   };
   const chunks = [];
   let closed = false;
   // Enough of a stub to handle open & close.  If we want to test deeper, should
   // expand & formalize this mock a bit more.
-  const origShowSaveFilePicker = globalThis.showSaveFilePicker;
-  globalThis.showSaveFilePicker = async (options) => {
-    return /** @type {!FileSystemFileHandle} */ ({
-      createWritable: async (options) => {
-        return /** @type {!FileSystemWritableFileStream} */ ({
-          write: async (chunk) => chunks.push(chunk),
-          close: async () => closed = true,
-        });
+  globalThis.showDirectoryPicker = async (options) => {
+    return /** @type {!FileSystemDirectoryHandle} */ ({
+      getFileHandle: async (name, options) => {
+        return {
+          getFile: async () => {
+            return {
+              size: 1024 * 1024,
+            };
+          },
+          createWritable: async () => {
+            return {
+              write: async (chunk) => chunks.push(chunk),
+              truncate: async (size) => {},
+              close: async () => closed = true,
+            };
+          },
+        };
       },
     });
   };
   await this.cli.dispatchCommand_('get foo');
   assert.isTrue(closed);
-  globalThis.showSaveFilePicker = origShowSaveFilePicker;
 });
 
 /**
@@ -402,6 +425,7 @@ it('nasftp-mget-not-enough-args', async function() {
     assert.fail();
   };
   await this.cli.dispatchCommand_('mget');
+  await this.cli.dispatchCommand_('mreget');
 });
 
 it('nasftp-mget-fetch-many-missing', async function() {
@@ -414,6 +438,19 @@ it('nasftp-mget-fetch-many-missing', async function() {
      }, 'fileStatus');
   };
   await this.cli.dispatchCommand_('mget a b c');
+  assert.deepStrictEqual(checked, ['./a', './b', './c']);
+});
+
+it('nasftp-mreget-fetch-many', async function() {
+  const checked = [];
+  this.client.fileStatus.return = (path) => {
+    checked.push(path);
+    throw new StatusError({
+      'code': StatusCodes.NO_SUCH_FILE,
+      'message': path,
+     }, 'fileStatus');
+  };
+  await this.cli.dispatchCommand_('mreget a b c');
   assert.deepStrictEqual(checked, ['./a', './b', './c']);
 });
 
@@ -954,6 +991,21 @@ describe('nasftp-complete-mget-command', async function() {
     ['mget sys/ s s', 'mget sys/ s sys/'],
     // Complete files -- should auto include a trailing space.
     ['mget .vim', 'mget .vimrc '],
+  ]);
+});
+
+/**
+ * Check get subcommand completion.
+ */
+describe('nasftp-complete-mreget-command', async function() {
+  completeCommandTests([
+    // Complete all args as remote paths.
+    ['mreget s', 'mreget sys/'],
+    ['mreget sys/ s', 'mreget sys/ sys/'],
+    ['mreget sys/ 1', 'mreget sys/ 1'],
+    ['mreget sys/ s s', 'mreget sys/ s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['mreget .vim', 'mreget .vimrc '],
   ]);
 });
 
