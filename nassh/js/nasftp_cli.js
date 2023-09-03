@@ -642,8 +642,8 @@ Cli.prototype.completeCommandOptions_ = function(args, opts) {
  * Complete paths against the remote system.
  *
  * @param {!Array<string>} args The current command line arguments.
- * @param {function((!File|!FileAttrs))=} filter Callback to filter possible
- *     matches.
+ * @param {function(string, (!File|!FileAttrs))=} filter Callback to filter
+ *     possible matches.
  * @return {!Promise<!Cli.Completion>} The remote paths that match.
  */
 Cli.prototype.completeRemotePath_ = async function(
@@ -652,9 +652,10 @@ Cli.prototype.completeRemotePath_ = async function(
   const lastSlash = input.lastIndexOf('/') + 1;
   const parent = input.substr(0, lastSlash);
   const lastpath = input.substr(lastSlash);
+  const expandedParent = this.makePath_(parent);
 
   const matches = await
-    this.client.openDirectory(this.makePath_(parent))
+    this.client.openDirectory(expandedParent)
       .then((handle) => {
         // Enumerate all the entries in this path.
         return this.client.scanDirectory(handle, (entry) => {
@@ -669,7 +670,7 @@ Cli.prototype.completeRemotePath_ = async function(
             return false;
           }
 
-          return filter ? filter(entry) : true;
+          return filter ? filter(expandedParent, entry) : true;
         })
         .finally(() => this.client.closeFile(handle));
       });
@@ -684,6 +685,60 @@ Cli.prototype.completeRemotePath_ = async function(
       return ret;
     }),
     skip: parent.length,
+  });
+};
+
+/**
+ * Helper to expand a symlink for completion purposes.
+ *
+ * This will retain the original entry, but replace some of the attributes with
+ * attributes of the target of the symlink.  The isLink field will still be left
+ * alone, so the caller can detect the situation if need be.
+ *
+ * @param {string} parent The expanded parent path for this entry.
+ * @param {(!File|!FileAttrs)} entry Path to check.
+ * @return {!Promise<(!File|!FileAttrs)>} Path with symlinked attrs expanded.
+ */
+Cli.prototype.completeResolveTargetAttrs_ = async function(parent, entry) {
+  if (entry.isLink) {
+    // If it's a symlink, resolve the target for file/directory stats.
+    await this.client.fileStatus(`${parent}/${entry.filename}`)
+      .then((attrs) => {
+        entry.isDirectory = attrs.isDirectory;
+        entry.isRegularFile = attrs.isRegularFile;
+      })
+      .catch((e) => {
+        // If the symlink is broken, we'll get an error, so ignore it.  Don't
+        // swallow any other errors though (like test failures).
+        if (!(e instanceof StatusError)) {
+          throw e;
+        }
+      });
+  }
+
+  return entry;
+};
+
+/**
+ * Helper to only complete directories.
+ *
+ * Symlinks to directories will also be included.
+ *
+ * @param {!Array<string>} args The current command line arguments.
+ * @param {boolean=} onlyDirs Only return directories.
+ * @return {!Promise<!Cli.Completion>} The remote paths that match.
+ */
+Cli.prototype.completeResolvedRemotePath_ = async function(
+    args, onlyDirs = false) {
+  return this.completeRemotePath_(args, (parent, entry) => {
+    return this.completeResolveTargetAttrs_(parent, entry)
+      .then((entry) => {
+        if (onlyDirs) {
+          return entry.isDirectory ? entry : false;
+        } else {
+          return entry;
+        }
+      });
   });
 };
 
@@ -1293,7 +1348,7 @@ Cli.commandCat_ = function(args) {
 Cli.completeCat_ = async function(args) {
   // Only complete the first argument.
   if (args.length <= 2) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
@@ -1349,10 +1404,7 @@ Cli.commandCd_ = function(args) {
 Cli.completeCd_ = async function(args) {
   // Only complete the first path.
   if (args.length === 2) {
-    return this.completeRemotePath_(args, (entry) => {
-      // TODO(vapier): Probably should handle symlinks to dirs.
-      return entry.isDirectory;
-    });
+    return this.completeResolvedRemotePath_(args, true);
   }
   return null;
 };
@@ -1393,7 +1445,7 @@ Cli.commandChmod_ = function(args) {
 Cli.completeChmod_ = async function(args) {
   // Only complete the paths.
   if (args.length > 2) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
@@ -1439,7 +1491,7 @@ Cli.commandChown_ = function(args) {
 Cli.completeChown_ = async function(args) {
   // Only complete the paths.
   if (args.length > 2) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
@@ -1507,7 +1559,7 @@ Cli.commandClip_ = function(args) {
 Cli.completeClip_ = async function(args) {
   // Only complete the first argument.
   if (args.length <= 2) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
@@ -1606,7 +1658,7 @@ Cli.commandCopy_ = function(args) {
 Cli.completeCopy_ = async function(args) {
   // Only complete the paths.
   if (args.length <= 3) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
@@ -1684,7 +1736,7 @@ Cli.commandDiskFree_ = function(args, opts) {
  * @return {!Promise<!Cli.Completion>} Possible completions.
  */
 Cli.completeDiskFree_ = async function(args) {
-  return this.completeRemotePath_(args);
+  return this.completeResolvedRemotePath_(args);
 };
 Cli.addCommand_(['df'], 0, null, 'hi', '[paths...]',
                 Cli.commandDiskFree_, Cli.completeDiskFree_);
@@ -1753,7 +1805,7 @@ Cli.commandGet_ = function(args) {
 Cli.completeGet_ = async function(args) {
   // Only complete the first argument.
   if (args.length <= 2) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
@@ -2021,7 +2073,7 @@ Cli.commandList_ = function(args, opts) {
  * @return {!Promise<!Cli.Completion>} Possible completions.
  */
 Cli.completeList_ = async function(args) {
-  return this.completeRemotePath_(args);
+  return this.completeResolvedRemotePath_(args);
 };
 Cli.addCommand_(['list', 'ls', 'dir'], 0, null, '1aflrRSt', '[dirs...]',
                 Cli.commandList_, Cli.completeList_);
@@ -2053,7 +2105,7 @@ Cli.commandLink_ = function(args, opts) {
 Cli.completeLink_ = async function(args) {
   // Only complete the paths.
   if (args.length <= 3) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
@@ -2082,9 +2134,7 @@ Cli.commandMkdir_ = function(args) {
  */
 Cli.completeMkdir_ = async function(args) {
   // Can't mkdir files, so only allow completing (through) dirs.
-  return this.completeRemotePath_(args, (entry) => {
-    return entry.isDirectory;
-  });
+  return this.completeResolvedRemotePath_(args, true);
 };
 Cli.addCommand_(['mkdir'], 1, null, '', '<paths...>',
                 Cli.commandMkdir_, Cli.completeMkdir_);
@@ -2112,7 +2162,7 @@ Cli.commandMove_ = function(args) {
 Cli.completeMove_ = async function(args) {
   // Only complete the paths.
   if (args.length <= 3) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
@@ -2292,7 +2342,7 @@ Cli.commandPut_ = function(args, opts) {
 Cli.completePut_ = async function(args) {
   // Only complete the first argument.
   if (args.length <= 2) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };
@@ -2355,7 +2405,7 @@ Cli.commandReadlink_ = function(args) {
  * @return {!Promise<!Cli.Completion>} Possible completions.
  */
 Cli.completeReadlink_ = async function(args) {
-  return this.completeRemotePath_(args);
+  return this.completeResolvedRemotePath_(args);
 };
 Cli.addCommand_(['readlink'], 1, null, '', '<paths...>',
                 Cli.commandReadlink_, Cli.completeReadlink_);
@@ -2385,7 +2435,7 @@ Cli.commandRealpath_ = function(args) {
  * @return {!Promise<!Cli.Completion>} Possible completions.
  */
 Cli.completeRealpath_ = async function(args) {
-  return this.completeRemotePath_(args);
+  return this.completeResolvedRemotePath_(args);
 };
 Cli.addCommand_(['realpath'], 1, null, '', '<paths...>',
                 Cli.commandRealpath_, Cli.completeRealpath_);
@@ -2433,7 +2483,7 @@ Cli.commandRemove_ = function(args, opts) {
  * @return {!Promise<!Cli.Completion>} Possible completions.
  */
 Cli.completeRemove_ = async function(args) {
-  return this.completeRemotePath_(args);
+  return this.completeResolvedRemotePath_(args);
 };
 Cli.addCommand_(['rm', 'del'], 1, null, 'rRfv', '<paths...>',
                 Cli.commandRemove_, Cli.completeRemove_);
@@ -2460,9 +2510,7 @@ Cli.commandRmdir_ = function(args) {
  */
 Cli.completeRmdir_ = async function(args) {
   // Can't rmdir files, so only allow dirs.
-  return this.completeRemotePath_(args, (entry) => {
-    return entry.isDirectory;
-  });
+  return this.completeResolvedRemotePath_(args, true);
 };
 Cli.addCommand_(['rmdir'], 1, null, '', '<paths...>',
                 Cli.commandRmdir_, Cli.completeRmdir_);
@@ -2507,7 +2555,7 @@ Cli.commandShow_ = function(args) {
  * @return {!Promise<!Cli.Completion>} Possible completions.
  */
 Cli.completeShow_ = async function(args) {
-  return this.completeRemotePath_(args);
+  return this.completeResolvedRemotePath_(args);
 };
 Cli.addCommand_(['show'], 1, null, '', '<paths...>',
                 Cli.commandShow_, Cli.completeShow_);
@@ -2558,7 +2606,7 @@ Cli.commandStat_ = function(args) {
  * @return {!Promise<!Cli.Completion>} Possible completions.
  */
 Cli.completeStat_ = async function(args) {
-  return this.completeRemotePath_(args);
+  return this.completeResolvedRemotePath_(args);
 };
 Cli.addCommand_(['stat', 'lstat'], 1, null, '', '<paths...>',
                 Cli.commandStat_, Cli.completeStat_);
@@ -2615,7 +2663,7 @@ Cli.commandTruncate_ = function(args, opts) {
  * @return {!Promise<!Cli.Completion>} Possible completions.
  */
 Cli.completeTruncate_ = async function(args) {
-  return this.completeRemotePath_(args);
+  return this.completeResolvedRemotePath_(args);
 };
 Cli.addCommand_(['truncate'], 1, null, 's', '[-s <size>] <paths...>',
                 Cli.commandTruncate_, Cli.completeTruncate_);
@@ -2644,7 +2692,7 @@ Cli.commandSymlink_ = function(args) {
 Cli.completeSymlink_ = async function(args) {
   // Only complete the paths.
   if (args.length <= 3) {
-    return this.completeRemotePath_(args);
+    return this.completeResolvedRemotePath_(args);
   }
   return null;
 };

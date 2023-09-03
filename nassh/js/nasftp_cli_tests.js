@@ -490,9 +490,16 @@ function mockCompleteRemotePath(entries = undefined) {
   this.client.openDirectory.return = (path) => {
     return 'handle';
   };
-  this.client.scanDirectory.return = (handle, callback) => {
+  this.client.scanDirectory.return = async (handle, callback) => {
     assert.equal('handle', handle);
-    return entries.filter(callback);
+    const filtered = [];
+    for (let i = 0; i < entries.length; ++i) {
+      const entry = entries[i];
+      if (await callback(entry)) {
+        filtered.push(entry);
+      }
+    }
+    return filtered;
   };
   this.client.closeFile.return = (handle) => {
     assert.equal('handle', handle);
