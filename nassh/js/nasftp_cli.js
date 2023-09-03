@@ -1781,9 +1781,10 @@ Cli.addCommand_(['df'], 0, null, 'hi', '[paths...]',
                 Cli.commandDiskFree_, Cli.completeDiskFree_);
 
 /**
- * User command to download files.
+ * User command to download a single file.
  *
- * Note: Large files will run into Chrome's data-uri limit which is 1MB - 2MB.
+ * TODO(vapier): Files are buffered completely in memory, so large files can
+ * cause the tab to OOM.  Probably best to stick to like <10 MB for now.
  *
  * @this {Cli}
  * @param {!Array<string>} args The command arguments.
@@ -2139,6 +2140,34 @@ Cli.completeLink_ = async function(args) {
 };
 Cli.addCommand_(['ln'], 2, 2, 's', '<target> <path>',
                 Cli.commandLink_, Cli.completeLink_);
+
+/**
+ * User command to download multiple files.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @param {!Object} opts The set of seen options.
+ * @return {!Promise<void>}
+ */
+Cli.commandMget_ = async function(args, opts) {
+  // Create a chain of promises by processing each path in serial.
+  return args.reduce((chain, path) => chain.then(() => {
+    // Pretend the user typed in 'get' for each file.
+    return this.dispatchCommand_([args.cmd.slice(1), path]);
+  }), Promise.resolve());
+};
+/**
+ * Complete the command.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?Cli.Completion>} Possible completions.
+ */
+Cli.completeMget_ = async function(args) {
+  return this.completeResolvedRemotePath_(args);
+};
+Cli.addCommand_(['mget'], 1, null, '', '<remote paths...>',
+                Cli.commandMget_, Cli.completeMget_);
 
 /**
  * User command to create directories.

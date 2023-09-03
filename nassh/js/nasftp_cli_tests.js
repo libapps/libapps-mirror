@@ -13,7 +13,8 @@ import {hterm} from '../../hterm/index.js';
 import {Cli, defaultColorMap, ProgressBar} from './nasftp_cli.js';
 import {CommandInstance} from './nassh_command_instance.js';
 import {MockSftpClient} from './nassh_sftp_fsp_tests.js';
-import {FileAttrs} from './nassh_sftp_packet_types.js';
+import {FileAttrs, StatusCodes} from './nassh_sftp_packet_types.js';
+import {StatusError} from './nassh_sftp_status.js';
 
 describe('nasftp_cli_tests.js', () => {
 
@@ -260,11 +261,59 @@ it('nasftp-color', function(done) {
 });
 
 /**
+ * Check get command.
+ */
+it('nasftp-get-not-enough-args', async function() {
+  // Missing args shouldn't trigger activity.
+  this.client.fileStatus.return = (path) => {
+    assert.fail();
+  };
+  await this.cli.dispatchCommand_('get');
+});
+
+it('nasftp-get-fetch-one-missing', async function() {
+  const checked = [];
+  this.client.fileStatus.return = (path) => {
+    checked.push(path);
+    throw new StatusError({
+      'code': StatusCodes.NO_SUCH_FILE,
+      'message': path,
+     }, 'fileStatus');
+  };
+  await this.cli.dispatchCommand_('get foo');
+  assert.deepStrictEqual(checked, ['./foo']);
+});
+
+/**
  * Check help command.
  */
 it('nasftp-help', function(done) {
   this.cli.dispatchCommand_('help')
     .then(() => done());
+});
+
+/**
+ * Check mget command.
+ */
+it('nasftp-mget-not-enough-args', async function() {
+  // Missing args shouldn't trigger activity.
+  this.client.fileStatus.return = (path) => {
+    assert.fail();
+  };
+  await this.cli.dispatchCommand_('mget');
+});
+
+it('nasftp-mget-fetch-many-missing', async function() {
+  const checked = [];
+  this.client.fileStatus.return = (path) => {
+    checked.push(path);
+    throw new StatusError({
+      'code': StatusCodes.NO_SUCH_FILE,
+      'message': path,
+     }, 'fileStatus');
+  };
+  await this.cli.dispatchCommand_('mget a b c');
+  assert.deepStrictEqual(checked, ['./a', './b', './c']);
 });
 
 /**
@@ -766,6 +815,21 @@ describe('nasftp-complete-mkdir-command', async function() {
     ['mkdir s s s', 'mkdir s s sys/'],
     // Do not complete files -- can't mkdir them.
     ['mkdir .vim', 'mkdir .vim'],
+  ]);
+});
+
+/**
+ * Check get subcommand completion.
+ */
+describe('nasftp-complete-mget-command', async function() {
+  completeCommandTests([
+    // Complete all args as remote paths.
+    ['mget s', 'mget sys/'],
+    ['mget sys/ s', 'mget sys/ sys/'],
+    ['mget sys/ 1', 'mget sys/ 1'],
+    ['mget sys/ s s', 'mget sys/ s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['mget .vim', 'mget .vimrc '],
   ]);
 });
 

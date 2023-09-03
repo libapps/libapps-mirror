@@ -1214,7 +1214,7 @@
 		"message": "Disconnect"
 	},
 	"NASFTP_CMD_GET": {
-		"description": "Name of the 'get' command which downloads files from the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'get' command which downloads a single file from the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "get"
 	},
 	"NASFTP_CMD_GET_DOWNLOAD_FILE": {
@@ -1232,8 +1232,8 @@
 		}
 	},
 	"NASFTP_CMD_GET_HELP": {
-		"description": "Help text for the 'get' command.",
-		"message": "Download files"
+		"description": "Help text for the 'get' command which downloads a single file from the remote server.",
+		"message": "Download one file"
 	},
 	"NASFTP_CMD_HELP": {
 		"description": "Name of the 'help' command which shows help text for using the program. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
@@ -1286,6 +1286,14 @@
 	"NASFTP_CMD_LN_HELP": {
 		"description": "Help text for the 'ln' command. 'link' is a computing term for 'shortcut'. 'path' and 'target' are file system paths the user will be entering as arguments where the path will be a hard link bound to the target.",
 		"message": "Create a link at path pointing to the target"
+	},
+	"NASFTP_CMD_MGET": {
+		"description": "Name of the 'mget' ('multiple get') command which downloads multiple files from the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "mget"
+	},
+	"NASFTP_CMD_MGET_HELP": {
+		"description": "Help text for the 'mget' ('multiple get') command which downloads multiple files from the remote server.",
+		"message": "Download multiple files"
 	},
 	"NASFTP_CMD_MKDIR": {
 		"description": "Name of the 'mkdir' command which creaties directories on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
