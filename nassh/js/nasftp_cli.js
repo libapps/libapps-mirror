@@ -251,9 +251,14 @@ export function Cli(commandInstance) {
   // A local shortcut since we use it often in this class.
   this.client = this.commandInstance_.sftpClient;
 
-  // The initial path for the sftp client.  The user can change at runtime via
-  // the `cd` command.
+  // The initial remote path for the sftp client.  The user can change at
+  // runtime via the `cd` command.
   this.cwd = './';
+
+  // The initial local path for the sftp client.  The user can change at
+  // runtime via the `lcd` command.
+  /** @type {?FileSystemDirectoryHandle} */
+  this.lcwd = null;
 
   // The pending user line buffer.
   this.stdin_ = '';
@@ -2024,6 +2029,28 @@ Cli.addCommand_(['help', '?'], 0, null, '', '[commands]',
                 Cli.commandHelp_, Cli.completeHelp_);
 
 /**
+ * User command to change the local working directory.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<void>}
+ */
+Cli.commandLcd_ = async function(args) {
+  if (globalThis.showDirectoryPicker === undefined) {
+    this.showError_(localize('NASFTP_ERROR_MISSING_FILE_SYSTEM_ACCESS_API'));
+    return;
+  }
+
+  try {
+    this.lcwd = await globalThis.showDirectoryPicker({mode: 'readwrite'});
+  } catch (e) {
+    this.showError_(localize('NASFTP_ERROR_PERMISSION_DENIED', [args.cmd]));
+  }
+};
+Cli.addCommand_(['lchdir', 'lcd'], 0, 0, '', '',
+                Cli.commandLcd_);
+
+/**
  * User command to list information about files/directories.
  *
  * @this {Cli}
@@ -2221,6 +2248,29 @@ Cli.addCommand_(['list', 'ls', 'dir'], 0, null, '1aflrRSt', '[dirs...]',
                 Cli.commandList_, Cli.completeList_);
 
 /**
+ * User command to list information about local files/directories.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<void>}
+ */
+Cli.commandLocalList_ = async function(args) {
+  if (this.lcwd === null) {
+    return;
+  }
+
+  // TODO(vapier): Unify with `ls` command for sorting/coloring/etc...
+  const paths = [];
+  for await (const key of this.lcwd.keys()) {
+    paths.push(key);
+  }
+  paths.sort();
+  paths.map((path) => this.io.println(path));
+};
+Cli.addCommand_(['llist', 'lls', 'ldir'], 0, 0, '', '',
+                Cli.commandLocalList_);
+
+/**
  * User command to create hardlinks & symlinks.
  *
  * @this {Cli}
@@ -2253,6 +2303,21 @@ Cli.completeLink_ = async function(args) {
 };
 Cli.addCommand_(['ln'], 2, 2, 's', '<target> <path>',
                 Cli.commandLink_, Cli.completeLink_);
+
+/**
+ * User command to show the active local working directory.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<void>}
+ */
+Cli.commandLpwd_ = async function(args) {
+  this.io.println(localize('NASFTP_CMD_LPWD_OUTPUT', [
+    this.escapeString_(this.lcwd?.name ?? ''),
+  ]));
+};
+Cli.addCommand_(['lpwd'], 0, 0, '', '',
+                Cli.commandLpwd_);
 
 /**
  * User command to download multiple files.

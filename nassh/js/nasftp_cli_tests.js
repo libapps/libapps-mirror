@@ -49,6 +49,21 @@ MockSftpCommandInstance.prototype.exit = function() {
 };
 
 /**
+ * A mock object for showDirectoryPicker API.
+ *
+ * @param {string=} name
+ * @return {function(!Object=): !Promise<!FileSystemDirectoryHandle>}
+ * @suppress {checkTypes} The mock is fine, but closure wants a lot of casts.
+ */
+function MockShowDirectoryPicker(name = 'foo') {
+  return async function(options) {
+    return {
+      name,
+    };
+  };
+}
+
+/**
  * Promise wrapper for setTimeout.  Some nasftp APIs don't use promises.
  *
  * @param {number=} timeout How long (milliseconds) to wait.
@@ -318,6 +333,64 @@ it('nasftp-get-almost-fetch-one', async function() {
 it('nasftp-help', function(done) {
   this.cli.dispatchCommand_('help')
     .then(() => done());
+});
+
+/**
+ * Check lcd command.
+ */
+it('nasftp-lcd', async function() {
+  globalThis.showDirectoryPicker = MockShowDirectoryPicker();
+  await this.cli.dispatchCommand_('lcd');
+  assert.equal(this.cli.lcwd.name, 'foo');
+
+  globalThis.showDirectoryPicker = MockShowDirectoryPicker('bar');
+  await this.cli.dispatchCommand_('lchdir');
+  assert.equal(this.cli.lcwd.name, 'bar');
+});
+
+it('nasftp-lcd-extra-args', async function() {
+  globalThis.showDirectoryPicker = MockShowDirectoryPicker();
+  await this.cli.dispatchCommand_('lcd bar');
+  assert.isNull(this.cli.lcwd);
+});
+
+it('nasftp-lcd-no-fs-access-api', async function() {
+  delete globalThis.showDirectoryPicker;
+  await this.cli.dispatchCommand_('lcd');
+  assert.isNull(this.cli.lcwd);
+});
+
+/**
+ * Check llist command.
+ */
+it('nasftp-llist', async function() {
+  this.cli.lcwd = new Map([['file', {}], ['dir', {}]]);
+  await this.cli.dispatchCommand_('llist');
+});
+
+it('nasftp-llist-no-lcwd', async function() {
+  assert.isNull(this.cli.lcwd);
+  await this.cli.dispatchCommand_('llist');
+  await this.cli.dispatchCommand_('lls');
+  await this.cli.dispatchCommand_('ldir');
+});
+
+it('nasftp-llist-extra-args', async function() {
+  // An invalid value to trigger crashes.
+  this.cli.lcwd = 1;
+  await this.cli.dispatchCommand_('llist .');
+  await this.cli.dispatchCommand_('lls .');
+  await this.cli.dispatchCommand_('ldir .');
+});
+
+/**
+ * Check lpwd command.
+ */
+it('nasftp-lpwd', async function() {
+  assert.isNull(this.cli.lcwd);
+  await this.cli.dispatchCommand_('lpwd');
+  this.cli.lcwd = 'foo';
+  await this.cli.dispatchCommand_('lpwd');
 });
 
 /**
@@ -653,6 +726,29 @@ it('nasftp-complete-remote-paths', async function() {
     const [arg, exp] = tests[i];
     const result = await this.cli.completeRemotePath_(arg);
     assert.deepStrictEqual(result.matches, exp);
+  }
+});
+
+/**
+ * Check subcommands that don't offer.
+ */
+describe('nasftp-no-complete-commands', () => {
+  const commands = [
+    'lcd',
+    'lchdir',
+    'ldir',
+    'llist',
+    'lls',
+    'lpwd',
+  ];
+  for (const command of commands) {
+    it(command, async function() {
+      mockCompleteRemotePath.call(this);
+      this.cli.stdin_ = `${command} b`;
+      this.cli.onTabKey_();
+      await sleep();
+      assert.equal(this.cli.stdin_, `${command} b`);
+    });
   }
 });
 

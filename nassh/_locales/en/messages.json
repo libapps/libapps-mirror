@@ -1078,16 +1078,16 @@
 		"message": "Dump a file to the terminal"
 	},
 	"NASFTP_CMD_CD": {
-		"description": "Name of the 'cd' ('change directory') command which changes the current working directory. This is the directory where files will be accessed. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'cd' ('change directory') command which changes the current remote working directory. This is the remote directory where files will be accessed (uploaded to, or downloaded from). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "cd"
 	},
 	"NASFTP_CMD_CHDIR": {
-		"description": "Name of the 'chdir' ('change directory') command which changes the current working directory. This is the directory where files will be accessed. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"description": "Name of the 'chdir' ('change directory') command which changes the current remote working directory. This is the remote directory where files will be accessed (uploaded to, or downloaded from). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "chdir"
 	},
 	"NASFTP_CMD_CHDIR_HELP": {
-		"description": "Help text for the 'chdir' command. This is the directory where files will be accessed.",
-		"message": "Change working directory"
+		"description": "Help text for the 'chdir' ('change directory') command. This is the remote directory where files will be accessed (uploaded to, or downloaded from).",
+		"message": "Change remote working directory"
 	},
 	"NASFTP_CMD_CHGRP": {
 		"description": "Name of the 'chgrp' ('change group') command which changes the group ownership of paths. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
@@ -1271,6 +1271,18 @@
 			}
 		}
 	},
+	"NASFTP_CMD_LCD": {
+		"description": "Name of the 'lcd' ('local change directory') command which changes the current local working directory. This is the local directory where files will be accessd (downloaded to, or uploaded from). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "lcd"
+	},
+	"NASFTP_CMD_LCHDIR": {
+		"description": "Name of the 'lchdir' ('local change directory') command which changes the current local working directory. This is the local directory where files will be accessed (downloaded to, or uploaded from). This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "lchdir"
+	},
+	"NASFTP_CMD_LCHDIR_HELP": {
+		"description": "Help text for the 'lchdir' ('local change directory') command. This is the local directory where files will be accessed (downloaded to, or uploaded from).",
+		"message": "Change local working directory"
+	},
 	"NASFTP_CMD_LIST": {
 		"description": "Name of the 'list' command which displays (lists) details about paths on the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "list"
@@ -1279,6 +1291,14 @@
 		"description": "Help text for the 'list' command which displays (lists) details about paths on the remote server.",
 		"message": "List directory details"
 	},
+	"NASFTP_CMD_LLIST": {
+		"description": "Name of the 'llist' ('local list') command which displays (lists) details about paths on the local machine. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "llist"
+	},
+	"NASFTP_CMD_LLIST_HELP": {
+		"description": "Help text for the 'llist' ('local list') command which displays (lists) details about paths on the local machine.",
+		"message": "List local directory details"
+	},
 	"NASFTP_CMD_LN": {
 		"description": "Name of the 'ln' command which creates hard and soft links. Links are computing terms for 'shortcuts'. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "ln"
@@ -1286,6 +1306,24 @@
 	"NASFTP_CMD_LN_HELP": {
 		"description": "Help text for the 'ln' command. 'link' is a computing term for 'shortcut'. 'path' and 'target' are file system paths the user will be entering as arguments where the path will be a hard link bound to the target.",
 		"message": "Create a link at path pointing to the target"
+	},
+	"NASFTP_CMD_LPWD": {
+		"description": "Name of the 'lpwd' ('local print working directory') command which displays the current working directory on the local machine. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "lpwd"
+	},
+	"NASFTP_CMD_LPWD_HELP": {
+		"description": "Help text for the 'lpwd' ('local print working directory') command which displays the current working directory on the local machine.",
+		"message": "Show current local working directory"
+	},
+	"NASFTP_CMD_LPWD_OUTPUT": {
+		"description": "Output for the 'lpwd' ('local print working directory') command which displays the current working directory on the local machine.",
+		"message": "Local working directory: $CWD$",
+		"placeholders": {
+			"CWD": {
+				"content": "$1",
+				"example": "/home/vapier"
+			}
+		}
 	},
 	"NASFTP_CMD_MGET": {
 		"description": "Name of the 'mget' ('multiple get') command which downloads multiple files from the remote server. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
@@ -1351,7 +1389,7 @@
 	},
 	"NASFTP_CMD_PWD_HELP": {
 		"description": "Help text for the 'pwd' ('print working directory') command which displays the current working directory on the remote server.",
-		"message": "Show current working directory"
+		"message": "Show current remote working directory"
 	},
 	"NASFTP_CMD_PWD_OUTPUT": {
 		"description": "Output for the 'pwd' ('print working directory') command which displays the current working directory on the remote server.",
