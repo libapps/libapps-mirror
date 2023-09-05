@@ -143,6 +143,9 @@ export function Cli(commandInstance) {
   // Used to manually break a connection.
   this.killCount_ = 0;
 
+  // Swallow unhandled errors.  This is good for release, but not for testing.
+  this.swallowErrors_ = globalThis.chai === undefined;
+
   // Command line history.
   this.history_ = [];
   this.historyPosition_ = -1;
@@ -287,11 +290,20 @@ Cli.prototype.dispatchCommand_ = function(userArgs) {
       .catch((response) => {
         if (response instanceof StatusError) {
           this.showSftpStatusError_(response, args.cmd);
-        } else if (response !== undefined) {
+        } else {
+          // Don't swallow test failures, but diagnosis the others via the
+          // command output.  This avoids bugs in one command crashing the
+          // entire program.
+          if (!this.swallowErrors_) {
+            throw response;
+          }
           showCrash(response);
         }
       });
   } catch (e) {
+    if (!this.swallowErrors_) {
+      throw e;
+    }
     showCrash(e);
     return Promise.reject();
   }
@@ -2401,9 +2413,14 @@ Cli.commandRemove_ = function(args, opts) {
     return (opts.recursive ?
         this.client.removeDirectory(path, true) :
         this.client.removeFile(path))
-      .catch((result) => {
-        if (!opts.force) {
-          throw result;
+      .catch((e) => {
+        // If the file is missing or permission denied or something, ignore the
+        // error when using f.  Don't swallow any other errors though (like test
+        // failures).
+        if (e instanceof StatusError) {
+          if (!opts.force) {
+            throw e;
+          }
         }
       });
   }), Promise.resolve());
