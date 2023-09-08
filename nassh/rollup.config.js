@@ -68,6 +68,7 @@ let targets = [
     external: [
       '../../../libdot/index.js',
       '../../libdot/index.js',
+      '../libdot/index.js',
     ],
     plugins: plugins,
   },
