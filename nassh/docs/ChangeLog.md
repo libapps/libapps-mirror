@@ -1,3 +1,20 @@
+# 0.59, 2023-09-21, Major nasftp improvements, internal overhauls.
+
+* nasftp: Add mput/mreput helpers.
+* nasftp: Support resuming downloads (reget).
+* nasftp: Start implementing local commands.
+* nasftp: Support new File System Access API for saving large files.
+* nasftp: Add mget support.
+* nasftp: Colorize completions too.
+* nasftp: Resolve symlinks with command completion.
+* nasftp: Narrow exception handlers a bit for test failures.
+* dist: Build hterm via rollup as ES6 module.
+* dist: Build libdot via rollup as ES6 module.
+* dist: Switch from concat to rollup.
+* dist: Switch lib.resource release info to rollup.
+* dist: Switch lib.resource svg imports to rollup.
+* reconnect: Use a dedicated io to capture user input to avoid repeats.
+
 # 0.58, 2023-08-31, Some minor fixes.
 
 * launcher: Clear own opener to break linkage with opener.
