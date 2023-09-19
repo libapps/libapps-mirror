@@ -13,12 +13,14 @@ Tweak hterm APIs to match the latest release and to share code.
        position: absolute;
 --- a/mosh_app/mosh_window.js
 +++ b/mosh_app/mosh_window.js
-@@ -15,7 +15,7 @@
+@@ -15,7 +15,9 @@
  // You should have received a copy of the GNU General Public License
  // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -'use strict';
-+import {hterm, lib} from '/js/deps_local.concat.js';
++import {lib} from '/libdot/index.js';
++
++import {hterm} from '/hterm/index.js';
  
  // Several vars will be set by the window which creates this one:
  //   window.args - An object with Mosh arguments.
