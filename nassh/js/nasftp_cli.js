@@ -35,6 +35,7 @@ export function ProgressBar(terminal, max) {
 
   this.startTime_ = performance.now();
   this.endTime_ = this.startTime_;
+  this.lastUpdate_ = this.startTime_;
 
   if (max === undefined) {
     this.mode_ = this.RANDOM;
@@ -67,16 +68,27 @@ ProgressBar.prototype.PERCENTAGE = Symbol('Percentage');
  * @param {number=} pos The new byte count.
  */
 ProgressBar.prototype.update = function(pos = 0) {
+  const now = performance.now();
+
   if (this.mode_ == this.RANDOM) {
     this.io_.print(`${String.fromCodePoint(this.pos_)}\r`);
     // Pick a new random code point.
     this.pos_ =
         Math.floor(Math.random() * (this.max_ - this.min_ + 1)) + this.min_;
   } else {
+    // Rate limit how often we update.  Updating too often can slow us down.
+    // 250ms seems to be a decent balance between user feedback and not being
+    // too much slower.
+    if (now - this.lastUpdate_ < 250) {
+      return;
+    }
+
     const percent = Math.round(pos / this.max_ * 100);
     this.pos_ = pos;
     this.io_.print(`\r${pos} / ${this.maxFormat_} (${percent}%)`);
   }
+
+  this.lastUpdate_ = now;
 };
 
 /**
