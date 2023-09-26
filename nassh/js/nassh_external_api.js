@@ -710,7 +710,10 @@ function dispatchConnect_(internal, port) {
   // If the requested endpoint doesn't exist, abort.
   if (!CONNECTIONS.has(name)) {
     try {
-      postMessage({error: true, message: `unsupported connection '${name}'`});
+      port.postMessage({
+        error: true,
+        message: `unsupported connection '${name}'`,
+      });
     } catch (e) {
       console.log('API: ignoring error during early disconnect', e);
     }
@@ -735,11 +738,13 @@ function dispatchConnect_(internal, port) {
   // Execute specified connection.
   try {
     CONNECTIONS.get(name).call(this, port);
+
+    // Return true to allow async sendResponse.
     return true;
   } catch (e) {
     console.error(e);
     try {
-      postMessage({error: true, message: e.message, stack: e.stack});
+      port.postMessage({error: true, message: e.message, stack: e.stack});
     } catch (e) {
       console.log('API: ignoring error during late disconnect', e);
     }
