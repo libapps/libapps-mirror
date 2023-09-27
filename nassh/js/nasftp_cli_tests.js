@@ -117,7 +117,7 @@ beforeEach(async function() {
   delete globalThis.showDirectoryPicker;
   this.terminal.reset();
   this.instance = new MockSftpCommandInstance(this.terminal);
-  this.cli = new Cli(this.instance);
+  this.cli = new Cli(this.instance, {localStorage: new lib.Storage.Memory()});
   this.client = this.cli.client;
   await this.cli.run();
 });
@@ -358,6 +358,34 @@ it('nasftp-get-almost-fetch-one', async function() {
 it('nasftp-help', function(done) {
   this.cli.dispatchCommand_('help')
     .then(() => done());
+});
+
+/**
+ * Check history command.
+ */
+it('nasftp-history', async function() {
+  assert.deepStrictEqual(this.cli.history_, []);
+  assert.deepStrictEqual(this.cli.localPrefs_.get('history'), []);
+
+  // Run a command.
+  await this.cli.onInput_('prompt\n');
+  assert.deepStrictEqual(this.cli.history_, ['prompt']);
+  assert.deepStrictEqual(this.cli.localPrefs_.get('history'), ['prompt']);
+
+  // Show history.
+  await this.cli.onInput_('history\n');
+  assert.deepStrictEqual(this.cli.history_, ['history', 'prompt']);
+  assert.deepStrictEqual(
+      this.cli.localPrefs_.get('history'), ['history', 'prompt']);
+
+  // Clear history.
+  await this.cli.dispatchCommand_('history -c');
+  assert.deepStrictEqual(this.cli.history_, []);
+  assert.deepStrictEqual(this.cli.localPrefs_.get('history'), []);
+
+  // Make sure underlying array storage is not the same.
+  this.cli.history_.push('asdf');
+  assert.deepStrictEqual(this.cli.localPrefs_.get('history'), []);
 });
 
 /**
@@ -618,8 +646,8 @@ it('nasftp-complete-command', function() {
   assert.include(result.matches, 'bye');
 
   // Match one command with one char.
-  result = this.cli.completeCommand_('h');
-  assert.deepStrictEqual({arg: 'h', matches: ['help']}, result);
+  result = this.cli.completeCommand_('he');
+  assert.deepStrictEqual({arg: 'he', matches: ['help']}, result);
 
   // Match multiple commands with two chars.
   result = this.cli.completeCommand_('re');

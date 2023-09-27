@@ -144,6 +144,27 @@ export class PreferenceManager extends lib.PreferenceManager {
 }
 
 /**
+ * Global nasftp preferences.
+ *
+ * These are not synced between devices.
+ */
+export class LocalPreferenceManager extends lib.PreferenceManager {
+  /**
+   * @param {!lib.Storage} storage
+   */
+  constructor(storage) {
+    super(storage, '/nasftp/');
+
+    this.definePreferences([
+      /**
+       * Previous commands run.
+       */
+      ['history', []],
+    ]);
+  }
+}
+
+/**
  * Wrapper around various web methods for downloading files.
  *
  * @abstract
@@ -310,14 +331,19 @@ function getFileWriter(name, attrs, options) {
  * The command line sftp client.
  *
  * @param {!CommandInstance} commandInstance The command instance to bind.
+ * @param {!Object=} opts Various options.
  * @constructor
  */
-export function Cli(commandInstance) {
+export function Cli(commandInstance, {localStorage} = {}) {
   // The nassh command instance we're bound to.
   this.commandInstance_ = commandInstance;
 
   // Various prefs that persist across sessions.
   this.prefs_ = new PreferenceManager(this.commandInstance_.syncStorage);
+  if (localStorage === undefined) {
+    localStorage = new lib.Storage.Local();
+  }
+  this.localPrefs_ = new LocalPreferenceManager(localStorage);
 
   // The user's terminal.
   // A local shortcut since we use it often in this class.
@@ -403,12 +429,21 @@ export function Cli(commandInstance) {
  */
 Cli.prototype.run = async function() {
   await new Promise((resolve) => this.prefs_.readStorage(resolve));
+  await new Promise((resolve) => this.localPrefs_.readStorage(resolve));
 
   const prompt = this.prefs_.get('prompt');
   if (typeof prompt === 'string') {
     this.prompt_ = prompt;
   } else {
     this.prefs_.reset('prompt');
+  }
+
+  const history = this.localPrefs_.get('history');
+  if (Array.isArray(history)) {
+    // Create a copy so we don't mutate the value in storage.
+    this.history_ = [...history];
+  } else {
+    this.localPrefs_.reset('history');
   }
 
   // Now that we're ready, show the user the prompt.
@@ -566,12 +601,14 @@ Cli.prototype.onInputChar_ = function(ch) {
           }
         }
 
-        // Add non-empty entries into the history.
-        if (this.stdin_.length) {
+        // Add non-empty non-recent-duplicate entries into the history.
+        if (this.stdin_.length && this.history_[0] !== this.stdin_) {
           this.history_.unshift(this.stdin_);
           if (this.history_.length > 100) {
             this.history_.length = 100;
           }
+          // Create a copy so we don't mutate the value in storage.
+          this.localPrefs_.set('history', [...this.history_]);
         }
         this.historyPosition_ = -1;
         this.stdin_ = '';
@@ -2122,6 +2159,29 @@ Cli.completeHelp_ = async function(args) {
 };
 Cli.addCommand_(['help', '?'], 0, null, '', '[commands]',
                 Cli.commandHelp_, Cli.completeHelp_);
+
+/**
+ * User command to manage command line history.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @param {!Object} opts The set of seen options.
+ * @return {!Promise<void>}
+ */
+Cli.commandHistory_ = async function(args, opts) {
+  if (opts.c) {
+    this.history_.length = 0;
+    await this.localPrefs_.reset('history');
+    return;
+  }
+
+  const len = this.history_.length;
+  for (let i = 0; i < len; ++i) {
+    this.io.println(`${i + 1}  ${this.history_[len - i - 1]}`);
+  }
+};
+Cli.addCommand_(['history'], 0, 0, 'c', '',
+                Cli.commandHistory_);
 
 /**
  * User command to change the local working directory.
