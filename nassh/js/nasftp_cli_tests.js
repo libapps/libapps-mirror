@@ -29,6 +29,7 @@ const MockSftpCommandInstance = function(terminal) {
   this.terminal = terminal;
   this.io = terminal.io;
   this.sftpClient = new MockSftpClient();
+  this.syncStorage = new lib.Storage.Memory();
   this.exited_ = false;
 
   // Stub out bell ringing to avoid spamming audio and upsetting Chrome when
@@ -491,9 +492,24 @@ it('nasftp-move', function(done) {
 /**
  * Check prompt command.
  */
-it('nasftp-prompt', function(done) {
-  this.cli.dispatchCommand_('prompt')
-    .then(() => done());
+it('nasftp-prompt', async function() {
+  assert.isNull(this.cli.prompt_);
+  assert.isNull(this.cli.prefs_.get('prompt'));
+
+  // Toggle the prompt (to get color).
+  await this.cli.dispatchCommand_('prompt');
+  assert.strictEqual(this.cli.prompt_, '');
+  assert.strictEqual(this.cli.prefs_.get('prompt'), '');
+
+  // Set the prompt.
+  await this.cli.dispatchCommand_('prompt "$ > "');
+  assert.strictEqual(this.cli.prompt_, '$ > ');
+  assert.strictEqual(this.cli.prefs_.get('prompt'), '$ > ');
+
+  // Clear the prompt.
+  await this.cli.dispatchCommand_('prompt');
+  assert.isNull(this.cli.prompt_);
+  assert.isNull(this.cli.prefs_.get('prompt'));
 });
 
 /**

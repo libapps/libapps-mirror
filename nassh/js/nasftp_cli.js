@@ -123,6 +123,27 @@ ProgressBar.prototype.summarize = function(max) {
 };
 
 /**
+ * Global nasftp preferences.
+ *
+ * These are synced between devices.
+ */
+export class PreferenceManager extends lib.PreferenceManager {
+  /**
+   * @param {!lib.Storage} storage
+   */
+  constructor(storage) {
+    super(storage, '/nasftp/');
+
+    this.definePreferences([
+      /**
+       * The shell prompt.
+       */
+      ['prompt', null],
+    ]);
+  }
+}
+
+/**
  * Wrapper around various web methods for downloading files.
  *
  * @abstract
@@ -295,6 +316,9 @@ export function Cli(commandInstance) {
   // The nassh command instance we're bound to.
   this.commandInstance_ = commandInstance;
 
+  // Various prefs that persist across sessions.
+  this.prefs_ = new PreferenceManager(this.commandInstance_.syncStorage);
+
   // The user's terminal.
   // A local shortcut since we use it often in this class.
   this.io = this.commandInstance_.io;
@@ -335,7 +359,7 @@ export function Cli(commandInstance) {
   this.colorMap_ = Object.assign({}, defaultColorMap);
 
   // The prompt settings for this session.
-  this.prompt_ = undefined;
+  this.prompt_ = null;
 
   // Whether the user has interrupted long running commands.
   this.userInterrupted_ = false;
@@ -378,6 +402,15 @@ export function Cli(commandInstance) {
  * Start the nasftp command.
  */
 Cli.prototype.run = async function() {
+  await new Promise((resolve) => this.prefs_.readStorage(resolve));
+
+  const prompt = this.prefs_.get('prompt');
+  if (typeof prompt === 'string') {
+    this.prompt_ = prompt;
+  } else {
+    this.prefs_.reset('prompt');
+  }
+
   // Now that we're ready, show the user the prompt.
   this.showPrompt_();
 };
@@ -1216,7 +1249,7 @@ Cli.prototype.getColorForAttrs_ = function(attrs) {
 Cli.prototype.showPrompt_ = function() {
   let prompt = this.prompt_;
   const defaultPrompt = localize('NASFTP_PROMPT', ['%(cwd)']);
-  if (prompt === undefined) {
+  if (prompt === null) {
     // Normally one should not mess with translation text.  But it's a bit hard
     // to preserve colorization settings.  So hand insert it if possible.
     prompt = defaultPrompt.replace('nasftp', '%(prompt)nasftp%(reset)');
@@ -1237,7 +1270,7 @@ Cli.prototype.showPrompt_ = function() {
     'cwd': this.escapeString_(this.cwd),
   });
 
-  this.io.print(lib.f.replaceVars(lib.notUndefined(prompt), vars));
+  this.io.print(lib.f.replaceVars(prompt, vars));
 };
 
 /**
@@ -2511,17 +2544,18 @@ Cli.addCommand_(['mput', 'mreput'], 0, 0, 'af', '',
  * @param {!Array<string>} args The command arguments.
  * @return {!Promise<void>}
  */
-Cli.commandPrompt_ = function(args) {
+Cli.commandPrompt_ = async function(args) {
   if (args.length) {
     this.prompt_ = args.shift();
   } else {
-    if (this.prompt_ === undefined) {
+    if (this.prompt_ === null) {
       this.prompt_ = '';
     } else {
-      this.prompt_ = undefined;
+      this.prompt_ = null;
     }
   }
-  return Promise.resolve();
+
+  await this.prefs_.set('prompt', this.prompt_);
 };
 Cli.addCommand_(['prompt'], 0, 1, '', '[prompt]',
                 Cli.commandPrompt_);
