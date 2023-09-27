@@ -139,6 +139,11 @@ export class PreferenceManager extends lib.PreferenceManager {
        * The shell prompt.
        */
       ['prompt', null],
+
+      /**
+       * Whether to use colors.
+       */
+      ['color', true],
     ]);
   }
 }
@@ -381,8 +386,9 @@ export function Cli(commandInstance, {localStorage} = {}) {
   this.historyPosition_ = -1;
   this.historyStash_ = '';
 
-  // The color settings for this session.
-  this.colorMap_ = Object.assign({}, defaultColorMap);
+  // The color settings for this session.  Enabled by default.
+  this.colorMap_ = {};
+  this.toggleColors_(true);
 
   // The prompt settings for this session.
   this.prompt_ = null;
@@ -436,6 +442,11 @@ Cli.prototype.run = async function() {
     this.prompt_ = prompt;
   } else {
     this.prefs_.reset('prompt');
+  }
+
+  if (!this.prefs_.getBoolean('color')) {
+    // Assume colors default to on, so we only have to turn them off.
+    this.toggleColors_(false);
   }
 
   const history = this.localPrefs_.get('history');
@@ -1247,6 +1258,28 @@ export const defaultColorMap = {
 };
 
 /**
+ * Toggle color usage in output.
+ *
+ * @param {boolean=} state Whether to toggle or set color usage.
+ */
+Cli.prototype.toggleColors_ = function(state = undefined) {
+  if (state === undefined) {
+    state = !this.colorMap_['prompt'];
+  }
+
+  if (!state) {
+    Object.keys(defaultColorMap).forEach((key) => {
+      this.colorMap_[key] = '';
+    });
+  } else {
+    this.colorMap_ = Object.assign({}, defaultColorMap);
+  }
+
+  // Always keep 'reset' working for the prompt.
+  this.colorMap_['reset'] = defaultColorMap['reset'];
+};
+
+/**
  * Cache the SGR sequences.
  */
 Object.entries(defaultColorMap).forEach(([key, setting]) => {
@@ -1868,19 +1901,9 @@ Cli.addCommand_(['clip', 'clipboard'], 1, 3, '',
  * @param {!Array<string>} _args The command arguments.
  * @return {!Promise<void>}
  */
-Cli.commandColor_ = function(_args) {
-  if (this.colorMap_['prompt']) {
-    Object.keys(this.colorMap_).forEach((key) => {
-      this.colorMap_[key] = '';
-    });
-  } else {
-    this.colorMap_ = Object.assign({}, defaultColorMap);
-  }
-
-  // Always keep 'reset' working for the prompt.
-  this.colorMap_['reset'] = defaultColorMap['reset'];
-
-  return Promise.resolve();
+Cli.commandColor_ = async function(_args) {
+  this.toggleColors_();
+  this.prefs_.set('color', !!this.colorMap_['prompt']);
 };
 Cli.addCommand_(['color'], 0, 0, '', '',
                 Cli.commandColor_);
