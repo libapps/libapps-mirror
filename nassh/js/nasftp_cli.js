@@ -189,7 +189,7 @@ class AnchorTagFileWriter extends FileWriter {
 
   /** @override */
   async write(chunk) {
-    this.chunks.push(chunk);
+    this.chunks.push(new Blob([chunk]));
   }
 
   /** @override */
@@ -200,6 +200,10 @@ class AnchorTagFileWriter extends FileWriter {
     this.a.click();
     this.a.remove();
     URL.revokeObjectURL(this.a.href);
+
+    // Hint to the runtime that we're done with the chunks and they can
+    // release the underlying memory/blobs.
+    this.chunks.length = 0;
   }
 }
 
