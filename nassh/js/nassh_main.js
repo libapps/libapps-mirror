@@ -113,6 +113,10 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
     terminal.decorate(lib.notNull(document.querySelector('#terminal')));
     terminal.installKeyboard();
     const runNassh = function() {
+      terminal.keyboard.bindings.addBinding('Ctrl+Shift+N', function() {
+        openNewWindow(lib.f.getURL('/html/nassh_connect_dialog.html'));
+        return hterm.Keyboard.KeyActions.CANCEL;
+      });
       terminal.onOpenOptionsPage = openOptionsPage;
       terminal.setCursorPosition(0, 0);
       terminal.setCursorVisible(true);
