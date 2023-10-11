@@ -52,29 +52,6 @@ function(request, sender, sendResponse) {
 });
 
 /**
- * SftpFsp instance.
- *
- * @type {?SftpFsp}
- */
-let fsp_ = null;
-
-/**
- * Filesystem handle for accessing /.ssh files.
- *
- * @type {?FileSystem}
- */
-let fileSystem_ = null;
-
-/**
- * Mock to satisfy SFTP APIs.  This is a hack that should get fixed someday.
- *
- * External API calls will not require user IO to enter password, etc.
- *
- * @type {?hterm.Terminal.IO}
- */
-let io_ = null;
-
-/**
  * Root dir for all files to be written under.
  *
  * @const
@@ -109,18 +86,18 @@ function(request, sender, sendResponse) {
    */
   const writeFile = (filename, content) => {
     // TODO(vapier): Move to indexeddb-fs once SFTP works w/WASM.
-    return overwriteFile(fileSystem_.root, filename, content);
+    return overwriteFile(this.fileSystem_.root, filename, content);
   };
   Promise.all([
       writeFile(knownHosts, request.knownHosts),
       writeFile(identityFile, request.identityFile),
   ]).then(async () => {
     const argv = {
-      io: lib.notNull(io_),
+      io: this.io_,
       syncStorage: getSyncStorage(),
       isSftp: true,
       isMount: true,
-      fsp: lib.notNull(fsp_),
+      fsp: lib.notNull(this.fsp_),
       mountOptions: {
         fileSystemId: request.fileSystemId,
         displayName: request.displayName,
@@ -155,7 +132,7 @@ function(request, sender, sendResponse) {
   const {fileSystemId} = request;
   // Always call the unmount API.  It will handle unknown mounts for us, and
   // will clean up FSP state that Chrome knows about but we don't.
-  fsp_.onUnmountRequested(
+  this.fsp_.onUnmountRequested(
       {fileSystemId},
       () => sendResponse({error: false, message: `unmounted ${fileSystemId}`}),
       (message) => sendResponse({error: true, message: message}));
@@ -264,7 +241,7 @@ function(request, sender, sendResponse) {
   }
 
   const {fileSystemId} = request;
-  const sftpInstance = fsp_.getMount(fileSystemId);
+  const sftpInstance = this.fsp_.getMount(fileSystemId);
   if (sftpInstance === undefined) {
     sendResponse({error: true, message: `mount ${fileSystemId} not found`});
     return;
@@ -294,7 +271,7 @@ function(request, sender, sendResponse) {
   }
 
   const {fileSystemId, info} = request;
-  const sftpInstance = fsp_.getMount(fileSystemId);
+  const sftpInstance = this.fsp_.getMount(fileSystemId);
   if (sftpInstance === undefined) {
     sendResponse({error: true, message: `mount ${fileSystemId} not found`});
     return;
@@ -449,13 +426,6 @@ function(request, sender, sendResponse) {
   sendResponse({error: false, message: 'openProtoReg'});
 });
 
-/**
- * Whether we've initialized enough to process requests.
- *
- * @private
- */
-let handlersReady = false;
-
 /** @typedef {{command:string}} */
 const OnMessageRequest = undefined;
 
@@ -467,11 +437,12 @@ const OnMessageRequest = undefined;
  * @param {!MessageSender} sender chrome.runtime.MessageSender.
  * @param {function(!Object=)} sendResponse called to send response.
  * @return {boolean} Whether sendResponse will be called asynchronously.
+ * @this {ExternalApi}
  * @private
  */
 function dispatchMessage_(internal, request, sender, sendResponse) {
   // If we aren't ready yet, reschedule the call.
-  if (!handlersReady) {
+  if (!this.handlersReady_) {
     setTimeout(
         dispatchMessage_.bind(this, internal, request, sender, sendResponse),
         100);
@@ -638,7 +609,7 @@ function(port) {
         // UI wants us to start a connection.
         const {argv, connectOptions} = msg;
         argv.io = pipeIo;
-        argv.fsp = fsp_;
+        argv.fsp = this.fsp_;
         argv.syncStorage = getSyncStorage();
         argv.onExit = (status) => {
           post({error: false, command: 'exit', status});
@@ -693,11 +664,12 @@ function(port) {
  * @param {boolean} internal Whether the sender is this own extension.
  * @param {!Port} port The new communication channel.
  * @return {?boolean} Whether we were able to initiate the connection.
+ * @this {ExternalApi}
  * @private
  */
 function dispatchConnect_(internal, port) {
   // If we aren't ready yet, reschedule the call.
-  if (!handlersReady) {
+  if (!this.handlersReady_) {
     setTimeout(dispatchConnect_.bind(this, internal, port), 100);
     return null;
   }
@@ -776,45 +748,78 @@ function onConnect_(port) {
 }
 
 /**
- * Initialize nassh.External.
- *
- * @param {!SftpFsp} fsp
- * @return {!Promise<void>} When init has finished.
+ * Class for managing our API.
  */
-export function initApi(fsp) {
-  fsp_ = fsp;
-  io_ = new hterm.Terminal.IO(/** @type {!hterm.Terminal} */ ({
-    setProfile: () => {},
-    screenSize: {width: 0, height: 0},
-    showOverlay: () => {},
-  }));
+export class ExternalApi {
+  constructor() {
+    /**
+     * Mock to satisfy SFTP APIs.  This is a hack that should get fixed someday.
+     *
+     * External API calls will not require user IO to enter password, etc.
+     */
+     this.io_ = new hterm.Terminal.IO(/** @type {!hterm.Terminal} */ ({
+       setProfile: () => {},
+       screenSize: {width: 0, height: 0},
+       showOverlay: () => {},
+     }));
 
-  // Get handle on FileSystem, cleanup files, and register listener.
-  return getDomFileSystem().then((fileSystem) => {
-    if (!fileSystem) {
-      return;
+    /**
+     * Whether we've initialized enough to process requests.
+     */
+    this.handlersReady_ = false;
+
+    /**
+     * SftpFsp instance.
+     *
+     * @type {?SftpFsp}
+     */
+    this.fsp_ = null;
+
+    /**
+     * Filesystem handle for accessing /.ssh files.
+     *
+     * @type {?FileSystem}
+     */
+    this.fileSystem_ = null;
+  }
+
+  /**
+   * Initialize runtime state that requires callbacks.
+   *
+   * @param {!SftpFsp} fsp
+   * @return {!Promise<void>} When init has finished.
+   */
+  async init(fsp) {
+    this.fsp_ = fsp;
+
+    // Get handle on FileSystem & cleanup files.
+    try {
+      this.fileSystem_ = await getDomFileSystem() ?? null;
+      if (this.fileSystem_) {
+        await new Promise((deleteDone) => {
+          // Remove existing contents of '/external/' before registering.
+          this.fileSystem_.root.getDirectory(
+              ROOT_DIR,
+              {},
+              (f) => { f.removeRecursively(deleteDone, deleteDone); },
+              deleteDone);
+        });
+      }
+    } catch (e) {
+      console.warn(`Setting up DOM fs failed`, e);
     }
-    fileSystem_ = fileSystem;
-    return new Promise((deleteDone) => {
-      // Remove existing contents of '/external/' before registering listener.
-      fileSystem.root.getDirectory(
-          ROOT_DIR,
-          {},
-          (f) => { f.removeRecursively(deleteDone, deleteDone); },
-          deleteDone);
-    });
-  }).finally(() => {
-    // We can start processing messages now.
-    handlersReady = true;
-  });
-}
 
-/**
- * Register listeners to receive messages.
- */
-export function addListeners() {
-  chrome.runtime.onConnectExternal.addListener(onConnectExternal_.bind(this));
-  chrome.runtime.onConnect.addListener(onConnect_.bind(this));
-  chrome.runtime.onMessageExternal.addListener(onMessageExternal_.bind(this));
-  chrome.runtime.onMessage.addListener(onMessage_.bind(this));
+    // We can start processing messages now.
+    this.handlersReady_ = true;
+  }
+
+  /**
+   * Register listeners to receive messages.
+   */
+  addListeners() {
+    chrome.runtime.onConnectExternal.addListener(onConnectExternal_.bind(this));
+    chrome.runtime.onConnect.addListener(onConnect_.bind(this));
+    chrome.runtime.onMessageExternal.addListener(onMessageExternal_.bind(this));
+    chrome.runtime.onMessage.addListener(onMessage_.bind(this));
+  }
 }

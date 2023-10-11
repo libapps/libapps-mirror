@@ -12,8 +12,7 @@ import {hterm} from '../../hterm/index.js';
 import {browserAction, getSyncStorage, runtimeSendMessage} from './nassh.js';
 import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';
-import {addListeners as externalAddListeners,
-        initApi} from './nassh_external_api.js';
+import {ExternalApi} from './nassh_external_api.js';
 import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
 import {probeExtensions} from './nassh_google.js';
 import {SftpFsp} from './nassh_sftp_fsp.js';
@@ -29,7 +28,8 @@ function onLaunched() {
 
 // We have to turn on listeners here so we can handle messages when first
 // launched.
-externalAddListeners();
+const externalApi_ = new ExternalApi();
+externalApi_.addListeners();
 
 // Used to watch for launch events that occur before we're ready to handle
 // them.  We'll clean this up below during init.
@@ -45,7 +45,7 @@ if (browserAction) {
  */
 function init() {
   const fsp = new SftpFsp();
-  initApi(fsp);
+  externalApi_.init(fsp);
 
   const storage = getSyncStorage();
   const app = new App(storage);
