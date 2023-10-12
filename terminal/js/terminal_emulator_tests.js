@@ -270,6 +270,8 @@ describe('terminal_emulator_tests.js', function() {
           /** @type {!hterm.AccessibilityReader} */(
               this.htermA11yReaderMock.proxy));
 
+      this.terminal.open(this.elem);
+
       this.write = async (content) => {
         return new Promise((resolve) => this.terminal.write(content, resolve));
       };
