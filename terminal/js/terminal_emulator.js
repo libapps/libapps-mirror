@@ -750,6 +750,31 @@ export class XtermTerminal {
     this.xtermInternal_.installEscKHandler();
   }
 
+  installA11yKeyPressHandler_() {
+    // Handle keypress when the user focuses the a11y tree with ChromeVox.
+    // Note that we check the target against <body> instead of the a11y tree
+    // because of bug https://issuetracker.google.com/298164476.
+    document.body.addEventListener('keydown', (e) => {
+      if (e.target === document.body) {
+        switch (e.keyCode) {
+          case keyCodes.C:
+            // For both <ctrl-c> and <ctrl-shift-c>
+            if (e.ctrlKey) {
+              this.copySelection_();
+            }
+            break;
+          case keyCodes.ESCAPE:
+            this.focus();
+            break;
+          default:
+            return;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+  }
+
   /**
    * Write data to the terminal.
    *
@@ -838,6 +863,8 @@ export class XtermTerminal {
       if (!this.prefs_.get('scrollbar-visible')) {
         this.xtermInternal_.setScrollbarVisible(false);
       }
+
+      this.installA11yKeyPressHandler_();
 
       this.onTerminalReady();
     })();
