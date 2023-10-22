@@ -42,7 +42,7 @@ lib.PreferenceManager = function(storage, prefix = '/') {
 
   /** @type {!Object<string, !lib.PreferenceManager.Record>} */
   this.prefRecords_ = {};
-  this.globalObservers_ = [];
+  this.globalObservers_ = new lib.Event();
   this.prefixObservers_ = [];
 
   this.childFactories_ = {};
@@ -332,7 +332,7 @@ lib.PreferenceManager.prototype.addObservers = function(global, map) {
   }
 
   if (global) {
-    this.globalObservers_.push(global);
+    this.globalObservers_.addListener(global);
   }
 
   if (!map) {
@@ -386,11 +386,7 @@ lib.PreferenceManager.prototype.notifyChange_ = function(name) {
   }
 
   const currentValue = record.get();
-
-  for (let i = 0; i < this.globalObservers_.length; i++) {
-    this.globalObservers_[i](name, currentValue);
-  }
-
+  this.globalObservers_.emit(name, currentValue);
   record.onChange.emit(currentValue, name, this);
 };
 
