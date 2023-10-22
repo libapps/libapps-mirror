@@ -319,7 +319,7 @@ lib.PreferenceManager = class {
     this.childLists_[listName][id] = childManager;
 
     ids.push(id);
-    this.set(listName, ids, undefined, !this.isImportingJson_);
+    this.set(listName, ids, !this.isImportingJson_);
 
     return childManager;
   }
@@ -341,7 +341,7 @@ lib.PreferenceManager = class {
     const i = ids.indexOf(id);
     if (i != -1) {
       ids.splice(i, 1);
-      this.set(listName, ids, undefined, !this.isImportingJson_);
+      this.set(listName, ids, !this.isImportingJson_);
     }
 
     delete this.childLists_[listName][id];
@@ -562,13 +562,12 @@ lib.PreferenceManager = class {
    * @param {string} name The preference to set.
    * @param {*} newValue The value to set.  Anything that can be represented in
    *     JSON is a valid value.
-   * @param {function()=} onComplete Callback when the set call completes.
    * @param {boolean=} saveToStorage Whether to commit the change to the backing
    *     storage or only the in-memory record copy.
    * @return {!Promise<void>} Promise which resolves once all observers are
    *     notified.
    */
-  set(name, newValue, onComplete = undefined, saveToStorage = true) {
+  async set(name, newValue, saveToStorage = true) {
     const record = this.prefRecords_[name];
     if (!record) {
       throw new Error(`Unknown preference: ${name}`);
@@ -577,18 +576,18 @@ lib.PreferenceManager = class {
     const oldValue = record.get();
 
     if (!this.diff(oldValue, newValue)) {
-      return Promise.resolve();
+      return;
     }
 
     if (this.diff(record.defaultValue, newValue)) {
       record.currentValue = newValue;
       if (saveToStorage) {
-        this.storage.setItem(this.prefix + name, newValue).then(onComplete);
+        this.storage.setItem(this.prefix + name, newValue);
       }
     } else {
       record.currentValue = this.DEFAULT_VALUE;
       if (saveToStorage) {
-        this.storage.removeItem(this.prefix + name).then(onComplete);
+        this.storage.removeItem(this.prefix + name);
       }
     }
 
@@ -600,9 +599,7 @@ lib.PreferenceManager = class {
     //
     // The notification is async so clients don't accidentally depend on
     // a synchronous notification.
-    return Promise.resolve().then(() => {
-      this.notifyChange_(name);
-    });
+    this.notifyChange_(name);
   }
 
   /**
