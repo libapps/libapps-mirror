@@ -88,7 +88,7 @@ lib.PreferenceManager.Record = function(name, defaultValue) {
   this.name = name;
   this.defaultValue = defaultValue;
   this.currentValue = this.DEFAULT_VALUE;
-  this.observers = [];
+  this.onChange = new lib.Event();
 };
 
 /**
@@ -98,30 +98,6 @@ lib.PreferenceManager.Record = function(name, defaultValue) {
  */
 lib.PreferenceManager.Record.prototype.DEFAULT_VALUE =
     lib.PreferenceManager.prototype.DEFAULT_VALUE;
-
-/**
- * Register a callback to be invoked when this preference changes.
- *
- * @param {function(string, string, !lib.PreferenceManager)} observer The
- *     function to invoke.  It will receive the new value, the name of the
- *     preference, and a reference to the PreferenceManager as parameters.
- */
-lib.PreferenceManager.Record.prototype.addObserver = function(observer) {
-  this.observers.push(observer);
-};
-
-/**
- * Unregister an observer callback.
- *
- * @param {function(string, string, !lib.PreferenceManager)} observer A
- *     previously registered callback.
- */
-lib.PreferenceManager.Record.prototype.removeObserver = function(observer) {
-  const i = this.observers.indexOf(observer);
-  if (i >= 0) {
-    this.observers.splice(i, 1);
-  }
-};
 
 /**
  * Fetch the value of this preference.
@@ -259,7 +235,7 @@ lib.PreferenceManager.prototype.definePreference = function(
   }
 
   if (onChange) {
-    record.addObserver(onChange);
+    record.onChange.addListener(onChange);
   }
 };
 
@@ -339,7 +315,7 @@ lib.PreferenceManager.prototype.addObserver = function(name, observer) {
     throw new Error(`Unknown preference: ${name}`);
   }
 
-  this.prefRecords_[name].addObserver(observer);
+  this.prefRecords_[name].onChange.addListener(observer);
 };
 
 /**
@@ -380,7 +356,7 @@ lib.PreferenceManager.prototype.removeObserver = function(name, observer) {
     throw new Error(`Unknown preference: ${name}`);
   }
 
-  this.prefRecords_[name].removeObserver(observer);
+  this.prefRecords_[name].onChange.removeListener(observer);
 };
 
 /**
@@ -415,9 +391,7 @@ lib.PreferenceManager.prototype.notifyChange_ = function(name) {
     this.globalObservers_[i](name, currentValue);
   }
 
-  for (let i = 0; i < record.observers.length; i++) {
-    record.observers[i](currentValue, name, this);
-  }
+  record.onChange.emit(currentValue, name, this);
 };
 
 // Suppress linter for bug
