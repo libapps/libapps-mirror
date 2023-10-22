@@ -48,9 +48,9 @@ function ConnectDialog() {
   const storage = getSyncStorage();
   this.prefs_ = new PreferenceManager(storage);
   this.localPrefs_ = new LocalPreferenceManager();
-  this.prefs_.readStorage(() => {
+  this.prefs_.readStorage().then(() => {
     this.syncProfiles_(this.onPreferencesReady_.bind(this));
-    this.localPrefs_.readStorage(() => {
+    this.localPrefs_.readStorage().then(() => {
       this.localPrefs_.syncProfiles(this.prefs_);
     });
   });
@@ -913,7 +913,7 @@ ConnectDialog.prototype.syncProfiles_ = function(callback) {
 
   this.profileList_.forEach((profile) => {
     if (profile.prefs) {
-      profile.prefs.readStorage(onRead.bind(this, profile));
+      profile.prefs.readStorage().then(onRead.bind(this, profile));
     }
   });
 };

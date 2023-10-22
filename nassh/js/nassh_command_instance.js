@@ -193,7 +193,7 @@ CommandInstance.prototype.run = async function() {
     }
   });
 
-  this.prefs_.readStorage(async () => {
+  this.prefs_.readStorage().then(async () => {
     // Set default window title.
     this.io.print('\x1b]0;' + this.manifest_.name + ' ' +
                     this.manifest_.version + '\x07');
@@ -204,7 +204,7 @@ CommandInstance.prototype.run = async function() {
     await probePromise;
     onFileSystemFound();
 
-    this.localPrefs_.readStorage(() => {
+    this.localPrefs_.readStorage().then(() => {
       this.localPrefs_.syncProfiles(this.prefs_);
 
       // updateWindowDimensions_ uses chrome.windows.getCurrent.
@@ -468,7 +468,7 @@ CommandInstance.prototype.commonProfileSetup_ = function(profileID, callback) {
 
   // Re-read prefs from storage in case they were just changed in the connect
   // dialog.
-  this.prefs_.readStorage(onReadStorage);
+  this.prefs_.readStorage().then(onReadStorage);
 };
 
 /**

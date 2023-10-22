@@ -39,7 +39,7 @@ export function exportPreferences(onComplete) {
 
   const storage = getSyncStorage();
   const nasshPrefs = new PreferenceManager(storage);
-  nasshPrefs.readStorage(function() {
+  nasshPrefs.readStorage().then(function() {
     // Export all the connection settings.
     rv.nassh = nasshPrefs.exportAsJson();
 
@@ -49,7 +49,7 @@ export function exportPreferences(onComplete) {
       profiles.forEach((profile) => {
         rv.hterm[profile] = null;
         const prefs = new hterm.PreferenceManager(storage, profile);
-        prefs.readStorage(onReadStorage.bind(null, profile, prefs));
+        prefs.readStorage().then(onReadStorage.bind(null, profile, prefs));
         pendingReads++;
       });
 
@@ -88,7 +88,7 @@ export function importPreferences(prefsObject) {
     for (const terminalProfile in prefsObject.hterm) {
       const prefs = new hterm.PreferenceManager(storage, terminalProfile);
       // Sync storage to prefs object so we can reset it when importing.
-      await new Promise((resolve) => prefs.readStorage(resolve));
+      await prefs.readStorage();
       await prefs.importFromJson(prefsObject.hterm[terminalProfile]);
     }
 

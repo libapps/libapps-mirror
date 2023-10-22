@@ -90,7 +90,7 @@ lib.PreferenceManager = class {
       this.prefRecords_[name].currentValue = this.DEFAULT_VALUE;
     }
 
-    this.readStorage(() => {
+    this.readStorage().then(() => {
       this.onPrefixChange.emit(this.prefix, this);
       this.notifyAll();
       if (callback) {
@@ -112,47 +112,32 @@ lib.PreferenceManager = class {
    * This function is asynchronous, if you need to read preference values, you
    * *must* wait for the callback.
    *
-   * @param {function()=} callback Optional function to invoke when the read
-   *     has completed.
+   * @return {!Promise<void>} When storage has finished loading.
    */
-  readStorage(callback = undefined) {
-    let pendingChildren = 0;
-
-    function onChildComplete() {
-      if (--pendingChildren == 0 && callback) {
-        callback();
-      }
-    }
-
+  async readStorage() {
     const keys = Object.keys(this.prefRecords_).map((el) => this.prefix + el);
 
     if (this.trace) {
       console.log(`Preferences read: ${this.prefix}`);
     }
 
-    this.storage.getItems(keys).then((items) => {
-        const prefixLength = this.prefix.length;
+    const items = await this.storage.getItems(keys);
+    const prefixLength = this.prefix.length;
 
-        for (const key in items) {
-          const value = items[key];
-          const name = key.substr(prefixLength);
-          const needSync = (
-              name in this.childLists_ &&
-              (JSON.stringify(value) !=
-               JSON.stringify(this.prefRecords_[name].currentValue)));
+    for (const key in items) {
+      const value = items[key];
+      const name = key.substr(prefixLength);
+      const needSync = (
+          name in this.childLists_ &&
+          (JSON.stringify(value) !=
+           JSON.stringify(this.prefRecords_[name].currentValue)));
 
-          this.prefRecords_[name].currentValue = value;
+      this.prefRecords_[name].currentValue = value;
 
-          if (needSync) {
-            pendingChildren++;
-            this.syncChildList(name, onChildComplete);
-          }
-        }
-
-        if (pendingChildren == 0 && callback) {
-          setTimeout(callback);
-        }
-      });
+      if (needSync) {
+        await this.syncChildList(name);
+      }
+    }
   }
 
   /**
@@ -407,16 +392,9 @@ lib.PreferenceManager = class {
    * preferences will be deleted.
    *
    * @param {string} listName The child list to synchronize.
-   * @param {function()=} callback Function to invoke when the sync finishes.
+   * @return {!Promise<void>} When child has finished loading.
    */
-  syncChildList(listName, callback = undefined) {
-    let pendingChildren = 0;
-    function onChildStorage() {
-      if (--pendingChildren == 0 && callback) {
-        callback();
-      }
-    }
-
+  async syncChildList(listName) {
     // The list of child ids that we *should* have a manager for.
     const currentIds = /** @type {!Array<string>} */ (this.get(listName));
 
@@ -441,17 +419,12 @@ lib.PreferenceManager = class {
 
         childManager.trace = this.trace;
         this.childLists_[listName][id] = childManager;
-        pendingChildren++;
-        childManager.readStorage(onChildStorage);
+        await childManager.readStorage();
       }
     }
 
     for (let i = 0; i < oldIds.length; i++) {
       delete this.childLists_[listName][oldIds[i]];
-    }
-
-    if (!pendingChildren && callback) {
-      setTimeout(callback);
     }
   }
 

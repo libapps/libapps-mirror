@@ -817,7 +817,7 @@ export class XtermTerminal {
     elem.style.backgroundSize = '100% 100%';
 
     (async () => {
-      await new Promise((resolve) => this.prefs_.readStorage(resolve));
+      await this.prefs_.readStorage();
       // This will trigger all the observers to set the terminal options before
       // we call `this.term.open()`.
       this.prefs_.notifyAll();

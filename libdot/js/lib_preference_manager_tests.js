@@ -179,7 +179,7 @@ it('change-prefix', async () => {
     ['c', 'c'],
     ['d', 'd'],
   ]);
-  await new Promise((resolve) => manager.readStorage(resolve));
+  await manager.readStorage();
 
   const observed = {};
   let observerCount = 0;
@@ -228,7 +228,7 @@ it('get-array-or-object-returns-copy', async () => {
     ['object', defaultObject],
     ['array', defaultArray],
   ]);
-  await new Promise((resolve) => manager.readStorage(resolve));
+  await manager.readStorage();
 
   // Check when value is default.
   let o = /** @type {!Object} */(manager.get('object'));
@@ -271,7 +271,7 @@ it('set-array-or-object-detects-default', async () => {
     ['object', defaultObject],
     ['array', defaultArray],
   ]);
-  await new Promise((resolve) => manager.readStorage(resolve));
+  await manager.readStorage();
 
   assert.isUndefined(await storage.getItem('/object'));
   assert.isUndefined(await storage.getItem('/array'));

@@ -56,7 +56,7 @@ function runTerminalHome() {
     setColorRgbCssVar('button-color', c);
   });
   watchColors(prefs);
-  prefs.readStorage(() => {
+  prefs.readStorage().then(() => {
     prefs.notifyAll();
     document.body.style.overflow = 'auto';
     document.body.appendChild(document.createElement('terminal-home-app'));

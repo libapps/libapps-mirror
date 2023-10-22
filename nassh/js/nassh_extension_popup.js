@@ -39,8 +39,8 @@ function popup() {
   this.htermPrefs_ = new hterm.PreferenceManager(storage);
 
   // Load the theme first so the style doesn't flicker.
-  this.htermPrefs_.readStorage(() => {
-    this.prefs_.readStorage(() => {
+  this.htermPrefs_.readStorage().then(() => {
+    this.prefs_.readStorage().then(() => {
       // If there aren't any connections yet, pop open the connection dialog
       // automatically.  This will force users to register one first.
       const ids = this.prefs_.get('profile-ids');
@@ -50,7 +50,7 @@ function popup() {
       }
 
       this.populateList_();
-      this.localPrefs_.readStorage(() => {
+      this.localPrefs_.readStorage().then(() => {
         this.localPrefs_.syncProfiles(this.prefs_);
       });
     });

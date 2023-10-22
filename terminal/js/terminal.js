@@ -330,7 +330,7 @@ async function runNassh(term, storage, ssh, tmuxControllerDriver) {
 
     const id = profileId.split(':')[1] || profileId;
     const prefs = new PreferenceManager(storage);
-    await new Promise((resolve) => prefs.readStorage(resolve));
+    await prefs.readStorage();
     const profile = prefs.getProfile(id);
     const displayName = profile.getString('description');
     mountOptions = {fileSystemId: id, displayName, writable: true};

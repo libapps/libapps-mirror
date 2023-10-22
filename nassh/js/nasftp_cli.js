@@ -434,8 +434,8 @@ export function Cli(commandInstance, {localStorage} = {}) {
  * Start the nasftp command.
  */
 Cli.prototype.run = async function() {
-  await new Promise((resolve) => this.prefs_.readStorage(resolve));
-  await new Promise((resolve) => this.localPrefs_.readStorage(resolve));
+  await this.prefs_.readStorage();
+  await this.localPrefs_.readStorage();
 
   const prompt = this.prefs_.get('prompt');
   if (typeof prompt === 'string') {

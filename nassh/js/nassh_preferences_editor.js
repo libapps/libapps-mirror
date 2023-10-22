@@ -222,7 +222,7 @@ PreferencesEditor.prototype.selectProfile = function(profileId) {
   globalThis.term_.setProfile(profileId);
   const prefs = new hterm.PreferenceManager(this.storage_, profileId);
   this.prefs_ = prefs;
-  prefs.readStorage(() => {
+  prefs.readStorage().then(() => {
     prefs.notifyAll();
     this.syncPage();
   });

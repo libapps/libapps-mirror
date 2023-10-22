@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   window.preferenceManager = new window.PreferenceManager(
       window.storage, hterm.Terminal.DEFAULT_PROFILE_ID);
   definePrefs(window.preferenceManager);
-  window.preferenceManager.readStorage(() => {
+  window.preferenceManager.readStorage().then(() => {
     normalizePrefsInPlace(window.preferenceManager);
     window.preferenceManager.notifyAll();
     document.body.appendChild(
