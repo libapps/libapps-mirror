@@ -71,16 +71,13 @@ lib.PreferenceManager = class {
    * and all pref observers with new values.
    *
    * @param {string} prefix
-   * @param {function()=} callback Optional function to invoke when completed.
+   * return {!Promise<void>} When prefix has finished updating.
    */
-  setPrefix(prefix, callback) {
+  async setPrefix(prefix) {
     if (!prefix.endsWith('/')) {
       prefix += '/';
     }
     if (prefix === this.prefix) {
-      if (callback) {
-        callback();
-      }
       return;
     }
 
@@ -90,13 +87,9 @@ lib.PreferenceManager = class {
       this.prefRecords_[name].currentValue = this.DEFAULT_VALUE;
     }
 
-    this.readStorage().then(() => {
-      this.onPrefixChange.emit(this.prefix, this);
-      this.notifyAll();
-      if (callback) {
-        callback();
-      }
-    });
+    await this.readStorage();
+    this.onPrefixChange.emit(this.prefix, this);
+    this.notifyAll();
   }
 
   /**

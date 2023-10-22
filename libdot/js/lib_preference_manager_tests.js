@@ -206,7 +206,7 @@ it('change-prefix', async () => {
     // This should be called before prefs are notified.
     assert.equal(4, observerCount);
   });
-  await new Promise((resolve) => manager.setPrefix('/p2', resolve));
+  await manager.setPrefix('/p2');
   assert.equal('/p2/', prefixObserved);
   assert.deepStrictEqual({a: 'p2a', b: 'b', c: 'p2c', d: 'd'}, observed);
   assert.equal(8, observerCount);

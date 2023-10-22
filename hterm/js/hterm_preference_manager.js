@@ -31,7 +31,7 @@ hterm.PreferenceManager = class extends lib.PreferenceManager {
    * @param {function()=} callback Optional function to invoke when completed.
    */
   setProfile(profileId, callback) {
-    this.setPrefix(hterm.PreferenceManager.prefix_ + profileId, callback);
+    this.setPrefix(hterm.PreferenceManager.prefix_ + profileId).then(callback);
   }
 };
 
