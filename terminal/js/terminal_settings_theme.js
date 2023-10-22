@@ -250,7 +250,8 @@ export class TerminalSettingsThemeElement extends LitElement {
     super.connectedCallback();
 
     this.profileChanged_();
-    window.preferenceManager.addPrefixObserver(this.boundProfileChanged_);
+    window.preferenceManager.onPrefixChange.addListener(
+        this.boundProfileChanged_);
     PREFS.forEach((p) => {
       window.preferenceManager.addObserver(
           p, this.boundPreferenceChanged_);
@@ -261,7 +262,8 @@ export class TerminalSettingsThemeElement extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    window.preferenceManager.removePrefixObserver(this.boundProfileChanged_);
+    window.preferenceManager.onPrefixChange.removeListener(
+        this.boundProfileChanged_);
     PREFS.forEach((p) => {
       window.preferenceManager.removeObserver(
         p, this.boundPreferenceChanged_);

@@ -201,7 +201,7 @@ it('change-prefix', async () => {
 
   // Change prefix to '/p2', and validate.
   let prefixObserved;
-  manager.addPrefixObserver((value) => {
+  manager.onPrefixChange.addListener((value) => {
     prefixObserved = value;
     // This should be called before prefs are notified.
     assert.equal(4, observerCount);

@@ -43,7 +43,7 @@ lib.PreferenceManager = function(storage, prefix = '/') {
   /** @type {!Object<string, !lib.PreferenceManager.Record>} */
   this.prefRecords_ = {};
   this.globalObservers_ = new lib.Event();
-  this.prefixObservers_ = [];
+  this.onPrefixChange = new lib.Event();
 
   this.childFactories_ = {};
 
@@ -142,9 +142,7 @@ lib.PreferenceManager.prototype.setPrefix = function(prefix, callback) {
   }
 
   this.readStorage(() => {
-    for (const o of this.prefixObservers_) {
-      o(this.prefix, this);
-    }
+    this.onPrefixChange.emit(this.prefix, this);
     this.notifyAll();
     if (callback) {
       callback();
@@ -278,30 +276,6 @@ lib.PreferenceManager.prototype.defineChildren = function(
                         this.onChildListChange_.bind(this, listName));
   this.childFactories_[listName] = childFactory;
   this.childLists_[listName] = {};
-};
-
-/**
- * Register a callback to be invoked when PreferenceManager prefix changes.
- *
- * @param {function(string, !lib.PreferenceManager)} observer The
- *     function to invoke.  It will receive the new prefix, and a reference
- *     to the PreferenceManager as parameters.
- */
-lib.PreferenceManager.prototype.addPrefixObserver = function(observer) {
-  this.prefixObservers_.push(observer);
-};
-
-/**
- * Unregister an observer callback.
- *
- * @param {function(string, !lib.PreferenceManager)} observer A
- *     previously registered callback.
- */
-lib.PreferenceManager.prototype.removePrefixObserver = function(observer) {
-  const i = this.prefixObservers_.indexOf(observer);
-  if (i >= 0) {
-    this.prefixObservers_.splice(i, 1);
-  }
 };
 
 /**

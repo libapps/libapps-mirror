@@ -69,7 +69,8 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
     this.imagePreviewSrc_ = '';
     /** @private {string} */
     this.errorMsg_ = '';
-    window.preferenceManager.addPrefixObserver(this.profileChanged_.bind(this));
+    window.preferenceManager.onPrefixChange.addListener(
+        this.profileChanged_.bind(this));
     this.profileChanged_();
   }
 
