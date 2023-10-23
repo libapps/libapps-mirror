@@ -24,19 +24,29 @@ lib.PreferenceManager = class {
    *     hierarchy, if you're going to have that kind of thing.  If provided,
    *     the prefix should start with a '/'.  If not provided, it defaults to
    *     '/'.
+   * @param {{
+   *   finegrain: boolean,
+   * }=} options Various knobs.
+   *     finegrain: How we store preferences in the underlying storage.  With
+   *         fine grained preferences (the default), every setting is stored
+   *         in independent storage keys.  With coarse preferences, all settings
+   *         are condensed into a single storage key.
    */
-  constructor(storage, prefix = '/') {
-    this.storage = storage;
+  constructor(storage, prefix = '/', {finegrain = true} = {}) {
+    if (!prefix.endsWith('/')) {
+      prefix += '/';
+    }
+    this.prefix = prefix;
+
+    this.finegrain_ = finegrain;
+    this.realStorage_ = this.storage = storage;
+    if (!this.finegrain_) {
+      this.storage = new lib.Storage.Condenser(this.realStorage_, this.prefix);
+    }
     this.storageObserver_ = this.onStorageChange_.bind(this);
     this.storage.addObserver(this.storageObserver_);
 
     this.trace = false;
-
-    if (!prefix.endsWith('/')) {
-      prefix += '/';
-    }
-
-    this.prefix = prefix;
 
     // Internal state for when we're doing a bulk import from JSON and we want
     // to elide redundant storage writes (for quota reasons).
@@ -87,6 +97,9 @@ lib.PreferenceManager = class {
       this.prefRecords_[name].currentValue = this.DEFAULT_VALUE;
     }
 
+    if (!this.finegrain_) {
+      this.storage = new lib.Storage.Condenser(this.realStorage_, this.prefix);
+    }
     await this.readStorage();
     this.onPrefixChange.emit(this.prefix, this);
     this.notifyAll();
@@ -112,6 +125,19 @@ lib.PreferenceManager = class {
 
     if (this.trace) {
       console.log(`Preferences read: ${this.prefix}`);
+    }
+
+    if (!this.finegrain_) {
+      // Handle transition from multiple keys to single key.
+      const oldItems = await this.realStorage_.getItems(keys);
+      const oldKeys = Object.keys(oldItems);
+      if (oldKeys.length) {
+        const newItems = await this.storage.getItems(keys);
+        if (Object.keys(newItems).length === 0) {
+          await this.storage.setItems(oldItems);
+        }
+        await this.realStorage_.removeItems(oldKeys);
+      }
     }
 
     const items = await this.storage.getItems(keys);
