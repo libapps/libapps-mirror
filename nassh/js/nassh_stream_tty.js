@@ -30,7 +30,7 @@ export function InputBuffer() {
   // This event is fired with the value true when there is data available to be
   // read, and false when the buffer is empty. It is only fired when this
   // status changes.
-  this.onDataAvailable = lib.Event();
+  this.onDataAvailable = new lib.Event();
 }
 
 /**
@@ -67,7 +67,7 @@ InputBuffer.prototype.write = function(data) {
 
   // Now, if data is still available, notify.
   if (this.data_.length > 0 && !wasAvailable) {
-    this.onDataAvailable(true);
+    this.onDataAvailable.emit(true);
   }
 };
 
@@ -104,7 +104,7 @@ InputBuffer.prototype.read = function(size, onRead) {
   }
 
   if (this.data_.length == 0) {
-    this.onDataAvailable(false);
+    this.onDataAvailable.emit(false);
   }
 };
 

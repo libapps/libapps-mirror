@@ -12,12 +12,12 @@ import {lib} from '../index.js';
 describe('lib_event_tests.js', () => {
 
 it('complete', () => {
-  const event = lib.Event();
+  const event = new lib.Event();
 
   // Post events w/no listeners.
-  event();
-  event(1);
-  event('a', 'b');
+  event.emit();
+  event.emit(1);
+  event.emit('a', 'b');
 
   // Add listener.
   const events1 = [];
@@ -25,9 +25,9 @@ it('complete', () => {
   event.addListener(callback1);
 
   // Post more events.
-  event();
-  event(2);
-  event('c', 'd');
+  event.emit();
+  event.emit(2);
+  event.emit('c', 'd');
   assert.deepStrictEqual(events1, [[], [2], ['c', 'd']]);
 
   // Add another listener.
@@ -36,8 +36,8 @@ it('complete', () => {
   event.addListener(callback2);
 
   // Post more events.
-  event(null);
-  event([1, 2]);
+  event.emit(null);
+  event.emit([1, 2]);
   assert.deepStrictEqual(events1, [[], [2], ['c', 'd'], [null], [[1, 2]]]);
   assert.deepStrictEqual(events2, [[null], [[1, 2]]]);
 
@@ -45,7 +45,7 @@ it('complete', () => {
   event.removeListener(callback1);
 
   // Post more events.
-  event(undefined);
+  event.emit(undefined);
   assert.deepStrictEqual(events1, [[], [2], ['c', 'd'], [null], [[1, 2]]]);
   assert.deepStrictEqual(events2, [[null], [[1, 2]], [undefined]]);
 
@@ -53,7 +53,7 @@ it('complete', () => {
   event.removeListener(callback2);
 
   // Post more events.
-  event('final');
+  event.emit('final');
   assert.deepStrictEqual(events1, [[], [2], ['c', 'd'], [null], [[1, 2]]]);
   assert.deepStrictEqual(events2, [[null], [[1, 2]], [undefined]]);
 });
@@ -62,7 +62,7 @@ it('complete', () => {
  * Verify unknown listeners are ignored when removing.
  */
 it('remove unknown listeners', () => {
-  const event = lib.Event();
+  const event = new lib.Event();
   assert.deepEqual(event.observers, []);
   event.removeListener(() => {});
   assert.deepEqual(event.observers, []);
