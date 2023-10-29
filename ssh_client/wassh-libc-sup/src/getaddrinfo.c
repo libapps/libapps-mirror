@@ -80,6 +80,42 @@ static struct in6_addr* next_fake_addr6(const char* node) {
   return &fake_addr;
 }
 
+// Allocate a new addrinfo structure.
+static struct addrinfo* new_addrinfo(int ai_family, int ai_socktype,
+                                     int ai_protocol, long sin_port,
+                                     void* s_addr) {
+  struct addrinfo* ret = malloc(sizeof(*ret));
+  memset(ret, 0, sizeof(*ret));
+  // POSIX says flags are unused.
+  ret->ai_flags = 0;
+  ret->ai_socktype = ai_socktype;
+  ret->ai_protocol = ai_protocol;
+  union {
+    struct sockaddr_storage storage;
+    struct sockaddr sa;
+    struct sockaddr_in sin;
+    struct sockaddr_in6 sin6;
+  }* sa = malloc(sizeof(*sa));
+  memset(sa, 0, sizeof(*sa));
+  if (ai_family == AF_INET6) {
+    struct sockaddr_in6* sin6 = &sa->sin6;
+    sin6->sin6_family = AF_INET6;
+    sin6->sin6_port = htons(sin_port);
+    memcpy(&sin6->sin6_addr, s_addr, sizeof(sin6->sin6_addr));
+  } else {
+    struct sockaddr_in* sin = &sa->sin;
+    sin->sin_family = AF_INET;
+    sin->sin_port = htons(sin_port);
+    memcpy(&sin->sin_addr.s_addr, s_addr, sizeof(sin->sin_addr.s_addr));
+  }
+  ret->ai_family = ai_family;
+  ret->ai_addrlen = sizeof(*sa);
+  ret->ai_addr = &sa->sa;
+  ret->ai_canonname = NULL;
+  ret->ai_next = NULL;
+  return ret;
+}
+
 // Resolve a hostname into an IP address.
 //
 // We don't implement AI_ADDRCONFIG or AI_V4MAPPED as nothing uses them atm.
@@ -129,10 +165,13 @@ int getaddrinfo(const char* node, const char* service,
   // clearly differentiate between the two modes.
   uint32_t s_addr;
   struct in6_addr sin6_addr;
-  if (ai_family == AF_INET6) {
+  if (ai_family == AF_INET6 || ai_family == AF_UNSPEC) {
     if (is_localhost(node)) {
       memcpy(&sin6_addr, &in6addr_loopback, sizeof(in6addr_loopback));
-    } else if (inet_pton(AF_INET6, node, &sin6_addr) != 1) {
+      ai_family = AF_INET6;
+    } else if (inet_pton(AF_INET6, node, &sin6_addr) == 1) {
+      ai_family = AF_INET6;
+    } else {
       if (ai_flags & AI_NUMERICHOST) {
         _EXIT("EAI_NONAME: non-numeric IPv6 address");
         return EAI_NONAME;
@@ -141,10 +180,14 @@ int getaddrinfo(const char* node, const char* service,
         memcpy(&sin6_addr, next_fake_addr6(node), sizeof(sin6_addr));
       }
     }
-  } else {
+  }
+  if (ai_family == AF_INET || ai_family == AF_UNSPEC) {
     if (is_localhost(node)) {
       s_addr = htonl(0x7f000001);
-    } else if (inet_pton(AF_INET, node, &s_addr) != 1) {
+      ai_family = AF_INET;
+    } else if (inet_pton(AF_INET, node, &s_addr) == 1) {
+      ai_family = AF_INET;
+    } else {
       if (ai_flags & AI_NUMERICHOST) {
         _EXIT("EAI_NONAME: non-numeric IPv4 address");
         return EAI_NONAME;
@@ -156,37 +199,36 @@ int getaddrinfo(const char* node, const char* service,
   }
 
   // Return the result.
-  struct addrinfo* ret = malloc(sizeof(*ret));
-  memset(ret, 0, sizeof(*ret));
-  // POSIX says flags are unused.
-  ret->ai_flags = 0;
-  ret->ai_socktype = ai_socktype;
-  ret->ai_protocol = ai_protocol;
-  union {
-    struct sockaddr_storage storage;
-    struct sockaddr sa;
-    struct sockaddr_in sin;
-    struct sockaddr_in6 sin6;
-  }* sa = malloc(sizeof(*sa));
-  memset(sa, 0, sizeof(*sa));
-  if (ai_family == AF_INET6) {
-    struct sockaddr_in6* sin6 = &sa->sin6;
-    sin6->sin6_family = AF_INET6;
-    sin6->sin6_port = htons(sin_port);
-    memcpy(&sin6->sin6_addr, &sin6_addr, sizeof(sin6_addr));
-    ret->ai_family = AF_INET6;
-  } else {
-    struct sockaddr_in* sin = &sa->sin;
-    sin->sin_family = AF_INET;
-    sin->sin_port = htons(sin_port);
-    sin->sin_addr.s_addr = s_addr;
-    ret->ai_family = AF_INET;
+  struct addrinfo* ret6;
+  struct addrinfo* ret4;
+  if (ai_family == AF_INET6 || ai_family == AF_UNSPEC) {
+    _MID("adding AF_INET6 result");
+    ret6 = new_addrinfo(AF_INET6, ai_socktype, ai_protocol, sin_port,
+                        &sin6_addr);
+    if (ai_family == AF_INET6) {
+      *res = ret6;
+      goto done;
+    }
   }
-  ret->ai_addrlen = sizeof(*sa);
-  ret->ai_addr = &sa->sa;
-  ret->ai_canonname = NULL;
-  ret->ai_next = NULL;
-  *res = ret;
+  if (ai_family == AF_INET || ai_family == AF_UNSPEC) {
+    _MID("adding AF_INET result");
+    ret4 = new_addrinfo(AF_INET, ai_socktype, ai_protocol, sin_port, &s_addr);
+    if (ai_family == AF_INET) {
+      *res = ret4;
+      goto done;
+    }
+  }
+  // If we're still here, it's AF_UNSPEC, and we have 2 results.  The compiler
+  // isn't able to detect this logic though, so help it a little.  We don't know
+  // if the host actually has IPv6 & IPv4 records, but ssh will end up trying
+  // both, and the Chrome side will handle the error when connecting.
+  if (ai_family != AF_UNSPEC) {
+    _EXIT("unsupported ai_family");
+    return 1;
+  }
+  ret6->ai_next = ret4;
+  *res = ret6;
+ done:
   _EXIT("return 0");
   return 0;
 }
