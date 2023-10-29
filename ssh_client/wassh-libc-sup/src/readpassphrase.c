@@ -41,6 +41,7 @@ char* readpassphrase(const char* prompt, char* buf, size_t buf_len, int flags) {
       }
     }
     write(2, new_prompt, new_len);
+    new_prompt[new_len] = '\0';
     prompt = new_prompt;
   }
 
