@@ -53,6 +53,7 @@
     "rollup-plugin-html": "~0",
     "rollup-plugin-string": "~3",
     "terser": "~5",
+    "typescript": "~5",
     "url-loader": "~4",
     "val-loader": "~5",
     "webpack": "~5",
