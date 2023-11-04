@@ -16,6 +16,7 @@
     "start": "http-server --cors -a localhost -c-1 ."
   },
   "dependencies": {
+    "@bkuri/rollup-plugin-string": "~1",
     "@material/mwc-icon-button": "^0.25.3",
     "@polymer/polymer": "^3.3",
     "@rollup/plugin-commonjs": "^21.0.1",
@@ -58,7 +59,6 @@
     "regex-extract-loader": "~1",
     "rollup": "~2",
     "rollup-plugin-git-info": "~1",
-    "rollup-plugin-string": "~3",
     "terser": "~5",
     "typescript": "~5",
     "url-loader": "~4",

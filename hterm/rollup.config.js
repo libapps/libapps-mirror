@@ -6,11 +6,11 @@
  * @fileoverview Bundle up for release.
  */
 
+import string from '@bkuri/rollup-plugin-string';
 import image from '@rollup/plugin-image';
 import terser from '@rollup/plugin-terser';
 import url from '@rollup/plugin-url';
 import gitInfo from 'rollup-plugin-git-info';
-import {string} from 'rollup-plugin-string';
 
 const plugins = [];
 if (process.env.NODE_ENV === 'production') {
