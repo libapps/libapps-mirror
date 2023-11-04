@@ -10,7 +10,6 @@ import image from '@rollup/plugin-image';
 import terser from '@rollup/plugin-terser';
 import url from '@rollup/plugin-url';
 import gitInfo from 'rollup-plugin-git-info';
-import html from 'rollup-plugin-html';
 import {string} from 'rollup-plugin-string';
 
 const plugins = [];
@@ -44,8 +43,7 @@ let targets = [
       // Always run terser on these files as it's all generated anyways.
       terser(),
       gitInfo(),
-      html(),
-      string({include: "**/*.svg"}),
+      string({include: ['**/*.html', '**/*.svg']}),
       image({exclude: "**/*.svg"}),
       url({include: ['**/*.ogg']}),
     ],
