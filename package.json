@@ -49,7 +49,6 @@
     "raw-loader": "~4",
     "regex-extract-loader": "~1",
     "rollup": "~2",
-    "rollup-plugin-concat": "~1",
     "rollup-plugin-git-info": "~1",
     "rollup-plugin-html": "~0",
     "rollup-plugin-string": "~3",
