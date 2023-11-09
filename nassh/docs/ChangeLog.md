@@ -1,3 +1,15 @@
+# 0.60, 2023-11-16, Deframe connection dialog, WASM IPv6 fixes, nasftp speed improvements.
+
+* wassh: Fix IPv6 address parsing with socket get name.
+* wassh: Have GAI return 2 results for AF_UNSPEC.
+* wassh: Fix NUL termination in secure prompt.
+* nassh: Add Ctrl+Shift+N binding.
+* connect: Delete promptOnReload logic.
+* connect: Make connection dialog a dedicated page.
+* nasftp: Change <a> downloads to use blobs for all chunks.
+* nasftp: Rate limit how often we update transfer bars.
+* external api: Fix connection error responses.
+
 # 0.59, 2023-09-21, Major nasftp improvements, internal overhauls.
 
 * nasftp: Add mput/mreput helpers.
