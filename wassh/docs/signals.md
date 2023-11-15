@@ -90,6 +90,10 @@ OpenSSH spends the majority of its time calling these functions (to move data
 around), this limitation isn't a big deal, and it minimizes the number of touch
 points we have to add in wassh.
 
+We don't reset the handler (not `SA_RESETHAND`), we defer the same signal (not
+`SA_NODEFER`), and we don't restart the signal (not `SA_RESTART`).  OpenSSH will
+handle `EINTR` from the relevant calls, so this works out.
+
 ### Details
 
 wassh maintains a per-process queue of signals.

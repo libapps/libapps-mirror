@@ -804,13 +804,17 @@ export class WasiPreview1 extends Base {
       return ret;
     }
 
-    // TODO(vapier): This call does not below here.  This should be in wassh.
+    // TODO(vapier): This call does not belong here.  This should be in wassh.
     // But the current sys_poll_oneoff logic is not factored well for hooking.
-    // We might also want to return EINTR here if there are no events ...
     if (ret.signals !== undefined) {
       ret.signals.forEach(
           /** @type {{__wassh_signal_deliver: function(number)}} */ (
               this.process_.instance_.exports).__wassh_signal_deliver);
+      if (ret.events.length === 0) {
+        // If there are no other events, return EINTR so the caller knows that a
+        // signal came in.  It should retry the call automatically.
+        return WASI.errno.EINTR;
+      }
     }
 
     const dvEvents = this.getView_(events_ptr);
