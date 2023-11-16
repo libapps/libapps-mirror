@@ -51,6 +51,7 @@ def src_configure(metadata):
         "--prefix=/",
         "--cache-file=../config.cache",
         f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
+        "--with-drill",
         "--disable-dane-verify",
         "--disable-gost",
         # The ldns configure logic is quite poor and searches the filesystem
@@ -64,6 +65,7 @@ def src_compile(_metadata):
     """Compile the source."""
     ssh_client.emake("setup-builddir")
     ssh_client.emake("lib")
+    ssh_client.emake("drill")
 
 
 def src_install(metadata):
