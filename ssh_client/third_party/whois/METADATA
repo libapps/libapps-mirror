@@ -1,0 +1,11 @@
+name: "whois"
+description: "WHOIS client"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/rfc1036/whois"
+  }
+  version: "5.5.20"
+  last_upgrade_date { year: 2023 month: 11 day: 10 }
+}
