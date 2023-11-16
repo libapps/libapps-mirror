@@ -54,6 +54,18 @@ function netErrorToErrno(err) {
 }
 
 /**
+ * Clear "last error" if available.
+ *
+ * Some Chrome APIs set the last error field in addition to returning an error,
+ * and if it isn't cleared, then it will throw confusing errors in the console.
+ *
+ * @suppress {uselessCode}
+ */
+function clearLastError() {
+  globalThis.chrome?.runtime?.lastError;
+}
+
+/**
  * Base class for all socket types.
  *
  * This should support TCP/UDP/UNIX/etc... fundamentals without having any
@@ -270,6 +282,7 @@ export class ChromeTcpSocket extends Socket {
 
     const ret = netErrorToErrno(result);
     if (ret !== WASI.errno.ESUCCESS) {
+      clearLastError();
       return ret;
     }
 
@@ -315,6 +328,7 @@ export class ChromeTcpSocket extends Socket {
 
     const ret = netErrorToErrno(resultCode);
     if (ret !== WASI.errno.ESUCCESS) {
+      clearLastError();
       return ret;
     }
 
@@ -585,6 +599,7 @@ export class ChromeTcpListenSocket extends Socket {
           this.socketId_, this.address, this.port, backlog, resolve);
     });
 
+    clearLastError();
     return netErrorToErrno(result);
   }
 
