@@ -614,7 +614,12 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
             }
             break;
           case WASI.filetype.SOCKET_DGRAM:
-            // TODO(vapier): Implement UDP support.
+            if (Sockets.ChromeUdpSocket.isSupported()) {
+              handle = new Sockets.ChromeUdpSocket(domain, type, protocol);
+            } else {
+              return WASI.errno.EPROTONOSUPPORT;
+            }
+            break;
           default:
             return WASI.errno.EPROTONOSUPPORT;
         }
@@ -668,13 +673,6 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     if (!(handle instanceof Sockets.Socket)) {
       return WASI.errno.ENOTSOCK;
     }
-
-    /* TODO(vapier): Implement UDP support.
-    if (this.socketUdpRecv_ === null) {
-      this.socketUdpRecv_ = this.onSocketUdpRecv.bind(this);
-      chrome.sockets.Udp.onReceive.addListener(this.socketUdpRecv_);
-    }
-    */
 
     // The getaddrinfo function used -1 to register a delayed hostname lookup.
     if (handle.protocol === -1) {
@@ -796,6 +794,58 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     }
 
     return handle.setSocketOption(level, name, value);
+  }
+
+  /**
+   * @param {!WASI_t.fd} socket
+   * @param {number} length
+   * @return {!WASI_t.errno|{
+   *   nwritten: number,
+   *   domain: number,
+   *   address: string,
+   *   port: number,
+   * }}
+   */
+  handle_sock_recvfrom(socket, length) {
+    const handle = this.vfs.getFileHandle(socket);
+    if (handle === undefined) {
+      return WASI.errno.EBADF;
+    }
+    if (!(handle instanceof Sockets.Socket)) {
+      return WASI.errno.ENOTSOCK;
+    }
+
+    const ret = handle.read(length);
+    if (typeof ret === 'number') {
+      return ret;
+    }
+
+    ret.domain = handle.domain;
+    ret.address = handle.address;
+    ret.port = handle.port;
+
+    return ret;
+  }
+
+  /**
+   * @param {!WASI_t.fd} socket
+   * @param {!Uint8Array} buf
+   * @param {!WASI_t.s32} flags
+   * @param {!WASI_t.s32} domain
+   * @param {string} address
+   * @param {!WASI_t.u16} port
+   * @return {!WASI_t.errno}
+   */
+  handle_sock_sendto(socket, buf, flags, domain, address, port) {
+    const handle = this.vfs.getFileHandle(socket);
+    if (handle === undefined) {
+      return WASI.errno.EBADF;
+    }
+    if (!(handle instanceof Sockets.Socket)) {
+      return WASI.errno.ENOTSOCK;
+    }
+
+    return handle.sendto(buf, address, port);
   }
 
   /**

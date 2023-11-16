@@ -164,6 +164,18 @@ export class Socket extends VFS.PathHandle {
   }
 
   /**
+   * Send data to a specific address/port.
+   *
+   * @param {!ArrayBuffer} buf The data to send.
+   * @param {string} address The system to send to.
+   * @param {number} port The port to send to.
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   */
+  async sendto(buf, address, port) {
+    throw new Error('sendto(): unimplemented');
+  }
+
+  /**
    * Registers a listener that will be called when data is recieved on the
    * socket.
    *
@@ -698,6 +710,120 @@ export class ChromeTcpListenSocket extends Socket {
  * @type {?ChromeTcpListenSocketEventRouter}
  */
 ChromeTcpListenSocket.eventRouter_ = null;
+
+/**
+ * A UDP/IP based socket backed by the chrome.sockets.udp API.
+ */
+export class ChromeUdpSocket extends Socket {
+  /** @override */
+  constructor(domain, type, protocol) {
+    super(domain, type, protocol);
+
+    /** @type {number} */
+    this.socketId_ = -1;
+  }
+
+  /** @override */
+  async init(socketId = undefined) {
+    if (socketId === undefined) {
+      const info = await new Promise((resolve) => {
+        chrome.sockets.udp.create(resolve);
+      });
+
+      this.socketId_ = info.socketId;
+    } else {
+      this.socketId_ = socketId;
+    }
+
+    if (ChromeUdpSocket.eventRouter_ === null) {
+      ChromeUdpSocket.eventRouter_ = new ChromeUdpSocketEventRouter();
+    }
+
+    ChromeUdpSocket.eventRouter_.register(this.socketId_, this);
+  }
+
+  /** @override */
+  async close() {
+    // In the *NIX world, close must never fail.  That's why we don't return
+    // any errors here.
+
+    if (this.socketId_ === -1) {
+      return;
+    }
+
+    chrome.sockets.udp.close(this.socketId_);
+    ChromeUdpSocket.eventRouter_.unregister(this.socketId_);
+
+    this.socketId_ = -1;
+    this.address = null;
+    this.port = null;
+  }
+
+  /** @override */
+  async sendto(buf, address, port) {
+    // Chrome APIs require us to bind the socket locally first.
+    if (this.address === null) {
+      const bindRet = await this.bind('0.0.0.0', 0);
+      if (typeof bindRet === 'number' && bindRet !== WASI.errno.ESUCCESS) {
+        return bindRet;
+      }
+    }
+
+    const {resultCode, bytesSent} = await new Promise((resolve) => {
+      chrome.sockets.udp.send(this.socketId_, buf, address, port, resolve);
+    });
+
+    const ret = netErrorToErrno(resultCode);
+    if (ret !== WASI.errno.ESUCCESS) {
+      clearLastError();
+      return ret;
+    }
+
+    return {nwritten: bytesSent};
+  }
+
+  /** @override */
+  async bind(address, port) {
+    if (this.address !== null) {
+      return WASI.errno.EADDRINUSE;
+    }
+
+    const result = await new Promise((resolve) => {
+      chrome.sockets.udp.bind(this.socketId_, address, port, resolve);
+    });
+
+    const ret = netErrorToErrno(result);
+    if (ret !== WASI.errno.ESUCCESS) {
+      clearLastError();
+      return ret;
+    }
+
+    this.address = address;
+    this.port = port;
+    return WASI.errno.ESUCCESS;
+  }
+
+  /**
+   * @return {!Promise<!chrome.socket.SocketInfo>}
+   */
+  async getSocketInfo() {
+    return new Promise((resolve) => {
+      chrome.sockets.udp.getInfo(this.socketId_, resolve);
+    });
+  }
+
+  /** @override */
+  static isSupported() {
+    return window?.chrome?.sockets?.udp !== undefined;
+  }
+}
+
+/**
+ * Used to route receive events to all ChromeUdpSockets.
+ *
+ * @type {?ChromeUdpSocketEventRouter}
+ */
+ChromeUdpSocket.eventRouter_ = null;
 
 /**
  * A TCP/IP based socket backed by a Stream. Used to connect to a relay server.
@@ -1382,5 +1508,36 @@ class ChromeTcpListenSocketEventRouter extends ChromeSocketsEventRouter {
     }
 
     handle.onAccept(clientSocketId);
+  }
+}
+
+/**
+ * Maps socketIds to sockets and forwards data received to the sockets.
+ */
+class ChromeUdpSocketEventRouter extends ChromeSocketsEventRouter {
+  constructor() {
+    super();
+
+    chrome.sockets.udp.onReceive.addListener(this.onSocketRecv_.bind(this));
+  }
+
+  /**
+   * The onReceive listener for the chrome.sockets API which forwards data to
+   * the associated ChromeUdpSocket.
+   *
+   * @param {{socketId: number, data: !ArrayBuffer}} options
+   */
+  onSocketRecv_({socketId, data}) {
+    const handle = this.socketMap_.get(socketId);
+    if (handle === undefined) {
+      // We don't do anything about this because Chrome broadcasts events to all
+      // instances of Secure Shell.  The sockets are not bound to the specific
+      // runtime.
+      // console.warn(`Data received for unknown socket ${socketId}`);
+      // chrome.sockets.udp.close(socketId);
+      return;
+    }
+
+    handle.onRecv(data);
   }
 }

@@ -30,6 +30,8 @@ C_SOURCES := \
 	ioctl.c \
 	listen.c \
 	readpassphrase.c \
+	recv.c \
+	send.c \
 	setsockopt.c \
 	signal.c \
 	socket.c \

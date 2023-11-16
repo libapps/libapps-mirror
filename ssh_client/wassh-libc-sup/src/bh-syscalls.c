@@ -166,6 +166,33 @@ int sock_set_opt(__wasi_fd_t sock, int level, int optname, int optvalue) {
   return 0;
 }
 
+SYSCALL(sock_recvfrom)(__wasi_fd_t sock, void* buf, size_t len, size_t* written,
+                       int flags, int* domain, uint8_t* addr, uint16_t* port);
+int sock_recvfrom(__wasi_fd_t sock, void* buf, size_t len, size_t* written,
+                  int flags, int* domain, uint8_t* addr, uint16_t* port) {
+  __wasi_errno_t error = __wassh_sock_recvfrom(
+      sock, buf, len, written, flags, domain, addr, port);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return 0;
+}
+
+SYSCALL(sock_sendto)(__wasi_fd_t sock, const void* buf, size_t len,
+                     size_t* written, int flags, int domain,
+                     const uint8_t* addr, uint16_t port);
+int sock_sendto(__wasi_fd_t sock, const void* buf, size_t len, size_t* written,
+                int flags, int domain, const uint8_t* addr, uint16_t port) {
+  __wasi_errno_t error = __wassh_sock_sendto(
+      sock, buf, len, written, flags, domain, addr, port);
+  if (error != 0) {
+    errno = error;
+    return -1;
+  }
+  return 0;
+}
+
 SYSCALL(tty_get_window_size)(__wasi_fd_t fd, struct winsize* winsize);
 int tty_get_window_size(__wasi_fd_t fd, struct winsize* winsize) {
   __wasi_errno_t error = __wassh_tty_get_window_size(fd, winsize);

@@ -248,6 +248,129 @@ export class WasshExperimental extends SyscallEntry.Base {
   }
 
   /**
+   * @param {!WASI_t.fd} sock
+   * @param {!WASI_t.pointer} buf_ptr
+   * @param {!WASI_t.size} buf_len
+   * @param {!WASI_t.pointer} nwritten_ptr
+   * @param {!WASI_t.s32} flags
+   * @param {!WASI_t.pointer} domain_ptr
+   * @param {!WASI_t.pointer} addr_ptr
+   * @param {!WASI_t.pointer} port_ptr
+   * @return {!WASI_t.errno}
+   */
+  sys_sock_recvfrom(sock, buf_ptr, buf_len, nwritten_ptr, flags, domain_ptr,
+                    addr_ptr, port_ptr) {
+    if (flags) {
+      // We don't support any today.
+      return WASI.errno.EINVAL;
+    }
+
+    const ret = this.handle_sock_recvfrom(sock, buf_len);
+    if (typeof ret === 'number') {
+      return ret;
+    }
+
+    const bytes = this.getMem_(buf_ptr, buf_ptr + buf_len);
+    bytes.set(ret.buf);
+
+    const dvWritten = this.getView_(nwritten_ptr, 4);
+    dvWritten.setUint32(0, ret.buf.length, true);
+
+    if (domain_ptr) {
+      const dv = this.getView_(domain_ptr, 4);
+      dv.setUint32(0, ret.domain, true);
+    }
+
+    if (addr_ptr) {
+      let addrLen;
+      switch (ret.domain) {
+        case Constants.AF_INET:
+          addrLen = 4;
+          break;
+        case Constants.AF_INET6:
+          addrLen = 16;
+          break;
+      }
+      if (addrLen !== undefined) {
+        const bytes = this.getMem_(addr_ptr, addr_ptr + addrLen);
+        bytes.set(ret.address);
+      }
+    }
+
+    if (port_ptr) {
+      const dv = this.getView_(port_ptr, 2);
+      dv.setUint16(0, ret.port, true);
+    }
+
+    return WASI.errno.ESUCCESS;
+  }
+
+  /**
+   * @param {!WASI_t.fd} sock
+   * @param {!WASI_t.pointer} buf_ptr
+   * @param {!WASI_t.size} buf_len
+   * @param {!WASI_t.pointer} nwritten_ptr
+   * @param {!WASI_t.s32} flags
+   * @param {!WASI_t.s32} domain
+   * @param {!WASI_t.pointer} addr_ptr
+   * @param {!WASI_t.u16} port
+   * @return {!WASI_t.errno}
+   */
+  sys_sock_sendto(sock, buf_ptr, buf_len, nwritten_ptr, flags, domain, addr_ptr,
+                  port) {
+    if (flags) {
+      // We don't support any today.
+      return WASI.errno.EINVAL;
+    }
+
+    let address;
+    switch (domain) {
+      case Constants.AF_INET: {
+        const dv = this.getView_(addr_ptr, 4);
+        const bytes = this.getMem_(addr_ptr, addr_ptr + 4);
+        // If address is within the fake range (0.0.0.0/8), pass it as an
+        // integer to look up the real host later.
+        address = dv.getUint32(0, true);
+        if (address >= 0x1000000) {
+          address = bytes.join('.');
+        }
+        break;
+      }
+
+      case Constants.AF_INET6: {
+        const bytes = this.getMem_(addr_ptr, addr_ptr + 16);
+        if (bytes[0] === 1) {
+          // If address is within the fake range (100::/64), pass it as an
+          // integer to look up the real host later.
+          address = bytes[15];
+        } else {
+          // TODO(vapier): Check endianness; might need DataView via getView_().
+          const u16 = new Uint16Array(bytes.buffer, bytes.bytesOffset, 8);
+          address = Array.from(u16).map(
+              (b) => b.toString(16).padStart(4, '0')).join(':');
+        }
+        break;
+      }
+
+      default:
+        return WASI.errno.EAFNOSUPPORT;
+    }
+
+    const buf = this.getMem_(buf_ptr, buf_ptr + buf_len);
+
+    const ret = this.handle_sock_sendto(
+        sock, buf, flags, domain, address, port);
+    if (typeof ret === 'number') {
+      return ret;
+    }
+
+    const dvWritten = this.getView_(nwritten_ptr, 4);
+    dvWritten.setUint32(0, ret.nwritten, true);
+
+    return WASI.errno.ESUCCESS;
+  }
+
+  /**
    * @param {!WASI_t.fd} oldfd
    * @param {!WASI_t.pointer} newfd_ptr
    * @return {!WASI_t.errno}

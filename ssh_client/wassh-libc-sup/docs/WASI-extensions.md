@@ -170,6 +170,41 @@ Same semantics as standard Linux/POSIX [setsockopt(2)] function.
 
 [setsockopt(2)]: https://man7.org/linux/man-pages/man2/setsockopt.2.html
 
+### __wassh_sock_recvfrom
+
+`__wasi_errno_t sock_recvfrom(__wasi_fd_t sock, void* buf, size_t len, size_t* written, int flags, int* domain, uint8_t* addr, uint16_t* port)`
+
+* `sock`: The existing open socket to operate on.
+* `buf` (output): Buffer to store received data.
+* `len`: Length (in bytes) of the `buf` buffer.
+* `written` (output): How many bytes were actually written to `buf`.
+* `flags`: No flags are currently supported.
+* `domain` (optional output): The communication domain.
+* `addr` (optional output): Pointer to a domain-specific address buffer of the
+  remote address.
+* `port` (optional output): Pointer to the remote port.
+
+Same semantics as standard Linux/POSIX [recvfrom(2)] function.
+
+[recvfrom(2)]: https://man7.org/linux/man-pages/man2/recvfrom.2.html
+
+### __wassh_sock_sendto
+
+`__wasi_errno_t sock_sendto(__wasi_fd_t sock, const void* buf, size_t len, size_t* written, int flags, int domain, const uint8_t* addr, uint16_t port)`
+
+* `sock`: The existing open socket to operate on.
+* `buf`: Data to transmit.
+* `len`: Length (in bytes) of the `buf` buffer.
+* `written` (output): How many bytes were actually sent from `buf`.
+* `flags`: No flags are currently supported.
+* `domain`: The communication domain.
+* `addr`: Pointer to a domain-specific address buffer of the remote address.
+* `port`: The remote port.
+
+Same semantics as standard Linux/POSIX [sendto(2)] function.
+
+[sendto(2)]: https://man7.org/linux/man-pages/man2/sendto.2.html
+
 ## Signal Syscalls
 
 See the [wassh signals design] for higher level details.
