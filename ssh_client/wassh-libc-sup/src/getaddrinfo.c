@@ -297,10 +297,17 @@ int getnameinfo(const struct sockaddr* sa,
   const struct sockaddr_in* sin = (const struct sockaddr_in*)sa;
 
   if (node) {
-    if (sa->sa_family == AF_INET6)
-      inet_ntop(AF_INET6, &sin6->sin6_addr, node, nodelen);
-    else
-      inet_ntop(AF_INET, &sin->sin_addr, node, nodelen);
+    // Return stub values for fake addresses to avoid confusing users.
+    const void* src;
+    struct in_addr s_addr;
+    if (sa->sa_family == AF_INET6) {
+      src = sin6->sin6_addr.s6_addr[0] == 1 ? &in6addr_any : &sin6->sin6_addr;
+    } else {
+      src = &s_addr;
+      s_addr.s_addr =
+          sin->sin_addr.s_addr < 0x1000000 ? INADDR_ANY : sin->sin_addr.s_addr;
+    }
+    inet_ntop(sa->sa_family, src, node, nodelen);
   }
 
   if (service)
