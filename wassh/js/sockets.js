@@ -280,13 +280,13 @@ export class ChromeTcpSocket extends Socket {
 
   /** @override */
   async write(buf) {
-    const {result, bytesSent} = await new Promise((resolve) => {
+    const {resultCode, bytesSent} = await new Promise((resolve) => {
       // TODO(vapier): Double check whether send accepts TypedArrays directly.
       // Or if we have to respect buf.byteOffset & buf.byteLength ourself.
       chrome.sockets.tcp.send(this.socketId_, buf.buffer, resolve);
     });
 
-    if (result < 0) {
+    if (resultCode < 0) {
       // NB: Should try to translate these error codes.
       return WASI.errno.EINVAL;
     }
