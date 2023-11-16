@@ -159,12 +159,27 @@ int getaddrinfo(const char* node, const char* service,
     }
   }
 
+  uint32_t s_addr;
+  struct in6_addr sin6_addr;
+
+  // If we're given an IP address w/AF_UNSPEC, lock the family to the right
+  // value since trying to connect with AF_INET6 to an IPv4 address or vice
+  // versa doesn't make sense.
+  if (ai_family == AF_UNSPEC) {
+    // If they passed an IP address in, then we don't need fake records.
+    if (inet_pton(AF_INET6, node, &sin6_addr) == 1) {
+      _MID("inet_pton detected numeric IPv6 address");
+      ai_family = AF_INET6;
+    } else if (inet_pton(AF_INET, node, &s_addr) == 1) {
+      _MID("inet_pton detected numeric IPv4 address");
+      ai_family = AF_INET;
+    }
+  }
+
   // Resolve a few known knowns and IP addresses.  Fake (delay) the rest.
   // The -1 protocol value indicates delayed hostname resolution -- the caller
   // uses that when creating the socket, so the JS side will see it and can
   // clearly differentiate between the two modes.
-  uint32_t s_addr;
-  struct in6_addr sin6_addr;
   if (ai_family == AF_INET6 || ai_family == AF_UNSPEC) {
     if (is_localhost(node)) {
       memcpy(&sin6_addr, &in6addr_loopback, sizeof(in6addr_loopback));
@@ -176,6 +191,7 @@ int getaddrinfo(const char* node, const char* service,
         _EXIT("EAI_NONAME: non-numeric IPv6 address");
         return EAI_NONAME;
       } else {
+        _MID("adding fake IPv6 result");
         ai_protocol = -1;
         memcpy(&sin6_addr, next_fake_addr6(node), sizeof(sin6_addr));
       }
@@ -192,6 +208,7 @@ int getaddrinfo(const char* node, const char* service,
         _EXIT("EAI_NONAME: non-numeric IPv4 address");
         return EAI_NONAME;
       } else {
+        _MID("adding fake IPv4 result");
         ai_protocol = -1;
         s_addr = next_fake_addr(node);
       }
