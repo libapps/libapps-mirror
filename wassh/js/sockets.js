@@ -8,6 +8,7 @@
  */
 
 import * as WASI from '../../wasi-js-bindings/js/wasi.js';
+import * as NetErrorList from './chrome_net_error_list.js';
 import * as Constants from './constants.js';
 import * as VFS from './vfs.js';
 
@@ -22,6 +23,35 @@ const IP_TOS = 1;
 const IPPROTO_TCP = 6;
 const TCP_NODELAY = 1;
 const IPV6_TCLASS = 67;
+
+/**
+ * Map Chrome net errors to errno values when possible.
+ */
+const CHROME_NET_ERROR_TO_ERRNO = {
+  // NB: Sorted by NetErrorList value.
+  [NetErrorList.INVALID_ARGUMENT]: WASI.errno.EINVAL,
+  [NetErrorList.TIMED_OUT]: WASI.errno.ETIMEDOUT,
+  [NetErrorList.SUCCESS]: WASI.errno.ESUCCESS,
+  [NetErrorList.CONNECTION_REFUSED]: WASI.errno.ECONNREFUSED,
+  [NetErrorList.NAME_NOT_RESOLVED]: WASI.errno.EHOSTUNREACH,
+  [NetErrorList.ADDRESS_IN_USE]: WASI.errno.EADDRINUSE,
+};
+
+/**
+ * Convert an error from the Chrome network layers to an errno.
+ *
+ * Chrome doesn't seem to expose this anywhere.
+ *
+ * @param {number} err The Chrome network error.
+ * @return {number} The translated errno value.
+ */
+function netErrorToErrno(err) {
+  const ret = CHROME_NET_ERROR_TO_ERRNO[err];
+  if (ret !== undefined) {
+    return ret;
+  }
+  return WASI.errno.ENOTRECOVERABLE;
+}
 
 /**
  * Base class for all socket types.
@@ -238,17 +268,14 @@ export class ChromeTcpSocket extends Socket {
           this.socketId_, address, port, addrType, resolve);
     });
 
-    switch (result) {
-      case 0:
-        this.address = address;
-        this.port = port;
-        return WASI.errno.ESUCCESS;
-      case -102:
-        return WASI.errno.ECONNREFUSED;
-      default:
-        // NB: Should try to translate these error codes.
-        return WASI.errno.ENETUNREACH;
+    const ret = netErrorToErrno(result);
+    if (ret !== WASI.errno.ESUCCESS) {
+      return ret;
     }
+
+    this.address = address;
+    this.port = port;
+    return ret;
   }
 
   /** @override */
@@ -286,9 +313,9 @@ export class ChromeTcpSocket extends Socket {
       chrome.sockets.tcp.send(this.socketId_, buf.buffer, resolve);
     });
 
-    if (resultCode < 0) {
-      // NB: Should try to translate these error codes.
-      return WASI.errno.EINVAL;
+    const ret = netErrorToErrno(resultCode);
+    if (ret !== WASI.errno.ESUCCESS) {
+      return ret;
     }
 
     return {nwritten: bytesSent};
@@ -550,7 +577,7 @@ export class ChromeTcpListenSocket extends Socket {
       // don't bother and immediately return EADDRINUSE.  This isn't exactly
       // correct, but it's also not exactly incorrect.
       if (this.address === null || this.port === null) {
-        resolve(-147);
+        resolve(NetErrorList.ADDRESS_IN_USE);
         return;
       }
 
@@ -558,17 +585,7 @@ export class ChromeTcpListenSocket extends Socket {
           this.socketId_, this.address, this.port, backlog, resolve);
     });
 
-    switch (result) {
-      case 0:
-        return WASI.errno.ESUCCESS;
-      case -4:
-        return WASI.errno.EINVAL;
-      case -147:
-        return WASI.errno.EADDRINUSE;
-      default:
-        // NB: Should try to translate these error codes.
-        return WASI.errno.ENETUNREACH;
-    }
+    return netErrorToErrno(result);
   }
 
   /** @override */
