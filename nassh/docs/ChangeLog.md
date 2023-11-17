@@ -1,3 +1,12 @@
+# 0.61, 2023-11-22, Fix WASM IPv4 regression.
+
+* nasftp: Split execution startup from construction.
+* wassh: Clear Chrome "last error".
+* wassh: Add framework to translate Chrome net errors to errno.
+* wassh: Do not queue fake addresses for IP addresses.
+* wassh: Fix result checking with tcp writes.
+* wasi-js-bindings: Return EINTR when handling signals w/no other events.
+
 # 0.60, 2023-11-16, Deframe connection dialog, WASM IPv6 fixes, nasftp speed improvements.
 
 * wassh: Fix IPv6 address parsing with socket get name.
