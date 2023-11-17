@@ -30,7 +30,7 @@ import {
 import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
 import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
 import {
-  LocalPreferenceManager, PreferenceManager,
+  LocalPreferenceManager, PreferenceManager, ProfilePreferenceManager,
 } from './nassh_preference_manager.js';
 import {Corp as RelayCorp} from './nassh_relay_corp.js';
 import {Corpv4 as RelayCorpv4} from './nassh_relay_corpv4.js';
@@ -442,8 +442,8 @@ CommandInstance.prototype.connectToArgString = function(argstr) {
  * Common phases that we run before making an actual connection.
  *
  * @param {string} profileID Terminal preference profile name.
- * @param {function(!PreferenceManager)} callback Callback when the prefs have
- *     finished loading.
+ * @param {function(!ProfilePreferenceManager)} callback Callback when the prefs
+ *     have finished loading.
  */
 CommandInstance.prototype.commonProfileSetup_ = function(profileID, callback) {
   const onReadStorage = () => {

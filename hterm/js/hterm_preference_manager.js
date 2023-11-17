@@ -10,20 +10,29 @@ import {hterm} from '../index.js';
  * PreferenceManager subclass managing global NaSSH preferences.
  *
  * This is currently just an ordered list of known connection profiles.
- *
- * @param {!lib.Storage} storage Where to store preferences.
- * @param {string=} profileId Uses 'default' if not specified.
- * @extends {lib.PreferenceManager}
- * @constructor
  */
-hterm.PreferenceManager = function(
-    storage, profileId = hterm.Terminal.DEFAULT_PROFILE_ID) {
-  lib.PreferenceManager.call(this, storage,
-                             hterm.PreferenceManager.prefix_ + profileId);
-  Object.entries(hterm.PreferenceManager.defaultPreferences).forEach(
-      ([key, entry]) => {
-        this.definePreference(key, entry['default']);
-      });
+hterm.PreferenceManager = class extends lib.PreferenceManager {
+  /**
+   * @param {!lib.Storage} storage Where to store preferences.
+   * @param {string=} profileId Uses 'default' if not specified.
+   */
+  constructor(storage, profileId = hterm.Terminal.DEFAULT_PROFILE_ID) {
+    super(storage, hterm.PreferenceManager.prefix_ + profileId);
+    Object.entries(hterm.PreferenceManager.defaultPreferences).forEach(
+        ([key, entry]) => {
+          this.definePreference(key, entry['default']);
+        });
+  }
+
+  /**
+   * Changes profile and notifies all listeners with updated values.
+   *
+   * @param {string} profileId New profile to use.
+   * @param {function()=} callback Optional function to invoke when completed.
+   */
+  setProfile(profileId, callback) {
+    this.setPrefix(hterm.PreferenceManager.prefix_ + profileId, callback);
+  }
 };
 
 /**
@@ -874,20 +883,4 @@ hterm.PreferenceManager.defaultPreferences = {
       `\n` +
       `By default, we prompt until a choice is made.`,
   ),
-};
-
-hterm.PreferenceManager.prototype =
-    Object.create(lib.PreferenceManager.prototype);
-/** @override */
-hterm.PreferenceManager.constructor = hterm.PreferenceManager;
-
-/**
- * Changes profile and notifies all listeners with updated values.
- *
- * @param {string} profileId New profile to use.
- * @param {function()=} callback Optional function to invoke when completed.
- */
-hterm.PreferenceManager.prototype.setProfile = function(profileId, callback) {
-  lib.PreferenceManager.prototype.setPrefix.call(
-      this, hterm.PreferenceManager.prefix_ + profileId, callback);
 };
