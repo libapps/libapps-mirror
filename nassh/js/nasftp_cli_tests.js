@@ -112,12 +112,13 @@ after(function() {
  *
  * Reset the terminal back to a good state before each run.
  */
-beforeEach(function() {
+beforeEach(async function() {
   delete globalThis.showDirectoryPicker;
   this.terminal.reset();
   this.instance = new MockSftpCommandInstance(this.terminal);
   this.cli = new Cli(this.instance);
   this.client = this.cli.client;
+  await this.cli.run();
 });
 
 /**

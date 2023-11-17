@@ -372,10 +372,15 @@ export function Cli(commandInstance) {
 
   // Take care of translating the available commands.
   this.commands_ = this.translateCommands(Cli.commands);
+}
 
+/**
+ * Start the nasftp command.
+ */
+Cli.prototype.run = async function() {
   // Now that we're ready, show the user the prompt.
   this.showPrompt_();
-}
+};
 
 /**
  * Convert control characters to avoid the terminal interpreting them.

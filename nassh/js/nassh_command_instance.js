@@ -1661,9 +1661,11 @@ CommandInstance.prototype.onSftpInitialised = function() {
     // Useful for console debugging.
     this.terminalWindow.nasftp_ = this.sftpCli_;
 
-    if (this.sftpStartupCallback) {
-      this.sftpStartupCallback(true, null);
-    }
+    this.sftpCli_.run().then(() => {
+      if (this.sftpStartupCallback) {
+        this.sftpStartupCallback(true, null);
+      }
+    });
   }
 };
 
