@@ -40,7 +40,7 @@ lib.PreferenceManager = function(storage, prefix = '/') {
   // to elide redundant storage writes (for quota reasons).
   this.isImportingJson_ = false;
 
-  /** @type {!Object<string, !lib.PreferenceManager.Record>} */
+  /** @type {!Object<string, !Record>} */
   this.prefRecords_ = {};
   this.globalObservers_ = new lib.Event();
   this.onPrefixChange = new lib.Event();
@@ -73,49 +73,6 @@ lib.PreferenceManager = function(storage, prefix = '/') {
  * @type {symbol}
  */
 lib.PreferenceManager.prototype.DEFAULT_VALUE = Symbol('DEFAULT_VALUE');
-
-/**
- * An individual preference.
- *
- * These objects are managed by the PreferenceManager, you shouldn't need to
- * handle them directly.
- *
- * @param {string} name The name of the new preference (used for indexing).
- * @param {*} defaultValue The default value for this preference.
- * @constructor
- */
-lib.PreferenceManager.Record = function(name, defaultValue) {
-  this.name = name;
-  this.defaultValue = defaultValue;
-  this.currentValue = this.DEFAULT_VALUE;
-  this.onChange = new lib.Event();
-};
-
-/**
- * A local copy of the DEFAULT_VALUE constant to make it less verbose.
- *
- * @type {symbol}
- */
-lib.PreferenceManager.Record.prototype.DEFAULT_VALUE =
-    lib.PreferenceManager.prototype.DEFAULT_VALUE;
-
-/**
- * Fetch the value of this preference.
- *
- * @return {*} The value for this preference.
- */
-lib.PreferenceManager.Record.prototype.get = function() {
-  const result = this.currentValue === this.DEFAULT_VALUE ?
-      this.defaultValue : this.currentValue;
-
-  if (typeof this.defaultValue === 'object') {
-    // We want to return a COPY of the value so that users can
-    // modify the array or object without changing the value.
-    return JSON.parse(JSON.stringify(result));
-  }
-
-  return result;
-};
 
 /**
  * Update prefix and reset and reload storage, then notify prefix observers, and
@@ -228,8 +185,7 @@ lib.PreferenceManager.prototype.definePreference = function(
   if (record) {
     this.changeDefault(name, value);
   } else {
-    record = this.prefRecords_[name] =
-        new lib.PreferenceManager.Record(name, value);
+    record = this.prefRecords_[name] = new Record(name, value);
   }
 
   if (onChange) {
@@ -913,3 +869,47 @@ lib.PreferenceManager.prototype.onStorageChange_ = function(map) {
     }
   }
 };
+
+/**
+ * An individual preference.
+ *
+ * These objects are managed by the PreferenceManager, you shouldn't need to
+ * handle them directly.
+ */
+class Record {
+  /**
+   * @param {string} name The name of the new preference (used for indexing).
+   * @param {*} defaultValue The default value for this preference.
+   */
+  constructor(name, defaultValue) {
+    this.name = name;
+    this.defaultValue = defaultValue;
+    this.currentValue = this.DEFAULT_VALUE;
+    this.onChange = new lib.Event();
+  }
+
+  /**
+   * Fetch the value of this preference.
+   *
+   * @return {*} The value for this preference.
+   */
+  get() {
+    const result = this.currentValue === this.DEFAULT_VALUE ?
+        this.defaultValue : this.currentValue;
+
+    if (typeof this.defaultValue === 'object') {
+      // We want to return a COPY of the value so that users can
+      // modify the array or object without changing the value.
+      return JSON.parse(JSON.stringify(result));
+    }
+
+    return result;
+  }
+}
+
+/**
+ * A local copy of the DEFAULT_VALUE constant to make it less verbose.
+ *
+ * @type {symbol}
+ */
+Record.prototype.DEFAULT_VALUE = lib.PreferenceManager.prototype.DEFAULT_VALUE;
