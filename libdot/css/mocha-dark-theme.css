@@ -11,6 +11,8 @@
  * just enough to go from white-on-black to black-on-white.
  */
 
+@media (prefers-color-scheme: dark) {
+
 body {
   background-color: black;
   color: white;
@@ -34,4 +36,6 @@ body {
 
 #mocha-stats canvas {
   filter: invert(1);
+}
+
 }
