@@ -11,6 +11,7 @@
  * A magic string to mark bigints serialized in JSON as a string.
  */
 const BIGINT_MAGIC = '_WASI\x00BigInt\x01';
+const ARRAY_BUFFER_MAGIC = '_WASI\x00ArrayBuffer\x01';
 
 /**
  * Locking type that's more analagous to a Win32-style signal. This class
@@ -38,17 +39,20 @@ export class SyscallLock {
     }
 
     // Space for integers shared memory.
-    this.sabArr = new Int32Array(buffer, offset, 3);
+    this.sabArr = new Int32Array(buffer, offset, 4);
     // Offset of the lock itself.
     this.lockIndex = 0;
     // Offset of the return value.
     this.retcodeIndex = 1;
     // Offset of the data object.
     this.dataLengthIndex = 2;
+    // Offset of the array buffer.
+    this.arrLengthIndex = 3;
 
     // The space for passing shared objects around.
-    this.sabDataArr = new Uint8Array(buffer, offset + this.sabArr.byteLength,
-                                     64 * 1024 - this.sabArr.byteLength);
+    this.sabDataArr = new Uint8Array(
+        buffer, offset + this.sabArr.byteLength,
+        buffer.byteLength - offset - this.sabArr.byteLength);
   }
 
   /**
@@ -111,14 +115,23 @@ export class SyscallLock {
    */
   setData(obj) {
     const te = new TextEncoder();
-    /** @suppress {checkTypes} https://github.com/google/closure-compiler/issues/3701 */
+    /** @type {?ArrayBufferView} */
+    let ab = null;
     const str = JSON.stringify(obj, (key, value) => {
       switch (typeof value) {
         case 'bigint':
           return BIGINT_MAGIC + value.toString();
         case 'object':
           if (ArrayBuffer.isView(value)) {
-            return Array.from(value);
+            // closure-compiler misses the ArrayBuffer.isView check above, so we
+            // have to cast it when using it below.
+            if (ab !== null) {
+              console.warn('Can only handle one array buffer at a time.');
+              return Array.from(
+                  /** @type {!IArrayLike<!ArrayBufferView>} */ (value));
+            }
+            ab = /** @type {!ArrayBufferView} */ (value);
+            return ARRAY_BUFFER_MAGIC;
           }
         default:
           return value;
@@ -129,6 +142,11 @@ export class SyscallLock {
     const bytes = te.encode(str);
     this.sabDataArr.set(bytes);
     this.sabArr[this.dataLengthIndex] = bytes.length;
+    if (ab !== null) {
+      // closure-compiler is missing the null check here for some reason.
+      this.sabDataArr.set(/** @type {!ArrayBufferView} */ (ab), bytes.length);
+      this.sabArr[this.arrLengthIndex] = ab.length;
+    }
   }
 
   /**
@@ -148,8 +166,15 @@ export class SyscallLock {
     // buffers yet.
     const bytes = this.sabDataArr.slice(0, length);
     const ret = JSON.parse(td.decode(bytes), (key, value) => {
-      return (typeof value === 'string' && value.startsWith(BIGINT_MAGIC)) ?
-          BigInt(value.substr(BIGINT_MAGIC.length)) : value;
+      if (typeof value === 'string') {
+        if (value.startsWith(BIGINT_MAGIC)) {
+          return BigInt(value.substr(BIGINT_MAGIC.length));
+        } else if (value.startsWith(ARRAY_BUFFER_MAGIC)) {
+          const arrLength = this.sabArr[this.arrLengthIndex];
+          return Array.from(this.sabDataArr.slice(length, length + arrLength));
+        }
+      }
+      return value;
     });
     if (!(ret instanceof Object)) {
       throw new Error(`Invalid serialized object`);
