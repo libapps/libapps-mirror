@@ -320,6 +320,7 @@ export class ChromeTcpSocket extends Socket {
       const info = await new Promise(async (resolve) => {
         chrome.sockets.tcp.create({
           name: await getChromeSocketsName(),
+          bufferSize: 64 * 1024,
         }, resolve);
       });
 
