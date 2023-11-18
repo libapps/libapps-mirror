@@ -24,6 +24,7 @@ import {SshAgentRelayStream} from './nassh_stream_sshagent_relay.js';
 import {WASI} from '../../wasi-js-bindings/index.js';
 
 import * as WasshProcess from '../wassh/js/process.js';
+import {cleanupChromeSockets} from '../wassh/js/sockets.js';
 import * as WasshSyscallHandler from '../wassh/js/syscall_handler.js';
 import {FileHandle} from '../wassh/js/vfs.js';
 
@@ -233,6 +234,8 @@ export class Plugin {
     // TODO(vapier): Should close all streams upon exit.
     this.plugin_.terminate();
     this.plugin_ = null;
+    // TODO(vapier): This should be automatic in the plugin termination.
+    cleanupChromeSockets();
   }
 
   /**

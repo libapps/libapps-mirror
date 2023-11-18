@@ -225,6 +225,81 @@ export class Socket extends VFS.PathHandle {
 }
 
 /**
+ * Construct a name for tracking Chrome sockets.
+ *
+ * See cleanupChromeSockets below for more details.
+ *
+ * @return {!Promise<string>}
+ */
+async function getChromeSocketsName() {
+  const {id} = await new Promise((resolve) => chrome.tabs.getCurrent(resolve));
+  return `tabid:${id}`;
+}
+
+/**
+ * Check to see if a tab still exists.
+ *
+ * @param {number} id The tab id.
+ * @return {!Promise<boolean>} Whether the tab exists.
+ */
+async function checkChromeTab(id) {
+  const tab = await new Promise((resolve) => chrome.tabs.get(id, resolve));
+  if (tab === undefined) {
+    clearLastError();
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Cleanup orphaned Chrome sockets.
+ *
+ * Walk all open Chrome sockets and check which tab they're associated with.  If
+ * the tab no longer exists, close it.  If the socket is associated with the
+ * current tab, it's from a previous run and should be closed too.
+ *
+ * We track the tab via each socket's name field that is set when creating it.
+ * See getChromeSocketsName for the simple format we use.
+ *
+ * @return {!Promise<void>}
+ */
+export async function cleanupChromeSockets() {
+  const {id} = await new Promise((resolve) => chrome.tabs.getCurrent(resolve));
+  const promises = [];
+  const cleanup = (api) => {
+    const closeSocket = (socket) => {
+      return new Promise((resolve) => api.close(socket, resolve));
+    };
+
+    return new Promise((resolve) => {
+      api.getSockets((sockets) => {
+        sockets.forEach((socket) => {
+          const name = socket.name || '';
+          const ele = name.split(':');
+          if (ele[0] !== 'tabid' || ele[1] === `${id}`) {
+            // Close unknown sockets and sockets that belonged to this tab in a
+            // previous run.
+            promises.push(closeSocket(socket.socketId));
+          } else {
+            // Close sockets whose tabs no longer exist.
+            promises.push(
+                checkChromeTab(parseInt(ele[1], 10)).then((exists) => {
+                  if (!exists) {
+                    return closeSocket(socket.socketId);
+                  }
+                }));
+          }
+        });
+        resolve();
+      });
+    });
+  };
+  await cleanup(chrome.sockets.tcp);
+  await cleanup(chrome.sockets.tcpServer);
+  await Promise.all(promises);
+}
+
+/**
  * A TCP/IP based socket backed by the chrome.sockets.tcp API.
  */
 export class ChromeTcpSocket extends Socket {
@@ -242,8 +317,10 @@ export class ChromeTcpSocket extends Socket {
   /** @override */
   async init(socketId = undefined) {
     if (socketId === undefined) {
-      const info = await new Promise((resolve) => {
-        chrome.sockets.tcp.create(resolve);
+      const info = await new Promise(async (resolve) => {
+        chrome.sockets.tcp.create({
+          name: await getChromeSocketsName(),
+        }, resolve);
       });
 
       this.socketId_ = info.socketId;
@@ -485,8 +562,10 @@ export class ChromeTcpListenSocket extends Socket {
 
   /** @override */
   async init() {
-    const info = await new Promise((resolve) => {
-      chrome.sockets.tcpServer.create(resolve);
+    const info = await new Promise(async (resolve) => {
+      chrome.sockets.tcpServer.create({
+        name: await getChromeSocketsName(),
+      }, resolve);
     });
 
     this.socketId_ = info.socketId;

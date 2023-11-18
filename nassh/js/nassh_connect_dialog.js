@@ -2,9 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+/**
+ * @fileoverview The connection dialog.
+ * @suppress {moduleLoad}
+ */
+
 import {lib} from '../../libdot/index.js';
 
 import {hterm} from '../../hterm/index.js';
+
+import {cleanupChromeSockets} from '../wassh/js/sockets.js';
 
 import {
   getSyncStorage, isCrOSSystemApp, loadWebFonts, localize, openOptionsPage,
@@ -84,6 +91,7 @@ function ConnectDialog() {
  * Global window startup.
  */
 ConnectDialog.onWindowStartup = async function() {
+  cleanupChromeSockets();
   await setupForWebApp();
   const dialog = new ConnectDialog();
 

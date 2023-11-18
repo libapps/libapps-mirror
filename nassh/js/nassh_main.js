@@ -2,9 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+/**
+ * @fileoverview The main nassh runtime.
+ * @suppress {moduleLoad}
+ */
+
 import {lib} from '../../libdot/index.js';
 
 import {hterm} from '../../hterm/index.js';
+
+import {cleanupChromeSockets} from '../wassh/js/sockets.js';
 
 import {
   disableTabDiscarding, getSyncStorage, loadWebFonts, localize,
@@ -182,6 +189,7 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
     globalThis.term_ = terminal;
   };
 
+  await cleanupChromeSockets();
   disableTabDiscarding();
   await setupForWebApp();
   execNaSSH();
