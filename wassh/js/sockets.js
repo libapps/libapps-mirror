@@ -1291,43 +1291,51 @@ export class UnixSocket extends Socket {
 /**
  * Maps socketIds to sockets and forwards data received to the sockets.
  */
-class ChromeTcpSocketEventRouter {
+class ChromeSocketsEventRouter {
   constructor() {
     this.socketMap_ = new Map();
-
-    const socketTcpRecv = this.onSocketTcpRecv_.bind(this);
-    chrome.sockets.tcp.onReceive.addListener(socketTcpRecv);
   }
 
   /**
-   * Registers the given ChromeTcpSocket with the router.
+   * Registers the given socket with the router.
    *
    * Sockets must be registered in order to be notified when they receive
    * data.
    *
    * @param {number} socketId
-   * @param {!ChromeTcpSocket} socket
+   * @param {!Object} socket
    */
   register(socketId, socket) {
     this.socketMap_.set(socketId, socket);
   }
 
   /**
-   * Unregisters the ChromeTcpSocket with the given ID from the router.
+   * Unregisters the socket with the given ID from the router.
    *
    * @param {number} socketId
    */
   unregister(socketId) {
     this.socketMap_.delete(socketId);
   }
+}
+
+/**
+ * Maps socketIds to sockets and forwards data received to the sockets.
+ */
+class ChromeTcpSocketEventRouter extends ChromeSocketsEventRouter {
+  constructor() {
+    super();
+
+    chrome.sockets.tcp.onReceive.addListener(this.onSocketRecv_.bind(this));
+  }
 
   /**
    * The onReceive listener for the chrome.sockets API which forwards data to
-   * the associated ChromeTcpSocket.
+   * the associated socket.
    *
    * @param {{socketId: number, data: !ArrayBuffer}} options
    */
-  onSocketTcpRecv_({socketId, data}) {
+  onSocketRecv_({socketId, data}) {
     const handle = this.socketMap_.get(socketId);
     if (handle === undefined) {
       // We don't do anything about this because Chrome broadcasts events to all
@@ -1345,34 +1353,12 @@ class ChromeTcpSocketEventRouter {
 /**
  * Maps socketIds to sockets and forwards data received to the sockets.
  */
-class ChromeTcpListenSocketEventRouter {
+class ChromeTcpListenSocketEventRouter extends ChromeSocketsEventRouter {
   constructor() {
-    this.socketMap_ = new Map();
+    super();
 
-    const listener = this.onSocketTcpAccept_.bind(this);
-    chrome.sockets.tcpServer.onAccept.addListener(listener);
-  }
-
-  /**
-   * Registers the given ChromeTcpListenSocket with the router.
-   *
-   * Sockets must be registered in order to be notified when they receive
-   * data.
-   *
-   * @param {number} socketId
-   * @param {!ChromeTcpListenSocket} socket
-   */
-  register(socketId, socket) {
-    this.socketMap_.set(socketId, socket);
-  }
-
-  /**
-   * Unregisters the ChromeTcpListenSocket with the given ID from the router.
-   *
-   * @param {number} socketId
-   */
-  unregister(socketId) {
-    this.socketMap_.delete(socketId);
+    chrome.sockets.tcpServer.onAccept.addListener(
+        this.onSocketAccept_.bind(this));
   }
 
   /**
@@ -1381,7 +1367,7 @@ class ChromeTcpListenSocketEventRouter {
    *
    * @param {!chrome.sockets.tcpServer.AcceptEventData} options
    */
-  onSocketTcpAccept_({socketId, clientSocketId}) {
+  onSocketAccept_({socketId, clientSocketId}) {
     const handle = this.socketMap_.get(socketId);
     if (handle === undefined) {
       // We don't do anything about this because Chrome broadcasts events to all
