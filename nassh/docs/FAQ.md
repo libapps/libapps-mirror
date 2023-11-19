@@ -560,51 +560,28 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   other saved connections.
 
 
-### How do I set terminal preferences?
+### How do I set terminal preferences? {#options-page}
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Appearance
-  section.  The documentation below is meant for people hacking on the source
-  directly.
+  You should manage your preferences under the Secure Shell Options page like
+  any other extension.  The general Chrome developer page
+  [offers some tips](https://developer.chrome.com/docs/extensions/mv3/options/#view_page).
 
-  In general, you open the JavaScript console and type something like...
+  Additionally, the page has links at the bottom of the Connection dialg, at
+  the bottom of the extensions popup, and when you right click the terminal of
+  an active connection.
 
-     term_.prefs_.set('pref-name', 'pref-value')
-
-  Preferences are saved in your local storage, so they're remembered the
-  next time you launch Secure Shell.
-
-  If you want to check the current value of a preference, type this...
-
-     term_.prefs_.get('pref-name')
-
-  To reset a single preference to its default state, type this...
-
-     term_.prefs_.reset('pref-name')
-
-  To reset all preferences to their default state, type this...
-
-     localStorage.clear()
+  Preferences are saved in synchronized storage, so they're remembered the next
+  time you launch Secure Shell, and across multiple computers.
 
   Most preference changes take effect immediately, in all open instances of
   Secure Shell.  The exception is the 'environment' setting, which won't
   take effect until the next time you reconnect.
 
-  Some common preferences are listed in questions that follow.  For the full
-  list, you'll have to read through the "definePreferences" call in
-  [hterm_preference_manager.js](/hterm/js/hterm_preference_manager.js).
-
 
 ### How do I change the audible bell sound?
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Sounds
-  section.  The documentation below is meant for people hacking on the source
-  directly.
-
-  Open the JavaScript console and type...
-
-     term_.prefs_.set('audible-bell-sound', 'http://example.com/bell.ogg')
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Sounds.
 
   Change the example url to point to the sound file you want to use.
   Unfortunately, local file: urls are not supported at this time.  If you
@@ -614,49 +591,30 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 
 ### How do I disable the audible bell?
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Sounds
-  section.  The documentation below is meant for people hacking on the source
-  directly.
-
-  Open the JavaScript console and type...
-
-     term_.prefs_.set('audible-bell-sound', '')
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Sounds.
 
 
 ### How do I change the color scheme?
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Appearance
-  section.  The documentation below is meant for people hacking on the source
-  directly.
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Appearance.
 
-  You can change the foreground, background or cursor color preferences from
-  the JavaScript console like this...
-
-     term_.prefs_.set('background-color', 'wheat')
-     term_.prefs_.set('foreground-color', '#533300')
-     term_.prefs_.set('cursor-color', 'rgba(100, 100, 10, 0.5)')
-
-  You can use any valid CSS color value for any of these colors.  You need
-  to use a semi-transparent color (the fourth parameter in the rgba value)
-  for the cursor if you want to be able to see the character behind it.
+  You can use any
+  [valid CSS color value](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)
+  for any of these colors.  You need to use a semi-transparent color (the fourth
+  parameter in the `rgba` value) for the cursor if you want to be able to see
+  the character behind it.
 
 
 ### How do I change the font face?
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Appearance
-  section.  The documentation below is meant for people hacking on the source
-  directly.
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Appearance.
 
-  Open the JavaScript console and type...
+  Be sure to only use monospace fonts.
 
-     term_.prefs_.set('font-family', 'Lucida Console')
-
-  Replace 'Lucida Console' with your favorite monospace font.
-
-  Keep in mind that some fonts, especially on Mac OS X systems, have bold
+  Keep in mind that some fonts, especially on macOS systems, have bold
   characters that are larger than the non-bold version.  hterm will print a
   warning to the JS console if it detects that you've selected a font like
   this.  It will also disable "real" bold characters, using only bright
@@ -681,23 +639,17 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 
 ### How do I change the default font size?
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Appearance
-  section.  The documentation below is meant for people hacking on the source
-  directly.
-
-  Open the JavaScript console and type...
-
-     term_.prefs_.set('font-size', 15)
-
-  Replace 15 with your desired font size in pixels.  15 is the default, so
-  you'll have to pick a different number to have any effect at all.
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Appearance.
 
 
 ### How do I use web fonts?
 
-  You can define it in the CSS file loaded via the 'user-css' field, or you can
-  inline the content in 'user-css-text'.
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Appearance.
+
+  You can define it in the CSS file loaded via the Custom CSS settings -- either
+  'user-css' field (URI) or inline the content in 'user-css-text'.
 
   Here is an example using [Google Web Fonts](https://fonts.google.com/).  Add
   this line to your custom CSS, and add `"Roboto Mono"` to your 'font-family'
@@ -717,12 +669,14 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 
 ### Are font ligatures supported?
 
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+
   By default, we disable [ligatures].  Some fonts actively enable them like
   macOS's Menlo (e.g. "ae" is rendered as "æ").  This messes up copying and
   pasting and is, arguably, not terribly legible for a terminal.
 
   If you're using a font that supports ligatures, and you want to use them,
-  you can enable them via the 'user-css-text' field:
+  you can enable them via the Custom CSS 'user-css-text' field:
 
     x-row {
       text-rendering: optimizeLegibility;
@@ -770,24 +724,18 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 
 ### How do I disable anti-aliasing?
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Appearance
-  section.  The documentation below is meant for people hacking on the source
-  directly.
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Appearance -> Text font smoothing.
 
-  Open the JavaScript console and type...
-
-     term_.prefs_.set('font-smoothing', 'none')
-
-  This directly modifies the '-webkit-font-smoothing' CSS property for the
-  terminal.  As such, 'none', 'antialiased', and 'subpixel-antialiased' are
-  all valid values.
-
-  The default setting is 'antialiased'.
+  This directly modifies the
+  ['-webkit-font-smoothing' CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-smooth).
+  As such, 'none', 'antialiased', and 'subpixel-antialiased' are all valid
+  values.
 
 
 ### How do I customize the mouse pointer?
 
+  Manage your preferences under the [Secure Shell Options page](#options-page).
   You can customize these via the 'user-css' or 'user-css-text' fields.
 
   There are two mouse styles you will encounter: text and pointer.
@@ -815,23 +763,8 @@ You'll have to adjust your keyboard/muscle memory accordingly.
 
 ### How do I make the cursor blink?
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Appearance
-  section.  The documentation below is meant for people hacking on the source
-  directly.
-
-  Open the JavaScript console and type...
-
-     term_.prefs_.set('cursor-blink', true)
-
-  Notice that true is NOT in quotes.  This is especially important if you try
-  to turn blinking back off, with...
-
-     term_.prefs_.set('cursor-blink', false)
-
-  or you could just revert to the default value of false with...
-
-     term_.prefs_.reset('cursor-blink')
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Appearance -> Cursor blink.
 
 
 ### Why does hterm ignore the cursor blink escape sequence?
@@ -840,52 +773,40 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   cursor.  This lets you choose between a blink/steady cursor via the
   cursor-blink preference, without having the host change your setting.
 
-  By default, hterm also ignores this escape sequence.  To enable it, set the
-  'enable-dec12' preference to true.
+  By default, hterm also ignores this escape sequence.  To enable it,
+  manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Miscellaneous.
 
-     term_.prefs_.set('enable-dec12', true)
 
-### How do I change the TERM environment variable?
+### How do I change the TERM environment variable? {#options-env-term}
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Misc
-  section.  The documentation below is meant for people hacking on the source
-  directly.
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Miscellaneous -> Environment variables.
 
-  Open the JavaScript console and type...
-
-     term_.prefs_.set('environment', {TERM: 'hterm'})
-
-  Notice that only 'hterm' is quoted, not the entire value.  You can replace
-  'hterm' with whichever value you prefer.
+  Note that this is a JSON object with string keys & values.
 
   The default TERM value is 'xterm-256color'.  If you prefer to simulate a
-  16 color xterm, try setting TERM to 'xterm'.
+  16 color xterm, try setting TERM to 'xterm'.  But you really shouldn't change
+  this.
 
   You will have to reconnect for this setting to take effect.
 
 
 ### How do I enter accented characters?
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Keyboard
-  section.  The documentation below is meant for people hacking on the source
-  directly.
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Keyboard.
 
   That depends on your platform and which accented characters you want to
   enter.
 
   In xterm, you could use Alt+plus-a-letter-or-number to select from the
   upper 128 characters.  The palette of 128 characters was "hardcoded" and
-  not dependent on your keyboard locale.  You can set hterm to do the same
-  thing by opening the JavaScript console and typing...
+  not dependent on your keyboard locale.  This is Alt key modifier set to
+  '8-bit'.
 
-     term_.prefs_.set('alt-sends-what', '8-bit')
-
-  However, if you are on Mac OS X and you prefer that Alt sends a character
-  based on your keyboard locale, try this instead...
-
-     term_.prefs_.set('alt-sends-what', 'browser-key')
+  However, if you are on macOS and you prefer that Alt sends a character based
+  on your keyboard locale, try setting Alt key modifier to 'browser-key'.
 
   Note that composed characters (those that require multiple keystrokes) are
   not currently supported by this mode.
@@ -899,24 +820,18 @@ You'll have to adjust your keyboard/muscle memory accordingly.
   mostly like a traditional Meta key.
 
   If you really, really want Alt to be an alias for the Meta key in every
-  sense, use...
-
-     term_.prefs_.set('alt-is-meta', true)
+  sense, enable Alt key as Meta key.
 
 
 ### How do I make backspace send ^H?
 
-  You should manage your preferences under the Secure Shell Options page.
-  Just right click the app in Chrome, select Options, and see the Keyboard
-  section.  The documentation below is meant for people hacking on the source
-  directly.
+  Manage your preferences under the [Secure Shell Options page](#options-page).
+  It's under Terminal Settings -> Keyboard.
 
   By default, hterm sends a delete (DEL, '\x7f') character for the
   backspace key.  Sounds weird, but it tends to be the right thing for
   most people.  If you'd prefer it send the backspace (BS, '\x08', aka ^H)
-  character, then open the JavaScript console and type...
-
-     term_.prefs_.set('backspace-sends-backspace', true)
+  character, enable Backspace key behavior.
 
 
 ### How do I send Ctrl+W, Ctrl+N or Ctrl+T to the terminal?
@@ -1113,10 +1028,8 @@ The prompt makes it sound like it will delete & reset everything, but it won't.
   You can fix vi with ':set bg=dark'.  Emacs can be started in "reverse
   video" mode with 'emacs -rv'.
 
-  If you just want your old 16 color palette back, open the JavaScript
-  console and type...
-
-     term_.prefs_.set('environment', {TERM: 'xterm'})
+  If you just want your old 16 color palette back, change your
+  [`TERM` environment setting to `xterm`](#options-env-term).
 
   Then restart Secure Shell.
 
