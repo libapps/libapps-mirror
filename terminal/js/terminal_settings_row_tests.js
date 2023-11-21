@@ -9,7 +9,7 @@
 import './terminal_settings_row.js';
 
 
-describe('terminal_settings_row.js', () => {
+describe('terminal_settings_row_tests.js', () => {
   beforeEach(async function() {
     this.expandableRow = document.createElement('terminal-settings-row');
     this.expandableRow.setAttribute('expandable', '');
@@ -21,6 +21,10 @@ describe('terminal_settings_row.js', () => {
     });
 
     await this.expandableRow.updateComplete;
+  });
+
+  afterEach(function() {
+    document.body.removeChild(this.expandableRow);
   });
 
   it('toggle expand state when clicked', async function() {

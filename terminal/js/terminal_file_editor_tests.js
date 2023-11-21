@@ -11,7 +11,7 @@ import {createFs} from './deps_indexeddb-fs.rollup.js';
 
 import './terminal_file_editor.js';
 
-describe('terminal_file_editor.js', () => {
+describe('terminal_file_editor_tests.js', () => {
   beforeEach(async function() {
     // The store name has 20 char limit.
     const fsId = `test-${Date.now() % 1e7}-${Math.floor(Math.random() * 1e7)}`;
@@ -25,6 +25,10 @@ describe('terminal_file_editor.js', () => {
 
     document.body.appendChild(this.el);
     await this.el.updateComplete;
+  });
+
+  afterEach(function() {
+    document.body.removeChild(this.el);
   });
 
   it('default empty', function() {
