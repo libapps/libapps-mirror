@@ -7,6 +7,7 @@
  */
 
 import {lib} from '../../libdot/index.js';
+import {hterm} from '../../hterm/index.js';
 
 import {TerminalSettingsColorpickerElement as Element, TOO_WHITE_BOX_SHADOW,
   FOCUS_BOX_SHADOW} from './terminal_settings_colorpicker.js';
@@ -69,7 +70,7 @@ describe('terminal_settings_colorpicker.js', () => {
 
   beforeEach(function() {
     window.preferenceManager =
-      new lib.PreferenceManager(new lib.Storage.Memory());
+        new hterm.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(preference, orange);
 
     this.el = /** @type {!Element} */ (document.createElement(Element.is));

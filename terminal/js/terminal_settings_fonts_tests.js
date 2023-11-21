@@ -7,6 +7,7 @@
  */
 
 import {lib} from '../../libdot/index.js';
+import {hterm} from '../../hterm/index.js';
 
 import {SUPPORTED_FONT_FAMILIES, DEFAULT_FONT_FAMILY}
     from './terminal_common.js';
@@ -15,7 +16,7 @@ import './terminal_settings_fonts.js';
 describe('terminal_settings_fonts_tests.js', () => {
   beforeEach(async function() {
     window.preferenceManager =
-      new lib.PreferenceManager(new lib.Storage.Memory());
+        new hterm.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(
       'font-family', DEFAULT_FONT_FAMILY);
 

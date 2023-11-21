@@ -7,6 +7,7 @@
  */
 
 import {lib} from '../../libdot/index.js';
+import {hterm} from '../../hterm/index.js';
 
 import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsScrollbackLimit}
@@ -17,7 +18,7 @@ describe('terminal_settings_scrollback_limit.js', () => {
 
   beforeEach(async function() {
     window.preferenceManager =
-      new lib.PreferenceManager(new lib.Storage.Memory());
+        new hterm.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(preference, 10000);
 
     this.el = /** @type {!TerminalSettingsScrollbackLimit} */ (

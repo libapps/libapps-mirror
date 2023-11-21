@@ -7,6 +7,7 @@
  */
 
 import {lib} from '../../libdot/index.js';
+import {hterm} from '../../hterm/index.js';
 
 import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
@@ -16,7 +17,7 @@ describe('terminal_settings_checkbox_tests.js', () => {
 
   beforeEach(function() {
     window.preferenceManager =
-      new lib.PreferenceManager(new lib.Storage.Memory());
+        new hterm.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(preference, 'off');
 
     const converter = {

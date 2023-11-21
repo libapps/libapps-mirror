@@ -20,7 +20,7 @@ import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
 
 export const terminal = {};
 
-/** @type {!lib.PreferenceManager} */
+/** @type {!hterm.PreferenceManager} */
 window.preferenceManager;
 
 /**

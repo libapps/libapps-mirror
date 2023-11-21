@@ -19,8 +19,7 @@ describe('terminal_settings_app.js', function() {
     window.storage = new lib.Storage.Memory();
     await setProfileIds(ProfileType.HTERM, ['default', 'red', 'green']);
     window.PreferenceManager = hterm.PreferenceManager;
-    window.preferenceManager =
-      new hterm.PreferenceManager(window.storage);
+    window.preferenceManager = new hterm.PreferenceManager(window.storage);
     definePrefs(window.preferenceManager);
 
     this.el = /** @type {!TerminalSettingsApp} */ (

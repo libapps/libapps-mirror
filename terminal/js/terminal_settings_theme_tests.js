@@ -7,6 +7,7 @@
  */
 
 import {lib} from '../../libdot/index.js';
+import {hterm} from '../../hterm/index.js';
 
 import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsThemeElement} from './terminal_settings_theme.js';
@@ -16,7 +17,7 @@ import {DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR, DEFAULT_CURSOR_COLOR,
 describe('terminal_settings_theme_tests.js', () => {
   beforeEach(function() {
     window.preferenceManager =
-      new lib.PreferenceManager(new lib.Storage.Memory());
+        new hterm.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference('theme', 'dark');
     window.preferenceManager.definePreference('theme-variations', {});
     window.preferenceManager.definePreference(

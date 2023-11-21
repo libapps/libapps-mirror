@@ -7,6 +7,7 @@
  */
 
 import {lib} from '../../libdot/index.js';
+import {hterm} from '../../hterm/index.js';
 
 import {TerminalSettingsBackgroundImageElement}
     from './terminal_settings_background_image.js';
@@ -18,8 +19,8 @@ describe('terminal_settings_background_image_tests.js', () => {
       'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLz4=';
 
   beforeEach(function() {
-    window.preferenceManager = new lib.PreferenceManager(
-      new lib.Storage.Memory(), '/hterm/profiles/test/');
+    window.preferenceManager = new hterm.PreferenceManager(
+        new lib.Storage.Memory(), 'test');
     window.localStorage.removeItem(key);
 
     this.el = null;

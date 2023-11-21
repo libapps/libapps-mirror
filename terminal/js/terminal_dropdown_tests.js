@@ -7,6 +7,7 @@
  */
 
 import {lib} from '../../libdot/index.js';
+import {hterm} from '../../hterm/index.js';
 
 import {listenForPrefChange} from './terminal_test.js';
 import {TerminalSettingsDropdownElement} from './terminal_dropdown.js';
@@ -22,7 +23,7 @@ describe('terminal_dropdown_tests.js', () => {
 
   beforeEach(async function() {
     window.preferenceManager =
-      new lib.PreferenceManager(new lib.Storage.Memory());
+        new hterm.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(preference, options[0].value);
 
     this.el = /** @type {!TerminalSettingsDropdownElement} */ (
