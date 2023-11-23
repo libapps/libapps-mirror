@@ -43,11 +43,11 @@ beforeEach(function(done) {
   this.terminal = new hterm.Terminal({storage: new lib.Storage.Memory()});
 
   this.terminal.decorate(div);
-  this.terminal.setWidth(this.visibleColumnCount);
-  this.terminal.setHeight(this.visibleRowCount);
   this.terminal.onTerminalReady = () => {
     this.terminal.setCursorPosition(0, 0);
     this.terminal.setCursorVisible(true);
+    this.terminal.setWidth(this.visibleColumnCount);
+    this.terminal.setHeight(this.visibleRowCount);
     done();
   };
 

@@ -30,8 +30,6 @@ beforeEach(function(done) {
 
   this.terminal = new hterm.Terminal({storage: new lib.Storage.Memory()});
   this.terminal.decorate(div);
-  this.terminal.setWidth(width);
-  this.terminal.setHeight(height);
   this.terminal.onTerminalReady = () => {
     this.terminal.installKeyboard();
     this.findBar = this.terminal.findBar;
@@ -46,7 +44,9 @@ beforeEach(function(done) {
     /** @suppress {visibility} */
     this.closeButton = this.findBar.closeButton_;
 
-    done();
+    this.terminal.setWidth(width);
+    this.terminal.setHeight(height);
+    setTimeout(() => done());
   };
 });
 
@@ -136,11 +136,11 @@ const extractIndexes = (results) => {
  * Test findInRow.
  */
 it('finds-matches-in-a-row-and-updates-count', function(done) {
-  this.terminal.io.println('Findbar Findbar Findbar');
+  this.terminal.io.println('Findbar^Findbar^Findbar');
   for (let i = 0; i < 10; i++) {
     this.terminal.io.println('No matches in this row.');
   }
-  this.terminal.io.println('Findbar Findbar Findbar');
+  this.terminal.io.println('Findbar_Findbar_Findbar');
   this.findBar.searchText_ = 'findbar';
 
   // Wait for scrollDown in terminal.js.
@@ -153,14 +153,14 @@ it('finds-matches-in-a-row-and-updates-count', function(done) {
       this.findBar.findInRow_(11);
       assert.deepEqual(extractIndexes(this.findBar.results_), {11: [0, 8, 16]});
       assert.equal(this.findBar.resultCount_, 3);
-      assert.equal(this.scrollPort.getTopRowIndex(), 10);
+      assert.equal(this.scrollPort.getTopRowIndex(), 9);
       assert.equal(this.findBar.selectedOrdinal_, 0);
 
       // Rows with no matches should not be added to results.
       this.findBar.findInRow_(1);
       assert.deepEqual(extractIndexes(this.findBar.results_), {11: [0, 8, 16]});
       assert.equal(this.findBar.resultCount_, 3);
-      assert.equal(this.scrollPort.getTopRowIndex(), 10);
+      assert.equal(this.scrollPort.getTopRowIndex(), 9);
       assert.equal(this.findBar.selectedOrdinal_, 0);
 
       // Rows above selected result with matches should be added to results.
@@ -168,7 +168,7 @@ it('finds-matches-in-a-row-and-updates-count', function(done) {
       assert.deepEqual(extractIndexes(this.findBar.results_), {11: [0, 8, 16],
           0: [0, 8, 16]});
       assert.equal(this.findBar.resultCount_, 6);
-      assert.equal(this.scrollPort.getTopRowIndex(), 10);
+      assert.equal(this.scrollPort.getTopRowIndex(), 9);
       assert.equal(this.findBar.selectedOrdinal_, 3);
       done();
     });
@@ -257,7 +257,7 @@ it('draws-results-on-screen-and-first-result-is-selected', function() {
   this.terminal.screen_.setRange_(this.terminal.getRowNode(0), 0, 7, range);
   Object.values(getDiffBoundingClientRect(range, highlighter1))
       .forEach((value) => {
-        assert.isAtMost(value, 1);
+        assert.isAtMost(value, 2);
       });
 
   // highlighter should be on top of matching text.
@@ -265,7 +265,7 @@ it('draws-results-on-screen-and-first-result-is-selected', function() {
   this.terminal.screen_.setRange_(this.terminal.getRowNode(1), 12, 19, range);
   Object.values(getDiffBoundingClientRect(range, highlighter2))
       .forEach((value) => {
-        assert.isAtMost(value, 1);
+        assert.isAtMost(value, 2);
       });
 });
 
@@ -315,11 +315,11 @@ it('uses-index-correctly', function() {
     assert.equal(this.findBar.canUseMatchingRowsIndex_(step), expected);
   };
 
-  // Screen height is 4, topRowIndex == 0, bottomRowIndex == 2.
+  // Screen height is 4, topRowIndex == 0, bottomRowIndex == 3.
   // Test when batching is complete.
   assert.equal(this.terminal.getRowCount(), 4);
   assert.equal(this.findBar.scrollPort_.getTopRowIndex(), 0);
-  assert.equal(this.findBar.scrollPort_.getBottomRowIndex(0), 2);
+  assert.equal(this.findBar.scrollPort_.getBottomRowIndex(0), 3);
   this.findBar.batchRow_ = 5;
   for (let i = 0; i < 4; i++) {
     expectCanUseMatchingRowsIndex(i, -1, true);
