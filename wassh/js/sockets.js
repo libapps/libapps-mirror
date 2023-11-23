@@ -23,6 +23,8 @@ const IP_TOS = 1;
 const IPPROTO_TCP = 6;
 const TCP_NODELAY = 1;
 const IPV6_TCLASS = 67;
+// Time (seconds) for default keep alive intervals.  This matches Linux.
+const TCP_KEEPALIVE_INTVL = 75;
 
 /**
  * Map Chrome net errors to errno values when possible.
@@ -470,7 +472,8 @@ export class ChromeTcpSocket extends Socket {
         switch (name) {
           case SO_KEEPALIVE: {
             const result = await new Promise((resolve) => {
-              chrome.sockets.tcp.setKeepAlive(this.socketId_, !!value, resolve);
+              chrome.sockets.tcp.setKeepAlive(
+                  this.socketId_, !!value, TCP_KEEPALIVE_INTVL, resolve);
             });
             if (result < 0) {
               console.warn(`setKeepAlive(${value}) failed with ${result})`);
@@ -909,8 +912,7 @@ export class RelaySocket extends Socket {
     };
     // Keep alive is disabled by default, so don't specify it if it's disabled.
     if (this.tcpKeepAlive_) {
-      // Default to 75 seconds to match default Linux TCP_KEEPINTVL.
-      options.keepAliveDelay = 75000;
+      options.keepAliveDelay = TCP_KEEPALIVE_INTVL * 1000;
     }
 
     this.setTcpSocket_(new TCPSocket(address, port, options));
