@@ -35,7 +35,7 @@ EXTERNS_DIR = libdot.DIR / "externs"
 
 # The version of externs that we pull in from closure.  We normally pin to the
 # closure version for stability, but this can be updated independently.
-EXTERNS_VERSION = "4a040b4d60de4cbafe870a9dafb5eb6bbaf06c75"
+EXTERNS_VERSION = "f1151cc0995b455f664e64de6798dfc46eb8f306"
 
 # The version of Chrome externs that we pull from Chromium directly.
 CHROME_EXTERNS_VERSION = "8f892bcb37b3fe5fe7dff5c0150bc3875ea59ac2"
