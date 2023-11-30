@@ -44,21 +44,20 @@ hterm.PreferenceManager.prefix_ = '/hterm/profiles/';
  * List all the defined profiles.
  *
  * @param {!lib.Storage} storage Where to look for profiles.
- * @param {function(!Array<string>)} callback Called with the list of profiles.
+ * @return {!Promise<!Array<string>>} The list of profiles.
  */
-hterm.PreferenceManager.listProfiles = function(storage, callback) {
-  storage.getItems(null).then((items) => {
-    const profiles = {};
-    for (const key of Object.keys(items)) {
-      if (key.startsWith(hterm.PreferenceManager.prefix_)) {
-        // Turn "/hterm/profiles/foo/bar/cow" to "foo/bar/cow".
-        const subKey = key.slice(hterm.PreferenceManager.prefix_.length);
-        // Turn "foo/bar/cow" into "foo".
-        profiles[subKey.split('/', 1)[0]] = true;
-      }
+hterm.PreferenceManager.listProfiles = async function(storage) {
+  const items = await storage.getItems(null);
+  const profiles = {};
+  for (const key of Object.keys(items)) {
+    if (key.startsWith(hterm.PreferenceManager.prefix_)) {
+      // Turn "/hterm/profiles/foo/bar/cow" to "foo/bar/cow".
+      const subKey = key.slice(hterm.PreferenceManager.prefix_.length);
+      // Turn "foo/bar/cow" into "foo".
+      profiles[subKey.split('/', 1)[0]] = true;
     }
-    callback(Object.keys(profiles));
-  });
+  }
+  return Object.keys(profiles);
 };
 
 /** @enum {string} */

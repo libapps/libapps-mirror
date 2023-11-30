@@ -45,7 +45,7 @@ export function exportPreferences(onComplete) {
 
     // Save all the profiles.
     rv.hterm = {};
-    hterm.PreferenceManager.listProfiles(nasshPrefs.storage, (profiles) => {
+    hterm.PreferenceManager.listProfiles(storage).then((profiles) => {
       profiles.forEach((profile) => {
         rv.hterm[profile] = null;
         const prefs = new hterm.PreferenceManager(storage, profile);
