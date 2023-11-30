@@ -45,9 +45,10 @@ export async function exportPreferences() {
   // Save all the profiles.
   rv.hterm = {};
   const profiles = await hterm.PreferenceManager.listProfiles(storage);
+  const prefs = new hterm.PreferenceManager(storage);
+  await prefs.readStorage();
   for (const profile of profiles) {
-    const prefs = new hterm.PreferenceManager(storage, profile);
-    await prefs.readStorage();
+    await prefs.setProfile(profile);
     rv.hterm[profile] = prefs.exportAsJson();
   }
 
