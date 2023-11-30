@@ -1,3 +1,16 @@
+# 0.62, 2023-12-06, Windows KeepAlive fixes.
+
+* nassh: api: Rework runtime as a class.
+* wassh: sockets: Always set TCP keep alive interval with Chrome sockets.
+* wassh: sockets: Increase default recv buffer.
+* wassh: sockets: Unify Chrome sockets event router logic.
+* wasi-js-bindings: Optimize single TypedArrays transfers.
+* nasftp: Remember color across sessions.
+* nasftp: Remember history across sessions.
+* nasftp: Remember prompt across sessions.
+* wassh: sockets: Manually cleanup orphaned Chrome sockets.
+* faq: Drop all mention of term_ options.
+
 # 0.61, 2023-11-22, Fix WASM IPv4 regression.
 
 * nasftp: Split execution startup from construction.
