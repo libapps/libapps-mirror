@@ -397,19 +397,18 @@ COMMANDS.set('prefsExport',
  * @param {!MessageSender} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
-function(request, sender, sendResponse) {
+async function(request, sender, sendResponse) {
   if (!sender.internal && !selfExtIds.has(sender.id)) {
     sendResponse(
         {error: true, message: 'prefsExport: External access not allowed'});
     return;
   }
 
-  exportPreferences((prefs) => {
-    if (request.asJson) {
-      prefs = JSON.stringify(prefs);
-    }
-    sendResponse({error: false, message: 'prefsExport', prefs: prefs});
-  });
+  let prefs = await exportPreferences();
+  if (request.asJson) {
+    prefs = JSON.stringify(prefs);
+  }
+  sendResponse({error: false, message: 'prefsExport', prefs: prefs});
 });
 
 COMMANDS.set('openProtoReg',

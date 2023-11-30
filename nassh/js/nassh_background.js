@@ -18,46 +18,31 @@ import {PreferenceManager} from './nassh_preference_manager.js';
  * This is method must be given a completion callback because the hterm
  * profiles need to be loaded asynchronously.
  *
- * @param {function(!Object)} onComplete Callback to be invoked when export is
- *     complete.
- *   The callback will receive a plain JS object representing the state of
- *   nassh preferences.  The object can be passed back to importPreferences.
+ * @return {!Promise<!Object>} Plain JS object representing the state of nassh
+ *     preferences.  The object can be passed back to importPreferences.
  */
-export function exportPreferences(onComplete) {
-  let pendingReads = 0;
-  const rv = {};
-
-  const onReadStorage = function(profile, prefs) {
-    rv.hterm[profile] = prefs.exportAsJson();
-    if (--pendingReads < 1) {
-      onComplete(rv);
-    }
+export async function exportPreferences() {
+  const rv = {
+    magic: 'nassh-prefs',
+    version: 1,
   };
-
-  rv.magic = 'nassh-prefs';
-  rv.version = 1;
 
   const storage = getSyncStorage();
   const nasshPrefs = new PreferenceManager(storage);
-  nasshPrefs.readStorage().then(function() {
-    // Export all the connection settings.
-    rv.nassh = nasshPrefs.exportAsJson();
+  await nasshPrefs.readStorage();
+  // Export all the connection settings.
+  rv.nassh = nasshPrefs.exportAsJson();
 
-    // Save all the profiles.
-    rv.hterm = {};
-    hterm.PreferenceManager.listProfiles(storage).then((profiles) => {
-      profiles.forEach((profile) => {
-        rv.hterm[profile] = null;
-        const prefs = new hterm.PreferenceManager(storage, profile);
-        prefs.readStorage().then(onReadStorage.bind(null, profile, prefs));
-        pendingReads++;
-      });
+  // Save all the profiles.
+  rv.hterm = {};
+  const profiles = await hterm.PreferenceManager.listProfiles(storage);
+  for (const profile of profiles) {
+    const prefs = new hterm.PreferenceManager(storage, profile);
+    await prefs.readStorage();
+    rv.hterm[profile] = prefs.exportAsJson();
+  }
 
-      if (profiles.length == 0) {
-        onComplete(rv);
-      }
-    });
-  });
+  return rv;
 }
 
 /**
