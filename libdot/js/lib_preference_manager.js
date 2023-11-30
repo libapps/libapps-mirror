@@ -722,11 +722,8 @@ lib.PreferenceManager = class {
     for (const name in json) {
       if (name in this.childLists_) {
         const childList = json[name];
-        const ids = [];
         for (let i = 0; i < childList.length; i++) {
           const id = childList[i].id;
-          ids.push(id);
-
           let childPrefManager = this.childLists_[name][id];
           if (!childPrefManager) {
             childPrefManager = this.createChild(name, null, id);
@@ -735,7 +732,10 @@ lib.PreferenceManager = class {
           await childPrefManager.importFromJson(childList[i].json);
         }
         // Update the list of children now that we've finished creating them.
-        await this.set(name, ids);
+        // The .set() API doesn't work because it performs a diff on the record,
+        // and the in-memory value is already up-to-date, so it skips saving to
+        // the underlying storage.
+        await this.storage.setItem(this.prefix + name, this.get(name));
       } else {
         await this.set(name, json[name]);
       }
