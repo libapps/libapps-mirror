@@ -28,10 +28,10 @@ hterm.PreferenceManager = class extends lib.PreferenceManager {
    * Changes profile and notifies all listeners with updated values.
    *
    * @param {string} profileId New profile to use.
-   * @param {function()=} callback Optional function to invoke when completed.
+   * @return {!Promise<void>} When the profile has been setup.
    */
-  setProfile(profileId, callback) {
-    this.setPrefix(hterm.PreferenceManager.prefix_ + profileId).then(callback);
+  setProfile(profileId) {
+    return this.setPrefix(hterm.PreferenceManager.prefix_ + profileId);
   }
 };
 

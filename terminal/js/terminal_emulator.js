@@ -897,7 +897,7 @@ export class XtermTerminal {
 
   /** @override */
   setProfile(profileId, callback = undefined) {
-    this.prefs_.setProfile(profileId, callback);
+    this.prefs_.setProfile(profileId).then(callback);
   }
 
   /** @override */
