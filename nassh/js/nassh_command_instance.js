@@ -57,6 +57,7 @@ import {Cli as nasftpCli} from './nasftp_cli.js';
  *   syncStorage: (!lib.Storage),
  *   terminalLocation: (!Location|undefined),
  *   terminalWindow: (!Object|undefined),
+ *   connectPage: (string|undefined),
  * }}
  */
 export let CommandInstanceArgv;
@@ -135,6 +136,9 @@ export function CommandInstance(argv) {
 
   // Terminal Window reference (can accept another hterm tab's window).
   this.terminalWindow = argv.terminalWindow || globalThis;
+
+  // URL path of connect page to show after exit dialog.
+  this.connectPage = argv.connectPage || '/html/nassh_connect_dialog.html';
 
   /**
    * @type {(?NaclPlugin|?WasmPlugin)} The current plugin (WASM/NaCl/etc...).
@@ -390,7 +394,7 @@ CommandInstance.prototype.promptForDestination_ = function() {
   // Clear retry count whenever we show the dialog.
   globalThis.sessionStorage.removeItem('googleRelay.redirectCount');
 
-  const url = lib.f.getURL('/html/nassh_connect_dialog.html');
+  const url = lib.f.getURL(this.connectPage);
   this.terminalLocation.replace(url);
 };
 
@@ -546,8 +550,7 @@ CommandInstance.prototype.mountProfile = function(profileID) {
           switch (ch) {
             case 'c':
             case '\x12': // ctrl-r
-              this.terminalLocation.replace(
-                  lib.f.getURL('/html/nassh_connect_dialog.html'));
+              this.terminalLocation.replace(lib.f.getURL(this.connectPage));
               break;
 
             case 'e':
@@ -1589,8 +1592,7 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
     switch (ch) {
       case 'c':
       case '\x12': // ctrl-r
-        this.terminalLocation.replace(
-            lib.f.getURL('/html/nassh_connect_dialog.html'));
+        this.terminalLocation.replace(lib.f.getURL(this.connectPage));
         break;
 
       case 'e':

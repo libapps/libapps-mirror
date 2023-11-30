@@ -378,6 +378,7 @@ async function runNassh(term, storage, ssh, tmuxControllerDriver) {
         chrome.tabs.remove((await getTerminalInfoTracker()).tabId);
       }
     },
+    connectPage: '/html/terminal.html#home',
   });
 
   if (tmuxControllerDriver) {
