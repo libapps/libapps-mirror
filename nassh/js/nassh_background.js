@@ -8,6 +8,7 @@
 
 import {hterm} from '../../hterm/index.js';
 
+import {PreferenceManager as NasftpPreferenceManager} from './nasftp_cli.js';
 import {getSyncStorage} from './nassh.js';
 import {PreferenceManager} from './nassh_preference_manager.js';
 
@@ -32,6 +33,14 @@ export async function exportPreferences() {
   await nasshPrefs.readStorage();
   // Export all the connection settings.
   rv.nassh = nasshPrefs.exportAsJson();
+
+  // Export nasftp if it has any content.
+  const nasftpPrefs = new NasftpPreferenceManager(storage);
+  await nasftpPrefs.readStorage();
+  rv.nasftp = nasftpPrefs.exportAsJson();
+  if (Object.keys(rv.nasftp).length === 0) {
+    delete rv.nasftp;
+  }
 
   // Save all the profiles.
   rv.hterm = {};
@@ -67,6 +76,12 @@ export async function importPreferences(prefsObject) {
   const nasshPrefs = new PreferenceManager(storage);
   // First import the nassh settings.
   await nasshPrefs.importFromJson(prefsObject.nassh);
+
+  // Import nasftp if it has any content.
+  if (prefsObject.nasftp) {
+    const nasftpPrefs = new NasftpPreferenceManager(storage);
+    await nasftpPrefs.importFromJson(prefsObject.nasftp);
+  }
 
   // Then import each hterm profile.
   for (const terminalProfile in prefsObject.hterm) {
