@@ -369,7 +369,7 @@ COMMANDS.set('prefsImport',
  * @param {!MessageSender} sender chrome.runtime.MessageSender
  * @param {function(!Object=)} sendResponse called to send response.
  */
-function(request, sender, sendResponse) {
+async function(request, sender, sendResponse) {
   if (!sender.internal && !selfExtIds.has(sender.id)) {
     sendResponse(
         {error: true, message: 'prefsImport: External access not allowed'});
@@ -384,9 +384,8 @@ function(request, sender, sendResponse) {
     lib.assert(typeof request.prefs == 'object');
     prefs = request.prefs;
   }
-  importPreferences(prefs).then(() => {
-    sendResponse({error: false, message: 'prefsImport'});
-  });
+  await importPreferences(prefs);
+  sendResponse({error: false, message: 'prefsImport'});
 });
 
 COMMANDS.set('prefsExport',
