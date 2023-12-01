@@ -5,6 +5,32 @@
 import {lib} from '../../libdot/index.js';
 
 /**
+ * See whether a particular storage has "high" quota limits.
+ *
+ * Some storage backends (notably Chrome sync storage) have quotas limits that
+ * we can semi-easily run into because of how our underlying profiles store
+ * their state, and how many profiles/keys we expect them to have.  Since each
+ * saved connection can take up ~10 keys, and Chrome sync storage limits each
+ * extension to 512 keys, some users have reported being unable to add more.
+ * Similarly, Chrome sync storage limits how many keys we can write to per
+ * minute (120) which makes backup restores painful.
+ *
+ * So we define "high" as how likely we are to run into the limits.
+ *
+ * @param {!lib.Storage} storage The storage to inspect.
+ * @return {boolean} Whether the storage has "high" quotas.
+ */
+export function storageQuotasAreHigh(storage) {
+  // Chrome sync storage quotas are a bit too low for us.
+  if (storage instanceof lib.Storage.Chrome) {
+    return storage.storage_?.MAX_ITEMS === undefined;
+  }
+
+  // All other storage methods are known to be fine.
+  return true;
+}
+
+/**
  * PreferenceManager subclass managing global NaSSH preferences.
  *
  * These are synced between devices.
@@ -63,7 +89,10 @@ export class ProfilePreferenceManager extends lib.PreferenceManager {
    * @param {string} id
    */
   constructor(parent, id) {
-    super(parent.storage, `/nassh/profiles/${id}`);
+    super(parent.storage, `/nassh/profiles/${id}`, {
+      // Condense only if underlying storage has quota limits.
+      finegrain: storageQuotasAreHigh(parent.storage),
+    });
 
     this.id = id;
 

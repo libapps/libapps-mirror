@@ -14,6 +14,7 @@ import {hterm} from '../../hterm/index.js';
 
 import {localize, sgrSequence} from './nassh.js';
 import {CommandInstance, splitCommandLine} from './nassh_command_instance.js';
+import {storageQuotasAreHigh} from './nassh_preference_manager.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
 import {SftpFsp} from './nassh_sftp_fsp.js';
 import {
@@ -132,7 +133,10 @@ export class PreferenceManager extends lib.PreferenceManager {
    * @param {!lib.Storage} storage
    */
   constructor(storage) {
-    super(storage, '/nasftp/');
+    super(storage, '/nasftp/', {
+      // Condense only if underlying storage has quota limits.
+      finegrain: storageQuotasAreHigh(storage),
+    });
 
     this.definePreferences([
       /**
