@@ -709,6 +709,8 @@ PreferencesEditor.prototype.createInput = function(key) {
 
     case 'multiline-string':
       input = document.createElement('textarea');
+      input.setAttribute('autocomplete', 'off');
+      input.setAttribute('spellcheck', 'false');
       // Save simple strings immediately.
       oninput = onchangeCursorReset;
       onchange = null;
@@ -728,6 +730,8 @@ PreferencesEditor.prototype.createInput = function(key) {
     default:
       // We'll use JSON to go between object/user text.
       input = document.createElement('textarea');
+      input.setAttribute('autocomplete', 'off');
+      input.setAttribute('spellcheck', 'false');
       input.data = 'JSON';
       onchange = onchangeCursorReset;
       break;
