@@ -307,28 +307,6 @@ CommandInstance.prototype.run = async function() {
  * @return {boolean}
  */
 CommandInstance.prototype.isDevVersion = function() {
-  // For Terminal, opt in R108 in dev/canary channel.  We don't have access to
-  // the channels, so time-delay it to prevent slipping into stable.  We go by
-  // the branch date in https://chromiumdash.appspot.com/schedule.
-  const version = parseInt(this.manifest_.version, 10);
-  if (version >= 108) {
-    const now = new Date();
-    switch (version) {
-      case 108:
-        return now < new Date(2022, 10, 13);
-      case 109:
-        return now < new Date(2022, 11, 10);
-      case 110:
-        return now < new Date(2022, 12, 15);
-      case 111:
-        return now < new Date(2023, 1, 26);
-      case 112:
-        return now < new Date(2023, 2, 23);
-    }
-    // Hopefully we'll have a better solution by R113.
-    return false;
-  }
-
   // For the normal extension, check the manifest build type.
   // We set version_name to "ToT" in git itself, to the build date in the dev
   // version, and clear it in the stable version.
@@ -1137,13 +1115,11 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
   } else if (this.sshClientVersion_ === 'pnacl') {
-    if (lib.f.randomInt(0, 100) < 5 || this.isDevVersion()) {
-      this.io.println(sgrText(
-          'Opting in to WASM for this session.  Please report issues.\n\r' +
-          'Use --ssh-client-version=pnacl to temporarily opt-out.\n\r',
-          {bold: true}));
-      this.sshClientVersion_ = 'wasm';
-    }
+    this.io.println(sgrText(
+        'Opting in to WASM for this session.  Please report issues.\n\r' +
+        'Use --ssh-client-version=pnacl to temporarily opt-out.\n\r',
+        {bold: true}));
+    this.sshClientVersion_ = 'wasm';
   }
   if (!this.sshClientVersion_.match(/^[a-zA-Z0-9.-]+$/)) {
     this.io.println(localize('UNKNOWN_SSH_CLIENT_VERSION',
