@@ -15,11 +15,11 @@ import libdot
 # The sha256sum hash of the plugin archive that we maintain.
 # Allow a long line for easy automated updating.
 # pylint: disable=line-too-long
-PLUGIN_HASH = "31a95357f00df2419ab8b996bb200d7cca0bdb62cbd7433430b428a8b3f942e1"
+PLUGIN_HASH = "edf795fdd3f40a4c10e4dc8cfbbc9f11269f792f23eac991214351d7bf17bb7a"
 # pylint: enable=line-too-long
 
 # Bucket maintained by us.
-PLUGIN_VERSION = "0.58"
+PLUGIN_VERSION = "0.62"
 PLUGIN_GS_FRAGMENT = "chromeos-localmirror/secureshell/releases"
 PLUGIN_BASE_URI = f"https://storage.googleapis.com/{PLUGIN_GS_FRAGMENT}"
 
