@@ -6,10 +6,10 @@
 # Only features added since then should be documented in this file.
 # When a new version has gone stable, update the version,
 # and delete all the old release notes below.
-last_version: "0.50"
+last_version: "0.62"
 
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 notes:
-  # release: 0.51 (stable Oct 2022)
-  - NaCl to WASM migration enabled for a small number of runs.
+  # release: 0.63
+  - WASM enabled for a small number of runs.
