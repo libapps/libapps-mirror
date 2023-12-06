@@ -1,0 +1,11 @@
+# Copyright 2023 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# Configure automated Google security scanning.
+third_party {
+  security {
+    # Security > SSH > Chrome Secure Shell
+    tag: "vuln_reporting:buganizer_component:146364"
+  }
+}
