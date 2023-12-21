@@ -232,15 +232,16 @@ def mkzip(
 
     if stable:
         # Point the icons to the stable version.
-        path = tmpdir / "html" / "nassh.html"
-        if path.exists():
-            html = re.sub(
-                r"images/dev/",
-                "images/stable/",
-                path.read_text(encoding="utf-8"),
-                flags=re.M,
-            )
-            path.write_text(html, encoding="utf-8")
+        for file in ("nassh.html", "nassh_connect_dialog.html"):
+            path = tmpdir / "html" / file
+            if path.exists():
+                html = re.sub(
+                    r"images/dev/",
+                    "images/stable/",
+                    path.read_text(encoding="utf-8"),
+                    flags=re.M,
+                )
+                path.write_text(html, encoding="utf-8")
 
     del data["key"]
     del data["platforms"]
