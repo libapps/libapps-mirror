@@ -1041,7 +1041,7 @@ export class RelaySocket extends Socket {
       options.keepAliveDelay = TCP_KEEPALIVE_INTVL * 1000;
     }
 
-    this.setTcpSocket_(new TCPSocket(address, port, options));
+    await this.setTcpSocket_(new TCPSocket(address, port, options));
     this.pollData_();
 
     return WASI.errno.ESUCCESS;
