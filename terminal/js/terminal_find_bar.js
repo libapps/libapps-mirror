@@ -49,6 +49,7 @@ export class TerminalFindBar extends LitElement {
           border-radius: 2px;
           box-shadow: 0 2px 2px 1px rgba(var(--google-grey-600-rgb), .1);
           background: white;
+          color: black;
           font-family: Roboto;
           padding: 5px 15px;
           width: 320px;
@@ -57,6 +58,7 @@ export class TerminalFindBar extends LitElement {
         input {
           background-color: inherit;
           border: none;
+          color: inherit;
           flex-grow: 1;
           font-family: inherit;
           margin: 8px 0;
