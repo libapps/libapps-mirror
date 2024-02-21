@@ -13,7 +13,7 @@ import {hterm} from '../../hterm/index.js';
 
 import {LitElement, css, html} from './lit.js';
 import {FontManager, ORIGINAL_URL, backgroundImageLocalStorageKey, definePrefs,
-  delayedScheduler, fontManager, getOSInfo, sleep} from './terminal_common.js';
+  delayedScheduler, fontManager, sleep} from './terminal_common.js';
 import {TerminalContextMenu} from './terminal_context_menu.js';
 import {TerminalFindBar} from './terminal_find_bar.js';
 import {ICON_COPY} from './terminal_icons.js';
@@ -1654,13 +1654,11 @@ class HtermTerminal extends hterm.Terminal {
     this.addBindings_();
 
     const fontManager = new FontManager(this.getDocument());
-    fontManager.loadPowerlineCSS().then(() => {
-      const prefs = this.getPrefs();
-      fontManager.loadFont(/** @type {string} */(prefs.get('font-family')));
-      prefs.addObserver(
-          'font-family',
-          (v) => fontManager.loadFont(/** @type {string} */(v)));
-    });
+    const prefs = this.getPrefs();
+    fontManager.loadFont(/** @type {string} */(prefs.get('font-family')));
+    prefs.addObserver(
+        'font-family',
+        (v) => fontManager.loadFont(/** @type {string} */(v)));
 
     const backgroundImageWatcher = new BackgroundImageWatcher(this.getPrefs(),
         (image) => this.setBackgroundImage(image));
@@ -1772,14 +1770,12 @@ class HtermTerminal extends hterm.Terminal {
 export async function createEmulator({storage, profileId}) {
   let emulator_type = 'hterm';
 
-  if (getOSInfo().alternative_emulator) {
-    // TODO: remove the url param logic. This is temporary to make manual
-    // testing a bit easier.
-    if (ORIGINAL_URL.searchParams.get('emulator') !== 'hterm') {
-      emulator_type = 'xterm.js';
-    }
-    console.log('Terminal emulator type: ', emulator_type);
+  // TODO: remove the url param logic. This is temporary to make manual
+  // testing a bit easier.
+  if (ORIGINAL_URL.searchParams.get('emulator') !== 'hterm') {
+    emulator_type = 'xterm.js';
   }
+  console.log('Terminal emulator type: ', emulator_type);
 
   if (emulator_type === 'hterm') {
     return new HtermTerminal({profileId, storage});

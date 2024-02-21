@@ -17,16 +17,6 @@ const LOCAL_FONTS = [
   'Noto Sans Mono',
   'Cousine',
 ];
-// Minimal set of fonts used without xterm.js.  These fonts have additional
-// Powerline glyphs provided.
-/** @type {!Array<string>} */
-export const SUPPORTED_FONT_FAMILIES_MINIMAL = [
-  'Noto Sans Mono',
-  'Cousine',
-  'Roboto Mono',
-  'Inconsolata',
-  'Source Code Pro',
-];
 // Fonts available as web fonts from fonts.google.com.
 /** @type {!Array<string>} */
 export const SUPPORTED_FONT_FAMILIES = [
@@ -51,8 +41,6 @@ export const SUPPORTED_FONT_FAMILIES = [
 // 'Noto Sans Mono' is the default local font.
 export const DEFAULT_FONT_FAMILY = 'Noto Sans Mono';
 export const SUPPORTED_FONT_SIZES = [10, 11, 12, 13, 14, 15, 16, 18, 20];
-export const SUPPORTED_LINE_HEIGHT_PADDINGS = [-2, -1.5, -1, -0.5, 0, 0.5, 1,
-  1.5, 2, 3, 4, 5];
 export const SUPPORTED_LINE_HEIGHT = [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8,
   1.9, 2];
 
@@ -106,41 +94,15 @@ export const PARAM_NAME_TMUX = 'tmux';
 export const ORIGINAL_URL = new URL(globalThis.location.href);
 
 /**
- * Returns whether we are using xterm.js for emulator.
- *
- * @param {!lib.PreferenceManager} prefs The preference manager.
- * @return {boolean}
- */
-export function isXtermJs(prefs) {
-  return !!getOSInfo().alternative_emulator;
-}
-
-/**
- * Return supported fonts.
- *
- * @param {!lib.PreferenceManager} prefs The preference manager.
- * @return {!Array<string>}
- */
-export function getSupportedFontFamilies(prefs) {
-  if (isXtermJs(prefs)) {
-    return SUPPORTED_FONT_FAMILIES;
-  }
-  return SUPPORTED_FONT_FAMILIES_MINIMAL;
-}
-
-/**
  * Convert a font family to a CSS string.
  *
  * @param {string} fontFamily one of the font in SUPPORTED_FONT_FAMILIES.
  * @return {string}
  */
 export function fontFamilyToCSS(fontFamily) {
-  // TODO(joelhockey): Remove powerline fonts once migrated to xterm.js.
-  const powerline = SUPPORTED_FONT_FAMILIES_MINIMAL.includes(fontFamily) ?
-      `, 'Powerline For ${fontFamily}'` : '';
   const fallback =
       fontFamily === DEFAULT_FONT_FAMILY ? '' : `, '${DEFAULT_FONT_FAMILY}'`;
-  return `'${fontFamily}'${powerline}${fallback}`;
+  return `'${fontFamily}'${fallback}`;
 }
 
 /**
@@ -325,14 +287,6 @@ export class FontManager {
   }
 
   /**
-   * Load the powerline css. This is only necessary for hterm, which uses it own
-   * document object inside an iframe.
-   */
-  async loadPowerlineCSS() {
-    await this.insertStyleSheet_('../css/powerline_fonts.css');
-  }
-
-  /**
    * @param {string} fontFamily Not cssFontFamily.
    * @return {!Promise<void>}
    */
@@ -395,7 +349,7 @@ async function prefetchOSInfo() {
   } else {
     // Set it to something approriate for the testing environment.
     OS_INFO = {
-      alternative_emulator: true,
+      tast: false,
     };
   }
 }

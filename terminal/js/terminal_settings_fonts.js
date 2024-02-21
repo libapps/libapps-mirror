@@ -11,8 +11,8 @@
 import {hterm} from '../../hterm/index.js';
 
 import {LitElement, html, ifDefined} from './lit.js';
-import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS, fontManager,
-  getSupportedFontFamilies} from './terminal_common.js';
+import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS, fontManager}
+    from './terminal_common.js';
 import './terminal_dropdown.js';
 
 export class TerminalSettingsFonts extends LitElement {
@@ -53,8 +53,7 @@ export class TerminalSettingsFonts extends LitElement {
 
   /** @override */
   render() {
-    const fonts = getSupportedFontFamilies(window.preferenceManager);
-    const options = fonts.map(
+    const options = SUPPORTED_FONT_FAMILIES.map(
         (font) => ({
           value: fontFamilyToCSS(font),
           label: font,

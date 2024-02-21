@@ -13,10 +13,10 @@ import {hterm} from '../../hterm/index.js';
 
 import {getIndexeddbFileSystem} from './nassh_fs.js';
 
-import {LitElement, createRef, css, html, ref, when} from './lit.js';
+import {LitElement, createRef, css, html, ref} from './lit.js';
 import {SUPPORTED_FONT_SIZES, SUPPORTED_LINE_HEIGHT,
-  SUPPORTED_LINE_HEIGHT_PADDINGS, backgroundImageLocalStorageKeyForProfileId,
-  isXtermJs} from './terminal_common.js';
+  backgroundImageLocalStorageKeyForProfileId}
+    from './terminal_common.js';
 import './terminal_dropdown.js';
 import './terminal_file_editor.js';
 import {ICON_OPEN_IN_NEW} from './terminal_icons.js';
@@ -210,8 +210,6 @@ export class TerminalSettingsApp extends LitElement {
             }),
         );
 
-    const xtermJs = isXtermJs(window.preferenceManager);
-
     return html`
       <div id="left-panel">
         <h1>${msg('PREFERENCES_HEADER_TERMINAL')}</h1>
@@ -308,18 +306,6 @@ export class TerminalSettingsApp extends LitElement {
                     preference="foreground-color">
                 </terminal-settings-colorpicker>
               </li>
-              ${when(!xtermJs, () => html`
-                <li class="setting-container"
-                    title="${msg('HTERM_PREF_FONT_SMOOTHING')}">
-                  <div class="label">
-                    ${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}
-                  </div>
-                  <terminal-settings-checkbox
-                      ariaLabel="${msg('TERMINAL_NAME_PREF_ANTI_ALIAS')}"
-                      preference="font-smoothing">
-                  </terminal-settings-checkbox>
-                </li>
-              `)}
               <li class="setting-container"
                   title="${msg('TERMINAL_PREF_ANSI_COLORS')}">
                 <div class="label">
@@ -330,37 +316,19 @@ export class TerminalSettingsApp extends LitElement {
                 </terminal-settings-ansi-colors>
               </li>
 
-              ${when(xtermJs, () => html`
-                <li class="setting-container"
-                    title="${msg('TERMINAL_PREF_LINE_HEIGHT')}">
-                  <div class="label">
-                    ${msg('TERMINAL_NAME_PREF_LINE_HEIGHT')}
-                  </div>
-                  <terminal-settings-dropdown
-                      ariaLabel="${msg('TERMINAL_NAME_PREF_LINE_HEIGHT')}"
-                      preference="line-height"
-                      .options="${SUPPORTED_LINE_HEIGHT.map(
-                        (value) => ({value}))}"
-                  >
-                  </terminal-settings-dropdown>
-                </li>
-              `, () => html`
-                <li class="setting-container"
-                    title="${msg('HTERM_PREF_LINE_HEIGHT_PADDING_SIZE')}">
-                  <div class="label">
-                    ${msg('HTERM_NAME_PREF_LINE_HEIGHT_PADDING_SIZE')}
-                  </div>
-                  <!-- TODO(easy): Support text field entry. -->
-                  <terminal-settings-dropdown
-                      ariaLabel="${
-                          msg('HTERM_NAME_PREF_LINE_HEIGHT_PADDING_SIZE')}"
-                      preference="line-height-padding-size"
-                      .options="${SUPPORTED_LINE_HEIGHT_PADDINGS.map(
-                        (value) => ({value}))}"
-                  >
-                  </terminal-settings-dropdown>
-                </li>
-              `)}
+              <li class="setting-container"
+                  title="${msg('TERMINAL_PREF_LINE_HEIGHT')}">
+                <div class="label">
+                  ${msg('TERMINAL_NAME_PREF_LINE_HEIGHT')}
+                </div>
+                <terminal-settings-dropdown
+                    ariaLabel="${msg('TERMINAL_NAME_PREF_LINE_HEIGHT')}"
+                    preference="line-height"
+                    .options="${SUPPORTED_LINE_HEIGHT.map(
+                      (value) => ({value}))}"
+                >
+                </terminal-settings-dropdown>
+              </li>
             </ul>
           </section>
 

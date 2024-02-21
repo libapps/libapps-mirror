@@ -8,9 +8,9 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {DEFAULT_BACKGROUND_COLOR, SUPPORTED_FONT_FAMILIES,
-  delayedScheduler, definePrefs, fontFamilyToCSS, getSupportedFontFamilies,
-  normalizeCSSFontFamily, normalizePrefsInPlace} from './terminal_common.js';
+import {DEFAULT_BACKGROUND_COLOR, delayedScheduler, definePrefs,
+  fontFamilyToCSS, normalizeCSSFontFamily, normalizePrefsInPlace}
+    from './terminal_common.js';
 
 describe('terminal_common_tests.js', () => {
   beforeEach(function() {
@@ -19,15 +19,8 @@ describe('terminal_common_tests.js', () => {
     this.preferenceManager.definePreference('font-family', 'invalid');
   });
 
-  it('getSupportedFontFamilies', function() {
-    assert.equal(
-        getSupportedFontFamilies(this.preferenceManager),
-        SUPPORTED_FONT_FAMILIES);
-  });
-
   it('fontFamilyToCSS', function() {
-    assert.equal(fontFamilyToCSS('Noto Sans Mono'),
-        `'Noto Sans Mono', 'Powerline For Noto Sans Mono'`);
+    assert.equal(fontFamilyToCSS('Noto Sans Mono'), `'Noto Sans Mono'`);
     assert.equal(fontFamilyToCSS('Anonymous Pro'),
         `'Anonymous Pro', 'Noto Sans Mono'`);
   });
