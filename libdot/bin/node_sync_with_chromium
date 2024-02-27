@@ -42,7 +42,7 @@ def update_file(var, value):
             old_value = match.group(1)
             if value != old_value:
                 logging.info("  Old value was %s", old_value)
-                lines[i] = f"{var} = '{value}'"
+                lines[i] = f'{var} = "{value}"'
                 break
             else:
                 logging.info("  Value up-to-date already")
