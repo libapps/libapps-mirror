@@ -23,7 +23,7 @@ filter_known_files = libdot.pylint.filter_known_files
 def find_black() -> str:
     """Figure out the name of the black tool."""
     # Prefer our vpython copy if possible.
-    if shutil.which("vpython"):
+    if shutil.which("vpython3"):
         return libdot.BIN_DIR / "black-vpython"
 
     # If there's no black, give up.

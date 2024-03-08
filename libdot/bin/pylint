@@ -100,7 +100,7 @@ def find_pylint():
     It keeps changing with Python 2->3 migrations.  Fun.
     """
     # Prefer our vpython copy if possible.
-    if shutil.which("vpython"):
+    if shutil.which("vpython3"):
         return libdot.BIN_DIR / "pylint-vpython"
 
     # Prefer pylint3 as that's what we want.
