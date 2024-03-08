@@ -1392,7 +1392,6 @@ export function postProcessOptions(options, hostname, username, isMount) {
         'corp-relay-v4@google.com' : 'corp-relay@google.com';
     const proxyHostFallback = useSupSshRelay ?
         'sup-ssh-relay.corp.google.com' : 'ssh-relay-fallback.corp.google.com';
-    const proxyRemoteHost = useSupSshRelay ? hostname : '';
 
     rv = Object.assign({
       'auth-agent-forward': forwardAgent,
@@ -1400,7 +1399,7 @@ export function postProcessOptions(options, hostname, username, isMount) {
       '--proxy-host-fallback': proxyHostFallback,
       '--proxy-port': '443',
       '--proxy-mode': proxyMode,
-      '--proxy-remote-host': proxyRemoteHost,
+      '--proxy-remote-host': hostname,
       '--use-ssl': true,
       '--report-ack-latency': !isMount,
       '--report-connect-attempts': true,
