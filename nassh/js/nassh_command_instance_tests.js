@@ -433,7 +433,7 @@ describe('default-proxy-host', () => {
     // Default Google settings.
     ['--config=google', 'example.com',
      '443', 'ssh-relay.corp.google.com', 'root',
-     'ssh-relay-fallback.corp.google.com', '', modeOld, false],
+     'ssh-relay-fallback.corp.google.com', 'example.com', modeOld, false],
 
     // Default cloudtop Google settings.
     ['--config=google', 'example.c.googlers.com',
@@ -463,7 +463,7 @@ describe('default-proxy-host', () => {
     // Proxy fallback settings.
     ['--config=google --proxy-host-fallback=fallback.com', 'example.com',
      '443', 'ssh-relay.corp.google.com', 'root',
-     'fallback.com', '', modeOld, false],
+     'fallback.com', 'example.com', modeOld, false],
     ['--config=google --proxy-host-fallback=fallback.com',
      'example.c.googlers.com', '443', 'ssh-relay-router.corp.google.com',
      'root', 'fallback.com', 'example.c.googlers.com', modev4, true],
@@ -479,7 +479,8 @@ describe('default-proxy-host', () => {
     // Mode settings.
     ['--config=google --proxy-mode=foo', 'example.com',
      '443', 'ssh-relay.corp.google.com', 'root',
-     'ssh-relay-fallback.corp.google.com', '', 'foo', false],
+     'ssh-relay-fallback.corp.google.com', 'example.com',
+      'foo', false],
     ['--config=google --proxy-mode=foo', 'example.internal.gcpnode.com',
      '443', 'ssh-relay-router.corp.google.com', 'root',
      'sup-ssh-relay.corp.google.com', 'example.internal.gcpnode.com',
@@ -488,7 +489,7 @@ describe('default-proxy-host', () => {
     // Resume settings.
     ['--config=google --resume-connection', 'example.com',
      '443', 'ssh-relay.corp.google.com', 'root',
-     'ssh-relay-fallback.corp.google.com', '', modeOld, true],
+     'ssh-relay-fallback.corp.google.com', 'example.com', modeOld, true],
     ['--config=google --no-resume-connection', 'example.internal.gcpnode.com',
      '443', 'ssh-relay-router.corp.google.com', 'root',
      'sup-ssh-relay.corp.google.com', 'example.internal.gcpnode.com',
