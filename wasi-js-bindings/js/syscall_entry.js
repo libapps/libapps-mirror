@@ -155,7 +155,7 @@ export class Base {
       if (e instanceof util.CompletedProcessError) {
         return e;
       }
-      this.logError(e);
+      this.logError(`Error: ${func?.name}(${args}): ${e}\n${e.stack}`);
       return WASI.errno.ENOTRECOVERABLE;
     }
   }
