@@ -316,6 +316,28 @@ lib.f.lastError = function(defaultMsg = null) {
 };
 
 /**
+ * Determine whether the URL is valid.
+ *
+ * We define "valid" as in "whether the browser will accept it".  We don't
+ * check the syntax or probe the remote system at all.  This is important when
+ * handling user inputs as passing invalid URLs to Web APIs often trigger
+ * exceptions (e.g. URL() or window.location).
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/URL
+ * @param {string} url The URL to check.
+ * @return {boolean} Whether the URL is valid.
+ */
+lib.f.isValidUrl = function(url) {
+  try {
+    // eslint-disable-next-line no-new
+    new URL(url);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
+/**
  * Just like window.open, but enforce noopener.
  *
  * If we're not careful, the website we open will have access to use via its
@@ -328,6 +350,12 @@ lib.f.lastError = function(defaultMsg = null) {
  * @return {?Window} The newly opened window.
  */
 lib.f.openWindow = function(url, name = undefined, features = undefined) {
+  // Check the syntax early so we don't have to error check every API below,
+  // or create windows that then have to be destroyed.
+  if (url !== undefined && !lib.f.isValidUrl(url)) {
+    return null;
+  }
+
   // If this context doesn't have an open function, fallback to extension APIs.
   // For example, the background extension service worker.
   if (globalThis.open === undefined) {

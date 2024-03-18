@@ -147,6 +147,34 @@ it('lastError', () => {
 });
 
 /**
+ * Check various good URLs.
+ */
+describe('isValidURL -> true', () => {
+  [
+    'http://localhost',
+  ].forEach((url) => {
+    it(`${url}`, () => {
+      assert.isTrue(lib.f.isValidUrl(url));
+    });
+  });
+});
+
+/**
+ * Check various bad URLs.
+ */
+describe('isValidURL -> false', () => {
+  [
+    undefined,
+    null,
+    'http://%',
+  ].forEach((url) => {
+    it(`${url}`, () => {
+      assert.isFalse(lib.f.isValidUrl(url));
+    });
+  });
+});
+
+/**
  * Simple smoke test.  The runtime seems to block any attempts to open windows
  * (probably because the code wasn't triggered by user interaction), so we can't
  * actually test too much behavior here :/.
