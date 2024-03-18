@@ -19,6 +19,7 @@ describe('hterm_keyboard_keymap_tests.js', () => {
     this.originalOpen = globalThis.open;
     globalThis.open = function() { return null; };
     this.terminal = {
+      onOpenNewSession: () => {},
       passCtrlN: false,
       passCtrlT: false,
       passCtrlW: false,

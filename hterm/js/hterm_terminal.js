@@ -4223,6 +4223,15 @@ hterm.Terminal.prototype.onOpenOptionsPage_ = function() {
   this.onOpenOptionsPage();
 };
 
+/**
+ * Clients can override this to change how new sessions are created.
+ */
+hterm.Terminal.prototype.onOpenNewSession = function() {
+  lib.f.openWindow(globalThis.location.href, '',
+                   'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                   `minimizable=yes,width=${globalThis.outerWidth}` +
+                   `,height=${globalThis.outerHeight}`);
+};
 
 /**
  * Client should override this if they want to handle tmux control mode DCS

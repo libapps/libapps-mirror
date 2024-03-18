@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {lib} from '../../libdot/index.js';
-
 import {hterm} from '../index.js';
 
 /**
@@ -845,10 +843,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlN_ = function(e) {
   }
 
   if (e.shiftKey) {
-    lib.f.openWindow(globalThis.location.href, '',
-                     'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                     `minimizable=yes,width=${globalThis.innerWidth}` +
-                     `,height=${globalThis.innerHeight}`);
+    this.keyboard.terminal.onOpenNewSession();
     return hterm.Keyboard.KeyActions.CANCEL;
   }
 
@@ -890,10 +885,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlV_ = function(e) {
  */
 hterm.Keyboard.KeyMap.prototype.onMetaN_ = function(e) {
   if (e.shiftKey) {
-    lib.f.openWindow(globalThis.location.href, '',
-                     'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                     `minimizable=yes,width=${globalThis.outerWidth}` +
-                     `,height=${globalThis.outerHeight}`);
+    this.keyboard.terminal.onOpenNewSession();
     return hterm.Keyboard.KeyActions.CANCEL;
   }
 
