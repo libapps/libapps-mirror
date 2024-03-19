@@ -127,6 +127,8 @@ else, please file a [feature request] with us.
 * `scrollPageDown`: Scroll down one page in the terminal buffer.
 * `scrollToTop`: Scroll to the top of the terminal buffer.
 * `scrollToBottom`: Scroll to the bottom of the terminal buffer.
+* `copyCurrentSelection`: Copy the current selection to the clipboard.
+* `pasteClipboard`: Paste the current clipboard.
 * `selectAll`: Select all lines in the terminal buffer.
 * `clearScreen`: Clear the screen and move the cursor to (0,0).
 * `clearScrollback`: Clear the scrollback buffer.

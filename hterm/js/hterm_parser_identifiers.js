@@ -331,4 +331,26 @@ hterm.Parser.identifiers.actions = {
     terminal.softReset();
     return hterm.Keyboard.KeyActions.CANCEL;
   },
+
+  /**
+   * Copy current terminal selection.
+   *
+   * @param {!hterm.Terminal} terminal
+   * @return {!hterm.Keyboard.KeyActions}
+   */
+  copyCurrentSelection: function(terminal) {
+    terminal.copySelectionToClipboard();
+    return hterm.Keyboard.KeyActions.CANCEL;
+  },
+
+  /**
+   * Perform a paste operation.
+   *
+   * @param {!hterm.Terminal} terminal
+   * @return {!hterm.Keyboard.KeyActions}
+   */
+  pasteClipboard: function(terminal) {
+    terminal.paste();
+    return hterm.Keyboard.KeyActions.CANCEL;
+  },
 };
