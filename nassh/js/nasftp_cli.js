@@ -275,6 +275,10 @@ class FileSystemApiFileWriter extends FileWriter {
     if (this.cli.lcwd === null) {
       await this.cli.dispatchCommand_(['lcd']);
     }
+    if (this.cli.lcwd === null) {
+      // If it's still null, the user aborted selection, so give up here too.
+      throw new DOMException('lcd aborted', 'AbortError');
+    }
 
     const fsDirHandle = this.cli.lcwd;
     const fsFileHandle = await fsDirHandle.getFileHandle(
@@ -2098,12 +2102,16 @@ Cli.commandGet_ = async function(args, opts) {
         window: globalThis,
         cli: this,
       });
-      offset = await writer.init(opts.resume);
-      return this.client.readFile(this.makePath_(src), handleChunk, offset)
-        .then(() => spinner.finish(true))
+      return writer.init(opts.resume).then((offset) => {
+        return this.client.readFile(this.makePath_(src), handleChunk, offset);
+      }).then(() => spinner.finish(true))
         .catch((e) => {
           spinner.finish(false);
-          throw e;
+          if (e instanceof DOMException && e.code === DOMException.ABORT_ERR) {
+            // User canceled things.  This is not an error.
+          } else {
+            throw e;
+          }
         })
         .finally(() => writer.close());
     });
@@ -2222,7 +2230,11 @@ Cli.commandLcd_ = async function(args) {
   try {
     this.lcwd = await globalThis.showDirectoryPicker({mode: 'readwrite'});
   } catch (e) {
-    this.showError_(localize('NASFTP_ERROR_PERMISSION_DENIED', [args.cmd]));
+    if (e instanceof DOMException && e.code === DOMException.ABORT_ERR) {
+      // User canceled picker action.  This is not an error, so ignore it.
+    } else {
+      this.showError_(localize('NASFTP_ERROR_PERMISSION_DENIED', [args.cmd]));
+    }
   }
 };
 Cli.addCommand_(['lchdir', 'lcd'], 0, 0, '', '',
