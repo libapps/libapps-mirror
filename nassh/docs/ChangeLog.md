@@ -1,3 +1,15 @@
+# 0.63, 2024-04-25, Windows KeepAlive fixes.
+
+* wasi-js-bindings: Add more details with unhandled exceptions.
+* relays: Always send host to relay to allow best redirection.
+* wassh: Fix async issue with Direct Sockets.
+* connect: Add icons like nassh.html.
+* prefs: Save & restore nasftp settings.
+* prefs: Convert importPreferences to async.
+* prefs: Convert exportPreferences to promises.
+* wassh: Increase opt-in to 5% of runs on Linux & CrOS.
+* prefs: Disable spellcheck & autocomplete in textfields.
+
 # 0.62, 2023-12-06, Windows KeepAlive fixes.
 
 * nassh: api: Rework runtime as a class.
