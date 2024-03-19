@@ -162,6 +162,16 @@ export class LocalPreferenceManager extends lib.PreferenceManager {
 
     this.definePreferences([
       /**
+       * Download mode method.
+       *
+       * Can be:
+       * - null: Autoselect the right mode.
+       * - a: Use <a> tags.
+       * - fsapi: Use FileSystem APIs.
+       */
+      ['downloadMode', null],
+
+      /**
        * Previous commands run.
        */
       ['history', []],
@@ -327,7 +337,8 @@ class FileSystemApiFileWriter extends FileWriter {
  * @return {!FileWriter} The file writer.
  */
 function getFileWriter(name, attrs, options) {
-  if (globalThis.showDirectoryPicker === undefined) {
+  if (globalThis.showDirectoryPicker === undefined ||
+      options.prefs.get('downloadMode') === 'a') {
     return new AnchorTagFileWriter(
         name, {size: attrs.size, document: options.document});
   } else {
@@ -2101,6 +2112,7 @@ Cli.commandGet_ = async function(args, opts) {
         document: this.terminal.getDocument(),
         window: globalThis,
         cli: this,
+        prefs: this.localPrefs_,
       });
       return writer.init(opts.resume).then((offset) => {
         return this.client.readFile(this.makePath_(src), handleChunk, offset);
@@ -2109,6 +2121,11 @@ Cli.commandGet_ = async function(args, opts) {
           spinner.finish(false);
           if (e instanceof DOMException && e.code === DOMException.ABORT_ERR) {
             // User canceled things.  This is not an error.
+            if (writer instanceof FileSystemApiFileWriter) {
+              this.io.println(localize('NASFTP_TIP_FILE_WRTIER_API_PREF', [
+                `${localize('NASFTP_CMD_PREFERENCES')} downloadMode a`,
+              ]));
+            }
           } else {
             throw e;
           }
@@ -2631,6 +2648,113 @@ Cli.commandMput_ = async function(args, opts) {
 };
 Cli.addCommand_(['mput', 'mreput'], 0, 0, 'af', '',
                 Cli.commandMput_);
+
+/**
+ * The set of known preferences the user may interact with.
+ */
+const knownUserPreferences = new Set([
+  'downloadMode',
+]);
+
+/**
+ * User command to control various preferences.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @param {!Object} opts The set of seen options.
+ * @return {!Promise<void>}
+ */
+Cli.commandPreferences_ = async function(args, opts) {
+  opts.unset = opts.u;
+
+  if (args.length === 0) {
+    if (opts.unset) {
+      // Reset all preferences.
+      knownUserPreferences.forEach((key) => {
+        this.localPrefs_.reset(key);
+      });
+    } else {
+      // Show current preferences.
+      Array.from(knownUserPreferences).sort().forEach((key) => {
+        const value = this.localPrefs_.get(key);
+        this.io.println(localize('NASFTP_CMD_PREFERENCES_LINE', [key, value]));
+      });
+    }
+    return;
+  }
+
+  const key = args.shift();
+  if (!knownUserPreferences.has(key)) {
+    this.showError_(localize('NASFTP_ERROR_UNKNOWN_ARGUMENT', [args.cmd, key]));
+    return;
+  }
+
+  if (opts.unset) {
+    // Unset the preference.
+    if (args.length !== 0) {
+      this.showError_(localize('NASFTP_ERROR_TOO_MANY_ARGS', [args.cmd]));
+      return;
+    }
+
+    this.localPrefs_.reset(key);
+  } else {
+    // Set the preference.
+    if (args.length === 0) {
+      this.showError_(localize('NASFTP_ERROR_NOT_ENOUGH_ARGS', [args.cmd]));
+      return;
+    } else if (args.length !== 1) {
+      this.showError_(localize('NASFTP_ERROR_TOO_MANY_ARGS', [args.cmd]));
+      return;
+    }
+
+    let value = args.shift();
+    if (value === 'null') {
+      value = null;
+    }
+    this.localPrefs_.set(key, value);
+  }
+};
+/**
+ * Complete the command.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?Cli.Completion>} Possible completions.
+ */
+Cli.completePreferences_ = async function(args) {
+  const key = args[1];
+  const value = args[2];
+
+  if (args.length === 2) {
+    // Complete the preference name.
+    const matches = [];
+    knownUserPreferences.forEach((pref) => {
+      if (pref.startsWith(key)) {
+        matches.push(pref);
+      }
+    });
+    return /** @type {!Cli.Completion} */ ({arg: key, matches});
+  } else if (args.length === 3) {
+    // Complete the preference value.
+    let values = [];
+    switch (key) {
+      case 'downloadMode':
+        values = ['null', 'a', 'fsapi'];
+        break;
+    }
+
+    const matches = [];
+    values.forEach((v) => {
+      if (v.startsWith(value)) {
+        matches.push(v);
+      }
+    });
+    return /** @type {!Cli.Completion} */ ({arg: value, matches});
+  }
+  return null;
+};
+Cli.addCommand_(['preferences', 'cfg', 'config'], 0, 2, 'u', '[key] [value]',
+                Cli.commandPreferences_, Cli.completePreferences_);
 
 /**
  * User command to control the prompt.
@@ -3215,6 +3339,7 @@ Cli.commandTestCli_ = function(_args) {
     .then(() => wrap('help', 'xxxxxxx'))
     .then(() => wrap('color'))
     .then(() => wrap('color'))
+    .then(() => wrap('preferences'))
     .then(() => wrap('chdir', '/tmp'))
     .then(() => wrap('rm', '-Rf', base))
     .then(() => wrap('mkdir', base))

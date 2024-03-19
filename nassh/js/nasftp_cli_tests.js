@@ -518,6 +518,39 @@ it('nasftp-move', function(done) {
 });
 
 /**
+ * Check preferences command.
+ */
+it('nasftp-preferences', async function() {
+  const getPref = () => this.cli.localPrefs_.get('downloadMode');
+  assert.isNull(getPref());
+
+  // Show all preferences.
+  await this.cli.dispatchCommand_('preferences');
+
+  // Show one preference.
+  await this.cli.dispatchCommand_('preferences downloadMode');
+
+  // Set a preference.
+  await this.cli.dispatchCommand_('preferences downloadMode a');
+  assert.equal(getPref(), 'a');
+
+  // Unset a preference.
+  await this.cli.dispatchCommand_('preferences -u downloadMode');
+  assert.isNull(getPref());
+
+  // Set a preference.
+  await this.cli.dispatchCommand_('preferences downloadMode a');
+  assert.equal(getPref(), 'a');
+
+  // Unset all preferences.
+  await this.cli.dispatchCommand_('preferences -u');
+  assert.isNull(getPref());
+
+  // Show unknown preference.
+  await this.cli.dispatchCommand_('preferences asdf');
+});
+
+/**
  * Check prompt command.
  */
 it('nasftp-prompt', async function() {
@@ -1085,6 +1118,24 @@ describe('nasftp-complete-put-command', async function() {
     ['put sys/ s s', 'put sys/ s s'],
     // Complete files -- should auto include a trailing space.
     ['put .vim', 'put .vimrc '],
+  ]);
+});
+
+/**
+ * Check preferences subcommand completion.
+ */
+describe('nasftp-complete-preferences-command', async function() {
+  completeCommandTests([
+    // We only have one preference atm, so it always completes.
+    ['preferences ', 'preferences downloadMode '],
+    // Don't complete unknown preferences.
+    ['preferences asdf', 'preferences asdf'],
+    // Complete a known preference.
+    ['preferences down', 'preferences downloadMode '],
+    // Complete known values.
+    ['preferences downloadMode fs', 'preferences downloadMode fsapi '],
+    // Don't complete unknown values.
+    ['preferences downloadMode xxx', 'preferences downloadMode xxx'],
   ]);
 });
 

@@ -1373,6 +1373,28 @@
 		"description": "Help text for the 'mreput' ('multiple resume put') command which resumes file uploads.",
 		"message": "Resume uploading multiple files"
 	},
+	"NASFTP_CMD_PREFERENCES": {
+		"description": "Name of the 'preferences' command which controls various user preferences/settings. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "preferences"
+	},
+	"NASFTP_CMD_PREFERENCES_HELP": {
+		"description": "Help text for the 'preferences' command which controls various user preferences/settings.",
+		"message": "Set or unset a preference"
+	},
+	"NASFTP_CMD_PREFERENCES_LINE": {
+		"description": "Line shown for each user preference (usually multiple ones). Neither value will be translated, but be internal string constants.",
+		"message": "$KEY$: $VALUE$",
+		"placeholders": {
+			"KEY": {
+				"content": "$1",
+				"example": "downloadMode"
+			},
+			"VALUE": {
+				"content": "$2",
+				"example": "fsapi"
+			}
+		}
+	},
 	"NASFTP_CMD_PROMPT": {
 		"description": "Name of the 'prompt' command which sets the user's interactive prompt string. This is the status message shown whenever the program prompts the user to enter a command. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "prompt"
@@ -1749,6 +1771,20 @@
 			}
 		}
 	},
+	"NASFTP_ERROR_UNKNOWN_ARGUMENT": {
+		"description": "Error message shown to the user when they tried to use an unknown/invalid argument. This comes up when an argument must be one of a few known settings rather than an arbitrary value. The quote style may be changed as needed.",
+		"message": "$CMD$: unknown argument '$ARG$'",
+		"placeholders": {
+			"ARG": {
+				"content": "$2",
+				"example": "foo"
+			},
+			"CMD": {
+				"content": "$1",
+				"example": "ls"
+			}
+		}
+	},
 	"NASFTP_ERROR_UNKNOWN_CMD": {
 		"description": "An error message shown to the user when they tried to run an unknown command.",
 		"message": "$CMD$: unknown command",
@@ -1802,6 +1838,16 @@
 			"CWD": {
 				"content": "$1",
 				"example": "/home/vapier"
+			}
+		}
+	},
+	"NASFTP_TIP_FILE_WRTIER_API_PREF": {
+		"description": "A tip shown to the user when newer download methods do not work.",
+		"message": "If downloading is not working, try running: $CMD$",
+		"placeholders": {
+			"CMD": {
+				"content": "$1",
+				"example": "preferences downloadMode a"
 			}
 		}
 	},
