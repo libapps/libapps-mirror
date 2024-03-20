@@ -2245,7 +2245,11 @@ Cli.commandLcd_ = async function(args) {
   }
 
   try {
-    this.lcwd = await globalThis.showDirectoryPicker({mode: 'readwrite'});
+    this.lcwd = await globalThis.showDirectoryPicker({
+      id: 'lcd',
+      mode: 'readwrite',
+      startIn: 'downloads',
+    });
   } catch (e) {
     if (e instanceof DOMException && e.code === DOMException.ABORT_ERR) {
       // User canceled picker action.  This is not an error, so ignore it.
