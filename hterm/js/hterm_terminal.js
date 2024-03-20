@@ -1789,6 +1789,16 @@ hterm.Terminal.prototype.setupScrollPort_ = function() {
   border-width: 2px;
   border-style: solid;
 }
+.cursor-node[shape="block"] {
+}
+.cursor-node[shape="beam"] {
+  background-color: transparent !important;
+  border-left-style: solid;
+}
+.cursor-node[shape="underline"] {
+  background-color: transparent !important;
+  border-bottom-style: solid;
+}
 menu {
   background: #fff;
   border-radius: 4px;
@@ -3267,27 +3277,7 @@ hterm.Terminal.prototype.restyleCursor_ = function() {
     shape = hterm.Terminal.cursorShape.BLOCK;
   }
 
-  const style = this.cursorNode_.style;
-
-  switch (shape) {
-    case hterm.Terminal.cursorShape.BEAM:
-      style.backgroundColor = 'transparent';
-      style.borderBottomStyle = '';
-      style.borderLeftStyle = 'solid';
-      break;
-
-    case hterm.Terminal.cursorShape.UNDERLINE:
-      style.backgroundColor = 'transparent';
-      style.borderBottomStyle = 'solid';
-      style.borderLeftStyle = '';
-      break;
-
-    default:
-      style.backgroundColor = 'var(--hterm-cursor-color)';
-      style.borderBottomStyle = '';
-      style.borderLeftStyle = '';
-      break;
-  }
+  this.cursorNode_.setAttribute('shape', shape.toLowerCase());
 };
 
 /**
