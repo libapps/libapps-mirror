@@ -2150,7 +2150,9 @@ hterm.VT.OSC['12'] = function(parseState) {
 
   const colorX11 = lib.colors.x11ToCSS(args.shift());
   if (colorX11) {
-    this.terminal.setCursorColor(colorX11);
+    // Preserve existing alpha channel.
+    const alpha = lib.colors.crackRGB(this.terminal.getCursorColor())[3];
+    this.terminal.setCursorColor(lib.colors.setAlpha(colorX11, alpha));
   }
 
   /* Note: If we support OSC 13+, we'd chain it here.

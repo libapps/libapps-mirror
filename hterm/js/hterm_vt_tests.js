@@ -1886,11 +1886,19 @@ it('OSC-12', function() {
     const foreColor = this.terminal.getForegroundColor();
     const backColor = this.terminal.getBackgroundColor();
 
+    // Start with known color -- black.
+    this.terminal.setCursorColor('rgb(0, 0, 0)');
+
     this.terminal.interpret('\x1b]12;red\x07');
     assert.equal('rgb(255, 0, 0)', this.terminal.getCursorColor());
 
     this.terminal.interpret('\x1b]12;white\x07');
     assert.equal('rgb(255, 255, 255)', this.terminal.getCursorColor());
+
+    // Check alpha channel is preserved.
+    this.terminal.setCursorColor('rgba(1, 1, 1, 0.5)');
+    this.terminal.interpret('\x1b]12;black\x07');
+    assert.equal('rgba(0, 0, 0, 0.5)', this.terminal.getCursorColor());
 
     // Make sure other colors aren't changed by accident.
     assert.equal(foreColor, this.terminal.getForegroundColor());
@@ -1901,6 +1909,9 @@ it('OSC-12', function() {
  * Verify chaining color change requests.
  */
 it('OSC-10-11-12', function() {
+    // Start with known color -- black.
+    this.terminal.setCursorColor('rgb(0, 0, 0)');
+
     // Set 10-11-12 at once.
     this.terminal.interpret('\x1b]10;red;green;blue\x07');
     assert.equal('rgb(255, 0, 0)', this.terminal.getForegroundColor());
@@ -2098,6 +2109,9 @@ it('OSC-112', function() {
   // Make sure other colors aren't changed by accident.
   const foreColor = this.terminal.getForegroundColor();
   const backColor = this.terminal.getBackgroundColor();
+
+  // Start with known color -- black.
+  this.terminal.setCursorColor('rgb(0, 0, 0)');
 
   this.terminal.interpret('\x1b]12;red\x07');
   assert.equal('rgb(255, 0, 0)', this.terminal.getCursorColor());
