@@ -49,9 +49,11 @@ function ConnectDialog() {
   this.prefs_ = new PreferenceManager(storage);
   this.localPrefs_ = new LocalPreferenceManager();
   this.prefs_.readStorage().then(() => {
-    this.syncProfiles_(this.onPreferencesReady_.bind(this));
-    this.localPrefs_.readStorage().then(() => {
-      this.localPrefs_.syncProfiles(this.prefs_);
+    this.syncProfiles_(() => {
+      this.localPrefs_.readStorage().then(() => {
+        this.localPrefs_.syncProfiles(this.prefs_);
+        this.onPreferencesReady_();
+      });
     });
   });
 
