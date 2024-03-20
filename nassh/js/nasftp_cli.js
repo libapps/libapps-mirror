@@ -291,8 +291,24 @@ class FileSystemApiFileWriter extends FileWriter {
     }
 
     const fsDirHandle = this.cli.lcwd;
-    const fsFileHandle = await fsDirHandle.getFileHandle(
-        this.name, {create: true});
+    let fsFileHandle;
+    try {
+      fsFileHandle = await fsDirHandle.getFileHandle(this.name, {create: true});
+    } catch (e) {
+      if (e instanceof TypeError) {
+        // User tried to download a file with characters the local system does
+        // not allow.  For example, Chrome blocks files with ":" in them.  Force
+        // them to pick the filename explicitly in this case.
+        this.cli.showError_(e.toString());
+        fsFileHandle = await globalThis.showSaveFilePicker({
+          id: 'lcd',
+          startIn: 'downloads',
+          suggestedName: this.name,
+        });
+      } else {
+        throw e;
+      }
+    }
 
     // See if we've already completed.  If we get a writable handle, Chrome will
     // create a tempfile with its contents, and this is wasteful when resuming a
