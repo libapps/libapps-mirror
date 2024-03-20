@@ -60,7 +60,7 @@ describe('transparency_slider_tests.js', () => {
     assert.equal(
         this.el.shadowRoot.getElementById('display').getAttribute('style'),
         'background-image: linear-gradient(to right, transparent, ' +
-          'rgba(12, 34, 56, 1));');
+          'rgb(12, 34, 56));');
 
     // knob has the current transparency.
     assert.equal(

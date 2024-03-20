@@ -572,8 +572,11 @@ lib.colors.arrayToHSLA = function(ary) {
  * @return {string} The normalized CSS color spec with updated alpha channel.
  */
 lib.colors.setAlpha = function(rgb, alpha) {
-  const ary = lib.colors.crackRGB(rgb);
-  ary[3] = alpha.toString();
+  const ary = lib.colors.crackRGB(rgb).slice(0, 3);
+  alpha = alpha.toString();
+  if (alpha !== '1') {
+    ary[3] = alpha;
+  }
   return lib.colors.arrayToRGBA(ary);
 };
 
