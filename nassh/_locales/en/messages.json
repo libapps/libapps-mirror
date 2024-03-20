@@ -1579,6 +1579,14 @@
 		"description": "Help text for the 'symlink' command. 'symlink' ('symbolic link') is a computing term for 'shortcut'. 'path' and 'target' are file system paths the user will be entering as arguments where 'path' will be the symlink pointing at 'target'.",
 		"message": "Create a symlink at path pointing to the target"
 	},
+	"NASFTP_CMD_TOUCH": {
+		"description": "Name of the 'touch' command which changes access and modification times. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
+		"message": "touch"
+	},
+	"NASFTP_CMD_TOUCH_HELP": {
+		"description": "Help text for the 'touch' command which changes access and modification times.",
+		"message": "Update access and modification times of files"
+	},
 	"NASFTP_CMD_TRUNCATE": {
 		"description": "Name of the 'truncate' command which truncates files to 0 bytes. This does not need to be translated, but if it is, it must be as one word (no spaces). If a translation is provided, the original English command name will still be usable, so do not worry about 'breaking' the flow for users as they will be able to choose between the two.",
 		"message": "truncate"

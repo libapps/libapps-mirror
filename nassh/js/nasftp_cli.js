@@ -3220,6 +3220,52 @@ Cli.addCommand_(['stat', 'lstat'], 1, null, '', '<paths...>',
                 Cli.commandStat_, Cli.completeStat_);
 
 /**
+ * User command to touch files.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @param {!Object} opts The set of seen options.
+ * @return {!Promise<void>}
+ */
+Cli.commandTouch_ = function(args, opts) {
+  const flags = (opts.c ? 0 : OpenFlags.CREAT) | OpenFlags.WRITE;
+  const date = Math.trunc(Date.now() / 1e3);
+  const attrs = {
+    flags: FileXferAttrs.ACMODTIME,
+    lastAccessed: date,
+    lastModified: date,
+  };
+
+  // Create a chain of promises by processing each path in serial.
+  return args.reduce((chain, path) => chain.then(() => {
+    // Final promise series sends open+set+close packets.
+    let writeHandle;
+    return this.client.openFile(this.makePath_(path), flags)
+      .then((handle) => {
+        writeHandle = handle;
+        return this.client.setFileHandleStatus(handle, attrs);
+      })
+      .finally(() => {
+        if (writeHandle !== undefined) {
+          return this.client.closeFile(writeHandle);
+        }
+      });
+  }), Promise.resolve());
+};
+/**
+ * Complete the command.
+ *
+ * @this {Cli}
+ * @param {!Array<string>} args The command arguments.
+ * @return {!Promise<?Cli.Completion>} Possible completions.
+ */
+Cli.completeTouch_ = async function(args) {
+  return this.completeResolvedRemotePath_(args);
+};
+Cli.addCommand_(['touch'], 1, null, 'c', '<paths...>',
+                Cli.commandTouch_, Cli.completeTouch_);
+
+/**
  * User command to truncate files.
  *
  * @this {Cli}
@@ -3369,6 +3415,7 @@ Cli.commandTestCli_ = function(_args) {
     .then(() => wrap('df', '-i', '.'))
     .then(() => wrap('df', '-h', '/'))
     .then(() => wrap('pwd'))
+    .then(() => wrap('touch', 'touch'))
     .then(() => wrap('chmod', '750', '.'))
     .then(() => wrap('mkdir', 'subdir', 'subdir2', 'subdir3', 'emptydir'))
     .then(() => wrap('rmdir', 'emptydir'))

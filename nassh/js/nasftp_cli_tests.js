@@ -1224,6 +1224,20 @@ describe('nasftp-complete-stat-command', async function() {
 });
 
 /**
+ * Check touch subcommand completion.
+ */
+describe('nasftp-complete-touch-command', async function() {
+  completeCommandTests([
+    // Complete all args as paths.
+    ['touch s', 'touch sys/'],
+    ['touch s s', 'touch s sys/'],
+    ['touch s s s', 'touch s s sys/'],
+    // Complete files -- should auto include a trailing space.
+    ['touch .vim', 'touch .vimrc '],
+  ]);
+});
+
+/**
  * Check truncate subcommand completion.
  */
 describe('nasftp-complete-truncate-command', async function() {
