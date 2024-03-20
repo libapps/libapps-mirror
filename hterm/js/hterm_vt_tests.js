@@ -3449,7 +3449,22 @@ it('csi-j-3', function() {
 });
 
 /**
- * Verify CSI-N DECSTBM (set scrolling region) works.
+ * Verify CSI-t-16 (report cell size) works.
+ */
+it('csi-t-16', function() {
+  const terminal = this.terminal;
+  let resultString;
+  terminal.io.sendString = (str) => resultString = str;
+
+  terminal.interpret('\x1b[16t');
+  // The exact pixel sizes can change depending on browser runtime.
+  // eslint-disable-next-line no-control-regex
+  const match = resultString.match(/^\x1b\[6;[0-9]+;[0-9]+t/);
+  assert.isNotNull(match);
+});
+
+/**
+ * Verify CSI-r DECSTBM (set scrolling region) works.
  */
 it('scroll-region', function() {
   const terminal = this.terminal;

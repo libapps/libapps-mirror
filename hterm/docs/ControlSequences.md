@@ -539,7 +539,7 @@ argN p.
 |  $r | DECCARA  | Change Attributes in Rectangular Area       | Won't support |
 |   s |          | Save cursor (ANSI.SYS)                      | Supported |
 |  ?s |          | Save DEC Private Mode Values                | Won't support |
-|   t |          | Window manipulation                         | Won't support |
+|   t |          | Window manipulation                         | Partial support |
 |  $t | DECRARA  | Reverse Attributes in Rectangular Area      | Won't support |
 |  >t |          | Set one or more features of the title modes | Won't support |
 |  ␠t | DECSWBV  | Set Warning Bell Volume                     | Won't support |

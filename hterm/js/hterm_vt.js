@@ -3316,9 +3316,23 @@ hterm.VT.CSI['?s'] = hterm.VT.ignore;
 /**
  * Window manipulation (from dtterm, as well as extensions).
  *
- * Will not implement.
+ * @this {!hterm.VT}
+ * @param {!hterm.VT.ParseState} parseState
  */
-hterm.VT.CSI['t'] = hterm.VT.ignore;
+hterm.VT.CSI['t'] = function(parseState) {
+  const args = parseState.args;
+  const op = args[0] ? parseInt(args[0], 10) : 0;
+
+  switch (op) {
+    // Report xterm character cell size in pixels.
+    case 16: {
+      const height = Math.floor(this.terminal.scrollPort_.characterSize.height);
+      const width = Math.floor(this.terminal.scrollPort_.characterSize.width);
+      this.terminal.io.sendString(`\x1b[6;${height};${width}t`);
+      break;
+    }
+  }
+};
 
 /**
  * Reverse Attributes in Rectangular Area (DECRARA).
