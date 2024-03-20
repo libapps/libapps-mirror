@@ -568,7 +568,7 @@ lib.colors.arrayToHSLA = function(ary) {
  * Overwrite the alpha channel of an rgb/rgba color.
  *
  * @param {string} rgb The normalized CSS color spec.
- * @param {number} alpha The alpha channel.
+ * @param {string|number} alpha The alpha channel.
  * @return {string} The normalized CSS color spec with updated alpha channel.
  */
 lib.colors.setAlpha = function(rgb, alpha) {
