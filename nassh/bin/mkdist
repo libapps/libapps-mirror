@@ -174,6 +174,7 @@ def copyfiles(tmpdir, extra_exclude=()):
 def create_zip(
     archive: Path,
     tmpdir: Path,
+    enable_zip: bool = True,
 ) -> None:
     """Create |archive| zip of |tmpdir|."""
     libdot.unlink(archive)
@@ -183,12 +184,13 @@ def create_zip(
         os.utime(path, times=(0, 0))
         paths.append(os.path.relpath(path, tmpdir))
     # Sort the file list for reproducibility.
-    libdot.run(
-        ["zip", "-@q", os.path.relpath(archive, tmpdir)],
-        cwd=tmpdir,
-        encoding="utf-8",
-        input="\n".join(str(x) for x in sorted(paths)),
-    )
+    if enable_zip:
+        libdot.run(
+            ["zip", "-@q", os.path.relpath(archive, tmpdir)],
+            cwd=tmpdir,
+            encoding="utf-8",
+            input="\n".join(str(x) for x in sorted(paths)),
+        )
 
 
 def mkzip(
@@ -196,6 +198,7 @@ def mkzip(
     archive_suffix: str,
     version_mangle: Callable = lambda x: x,
     version_name: str = "",
+    enable_zip: bool = True,
 ):
     """Build the nassh extension archive.
 
@@ -272,10 +275,10 @@ def mkzip(
     del data["platforms"]
     minify_json_data(data, tmpdir / "manifest.json")
 
-    create_zip(archive, tmpdir)
+    create_zip(archive, tmpdir, enable_zip)
 
 
-def mkcrosh(enable_minify, enable_gzip):
+def mkcrosh(enable_minify, enable_gzip, enable_zip: bool = True) -> None:
     """Build the crosh archive."""
     logging.info("Processing crosh/terminal")
 
@@ -304,7 +307,7 @@ def mkcrosh(enable_minify, enable_gzip):
         minify(tmpdir)
     if enable_gzip:
         gzip_all(tmpdir)
-    create_zip(archive, tmpdir)
+    create_zip(archive, tmpdir, enable_zip)
 
 
 def get_stamp():
@@ -370,6 +373,13 @@ def get_parser():
         default=True,
         help="Skip minify/gzip steps on files.",
     )
+    parser.add_argument(
+        "--skip-zip",
+        dest="zip",
+        action="store_false",
+        default=True,
+        help="Skip creating final zip archive.",
+    )
     return parser
 
 
@@ -392,9 +402,9 @@ def main(argv):
         def _stamp_dev(version):
             return ".".join([version] + list(stamps[1:]))
 
-        mkzip(False, "-dev", _stamp_dev, stamps[0])
+        mkzip(False, "-dev", _stamp_dev, stamps[0], enable_zip=opts.zip)
         # Build the stable channel variants.
-        mkzip(True, "")
+        mkzip(True, "", enable_zip=opts.zip)
         # Build the stable channel rollback variants.
         def _rollback(version):
             parts = list(int(x) for x in version.split("."))
@@ -402,10 +412,10 @@ def main(argv):
             parts += [0, 1]
             return ".".join(str(x) for x in parts)
 
-        mkzip(True, "-rollback", _rollback)
+        mkzip(True, "-rollback", _rollback, enable_zip=opts.zip)
 
     # Never minify, maybe gzip.
-    mkcrosh(False, True)
+    mkcrosh(False, True, enable_zip=opts.zip)
 
 
 if __name__ == "__main__":
