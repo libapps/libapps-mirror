@@ -1056,14 +1056,14 @@ it('mode-bits', function() {
 
     this.terminal.interpret('\x1b[?25l');
     assert.isFalse(this.terminal.options_.cursorVisible);
-    assert.equal(this.terminal.cursorNode_.style.opacity, '0');
+    assert.equal(this.terminal.cursorNode_.getAttribute('visible'), 'false');
 
     this.terminal.interpret('\x1b[?25h');
     assert.isTrue(this.terminal.options_.cursorVisible);
 
     // Turn off blink so we know the cursor should be on.
     this.terminal.interpret('\x1b[?12l');
-    assert.equal(this.terminal.cursorNode_.style.opacity, '1');
+    assert.equal(this.terminal.cursorNode_.getAttribute('visible'), 'true');
 
     this.terminal.interpret('\x1b[?45h');
     assert.isTrue(this.terminal.options_.reverseWraparound);

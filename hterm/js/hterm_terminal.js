@@ -1799,6 +1799,12 @@ hterm.Terminal.prototype.setupScrollPort_ = function() {
   background-color: transparent !important;
   border-bottom-style: solid;
 }
+.cursor-node[bell="true"] {
+  background-color: rgb(var(--hterm-foreground-color)) !important;
+}
+.cursor-node[visible="false"] {
+  opacity: 1;
+}
 menu {
   background: #fff;
   border-radius: 4px;
@@ -2952,9 +2958,9 @@ hterm.Terminal.prototype.setReverseVideo = function(state) {
  * This will not play the bell audio more than once per second.
  */
 hterm.Terminal.prototype.ringBell = function() {
-  this.cursorNode_.style.backgroundColor = 'rgb(var(--hterm-foreground-color))';
+  this.cursorNode_.setAttribute('bell', 'true');
 
-  setTimeout(() => this.restyleCursor_(), 200);
+  setTimeout(() => this.cursorNode_.removeAttribute('bell'), 200);
 
   // bellSquelchTimeout_ affects both audio and notification bells.
   if (this.bellSquelchTimeout_) {
@@ -3150,13 +3156,13 @@ hterm.Terminal.prototype.setCursorVisible = function(state) {
       clearTimeout(this.timeouts_.cursorBlink);
       delete this.timeouts_.cursorBlink;
     }
-    this.cursorNode_.style.opacity = '0';
+    this.cursorNode_.setAttribute('visible', 'false');
     return;
   }
 
   this.syncCursorPosition_();
 
-  this.cursorNode_.style.opacity = '1';
+  this.cursorNode_.setAttribute('visible', 'true');
 
   if (this.options_.cursorBlink) {
     if (this.timeouts_.cursorBlink) {
@@ -4139,13 +4145,13 @@ hterm.Terminal.prototype.onCursorBlink_ = function() {
   }
 
   if (this.cursorNode_.getAttribute('focus') == 'false' ||
-      this.cursorNode_.style.opacity == '0' ||
+      this.cursorNode_.getAttribute('visible') == 'false' ||
       this.cursorBlinkPause_) {
-    this.cursorNode_.style.opacity = '1';
+    this.cursorNode_.setAttribute('visible', 'true');
     this.timeouts_.cursorBlink = setTimeout(this.myOnCursorBlink_,
                                             this.cursorBlinkCycle_[0]);
   } else {
-    this.cursorNode_.style.opacity = '0';
+    this.cursorNode_.setAttribute('visible', 'false');
     this.timeouts_.cursorBlink = setTimeout(this.myOnCursorBlink_,
                                             this.cursorBlinkCycle_[1]);
   }
