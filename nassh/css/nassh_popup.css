@@ -27,5 +27,6 @@ div.links {
 div.links:focus,
 div.links:hover {
   background-color: var(--nassh-cursor-color);
+  color: white;
   text-decoration: underline;
 }

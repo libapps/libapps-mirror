@@ -109,7 +109,8 @@ a:hover {
 }
 
 .column-list:focus .column-list-item.active div {
-  background-color: var(--nassh-cursor-color-75);
+  background-color: var(--nassh-cursor-color);
+  color: white;
   outline: none;
 }
 
