@@ -380,7 +380,7 @@ All other responses will have `error=false`.
 
 
 [Chrome messaging API]: https://developer.chrome.com/extensions/messaging
-[crosh]: chromeos-crosh.md
+[crosh]: https://www.chromium.org/chromium-os/developer-library/reference/device/crosh/
 [`chrome.runtime.onConnect`]: https://developer.chrome.com/extensions/runtime#event-onConnect
 [`chrome.runtime.onConnectExternal`]: https://developer.chrome.com/extensions/runtime#event-onConnectExternal
 [`chrome.runtime.connect`]: https://developer.chrome.com/extensions/runtime#method-connect

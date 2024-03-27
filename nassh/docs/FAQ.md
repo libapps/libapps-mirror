@@ -47,15 +47,6 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   other text-based command) on its own.
 
 
-### How do Secure Shell and hterm relate to the "crosh" (Ctrl+Alt+T) command in ChromeOS?
-
-  See [chromeos-crosh.md](chromeos-crosh.md) in this directory for the details.
-
-  TL;DR - Don't use crosh for ssh any more, use the Secure Shell app instead.
-  The crosh shell will use the newer terminal emulator from Secure Shell when
-  possible.
-
-
 ### What's the difference between the Secure Shell App and Extension? {#app-vs-ext}
 
   Everyone should install & use the extension variant now:

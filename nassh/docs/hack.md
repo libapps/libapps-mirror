@@ -95,11 +95,6 @@ level/color as legitmate errors.
 * 'fileSystemProvider' is not allowed for specified platform.
 ```
 
-## Manifests
-
-If you're updating the [manifest.json], you'll sometimes also need to update the
-[manifest][manifest_crosh.json] for [crosh] which lives in the Chromium tree.
-
 ## Allowed Permissions
 
 Using the dev extension id is necessary in order to access some APIs that are
@@ -110,7 +105,7 @@ by with using a different id (and delete the settings from the
 * Access to [crosh] under ChromeOS (`terminalPrivate`).
   [(1)](https://cs.chromium.org/search/?q=terminalPrivate)
   [(2)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/terminal_private.json)
-  [(3)](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/terminal_extension_helper.cc)
+  [(3)](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/terminal_private_api.cc)
 * Access to raw sockets under NaCl.  This allows connecting directly to SSH
   servers (e.g. port 22).
   [(1)](https://cs.chromium.org/search/?q=kPredefinedAllowedSocketOrigins)
@@ -197,8 +192,6 @@ code and manifest lives in Chrome.
     Defines the `chrome.terminalPrivate` JavaScript API.
 * [chrome/browser/extensions/api/terminal/](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/):
   Implements the `chrome.terminalPrivate` JavaScript API.
-* [chrome/browser/resources/chromeos/crosh_builtin/](https://cs.chromium.org/chromium/src/chrome/browser/resources/chromeos/crosh_builtin/)
-  * [manifest.json][manifest_crosh.json]: Manifest for the [crosh] extension.
 * [chromeos/process_proxy/](https://cs.chromium.org/chromium/src/chromeos/process_proxy/):
   * Utility classes to manage processes and input/output for commands invoked
     by the `api/terminal/` code.
@@ -494,7 +487,6 @@ Here's a random list of documents which would be useful to people.
 [third_party/]: ../third_party/
 
 [manifest.json]: ../manifest.json
-[manifest_crosh.json]: https://cs.chromium.org/chromium/src/chrome/browser/resources/chromeos/crosh_builtin/manifest.json
 
 [chrome-bootstrap.css]: ../third_party/chrome-bootstrap/chrome-bootstrap.css
 [nassh_box.css]: ../css/nassh_box.css
@@ -549,7 +541,7 @@ Here's a random list of documents which would be useful to people.
 [Chrome extension manifest]: https://developer.chrome.com/extensions/manifest
 [copy-data]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-extensions-00#section-7
 [Corp Relay]: relay-protocol.md#corp-relay
-[crosh]: chromeos-crosh.md
+[crosh]: https://www.chromium.org/chromium-os/developer-library/reference/device/crosh/
 [gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
 [NaCl]: https://developer.chrome.com/native-client
 [Native Sockets]: https://crbug.com/909927
