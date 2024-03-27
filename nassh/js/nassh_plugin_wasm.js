@@ -175,7 +175,8 @@ export class Plugin {
     }
 
     this.terminal_.io.print(
-        ' «««This is in alpha -- see https://crbug.com/1312115 for KIs»»»');
+        ' «««This is in beta -- see https://issuetracker.google.com/40220462 ' +
+        'for KIs»»»');
 
     const settings = {
       executable: this.executable_,
