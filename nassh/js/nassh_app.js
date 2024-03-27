@@ -150,7 +150,7 @@ App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
   this.omniMatches_.forEach((match) => {
     if (match.uhp.startsWith(text)) {
       resultsUhp.push({
-        content: 'profile-id:' + match.id,
+        content: `profile-id=${match.id}`,
         description: lib.f.replaceVars(
           '<match>%escapeHTML(uhp)</match>: %escapeHTML(desc)', match),
       });
@@ -158,7 +158,7 @@ App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
 
     if (match.desc.startsWith(text)) {
       resultsDescLeading.push({
-        content: 'profile-id:' + match.id,
+        content: `profile-id=${match.id}`,
         description: lib.f.replaceVars(
           '%escapeHTML(uhp): <match>%escapeHTML(desc)</match>', match),
       });
@@ -166,7 +166,7 @@ App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
 
     if (match.desc.includes(text)) {
       resultsDescSubstr.push({
-        content: 'profile-id:' + match.id,
+        content: `profile-id=${match.id}`,
         description: lib.f.replaceVars(
           '%escapeHTML(uhp): <match>%escapeHTML(desc)</match>', match),
       });
@@ -180,7 +180,7 @@ App.prototype.omniboxOnInputChanged_ = function(text, suggest) {
     // last connection used first.
     if (this.omniDefault_) {
       results.unshift({
-        content: 'profile-id:' + this.omniDefault_.id,
+        content: `profile-id=${this.omniDefault_.id}`,
         description: lib.f.replaceVars('%escapeHTML(uhp): %escapeHTML(desc)',
                                        this.omniDefault_),
       });
@@ -208,12 +208,12 @@ App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
     const match = this.omniMatches_[i];
 
     if (match.desc == text) {
-      text = 'profile-id:' + match.id;
+      text = `profile-id=${match.id}`;
       break;
     }
   }
 
-  const url = lib.f.getURL('/html/nassh.html#' + text);
+  const url = lib.f.getURL(`/html/nassh.html?${text}`);
   switch (disposition) {
     default:
       console.warn('unknown disposition: ' + disposition);

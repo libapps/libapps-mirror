@@ -87,10 +87,10 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
       if (newWindow) {
         const state = profile ? profile.get('win/state') : '';
         if (state !== 'normal') {
-          openas = `openas=${state}`;
+          openas = `openas=${state}&`;
         }
       }
-      url += `?${openas}#profile-id:${id}`;
+      url += `?${openas}profile-id=${id}`;
       break;
     }
   }

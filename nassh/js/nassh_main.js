@@ -132,10 +132,19 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
         environment = {};
       }
 
+      // If the connection profile isn't passed via the hash, check the query
+      // string for profile-id= override.
+      let argstr = globalThis.location.hash.substr(1);
+      if (argstr === '') {
+        const nasshProfileId = params.get('profile-id');
+        if (nasshProfileId !== undefined) {
+          argstr = `profile-id:${nasshProfileId}`;
+        }
+      }
       const nasshCommand = new CommandInstance({
         io: terminal.io,
         syncStorage: storage,
-        args: [globalThis.location.hash.substr(1)],
+        args: [argstr],
         environment: environment,
         onExit: (code) => {
           if (terminal.getPrefs().get('close-on-exit')) {

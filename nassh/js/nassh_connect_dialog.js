@@ -497,7 +497,7 @@ ConnectDialog.prototype.startup_ = function(message, proto) {
 
   if (this.form_.checkValidity()) {
     const uri = lib.f.getURL('/html/nassh.html');
-    this.location_.replace(`${uri}#profile-id:${id}`);
+    this.location_.replace(`${uri}?profile-id=${id}`);
   } else {
     this.form_.reportValidity();
   }

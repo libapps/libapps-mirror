@@ -112,7 +112,7 @@ it('omnibox-input-changed-default', function() {
   // Should match the default profile.
   this.app.omniboxOnInputChanged_('xxx', (result) => {
     assert.deepStrictEqual([{
-      content: `profile-id:${profile.id}`,
+      content: `profile-id=${profile.id}`,
       description: 'root@localhost: my desc',
     }], result);
   });
@@ -168,7 +168,7 @@ it('omnibox-input-cancelled-profile-no-default', function() {
   this.app.omniboxOnInputStarted_();
   this.app.omniboxOnInputChanged_('root', (result) => {
     assert.deepStrictEqual([{
-      content: `profile-id:${profile.id}`,
+      content: `profile-id=${profile.id}`,
       description: '<match>root@localhost</match>: my desc',
     }], result);
   });
@@ -193,7 +193,7 @@ it('omnibox-input-cancelled-profile-default', function() {
   this.app.omniboxOnInputStarted_();
   this.app.omniboxOnInputChanged_('root', (result) => {
     assert.deepStrictEqual([{
-      content: `profile-id:${profile.id}`,
+      content: `profile-id=${profile.id}`,
       description: '<match>root@localhost</match>: my desc',
     }], result);
   });
