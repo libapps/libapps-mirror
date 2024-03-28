@@ -1,4 +1,16 @@
-# 0.63, 2024-04-25, Windows KeepAlive fixes.
+# 0.64, 2024-04-01, Minor OSC features and nasftp fixes.
+
+* uri: Support profile-id query string for selecting connection.
+* wassh: Update "alpha" status to "beta".
+* connect: Improve selected contrast.
+* connect: Signal prefs ready after loading sync & local.
+* nasftp: Add a touch helper command.
+* nasftp: Force user to pick file directly with "unsafe" names.
+* nasftp: Default lcd in the downloads dir.
+* nasftp: Add a preferences command for toggling download modes.
+* nasftp: get/lcd: Do not crash if user cancels picker dialog.
+
+# 0.63, 2024-03-25, Minor bug fixes.
 
 * wasi-js-bindings: Add more details with unhandled exceptions.
 * relays: Always send host to relay to allow best redirection.
