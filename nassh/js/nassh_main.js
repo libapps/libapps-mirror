@@ -137,7 +137,7 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
       let argstr = globalThis.location.hash.substr(1);
       if (argstr === '') {
         const nasshProfileId = params.get('profile-id');
-        if (nasshProfileId !== undefined) {
+        if (nasshProfileId !== null) {
           argstr = `profile-id:${nasshProfileId}`;
         }
       }
