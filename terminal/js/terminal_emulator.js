@@ -146,11 +146,11 @@ function ctl(ch) {
  * @return {!Notification}
  */
 function createNotification(title, body) {
-  const options = {icon: lib.resource.getDataUrl('hterm/images/icon-96')};
+  const options = {title: `♪ ${title} ♪`};
   if (body) {
     options.body = body;
   }
-  return new Notification(`\u266A ${title} \u266A`, options);
+  return hterm.notify(options);
 }
 
 /**
