@@ -106,7 +106,7 @@ RelaySshfeWsStream.prototype.asyncOpen = async function(settings, onComplete) {
  */
 RelaySshfeWsStream.prototype.challengeTemplate_ =
     `%(protocol)://%(relayHost):%(relayPort)` +
-    `/challenge?user=%encodeURIComponent(relayUser)`;
+    `/ssh-fe/challenge?user=%encodeURIComponent(relayUser)`;
 
 /**
  * Get the server challenge.
