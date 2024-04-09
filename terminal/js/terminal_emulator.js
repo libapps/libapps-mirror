@@ -139,21 +139,6 @@ function ctl(ch) {
 }
 
 /**
- * Create a notification following hterm's style.
- *
- * @param {string} title
- * @param {?string=} body
- * @return {!Notification}
- */
-function createNotification(title, body) {
-  const options = {title: `♪ ${title} ♪`};
-  if (body) {
-    options.body = body;
-  }
-  return hterm.notify(options);
-}
-
-/**
  * A "terminal io" class for xterm. We don't want the vanilla hterm.Terminal.IO
  * because it always convert utf8 data to strings, which is not necessary for
  * xterm.
@@ -279,7 +264,7 @@ class Bell {
 
     this.audio_?.play();
     if (this.showNotification && !document.hasFocus() && !this.notification_) {
-      this.notification_ = createNotification(document.title);
+      this.notification_ = hterm.notify({title: document.title});
       // Close the notification after a timeout. Note that this is different
       // from hterm's behavior, but I think it makes more sense to do so.
       setTimeout(() => {
@@ -739,7 +724,7 @@ export class XtermTerminal {
       // Match 'notify;<title>[;<message>]'.
       const match = args.match(/^notify;([^;]*)(?:;(.*))?$/);
       if (match) {
-        createNotification(match[1], match[2]);
+        hterm.notify({title: match[1], body: match[2]});
       }
 
       return true;
