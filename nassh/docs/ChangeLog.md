@@ -1,3 +1,10 @@
+# 0.65, 2024-04-15, Default profile regression fix.
+
+* popup: Support Shift+Click like Chrome -- tab in new window.
+* prefs: Rework hterm profile export slightly.
+* sshfe: Switch endpoint.
+* connect: Check missing params against null.
+
 # 0.64, 2024-04-01, Minor OSC features and nasftp fixes.
 
 * uri: Support profile-id query string for selecting connection.
