@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// NB: This file is not loaded as a module because it modifies global scope.
 'use strict';
 
 /**
@@ -34,7 +35,7 @@ globalThis.onload = function() {
 
 describe('nassh_test.js', () => {
 
-  /** Make sure no general framework errors happened (e.g. syntax error). */
+  /** Make sure no general framework errors happened (e.g. syntax errors). */
   it('uncaught framework errors', () => {
     if (earlyError !== null) {
       assert.fail(`uncaught exception detected:\n${earlyError.join('\n')}`);

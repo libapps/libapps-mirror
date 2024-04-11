@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// NB: This file is not loaded as a module because it modifies global scope.
+'use strict';
+
 /**
  * @fileoverview Test framework setup when run inside the browser.
  */
