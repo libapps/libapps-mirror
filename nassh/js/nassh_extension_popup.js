@@ -45,7 +45,7 @@ function popup() {
       // automatically.  This will force users to register one first.
       const ids = this.prefs_.get('profile-ids');
       if (ids.length === 0) {
-        this.openLink_('connect-dialog');
+        this.openLink_('connect-dialog', openModes.WINDOW);
         return;
       }
 
@@ -58,12 +58,23 @@ function popup() {
 }
 
 /**
+ * Different ways of opening links.
+ *
+ * @enum {string}
+ */
+const openModes = {
+  FOREGROUND_TAB: 'foreground-tab',
+  WINDOW: 'window',
+  WINDOW_TAB: 'window+tab',
+};
+
+/**
  * Open a specific connection.
  *
  * @param {string} id The profile id to open.
- * @param {boolean=} newWindow Whether to open in a window or tab.
+ * @param {!openModes} openMode How to open the link.
  */
-popup.prototype.openLink_ = function(id, newWindow = true) {
+popup.prototype.openLink_ = function(id, openMode) {
   let profile;
 
   let url = lib.f.getURL('/html/nassh.html');
@@ -84,7 +95,7 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
         profile = this.localPrefs_.getProfile(id);
       }
       let openas = '';
-      if (newWindow) {
+      if (openMode === openModes.WINDOW) {
         const state = profile ? profile.get('win/state') : '';
         if (state !== 'normal') {
           openas = `openas=${state}&`;
@@ -96,7 +107,7 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
   }
 
   // Launch it.
-  if (!newWindow) {
+  if (openMode === openModes.FOREGROUND_TAB) {
     // Should we offer a way to open tabs in the background?
     chrome.tabs.create({url: url, active: true});
   } else {
@@ -121,10 +132,22 @@ popup.prototype.openLink_ = function(id, newWindow = true) {
       height = parseDim(profile.get('win/height'), height);
       width = parseDim(profile.get('win/width'), width);
     }
-    lib.f.openWindow(url, '',
-                     'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                     `minimizable=yes,top=${top},left=${left},` +
-                     `height=${height},width=${width}`);
+
+    if (openMode === openModes.WINDOW_TAB) {
+      chrome.windows.create({
+        url: url,
+        top: top,
+        left: left,
+        width: width,
+        height: height,
+        focused: true,
+      });
+    } else {
+      lib.f.openWindow(url, '',
+                       'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
+                       `minimizable=yes,top=${top},left=${left},` +
+                       `height=${height},width=${width}`);
+    }
   }
 
   // Close the popup.  It happens automatically on some systems (e.g. Linux),
@@ -147,19 +170,19 @@ popup.prototype.mouseClickLink_ = function(e) {
   }
 
   // Figure out whether to open a window or a tab.
-  let newWindow;
+  let openMode;
   if ((hterm.os !== 'mac' && e.ctrlKey) ||
       (hterm.os === 'mac' && e.metaKey) ||
       e.type === 'auxclick') {
-    newWindow = false;
+    openMode = openModes.FOREGROUND_TAB;
   } else if (e.shiftKey) {
-    newWindow = true;
+    openMode = openModes.WINDOW_TAB;
   } else {
     // TODO: Get default from prefs.
-    newWindow = true;
+    openMode = openModes.WINDOW;
   }
 
-  this.openLink_(e.target.id, newWindow);
+  this.openLink_(e.target.id, openMode);
 };
 
 /**
@@ -171,18 +194,18 @@ popup.prototype.keyupLink_ = function(e) {
   switch (e.key) {
     case 'Enter': {
       // Figure out whether to open a window or a tab.
-      let newWindow;
+      let openMode;
       if ((hterm.os !== 'mac' && e.ctrlKey) ||
           (hterm.os === 'mac' && e.metaKey)) {
-        newWindow = false;
+        openMode = openModes.FOREGROUND_TAB;
       } else if (e.shiftKey) {
-        newWindow = true;
+        openMode = openModes.WINDOW_TAB;
       } else {
         // TODO: Get default from prefs.
-        newWindow = true;
+        openMode = openModes.WINDOW;
       }
 
-      this.openLink_(e.target.id, newWindow);
+      this.openLink_(e.target.id, openMode);
       e.preventDefault();
       break;
     }
