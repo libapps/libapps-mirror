@@ -68,16 +68,6 @@ lib.Storage.Chrome = class extends lib.Storage {
   }
 
   /**
-   * Return the current value of a storage item.
-   *
-   * @param {string} key The key to look up.
-   * @override
-   */
-  async getItem(key) {
-    return this.getItems([key]).then((items) => items[key]);
-  }
-
-  /**
    * Fetch the values of multiple storage items.
    *
    * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
@@ -131,16 +121,6 @@ lib.Storage.Chrome = class extends lib.Storage {
     return new Promise((resolve) => {
       this.storage_.set(obj, resolve);
     });
-  }
-
-  /**
-   * Remove an item from storage.
-   *
-   * @param {string} key The key to be removed.
-   * @override
-   */
-  async removeItem(key) {
-    return this.removeItems([key]);
   }
 
   /**

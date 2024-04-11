@@ -195,17 +195,6 @@ lib.Storage.TerminalPrivate = class extends lib.Storage {
   }
 
   /**
-   * Return the current value of a storage item.
-   *
-   * @param {string} key The key to look up.
-   * @override
-   */
-  async getItem(key) {
-    await this.initCache_();
-    return this.prefValue_[key];
-  }
-
-  /**
    * Fetch the values of multiple storage items.
    *
    * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
@@ -229,18 +218,6 @@ lib.Storage.TerminalPrivate = class extends lib.Storage {
   }
 
   /**
-   * Set a value in storage.
-   *
-   * @param {string} key The key for the value to be stored.
-   * @param {*} value The value to be stored.  Anything that can be serialized
-   *     with JSON is acceptable.
-   * @override
-   */
-  async setItem(key, value) {
-    return this.setItems({[key]: value});
-  }
-
-  /**
    * Set multiple values in storage.
    *
    * @param {!Object} obj A map of key/values to set in storage.
@@ -249,16 +226,6 @@ lib.Storage.TerminalPrivate = class extends lib.Storage {
   async setItems(obj) {
     await this.initCache_();
     return this.update_(Object.assign({}, this.prefValue_, obj));
-  }
-
-  /**
-   * Remove an item from storage.
-   *
-   * @param {string} key The key to be removed.
-   * @override
-   */
-  async removeItem(key) {
-    return this.removeItems([key]);
   }
 
   /**

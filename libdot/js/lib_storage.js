@@ -38,7 +38,9 @@ lib.Storage = class {
    * @param {string} key The key to look up.
    * @return {!Promise<*>} A promise resolving to the requested item.
    */
-  async getItem(key) {}
+  async getItem(key) {
+    return this.getItems([key]).then((items) => items[key]);
+  }
 
   /**
    * Fetch the values of multiple storage items.
@@ -59,7 +61,9 @@ lib.Storage = class {
    * @param {*} value The value to be stored.  Anything that can be serialized
    *     with JSON is acceptable.
    */
-  async setItem(key, value) {}
+  async setItem(key, value) {
+    await this.setItems({[key]: value});
+  }
 
   /**
    * Set multiple values in storage.
@@ -76,7 +80,9 @@ lib.Storage = class {
    *
    * @param {string} key The key to be removed.
    */
-  async removeItem(key) {}
+  async removeItem(key) {
+    await this.removeItems([key]);
+  }
 
   /**
    * Remove multiple items from storage.
