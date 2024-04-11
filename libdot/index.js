@@ -19,6 +19,7 @@ import './js/lib_preference_manager.js';
 import './js/lib_resource.js';
 import './js/lib_storage.js';
 import './js/lib_storage_chrome.js';
+import './js/lib_storage_condenser.js';
 import './js/lib_storage_local.js';
 import './js/lib_storage_memory.js';
 import './js/lib_storage_terminal_private.js';

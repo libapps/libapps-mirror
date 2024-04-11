@@ -39,6 +39,13 @@ it('get-set', async function() {
   await storage.setItem('foo', 1);
   value = await storage.getItem('foo');
   assert.equal(value, 1);
+
+  // Adding another item should leave existing ones alone.
+  await storage.setItem('bar', 2);
+  value = await storage.getItem('bar');
+  assert.equal(value, 2);
+  value = await storage.getItem('foo');
+  assert.equal(value, 1);
 });
 
 /**
@@ -64,6 +71,11 @@ it('gets-sets', async function() {
 
   value = await storage.getItems(null);
   assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 3});
+
+  // Changing one item should leave existing ones alone.
+  await storage.setItems({'cow': 4});
+  value = await storage.getItems(null);
+  assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 4});
 });
 
 /**
