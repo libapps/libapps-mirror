@@ -7,84 +7,84 @@ import {lib} from '../index.js';
 /**
  * Namespace for implementations of persistent, possibly cloud-backed
  * storage.
- *
- * @interface
  */
-lib.Storage = function() {};
+lib.Storage = class {
+  constructor() {}
 
-/**
- * Register a function to observe storage changes.
- *
- * @param {function(!Object<string, !StorageChange>)} callback The function to
- *     invoke when the storage changes.
- */
-lib.Storage.prototype.addObserver = function(callback) {};
+  /**
+   * Register a function to observe storage changes.
+   *
+   * @param {function(!Object<string, !StorageChange>)} callback The function to
+   *     invoke when the storage changes.
+   */
+  addObserver(callback) {}
 
-/**
- * Unregister a change observer.
- *
- * @param {function(!Object<string, !StorageChange>)} callback A previously
- *     registered callback.
- */
-lib.Storage.prototype.removeObserver = function(callback) {};
+  /**
+   * Unregister a change observer.
+   *
+   * @param {function(!Object<string, !StorageChange>)} callback A previously
+   *     registered callback.
+   */
+  removeObserver(callback) {}
 
-/**
- * Delete everything in this storage.
- */
-lib.Storage.prototype.clear = async function() {};
+  /**
+   * Delete everything in this storage.
+   */
+  async clear() {}
 
-/**
- * Return the current value of a storage item.
- *
- * @param {string} key The key to look up.
- * @return {!Promise<*>} A promise resolving to the requested item.
- */
-lib.Storage.prototype.getItem = async function(key) {};
+  /**
+   * Return the current value of a storage item.
+   *
+   * @param {string} key The key to look up.
+   * @return {!Promise<*>} A promise resolving to the requested item.
+   */
+  async getItem(key) {}
 
-/**
- * Fetch the values of multiple storage items.
- *
- * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
- * @return {!Promise<!Object<string, *>>} A promise resolving to the requested
- *     items.
- */
-lib.Storage.prototype.getItems = async function(keys) {};
+  /**
+   * Fetch the values of multiple storage items.
+   *
+   * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
+   * @return {!Promise<!Object<string, *>>} A promise resolving to the requested
+   *     items.
+   */
+  async getItems(keys) {}
 
-/**
- * Set a value in storage.
- *
- * You don't have to wait for the set to complete in order to read the value
- * since the local cache is updated synchronously.
- *
- * @param {string} key The key for the value to be stored.
- * @param {*} value The value to be stored.  Anything that can be serialized
- *     with JSON is acceptable.
- */
-lib.Storage.prototype.setItem = async function(key, value) {};
+  /**
+   * Set a value in storage.
+   *
+   * You don't have to wait for the set to complete in order to read the value
+   * since the local cache is updated synchronously.
+   *
+   * @param {string} key The key for the value to be stored.
+   * @param {*} value The value to be stored.  Anything that can be serialized
+   *     with JSON is acceptable.
+   */
+  async setItem(key, value) {}
 
-/**
- * Set multiple values in storage.
- *
- * You don't have to wait for the set to complete in order to read the value
- * since the local cache is updated synchronously.
- *
- * @param {!Object} obj A map of key/values to set in storage.
- */
-lib.Storage.prototype.setItems = async function(obj) {};
+  /**
+   * Set multiple values in storage.
+   *
+   * You don't have to wait for the set to complete in order to read the value
+   * since the local cache is updated synchronously.
+   *
+   * @param {!Object} obj A map of key/values to set in storage.
+   */
+  async setItems(obj) {}
 
-/**
- * Remove an item from storage.
- *
- * @param {string} key The key to be removed.
- */
-lib.Storage.prototype.removeItem = async function(key) {};
+  /**
+   * Remove an item from storage.
+   *
+   * @param {string} key The key to be removed.
+   */
+  async removeItem(key) {}
 
-/**
- * Remove multiple items from storage.
- *
- * @param {!Array<string>} keys The keys to be removed.
- */
-lib.Storage.prototype.removeItems = async function(keys) {};
+  /**
+   * Remove multiple items from storage.
+   *
+   * @param {!Array<string>} keys The keys to be removed.
+   */
+  async removeItems(keys) {}
+};
 
 /**
  * Create the set of changes between two states.
