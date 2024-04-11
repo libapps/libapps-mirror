@@ -12,32 +12,7 @@ lib.Storage.Memory = class extends lib.Storage {
   constructor() {
     super();
 
-    this.observers_ = [];
     this.storage_ = {};
-  }
-
-  /**
-   * Register a function to observe storage changes.
-   *
-   * @param {function(!Object)} callback The function to invoke when the storage
-   *     changes.
-   * @override
-   */
-  addObserver(callback) {
-    this.observers_.push(callback);
-  }
-
-  /**
-   * Unregister a change observer.
-   *
-   * @param {function(!Object)} callback A previously registered callback.
-   * @override
-   */
-  removeObserver(callback) {
-    const i = this.observers_.indexOf(callback);
-    if (i != -1) {
-      this.observers_.splice(i, 1);
-    }
   }
 
   /**

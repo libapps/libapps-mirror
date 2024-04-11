@@ -15,7 +15,6 @@ lib.Storage.Local = class extends lib.Storage {
   constructor(storage = undefined) {
     super();
 
-    this.observers_ = [];
     /** @type {!Storage} */
     this.storage_ = storage ? storage : lib.notNull(globalThis.localStorage);
     // Closure thinks all addEventListener calls take Events.
@@ -42,30 +41,6 @@ lib.Storage.Local = class extends lib.Storage {
 
     for (let i = 0; i < this.observers_.length; i++) {
       this.observers_[i](o);
-    }
-  }
-
-  /**
-   * Register a function to observe storage changes.
-   *
-   * @param {function(!Object)} callback The function to invoke when the storage
-   *     changes.
-   * @override
-   */
-  addObserver(callback) {
-    this.observers_.push(callback);
-  }
-
-  /**
-   * Unregister a change observer.
-   *
-   * @param {function(!Object)} callback A previously registered callback.
-   * @override
-   */
-  removeObserver(callback) {
-    const i = this.observers_.indexOf(callback);
-    if (i != -1) {
-      this.observers_.splice(i, 1);
     }
   }
 

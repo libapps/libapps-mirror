@@ -16,7 +16,6 @@ lib.Storage.Chrome = class extends lib.Storage {
     super();
 
     this.storage_ = storage;
-    this.observers_ = [];
 
     storage.onChanged.addListener(this.onChanged_.bind(this));
   }
@@ -29,31 +28,6 @@ lib.Storage.Chrome = class extends lib.Storage {
    */
   onChanged_(changes) {
     this.observers_.forEach((o) => o(changes));
-  }
-
-  /**
-   * Register a function to observe storage changes.
-   *
-   * @param {function(!Object<string, !StorageChange>)} callback The function to
-   *     invoke when the storage changes.
-   * @override
-   */
-  addObserver(callback) {
-    this.observers_.push(callback);
-  }
-
-  /**
-   * Unregister a change observer.
-   *
-   * @param {function(!Object<string, !StorageChange>)} callback A previously
-   *     registered callback.
-   * @override
-   */
-  removeObserver(callback) {
-    const i = this.observers_.indexOf(callback);
-    if (i != -1) {
-      this.observers_.splice(i, 1);
-    }
   }
 
   /**

@@ -29,12 +29,6 @@ lib.Storage.TerminalPrivate = class extends lib.Storage {
     this.prefPath_ = lib.notUndefined(prefPath);
 
     /**
-     * @const
-     * @private
-     */
-    this.observers_ = [];
-
-    /**
      * Local cache of terminalPrivate.getPrefs().
      *
      * @private {!Object<string, *>}
@@ -140,30 +134,6 @@ lib.Storage.TerminalPrivate = class extends lib.Storage {
         });
       });
     });
-  }
-
-  /**
-   * Register a function to observe storage changes.
-   *
-   * @param {function(!Object)} callback The function to invoke when the storage
-   *     changes.
-   * @override
-   */
-  addObserver(callback) {
-    this.observers_.push(callback);
-  }
-
-  /**
-   * Unregister a change observer.
-   *
-   * @param {function(!Object)} callback A previously registered callback.
-   * @override
-   */
-  removeObserver(callback) {
-    const i = this.observers_.indexOf(callback);
-    if (i !== -1) {
-      this.observers_.splice(i, 1);
-    }
   }
 
   /**

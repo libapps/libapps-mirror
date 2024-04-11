@@ -9,7 +9,13 @@ import {lib} from '../index.js';
  * storage.
  */
 lib.Storage = class {
-  constructor() {}
+  constructor() {
+    /**
+     * @type {!Array<function(!Object<string, !StorageChange>)>}
+     * @const
+     */
+    this.observers_ = [];
+  }
 
   /**
    * Register a function to observe storage changes.
@@ -17,7 +23,9 @@ lib.Storage = class {
    * @param {function(!Object<string, !StorageChange>)} callback The function to
    *     invoke when the storage changes.
    */
-  addObserver(callback) {}
+  addObserver(callback) {
+    this.observers_.push(callback);
+  }
 
   /**
    * Unregister a change observer.
@@ -25,7 +33,12 @@ lib.Storage = class {
    * @param {function(!Object<string, !StorageChange>)} callback A previously
    *     registered callback.
    */
-  removeObserver(callback) {}
+  removeObserver(callback) {
+    const i = this.observers_.indexOf(callback);
+    if (i !== -1) {
+      this.observers_.splice(i, 1);
+    }
+  }
 
   /**
    * Delete everything in this storage.
