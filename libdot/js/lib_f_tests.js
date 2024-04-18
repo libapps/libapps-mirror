@@ -152,6 +152,7 @@ it('lastError', () => {
 describe('isValidURL -> true', () => {
   [
     'http://localhost',
+    '/foo.html',
   ].forEach((url) => {
     it(`${url}`, () => {
       assert.isTrue(lib.f.isValidUrl(url));

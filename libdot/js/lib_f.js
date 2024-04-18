@@ -328,6 +328,10 @@ lib.f.lastError = function(defaultMsg = null) {
  * @return {boolean} Whether the URL is valid.
  */
 lib.f.isValidUrl = function(url) {
+  if (url?.startsWith('/')) {
+    return true;
+  }
+
   try {
     // eslint-disable-next-line no-new
     new URL(url);
