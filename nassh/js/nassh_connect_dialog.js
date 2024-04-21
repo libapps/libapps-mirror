@@ -35,12 +35,6 @@ import {
  * @constructor
  */
 function ConnectDialog() {
-  // Turn off spellcheck everywhere.
-  const ary = document.querySelectorAll('input[type="text"]');
-  for (let i = 0; i < ary.length; i++) {
-    ary[i].setAttribute('spellcheck', 'false');
-  }
-
   this.location_ = document.location;
   this.sessionStorage_ = globalThis.sessionStorage;
 
