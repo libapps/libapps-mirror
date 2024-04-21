@@ -14,7 +14,7 @@ import {hterm} from '../../hterm/index.js';
 import {cleanupChromeSockets} from '../wassh/js/sockets.js';
 
 import {
-  getSyncStorage, isCrOSSystemApp, loadWebFonts, localize, openOptionsPage,
+  getSyncStorage, loadWebFonts, localize, openOptionsPage,
   registerProtocolHandler, runtimeSendMessage, sendFeedback, setupForWebApp,
 } from './nassh.js';
 import {ColumnList} from './nassh_column_list.js';
@@ -75,12 +75,6 @@ function ConnectDialog() {
   this.deleteButton_ = lib.notNull(document.querySelector('#delete'));
   this.optionsButton_ = lib.notNull(document.querySelector('#options'));
   this.feedbackButton_ = lib.notNull(document.querySelector('#feedback'));
-
-  // Hide options and feedback for Terminal-SSH.
-  if (isCrOSSystemApp()) {
-    this.optionsButton_.remove();
-    this.feedbackButton_.remove();
-  }
 }
 
 /**
