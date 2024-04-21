@@ -123,13 +123,13 @@ ColumnList.prototype.redraw = function() {
   const tbody = this.document_.createElement('tbody');
   table.appendChild(tbody);
 
-  let tr;
+  let tr, td;
 
   for (let i = 0; i < this.items_.length; i++) {
     const row = Math.floor(i / this.columnCount);
     const column = i % this.columnCount;
 
-    const td = this.document_.createElement('td');
+    td = this.document_.createElement('td');
     td.setAttribute('role', 'option');
     td.setAttribute('id', this.baseId_ + '-item-' + i);
     td.setAttribute('row', row);
@@ -150,6 +150,11 @@ ColumnList.prototype.redraw = function() {
 
     tr.appendChild(td);
   }
+
+  // Stub node so caller can pick between spaced out rows or compact rows.
+  tr = this.document_.createElement('tr');
+  tbody.appendChild(tr);
+  tr.id = 'shortcut-list-last-row';
 
   this.setActiveIndex(Math.min(this.activeIndex, this.items_.length - 1));
 

@@ -80,6 +80,10 @@ div[role="button"][disabled] {
   color: var(--nassh-fg-color);
 }
 
+#shortcut-list-last-row {
+  height: 100%;
+}
+
 a {
   color: var(--nassh-fg-color);
   text-decoration: none;
