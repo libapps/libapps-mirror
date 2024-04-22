@@ -26,7 +26,7 @@ import {WASI} from '../../wasi-js-bindings/index.js';
 import * as WasshProcess from '../wassh/js/process.js';
 import {cleanupChromeSockets} from '../wassh/js/sockets.js';
 import * as WasshSyscallHandler from '../wassh/js/syscall_handler.js';
-import {FileHandle} from '../wassh/js/vfs.js';
+import {FileHandle, FileHandler} from '../wassh/js/vfs.js';
 
 /**
  * A write-only pipe.
@@ -120,6 +120,76 @@ class SftpPipeReadHandle extends FileHandle {
 }
 
 /**
+ * A path backed by a key in a specific lib.Storage.
+ *
+ * This is how we sync files.
+ *
+ * TODO(vapier): Generalize this and move to wassh.vfs?
+ */
+class StorageFileHandle extends FileHandle {
+  /**
+   * @param {string} path The absolute path in the filesystem for this handler.
+   * @param {!WASI_t.filetype=} filetype The WASI filetype.
+   * @param {!lib.Storage} storage The backing storage for file content.
+   * @param {string} key The storage item name.
+   */
+  constructor(path, filetype, storage, key) {
+    super(path, filetype);
+
+    this.storage_ = storage;
+    this.key_ = key;
+  }
+
+  /** @override */
+  async init() {
+    const data = await this.storage_.getItem(this.key_) ?? '';
+    this.data = lib.codec.stringToCodeUnitArray(data);
+  }
+
+  /** @override */
+  async write(buf) {
+    return WASI.errno.EROFS;
+  }
+
+  /** @override */
+  async pwrite(buf, offset) {
+    return WASI.errno.EROFS;
+  }
+}
+
+/**
+ * A path backed by a key in a specific lib.Storage.
+ *
+ * This is how we sync files.
+ *
+ * TODO(vapier): Generalize this and move to wassh.vfs?
+ */
+class StorageFileHandler extends FileHandler {
+  /**
+   * @param {string} path The absolute path in the filesystem for this handler.
+   * @param {!lib.Storage} storage The backing storage for file content.
+   * @param {string} key The storage item name.
+   */
+  constructor(path, storage, key) {
+    super(path, WASI.filetype.REGULAR_FILE, StorageFileHandle);
+
+    this.storage_ = storage;
+    this.key_ = key;
+  }
+
+  /** @override */
+  async open(path, fs_flags, o_flags) {
+    if (path !== this.path) {
+      return WASI.errno.ENOTDIR;
+    }
+    const ret = new this.handleCls(
+        this.path, this.filetype, this.storage_, this.key_);
+    await ret.init();
+    return ret;
+  }
+}
+
+/**
  * Plugin message handlers.
  */
 export class Plugin {
@@ -139,7 +209,8 @@ export class Plugin {
    * }} opts
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
-               authAgentAppID, relay, isSftp, sftpClient, secureInput}) {
+               authAgentAppID, relay, isSftp, sftpClient, secureInput,
+               syncStorage}) {
     this.executable_ = executable;
     this.argv_ = argv;
     this.environ_ = environ;
@@ -151,6 +222,7 @@ export class Plugin {
     this.isSftp_ = isSftp;
     this.sftpClient_ = sftpClient;
     this.secureInput_ = secureInput;
+    this.syncStorage_ = syncStorage;
     this.plugin_ = null;
     this.sftpStdin_ = null;
     this.sftpStdout_ = null;
@@ -194,10 +266,16 @@ export class Plugin {
     };
     await settings.handler.init();
 
+    const vfs = settings.handler.vfs;
+    vfs.addHandler(new StorageFileHandler(
+        '/etc/ssh/ssh_config', this.syncStorage_, '/nassh/etc/ssh/ssh_config'));
+    vfs.addHandler(new StorageFileHandler(
+        '/etc/ssh/ssh_known_hosts', this.syncStorage_,
+        '/nassh/etc/ssh/ssh_known_hosts'));
+
     // If this is an SFTP connection, rebind stdin/stdout to our custom pipes
     // which connect to our JS SFTP client.
     if (this.isSftp_) {
-      const vfs = settings.handler.vfs;
 
       this.sftpStdin_ = new SftpPipeReadHandle('sftp-in', settings.handler);
       let fd = vfs.openHandle(this.sftpStdin_);

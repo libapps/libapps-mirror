@@ -1484,6 +1484,7 @@ CommandInstance.prototype.initWasmPlugin_ =
     isSftp: this.isSftp,
     sftpClient: this.sftpClient,
     secureInput: (...args) => this.secureInput(...args),
+    syncStorage: this.syncStorage,
   });
   return this.plugin_.init();
 };

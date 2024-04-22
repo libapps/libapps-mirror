@@ -78,8 +78,23 @@
         <div class='content vflex'>
           <section>
             <h3>
-              <a href='../plugin/docs/ssh.1.html#VERIFYING_HOST_KEYS'
+              <a href='../plugin/docs/sshd.8.html#SSH_KNOWN_HOSTS_FILE_FORMAT'
+                 target='_blank'>/etc/ssh/ssh_known_hosts</a>
+              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_SYNCED"}'></span>
+            </h3>
+
+            <textarea id='ssh-files-etc-ssh-known-hosts' rows=5 autocomplete=off
+                      spellcheck=false></textarea>
+            <br/>
+            <button id='ssh-files-etc-ssh-known-hosts-save'
+                    i18n='{"_": "SAVE_LABEL"}'></button>
+          </section>
+
+          <section>
+            <h3>
+              <a href='../plugin/docs/sshd.8.html#SSH_KNOWN_HOSTS_FILE_FORMAT'
                  target='_blank'>~/.ssh/known_hosts</a>
+              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_LOCAL"}'></span>
             </h3>
 
             <textarea id='ssh-files-known-hosts' rows=5 autocomplete=off
@@ -94,7 +109,21 @@
           <section>
             <h3>
               <a href='../plugin/docs/ssh_config.5.html'
+                 target='_blank'>/etc/ssh/ssh_config</a>
+              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_SYNCED"}'></span>
+            </h3>
+
+            <textarea id='ssh-files-etc-ssh-config' rows=10 autocomplete=off
+                      spellcheck=false></textarea>
+            <button id='ssh-files-etc-ssh-config-save'
+                    i18n='{"_": "SAVE_LABEL"}'></button>
+          </section>
+
+          <section>
+            <h3>
+              <a href='../plugin/docs/ssh_config.5.html'
                  target='_blank'>~/.ssh/config</a>
+              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_LOCAL"}'></span>
             </h3>
 
             <textarea id='ssh-files-config' rows=10 autocomplete=off
@@ -108,6 +137,7 @@
             <h3>
               <a href='../plugin/docs/ssh_config.5.html#IdentityFile'
                  target='_blank' i18n='{"_": "IDENTITY_LABEL"}'></a>
+              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_LOCAL"}'></span>
             </h3>
 
             <ul id='ssh-files-identities'></ul>

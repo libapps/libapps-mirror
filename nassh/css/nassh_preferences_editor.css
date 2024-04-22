@@ -190,8 +190,15 @@ body {
   vertical-align: middle;
 }
 
-#ssh-files-known-hosts, #ssh-files-config {
+#ssh-files-etc-ssh-known-hosts,
+#ssh-files-known-hosts,
+#ssh-files-etc-ssh-config,
+#ssh-files-config {
   font-family: monospace;
   white-space: nowrap;
   width: 100%;
+}
+
+.float-right {
+  float: right;
 }

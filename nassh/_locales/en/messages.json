@@ -1929,6 +1929,14 @@
 		"description": "Menu label to select the protocol handler registration page. This controls settings for e.g. ssh:// URIs.",
 		"message": "URI Handlers"
 	},
+	"PREFERENCES_KEY_IS_LOCAL": {
+		"description": "Text label to show this preference is not synchronized. The setting is only saved locally on this specific system.",
+		"message": "Local preference"
+	},
+	"PREFERENCES_KEY_IS_SYNCED": {
+		"description": "Text label to show this preference is synchronized. The setting is shared among all systems.",
+		"message": "Synced preference"
+	},
 	"PREFERENCES_RESET": {
 		"description": "Message displayed after all preferences (e.g. colors, fonts, etc...) are reset.",
 		"message": "All preferences reset!"

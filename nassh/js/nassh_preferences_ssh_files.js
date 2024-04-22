@@ -6,6 +6,9 @@
  * @fileoverview SSH file editing helper.
  */
 
+import {lib} from '../../libdot/index.js';
+
+import {getSyncStorage} from './nassh.js';
 import {getIndexeddbFileSystem} from './nassh_fs.js';
 
 /**
@@ -163,6 +166,80 @@ class DirWatcher {
 }
 
 /**
+ * Utility class to bind a directory to some basic UI tools.
+ */
+class StorageFileWatcher {
+  /**
+   * @param {string} id The HTML id used to find UI elements.
+   * @param {!lib.Storage} storage The backing storage for file content.
+   * @param {string} key The storage item name.
+   */
+  constructor(id, storage, key) {
+    this.element = document.getElementById(id);
+    this.storage = storage;
+    this.key = key;
+    this.bindUi_(id);
+    this.load();
+  }
+
+  /**
+   * Bind this class to the UI elements.
+   *
+   * @param {string} id The HTML id used to find UI elements.
+   */
+  bindUi_(id) {
+    const save = document.getElementById(`${id}-save`);
+    save.onclick = this.save.bind(this);
+
+    this.element.onkeyup = this.keyup.bind(this);
+  }
+
+  /**
+   * Load the file.
+   *
+   * @return {!Promise<void>} Promise that resolves when the load finishes.
+   */
+  async load() {
+    const data = await this.storage.getItem(this.key) ?? '';
+    this.element.value = data;
+  }
+
+  /**
+   * Save the file.
+   *
+   * @return {!Promise<void>} Promise that resolves when the save finishes.
+   */
+  async save() {
+    if (this.element.value.length === 0) {
+      await this.storage.removeItem(this.key);
+    } else {
+      await this.storage.setItem(this.key, this.element.value);
+    }
+  }
+
+  /**
+   * Handle keypresses in the UI.
+   *
+   * @param {?Event} e The keyboard event.
+   */
+  keyup(e) {
+    switch (e.key) {
+      // Escape should discard changes & reload content.
+      case 'Escape':
+        this.load();
+        break;
+
+      // Ctrl+Enter saves changes.
+      case 'Enter':
+        if (e.ctrlKey) {
+          this.save();
+        }
+        break;
+    }
+  }
+}
+
+/**
  * Name to help with debugging in the terminal.
  */
 const watched = {};
@@ -170,11 +247,18 @@ const watched = {};
 /**
  * Event when the window finishes loading.
  */
-globalThis.addEventListener('DOMContentLoaded', (event) => {
+globalThis.addEventListener('DOMContentLoaded', async (event) => {
+  const storage = await getSyncStorage();
+  watched.etcSshConfig = new StorageFileWatcher(
+      'ssh-files-etc-ssh-config', storage, '/nassh/etc/ssh/ssh_config');
+  watched.etcSshKnownHosts = new StorageFileWatcher(
+      'ssh-files-etc-ssh-known-hosts', storage,
+      '/nassh/etc/ssh/ssh_known_hosts');
+
   // Load all the ~/.ssh files into the UI.
   getIndexeddbFileSystem().then((fs) => {
     filesystem = fs;
-    watched.knowHosts = new FileWatcher(
+    watched.knownHosts = new FileWatcher(
         'ssh-files-known-hosts', '/.ssh/known_hosts');
     watched.sshConfig = new FileWatcher(
         'ssh-files-config', '/.ssh/config');
