@@ -135,13 +135,18 @@ class DirWatcher {
     button.textContent = '🗑';
     button.onclick = this.deleteFile_.bind(this, li, path.fullPath);
 
-    const span = document.createElement('span');
-    span.textContent = path.name;
-    span.style.paddingLeft = '1em';
-    span.style.paddingRight = '1em';
+    const a = document.createElement('a');
+    a.download = path.name;
+    a.textContent = path.name;
+    filesystem.readFile(path.fullPath).then((data) => {
+      const blob = new Blob([data], {type: 'text/plain'});
+      a.href = URL.createObjectURL(blob);
+    });
+    a.style.paddingLeft = '1em';
+    a.style.paddingRight = '1em';
 
     li.appendChild(button);
-    li.appendChild(span);
+    li.appendChild(a);
     this.element.appendChild(li);
   }
 
