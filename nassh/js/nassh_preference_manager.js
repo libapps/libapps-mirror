@@ -174,9 +174,6 @@ export class LocalPreferenceManager extends lib.PreferenceManager {
       /* The last profile the user selected. */
       ['connectDialog/lastProfileId', ''],
 
-      /* How many times we've shown the migration message. */
-      ['migrate/showCount', 0],
-
       /**
        * Whether permission to track performance metrics was granted (true) or
        * or denied (false). Null if user has not been prompted.
