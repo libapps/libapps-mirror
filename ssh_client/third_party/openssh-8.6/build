@@ -94,6 +94,7 @@ def src_configure(metadata):
         f"--host={tc.chost}",
         # The prefix path matches what is used at runtime.
         "--prefix=/",
+        "--sysconfdir=/etc/ssh",
         "--cache-file=../config.cache",
         f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
         f"LIBS={' '.join(EXTRA_LIBS)}",
