@@ -1,3 +1,15 @@
+# 0.66, 2024-04-29, Syncable ssh configs, and better profile storage.
+
+* mosh: Filter uri args a bit.
+* ssh files: Support syncing of /etc/ssh/ssh_config & /etc/ssh/ssh_known_hosts.
+* prefs: Drop unused migrate/showCount.
+* openssh: Set system config path to /etc/ssh.
+* prefs: Make it easy to save imported private keys.
+* connect: Make row height static.
+* connect: Drop support for Terminal SSH.
+* connect: Inline spellcheck=false in HTML.
+* prefs: Switch to coarse storage.
+
 # 0.65, 2024-04-15, Default profile regression fix.
 
 * popup: Support Shift+Click like Chrome -- tab in new window.
