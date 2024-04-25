@@ -2,6 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+/**
+ * @fileoverview
+ * @suppress {moduleLoad}
+ */
+
+import {punycode} from './deps_punycode.rollup.js';
+
 import {lib} from '../../libdot/index.js';
 
 import {hterm} from '../index.js';
@@ -268,6 +275,16 @@ hterm.TextAttributes.prototype.createContainer = function(textContent = '') {
     classes.push('uri-node');
     span.uriId = this.uriId;
     span.title = this.uri;
+    try {
+      const uri = new URL(this.uri);
+      const idn_host = punycode.toASCII(uri.host);
+      const disp_host = idn_host === uri.host ? uri.host : idn_host;
+      if (disp_host) {
+        span.title += `\n(${disp_host})`;
+      }
+    } catch (e) {
+      // If the URL doesn't parse, then it won't open, so don't need a label.
+    }
     span.addEventListener('click', hterm.openUrl.bind(this, this.uri));
   }
 

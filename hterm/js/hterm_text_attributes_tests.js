@@ -236,6 +236,28 @@ it('invisible', () => {
   assert.equal(tattrs.backgroundSource, node.style.backgroundColor);
 });
 
+/**
+ * Handling of URIs.
+ */
+describe('uris', () => {
+  const tattrs = new hterm.TextAttributes(globalThis.document);
+
+  [
+    ['http://example.com', 'http://example.com\n(example.com)'],
+    ['example.com', 'example.com'],
+    ['mailto:u@example.com', 'mailto:u@example.com'],
+    ['https://日本.com/foo', 'https://日本.com/foo\n(xn--wgv71a.com)'],
+    ['http://\u202E@example.com/moc.elgoog\u202D',
+     'http://‮@example.com/moc.elgoog‭\n(example.com)'],
+  ].forEach(([uri, exp]) => {
+    it(uri, () => {
+      tattrs.uri = uri;
+      const node = tattrs.createContainer('asdf');
+      assert.equal(node.title, exp);
+    });
+  });
+});
+
 it('splitWidecharString-ascii', () => {
   const text = 'abcdefghijklmn';
 
