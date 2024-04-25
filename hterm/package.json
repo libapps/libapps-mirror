@@ -28,11 +28,14 @@
     "test": "./bin/load_tests"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "~15",
     "chai": "~4",
     "eslint": "~8",
     "mocha": "~10",
     "mocha-headless-chrome": "~4",
     "terser": "~5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "punycode": "~2"
+  }
 }

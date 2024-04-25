@@ -26,12 +26,12 @@ def _get_default_paths(basedir):
         if x.suffix not in {".js"}
     )
 
-    # All files in js/*.js.
+    # All files in js/*.js excluding generated files.
     # Use relpath for nicer default output.
     # Sort to ensure hterm.js comes before hterm_other.js, etc.
     js_files = sorted(
         [hterm.DIR / "index.js"]
-        + list(x for x in JS_DIR.glob("*.js"))
+        + list(x for x in JS_DIR.glob("*.js") if not x.name.startswith("deps_"))
         + list((hterm.DIR / "third_party").glob("*/*.js"))
     )
 

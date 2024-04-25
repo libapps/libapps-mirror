@@ -1,3 +1,6 @@
+# Bundled dependencies.
+js/*.rollup.js
+
 # Stuff we build for distribution
 dist
 /hterm-*.tgz

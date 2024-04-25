@@ -8,11 +8,18 @@
 
 import string from '@bkuri/rollup-plugin-string';
 import image from '@rollup/plugin-image';
+import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import url from '@rollup/plugin-url';
 import gitInfo from 'rollup-plugin-git-info';
 
-const plugins = [];
+const plugins = [
+  resolve({
+    mainFields: ['module', 'jsnext:main'],
+    preferBuiltins: false
+  }),
+];
+
 if (process.env.NODE_ENV === 'production') {
   plugins.push(terser());
 }
@@ -25,6 +32,23 @@ const output = {
   indent: false,
   preferConst: true,
 };
+
+/**
+ * Helper for building up deps.
+ *
+ * @param {string} name
+ * @return {!Object}
+ */
+function dep(name) {
+  return {
+    input: `js/deps_${name}.shim.js`,
+    output: {
+      ...output,
+      file: `js/deps_${name}.rollup.js`,
+    },
+    plugins,
+  };
+}
 
 // The files we'll build.  The deps target must be first.
 let targets = [
@@ -49,6 +73,9 @@ let targets = [
     ],
   },
 
+  // 3rd party deps.
+  dep('punycode'),
+
   // Main lib.
   {
     input: 'index.js',
@@ -56,11 +83,6 @@ let targets = [
       ...output,
       file: 'dist/js/hterm.js',
     },
-    external: [
-      '../../../libdot/index.js',
-      '../../libdot/index.js',
-      '../libdot/index.js',
-    ],
     plugins,
   },
 ];
