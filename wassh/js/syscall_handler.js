@@ -605,10 +605,10 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
               handle = new Sockets.RelaySocket(
                   domain, type, protocol, this.tcpSocketsOpen_);
               this.firstConnection_ = false;
-            } else if (Sockets.WebTcpSocket.isSupported()) {
-              handle = new Sockets.WebTcpSocket(domain, type, protocol);
             } else if (Sockets.ChromeTcpSocket.isSupported()) {
               handle = new Sockets.ChromeTcpSocket(domain, type, protocol);
+            } else if (Sockets.WebTcpSocket.isSupported()) {
+              handle = new Sockets.WebTcpSocket(domain, type, protocol);
             } else {
               return WASI.errno.EPROTONOSUPPORT;
             }
