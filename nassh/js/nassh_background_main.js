@@ -26,6 +26,18 @@ function onLaunched() {
   didLaunch = true;
 }
 
+let omniboxEarlyData = null;
+
+/**
+ * Remember omnibox input before we were ready.
+ *
+ * @param {string} text The text to operate on.
+ * @param {string} disposition Mode the user wants us to open as.
+ */
+function omniboxOnInputEntered(text, disposition) {
+  omniboxEarlyData = {text, disposition};
+}
+
 // We have to turn on listeners here so we can handle messages when first
 // launched.
 const externalApi_ = new ExternalApi();
@@ -35,6 +47,12 @@ externalApi_.addListeners();
 // them.  We'll clean this up below during init.
 if (browserAction) {
   browserAction.onClicked.addListener(onLaunched);
+}
+
+// We have to listen for entered event so we don't miss it.  We'll clean this
+// up below during init.
+if (globalThis.chrome?.omnibox) {
+  chrome.omnibox.onInputEntered.addListener(omniboxOnInputEntered);
 }
 
 /**
@@ -56,6 +74,7 @@ function init() {
   // If omnibox is enabled, set it up.
   if (globalThis.chrome?.omnibox) {
     app.installOmnibox(chrome.omnibox);
+    chrome.omnibox.onInputEntered.removeListener(omniboxOnInputEntered);
   }
 
   // Probe gnubby extensions.
@@ -76,6 +95,13 @@ function init() {
   // If the user tried to run us while we were initializing, run it now.
   if (didLaunch) {
     app.onLaunched();
+  }
+
+  // If the user triggered omnibox while we were sleeping, run it now.
+  if (omniboxEarlyData !== null) {
+    app.omniboxOnInputEntered_(
+        omniboxEarlyData.text, omniboxEarlyData.disposition);
+    omniboxEarlyData = null;
   }
 
   // Help with live debugging.
