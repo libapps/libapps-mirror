@@ -213,7 +213,11 @@ App.prototype.omniboxOnInputEntered_ = function(text, disposition) {
     }
   }
 
-  const url = lib.f.getURL(`/html/nassh.html?${text}`);
+  // If the user typed user@host directly, connect to it via hash.  If they
+  // matched a saved profile, pass it via query string.
+  const delim = text.startsWith('profile-id=') ? '?' : '#';
+
+  const url = lib.f.getURL(`/html/nassh.html${delim}${text}`);
   switch (disposition) {
     default:
       console.warn('unknown disposition: ' + disposition);
