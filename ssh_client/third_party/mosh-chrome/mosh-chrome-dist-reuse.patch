@@ -26,14 +26,14 @@
      strip_components = 1,
      build_file = "//:external_builds/BUILD.nacl_sdk",
 @@ -92,13 +92,6 @@ new_git_repository(
-     build_file = "external_builds/BUILD.mosh",
+     build_file = "BUILD.mosh",
  )
  
 -new_git_repository(
 -    name = "libapps",
 -    remote = "https://github.com/libapps/libapps-mirror.git",
 -    commit = "2056832f0b287924110849cecbf1e5019c1a51c3", # tag = "hterm-1.80"
--    build_file = "external_builds/BUILD.libapps",
+-    build_file = "BUILD.libapps",
 -)
 -
  git_repository(

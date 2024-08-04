@@ -2,8 +2,8 @@ nassh has access to the private nacl network stack, but not the public one.
 This is a historical wart (nassh was implemented back when only the private
 stack existed).  Convert the mosh-chrome code over to the private stack.
 
---- a/external_builds/BUILD.nacl_sdk
-+++ b/external_builds/BUILD.nacl_sdk
+--- a/external/BUILD.nacl_sdk
++++ b/external/BUILD.nacl_sdk
 @@ -45,6 +45,7 @@ cc_library(
      srcs = [
          # TODO: Release/Debug should be chosen based on build type.

@@ -3,23 +3,23 @@ except for raising the banner size to 8k.  It was only increased to 255.
 
 --- a/WORKSPACE
 +++ b/WORKSPACE
-@@ -78,10 +78,11 @@ new_http_archive(
-     build_file = "external_builds/BUILD.glibc_compat",
- )
+@@ -78,10 +78,11 @@ http_archive(
  
+ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+ load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 -new_git_repository(
-+new_http_archive(
++http_archive(
      name = "libssh",
 -    remote = "https://github.com/rpwoodbu/libssh.git",
 -    commit = "cdd4f3e3efb8758a53ebf34ac7b34d74d217158d", # branch = "mosh-chrome-patches"
 +    url = "https://www.libssh.org/files/0.9/libssh-0.9.5.tar.xz",
 +    sha256 = "acffef2da98e761fc1fd9c4fddde0f3af60ab44c4f5af05cd1b2d60a3fa08718",
 +    strip_prefix = "libssh-0.9.5",
-     build_file = "external_builds/BUILD.libssh",
+     build_file = "BUILD.libssh",
  )
  
---- a/external_builds/BUILD.libssh
-+++ b/external_builds/BUILD.libssh
+--- a/external/BUILD.libssh
++++ b/external/BUILD.libssh
 @@ -7,12 +7,88 @@ config_setting(
  
  cc_library(

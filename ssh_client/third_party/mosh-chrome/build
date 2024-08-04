@@ -16,22 +16,21 @@ import ssh_client  # pylint: disable=wrong-import-position
 
 ARCHIVES = ("%(P)s.tar.gz",)
 PATCHES = (
-    "%(p)s-private-net.patch",
-    "%(p)s-mosh-main.patch",
-    "%(p)s-hterm-update.patch",
-    "%(p)s-app-to-ext.patch",
-    "%(p)s-term-init.patch",
-    "%(p)s-misc.patch",
-    "%(p)s-dist-reuse.patch",
-    "%(p)s-ssh-agent.patch",
-    "%(p)s-libssh-update.patch",
-    "%(p)s-reconnect.patch",
-    "%(p)s-contextmenu.patch",
-    "%(p)s-utf8-send.patch",
-    "%(p)s-icon.patch",
-    "%(p)s-hterm-runcommandclass.patch",
-    "%(p)s-hterm-storage.patch",
-    "%(p)s-argv-pass-thru.patch",
+    "%(pn)s-private-net.patch",
+    "%(pn)s-0.5.6-mosh-main.patch",
+    "%(pn)s-0.5.6-hterm-update.patch",
+    "%(pn)s-0.5.6-app-to-ext.patch",
+    "%(pn)s-0.5.6-misc.patch",
+    "%(pn)s-dist-reuse.patch",
+    "%(pn)s-0.5.6-ssh-agent.patch",
+    "%(pn)s-libssh-update.patch",
+    "%(pn)s-0.5.6-reconnect.patch",
+    "%(pn)s-0.5.6-contextmenu.patch",
+    "%(pn)s-0.5.6-icon.patch",
+    "%(pn)s-0.5.6-hterm-runcommandclass.patch",
+    "%(pn)s-0.5.6-hterm-storage.patch",
+    "%(pn)s-0.5.6-argv-pass-thru.patch",
+    "%(pn)s-pnacl-python2.patch",
 )
 
 
@@ -39,13 +38,13 @@ def src_compile(_metadata):
     """Compile the source."""
     ssh_client.run(
         [
-            "bazel-0.17",
+            "bazel-5",
             "build",
+            "--verbose_failures",
             "-s",
             "--spawn_strategy=standalone",
             "--genrule_strategy=standalone",
             "//:mosh_chrome",
-            "--config=pnacl",
         ],
         extra_env={"DISTDIR": str(ssh_client.DISTDIR)},
     )
@@ -56,10 +55,10 @@ def src_install(metadata):
     output = Path(ssh_client.OUTPUT) / "plugin" / "mosh"
     output.mkdir(exist_ok=True)
     srcdir = Path(metadata["S"])
-    genfiles = srcdir / "bazel-genfiles"
+    genfiles = srcdir / "bazel-bin"
 
     for f in (genfiles / "mosh_nacl").glob("*"):
-        if f.suffix != ".pexe":
+        if f.suffix in {".nexe", ".nmf"}:
             ssh_client.copy(f, output / f.name)
     ssh_client.copy(
         genfiles / "mosh_app" / "mosh_version.js", output / "mosh_version.js"

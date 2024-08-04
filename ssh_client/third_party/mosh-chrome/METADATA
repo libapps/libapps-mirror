@@ -6,6 +6,6 @@ third_party {
     type: HOMEPAGE
     value: "https://github.com/rpwoodbu/mosh-chrome"
   }
-  version: "0.5.6"
-  last_upgrade_date { year: 2020 month: 8 day: 5 }
+  version: "ff3b15de80d5269d98d21a10f933a73e031c4012"
+  last_upgrade_date { year: 2022 month: 3 day: 2 }
 }

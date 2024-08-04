@@ -1,0 +1,63 @@
+pnacl tries to use "python" instead of "python2".
+
+--- a/nacl_sdk/pnacl.bzl
++++ b/nacl_sdk/pnacl.bzl
+@@ -13,7 +13,7 @@ def pnacl_finalized(name, src, visibility=None):
+     srcs = [src],
+     outs = [name + ".pexe"],
+     tools = ["@nacl_sdk//:pnacl_toolchain"],
+-    cmd = "external/nacl_sdk/toolchain/linux_pnacl/bin/pnacl-finalize $(SRCS) -o $(OUTS)",
++    cmd = "PNACLPYTHON=python2 external/nacl_sdk/toolchain/linux_pnacl/bin/pnacl-finalize $(SRCS) -o $(OUTS)",
+     message = "Finalizing portable binary",
+     visibility = visibility,
+   )
+@@ -41,6 +41,7 @@ def pnacl_translated(name, src, arch, visibility=None):
+     tools = ["@nacl_sdk//:pnacl_toolchain"],
+     message = "Translating portable bitcode to native code",
+     cmd = """
++      PNACLPYTHON=python2 \
+       external/nacl_sdk/toolchain/linux_pnacl/bin/pnacl-translate \
+         -arch {arch} {extra_flags} $(SRCS) -o $(OUTS)
+     """.format(
+--- a/toolchain/pnacl_ar.sh
++++ b/toolchain/pnacl_ar.sh
+@@ -1,3 +1,4 @@
+ #!/bin/bash
+ set -euo pipefail
++export PNACLPYTHON=python2
+ external/nacl_sdk/toolchain/linux_pnacl/bin/pnacl-ar "$@"
+--- a/toolchain/pnacl_clang++.sh
++++ b/toolchain/pnacl_clang++.sh
+@@ -1,3 +1,4 @@
+ #!/bin/bash
+ set -euo pipefail
++export PNACLPYTHON=python2
+ external/nacl_sdk/toolchain/linux_pnacl/bin/pnacl-clang++ "$@"
+--- a/toolchain/pnacl_clang.sh
++++ b/toolchain/pnacl_clang.sh
+@@ -1,3 +1,4 @@
+ #!/bin/bash
+ set -euo pipefail
++export PNACLPYTHON=python2
+ external/nacl_sdk/toolchain/linux_pnacl/bin/pnacl-clang "$@"
+--- a/toolchain/pnacl_ld.sh
++++ b/toolchain/pnacl_ld.sh
+@@ -1,3 +1,4 @@
+ #!/bin/bash
+ set -euo pipefail
++export PNACLPYTHON=python2
+ external/nacl_sdk/toolchain/linux_pnacl/bin/pnacl-ld "$@"
+--- a/toolchain/pnacl_nm.sh
++++ b/toolchain/pnacl_nm.sh
+@@ -1,3 +1,4 @@
+ #!/bin/bash
+ set -euo pipefail
++export PNACLPYTHON=python2
+ external/nacl_sdk/toolchain/linux_pnacl/bin/pnacl-nm "$@"
+--- a/toolchain/pnacl_strip.sh
++++ b/toolchain/pnacl_strip.sh
+@@ -1,3 +1,4 @@
+ #!/bin/bash
+ set -euo pipefail
++export PNACLPYTHON=python2
+ external/nacl_sdk/toolchain/linux_pnacl/bin/pnacl-strip "$@"
