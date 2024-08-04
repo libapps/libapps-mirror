@@ -1,0 +1,11 @@
+name: "bazel"
+description: "a fast, scalable, multi-language and extensible build system"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://bazel.build/"
+  }
+  version: "5.4.1"
+  last_upgrade_date { year: 2023 month: 4 day: 19 }
+}
