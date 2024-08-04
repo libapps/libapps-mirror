@@ -40,7 +40,6 @@ tc_pkgs=(
   # Build tools.
   gnuconfig
   mandoc
-  bazel-0.17
   bazel-5
 
   # WASM toolchain.
