@@ -1,3 +1,9 @@
+# 0.67, 2024-08-12, Omnibox fixes.
+
+* omnibox: Fix ad-hoc connections.
+* omnibox: Fix triggers when background page is inactive.
+* wassh: sockets: Prefer Chrome sockets for now.
+
 # 0.66, 2024-04-29, Syncable ssh configs, and better profile storage.
 
 * mosh: Filter uri args a bit.
