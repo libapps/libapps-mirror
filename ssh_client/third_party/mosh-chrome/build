@@ -31,6 +31,7 @@ PATCHES = (
     "%(pn)s-0.5.6-hterm-storage.patch",
     "%(pn)s-0.5.6-argv-pass-thru.patch",
     "%(pn)s-pnacl-python2.patch",
+    "%(pn)s-mosh-update.patch",
 )
 
 
