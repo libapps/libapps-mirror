@@ -14,7 +14,6 @@
 __BEGIN_DECLS
 
 #define fork() -1
-#define getpid() 100
 pid_t getppid(void);
 pid_t getpgrp(void);
 

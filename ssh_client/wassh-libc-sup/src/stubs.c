@@ -110,9 +110,3 @@ pid_t getpgrp(void) {
 int chown(const char* path, uid_t uid, gid_t gid) {
   STUB_RETURN(0, "path={%s} uid=%i gid=%i", path, uid, gid);
 }
-int chmod(const char* path, mode_t mode) {
-  STUB_RETURN(0, "path={%s} mode=%o", path, mode);
-}
-int fchmod(int fd, mode_t mode) {
-  STUB_RETURN(0, "fd=%i mode=%o", fd, mode);
-}

@@ -214,6 +214,8 @@ def _toolchain_wasm_env():
     incdir = sysroot / "include"
     pcdir = libdir / "pkgconfig"
 
+    # We currently support the WASI preview1 ABI.
+    target = "wasm32-wasip1"
     return {
         # Only use single core here due to known bug in 89 release:
         # https://github.com/WebAssembly/binaryen/issues/2273
@@ -222,26 +224,35 @@ def _toolchain_wasm_env():
         "ac_cv_func_malloc_0_nonnull": "yes",
         "ac_cv_func_realloc_0_nonnull": "yes",
         "CHOST": "wasm32-wasi",
-        "CC": f"{bin_dir / 'clang'} --sysroot={sysroot}",
-        "CXX": f"{bin_dir / 'clang++'} --sysroot={sysroot}",
+        "CC": f"{bin_dir / 'clang'} --sysroot={sysroot} -target {target}",
+        "CXX": f"{bin_dir / 'clang++'} --sysroot={sysroot} -target {target}",
         "AR": str(bin_dir / "llvm-ar"),
         "RANLIB": str(bin_dir / "llvm-ranlib"),
         "STRIP": str(BUILD_BINDIR / "wasm-strip"),
         "PKG_CONFIG_SYSROOT_DIR": str(sysroot),
         "PKG_CONFIG_LIBDIR": str(pcdir),
         "SYSROOT": str(sysroot),
-        "CPPFLAGS": " ".join((f'-isystem {incdir / "wassh-libc-sup"}',)),
+        "CPPFLAGS": " ".join(
+            (
+                f'-isystem {incdir / "wassh-libc-sup"}',
+                "-D_WASI_EMULATED_GETPID",
+                "-D_WASI_EMULATED_PROCESS_CLOCKS",
+                "-D_WASI_EMULATED_SIGNAL",
+            )
+        ),
         "LDFLAGS": " ".join(
-            [
+            (
                 f"-L{libdir}",
                 "-lwassh-libc-sup",
+                "-lwasi-emulated-getpid",
+                "-lwasi-emulated-process-clocks",
                 "-lwasi-emulated-signal",
                 (
                     "-Wl,--allow-undefined-file="
                     f"{libdir / 'wassh-libc-sup.imports'}"
                 ),
                 "-Wl,--export=__wassh_signal_deliver",
-            ]
+            )
         ),
     }
 

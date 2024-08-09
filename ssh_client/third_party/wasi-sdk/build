@@ -14,8 +14,8 @@ sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ("%(P)s-linux.tar.gz",)
-PATCHES = ("%(p)s-ififo.patch",)
+ARCHIVES = ("%(P)s-x86_64-linux.tar.gz",)
+S = "%(workdir)s/%(P)s-x86_64-linux"
 
 
 def src_install(metadata):
