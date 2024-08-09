@@ -1,0 +1,21 @@
+we don't use/build gtest, so omit it.
+
+--- a/configure
++++ b/configure
+@@ -845,7 +845,7 @@
+ OBJC
+ OBJCFLAGS
+ LT_SYS_LIBRARY_PATH'
+-ac_subdirs_all='third_party/googletest'
++ac_subdirs_all=
+ 
+ # Initialize some variables set by options.
+ ac_init_help=
+@@ -20689,7 +20689,6 @@
+ export CXXFLAGS
+ 
+ 
+-subdirs="$subdirs third_party/googletest"
+ 
+ 
+ ac_config_files="$ac_config_files Makefile src/Makefile benchmarks/Makefile conformance/Makefile protobuf.pc protobuf-lite.pc"

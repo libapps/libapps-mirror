@@ -36,6 +36,7 @@ tc_pkgs=(
   # Build tools.
   gnuconfig
   mandoc
+  protobuf
 
   # WASM toolchain.
   binaryen
@@ -43,7 +44,7 @@ tc_pkgs=(
   wasi-sdk
 )
 for tc_pkg in "${tc_pkgs[@]}"; do
-  ./third_party/${tc_pkg}/build
+  ./third_party/${tc_pkg}/build --toolchain build
 done
 
 # The plugin packages.
@@ -64,6 +65,7 @@ mosh_pkgs=(
   zlib
   openssl
   ncurses
+  protobuf
 )
 ./wassh-libc-sup/build --toolchain wasip1-threads
 for pkg in "${mosh_pkgs[@]}"; do
