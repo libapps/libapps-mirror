@@ -1,0 +1,78 @@
+From eb0d82be2238a70a243e2ea69d6041d3644bf5b2 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@chromium.org>
+Date: Fri, 9 Aug 2024 05:12:30 -0400
+Subject: [PATCH] include openssl/bn.h explicitly in more places
+
+These files use BN APIs, so explicitly include bn.h rather than rely on
+other openssl headers (sometimes) including it for us.
+---
+ kexdh.c                         | 1 +
+ kexecdh.c                       | 1 +
+ openbsd-compat/openssl-compat.h | 1 +
+ ssh-keygen.c                    | 1 +
+ ssh-pkcs11.c                    | 1 +
+ 5 files changed, 5 insertions(+)
+
+diff --git a/kexdh.c b/kexdh.c
+index c1084f2146e1..10595297cadf 100644
+--- a/kexdh.c
++++ b/kexdh.c
+@@ -34,6 +34,7 @@
+ #include <signal.h>
+ 
+ #include "openbsd-compat/openssl-compat.h"
++#include <openssl/bn.h>
+ #include <openssl/dh.h>
+ 
+ #include "sshkey.h"
+diff --git a/kexecdh.c b/kexecdh.c
+index efb2e55a6d42..f63e1570ad98 100644
+--- a/kexecdh.c
++++ b/kexecdh.c
+@@ -34,6 +34,7 @@
+ #include <string.h>
+ #include <signal.h>
+ 
++#include <openssl/bn.h>
+ #include <openssl/ecdh.h>
+ 
+ #include "sshkey.h"
+diff --git a/openbsd-compat/openssl-compat.h b/openbsd-compat/openssl-compat.h
+index f6796b3baaa9..7bce9ad93ece 100644
+--- a/openbsd-compat/openssl-compat.h
++++ b/openbsd-compat/openssl-compat.h
+@@ -20,6 +20,7 @@
+ #include "includes.h"
+ #ifdef WITH_OPENSSL
+ 
++#include <openssl/bn.h>
+ #include <openssl/opensslv.h>
+ #include <openssl/crypto.h>
+ #include <openssl/evp.h>
+diff --git a/ssh-keygen.c b/ssh-keygen.c
+index 97c6d134a16f..522549ec2637 100644
+--- a/ssh-keygen.c
++++ b/ssh-keygen.c
+@@ -19,6 +19,7 @@
+ #include <sys/stat.h>
+ 
+ #ifdef WITH_OPENSSL
++#include <openssl/bn.h>
+ #include <openssl/evp.h>
+ #include <openssl/pem.h>
+ #include "openbsd-compat/openssl-compat.h"
+diff --git a/ssh-pkcs11.c b/ssh-pkcs11.c
+index 1e76e8b2bb3a..a8ea2d2554fd 100644
+--- a/ssh-pkcs11.c
++++ b/ssh-pkcs11.c
+@@ -35,6 +35,7 @@
+ #include "openbsd-compat/sys-queue.h"
+ #include "openbsd-compat/openssl-compat.h"
+ 
++#include <openssl/bn.h>
+ #include <openssl/ecdsa.h>
+ #include <openssl/x509.h>
+ #include <openssl/err.h>
+-- 
+2.39.2
+
