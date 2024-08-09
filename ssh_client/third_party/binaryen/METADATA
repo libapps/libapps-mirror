@@ -6,5 +6,5 @@ third_party {
     type: HOMEPAGE
     value: "https://github.com/WebAssembly/binaryen"
   }
-  version: "97"
+  version: "118"
 }
