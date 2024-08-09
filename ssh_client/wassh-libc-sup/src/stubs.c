@@ -116,3 +116,14 @@ pid_t getpgrp(void) {
 int chown(const char* path, uid_t uid, gid_t gid) {
   STUB_RETURN(0, "path={%s} uid=%i gid=%i", path, uid, gid);
 }
+
+// C++ exceptions are fatal and never caught.  Which is OK if the codebase only
+// throws exceptions to abort rather than dynamic recovery.
+void* __cxa_allocate_exception(size_t thrown_size) {
+  fprintf(stderr, "\r\nC++ exceptions are disabled.\r\n");
+  abort();
+}
+void __cxa_throw(void* thrown_exception, void* tinfo, void (*dest)(void*)) {
+  fprintf(stderr, "\r\nC++ exceptions are disabled.\r\n");
+  abort();
+}
