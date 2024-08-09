@@ -67,6 +67,12 @@ int pipe(int pipefd[2]) {
   STUB_ENOSYS(-1, "");
 }
 
+char* ptsname(int fd) {
+  static char path[10];
+  strncpy(path, "/dev/tty", sizeof(path));
+  return path;
+}
+
 struct passwd* getpwuid(uid_t uid) {  // NOLINT(runtime/threadsafe_fn)
   static struct passwd pwd;
   pwd.pw_name = (char*)"";
