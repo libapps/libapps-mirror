@@ -8,7 +8,10 @@
 #define WASSH_SIGNAL_H
 
 // Force sigset/etc... definition ourselves as wasi-sdk elides it atm.
-#include <sys/types.h>
+#define __NEED_pid_t
+#define __NEED_sigset_t
+#define __NEED_uid_t
+#include <bits/alltypes.h>
 
 #include_next <signal.h>
 
@@ -62,6 +65,9 @@ int sigfillset(sigset_t*);
 int sigaddset(sigset_t*, int);
 int sigdelset(sigset_t*, int);
 int sigismember(const sigset_t*, int);
+
+// We could support this, but the API is rarely used atm.
+#define sigprocmask(how, set, oset) 0
 
 __END_DECLS
 
