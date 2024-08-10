@@ -150,15 +150,14 @@ class ToolchainInfo:
     def __init__(self, env):
         """Initialize."""
         self._env = env
-        if not env:
-            return
         self._cbuild = None
-        self.chost = self._env["CHOST"]
-        self.sysroot = Path(self._env["SYSROOT"])
-        self.libdir = self.sysroot / "lib"
-        self.incdir = self.sysroot / "include"
-        self.pkgconfdir = self.libdir / "pkgconfig"
-        self.ar = self._env["AR"]
+        self._chost = self._env.get("CHOST")
+        if "SYSROOT" in self._env:
+            self.sysroot = Path(self._env["SYSROOT"])
+            self.libdir = self.sysroot / "lib"
+            self.incdir = self.sysroot / "include"
+            self.pkgconfdir = self.libdir / "pkgconfig"
+        self.ar = self._env.get("AR")
 
     @classmethod
     def from_id(cls, name):
@@ -174,6 +173,29 @@ class ToolchainInfo:
     def activate(self):
         """Update the current environment with this toolchain."""
         os.environ.update(self._env)
+
+        for var in (
+            "AR",
+            "CC",
+            "CXX",
+            "CFLAGS",
+            "CPPFLAGS",
+            "CXXFLAGS",
+            "LDFLAGS",
+            "RANLIB",
+            "STRIP",
+            "SYSROOT",
+            "PKG_CONFIG_PATH",
+            "PKG_CONFIG_LIBDIR",
+            "PKG_CONFIG_SYSROOT_DIR",
+        ):
+            if var not in self._env:
+                os.environ.pop(var, None)
+
+    @property
+    def chost(self):
+        """Get the current hsst system."""
+        return self.cbuild if self._chost is None else self._chost
 
     @property
     def cbuild(self):

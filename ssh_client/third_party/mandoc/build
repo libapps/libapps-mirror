@@ -20,8 +20,6 @@ ARCHIVES = ("%(P)s.tar.gz",)
 
 def src_configure(_metadata):
     """Configure the source."""
-    for var in ("AR", "CC", "CFLAGS", "CPPFLAGS", "LDFLAGS"):
-        os.environ.pop(var, None)
     if not os.path.exists("Makefile.local"):
         ssh_client.run(["./configure"])
 

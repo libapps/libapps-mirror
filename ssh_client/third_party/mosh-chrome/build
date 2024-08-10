@@ -5,6 +5,7 @@
 
 """Build mosh-chrome package."""
 
+import os
 from pathlib import Path
 import sys
 
@@ -38,6 +39,9 @@ PATCHES = (
 
 def src_compile(_metadata):
     """Compile the source."""
+    # The bazel build handles the toolchain itself, so don't override.
+    for var in ("CC", "CXX"):
+        os.environ.pop(var, None)
     ssh_client.run(
         [
             "bazel-5",
