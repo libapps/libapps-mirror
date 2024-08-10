@@ -24,6 +24,7 @@ PATCHES = (
     "openssl-1.0.2a-parallel-obj-headers.patch",
     "openssl-1.0.2a-parallel-install-dirs.patch",
     "openssl-1.0.2a-parallel-symlinking.patch",
+    "openssl-1.0.2k-domd-hack.patch",
 )
 
 

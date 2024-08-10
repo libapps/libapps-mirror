@@ -167,7 +167,12 @@ class ToolchainInfo:
             return cls(_toolchain_wasm_env())
 
         assert name == "build"
-        return cls({})
+        return cls(
+            {
+                "CC": "gcc",
+                "CXX": "g++",
+            }
+        )
 
     def activate(self):
         """Update the current environment with this toolchain."""
@@ -190,6 +195,10 @@ class ToolchainInfo:
         ):
             if var not in self._env:
                 os.environ.pop(var, None)
+
+        if shutil.which("ccache"):
+            for var in ("CC", "CXX"):
+                os.environ[var] = f"ccache {os.environ[var]}"
 
     @property
     def chost(self):
