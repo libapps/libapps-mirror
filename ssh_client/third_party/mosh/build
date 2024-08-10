@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# Copyright 2024 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build mosh package."""
+
+import logging
+import os
+from pathlib import Path
+import sys
+
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+ARCHIVES = ("%(p)s.tar.gz",)
+
+
+def src_configure(metadata):
+    """Configure the source."""
+    if os.path.exists("Makefile"):
+        logging.info("Makefile exists; skipping ./configure step")
+        return
+
+    tc = metadata["toolchain"]
+    cmd = [
+        "./configure",
+        "--disable-silent-rules",
+        f"--build={tc.cbuild}",
+        f"--host={tc.chost}",
+        # The prefix path matches what is used at runtime.
+        "--prefix=/",
+        "--cache-file=../config.cache",
+        "--disable-server",
+        "--disable-hardening",
+    ]
+    ssh_client.run(cmd)
+
+    # Build the html man pages.  Since we're hooking the Makefile, we need can
+    # do this only after we've run configure.
+    cmd = " ".join(ssh_client.get_mandoc_cmd(metadata["p"]))
+    with open("man/Makefile", "ab") as f:
+        f.writelines(
+            [
+                b"all: mosh.1.html mosh-client.1.html\n",
+                b"%.html: %\n",
+                f"\t{cmd} $< >$@.tmp\n".encode("utf-8"),
+                b"\tmv $@.tmp $@\n",
+            ]
+        )
+
+
+def src_compile(_metadata):
+    """Compile the source."""
+    ssh_client.emake()
+
+
+def src_install(_metadata):
+    """Install the package."""
+    plugin_docs = ssh_client.OUTPUT / "plugin" / "docs"
+    plugin_docs.mkdir(parents=True, exist_ok=True)
+    for path in Path("man").glob("*.[0-9].html"):
+        ssh_client.copy(path, plugin_docs / path.name)
+
+
+ssh_client.build_package(sys.modules[__name__], "wasip1-threads")

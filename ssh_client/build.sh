@@ -66,6 +66,7 @@ mosh_pkgs=(
   openssl
   ncurses
   protobuf
+  mosh
 )
 ./wassh-libc-sup/build --toolchain wasip1-threads
 for pkg in "${mosh_pkgs[@]}"; do
@@ -106,6 +107,15 @@ WASM_OPT = ${PWD}/bin/wasm-opt
 
 all:
 EOF
+emit_wasm_opt_rule() {
+  local src="$1"
+  local dst="$2"
+  (
+    echo "all: ${dst}"
+    echo "${dst}: ${src}"
+    printf '\t$(WASM_OPT) ${WASM_OPTS} $< -o $@\n'
+  ) >>Makefile.wasm-opt
+}
 first="true"
 for version in "${SSH_VERSIONS[@]}"; do
   if [[ "${first}" == "true" ]]; then
@@ -117,14 +127,14 @@ for version in "${SSH_VERSIONS[@]}"; do
   mkdir -p "${dir}"
 
   for prog in scp sftp ssh ssh-keygen; do
-    (
-      echo "all: ${dir}/${prog}.wasm"
-      echo "${dir}/${prog}.wasm:" \
-        build/wasm32-wasip1/openssh-${version}*/work/openssh-*/${prog}
-      printf '\t$(WASM_OPT) ${WASM_OPTS} $< -o $@\n'
-    ) >>Makefile.wasm-opt
+    emit_wasm_opt_rule \
+      build/wasm32-wasip1/openssh-${version}*/work/openssh-*/${prog} \
+      "${dir}/${prog}.wasm"
   done
 done
+emit_wasm_opt_rule \
+  build/wasm32-wasip1-threads/mosh-*/work/mosh-*/src/frontend/mosh-client \
+  plugin/wasm/mosh-client.wasm
 make -f Makefile.wasm-opt -j${ncpus} -O
 popd >/dev/null
 
