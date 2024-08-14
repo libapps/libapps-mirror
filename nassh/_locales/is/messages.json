@@ -699,7 +699,7 @@
 		"message": "Demba skrá í skipanaglugga"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Breyta vinnuskráasafni"
+		"message": "Breyta skráasafni fjarvinnu"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Breyta hópi slóða"
@@ -717,7 +717,7 @@
 		"message": "hreinsa"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Hreinsa skjá núverandi skipanaglugga."
+		"message": "Hreinsa skjá núverandi skipanaglugga"
 	},
 	"nasftp_cmd_clip": {
 		"message": "bútur"
@@ -762,7 +762,7 @@
 		"message": "Sækir skrá: $1 sem $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Sækja skrár"
+		"message": "Sækja eina skrá"
 	},
 	"nasftp_cmd_help": {
 		"message": "hjálp"
@@ -770,14 +770,29 @@
 	"nasftp_cmd_help_help": {
 		"message": "Þessi hjálparskjár"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Breyta skráasafni staðvinnu"
+	},
 	"nasftp_cmd_list": {
 		"message": "listi"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "Birta upplýsingar um skráasafn"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Birta lista með upplýsingum um staðbundið skráasafn"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Búa til tengil á slóð sem vísar á áfangastaðinn"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Sýna núverandi skráasafn staðvinnu"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Skráasafn staðvinnu: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Sækja margar skrár"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Búa til skráasöfn"
@@ -787,6 +802,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Endurnefna skrá"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Hlaða upp mörgum skrám"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Halda áfram að sækja margar skrár"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Halda áfram að hlaða upp mörgum skrám"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "kjörstillingar"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Stilla eða afstilla kjörstillingu"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "kvaðning"
@@ -804,7 +834,7 @@
 		"message": "Hleður upp skrá: $1 sem $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Sýna núverandi vinnuskráasafn"
+		"message": "Sýna núverandi skráasafn fjarvinnu"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Fjartengt vinnuskráasafn: $1"
@@ -823,6 +853,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Flokka slóðir"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Halda áfram að sækja eina skrá"
 	},
 	"nasftp_cmd_rename": {
 		"message": "endurnefna"
@@ -856,6 +889,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Búa til tákntengingu á slóð sem vísar á áfangastaðinn"
+	},
+	"nasftp_cmd_touch": {
+		"message": "snerta"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Uppfærðu tímasetningu aðgangs og breytinga fyrir skrár"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "stytta"
@@ -908,6 +947,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: Of margar breytur"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: óþekkt breyta „$2“"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: óþekkt skipun"
 	},
@@ -919,6 +961,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 bæti flutt á $2 sekúndum ($3/sek.)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Ef niðurhal virkar ekki skaltu prófa að keyra: $1"
 	},
 	"nassh_options_error": {
 		"message": "Óþekktur valkostur: $1"
@@ -961,6 +1006,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI-hjálparforrit"
+	},
+	"preferences_key_is_local": {
+		"message": "Staðarval"
+	},
+	"preferences_key_is_synced": {
+		"message": "Samstillt val"
 	},
 	"preferences_reset": {
 		"message": "Allar kjörstillingar endurstilltar!"

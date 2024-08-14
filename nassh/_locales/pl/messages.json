@@ -705,7 +705,7 @@
 		"message": "Zrzuć plik do terminala"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Zmień katalog roboczy"
+		"message": "Zmień zdalny katalog roboczy"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Zmień grupę ścieżek"
@@ -747,22 +747,52 @@
 		"message": "Pobieram plik: $1 jako $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Pobieranie plików"
+		"message": "Pobierz 1 plik"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Ten ekran pomocy"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Zmień lokalny katalog roboczy"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Wyświetl listę szczegółów katalogu"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Wyświetl szczegóły katalogu lokalnego"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Utwórz dowiązanie do elementu docelowego w określonej ścieżce"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Pokaż bieżący lokalny katalog roboczy"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Lokalny katalog roboczy: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Pobierz kilka plików"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Utwórz katalogi"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Zmiana nazwy pliku"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Prześlij kilka plików"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Wznów pobieranie kilku plików"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Wznów przesyłanie kilku plików"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "ustawienia"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Konfigurowanie i anulowanie ustawień"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Ustaw ciąg wiersza poleceń"
@@ -774,7 +804,7 @@
 		"message": "Przesyłam plik: $1 jako $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Wyświetlanie aktualnego katalogu roboczego"
+		"message": "Pokaż bieżący zdalny katalog roboczy"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Zdalny katalog roboczy: $1"
@@ -784,6 +814,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Utwórz ścieżki kanoniczne"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Wznów pobieranie 1 pliku"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Wznów przesyłanie plików"
@@ -808,6 +841,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Utwórz dowiązanie symboliczne do elementu docelowego w określonej ścieżce"
+	},
+	"nasftp_cmd_touch": {
+		"message": "dotknij"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Zaktualizuj czas dostępu do plików i ich modyfikacji"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Skróć ścieżki do 0 bajtów"
@@ -854,6 +893,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: zbyt wiele argumentów"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: nieznany argument „$2”"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: nieznane polecenie"
 	},
@@ -865,6 +907,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "Przesłano $1 B w ciągu $2 s ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Jeśli pobieranie nie działa, spróbuj uruchomić polecenie $1"
 	},
 	"nassh_options_error": {
 		"message": "Nieznana opcja: $1"
@@ -907,6 +952,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Moduły obsługi identyfikatorów URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Ustawienie lokalne"
+	},
+	"preferences_key_is_synced": {
+		"message": "Ustawienie synchronizowane"
 	},
 	"preferences_reset": {
 		"message": "Wszystkie ustawienia zostały zresetowane."

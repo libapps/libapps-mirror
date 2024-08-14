@@ -702,7 +702,7 @@
 		"message": "Lahla ifayela kwitheminali"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Shintsha uhla lwemibhalo olusebenzayo"
+		"message": "Shintsha uhla lwemibhalo lokusebenza ukude"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Shintsha amaqembu wezindlela"
@@ -717,7 +717,7 @@
 		"message": "sula"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Sula isikrini setheminali samanje."
+		"message": "Sula isikrini setheminali samanje"
 	},
 	"nasftp_cmd_clip": {
 		"message": "namathisela"
@@ -762,7 +762,7 @@
 		"message": "Ukulanda ifayela: $1 njenge-$2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Landa amafayela"
+		"message": "Dawuniloda ifayela elilodwa"
 	},
 	"nasftp_cmd_help": {
 		"message": "usizo"
@@ -770,20 +770,50 @@
 	"nasftp_cmd_help_help": {
 		"message": "Lesi sikrini sosizo"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Shintsha uhla lwemibhalo olusebenzayo lwasendaweni"
+	},
 	"nasftp_cmd_list": {
 		"message": "uhlu"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "Yenza uhlu lwemininingwane yohla lwemibhalo"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Imininingwane yohla lwemibhalo lwasendaweni"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Dala isixhumanisi kwindlela ekhomba kwithagethi"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Bonisa uhla lwemibhalo olusebenza lwamanje lwasendaweni"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Uhla lwemibhalo olusebenzayo lwasendaweni: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Dawuniloda amafayela amaningi"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Dalal izinhla zemibhalo"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Qamba kabusha ifayela"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Layisha amafayela amaningi"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Qhubeka nokudawuniloda amafayela amaningi"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Qhubeka nokulayisha amafayela amaningi"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "okuncamelayo"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Setha noma ungasethi okuncamelayo"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "xwayisa"
@@ -798,7 +828,7 @@
 		"message": "Ukulayisha ifayela: $1 njenge-$2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Bonisa uhla lwemibhalo olusebenzayo lwamanje"
+		"message": "Bonisa uhla lwemibhalo lwamanje olusebenza ukude"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Uhla lwemibhalo esebenza kude: $1"
@@ -808,6 +838,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Izindlela ze-canonicalize"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Qhubeka nokudawuniloda ifayela elilodwa"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Qalisa kabusha ukulayisha amafayela"
@@ -835,6 +868,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Dala i-symlink endleleni eya kuthagethi"
+	},
+	"nasftp_cmd_touch": {
+		"message": "thinta"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Buyekeza izikhathi zokufinyelela nokulungiswa kwamafayela"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Fushanisa izindlela zibe amabhayithi angu-0"
@@ -884,6 +923,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: ukuphikisana okuningi kakhulu"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: ukuphikisana okungaziwa '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: umyalo ongaziwa"
 	},
@@ -895,6 +937,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "Amabhayithi angu-$1 adluliswe ngamasekhondi angu-$2 ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Uma ukudawuniloda kungasebenzi, zama ukuqalisa: $1"
 	},
 	"nassh_options_error": {
 		"message": "Inketho engaziwa: $1"
@@ -937,6 +982,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Izibambi ze-URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Okuncanyelwayo kwendawo"
+	},
+	"preferences_key_is_synced": {
+		"message": "Okuncanyelwayo okuvunyelanisiwe"
 	},
 	"preferences_reset": {
 		"message": "Zonke izinketho zisethwe kabsha!"

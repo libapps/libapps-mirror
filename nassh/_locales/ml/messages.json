@@ -699,7 +699,7 @@
 		"message": "ടെർമിനലിലേക്ക് ഫയൽ ഡംപ് ചെയ്യുക"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "പ്രവർത്തിക്കുന്ന ഡയറക്റ്ററി മാറ്റുക"
+		"message": "വിദൂരത്ത് നിന്ന് പ്രവർത്തിക്കുന്ന ഡയറക്റ്ററി മാറ്റുക"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "പാതകളുടെ ഗ്രൂപ്പ് മാറ്റുക"
@@ -711,7 +711,7 @@
 		"message": "പാതകളുടെ ഉടമയെ മാറ്റുക"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "നിലവിലെ ടെർമിനൽ സ്ക്രീൻ മായ്ക്കുക."
+		"message": "നിലവിലെ ടെർമിനൽ സ്ക്രീനിലെ ഉള്ളടക്കം മായ്ക്കുക"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "ക്ലിപ്പ്ബോർഡിലേക്ക് ഫയൽ പകർത്തുക (ഡിഫോൾട്ട്: തുടക്കത്തിലെ 10MiB)"
@@ -741,22 +741,52 @@
 		"message": "ഫയൽ ഡൗൺലോഡ് ചെയ്യുന്നു: $1 എന്നത് $2 ആയി"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ഫയലുകൾ ഡൗൺലോഡ് ചെയ്യുക"
+		"message": "ഒരു ഫയൽ ഡൗൺലോഡ് ചെയ്യുക"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "ഈ സഹായ സ്‌ക്രീൻ"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "ലോക്കലായി പ്രവർത്തിക്കുന്ന ഡയറക്റ്ററി മാറ്റുക"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "ഡയറക്റ്ററി വിശദാംശങ്ങള്‍ ലിസ്‌റ്റ് ചെയ്യുക"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "ലോക്കൽ ഡയറക്റ്ററിയിലെ വിശദാംശങ്ങൾ ലിസ്റ്റ് ചെയ്യുക"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "ടാർഗെറ്റിലേക്ക് പോയിന്റ് ചെയ്യുന്ന പാതയിൽ ലിങ്ക് സൃഷ്ടിക്കുക"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "നിലവിൽ ലോക്കലായി പ്രവർത്തിക്കുന്ന ഡയറക്റ്ററി കാണിക്കുക"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "ലോക്കലായി പ്രവർത്തിക്കുന്ന ഡയറക്റ്ററി: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "ഒന്നിലധികം ഫയലുകൾ ഡൗൺലോഡ് ചെയ്യുക"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "ഡയറക്റ്ററികൾ സൃഷ്‌ടിക്കുക"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ഫയലിന്റെ പേര് മാറ്റുക"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "ഒന്നിലധികം ഫയലുകൾ അപ്‌ലോഡ് ചെയ്യുക"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "ഒന്നിലധികം ഫയലുകൾ ഡൗൺലോഡ് ചെയ്യുന്നത് പുനരാരംഭിക്കുക"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "ഒന്നിലധികം ഫയലുകൾ അപ്‌ലോഡ് ചെയ്യുന്നത് പുനരാരംഭിക്കുക"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "മുൻഗണനകൾ"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "മുൻഗണന സജ്ജീകരിക്കുക അല്ലെങ്കിൽ സജ്ജീകരിച്ചത് മാറ്റുക"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "പ്രോംപ്റ്റ് സ്ട്രിംഗ് സജ്ജീകരിക്കുക"
@@ -768,7 +798,7 @@
 		"message": "ഫയൽ അപ്‌ലോഡ് ചെയ്യുന്നു: $1 എന്നത് $2 ആയി ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "നിലവിൽ പ്രവർത്തിക്കുന്ന ഡയറക്റ്ററി കാണിക്കുക"
+		"message": "നിലവിൽ വിദൂരത്ത് നിന്ന് പ്രവർത്തിക്കുന്ന ഡയറക്റ്ററി കാണിക്കുക"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "റിമോട്ടായി പ്രവർത്തിക്കുന്ന ഡയറക്റ്ററി: $1"
@@ -778,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "പാതകൾ കനോണിക്കലൈസ് ചെയ്യുക"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "ഒരു ഫയൽ ഡൗൺലോഡ് ചെയ്യുന്നത് പുനരാരംഭിക്കുക"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "ഫയലുകൾ അപ്‌ലോഡ് ചെയ്യുന്നത് പുനരാരംഭിക്കുക"
@@ -802,6 +835,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "ടാർഗെറ്റിലേക്ക് പോയിന്റ് ചെയ്യുന്ന പാതയിൽ സൂചകമായ ലിങ്ക് സൃഷ്ടിക്കുക"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ഫയലുകൾ ആക്‌സസ് ചെയ്തതും പരിഷ്‌കരിച്ചതുമായ സമയങ്ങൾ അപ്ഡേറ്റ് ചെയ്യുക"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "പാതകളെ 0 ബൈറ്റുകളായി ചുരുക്കുക"
@@ -848,6 +884,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: നിരവധി സൂത്രവാക്യങ്ങൾ"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: '$2' എന്ന സൂത്രവാക്യം അജ്ഞാതമാണ്"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: അജ്ഞാത കമാൻഡ്"
 	},
@@ -859,6 +898,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$2 സെക്കൻഡിൽ ($3/സെ) മൊത്തം $1 ബൈറ്റുകൾ കൈമാറി"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "ഡൗൺലോഡ് ചെയ്യൽ പ്രവർത്തിക്കുന്നില്ലെങ്കിൽ, ഇനിപ്പറയുന്നത് റൺ ചെയ്ത് നോക്കൂ: $1"
 	},
 	"nassh_options_error": {
 		"message": "അജ്ഞാതമായ ഓപ്‌ഷൻ: $1"
@@ -901,6 +943,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI കൈകാര്യം ചെയ്യുന്ന സംവിധാനങ്ങൾ"
+	},
+	"preferences_key_is_local": {
+		"message": "ലോക്കൽ മുൻഗണന"
+	},
+	"preferences_key_is_synced": {
+		"message": "ലിങ്ക് ചെയ്ത മുൻഗണന"
 	},
 	"preferences_reset": {
 		"message": "എല്ലാ മുൻഗണനകളും റീസെറ്റ് ചെയ്‌തു!"

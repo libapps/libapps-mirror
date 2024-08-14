@@ -693,7 +693,7 @@
 		"message": "ფაილის ჩაგდება ტერმინალში"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "სამუშაო კატალოგის შეცვლა"
+		"message": "დისტანციური სამუშაო დირექტორიის შეცვლა"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "მდებარეობათა ჯგუფის შეცვლა"
@@ -705,7 +705,7 @@
 		"message": "მდებარეობათა მფლობელის შეცვლა"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "ტერმინალის ამჟამინდელი ეკრანის გასუფთავება."
+		"message": "ტერმინალის ამჟამინდელი ეკრანის გასუფთავება"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "ფაილის კოპირება გაცვლის ბუფერში (ნაგულისხმევი: პირველი 10 მებიბაიტი)"
@@ -735,22 +735,52 @@
 		"message": "მიმდინარეობს ფაილის ჩამოტვირთვა: $1, როგორც $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ფაილების ჩამოტვირთვა"
+		"message": "ერთი ფაილის ჩამოტვირთვა"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "ეს დამხმარე ეკრანი"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "ადგილობრივი სამუშაო დირექტორიის შეცვლა"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "კატალოგის დეტალების ჩვენება"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "ადგილობრივი დირექტორიის დეტალების ჩამოთვლა"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "ბმულის შექმნა სამიზნე ობიექტის მდებარეობისთვის"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "ამჟამინდელი ადგილობრივი სამუშაო დირექტორიის ჩვენება"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "ადგილობრივი სამუშაო დირექტორია: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "რამდენიმე ფაილის ჩამოტვირთვა"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "კატალოგების შექმნა"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ფაილის გადარქმევა"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "რამდენიმე ფაილის ატვირთვა"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "რამდენიმე ფაილის ჩამოტვირთვის გაგრძელება"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "რამდენიმე ფაილის ატვირთვის გაგრძელება"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "პარამეტრები"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "პარამეტრის დაყენება ან გაუქმება"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "მოთხოვნის სტრიქონის დაყენება"
@@ -762,7 +792,7 @@
 		"message": "მიმდინარეობს ფაილის ატვირთვა: $1, როგორც $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "ამჟამინდელი სამუშაო კატალოგის ჩვენება"
+		"message": "ამჟამინდელი დისტანციური სამუშაო დირექტორიის ჩვენება"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "დისტანციური სამუშაო კატალოგი: $1"
@@ -772,6 +802,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "მდებარეობების კანონიზება"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "ერთი ფაილის ჩამოტვირთვის გაგრძელება"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "ფაილების ატვირთვის გაგრძელება"
@@ -796,6 +829,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "სიმბოლური ბმულის შექმნა სამიზნე ობიექტის მდებარეობისთვის"
+	},
+	"nasftp_cmd_touch": {
+		"message": "შეხება"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ფაილებზე წვდომის და მათი მოდიფიკაციის დროის განახლება"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "მდებარეობათა შემოკლება 0 ბაიტამდე"
@@ -842,6 +881,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: არგუმენტების რაოდენობა ზედმეტად დიდია"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: უცნობი არგუმენტი „$2“"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: ბრძანება უცნობია"
 	},
@@ -853,6 +895,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$2 წამში გადაცემულია $1 ბაიტი ($3/წმ)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "თუ ჩამოტვირთვა არ მუშაობს, ცადეთ, გაუშვათ „$1“"
 	},
 	"nassh_options_error": {
 		"message": "უცნობი ვარიანტი: $1"
@@ -892,6 +937,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI დამმუშავებლები"
+	},
+	"preferences_key_is_local": {
+		"message": "ლოკალური პრიორიტეტი"
+	},
+	"preferences_key_is_synced": {
+		"message": "სინქრონიზებული პრიორიტეტი"
 	},
 	"preferences_reset": {
 		"message": "ყველა პარამეტრი გადაყენებულია!"

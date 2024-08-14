@@ -702,7 +702,7 @@
 		"message": "किसी फ़ाइल को टर्मिनल में डाउनलाेड/एक्सपाेर्ट करें"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "जिस डायरेक्ट्री पर काम किया जा रहा है उसे बदलें"
+		"message": "ऑफ़िस से दूर रहकर काम करने वाली डायरेक्ट्री बदलें"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "पाथ का ग्रुप बदलें"
@@ -762,7 +762,7 @@
 		"message": "फ़ाइल को डाउनलोड किया जा रहा है: $1 को $2 के तौर पर"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "फ़ाइलें डाउनलोड करें"
+		"message": "एक फ़ाइल डाउनलोड करें"
 	},
 	"nasftp_cmd_help": {
 		"message": "सहायता"
@@ -770,20 +770,50 @@
 	"nasftp_cmd_help_help": {
 		"message": "यह सहायता स्क्रीन"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "लोकल वर्किंग डायरेक्ट्री बदलें"
+	},
 	"nasftp_cmd_list": {
 		"message": "सूची"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "डायरेक्ट्री की जानकारी वाली सूची बनाएं"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "लोकल डायरेक्ट्री की जानकारी वाली सूची बनाएं"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "टारगेट पर ले जाने वाले पाथ पर एक लिंक बनाएं"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "मौजूदा लोकल वर्किंग डायरेक्ट्री दिखाएं"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "लोकल वर्किंग डायरेक्ट्री: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "कई फ़ाइलें डाउनलोड करें"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "डायरेक्ट्री बनाएं"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "फ़ाइल का नाम बदलना"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "कई फ़ाइलें अपलोड करें"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "कई फ़ाइलों को डाउनलोड करना फिर से शुरू करें"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "कई फ़ाइलों को अपलोड करना फिर से शुरू करें"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "प्राथमिकताएं"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "प्राथमिकता सेट या अनसेट करें"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "प्रॉम्प्ट"
@@ -798,7 +828,7 @@
 		"message": "फ़ाइल को अपलोड किया जा रहा है: $1 को $2 के तौर पर ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "जिस डायरेक्ट्री पर अभी काम किया जा रहा है उसे दिखाएं"
+		"message": "ऑफ़िस से दूर रहकर काम करने वाली मौजूदा डायरेक्ट्री दिखाएं"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "किसी दूसरे सर्वर पर मौजूद डायरेक्ट्री: $1"
@@ -817,6 +847,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "यूआरएल के कैननिकल होने की जांच करने वाले पाथ"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "एक फ़ाइल डाउनलोड करना फिर से शुरू करें"
 	},
 	"nasftp_cmd_rename": {
 		"message": "बदलें"
@@ -853,6 +886,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "टारगेट पर ले जाने वाले पाथ पर एक सिमलिंक बनाएं"
+	},
+	"nasftp_cmd_touch": {
+		"message": "टच"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "फ़ाइलों का ऐक्सेस और उनमें किए गए बदलावों का समय अपडेट करें"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "काटें"
@@ -905,6 +944,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: तय सीमा से ज़्यादा तर्क डाले गए"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: इस तर्क के बारे में जानकारी मौजूद नहीं है '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: अज्ञात निर्देश"
 	},
@@ -916,6 +958,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$2 में $1 बाइट डेटा ट्रांसफ़र किया गया ($3/सेकंड)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "अगर डाउनलोड करने का तरीका काम नहीं कर रहा है, तो इसे चलाकर देखें: $1"
 	},
 	"nassh_options_error": {
 		"message": "अज्ञात विकल्प: $1"
@@ -958,6 +1003,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "यूआरआई हैंडलर"
+	},
+	"preferences_key_is_local": {
+		"message": "स्थानीय प्राथमिकता"
+	},
+	"preferences_key_is_synced": {
+		"message": "सिंक की गई प्राथमिकता"
 	},
 	"preferences_reset": {
 		"message": "सभी प्राथमिकताएं रीसेट की गईं!"
@@ -1026,7 +1077,7 @@
 		"message": " पता नहीं लगाया जा सका: $1"
 	},
 	"ssh_cert_check_refresh": {
-		"message": "SSH प्रमाणपत्र की जानकारी रीफ़्रेश हो रही है..."
+		"message": "SSH सर्टिफ़िकेट की जानकारी रीफ़्रेश हो रही है..."
 	},
 	"ssh_cert_check_result": {
 		"message": " मंज़ूरी खत्म होने में ~$1 बाकी हैं"

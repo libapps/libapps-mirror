@@ -702,7 +702,7 @@
 		"message": "Vypsat soubor na terminál"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Změnit pracovní adresář"
+		"message": "Změnit vzdálený pracovní adresář"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Změnit skupinu cest"
@@ -714,7 +714,7 @@
 		"message": "Změnit vlastníka cest"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Vymazat aktuální obrazovku terminálu."
+		"message": "Vymazat aktuální obrazovku terminálu"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Zkopírovat soubor do schránky (výchozí: prvních 10 MiB)"
@@ -744,22 +744,52 @@
 		"message": "Stahování souboru: $1 jako $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Stáhnout soubory"
+		"message": "Stáhnout jeden soubor"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Tato obrazovka nápovědy"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Změnit místní pracovní adresář"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Vypsat podrobnosti o adresáři"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Zobrazit seznam podrobností o místním adresáři"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Vytvořit na zadané cestě odkaz na cíl"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Zobrazit aktuální místní pracovní adresář"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Místní pracovní adresář: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Stáhnout několik souborů"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Vytvořit adresáře"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Přejmenovat soubor"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Nahrát několik souborů"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Pokračovat ve stahování několika souborů"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Pokračovat v nahrávání několika souborů"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "předvolby"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Nastavit nebo zrušit předvolbu"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Nastavit řetězec výzvy"
@@ -771,7 +801,7 @@
 		"message": "Nahrávání souboru: $1 jako $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Zobrazit aktuální pracovní adresář"
+		"message": "Zobrazit aktuální vzdálený pracovní adresář"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Vzdálený pracovní adresář: $1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Kanonizovat cesty"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Pokračovat ve stahování jednoho souboru"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Obnovit nahrávání souborů"
@@ -805,6 +838,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Vytvořit na zadané cestě symbolický odkaz na cíl"
+	},
+	"nasftp_cmd_touch": {
+		"message": "klepnutí"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Aktualizovat čas použití a změny souborů"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Oříznout cesty na 0 bajtů"
@@ -851,6 +890,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: příliš mnoho argumentů"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: neznámý argument $2"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: neznámý příkaz"
 	},
@@ -862,6 +904,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "Přeneseno: $1 B za $2 s ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Pokud stahování nefunguje, zkuste spustit příkaz: $1"
 	},
 	"nassh_options_error": {
 		"message": "Neznámá možnost: $1"
@@ -904,6 +949,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Obslužné nástroje pro URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Místní předvolba"
+	},
+	"preferences_key_is_synced": {
+		"message": "Synchronizovaná předvolba"
 	},
 	"preferences_reset": {
 		"message": "Všechny předvolby byly resetovány."

@@ -24,7 +24,7 @@
 		"message": "Futa"
 	},
 	"command_complete": {
-		"message": "Amri ya $1 imekamilishwa kwa nambari ya kuonyesha hali $2."
+		"message": "Amri ya $1 imekamilishwa kwa namba ya kuonyesha hali $2."
 	},
 	"command_not_supported": {
 		"message": "$1 haitumiki kwenye toleo hili la Chrome"
@@ -54,7 +54,7 @@
 		"message": "Futa"
 	},
 	"disconnect_message": {
-		"message": "Programu imejifunga ikiwa na nambari ya kuonyesha hali $1."
+		"message": "Programu imejifunga ikiwa na namba ya kuonyesha hali $1."
 	},
 	"enter_keycap": {
 		"message": "[ENTER]"
@@ -438,7 +438,7 @@
 		"message": "Ikiwa itafunga dirisha wakati amri inakamilisha kutekeleza."
 	},
 	"hterm_pref_color_palette_overrides": {
-		"message": "Futa rangi kwenye safu ya rangi chaguomsingi.\n\nHii inaweza kubainishwa kuwa mfuatano au kipengee. Kama imebanishwa kuwa kipengee, huchukuliwa kuwa mfuatano uliotengana, ambapo kila kipengele ni nambari kwenye safu ya rangi. \n\nThamani zinaweza kubainishwa kuwa zinazokaribia thamani yoyote ya rangi ya CSS. Hii inajumuisha #RGB, #RRGGBB, rgb(...), rgba(...) na majina yoyote ya rangi ambayo ni sehemu ya faili ya kawaida ya X11 rgb.txt.\n\nUnaweza kutumia 'null' kubainisha kwamba thamani chaguomsingi haipaswi kubadilishwa. Hii ni muhimu wakati wa kuruka idadi ndogo ya herufi ambapo thamani imebainishwa kuwa mfuatano.\n\nMifano hii miwili inaweka thamani ya rangi ya 1 kuwa samawati:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
+		"message": "Futa rangi kwenye safu ya rangi chaguomsingi.\n\nHii inaweza kubainishwa kuwa mfuatano au kipengee. Kama imebanishwa kuwa kipengee, huchukuliwa kuwa mfuatano uliotengana, ambapo kila kipengele ni namba kwenye safu ya rangi. \n\nThamani zinaweza kubainishwa kuwa zinazokaribia thamani yoyote ya rangi ya CSS. Hii inajumuisha #RGB, #RRGGBB, rgb(...), rgba(...) na majina yoyote ya rangi ambayo ni sehemu ya faili ya kawaida ya X11 rgb.txt.\n\nUnaweza kutumia 'null' kubainisha kwamba thamani chaguomsingi haipaswi kubadilishwa. Hii ni muhimu wakati wa kuruka idadi ndogo ya herufi ambapo thamani imebainishwa kuwa mfuatano.\n\nMifano hii miwili inaweka thamani ya rangi ya 1 kuwa samawati:\n  {1: \"#0000ff\"}\n  [null, \"#0000ff\"]"
 	},
 	"hterm_pref_copy_on_select": {
 		"message": "Nakili kiotomatiki sehemu uliyochagua kwa kutumia kipanya kwenye ubao wa kunakili."
@@ -525,7 +525,7 @@
 		"message": "Ikiwa ndivyo, kitufe cha Home au End kitadhibiti upau wa kusogeza pembeni na vitufe vya Shift+Home au Shift+End vitatumwa kwenye seva pangishi ya mbali. Ikiwa sivyo, basi vitufe vya Home au End vitatumwa kwenye seva pangishi ya mbali na Shift+Home au Shift+End vitatumika kusogeza."
 	},
 	"hterm_pref_keybindings": {
-		"message": "Ramani ya mifuatano ya vitufe vya kutekeleza hatua muhimu. Mifuatano ya vitufe hujumuisha vitufe vya sufuri au vitufe zaidi vya kurekebisha vikifuatwa na msimbo wa vitufe. Misimbo ya vitufe inaweza kuwa nambari ya desimali au heksadesimali au kitambulishi cha kitufe. Hatua za vitufe zinaweza kubainisha mfuatano ili kutuma maelezo kwenye seva pangishi au kitambulishi cha hatua. Kwa ufafanuzi kamili wa muundo, angalia https://hterm.org/x/docs/keyboard-bindings.\n\nMifano ya mifuatano ya vitufe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hamjambo Nyote'\"\n}"
+		"message": "Ramani ya mifuatano ya vitufe vya kutekeleza hatua muhimu. Mifuatano ya vitufe hujumuisha vitufe vya sufuri au vitufe zaidi vya kurekebisha vikifuatwa na msimbo wa vitufe. Misimbo ya vitufe inaweza kuwa namba ya desimali au heksadesimali au kitambulishi cha kitufe. Hatua za vitufe zinaweza kubainisha mfuatano ili kutuma maelezo kwenye seva pangishi au kitambulishi cha hatua. Kwa ufafanuzi kamili wa muundo, angalia https://hterm.org/x/docs/keyboard-bindings.\n\nMifano ya mifuatano ya vitufe:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'Hamjambo Nyote'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "Ikiwa shurutisho za kawaida za Mfumo wa Uendeshaji wa kibodi ni sharti zizingatiwe badala ya kunasa kila wakati kwa matumizi ya hterm."
@@ -705,7 +705,7 @@
 		"message": "Weka faili kwenye sehemu ya mwisho"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Badilisha saraka inayofanya kazi"
+		"message": "Badilisha saraka ya mbali inayotumika"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Badilisha kikundi cha njia"
@@ -723,7 +723,7 @@
 		"message": "futa"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Futa skrini ya sasa ya sehemu ya mwisho."
+		"message": "Futa maudhui kwenye skrini ya sasa ya sehemu ya mwisho"
 	},
 	"nasftp_cmd_clip": {
 		"message": "nakili"
@@ -768,7 +768,7 @@
 		"message": "Kupakua faili: $1 kama $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Pakua faili"
+		"message": "Pakua faili moja"
 	},
 	"nasftp_cmd_help": {
 		"message": "usaidizi"
@@ -776,17 +776,32 @@
 	"nasftp_cmd_help_help": {
 		"message": "Skrini hii ya usaidizi"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Badilisha saraka iliyopo kwenye kifaa inayotumika"
+	},
 	"nasftp_cmd_list": {
 		"message": "orodha"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "Maelezo ya orodha ya saraka"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Orodhesha maelezo ya saraka iliyopo kwenye kifaa"
+	},
 	"nasftp_cmd_ln": {
 		"message": "In"
 	},
 	"nasftp_cmd_ln_help": {
 		"message": "Buni kiungo kwenye njia ukielekeza kwenye lengo"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Onyesha saraka iliyopo kwenye kifaa inayotumika"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Saraka iliyopo kwenye kifaa inayotumika: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Pakua faili nyingi"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Unda saraka"
@@ -796,6 +811,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Badilisha jina la faili"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Pakia faili nyingi"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Endelea kupakua faili nyingi"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Endelea kupakia faili nyingi"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "mapendeleo"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Weka au uondoe mapendeleo"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "dokeza"
@@ -813,7 +843,7 @@
 		"message": "Kupakia faili: $1 kama $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Onyesho saraka ya sasa inayofanya kazi"
+		"message": "Onyesha saraka ya sasa ya mbali inayotumika"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Saraka ya kufanya kazi kwa mbali: $1"
@@ -832,6 +862,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Njia za kuweka viwango vya kawaida"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Endelea kupakua faili moja"
 	},
 	"nasftp_cmd_rename": {
 		"message": "badilisha jina"
@@ -872,6 +905,12 @@
 	"nasftp_cmd_symlink_help": {
 		"message": "Buni kiungo kinachoelekeza kwingine kwenye njia inayoelekeza katika lengo"
 	},
+	"nasftp_cmd_touch": {
+		"message": "gusa"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Sasisha muda wa urekebishaji na ufikiaji wa faili"
+	},
 	"nasftp_cmd_truncate": {
 		"message": "fupisha"
 	},
@@ -903,7 +942,7 @@
 		"message": "Hitilafu ya ndani ambayo haijashughulikiwa; tafadhali tuma ripoti ya hitilafu: $1"
 	},
 	"nasftp_error_invalid_number": {
-		"message": "$1: $2: nambari isiyo sahihi: $3"
+		"message": "$1: $2: namba isiyo sahihi: $3"
 	},
 	"nasftp_error_message": {
 		"message": "HITILAFU: $1"
@@ -923,6 +962,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: vipengele vingi mno"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: kipengele kisichojulikana '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: amri isiyojulikana"
 	},
@@ -934,6 +976,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "Baiti $1 zinahamishwa kwa sekunde $2 ($3 kwa sekunde)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Ikiwa kipengele cha kupakua hakifanyi kazi, jaribu kutumia: $1"
 	},
 	"nassh_options_error": {
 		"message": "Chaguo lisilojulikana: $1"
@@ -976,6 +1021,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Vidhibiti vya URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Mapendeleo ya kuhifadhi kwenye mfumo huu pekee"
+	},
+	"preferences_key_is_synced": {
+		"message": "Mapendeleo ya kusawazisha kwenye mifumo yote"
 	},
 	"preferences_reset": {
 		"message": "Mapendeleo yote yamewekwa upya!"

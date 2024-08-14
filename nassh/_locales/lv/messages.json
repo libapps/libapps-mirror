@@ -702,7 +702,7 @@
 		"message": "Faila izmete terminālī"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Mainīt darba katalogu"
+		"message": "Mainīt attālo darba direktoriju"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Mainīt ceļu grupas"
@@ -747,22 +747,49 @@
 		"message": "Notiek faila lejupielāde: $1 kā $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Lejupielādēt failus"
+		"message": "Lejupielādēt vienu failu"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Šis palīdzības ekrāns"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Mainīt vietējo darba katalogu"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Detalizēta informācija par saraksta katalogu"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Parādīt vietējā kataloga informāciju"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Izveidot saiti ceļā, norādot uz mērķi"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Parādīt pašreizējo vietējo darba katalogu"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Vietējais darba katalogs: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Lejupielādēt vairākus failus"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Izveidot katalogus"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Pārdēvēt failu"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Augšupielādēt vairākus failus"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Atsākt vairāku failu lejupielādi"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Atsākt vairāku failu augšupielādi"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Preferenču iestatīšana vai atiestatīšana"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Iestatīt uzvednes virkni"
@@ -774,7 +801,7 @@
 		"message": "Notiek faila augšupielāde: $1 kā $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Rādīt pašreizējo darba katalogu"
+		"message": "Parādīt pašreizējo attālo darba katalogu"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Attālā darba katalogs: $1"
@@ -784,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Kanoniskot ceļus"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Atsākt viena faila lejupielādi"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Atsākt failu augšupielādi"
@@ -808,6 +838,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Izveidot simbolisku saiti ceļā, norādot uz mērķi"
+	},
+	"nasftp_cmd_touch": {
+		"message": "skāriens"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Failu piekļuves un izmaiņu ieviešanas laika atjaunināšana"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Saīsināt ceļu līdz 0 baitiem"
@@ -854,6 +890,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: pārāk daudz argumentu"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: nezināms arguments “$2”"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: nezināma komanda"
 	},
@@ -865,6 +904,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 baiti nosūtīti $2 sekundēs ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Ja lejupielāde nedarbojas, mēģiniet palaist $1"
 	},
 	"nassh_options_error": {
 		"message": "Nezināma opcija: $1"
@@ -907,6 +949,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI apstrādātāji"
+	},
+	"preferences_key_is_local": {
+		"message": "Lokāli saglabāta preference"
+	},
+	"preferences_key_is_synced": {
+		"message": "Sinhronizēta preference"
 	},
 	"preferences_reset": {
 		"message": "Visas preferences ir atiestatītas."

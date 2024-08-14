@@ -702,7 +702,7 @@
 		"message": "Vie tiedosto terminaaliin"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Vaihda työhakemistoa"
+		"message": "Vaihda etätyöhakemistoa"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Muuta polkujoukkoa"
@@ -714,7 +714,7 @@
 		"message": "Muuta polkujen omistajaa"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Tyhjennä nykyinen terminaalinäyttö."
+		"message": "Tyhjennä nykyinen terminaalinäyttö"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Kopioi tiedosto leikepöydälle (oletus: 10 MiB alussa)"
@@ -744,22 +744,52 @@
 		"message": "Ladataan tiedostoa: $1 ($2)"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Lataa tiedostoja"
+		"message": "Lataa yksi tiedosto"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Tämä ohjenäyttö"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Muuta paikallista työhakemistoa"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Näytä hakemiston tiedot"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Lisää paikallisen hakemiston tiedot"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Luo polkuun linkki, joka johtaa kohteeseen"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Näytä nykyinen paikallinen työhakemisto"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Paikallinen työhakemisto: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Lataa useita tiedostoja"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Luo hakemistoja"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Nimeä tiedosto uudelleen"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Lähetä useita tiedostoja"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Jatka useiden tiedostojen latausta"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Jatka useiden tiedostojen lähetystä"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "asetukset"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Valitse asetus tai poista sen valinta"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Aseta kehotteen merkkijono"
@@ -771,7 +801,7 @@
 		"message": "Lähetetään tiedostoa: $1 ($2) ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Näytä nykyinen työhakemisto"
+		"message": "Näytä nykyinen etätyöhakemisto"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Etätyöhakemisto: $1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Ilmoita polkuja ensisijaisiksi"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Jatka yhden tiedoston lataamista"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Jatka tiedostojen lähettämistä"
@@ -805,6 +838,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Luo polkuun symlink, joka johtaa kohteeseen"
+	},
+	"nasftp_cmd_touch": {
+		"message": "kosketus"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Päivitä tiedostojen pääsy- ja muokkausajat"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Lyhennä polut 0 tavuun"
@@ -851,6 +890,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: liikaa argumentteja"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: tuntematon argumentti \"$2\""
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: tuntematon komento"
 	},
@@ -862,6 +904,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 tavua siirretty $2 sekunnissa ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Jos lataaminen ei onnistu, kokeile tätä: $1"
 	},
 	"nassh_options_error": {
 		"message": "Tuntematon vaihtoehto: $1"
@@ -904,6 +949,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI-käsittelijät"
+	},
+	"preferences_key_is_local": {
+		"message": "Paikallinen asetus"
+	},
+	"preferences_key_is_synced": {
+		"message": "Synkronoitu asetus"
 	},
 	"preferences_reset": {
 		"message": "Asetukset on nollattu"

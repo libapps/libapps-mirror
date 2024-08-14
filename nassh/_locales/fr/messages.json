@@ -702,7 +702,7 @@
 		"message": "Permet de vider un fichier dans le terminal"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Permet de changer de répertoire de travail"
+		"message": "Modifier le répertoire de travail distant"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Permet de changer de groupe de chemins d'accès"
@@ -714,7 +714,7 @@
 		"message": "Permet de modifier le propriétaire des chemins d'accès"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Permet d'effacer l'écran actuel du terminal."
+		"message": "Effacer l'écran actuel du terminal"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Permet de copier un fichier dans le presse-papiers (10 Mio par défaut dès le début)"
@@ -747,22 +747,55 @@
 		"message": "Téléchargement du fichier $1 en tant que fichier $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Permet de télécharger des fichiers"
+		"message": "Télécharger un fichier"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Permet d'afficher l'écran d'aide"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Modifier le répertoire de travail local"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Permet de répertorier les détails du répertoire"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Lister les détails du répertoire local"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Permet de créer un lien sous forme de chemin d'accès pointant vers la cible"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Afficher le répertoire de travail local actuel"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Répertoire de travail local : $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Télécharger plusieurs fichiers"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Permet de créer des répertoires"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Renommer un fichier"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Importer plusieurs fichiers"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Reprendre le téléchargement de plusieurs fichiers"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Reprendre l'importation de plusieurs fichiers"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "préférences"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Définir ou annuler une préférence"
+	},
+	"nasftp_cmd_preferences_line": {
+		"message": "$1 : $2"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Permet de configurer la chaîne d'invite"
@@ -774,7 +807,7 @@
 		"message": "Importation du fichier $1 en tant que fichier $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Permet d'afficher le répertoire de travail actuel"
+		"message": "Afficher le répertoire de travail distant actuel"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Répertoire de travail distant : $1"
@@ -784,6 +817,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Permet de rendre les chemins d'accès canoniques"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Reprendre le téléchargement d'un fichier"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Permet de reprendre l'importation de fichiers"
@@ -811,6 +847,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Permet de créer un lien symbolique sous forme de chemin d'accès pointant vers la cible"
+	},
+	"nasftp_cmd_touch": {
+		"message": "appuyer"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Mettre à jour les heures d'accès et de modification des fichiers"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Permet de tronquer les chemins d'accès à 0 octet"
@@ -863,6 +905,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1 : trop d'arguments"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1 : argument \"$2\" inconnu"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1 : commande inconnue"
 	},
@@ -877,6 +922,9 @@
 	},
 	"nasftp_prompt": {
 		"message": "nasftp $1 >"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Si le téléchargement ne fonctionne pas, essayez d'exécuter : $1."
 	},
 	"nassh_options_error": {
 		"message": "Option inconnue : $1"
@@ -919,6 +967,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Gestionnaires d'URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Préférence locale"
+	},
+	"preferences_key_is_synced": {
+		"message": "Préférence synchronisée"
 	},
 	"preferences_reset": {
 		"message": "Toutes les préférences ont été réinitialisées."

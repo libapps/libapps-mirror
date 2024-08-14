@@ -699,7 +699,7 @@
 		"message": "फाइल टर्मिनलवर डंप करा"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "काम करणारी डिरेक्टरी बदला"
+		"message": "रिमोट पद्धतीने काम करणारी डिरेक्टरी बदला"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "पाथचा गट बदला"
@@ -714,7 +714,7 @@
 		"message": "साफ करा"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "सध्याची टर्मिनल स्क्रीन साफ करा."
+		"message": "सध्याची टर्मिनल स्क्रीन साफ करा"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "एखादी फाइल क्लिपबोर्डवर कॉपी करा (डीफॉल्ट: सुरुवातीपासून १०MiB )"
@@ -753,7 +753,7 @@
 		"message": "डाउनलोड करत आहे: $2 म्हणून $1"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "फाइल डाउनलोड करा"
+		"message": "एक फाइल डाउनलोड करा"
 	},
 	"nasftp_cmd_help": {
 		"message": "मदत"
@@ -761,11 +761,26 @@
 	"nasftp_cmd_help_help": {
 		"message": "ही मदत स्क्रीन"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "स्थानिक काम करणारी डिरेक्टरी बदला"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "डिरेक्टरी तपशील सूचीबद्ध करा"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "स्थानिक डिरेक्टरीशी संबंधित तपशील सूचीबद्ध करा"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "पाथवर लक्ष्याकडे निर्देश करणारी लिंक तयार करा"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "सध्याची काम करणारी स्थानिक डिरेक्टरी दाखवा"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "स्थानिक काम करणारी डिरेक्टरी: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "एकाहून अधिक फाइल डाउनलोड करा"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "डिरेक्टरी तयार करा"
@@ -775,6 +790,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "फाइलचे नाव बदला"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "एकाहून अधिक फाइल अपलोड करा"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "एकाहून अधिक फाइल डाउनलोड करणे पुन्‍हा सुरू करा"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "एकाहून अधिक फाइल अपलोड करणे पुन्‍हा सुरू करा"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "प्राधान्ये"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "प्राधान्य सेट करा किंवा अनसेट करा"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "सूचना"
@@ -789,7 +819,7 @@
 		"message": "फाइल अपलोड करत आहे: $2 म्हणून $1 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "सध्याची काम करणारी डिरेक्टरी दाखवा"
+		"message": "सध्याची रिमोट पद्धतीने काम करणारी डिरेक्टरी दाखवा"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "रिमोट काम करणारी डिरेक्टरी: $1"
@@ -799,6 +829,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "पाथ कॅ‍नोनिकलाइझ करा"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "एक फाइल डाउनलोड करणे पुन्‍हा सुरू करा़"
 	},
 	"nasftp_cmd_rename": {
 		"message": "नाव बदला"
@@ -829,6 +862,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "पाथवर लक्ष्याकडे निर्देश करणारी सिमलिंक तयार करा"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "फाइल अ‍ॅक्सेस केल्याच्या आणि त्यांमध्ये फेरबदल केल्याच्या वेळा अपडेट करा"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "पाथ ० बाइटवर कापा"
@@ -878,6 +914,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: खूप जास्त वितर्क आहेत"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: '$2' argument अज्ञात आहे"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: अज्ञात कमांड"
 	},
@@ -889,6 +928,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$2 सेकंदांमध्ये एकूण $1 बाइट ट्रान्सफर केल्या ($3/से)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "डाउनलोड करणे काम करत नसल्यास, हे रन करून पहा: $1"
 	},
 	"nassh_options_error": {
 		"message": "अज्ञात पर्याय: $1"
@@ -931,6 +973,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI हँडलर"
+	},
+	"preferences_key_is_local": {
+		"message": "स्थानिक प्राधान्य"
+	},
+	"preferences_key_is_synced": {
+		"message": "सिंक केलेले प्राधान्य"
 	},
 	"preferences_reset": {
 		"message": "सर्व प्राधान्ये रीसेट केली गेली!"

@@ -702,7 +702,7 @@
 		"message": "Вывести файл в терминале"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Изменить рабочий каталог"
+		"message": "Изменить удаленный рабочий каталог"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Изменение группы для указанных объектов"
@@ -744,22 +744,49 @@
 		"message": "Скачивание файла: $1 как $2."
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Скачать файлы"
+		"message": "Скачать один файл"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Показать этот экран со справкой"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Изменить локальный рабочий каталог"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Показать сведения о каталоге"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Показать сведения о локальных каталогах"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Создать ссылку по данному пути, указывающую на целевой объект"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Показать текущий локальный рабочий каталог"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Локальный рабочий каталог: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Скачать несколько файлов"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Создание каталогов"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Переименовать файл"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Загрузить несколько файлов"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Продолжить скачивание нескольких файлов"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Продолжить загрузку нескольких файлов"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Установить или отменить настройки"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Задать строку запроса"
@@ -771,7 +798,7 @@
 		"message": "Загрузка файла: $1 как $2 ($3)."
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Показать текущий рабочий каталог"
+		"message": "Показать текущий удаленный рабочий каталог"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Удаленный рабочий каталог: $1."
@@ -781,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Нормализовать пути"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Продолжить скачивание одного файла"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Возобновить загрузку файлов"
@@ -805,6 +835,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Создать символическую ссылку по данному пути, указывающую на целевой объект"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Обновить время изменения и доступа для файлов"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Сократить содержимое путей до 0 байт"
@@ -851,6 +884,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: слишком много аргументов."
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: неизвестный аргумент \"$2\""
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "Неизвестная команда: $1."
 	},
@@ -862,6 +898,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "Передано байтов: $1 за $2 сек. ($3/сек)."
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Если скачивание не работает, попробуйте выполнить команду: $1"
 	},
 	"nassh_options_error": {
 		"message": "Неизвестный параметр: $1."
@@ -904,6 +943,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Обработчики URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Локальный параметр"
+	},
+	"preferences_key_is_synced": {
+		"message": "Синхронизированный параметр"
 	},
 	"preferences_reset": {
 		"message": "Все настройки сброшены."

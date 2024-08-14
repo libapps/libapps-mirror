@@ -696,7 +696,7 @@
 		"message": "Esporta un file sul terminale"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Modifica directory di lavoro"
+		"message": "Cambia directory di lavoro remota"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Modifica il gruppo di percorsi"
@@ -708,7 +708,7 @@
 		"message": "Modifica il proprietario dei percorsi"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Cancella l'attuale schermata del terminale."
+		"message": "Cancella l'attuale schermata del terminale"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Copia un file negli appunti (valore predefinito: dall'inizio 10 MiB)"
@@ -741,22 +741,52 @@
 		"message": "Download del file: $1 come $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Scarica i file"
+		"message": "Scarica un file"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Questa schermata della Guida"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Cambia directory di lavoro locale"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Elenco dei dettagli della directory"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Elenca i dettagli della directory locale"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Crea un link nel percorso per la destinazione"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Mostra la directory di lavoro locale attuale"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Directory di lavoro locale: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Scarica più file"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Crea directory"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Rinomina un file"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Carica più file"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Riprendi il download di più file"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Riprendi il caricamento di più file"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "preferenze"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Imposta o annulla l'impostazione di una preferenza"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Imposta la stringa della richiesta"
@@ -768,7 +798,7 @@
 		"message": "Caricamento file: $1 come $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Mostra attuale directory di lavoro"
+		"message": "Mostra la directory di lavoro remota attuale"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Directory di lavoro remota: $1"
@@ -778,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Canonicalizza i percorsi"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Riprendi il download di un file"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Riprendi il caricamento di file"
@@ -802,6 +835,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Crea un collegamento simbolico nel percorso per la destinazione"
+	},
+	"nasftp_cmd_touch": {
+		"message": "tocca"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Aggiorna i tempi di accesso e modifica dei file"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Tronca i percorsi a 0 byte"
@@ -848,6 +887,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: troppi argomenti"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: argomento \"$2\" sconosciuto"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: comando sconosciuto"
 	},
@@ -859,6 +901,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 byte trasferiti in $2 secondi ($3)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Se il download non funziona, prova a eseguire: $1"
 	},
 	"nassh_options_error": {
 		"message": "Opzione sconosciuta: $1"
@@ -901,6 +946,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Gestori URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Preferenza locale"
+	},
+	"preferences_key_is_synced": {
+		"message": "Preferenza sincronizzata"
 	},
 	"preferences_reset": {
 		"message": "Tutte le preferenze sono state reimpostate."

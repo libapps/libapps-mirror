@@ -165,7 +165,7 @@
 		"message": "ดำเนินการกับแป้น Alt เหมือนเป็นแป้น Meta"
 	},
 	"hterm_name_pref_alt_sends_what": {
-		"message": "การจัดการคีย์ตัวปรับแต่งแป้น Alt"
+		"message": "การจัดการแป้นกดร่วม Alt"
 	},
 	"hterm_name_pref_audible_bell_sound": {
 		"message": "เสียงกระดิ่งแจ้งเตือน (URI)"
@@ -294,7 +294,7 @@
 		"message": "แป้น Media คือ Fkey"
 	},
 	"hterm_name_pref_meta_sends_escape": {
-		"message": "การจัดการคีย์ตัวปรับแต่งแป้น Meta"
+		"message": "การจัดการแป้นกดร่วม Meta"
 	},
 	"hterm_name_pref_mouse_paste_button": {
 		"message": "การวางด้วยปุ่มเมาส์"
@@ -522,7 +522,7 @@
 		"message": "หากเป็น \"จริง\" การกด Home/End จะควบคุมแถบเลื่อนเทอร์มินัลและ Shift+Home/Shift+End จะส่งไปยังโฮสต์ระยะไกล หากเป็น \"เท็จ\" การกด Home/End จะส่งไปยังโฮสต์ระยะไกล และ Shift+Home/Shift+End จะเป็นการเลื่อน"
 	},
 	"hterm_pref_keybindings": {
-		"message": "การจับคู่การกดแป้นติดต่อกันกับการทำงานของแป้น การกดแป้นติดต่อกันจะมีคีย์ตัวปรับแต่ง 0 คีย์ขึ้นไปแล้วตามด้วยรหัสคีย์ โดยรหัสคีย์อาจเป็นเลขทศนิยมหรือเลขฐานสิบหก หรือเป็นตัวระบุคีย์ก็ได้ การทำงานของแป้นอาจกำหนดให้เป็นสตริงเพื่อส่งไปยังโฮสต์หรือเป็นตัวระบุการทำงานก็ได้ ดูคำอธิบายโดยละเอียดเกี่ยวกับรูปแบบได้ที่ https://hterm.org/x/docs/keyboard-bindings\n\nตัวอย่างการเชื่อมโยงแป้น\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'สวัสดีชาวโลก'\"\n}"
+		"message": "การจับคู่การกดแป้นติดต่อกันกับการทำงานของแป้น การกดแป้นติดต่อกันจะมีแป้นกดร่วม 0 คีย์ขึ้นไปแล้วตามด้วยรหัสคีย์ โดยรหัสคีย์อาจเป็นเลขทศนิยมหรือเลขฐานสิบหก หรือเป็นตัวระบุคีย์ก็ได้ การทำงานของแป้นอาจกำหนดให้เป็นสตริงเพื่อส่งไปยังโฮสต์หรือเป็นตัวระบุการทำงานก็ได้ ดูคำอธิบายโดยละเอียดเกี่ยวกับรูปแบบได้ที่ https://hterm.org/x/docs/keyboard-bindings\n\nตัวอย่างการเชื่อมโยงแป้น\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\",\n  \"Ctrl+Shift+L\": \"PASS\",\n  \"Ctrl+H\": \"'สวัสดีชาวโลก'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "กำหนดว่าจะให้ระบบดำเนินการตามการเชื่อมโยงแป้นพิมพ์ของระบบปฏิบัติการโดยทั่วไปแทนการบันทึกไว้ทุกครั้งเพื่อการใช้งานของ hterm เองหรือไม่"
@@ -699,7 +699,7 @@
 		"message": "ถ่ายโอนไฟล์ไปยังเทอร์มินัล"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "เปลี่ยนไดเรกทอรีที่ใช้งานอยู่"
+		"message": "เปลี่ยนไดเรกทอรีที่ใช้งานอยู่จากระยะไกล"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "เปลี่ยนแปลงกลุ่มเส้นทาง"
@@ -744,22 +744,52 @@
 		"message": "กำลังดาวน์โหลดไฟล์: $1 เป็น $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ดาวน์โหลดไฟล์"
+		"message": "ดาวน์โหลด 1 ไฟล์"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "หน้าจอความช่วยเหลือนี้"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "เปลี่ยนไดเรกทอรีที่ใช้งานอยู่ในเครื่อง"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "แสดงรายละเอียดไดเรกทอรี"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "แสดงรายละเอียดไดเรกทอรีในเครื่อง"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "สร้างลิงก์ที่เส้นทางที่ชี้ไปยังเป้าหมาย"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "แสดงไดเรกทอรีที่ใช้งานอยู่ในเครื่องขณะนี้"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "ไดเรกทอรีที่ใช้งานอยู่ในเครื่อง: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "ดาวน์โหลดหลายไฟล์"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "สร้างไดเรกทอรี"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "เปลี่ยนชื่อไฟล์"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "อัปโหลดหลายไฟล์"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "ดาวน์โหลดไฟล์หลายไฟล์ต่อ"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "อัปโหลดไฟล์หลายไฟล์ต่อ"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "การกำหนดค่า"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "ตั้งหรือยกเลิกการกำหนดค่า"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "ตั้งค่าสตริงข้อความแจ้ง"
@@ -771,7 +801,7 @@
 		"message": "กำลังอัปโหลดไฟล์: $1 เป็น $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "แสดงไดเรกทอรีที่ใช้งานในปัจจุบัน"
+		"message": "แสดงไดเรกทอรีที่ใช้งานอยู่จากระยะไกลในปัจจุบัน"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "ไดเรกทอรีที่ใช้งานอยู่จากระยะไกล: $1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "เส้นทางที่กำหนดหน้า Canonical"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "ดาวน์โหลด 1 ไฟล์ต่อ"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "อัปโหลดไฟล์ต่อ"
@@ -805,6 +838,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "สร้างลิงก์สัญลักษณ์ (symlink) ที่เส้นทางที่ชี้ไปยังเป้าหมาย"
+	},
+	"nasftp_cmd_touch": {
+		"message": "แตะ"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "อัปเดตเวลาการเข้าถึงและแก้ไขไฟล์"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "ตัดเส้นทางให้เหลือ 0 ไบต์"
@@ -851,6 +890,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: มีอาร์กิวเมนต์มากเกินไป"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: อาร์กิวเมนต์ที่ไม่รู้จัก \"$2\""
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: คำสั่งที่ไม่รู้จัก"
 	},
@@ -862,6 +904,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "โอน $1 ไบต์แล้วใน $2 วินาที ($3/วินาที)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "หากการดาวน์โหลดไม่ทำงาน ให้ลองเรียกใช้ $1"
 	},
 	"nassh_options_error": {
 		"message": "ตัวเลือกที่ไม่รู้จัก: $1"
@@ -904,6 +949,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "เครื่องจัดการ URI"
+	},
+	"preferences_key_is_local": {
+		"message": "ค่ากำหนดในเครื่อง"
+	},
+	"preferences_key_is_synced": {
+		"message": "ค่ากำหนดที่ซิงค์"
 	},
 	"preferences_reset": {
 		"message": "รีเซ็ตค่ากำหนดทั้งหมดแล้ว!"

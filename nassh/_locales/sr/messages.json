@@ -702,7 +702,7 @@
 		"message": "Направите сирову копију датотеке на терминалу"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Промените радни директоријум"
+		"message": "Промените даљински радни директоријум"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Промените групу путања"
@@ -714,7 +714,7 @@
 		"message": "Промените власника путања"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Обришите актуелни екран терминала."
+		"message": "Обришите актуелни екран терминала"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Копирајте датотеку у привремену меморију (подразумевано: 10 MiB од почетка)"
@@ -744,22 +744,52 @@
 		"message": "Преузимање датотеке: $1 као $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Преузимајте датотеке"
+		"message": "Преузмите један фајл"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Овај екран помоћи"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Промените локални радни директоријум"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Наведите детаље о директоријумима"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Наведите детаље о локалном директоријуму"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Направите линк на путањи која указује на циљ"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Прикажите актуелни локални радни директоријум"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Локални радни директоријум: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Преузмите више фајлова"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Правите директоријуме"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Преименујте датотеку"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Отпремите више фајлова"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Наставите преузимање више фајлова"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Наставите отпремање више фајлова"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "подешавања"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Подесите или опозовите подешавање"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Подесите стринг упита"
@@ -771,7 +801,7 @@
 		"message": "Отпремање датотеке: $1 као $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Приказује се актуелни радни директоријум"
+		"message": "Прикажи актуелни даљински радни директоријум"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Удаљени радни директоријум: $1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Каноникализујте путање"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Наставите преузимање једног фајла"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Наставите отпремање датотека"
@@ -805,6 +838,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Направите симболичку везу на путањи која указује на циљ"
+	},
+	"nasftp_cmd_touch": {
+		"message": "додирни"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Ажурирајте време приступа и измене фајлова"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Скратите путање на 0 бајтова"
@@ -851,6 +890,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: превише аргумената"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: непознат аргумент „$2“"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: непозната команда"
 	},
@@ -862,6 +904,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 бајт(ов)а је пренето за $2 сек ($3/с)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Ако преузимање не ради, пробајте да покренете: $1"
 	},
 	"nassh_options_error": {
 		"message": "Непозната опција: $1"
@@ -904,6 +949,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI обрађивачи"
+	},
+	"preferences_key_is_local": {
+		"message": "Локално подешавање"
+	},
+	"preferences_key_is_synced": {
+		"message": "Синхронизовано подешавање"
 	},
 	"preferences_reset": {
 		"message": "Сва подешавања су ресетована!"

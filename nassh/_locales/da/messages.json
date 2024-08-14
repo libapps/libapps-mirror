@@ -708,7 +708,7 @@
 		"message": "indeksændring"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Skift fungerende indeks"
+		"message": "Skift ekstern arbejdsmappe"
 	},
 	"nasftp_cmd_chgrp": {
 		"message": "gruppeejerskabsændring"
@@ -732,7 +732,7 @@
 		"message": "ryd"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Ryd den aktuelle terminalskærm."
+		"message": "Ryd den aktuelle terminalskærm"
 	},
 	"nasftp_cmd_clip": {
 		"message": "klip"
@@ -783,7 +783,7 @@
 		"message": "Downloader filen $1 som $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Download filer"
+		"message": "Download én fil"
 	},
 	"nasftp_cmd_help": {
 		"message": "hjælp"
@@ -791,17 +791,32 @@
 	"nasftp_cmd_help_help": {
 		"message": "Denne hjælpeskærm"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Skift lokal arbejdsmappe"
+	},
 	"nasftp_cmd_list": {
 		"message": "angiv"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "Angivelse af oplysninger om indeks"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Vis oplysninger om lokal mappe"
+	},
 	"nasftp_cmd_ln": {
 		"message": "linkoprettelse"
 	},
 	"nasftp_cmd_ln_help": {
 		"message": "Opret et link i stien, der henviser til målet"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Vis den aktuelle lokale arbejdsmappe"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Lokal arbejdsmappe: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Download flere filer"
 	},
 	"nasftp_cmd_mkdir": {
 		"message": "indeksoprettelse"
@@ -814,6 +829,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Omdøb en fil"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Upload flere filer"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Genoptag download af flere filer"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Genoptag upload af flere filer"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "præferencer"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Angiv eller fjern en præference"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "meddelelse"
@@ -834,7 +864,7 @@
 		"message": "indeksvisning"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Vis det aktuelle fungerende indeks"
+		"message": "Vis den aktuelle eksterne arbejdsmappe"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Eksternt fungerende indeks: $1"
@@ -853,6 +883,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Kanoniser stier"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Genoptag download af én fil"
 	},
 	"nasftp_cmd_rename": {
 		"message": "omdøb"
@@ -898,6 +931,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Opret et symbolsk link i stien, der henviser til målet"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Opdater adgangs- og ændringstidspunkter for filer"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "afkort"
@@ -947,6 +983,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: Der er for mange argumenter"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: ukendt argument \"$2\""
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: Ukendt kommando"
 	},
@@ -958,6 +997,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 bytes blev overført på $2 sekunder ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Hvis download ikke virker, kan du prøve at køre: $1"
 	},
 	"nassh_options_error": {
 		"message": "Ukendt valgmulighed: $1"
@@ -990,7 +1032,7 @@
 		"message": "Hold Ctrl nede for at åbne på en ny fane."
 	},
 	"pref_backup_filename": {
-		"message": "Backup af Secure Shell-præferencer.json"
+		"message": "Sikkerhedskopiering af Secure Shell-præferencer.json"
 	},
 	"preferences_header_ssh_files": {
 		"message": "SSH-filer"
@@ -1000,6 +1042,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI-handlere"
+	},
+	"preferences_key_is_local": {
+		"message": "Lokal præference"
+	},
+	"preferences_key_is_synced": {
+		"message": "Synkroniseret præference"
 	},
 	"preferences_reset": {
 		"message": "Alle præferencer blev nulstillet"

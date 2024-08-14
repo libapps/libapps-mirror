@@ -705,7 +705,7 @@
 		"message": "Fájl mozgatása a terminálhoz"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Munkakönyvtár módosítása"
+		"message": "Távoli munkakönyvtár módosítása"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Útvonalcsoport módosítása"
@@ -717,7 +717,7 @@
 		"message": "Útvonalak tulajdonosának módosítása"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "A terminál jelenlegi képernyőjének törlése."
+		"message": "A terminál jelenlegi képernyőjének törlése"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Fájl másolása a vágólapra (alapértelmezett beállítás: a fájl elejétől számított 10 MiB)"
@@ -747,22 +747,52 @@
 		"message": "Fájl letöltése: $1, a következőként: $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Fájlok letöltése"
+		"message": "Egy fájl letöltése"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Ez a súgóképernyő"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Helyi munkakönyvtár módosítása"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Könyvtár részleteinek listázása"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Helyi könyvtár adatainak listázása"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Link létrehozása a célra mutató útvonalon"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Jelenlegi helyi munkakönyvtár megjelenítése"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Helyi munkakönyvtár: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Több fájl letöltése"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Könyvtárak létrehozása"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Fájl átnevezése"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Több fájl feltöltése"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Több fájl letöltésének folytatása"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Több fájl feltöltésének folytatása"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "preferenciák"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Preferencia megadása vagy visszavonása"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Az értesítés karakterláncának beállítása"
@@ -774,7 +804,7 @@
 		"message": "Fájl feltöltése: $1 mint $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Jelenlegi munkakönyvtár megjelenítése"
+		"message": "A jelenlegi távoli munkakönyvtár megjelenítése"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Távoli munkakönyvtár: $1"
@@ -784,6 +814,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Útvonalak szabványosítása"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Egy fájl letöltésének folytatása"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Fájlfeltöltés folytatása"
@@ -808,6 +841,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Szimlink létrehozása a célra mutató útvonalon"
+	},
+	"nasftp_cmd_touch": {
+		"message": "érintés"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Fájlok hozzáférési és módosítási időpontjának frissítése"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Útvonalak csonkolása 0 bájtra"
@@ -854,6 +893,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: túl sok argumentum"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: ismeretlen argumentum – „$2”"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: ismeretlen parancs"
 	},
@@ -865,6 +907,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 bájt átvitele megtörtént $2 másodperc alatt ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Ha a letöltés nem működik, próbálkozzon a következő futtatásával: $1"
 	},
 	"nassh_options_error": {
 		"message": "Ismeretlen lehetőség: $1"
@@ -907,6 +952,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI-kezelők"
+	},
+	"preferences_key_is_local": {
+		"message": "Helyi preferencia"
+	},
+	"preferences_key_is_synced": {
+		"message": "Szinkronizált preferencia"
 	},
 	"preferences_reset": {
 		"message": "Minden beállítás visszaállítva!"

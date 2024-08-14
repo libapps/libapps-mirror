@@ -699,7 +699,7 @@
 		"message": "ટર્મિનલ પર ફાઇલને ડમ્પ કરો"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "કામ કરતી ડિરેક્ટરી બદલો"
+		"message": "ઑફિસથી રિમોટલી કામ કરવા માટે ઉપયોગી ડિરેક્ટરી બદલો"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "પથનું ગ્રૂપ બદલો"
@@ -711,7 +711,7 @@
 		"message": "પથના માલિકને બદલો"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "વર્તમાન ટર્મિનલ સ્ક્રીન સાફ કરો."
+		"message": "વર્તમાન ટર્મિનલ સ્ક્રીન સાફ કરો"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "ક્લિપબોર્ડ પર ફાઇલને કૉપિ કરો (ડિફૉલ્ટ: શરૂઆતથી 10MiB)"
@@ -741,22 +741,52 @@
 		"message": "ફાઇલ ડાઉનલોડ કરી રહ્યાં છીએ: $1ને $2 તરીકે"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ફાઈલો ડાઉનલોડ કરો"
+		"message": "એક ફાઇલ ડાઉનલોડ કરો"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "સહાય માટેની આ સ્ક્રીન"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "સ્થાનિક ઑફિસ ડિરેક્ટરી બદલો"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "ડિરેક્ટરીની વિગતોની સૂચિ બનાવો"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "સ્થાનિક ડિરેક્ટરીની વિગતોવાળી સૂચિ બતાવો"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "લક્ષ્યનો સંકેત આપતા પથ પર લિંક બનાવો"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "વર્તમાન સ્થાનિક ઑફિસ ડિરેક્ટરી બતાવો"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "સ્થાનિક ઑફિસ ડિરેક્ટરી: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "એકથી વધુ ફાઇલો ડાઉનલોડ કરો"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "ડિરેક્ટરી બનાવો"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ફાઇલનું નામ બદલો"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "એકથી વધુ ફાઇલો અપલોડ કરો"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "એકથી વધુ ફાઇલો ડાઉનલોડ કરવાનું ફરી શરૂ કરો"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "એકથી વધુ ફાઇલો અપલોડ કરવાનું ફરી શરૂ કરો"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "પસંદગીઓ"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "પસંદગીનું સેટઅપ કરો અથવા સેટઅપ રદ કરો"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "સંકેતની સ્ટ્રિંગ સેટ કરો"
@@ -768,7 +798,7 @@
 		"message": "ફાઇલ અપલોડ કરી રહ્યાં છીએ: $1ને $2 ($3) તરીકે"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "કામ કરતી વર્તમાન ડિરેક્ટરી બતાવો"
+		"message": "ઑફિસથી રિમોટલી કામ કરવા માટે ઉપયોગી વર્તમાન ડિરેક્ટરી બતાવો"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "કામ કરતી રિમોટ ડિરેક્ટરી: $1"
@@ -778,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "પથને સ્વીકૃત બનાવો"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "એક ફાઇલ ડાઉનલોડ કરવાનું ફરી શરૂ કરો"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "ફાઇલો અપલોડ કરવાનું ફરી શરૂ કરો"
@@ -802,6 +835,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "લક્ષ્યનો સંકેત આપતા પથ પર સંદર્ભ ધરાવતી લિંક બનાવો"
+	},
+	"nasftp_cmd_touch": {
+		"message": "ટચ"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ફાઇલ ઍક્સેસ કર્યાનો અને તેમાં ફેરફાર કર્યાનો સમય અપડેટ કરો"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "પથને 0 બાઇટ જેટલા ટૂંકા કરો"
@@ -848,6 +887,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: ઘણા બધા તર્ક"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: અજાણ્યું તર્ક '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: અજાણ્યો આદેશ"
 	},
@@ -859,6 +901,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$2 સેકન્ડમાં $1 બાઇટ ટ્રાન્સફર કર્યા ($3/સેકન્ડ)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "જો ડાઉનલોડ કામ ન કરતું હોય, તો આ ચલાવવાનો પ્રયાસ કરો: $1"
 	},
 	"nassh_options_error": {
 		"message": "અજાણ્યો વિકલ્પ: $1"
@@ -901,6 +946,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI હૅન્ડલર"
+	},
+	"preferences_key_is_local": {
+		"message": "સ્થાનિક પસંદગી"
+	},
+	"preferences_key_is_synced": {
+		"message": "સિંક કરેલી પસંદગી"
 	},
 	"preferences_reset": {
 		"message": "બધી પસંદગીઓને રીસેટ કરી!"

@@ -705,7 +705,7 @@
 		"message": "አንድ ፋይል ተርሚናል ላይ ጣል ያድርጉ"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "የመሥሪያ ማውጫን ለውጥ"
+		"message": "የርቀት መቆጣጠሪያ የሥራ ማውጫን ይለውጡ"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "የዱካዎች ቡድንን ለውጥ"
@@ -717,7 +717,7 @@
 		"message": "የዱካዎች ባለቤት ቀይር"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "አሁን ያለውን የጣቢያ ማያ ገፅ አጽዳ።"
+		"message": "አሁን ያለውን የጣቢያ ማያ ገፅ አጽዳ"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "አንድ ፋይል ወደ ቅንጥብ ሰሌዳው ይቅዱ (ነባሪ፦ ከጅምሩ 10 ሜቢባይት)"
@@ -747,10 +747,16 @@
 		"message": "ፋይል በማውረድ ላይ፦ $1 እንደ $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ፋይሎችን ያወርዳል"
+		"message": "አንድ ፋይል አውርድ"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "ይህ የእገዛ ማያ ገፅ"
+	},
+	"nasftp_cmd_lcd": {
+		"message": "ኤልሲዲ"
+	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "አካባቢያዊ የሥራ ማውጫን ይለውጡ"
 	},
 	"nasftp_cmd_list": {
 		"message": "ዝርዝር"
@@ -758,8 +764,20 @@
 	"nasftp_cmd_list_help": {
 		"message": "የዝርዝር ማውጫ ዝርዝሮች"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "የአካባቢያዊ ማውጫ ዝርዝሮች ዝርዝር"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "ወደ ዒላማ በዱካ ጥቆማ አደራረግ ላይ አገናኝን ይፍጠሩ"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "የአሁኑን አካባቢያዊ የሥራ ማውጫ አሳይ"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "አካባቢያዊ የሥራ ማውጫ፦ $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "በርካታ ፋይሎችን አውርድ"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "ማውጫዎችን ይፍጠሩ"
@@ -769,6 +787,24 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ፋይልን ዳግም ሰይም"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "በርካታ ፋይሎችን ስቀል"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "በርካታ ፋይሎች ማውረድ ከቆመበት ቀጥል"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "በርካታ ፋይሎች መስቀል ከቆመበት ቀጥል"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "ምርጫዎች"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "ምርጫን ያቀናብሩ ወይም አያቀናብሩ"
+	},
+	"nasftp_cmd_preferences_line": {
+		"message": "$1፥ $2"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "የጥያቄ ኅብረቁምፊን ያቀናብሩ"
@@ -780,7 +816,7 @@
 		"message": "ፋይል በመስቀል ላይ፦ $1 እንደ $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "አሁን ያለውን የሚሠራ ማውጫ አሳይ"
+		"message": "የአሁኑን የርቀት መቆጣጠሪያ የሥራ ማውጫን አሳይ"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "የርቀት መሥሪያ ማውጫ፦ $1"
@@ -790,6 +826,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "ዱካዎችን በብዙ ዓይነት ለውጥ"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "አንድ ፋይል ማውረድ ከቆመበት ቀጥል"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "ፋይሎችን መስቀል ከቆመበት ቀጥል"
@@ -817,6 +856,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "ወደ ዒላማው በሚጠቁም ዱካ ላይ ተምሳሌታዊ መጠሪያን ይፍጠሩ"
+	},
+	"nasftp_cmd_touch": {
+		"message": "ይንኩ"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "የፋይሎች መዳረሻ እና ማሻሻያ ጊዜዎችን ያዘምኑ"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "ዱካዎችን ወደ 0 ባይቶች ያሳጥሩ"
@@ -866,6 +911,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1፦ በጣም ብዙ ነጋሪ እሴቶች"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1፦ ያልታወቀ ነጋሪ እሴት «$2»"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1፦ ያልታወቀ ትዕዛዝ"
 	},
@@ -877,6 +925,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 ባይት በ$2 ሰከንዶች ($3/ሰ) ተላልፏል"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "ማውረድ እየሰራ ካልሆነ የሚከተለውን ለማሄድ ይሞክሩ፦ $1"
 	},
 	"nassh_options_error": {
 		"message": "ያልታወቀ አማራጭ፦ $1"
@@ -919,6 +970,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "የURI ተቆጣጣሪዎች"
+	},
+	"preferences_key_is_local": {
+		"message": "የአካባቢ ምርጫ"
+	},
+	"preferences_key_is_synced": {
+		"message": "የተሰመረ ምርጫ"
 	},
 	"preferences_reset": {
 		"message": "ሁሉም ምርጫዎች ዳግም ተጀምረዋል!"

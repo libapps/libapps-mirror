@@ -537,7 +537,7 @@
 		"message": "Trimiteți un prefix ESC când apăsați o tastă și apăsați lung tasta Meta.\n\nDe exemplu, atunci când este activată, apăsarea Meta+K va trimite ^[k la fel ca atunci când tastați Escape, apoi k. Atunci când este dezactivată, se va trimite doar k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Butonul mouse-ului care se folosește pentru inserare.\n\nPentru detectare automată, vom folosi butonul din mijloc al mouse-ului pentru platforme non-X11 (inclusiv Sistemul de operare Chrome). În X11, vom folosi butonul drept al mouse-ului (deoarece managerul de ferestre ar trebui să insereze folosind butonul din mijloc).\n\n0 == butonul stâng (principal).\n1 == butonul din mijloc (auxiliar).\n2 == butonul drept (secundar).\n\nOpțiunea este independentă de setarea pentru inserare cu clic dreapta.\n\nNotă: butonul principal și cel secundar se vor schimba automat între ele în cazul mouse-urilor pentru persoane stângace."
+		"message": "Butonul mouse-ului care se folosește pentru inserare.\n\nPentru detectare automată, vom folosi butonul din mijloc al mouse-ului pentru platforme non-X11 (inclusiv ChromeOS). În X11, vom folosi butonul drept al mouse-ului (deoarece managerul de ferestre ar trebui să insereze folosind butonul din mijloc).\n\n0 == butonul stâng (principal).\n1 == butonul din mijloc (auxiliar).\n2 == butonul drept (secundar).\n\nOpțiunea este independentă de setarea pentru inserare cu clic dreapta.\n\nNotă: butonul principal și cel secundar se vor schimba automat între ele în cazul mouse-urilor pentru persoane stângace."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Inserați la clicurile pe butonul drept al mouse-ului.\n\nAceastă opțiune este independentă de setarea „mouse-paste-button”.\n\nNotă: butonul principal și cel secundar se vor schimba automat între ele în cazul mouse-urilor pentru persoane stângace."
@@ -699,7 +699,7 @@
 		"message": "Preluați un fișier pe terminal"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Schimbați directorul de lucru"
+		"message": "Schimbați directorul de lucru de la distanță"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Schimbați grupul de căi"
@@ -711,7 +711,7 @@
 		"message": "Schimbați proprietarul căilor"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Goliți ecranul actual al terminalului."
+		"message": "Goliți ecranul actual al terminalului"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Copiați un fișier în clipboard (dimensiune prestabilită: 10 MiB de la început)"
@@ -741,22 +741,52 @@
 		"message": "Se descarcă fișierul: $1 ca $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Descărcați fișiere"
+		"message": "Descărcați un fișier"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Acest ecran de ajutor"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Schimbați directorul de lucru local"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Afișați detaliile directorului"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Afișați detaliile directorului local"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Creați un link pe cale, care indică spre țintă"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Afișați directorul de lucru local actual"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Director de lucru local: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Descărcați mai multe fișiere"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Creați directoare"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Redenumiți un fișier"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Încărcați mai multe fișiere"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Reluați descărcarea mai multor fișiere"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Reluați încărcarea mai multor fișiere"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "preferințe"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Setați o preferință sau anulați setarea acesteia"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Setați șirul pentru solicitare"
@@ -768,7 +798,7 @@
 		"message": "Se încarcă fișierul: $1 ca $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Afișați directorul de lucru actual"
+		"message": "Afișați directorul de lucru de la distanță actual"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Director de lucru de la distanță: $1"
@@ -778,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Canonicalizați căile"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Reluați descărcarea unui fișier"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Reluați încărcarea fișierelor"
@@ -802,6 +835,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Creați un symlink pe cale, care indică spre țintă"
+	},
+	"nasftp_cmd_touch": {
+		"message": "atingeți"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Actualizați orele de accesare și de modificare a fișierelor"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Trunchiați căile la 0 byți"
@@ -848,6 +887,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: prea multe argumente"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: argumentul necunoscut $2"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: comandă necunoscută"
 	},
@@ -859,6 +901,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 byți transferați în $2 secunde ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Dacă descărcarea nu funcționează, rulați: $1"
 	},
 	"nassh_options_error": {
 		"message": "Opțiune necunoscută: $1"
@@ -901,6 +946,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Handlere URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Preferință locală"
+	},
+	"preferences_key_is_synced": {
+		"message": "Preferință sincronizată"
 	},
 	"preferences_reset": {
 		"message": "Toate preferințele au fost resetate!"

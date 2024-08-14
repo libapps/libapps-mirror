@@ -693,7 +693,7 @@
 		"message": "فائل کو ٹرمینل میں ڈمپ کریں"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "کام کرنے والی ڈائرکٹری تبدیل کریں"
+		"message": "ریموٹ ورکنگ ڈائرکٹری کو تبدیل کریں"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "راستوں کا گروپ تبدیل کریں"
@@ -708,7 +708,7 @@
 		"message": "صاف کریں"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "موجودہ ٹرمینل اسکرین صاف کریں۔"
+		"message": "موجودہ ٹرمینل اسکرین صاف کریں"
 	},
 	"nasftp_cmd_clip": {
 		"message": "کلپ"
@@ -753,7 +753,7 @@
 		"message": "فائل ڈاؤن لوڈ ہو رہی ہے: $1 بطور $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "فائلیں ڈاؤن لوڈ کریں"
+		"message": "ایک فائل ڈاؤن لوڈ کریں"
 	},
 	"nasftp_cmd_help": {
 		"message": "مدد"
@@ -761,14 +761,29 @@
 	"nasftp_cmd_help_help": {
 		"message": "یہ امدادی اسکرین"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "مقامی ورکنگ ڈائرکٹری تبدیل کریں"
+	},
 	"nasftp_cmd_list": {
 		"message": "فہرست"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "ڈائرکٹری کی تفصیلات کی فہرست بنائیں"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "مقامی ڈائریکٹری کی تفصیلات درج کریں"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "ہدف کی نشاندہی کرنے والے راستے پر ایک لنک تخلیق کریں"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "موجودہ مقامی ورکنگ ڈائرکٹری دکھائیں"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "مقامی ورکنگ ڈائریکٹری: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "متعدد فائلز ڈاؤن لوڈ کریں"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "ڈائرکٹریز تخلیق کریں"
@@ -778,6 +793,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "فائل کا نام تبدیل کریں"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "متعدد فائلز اپ لوڈ کریں"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "متعدد فائلز کو ڈاؤن لوڈ کرنا دوبارہ شروع کریں"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "متعدد فائلز کو اپ لوڈ کرنا دوبارہ شروع کریں"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "ترجیحات"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "ترجیح سیٹ یا ان سیٹ کریں"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "پرامپٹ"
@@ -792,7 +822,7 @@
 		"message": "فائل اپ لوڈ کی جا رہی ہے: $1 بطور $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "موجودہ ورکنگ ڈائرکٹری دکھائیں"
+		"message": "موجودہ ریموٹ ورکنگ ڈائرکٹری دکھائیں"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "دور سے کام کرنے والی ڈائرکٹری: $1"
@@ -805,6 +835,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "راستے کینونکلائز کریں"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "ایک فائل کو ڈاؤن لوڈ کرنا دوبارہ شروع کریں"
 	},
 	"nasftp_cmd_rename": {
 		"message": "نام تبدیل کریں"
@@ -841,6 +874,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "ہدف کی نشاندہی کرنے والے راستے پر ایک سِم لنک تخلیق کریں"
+	},
+	"nasftp_cmd_touch": {
+		"message": "ٹچ کریں"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "فائلز تک رسائی اور ترمیم کے اوقات کو اپ ڈیٹ کریں"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "راستوں کو 0 بائٹس تک کاٹیں"
@@ -890,6 +929,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: کافی زیادہ آرگیومینٹس"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: نامعلوم آرگیومینٹ '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: نامعلوم کمانڈ"
 	},
@@ -904,6 +946,9 @@
 	},
 	"nasftp_prompt": {
 		"message": "‎nasftp $1 >‎"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "اگر ڈاؤن لوڈنگ کام نہیں کر رہی ہے تو چلانے کی کوشش کریں: $1"
 	},
 	"nassh_options_error": {
 		"message": "نامعلوم اختیار: $1"
@@ -946,6 +991,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI ہینڈلرز"
+	},
+	"preferences_key_is_local": {
+		"message": "مقامی ترجیح"
+	},
+	"preferences_key_is_synced": {
+		"message": "مطابقت پذیر ترجیح"
 	},
 	"preferences_reset": {
 		"message": "تمام ترجیحات ری سیٹ کی گئیں!"

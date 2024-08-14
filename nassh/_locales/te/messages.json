@@ -126,7 +126,7 @@
 		"message": "బ్లాక్"
 	},
 	"hterm_button_close": {
-		"message": "మూసివేయి"
+		"message": "మూసివేయండి"
 	},
 	"hterm_button_close_find_bar": {
 		"message": "కనుగొనే బార్‌ను మూసివేయండి"
@@ -564,7 +564,7 @@
 		"message": "Ctrl+Tab, అలాగే Ctrl+Shift+Tab బ్రౌజర్‌కు పంపాలా వద్దా.\n\nఒప్పు అయితే, బ్రౌజర్ Ctrl+Tab అలాగే Ctrl+Shift+Tabని \"తర్వాతి/మునుపటి ట్యాబ్\" కీబోర్డ్ షార్ట్‌కట్‌గా హ్యాండిల్ చేస్తుంది. తప్పు అయితే, Tab కీ Ctrl లేదా Shift లేకుండా హోస్ట్‌కి పంపబడుతుంది."
 	},
 	"hterm_pref_pass_ctrl_w": {
-		"message": "Ctrl+W బ్రౌజర్‌కు పంపాలా వద్దా.\n\nఒప్పు అయితే, బ్రౌజర్ Ctrl+Wని \"ట్యాబ్‌ను మూసివేయి\" కీబోర్డ్ షార్ట్‌కట్‌గా హ్యాండిల్ చేస్తుంది. తప్పు అయితే, Ctrl+W హోస్ట్‌కు పంపబడుతుంది."
+		"message": "Ctrl+W బ్రౌజర్‌కు పంపాలా వద్దా.\n\nఒప్పు అయితే, బ్రౌజర్ Ctrl+Wని \"ట్యాబ్‌ను మూసివేయండి\" కీబోర్డ్ షార్ట్‌కట్‌గా హ్యాండిల్ చేస్తుంది. తప్పు అయితే, Ctrl+W హోస్ట్‌కు పంపబడుతుంది."
 	},
 	"hterm_pref_pass_meta_number": {
 		"message": "Meta+1..9 బ్రౌజర్‌కు పంపాలా వద్దా.\n\nబ్రౌజర్ ట్యాబ్‌లో hterm రన్ అవుతున్నప్పుడు ఇది ఉపయోగకరంగా ఉంటుంది, కనుక Chrome యొక్క \"ట్యాబ్‌కు స్విచ్ అవ్వండి\" కీబోర్డ్ షార్ట్‌కట్‌లను కోల్పోరు. ట్యాబ్‌లో రన్ అవ్వకపోతే, ఈ కీలను హోస్ట్‌కు పంపడం మంచిది, తద్వారా, వాటిని vim లేదా emacsలలో ఉపయోగించవచ్చు.\n\nఒప్పు అయితే, బ్రౌజర్ Meta+1..9ని హ్యాండిల్ చేస్తుంది. తప్పు అయితే, Meta+1..9 హోస్ట్‌కు పంపబడుతుంది. శూన్యం అయితే, బ్రౌజర్ ప్లాట్‌ఫామ్, విండో రకం ఆధారంగా ఆటోమేటిక్‌గా గుర్తించబడుతుంది."
@@ -705,7 +705,7 @@
 		"message": "టెర్మినల్‌కు ఫైల్‌ను డంప్ చేయండి"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "అమలవుతున్న డైరెక్టరీని మార్చండి"
+		"message": "రిమోట్ వర్కింగ్ డైరెక్టరీని మార్చండి"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "పాత్‌ల గ్రూప్‌ను మార్చండి"
@@ -720,7 +720,7 @@
 		"message": "క్లియర్ చేయండి"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "ప్రస్తుత టెర్మినల్ స్క్రీన్‌ను క్లియర్ చేయండి."
+		"message": "ప్రస్తుత టెర్మినల్ స్క్రీన్‌ను క్లియర్ చేయండి"
 	},
 	"nasftp_cmd_clip": {
 		"message": "క్లిప్"
@@ -765,7 +765,7 @@
 		"message": "ఫైల్‌ను డౌన్‌లోడ్ చేస్తోంది: $1 $2గా"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ఫైళ్లను డౌన్‌లోడ్ చేయండి"
+		"message": "ఒక ఫైల్‌ను డౌన్‌లోడ్ చేయండి"
 	},
 	"nasftp_cmd_help": {
 		"message": "సహాయం"
@@ -773,14 +773,29 @@
 	"nasftp_cmd_help_help": {
 		"message": "ఈ సహాయ స్క్రీన్"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "లోకల్ వర్కింగ్ డైరెక్టరీని మార్చండి"
+	},
 	"nasftp_cmd_list": {
 		"message": "లిస్ట్"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "డైరెక్టరీ వివరాలతో లిస్ట్‌ను తయారు చేయండి"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "లోకల్ డైరెక్టరీ వివరాలను లిస్ట్ చేయండి"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "లక్ష్యానికి పాయింట్ చేసే పాత్ వద్ద లింక్‌ను క్రియేట్ చేయండి"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "ప్రస్తుత లోకల్ వర్కింగ్ డైరెక్టరీని చూపించండి"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "లోకల్ వర్కింగ్ డైరెక్టరీ: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "అనేక ఫైళ్లను డౌన్‌లోడ్ చేయండి"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "డైరెక్టరీలను క్రియేట్ చేయండి"
@@ -790,6 +805,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ఫైల్ పేరు మార్చండి"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "అనేక ఫైళ్లను అప్‌లోడ్ చేయండి"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "అనేక ఫైళ్లను డౌన్‌లోడ్ చేయడం కొనసాగించండి"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "అనేక ఫైళ్లను అప్‌లోడ్ చేయడం కొనసాగించండి"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "ప్రాధాన్యతలు"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "ప్రాధాన్యతను సెట్ చేయండి లేదా అన్‌సెట్ చేయండి"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "ప్రాంప్ట్"
@@ -807,7 +837,7 @@
 		"message": "ఫైల్ అప్‌లోడ్ అవుతోంది: $1, $2 ($3)గా"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "ప్రస్తుతం అమలవుతున్న డైరెక్టరీని చూపు"
+		"message": "ప్రస్తుత రిమోట్ వర్కింగ్ డైరెక్టరీని చూపించండి"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "రిమోట్‌గా పని చేసే డైరెక్టరీ: $1"
@@ -827,6 +857,9 @@
 	"nasftp_cmd_realpath_help": {
 		"message": "నియమానుగుణత పాత్‌లు"
 	},
+	"nasftp_cmd_reget_help": {
+		"message": "ఒక ఫైల్‌ను డౌన్‌లోడ్ చేయడం కొనసాగించండి"
+	},
 	"nasftp_cmd_rename": {
 		"message": "పేరుమార్చు"
 	},
@@ -843,7 +876,7 @@
 		"message": "ఖాళీ డైరెక్టరీలను తొలగించండి"
 	},
 	"nasftp_cmd_show": {
-		"message": "చూపు"
+		"message": "చూపండి"
 	},
 	"nasftp_cmd_show_help": {
 		"message": "ఇన్‌లైన్ ఫైళ్లను చూపు"
@@ -862,6 +895,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "టార్గెట్‌ను పాయింట్ చేసే పాత్ వద్ద symlinkను క్రియేట్ చేయండి"
+	},
+	"nasftp_cmd_touch": {
+		"message": "టచ్"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ఫైల్స్‌కు యాక్సెస్‌ను, వాటికి మార్పులు చేసిన సమయాలను అప్‌డేట్ చేయండి"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "తగ్గించు"
@@ -914,6 +953,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: చాలా ఆర్గ్యుమెంట్‌లు ఉన్నాయి"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: ఈ ఆర్గ్యుమెంట్‌కు సంబంధించిన సమాచారం అందుబాటులో లేదు '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: తెలియని కమాండ్"
 	},
@@ -925,6 +967,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$2 సెకన్లలో $1 బైట్‌లు ($3/సె) బదిలీ చేయబడ్డాయి"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "డౌన్‌లోడ్ పద్ధతి పని చేయకపోతే, దీన్ని రన్ చేసి చూడండి: $1"
 	},
 	"nassh_options_error": {
 		"message": "తెలియని ఆప్ష‌న్‌: $1"
@@ -967,6 +1012,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI హ్యాండ్లర్‌లు"
+	},
+	"preferences_key_is_local": {
+		"message": "లోకల్ ప్రాధాన్యత"
+	},
+	"preferences_key_is_synced": {
+		"message": "సింక్ చేసిన ప్రాధాన్యత"
 	},
 	"preferences_reset": {
 		"message": "అన్ని ప్రాధాన్యతలు రీసెట్ చేయబడ్డాయి!"

@@ -603,7 +603,7 @@
 		"message": "Xác định xem sử dụng tổ hợp phím Shift+Insert cho thao tác dán hay gửi tổ hợp phím này đến máy chủ từ xa."
 	},
 	"hterm_pref_terminal_encoding": {
-		"message": "Chế độ mã hóa thiết bị đầu cuối mặc định (DOCS).\n\nISO-2022 cho phép chuyển đổi ánh xạ ký tự (như ánh xạ đồ họa).\nUTF-8 không cho phép các loại chuyển đổi này.\n\nBiến thể bị khóa có nghĩa là không thể thay đổi mã hóa vào thời gian chạy thông qua chuỗi ký tự thoát của thiết bị đầu cuối.\n\nBạn nên luôn sử dụng UTF-8 trừ khi nhận thấy có sự cố hiển thị với các ứng dụng cũ."
+		"message": "Chế độ mã hóa thiết bị đầu cuối mặc định (DOCS).\n\nISO-2022 cho phép chuyển đổi ánh xạ ký tự (như ánh xạ đồ họa).\nUTF-8 không cho phép các loại chuyển đổi này.\n\nBiến thể bị khóa có nghĩa là không thể thay đổi mã hóa vào thời gian chạy thông qua chuỗi ký tự thoát của thiết bị đầu cuối.\n\nBạn nên luôn sử dụng UTF-8 trừ phi nhận thấy có sự cố hiển thị với các ứng dụng cũ."
 	},
 	"hterm_pref_use_default_window_copy": {
 		"message": "Xác định xem có sử dụng thao tác sao chép của hệ điều hành/trình duyệt mặc định hay không.\n\nViệc cho phép trình duyệt/hệ điều hành trực tiếp xử lý sự kiện sao chép có thể giúp cải thiện tính tương thích với một số hệ thống (trong đó chức năng sao chép không hề hoạt động), nhưng lại khiến khả năng chọn văn bản kém hiệu quả hơn.\n\nVí dụ: các dòng dài áp dụng tính năng hiển thị bằng nhiều dòng ngắn sẽ được sao chép mà vẫn đảm bảo các dòng mới thuộc dòng dài đó."
@@ -702,7 +702,7 @@
 		"message": "Xuất tệp sang thiết bị đầu cuối"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Thay đổi thư mục đang làm việc"
+		"message": "Thay đổi thư mục đang làm việc từ xa"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Thay đổi nhóm đường dẫn"
@@ -714,7 +714,7 @@
 		"message": "Thay đổi chủ sở hữu của đường dẫn"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Xóa màn hình hiện tại của thiết bị đầu cuối."
+		"message": "Xoá màn hình hiện tại của thiết bị đầu cuối"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Sao chép tệp vào bảng nhớ tạm (mặc định: 10 MiB đầu tiên)"
@@ -744,22 +744,49 @@
 		"message": "Tệp tải xuống: $1 dưới dạng $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Tải tệp xuống"
+		"message": "Tải một tệp xuống"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Màn hình trợ giúp này"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Thay đổi thư mục đang làm việc trên máy"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Liệt kê thông tin chi tiết về thư mục"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Liệt kê thông tin chi tiết về thư mục trên máy"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Tạo một đường liên kết tại đường dẫn trỏ đến đích"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Hiện thư mục đang làm việc trên máy"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Thư mục đang làm việc trên máy: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Tải nhiều tệp xuống"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Tạo thư mục"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Đổi tên tệp"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Tải nhiều tệp lên"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Tiếp tục tải nhiều tệp xuống"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Tiếp tục tải nhiều tệp lên"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Đặt hoặc huỷ đặt một lựa chọn ưu tiên"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Đặt chuỗi lời nhắc"
@@ -771,7 +798,7 @@
 		"message": "Đang tải tệp lên: $1 dưới dạng $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Hiển thị thư mục đang làm việc"
+		"message": "Hiện thư mục đang làm việc từ xa"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Thư mục đang làm việc từ xa: $1"
@@ -781,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Chuẩn hóa đường dẫn"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Tiếp tục tải một tệp xuống"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Tiếp tục tải tệp lên"
@@ -805,6 +835,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Tạo một đường liên kết tượng trưng tại đường dẫn trỏ đến đích"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Cập nhật thời gian truy cập và sửa đổi tệp"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Cắt bớt đường dẫn xuống còn 0 byte"
@@ -851,6 +884,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: có quá nhiều đối số"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: đối số \"$2\" không xác định"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: lệnh không xác định"
 	},
@@ -862,6 +898,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "Đã chuyển $1 byte trong $2 giây ($3/giây)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Nếu quá trình tải xuống không hoạt động, hãy thử chạy: $1"
 	},
 	"nassh_options_error": {
 		"message": "Tùy chọn không xác định: $1"
@@ -904,6 +943,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Trình xử lý URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Chỉ lưu lựa chọn ưu tiên trên hệ thống này"
+	},
+	"preferences_key_is_synced": {
+		"message": "Lựa chọn ưu tiên đã được đồng bộ hoá"
 	},
 	"preferences_reset": {
 		"message": "Đã đặt lại tất cả tùy chọn!"

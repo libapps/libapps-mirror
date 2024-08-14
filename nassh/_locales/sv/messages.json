@@ -399,7 +399,7 @@
 		"message": "Om fjärrvärden ska få visa bilder i terminalen.\n\nSom standard visas en fråga tills någonting väljs."
 	},
 	"hterm_pref_alt_backspace_is_meta_backspace": {
-		"message": "När detta alternativ har ställts in åsidosätts ommappningen av Alt+Backsteg till Delete i Chrome OS så att kombinationen Alt+Backsteg verkligen ger Alt+Backsteg."
+		"message": "När detta alternativ har ställts in åsidosätts ommappningen av Alt+Backsteg till Delete i ChromeOS så att kombinationen Alt+Backsteg verkligen ger Alt+Backsteg."
 	},
 	"hterm_pref_alt_gr_mode": {
 		"message": "Välj heuristisk metod för identifiering av AltGr-tangent.\n\n'null': Automatisk identifiering utifrån navigator.language:\n      'en-us' => 'none', övriga => 'right-alt'\n'none': Inaktivera all AltGr-emulering.\n'ctrl-alt': Anta att Ctrl+Alt används som AltGr.\n'left-alt': Anta att vänster Alt-tangent används som AltGr.\n'right-alt': Anta att höger Alt-tangent används som AltGr."
@@ -540,7 +540,7 @@
 		"message": "Skicka ett ESC-prefix när en tangent trycks ned medan Meta-tangenten är nedtryckt.\n\nNär detta är aktiverat skickas till exempel ^[k när du trycker på Meta+K, som om du hade tryckt på Esc följt av k. När detta är inaktiverat skickas bara k."
 	},
 	"hterm_pref_mouse_paste_button": {
-		"message": "Den musknapp som ska användas för att klistra in.\n\nMed automatisk identifiering används musens mittknapp på plattformar som inte har X11 som fönsterhanterare (inklusive Chrome OS). Med X11 används höger musknapp (eftersom inklistring med musens mittknapp normalt sköts av fönsterhanteraren).\n\n0 == vänster musknapp (primär).\n1 == mittknappen (reserv).\n2 == höger musknapp (sekundär).\n\nAlternativet är oberoende av inställningen för att klistra in med höger musknapp.\n\nObs! De primära och sekundära knapparna anpassar sig automatiskt efter om du har en vänster- eller högerhänt mus."
+		"message": "Den musknapp som ska användas för att klistra in.\n\nMed automatisk identifiering används musens mittknapp på plattformar som inte har X11 som fönsterhanterare (inklusive ChromeOS). Med X11 används höger musknapp (eftersom inklistring med musens mittknapp normalt sköts av fönsterhanteraren).\n\n0 == vänster musknapp (primär).\n1 == mittknappen (reserv).\n2 == höger musknapp (sekundär).\n\nAlternativet är oberoende av inställningen för att klistra in med höger musknapp.\n\nObs! De primära och sekundära knapparna anpassar sig automatiskt efter om du har en vänster- eller högerhänt mus."
 	},
 	"hterm_pref_mouse_right_click_paste": {
 		"message": "Klistra in genom att klicka på höger musknapp.\n\nAlternativet är oberoende av inställningen mouse-paste-button.\n\nObs! De primära och sekundära knapparna anpassar sig automatiskt efter om du har en vänster- eller högerhänt mus."
@@ -702,7 +702,7 @@
 		"message": "Skriv ut en fil i terminalfönstret"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Ändra arbetskatalog"
+		"message": "Ändra distansarbetskatalog"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Ändra vilken grupp som en sökväg tillhör"
@@ -714,7 +714,7 @@
 		"message": "Ändra ägare till sökvägar"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Rensa den aktuella terminalskärmen."
+		"message": "Rensa den aktuella terminalskärmen"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Kopiera en fil till urklipp (standard: 10 MiB från början)"
@@ -744,22 +744,52 @@
 		"message": "Laddar ned filen: $1 som $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Ladda ned filer"
+		"message": "Ladda ned en fil"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Den här hjälpskärmen"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Ändra lokal arbetskatalog"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Visa kataloginformation som lista"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Visa uppgifter om lokal katalog"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Skapa en länk på den angivna sökvägen som pekar på målet"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Visa aktuell lokal arbetskatalog"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Lokal arbetskatalog: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Ladda ned flera filer"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Skapa kataloger"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Byta namn på en fil"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Ladda upp flera filer"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Fortsätt ladda ned flera filer"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Fortsätt ladda upp flera filer"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "inställningar"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Ange eller ta bort en inställning"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Ange prompt-sträng"
@@ -771,7 +801,7 @@
 		"message": "Laddar upp filen: $1 som $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Visa aktuell arbetskatalog"
+		"message": "Visa aktuell distansarbetskatalog"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Fjärrarbetskatalog: $1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Kanonisera sökvägar"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Fortsätt ladda ned en fil"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Återuppta filuppladdning"
@@ -805,6 +838,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Skapa en symbolisk länk på den angivna sökvägen som pekar på målet"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Uppdatera åtkomst- och ändringstider för filer"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Trunkera sökvägar till 0 byte"
@@ -851,6 +887,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: för många argument"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: okänt argument $2"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: okänt kommando"
 	},
@@ -862,6 +901,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 byte överfördes på $2 sekunder ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Om nedladdningen inte fungerar testar du att köra $1"
 	},
 	"nassh_options_error": {
 		"message": "Okänt alternativ: $1"
@@ -904,6 +946,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI-hanterare"
+	},
+	"preferences_key_is_local": {
+		"message": "Lokal inställning"
+	},
+	"preferences_key_is_synced": {
+		"message": "Synkroniserad inställning"
 	},
 	"preferences_reset": {
 		"message": "Alla inställningar har återställts."
@@ -1287,7 +1335,7 @@
 		"message": "Du kan ansluta från adressfältet genom att skriva ssh<Tab><profile name>: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
-		"message": "I Chrome OS kan du montera filsystem via SFTP och bläddra via appen Filer. Använd SFTP-montering i stället för Anslut."
+		"message": "I ChromeOS kan du montera filsystem via SFTP och bläddra via appen Filer. Använd SFTP-montering i stället för Anslut."
 	},
 	"tip_5": {
 		"message": "Anslut med ssh://-länkar på webbsidor eller spara ett bokmärke: https://hterm.org/x/ssh/faq/bookmarks"

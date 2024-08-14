@@ -516,7 +516,7 @@
 		"message": "De voorgrondkleur voor tekst zonder andere kleurkenmerken."
 	},
 	"hterm_pref_hide_mouse_while_typing": {
-		"message": "Of de muisaanwijzer automatisch moet worden verborgen als je typt. Standaard wordt automatisch gedetecteerd of dit door het platform/OS wordt afgehandeld.\n\nOpmerking: Mogelijk wordt deze instelling overschreven door je besturingssysteem, waardoor je deze instelling niet altijd kunt uitzetten."
+		"message": "Of de cursor automatisch moet worden verborgen als je typt. Standaard wordt automatisch gedetecteerd of dit door het platform/OS wordt afgehandeld.\n\nOpmerking: Mogelijk wordt deze instelling overschreven door je besturingssysteem, waardoor je deze instelling niet altijd kunt uitzetten."
 	},
 	"hterm_pref_home_keys_scroll": {
 		"message": "Als 'true' is ingesteld, wordt met Home/End de scrollbalk van de terminal bediend en worden Shift + Home/Shift + End naar de externe host gestuurd. Als 'false' is ingesteld, worden Home/End naar de externe host gestuurd en wordt met Shift + Home/Shift + End gescrolld."
@@ -699,7 +699,7 @@
 		"message": "Een bestand naar de terminal dumpen"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Werkdirectory wijzigen"
+		"message": "Externe werkdirectory wijzigen"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Groep paden wijzigen"
@@ -711,7 +711,7 @@
 		"message": "Eigenaar van paden wijzigen"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Het huidige terminalscherm wissen."
+		"message": "Het huidige terminalscherm wissen"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Een bestand naar het klembord kopiëren (standaard: 10 MiB bij aanvang)"
@@ -741,22 +741,49 @@
 		"message": "Bestand downloaden: $1 als $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Bestanden downloaden"
+		"message": "Eén bestand downloaden"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Dit hulpscherm"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Lokale werkdirectory wijzigen"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Details van directory tonen"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Gegevens van lokale directory vermelden"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Een link voor het pad maken dat naar de bestemming verwijst"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Huidige lokale werkdirectory tonen"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Lokale werkdirectory: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Meerdere bestanden downloaden"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Directory's maken"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "De naam van een bestand wijzigen"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Meerdere bestanden uploaden"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Meerdere bestanden downloaden hervatten"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Meerdere bestanden uploaden hervatten"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Een voorkeur instellen of niet instellen"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Tekenreeks voor prompt instellen"
@@ -768,7 +795,7 @@
 		"message": "Bestand uploaden: $1 als $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Huidige werkdirectory tonen"
+		"message": "Huidige externe werkdirectory tonen"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Externe werkdirectory: $1"
@@ -778,6 +805,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Canonieke paden gebruiken"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Eén bestand downloaden hervatten"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Het uploaden van bestanden hervatten"
@@ -802,6 +832,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Een symbolische link voor het pad maken dat naar de bestemming verwijst"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Toegangs- en aanpassingstijden van bestanden updaten"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Paden afkappen tot 0 bytes"
@@ -848,6 +881,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: te veel argumenten"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: onbekend argument $2"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: onbekende opdracht"
 	},
@@ -859,6 +895,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 bytes overgedragen in $2 seconden ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Als het downloaden niet werkt, probeer je het volgende uit te voeren: $1"
 	},
 	"nassh_options_error": {
 		"message": "Onbekende optie: $1"
@@ -901,6 +940,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI-handlers"
+	},
+	"preferences_key_is_local": {
+		"message": "Lokale voorkeur"
+	},
+	"preferences_key_is_synced": {
+		"message": "Gesynchroniseerde voorkeur"
 	},
 	"preferences_reset": {
 		"message": "Alle voorkeuren zijn gereset."

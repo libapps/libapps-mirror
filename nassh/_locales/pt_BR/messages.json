@@ -216,7 +216,7 @@
 		"message": "Como o cursor pisca"
 	},
 	"hterm_name_pref_cursor_blink_cycle": {
-		"message": "Velocidade em que o cursor pisca"
+		"message": "Taxa de intermitência do cursor"
 	},
 	"hterm_name_pref_cursor_color": {
 		"message": "Cor do cursor de texto"
@@ -456,7 +456,7 @@
 		"message": "Define se o cursor de texto pisca por padrão ou não. Isso pode ser ativado durante o tempo de execução por meio de sequências de escape de terminal."
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "O ritmo em que o cursor pisca em milissegundos.\n\nUma matriz de dois elementos, sendo o primeiro por quanto tempo o cursor de texto aparecerá e o segundo por quanto tempo ele desaparecerá."
+		"message": "A Taxa de intermitência do cursor em milissegundos.\n\nUma matriz de dois elementos, sendo o primeiro por quanto tempo o cursor de texto aparecerá e o segundo por quanto tempo ele desaparecerá."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "A cor do cursor de texto visível."
@@ -702,7 +702,7 @@
 		"message": "Despejar um arquivo no terminal"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Mudar diretório de trabalho"
+		"message": "Mudar diretório de trabalho remoto"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Mudar grupo de caminhos"
@@ -714,7 +714,7 @@
 		"message": "Mudar proprietário de caminhos"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Limpar a tela atual do terminal."
+		"message": "Limpar a tela atual do terminal"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Copiar um arquivo para a área de transferência (padrão: 10 MiB ao iniciar)"
@@ -744,22 +744,52 @@
 		"message": "Fazendo o download do arquivo: $1 como $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Fazer o download de arquivos"
+		"message": "Fazer o download de um arquivo"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Esta tela de ajuda"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Mudar o diretório local de trabalho"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Exibir detalhes do diretório"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Listar detalhes do diretório local"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Criar um link no caminho apontando para o destino"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Mostrar o diretório local de trabalho atual"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Diretório local de trabalho: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Fazer o download de vários arquivos"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Criar diretórios"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Renomear um arquivo"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Fazer upload de vários arquivos"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Retomar o download de vários arquivos"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Retomar o upload de vários arquivos"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "preferências"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Definir ou cancelar a definição de uma preferência"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Definir a string de prompt"
@@ -771,7 +801,7 @@
 		"message": "Fazendo upload do arquivo: $1 como $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Mostrar diretório de trabalho atual"
+		"message": "Mostrar o diretório remoto de trabalho atual"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Diretório de trabalho remoto: $1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Canonizar caminhos"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Retomar o download de um arquivo"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Retomar upload de arquivos"
@@ -805,6 +838,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Criar um link simbólico no caminho apontando para o destino"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Atualizar horários de acesso e modificação de arquivos"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Truncar caminhos até 0 byte"
@@ -851,6 +887,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: argumentos demais"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: argumento \"$2\" desconhecido"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: comando desconhecido"
 	},
@@ -862,6 +901,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 bytes transferidos em $2 segundos ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Se o download não estiver funcionando, tente executar: $1"
 	},
 	"nassh_options_error": {
 		"message": "Opção desconhecida: $1"
@@ -904,6 +946,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Gerenciadores de URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Preferência local"
+	},
+	"preferences_key_is_synced": {
+		"message": "Preferência sincronizada"
 	},
 	"preferences_reset": {
 		"message": "Todas as preferências foram redefinidas."

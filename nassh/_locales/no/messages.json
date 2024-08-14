@@ -702,7 +702,7 @@
 		"message": "Eksportér en fil til terminalen"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Bytt arbeidskatalog"
+		"message": "Bytt ekstern arbeidskatalog"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Endre gruppe med baner"
@@ -714,7 +714,7 @@
 		"message": "Endre eier av baner"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Tøm den aktive terminalskjermen."
+		"message": "Tøm den aktive terminalskjermen"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Kopiér en fil til utklippstavlen (standard: 10 MiB fra begynnelsen)"
@@ -744,22 +744,49 @@
 		"message": "Laster ned fil: $1 som $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Last ned filer"
+		"message": "Last ned én fil"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Denne hjelpeskjermen"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Bytt lokal arbeidskatalog"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Vis en liste med katalogdetaljer"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Vis informasjon om den lokale katalogen"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Opprett en link på banen som peker på målet"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Vis den gjeldende lokale arbeidskatalogen"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Lokal arbeidskatalog: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Last ned flere filer"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Opprett kataloger"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Bytt navn på filer"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Last opp flere filer"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Gjenoppta nedlasting av flere filer"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Gjenoppta opplasting av flere filer"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Angi eller opphev en innstilling"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Angi ledetekststrengen"
@@ -771,7 +798,7 @@
 		"message": "Laster opp fil: $1 som $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Vis gjeldende arbeidskatalog"
+		"message": "Vis den gjeldende eksterne arbeidskatalogen"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Ekstern arbeidskatalog: $1"
@@ -781,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Kanonikaliser baner"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Fortsett nedlastingen av én fil"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Gjenoppta filopplasting"
@@ -805,6 +835,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Opprett en symlink på banen som peker på målet"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Oppdater tilgangs- og endringstider for filer"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Avkort baner til 0 byte"
@@ -851,6 +884,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: for mange argumenter"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: ukjent argument «$2»"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: ukjent kommando"
 	},
@@ -862,6 +898,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 byte overført på $2 sekunder ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Hvis nedlastingen ikke fungerer, kan du prøve å kjøre denne kommandoen: $1"
 	},
 	"nassh_options_error": {
 		"message": "Ukjent alternativ: $1"
@@ -904,6 +943,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI-behandlere"
+	},
+	"preferences_key_is_local": {
+		"message": "Lokal innstilling"
+	},
+	"preferences_key_is_synced": {
+		"message": "Synkronisert innstilling"
 	},
 	"preferences_reset": {
 		"message": "Alle innstillingene er tilbakestilt."

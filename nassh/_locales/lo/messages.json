@@ -696,7 +696,7 @@
 		"message": "ສົ່ງອອກໄຟລ໌ໄປຍັງເທີມິນອນ"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "ປ່ຽນແຟ້ມທີ່ນຳໃຊ້ຢູ່"
+		"message": "ປ່ຽນໄດເຣັກທໍຣີການເຮັດວຽກຈາກທາງໄກ"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "ປ່ຽນກຸ່ມເສັ້ນທາງ"
@@ -711,7 +711,7 @@
 		"message": "ລຶບລ້າງ"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "ລຶບລ້າງໜ້າຈໍເທີມິນອນປັດຈຸບັນ."
+		"message": "ລຶບລ້າງໜ້າຈໍເທີມິນອນປັດຈຸບັນ"
 	},
 	"nasftp_cmd_clip": {
 		"message": "ຄລິບ"
@@ -756,7 +756,7 @@
 		"message": "ກຳລັງດາວໂຫຼດໄຟລ໌: $1 ເປັນ $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ດາວໂຫຼດໄຟລ໌"
+		"message": "ດາວໂຫຼດໄຟລ໌ດຽວ"
 	},
 	"nasftp_cmd_help": {
 		"message": "ຊ່ວຍເຫຼືອ"
@@ -764,17 +764,32 @@
 	"nasftp_cmd_help_help": {
 		"message": "ໜ້າຈໍຊ່ວຍເຫຼືອນີ້"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "ປ່ຽນໄດເຣັກທໍຣີການເຮັດວຽກໃນເຄື່ອງ"
+	},
 	"nasftp_cmd_list": {
 		"message": "ລາຍຊື່"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "ສະແດງລາຍລະອຽດແຟ້ມ"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "ສະແດງລາຍລະອຽດໄດເຣັກທໍຣີໃນເຄື່ອງ"
+	},
 	"nasftp_cmd_ln": {
 		"message": "ໃນ"
 	},
 	"nasftp_cmd_ln_help": {
 		"message": "ສ້າງລິ້ງຢູ່ເສັ້ນທາງທີ່ຊີ້ໄປຍັງເປົ້າໝາຍ"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "ສະແດງໄດເຣັກທໍຣີການເຮັດວຽກໃນເຄື່ອງປັດຈຸບັນ"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "ໄດເຣັກທໍຣີການເຮັດວຽກໃນເຄື່ອງ: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "ດາວໂຫຼດຫຼາຍໄຟລ໌"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "ສ້າງແຟ້ມ"
@@ -784,6 +799,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ປ່ຽນຊື່ໄຟລ໌"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "ອັບໂຫຼດຫຼາຍໄຟລ໌"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "ສືບຕໍ່ການດາວໂຫຼດຫຼາຍໄຟລ໌"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "ສືບຕໍ່ການອັບໂຫຼດຫຼາຍໄຟລ໌"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "ຄ່າກຳນົດ"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "ຕັ້ງ ຫຼື ຍົກເລີກການກຳນົດຄ່າ"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "ການເຕືອນ"
@@ -798,7 +828,7 @@
 		"message": "ກຳລັງອັບໂຫຼດໄຟລ໌: $1 ເປັນ $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "ສະແດງແຟ້ມທີ່ນຳໃຊ້ຢູ່ໃນປັດຈຸບັນ"
+		"message": "ສະແດງໄດເຣັກທໍຣີການເຮັດວຽກຈາກທາງໄກປັດຈຸບັນ"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "ແຟ້ມທີ່ນຳໃຊ້ຢູ່ຈາກທາງໄກ: $1"
@@ -811,6 +841,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "ກຳນົດເສັ້ນທາງແບບ Canonical"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "ສືບຕໍ່ການດາວໂຫຼດໄຟລ໌ດຽວ"
 	},
 	"nasftp_cmd_rename": {
 		"message": "ປ່ຽນຊື່"
@@ -844,6 +877,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "ສ້າງລິ້ງສັນຍາລັກຢູ່ເສັ້ນທາງທີ່ຊີ້ໄປຍັງເປົ້າໝາຍ"
+	},
+	"nasftp_cmd_touch": {
+		"message": "ສຳຜັດ"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ອັບເດດເວລາການເຂົ້າເຖິງ ແລະ ການແກ້ໄຂໄຟລ໌"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "ຕັດ"
@@ -896,6 +935,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: ອາກິວເມັນຫຼາຍເກີນໄປ"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: ອາກິວເມັນທີ່ບໍ່ຮູ້ຈັກ '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: ຄຳສັ່ງທີ່ບໍ່ຮູ້ຈັກ"
 	},
@@ -907,6 +949,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "ໂອນຍ້າຍ $1 ໄບຕ໌ໃນ $2 ວິນາທີແລ້ວ ($3/ວິ)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "ຫາກການດາວໂຫຼດບໍ່ເຮັດວຽກ, ໃຫ້ລອງເອີ້ນໃຊ້: $1"
 	},
 	"nassh_options_error": {
 		"message": "ຕົວເລືອກທີ່ບໍ່ຮູ້ຈັກ: $1"
@@ -949,6 +994,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "ຕົວຈັດການ URI"
+	},
+	"preferences_key_is_local": {
+		"message": "ການຕັ້ງຄ່າທ້ອງຖິ່ນ"
+	},
+	"preferences_key_is_synced": {
+		"message": "ການຕັ້ງຄ່າທີ່ຊິ້ງແລ້ວ"
 	},
 	"preferences_reset": {
 		"message": "ຣີເຊັດທຸກການຕັ້ງຄ່າແລ້ວ!"

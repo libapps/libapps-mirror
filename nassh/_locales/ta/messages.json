@@ -702,7 +702,7 @@
 		"message": "ஃபைலை டெர்மினலுக்கு நகலெடுக்கும்"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "செயல்படும் கோப்பகத்தை மாற்றும்"
+		"message": "ரிமோட் வொர்கிங் டைரக்டரியை மாற்றும்"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "தடங்களின் குழுவை மாற்றும்"
@@ -717,7 +717,7 @@
 		"message": "அழி"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "தற்போதைய டெர்மினல் திரையை அழிக்கும்."
+		"message": "தற்போதைய டெர்மினல் திரையை அழிக்கும்"
 	},
 	"nasftp_cmd_clip": {
 		"message": "கிளிப்"
@@ -762,7 +762,7 @@
 		"message": "ஃபைலைப் பதிவிறக்குகிறது: $1, $2 ஆக"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ஃபைல்களைப் பதிவிறக்கும்"
+		"message": "ஒரு ஃபைலைப் பதிவிறக்கும்"
 	},
 	"nasftp_cmd_help": {
 		"message": "உதவி"
@@ -770,14 +770,29 @@
 	"nasftp_cmd_help_help": {
 		"message": "இந்த உதவித் திரை"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "லோக்கல் வொர்கிங் டைரக்டரியை மாற்றும்"
+	},
 	"nasftp_cmd_list": {
 		"message": "பட்டியலிடு"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "கோப்பக விவரங்களைப் பட்டியலிடும்"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "லோக்கல் டைரக்டரி விவரங்களைப் பட்டியலிடும்"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "இலக்கைக் காட்டும் தடத்தில் ஓர் இணைப்பை உருவாக்கும்"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "தற்போதைய லோக்கல் வொர்கிங் டைரக்ட்ரியைக் காட்டும்"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "லோக்கல் வொர்கிங் டைரக்ட்ரி: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "பல ஃபைல்களைப் பதிவிறக்கும்"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "கோப்பகங்களை உருவாக்கும்"
@@ -787,6 +802,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ஃபைலின் பெயரை மாற்றும்"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "பல ஃபைல்களைப் பதிவேற்றும்"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "பல ஃபைல்களை மீண்டும் பதிவிறக்கத் தொடங்கும்"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "பல ஃபைல்களை மீண்டும் பதிவேற்றத் தொடங்கும்"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "விருப்பத்தேர்வுகள்"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "விருப்பத்தேர்வை அமைக்கலாம் அகற்றலாம்"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "ப்ராம்ப்ட்"
@@ -804,7 +834,7 @@
 		"message": "ஃபைலைப் பதிவேற்றுகிறது: $1, $2 ஆக ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "தற்போதைய பணியாற்றும் கோப்பகத்தைக் காண்பிக்கும்"
+		"message": "தற்போதைய ரிமோட் வொர்கிங் டைரக்டரியைக் காட்டும்"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "தொலைநிலையான பணியாற்றும் கோப்பகம்: $1"
@@ -824,8 +854,11 @@
 	"nasftp_cmd_realpath_help": {
 		"message": "தடங்களைத் தீர்மானிக்கும்"
 	},
+	"nasftp_cmd_reget_help": {
+		"message": "ஒரு ஃபைலை மீண்டும் பதிவிறக்கத் தொடங்கும்"
+	},
 	"nasftp_cmd_rename": {
-		"message": "மறுபெயரிடு"
+		"message": "பெயர் மாற்று"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "ஃபைல்களைப் பதிவேற்றுவதை மீண்டும் தொடங்கும்"
@@ -859,6 +892,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "இலக்கைக் காட்டும் தடத்தில் ஒரு சிம்லிங்கை உருவாக்கும்"
+	},
+	"nasftp_cmd_touch": {
+		"message": "தொடுதல்"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ஃபைல்களின் அணுகல் மற்றும் மாற்றம் செய்வதற்கான நேரங்களை மாற்றலாம்"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "அளவைக்குறை"
@@ -911,6 +950,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: அளவுக்கதிகமான தருமதிப்புகள்"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: தெரியாத தருமதிப்பு '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: தெரியாத கட்டளை"
 	},
@@ -922,6 +964,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 பைட்கள் $2 விநாடிகளில் பரிமாற்றப்பட்டன ($3/வி)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "பதிவிறக்க முடியவில்லை என்றால் $1 ஐ இயக்கவும்"
 	},
 	"nassh_options_error": {
 		"message": "தெரியாத விருப்பம்: $1"
@@ -964,6 +1009,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI ஹேண்ட்லர்கள்"
+	},
+	"preferences_key_is_local": {
+		"message": "ஒத்திசைக்கப்படாத விருப்பத்தேர்வு"
+	},
+	"preferences_key_is_synced": {
+		"message": "ஒத்திசைக்கப்பட்ட விருப்பத்தேர்வு"
 	},
 	"preferences_reset": {
 		"message": "எல்லா விருப்பத்தேர்வுகளும் மீட்டமைக்கப்பட்டன!"
@@ -1383,7 +1434,7 @@
 		"message": "ChangeLog/வெளியீட்டுக் குறிப்புகள்: $1"
 	},
 	"welcome_faq": {
-		"message": "அடிக்கடி கேட்கப்படும் கேள்விகளுக்கான பதில்கள்: $1 (இணைப்புகளைத் திறக்க Ctrl+Clickகைப் பயன்படுத்தவும்)"
+		"message": "பொதுவான கேள்விகளுக்கான பதில்கள்: $1 (இணைப்புகளைத் திறக்க Ctrl+Clickகைப் பயன்படுத்தவும்)"
 	},
 	"welcome_release_highlights": {
 		"message": "$1 இலிருந்து முக்கிய மாற்றங்கள்:"

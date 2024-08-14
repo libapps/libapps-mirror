@@ -705,7 +705,7 @@
 		"message": "Pateikti failą į terminalą"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Keisti langų katalogą"
+		"message": "Keisti nuotolinį darbo katalogą"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Keisti kelių grupę"
@@ -720,7 +720,7 @@
 		"message": "išvalyti"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Išvalyti dabartinį terminalo ekraną."
+		"message": "Išvalyti dabartinį terminalo ekraną"
 	},
 	"nasftp_cmd_clip": {
 		"message": "iškarpinė"
@@ -765,7 +765,7 @@
 		"message": "Atsisiunčiamas failas: $1 kaip $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Atsisiųsti failus"
+		"message": "Atsisiųsti vieną failą"
 	},
 	"nasftp_cmd_help": {
 		"message": "pagalba"
@@ -773,14 +773,29 @@
 	"nasftp_cmd_help_help": {
 		"message": "Šis pagalbos ekranas"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Keisti vietinį darbo katalogą"
+	},
 	"nasftp_cmd_list": {
 		"message": "sąrašas"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "Katalogų sąrašo išsami informacija"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Pateikti išsamią vietinio katalogo informaciją"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Sukurti nuorodą kelyje į paskirties vietą"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Rodyti dabartinį vietinį darbo katalogą"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Vietinis darbo katalogas: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Atsisiųsti kelis failus"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Kurti katalogus"
@@ -790,6 +805,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Failo pavadinimo keitimas"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Įkelti kelis failus"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Atnaujinti kelių failų atsisiuntimą"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Tęsti kelių failų įkėlimą"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "nuostatos"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Nustatykite arba atšaukite nuostatą"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "raginimas"
@@ -804,7 +834,7 @@
 		"message": "Įkeliamas failas: $1 kaip $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Rodyti dabartinį darbo katalogą"
+		"message": "Rodyti dabartinį nuotolinį darbo katalogą"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Nuotolinis darbo katalogas: $1"
@@ -817,6 +847,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Standartizuoti kelius"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Tęsti vieno failo atsisiuntimą"
 	},
 	"nasftp_cmd_rename": {
 		"message": "pervardyti"
@@ -850,6 +883,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Sukurti virtualųjį katalogą, kurio kelias nukreipia į paskirties vietą"
+	},
+	"nasftp_cmd_touch": {
+		"message": "palietimas"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Failų prieigos ir keitimo laiko atnaujinimas"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "trumpinti"
@@ -902,6 +941,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: per daug argumentų"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: nežinomas argumentas „$2“"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: nežinoma komanda"
 	},
@@ -913,6 +955,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "Per $2 sek. perduota $1 bait. ($3/sek.)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Jei atsisiuntimas neveikia, pabandykite paleisti: $1"
 	},
 	"nassh_options_error": {
 		"message": "Nežinoma parinktis: $1"
@@ -955,6 +1000,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI doroklės"
+	},
+	"preferences_key_is_local": {
+		"message": "Vietinė nuostata"
+	},
+	"preferences_key_is_synced": {
+		"message": "Sinchronizuota nuostata"
 	},
 	"preferences_reset": {
 		"message": "Visos nuostatos nustatytos iš naujo!"

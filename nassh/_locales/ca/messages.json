@@ -216,7 +216,7 @@
 		"message": "Parpelleig del cursor"
 	},
 	"hterm_name_pref_cursor_blink_cycle": {
-		"message": "Velocitat de parpelleig del cursor"
+		"message": "Freqüència de parpelleig del cursor"
 	},
 	"hterm_name_pref_cursor_color": {
 		"message": "Color del cursor de text"
@@ -345,7 +345,7 @@
 		"message": "Mida del farciment de la pantalla"
 	},
 	"hterm_name_pref_scroll_on_keystroke": {
-		"message": "Desplaça't a la part inferior després de prémer una tecla"
+		"message": "Desplaça't a la part inferior després de la pulsació"
 	},
 	"hterm_name_pref_scroll_on_output": {
 		"message": "Desplaça't al final després d'una sortida nova"
@@ -456,7 +456,7 @@
 		"message": "Estableix si el cursor de text parpelleja de manera predeterminada. Aquesta opció es pot commutar durant l'execució mitjançant seqüències d'escapada del terminal."
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "Velocitat de parpelleig del cursor de text en mil·lisegons.\n\nMatriu de dos elements: el primer defineix el temps que el cursor està activat i el segon el temps que està desactivat."
+		"message": "Freqüència de parpelleig del cursor de text en mil·lisegons.\n\nMatriu de dos elements: el primer defineix el temps que el cursor està activat i el segon el temps que està desactivat."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "Color del cursor de text visible."
@@ -585,7 +585,7 @@
 		"message": "Mida en píxels del farciment que envolta la vora de la pantalla del terminal.\n\nControla la mida de la vora que envolta la pantalla del terminal perquè l'usuari pugui afegir farciment visible a les vores de la pantalla."
 	},
 	"hterm_pref_scroll_on_keystroke": {
-		"message": "Estableix si es desplaça a la part inferior en prémer qualsevol tecla."
+		"message": "Estableix si es desplaça a la part inferior amb qualsevol pulsació."
 	},
 	"hterm_pref_scroll_on_output": {
 		"message": "Estableix si es desplaça a la part inferior la sortida del terminal."
@@ -681,7 +681,7 @@
 		"message": "mostra la llicència"
 	},
 	"licenses_title": {
-		"message": "Llicències de programari lliure"
+		"message": "Llicències de codi obert"
 	},
 	"loading_label": {
 		"message": "S'està carregant..."
@@ -702,7 +702,7 @@
 		"message": "Aboca un fitxer al terminal"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Canvia el directori de treball"
+		"message": "Canvia el directori de teletreball"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Canvia el grup de camins"
@@ -714,7 +714,7 @@
 		"message": "Canvia el propietari dels camins"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Esborra la pantalla del terminal actual."
+		"message": "Esborra la pantalla del terminal actual"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Copia un fitxer al porta-retalls (valor predeterminat: 10 MiB inicials)"
@@ -747,22 +747,52 @@
 		"message": "S'està baixant el fitxer $1 com a $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Baixa els fitxers"
+		"message": "Baixa un fitxer"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Aquesta pantalla d'ajuda"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Canvia el directori de treball local"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Mostra els detalls del directori"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Mostra els detalls del directori local"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Crea un enllaç al camí que dirigeix a la destinació"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Mostra el directori de treball local actual"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Directori de treball local: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Baixa diversos fitxers"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Crea directoris"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Canvia el nom d'un fitxer"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Penja diversos fitxers"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Reprèn la baixada de diversos fitxers"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Reprèn la pujada de diversos fitxers"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "preferències"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Defineix o anul·la una preferència"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Estableix la cadena de sol·licitud"
@@ -774,7 +804,7 @@
 		"message": "S'està penjant el fitxer $1 com a $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Mostra el directori de treball actual"
+		"message": "Mostra el directori de teletreball actual"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Directori de treball remot: $1"
@@ -784,6 +814,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Canonitza els camins"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Reprèn la baixada d'un fitxer"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Reprèn la pujada de fitxers"
@@ -805,6 +838,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Crea un enllaç simbòlic al camí que dirigeix a la destinació"
+	},
+	"nasftp_cmd_touch": {
+		"message": "tàctil"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Actualitza les hores d'accés i de modificació dels fitxers"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Trunca els camins en 0 bytes"
@@ -848,6 +887,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: hi ha massa arguments"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: argument desconegut \"$2\""
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: ordre desconeguda"
 	},
@@ -859,6 +901,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "S'han transferit $1 bytes en $2 segons ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Si la baixada no funciona, prova d'executar: $1"
 	},
 	"nassh_options_error": {
 		"message": "Opció desconeguda: $1"
@@ -901,6 +946,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Gestors d'URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Preferència local"
+	},
+	"preferences_key_is_synced": {
+		"message": "Preferència sincronitzada"
 	},
 	"preferences_reset": {
 		"message": "S'han restablert totes les preferències."
@@ -975,7 +1026,7 @@
 		"message": "S'està comprovant la freqüència del certificat SSH..."
 	},
 	"stream_open_error": {
-		"message": "No s'ha pogut obrir la reproducció en continu $1: $2"
+		"message": "No s'ha pogut obrir la reproducció en línia $1: $2"
 	},
 	"terminal_clear_menu_label": {
 		"message": "Esborra el terminal"

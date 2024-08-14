@@ -537,7 +537,7 @@
 		"message": "Se for definida como verdadeira, deve converter as teclas multimédia nas respetivas teclas de função equivalentes. Se for definida como falsa, permita que o navegador processe as teclas."
 	},
 	"hterm_pref_meta_sends_escape": {
-		"message": "Envie um prefixo ESC ao premir uma tecla enquanto mantém premida a tecla Meta.\n\nPor exemplo, se estiver ativado, premir Meta+K envia ^[k como se tivesse digitado Escape, seguido de k. Se estiver desativado, apenas k é enviado."
+		"message": "Envie um prefixo ESC ao premir uma tecla enquanto mantém pressionada a tecla Meta.\n\nPor exemplo, se estiver ativado, premir Meta+K envia ^[k como se tivesse digitado Escape, seguido de k. Se estiver desativado, apenas k é enviado."
 	},
 	"hterm_pref_mouse_paste_button": {
 		"message": "O botão do rato a usar para colar.\n\nPara a deteção automática, vamos usar o botão central do rato para outras plataformas que não o X11 (incluindo o ChromeOS). No X11, vamos usar o botão direito do rato (uma vez que o gestor de janela deverá usar o botão central do rato para colar).\n\n0 == botão esquerdo (principal).\n1 == botão central (auxiliar).\n2 == botão direito (secundário).\n\nEsta opção é independente da definição para colar ao clicar com o botão direito do rato.\n\nNota: os botões principal e secundário são processados para si com ratos para utilizadores canhotos e destros."
@@ -702,7 +702,7 @@
 		"message": "Exportar um ficheiro para o terminal"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Alterar diretório de trabalho"
+		"message": "Altere o diretório de trabalho remoto"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Alterar o grupo de caminhos"
@@ -714,7 +714,7 @@
 		"message": "Alterar proprietário de caminhos"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Limpar o ecrã do terminal atual."
+		"message": "Limpe o ecrã do terminal atual"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Copiar um ficheiro para a área de transferência (predefinição: 10 MiB ao início)"
@@ -744,22 +744,52 @@
 		"message": "A transferir o ficheiro $1 como $2…"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Transferir ficheiros"
+		"message": "Transfira um ficheiro"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Este ecrã de ajuda"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Altere o diretório de trabalho local"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Lista de detalhes do diretório"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Liste os detalhes do diretório local"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Criar um link no caminho que aponta para o destino"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Mostre o diretório de trabalho local atual"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Diretório de trabalho local: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Transfira vários ficheiros"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Criar diretórios"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Mudar o nome de um ficheiro"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Carregue vários ficheiros"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Retome a transferência de vários ficheiros"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Retome o carregamento de vários ficheiros"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "preferências"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Defina ou anule a definição de uma preferência"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Definir string de pedido"
@@ -771,7 +801,7 @@
 		"message": "A carregar ficheiro $1 como $2 ($3)…"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Mostrar diretório de trabalho atual"
+		"message": "Mostre o diretório de trabalho remoto atual"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Diretório de trabalho remoto: $1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Canonicalizar caminhos"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Retome a transferência de um ficheiro"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Retomar o carregamento de ficheiros"
@@ -805,6 +838,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Criar uma ligação simbólica no caminho que aponta para o destino"
+	},
+	"nasftp_cmd_touch": {
+		"message": "toque"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Atualize as horas de acesso e modificação dos ficheiros"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Truncar os caminhos em 0 bytes"
@@ -854,6 +893,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: demasiados argumentos."
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: argumento desconhecido \"$2\""
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: comando desconhecido."
 	},
@@ -865,6 +907,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 bytes transferidos em $2 segundos ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Se a transferência não estiver a funcionar, experimente executar o seguinte comando: $1"
 	},
 	"nassh_options_error": {
 		"message": "Opção desconhecida: $1."
@@ -907,6 +952,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Controladores de URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Preferência local"
+	},
+	"preferences_key_is_synced": {
+		"message": "Preferência sincronizada"
 	},
 	"preferences_reset": {
 		"message": "Todas as preferências repostas!"

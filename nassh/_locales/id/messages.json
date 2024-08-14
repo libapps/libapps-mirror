@@ -699,7 +699,7 @@
 		"message": "Membuang file ke terminal"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Mengubah direktori kerja"
+		"message": "Ubah direktori kerja jarak jauh"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Mengubah grup jalur"
@@ -714,7 +714,7 @@
 		"message": "hapus"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Menghapus layar terminal saat ini."
+		"message": "Hapus layar terminal saat ini"
 	},
 	"nasftp_cmd_clip": {
 		"message": "klip"
@@ -759,7 +759,7 @@
 		"message": "Mendownload file: $1 sebagai $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Mendownload file"
+		"message": "Download satu file"
 	},
 	"nasftp_cmd_help": {
 		"message": "bantuan"
@@ -767,14 +767,29 @@
 	"nasftp_cmd_help_help": {
 		"message": "Layar bantuan ini"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Ubah direktori kerja lokal"
+	},
 	"nasftp_cmd_list": {
 		"message": "daftar"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "Daftar detail direktori"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Tampilkan detail direktori lokal"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Membuat link di jalur yang mengarah ke target"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Tampilkan direktori kerja lokal saat ini"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Direktori kerja lokal: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Download beberapa file"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Membuat direktori"
@@ -784,6 +799,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Mengganti nama file"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Upload beberapa file"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Lanjutkan mendownload beberapa file"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Lanjutkan mengupload beberapa file"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "preferensi"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Menyetel atau membatalkan setelan preferensi"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "perintah"
@@ -801,7 +831,7 @@
 		"message": "Mengupload file: $1 sebagai $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Menampilkan direktori kerja saat ini"
+		"message": "Tampilkan direktori kerja jarak jauh saat ini"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Direktori kerja jarak jauh: $1"
@@ -814,6 +844,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Melakukan kanonikalisasi jalur"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Lanjutkan mendownload satu file"
 	},
 	"nasftp_cmd_rename": {
 		"message": "ganti"
@@ -847,6 +880,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Membuat symlink di jalur yang mengarah ke target"
+	},
+	"nasftp_cmd_touch": {
+		"message": "sentuhan"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Memperbarui waktu akses dan perubahan file"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "potong"
@@ -896,6 +935,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: terlalu banyak argumen"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: argumen '$2' tidak diketahui"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: perintah tidak diketahui"
 	},
@@ -907,6 +949,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 byte ditransfer dalam $2 detik ($3/detik)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Jika proses download tidak berhasil, coba jalankan: $1"
 	},
 	"nassh_options_error": {
 		"message": "Opsi tidak dikenal: $1"
@@ -949,6 +994,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Pengendali URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Preferensi lokal"
+	},
+	"preferences_key_is_synced": {
+		"message": "Preferensi yang disinkronkan"
 	},
 	"preferences_reset": {
 		"message": "Semua preferensi direset."

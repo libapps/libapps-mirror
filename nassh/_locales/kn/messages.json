@@ -3,7 +3,7 @@
 		"message": "ಫೈಲ್ ಸಿಸ್ಟಂ ಅನ್ನು ಈಗಾಗಲೇ ಅಳವಡಿಸಲಾಗಿದೆ!"
 	},
 	"backup_prefs": {
-		"message": "ಬ್ಯಾಕಪ್ ಅನ್ನು ಉಳಿಸಿ"
+		"message": "ಬ್ಯಾಕಪ್ ಅನ್ನು ಸೇವ್ ಮಾಡಿ"
 	},
 	"bad_destination": {
 		"message": "ಗಮ್ಯಸ್ಥಾನವನ್ನು ಪಾರ್ಸ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ: $1"
@@ -699,7 +699,7 @@
 		"message": "ಫೈಲ್ ಅನ್ನು ಟರ್ಮಿನಲ್‌ನಲ್ಲಿ ಡಂಪ್ ಮಾಡಿ"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಡೈರೆಕ್ಟರಿಯನ್ನು ಬದಲಾಯಿಸಿ"
+		"message": "ರಿಮೋಟ್ ಆಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಡೈರೆಕ್ಟರಿಯನ್ನು ಬದಲಾಯಿಸಿ"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "ಪಾಥ್‌ಗಳ ಗುಂಪನ್ನು ಬದಲಾಯಿಸಿ"
@@ -714,7 +714,7 @@
 		"message": "ತೆರವುಗೊಳಿಸಿ"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "ಪ್ರಸ್ತುತ ಟರ್ಮಿನಲ್ ಪರದೆಯನ್ನು ತೆರವುಗೊಳಿಸಿ."
+		"message": "ಪ್ರಸ್ತುತ ಟರ್ಮಿನಲ್ ಸ್ಕ್ರೀನ್ ಅನ್ನು ತೆರವುಗೊಳಿಸಿ"
 	},
 	"nasftp_cmd_clip": {
 		"message": "ಕ್ಲಿಪ್"
@@ -759,7 +759,7 @@
 		"message": "ಫೈಲ್ ಅನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ: $1 ಅನ್ನು $2 ಎಂಬ ಹಾಗೆ"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ಫೈಲ್‌ಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ"
+		"message": "ಒಂದು ಫೈಲ್ ಅನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ"
 	},
 	"nasftp_cmd_help": {
 		"message": "ಸಹಾಯ"
@@ -767,14 +767,29 @@
 	"nasftp_cmd_help_help": {
 		"message": "ಈ ಸಹಾಯ ಪರದೆ"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "ಸ್ಥಳೀಯವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಡೈರೆಕ್ಟರಿಯನ್ನು ಬದಲಾಯಿಸಿ"
+	},
 	"nasftp_cmd_list": {
 		"message": "ಪಟ್ಟಿ"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "ಡೈರೆಕ್ಟರಿಯ ವಿವರಗಳನ್ನು ಪಟ್ಟಿ ಮಾಡಿ"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "ಸ್ಥಳೀಯ ಡೈರೆಕ್ಟರಿಯ ವಿವರಗಳನ್ನು ಪಟ್ಟಿಮಾಡಿ"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "ಪಾಥ್‌ನಲ್ಲಿ, ಲಕ್ಷ್ಯದತ್ತ ಗುರಿ ಮಾಡಿರುವ ಲಿಂಕ್ ಅನ್ನು ರಚಿಸಿ"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "ಪ್ರಸ್ತುತ ಸ್ಥಳೀಯವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಡೈರೆಕ್ಟರಿಯನ್ನು ತೋರಿಸಿ"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "ಸ್ಥಳೀಯವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಡೈರೆಕ್ಟರಿ: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "ಅನೇಕ ಫೈಲ್‌ಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "ಡೈರೆಕ್ಟರಿಗಳನ್ನು ರಚಿಸಿ"
@@ -784,6 +799,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ಫೈಲ್ ಅನ್ನು ಮರುಹೆಸರಿಸಿ"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "ಅನೇಕ ಫೈಲ್ ಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "ಅನೇಕ ಫೈಲ್‌ಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡುವುದನ್ನು ಪುನರಾರಂಭಿಸಿ"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "ಅನೇಕ ಫೈಲ್‌ಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡುವುದನ್ನು ಪುನರಾರಂಭಿಸಿ"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "ಆದ್ಯತೆಗಳು"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "ಆದ್ಯತೆಯೊಂದನ್ನು ಸೆಟ್ ಮಾಡಿ ಅಥವಾ ಅನ್‌ಸೆಟ್ ಮಾಡಿ"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "ಪ್ರಾಂಪ್ಟ್"
@@ -804,7 +834,7 @@
 		"message": "PWD"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "ಪ್ರಸ್ತುತ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಡೈರೆಕ್ಟರಿಯನ್ನು ತೋರಿಸಿ"
+		"message": "ಪ್ರಸ್ತುತ ರಿಮೋಟ್ ಆಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಡೈರೆಕ್ಟರಿಯನ್ನು ತೋರಿಸಿ"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "ರಿಮೋಟ್ ಆಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಡೈರೆಕ್ಟರಿ: $1"
@@ -820,6 +850,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "ಪಾಥ್‌ಗಳನ್ನು ಅಂಗೀಕೃತಗೊಳಿಸಿ"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "ಒಂದು ಫೈಲ್ ಅನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡುವುದನ್ನು ಪುನರಾರಂಭಿಸಿ"
 	},
 	"nasftp_cmd_rename": {
 		"message": "ಮರುಹೆಸರಿಸಿ"
@@ -862,6 +895,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "ಪಾಥ್‌ನಲ್ಲಿ, ಲಕ್ಷ್ಯದತ್ತ ಗುರಿ ಮಾಡಿರುವ ಸಿಮ್‌ಲಿಂಕ್ ಅನ್ನು ರಚಿಸಿ"
+	},
+	"nasftp_cmd_touch": {
+		"message": "ಸ್ಪರ್ಶ"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ಫೈಲ್‌ಗಳ ಆ್ಯಕ್ಸೆಸ್ ಮತ್ತು ಮಾರ್ಪಡಿಸುವಿಕೆಯ ಸಮಯವನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾಡಿ"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "ಮೊಟಕುಗೊಳಿಸಿ"
@@ -914,6 +953,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: ತುಂಬಾ ಹೆಚ್ಚು ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳಿವೆ"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: ಅಪರಿಚಿತ ಆರ್ಗ್ಯುಮೆಂಟ್ '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: ಅಪರಿಚಿತ ಕಮಾಂಡ್"
 	},
@@ -925,6 +967,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$2 ಸೆಕೆಂಡುಗಳಲ್ಲಿ $1 ಬೈಟ್‌ಗಳನ್ನು ವರ್ಗಾಯಿಸಲಾಗಿದೆ ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "ಡೌನ್‌ಲೋಡ್ ಮಾಡುವಿಕೆ ಕೆಲಸ ಮಾಡದಿದ್ದರೆ, ಇದನ್ನು ರನ್ ಮಾಡಿ ನೋಡಿ: $1"
 	},
 	"nassh_options_error": {
 		"message": "ಅಪರಿಚಿತ ಆಯ್ಕೆ: $1"
@@ -967,6 +1012,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI ಹ್ಯಾಂಡ್‌ಲರ್‌ಗಳು"
+	},
+	"preferences_key_is_local": {
+		"message": "ಸ್ಥಳೀಯ ಆದ್ಯತೆ"
+	},
+	"preferences_key_is_synced": {
+		"message": "ಸಿಂಕ್ ಮಾಡಿದ ಆದ್ಯತೆ"
 	},
 	"preferences_reset": {
 		"message": "ಎಲ್ಲಾ ಆದ್ಯತೆಗಳನ್ನು ಮರುಹೊಂದಿಸಲಾಗಿದೆ!"
@@ -1011,7 +1062,7 @@
 		"message": "ಬ್ಯಾಕಪ್ ಅನ್ನು ಮರುಸ್ಥಾಪಿಸಿ"
 	},
 	"save_label": {
-		"message": "ಉಳಿಸಿ"
+		"message": "ಸೇವ್ ಮಾಡಿ"
 	},
 	"select_label": {
 		"message": "ಆಯ್ಕೆಮಾಡಿ"

@@ -699,7 +699,7 @@
 		"message": "ගොනුවක් පර්යන්තයට නික්ෂේප කරන්න"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "ක්‍රියාකාරී නාමාවලිය වෙනස් කරන්න"
+		"message": "දුරස්ථ වැඩ කිරීමේ නාමාවලිය වෙනස් කරන්න"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "මාර්ගවල කණ්ඩායම මාරු කරන්න"
@@ -717,7 +717,7 @@
 		"message": "හිස්"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "වත්මන් පර්යන්ත තිරය හිස් කරන්න."
+		"message": "වත්මන් පර්යන්ත තිරය හිස් කරන්න"
 	},
 	"nasftp_cmd_clip": {
 		"message": "පසුර"
@@ -762,7 +762,7 @@
 		"message": "ගොනුව බාගැනීම: $2 ලෙස $1"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ගොනු බාගන්න"
+		"message": "එක් ගොනුවක් බාගන්න"
 	},
 	"nasftp_cmd_help": {
 		"message": "උදවු"
@@ -770,17 +770,32 @@
 	"nasftp_cmd_help_help": {
 		"message": "මෙම උදවු තිරය"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "ස්ථානික වැඩ කිරීමේ නාමාවලිය වෙනස් කරන්න"
+	},
 	"nasftp_cmd_list": {
 		"message": "ලැයිස්තුව"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "නාමාවලි විස්තර ලැයිස්තුගත කරන්න"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "ස්ථානික නාමාවලි විස්තර ලැයිස්තුගත කරන්න"
+	},
 	"nasftp_cmd_ln": {
 		"message": "තුළ"
 	},
 	"nasftp_cmd_ln_help": {
 		"message": "ඉලක්කයට යොමු කරන මාර්ගයට සබැඳියක් සාදන්න"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "වත්මන් ස්ථානික වැඩ කිරීමේ නාමාවලිය පෙන්වන්න"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "ස්ථානික වැඩ කිරීමේ නාමාවලිය: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "ගොනු කිහිපයක් බාගන්න"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "නාමාවලි සාදන්න"
@@ -790,6 +805,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ගොනුවක් යළි නම් කරන්න"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "ගොනු කිහිපයක් උඩුගත කරන්න"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "ගොනු කිහිපයක් බාගැනීම නැවත පටන් ගන්න"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "ගොනු කිහිපයක් උඩුගත කිරීම නැවත පටන් ගන්න"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "මනාප"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "මනාපයක් සකසන්න හෝ නොසකසන්න"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "ප්‍රේරකය"
@@ -807,7 +837,7 @@
 		"message": "ගොනුව උඩුගත කිරීම: $2 ලෙස $1 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "වත්මන් වැඩ කිරීමේ නාමාවලිය පෙන්වන්න"
+		"message": "වත්මන් දුරස්ථ වැඩ කිරීමේ නාමාවලිය පෙන්වන්න"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "දුරස්ථ ක්‍රියා කිරීමේ නාමාවලිය: $1"
@@ -826,6 +856,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "සෞත්‍රික මාර්ග"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "එක් ගොනුවක් බාගැනීම නැවත පටන් ගන්න"
 	},
 	"nasftp_cmd_rename": {
 		"message": "ප්‍රතිනම"
@@ -868,6 +901,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "ඉලක්කයට යොමු කරන මාර්ගයට සංකේතාත්මක සබැඳියක් සාදන්න"
+	},
+	"nasftp_cmd_touch": {
+		"message": "ස්පර්ශය"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ගොනුවල ප්‍රවේශ සහ වෙනස් කිරීමේ වේලාවන් යාවත්කාලීන කරන්න"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "ලෝපනය"
@@ -920,6 +959,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: විස්තාරක සංඛ්‍යාව ඉතා වැඩියි"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: නොදන්නා තර්කය '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: නොදන්නා විධානය"
 	},
@@ -931,6 +973,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "තත්පර $2 ක් ($3/s) තුළ බයිට් $1 ක් මාරු කළා"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "බාගැනීම ක්‍රියා නොකරන්නේ නම්, ධාවනය කිරීමට උත්සාහ කරන්න: $1"
 	},
 	"nassh_options_error": {
 		"message": "නොදන්නා විකල්පය: $1"
@@ -973,6 +1018,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI හසුරුවන්නන්"
+	},
+	"preferences_key_is_local": {
+		"message": "දේශීය මනාපය"
+	},
+	"preferences_key_is_synced": {
+		"message": "සමමුහුර්ත මනාපය"
 	},
 	"preferences_reset": {
 		"message": "සියලු මනාප නැවත සකසා ඇත!"

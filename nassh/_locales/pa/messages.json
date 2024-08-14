@@ -162,7 +162,7 @@
 		"message": "Alt ਕੁੰਜੀ ਸੋਧਕ ਵਰਤੋ"
 	},
 	"hterm_name_pref_audible_bell_sound": {
-		"message": "ਸੁਚੇਤਨਾ ਘੰਟੀ ਦੀ ਅਵਾਜ਼ (URI)"
+		"message": "ਅਲਰਟ ਘੰਟੀ ਦੀ ਅਵਾਜ਼ (URI)"
 	},
 	"hterm_name_pref_background_color": {
 		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਦਾ ਰੰਗ"
@@ -216,7 +216,7 @@
 		"message": "ਲਿਖਤ ਕਰਸਰ ਦੀ ਆਕ੍ਰਿਤੀ"
 	},
 	"hterm_name_pref_desktop_notification_bell": {
-		"message": "ਸੁਚੇਤਨਾ ਘੰਟੀਆਂ ਲਈ ਡੈਸਕਟਾਪ ਸੂਚਨਾਵਾਂ ਦੀ ਰਚਨਾ ਕਰੋ"
+		"message": "ਅਲਰਟ ਘੰਟੀਆਂ ਲਈ ਡੈਸਕਟਾਪ ਸੂਚਨਾਵਾਂ ਦੀ ਰਚਨਾ ਕਰੋ"
 	},
 	"hterm_name_pref_east_asian_ambiguous_as_two_column": {
 		"message": "East Asian Ambiguous ਦੋ ਕਾਲਮ ਵਰਤਦੇ ਹਨ"
@@ -693,7 +693,7 @@
 		"message": "ਟਰਮੀਨਲ ਵਿੱਚ ਕੋਈ ਫ਼ਾਈਲ ਲਿਜਾਓ"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "ਕਾਰਜੀ ਡਾਇਰੈਕਟਰੀ ਨੂੰ ਬਦਲੋ"
+		"message": "ਰਿਮੋਟ ਕਾਰਜ ਡਾਇਰੈਕਟਰੀ ਨੂੰ ਬਦਲੋ"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "ਪਾਥਾਂ ਦੇ ਗਰੁੱਪ ਬਦਲੋ"
@@ -705,7 +705,7 @@
 		"message": "ਪਾਥਾਂ ਦਾ ਮਾਲਕ ਬਦਲੋ"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "ਮੌਜੂਦਾ ਟਰਮੀਨਲ ਸਕ੍ਰੀਨ ਕਲੀਅਰ ਕਰੋ।"
+		"message": "ਮੌਜੂਦਾ ਟਰਮੀਨਲ ਸਕ੍ਰੀਨ ਕਲੀਅਰ ਕਰੋ"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕੋਈ ਫ਼ਾਈਲ ਕਾਪੀ ਕਰੋ (ਪੂਰਵ-ਨਿਰਧਾਰਤ: ਸ਼ੁਰੂਆਤ ਵਿੱਚ 10MiB)"
@@ -741,22 +741,52 @@
 		"message": "ਫ਼ਾਈਲ ਡਾਊਨਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ: $1 $2 ਵਜੋਂ"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ਫ਼ਾਈਲਾਂ ਡਾਊਨਲੋਡ ਕਰੋ"
+		"message": "ਇੱਕ ਫ਼ਾਈਲ ਡਾਊਨਲੋਡ ਕਰੋ"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "ਇਹ ਮਦਦ ਸਕ੍ਰੀਨ"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "ਸਥਾਨਕ ਕਾਰਜ ਡਾਇਰੈਕਟਰੀ ਨੂੰ ਬਦਲੋ"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "ਡਾਇਰੈਕਟਰੀ ਵੇਰਵਿਆਂ ਦੀ ਸੂਚੀ ਬਣਾਓ"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "ਸਥਾਨਕ ਡਾਇਰੈਕਟਰੀ ਦੇ ਵੇਰਵਿਆਂ ਨੂੰ ਸੂਚੀਬੱਧ ਕਰੋ"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "ਪਾਥ 'ਤੇ ਟੀਚੇ ਵੱਲ ਇਸ਼ਾਰਾ ਕਰਨ ਵਾਲਾ ਲਿੰਕ ਬਣਾਓ"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "ਮੌਜੂਦਾ ਸਥਾਨਕ ਕਾਰਜ ਡਾਇਰੈਕਟਰੀ ਦਿਖਾਓ"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "ਸਥਾਨਕ ਕਾਰਜ ਡਾਇਰੈਕਟਰੀ: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "ਇੱਕ ਤੋਂ ਵੱਧ ਫ਼ਾਈਲਾਂ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰੋ"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "ਡਾਇਰੈਕਟਰੀਆਂ ਬਣਾਓ"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ਕਿਸੇ ਫ਼ਾਈਲ ਦਾ ਨਾਮ ਬਦਲੋ"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "ਇੱਕ ਤੋਂ ਵੱਧ ਫ਼ਾਈਲਾਂ ਨੂੰ ਅੱਪਲੋਡ ਕਰੋ"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "ਇੱਕ ਤੋਂ ਵੱਧ ਫ਼ਾਈਲਾਂ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨਾ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "ਇੱਕ ਤੋਂ ਵੱਧ ਫ਼ਾਈਲਾਂ ਨੂੰ ਅੱਪਲੋਡ ਕਰਨਾ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "ਤਰਜੀਹਾਂ"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "ਤਰਜੀਹ ਨੂੰ ਸੈੱਟ ਜਾਂ ਅਣਸੈੱਟ ਕਰੋ"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "ਉਤਪ੍ਰੇਰਕ"
@@ -771,7 +801,7 @@
 		"message": "ਫ਼ਾਈਲ ਅੱਪਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ: $1 $2 ਵਜੋਂ ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "ਮੌਜੂਦਾ ਕਾਰਜ ਡਾਇਰੈਕਟਰੀ ਦਿਖਾਓ"
+		"message": "ਮੌਜੂਦਾ ਰਿਮੋਟ ਕਾਰਜ ਡਾਇਰੈਕਟਰੀ ਦਿਖਾਓ"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "ਰਿਮੋਟ ਕਾਰਜਕਾਰੀ ਡਾਇਰੈਕਟਰੀ: $1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "ਪਾਥਾਂ ਨੂੰ ਕੈਨੋਨੀਕਲ ਕਰੋ"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "ਇੱਕ ਫ਼ਾਈਲ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨਾ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "ਫ਼ਾਈਲਾਂ ਅੱਪਲੋਡ ਕਰਨਾ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
@@ -805,6 +838,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "ਪਾਥ 'ਤੇ ਟੀਚੇ ਵੱਲ ਇਸ਼ਾਰਾ ਕਰਨ ਵਾਲਾ ਚਿੰਨ੍ਹ ਲਿੰਕ ਬਣਾਓ"
+	},
+	"nasftp_cmd_touch": {
+		"message": "ਸਪਰਸ਼ ਕਰੋ"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ਫ਼ਾਈਲਾਂ ਤੱਕ ਪਹੁੰਚ ਅਤੇ ਇਨ੍ਹਾਂ ਨੂੰ ਸੋਧਣ ਦੇ ਸਮਿਆਂ ਨੂੰ ਅੱਪਡੇਟ ਕਰੋ"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "ਪਾਥਾਂ ਨੂੰ 0 ਬਾਈਟਾਂ 'ਤੇ ਕੱਟੋ"
@@ -851,6 +890,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: ਬਹੁਤ ਜ਼ਿਆਦਾ ਆਰਗੂਮੈਂਟ"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: ਅਗਿਆਤ ਆਰਗੂਮੈਂਟ '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: ਅਗਿਆਤ ਆਦੇਸ਼"
 	},
@@ -862,6 +904,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 ਬਾਈਟਾਂ $2 ਸਕਿੰਟਾਂ ਵਿੱਚ ਟ੍ਰਾਂਸਫ਼ਰ ਕੀਤੀਆਂ ਗਈਆਂ ($3/ਸਕਿੰਟ)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "ਜੇ ਡਾਊਨਲੋਡ ਪ੍ਰਕਿਰਿਆ ਕੰਮ ਨਹੀਂ ਕਰ ਰਹੀ ਹੈ, ਤਾਂ ਇਸਨੂੰ ਚਲਾ ਕੇ ਦੇਖੋ: $1"
 	},
 	"nassh_options_error": {
 		"message": "ਅਗਿਆਤ ਵਿਕਲਪ: $1"
@@ -901,6 +946,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI ਹੈਂਡਲਰ"
+	},
+	"preferences_key_is_local": {
+		"message": "ਸਥਾਨਕ ਤਰਜੀਹਾਂ"
+	},
+	"preferences_key_is_synced": {
+		"message": "ਸਿੰਕ ਕੀਤੀਆਂ ਤਰਜੀਹਾਂ"
 	},
 	"preferences_reset": {
 		"message": "ਸਾਰੀਆਂ ਤਰਜੀਹਾਂ ਨੂੰ ਰੀਸੈੱਟ ਕੀਤਾ ਗਿਆ!"
@@ -1005,7 +1056,7 @@
 		"message": "ਆਯਾਤ ਕਰੋ"
 	},
 	"terminal_home_linux_not_enabled": {
-		"message": "Linux ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਲਈ ਵਿਕਾਸਕਾਰ ਚੋਣਾਂ 'ਤੇ ਜਾਓ"
+		"message": "Linux ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਲਈ ਵਿਕਾਸਕਾਰ ਵਿਕਲਪਾਂ 'ਤੇ ਜਾਓ"
 	},
 	"terminal_home_manage": {
 		"message": "ਪ੍ਰਬੰਧਨ ਕਰੋ"

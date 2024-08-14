@@ -702,7 +702,7 @@
 		"message": "Buang fail pada terminal"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Tukar direktori kerja"
+		"message": "Tukar direktori bekerja dari jauh"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Tukar kumpulan laluan"
@@ -714,7 +714,7 @@
 		"message": "Tukar pemilik laluan"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Kosongkan skrin terminal semasa."
+		"message": "Kosongkan skrin terminal semasa"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Salin fail pada papan keratan (lalai: 10MiB semasa bermula)"
@@ -747,22 +747,52 @@
 		"message": "Memuat turun fail: $1 sebagai $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Muat turun fail"
+		"message": "Muat turun satu fail"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Skrin bantuan ini"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Tukar direktori bekerja secara setempat"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Senaraikan butiran direktori"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Senaraikan butiran direktori setempat"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Buat pautan pada laluan yang menunjuk kepada sasaran"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Tunjukkan direktori bekerja secara setempat semasa"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Direktori bekerja secara setempat: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Muat turun berbilang fail"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Buat direktori"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Namakan semula fail"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Muat naik berbilang fail"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Sambung semula muat turun berbilang fail"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Sambung semula muat naik berbilang fail"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "pilihan"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Tetapkan atau nyahtetapkan pilihan"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Tetapkan rentetan gesaan"
@@ -774,7 +804,7 @@
 		"message": "Memuat naik fail: $1 sebagai $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Tunjukkan direktori kerja semasa"
+		"message": "Tunjukkan direktori bekerja dari jauh semasa"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Direktori kerja jauh: $1"
@@ -784,6 +814,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Kanonik laluan"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Sambung semula muat turun satu fail"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Sambung semula memuat naik fail"
@@ -808,6 +841,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Buat pautan simbolik pada laluan yang menunjuk kepada sasaran"
+	},
+	"nasftp_cmd_touch": {
+		"message": "sentuh"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Kemas kinikan akses dan masa pengubahsuaian fail"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Pendekkan laluan kepada 0 bait"
@@ -854,6 +893,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: terlalu banyak argumen"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: argumen tidak diketahui '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: perintah tidak diketahui"
 	},
@@ -865,6 +907,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 bait dipindahkan dalam $2 saat ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Jika muat turun tidak berfungsi, cuba jalankan: $1"
 	},
 	"nassh_options_error": {
 		"message": "Pilihan tidak diketahui: $1"
@@ -907,6 +952,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Pengendali URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Keutamaan tempatan"
+	},
+	"preferences_key_is_synced": {
+		"message": "Keutamaan yang telah disegerakkan"
 	},
 	"preferences_reset": {
 		"message": "Semua pilihan ditetapkan semula!"

@@ -687,7 +687,7 @@
 		"message": "បោះចោលឯកសារទៅក្នុងស្ថានីយ"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "ប្ដូរបញ្ជីដែលដំណើរការ"
+		"message": "ផ្លាស់ប្ដូរបញ្ជីដែលដំណើរការពីចម្ងាយ"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "ប្ដូរក្រុមរបស់ផ្លូវ"
@@ -702,7 +702,7 @@
 		"message": "សម្អាត"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "សម្អាតអេក្រង់ស្ថានីយបច្ចុប្បន្ន។"
+		"message": "សម្អាតអេក្រង់​ទែមីណាល់បច្ចុប្បន្ន"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "ចម្លងឯកសារទៅឃ្លីបបត (លំនាំដើម៖ ចម្លង 10MiB ដំបូងនៃឯកសារ)"
@@ -738,7 +738,7 @@
 		"message": "កំពុងទាញយកឯកសារ៖ $1 ជា $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ទាញយក​ឯកសារ"
+		"message": "ទាញយកឯកសារមួយ"
 	},
 	"nasftp_cmd_help": {
 		"message": "ជំនួយ"
@@ -746,20 +746,53 @@
 	"nasftp_cmd_help_help": {
 		"message": "អេក្រង់ជំនួយនេះ"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "ផ្លាស់ប្ដូរបញ្ជីដែលដំណើរការនៅលើឧបករណ៍"
+	},
 	"nasftp_cmd_list": {
 		"message": "បញ្ជី"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "ព័ត៌មានលម្អិតអំពីបញ្ជី"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "រាយព័ត៌មានលម្អិតអំពីបញ្ជីនៅលើឧបករណ៍"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "បង្កើត​តំណនៅផ្លូវដែលបង្ហាញទៅគោលដៅ"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "បង្ហាញបញ្ជីដែលដំណើរការនៅលើឧបករណ៍បច្ចុប្បន្ន"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "បញ្ជីដែលដំណើរការនៅលើឧបករណ៍៖ $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "ទាញយកឯកសារច្រើន"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "បង្កើតបញ្ជី"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ប្ដូរឈ្មោះឯកសារ"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "បង្ហោះឯកសារច្រើន"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "បន្តការទាញ​យកឯកសារច្រើន"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "បន្តការបង្ហោះឯកសារច្រើន"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "ចំណូលចិត្ត"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "កំណត់ ឬឈប់កំណត់ចំណូលចិត្ត"
+	},
+	"nasftp_cmd_preferences_line": {
+		"message": "$1៖ $2"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "កំណត់​ជួរអក្សរសារ"
@@ -771,7 +804,7 @@
 		"message": "កំពុងបង្ហោះឯកសារ៖ $1 ជា $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "បង្ហាញបញ្ជីដែលដំណើរការបច្ចុប្បន្ន"
+		"message": "បង្ហាញបញ្ជីដែលដំណើរការពីចម្ងាយបច្ចុប្បន្ន"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "បញ្ជីដែលដំណើរការពីចម្ងាយ៖ $1"
@@ -781,6 +814,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "ជ្រើសរើសផ្លូវល្អបំផុត"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "បន្តការទាញ​យកឯកសារមួយ"
 	},
 	"nasftp_cmd_rename": {
 		"message": "ប្ដូរឈ្មោះ"
@@ -814,6 +850,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "បង្កើតតំណតំណាងនៅផ្លូវដែលបង្ហាញទៅគោលដៅ"
+	},
+	"nasftp_cmd_touch": {
+		"message": "ចុច"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ធ្វើបច្ចុប្បន្នភាពពេលវេលាចូលប្រើប្រាស់ និងកែប្រែឯកសារ"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "បន្ថយផ្លូវឱ្យខ្លីទៅ 0 បៃ"
@@ -863,6 +905,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1៖ អញ្ញត្តិ​ច្រើន​ពេក"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1៖ អញ្ញត្តិដែលមិនស្គាល់ '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1៖ ពាក្យបញ្ជាមិនស្គាល់"
 	},
@@ -874,6 +919,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "បានផ្ទេរ $1 បៃក្នុងរយៈពេល $2 វិនាទី ($3/វិ)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "ប្រសិនបើការទាញយកមិនដំណើរការទេ សូមសាកល្បងដំណើរការ៖ $1"
 	},
 	"nassh_options_error": {
 		"message": "ជម្រើសមិនស្គាល់៖ $1"
@@ -916,6 +964,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "ឧបករណ៍ដោះស្រាយ​ URI"
+	},
+	"preferences_key_is_local": {
+		"message": "ចំណូលចិត្តក្នុងឧបករណ៍"
+	},
+	"preferences_key_is_synced": {
+		"message": "ចំណូលចិត្តដែលបានធ្វើសមកាលកម្ម"
 	},
 	"preferences_reset": {
 		"message": "បានកំណត់ចំណូលចិត្តទាំងអស់ឡើងវិញហើយ!"

@@ -114,7 +114,7 @@
 		"message": "Осы сеансқа рұқсат беру"
 	},
 	"hterm_button_block": {
-		"message": "Бөгеу"
+		"message": "Блоктау"
 	},
 	"hterm_button_close": {
 		"message": "Жабу"
@@ -693,7 +693,7 @@
 		"message": "Терминалдағы файлды қалпына келтіру"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Жұмыс каталогін өзгерту"
+		"message": "Қашықтан істейтін каталогті өзгерту"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Жолдар тобын өзгерту"
@@ -735,22 +735,55 @@
 		"message": "Жүктеп алынатын файл: $1 – $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Файлдарды жүктеп алу"
+		"message": "Бір файл жүктеп алу"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Осы анықтама экраны"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Жергілікті деңгейде істейтін каталогті өзгерту"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Каталог мәліметтерінің тізімі"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Жергілікті деңгейде істейтін каталогтер тізімі"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Мақсатты көрсететін жол сілтемесін жасау"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Жергілікті деңгейде істеп тұрған каталогті көрсету"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Жергілікті деңгейде істейтін каталог: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Бірнеше файлды жүктеп алу"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Каталогтер жасау"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Файл атын өзгерту"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Бірнеше файлды жүктеп салу"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Бірнеше файлды жүктеп алуды жалғастыру"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Бірнеше файлды жүктеп салуды жалғастыру"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "параметрлер"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Параметрді орнату немесе алып тастау"
+	},
+	"nasftp_cmd_preferences_line": {
+		"message": "$1: $2."
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Сұрау жолын қосу"
@@ -762,7 +795,7 @@
 		"message": "Жүктеп салынатын файл: $1 – $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Ағымдағы жұмыс каталогін көрсету"
+		"message": "Қашықтан істеп тұрған каталогті көрсету"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Қашықтағы жұмыс каталогі: $1"
@@ -772,6 +805,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Жолдарды қалыптандыру"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Бір файлды жүктеп алуды жалғастыру"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Файлдарды жүктеп салуды жалғастыру"
@@ -796,6 +832,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Мақсатты көрсететін жолға символдық сілтеме жасау"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Файлдардың пайдалану рұқсаты мен өңдеу уақытын өзгерту"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Жолдарды 0 байтқа дейін кесу"
@@ -845,6 +884,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: айнымалылар тым көп."
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: белгісіз айнымалы \"$2\""
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: белгісіз пәрмен."
 	},
@@ -856,6 +898,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$2 секундта $1 байт аударылды ($3/с)."
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Жүктеп алынбай жатса, мына пәрменді іске қосып көріңіз: $1"
 	},
 	"nassh_options_error": {
 		"message": "Белгісіз опция: $1."
@@ -898,6 +943,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI өңдегіштері"
+	},
+	"preferences_key_is_local": {
+		"message": "Жүйеде ғана сақталған параметр"
+	},
+	"preferences_key_is_synced": {
+		"message": "Синхрондалған параметр"
 	},
 	"preferences_reset": {
 		"message": "Барлық параметр бастапқы күйге қайтарылды."

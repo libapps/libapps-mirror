@@ -702,7 +702,7 @@
 		"message": "將檔案匯出到終端機"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "變更工作目錄"
+		"message": "變更遠端工作目錄"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "變更路徑群組"
@@ -714,7 +714,7 @@
 		"message": "變更路徑的擁有者"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "清除目前的終端機畫面。"
+		"message": "清除目前的終端機畫面"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "將檔案複製到剪貼簿 (預設值：前 10 MiB)"
@@ -744,22 +744,52 @@
 		"message": "正在下載檔案：將 $1 下載為 $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "下載檔案"
+		"message": "下載一個檔案"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "這個說明畫面"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "變更本機工作目錄"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "列出目錄詳細資料"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "列出本機目錄詳細資料"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "建立含有目標路徑的連結"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "顯示目前的本機工作目錄"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "本機工作目錄：$1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "下載多個檔案"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "建立目錄"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "重新命名檔案"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "上傳多個檔案"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "繼續下載多個檔案"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "繼續上傳多個檔案"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "偏好設定"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "設定或取消設定偏好設定"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "設定提示字串"
@@ -771,7 +801,7 @@
 		"message": "正在上傳檔案：將 $1 上傳為 $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "顯示目前的工作目錄"
+		"message": "顯示目前的遠端工作目錄"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "遠端工作目錄：$1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "將路徑標準化"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "繼續下載一個檔案"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "繼續上傳檔案"
@@ -808,6 +841,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "建立含有目標路徑的符號連結"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "更新檔案的存取權和修改次數"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "將路徑截斷為 0 個位元組"
@@ -857,6 +893,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1：引數過多"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1：不明引數「$2」"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1：不明的指令"
 	},
@@ -868,6 +907,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "已在 $2 秒內轉移 $1 個位元組 ($3/秒)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "如果無法下載，請嘗試執行：$1"
 	},
 	"nassh_options_error": {
 		"message": "不明的選項：$1"
@@ -910,6 +952,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI 處理常式"
+	},
+	"preferences_key_is_local": {
+		"message": "本機偏好設定"
+	},
+	"preferences_key_is_synced": {
+		"message": "保持同步的偏好設定"
 	},
 	"preferences_reset": {
 		"message": "已重設所有偏好設定！"

@@ -702,7 +702,7 @@
 		"message": "Faili kukutamine terminali"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Töökataloogi muutmine"
+		"message": "Kaugtöökataloogi muutmine"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Teede grupi muutmine"
@@ -714,7 +714,7 @@
 		"message": "Teede omaniku muutmine"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Tühjendab praeguse terminalikuva"
+		"message": "Praeguse terminalikuva tühjendamine"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Faili kopeerimine lõikelauale (vaikeseade: 10 MiB algusest)"
@@ -744,22 +744,49 @@
 		"message": "Faili allalaadimine: $1 nimega $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Failide allalaadimine"
+		"message": "Ühe faili allalaadimine"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "See abikuva"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Kohaliku töökataloogi muutmine"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Kataloogi üksikasjade loetlemine"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Kohaliku kataloogi üksikasjade loetlemine"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Sihtmärgile viitaval teel lingi loomine"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Praeguse kohaliku töökataloogi kuvamine"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Kohalik töökataloog: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Mitme faili allalaadimine"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Kataloogide loomine"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Faili nime muutmine"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Mitme faili üleslaadimine"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Mitme faili allalaadimise jätkamine"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Mitme faili üleslaadimise jätkamine"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Eelistuse määramine ja määrangute tühistamine"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Viiba stringi määramine"
@@ -771,7 +798,7 @@
 		"message": "Faili üleslaadimine: $1 nimega $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Praeguse töökataloogi kuvamine"
+		"message": "Praeguse kaugtöökataloogi kuvamine"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Kaugtöö kataloog: $1"
@@ -781,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Teede kanoniseerimine"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Ühe faili allalaadimise jätkamine"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Failide üleslaadimise jätkamine"
@@ -805,6 +835,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Sihtmärgile viitaval teel sümbolnime loomine"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Failidele juurdepääsu ja nende muutmisaegade värskendamine"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Teede lühendamine 0 baidini"
@@ -851,6 +884,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: liiga palju argumente"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: tundmatu argument „$2“"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: tundmatu käsk"
 	},
@@ -862,6 +898,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 baiti teisaldati $2 sekundiga ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Kui allalaadimine ei tööta, proovige kasutada allalaadimise meetodit $1"
 	},
 	"nassh_options_error": {
 		"message": "Tundmatu valik: $1"
@@ -904,6 +943,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI töötlejad"
+	},
+	"preferences_key_is_local": {
+		"message": "Kohalik eelistus"
+	},
+	"preferences_key_is_synced": {
+		"message": "Sünkroonitud eelistus"
 	},
 	"preferences_reset": {
 		"message": "Kõik eelistused lähtestati."

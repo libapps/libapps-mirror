@@ -213,16 +213,16 @@
 		"message": "عملکرد جای‌گذاری Ctrl+V"
 	},
 	"hterm_name_pref_cursor_blink": {
-		"message": "چشمک زدن نشانگر"
+		"message": "چشمک زدن مکان‌نما"
 	},
 	"hterm_name_pref_cursor_blink_cycle": {
-		"message": "نرخ چشمک زدن نشانگر"
+		"message": "نرخ چشمک زدن مکان‌نما"
 	},
 	"hterm_name_pref_cursor_color": {
-		"message": "رنگ نشانگر نوشتار"
+		"message": "رنگ مکان‌نمای نوشتار"
 	},
 	"hterm_name_pref_cursor_shape": {
-		"message": "شکل نشانگر نوشتار"
+		"message": "شکل مکان‌نمای نوشتار"
 	},
 	"hterm_name_pref_desktop_notification_bell": {
 		"message": "ایجاد اعلان‌های میز کار برای زنگ‌های هشدار"
@@ -252,7 +252,7 @@
 		"message": "مجاز کردن پاک کردن بافر پیمایش به‌عقب (CSI-J-3)"
 	},
 	"hterm_name_pref_enable_dec12": {
-		"message": "مجاز کردن تغییر چشمک زدن نشانگر نوشتار"
+		"message": "مجاز کردن تغییر چشمک زدن مکان‌نمای نوشتار"
 	},
 	"hterm_name_pref_enable_resize_status": {
 		"message": "نمایش ابعاد پایانه وقتی اندازه تغییر کرده است"
@@ -279,7 +279,7 @@
 		"message": "رنگ نوشتار"
 	},
 	"hterm_name_pref_hide_mouse_while_typing": {
-		"message": "پنهان کردن نشانگر موشواره درحین تایپ"
+		"message": "پنهان کردن مکان‌نمای موشواره درحین تایپ"
 	},
 	"hterm_name_pref_home_keys_scroll": {
 		"message": "عملکرد پیمایش کلید Home/End"
@@ -297,7 +297,7 @@
 		"message": "کلیدهای رسانه، Fkeys هستند"
 	},
 	"hterm_name_pref_meta_sends_escape": {
-		"message": "کنترل کلید تغییردهنده Meta"
+		"message": "کنترل کلید توصیف‌گر Meta"
 	},
 	"hterm_name_pref_mouse_paste_button": {
 		"message": "دکمه جای‌گذاری موشواره"
@@ -357,7 +357,7 @@
 		"message": "ضریب چرخ پیمایش موشواره"
 	},
 	"hterm_name_pref_scrollbar_visible": {
-		"message": "نمایان بودن نوار پیمایش"
+		"message": "رؤیت‌پذیری نوار پیمایش"
 	},
 	"hterm_name_pref_shift_insert_paste": {
 		"message": "جای‌گذاری Shift+Insert"
@@ -456,13 +456,13 @@
 		"message": "اینکه مکان‌نمای نوشتار به‌طور پیش‌فرض چشمک‌زن باشد یا نه. این گزینه ممکن است در زمان اجرا ازطریق توالی گریز پایانه تغییر کند."
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "سرعت چشمک زدن مکان‌نمای نوشتار به میلی‌ثانیه.\n\nآرایه‌ای دو عنصری، که عنصر اول به مدت‌زمان روشن بودن مکان‌نمای نوشتار و عنصر دوم به مدت‌زمان خاموش بودن آن مربوط است."
+		"message": "نرخ چشمک زدن مکان‌نمای نوشتار به میلی‌ثانیه.\n\nآرایه‌ای دو عنصری، که عنصر اول به مدت‌زمان روشن بودن مکان‌نمای نوشتار و عنصر دوم به مدت‌زمان خاموش بودن آن مربوط است."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "رنگ مکان‌نمای نوشتار قابل‌مشاهده."
 	},
 	"hterm_pref_cursor_shape": {
-		"message": "شکل نشانگر نوشتار قابل‌مشاهده. این گزینه ممکن است در زمان اجرا ازطریق توالی گریز پایانه تغییر کند."
+		"message": "شکل مکان‌نمای نوشتار قابل‌مشاهده. این گزینه ممکن است در زمان اجرا ازطریق توالی گریز پایانه تغییر کند."
 	},
 	"hterm_pref_desktop_notification_bell": {
 		"message": "اگر روی «درست» تنظیم شده باشد، زنگ‌های پایانه در پس‌زمینه، «اعلان وب» ایجاد می‌کنند. https://www.w3.org/TR/notifications/‎\n\nنمایش اعلان‌ها به اجازه کاربر نیاز دارد. اگر این گزینه روی «درست» تنظیم شود، hterm ،درصورت لزوم، از کاربر کسب اجازه می‌کند. اگر درخواست اجازه ازطریق کنش کاربر صورت نگیرد، ممکن است مرورگرها آن را نشان ندهند.\n\nافزونه‌های Chrome که مجوز «اعلان‌ها» را دارند اجازه دارند اعلان‌ها را نمایش دهند."
@@ -492,7 +492,7 @@
 		"message": "آیا قابلیت «پاک کردن خطوط ذخیره‌شده» (حالت ۳) از فرمان «پاک کردن نمایش‌گر» (CSI-J) می‌تواند بافر پیمایش به‌عقب پایانه را پاک کند یا نه.\n\nفعال کردن این گزینه به‌طور پیش‌فرض ایمن است."
 	},
 	"hterm_pref_enable_dec12": {
-		"message": "درنظر گرفتن تلاش میزبان برای تغییر وضعیت چشمک زدن نشانگر نوشتار با استفاده از DEC Private Mode 12."
+		"message": "درنظر گرفتن تلاش میزبان برای تغییر وضعیت چشمک زدن مکان‌نمای نوشتار با استفاده از DEC Private Mode 12."
 	},
 	"hterm_pref_enable_resize_status": {
 		"message": "اینکه وقتی پایانه اندازه را تغییر می‌دهد، ابعاد پایانه نشان داده شود یا نه."
@@ -525,7 +525,7 @@
 		"message": "اگر «درست» باشد، دکمه‌های Home/End نوار پیمایش پایانه را کنترل می‌کند و دکمه‌های Shift+Home/Shift+End به میزبان راه‌دور ارسال می‌شود. اگر «نادرست» باشد، دکمه‌های Home/End به میزبان راه‌دور ارسال می‌شود و Shift+Home /Shift+End عمل پیمایش را انجام می‌دهد."
 	},
 	"hterm_pref_keybindings": {
-		"message": "نگاشتی از توالی کلید به کنش‌های کلید. توالی کلید شامل صفر یا چند کلید تغییردهنده به‌همراه کد یک کلید است. کدهای کلید می‌تواند اعداد بر مبنای اعشاری یا شانزده‌شانزدهی، یا یک شناسه کلید باشد. می‌توان برای عملکردهای کلید، رشته‌ای برای ارسال به میزبان یا یک شناسه عملکرد تعیین کرد. برای توضیحات کامل این قالب، به https://hterm.org/x/docs/keyboard-bindings مراجعه کنید.\n\nنمونه اتصال کلید‌ها:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\"،\n  \"Ctrl+Shift+L\": \"PASS\"،\n  \"Ctrl+H\": \"'Hello World'\"\n}"
+		"message": "نگاشتی از توالی کلید به کنش‌های کلید. توالی کلید شامل صفر یا چند کلید توصیف‌گر به‌همراه کد یک کلید است. کدهای کلید می‌تواند اعداد بر مبنای اعشاری یا شانزده‌شانزدهی، یا یک شناسه کلید باشد. می‌توان برای عملکردهای کلید، رشته‌ای برای ارسال به میزبان یا یک شناسه عملکرد تعیین کرد. برای توضیحات کامل این قالب، به https://hterm.org/x/docs/keyboard-bindings مراجعه کنید.\n\nنمونه اتصال کلید‌ها:\n{\n  \"Ctrl+Alt+K\": \"clearTerminal\"،\n  \"Ctrl+Shift+L\": \"PASS\"،\n  \"Ctrl+H\": \"'Hello World'\"\n}"
 	},
 	"hterm_pref_keybindings_os_defaults": {
 		"message": "اینکه به‌جای ضبط همیشگی برای استفاده خود hterm باید اتصالات معمول صفحه‌کلید OS درنظر گرفته شود یا نه."
@@ -612,7 +612,7 @@
 		"message": "نشانی وب برگه سبک نگارش برای قرار گرفتن در سند پایانه."
 	},
 	"hterm_pref_user_css_text": {
-		"message": "متن CSS سفارشی برای سبک‌بندی پایانه."
+		"message": "متن CSS سفارشی برای سبک‌پردازی پایانه."
 	},
 	"hterm_pref_word_break_match_left": {
 		"message": "عبارت باقاعده برای توقف تطبیق دادن در سمت راست (شروع) یک انتخاب.\n\nمعمولاً این گزینه، گروهی نویسه برای رد کردن برخی نویسه‌ها است.\nما به‌صورت پیش‌فرض به «~» و «.» به‌عنوان مسیرهایی که عبارت اغلب با آن‌ها شروع می‌شود، اجازه می‌دهیم."
@@ -702,7 +702,7 @@
 		"message": "رونوشت فایل در پایانه"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "تغییر فهرست راهنمای کار"
+		"message": "تغییر دایرکتوری کار از دور"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "تغییر گروه مسیرها"
@@ -717,7 +717,7 @@
 		"message": "پاک کردن"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "صفحه پایانه فعلی را پاک کنید."
+		"message": "پاک کردن صفحه پایانه فعلی"
 	},
 	"nasftp_cmd_clip": {
 		"message": "کلیپ"
@@ -762,7 +762,7 @@
 		"message": "بارگیری فایل: $1 به‌عنوان $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "بارگیری فایل‌ها"
+		"message": "بارگیری یک فایل"
 	},
 	"nasftp_cmd_help": {
 		"message": "راهنما"
@@ -770,14 +770,29 @@
 	"nasftp_cmd_help_help": {
 		"message": "این صفحه راهنما"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "تغییر دایرکتوری کار محلی"
+	},
 	"nasftp_cmd_list": {
 		"message": "فهرست"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "فهرست‌بندی جزئیات فهرست راهنما"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "فهرست کردن جزئیات دایرکتوری محلی"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "ایجاد پیوند در مسیر مرتبط با هدف"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "نمایش دایرکتوری کار محلی فعلی"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "دایرکتوری کار محلی: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "بارگیری چند فایل"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "ایجاد فهرست‌های راهنما"
@@ -787,6 +802,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "تغییر نام فایل"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "بارگذاری چند فایل"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "ازسر گرفتن بارگیری چند فایل"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "ازسر گرفتن بارگذاری چند فایل"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "اولویت‌ها"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "تنظیم کردن یا برداشتن تنظیم اولویت"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "فرمان"
@@ -804,7 +834,7 @@
 		"message": "بارگذاری فایل: $1 به‌عنوان $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "نمایش فهرست راهنمای کار فعلی"
+		"message": "نمایش دایرکتوری کار از دور فعلی"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "فهرست راهنمای کار ازراه‌دور: $1"
@@ -823,6 +853,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "مسیرهای کانونیک کردن"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "ازسر گرفتن بارگیری یک فایل"
 	},
 	"nasftp_cmd_rename": {
 		"message": "تغییر نام"
@@ -859,6 +892,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "ایجاد پیوند نمادین در مسیر مرتبط با هدف"
+	},
+	"nasftp_cmd_touch": {
+		"message": "لمس کردن"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "به‌روزرسانی زمان اصلاح و دسترسی به فایل‌ها"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "کاهش"
@@ -911,6 +950,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: تعداد متغیرهای مستقل بسیار زیاد است"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: متغیر مستقل ناشناس «$2»"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: فرمان ناشناس"
 	},
@@ -922,6 +964,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 بایت در $2 ثانیه ($3/ ثانیه) منتقل شد"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "اگر بارگیری کار نمی‌کند، این را اجرا کنید: $1"
 	},
 	"nassh_options_error": {
 		"message": "گزینه نامشخص: $1"
@@ -964,6 +1009,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "کنترل‌کننده‌های URI"
+	},
+	"preferences_key_is_local": {
+		"message": "اولویت محلی"
+	},
+	"preferences_key_is_synced": {
+		"message": "اولویت همگام‌سازی‌شده"
 	},
 	"preferences_reset": {
 		"message": "همه اولویت‌ها بازنشانی شدند!"
@@ -1209,7 +1260,7 @@
 		"message": "بازنشانی زمینه"
 	},
 	"terminal_settings_reset_label": {
-		"message": "بازنشاندن"
+		"message": "بازنشانی"
 	},
 	"terminal_theme_classic_label": {
 		"message": "قدیمی"
@@ -1230,7 +1281,7 @@
 		"message": "روشن"
 	},
 	"terminal_theme_solarized_dark_label": {
-		"message": "زمینه تیره Solarized"
+		"message": "زمینه تاریک Solarized"
 	},
 	"terminal_theme_solarized_light_label": {
 		"message": "زمینه روشن Solarized"
@@ -1293,7 +1344,7 @@
 		"message": "عملکرد"
 	},
 	"terminal_title_pref_cursor": {
-		"message": "نشانگر"
+		"message": "مکان‌نما"
 	},
 	"terminal_title_pref_keyboard": {
 		"message": "صفحه‌کلید"

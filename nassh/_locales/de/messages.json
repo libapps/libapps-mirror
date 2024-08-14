@@ -702,7 +702,7 @@
 		"message": "Eine Datei zum Terminal exportieren"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Arbeitsverzeichnis ändern"
+		"message": "Remote-Arbeitsverzeichnis ändern"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Pfadgruppe ändern"
@@ -714,7 +714,7 @@
 		"message": "Pfadeigentümer ändern"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Aktuellen Terminal-Bildschirm löschen."
+		"message": "Aktuellen Terminal-Bildschirm löschen"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Eine Datei in die Zwischenablage kopieren (Standard: die ersten 10 MiB)"
@@ -747,22 +747,52 @@
 		"message": "Datei wird heruntergeladen: $1 als $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Dateien herunterladen"
+		"message": "Eine Datei herunterladen"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Dieser Hilfebildschirm"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Lokales Arbeitsverzeichnis ändern"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Verzeichnisdetails aufführen"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Details zum lokalen Verzeichnis auflisten"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Einen Link für den Pfad erstellen, der auf das Ziel verweist"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Aktuelles lokales Arbeitsverzeichnis anzeigen"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Lokales Arbeitsverzeichnis: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Mehrere Dateien herunterladen"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Verzeichnisse erstellen"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Datei umbenennen"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Mehrere Dateien hochladen"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Download mehrerer Dateien fortsetzen"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Upload mehrerer Dateien fortsetzen"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "Einstellungen"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Einstellungen festlegen oder aufheben"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Eingabeaufforderung einrichten"
@@ -774,7 +804,7 @@
 		"message": "Datei wird hochgeladen: $1 als $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Aktuelles Arbeitsverzeichnis anzeigen"
+		"message": "Aktuelles Remote-Arbeitsverzeichnis anzeigen"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Remote-Arbeitsverzeichnis: $1"
@@ -784,6 +814,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Pfade kanonisieren"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Download einer Datei fortsetzen"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Hochladen der Dateien fortsetzen"
@@ -808,6 +841,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Einen Symlink für den Pfad erstellen, der auf das Ziel verweist"
+	},
+	"nasftp_cmd_touch": {
+		"message": "Berührung"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Zugriffs- und Änderungszeiten von Dateien aktualisieren"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Reduziert Pfade auf 0 Byte"
@@ -857,6 +896,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: zu viele Argumente"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: unbekanntes Argument „$2“"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: unbekannter Befehl"
 	},
@@ -871,6 +913,9 @@
 	},
 	"nasftp_prompt": {
 		"message": "nasftp $1 >"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Wenn der Download nicht funktioniert, versuche Folgendes auszuführen: $1"
 	},
 	"nassh_options_error": {
 		"message": "Unbekannte Option: $1"
@@ -913,6 +958,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI-Handler"
+	},
+	"preferences_key_is_local": {
+		"message": "Lokale Einstellung"
+	},
+	"preferences_key_is_synced": {
+		"message": "Synchronisierte Einstellung"
 	},
 	"preferences_reset": {
 		"message": "Alle Einstellungen wurden zurückgesetzt."

@@ -702,7 +702,7 @@
 		"message": "Надіслати файл у термінал"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Змінити робочий каталог"
+		"message": "Змінити віддалений робочий каталог"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Змінити групу шляхів"
@@ -717,7 +717,7 @@
 		"message": "очистити"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Очистити поточний екран термінала."
+		"message": "Очистити поточний екран термінала"
 	},
 	"nasftp_cmd_clip": {
 		"message": "копіювати"
@@ -762,7 +762,7 @@
 		"message": "Завантажується файл: $1 як $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Завантажити файли"
+		"message": "Завантажити один файл"
 	},
 	"nasftp_cmd_help": {
 		"message": "довідка"
@@ -770,17 +770,32 @@
 	"nasftp_cmd_help_help": {
 		"message": "Цей екран довідки"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Змінити локальний робочий каталог"
+	},
 	"nasftp_cmd_list": {
 		"message": "список"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "Список деталей каталогу"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Показати деталі локального каталогу"
+	},
 	"nasftp_cmd_ln": {
 		"message": "У"
 	},
 	"nasftp_cmd_ln_help": {
 		"message": "Створити посилання на шлях, що вказує на ціль"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Показати поточний локальний робочий каталог"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Локальний робочий каталог: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Завантажити кілька файлів на комп’ютер"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Створити каталоги"
@@ -790,6 +805,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Перейменувати файл"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Завантажити кілька файлів з комп’ютера"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Відновити завантаження кількох файлів на комп’ютер"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Відновити завантаження кількох файлів з комп’ютера"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "параметри"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Увімкнути або вимкнути параметр"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "підказка"
@@ -807,7 +837,7 @@
 		"message": "Завантаження файлу: $1 як $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Показати поточний робочий каталог"
+		"message": "Показати поточний віддалений робочий каталог"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Віддалений робочий каталог: $1"
@@ -823,6 +853,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Канонікалізувати шляхи"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Відновити завантаження одного файлу на комп’ютер"
 	},
 	"nasftp_cmd_rename": {
 		"message": "перейменувати"
@@ -862,6 +895,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Створити символічне посилання на шлях, що вказує на ціль"
+	},
+	"nasftp_cmd_touch": {
+		"message": "вибрати"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Оновити час доступу й змінення файлів"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "обрізати"
@@ -914,6 +953,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: забагато аргументів"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: невідомий аргумент \"$2\""
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: невідома команда"
 	},
@@ -925,6 +967,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 Б перенесено за $2 с ($3/с)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Якщо не вдається завантажити, спробуйте запустити: $1"
 	},
 	"nassh_options_error": {
 		"message": "Невідомий варіант: $1"
@@ -967,6 +1012,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Обробники URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Локальне налаштування"
+	},
+	"preferences_key_is_synced": {
+		"message": "Синхронізоване налаштування"
 	},
 	"preferences_reset": {
 		"message": "Усі налаштування скинуто."

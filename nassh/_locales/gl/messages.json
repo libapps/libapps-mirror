@@ -216,7 +216,7 @@
 		"message": "Pestanexo do cursor"
 	},
 	"hterm_name_pref_cursor_blink_cycle": {
-		"message": "Ritmo de pestanexo do cursor"
+		"message": "Velocidade de intermitencia do cursor"
 	},
 	"hterm_name_pref_cursor_color": {
 		"message": "Cor do cursor de texto"
@@ -456,7 +456,7 @@
 		"message": "Define se o cursor de texto pestanexa de forma predeterminada. Esta preferencia pódese activar/desactivar durante o tempo de execución mediante secuencias de escape do terminal."
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "A taxa de intermitencia do cursor de texto en milisegundos.\n\nÉ unha matriz de dous elementos. O primeiro deles define canto tempo debe estar visible o cursor de texto, mentres que o segundo define canto tempo debe estar oculto."
+		"message": "A velocidade de intermitencia do cursor de texto en milisegundos.\n\nÉ unha matriz de dous elementos. O primeiro deles define canto tempo debe estar visible o cursor de texto, mentres que o segundo define canto tempo debe estar oculto."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "A cor do cursor de texto visible."
@@ -702,7 +702,7 @@
 		"message": "Exportar un ficheiro ao terminal"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Cambiar directorio de traballo"
+		"message": "Cambiar o directorio de traballo remoto"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Cambiar grupo de rutas"
@@ -714,7 +714,7 @@
 		"message": "Cambiar propietario das rutas"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Borrar a pantalla actual do terminal."
+		"message": "Borrar a pantalla actual do terminal"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Copiar un ficheiro ao portapapeis (predeterminado: 10 MiB desde o inicio)"
@@ -726,7 +726,7 @@
 		"message": "Activar/desactivar uso de cor"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "Copia unha ruta remota noutra ruta remota diferente"
+		"message": "Copiar unha ruta remota noutra ruta remota diferente"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "Eliminar ficheiros"
@@ -747,22 +747,52 @@
 		"message": "Descargando ficheiro: $1 como $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Descargar ficheiros"
+		"message": "Descargar un ficheiro"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Esta pantalla de axuda"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Cambiar o directorio de traballo local"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Mostrar detalles do directorio"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Mostrar os detalles dos directorios locais"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Crear unha ligazón na ruta que dirixe ao obxectivo"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Mostrar o directorio de traballo local actual"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Directorio de traballo local: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Descargar varios ficheiros"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Crear directorios"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Cambiar de nome un ficheiro"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Cargar varios ficheiros"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Retomar a descarga de varios ficheiros"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Retomar a carga de varios ficheiros"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "preferencias"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Establecer ou anular unha preferencia"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Definir a cadea de solicitude"
@@ -774,7 +804,7 @@
 		"message": "Cargando ficheiro: $1 como $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Mostrar directorio de traballo actual"
+		"message": "Mostrar o directorio de traballo remoto actual"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Directorio de traballo remoto: $1"
@@ -784,6 +814,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Canonicalizar rutas"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Retomar a descarga dun ficheiro"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Retomar a carga de ficheiros"
@@ -808,6 +841,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Crear unha ligazón simbólica na ruta que dirixa ao obxectivo"
+	},
+	"nasftp_cmd_touch": {
+		"message": "táctil"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Actualizar o acceso e as horas de modificación dos ficheiros"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Truncar rutas a 0 bytes"
@@ -854,6 +893,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: hai demasiados argumentos"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: argumento descoñecido '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: comando descoñecido"
 	},
@@ -865,6 +907,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 bytes transferidos en $2 segundos ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Se non funciona a descarga, proba a executar: $1"
 	},
 	"nassh_options_error": {
 		"message": "Opción descoñecida: $1"
@@ -907,6 +952,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Controladores URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Preferencia local"
+	},
+	"preferences_key_is_synced": {
+		"message": "Preferencia sincronizada"
 	},
 	"preferences_reset": {
 		"message": "Restablecéronse todas as preferencias"

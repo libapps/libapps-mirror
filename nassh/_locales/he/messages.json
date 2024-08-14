@@ -705,7 +705,7 @@
 		"message": "ייצוא קובץ לטרמינל"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "שינוי ספריית העבודה"
+		"message": "שינוי ספריית העבודה מרחוק"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "שינוי קבוצה של נתיבים"
@@ -717,7 +717,7 @@
 		"message": "החלפת הבעלים של נתיבים"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "ניקוי המסך הנוכחי של הטרמינל."
+		"message": "ניקוי המסך הנוכחי של הטרמינל"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "העתקת קובץ ללוח (ברירת מחדל: 10MiB מההתחלה)"
@@ -747,22 +747,55 @@
 		"message": "מתבצעת הורדה של קובץ: $1 בתור $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "הורדת קבצים"
+		"message": "הורדת קובץ אחד"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "מסך העזרה הזה"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "שינוי ספריית העבודה המקומית"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "הצגת פרטים על הנתיבים בשרת המרוחק"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "הצגת פרטי הספרייה המקומית"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "יצירת קישור בנתיב שמפנה ליעד"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "הצגה של ספריית העבודה המקומית הנוכחית"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "ספריית העבודה המקומית: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "הורדת מספר קבצים"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "יצירת ספריות"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "שינוי שם של קובץ"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "העלאת מספר קבצים"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "המשך ההורדה של מספר קבצים"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "המשך ההעלאה של מספר קבצים"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "העדפות"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "הגדרה או ביטול ההגדרה של ההעדפה"
+	},
+	"nasftp_cmd_preferences_line": {
+		"message": "‫$1: $2"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "יש להגדיר את המחרוזת של prompt"
@@ -774,7 +807,7 @@
 		"message": "מתבצעת העלאה של קובץ: $1 כ-$2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "הצגת ספריית העבודה הנוכחית"
+		"message": "הצגה של ספריית העבודה הנוכחית מרחוק"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "ספריית עבודה בשרת מרוחק: $1"
@@ -784,6 +817,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "קביעת כתובת ה-URL של נתיבים כגרסה הרשמית (הקנונית)"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "המשך ההורדה של קובץ אחד"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "המשך העלאה של קבצים"
@@ -808,6 +844,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "יצירת קישור סימבולי בנתיב שמפנה ליעד"
+	},
+	"nasftp_cmd_touch": {
+		"message": "‫Touch"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "עדכון זמני הגישה והשינוי של הקבצים"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "קיצור נתיבים ל-0 בייט"
@@ -854,6 +896,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: יותר מדי ארגומנטים"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "‫$1: ארגומנט לא ידוע '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: פקודה לא ידועה"
 	},
@@ -868,6 +913,9 @@
 	},
 	"nasftp_prompt": {
 		"message": "‎nasftp $1 >‎"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "אם ההורדה לא עובדת, כדאי לנסות להריץ את: $1"
 	},
 	"nassh_options_error": {
 		"message": "אפשרות לא ידועה: $1"
@@ -910,6 +958,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Handlers של URI"
+	},
+	"preferences_key_is_local": {
+		"message": "העדפה מקומית"
+	},
+	"preferences_key_is_synced": {
+		"message": "העדפה מסונכרנת"
 	},
 	"preferences_reset": {
 		"message": "כל ההעדפות אופסו."

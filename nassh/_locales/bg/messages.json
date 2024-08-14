@@ -702,7 +702,7 @@
 		"message": "Извеждане на файл в терминала"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Смяна на работната директория"
+		"message": "Промяна на отдалечената работна директория"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Промяна на групата за пътищата"
@@ -714,7 +714,7 @@
 		"message": "Промяна на собственика на пътищата"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Изчистване на текущия екран на терминала."
+		"message": "Изчистване на текущия екран на терминала"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Копиране на файл в буферната памет (по подразбиране: 10 МБ от началото)"
@@ -744,22 +744,52 @@
 		"message": "Файлът „$1“ се изтегля като „$2“"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Изтегляне на файлове"
+		"message": "Изтегляне на един файл"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Този помощен екран"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Промяна на локалната работна директория"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Извеждане на подробности за директорията"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Показване на подробности за локалните директории"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Създава в директорията връзка, водеща към целта"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Показване на текущата локална работна директория"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Локална работна директория: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Изтегляне на няколко файла"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Създаване на директория"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Преименуване на файл"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Качване на няколко файла"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Възобновяване на изтеглянето на няколко файла"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Възобновяване на качването на няколко файла"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "предпочитания"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Задаване или премахване на задаването на предпочитание"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Задаване на низа за подканата"
@@ -771,7 +801,7 @@
 		"message": "Файлът „$1“ се качва като „$2“ ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Показване на текущата работна директория"
+		"message": "Показване на текущата отдалечена работна директория"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Отдалечена работна директория: $1"
@@ -781,6 +811,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Превръщане на пътищата в канонични"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Възобновяване на изтеглянето на един файл"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Възобновяване на качването на файлове"
@@ -805,6 +838,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Създава в директорията символична връзка, водеща към целта"
+	},
+	"nasftp_cmd_touch": {
+		"message": "докосване"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Актуализиране на часовете за достъп и промяна на файловете"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Съкращаване на пътя до 0 байта"
@@ -851,6 +890,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: твърде много аргументи"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: неизвестен аргумент $2"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: неизвестна команда"
 	},
@@ -862,6 +904,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 байта, прехвърлени за $2 секунди ($3/сек)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Ако изтеглянето не работи, стартирайте: $1"
 	},
 	"nassh_options_error": {
 		"message": "Неизвестна опция: $1"
@@ -904,6 +949,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Манипулатори за URI адреси"
+	},
+	"preferences_key_is_local": {
+		"message": "Локално предпочитание"
+	},
+	"preferences_key_is_synced": {
+		"message": "Синхронизирано предпочитание"
 	},
 	"preferences_reset": {
 		"message": "Всички предпочитания са нулирани!"

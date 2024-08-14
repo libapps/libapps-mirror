@@ -693,7 +693,7 @@
 		"message": "Mag-dump ng file sa terminal"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Palitan ang gumaganang directory"
+		"message": "Baguhin ang remote na gumaganang directory"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Baguhin ang grupo ng mga path"
@@ -708,7 +708,7 @@
 		"message": "i-clear"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "I-clear ang kasalukuyang screen ng terminal."
+		"message": "I-clear ang kasalukuyang screen ng terminal"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Magkopya ng file sa (default: 10MiB mula sa simula)"
@@ -750,7 +750,7 @@
 		"message": "Dina-download ang file: $1 bilang $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Mag-download ng mga file"
+		"message": "Mag-download ng isang file"
 	},
 	"nasftp_cmd_help": {
 		"message": "tulong"
@@ -758,14 +758,29 @@
 	"nasftp_cmd_help_help": {
 		"message": "Ang screen ng tulong na ito"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Baguhin ang lokal na gumaganang directory"
+	},
 	"nasftp_cmd_list": {
 		"message": "listahan"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "Ilista ang mga detalye ng directory"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Ilista ang mga detalye ng lokal na directory"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Gumawa ng link sa path na papunta sa target"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Ipakita ang kasalukuyang lokal na gumaganang directory"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Lokal na gumaganang directory: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Mag-download ng maraming file"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Gumawa ng mga directory"
@@ -775,6 +790,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Mag-rename ng file"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Mag-upload ng maraming file"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Ipagpatuloy ang pag-download ng maraming file"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Ipagpatuloy ang pag-upload ng maraming file"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "mga kagustuhan"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Magtakda o mag-unset ng kagustuhan"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "i-prompt"
@@ -792,7 +822,7 @@
 		"message": "Nag-a-upload ng file: $1 bilang $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Ipakita ang kasalukuyang gumaganang directory"
+		"message": "Ipakita ang kasalukuyang remote na gumaganang directory"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Remote na gumaganang directory: $1"
@@ -805,6 +835,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Mag-canonicalize ng mga path"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Ipagpatuloy ang pag-download ng isang file"
 	},
 	"nasftp_cmd_rename": {
 		"message": "i-rename"
@@ -838,6 +871,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Gumawa ng symlink sa path na papunta sa target"
+	},
+	"nasftp_cmd_touch": {
+		"message": "pindutin"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Ina-update ang mga oras ng pag-access at pagbabago ng mga file"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "putulin"
@@ -887,6 +926,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: masyadong maraming argument"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: hindi alam na argument '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: hindi alam na command"
 	},
@@ -898,6 +940,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 (na) byte ang nailipat sa loob ng $2 (na) segundo ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Kung hindi gumagana ang pag-download, subukang patakbuhin ang: $1"
 	},
 	"nassh_options_error": {
 		"message": "Hindi alam na opsyon: $1"
@@ -940,6 +985,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Mga Tagapangasiwa ng URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Lokal na kagustuhan"
+	},
+	"preferences_key_is_synced": {
+		"message": "Naka-sync na kagustuhan"
 	},
 	"preferences_reset": {
 		"message": "Na-reset na ang lahat ng kagustuhan!"

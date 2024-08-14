@@ -702,7 +702,7 @@
 		"message": "将文件转储到终端"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "更改工作目录"
+		"message": "更改远程工作目录"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "更改路径组"
@@ -714,7 +714,7 @@
 		"message": "更改路径所有者"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "清空当前的终端屏幕。"
+		"message": "清空当前的终端屏幕"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "将文件复制到剪贴板（默认复制前 10MiB 内容）"
@@ -744,22 +744,55 @@
 		"message": "正在下载文件：将 $1 下载为 $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "下载文件"
+		"message": "下载一个文件"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "此帮助屏幕"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "更改本地工作目录"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "列出目录详情"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "列出本地目录详细信息"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "在路径下创建指向目标的链接"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "显示当前的本地工作目录"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "本地工作目录：$1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "下载多个文件"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "创建目录"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "重命名文件"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "上传多个文件"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "继续下载多个文件"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "继续上传多个文件"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "偏好设置"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "设置或取消偏好设置"
+	},
+	"nasftp_cmd_preferences_line": {
+		"message": "$1：$2"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "设置提示字符串"
@@ -771,7 +804,7 @@
 		"message": "正在上传文件：将 $1 上传为 $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "显示当前的工作目录"
+		"message": "显示当前的远程工作目录"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "远程工作目录：$1"
@@ -781,6 +814,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "将路径规范化"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "继续下载一个文件"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "继续上传文件"
@@ -808,6 +844,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "在路径中创建指向目标的符号链接"
+	},
+	"nasftp_cmd_touch": {
+		"message": "触"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "更新文件的访问权限和修改次数"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "将路径截断为 0 个字节"
@@ -857,6 +899,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1：参数过多"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1：未知参数“$2”"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1：未知命令"
 	},
@@ -868,6 +913,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$2 秒内已传输 $1 个字节（$3/秒）"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "如果无法下载，请尝试运行：$1"
 	},
 	"nassh_options_error": {
 		"message": "未知选项：$1"
@@ -910,6 +958,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI 处理程序"
+	},
+	"preferences_key_is_local": {
+		"message": "本地偏好设置"
+	},
+	"preferences_key_is_synced": {
+		"message": "已同步的偏好设置"
 	},
 	"preferences_reset": {
 		"message": "已重置所有偏好设置！"

@@ -708,7 +708,7 @@
 		"message": "promdir"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Promjena radnog direktorija"
+		"message": "Promijeni direktorij za rad na daljinu"
 	},
 	"nasftp_cmd_chgrp": {
 		"message": "prgrup"
@@ -732,7 +732,7 @@
 		"message": "izbriši"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Brisanje trenutačnog zaslona terminala."
+		"message": "Izbriši trenutačni zaslon terminala"
 	},
 	"nasftp_cmd_clip": {
 		"message": "međusp"
@@ -780,7 +780,7 @@
 		"message": "Preuzimanje datoteke: $1 kao $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Preuzimanje datoteka"
+		"message": "Preuzmi jednu datoteku"
 	},
 	"nasftp_cmd_help": {
 		"message": "pomoć"
@@ -788,17 +788,32 @@
 	"nasftp_cmd_help_help": {
 		"message": "Ovaj zaslon za pomoć"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Promijeni lokalni radni direktorij"
+	},
 	"nasftp_cmd_list": {
 		"message": "popis"
 	},
 	"nasftp_cmd_list_help": {
 		"message": "Popis pojedinosti o direktoriju"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Navedi pojedinosti o lokalnom direktoriju"
+	},
 	"nasftp_cmd_ln": {
 		"message": "vz"
 	},
 	"nasftp_cmd_ln_help": {
 		"message": "Izrada veze na putu koji vodi prema cilju"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Prikaži trenutačni lokalni radni direktorij"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Lokalni radni direktorij: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Preuzmi više datoteka"
 	},
 	"nasftp_cmd_mkdir": {
 		"message": "izrdir"
@@ -811,6 +826,21 @@
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Preimenovanje datoteke"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Prenesi više datoteka"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Nastavi s preuzimanjem više datoteka"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Nastavi s prijenosom više datoteka"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "postavke"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Postavljanje ili poništavanje postavke"
 	},
 	"nasftp_cmd_prompt": {
 		"message": "upit"
@@ -831,7 +861,7 @@
 		"message": "trd"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Prikaz trenutačnog radnog direktorija"
+		"message": "Prikaži trenutačni direktorij za rad na daljinu"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Udaljeni radni direktorij: $1"
@@ -850,6 +880,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Kanonikalizacija putova"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Nastavi s preuzimanjem jedne datoteke"
 	},
 	"nasftp_cmd_rename": {
 		"message": "preimenuj"
@@ -892,6 +925,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Izrada simboličke veze na putu koji vodi prema cilju"
+	},
+	"nasftp_cmd_touch": {
+		"message": "dodir"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Ažuriranje vremena pristupa i izmjene datoteka"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "skrati"
@@ -944,6 +983,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: previše argumenata"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: nepoznati argument \"$2\""
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: nepoznata naredba"
 	},
@@ -955,6 +997,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 bajtova preneseno za $2 s ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Ako preuzimanje ne funkcionira, pokušajte pokrenuti: $1"
 	},
 	"nassh_options_error": {
 		"message": "Nepoznata opcija: $1"
@@ -997,6 +1042,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI rukovatelji"
+	},
+	"preferences_key_is_local": {
+		"message": "Lokalne postavke"
+	},
+	"preferences_key_is_synced": {
+		"message": "Sinkronizirana postavka"
 	},
 	"preferences_reset": {
 		"message": "Sve su postavke vraćene na zadano!"

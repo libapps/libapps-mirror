@@ -213,7 +213,7 @@
 		"message": "Kurtsorearen keinua"
 	},
 	"hterm_name_pref_cursor_blink_cycle": {
-		"message": "Kurtsorearen keinu-tasa"
+		"message": "Kurtsorearen keinu-maiztasuna"
 	},
 	"hterm_name_pref_cursor_color": {
 		"message": "Testu-kurtsorearen kolorea"
@@ -453,7 +453,7 @@
 		"message": "Kurtsoreak modu lehenetsian keinu egiten duen ala ez zehazten du. Terminalaren ihes-sekuentzien bidez aktibatu edo desaktiba daiteke exekuzio-denboran egon bitartean."
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "Kurtsorearen keinu-tasa milisegundotan.\n\nBi elementuko matrize bat da. Lehenengoak testuaren kurtsoreak zenbat denbora egon behar duen ikusgai zehazten du; bigarrenak, berriz, zenbat denbora egon behar duen ikusezin."
+		"message": "Kurtsorearen keinu-maiztasuna milisegundotan.\n\nBi elementuko matrize bat da. Lehenengoak testuaren kurtsoreak zenbat denbora egon behar duen ikusgai zehazten du; bigarrenak, berriz, zenbat denbora egon behar duen ikusezin."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "Ikusgai dagoen testu-kurtsorearen kolorea."
@@ -699,7 +699,7 @@
 		"message": "Irauli fitxategi bat terminalera"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Aldatu lan-direktorioa"
+		"message": "Aldatu urruneko lan-direktorioa"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Aldatu bide-izenen multzoa"
@@ -711,7 +711,7 @@
 		"message": "Aldatu bide-izenen jabea"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "Garbitu oraingo terminalaren pantaila."
+		"message": "Garbitu oraingo terminalaren pantaila"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "Kopiatu fitxategi bat arbelean (modu lehenetsian: 10 MiB hasieratik)"
@@ -732,7 +732,7 @@
 		"message": "Erakutsi diskoaren estatistikak"
 	},
 	"nasftp_cmd_df_summary": {
-		"message": "  Bide-izena: $1.\n  Fitxategi-sistemaren IDa: $2.\n Guztira: $3.\n  Erabilita: $4 ($5%).\n Erabilgarri: $6 (pribilegiorik gabeko erabiltzaileentzat) eta $7 (administratzaileentzat)."
+		"message": "  Bide-izena: $1.\n  Fitxategi-sistemarenidentifikatzailea: $2.\n Guztira: $3.\n  Erabilita: $4 ($5%).\n Erabilgarri: $6 (pribilegiorik gabeko erabiltzaileentzat) eta $7 (administratzaileentzat)."
 	},
 	"nasftp_cmd_exit_help": {
 		"message": "Deskonektatu"
@@ -741,22 +741,52 @@
 		"message": "$1 fitxategia $2 gisa deskargatzen da"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Deskargatu fitxategiak"
+		"message": "Deskargatu fitxategi bat"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Laguntza-pantaila hau"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Aldatu gailuko lan-direktorioa"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Zerrendatu direktorioaren xehetasunak"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Zerrendatu gailuko direktorioaren xehetasunak"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Sortu helbururako esteka bat bide-izenean"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Erakutsi oraingo gailuko lan-direktorioa"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Gailuko lan-direktorioa: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Deskargatu fitxategi bat baino gehiago"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Sortu direktorioak"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Aldatu fitxategi baten izena"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Kargatu fitxategi bat baino gehiago"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Berrekin fitxategi bat baino gehiago deskargatzeari"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Berrekin fitxategi bat baino gehiago kargatzeari"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "hobespenak"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Ezarri edo kendu hobespen bat"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Ezarri eskaeraren katea"
@@ -768,7 +798,7 @@
 		"message": "$1 fitxategia $2 gisa kargatzen da ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Erakutsi oraingo lan-direktorioa"
+		"message": "Erakutsi oraingo urruneko lan-direktorioa"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Urruneko lan-direktorioa: $1."
@@ -778,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Normalizatu bide-izenak"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Berrekin fitxategi bat deskargatzeari"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Berrekin fitxategiak kargatzeari"
@@ -801,10 +834,16 @@
 		"message": "Erakutsi fitxategiaren egoera"
 	},
 	"nasftp_cmd_stat_summary": {
-		"message": "  Fitxategia: $1.\n  Tamaina: $2 byte.\n   Erabiltzailearen IDa: $3.\n   Taldearen IDa: $4.\nSarbidea: $5.\n Atzitze-ordua: $6.\n Aldatze-ordua: $7."
+		"message": "  Fitxategia: $1.\n  Tamaina: $2 byte.\n   Erabiltzaile-identifikatzailea: $3.\n   Talde-identifikatzailea: $4.\nSarbidea: $5.\n Atzitze-ordua: $6.\n Aldatze-ordua: $7."
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Sortu helbururako esteka sinboliko bat bide-izenean"
+	},
+	"nasftp_cmd_touch": {
+		"message": "sakatu"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Eguneratu fitxategien sarbide- eta aldaketa-orduak"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "Moztu bide-izena 0 bytera"
@@ -854,6 +893,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: argumentu gehiegi daude."
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: \"$2\" argumentu ezezaguna"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: agindu ezezaguna."
 	},
@@ -865,6 +907,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 byte transferitu dira $2 segundotan ($3/s)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Deskargak funtzionatzen ez badu, exekutatu hau: $1"
 	},
 	"nassh_options_error": {
 		"message": "Aukera ezezaguna: $1."
@@ -907,6 +952,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URIaren kudeatzaileak"
+	},
+	"preferences_key_is_local": {
+		"message": "Gailuaren hobespena"
+	},
+	"preferences_key_is_synced": {
+		"message": "Sinkronizatutako hobespena"
 	},
 	"preferences_reset": {
 		"message": "Berrezarri dira hobespen guztiak"

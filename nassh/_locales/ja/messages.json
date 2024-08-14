@@ -702,7 +702,7 @@
 		"message": "ファイルをターミナルにダンプします"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "作業ディレクトリを変更します"
+		"message": "リモート作業ディレクトリを変更する"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "パスのグループを変更します"
@@ -714,7 +714,7 @@
 		"message": "パスのオーナーを変更します"
 	},
 	"nasftp_cmd_clear_help": {
-		"message": "現在のターミナル画面を消去します。"
+		"message": "現在のターミナル画面を消去する"
 	},
 	"nasftp_cmd_clip_help": {
 		"message": "ファイルをクリップボードにコピーします（デフォルト: 開始時から 10MiB）"
@@ -744,22 +744,49 @@
 		"message": "$1 を $2 としてダウンロードしています"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "ファイルをダウンロードします"
+		"message": "1 つのファイルをダウンロードする"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "このヘルプ画面です"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "ローカル作業ディレクトリを変更する"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "ディレクトリの詳細をリスト表示します"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "ローカル ディレクトリの詳細をリストする"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "ターゲットをポイントするパスのリンクを作成します"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "現在のローカル作業ディレクトリを表示する"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "ローカル作業ディレクトリ: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "複数のファイルをダウンロードする"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "ディレクトリを作成します"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "ファイル名を変更します"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "複数のファイルをアップロードする"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "複数のファイルのダウンロードを再開する"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "複数のファイルのアップロードを再開する"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "設定を行う、または設定を解除する"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "プロンプト文字列を設定します"
@@ -771,7 +798,7 @@
 		"message": "$1 を $2 としてアップロードしています（$3）"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "現在の作業ディレクトリを表示します"
+		"message": "現在のリモート作業ディレクトリを表示する"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "リモート作業ディレクトリ: $1"
@@ -781,6 +808,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "パスを正規化します"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "1 つのファイルのダウンロードを再開する"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "ファイルのアップロードを再開します"
@@ -805,6 +835,9 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "ターゲットをポイントするパスのシンボリック リンクを作成します"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "ファイルのアクセス日時と変更日時を更新する"
 	},
 	"nasftp_cmd_truncate_help": {
 		"message": "パスを 0 バイトに切り詰めます"
@@ -851,6 +884,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: 引数が多すぎます"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: 不明な引数「$2」"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: 不明なコマンド"
 	},
@@ -862,6 +898,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "$1 バイトを $2 秒で転送しました（$3/秒）"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "ダウンロードが機能しない場合は、$1 を実行してみてください。"
 	},
 	"nassh_options_error": {
 		"message": "不明なオプション: $1"
@@ -904,6 +943,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "URI ハンドラ"
+	},
+	"preferences_key_is_local": {
+		"message": "ローカル設定"
+	},
+	"preferences_key_is_synced": {
+		"message": "同期された設定"
 	},
 	"preferences_reset": {
 		"message": "設定がすべてリセットされました。"

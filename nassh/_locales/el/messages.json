@@ -9,10 +9,10 @@
 		"message": "Δεν είναι δυνατή η ανάλυση του προορισμού: $1"
 	},
 	"before_unload": {
-		"message": "Εάν κλείσετε αυτήν την καρτέλα, θα τερματιστεί η περίοδος λειτουργίας."
+		"message": "Εάν κλείσετε αυτή την καρτέλα, θα τερματιστεί η περίοδος λειτουργίας."
 	},
 	"cache_pin_prompt": {
-		"message": "Να αποθηκευτεί το PIN στην κρυφή μνήμη για αυτήν την περίοδο λειτουργίας SSH; (y/N):"
+		"message": "Να αποθηκευτεί το PIN στην κρυφή μνήμη για αυτή την περίοδο λειτουργίας SSH; (y/N):"
 	},
 	"cancel_button_label": {
 		"message": "Άκυρο"
@@ -120,7 +120,7 @@
 		"message": "Να επιτρέπεται πάντα"
 	},
 	"hterm_button_allow_session": {
-		"message": "Να επιτρέπεται μόνο σε αυτήν την περίοδο λειτουργίας"
+		"message": "Να επιτρέπεται μόνο σε αυτή την περίοδο λειτουργίας"
 	},
 	"hterm_button_block": {
 		"message": "Αποκλεισμός"
@@ -702,7 +702,7 @@
 		"message": "Αποτυπώστε ένα αρχείο στο τερματικό"
 	},
 	"nasftp_cmd_chdir_help": {
-		"message": "Αλλαγή καταλόγου εργασίας"
+		"message": "Αλλαγή απομακρυσμένου καταλόγου εργασίας"
 	},
 	"nasftp_cmd_chgrp_help": {
 		"message": "Αλλάξτε μια ομάδα διαδρομών"
@@ -747,22 +747,52 @@
 		"message": "Λήψη αρχείου: $1 ως $2"
 	},
 	"nasftp_cmd_get_help": {
-		"message": "Λήψη αρχείων"
+		"message": "Λήψη ενός αρχείου"
 	},
 	"nasftp_cmd_help_help": {
 		"message": "Αυτή η οθόνη βοήθειας"
 	},
+	"nasftp_cmd_lchdir_help": {
+		"message": "Αλλαγή τοπικού καταλόγου εργασίας"
+	},
 	"nasftp_cmd_list_help": {
 		"message": "Παράθεση λεπτομερειών καταλόγου"
 	},
+	"nasftp_cmd_llist_help": {
+		"message": "Παράθεση λεπτομερειών τοπικού καταλόγου"
+	},
 	"nasftp_cmd_ln_help": {
 		"message": "Δημιουργήστε έναν σύνδεσμο στη διαδρομή που οδηγεί στον προορισμό"
+	},
+	"nasftp_cmd_lpwd_help": {
+		"message": "Εμφάνιση τρέχοντος τοπικού καταλόγου εργασίας"
+	},
+	"nasftp_cmd_lpwd_output": {
+		"message": "Τοπικός κατάλογος εργασίας: $1"
+	},
+	"nasftp_cmd_mget_help": {
+		"message": "Λήψη πολλών αρχείων"
 	},
 	"nasftp_cmd_mkdir_help": {
 		"message": "Δημιουργία καταλόγων"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Μετονομασία αρχείου"
+	},
+	"nasftp_cmd_mput_help": {
+		"message": "Μεταφόρτωση πολλών αρχείων"
+	},
+	"nasftp_cmd_mreget_help": {
+		"message": "Συνέχιση λήψης πολλών αρχείων"
+	},
+	"nasftp_cmd_mreput_help": {
+		"message": "Συνέχιση μεταφόρτωσης πολλών αρχείων"
+	},
+	"nasftp_cmd_preferences": {
+		"message": "προτιμήσεις"
+	},
+	"nasftp_cmd_preferences_help": {
+		"message": "Ορισμός ή κατάργηση μιας προτίμησης"
 	},
 	"nasftp_cmd_prompt_help": {
 		"message": "Ορίστε τη συμβολοσειρά προτροπής"
@@ -774,7 +804,7 @@
 		"message": "Μεταφόρτωση αρχείου: $1 ως $2 ($3)"
 	},
 	"nasftp_cmd_pwd_help": {
-		"message": "Εμφάνιση τρέχοντος καταλόγου εργασίας"
+		"message": "Εμφάνιση τρέχοντος απομακρυσμένου καταλόγου εργασίας"
 	},
 	"nasftp_cmd_pwd_output": {
 		"message": "Απομακρυσμένος κατάλογος εργασίας: $1"
@@ -784,6 +814,9 @@
 	},
 	"nasftp_cmd_realpath_help": {
 		"message": "Κανονικοποίηση διαδρομών"
+	},
+	"nasftp_cmd_reget_help": {
+		"message": "Συνέχιση λήψης ενός αρχείου"
 	},
 	"nasftp_cmd_reput_help": {
 		"message": "Συνεχίστε τη μεταφόρτωση των αρχείων"
@@ -808,6 +841,12 @@
 	},
 	"nasftp_cmd_symlink_help": {
 		"message": "Δημιουργήστε μια συμβολική σύνδεση στη διαδρομή που οδηγεί στον προορισμό"
+	},
+	"nasftp_cmd_touch": {
+		"message": "άγγιγμα"
+	},
+	"nasftp_cmd_touch_help": {
+		"message": "Ενημέρωση ώρας πρόσβασης και τροποποίησης των αρχείων"
 	},
 	"nasftp_cmd_truncate": {
 		"message": "περικοπή"
@@ -857,6 +896,9 @@
 	"nasftp_error_too_many_args": {
 		"message": "$1: πάρα πολλά ορίσματα"
 	},
+	"nasftp_error_unknown_argument": {
+		"message": "$1: άγνωστο όρισμα '$2'"
+	},
 	"nasftp_error_unknown_cmd": {
 		"message": "$1: άγνωστη εντολή"
 	},
@@ -868,6 +910,9 @@
 	},
 	"nasftp_progress_summary": {
 		"message": "Μεταφέρθηκαν $1 byte σε $2 δευτερόλεπτα ($3/δ)"
+	},
+	"nasftp_tip_file_wrtier_api_pref": {
+		"message": "Εάν η λήψη δεν λειτουργεί, δοκιμάστε να εκτελέσετε: $1"
 	},
 	"nassh_options_error": {
 		"message": "Άγνωστη επιλογή: $1"
@@ -910,6 +955,12 @@
 	},
 	"preferences_header_uri": {
 		"message": "Δείκτες χειρισμού URI"
+	},
+	"preferences_key_is_local": {
+		"message": "Τοπική προτίμηση"
+	},
+	"preferences_key_is_synced": {
+		"message": "Συγχρονισμένη προτίμηση"
 	},
 	"preferences_reset": {
 		"message": "Έγινε επαναφορά όλων των προτιμήσεων!"
@@ -1026,7 +1077,7 @@
 		"message": "Προσάρτηση στα Αρχεία"
 	},
 	"terminal_home_mounted_tab_close_message": {
-		"message": "Διατηρήστε ανοικτή αυτήν την καρτέλα. Εάν κλείσετε αυτήν την καρτέλα, θα καταργηθεί η σύνδεση προσάρτησης από τα Αρχεία."
+		"message": "Διατηρήστε ανοικτή αυτή την καρτέλα. Εάν κλείσετε αυτή την καρτέλα, θα καταργηθεί η σύνδεση προσάρτησης από τα Αρχεία."
 	},
 	"terminal_home_new_linux": {
 		"message": "Νέο Linux"
