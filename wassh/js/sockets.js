@@ -310,6 +310,7 @@ export async function cleanupChromeSockets() {
   };
   await cleanup(chrome.sockets.tcp);
   await cleanup(chrome.sockets.tcpServer);
+  await cleanup(chrome.sockets.udp);
   await Promise.all(promises);
 }
 
@@ -726,8 +727,10 @@ export class ChromeUdpSocket extends Socket {
   /** @override */
   async init(socketId = undefined) {
     if (socketId === undefined) {
-      const info = await new Promise((resolve) => {
-        chrome.sockets.udp.create(resolve);
+      const info = await new Promise(async (resolve) => {
+        chrome.sockets.udp.create({
+          name: await getChromeSocketsName(),
+        }, resolve);
       });
 
       this.socketId_ = info.socketId;
