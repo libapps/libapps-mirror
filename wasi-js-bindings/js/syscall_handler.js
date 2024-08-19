@@ -128,8 +128,9 @@ export class DirectWasiPreview1 extends Base {
         // due to security concerns.
         return {res: BigInt(kNanosecToMillisec)};
       case WASI.clock.MONOTONIC:
-        // performance.now is guaranteed to be monotonic.
-        return {res: BigInt(1)};
+        // performance.now is guaranteed to be monotonic and provides
+        // microsecond resolution.
+        return {res: BigInt(1000)};
       default:
         return WASI.errno.EINVAL;
     }
@@ -143,7 +144,9 @@ export class DirectWasiPreview1 extends Base {
         return {now: BigInt(Date.now()) * BigInt(kNanosecToMillisec)};
       }
       case WASI.clock.MONOTONIC: {
-        return {now: BigInt(Math.floor(performance.now() * 1000000000))};
+        return {
+          now: BigInt(Math.floor(performance.now() * kNanosecToMillisec)),
+        };
       }
       default:
         return WASI.errno.EINVAL;

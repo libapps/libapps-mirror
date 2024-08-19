@@ -107,7 +107,7 @@ it('monotonic', async function() {
   const data = result.data;
 
   // Check resolution.
-  assert.deepEqual(data.getres, ['0', '1']);
+  assert.deepEqual(data.getres, ['0', '1000']);
 
   // Check it is indeed monotonic.
   let curr = -1n;
