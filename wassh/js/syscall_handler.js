@@ -729,30 +729,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       // time.  A socket opened via tcpServer seems to be missing local info.
       family = Constants.AF_INET;
       address = [0, 0, 0, 0];
-    } else if (strAddress.includes('.')) {
-      family = Constants.AF_INET;
-      address = strAddress.split('.').map((x) => parseInt(x, 10));
     } else {
-      family = Constants.AF_INET6;
-
-      // Need to handle compressed :: ourselves.
-      let parts = strAddress.split(':');
-      const firstEmpty = parts.indexOf('');
-      if (firstEmpty !== -1) {
-        const zeros = ['0', '0', '0', '0', '0', '0', '0', '0'];
-        const lastEmpty = parts.lastIndexOf('');
-        parts = parts.slice(0, firstEmpty).concat(
-            zeros.slice(parts.length - (lastEmpty - firstEmpty + 1))).concat(
-            parts.slice(lastEmpty + 1));
+      address = Sockets.strAddrToArray(strAddress);
+      if (address.length === 4) {
+        family = Constants.AF_INET;
+      } else {
+        family = Constants.AF_INET6;
       }
-
-      // Turn 8 16-bits into 16 8-bits.
-      address = [];
-      parts.forEach((s) => {
-        const o = parseInt(s, 16);
-        address.push((o & 0xff00) >> 8);
-        address.push(o & 0xff);
-      });
     }
 
     const port = (remote ? info.peerPort : info.localPort) ?? 0;
@@ -822,7 +805,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     }
 
     ret.domain = handle.domain;
-    ret.address = handle.address;
+    ret.address = Sockets.strAddrToArray(handle.address);
     ret.port = handle.port;
 
     return ret;

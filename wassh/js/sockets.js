@@ -68,6 +68,43 @@ function clearLastError() {
 }
 
 /**
+ * Convert string IP address to bytes.
+ *
+ * This is like the inet_pton() API, but we detect IPv4 vs IPv6.
+ *
+ * @param {string} strAddress The IP address.
+ * @return {!Array<number>} The IP address bytes.
+ */
+export function strAddrToArray(strAddress) {
+  let address;
+
+  if (strAddress.includes('.')) {
+    address = strAddress.split('.').map((x) => parseInt(x, 10));
+  } else {
+    // Need to handle compressed :: ourselves.
+    let parts = strAddress.split(':');
+    const firstEmpty = parts.indexOf('');
+    if (firstEmpty !== -1) {
+      const zeros = ['0', '0', '0', '0', '0', '0', '0', '0'];
+      const lastEmpty = parts.lastIndexOf('');
+      parts = parts.slice(0, firstEmpty).concat(
+          zeros.slice(parts.length - (lastEmpty - firstEmpty + 1))).concat(
+          parts.slice(lastEmpty + 1));
+    }
+
+    // Turn 8 16-bits into 16 8-bits.
+    address = [];
+    parts.forEach((s) => {
+      const o = parseInt(s, 16);
+      address.push((o & 0xff00) >> 8);
+      address.push(o & 0xff);
+    });
+  }
+
+  return address;
+}
+
+/**
  * Base class for all socket types.
  *
  * This should support TCP/UDP/UNIX/etc... fundamentals without having any
