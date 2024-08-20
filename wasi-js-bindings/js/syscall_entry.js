@@ -806,7 +806,8 @@ export class WasiPreview1 extends Base {
 
     // TODO(vapier): This call does not belong here.  This should be in wassh.
     // But the current sys_poll_oneoff logic is not factored well for hooking.
-    if (ret.signals !== undefined) {
+    if (ret.signals !== undefined &&
+        this.process_.instance_.exports.__wassh_signal_deliver !== undefined) {
       ret.signals.forEach(
           /** @type {{__wassh_signal_deliver: function(number)}} */ (
               this.process_.instance_.exports).__wassh_signal_deliver);
