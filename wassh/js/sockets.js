@@ -92,9 +92,6 @@ export class Socket extends VFS.PathHandle {
     /** @type {?function()} */
     this.receiveListener_ = null;
 
-    // TODO(vapier): Make this into a stream.
-    this.data = new Uint8Array(0);
-
     // Callback when the read is blocking.
     this.reader_ = null;
   }
@@ -122,33 +119,7 @@ export class Socket extends VFS.PathHandle {
    * @param {!ArrayBuffer} data
    */
   onRecv(data) {
-    const u8 = new Uint8Array(data);
-    const newData = new Uint8Array(this.data.length + u8.length);
-    newData.set(this.data);
-    newData.set(u8, this.data.length);
-    this.data = newData;
-
-    // If there are any readers waiting, wake them up.
-    if (this.reader_) {
-      this.reader_();
-      this.reader_ = null;
-    }
-
-    if (this.receiveListener_) {
-      this.receiveListener_();
-    }
-  }
-
-  /** @override */
-  async read(length) {
-    // TODO(vapier): Support O_NONBLOCK.
-    if (this.data.length === 0) {
-      await new Promise((resolve) => this.reader_ = resolve);
-    }
-
-    const buf = this.data.slice(0, length);
-    this.data = this.data.subarray(length);
-    return {buf};
+    throw new Error('onData(): unimplemented');
   }
 
   /** @override */
@@ -239,6 +210,92 @@ export class Socket extends VFS.PathHandle {
 }
 
 /**
+ * Base class for all stream socket types.
+ */
+export class StreamSocket extends Socket {
+  /** @override */
+  constructor(domain, type, protocol) {
+    super(domain, type, protocol);
+
+    // TODO(vapier): Make this into a stream.
+    this.data = new Uint8Array(0);
+  }
+
+  /** @override */
+  onRecv(data) {
+    const u8 = new Uint8Array(data);
+    const newData = new Uint8Array(this.data.length + u8.length);
+    newData.set(this.data);
+    newData.set(u8, this.data.length);
+    this.data = newData;
+
+    // If there are any readers waiting, wake them up.
+    if (this.reader_) {
+      this.reader_();
+      this.reader_ = null;
+    }
+
+    if (this.receiveListener_) {
+      this.receiveListener_();
+    }
+  }
+
+  /** @override */
+  async read(length) {
+    // TODO(vapier): Support O_NONBLOCK.
+    if (this.data.length === 0) {
+      await new Promise((resolve) => this.reader_ = resolve);
+    }
+
+    const buf = this.data.slice(0, length);
+    this.data = this.data.subarray(length);
+    return {buf};
+  }
+}
+
+/**
+ * Base class for all datagram (packet) socket types.
+ */
+export class DatagramSocket extends Socket {
+  /** @override */
+  constructor(domain, type, protocol) {
+    super(domain, type, protocol);
+
+    this.data = [];
+  }
+
+  /** @override */
+  onRecv(data) {
+    this.data.push(new Uint8Array(data));
+
+    // If there are any readers waiting, wake them up.
+    if (this.reader_) {
+      this.reader_();
+      this.reader_ = null;
+    }
+
+    if (this.receiveListener_) {
+      this.receiveListener_();
+    }
+  }
+
+  /** @override */
+  async read(length) {
+    // TODO(vapier): Support O_NONBLOCK.
+    if (this.data.length === 0) {
+      await new Promise((resolve) => this.reader_ = resolve);
+    }
+
+    // Packets have to be read completely, one at a time.
+    if (this.data[0].byteLength > length) {
+      return WASI.errno.ENOMEM;
+    }
+
+    return {buf: this.data.shift()};
+  }
+}
+
+/**
  * Construct a name for tracking Chrome sockets.
  *
  * See cleanupChromeSockets below for more details.
@@ -317,7 +374,7 @@ export async function cleanupChromeSockets() {
 /**
  * A TCP/IP based socket backed by the chrome.sockets.tcp API.
  */
-export class ChromeTcpSocket extends Socket {
+export class ChromeTcpSocket extends StreamSocket {
   /** @override */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
@@ -564,7 +621,7 @@ ChromeTcpSocket.eventRouter_ = null;
 /**
  * A TCP/IP based listening socket backed by the chrome.sockets.tcpServer API.
  */
-export class ChromeTcpListenSocket extends Socket {
+export class ChromeTcpListenSocket extends StreamSocket {
   /** @override */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
@@ -715,7 +772,7 @@ ChromeTcpListenSocket.eventRouter_ = null;
 /**
  * A UDP/IP based socket backed by the chrome.sockets.udp API.
  */
-export class ChromeUdpSocket extends Socket {
+export class ChromeUdpSocket extends DatagramSocket {
   /** @override */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
@@ -831,7 +888,7 @@ ChromeUdpSocket.eventRouter_ = null;
 /**
  * A TCP/IP based socket backed by a Stream. Used to connect to a relay server.
  */
-export class RelaySocket extends Socket {
+export class RelaySocket extends StreamSocket {
   /**
    * @param {number} domain
    * @param {number} type
@@ -994,7 +1051,7 @@ export class RelaySocket extends Socket {
  *
  * @see https://wicg.github.io/direct-sockets/
  */
- export class WebTcpSocket extends Socket {
+ export class WebTcpSocket extends StreamSocket {
   /** @override */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
@@ -1228,7 +1285,7 @@ export class RelaySocket extends Socket {
 /**
  * A TCP/IP based server socket backed by the Direct Sockets API.
  */
-export class WebTcpServerSocket extends Socket {
+export class WebTcpServerSocket extends StreamSocket {
   /** @override */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
@@ -1361,7 +1418,7 @@ export class WebTcpServerSocket extends Socket {
 /**
  * A local/UNIX socket.
  */
-export class UnixSocket extends Socket {
+export class UnixSocket extends StreamSocket {
   /**
    * @param {number} domain
    * @param {number} type
