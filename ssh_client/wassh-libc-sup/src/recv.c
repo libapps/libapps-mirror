@@ -77,3 +77,20 @@ ssize_t recvfrom(int sockfd, void* buf, size_t len, int flags,
 ssize_t recv(int sockfd, void* buf, size_t len, int flags) {
   return recvfrom(sockfd, buf, len, flags, NULL, NULL);
 }
+
+ssize_t recvmsg(int sockfd, struct msghdr* msg, int flags) {
+  _ENTER("sockfd=%i msg=%p flags=%x", sockfd, msg, flags);
+
+  if (msg->msg_iovlen != 1) {
+    errno = EINVAL;
+    return -1;
+  }
+
+  return recvfrom(
+      sockfd,
+      msg->msg_iov->iov_base,
+      msg->msg_iov->iov_len,
+      flags,
+      msg->msg_name,
+      &msg->msg_namelen);
+}

@@ -22,6 +22,20 @@ __BEGIN_DECLS
 #define PF_LOCAL     1
 #define PF_UNIX      PF_LOCAL
 
+#define MSG_DONTWAIT  0x0040
+
+struct cmsghdr {
+  socklen_t cmsg_len;
+  int cmsg_level;
+  int cmsg_type;
+};
+
+#define CMSG_DATA(cmsg) ((unsigned char *) ((struct cmsghdr *)(cmsg) + 1))
+#define CMSG_FIRSTHDR(mhdr) ((struct cmsghdr *) (mhdr)->msg_control)
+
+#define SCM_RIGHTS      0x01
+#define SCM_CREDENTIALS 0x02
+
 int accept(int, struct sockaddr*, socklen_t*);
 int accept4(int, struct sockaddr*, socklen_t*, int);
 int bind(int, const struct sockaddr*, socklen_t);
@@ -35,6 +49,9 @@ ssize_t sendto(int, const void*, size_t, int, const struct sockaddr*,
                socklen_t);
 ssize_t recv(int, void*, size_t, int);
 ssize_t recvfrom(int, void*, size_t, int, struct sockaddr*, socklen_t*);
+
+ssize_t sendmsg(int, const struct msghdr*, int);
+ssize_t recvmsg(int, struct msghdr*, int);
 
 int getsockopt(int, int, int, void*, socklen_t*);
 int setsockopt(int, int, int, const void*, socklen_t);

@@ -33,8 +33,9 @@
   return val; \
 }
 
-// ssize_t sendmsg(int sockfd, const struct msghdr* msg, int flags);
-// ssize_t recvmsg(int sockfd, struct msghdr* msg, int flags);
+ssize_t sendmsg(int sockfd, const struct msghdr* msg, int flags) {
+  STUB_ENOSYS(-1, "sockfd=%i msg=%p flags=%#x", sockfd, msg, flags);
+}
 
 int socketpair(int domain, int type, int protocol, int sv[2]) {
   STUB_ENOSYS(-1, "domain=%i type=%i protocol=%i sv=%p",
