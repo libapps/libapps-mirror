@@ -103,16 +103,13 @@ def src_configure(metadata):
 
     # Build the html man pages.  Since we're hooking the Makefile, we need can
     # do this only after we've run configure.
+    cmd = " ".join(ssh_client.get_mandoc_cmd(metadata["p"]))
     with open("Makefile", "ab") as f:
         f.writelines(
             [
                 b"html: $(MANPAGES_IN:%=%.html)\n",
                 b"%.html: %\n",
-                (
-                    b"\tmandoc -Thtml -I os="
-                    + metadata["p"].encode("utf-8")
-                    + b" -O man=%N.%S.html $< >$@.tmp\n"
-                ),
+                f"\t{cmd} $< >$@.tmp\n".encode("utf-8"),
                 b"\tmv $@.tmp $@\n",
             ]
         )
