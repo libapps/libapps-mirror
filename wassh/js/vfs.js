@@ -936,7 +936,15 @@ export class VFS {
     const fh = this.getFileHandle(fd);
     if (fh !== undefined) {
       this.fds_.delete(fd);
-      fh.close();
+      // If no other fds refer to this handle, close it.  This isn't the most
+      // efficient method, but we don't expect close to be called often or in a
+      // perf-sensitive context, so be lazy about it for now.
+      // TODO(vapier): Drop Array.from for Iterator.reduce when we require
+      // ES2025.
+      const values = Array.from(this.fds_.values());
+      if (!values.reduce((ret, v) => ret || v === fh, false)) {
+        fh.close();
+      }
       return WASI.errno.ESUCCESS;
     } else {
       return WASI.errno.EBADF;
