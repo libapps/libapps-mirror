@@ -241,9 +241,11 @@ export class StreamSocket extends Socket {
   }
 
   /** @override */
-  async read(length) {
-    // TODO(vapier): Support O_NONBLOCK.
+  async read(length, block = true) {
     if (this.data.length === 0) {
+      if (!block) {
+        return WASI.errno.EAGAIN;
+      }
       await new Promise((resolve) => this.reader_ = resolve);
     }
 
@@ -280,9 +282,11 @@ export class DatagramSocket extends Socket {
   }
 
   /** @override */
-  async read(length) {
-    // TODO(vapier): Support O_NONBLOCK.
+  async read(length, block = true) {
     if (this.data.length === 0) {
+      if (!block) {
+        return WASI.errno.EAGAIN;
+      }
       await new Promise((resolve) => this.reader_ = resolve);
     }
 

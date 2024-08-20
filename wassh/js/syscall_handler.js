@@ -799,6 +799,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   /**
    * @param {!WASI_t.fd} socket
    * @param {number} length
+   * @param {!WASI_t.s32} flags
    * @return {!WASI_t.errno|{
    *   nwritten: number,
    *   domain: number,
@@ -806,7 +807,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
    *   port: number,
    * }}
    */
-  handle_sock_recvfrom(socket, length) {
+  async handle_sock_recvfrom(socket, length, flags) {
     const handle = this.vfs.getFileHandle(socket);
     if (handle === undefined) {
       return WASI.errno.EBADF;
@@ -815,7 +816,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       return WASI.errno.ENOTSOCK;
     }
 
-    const ret = handle.read(length);
+    const ret = await handle.read(length, !(flags & Constants.MSG_DONTWAIT));
     if (typeof ret === 'number') {
       return ret;
     }

@@ -260,12 +260,11 @@ export class WasshExperimental extends SyscallEntry.Base {
    */
   sys_sock_recvfrom(sock, buf_ptr, buf_len, nwritten_ptr, flags, domain_ptr,
                     addr_ptr, port_ptr) {
-    if (flags) {
-      // We don't support any today.
+    if (flags & ~(Constants.MSG_DONTWAIT)) {
       return WASI.errno.EINVAL;
     }
 
-    const ret = this.handle_sock_recvfrom(sock, buf_len);
+    const ret = this.handle_sock_recvfrom(sock, buf_len, flags);
     if (typeof ret === 'number') {
       return ret;
     }
@@ -318,8 +317,7 @@ export class WasshExperimental extends SyscallEntry.Base {
    */
   sys_sock_sendto(sock, buf_ptr, buf_len, nwritten_ptr, flags, domain, addr_ptr,
                   port) {
-    if (flags) {
-      // We don't support any today.
+    if (flags & ~(Constants.MSG_DONTWAIT)) {
       return WASI.errno.EINVAL;
     }
 
