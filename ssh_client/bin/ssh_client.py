@@ -258,7 +258,7 @@ def _toolchain_wasm_env():
     pcdir = libdir / "pkgconfig"
 
     # We currently support the WASI preview1 ABI.
-    target = "wasm32-wasip1"
+    target = "wasm32-wasip1-threads"
     return {
         # Only use single core here due to known bug in 89 release:
         # https://github.com/WebAssembly/binaryen/issues/2273
@@ -283,6 +283,8 @@ def _toolchain_wasm_env():
                 "-D_WASI_EMULATED_SIGNAL",
             )
         ),
+        "CFLAGS": "-O2 -g0 -pipe -pthread",
+        "CXXFLAGS": "-O2 -g0 -pipe -pthread",
         "LDFLAGS": " ".join(
             (
                 f"-L{libdir}",
