@@ -470,10 +470,9 @@ ConnectDialog.prototype.save = function() {
 /**
  * Helper for starting a connection.
  *
- * @param {string} message The message to send to the main window to startup.
  * @param {string} proto The URI schema to try and register.
  */
-ConnectDialog.prototype.startup_ = function(message, proto) {
+ConnectDialog.prototype.startup_ = function(proto) {
   this.maybeCopyPlaceholders_();
   this.save();
 
@@ -504,7 +503,7 @@ ConnectDialog.prototype.mosh = function() {
 ConnectDialog.prototype.mount = function() {
   this.sessionStorage_.setItem('nassh.isMount', 'true');
   this.sessionStorage_.setItem('nassh.isSftp', 'true');
-  this.startup_('mountProfile', 'ssh');
+  this.startup_('ssh');
 };
 
 /**
@@ -528,14 +527,14 @@ ConnectDialog.prototype.unmount = function() {
  */
 ConnectDialog.prototype.sftpConnect = function() {
   this.sessionStorage_.setItem('nassh.isSftp', 'true');
-  this.startup_('sftpConnectToProfile', 'sftp');
+  this.startup_('sftp');
 };
 
 /**
  * Connect to the selected profile.
  */
 ConnectDialog.prototype.connect = function() {
-  this.startup_('connectToProfile', 'ssh');
+  this.startup_('ssh');
 };
 
 /**
