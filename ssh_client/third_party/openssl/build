@@ -50,32 +50,36 @@ def src_configure(metadata):
         }
     )
 
-    cmd = [
-        "./config",
-        "--prefix=/",
-        "no-asm",
-        "no-deprecated",
-        "no-dso",
-        "no-ec2m",
-        "no-engine",
-        "no-gmp",
-        "no-gost",
-        "no-heartbeats",
-        "no-hw",
-        "no-krb5",
-        "no-rfc3779",
-        "no-sctp",
-        "no-srp",
-        "no-sse2",
-        "no-ssl2",
-        "no-ssl3",
-        "no-syslog",
-        "no-threads",
-        "no-unit-test",
-        "-fgnu-inline-asm",
-        "-D_GNU_SOURCE",
-        "-DNO_SYSLOG",
-    ] + env["CPPFLAGS"].split()
+    cmd = (
+        [
+            "./config",
+            "--prefix=/",
+            "no-asm",
+            "no-deprecated",
+            "no-dso",
+            "no-ec2m",
+            "no-engine",
+            "no-gmp",
+            "no-gost",
+            "no-heartbeats",
+            "no-hw",
+            "no-krb5",
+            "no-rfc3779",
+            "no-sctp",
+            "no-srp",
+            "no-sse2",
+            "no-ssl2",
+            "no-ssl3",
+            "no-syslog",
+            "no-threads",
+            "no-unit-test",
+            "-fgnu-inline-asm",
+            "-D_GNU_SOURCE",
+            "-DNO_SYSLOG",
+        ]
+        + env.get("CFLAGS", "").split()
+        + env["CPPFLAGS"].split()
+    )
 
     ssh_client.run(cmd, env=env)
     ssh_client.emake("depend", "DIRS=crypto ssl", env=env)
