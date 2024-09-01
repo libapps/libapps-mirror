@@ -395,6 +395,7 @@ CommandInstance.prototype.connectToArgString = async function(argstr) {
       case 'sftp':
         this.sftpConnectToProfile(prefs);
         break;
+      case 'mosh':
       case 'ssh':
       default:
         this.connectToProfile(prefs);
@@ -443,6 +444,7 @@ CommandInstance.prototype.commonProfileSetup_ = async function(profileID) {
  */
 CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
   return {
+    command: prefs.get('app'),  // TODO: "app"
     username: prefs.get('username'),
     hostname: prefs.get('hostname'),
     port: prefs.get('port'),
@@ -739,10 +741,17 @@ export function parseDestination(destination) {
   if (destination.startsWith('uri:')) {
     // Strip off the "uri:" before decoding it.
     destination = unescape(destination.substr(4));
-    const schema = destination.split(':', 1)[0];
-    if (schema !== 'ssh' && schema !== 'web+ssh' && schema !== 'sftp' &&
-        schema !== 'web+sftp') {
-      return null;
+    let schema = destination.split(':', 1)[0];
+    if (schema.startsWith('web+')) {
+      schema = schema.slice(4);
+    }
+    switch (schema) {
+      case 'mosh':
+      case 'sftp':
+      case 'ssh':
+        break;
+      default:
+        return null;
     }
 
     stripSchema = true;
@@ -1122,6 +1131,7 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
 
   const argv = {
     debugTrace: options['--debug-trace-syscalls'],
+    command: params.command,
   };
   argv.terminalWidth = this.io.terminal_.screenSize.width;
   argv.terminalHeight = this.io.terminal_.screenSize.height;
@@ -1416,13 +1426,20 @@ CommandInstance.prototype.dispatchMessage_ = function(desc, handlers, msg) {
  * @param {!Array<string>} argv SSH command line arguments.
  * @param {!Object<string, string>} environ SSH environment variables.
  * @param {!Object=} options
- * @return {!Promise<void>}
+ * @return {!Promise<!SshSubproc>}
  */
 CommandInstance.prototype.initWasmSubproc_ =
-    async function(argv, environ, {trace = false} = {}) {
+    async function(argv, environ, {
+      executable,
+      trace = false,
+      captureStdout = false,
+    } = {}) {
 
-  this.program_ = new SshSubproc({
-    executable: `../../plugin/${this.sshClientVersion_}/ssh.wasm`,
+  if (!executable) {
+    executable = `../../plugin/${this.sshClientVersion_}/ssh.wasm`;
+  }
+  const ret = new SshSubproc({
+    executable: executable,
     argv: argv,
     environ: environ,
     terminal: this.io.terminal_,
@@ -1433,10 +1450,12 @@ CommandInstance.prototype.initWasmSubproc_ =
     isSftp: this.isSftp,
     sftpClient: this.sftpClient,
     secureInput: (...args) => this.secureInput(...args),
+    captureStdout: captureStdout,
     syncStorage: this.syncStorage,
     knownHosts: this.sshPolicy_.getSshKnownHosts(),
   });
-  return this.program_.init();
+  await ret.init();
+  return ret;
 };
 
 /**
@@ -1444,12 +1463,63 @@ CommandInstance.prototype.initWasmSubproc_ =
  * @return {!Promise<void>}
  */
 CommandInstance.prototype.initProgram_ = async function(argv) {
+  let executable;
+  let subproc;
+
+  if (argv.command === 'mosh') {
+    this.io.print(localize('PLUGIN_LOADING', [this.sshClientVersion_]));
+    // This logic is a bit hacky, but aligns with default `mosh` behavior.
+    // The default remote shell might not be POSIX compatible, so invoke sh.
+    // Assume the ssh connection includes the $SSH_CONNECTION variable so we
+    // can extract the remote host IP address -- the mosh-client program only
+    // accepts IP addresses, not hostnames.
+    const remoteCommand =
+        `sh -c '` +
+        `printf "\nMOSH SSH_CONNECTION %s\n" "$SSH_CONNECTION"; ` +
+        `exec mosh-server new` +
+        `'`;
+    subproc = await this.initWasmSubproc_(
+        [...argv.arguments, remoteCommand],
+        argv.environment, {
+          captureStdout: true,
+          trace: argv.debugTrace,
+        });
+    this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
+    // We don't check the exit status as we'll process the output below.
+    await subproc.run();
+    // This grubs around internal wassh VFS logic to get stdout log.
+    const bytes = subproc.process_.handler.vfs.fds_.get(1).log_.read(32 * 1024);
+    const stdout = lib.codec.codeUnitArrayToString(bytes);
+
+    // Extract the SSH_CONNECTION details (remote IP).
+    const mip = stdout.match(/MOSH SSH_CONNECTION [^ ]+ [0-9]+ ([^ ]+)/);
+    if (!mip) {
+      this.exit(1, /* noReconnect= */ false);
+      return;
+    }
+    // Extract the mosh CONNECT details (remote port & session key).
+    const m = stdout.match(/MOSH CONNECT ([0-9]+) ([a-zA-Z0-9+/]+)/);
+    if (!m) {
+      this.exit(1, /* noReconnect= */ false);
+      return;
+    }
+    subproc.terminate();
+
+    argv.arguments = [mip[1], m[1]];
+    argv.environment['MOSH_KEY'] = m[2];
+    argv.environment['MOSH_NO_TERM_INIT'] = '1';
+    argv.environment['TERM'] = 'xterm-256color';
+    executable = `../../plugin/wasm/mosh-client.wasm`;
+  }
+
   this.io.print(localize('PLUGIN_LOADING', [this.sshClientVersion_]));
-  await this.initWasmSubproc_(argv.arguments, argv.environment, {
-    trace: argv.debugTrace,
-  });
+  this.program_ = subproc = await this.initWasmSubproc_(
+    argv.arguments, argv.environment, {
+      executable: executable,
+      trace: argv.debugTrace,
+    });
   this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
-  this.program_.run().then(async (code) => {
+  subproc.run().then(async (code) => {
     await this.onPluginExit(code);
     this.exit(code, /* noReconnect= */ false);
   });
