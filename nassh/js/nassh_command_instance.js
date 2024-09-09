@@ -420,33 +420,30 @@ CommandInstance.prototype.connectToArgString = function(argstr) {
  * Common phases that we run before making an actual connection.
  *
  * @param {string} profileID Terminal preference profile name.
- * @param {function(!ProfilePreferenceManager)} callback Callback when the prefs
- *     have finished loading.
+ * @return {!Promise<!ProfilePreferenceManager>} The new prefs for the profile.
  */
-CommandInstance.prototype.commonProfileSetup_ = function(profileID, callback) {
-  const onReadStorage = () => {
-    let prefs;
-    try {
-      prefs = this.prefs_.getProfile(profileID);
-    } catch (e) {
-      this.io.println(localize('GET_PROFILE_ERROR', [profileID, e]));
-      this.exit(EXIT_INTERNAL_ERROR, true);
-      return;
-    }
-
-    this.profileId_ = profileID;
-    document.querySelector('#terminal').focus();
-
-    this.navigate_(`profile-id:${profileID}`);
-    document.title = prefs.get('description') + ' - ' +
-      this.manifest_.name + ' ' + this.manifest_.version;
-
-    callback(prefs);
-  };
-
+CommandInstance.prototype.commonProfileSetup_ = async function(profileID) {
   // Re-read prefs from storage in case they were just changed in the connect
   // dialog.
-  this.prefs_.readStorage().then(onReadStorage);
+  await this.prefs_.readStorage();
+
+  let prefs;
+  try {
+    prefs = this.prefs_.getProfile(profileID);
+  } catch (e) {
+    this.io.println(localize('GET_PROFILE_ERROR', [profileID, e]));
+    this.exit(EXIT_INTERNAL_ERROR, true);
+    throw e;
+  }
+
+  this.profileId_ = profileID;
+  document.querySelector('#terminal').focus();
+
+  this.navigate_(`profile-id:${profileID}`);
+  document.title = prefs.get('description') + ' - ' +
+    this.manifest_.name + ' ' + this.manifest_.version;
+
+  return prefs;
 };
 
 /**
@@ -473,7 +470,7 @@ CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
  *
  * @param {string} profileID Terminal preference profile name.
  */
-CommandInstance.prototype.mountProfile = function(profileID) {
+CommandInstance.prototype.mountProfile = async function(profileID) {
   const port = chrome.runtime.connect({name: 'mount'});
 
   // The main event loop -- process messages from the bg page.
@@ -557,35 +554,33 @@ CommandInstance.prototype.mountProfile = function(profileID) {
   };
 
   // Once we've loaded prefs from storage, kick off the mount in the bg.
-  const onStartup = (prefs) => {
-    this.isMount = true;
-    this.isSftp = true;
-    const params = this.prefsToConnectParams_(prefs);
-    this.connectTo(params, async () => {
-      if (this.relay_) {
-        params.relayState = this.relay_.saveState();
-      }
-      port.postMessage({
-        command: 'connect',
-        argv: {
-          isSftp: true,
-          basePath: prefs.get('mount-path'),
-          isMount: true,
-          // Mount options are passed directly to Chrome's FSP mount(),
-          // so don't add fields here that would otherwise collide.
-          mountOptions: {
-            fileSystemId: prefs.id,
-            displayName: prefs.get('description'),
-            writable: true,
-          },
-          sshClientVersion: this.sshClientVersion_,
-        },
-        connectOptions: params,
-      });
-    });
-  };
+  const prefs = await this.commonProfileSetup_(profileID);
 
-  this.commonProfileSetup_(profileID, onStartup);
+  this.isMount = true;
+  this.isSftp = true;
+  const params = this.prefsToConnectParams_(prefs);
+  this.connectTo(params, async () => {
+    if (this.relay_) {
+      params.relayState = this.relay_.saveState();
+    }
+    port.postMessage({
+      command: 'connect',
+      argv: {
+        isSftp: true,
+        basePath: prefs.get('mount-path'),
+        isMount: true,
+        // Mount options are passed directly to Chrome's FSP mount(),
+        // so don't add fields here that would otherwise collide.
+        mountOptions: {
+          fileSystemId: prefs.id,
+          displayName: prefs.get('description'),
+          writable: true,
+        },
+        sshClientVersion: this.sshClientVersion_,
+      },
+      connectOptions: params,
+    });
+  });
 };
 
 /**
@@ -593,15 +588,13 @@ CommandInstance.prototype.mountProfile = function(profileID) {
  *
  * @param {string} profileID Terminal preference profile name.
  */
-CommandInstance.prototype.sftpConnectToProfile = function(profileID) {
-  const onStartup = (prefs) => {
-    this.isSftp = true;
-    this.sftpClient = new sftpClient();
+CommandInstance.prototype.sftpConnectToProfile = async function(profileID) {
+  const prefs = await this.commonProfileSetup_(profileID);
 
-    this.connectTo(this.prefsToConnectParams_(prefs));
-  };
+  this.isSftp = true;
+  this.sftpClient = new sftpClient();
 
-  this.commonProfileSetup_(profileID, onStartup);
+  this.connectTo(this.prefsToConnectParams_(prefs));
 };
 
 /**
@@ -609,12 +602,10 @@ CommandInstance.prototype.sftpConnectToProfile = function(profileID) {
  *
  * @param {string} profileID Terminal preference profile name.
  */
-CommandInstance.prototype.connectToProfile = function(profileID) {
-  const onStartup = (prefs) => {
-    this.connectTo(this.prefsToConnectParams_(prefs));
-  };
+CommandInstance.prototype.connectToProfile = async function(profileID) {
+  const prefs = await this.commonProfileSetup_(profileID);
 
-  this.commonProfileSetup_(profileID, onStartup);
+  this.connectTo(this.prefsToConnectParams_(prefs));
 };
 
 /**
