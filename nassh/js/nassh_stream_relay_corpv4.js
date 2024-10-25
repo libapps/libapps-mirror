@@ -236,6 +236,7 @@ RelayCorpv4WsStream.prototype.asyncOpen = async function(settings, onComplete) {
   this.relayServerSocket_ = settings.relayServerSocket;
   this.relayUser_ = settings.relayUser;
   this.resume_ = settings.resume;
+  this.egressDomain_ = settings.egressDomain;
   this.host_ = settings.host;
   this.port_ = settings.port;
 
@@ -284,12 +285,16 @@ RelayCorpv4WsStream.prototype.connect_ = function() {
     throw new Error('stream already connected');
   }
 
-  const uri = lib.f.replaceVars(this.connectTemplate_, {
+  let uri = lib.f.replaceVars(this.connectTemplate_, {
     host: this.host_,
     port: this.port_,
     relay: this.relayServerSocket_,
     user: this.relayUser_,
   });
+
+  if (this.egressDomain_) {
+    uri = uri.concat(`&egressDomain=${encodeURIComponent(this.egressDomain_)}`);
+  }
 
   this.socket_ = new WebSocket(uri, ['ssh']);
   this.socket_.binaryType = 'arraybuffer';

@@ -1313,11 +1313,11 @@ export function tokenizeOptions(optionString = '') {
  */
 const safeUriNasshOptions = new Set([
   '--config', '--proxy-mode', '--proxy-host', '--proxy-port', '--proxy-user',
-  '--ssh-agent', '--welcome',
+  '--ssh-agent', '--welcome', '--egress-domain',
 ]);
 
 /**
- * Determine wheher a nassh option is safe for URIs.
+ * Determine whether a nassh option is safe for URIs.
  *
  * NB: This function is expected to be called after tokenizing.  Thus it looks
  * for values like `--config`, not `--config=google`.
@@ -1350,7 +1350,7 @@ const safeUriSshOptions = new Set([
 ]);
 
 /**
- * Determine wheher an OpenSSH option is safe for URIs.
+ * Determine whether an OpenSSH option is safe for URIs.
  *
  * NB: This function is expected to be called after command line splitting.
  * Thus it supports separate options only like -4 -q and not -4q.

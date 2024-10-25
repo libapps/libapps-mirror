@@ -30,6 +30,7 @@ export class Corp extends Relay {
     this.relayMethod = options['--relay-method'];
     this.relayServer = null;
     this.relayServerSocket = null;
+    this.egressDomain = options['--egress-domain'];
   }
 
   /**
@@ -175,6 +176,7 @@ export class Corp extends Relay {
       port: port,
       resume: this.resumeConnection,
       localPrefs: this.localPrefs,
+      egressDomain: this.egressDomain,
     };
     return streams.openStream(this.getStreamClass(), fd, options, onOpen);
   }
