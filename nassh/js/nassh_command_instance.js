@@ -92,12 +92,9 @@ export function CommandInstance(argv) {
   this.manifest_ = getManifest();
 
   // WASM requires SABs, so if they aren't available, fallback to NaCl.
-  // chrome-untrusted:// doesn't have access to any socket APIs yet, so
-  // fallback to NaCl there as well.
   const naclSupported =
       (navigator.mimeTypes ?? {})['application/x-pnacl'] !== undefined ||
-      globalThis.SharedArrayBuffer === undefined ||
-      isCrOSSystemApp();
+      globalThis.SharedArrayBuffer === undefined;
   // The version of the ssh client to load.
   this.sshClientVersion_ = naclSupported ? 'pnacl' : 'wasm';
 
@@ -1140,8 +1137,7 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
   } else if (this.sshClientVersion_ === 'pnacl') {
-    if (!isCrOSSystemApp() &&
-        (lib.f.randomInt(0, 100) < 5 || this.isDevVersion())) {
+    if (lib.f.randomInt(0, 100) < 5 || this.isDevVersion()) {
       this.io.println(sgrText(
           'Opting in to WASM for this session.  Please report issues.\n\r' +
           'Use --ssh-client-version=pnacl to temporarily opt-out.\n\r',
