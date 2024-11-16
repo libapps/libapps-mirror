@@ -963,6 +963,10 @@ export class RelaySocket extends StreamSocket {
     }
 
     this.callback_.onDataAvailable = (data) => this.onRecv(data);
+    this.callback_.onClose = () => {
+      this.callback_ = null;
+      this.close();
+    };
     this.address = address;
     this.port = port;
     return WASI.errno.ESUCCESS;
@@ -984,6 +988,9 @@ export class RelaySocket extends StreamSocket {
 
   /** @override */
   async write(buf) {
+    if (!this.callback_) {
+      return WASI.errno.ECONNRESET;
+    }
     await this.callback_.asyncWrite(buf);
     return {nwritten: buf.length};
   }
