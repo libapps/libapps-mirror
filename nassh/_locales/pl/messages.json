@@ -417,7 +417,7 @@
 		"message": "Kolor tła dla tekstu bez żadnych innych atrybutów koloru."
 	},
 	"hterm_pref_background_image": {
-		"message": "Wartość CSS obrazu tła. Pusty ciąg to brak obrazu.\n\nNa przykład:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Wartość CSS obrazu tła. Pusty ciąg to brak obrazu.\n\nNa przykład:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Wartość CSS pozycji obrazu tła.\n\nNa przykład:\n  10% 10%\n  center"
@@ -1356,7 +1356,7 @@
 		"message": "Zawartość edytora emacs/vim/etc i innych możesz skopiować do schowka, korzystając z sekwencji OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Z innymi użytkownikami hterm / bezpiecznej powłoki możesz rozmawiać w grupie chromium-hterm na chromium.org: https://goo.gl/RYHiK"
+		"message": "Z innymi użytkownikami hterm / bezpiecznej powłoki możesz rozmawiać w grupie chromium-hterm na chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Widzisz błąd?  Chcesz poprosić o nową funkcję?  Daj nam znać: https://hterm.org/x/ssh/newbug"

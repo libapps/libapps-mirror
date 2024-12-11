@@ -417,7 +417,7 @@
 		"message": "Boja pozadine za tekst bez drugih atributa boje."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS vrijednost pozadinske slike. Neka ostane prazno ako nema slike.\n\nNa primjer:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS vrijednost pozadinske slike. Neka ostane prazno ako nema slike.\n\nNa primjer:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS vrijednost položaja pozadinske slike.\n\nNa primjer:\n  10% 10%\n  center"
@@ -1443,7 +1443,7 @@
 		"message": "Kopirajte u međuspremnik iz uređivača emacs/vim/itd. pomoću naredbe OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Chatajte s drugima koji koriste hterm/Secure Shell putem chromium-hterm@chromium.org: https://goo.gl/RYHiK."
+		"message": "Chatajte s drugima koji koriste hterm/Secure Shell putem chromium-hterm@chromium.org: https://hterm.org/x/contact."
 	},
 	"tip_9": {
 		"message": "Pronašli ste programsku pogrešku?  Želite li zatražiti novu značajku?  Javite nam: https://hterm.org/x/ssh/newbug"

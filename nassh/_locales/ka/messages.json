@@ -408,7 +408,7 @@
 		"message": "იმ ტექსტის უკანა პლანის ფერი, რომელსაც ფერთა ატრიბუტები არ აქვს."
 	},
 	"hterm_pref_background_image": {
-		"message": "ფონის სურათის CSS-მნიშვნელობა. დატოვეთ ცარიელი, თუ არ გსურთ სურათის გამოყენება.\n\nმაგალითად:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ფონის სურათის CSS-მნიშვნელობა. დატოვეთ ცარიელი, თუ არ გსურთ სურათის გამოყენება.\n\nმაგალითად:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ფონის სურათის მდებარეობის CSS-მნიშვნელობა.\n\nმაგალითად:\n  10% 10%\n  center"
@@ -1344,7 +1344,7 @@
 		"message": "emacs/vim/etc..-დან კონტენტის თქვენს გაცვლის ბუფერში კოპირება OSC-52-ის მეშვეობით: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "ესაუბრეთ hterm/Secure Shell-ის სხვა მომხმარებლებს chromium-hterm@chromium.org-ის მეშვეობით. ვრცლად: https://goo.gl/RYHiK"
+		"message": "ესაუბრეთ hterm/Secure Shell-ის სხვა მომხმარებლებს chromium-hterm@chromium.org-ის მეშვეობით. ვრცლად: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "ხარვეზი შეამჩნიეთ?  ახალი ფუნქციის მოთხოვნა გსურთ?  შეგვატყობინეთ: https://hterm.org/x/ssh/newbug"

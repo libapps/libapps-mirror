@@ -414,7 +414,7 @@
 		"message": "Culoarea de fundal pentru textul fără alte atribute de culoare."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valoarea CSS a imaginii de fundal. Lăsați câmpul necompletat dacă nu doriți o imagine.\n\nDe exemplu:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valoarea CSS a imaginii de fundal. Lăsați câmpul necompletat dacă nu doriți o imagine.\n\nDe exemplu:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valoarea CSS a poziției imaginii de fundal.\n\nDe exemplu:\n  10% 10%\n  center"
@@ -1335,7 +1335,7 @@
 		"message": "Copiați în clipboard din emacs/vim/etc. folosind OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Discutați cu alți utilizatori hterm/Secure Shell pe chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Discutați cu alți utilizatori hterm/Secure Shell pe chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Ați găsit o eroare?  Solicitați o funcție nouă?  Anunțați-ne: https://hterm.org/x/ssh/newbug"

@@ -417,7 +417,7 @@
 		"message": "Color de fons per al text que no té cap altre atribut de color."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valor CSS de la imatge de fons. Deixa'l en blanc si no vols que es mostri cap imatge.\n\nPer exemple:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valor CSS de la imatge de fons. Deixa'l en blanc si no vols que es mostri cap imatge.\n\nPer exemple:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valor CSS de la posició de la imatge de fons.\n\nPer exemple:\n  \"10% 10%\"\n  \"center\""
@@ -1341,7 +1341,7 @@
 		"message": "Utilitza OSC-52 per copiar al porta-retalls des d'Emacs, Vim, etc.: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Xateja amb altres usuaris hterm i Secure Shell a través de chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Xateja amb altres usuaris hterm i Secure Shell a través de chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Has trobat un error?  Vols demanar una funció nova?  Fes-nos-ho saber: https://hterm.org/x/ssh/newbug."

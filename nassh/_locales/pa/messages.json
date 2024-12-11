@@ -408,7 +408,7 @@
 		"message": "ਉਸ ਲਿਖਤ ਦਾ ਬੈਕਗ੍ਰਾਊਂਡ ਰੰਗ ਜਿਸਦੀ ਕੋਈ ਹੋਰ ਰੰਗ ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਹੈ।"
 	},
 	"hterm_pref_background_image": {
-		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਦਾ CSS ਮੁੱਲ। ਕੋਈ ਚਿੱਤਰ ਨਾ ਹੋਣ 'ਤੇ ਇਸਨੂੰ ਖਾਲੀ ਛੱਡੋ।\n\nਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਦਾ CSS ਮੁੱਲ। ਕੋਈ ਚਿੱਤਰ ਨਾ ਹੋਣ 'ਤੇ ਇਸਨੂੰ ਖਾਲੀ ਛੱਡੋ।\n\nਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ਬੈਕਗ੍ਰਾਊਂਡ ਚਿੱਤਰ ਸਥਿਤੀ ਦਾ CSS ਮੁੱਲ।\n\nਉਦਾਹਰਨ ਦੇ ਤੌਰ 'ਤੇ:\n  10% 10%\n  ਕੇਂਦਰ"
@@ -1347,7 +1347,7 @@
 		"message": "OSC-52 ਦੀ ਵਰਤੋਂ ਕਰ ਕੇ emacs/vim/etc... ਤੋਂ ਆਪਣੇ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org ਰਾਹੀਂ ਸਾਥੀ hterm/Secure Shell ਵਰਤੋਕਾਰਾਂ ਨਾਲ ਚੈਟ ਕਰੋ: https://goo.gl/RYHiK"
+		"message": "chromium-hterm@chromium.org ਰਾਹੀਂ ਸਾਥੀ hterm/Secure Shell ਵਰਤੋਕਾਰਾਂ ਨਾਲ ਚੈਟ ਕਰੋ: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "ਕੀ ਕੋਈ ਬੱਗ ਮਿਲਿਆ?  ਕੀ ਨਵੀਂ ਵਿਸ਼ੇਸ਼ਤਾ ਦੀ ਬੇਨਤੀ ਕਰਨੀ ਹੈ?  ਸਾਨੂੰ ਇੱਥੇ ਦੱਸੋ: https://hterm.org/x/ssh/newbug"

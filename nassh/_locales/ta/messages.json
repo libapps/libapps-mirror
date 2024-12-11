@@ -414,7 +414,7 @@
 		"message": "வேறு எந்த வண்ணப் பண்புக்கூறுகளும் இல்லாத உரைக்கான பின்புல வண்ணம்."
 	},
 	"hterm_pref_background_image": {
-		"message": "பின்புல படத்தின் CSS மதிப்பு. படம் வேண்டாமெனில், காலியாக விடவும்.\n\nஎடுத்துக்காட்டாக:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "பின்புல படத்தின் CSS மதிப்பு. படம் வேண்டாமெனில், காலியாக விடவும்.\n\nஎடுத்துக்காட்டாக:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "பின்புலப் படநிலைக்கான CSS மதிப்பு.\n\nஎடுத்துக்காட்டாக:\n  10% 10%\n  center"
@@ -1416,7 +1416,7 @@
 		"message": "OSC-52 மூலம் Emacs, Vim, போன்றவற்றிலிருந்து கிளிப்போர்டுக்கு நகலெடுக்கலாம்: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org வழியாக, சக hterm/செக்யூர் ஷெல் பயனர்களுடன் அரட்டையடிக்கலாம்: https://goo.gl/RYHiK"
+		"message": "chromium-hterm@chromium.org வழியாக, சக hterm/செக்யூர் ஷெல் பயனர்களுடன் அரட்டையடிக்கலாம்: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "பிழையைக் கண்டறிந்தீர்களா?  புதிய அம்சத்தைக் கோர விரும்புகிறீர்களா?  https://hterm.org/x/ssh/newbug என்ற தளத்தில் எங்களுக்குத் தெரியப்படுத்துங்கள்"

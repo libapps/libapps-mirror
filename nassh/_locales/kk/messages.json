@@ -408,7 +408,7 @@
 		"message": "Басқа түс атрибуттары жоқ мәтіннің фондық түсі."
 	},
 	"hterm_pref_background_image": {
-		"message": "Фондық кескіннің CSS мәні. Суретсіз болуы үшін, оны бос қалдырыңыз.\n\nМысалы:\n  url (https://goo.gl/anedTK)\n   linear-gradient(top bottom, blue, red)"
+		"message": "Фондық кескіннің CSS мәні. Суретсіз болуы үшін, оны бос қалдырыңыз.\n\nМысалы:\n  url (https://hterm.org/x/example/bg-img)\n   linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Фондық кескін орнының CSS мәні.\n\nМысалы:\n  10% 10%\n  center"
@@ -1353,7 +1353,7 @@
 		"message": "OSC-52 пайдаланып, emacs/vim/etc... арқылы буферге көшіріңіз: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Hterm/Secure Shell басқа пайдаланушыларымен chromium-hterm@chromium.org арқылы араласыңыз: https://goo.gl/RYHiK."
+		"message": "Hterm/Secure Shell басқа пайдаланушыларымен chromium-hterm@chromium.org арқылы араласыңыз: https://hterm.org/x/contact."
 	},
 	"tip_9": {
 		"message": "Қате табылды ма?  Жаңа функция сұрау керек пе?  Бізге айтыңыз: https://hterm.org/x/ssh/newbug"

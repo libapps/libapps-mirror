@@ -663,7 +663,7 @@
 	},
 	"HTERM_PREF_BACKGROUND_IMAGE": {
 		"description": "Help text shown for the 'background-image' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. The example code should not be translated.",
-		"message": "CSS value of the background image. Leave it blank for no image.\n\nFor example:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS value of the background image. Leave it blank for no image.\n\nFor example:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"HTERM_PREF_BACKGROUND_POSITION": {
 		"description": "Help text shown for the 'background-position' preference. 'CSS' refers to the 'Cascading Style Sheets' web standard and may be translated if possible. The example code should not be translated.",
@@ -2555,7 +2555,7 @@
 	},
 	"TIP_8": {
 		"description": "Helpful tip shown to user advertising features",
-		"message": "Chat with fellow hterm/Secure Shell users via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Chat with fellow hterm/Secure Shell users via chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"TIP_9": {
 		"description": "Helpful tip shown to user advertising features",
@@ -2580,7 +2580,7 @@
 		"message": "Unmount SFTP"
 	},
 	"URL_LABEL": {
-		"description": "The label for a URL. Used to label the URL of a background image. e.g. URL: https://goo.gl/anedTK",
+		"description": "The label for a URL. Used to label the URL of a background image. e.g. URL: https://hterm.org/x/example/bg-img",
 		"message": "URL"
 	},
 	"WELCOME_CHANGELOG": {

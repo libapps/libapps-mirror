@@ -411,7 +411,7 @@
 		"message": "වෙනත් වර්ණ ලක්ෂණ නොමැති පාඨය සඳහා පසුබිම් වර්ණය."
 	},
 	"hterm_pref_background_image": {
-		"message": "පසුබිම් රූපයේ CSS අගය. රූපයක් නැති නම් එය හිස්ව තබන්න.\n\nඋදාහරණයක් වශයෙන්:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "පසුබිම් රූපයේ CSS අගය. රූපයක් නැති නම් එය හිස්ව තබන්න.\n\nඋදාහරණයක් වශයෙන්:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "පසුබිම් රූප ස්ථානයේ CSS අගය.\n\nඋදාහරණයක් වශයෙන්:\n  10% 10%\n  මැද"
@@ -1428,7 +1428,7 @@
 		"message": "emacs/vim/etc... using OSC-52: https://hterm.org/x/faq/osc52 වෙතින් ඔබේ පසුරු පුවරුව වෙත පිටපත් කරන්න"
 	},
 	"tip_8": {
-		"message": "අනෙකුත් hterm/සුරක්ෂිත ෂෙල් පරිශීලකයින් සමඟ chromium-hterm@chromium.org හරහා පරීක්ෂා කර ගන්න: https://goo.gl/RYHiK"
+		"message": "අනෙකුත් hterm/සුරක්ෂිත ෂෙල් පරිශීලකයින් සමඟ chromium-hterm@chromium.org හරහා පරීක්ෂා කර ගන්න: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "දෝෂයක් සොයා ගත්තේ ද?  නව විශේෂාංගයක් ඉල්ලන්නේ ද?  අපට දන්වන්න: https://hterm.org/x/ssh/newbug"

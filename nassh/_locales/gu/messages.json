@@ -414,7 +414,7 @@
 		"message": "અન્ય રંગ વિશેષતાઓ વિનાના ટેક્સ્ટના બૅકગ્રાઉન્ડનો રંગ."
 	},
 	"hterm_pref_background_image": {
-		"message": "બૅકગ્રાઉન્ડની છબીનું CSS મૂલ્ય. કોઈપણ છબી ન જોઈતી હોય, તો તેને ખાલી રાખો.\n\nઉદાહરણ તરીકે:\n  url(https://goo.gl/anedTK)\n  રેખીય શ્રેણી(ઉપર નીચે, વાદળી, લાલ)"
+		"message": "બૅકગ્રાઉન્ડની છબીનું CSS મૂલ્ય. કોઈપણ છબી ન જોઈતી હોય, તો તેને ખાલી રાખો.\n\nઉદાહરણ તરીકે:\n  url(https://hterm.org/x/example/bg-img)\n  રેખીય શ્રેણી(ઉપર નીચે, વાદળી, લાલ)"
 	},
 	"hterm_pref_background_position": {
 		"message": "બૅકગ્રાઉન્ડની છબીના સ્થાનનું CSS મૂલ્ય.\n\nઉદાહરણ તરીકે:\n  10% 10%\n  કેન્દ્ર"
@@ -1353,7 +1353,7 @@
 		"message": "OSC-52નો ઉપયોગ કરીને emacs/vim/etc... પરથી તમારા ક્લિપબોર્ડ પર કૉપિ કરો: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org દ્વારા સાથી hterm/Secure Shell વપરાશકર્તા સાથે ચૅટ કરો: https://goo.gl/RYHiK"
+		"message": "chromium-hterm@chromium.org દ્વારા સાથી hterm/Secure Shell વપરાશકર્તા સાથે ચૅટ કરો: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "કોઈ બગ મળ્યો છે?  નવી સુવિધા માટે વિનંતી કરીએ?  અમને જણાવો: https://hterm.org/x/ssh/newbug"

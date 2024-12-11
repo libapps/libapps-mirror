@@ -414,7 +414,7 @@
 		"message": "Bakgrunnslitur texta án annarra litaeininga."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS-gildi bakgrunnsmyndar. Skilið eftir autt til að hafa enga mynd.\n\nDæmi:\nurl(https://goo.gl/anedTK)\nlinear-gradient(top bottom, blue, red)"
+		"message": "CSS-gildi bakgrunnsmyndar. Skilið eftir autt til að hafa enga mynd.\n\nDæmi:\nurl(https://hterm.org/x/example/bg-img)\nlinear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS-gildi staðsetningar bakgrunnsmyndar.\n\nDæmi:\n  10% 10%\n  miðja"
@@ -1416,7 +1416,7 @@
 		"message": "Afritaðu á klippiborðið úr emacs/vim/etc... með OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Spjallaðu við aðra notendur hterm/Secure Shell með chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Spjallaðu við aðra notendur hterm/Secure Shell með chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Fannstu villu?  Viltu biðja um nýjan eiginleika?  Láttu okkur vita: https://hterm.org/x/ssh/newbug"

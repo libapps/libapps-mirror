@@ -411,7 +411,7 @@
 		"message": "ສີພາບພື້ນຫຼັງສຳລັບຂໍ້ຄວາມທີ່ບໍ່ມີຄຸນສົມບັດສີອື່ນ."
 	},
 	"hterm_pref_background_image": {
-		"message": "ຄ່າ CSS ຂອງພາບພື້ນຫຼັງ. ປະຫວ່າງເປົ່າຖ້າບໍ່ມີຮູບ.\n\nຕົວຢ່າງ:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ຄ່າ CSS ຂອງພາບພື້ນຫຼັງ. ປະຫວ່າງເປົ່າຖ້າບໍ່ມີຮູບ.\n\nຕົວຢ່າງ:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ຄ່າ CSS ຂອງຕຳແໜ່ງພາບພື້ນຫຼັງ.\n\nຕົວຢ່າງ:\n  10% 10%\n  ເຄິ່ງກາງ"
@@ -1395,7 +1395,7 @@
 		"message": "ສຳເນົາໄວ້ໃນຄລິບບອດຂອງທ່ານຈາກ emacs/vim/etc... ໂດຍໃຊ້ OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "ສົນທະນາກັບຜູ້ໃຊ້ hterm/Secure Shell ຜ່ານ chromium-hterm@chromium.org ໄດ້ທີ່: https://goo.gl/RYHiK"
+		"message": "ສົນທະນາກັບຜູ້ໃຊ້ hterm/Secure Shell ຜ່ານ chromium-hterm@chromium.org ໄດ້ທີ່: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "ພົບເຫັນຂໍ້ຜິດພາດບໍ?  ຮ້ອງຂໍຄຸນສົມບັດໃໝ່ບໍ?  ແຈ້ງໃຫ້ພວກເຮົາຮູ້: https://hterm.org/x/ssh/newbug"

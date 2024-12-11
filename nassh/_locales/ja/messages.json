@@ -417,7 +417,7 @@
 		"message": "他の色属性が指定されていない場合のテキストの背景色です。"
 	},
 	"hterm_pref_background_image": {
-		"message": "背景画像を表す CSS 値です。画像を使用しない場合は空白のままにします。\n\n例:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "背景画像を表す CSS 値です。画像を使用しない場合は空白のままにします。\n\n例:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "背景画像の位置を表す CSS 値です。\n\n例:\n  10% 10%\n  center"
@@ -1353,7 +1353,7 @@
 		"message": "emacs、vim などからクリップボードにコピーするには OSC-52 を使用します: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org を使って hterm ユーザーや Secure Shell ユーザーとチャットできます: https://goo.gl/RYHiK"
+		"message": "chromium-hterm@chromium.org を使って hterm ユーザーや Secure Shell ユーザーとチャットできます: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "バグを見つけた場合や新機能のご要望がある場合は、お知らせください: https://hterm.org/x/ssh/newbug"

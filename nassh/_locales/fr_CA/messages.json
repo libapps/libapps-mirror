@@ -402,7 +402,7 @@
 		"message": "Permet de spécifier la couleur d'arrière-plan du texte sans aucun autre attribut de couleur."
 	},
 	"hterm_pref_background_image": {
-		"message": "Permet de spécifier la valeur des feuilles de style CSS de l'image d'arrière-plan. Laissez le champ vide si vous ne souhaitez pas mettre d'image.\n\nPar exemple :\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Permet de spécifier la valeur des feuilles de style CSS de l'image d'arrière-plan. Laissez le champ vide si vous ne souhaitez pas mettre d'image.\n\nPar exemple :\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Permet de spécifier la valeur des feuilles de style CSS de la position de l'image d'arrière-plan.\n\nPar exemple :\n  10% 10%\n  center"
@@ -1338,7 +1338,7 @@
 		"message": "Copiez dans votre presse-papiers d'emacs/vim/ etc., en utilisant OSC-52 : https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Clavardez avec des utilisateurs de hterm/Secure Shell par l'intermédiaire de chromium-hterm@chromium.org : https://goo.gl/RYHiK"
+		"message": "Clavardez avec des utilisateurs de hterm/Secure Shell par l'intermédiaire de chromium-hterm@chromium.org : https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Vous avez trouvé un bogue?  Vous voulez demander une nouvelle fonctionnalité?  Dites-nous : https://hterm.org/x/ssh/newbug"

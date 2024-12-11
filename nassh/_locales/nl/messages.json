@@ -414,7 +414,7 @@
 		"message": "De achtergrondkleur voor tekst zonder andere kleurkenmerken."
 	},
 	"hterm_pref_background_image": {
-		"message": "Css-waarde van de achtergrondafbeelding. Een lege tekenreeks betekent dat er geen afbeelding is.\n\nBijvoorbeeld:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Css-waarde van de achtergrondafbeelding. Een lege tekenreeks betekent dat er geen afbeelding is.\n\nBijvoorbeeld:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Css-waarde van de positie van de achtergrondafbeelding.\n\nBijvoorbeeld:\n  10% 10%\n  center"
@@ -1341,7 +1341,7 @@
 		"message": "Kopieer naar je klembord via emacs/vim/etc... met OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Chat met andere gebruikers van hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Chat met andere gebruikers van hterm/Secure Shell via chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Bug gevonden?  Nieuwe functie aanvragen?  Laat het ons weten: https://hterm.org/x/ssh/newbug"

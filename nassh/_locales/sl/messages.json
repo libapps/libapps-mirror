@@ -417,7 +417,7 @@
 		"message": "Barva ozadja za besedilo brez drugih barvnih atributov."
 	},
 	"hterm_pref_background_image": {
-		"message": "Vrednost CSS slike ozadja. Pustite prazno, če ni slike.\n\nPrimer:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Vrednost CSS slike ozadja. Pustite prazno, če ni slike.\n\nPrimer:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Vrednost CSS položaja slike ozadja.\n\nNa primer:\n  10% 10%\n  center"
@@ -1449,7 +1449,7 @@
 		"message": "Kopirajte v odložišče iz urejevalnikov besedila emac/vim/ipd. z nizom OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Klepetajte z drugimi uporabniki hterma/varne lupine prek naslova chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Klepetajte z drugimi uporabniki hterma/varne lupine prek naslova chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Ste našli napako?  Želite zahtevati novo funkcijo?  Sporočite nam: https://hterm.org/x/ssh/newbug"

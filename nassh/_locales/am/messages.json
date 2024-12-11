@@ -417,7 +417,7 @@
 		"message": "ሌላ ምንም የቀለም አይነታዎች ለሌለው ጽሁፍ የጀርባው ቀለም።"
 	},
 	"hterm_pref_background_image": {
-		"message": "የጀርባው ምስል የCSS እሴት። ምንም ምስል ላለማስቀመጥ ባዶ እንደሆነ ይተዉት።\n\nለምሳሌ፦\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "የጀርባው ምስል የCSS እሴት። ምንም ምስል ላለማስቀመጥ ባዶ እንደሆነ ይተዉት።\n\nለምሳሌ፦\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "የጀርባው ምስል አቀማመጥ የCSS እሴት።\n\nለምሳሌ፦\n  10% 10%\n  center"
@@ -1386,7 +1386,7 @@
 		"message": "ከemacs/vim/etc... ወደ እርስዎ ቅንጥብ ሰሌዳ OSC-52ን በመጠቀም ይቅዱ፦ https://hterm.org/x/faq/osc52ን"
 	},
 	"tip_8": {
-		"message": "በchromium-hterm@chromium.org በኩል ከሌሎች ባልደረባ የhterm/Secure Shell ተጠቃሚዎች ጋር ይወያዩ፦ https://goo.gl/RYHiK"
+		"message": "በchromium-hterm@chromium.org በኩል ከሌሎች ባልደረባ የhterm/Secure Shell ተጠቃሚዎች ጋር ይወያዩ፦ https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "ሳንካ አግኝተዋል?  አዲስ ባህሪ ይጠየቅ?  https://hterm.org/x/ssh/newbug"

@@ -414,7 +414,7 @@
 		"message": "สีพื้นหลังสำหรับข้อความที่ไม่มีแอตทริบิวต์ของสีอื่น"
 	},
 	"hterm_pref_background_image": {
-		"message": "ค่า CSS ของภาพพื้นหลัง ปล่อยว่างไว้หากไม่มีรูปภาพ\n\nตัวอย่างเช่น\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ค่า CSS ของภาพพื้นหลัง ปล่อยว่างไว้หากไม่มีรูปภาพ\n\nตัวอย่างเช่น\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ค่า CSS ของตำแหน่งรูปภาพพื้นหลัง\n\nตัวอย่างเช่น\n  10% 10%\n  center"
@@ -1350,7 +1350,7 @@
 		"message": "คัดลอกจาก emacs/vim/ฯลฯ... ไปยังคลิปบอร์ด โดยใช้ OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "แชทกับผู้ใช้ hterm/Secure Shell ผ่าน chromium-hterm@chromium.org ได้ที่ https://goo.gl/RYHiK"
+		"message": "แชทกับผู้ใช้ hterm/Secure Shell ผ่าน chromium-hterm@chromium.org ได้ที่ https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "หากพบข้อบกพร่อง  หรือต้องการขอฟีเจอร์ใหม่  คุณแจ้งให้เราทราบได้ที่ https://hterm.org/x/ssh/newbug"

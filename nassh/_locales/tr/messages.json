@@ -414,7 +414,7 @@
 		"message": "Başka renk özelliği olmayan metin için arka plan rengi."
 	},
 	"hterm_pref_background_image": {
-		"message": "Arka plan resmin CSS değeri. Resim olmadığında boş bırakın.\n\nÖrneğin:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Arka plan resmin CSS değeri. Resim olmadığında boş bırakın.\n\nÖrneğin:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Arka plan resmi konumunun CSS değeri.\n\nÖrneğin:\n  10% 10%\n  center"
@@ -1353,7 +1353,7 @@
 		"message": "OSC-52 kullanarak emacs/vim/vb.den panonuza kopyalayın: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Diğer hterm/Secure Shell kullanıcılarıyla chromium-hterm@chromium.org üzerinden sohbet edin: https://goo.gl/RYHiK"
+		"message": "Diğer hterm/Secure Shell kullanıcılarıyla chromium-hterm@chromium.org üzerinden sohbet edin: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Bir hatayla mı karşılaştınız?  Yeni bir özellik isteğinde mi bulunacaksınız?  Bize şu adresten bildirebilirsiniz: https://hterm.org/x/ssh/newbug"

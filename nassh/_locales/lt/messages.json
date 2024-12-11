@@ -417,7 +417,7 @@
 		"message": "Teksto fono spalva be jokių kitų spalvų atributų."
 	},
 	"hterm_pref_background_image": {
-		"message": "Fono vaizdo CSS kalbos vertė. Palikite tuščią, jei nėra vaizdo.\n\nPavyzdžiui:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Fono vaizdo CSS kalbos vertė. Palikite tuščią, jei nėra vaizdo.\n\nPavyzdžiui:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Fono vaizdo pozicijos CSS kalbos vertė.\n\nPavyzdžiui:\n  10% 10%\n  center"
@@ -1410,7 +1410,7 @@
 		"message": "Nukopijuokite į iškarpinę iš „emacs“, „vim“ ir pan. naudodami OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Kalbėkite su kitais „hterm“ ar „Secure Shell“ naudotojais naudodami adresą chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Kalbėkite su kitais „hterm“ ar „Secure Shell“ naudotojais naudodami adresą chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Radote riktą?  Norite pateikti naujos funkcijos užklausą?  Praneškite mums: https://hterm.org/x/ssh/newbug"

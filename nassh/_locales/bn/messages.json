@@ -414,7 +414,7 @@
 		"message": "রঙের অন্য অ্যাট্রিবিউট ছাড়া টেক্সট ব্যাকগ্রাউন্ডের রঙ।"
 	},
 	"hterm_pref_background_image": {
-		"message": "ব্যাকগ্রাউন্ড ছবির CSS মান। কোনও ছবি না থাকলে এটি ফাঁকা রাখুন।\n\nযেমন:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ব্যাকগ্রাউন্ড ছবির CSS মান। কোনও ছবি না থাকলে এটি ফাঁকা রাখুন।\n\nযেমন:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ব্যাকগ্রাউন্ড ছবির পজিশনের CSS মান।\n\nযেমন:\n  10% 10%\n  center"
@@ -1356,7 +1356,7 @@
 		"message": "OSC-52 ব্যবহার করে emacs/vim/etc... থেকে আপনার ক্লিপবোর্ডে কপি করুন: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org আইডি ব্যবহার করে অন্যান্য hterm/Secure Shell ব্যবহারকারীর সাথে চ্যাট করুন: https://goo.gl/RYHiK"
+		"message": "chromium-hterm@chromium.org আইডি ব্যবহার করে অন্যান্য hterm/Secure Shell ব্যবহারকারীর সাথে চ্যাট করুন: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "সমস্যা হয়েছে?  নতুন ফিচারের জন্য অনুরোধ করবেন?  আমাদের জানান: https://hterm.org/x/ssh/newbug"

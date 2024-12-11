@@ -417,7 +417,7 @@
 		"message": "మరే ఇతర రంగు విశేషణాలు లేని టెక్స్‌ట్ానికి బ్యాక్‌గ్రౌండ్ రంగు."
 	},
 	"hterm_pref_background_image": {
-		"message": "బ్యాక్‌గ్రౌండ్ ఇమేజ్ CSS విలువ. ఇమేజ్ ఏదీ లేకుంటే ఖాళీగా విడిచిపెట్టండి.\n\nఉదాహరణకు:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "బ్యాక్‌గ్రౌండ్ ఇమేజ్ CSS విలువ. ఇమేజ్ ఏదీ లేకుంటే ఖాళీగా విడిచిపెట్టండి.\n\nఉదాహరణకు:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "బ్యాక్‌గ్రౌండ్ ఇమేజ్ స్థానం యొక్క CSS విలువ.\n\nఉదాహరణకు:\n  10% 10%\n  మధ్యన"
@@ -1422,7 +1422,7 @@
 		"message": "OSC-52ను ఉపయోగించి emacs/vim/etc... నుండి మీ క్లిప్‌బోర్డ్‌కు కాపీ చేయండి: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "సహకార hterm/Secure Shell వినియోగదారులతో chromium-hterm@chromium.org ద్వారా చాట్ చేయండి: https://goo.gl/RYHiK"
+		"message": "సహకార hterm/Secure Shell వినియోగదారులతో chromium-hterm@chromium.org ద్వారా చాట్ చేయండి: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "మీరు ఏదైనా బగ్‌ను కనుగొన్నారా?  కొత్త ఫీచర్‌ను రిక్వెస్ట్ చేయాలనుకుంటున్నారా?  మాకు తెలియజేయండి: https://hterm.org/x/ssh/newbug"

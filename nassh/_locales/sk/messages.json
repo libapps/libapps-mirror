@@ -417,7 +417,7 @@
 		"message": "Farba pozadia pre text bez ďalších farebných atribútov."
 	},
 	"hterm_pref_background_image": {
-		"message": "Hodnota CSS obrázka na pozadí. Ak na pozadí žiadny obrázok zobrazovať nechcete, ponechajte túto hodnotu prázdnu.\n\nPríklad:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Hodnota CSS obrázka na pozadí. Ak na pozadí žiadny obrázok zobrazovať nechcete, ponechajte túto hodnotu prázdnu.\n\nPríklad:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Hodnota CSS umiestnenia obrázka na pozadí.\n\nNapríklad:\n  10% 10%\n  stred"
@@ -1356,7 +1356,7 @@
 		"message": "Kopírujte do schránky z editorov emacs/vim/etc... pomocou parametra OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Četujte so spriaznenými používateľmi hterm alebo zabezpečeného prístupu prostredníctvom funkcie chromium-hterm@chromium.org na https://goo.gl/RYHiK"
+		"message": "Četujte so spriaznenými používateľmi hterm alebo zabezpečeného prístupu prostredníctvom funkcie chromium-hterm@chromium.org na https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Našli ste chybu?  Chcete požiadať o novú funkciu?  Dajte nám vedieť na https://hterm.org/x/ssh/newbug"

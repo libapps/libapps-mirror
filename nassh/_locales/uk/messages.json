@@ -417,7 +417,7 @@
 		"message": "Колір фону для тексту без інших атрибутів кольору."
 	},
 	"hterm_pref_background_image": {
-		"message": "Значення фонового зображення в CSS. Якщо рядок порожній, зображення немає.\n\nНаприклад:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Значення фонового зображення в CSS. Якщо рядок порожній, зображення немає.\n\nНаприклад:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Значення CSS позиції фонового зображення.\n\nНаприклад:\n  10% 10%\n  центр"
@@ -1422,7 +1422,7 @@
 		"message": "Копіюйте в буфер обміну з ресурсу emacs/vim/etc… за допомогою послідовності OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Спілкуйтеся в чаті з іншими користувачами hterm/Secure Shell на сторінці chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Спілкуйтеся в чаті з іншими користувачами hterm/Secure Shell на сторінці chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Знайшли помилку?  Пропонуєте нову функцію?  Повідомте нас про це: https://hterm.org/x/ssh/newbug."

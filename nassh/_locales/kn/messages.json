@@ -414,7 +414,7 @@
 		"message": "ಬೇರೆ ಯಾವುದೇ ಬಣ್ಣದ ಗುಣಲಕ್ಷಣಗಳನ್ನು ಹೊಂದಿಲ್ಲದ ಪಠ್ಯಕ್ಕಾಗಿ ಹಿನ್ನೆಲೆ ಬಣ್ಣ."
 	},
 	"hterm_pref_background_image": {
-		"message": "ಹಿನ್ನೆಲೆಯ ಚಿತ್ರದ CSS ಮೌಲ್ಯ. ಚಿತ್ರ ಬೇಡದಿದ್ದರೆ ಅದನ್ನು ಖಾಲಿ ಬಿಡಿ.\n\nಉದಾಹರಣೆಗೆ:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ಹಿನ್ನೆಲೆಯ ಚಿತ್ರದ CSS ಮೌಲ್ಯ. ಚಿತ್ರ ಬೇಡದಿದ್ದರೆ ಅದನ್ನು ಖಾಲಿ ಬಿಡಿ.\n\nಉದಾಹರಣೆಗೆ:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ಹಿನ್ನೆಲೆಯ ಚಿತ್ರದ ಸ್ಥಾನದ CSS ಮೌಲ್ಯ.\n\nಉದಾಹರಣೆಗೆ:\n  10% 10%\n  ಕೇಂದ್ರ"
@@ -1422,7 +1422,7 @@
 		"message": "OSC-52 ಬಳಸಿಕೊಂಡು emacs/vim/etc... ನಿಂದ ನಿಮ್ಮ ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಿ: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org: https://goo.gl/RYHiK ಮೂಲಕ ಸಹಭಾಗಿ hterm/Secure Shell ಬಳಕೆದಾರರೊಂದಿಗೆ ಚಾಟ್ ಮಾಡಿ"
+		"message": "chromium-hterm@chromium.org: https://hterm.org/x/contact ಮೂಲಕ ಸಹಭಾಗಿ hterm/Secure Shell ಬಳಕೆದಾರರೊಂದಿಗೆ ಚಾಟ್ ಮಾಡಿ"
 	},
 	"tip_9": {
 		"message": "ಬಗ್ ಕಂಡುಬಂದಿತೇ?  ಹೊಸ ಫೀಚರ್‌ಗಾಗಿ ವಿನಂತಿಸಬೇಕೇ?  ನಮಗೆ ತಿಳಿಸಿ: https://hterm.org/x/ssh/newbug"

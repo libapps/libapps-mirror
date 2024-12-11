@@ -414,7 +414,7 @@
 		"message": "Beste kolore-atributurik ez duen testuaren atzeko planoaren kolorea."
 	},
 	"hterm_pref_background_image": {
-		"message": "Atzeko planoko irudiaren CSS balioa. Ez idatzi ezer irudirik ez badago.\n\nAdibidez:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Atzeko planoko irudiaren CSS balioa. Ez idatzi ezer irudirik ez badago.\n\nAdibidez:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Atzeko planoko irudiaren kokapenaren CSS balioa.\n\nAdibidez:\n  10% 10%\n  center"
@@ -1365,7 +1365,7 @@
 		"message": "OSC-52 erabilita emacs, vim eta beste editore batzuen edukia arbelean kopiatzeko, joan https://hterm.org/x/faq/osc52 helbidera"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org helbide elektronikoaren bidez hterm-en eta Secure Shell-en beste erabiltzaile batzuekin txateatzeko, joan https://goo.gl/RYHiK helbidera"
+		"message": "chromium-hterm@chromium.org helbide elektronikoaren bidez hterm-en eta Secure Shell-en beste erabiltzaile batzuekin txateatzeko, joan https://hterm.org/x/contact helbidera"
 	},
 	"tip_9": {
 		"message": "Akats bat aurkitu duzu?  Eginbide berri bat eskatu nahi duzu?  Azal iezaguzu zer egin nahi duzun. Horretarako, joan https://hterm.org/x/ssh/newbug helbidera."

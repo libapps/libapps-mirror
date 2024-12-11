@@ -417,7 +417,7 @@
 		"message": "رنگ پس‌زمینه برای نوشتار بدون هیچ مشخصه رنگی دیگری."
 	},
 	"hterm_pref_background_image": {
-		"message": "مقدار CSS تصویر پس‌زمینه. وقتی تصویری وجود ندارد، آن را خالی بگذارید.\n\nبرای مثال:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "مقدار CSS تصویر پس‌زمینه. وقتی تصویری وجود ندارد، آن را خالی بگذارید.\n\nبرای مثال:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "مقدار CSS موقعیت تصویر پس‌زمینه.\n\nبرای مثال:\n  10% 10%\n  center"
@@ -1419,7 +1419,7 @@
 		"message": "بااستفاده از OSC-52 از emacs،‏ vim و غیره، نوشتار را در بریده‌دان کپی کنید: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "ازطریق chromium-hterm@chromium.org، با کاربران همکار hterm/Secure Shell گپ بزنید: https://goo.gl/RYHiK"
+		"message": "ازطریق chromium-hterm@chromium.org، با کاربران همکار hterm/Secure Shell گپ بزنید: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "اشکالی پیدا کرده‌اید؟  می‌خواهید ویژگی جدیدی را درخواست کنید؟  به ما اطلاع دهید: https://hterm.org/x/ssh/newbug"

@@ -408,7 +408,7 @@
 		"message": "اس ٹیکسٹ کیلئے پس منظر رنگ جس کے رنگ کے دیگر انتسابات نہیں ہیں۔"
 	},
 	"hterm_pref_background_image": {
-		"message": "پس منظر کی تصویر کی CSS قدر۔ تصویر نہ ہونے پر اسے خالی چھوڑ دیں۔\n\nمثال کے طور پر:\n  url(https://goo.gl/anedTK)\n  لینیر گریڈئنٹ (اوپر نیچے، نیلا، سرخ)"
+		"message": "پس منظر کی تصویر کی CSS قدر۔ تصویر نہ ہونے پر اسے خالی چھوڑ دیں۔\n\nمثال کے طور پر:\n  url(https://hterm.org/x/example/bg-img)\n  لینیر گریڈئنٹ (اوپر نیچے، نیلا، سرخ)"
 	},
 	"hterm_pref_background_position": {
 		"message": "پس منظر کی تصویر کی پوزیشن کی CSS قدر۔\n\nمثال کے طور پر:\n  10% 10%\n  وسط میں"
@@ -1401,7 +1401,7 @@
 		"message": "OSC-52 کا استعمال کر کے emacs/vim/etc... سے اپنے کلپ بورڈ میں کاپی کریں: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org کے ذریعے hterm/محفوظ شیل صارفین کے ساتھ چیٹ کریں: https://goo.gl/RYHiK"
+		"message": "chromium-hterm@chromium.org کے ذریعے hterm/محفوظ شیل صارفین کے ساتھ چیٹ کریں: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "بَگ ملا؟  ایک نئی خصوصیت کی درخواست دیں؟  ہمیں بتائیں: https://hterm.org/x/ssh/newbug"

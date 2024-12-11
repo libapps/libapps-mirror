@@ -417,7 +417,7 @@
 		"message": "Copy to your clipboard from emacs/vim/etc… using OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Chat with fellow HTerm/Secure Shell users via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Chat with fellow HTerm/Secure Shell users via chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Found a bug? Want to request a new feature? Let us know: https://hterm.org/x/ssh/newbug"

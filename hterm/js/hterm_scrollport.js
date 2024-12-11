@@ -87,7 +87,8 @@ hterm.ScrollPort = function(rowProvider) {
   this.lastRowCount_ = 0;
 
   // The scroll wheel pixel delta multiplier to increase/decrease
-  // the scroll speed of mouse wheel events. See: https://goo.gl/sXelnq
+  // the scroll speed of mouse wheel events.
+  // See: https://stackoverflow.com/questions/5527601
   this.scrollWheelMultiplier_ = 1;
 
   // The last touch events we saw to support touch based scrolling.  Indexed

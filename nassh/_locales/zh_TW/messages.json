@@ -417,7 +417,7 @@
 		"message": "無其他色彩屬性的文字的背景顏色。"
 	},
 	"hterm_pref_background_image": {
-		"message": "背景圖片的 CSS 值。留空表示沒有圖片。\n\n例如：\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "背景圖片的 CSS 值。留空表示沒有圖片。\n\n例如：\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "背景圖片位置的 CSS 值。\n\n例如：\n  10% 10%\n  center"
@@ -1359,7 +1359,7 @@
 		"message": "使用 OSC-52 從 emacs 或 vim 等來源複製內容到剪貼簿：https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "透過 chromium-hterm@chromium.org 與其他 hterm/安全殼層使用者進行即時通訊：https://goo.gl/RYHiK"
+		"message": "透過 chromium-hterm@chromium.org 與其他 hterm/安全殼層使用者進行即時通訊：https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "發現錯誤或想建議新功能？歡迎前往以下網址告訴我們：https://hterm.org/x/ssh/newbug"

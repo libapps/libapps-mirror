@@ -414,7 +414,7 @@
 		"message": "इतर कोणत्याही रंग विशेषता नसलेल्या मजकुरासाठी बॅकग्राउंड रंग."
 	},
 	"hterm_pref_background_image": {
-		"message": "बॅकग्राउंड इमेजचे CSS मूल्य. कोणतीही इमेज नसल्यास ते रिकामे सोडा.\n\nउदाहरणार्थ:\n  url(https://goo.gl/anedTK)\n  लिनीअर-ग्रेडियंट(वर तळाशी, निळा, लाल)"
+		"message": "बॅकग्राउंड इमेजचे CSS मूल्य. कोणतीही इमेज नसल्यास ते रिकामे सोडा.\n\nउदाहरणार्थ:\n  url(https://hterm.org/x/example/bg-img)\n  लिनीअर-ग्रेडियंट(वर तळाशी, निळा, लाल)"
 	},
 	"hterm_pref_background_position": {
 		"message": "बॅकग्राउंड इमेज स्थितीचे CSS मूल्य\n\nउदाहरणार्थ:\n  १०% १०%\n  केंद्र"
@@ -1383,7 +1383,7 @@
 		"message": "OSC-52 वापरून, emacs/vim/etc वरून तुमच्या क्लिपबोर्डवर कॉपी करा...: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org मार्फत सहकारी hterm/Secure Shell वापरकर्त्यांसोबत चॅट करा- https://goo.gl/RYHiK"
+		"message": "chromium-hterm@chromium.org मार्फत सहकारी hterm/Secure Shell वापरकर्त्यांसोबत चॅट करा- https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "बग आढळला आहे का?  नवीन वैशिष्ट्याची विनंती करायची आहे का?  आम्हाला कळवा: https://hterm.org/x/ssh/newbug"

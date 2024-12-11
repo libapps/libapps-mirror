@@ -107,7 +107,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
   Yes.  First, you need to subscribe to the [chromium-hterm mailing list].
   Subscribers have access to the "Dev" versions in the Chrome Web Store, which
-  are located <https://goo.gl/9NCCZQ>.
+  are located <https://hterm.org/x/ssh/cws/dev>.
 
   Note: You'll also need to sign in to the Chrome Web Store using the same
   account that joined the mailing list.  Otherwise, the link will result in a
@@ -1186,7 +1186,7 @@ The prompt makes it sound like it will delete & reset everything, but it won't.
 [osc52.sh]: ../../hterm/etc/osc52.sh
 [osc52.vim]: ../../hterm/etc/osc52.vim
 
-[chromium-hterm mailing list]: https://goo.gl/RYHiK
+[chromium-hterm mailing list]: https://hterm.org/x/contact
 [ISO 2022]: https://www.iso.org/standard/22747.html
 [OpenSSH]: https://www.openssh.com/
 [OpenSSH legacy options]: https://www.openssh.com/legacy.html

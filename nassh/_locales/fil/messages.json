@@ -408,7 +408,7 @@
 		"message": "Ang kulay ng background para sa text na walang ibang attribute ng kulay."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS value ng larawan sa background. Hayaang blangko kung walang larawan.\n\nHalimbawa:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS value ng larawan sa background. Hayaang blangko kung walang larawan.\n\nHalimbawa:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS value ng posisyon ng imahe sa background.\n\nHalimbawa:\n  10% 10%\n  gitna"
@@ -1332,7 +1332,7 @@
 		"message": "Magkopya sa iyong clipboard mula sa emacs/vim/etc... using OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Makipag-chat sa mga kapwa user ng hterm/Secure Shell sa pamamagitan ng chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Makipag-chat sa mga kapwa user ng hterm/Secure Shell sa pamamagitan ng chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Nakakita ng bug?  Humiling ng bagong feature?  Ipaalam sa amin: https://hterm.org/x/ssh/newbug"

@@ -417,7 +417,7 @@
 		"message": "El color de fondo para el texto sin otros atributos de colores."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valor de CSS para la imagen de fondo. Déjalo en blanco si no deseas mostrar una imagen.\n\nPor ejemplo:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valor de CSS para la imagen de fondo. Déjalo en blanco si no deseas mostrar una imagen.\n\nPor ejemplo:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valor de CSS para la posición de la imagen de fondo.\n\nPor ejemplo:\n  10% 10%\n  center"
@@ -1338,7 +1338,7 @@
 		"message": "Copia en el portapapeles desde emacs/vim/etc… con OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Chatea con otros usuarios de hterm/Secure Shell mediante chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Chatea con otros usuarios de hterm/Secure Shell mediante chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "¿Encontraste un error?  ¿Quieres una función nueva?  Envía un comentario: https://hterm.org/x/ssh/newbug"

@@ -196,7 +196,7 @@ hterm.PreferenceManager.defaultPreferences = {
       `CSS value of the background image. Leave it blank for no image.\n` +
       `\n` +
       `For example:\n` +
-      `  url(https://goo.gl/anedTK)\n` +
+      `  url(https://hterm.org/x/example/bg-img)\n` +
       `  linear-gradient(top bottom, blue, red)`,
   ),
 

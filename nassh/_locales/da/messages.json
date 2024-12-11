@@ -414,7 +414,7 @@
 		"message": "Baggrundsfarven for tekst uden andre farveattributter."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS-værdi for baggrundsbilledet. Lad feltet stå tomt, hvis der ikke er noget billede.\n\nEksempel:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS-værdi for baggrundsbilledet. Lad feltet stå tomt, hvis der ikke er noget billede.\n\nEksempel:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS-værdi for baggrundsbilledets position.\n\nEksempel:\n  10% 10%\n  center"
@@ -1440,7 +1440,7 @@
 		"message": "Kopiér til udklipsholderen fra emacs/vim/etc… ved hjælp af OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Chat med andre hterm-/Secure Shell-brugere via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Chat med andre hterm-/Secure Shell-brugere via chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Har du fundet en fejl?  Vil du anmode om en ny funktion?  Kontakt os: https://hterm.org/x/ssh/newbug"

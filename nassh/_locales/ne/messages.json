@@ -405,7 +405,7 @@
 		"message": "रङसम्बन्धी अन्य कुनै पनि विशेषता नभएको पाठको पृष्ठभूमिको रङ।"
 	},
 	"hterm_pref_background_image": {
-		"message": "पृष्ठभूमिको फोटोको CSS मान। कुनै पनि फोटो नराख्ने भए यो ठाउँ खाली छाड्नुहोस्।\n\nउदाहरणका लागि:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "पृष्ठभूमिको फोटोको CSS मान। कुनै पनि फोटो नराख्ने भए यो ठाउँ खाली छाड्नुहोस्।\n\nउदाहरणका लागि:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "पृष्ठभूमिको तस्बिरको स्थिति जनाउने CSS मान।\n\nउदाहरणका लागि:\n  10% 10%\n  center"
@@ -1344,7 +1344,7 @@
 		"message": "OSC-52 प्रयोग गरी emacs/vim/आदि... बाट कपी गरेर आफ्नो क्लिपबोर्डमा लैजानुहोस्: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org मा गई hterm/Secure Shell का सहकर्मी प्रयोगकर्तासँग च्याट गर्नुहोस्: https://goo.gl/RYHiK"
+		"message": "chromium-hterm@chromium.org मा गई hterm/Secure Shell का सहकर्मी प्रयोगकर्तासँग च्याट गर्नुहोस्: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "बग फेला पार्नुभयो?  नयाँ सुविधाका लागि अनुरोध गर्न चाहनुहुन्छ?  हामीलाई जानकारी गराउनुहोस्: https://hterm.org/x/ssh/newbug"

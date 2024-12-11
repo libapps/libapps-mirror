@@ -408,7 +408,7 @@
 		"message": "Ngjyra e sfondit për tekstin pa asnjë atribut tjetër të ngjyrës."
 	},
 	"hterm_pref_background_image": {
-		"message": "Vlera CSS e imazhit në sfond. Lëre bosh kur nuk ka imazh.\n\nPër shembull:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Vlera CSS e imazhit në sfond. Lëre bosh kur nuk ka imazh.\n\nPër shembull:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Vlera CSS e pozicionit të imazhit në sfond.\n\nPër shembull:\n  10% 10%\n  në qendër"
@@ -1365,7 +1365,7 @@
 		"message": "Kopjo te kujtesa e fragmenteve nga emacs/vim/etc... duke përdorur OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Bisedo me përdoruesit e hterm/Secure Shell që ke shokë nëpërmjet chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Bisedo me përdoruesit e hterm/Secure Shell që ke shokë nëpërmjet chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Gjete një defekt në kod?  Kërko një veçori të re?  Na informo: https://hterm.org/x/ssh/newbug"

@@ -405,7 +405,7 @@
 		"message": "Die agtergrondkleur vir teks sonder enige ander kleurkenmerke."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS-waarde van die agtergrondprent. Los dit leeg as daar geen prent is nie.\n\nByvoorbeeld:\n  url(https://goo.gl/anedTK)\n  lineêre gradiënt(bo, onder, blou, rooi)"
+		"message": "CSS-waarde van die agtergrondprent. Los dit leeg as daar geen prent is nie.\n\nByvoorbeeld:\n  url(https://hterm.org/x/example/bg-img)\n  lineêre gradiënt(bo, onder, blou, rooi)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS-waarde van die agtergrondprent se posisie.\n\nByvoorbeeld:\n  10% 10%\n  center"
@@ -1392,7 +1392,7 @@
 		"message": "Kopieer na jou knipbord vanaf emacs/vim/ens … met OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Klets met medegebruikers van hterm/Secure Shell via chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Klets met medegebruikers van hterm/Secure Shell via chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "’n Fout gekry?  Versoek ’n nuwe kenmerk?  Laat weet ons: https://hterm.org/x/ssh/newbug"

@@ -417,7 +417,7 @@
 		"message": "Цветът на фона на текста, който няма други атрибути за цвят."
 	},
 	"hterm_pref_background_image": {
-		"message": "Стойност в CSS за фоновото изображение. За да няма изображение, не посочвайте стойност.\n\nНапример:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Стойност в CSS за фоновото изображение. За да няма изображение, не посочвайте стойност.\n\nНапример:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Стойност в CSS за позицията на фоновото изображение.\n\nНапример:\n  10% 10%\n  center"
@@ -1353,7 +1353,7 @@
 		"message": "Копирайте в буферната памет от emacs, vim и др. посредством OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Разговаряйте с други потребители на hterm/Secure Shell чрез chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Разговаряйте с други потребители на hterm/Secure Shell чрез chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Открили сте програмна грешка?  Искате да заявите нова функция?  Уведомете ни: https://hterm.org/x/ssh/newbug"

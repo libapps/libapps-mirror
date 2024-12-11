@@ -417,7 +417,7 @@
 		"message": "Rangi ya mandhari nyuma ya maandishi yasiyo na aina zingine za rangi."
 	},
 	"hterm_pref_background_image": {
-		"message": "Thamani ya CSS ya picha ya mandharinyuma. Iache wazi iwapo hamna picha.\n\nKwa mfano:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Thamani ya CSS ya picha ya mandharinyuma. Iache wazi iwapo hamna picha.\n\nKwa mfano:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Thamani ya CSS ya nafasi ya picha ya mandharinyuma\n\nKwa mfano:\n  10% 10%\n  katikati"
@@ -1428,7 +1428,7 @@
 		"message": "Nakili kwenye ubao wa kunakili kutoka emacs/vim/etc... ukitumia OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Piga gumzo na watumiaji wa hterm/Secure Shell kupitia chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Piga gumzo na watumiaji wa hterm/Secure Shell kupitia chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Je, umepata hitilafu?  Ungependa kuomba kipengele kipya?  Tufahamishe: https://hterm.org/x/ssh/newbug"

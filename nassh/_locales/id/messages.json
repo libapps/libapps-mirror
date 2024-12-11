@@ -414,7 +414,7 @@
 		"message": "Warna latar belakang untuk teks tanpa atribut warna lainnya."
 	},
 	"hterm_pref_background_image": {
-		"message": "Nilai CSS gambar latar. Biarkan kosong jika tidak ada gambar.\n\nMisalnya:\n  url(https://goo.gl/anedTK)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Nilai CSS gambar latar. Biarkan kosong jika tidak ada gambar.\n\nMisalnya:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Nilai CSS posisi gambar latar.\n\nMisalnya:\n  10% 10%\n  tengah"
@@ -1365,7 +1365,7 @@
 		"message": "Salin ke papan klip dari emacs/vim/etc... menggunakan OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Chat dengan sesama pengguna hterm/Secure Shell melalui chromium-hterm@chromium.org: https://goo.gl/RYHiK"
+		"message": "Chat dengan sesama pengguna hterm/Secure Shell melalui chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Menemukan bug?  Ingin meminta fitur baru?  Beri tahu kami: https://hterm.org/x/ssh/newbug"
