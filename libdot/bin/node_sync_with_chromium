@@ -8,6 +8,7 @@
 import logging
 import re
 import sys
+from typing import Dict
 
 import libdot
 
@@ -15,15 +16,9 @@ import libdot
 URI_BASE = "https://chromium.googlesource.com/chromium/src/+/HEAD"
 
 # Where in Chromium's tree they maintain the version.
-# Look for 'node_linux64' here:
+# Look for 'src/third_party/node/linux' here:
 # https://chromium.googlesource.com/chromium/src/+/HEAD/DEPS
 URI_VER = f"{URI_BASE}/DEPS"
-
-# Where in Chromium's tree they maintain their hashes.
-URI_NODE_BASE = f"{URI_BASE}/third_party/node"
-URI_LIN = "/".join((URI_NODE_BASE, "linux", "node-linux-x64.tar.gz.sha1"))
-URI_MAC = "/".join((URI_NODE_BASE, "mac", "node-darwin-x64.tar.gz.sha1"))
-URI_WIN = "/".join((URI_NODE_BASE, "win", "node.exe.sha1"))
 
 # File which records the node settings.
 NODE_SCRIPT = libdot.BIN_DIR / "node"
@@ -55,22 +50,43 @@ def update_file(var, value):
     NODE_SCRIPT.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def update_ver(uri, var):
-    """Update |var| in our tree with the version data from |uri|."""
-    deps = fetch_data(uri)
-    m = re.search(r"chromium-nodejs/([0-9.]+)", deps)
-    if not m:
-        logging.error("Unable to find node version in DEPS:\n%s", uri)
-    new_value = m.group(1)
-    logging.info("Updating %s with version %s", var, new_value)
-    update_file(var, new_value)
-
-
-def update_hash(uri, var):
-    """Update |var| in our tree with the hash data from |uri|."""
-    new_hash = fetch_data(uri)
+def update_hash(var: str, deps: Dict) -> None:
+    """Update |var| in our tree with the |new_hash|."""
+    # The structure expected is:
+    # {
+    #   ...
+    #   'dep_type': 'gcs',
+    #   'bucket': 'chromium-nodejs',
+    #   'objects': [ {
+    #     'object_name': 'fa98c6432de572206bc5519f85e9c96bd518b039',
+    #     'sha256sum': 'fb563633b5bfe2d4307075c54c6bb54664a3b5ec6bc811f5b1...',
+    #     'size_bytes': 50288755,
+    #     'generation': 1730835522207929,
+    #     'output_file': 'node-linux-x64.tar.gz',
+    #   } ]
+    # }
+    if deps["dep_type"] != "gcs" or deps["bucket"] != "chromium-nodejs":
+        logging.error("Unknown dep type: %s", deps)
+        return
+    objects = deps["objects"]
+    if len(objects) != 1:
+        logging.error("Too many objects: %s", objects)
+        return
+    new_hash = objects[0]["object_name"]
     logging.info("Updating %s with hash %s", var, new_hash)
     update_file(var, new_hash)
+
+
+def fetch_deps(uri: str) -> Dict:
+    """Fetch & parse Chromium DEPS file."""
+    data = fetch_data(uri)
+    # Very basic implementation of the format to get the data we care about.
+    context = {
+        "Str": str,
+        "Var": lambda x: x,
+    }
+    exec(compile(data, uri, "exec"), context)  # pylint: disable=exec-used
+    return context["deps"]
 
 
 def fetch_data(uri):
@@ -90,10 +106,10 @@ def main(argv):
     parser = get_parser()
     _opts = parser.parse_args(argv)
 
-    update_ver(URI_VER, "NODE_VER")
-    update_hash(URI_LIN, "NODE_LINUX_HASH")
-    update_hash(URI_MAC, "NODE_MAC_HASH")
-    update_hash(URI_WIN, "NODE_WIN_HASH")
+    deps = fetch_deps(URI_VER)
+    update_hash("NODE_LINUX_HASH", deps["src/third_party/node/linux"])
+    update_hash("NODE_MAC_HASH", deps["src/third_party/node/mac"])
+    update_hash("NODE_WIN_HASH", deps["src/third_party/node/win"])
 
 
 if __name__ == "__main__":
