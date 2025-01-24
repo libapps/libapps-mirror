@@ -15,11 +15,9 @@ import libdot
 
 # The hash of the node_modules that we maintain.
 # Allow a long line for easy automated updating.
-# pylint: disable=line-too-long
 NODE_MODULES_HASH = (
-    "a8883766ac35c101613cfb8a3b8a4e2813e409b7faa0703b3114c90e2ba4bac1"
+    "36d5634d76080f4d2744ac279aa13a8f8eb3b168455258156c2812603b0face7"
 )
-# pylint: enable=line-too-long
 
 # In sync with Chromium's DEPS file because it's easier to use something that
 # already exists than maintain our own.
@@ -40,11 +38,10 @@ NODE_MODULES_BASE_URI = (
     f"https://storage.googleapis.com/{NODE_MODULES_GS_FRAGMENT}"
 )
 
-# The node_modules & node/npm paths.
+# The node_modules & node paths.
 NODE_MODULES_DIR = libdot.LIBAPPS_DIR / "node_modules"
 NODE_BIN_DIR = NODE_MODULES_DIR / ".bin"
 NODE = NODE_BIN_DIR / "node"
-NPM = NODE_BIN_DIR / "npm"
 # Use a dotdir as npm expects to manage everything under node_modules/.
 NODE_DIR = NODE_MODULES_DIR / ".node"
 
@@ -103,11 +100,9 @@ def update():
             libdot.unpack(output, cwd=NODE_DIR)
             libdot.unlink(output)
 
-            # Create canonical symlinks for node & npm.
+            # Create canonical symlinks for node.
             path = next(NODE_DIR.glob("*/bin/node"))
             libdot.symlink(path, NODE)
-            path = next(NODE_DIR.glob("*/*/node_modules/npm/bin/npm-cli.js"))
-            libdot.symlink(path, NPM)
 
         # Mark the hash of this checkout.
         libdot.touch(hash_file)

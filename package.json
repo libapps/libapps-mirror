@@ -53,6 +53,7 @@
     "markdownlint-cli": "~0",
     "mocha": "~10",
     "mocha-headless-chrome": "~4",
+    "npm": "~10",
     "pkijs": "~2.1",
     "punycode": "~2",
     "raw-loader": "~4",
