@@ -19,7 +19,7 @@ import subprocess
 import sys
 import time
 import types
-from typing import Dict, List, Optional, Union
+from typing import Optional, Union
 import urllib.error
 import urllib.request
 
@@ -28,8 +28,8 @@ import urllib.request
 # NB: We cannot require newer versions than CrOS itself supports.
 assert sys.version_info >= (
     3,
-    6,
-), f"Python 3.6 or newer is required; found {sys.version}"
+    9,
+), f"Python 3.9 or newer is required; found {sys.version}"
 
 
 BIN_DIR = Path(__file__).resolve().parent
@@ -176,12 +176,12 @@ def cmdstr(cmd):
 
 
 def run(
-    cmd: List[str],
-    cmd_prefix: List[str] = None,
-    log_prefix: List[str] = None,
+    cmd: list[str],
+    cmd_prefix: list[str] = None,
+    log_prefix: list[str] = None,
     check: bool = True,
     cwd: str = None,
-    extra_env: Dict[str, str] = None,
+    extra_env: dict[str, str] = None,
     **kwargs,
 ):
     """Run |cmd| inside of |cwd| and exit if it fails.
@@ -200,14 +200,6 @@ def run(
     Returns:
       A subprocess.CompletedProcess instance.
     """
-    # Python 3.6 doesn't support capture_output.
-    if sys.version_info < (3, 7):
-        capture_output = kwargs.pop("capture_output", None)
-        if capture_output:
-            assert "stdout" not in kwargs and "stderr" not in kwargs
-            kwargs["stdout"] = subprocess.PIPE
-            kwargs["stderr"] = subprocess.PIPE
-
     # The |env| setting specifies the entire environment, so we need to manually
     # merge our |extra_env| settings into it before passing it along.
     if extra_env is not None:
@@ -252,7 +244,7 @@ def sha256(path: Union[Path, str]) -> str:
 def unpack(
     archive: Union[Path, str],
     cwd: Optional[Path] = None,
-    files: Optional[List[Union[Path, str]]] = (),
+    files: Optional[list[Union[Path, str]]] = (),
 ):
     """Unpack |archive| into |cwd|."""
     archive = Path(archive)
@@ -283,9 +275,9 @@ def unpack(
 
 def pack(
     archive: Union[Path, str],
-    paths: List[Union[Path, str]],
+    paths: list[Union[Path, str]],
     cwd: Optional[Path] = None,
-    exclude: Optional[List[Union[Path, str]]] = (),
+    exclude: Optional[list[Union[Path, str]]] = (),
 ):
     """Create an |archive| with |paths| in |cwd|.
 

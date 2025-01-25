@@ -11,12 +11,11 @@ import json
 import logging
 from pathlib import Path
 import sys
-from typing import List
 
 import libdot
 
 
-def filter_known_files(paths: List[Path]) -> List[Path]:
+def filter_known_files(paths: list[Path]) -> list[Path]:
     """Figure out what files this linter supports."""
     ret = []
     for path in paths:
@@ -84,7 +83,7 @@ def check_messages(path: Path, fix: bool = False) -> bool:
     return check_common(path, old_data, new_data, fix=fix)
 
 
-def check_files(paths: List[Path], fix: bool = False) -> bool:
+def check_files(paths: list[Path], fix: bool = False) -> bool:
     """Check all the JSON files."""
     ret = True
     for path in paths:

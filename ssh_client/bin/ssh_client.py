@@ -12,7 +12,6 @@ from pathlib import Path
 import re
 import shutil
 import sys
-from typing import List
 
 
 BIN_DIR = Path(__file__).resolve().parent
@@ -77,7 +76,7 @@ def emake(*args, **kwargs):
     run(["make", f"-j{jobs}"] + list(args), **kwargs)
 
 
-def get_mandoc_cmd(p: str) -> List[str]:
+def get_mandoc_cmd(p: str) -> list[str]:
     """Get the mandoc command for the specified package."""
     return [
         "mandoc",

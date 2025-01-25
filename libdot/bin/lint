@@ -10,7 +10,6 @@ import logging
 import os
 from pathlib import Path
 import sys
-from typing import List
 
 import libdot
 
@@ -45,7 +44,7 @@ def is_generated_path(path):
     )
 
 
-def get_known_files(basedir: Path) -> List[Path]:
+def get_known_files(basedir: Path) -> list[Path]:
     """Return list of files committed to the tree."""
     # -z appends \0 to each path, it doesn't delimit them.  So strip off the
     # trailing \0 to avoid a spurious '' entry at the end.
@@ -62,7 +61,7 @@ def get_known_files(basedir: Path) -> List[Path]:
     return [basedir / x for x in all_files if (basedir / x).exists()]
 
 
-def get_known_sources(basedir: Path) -> List[Path]:
+def get_known_sources(basedir: Path) -> list[Path]:
     """Get list of committed files that we could possibly lint."""
     return (
         x
@@ -101,7 +100,7 @@ def lint_whitespace_data(path: Path, data: str) -> bool:
     return ret
 
 
-def lint_whitespace_files(paths: List[Path]) -> bool:
+def lint_whitespace_files(paths: list[Path]) -> bool:
     """Basic whitespace checks on text files."""
     ret = True
 
@@ -114,7 +113,7 @@ def lint_whitespace_files(paths: List[Path]) -> bool:
     return ret
 
 
-def lint_html_files(paths: List[Path]) -> bool:
+def lint_html_files(paths: list[Path]) -> bool:
     """Basic lint checks on HTML files."""
     logging.info("Linting HTML files %s", libdot.cmdstr(paths))
     ret = True
@@ -134,13 +133,13 @@ def lint_html_files(paths: List[Path]) -> bool:
     return ret
 
 
-def lint_text_files(paths: List[Path]) -> bool:
+def lint_text_files(paths: list[Path]) -> bool:
     """Basic lint checks on HTML files."""
     logging.info("Linting text files %s", libdot.cmdstr(paths))
     return lint_whitespace_files(paths)
 
 
-def _get_default_paths(basedir: Path) -> List[Path]:
+def _get_default_paths(basedir: Path) -> list[Path]:
     """Get list of paths to lint by default."""
     most_files = sorted(
         x for x in get_known_sources(basedir) if x.suffix not in {".js"}

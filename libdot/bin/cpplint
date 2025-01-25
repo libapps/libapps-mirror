@@ -7,7 +7,6 @@
 
 from pathlib import Path
 import sys
-from typing import List
 
 import libdot
 
@@ -29,7 +28,7 @@ CPPLINT_URL = (
 CPPLINT = libdot.BIN_DIR / f".cpplint.{CHROMIUM_REF}"
 
 
-def filter_known_files(paths: List[Path]) -> List[Path]:
+def filter_known_files(paths: list[Path]) -> list[Path]:
     """Figure out what files this linter supports."""
     ret = []
     for path in paths:

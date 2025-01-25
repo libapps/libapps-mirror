@@ -11,7 +11,6 @@ import logging
 import shutil
 import subprocess
 import sys
-from typing import List
 
 import libdot
 
@@ -86,7 +85,7 @@ def get_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: List[str]) -> int:
+def main(argv: list[str]) -> int:
     """The main func!"""
     parser = get_parser()
     opts, args = parser.parse_known_args(argv)

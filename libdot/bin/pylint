@@ -12,7 +12,6 @@ import os
 from pathlib import Path
 import shutil
 import sys
-from typing import List
 
 import libdot
 
@@ -68,7 +67,7 @@ def convert_to_kokoro(data):
         }
 
 
-def filter_known_files(paths: List[Path]) -> List[Path]:
+def filter_known_files(paths: list[Path]) -> list[Path]:
     """Figure out what files this linter supports."""
     ret = []
     for path in paths:
@@ -95,17 +94,10 @@ def filter_known_files(paths: List[Path]) -> List[Path]:
 
 @functools.lru_cache(maxsize=1)
 def find_pylint():
-    """Figure out the name of the pylint tool.
-
-    It keeps changing with Python 2->3 migrations.  Fun.
-    """
+    """Figure out the name of the pylint tool."""
     # Prefer our vpython copy if possible.
     if shutil.which("vpython3"):
         return libdot.BIN_DIR / "pylint-vpython"
-
-    # Prefer pylint3 as that's what we want.
-    if shutil.which("pylint3"):
-        return "pylint3"
 
     # If there's no pylint, give up.
     if not shutil.which("pylint"):
@@ -115,18 +107,7 @@ def find_pylint():
         )
         sys.exit(1)
 
-    # Make sure pylint is using Python 3.
-    result = libdot.run(
-        ["pylint", "--version"], capture_output=True, encoding="utf-8"
-    )
-    if "Python 3" in result.stdout:
-        return "pylint"
-
-    logging.error(
-        "pylint does not support Python 3; please upgrade:\n%s",
-        result.stdout.strip(),
-    )
-    sys.exit(1)
+    return "pylint"
 
 
 def setup():

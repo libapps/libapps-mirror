@@ -7,13 +7,12 @@
 
 from pathlib import Path
 import sys
-from typing import List
 
 import kokoro
 import libdot  # pylint: disable=wrong-import-order
 
 
-def _get_default_paths(basedir: Path) -> List[Path]:
+def _get_default_paths(basedir: Path) -> list[Path]:
     """Get list of paths to lint by default."""
     kokoro_files = sorted(libdot.lint.get_known_sources(basedir))
 

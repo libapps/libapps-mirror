@@ -8,7 +8,6 @@
 import logging
 import re
 import sys
-from typing import Dict
 
 import libdot
 
@@ -50,7 +49,7 @@ def update_file(var, value):
     NODE_SCRIPT.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def update_hash(var: str, deps: Dict) -> None:
+def update_hash(var: str, deps: dict) -> None:
     """Update |var| in our tree with the |new_hash|."""
     # The structure expected is:
     # {
@@ -77,7 +76,7 @@ def update_hash(var: str, deps: Dict) -> None:
     update_file(var, new_hash)
 
 
-def fetch_deps(uri: str) -> Dict:
+def fetch_deps(uri: str) -> dict:
     """Fetch & parse Chromium DEPS file."""
     data = fetch_data(uri)
     # Very basic implementation of the format to get the data we care about.

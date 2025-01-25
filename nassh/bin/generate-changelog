@@ -9,7 +9,6 @@ import html
 import logging
 import os
 import sys
-from typing import List
 
 import nassh  # pylint: disable=wrong-import-order
 import libdot
@@ -23,7 +22,7 @@ CHANGELOG_ENTRY_TEMPLATE = """\
 """
 
 
-def generate_html(tag: str, entries: List[List[str]]):
+def generate_html(tag: str, entries: list[list[str]]):
     """Generate the changelog file from |entries|."""
     with open(CHANGELOG_TEMPLATE, "r", encoding="utf-8") as fp:
         template = fp.read()
@@ -38,7 +37,7 @@ def generate_html(tag: str, entries: List[List[str]]):
         fp.write(output)
 
 
-def get_entries(tag: str) -> List[List[str]]:
+def get_entries(tag: str) -> list[list[str]]:
     """Find all the commits since |tag|."""
     output = libdot.run(
         ["git", "log", "--format=%H %s", f"{tag}..HEAD"],
@@ -90,7 +89,7 @@ def get_parser():
     return parser
 
 
-def main(argv: List[str]):
+def main(argv: list[str]):
     """The main func!"""
     parser = get_parser()
     opts = parser.parse_args(argv)
