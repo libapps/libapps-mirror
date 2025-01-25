@@ -203,7 +203,7 @@ class VTScope:
 
         if self.data[self.start_position] == "\x1b":
             m = None
-            for (esc_name, pattern) in self.re_escapes:
+            for esc_name, pattern in self.re_escapes:
                 m = pattern.match(self.data, self.start_position + 1)
                 if m:
                     break

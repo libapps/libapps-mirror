@@ -276,7 +276,7 @@ def test():
     failures = test_lint() + test_unittests()
     if failures:
         logging.error("Some tests failed!  See above for details.")
-        for (step, pkg) in failures:
+        for step, pkg in failures:
             logging.error("  %s failed %s phase.", pkg, step)
         sys.exit(1)
 

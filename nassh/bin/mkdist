@@ -405,6 +405,7 @@ def main(argv):
         mkzip(False, "-dev", _stamp_dev, stamps[0], enable_zip=opts.zip)
         # Build the stable channel variants.
         mkzip(True, "", enable_zip=opts.zip)
+
         # Build the stable channel rollback variants.
         def _rollback(version):
             parts = list(int(x) for x in version.split("."))

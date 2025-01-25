@@ -28,7 +28,7 @@ def generate_html(tag: str, entries: List[List[str]]):
     with open(CHANGELOG_TEMPLATE, "r", encoding="utf-8") as fp:
         template = fp.read()
     output = ""
-    for (commit, summary) in entries:
+    for commit, summary in entries:
         output += CHANGELOG_ENTRY_TEMPLATE % {
             "commit": commit,
             "summary": html.escape(summary),

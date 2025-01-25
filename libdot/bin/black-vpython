@@ -9,7 +9,7 @@
 # network to see if there are any updates.
 
 # [VPYTHON:BEGIN]
-# python_version: "3.8"
+# python_version: "3.11"
 #
 # # Third party dependencies.  These are only listed because pylint itself needs
 # # them.  Feel free to add/remove anything here.
@@ -21,6 +21,10 @@
 # wheel: <
 #   name: "infra/python/wheels/mypy-extensions-py3"
 #   version: "version:0.4.3"
+# >
+# wheel: <
+#   name: "infra/python/wheels/packaging-py3"
+#   version: "version:24.1"
 # >
 # wheel: <
 #   name: "infra/python/wheels/pathspec-py3"
@@ -43,10 +47,10 @@
 #
 # wheel: <
 #   name: "infra/python/wheels/black-py3"
-#   version: "version:22.3.0"
+#   version: "version:23.1.0"
 # >
 #
 # [VPYTHON:END]
 
-# pylint: disable=import-error,unused-import
+# pylint: disable=import-error,no-name-in-module,unused-import
 import black.__main__
