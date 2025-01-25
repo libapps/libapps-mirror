@@ -35,7 +35,7 @@
     "eslint": "~8",
     "http-server": "~14",
     "license-checker": "~25",
-    "mocha": "~10",
+    "mocha": "~11",
     "mocha-headless-chrome": "~4",
     "rollup": "~2",
     "terser": "~5"

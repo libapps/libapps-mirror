@@ -31,7 +31,7 @@
     "@rollup/plugin-node-resolve": "~15",
     "chai": "~4",
     "eslint": "~8",
-    "mocha": "~10",
+    "mocha": "~11",
     "mocha-headless-chrome": "~4",
     "terser": "~5"
   },
