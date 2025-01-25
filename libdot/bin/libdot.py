@@ -80,7 +80,7 @@ def setup_logging(debug=False, quiet=0):
         level = logging.WARNING
     elif quiet <= 2:
         level = logging.ERROR
-    elif quiet <= 3:
+    else:  # if quiet <= 3:
         level = logging.CRITICAL
 
     formatter = ColoredFormatter(fmt, datefmt)
@@ -119,7 +119,10 @@ class ArgumentParser(argparse.ArgumentParser):
 
     def add_common_arguments(self, short_options=True):
         """Add our custom/consistent set of command line flags."""
-        getopts = lambda *args: args if short_options else args[1:]
+
+        def getopts(*args):
+            return args if short_options else args[1:]
+
         self.add_argument(
             *getopts("-d", "--debug"),
             action="store_true",
