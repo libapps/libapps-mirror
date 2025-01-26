@@ -1,3 +1,34 @@
+# 0.68, 2025-02-03, Mosh WASM work.
+
+* wassh: Fix popup on disconnection when using relay.
+* relays: Add egress-domain parameter support.
+* connect: Drop unused startup message argument.
+* ssh_client: openssl: Respect custom CFLAGS too.
+* ssh_client: Improve build-time support.
+* ssh_client: wassh-libc-sup: Implement very basic recvmsg.
+* ssh_client: mandoc: Unify command to avoid duplication a bit.
+* wassh: sockets: Fix recvmsg address setup.
+* ssh_client: Add ncurses 6.1.
+* wassh: sockets: Support MSG_DONTWAIT non-blocking reads.
+* wassh: sockets: Refactor base Socket class for UDP.
+* ssh_client: wassh-libc-sup: Stub out rlimit APIs.
+* ssh_client: wassh-libc-sup: Stub out sigprocmask.
+* ssh_client: wassh-libc-sup: Stub out C++ exceptions ABIs.
+* wasi-js-bindings: Fix monotonic clock resolution.
+* wasi-js-bindings: poll: Only deliver signals when wassh ABI is available.
+* wassh: sockets: Cleanup orphaned UDP sockets too.
+* ssh_client: wassh-libc-sup: Stub out some pty APIs.
+* ssh_client: wasi-sdk: Update to 24.0 release.
+* ssh_client: binaryen: Update to 118 release.
+* ssh_client: openssh: Add missing openssl/bn.h include.
+* ssh_client: mosh: Add shortcut to get to connect dialog.
+* ssh_client: mosh: Update to 1.4.0 release.
+* nassh: Update translations.
+* ssh_client: mosh: Update to libssh 0.9.8.
+* ssh_client: bazel: Drop old 0.17.
+* ssh_client: mosh-chrome: Update to newer version for newer bazel.
+* ssh_client: bazel: Import version 5.
+
 # 0.67, 2024-08-12, Omnibox fixes.
 
 * omnibox: Fix ad-hoc connections.
