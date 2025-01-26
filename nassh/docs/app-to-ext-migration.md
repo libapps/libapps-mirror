@@ -114,29 +114,44 @@ https://dev.chromium.org/chromium-os/developer-information-for-chrome-os-devices
     non-enterprise users.
     *   The [Secure Shell extension] will work on all platforms.
     *   The Secure Shell app variant will still work on CrOS, but nowhere else.
+*   Dec 2020: [Manifest V3 initial support].
+    *   No impact on us at this point.
+*   Oct 2021: [Chrome Apps extension] announced.
+    *   Chrome Apps on CrOS support extended until at least Jan 2025.
+*   Apr 2022: Secure Shell 0.46 released with initial WASM port.
+    *   It's pre-alpha at this stage with KI.
+    *   Used automatically when NaCl is not available.
+    *   macOS on arm64 always uses WASM since it never had NaCl support.
+*   Sep 2022: WASM (alpha) port reaches MVP.
+    *   The dev extension uses WASM by default.
+*   Oct 2022: Secure Shell 0.51 released with MVP WASM port.
+    *   0.5% of runs automatically use WASM in stable extension.
+*   Jun 2023: Secure Shell 0.53 migrates to MV3.
+    *   SSH & SFTP still work fine, both for NaCl & WASM.
+    *   SFTP mounting breaks due to MV3 changes.
+    *   NaCl<->WASM automatic state migration no longer works.
+    *   Secure Shell extension now requires Chrome 108 (for MV3 and WASM).
+*   Nov 2023: [Manifest V2 EOL resumed].
+    *   Doesn't have an immediate impact on app or extension.
+    *   Chrome Apps won't work with MV3, so this sets EOL on Secure Shell app.
+*   Dec 2023: Chrome 120 stable released.
+    *   NaCl on Windows & macOS dropped, so only WASM port works there.
+*   Jan 2024: Chrome 121 stable released.
+    *   NaCl on Linux dropped, so only WASM port works there.
+*   Mar 2024: Secure Shell 0.63 released.
+    *   5% of runs automatically use WASM in stable extension.
+*   Mar 2024: Secure Shell 0.64 released.
+    *   WASM port reaches beta status.
+*   May 2024: [Manifest V2 phase-out].
+    *   No impact on Secure Shell extension since it's already MV3.
+*   Nov 2024: NaCl EOL announced via CWS e-mails.
+    *   CrOS 132 (released in Jan 2025) will be the last to support NaCl.
+    *   CrOS users on newer versions can only use WASM.
+*   Jan 2025: CrOS 132 goes stable, and CrOS 133 goes beta.
+*   Feb 2025: CrOS 133 goes stable.
+    *   Chrome disabled NaCl on consumer devices, so only WASM works.
 
-Now for things we're planning for but have not yet happened.
-These plans are subject to change of course.
-
-*   *ETA 2020Q4*: Secure Shell extension supports WASM.
-    *   Direct connections use [chrome.sockets API].
-    *   Secure Shell App still uses NaCl (and direct access through it).
-*   Dec 2020: Chrome Apps support on Windows/macOS/Linux ending for everyone.
-    *   The [Secure Shell extension] will work on all platforms.
-    *   The Secure Shell app variant will still work on CrOS, but nowhere else.
-*   Jun 2021: End of support for NaCl, PNaCl, and PPAPI APIs.
-    *   The [Secure Shell extension] should be migrated to WASM by this point
-        and so it won't be using NaCl, PNaCl, or PPAPI anymore.
-    *   *TBD*: Whether the Secure Shell app will support both.
-*   Jun 2021: Chrome Apps no longer working on CrOS for non-enterprise users.
-    *   The [Secure Shell extension] will work on all platforms.
-    *   The Secure Shell app will no longer work.
-    *   *TBD*: Whether the Secure Shell app will change in situ to an extension.
-*   Jun 2022: Chrome Apps no longer working on CrOS for everyone.
-    *   The [Secure Shell extension] will work on all platforms.
-    *   The Secure Shell app will no longer work.
-
-We will probably keep the Secure Shell App as a Chrome App and using NaCl for
+We will keep the Secure Shell App as a Chrome App and using NaCl for
 [EOL CrOS devices](#EOL) stuck on <M80.
 
 
@@ -145,8 +160,12 @@ We will probably keep the Secure Shell App as a Chrome App and using NaCl for
 [Chrome Apps launch]: https://blog.chromium.org/2013/02/chrome-app-launcher-developer-preview.html
 [Chrome Apps deprecation]: https://blog.chromium.org/2016/08/from-chrome-apps-to-web.html
 [Chrome Apps EOL]: https://blog.chromium.org/2020/01/moving-forward-from-chrome-apps.html
+[Chrome Apps extension]: https://blog.chromium.org/2021/10/extending-chrome-app-support-on-chrome.html
 [chrome.sockets API]: https://developer.chrome.com/apps/manifest/sockets
 [extension was launched]: https://groups.google.com/a/chromium.org/d/topic/chromium-hterm/6FdjiDky4uI/discussion
+[Manifest V2 EOL resumed]: https://developer.chrome.com/blog/resuming-the-transition-to-mv3
+[Manifest V2 phase-out]: https://blog.chromium.org/2024/05/manifest-v2-phase-out-begins.html
+[Manifest V3 initial support]: https://blog.chromium.org/2020/12/manifest-v3-now-available-on-m88-beta.html
 [PNaCl deprecation]: https://blog.chromium.org/2017/05/goodbye-pnacl-hello-webassembly.html
 [Secure Shell extension]: https://chrome.google.com/webstore/detail/iodihamcpbpeioajjeobimgagajmlibd
 [stops displaying Chrome Apps]: https://web.archive.org/web/20180224192909/https://plus.google.com/+NobleAckerson/posts/i8uLr9rpGwR
