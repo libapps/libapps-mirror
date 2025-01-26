@@ -1803,7 +1803,7 @@ hterm.Terminal.prototype.setupScrollPort_ = function() {
   background-color: rgb(var(--hterm-foreground-color)) !important;
 }
 .cursor-node[visible="false"] {
-  opacity: 1;
+  opacity: 0;
 }
 menu {
   background: #fff;
