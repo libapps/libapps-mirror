@@ -138,6 +138,8 @@ def run_docker(opts, docker_args=(), cmd_args=()):
     # The kokoro build detects this env var for presubmit.
     if opts.type == "presubmit":
         base_cmd += ["--env", "KOKORO_GERRIT_REVISION=HEAD"]
+    elif opts.type == "lint-test":
+        base_cmd += ["--env", "LIBAPPS_LINT_TEST=false"]
 
     cmd = base_cmd + list(docker_args) + [CONTAINER_NAME] + list(cmd_args)
     return sudo_run(opts, cmd, cwd=libdot.LIBAPPS_DIR, check=False)
@@ -173,7 +175,7 @@ def get_parser():
     )
     parser.add_argument(
         "--type",
-        choices=("presubmit", "release"),
+        choices=("lint-test", "presubmit", "release"),
         default="presubmit",
         help="Type of build to run (default: %(default)s)",
     )

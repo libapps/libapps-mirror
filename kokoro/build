@@ -50,6 +50,12 @@ DEPOT_TOOLS_URI = "https://chromium.googlesource.com/chromium/tools/depot_tools"
 DEPOT_TOOLS_DIR = kokoro.LIBAPPS_DIR / "depot_tools"
 
 
+def is_lint_test_only() -> bool:
+    """Whether we're only linting+testing the current tree."""
+    # This env var is passed down by our script.
+    return bool(os.environ.get("LIBAPPS_LINT_TEST"))
+
+
 def is_presubmit():
     """Whether we're testing a pending CL."""
     # This env var is passed down by kokoro.
@@ -64,6 +70,10 @@ def should_build_plugin():
     changes are relevant.
     """
     logging.info("Detecting whether to build plugin")
+
+    if is_lint_test_only():
+        logging.info("Only running lint+unittest")
+        return False
 
     # Release builders always build the plugin.
     if not is_presubmit():
