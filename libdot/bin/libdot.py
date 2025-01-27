@@ -512,6 +512,7 @@ class HelperProgram:
 
 
 # Wrappers around libdot/bin/ programs for other tools to access directly.
+# keep-sorted start
 black = HelperProgram("black")
 closure_compiler = HelperProgram("closure-compiler")
 cpplint = HelperProgram("cpplint")
@@ -525,3 +526,5 @@ minify_translations = HelperProgram("minify-translations")
 node = HelperProgram("node")
 npm = HelperProgram("npm")
 pylint = HelperProgram("pylint")
+sync_package_json = HelperProgram("sync-package-json")
+# keep-sorted end

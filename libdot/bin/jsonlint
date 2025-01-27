@@ -83,6 +83,15 @@ def check_messages(path: Path, fix: bool = False) -> bool:
     return check_common(path, old_data, new_data, fix=fix)
 
 
+def check_package(path: Path, fix: bool = False) -> bool:
+    """Check style on a package.json file."""
+    with open(path, "r", encoding="utf-8") as fp:
+        old_data = fp.read()
+
+    new_data = libdot.sync_package_json.format_data(path, old_data)
+    return check_common(path, old_data, new_data, fix=fix)
+
+
 def check_files(paths: list[Path], fix: bool = False) -> bool:
     """Check all the JSON files."""
     ret = True
@@ -96,6 +105,8 @@ def check_files(paths: list[Path], fix: bool = False) -> bool:
         logging.debug("Checking %s", path)
         if path.name == "messages.json":
             ret &= check_messages(path, fix=fix)
+        elif path.name == "package.json":
+            ret &= check_package(path, fix=fix)
         else:
             ret &= check_generic(path, fix=fix)
     return ret

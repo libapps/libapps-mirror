@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+# Copyright 2025 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Helper to keep package.json files in sync."""
+
+import functools
+import json
+import logging
+from pathlib import Path
+import sys
+
+import libdot
+
+
+@functools.lru_cache(maxsize=1)
+def _get_common_obj() -> dict:
+    """Return top-level package.json obj."""
+    common_file = libdot.LIBAPPS_DIR / "package.json"
+    return json.loads(common_file.read_bytes())
+
+
+def check_obj(file: Path, obj: dict) -> bool:
+    """Check whether the package.json obj is up-to-date."""
+    common_obj = _get_common_obj()
+    common_pkgs = common_obj["dependencies"]
+
+    def _check_deps(key: str) -> bool:
+        ret = True
+        deps = obj.get(key, {})
+        for pkg, ver in deps.items():
+            common_ver = common_pkgs.get(pkg, ver)
+            if common_ver != ver:
+                logging.warning(
+                    "%s/%s: dep %s is old: %s -> %s",
+                    file.parent.name,
+                    file.name,
+                    pkg,
+                    ver,
+                    common_ver,
+                )
+                deps[pkg] = common_ver
+                ret = False
+        return ret
+
+    return _check_deps("dependencies") | _check_deps("devDependencies")
+
+
+def format_data(file: Path, data: str) -> str:
+    """Check whether the package.json data is up-to-date."""
+    obj = json.loads(data)
+    check_obj(file, obj)
+    return json.dumps(obj, ensure_ascii=False, indent="  ")
+
+
+def check_file(file: Path, fix: bool = False) -> bool:
+    """Check whether the package.json is up-to-date."""
+    old_data = file.read_bytes()
+    new_data = format_data(file, old_data)
+    if fix and old_data != new_data:
+        with file.open("w", encoding="utf-8") as fp:
+            fp.write(new_data)
+            fp.write("\n")
+        return False
+    return True
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--fix",
+        help="Update old deps in package.json",
+    )
+    parser.add_argument("files", nargs="*", type=Path)
+    return parser
+
+
+def main(argv):
+    """The main func!"""
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+
+    files = opts.files
+    if not files:
+        files = [
+            libdot.LIBAPPS_DIR / x / "package.json"
+            for x in ("libdot", "hterm", "nassh")
+        ]
+
+    return 0 if all(check_file(x, opts.fix) for x in files) else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
