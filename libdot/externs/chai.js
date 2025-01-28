@@ -26,6 +26,13 @@ chai.config;
 chai.assert = function(expression, message) {};
 
 /**
+ * Shortcut that we always export in our test runner.
+ *
+ * @const
+ */
+var assert = chai.assert;
+
+/**
  * @param {*} actual
  * @param {*} expected
  * @param {string=} message

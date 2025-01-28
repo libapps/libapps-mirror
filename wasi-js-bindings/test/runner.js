@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
-
 /**
  * @fileoverview WASI main test runner.
  */
@@ -18,7 +16,7 @@ chai.config.showDiff = true;
 chai.config.truncateThreshold = 0;
 
 // Add a global shortcut to the assert API.
-const assert = chai.assert;
+globalThis['assert'] = chai.assert;
 
 // Catch any random errors before the test runner runs.
 let earlyError = null;
