@@ -12,7 +12,7 @@ except for raising the banner size to 8k.  It was only increased to 255.
      name = "libssh",
 -    remote = "https://github.com/rpwoodbu/libssh.git",
 -    commit = "cdd4f3e3efb8758a53ebf34ac7b34d74d217158d", # branch = "mosh-chrome-patches"
-+    url = "https://www.libssh.org/files/0.9/libssh-0.9.8.tar.xz",
++    url = "https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell/distfiles/libssh-0.9.8.tar.xz",
 +    sha256 = "9f834b732341d428d67bbe835b7d10ae97ccf25d6f5bd0288fa51ae683f2e7cd",
 +    strip_prefix = "libssh-0.9.8",
      build_file = "BUILD.libssh",
