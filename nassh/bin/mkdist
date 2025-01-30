@@ -406,15 +406,6 @@ def main(argv):
         # Build the stable channel variants.
         mkzip(True, "", enable_zip=opts.zip)
 
-        # Build the stable channel rollback variants.
-        def _rollback(version):
-            parts = list(int(x) for x in version.split("."))
-            parts[-1] += 1
-            parts += [0, 1]
-            return ".".join(str(x) for x in parts)
-
-        mkzip(True, "-rollback", _rollback, enable_zip=opts.zip)
-
     # Never minify, maybe gzip.
     mkcrosh(False, True, enable_zip=opts.zip)
 
