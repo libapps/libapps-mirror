@@ -4,19 +4,22 @@
 
 /**
  * @fileoverview WASI main test runner.
+ * @suppress {moduleLoad} closure compiler can't handle node_modules/.
  */
+
+import {assert, config} from '../../node_modules/chai/chai.js';
 
 // Setup the mocha framework.
 mocha.setup('bdd');
 mocha.checkLeaks();
 
 // Make failure output more useful.
-chai.config.includeStack = true;
-chai.config.showDiff = true;
-chai.config.truncateThreshold = 0;
+config.includeStack = true;
+config.showDiff = true;
+config.truncateThreshold = 0;
 
 // Add a global shortcut to the assert API.
-globalThis['assert'] = chai.assert;
+globalThis['assert'] = assert;
 
 // Catch any random errors before the test runner runs.
 let earlyError = null;
