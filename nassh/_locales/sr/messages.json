@@ -417,7 +417,7 @@
 		"message": "Боја позадине за текст без других атрибута боје."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS вредност за слику у позадини. Оставите празно поље ако нема слике.\n\nНа пример:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS вредност за слику у позадини. Оставите празно поље ако нема слике.\n\nНа пример:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS вредност за положај слике у позадини.\n\nНа пример:\n  10% 10%\n  center"

@@ -537,7 +537,7 @@
 		"message": "Consente di stabilire quale tasto del mouse usare per incollare.\n\nIn caso di rilevamento automatico verrà usato il tasto centrale del mouse sulle piattaforme diverse da X11 (incluso ChromeOS). Su X11 verrà usato il tasto destro del mouse (dato che la funzione per la gestione delle finestre dovrebbe usare il tasto centrale del mouse per incollare).\n\n0 = tasto sinistro (principale).\n1 = tasto centrale (ausiliario).\n2 = tasto destro (secondario).\n\nQuesta opzione è indipendente dall'impostazione relativa al clic con il tasto destro del mouse per incollare.\n\nNota: i tasti principale e secondario vengono gestiti automaticamente in base al tipo di mouse, per utenti destri e mancini."
 	},
 	"hterm_pref_mouse_right_click_paste": {
-		"message": "Clic con il pulsante destro del mouse per incollare.\n\nQuesta opzione è indipendente dall'impostazione \"mouse-paste-button\".\n\nNota: i pulsanti principale e secondario vengono gestiti automaticamente in base al tipo di mouse, per utenti destri e mancini."
+		"message": "Clic con il tasto destro del mouse per incollare.\n\nQuesta opzione è indipendente dall'impostazione \"mouse-paste-button\".\n\nNota: i tasti principale e secondario vengono gestiti automaticamente in base al tipo di mouse, per utenti destri e mancini."
 	},
 	"hterm_pref_page_keys_scroll": {
 		"message": "Se il valore è vero, con i tasti Pagina su/Pagina giù è possibile controllare la barra di scorrimento del terminale e i tasti Maiusc + Pagina su/Maiusc + Pagina giù vengono inviati all'host remoto. Se il valore è falso, i tasti Pagina su/Pagina giù vengono inviati all'host remoto, mentre i tasti Maiusc + Pagina su/Maiusc + Pagina giù consentono di scorrere."

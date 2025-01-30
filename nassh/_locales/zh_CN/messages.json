@@ -1317,7 +1317,7 @@
 		"message": "终端"
 	},
 	"terminal_title_theme": {
-		"message": "主题背景"
+		"message": "主题"
 	},
 	"terminal_tmux_controller_encounter_error": {
 		"message": "Tmux 控制器遇到了错误："

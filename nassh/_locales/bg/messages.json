@@ -417,7 +417,7 @@
 		"message": "Цветът на фона на текста, който няма други атрибути за цвят."
 	},
 	"hterm_pref_background_image": {
-		"message": "Стойност в CSS за фоновото изображение. За да няма изображение, не посочвайте стойност.\n\nНапример:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Стойност в CSS за фоновото изображение. За да няма изображение, не посочвайте стойност.\n\nНапример:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Стойност в CSS за позицията на фоновото изображение.\n\nНапример:\n  10% 10%\n  center"

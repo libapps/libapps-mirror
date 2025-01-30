@@ -417,7 +417,7 @@
 		"message": "Teksto fono spalva be jokių kitų spalvų atributų."
 	},
 	"hterm_pref_background_image": {
-		"message": "Fono vaizdo CSS kalbos vertė. Palikite tuščią, jei nėra vaizdo.\n\nPavyzdžiui:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Fono vaizdo CSS kalbos vertė. Palikite tuščią, jei nėra vaizdo.\n\nPavyzdžiui:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Fono vaizdo pozicijos CSS kalbos vertė.\n\nPavyzdžiui:\n  10% 10%\n  center"

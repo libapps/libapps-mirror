@@ -417,7 +417,7 @@
 		"message": "A cor de fundo para o texto sem outro atributo de cor."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valor CSS da imagem de fundo. Deixe-o vazio quando não há imagem.\n\nPor exemplo:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valor CSS da imagem de fundo. Deixe-o vazio quando não há imagem.\n\nPor exemplo:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valor CSS da posição da imagem de fundo.\n\nPor exemplo:\n  10% 10%\n  center"
@@ -1353,7 +1353,7 @@
 		"message": "Copie para a área de transferência a partir de emacs/vim/etc… com OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Converse no chat com outros utilizadores de hterm/Secure Shell através de chromium-hterm@chromium.org: https://hterm.org/x/contact"
+		"message": "Converse com outros utilizadores de hterm/Secure Shell através de chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Encontrou um erro?  Quer pedir uma nova funcionalidade?  Informe-nos: https://hterm.org/x/ssh/newbug"

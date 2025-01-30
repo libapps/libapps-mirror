@@ -1056,7 +1056,7 @@
 		"message": "Registrer protokolhandlere"
 	},
 	"protocol_register_explain": {
-		"message": "Knappen nedenfor forsøger at registrere handlere for alle de protokoller, vi understøtter. Dermed kan vi f.eks. håndtere links af typen ssh:// direkte. Der vises en meddelelse i browseren for hver protokol. Du skal derfor bekræfte/acceptere hver meddelelse, når den vises. Hvis der ikke vises nogen meddelelser, kan du se tips til fejlfinding i den næste sektion."
+		"message": "Knappen nedenfor forsøger at registrere handlere for alle de protokoller, vi understøtter. Dermed kan vi f.eks. håndtere links af typen ssh:// direkte. Der vises en meddelelse i browseren for hver protokol. Du skal derfor bekræfte/acceptere hver meddelelse, når den vises. Hvis der ikke vises nogen meddelelser, kan du se tip til fejlfinding i den næste sektion."
 	},
 	"protocol_register_explain_settings": {
 		"message": "Hvis vi allerede har registreret handlere, eller tidligere forsøg på registrering blev afvist, vises der ikke flere meddelelser. Åbn dialogboksen nedenfor, og tjek derefter indstillingerne for den registrerede handler i sektionerne med SSH, SFTP osv. Hvis programmet er blokeret, kan du slette indstillingerne, hvilket giver dig mulighed for at prøve registrering igen. Hvis programmet allerede er registreret, men ikke er angivet som din standardhandler, kan du også ændre standardhandleren."

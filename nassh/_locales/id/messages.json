@@ -750,7 +750,7 @@
 		"message": "keluar"
 	},
 	"nasftp_cmd_exit_help": {
-		"message": "Putuskan koneksi"
+		"message": "Berhenti hubungkan"
 	},
 	"nasftp_cmd_get": {
 		"message": "download"

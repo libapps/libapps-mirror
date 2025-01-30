@@ -33,7 +33,7 @@
 		"message": "$1 no és compatible amb aquesta versió de Chrome"
 	},
 	"command_startup_failed": {
-		"message": "S'ha produït un error en l'execució de l'ordre $1: $2"
+		"message": "Hi ha hagut un error en l'execució de l'ordre $1: $2"
 	},
 	"confirm_button_label": {
 		"message": "Confirma"
@@ -417,7 +417,7 @@
 		"message": "Color de fons per al text que no té cap altre atribut de color."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valor CSS de la imatge de fons. Deixa'l en blanc si no vols que es mostri cap imatge.\n\nPer exemple:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valor CSS de la imatge de fons. Deixa'l en blanc si no vols que es mostri cap imatge.\n\nPer exemple:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valor CSS de la posició de la imatge de fons.\n\nPer exemple:\n  \"10% 10%\"\n  \"center\""
@@ -981,7 +981,7 @@
 		"message": "Vols tornar a connectar (predeterminat) [R], triar una altra connexió [C] o sortir [X]?"
 	},
 	"relay_auth_error": {
-		"message": "S'ha produït un error en fer l'autenticació amb el servidor de retransmissió: $1"
+		"message": "Hi ha hagut un error en fer l'autenticació amb el servidor de retransmissió: $1"
 	},
 	"relay_retry": {
 		"message": "S'està tornant a provar..."

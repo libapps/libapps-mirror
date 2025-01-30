@@ -62,6 +62,9 @@
 	"enter_keycap": {
 		"message": "[SARTU]"
 	},
+	"faq_menu_label": {
+		"message": "Maiz egiten diren galderak"
+	},
 	"field_argstr_placeholder": {
 		"message": "Agindu-lerroko argumentu gehiago"
 	},
