@@ -131,6 +131,9 @@ https://dev.chromium.org/chromium-os/developer-information-for-chrome-os-devices
     *   SFTP mounting breaks due to MV3 changes.
     *   NaCl<->WASM automatic state migration no longer works.
     *   Secure Shell extension now requires Chrome 108 (for MV3 and WASM).
+*   Sep 2023: Chrome 117 stable released.
+    *   NaCl on Windows & macOS & Linux disabled by default, so WASM used.
+    *   Policies/flags can re-enable NaCl, but practically most people don't.
 *   Nov 2023: [Manifest V2 EOL resumed].
     *   Doesn't have an immediate impact on app or extension.
     *   Chrome Apps won't work with MV3, so this sets EOL on Secure Shell app.
@@ -145,14 +148,20 @@ https://dev.chromium.org/chromium-os/developer-information-for-chrome-os-devices
 *   May 2024: [Manifest V2 phase-out].
     *   No impact on Secure Shell extension since it's already MV3.
 *   Nov 2024: NaCl EOL announced via CWS e-mails.
-    *   CrOS 132 (released in Jan 2025) will be the last to support NaCl.
+    *   CrOS 132 (released in Jan 2025) will be the last to support NaCl for
+        unmanaged and consumer users, but it will be disabled by default in that
+        release.
+    *   CrOS 138 (released in Jul 2025) will be the last to support NaCl at all.
     *   CrOS users on newer versions can only use WASM.
-*   Jan 2025: CrOS 132 goes stable, and CrOS 133 goes beta.
-*   Feb 2025: CrOS 133 goes stable.
-    *   Chrome disabled NaCl on consumer devices, so only WASM works.
+*   Jan 2025: CrOS 132 goes stable.
+    *   Chrome disabled NaCl on consumer devices by default, so only WASM works.
+*   Jul 2025: CrOS 138 goes stable.
+    *   The last version with NaCl support, and a LTS release.
+*   Apr 2026: CrOS 138 (LTS) last refresh.
+    *   The last point where NaCl works for managed devices.
 
 We will keep the Secure Shell App as a Chrome App and using NaCl for
-[EOL CrOS devices](#EOL) stuck on <M80.
+[EOL CrOS devices](#EOL) stuck on <M80 until the CWS forces it to be taken down.
 
 
 [7DA]: https://support.google.com/analytics/answer/6171863
