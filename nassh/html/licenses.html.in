@@ -3,9 +3,9 @@
 <head>
   <meta charset='utf-8'/>
   <title i18n='{"_": "LICENSES_TITLE"}'></title>
-  <link rel='stylesheet' href='../third_party/chrome-bootstrap/chrome-bootstrap.css'></link>
-  <link rel='stylesheet' href='../css/licenses.css'></link>
-  <link rel='stylesheet' href='../css/chrome-bootstrap-darkmode.css'></link>
+  <link rel='stylesheet' href='../third_party/chrome-bootstrap/chrome-bootstrap.css'/>
+  <link rel='stylesheet' href='../css/licenses.css'/>
+  <link rel='stylesheet' href='../css/chrome-bootstrap-darkmode.css'/>
 
   <script type='module' src='../js/licenses.js'></script>
 </head>
