@@ -8,7 +8,7 @@ SRCDIR := $(CURDIR)
 OUTPUT ?= $(SRCDIR)/out
 
 CC ?= clang
-CFLAGS ?= -Ofast
+CFLAGS ?= -O3 -ffast-math
 CFLAGS += -g
 CPPFLAGS += \
 	-DHAVE_CRYPT_H \
