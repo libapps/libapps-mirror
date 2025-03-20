@@ -145,7 +145,7 @@ async function skeRefresh(io) {
 
   if (result.type !== 'error_response') {
     // Refresh the certificate if it expires in the next hour.
-    const hoursLeft = Math.floor((result.expiry - now) / 60 / 60);
+    const hoursLeft = Math.max(0, Math.floor((result.expiry - now) / 60 / 60));
     io.println(localize('SSH_CERT_CHECK_RESULT', [hoursLeft]));
     if (hoursLeft < 1) {
       io.showOverlay(localize('SSH_CERT_CHECK_REFRESH'));
@@ -307,7 +307,9 @@ export async function gcseRefreshCert(io) {
 
       if (result.status === 'OK') {
         // Refresh the certificate if it expires in the next hour.
-        const hoursLeft = Math.floor((result.expires - now) / 60 / 60);
+        const hoursLeft = Math.max(
+            0,
+            Math.floor((result.expires - now) / 60 / 60));
         io.println(localize('SSH_CERT_CHECK_RESULT', [hoursLeft]));
         if (hoursLeft < 1) {
           io.showOverlay(localize('SSH_CERT_CHECK_REFRESH'));
