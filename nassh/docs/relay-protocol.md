@@ -561,7 +561,9 @@ Then use connect to the server on port `8080` with `--proxy-mode=websockify`.
 [nassh_relay_corp.js]: ../js/nassh_relay_corp.js
 [nassh_relay_corpv4.js]: ../js/nassh_relay_corpv4.js
 [nassh_relay_sshfe.js]: ../js/nassh_relay_sshfe.js
+[nassh_relay_websockify.js]: ../js/nassh_relay_websockify.js
 [nassh_stream_relay_corp.js]: ../js/nassh_stream_relay_corp.js
 [nassh_stream_relay_corpv4.js]: ../js/nassh_stream_relay_corpv4.js
 [nassh_stream_relay_sshfe.js]: ../js/nassh_stream_relay_sshfe.js
+[nassh_stream_relay_websockify.js]: ../js/nassh_stream_relay_websockify.js
 [Options]: ./options.md
