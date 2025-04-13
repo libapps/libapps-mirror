@@ -71,6 +71,7 @@ def get_parser():
     parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--fix",
+        action="store_true",
         help="Update old deps in package.json",
     )
     parser.add_argument("files", nargs="*", type=Path)
@@ -89,7 +90,9 @@ def main(argv):
             for x in ("libdot", "hterm", "nassh")
         ]
 
-    return 0 if all(check_file(x, opts.fix) for x in files) else 1
+    # Run all the tests all the time to get full feedback.  Don't exit on the
+    # first error as that makes it more difficult to iterate in the CQ.
+    return 1 if sum(check_file(x, opts.fix) for x in files) else 0
 
 
 if __name__ == "__main__":
