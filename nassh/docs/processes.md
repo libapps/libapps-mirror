@@ -10,19 +10,22 @@ All new releases first go through the dev version of the extension.  This way
 we can get early feedback from testers on obvious issues without breaking the
 (much larger) stable user base.
 
-https://chrome.google.com/webstore/developer/detail/okddffdblfhhnmhodogpojmfkjmhinfp<br>
-https://chrome.google.com/webstore/developer/detail/algkcnfjnajfhgimadimbjhmpaeohhln
+https://chrome.google.com/webstore/detail/okddffdblfhhnmhodogpojmfkjmhinfp<br>
+https://chrome.google.com/webstore/detail/algkcnfjnajfhgimadimbjhmpaeohhln
 
 ### Nightly Build Process
 
-New developer builds are created and signed automatically by internal Google
-tools from the latest git revisions in the tree.
-That means the actual creation of the CRX archive is not run by local developers
-(anymore) as the [CWS] will block unsigned archives.
+New developer builds are created & signed & uploaded automatically by internal
+Google tools from the latest git revisions in the tree.
+That means the actual creation & publishing of the CRX archive is not run by
+local developers (anymore) as the [CWS] will block unsigned archives.
+
+We no longer announce dev releases since we switched to automated builds.
 
 ### Getting the CRX
 
 Googlers use `mpm` to download the CRX files.
+This can be helpful for debugging purposes, but isn't necessary otherwise.
 
 Locate the CRX from the [mpm browser].
 Drill down into the `app-dev` and `extension-dev` packages.
@@ -41,19 +44,6 @@ $ rm -rf app.mpm ext.mpm
 ```
 
 Now you'll have the `app.crx` and `ext.crx` archives to upload to the [CWS].
-
-### CWS Access
-
-You'll need to be part of the [chrome-secure-shell-publishers group] in order to
-manage things via the [CWS].
-
-### Upload the (dev) Release
-
-Visit the [CWS] dashboard to upload the new CRX archives:<br>
-https://chrome.google.com/webstore/developer/edit/okddffdblfhhnmhodogpojmfkjmhinfp<br>
-https://chrome.google.com/webstore/developer/edit/algkcnfjnajfhgimadimbjhmpaeohhln
-
-We no longer announce dev releases since we switched to automated builds.
 
 ## Preparing a Stable Release
 
@@ -141,6 +131,11 @@ uploading it directly to the [CWS] without explicitly testing it first.
 Visit the [mpm browser] again, but this time look at the `app-stable` and
 `extension-stable` packages.
 Use the same `mpm` flow as the dev step above to pull out the stable CRX's.
+
+### CWS Access
+
+You'll need to be part of the [chrome-secure-shell-publishers group] in order to
+manage things via the [CWS].
 
 ### Upload the (stable) Release for Googlers
 
