@@ -4,10 +4,12 @@
 
 /**
  * @fileoverview Initializes global state used in terminal.
+ * @suppress {moduleLoad} Loading wassh files is unhappy.
  */
 
 import {lib} from '../../libdot/index.js';
 import {hterm} from '../../hterm/index.js';
+import {cleanupChromeSockets} from '../../wassh/js/sockets.js';
 
 import {terminal} from './terminal.js';
 import {composeSshUrl, definePrefs, init, watchColors}
@@ -75,6 +77,8 @@ function runTerminalHome() {
       }
     });
   }
+
+  cleanupChromeSockets();
 }
 
 window.addEventListener('DOMContentLoaded', async () => {

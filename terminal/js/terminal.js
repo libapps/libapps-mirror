@@ -9,6 +9,7 @@
 
 import {lib} from '../../libdot/index.js';
 import {hterm} from '../../hterm/index.js';
+import {cleanupChromeSockets} from '../../wassh/js/sockets.js';
 
 import {composeTmuxUrl, getOSInfo, watchColors} from './terminal_common.js';
 import {createEmulator} from './terminal_emulator.js';
@@ -315,6 +316,8 @@ terminal.Command.prototype.exit = function(code) {
 async function runNassh(term, storage, ssh, tmuxControllerDriver) {
   // Load nassh modules and ensure gnubby extension lookup is complete.
   const {CommandInstance} = await terminalImport('./nassh_command_instance.js');
+
+  await cleanupChromeSockets();
 
   const profileId = ssh.hash.substr(1);
   let fsp;
