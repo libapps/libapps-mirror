@@ -1,0 +1,19 @@
+// Copyright 2025 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// This file defines the structure used for reading SSH policies from other
+// sources (e.g. extensions or managed storage).
+
+// Defines the data contract for message shared between nassh and any other
+// systems.
+message SshPolicy {
+  // A list of public keys of the host servers we've trusted in the string
+  // format, conforms to the same format as the `/etc/ssh/ssh_known_hosts` file.
+  optional string ssh_known_hosts = 1;
+
+  // Preferences for connecting to specific servers, including whether to force
+  // enable ssh host certificate verification. Conforms to the same format as
+  // `/etc/ssh/ssh_config`.
+  optional string ssh_config = 2;
+}
