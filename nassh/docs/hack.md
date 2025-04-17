@@ -163,11 +163,6 @@ There are a few extensions we talk to for various services at runtime which need
 to allow our extension ids (for source verification).  If you don't need any of
 these services, then you can ignore it.
 
-* [gnubbyd app beknehfpfkghjoafdifaflglpjkojoco](https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco)
-  * Optional SSH Agent backend (mostly for internal Google use).
-  * See http://cl/180966847 as an example.
-* [gnubbyd extension lkjlajklkdhaneeelolkfgbpikkgnkpk](https://chrome.google.com/webstore/detail/lkjlajklkdhaneeelolkfgbpikkgnkpk)
-  * Same as above.
 * [Smart Card Connector khpfeaanjngmcnplbdlpegiifgpfgdco](https://chrome.google.com/webstore/detail/khpfeaanjngmcnplbdlpegiifgpfgdco)
   * Optional SSH Agent backend built for [hardware keys](./hardware-keys.md).
   * See https://github.com/GoogleChromeLabs/chromeos_smart_card_connector/pull/54 as an example.
@@ -257,7 +252,7 @@ The vast majority of the code here lives under [js/].
     backends.
   * [nassh_stream_sshagent_relay.js]:
     SSH Agent API for connecting to other extensions.  They provide key store
-    backing (such as the [gnubbyd] extension).
+    backing.
   * [nassh_stream_tty.js]: Basic input/output tty streams.
 * Testing related code
   * [nassh_test.js]: Main unittest runner logic.  Locates & runs all tests.
@@ -542,7 +537,6 @@ Here's a random list of documents which would be useful to people.
 [copy-data]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-extensions-00#section-7
 [Corp Relay]: relay-protocol.md#corp-relay
 [crosh]: https://www.chromium.org/chromium-os/developer-library/reference/device/crosh/
-[gnubbyd]: https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco
 [NaCl]: https://developer.chrome.com/native-client
 [Native Sockets]: https://crbug.com/909927
 [OpenSSH]: https://www.openssh.com/

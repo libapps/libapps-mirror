@@ -25,7 +25,8 @@ import {
   syncFilesystemFromDomToIndexeddb, syncFilesystemFromIndexeddbToDom,
 } from './nassh_fs.js';
 import {
-  gcseRefreshCert, getGnubbyExtension, probeExtensions, fetchSshPolicy,
+  fetchSshPolicy, getGoogleSshAgentExtension, probeExtensions,
+  refreshGoogleSshCert,
 } from './nassh_google.js';
 import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
 import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
@@ -1096,7 +1097,7 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
 
   // Attempt to refresh certificates if need be.
   const refresh = options['cert-refresh'] ?
-      gcseRefreshCert(this.io) : Promise.resolve();
+      refreshGoogleSshCert(this.io) : Promise.resolve();
   // Even if refreshing went horribly, attempt the connection anyways.
   return refresh.finally(() => {
     if (finalize) {
@@ -1417,7 +1418,7 @@ export function postProcessOptions(options, hostname, username, isMount) {
   // Turn 'gnubby' into the default id.  We do it here because we haven't yet
   // ported the gnubbyd logic to the new ssh-agent frameworks.
   if (rv['--ssh-agent'] == 'gnubby') {
-    rv['--ssh-agent'] = getGnubbyExtension();
+    rv['--ssh-agent'] = getGoogleSshAgentExtension();
   }
 
   // Default the relay username to the ssh username.

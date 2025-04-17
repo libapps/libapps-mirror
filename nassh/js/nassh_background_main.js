@@ -77,7 +77,7 @@ function init() {
     chrome.omnibox.onInputEntered.removeListener(omniboxOnInputEntered);
   }
 
-  // Probe gnubby extensions.
+  // Probe Google extensions.
   probeExtensions();
 
   // Bind the FSP APIs.

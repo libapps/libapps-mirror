@@ -102,13 +102,6 @@ The extension to use as an ssh agent.  All auth requests will be forwarded
 from the ssh session to this extension for processing.  It can be used to
 manage keys or certificates or anything else an ssh agent can.
 
-Here's a list of known agents:
-
-* [gnubbyd app (beknehfpfkghjoafdifaflglpjkojoco)](https://chrome.google.com/webstore/detail/beknehfpfkghjoafdifaflglpjkojoco)
-* [gnubbyd ext (lkjlajklkdhaneeelolkfgbpikkgnkpk)](https://chrome.google.com/webstore/detail/lkjlajklkdhaneeelolkfgbpikkgnkpk)
-
-As a shortcut, `gnubby` may be used as an alias for the autodetected extension.
-
 ## `--ssh-client-version=<version>`
 
 The version of the ssh client to use.  Intended for mitigating regressions with
