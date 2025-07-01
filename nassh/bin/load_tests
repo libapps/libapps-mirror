@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2019 The ChromiumOS Authors
+# Copyright 2025 The ChromiumOS Authors
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
@@ -7,10 +7,13 @@
 
 import os
 import sys
+import logging
+import unittest
+
+from proto_js_sync_test import ProtoJsSyncTests, ColorTestRunner
 
 import nassh  # pylint: disable=wrong-import-order
 import libdot
-
 
 # Path to our html test page.
 TEST_PAGE = os.path.join("nassh", "html", "nassh_test.html")
@@ -24,4 +27,20 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    # Run the proto js sync test first.
+    loader = unittest.TestLoader()
+    suite = loader.loadTestsFromTestCase(ProtoJsSyncTests)
+
+    runner = ColorTestRunner(verbosity=2)
+    sync_test_result = runner.run(suite)
+
+    # Run the nassh unit test.
+    nassh_test_result = main(sys.argv[1:])
+
+    # print result of the proto js sync test.
+    if sync_test_result.wasSuccessful():
+        logging.info("\033[92mSUCCESS\033[0m: Proto and JS files are in sync")
+    else:
+        logging.info("\033[91mFAIL\033[0m: Proto and JS files are not in sync")
+
+    sys.exit(nassh_test_result)
