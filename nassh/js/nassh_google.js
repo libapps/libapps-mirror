@@ -9,6 +9,7 @@
 import {hterm} from '../../hterm/index.js';
 
 import {localize, runtimeSendMessage} from './nassh.js';
+import {SshPolicy} from './ssh_policy.js';
 
 /**
  * The different certificate slots in the gnubby.
@@ -107,6 +108,23 @@ async function findSkeExtension() {
       }
     }
   });
+}
+
+/**
+ * Try to fetch from SKE the SSH policy
+ * @return {!Promise<!SshPolicy>}
+ */
+export async function fetchSshPolicy() {
+  const response = await runtimeSendMessage(
+    defaultSkeExtension, {
+      type: 'get_ssh_policy_request',
+      slot: gnubbySlot.CORP_NORMAL_CERT_SLOT,
+    });
+
+  const data = response['data'] ?? {};
+
+  const sshPolicy = SshPolicy.create(data);
+  return sshPolicy;
 }
 
 /**

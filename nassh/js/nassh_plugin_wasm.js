@@ -190,6 +190,62 @@ class StorageFileHandler extends FileHandler {
 }
 
 /**
+ * A path in which we temporarily sync content of the file, but not store the
+ * file.
+ */
+class MemoryFileHandle extends FileHandle {
+  /**
+   * @param {string} path The absolute path in the filesystem for this handler.
+   * @param {string} content The content which we want to sync temporarily.
+   */
+  constructor(path, content) {
+    super(path);
+
+    this.content_ = content;
+  }
+
+  /** @override */
+  async init() {
+    this.data = lib.codec.stringToCodeUnitArray(this.content_);
+  }
+
+  /** @override */
+  async write(buf) {
+    return WASI.errno.EROFS;
+  }
+
+  /** @override */
+  async pwrite(buf, offset) {
+    return WASI.errno.EROFS;
+  }
+}
+
+/**
+ * A path in which we temporarily sync content of the file, but not store the
+ * file.
+ */
+class MemoryFileHandler extends FileHandler {
+  /**
+   * @param {string} path The absolute path in the filesystem for this handler.
+   * @param {string} content The content which we want to sync temporarily.
+   */
+  constructor(path, content) {
+    super(path, WASI.filetype.REGULAR_FILE, MemoryFileHandle);
+    this.content_ = content;
+  }
+
+  /** @override */
+  async open(path, _, __) {
+    if (path !== this.path) {
+      return WASI.errno.ENOTDIR;
+    }
+    const ret = new this.handleCls(path, this.content_);
+    await ret.init();
+    return ret;
+  }
+}
+
+/**
  * Plugin message handlers.
  */
 export class Plugin {
@@ -210,7 +266,7 @@ export class Plugin {
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
                authAgentAppID, relay, isSftp, sftpClient, secureInput,
-               syncStorage}) {
+               syncStorage, knownHosts}) {
     this.executable_ = executable;
     this.argv_ = argv;
     this.environ_ = environ;
@@ -226,6 +282,7 @@ export class Plugin {
     this.plugin_ = null;
     this.sftpStdin_ = null;
     this.sftpStdout_ = null;
+    this.knownHosts_ = knownHosts;
   }
 
   /**
@@ -272,6 +329,8 @@ export class Plugin {
     vfs.addHandler(new StorageFileHandler(
         '/etc/ssh/ssh_known_hosts', this.syncStorage_,
         '/nassh/etc/ssh/ssh_known_hosts'));
+    vfs.addHandler(new MemoryFileHandler(
+      '/etc/ssh/ssh_known_hosts2', this.knownHosts_ ? this.knownHosts_ : ''));
 
     // If this is an SFTP connection, rebind stdin/stdout to our custom pipes
     // which connect to our JS SFTP client.

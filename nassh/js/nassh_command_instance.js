@@ -25,7 +25,7 @@ import {
   syncFilesystemFromDomToIndexeddb, syncFilesystemFromIndexeddbToDom,
 } from './nassh_fs.js';
 import {
-  gcseRefreshCert, getGnubbyExtension, probeExtensions,
+  gcseRefreshCert, getGnubbyExtension, probeExtensions, fetchSshPolicy,
 } from './nassh_google.js';
 import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
 import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
@@ -1444,6 +1444,8 @@ CommandInstance.prototype.dispatchMessage_ = function(desc, handlers, msg) {
  */
 CommandInstance.prototype.initWasmPlugin_ =
     async function(argv, environ, {trace = false} = {}) {
+  const sshPolicy = await fetchSshPolicy();
+
   this.plugin_ = new WasmPlugin({
     executable: `../../plugin/${this.sshClientVersion_}/ssh.wasm`,
     argv: argv,
@@ -1457,6 +1459,7 @@ CommandInstance.prototype.initWasmPlugin_ =
     sftpClient: this.sftpClient,
     secureInput: (...args) => this.secureInput(...args),
     syncStorage: this.syncStorage,
+    knownHosts: sshPolicy.getSshKnownHosts(),
   });
   return this.plugin_.init();
 };
