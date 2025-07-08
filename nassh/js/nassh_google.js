@@ -119,7 +119,7 @@ export async function fetchSshPolicy() {
     defaultSkeExtension, {
       type: 'get_ssh_policy_request',
       slot: gnubbySlot.CORP_NORMAL_CERT_SLOT,
-    });
+    }).catch((e) => ({}));
 
   const data = response['data'] ?? {};
 
