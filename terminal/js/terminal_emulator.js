@@ -18,8 +18,8 @@ import {TerminalContextMenu} from './terminal_context_menu.js';
 import {TerminalFindBar} from './terminal_find_bar.js';
 import {ICON_COPY} from './terminal_icons.js';
 import {TerminalTooltip} from './terminal_tooltip.js';
-import {Terminal, CanvasAddon, SearchAddon, Unicode11Addon, WebLinksAddon,
-  WebglAddon} from './xterm.js';
+import {Terminal, CanvasAddon, ImageAddon, SearchAddon, Unicode11Addon,
+  WebLinksAddon, WebglAddon} from './xterm.js';
 import {XtermInternal} from './terminal_xterm_internal.js';
 
 
@@ -465,6 +465,7 @@ export class XtermTerminal {
           new WebLinksAddon((e, uri) => lib.f.openWindow(uri, '_blank')));
       this.term.loadAddon(new Unicode11Addon());
       this.term.unicode.activeVersion = '11';
+      this.term.loadAddon(new ImageAddon());
     }
 
     // This tracks whether an search is in progress. Note that you can get false

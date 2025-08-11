@@ -48,6 +48,7 @@
     "punycode": "~2",
     "xterm": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/xterm-218287b72c80df1937b8bd387c01984d4ff6b801392b7e7648bc26fb906fd8b2.tar.gz",
     "xterm-addon-canvas": "^0.5.0",
+    "xterm-addon-image": "^0.5.0",
     "xterm-addon-search": "^0.13.0",
     "xterm-addon-unicode11": "^0.6.0",
     "xterm-addon-web-links": "^0.9.0",
