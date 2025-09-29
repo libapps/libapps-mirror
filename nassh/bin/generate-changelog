@@ -14,27 +14,25 @@ import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 
-CHANGELOG_FILE = os.path.join(nassh.DIR, "html", "changelog.html")
-CHANGELOG_TEMPLATE = os.path.join(nassh.DIR, "html", "changelog.html.in")
+_HTML_FILE = nassh.DIR / "html" / "changelog.html"
+_HTML_TEMPLATE = nassh.DIR / "html" / "changelog.html.in"
 
-CHANGELOG_ENTRY_TEMPLATE = """\
+_HTML_ENTRY_TEMPLATE = """\
 <div><a href="https://crrev.com/%(commit)s">%(summary)s</a></div>
 """
 
 
 def generate_html(tag: str, entries: list[list[str]]):
     """Generate the changelog file from |entries|."""
-    with open(CHANGELOG_TEMPLATE, "r", encoding="utf-8") as fp:
-        template = fp.read()
+    template = _HTML_TEMPLATE.read_text(encoding="utf-8")
     output = ""
     for commit, summary in entries:
-        output += CHANGELOG_ENTRY_TEMPLATE % {
+        output += _HTML_ENTRY_TEMPLATE % {
             "commit": commit,
             "summary": html.escape(summary),
         }
     output = template.replace("%%COMMITS%%", output).replace("%%TAG%%", tag)
-    with open(CHANGELOG_FILE, "w", encoding="utf-8") as fp:
-        fp.write(output)
+    _HTML_FILE.write_text(output, encoding="utf-8")
 
 
 def get_entries(tag: str) -> list[list[str]]:
