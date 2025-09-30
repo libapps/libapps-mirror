@@ -1,3 +1,16 @@
+# 0.69, 2025-10-14, WASI update & Initial SSH policy support.
+
+* ssh_client: openssl: Update to 1.0.2u.
+* policy: Read from SKE and sync on nassh.
+* policy: Generate JS API bindings from ssh_policy.proto.
+* policy: Define a proto message for SSH policies.
+* goog: Update hoursLeft to be non-negative.
+* mosh: Tweak app naming.
+* wasm: Use by default all the time.
+* ssh_client: wasi-sdk: Update to 25.0 release.
+* html: Tweak <link> closing style.
+* plugin: Update to 0.68.
+
 # 0.68, 2025-02-03, Mosh WASM work.
 
 * wassh: Fix popup on disconnection when using relay.
