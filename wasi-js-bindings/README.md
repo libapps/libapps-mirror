@@ -55,12 +55,14 @@ servicing the syscall requests.
 As [WASI] is still under development, we often require current browser runtimes.
 No attempt is made to provide backwards compatibility or transpiling.
 
-* [WASI SDK] 12.0
-* [ECMAScript] 2021
+* [WASI SDK] 25.0
+* [ECMAScript] 2024
 * [Module workers](https://web.dev/module-workers/)
   * Chrome 80+
 * [WebAssembly BigInt Integration](https://www.chromestatus.com/feature/5648655109324800)
   * Chrome 85+
+* [JavaScript Promise Integration (JSPI)](https://chromestatus.com/feature/5674874568704000)
+  * Chrome 137+
 * Non-blocking message behavior between main thread & web workers
 
 Note that the supported [WASI API] version matches the aforementioned [WASI SDK]

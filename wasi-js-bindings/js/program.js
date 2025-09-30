@@ -87,6 +87,10 @@ export class Program {
     // the program calls exit() itself, then it too runs the exit syscall.  If
     // the program aborts, WASM will throw an exception which our Program class
     // will catch & process.  This seems more complicated than it should be.
-    return this.instance.exports['_start']() ?? 0;
+    let entry = this.instance.exports['_start'];
+    if (WebAssembly.promising !== undefined) {
+      entry = WebAssembly.promising(entry);
+    }
+    return await entry() ?? 0;
   }
 }

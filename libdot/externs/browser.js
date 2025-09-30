@@ -69,3 +69,12 @@ Intl.Segmenter.prototype.segment = function(s) {};
  * }}
  */
 Intl.Segmenter.Segment;
+
+var WebAssembly = WebAssembly || {};
+
+/**
+ * @see https://v8.dev/blog/jspi-newapi
+ * @param {function(...*)} fn
+ * @return {!Promise}
+ */
+WebAssembly.promising = function(fn) {};
