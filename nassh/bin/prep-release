@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+# Copyright 2025 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Helper for preparing a new release."""
+
+import datetime
+import json
+import logging
+from pathlib import Path
+import sys
+
+import nassh  # pylint: disable=wrong-import-order
+import libdot
+
+
+def parse_version(ver: str) -> tuple[int]:
+    """Parse a dotted version."""
+    return tuple(int(x) for x in ver.split("."))
+
+
+def unparse_version(ver: tuple[int]) -> str:
+    """Turn a version into a dotted string."""
+    return ".".join(str(x) for x in ver)
+
+
+def _update_json_version_key(path: Path, ver: str) -> None:
+    """Update the "version" key in a JSON file."""
+    data = json.loads(path.read_bytes())
+    data["version"] = ver
+    with path.open("w", encoding="utf-8") as fp:
+        json.dump(data, fp)
+    # Lazy reformat.
+    libdot.jsonlint.check_generic(path, fix=True)
+
+
+def update_manifest(ver: str) -> None:
+    """Update the manifest.json version."""
+    _update_json_version_key(nassh.DIR / "manifest.json", ver)
+
+
+def update_package_json(ver: str) -> None:
+    """Update the package.json version."""
+    _update_json_version_key(nassh.DIR / "package.json", ver)
+
+
+def update_changelog(ver: str) -> None:
+    """Update the CHangeLog.md file."""
+    path = nassh.DIR / "docs" / "ChangeLog.md"
+    lines = path.read_text(encoding="utf-8").splitlines()
+
+    # See if an entry has already been started.
+    line = lines[0]
+    if line.startswith(f"# {ver},"):
+        logging.info("docs/ChangeLog.md: appears up-to-date; skipping")
+        return
+
+    # Load history.
+    tag = nassh.generate_changelog.get_previous_tag()
+    git_log = [x[1] for x in nassh.generate_changelog.get_entries(tag)]
+
+    # Reformat the entry as needed.
+    entries = []
+    for entry in git_log:
+        elements = entry.split(": ")
+        words = elements[-1].split(" ")
+        if not words[-1].endswith("."):
+            words[-1] += "."
+        words[0] = words[0].title()
+        elements[-1] = " ".join(words)
+        entries.append(": ".join(elements))
+
+    # Generate new entries.
+    now = datetime.datetime.now()
+    lines = (
+        [
+            f"# {ver}, {now.year}-{now.month:02}-{now.day}, TBD",
+            "",
+        ]
+        + [f"* {x}" for x in entries]
+        + [""]
+        + lines
+    )
+    with path.open("w", encoding="utf-8") as fp:
+        fp.writelines(f"{x}\n" for x in lines)
+
+
+def get_prev_version() -> tuple[int]:
+    """Figure out the last release we made."""
+    result = libdot.run(
+        ["git", "show", "HEAD:./manifest.json"],
+        cwd=nassh.DIR,
+        capture_output=True,
+    )
+    data = json.loads(result.stdout)
+    return parse_version(data["version"])
+
+
+def get_parser():
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--version", help="What the next release version will be"
+    )
+    return parser
+
+
+def main(argv: list[str]):
+    """The main func!"""
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+
+    if opts.version:
+        next_version = parse_version(opts.version)
+    else:
+        prev_version = get_prev_version()
+        next_version = (prev_version[0], prev_version[1] + 1) + prev_version[2:]
+
+    str_version = unparse_version(next_version)
+    update_manifest(str_version)
+
+    update_changelog(str_version)
+
+    package_version = next_version
+    if len(next_version) < 3:
+        package_version += (0,)
+    package_str_version = unparse_version(package_version)
+    update_package_json(package_str_version)
+
+    logging.info("nassh/release-highlights.yaml: Remember to check/update")
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
