@@ -133,10 +133,10 @@ export class Foreground extends Base {
   async run() {
     const program = new Program(this.executable);
     this.instance_ = await program.instantiate(this.getImports_());
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       this.process_finish_ = resolve;
       try {
-        const ret = program.run();
+        const ret = await program.run();
         resolve(ret);
       } catch (e) {
         if (e instanceof WebAssembly.RuntimeError) {

@@ -76,11 +76,11 @@ export class Program {
   /**
    * Run the program.
    *
-   * This won't normally return until the program itself exits.
+   * This won't normally resolve until the program itself exits.
    *
-   * @return {number} The program exit code.
+   * @return {!Promise<number>} The program exit code.
    */
-  run() {
+  async run() {
     // WASI libc will return here only if the program *returns* 0 from its main
     // function.  If it *returns* non-zero, WASI libc will call exit() with that
     // value which triggers the exit syscall, and this point never returns.  If
