@@ -1,0 +1,43 @@
+We hack the agent code to use a fake IP address which the plugin watches for.
+We should have the plugin deal with AF_UNIX requests instead, then we won't
+have to hack up OpenSSH.
+
+--- a/authfd.c
++++ b/authfd.c
+@@ -90,14 +90,17 @@
+ ssh_get_authentication_socket_path(const char *authsocket, int *fdp)
+ {
+ 	int sock, oerrno;
+-	struct sockaddr_un sunaddr;
++	struct sockaddr_in sunaddr;
++
++	/* Magic value. Keep in sync with //ssh_client/src/file_system.cc */
++	static const int kSshAgentFakeIP = 0x7F010203;
+ 
+ 	debug3_f("path '%s'", authsocket);
+ 	memset(&sunaddr, 0, sizeof(sunaddr));
+-	sunaddr.sun_family = AF_UNIX;
+-	strlcpy(sunaddr.sun_path, authsocket, sizeof(sunaddr.sun_path));
++	sunaddr.sin_family = AF_INET;
++	sunaddr.sin_addr.s_addr = htonl(kSshAgentFakeIP);
+ 
+-	if ((sock = socket(AF_UNIX, SOCK_STREAM, 0)) == -1)
++	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+ 		return SSH_ERR_SYSTEM_ERROR;
+ 
+ 	/* close on exec */
+
+Since WASI doesn't support signals, it doesn't try to support POLLPRI yet.
+Stub it out to avoid build errors.
+
+--- a/openbsd-compat/bsd-poll.c
++++ b/openbsd-compat/bsd-poll.c
+@@ -42,6 +42,8 @@
+  * Supports pfd.fd = -1 meaning "unused" although it's not standard.
+  */
+ 
++#define POLLPRI 0
++
+ int
+ ppoll(struct pollfd *fds, nfds_t nfds, const struct timespec *tmoutp,
+     const sigset_t *sigmask)
