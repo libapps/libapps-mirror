@@ -6,8 +6,8 @@ third_party {
     type: HOMEPAGE
     value: "https://www.openssl.org/"
   }
-  version: "1.0.2k"
-  last_upgrade_date { year: 2017 month: 1 day: 26 }
+  version: "1.0.2u"
+  last_upgrade_date { year: 2024 month: 9 day: 21 }
 
   local_modifications:
       "See the patches in this directory for more details."

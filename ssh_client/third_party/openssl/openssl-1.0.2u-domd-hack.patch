@@ -7,6 +7,6 @@ the domd script is a huge hack already, so add a little more to handle ccache
  if [ "$1" = "-MD" ]; then
      shift
 +    [ "$1" = "ccache" ] && shift
-     MAKEDEPEND=$1
-     shift
- fi
+     MAKEDEPEND=""
+     while [ "$1" != "--" ]; do
+         MAKEDEPEND="$MAKEDEPEND $1"

@@ -20,11 +20,11 @@ ARCHIVES = ("%(p)s.tar.gz",)
 PATCHES = (
     "nacl.patch",
     "openssl-1.0.0a-ldflags.patch",
-    "openssl-1.0.2i-parallel-build.patch",
+    "openssl-1.0.2u-parallel-build.patch",
     "openssl-1.0.2a-parallel-obj-headers.patch",
     "openssl-1.0.2a-parallel-install-dirs.patch",
     "openssl-1.0.2a-parallel-symlinking.patch",
-    "openssl-1.0.2k-domd-hack.patch",
+    "openssl-1.0.2u-domd-hack.patch",
 )
 
 

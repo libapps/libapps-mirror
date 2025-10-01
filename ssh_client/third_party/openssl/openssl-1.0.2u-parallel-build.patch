@@ -134,7 +134,7 @@
  
  apps:
  	@(cd ..; $(MAKE) DIRS=apps all)
-@@ -435,136 +435,136 @@
+@@ -445,142 +445,142 @@ BUILD_CMD_STATIC=shlib_target=; \
  		link_app.$${shlib_target}
  
  $(RSATEST)$(EXE_EXT): $(RSATEST).o $(DLIBCRYPTO)
@@ -304,6 +304,14 @@
  $(BADDTLSTEST)$(EXE_EXT): $(BADDTLSTEST).o
 -	@target=$(BADDTLSTEST) $(BUILD_CMD)
 +	+@target=$(BADDTLSTEST) $(BUILD_CMD)
+ 
+ $(FATALERRTEST)$(EXE_EXT): $(FATALERRTEST).o ssltestlib.o $(DLIBSSL) $(DLIBCRYPTO)
+-	@target=$(FATALERRTEST); exobj=ssltestlib.o; $(BUILD_CMD)
++	+@target=$(FATALERRTEST); exobj=ssltestlib.o; $(BUILD_CMD)
+ 
+ $(X509TIMETEST)$(EXE_EXT): $(X509TIMETEST).o
+-	@target=$(X509TIMETEST) $(BUILD_CMD)
++	+@target=$(X509TIMETEST) $(BUILD_CMD)
  
  $(SSLV2CONFTEST)$(EXE_EXT): $(SSLV2CONFTEST).o
 -	@target=$(SSLV2CONFTEST) $(BUILD_CMD)
