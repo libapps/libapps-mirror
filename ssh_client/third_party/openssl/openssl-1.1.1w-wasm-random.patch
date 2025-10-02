@@ -1,0 +1,14 @@
+WASI can use getentropy().  This has been fixed in upstream OpenSSL-3.2.0+.
+https://github.com/openssl/openssl/commit/d88a0f5f3944535dd83d55bedc4d239544c5678d
+
+--- a/crypto/rand/rand_unix.c
++++ b/crypto/rand/rand_unix.c
+@@ -369,7 +369,7 @@
+      * Note: Sometimes getentropy() can be provided but not implemented
+      * internally. So we need to check errno for ENOSYS
+      */
+-#  if defined(__GNUC__) && __GNUC__>=2 && defined(__ELF__) && !defined(__hpux)
++#  if defined(__GNUC__) && __GNUC__>=2 && defined(__ELF__) && !defined(__hpux) || defined(__wasi__)
+     extern int getentropy(void *buffer, size_t length) __attribute__((weak));
+ 
+     if (getentropy != NULL) {

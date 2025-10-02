@@ -1,0 +1,27 @@
+Define a wasm target.  This basically assumes WASI, and prob needs more
+logic added to disable things (rather than passing no-xxx to ./config).
+
+--- a/Configurations/10-main.conf
++++ b/Configurations/10-main.conf
+@@ -1839,4 +1839,21 @@ my %targets = (
+         pointer_size     => "64",
+     },
+ 
++### WebAssembly
++
++    "wasm32" => {
++        inherit_from     => [ "BASE_unix" ],
++        CC               => "clang",
++        CXX              => "clang++",
++        CFLAGS           => picker(default => "-Wall",
++                                   debug   => "-O0 -g",
++                                   release => "-O2"),
++        CXXFLAGS         => picker(default => "-Wall",
++                                   debug   => "-O0 -g",
++                                   release => "-O2"),
++        cxxflags         => "-std=c++11",
++        lib_cppflags     => "-DL_ENDIAN -DOPENSSL_NO_SECURE_MEMORY -DOPENSSL_USE_NODELETE",
++        bn_ops           => "BN_LLONG",
++    },
++
+ );

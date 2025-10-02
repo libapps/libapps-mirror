@@ -18,38 +18,34 @@ import ssh_client  # pylint: disable=wrong-import-position
 
 ARCHIVES = ("%(p)s.tar.gz",)
 PATCHES = (
-    "nacl.patch",
-    "openssl-1.0.0a-ldflags.patch",
-    "openssl-1.0.2u-parallel-build.patch",
-    "openssl-1.0.2a-parallel-obj-headers.patch",
-    "openssl-1.0.2a-parallel-install-dirs.patch",
-    "openssl-1.0.2a-parallel-symlinking.patch",
-    "openssl-1.0.2u-domd-hack.patch",
+    "openssl-1.1.1w-wasm-configure.patch",
+    "openssl-1.1.1w-wasm-random.patch",
+    "openssl-1.1.1w-wasm-syslog.patch",
 )
 
 
 def src_configure(metadata):
     """Configure the source."""
     tc = metadata["toolchain"]
-    if tc.chost == "nacl":
-        machine = "le32newlib"
-    else:
-        machine = tc.chost.split("-")[0]
+    machine = tc.chost.split("-")[0]
 
     # See if configure passed.
-    with open("Makefile", encoding="utf-8") as fp:
-        if machine in fp.read():
-            logging.info("Makefile exists; skipping ./configure step")
-            return
+    try:
+        with open("Makefile", encoding="utf-8") as fp:
+            if machine in fp.read():
+                logging.info("Makefile exists; skipping ./configure step")
+                return
+    except FileNotFoundError:
+        pass
 
-    for f in metadata["S"].glob("**/Makefile*"):
-        data = f.read_text()
-        new_data = data.replace(
-            "$(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl",
-            f"$(INSTALL_PREFIX)$(INSTALLTOP)/{tc.relincdir}/openssl",
-        )
-        if data != new_data:
-            f.write_text(new_data)
+    f = metadata["S"] / "Configurations" / "unix-Makefile.tmpl"
+    data = f.read_text()
+    new_data = data.replace(
+        "$(DESTDIR)$(INSTALLTOP)/include/openssl",
+        f"$(DESTDIR)$(INSTALLTOP)/{tc.relincdir}/openssl",
+    )
+    if data != new_data:
+        f.write_text(new_data)
 
     env = os.environ.copy()
     env.update(
@@ -66,27 +62,28 @@ def src_configure(metadata):
             "--prefix=/",
             f"--libdir=/{tc.rellibdir}",
             "no-asm",
+            "no-async",
             "no-deprecated",
             "no-dso",
             "no-ec2m",
+            "no-egd",
             "no-engine",
-            "no-gmp",
+            "no-fuzz-afl",
+            "no-fuzz-libfuzzer",
             "no-gost",
             "no-heartbeats",
             "no-hw",
-            "no-krb5",
             "no-rfc3779",
+            "no-scrypt",
             "no-sctp",
+            "no-siphash",
+            "no-sock",
             "no-srp",
             "no-sse2",
             "no-ssl2",
             "no-ssl3",
-            "no-syslog",
             "no-threads",
             "no-unit-test",
-            "-fgnu-inline-asm",
-            "-D_GNU_SOURCE",
-            "-DNO_SYSLOG",
         ]
         + env.get("CFLAGS", "").split()
         + env["CPPFLAGS"].split()
@@ -98,18 +95,13 @@ def src_configure(metadata):
 
 def src_compile(_metadata):
     """Compile the source."""
-    ssh_client.emake("build_libs", "DIRS=crypto ssl")
+    ssh_client.emake("build_libs")
 
 
 def src_install(metadata):
     """Install the package."""
     tc = metadata["toolchain"]
-    ssh_client.emake(
-        "install_sw",
-        f"INSTALL_PREFIX={tc.sysroot}",
-        "DIRS=crypto ssl",
-        "LIBS=libcrypto.a libssl.a",
-    )
+    ssh_client.emake("install_dev", f"DESTDIR={tc.sysroot}")
 
 
 ssh_client.build_package(sys.modules[__name__], "wasm")
