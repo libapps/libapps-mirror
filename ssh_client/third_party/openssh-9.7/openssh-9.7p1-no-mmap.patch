@@ -1,0 +1,28 @@
+We don't have mmap(), but it's only used for shared lib loading, which we
+also don't have, so disable it.
+
+--- a/misc.c
++++ b/misc.c
+@@ -22,7 +22,6 @@
+ 
+ #include <sys/types.h>
+ #include <sys/ioctl.h>
+-#include <sys/mman.h>
+ #include <sys/socket.h>
+ #include <sys/stat.h>
+ #include <sys/time.h>
+@@ -2937,6 +2936,8 @@ ptimeout_isset(struct timespec *pt)
+ int
+ lib_contains_symbol(const char *path, const char *s)
+ {
++	return 0;
++#if 0
+ #ifdef HAVE_NLIST_H
+ 	struct nlist nl[2];
+ 	int ret = -1, r;
+@@ -3004,4 +3005,5 @@ lib_contains_symbol(const char *path, const char *s)
+ 	close(fd);
+ 	return ret;
+ #endif /* HAVE_NLIST_H */
++#endif
+ }

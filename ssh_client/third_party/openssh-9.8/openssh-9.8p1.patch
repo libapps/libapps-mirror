@@ -1,0 +1,14 @@
+Since WASI doesn't support signals, it doesn't try to support POLLPRI yet.
+Stub it out to avoid build errors.
+
+--- a/openbsd-compat/bsd-poll.c
++++ b/openbsd-compat/bsd-poll.c
+@@ -42,6 +42,8 @@
+  * Supports pfd.fd = -1 meaning "unused" although it's not standard.
+  */
+ 
++#define POLLPRI 0
++
+ int
+ ppoll(struct pollfd *fds, nfds_t nfds, const struct timespec *tmoutp,
+     const sigset_t *sigmask)
