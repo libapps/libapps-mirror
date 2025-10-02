@@ -15,12 +15,15 @@ we care about already.
  		ldns_buffer_printf(output, "%s ", protocol->p_name);
 --- a/str2host.c
 +++ b/str2host.c
-@@ -1155,7 +1155,7 @@ ldns_str2rdf_wks(ldns_rdf **rd, const char *str)
+@@ -1155,9 +1155,9 @@ ldns_str2rdf_wks(ldns_rdf **rd, const char *str)
  	        return LDNS_STATUS_INVALID_STR;
          }
      if (proto_str)
 -		proto = getprotobyname(proto_str);
 +		proto = NULL;
+     	if (!proto) {
+-		proto = getprotobyname(lc_proto_str);
++		proto = NULL;
+ 	}
  	if (proto) {
  		data[0] = (uint8_t) proto->p_proto;
- 	} else if (proto_str) {
