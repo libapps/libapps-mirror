@@ -188,8 +188,10 @@ export class Base {
       for (i = 0; i < handlers.length; ++i) {
         const handler = handlers[i];
         if (method in handler) {
-          if (handler[method] instanceof AsyncFunction) {
-            throw new util.ApiViolation(`${method} must not be async`);
+          if (handler[method] instanceof AsyncFunction &&
+              !(this[key] instanceof AsyncFunction)) {
+            throw new util.ApiViolation(
+                `async ${method} requires async ${key}`);
           }
           this[method] = this.createTracer_(
               handler[method].bind(handler), `handler: ${method}`);
@@ -220,12 +222,13 @@ export class Base {
   getImports() {
     const entries = {};
     this.getSyscalls_().forEach((key) => {
-      if (this[key] instanceof AsyncFunction) {
-        throw new util.ApiViolation(`${key} must not be async`);
-      }
-      entries[key.slice(4)] = this.createTracer_(
+      let func = this.createTracer_(
           this.unhandledExceptionWrapper_.bind(this, this[key].bind(this)),
           `entry: ${key}`);
+      if (this[key] instanceof AsyncFunction) {
+        func = new WebAssembly.Suspending(func);
+      }
+      entries[key.slice(4)] = func;
     });
     return {[this.namespace]: entries};
   }

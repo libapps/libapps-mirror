@@ -78,3 +78,10 @@ var WebAssembly = WebAssembly || {};
  * @return {!Promise}
  */
 WebAssembly.promising = function(fn) {};
+
+/**
+ * @see https://v8.dev/blog/jspi-newapi
+ * @param {function(*)} fn
+ * @constructor
+ */
+WebAssembly.Suspending = function(fn) {};
