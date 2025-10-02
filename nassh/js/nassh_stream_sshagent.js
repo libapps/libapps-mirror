@@ -102,5 +102,7 @@ SshAgentStream.prototype.asyncWrite = function(data, onSuccess) {
   setTimeout(this.trySendPacket_.bind(this), 0);
 
   // Note: report binary length written.
-  onSuccess(data.byteLength);
+  if (onSuccess) {
+    onSuccess(data.byteLength);
+  }
 };
