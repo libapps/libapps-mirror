@@ -1,3 +1,6 @@
+fixed after openssh-10.0
+https://github.com/openssh/openssh-portable/commit/a9cbe10da2be5be76755af0cea029db0f9c1f263
+
 From eb0d82be2238a70a243e2ea69d6041d3644bf5b2 Mon Sep 17 00:00:00 2001
 From: Mike Frysinger <vapier@chromium.org>
 Date: Fri, 9 Aug 2024 05:12:30 -0400
