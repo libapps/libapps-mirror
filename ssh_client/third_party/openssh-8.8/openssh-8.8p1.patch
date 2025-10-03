@@ -114,20 +114,6 @@ subprocess() relies on execv funcs we don't implement.
  		    command, strerror(errno));
  		_exit(127);
 
-add missing include
-https://lists.mindrot.org/pipermail/openssh-unix-dev/2021-March/039187.html
-
---- a/misc.h
-+++ b/misc.h
-@@ -15,6 +15,7 @@
- #ifndef _MISC_H
- #define _MISC_H
- 
-+#include <stdio.h>
- #include <sys/time.h>
- #include <sys/types.h>
- #include <sys/socket.h>
-
 The pnacl toolchain doesn't provide realpath(), but does define the prototype.
 This messes up the local replacement logic.
 
