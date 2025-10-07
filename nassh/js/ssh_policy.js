@@ -10,40 +10,73 @@
  * (Protobuf-like) format.
  * This conforms with /proto/ssh_policy.proto
  */
+
+/**
+ * Manages SSH policy configurations.
+ */
 export class SshPolicy {
-  constructor() {
-    this.sshKnownHosts = '';
-    this.sshConfig = '';
+  /**
+   * Initializes the policy with default empty values.
+   * @param {{
+   *   sshKnownHosts: (string|undefined),
+   *   sshConfig: (string|undefined)
+   * }=} options The options object.
+   */
+  constructor({
+    sshKnownHosts = '',
+    sshConfig = '',
+  } = {}) {
+    /** @private {string} */
+    this.sshKnownHosts_ = sshKnownHosts;
+
+    /** @private {string} */
+    this.sshConfig_ = sshConfig;
   }
 
+  /**
+   * @return {string} The SSH known hosts.
+   */
   getSshKnownHosts() {
-    return this.sshKnownHosts;
+    return this.sshKnownHosts_;
   }
 
+  /**
+   * @param {string} value The new SSH known hosts.
+   * @return {!SshPolicy} This instance for chaining.
+   */
   setSshKnownHosts(value) {
-    this.sshKnownHosts = value;
+    this.sshKnownHosts_ = value;
     return this;
   }
 
+  /**
+   * @return {string} The SSH config.
+   */
   getSshConfig() {
-    return this.sshConfig;
+    return this.sshConfig_;
   }
 
+  /**
+   * @param {string} value The new SSH config.
+   * @return {!SshPolicy} This instance for chaining.
+   */
   setSshConfig(value) {
-    this.sshConfig = value;
+    this.sshConfig_ = value;
     return this;
   }
 
-  static create(obj) {
-    const instance = new SshPolicy();
-    if (obj) {
-      if (obj.sshKnownHosts) {
-        instance.setSshKnownHosts(obj.sshKnownHosts);
-      }
-      if (obj.sshConfig) {
-        instance.setSshConfig(obj.sshConfig);
-      }
-    }
-    return instance;
+  /**
+   * Creates an SshPolicy instance from a plain object.
+   * @param {?{
+   *   sshKnownHosts: (string|undefined),
+   *   sshConfig: (string|undefined)
+   * }=} obj The object to create the policy from.
+   * @return {!SshPolicy} A new SshPolicy instance.
+   */
+  static from(obj) {
+    return new SshPolicy({
+      sshKnownHosts: obj?.sshKnownHosts ?? '',
+      sshConfig: obj?.sshConfig ?? '',
+    });
   }
 }

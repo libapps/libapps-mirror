@@ -122,7 +122,7 @@ export async function fetchSshPolicy() {
 
   const data = response['data'] ?? {};
 
-  return SshPolicy.create(data);
+  return SshPolicy.from(data);
 }
 
 /**
