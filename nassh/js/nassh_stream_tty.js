@@ -136,8 +136,8 @@ TtyStream.constructor = TtyStream;
  * @override
  */
 TtyStream.prototype.asyncOpen = async function(settings, onOpen) {
-  this.allowRead_ = settings.allowRead;
-  this.allowWrite_ = settings.allowWrite;
+  this.allowRead_ = settings.allowRead ?? false;
+  this.allowWrite_ = settings.allowWrite ?? false;
   this.inputBuffer_ = settings.inputBuffer;
   this.io_ = settings.io;
   this.acknowledgeCount_ = 0;

@@ -677,7 +677,7 @@ export class SftpFsp {
     // it's more robust for us to always unmount with the FSP layer.
     const sftp = this.mounts_.get(options.fileSystemId);
     if (sftp !== undefined) {
-      sftp.exit(0, true);  // exit NaCl plugin
+      sftp.exit(0, true);
       this.mounts_.delete(options.fileSystemId);
     }
 

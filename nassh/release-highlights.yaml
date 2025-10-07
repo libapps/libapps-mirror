@@ -6,9 +6,9 @@
 # Only features added since then should be documented in this file.
 # When a new version has gone stable, update the version,
 # and delete all the old release notes below.
-last_version: "0.63"
+last_version: "0.69"
 
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
 notes:
-  - WASM enabled automatically when Chrome does not support NaCl.
+  - NaCl support removed; only WASM is supported.

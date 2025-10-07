@@ -76,20 +76,6 @@
     "service_worker": "js/nassh_background_main.js",
     "type": "module"
   },
-  "platforms": [
-    {
-      "nacl_arch": "x86-64",
-      "sub_package_path": "_platform_specific/x86-64/"
-    },
-    {
-      "nacl_arch": "x86-32",
-      "sub_package_path": "_platform_specific/x86-32/"
-    },
-    {
-      "nacl_arch": "arm",
-      "sub_package_path": "_platform_specific/arm/"
-    }
-  ],
   "omnibox": {
     "keyword": "ssh"
   },

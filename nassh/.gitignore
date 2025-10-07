@@ -6,8 +6,7 @@ js/*.rollup.js
 /html/changelog.html
 /html/licenses.html
 
-# Copy of the nacl plugin used when loading as an unpacked extension
-/_platform_specific/
+# Copy of the plugin used when loading as an unpacked extension.
 /plugin/
 
 # Stuff we build for distribution

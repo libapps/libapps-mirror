@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview The NaCl plugin leans on its host to provide some basic
+ * @fileoverview The plugin leans on its host to provide some basic
  * stream-like objects.
  */
 

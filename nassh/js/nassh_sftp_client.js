@@ -30,7 +30,7 @@ export function Client(basePath = '') {
   // The packet request id counter.
   this.requestId_ = 0;
 
-  // The nacl plugin for communication.
+  // The plugin (program) that we're running.
   this.plugin_ = null;
 
   // Whether the SFTP connection has been initialized

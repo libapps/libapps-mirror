@@ -25,7 +25,6 @@ import {
   fetchSshPolicy, getGoogleSshAgentExtension, probeExtensions,
   refreshGoogleSshCert,
 } from './nassh_google.js';
-import {Plugin as NaclPlugin} from './nassh_plugin_nacl.js';
 import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
 import {
   LocalPreferenceManager, PreferenceManager, ProfilePreferenceManager,
@@ -90,12 +89,8 @@ export function CommandInstance(argv) {
   // Parsed extension manifest.
   this.manifest_ = getManifest();
 
-  // WASM requires SABs, so if they aren't available, fallback to NaCl.
-  const naclSupported =
-      (navigator.mimeTypes ?? {})['application/x-pnacl'] !== undefined ||
-      globalThis.SharedArrayBuffer === undefined;
   // The version of the ssh client to load.
-  this.sshClientVersion_ = naclSupported ? 'pnacl' : 'wasm';
+  this.sshClientVersion_ = 'wasm';
 
   // Application ID of auth agent.
   this.authAgentAppID_ = null;
@@ -137,7 +132,7 @@ export function CommandInstance(argv) {
   this.connectPage = argv.connectPage || '/html/nassh_connect_dialog.html';
 
   /**
-   * @type {(?NaclPlugin|?WasmPlugin)} The current plugin (WASM/NaCl/etc...).
+   * @type {(?WasmPlugin)} The current plugin (WASM/etc...).
    */
   this.plugin_ = null;
 
@@ -1118,12 +1113,6 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   // Make sure the selected ssh-client version is somewhat valid.
   if (options['--ssh-client-version']) {
     this.sshClientVersion_ = options['--ssh-client-version'];
-  } else if (this.sshClientVersion_ === 'pnacl') {
-    this.io.println(sgrText(
-        'Opting in to WASM for this session.  Please report issues.\n\r' +
-        'Use --ssh-client-version=pnacl to temporarily opt-out.\n\r',
-        {bold: true}));
-    this.sshClientVersion_ = 'wasm';
   }
   if (!this.sshClientVersion_.match(/^[a-zA-Z0-9.-]+$/)) {
     this.io.println(localize('UNKNOWN_SSH_CLIENT_VERSION',
@@ -1224,9 +1213,6 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
                            [`${params.username}@${disp_hostname}`]));
 
   lib.notNull(this.plugin_);
-  if (this.plugin_ instanceof NaclPlugin) {
-    this.plugin_.send('startSession', [argv]);
-  }
   if (this.isSftp) {
     try {
       await this.sftpClient.initConnection(this.plugin_);
@@ -1472,43 +1458,16 @@ CommandInstance.prototype.initWasmPlugin_ =
  * @param {!Object} argv Plugin arguments.
  * @return {!Promise<void>}
  */
-CommandInstance.prototype.initNaclPlugin_ = async function(argv) {
-  this.plugin_ = new NaclPlugin({
-    io: this.io,
-    sshClientVersion: this.sshClientVersion_,
-    onExit: async (code) => {
-      await this.onPluginExit(code);
-      this.exit(code, /* noReconnect= */ false);
-    },
-    secureInput: (...args) => this.secureInput(...args),
-    authAgent: this.authAgent_,
-    authAgentAppID: this.authAgentAppID_,
-    relay: this.relay_,
-    isSftp: this.isSftp,
-    sftpClient: this.sftpClient,
-  });
-  return this.plugin_.init();
-};
-
-/**
- * @param {!Object} argv Plugin arguments.
- * @return {!Promise<void>}
- */
 CommandInstance.prototype.initPlugin_ = async function(argv) {
   this.io.print(localize('PLUGIN_LOADING', [this.sshClientVersion_]));
-  if (this.sshClientVersion_.startsWith('pnacl')) {
-    await this.initNaclPlugin_(argv);
-    this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
-  } else {
-    await this.initWasmPlugin_(argv.arguments, argv.environment, {
-      trace: argv.debugTrace,
-    });
-    this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
-    this.plugin_.run().then(async (code) => {
-      await this.onPluginExit(code);
-      this.exit(code, /* noReconnect= */ false);
-    });
-  }
+  await this.initWasmPlugin_(argv.arguments, argv.environment, {
+    trace: argv.debugTrace,
+  });
+  this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
+  this.plugin_.run().then(async (code) => {
+    await this.onPluginExit(code);
+    this.exit(code, /* noReconnect= */ false);
+  });
 };
 
 /**
@@ -1536,10 +1495,7 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
 
   this.terminalWindow.removeEventListener('beforeunload', this.onBeforeUnload_);
 
-  // Hard destroy the plugin object.  In the past, we'd send onExitAcknowledge
-  // to the plugin and let it exit/cleanup itself.  The NaCl runtime seems to
-  // be a bit unstable though when using threads, so we can't rely on it.  See
-  // https://crbug.com/710252 for more details.
+  // Hard destroy the plugin object.
   this.removePlugin_();
 
   if (this.isMount) {
@@ -1755,8 +1711,8 @@ CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
 };
 
 /**
- * A user should override this if they want to get notified when the ssh NaCl
- * plugin exits.
+ * A user should override this if they want to get notified when the ssh plugin
+ * exits.
  *
  * @param {number} code The exit code.
  * @return {!Promise<void>}

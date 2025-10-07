@@ -52,7 +52,6 @@ EXCLUDE_PATTERNS_CROSH = (
     "html/nassh_background.html",
     "js/nassh_background_main.js",
     "plugin/mosh*",
-    "plugin/pnacl-*",
     "plugin/wasm-*",
     "plugin/wasm/scp*",
     "plugin/wasm/sftp*",
@@ -272,7 +271,6 @@ def mkzip(
                 path.write_text(html, encoding="utf-8")
 
     del data["key"]
-    del data["platforms"]
     minify_json_data(data, tmpdir / "manifest.json")
 
     create_zip(archive, tmpdir, enable_zip)
