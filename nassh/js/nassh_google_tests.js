@@ -8,41 +8,77 @@
 
 import {fetchSshPolicy} from './nassh_google.js';
 
-describe('nassh_google.js', () => {
-  describe('fetchSshPolicy', () => {
-    const sshPolicyResponse = 'get_ssh_policy_response';
-    let mockResponseData;
-
-    const mockSendMessage = (_, __, callback) => {
-      const response = mockResponseData;
-
-      if (callback) {
-        setTimeout(() => callback(response), 0);
-      } else {
-        return Promise.resolve(response);
-      }
-    };
-
-    const createSuccessData = (sshKnownHosts = '', sshConfig = '') => {
-      mockResponseData = {
-        'type': sshPolicyResponse,
-        'data': {
-          'sshKnownHosts': sshKnownHosts,
-          'sshConfig': sshConfig,
-        },
-      };
-    };
-
+/**
+ * A mock for the chrome.runtime.sendMessage API.
+ */
+class MockChromeRuntime {
+  constructor() {
     // We need this assignment so that chrome.runtime wouldn't be undefined.
     /** @suppress {constantProperty} */
     chrome.runtime = chrome.runtime || {};
-    /** @suppress {checkTypes} */
-    chrome.runtime.sendMessage = mockSendMessage;
+    this.originalSendMessage_ = chrome.runtime.sendMessage;
+    this.mockResponseData_ = undefined;
+  }
 
-    it('returns sshPolicy in the correct shape', async () => {
+  /**
+   * Starts the mock, replacing the original sendMessage with our mock version.
+   */
+  start() {
+    chrome.runtime.sendMessage = (...args) => {
+      const callback = args[args.length - 1];
+
+      if (callback instanceof Function) {
+        /** @type {function(*)} */
+        const fn = callback;
+        setTimeout(() => fn(this.mockResponseData_), 0);
+      } else {
+        return this.mockResponseData_;
+      }
+    };
+  }
+
+  /**
+   * Stops the mock and restores the original sendMessage function.
+   */
+  stop() {
+    chrome.runtime.sendMessage = this.originalSendMessage_;
+  }
+
+  /**
+   * Sets the data that the mock sendMessage function will return.
+   * @param {*} data The data to return.
+   */
+  setResponseData(data) {
+    this.mockResponseData_ = data;
+  }
+}
+
+describe('nassh_google.js', function() {
+  describe('fetchSshPolicy', function() {
+    const sshPolicyResponse = 'get_ssh_policy_response';
+
+    beforeEach(function() {
+      this.mockRuntime = new MockChromeRuntime();
+      this.mockRuntime.start();
+      this.createSuccessData = (sshKnownHosts = '', sshConfig = '') => {
+        this.mockRuntime.setResponseData({
+          'type': sshPolicyResponse,
+          'data': {
+            sshKnownHosts,
+            sshConfig,
+          },
+        });
+      };
+    });
+
+    afterEach(function() {
+      this.mockRuntime.stop();
+    });
+
+    it('returns sshPolicy in the correct shape', async function() {
       const sshKnownHosts = 'sshKnownHosts';
       const sshConfig = 'sshConfig';
-      createSuccessData(sshKnownHosts, sshConfig);
+      this.createSuccessData(sshKnownHosts, sshConfig);
 
       const response = await fetchSshPolicy();
 
@@ -51,8 +87,8 @@ describe('nassh_google.js', () => {
     });
 
     it('returns sshPolicy with empty data if the data returned from SKE is ' +
-      'empty', async () => {
-        createSuccessData();
+      'empty', async function() {
+        this.createSuccessData();
 
         const response = await fetchSshPolicy();
 
@@ -61,11 +97,8 @@ describe('nassh_google.js', () => {
       });
 
     it('returns sshPolicy with empty data if the data returned from SKE does ' +
-      'not include the required key', async () => {
-        mockResponseData = {
-          'type': sshPolicyResponse,
-          'data': {},
-        };
+      'not include the required key', async function() {
+        this.createSuccessData();
 
         const response = await fetchSshPolicy();
 
@@ -74,13 +107,13 @@ describe('nassh_google.js', () => {
       });
 
     it('returns sshPolicy with empty data if the data returned from SKE ' +
-      'includes malformed key', async () => {
-        mockResponseData = {
+      'includes malformed key', async function() {
+        this.mockRuntime.setResponseData({
           'type': sshPolicyResponse,
           'data': {
             'unknown_key': 'random_key',
           },
-        };
+        });
 
         const response = await fetchSshPolicy();
 
@@ -89,13 +122,13 @@ describe('nassh_google.js', () => {
       });
 
     it('returns sshPolicy with empty data if the SKE returns ' +
-      'error', async () => {
-        mockResponseData = {
+      'error', async function() {
+        this.mockRuntime.setResponseData({
           'type': 'error_response',
           'errorDetail': 'test',
           'errorReason': 'other error',
           'requestId': 1847507321,
-        };
+        });
 
         const response = await fetchSshPolicy();
 

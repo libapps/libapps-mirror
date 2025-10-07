@@ -39,6 +39,7 @@ import {Websockify as RelayWebsockify} from './nassh_relay_websockify.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
 import {SftpFsp} from './nassh_sftp_fsp.js';
 import {Cli as nasftpCli} from './nasftp_cli.js';
+import {SshPolicy} from './ssh_policy.js';
 
 /**
  * @typedef {{
@@ -146,6 +147,11 @@ export function CommandInstance(argv) {
    * @type {?string} The current connection profile.
    */
   this.profileId_ = null;
+
+  /**
+   * @type {?SshPolicy} Various SSH settings passed in via external policy.
+   */
+  this.sshPolicy_ = null;
 
   // Root preference managers.
   this.prefs_ = new PreferenceManager(this.syncStorage);
@@ -1212,6 +1218,7 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
     this.authAgent_ = new Agent(backendIDs, this.io.terminal_, forwardAgent);
   }
 
+  this.sshPolicy_ = await fetchSshPolicy();
   await this.initPlugin_(argv);
   this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
@@ -1444,7 +1451,6 @@ CommandInstance.prototype.dispatchMessage_ = function(desc, handlers, msg) {
  */
 CommandInstance.prototype.initWasmPlugin_ =
     async function(argv, environ, {trace = false} = {}) {
-  const sshPolicy = await fetchSshPolicy();
 
   this.plugin_ = new WasmPlugin({
     executable: `../../plugin/${this.sshClientVersion_}/ssh.wasm`,
@@ -1459,7 +1465,7 @@ CommandInstance.prototype.initWasmPlugin_ =
     sftpClient: this.sftpClient,
     secureInput: (...args) => this.secureInput(...args),
     syncStorage: this.syncStorage,
-    knownHosts: sshPolicy.getSshKnownHosts(),
+    knownHosts: this.sshPolicy_.getSshKnownHosts(),
   });
   return this.plugin_.init();
 };

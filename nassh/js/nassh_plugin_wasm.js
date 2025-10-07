@@ -235,7 +235,7 @@ class MemoryFileHandler extends FileHandler {
   }
 
   /** @override */
-  async open(path, _, __) {
+  async open(path, fs_flags, o_flags) {
     if (path !== this.path) {
       return WASI.errno.ENOTDIR;
     }
@@ -329,8 +329,11 @@ export class Plugin {
     vfs.addHandler(new StorageFileHandler(
         '/etc/ssh/ssh_known_hosts', this.syncStorage_,
         '/nassh/etc/ssh/ssh_known_hosts'));
+    // The OpenSSH client defaults to reading from both /etc/ssh/ssh_known_hosts
+    // and /etc/ssh/ssh_known_hosts2 for the global known hosts. We use the
+    // second file to inject host keys provided by enterprise policy.
     vfs.addHandler(new MemoryFileHandler(
-      '/etc/ssh/ssh_known_hosts2', this.knownHosts_ ? this.knownHosts_ : ''));
+      '/etc/ssh/ssh_known_hosts2', this.knownHosts_ ?? ''));
 
     // If this is an SFTP connection, rebind stdin/stdout to our custom pipes
     // which connect to our JS SFTP client.
