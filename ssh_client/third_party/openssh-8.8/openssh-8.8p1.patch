@@ -187,28 +187,6 @@ the newer releases.
  	}
  	if (options->num_user_hostfiles == 0) {
 
-The WASI system requires us to pass in a bunch of open file descriptors for
-access to file system paths.  If we close them, then we're shut off from the
-entire file system.  Plus, we know that we aren't leaking random fd's into the
-process that ssh has to protect itself from.  So remove this initial call.
-https://crbug.com/1312165
-
---- a/ssh.c
-+++ b/ssh.c
-@@ -640,12 +640,6 @@
- 	/* Ensure that fds 0, 1 and 2 are open or directed to /dev/null */
- 	sanitise_stdfd();
- 
--	/*
--	 * Discard other fds that are hanging around. These can cause problem
--	 * with backgrounded ssh processes started by ControlPersist.
--	 */
--	closefrom(STDERR_FILENO + 1);
--
- 	__progname = ssh_get_progname(av[0]);
- 
- #ifndef HAVE_SETPROCTITLE
-
 https://crbug.com/1312256
 https://github.com/WebAssembly/wasi-libc/issues/283
 

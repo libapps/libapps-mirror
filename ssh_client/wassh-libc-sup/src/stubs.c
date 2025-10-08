@@ -121,6 +121,21 @@ int chown(const char* path, uid_t uid, gid_t gid) {
   STUB_RETURN(0, "path={%s} uid=%i gid=%i", path, uid, gid);
 }
 
+// The WASI system requires us to pass in a bunch of open file descriptors for
+// access to file system paths.  If we close them, then we're shut off from the
+// entire file system.  Plus, we know that we aren't leaking random fd's into
+// the process that ssh has to protect itself from.
+//
+// POSIX also recognizes this as a possibility in a conforming environment which
+// is why they don't support the fundamental concept of blindly closing fds.
+// https://man7.org/linux/man-pages/man3/close.3p.html#RATIONALE
+//
+// For example, basic ssh breaks pretty quickly if it sanitizes on startup.
+// https://crbug.com/1312165
+int closefrom(int fd) {
+  STUB_RETURN(0, "fd=%i", fd);
+}
+
 // C++ exceptions are fatal and never caught.  Which is OK if the codebase only
 // throws exceptions to abort rather than dynamic recovery.
 void* __cxa_allocate_exception(size_t thrown_size) {

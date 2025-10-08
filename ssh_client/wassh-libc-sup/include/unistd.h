@@ -38,6 +38,7 @@ int execve(const char*, char *const[], char *const[]);
 int execvp(const char*, char *const[]);
 int system(const char*);
 
+int closefrom(int);
 int dup(int);
 int dup2(int, int);
 int pipe(int[2]);
