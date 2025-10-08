@@ -34,6 +34,7 @@ pid_t getpgrp(void);
 int execl(const char*, const char*, ...);
 int execlp(const char*, const char*, ...);
 int execv(const char*, char *const[]);
+int execve(const char*, char *const[], char *const[]);
 int execvp(const char*, char *const[]);
 int system(const char*);
 

@@ -93,6 +93,9 @@ pid_t waitpid(pid_t pid, int* status, int options) {
 int execv(const char* path, char* const argv[]) {
   STUB_ENOSYS(-1, "");
 }
+int execve(const char* path, char *const argv[], char *const envp[]) {
+  STUB_ENOSYS(-1, "");
+}
 int execvp(const char* file, char* const argv[]) {
   STUB_ENOSYS(-1, "");
 }

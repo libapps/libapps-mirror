@@ -104,7 +104,7 @@ subprocess() relies on execv funcs we don't implement.
  			error("%s: dup2: %s", tag, strerror(errno));
  			_exit(1);
  		}
-+#if !defined(__wasm__) && !defined(__pnacl__) && !defined(__nacl__)
++#if !defined(__pnacl__) && !defined(__nacl__)
  		if (env != NULL)
  			execve(av[0], av, env);
  		else
