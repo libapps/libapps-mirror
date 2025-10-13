@@ -29,6 +29,7 @@ C_SOURCES := \
 	getsockopt.c \
 	ioctl.c \
 	listen.c \
+	poll.c \
 	readpassphrase.c \
 	recv.c \
 	send.c \
