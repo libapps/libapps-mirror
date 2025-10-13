@@ -46,4 +46,4 @@ def src_install(metadata):
         ssh_client.copy(header, target)
 
 
-ssh_client.build_package(sys.modules[__name__], "pnacl")
+ssh_client.build_package(sys.modules[__name__], "wasm")

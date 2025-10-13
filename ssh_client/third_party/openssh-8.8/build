@@ -177,4 +177,4 @@ def src_install(metadata):
         ssh_client.copy(path, plugin_docs / path)
 
 
-ssh_client.build_package(sys.modules[__name__], "pnacl")
+ssh_client.build_package(sys.modules[__name__], "wasm")

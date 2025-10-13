@@ -161,9 +161,7 @@ class ToolchainInfo:
     @classmethod
     def from_id(cls, name):
         """Figure out what environment should be used."""
-        if name == "pnacl":
-            return cls(_toolchain_pnacl_env())
-        elif name == "wasm":
+        if name == "wasm":
             return cls(_toolchain_wasm_env())
 
         assert name == "build"
@@ -213,38 +211,6 @@ class ToolchainInfo:
             result = run([prog], capture_output=True)
             self._cbuild = result.stdout.strip().decode("utf-8")
         return self._cbuild
-
-
-def _toolchain_pnacl_env():
-    """Get custom env to build using PNaCl toolchain."""
-    nacl_sdk_root = OUTPUT / "naclsdk"
-
-    toolchain_root = nacl_sdk_root / "toolchain" / "linux_pnacl"
-    bin_dir = toolchain_root / "bin"
-    compiler_prefix = str(bin_dir / "pnacl-")
-    sysroot = toolchain_root / "le32-nacl"
-    sysroot_libdir = sysroot / "lib"
-    pkgconfig_dir = sysroot_libdir / "pkgconfig"
-
-    return {
-        "CHOST": "nacl",
-        "NACL_ARCH": "pnacl",
-        "NACL_SDK_ROOT": str(nacl_sdk_root),
-        "PATH": os.path.sep.join((str(bin_dir), os.environ["PATH"])),
-        "CC": compiler_prefix + "clang",
-        "CXX": compiler_prefix + "clang++",
-        "AR": compiler_prefix + "ar",
-        "RANLIB": compiler_prefix + "ranlib",
-        "STRIP": compiler_prefix + "strip",
-        "PKG_CONFIG_PATH": str(pkgconfig_dir),
-        "PKG_CONFIG_LIBDIR": str(sysroot_libdir),
-        "SYSROOT": str(sysroot),
-        "CPPFLAGS": (
-            f"-I{sysroot / 'include' / 'glibc-compat'}"
-            f" -I{nacl_sdk_root / 'include'}"
-        ),
-        "LDFLAGS": f"-L{nacl_sdk_root / 'lib' / 'pnacl' / 'Release'}",
-    }
 
 
 def _toolchain_wasm_env():
@@ -345,7 +311,7 @@ def get_parser(desc, default_toolchain):
     parser = libdot.ArgumentParser(description=desc)
     parser.add_argument(
         "--toolchain",
-        choices=("build", "pnacl", "wasm"),
+        choices=("build", "wasm"),
         default=default_toolchain,
         help="Which toolchain to use (default: %(default)s).",
     )

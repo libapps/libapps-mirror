@@ -12,7 +12,6 @@ ncpus=$(getconf _NPROCESSORS_ONLN || echo 2)
 
 DEBUG=0
 OFFICIAL_RELEASE=0
-BUILD_NACL=1
 
 for i in $@; do
   case $i in
@@ -21,9 +20,6 @@ for i in $@; do
       ;;
     "--official-release")
       OFFICIAL_RELEASE=1
-      ;;
-    "--wasm-only")
-      BUILD_NACL=0
       ;;
     *)
       echo "usage: $0 [--debug]"
@@ -40,13 +36,11 @@ tc_pkgs=(
   # Build tools.
   gnuconfig
   mandoc
-  bazel-5
 
   # WASM toolchain.
   binaryen
   wabt
   wasi-sdk
-  wasmtime
 )
 for tc_pkg in "${tc_pkgs[@]}"; do
   ./third_party/${tc_pkg}/build
@@ -58,15 +52,11 @@ pkgs=(
   openssl
   ldns
   $(printf 'openssh-%s ' "${SSH_VERSIONS[@]}")
-)
-wasm_pkgs=(
-  "${pkgs[@]}"
   ncurses
 )
 
 ./wassh-libc-sup/build
-# Build the WASM packages.
-for pkg in "${wasm_pkgs[@]}"; do
+for pkg in "${pkgs[@]}"; do
   ./third_party/${pkg}/build --toolchain wasm
 done
 
@@ -126,45 +116,12 @@ done
 make -f Makefile.wasm-opt -j${ncpus} -O
 popd >/dev/null
 
-if [[ ${BUILD_NACL} == 0 ]]; then
-  exit
-fi
-
-# pnacl tries to use "python" instead of "python2".
-export PNACLPYTHON=python2
-python2 --version >/dev/null
-
-# Build the NaCl toolchain packages.
-tc_pkgs=(
-  # NaCl toolchain.
-  naclsdk
-  glibc-compat
-)
-for tc_pkg in "${tc_pkgs[@]}"; do
-  ./third_party/${tc_pkg}/build
-done
-
-# Build the NaCl packages.
-for pkg in "${pkgs[@]}"; do
-  ./third_party/${pkg}/build --toolchain pnacl
-done
-./third_party/mosh-chrome/build
-
-# Build the PNaCl programs.
-BUILD_ARGS=()
+# Generate the final artifacts.
 if [[ $DEBUG == 1 ]]; then
-  BUILD_ARGS+=( DEBUG=1 )
   tarname="debug.tar"
 else
   tarname="release.tar"
 fi
-
-first="true"
-for version in "${SSH_VERSIONS[@]}"; do
-  make -C src -j${ncpus} "${BUILD_ARGS[@]}" \
-    SSH_VERSION="${version}" DEFAULT_VERSION="${first}"
-  first=
-done
 
 cd output
 # Only spend extra time on this on official release builders.  All other modes
@@ -177,7 +134,6 @@ fi
 # Use reproducible options since the inputs should be reproducible too.
 (
 find plugin/ -type f -print0
-find build/pnacl* -name '*.pexe' -o -name '*.dbg.nexe' -print0
 ) | \
 LC_ALL=C tar \
   --numeric-owner \

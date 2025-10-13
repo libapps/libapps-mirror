@@ -27,7 +27,7 @@ reasonably fast, reasonably correct, and reasonably portable across browsers.
 * [nassh/](./nassh/) is the Chrome Secure Shell extension that combines hterm
 with a build of OpenSSH to provide a PuTTY-like app for Chrome users.
 
-* [ssh_client/](./ssh_client/) is the NaCl & WASM port of OpenSSH.
+* [ssh_client/](./ssh_client/) is the WASM port of OpenSSH.
 
 * [terminal/](./terminal/) is the ChromeOS Terminal application.
 
