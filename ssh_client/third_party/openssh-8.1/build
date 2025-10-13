@@ -75,7 +75,7 @@ def src_configure(metadata):
         "--with-ldns",
         "--with-zlib",
         "--without-zlib-version-check",
-        # These don't work with newlib (used in PNaCl).
+        # These don't work with our runtime.
         "--without-stackprotect",
         "--without-hardening",
         # Disable inet funcs we don't rely upon.
