@@ -8,6 +8,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <netdb.h>
+#include <pty.h>
 #include <pwd.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -72,6 +73,12 @@ char* ptsname(int fd) {
   static char path[10];
   strncpy(path, "/dev/tty", sizeof(path));
   return path;
+}
+
+int openpty(int* amaster, int* aslave, char* name, const struct termios* termp,
+            const struct winsize* winp) {
+  errno = ENOENT;
+  return -1;
 }
 
 struct passwd* getpwuid(uid_t uid) {  // NOLINT(runtime/threadsafe_fn)
