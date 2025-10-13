@@ -119,51 +119,22 @@ def src_configure(metadata):
         )
 
 
-def src_compile(metadata):
+def src_compile(_metadata):
     """Compile the source."""
-    # These are the few objects we care about for our tools.
-    objects = [
-        "ssh.o",
-        "readconf.o",
-        "clientloop.o",
-        "sshtty.o",
-        "sshconnect.o",
-        "sshconnect2.o",
-        "mux.o",
-        "ssh-sk-client.o",
-    ]
-
-    targets = objects + [
-        # These are internal ssh libs that the objects above might use.
-        "libssh.a",
-        "openbsd-compat/libopenbsd-compat.a",
+    targets = [
+        "scp",
+        "sftp",
+        "ssh",
+        "ssh-keygen",
         # The documentation we'll ship later on.
         "html",
     ]
 
-    tc = metadata["toolchain"]
-    if tc.chost.startswith("wasm"):
-        targets += ["scp", "sftp", "ssh", "ssh-keygen"]
-
     ssh_client.emake(*targets)
-    ssh_client.run([tc.ar, "rcs", "libopenssh.a"] + objects)
 
 
-def src_install(metadata):
+def src_install(_metadata):
     """Install the package."""
-    tc = metadata["toolchain"]
-    # Turn "8.0p1" into just "8.0".
-    major_minor_version = metadata["PV"][:3]
-    for lib in (
-        "libopenssh.a",
-        "libssh.a",
-        "openbsd-compat/libopenbsd-compat.a",
-    ):
-        # Transform libssh.a to libssh-8.0.a.
-        base, ext = os.path.splitext(os.path.basename(lib))
-        target = f"{base}-{major_minor_version}{ext}"
-        ssh_client.copy(lib, os.path.join(tc.libdir, target))
-
     plugin_docs = ssh_client.OUTPUT / "plugin" / "docs"
     plugin_docs.mkdir(parents=True, exist_ok=True)
     for path in glob.glob("*.[0-9].html"):
