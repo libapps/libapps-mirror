@@ -65,9 +65,8 @@ def is_presubmit():
 def should_build_plugin():
     """Whether we should build the ssh_client plugin code.
 
-    Building this native code with the nacl toolchain dominates our build times
-    (usually ~75% of the entire build).  Lets skip it if we don't think any of
-    changes are relevant.
+    Building the native code dominates our build times (usually ~75% of the
+    entire build).  Lets skip it if we don't think any of changes are relevant.
     """
     logging.info("Detecting whether to build plugin")
 
@@ -131,7 +130,7 @@ def build_archive():
             ["unzip", archive, "-d", os.path.join(ARTIFACTS_DIR, output)]
         )
 
-    # Copy over the nacl ssh build with debug info.
+    # Copy over the ssh build with debug info.
     if should_build_plugin():
         ssh_client_dir = os.path.join(kokoro.LIBAPPS_DIR, "ssh_client")
         os.rename(
