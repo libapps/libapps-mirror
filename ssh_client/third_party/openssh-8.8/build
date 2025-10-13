@@ -75,6 +75,7 @@ def src_configure(metadata):
         "--without-selinux",
         "--without-shadow",
         "--without-ssl-engine",
+        "--without-zlib-version-check",
         # Features we want.
         # OpenSSL is needed for DSA/RSA key support.
         "--with-openssl",
