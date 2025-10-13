@@ -21,6 +21,7 @@ ARCHIVES = ("%(p)s.tar.gz",)
 PATCHES = (
     "%(p)s.patch",
     "%(p)s-write-disconnect.patch",
+    "%(p)s-openssl-bn.patch",
 )
 
 
