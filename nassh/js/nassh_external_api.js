@@ -10,11 +10,9 @@ import {lib} from '../../libdot/index.js';
 
 import {hterm} from '../../hterm/index.js';
 
-import {overwriteFile} from './lib_fs.js';
 import {getSyncStorage} from './nassh.js';
 import {exportPreferences, importPreferences} from './nassh_background.js';
 import {CommandInstance} from './nassh_command_instance.js';
-import {getDomFileSystem} from './nassh_fs.js';
 import {Client as sftpClient} from './nassh_sftp_client.js';
 import {SftpFsp} from './nassh_sftp_fsp.js';
 
@@ -49,93 +47,6 @@ function(request, sender, sendResponse) {
     internal: sender.internal,
     id: sender.id,
   });
-});
-
-/**
- * Root dir for all files to be written under.
- *
- * @const
- */
-const ROOT_DIR = '/external';
-
-/**
- * Unique identifier for each session.
- *
- * @private
- */
-let sessionCounter_ = 0;
-
-COMMANDS.set('mount',
-/**
- * Performs SFTP mount.
- *
- * @param {{username:string, hostname:string, port:(number|undefined),
- *     identityFile:string, knownHosts:string, fileSystemId:string,
- *     displayName:string}} request Request to mount specified host.
- * @param {!MessageSender} sender chrome.runtime.MessageSender
- * @param {function(!Object=)} sendResponse called to send response.
- */
-function(request, sender, sendResponse) {
-  const sessionId = sessionCounter_++;
-  const knownHosts = `${ROOT_DIR}/${sessionId}.known_hosts`;
-  const identityFile = `${ROOT_DIR}/${sessionId}.identity_file`;
-  /**
-   * @param {string} filename The filename to write to.
-   * @param {string} content The data to write out.
-   * @return {!Promise<void>} A promise completing when the write finishes.
-   */
-  const writeFile = (filename, content) => {
-    // TODO(vapier): Move to indexeddb-fs once SFTP works w/WASM.
-    return overwriteFile(this.fileSystem_.root, filename, content);
-  };
-  Promise.all([
-      writeFile(knownHosts, request.knownHosts),
-      writeFile(identityFile, request.identityFile),
-  ]).then(async () => {
-    const argv = {
-      io: this.io_,
-      syncStorage: getSyncStorage(),
-      isSftp: true,
-      isMount: true,
-      fsp: lib.notNull(this.fsp_),
-      mountOptions: {
-        fileSystemId: request.fileSystemId,
-        displayName: request.displayName,
-        writable: true,
-      },
-    };
-    const connectOptions = {
-      username: request.username,
-      hostname: request.hostname,
-      port: request.port,
-      argstr: `-i${identityFile} -oUserKnownHostsFile=${knownHosts}`,
-    };
-    const instance = new CommandInstance(argv);
-    await instance.connectTo(connectOptions);
-    // TODO(vapier): Plumb back up success/failure.
-    sendResponse({error: false, message: 'createSftpInstance'});
-  }).catch((e) => {
-    console.error(e);
-    sendResponse({error: true, message: e.message, stack: e.stack});
-  });
-});
-
-COMMANDS.set('unmount',
-/**
- * Unmount an existing SFTP mount.
- *
- * @param {{fileSystemId:string}} request Request to unmount specified mount.
- * @param {!MessageSender} sender chrome.runtime.MessageSender
- * @param {function(!Object=)} sendResponse called to send response.
- */
-function(request, sender, sendResponse) {
-  const {fileSystemId} = request;
-  // Always call the unmount API.  It will handle unknown mounts for us, and
-  // will clean up FSP state that Chrome knows about but we don't.
-  this.fsp_.onUnmountRequested(
-      {fileSystemId},
-      () => sendResponse({error: false, message: `unmounted ${fileSystemId}`}),
-      (message) => sendResponse({error: true, message: message}));
 });
 
 /**
@@ -772,13 +683,6 @@ export class ExternalApi {
      * @type {?SftpFsp}
      */
     this.fsp_ = null;
-
-    /**
-     * Filesystem handle for accessing /.ssh files.
-     *
-     * @type {?FileSystem}
-     */
-    this.fileSystem_ = null;
   }
 
   /**
@@ -789,23 +693,6 @@ export class ExternalApi {
    */
   async init(fsp) {
     this.fsp_ = fsp;
-
-    // Get handle on FileSystem & cleanup files.
-    try {
-      this.fileSystem_ = await getDomFileSystem() ?? null;
-      if (this.fileSystem_) {
-        await new Promise((deleteDone) => {
-          // Remove existing contents of '/external/' before registering.
-          this.fileSystem_.root.getDirectory(
-              ROOT_DIR,
-              {},
-              (f) => { f.removeRecursively(deleteDone, deleteDone); },
-              deleteDone);
-        });
-      }
-    } catch (e) {
-      console.warn(`Setting up DOM fs failed`, e);
-    }
 
     // We can start processing messages now.
     this.handlersReady_ = true;

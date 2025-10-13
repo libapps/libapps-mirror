@@ -82,33 +82,6 @@ The response will have these additional fields:
 | `internal`     | bool    | Whether the sender is the same extension. |
 | `id`           | string  | The extension id of the sender. |
 
-### Mount
-
-On ChromeOS, trigger a SFTP filesystem mount with the Files app.
-
-This is a one-shot API that does not allow for interactive UI.
-It is meant to automatically set up connections that use key auth only.
-
-| Field name     | Type    | Description |
-|----------------|---------|-------------|
-| `command`      | !string | Must be `mount`. |
-| `knownHosts`   | !string | File contents of known_hosts to be used for connection.  e.g. output from `ssh-keyscan <ssh-server>` |
-| `identityFile` | !string | File contents of private key identity_file (e.g. contents of id_rsa file `-----BEGIN RSA PRIVATE KEY----- ...`) |
-| `username`     | !string | Username for connection |
-| `hostname`     | !string | Hostname or IP address for connection |
-| `port`         | number= | Port, default is 22 |
-| `fileSystemId` | !string | ID used for ChromeOS mounted filesystem |
-| `displayName`  | !string | Display name in ChromeOS Files.app for mounted filesystem |
-
-### Unmount
-
-On ChromeOS, unmount an existing SFTP filesystem mount.
-
-| Field name     | Type    | Description |
-|----------------|---------|-------------|
-| `command`      | !string | Must be `unmount`. |
-| `fileSystemId` | !string | ID used for ChromeOS mounted filesystem. |
-
 ### Get Mount Info
 
 On ChromeOS, return information about a particular mount.
