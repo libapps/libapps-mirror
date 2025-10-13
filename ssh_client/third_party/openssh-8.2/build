@@ -87,6 +87,9 @@ def src_configure(metadata):
         "ac_cv_func_bindresvport_sa=yes",
         "ac_cv_func_getgrouplist=yes",
         "ac_cv_func_rresvport_af=yes",
+        # Older versions had a buggy configure.ac check.  It was fixed in
+        # OpenSSH 8.4+, but it's easier to set the variable than backport.
+        "ac_cv_libc_defines___progname=yes",
     ]
 
     cmd = [
