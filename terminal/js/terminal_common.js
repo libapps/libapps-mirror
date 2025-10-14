@@ -9,8 +9,6 @@
 import {lib} from '../../libdot/index.js';
 import {hterm} from '../../hterm/index.js';
 
-import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
-
 // Fonts which are installed in ChromeOS.
 /** @type {!Array<string>} */
 const LOCAL_FONTS = [
@@ -375,11 +373,6 @@ export async function init() {
       }),
       prefetchOSInfo(),
       // Load hterm.messageManager from /_locales/<lang>/messages.json.
-      // Migrate over the DOM filesystem to the new indexeddb-fs.
-      // TODO(vapier): Delete this with R110+.
-      migrateFilesystemFromDomToIndexeddb().catch((e) => {
-        console.error('Error migrating filesystem', e);
-      }),
   ]).then(() => {});
 }
 

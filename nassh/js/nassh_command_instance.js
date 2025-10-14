@@ -22,9 +22,6 @@ import {
 import {Agent} from './nassh_agent.js';
 import {setDefaultBackend} from './nassh_buffer.js';
 import {
-  syncFilesystemFromDomToIndexeddb, syncFilesystemFromIndexeddbToDom,
-} from './nassh_fs.js';
-import {
   fetchSshPolicy, getGoogleSshAgentExtension, probeExtensions,
   refreshGoogleSshCert,
 } from './nassh_google.js';
@@ -1476,14 +1473,10 @@ CommandInstance.prototype.initWasmPlugin_ =
  * @return {!Promise<void>}
  */
 CommandInstance.prototype.initNaclPlugin_ = async function(argv) {
-  syncFilesystemFromIndexeddbToDom();
-
   this.plugin_ = new NaclPlugin({
     io: this.io,
     sshClientVersion: this.sshClientVersion_,
     onExit: async (code) => {
-      syncFilesystemFromDomToIndexeddb();
-
       await this.onPluginExit(code);
       this.exit(code, /* noReconnect= */ false);
     },

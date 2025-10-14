@@ -13,7 +13,6 @@ import {browserAction, getSyncStorage, runtimeSendMessage} from './nassh.js';
 import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';
 import {ExternalApi} from './nassh_external_api.js';
-import {migrateFilesystemFromDomToIndexeddb} from './nassh_fs.js';
 import {probeExtensions} from './nassh_google.js';
 import {SftpFsp} from './nassh_sftp_fsp.js';
 
@@ -88,9 +87,6 @@ function init() {
     browserAction.onClicked.removeListener(onLaunched);
     app.installBrowserAction();
   }
-
-  // Migrate over the DOM filesystem to the new indexeddb-fs.
-  migrateFilesystemFromDomToIndexeddb();
 
   // If the user tried to run us while we were initializing, run it now.
   if (didLaunch) {
