@@ -157,6 +157,8 @@ https://dev.chromium.org/chromium-os/developer-information-for-chrome-os-devices
     *   Chrome disabled NaCl on consumer devices by default, so only WASM works.
 *   Jul 2025: CrOS 138 goes stable.
     *   The last version with NaCl support, and a LTS release.
+*   Oct 2025: Secure Shell 0.69 released.
+    *   This is the last version to support NaCl.
 *   Apr 2026: CrOS 138 (LTS) last refresh.
     *   The last point where NaCl works for managed devices.
 

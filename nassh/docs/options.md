@@ -114,8 +114,8 @@ default version and selecting a previous version makes things work, you need to
 
 Here are some versions that might be available:
 
-* `pnacl`: The default OpenSSH version built for NaCl most people should use.
-* `pnacl-openssh-7.5p1`: An older OpenSSH release.
+* `wasm`: The default OpenSSH version most people should use.
+* `wasm-openssh-8.6`: An older OpenSSH release.
 
 ## `--welcome`
 

@@ -21,7 +21,7 @@
 
 # Introduction
 
-Secure Shell is a Chrome extension that combines hterm with a NaCl build of
+Secure Shell is a Chrome extension that combines hterm with a WASM build of
 OpenSSH to provide a PuTTY-like app for Chrome users.
 
 See [/HACK.md](/HACK.md) for general information about working with the source
@@ -37,31 +37,25 @@ The Secure Shell app depends on some library code from
 
 This will create the various library dependencies that we use.
 
-## The NaCl plugin dependency
+## The plugin dependency
 
-Secure Shell depends on a NaCl (Native Client) plugin to function.  This plugin
-is a port of OpenSSH.  The latest version of the plugin is copied into
-`libapps/nassh/plugin/` by `nassh/bin/mkdeps`.  You can overwrite this with
-a different version if desired.  Your options are (pick one):
+Secure Shell depends on compiled WASM programs to function, namely a port of
+OpenSSH.  The latest version of the plugin is copied into `nassh/plugin/` by
+`nassh/bin/mkdeps`.  You can overwrite this with a different version if desired.
+Your options are (pick one):
 
 1. Build it yourself from [ssh_client].  This can take some time, but once it's
 finished:
 ```
 # In the ssh_client/ directory.
-$ cp -a output/hterm/plugin/ ../nassh/
+$ cp -a output/plugin/ ../nassh/
 ```
 
-2. Grab a different release.  For example:
+2. Download the latest version.
 ```
 # In the nassh/ directory.
-$ wget https://commondatastorage.googleapis.com/chromeos-localmirror/secureshell/releases/0.42.tar.xz
-$ tar -xvf 0.42.tar.xz plugin/
+$ ./bin/plugin
 ```
-
-3. Copy the `plugin/` directory from the latest version of Secure Shell.
-If you have Secure Shell installed, the plugin can be found in your profile
-directory, under
-`Default/Extensions/iodihamcpbpeioajjeobimgagajmlibd/<version>/plugin/`.
 
 # Dev-Test cycle
 
@@ -106,12 +100,6 @@ by with using a different id (and delete the settings from the
   [(1)](https://cs.chromium.org/search/?q=terminalPrivate)
   [(2)](https://cs.chromium.org/chromium/src/chrome/common/extensions/api/terminal_private.json)
   [(3)](https://cs.chromium.org/chromium/src/chrome/browser/extensions/api/terminal/terminal_private_api.cc)
-* Access to raw sockets under NaCl.  This allows connecting directly to SSH
-  servers (e.g. port 22).
-  [(1)](https://cs.chromium.org/search/?q=kPredefinedAllowedSocketOrigins)
-  <br>
-  Note: Making connections over https using relay servers will still work
-  though.  See the [FAQ] for more details.
 * Access to [chrome.sockets] APIs.  This allows connecting directly to SSH
   servers (e.g. port 22).  We're allowing this pending [Native Sockets] support
   in the web platform itself.
@@ -197,7 +185,7 @@ See the [libapps hacking document](../../HACK.md) for details.
 
 # Source Layout
 
-Keep in mind that the NaCl [ssh_client] code does not live here.
+Keep in mind that the WASM [ssh_client] code does not live here.
 
 The vast majority of the code here lives under [js/].
 
@@ -223,7 +211,7 @@ The vast majority of the code here lives under [js/].
   * `*.concat.js`: Compiled JS output of other projects we use.
   * See the section below.
 * [_locales/]: [Translations](https://developer.chrome.com/extensions/i18n) of strings shown to the user.
-* plugin/: Compiled NaCl & output from [ssh_client]
+* plugin/: Compiled programs output from [ssh_client]
 * [third_party/]: Various 3rd party code we import.
   * [chrome-bootstrap.css]: Theme code for the extensions options page.
 * [manifest.json]: The [Chrome extension manifest].
@@ -296,7 +284,7 @@ Secure Shell logic.
   * [nassh_sftp_packet_types.js]: Specific packet types.
   * [nassh_sftp_status.js]: Status objects for SFTP code.
 
-# NaCl/JS Life cycle
+# Life cycle
 
 When the extension is launched (e.g. a new connection is opened), the background
 page is automatically created.  This is used to monitor global state like
@@ -311,86 +299,14 @@ info is provided via the URL, then an iframe is created to show
 connections and picks the one they want to connect to.  This logic is in
 [nassh_connect_dialog.js].  Once the user makes a selection (either connecting
 or mounting), a message is sent to [nassh_command_instance.js].  There the
-connection dialog is closed, the NaCl plugin is loaded, and the streams are
-connected to hterm.
+connection dialog is closed, the plugin is loaded, and the streams are connected
+to hterm.
 
 ## Exit Codes
 
 Since the ssh program uses positive exit statuses, we tend to use -1 for
 internal exit states in the JS code.
 It doesn't matter too much as the exit values are purely for showing the user.
-
-## JS->NaCl API
-
-Here is the API that the JS code uses to communicate with the NaCl [ssh_client]
-module.
-
-The `CommandInstance.prototype.sendToPlugin_` function in
-[nassh_command_instance.js] is used to package up and make all the calls.
-Helper functions are also provided in that file to avoid a JS API to callers.
-
-At the lowest level, we pass a dictionary to the plugin.  It has two fields,
-both of which must be specified (even if `arguments` is just `[]`).
-
-* `name`: The function we want to call (as a string).
-* `arguments`: An array of arguments to the function.
-
-The `name` field can be any one of:
-
-| Function name        | Description                      | Arguments |
-|----------------------|----------------------------------|-----------|
-| `startSession`       | Start a new ssh connection!      | (object `session`) |
-| `onOpenFile`         | Open a new file.                 | (int `fd`, bool `success`, bool `is_atty`) |
-| `onOpenSocket`       | Open a new socket.               | (int `fd`, bool `success`, bool `is_atty`) |
-| `onRead`             | Send new data to the plugin.     | (int `fd`, ArrayBuffer `data`) |
-| `onWriteAcknowledge` | Tell plugin we've read data.     | (int `fd`, number `count`) |
-| `onClose`            | Close an existing fd.            | (int `fd`) |
-| `onReadReady`        | Notify plugin data is available. | (int `fd`, bool `result`) |
-| `onResize`           | Notify terminal size changes.    | (int `width`, int `height`) |
-| `onExitAcknowledge`  | Used to quit the plugin.         | () |
-| `onReadPass`         | Return the entered password.     | (str `pass`) |
-
-The session object currently has these members:
-
-* str `username`: Username for accessing the remote system.
-* str `host`: Hostname for accessing the remote system.
-* int `port`: Port number for accessing the remote system.
-* int `terminalWidth`: Initial width of the terminal window.
-* int `terminalHeight`: Initial height of the terminal window.
-* bool `useJsSocket`: Whether to use JS for network traffic.
-* object `environment`: A key/value object of environment variables.
-* array `arguments`: Extra command line options for ssh.
-* int `writeWindow`: Size of the write window.
-* str `authAgentAppID`: Extension id to use as the ssh-agent.
-* str `subsystem`: Which subsystem to launch.
-
-The `onWriteAcknowledge` `count` field tracks the total byte count sent for the
-connection, not the `count` from the most recent `write` request.
-It supports up to `Number.MAX_SAFE_INTEGER` bytes.
-
-## NaCl->JS API
-
-Here is the API that the NaCl [ssh_client] code uses to communicate with the
-JS layers.
-
-At the lowest level, we pass a dictionary to the JS code.  It has two fields,
-both of which must be specified (even if `arguments` is just `[]`).
-
-* `name`: The function we want to call (as a string).
-* `arguments`: An array of arguments to the function.
-
-The `name` field can be any one of:
-
-| Function name | Description                       | Arguments |
-|---------------|-----------------------------------|-----------|
-| `openFile`    | Plugin wants to open a file.      | (int `fd`, str `path`, int `mode`) |
-| `openSocket`  | Plugin wants to open a socket.    | (int `fd`, str `host`, int `port`) |
-| `read`        | Plugin wants to read data.        | (int `fd`, int `count`) |
-| `write`       | Plugin wants to write data.       | (int `fd`, ArrayBuffer `data`) |
-| `close`       | Plugin wants to close an fd.      | (int `fd`) |
-| `exit`        | The plugin is exiting.            | (int `code`) |
-| `printLog`    | Send a string to `console.log`.   | (str `str`) |
-| `readPass`    | Plugin wants to read secrets.     | (str `prompt`, int `max_bytes`, bool `echo`) |
 
 # SFTP {#SFTP}
 
@@ -460,7 +376,8 @@ having to download data from one file and uploading to a different one.
 Here's a random list of documents which would be useful to people.
 
 * [OpenSSH]: The ssh client we use
-* [NaCl]: Chrome's Native Client that we build using (including the PPAPI plugin)
+* [WASM]: WebAssembly: What programs are compiled using
+* [WASI]: The system interface for WASM
 * [RFC 4251 - The Secure Shell (SSH) Protocol Architecture](https://tools.ietf.org/html/rfc4251)
 * [RFC 4252 - The Secure Shell (SSH) Authentication Protocol](https://tools.ietf.org/html/rfc4252)
 * [RFC 4253 - The Secure Shell (SSH) Transport Layer Protocol](https://tools.ietf.org/html/rfc4253)
@@ -537,11 +454,11 @@ Here's a random list of documents which would be useful to people.
 [copy-data]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-extensions-00#section-7
 [Corp Relay]: relay-protocol.md#corp-relay
 [crosh]: https://www.chromium.org/chromium-os/developer-library/reference/device/crosh/
-[NaCl]: https://developer.chrome.com/native-client
 [Native Sockets]: https://crbug.com/909927
 [OpenSSH]: https://www.openssh.com/
 [OpenSSH SFTP Protocol]: https://github.com/openssh/openssh-portable/blob/HEAD/PROTOCOL
 [SFTPv3]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-02
 [SFTPv6]: https://tools.ietf.org/html/draft-ietf-secsh-filexfer-13
 [ssh_client]: ../../ssh_client/
-[wash]: ../../wash/
+[WASI]: https://wasi.dev/
+[WASM]: https://webassembly.org/

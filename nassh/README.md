@@ -1,6 +1,6 @@
 # Secure Shell (nassh)
 
-Secure Shell (nassh) is a Chrome App that combines [hterm](/hterm/) with a NaCl
+Secure Shell (nassh) is a Chrome App that combines [hterm](/hterm/) with a WASM
 build of OpenSSH to provide a PuTTY-like app for Chrome users.
 
 # Install
@@ -35,8 +35,7 @@ This will route to the right people.
 
 This has only been tested with Chrome.  We know the following is needed:
 
-* Native Client (NaCl)
-* Pepper Plugin API (PPAPI)
+* WebAssembly (WASM)
 * ECMAScript 2020
 
 [chromium-hterm mailing list]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm

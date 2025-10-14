@@ -123,7 +123,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   The source is in here: <https://chromium.googlesource.com/apps/libapps/>.
   This includes the front-end code for Secure Shell.
 
-  The Native Client wrapper around ssh is in [ssh_client/](/ssh_client/).
+  The WASM port of ssh is in [ssh_client/](/ssh_client/).
 
 ### Is there a changelog?
 
@@ -180,9 +180,8 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
   This makes it about as secure as any other connection based on the ssh
   command.
 
-  It does have the added advantage of running ssh as a sandboxed
-  Native Client plugin, which in theory makes it more secure than an
-  unsandboxed ssh connection.
+  It does have the added advantage of running ssh as a sandboxed WASM plugin,
+  which in theory makes it more secure than an unsandboxed ssh connection.
 
   Additionally, the Secure Shell application follows a strict Content Security
   Policy that does not allow access to the JavaScript 'eval' function.  This
@@ -223,7 +222,7 @@ is not answered here, please ask it on the [chromium-hterm mailing list].
 
   See <http://man.openbsd.org/ssh_config> for more information about the ssh
   configuration syntax.  Keep in mind that any directives that would require
-  access outside of the NaCl sandbox will not function properly.  This includes
+  access outside of the sandbox will not function properly.  This includes
   (but is not limited to) X11 forwarding,  syslog functionality, and anything
   that requires a domain socket.
 
@@ -368,7 +367,7 @@ have to re-import them.
 ### Is there support for keychains?
 
   Sorry, not yet.  This is a bit of a technical challenge given the nature
-  of the NaCl sandbox.  We have a few options that we're exploring.  Feel
+  of the sandbox.  We have a few options that we're exploring.  Feel
   free to post your ideas to the [chromium-hterm mailing list].
 
   (And yes, we're already considering integrating with the Chrome NSS
