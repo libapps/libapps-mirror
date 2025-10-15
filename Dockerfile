@@ -10,7 +10,7 @@
 #
 # Although all changes at this point can be done in the kokoro/build script.
 
-FROM debian:bullseye
+FROM debian:bookworm
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 # We also list packages needed by Chrome itself for headless tests.
 RUN apt-get --assume-yes install --no-install-recommends \
     gcc g++ libstdc++6:i386 libglib2.0-0:i386 git make cmake lbzip2 \
-    python python2.7 python3 python3-requests \
+    python-is-python3 python3 python3-requests \
     curl zlib1g-dev zip unzip rsync pkg-config xz-utils patch \
     libasound2 libatk1.0-0 libatk-bridge2.0-0 libatspi2.0-0 libcairo2 \
     libcups2 libdbus-1-3 libexpat1 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 \
@@ -50,5 +50,8 @@ RUN apt-get clean
 # When patches are applied, webports generates local git repos & commits.
 RUN git config --system user.email "noreply@google.com"
 RUN git config --system user.name "Secure Shell Builder"
+
+# We control the git content, so we don't need these checks.
+RUN git config --global --add safe.directory "*"
 
 CMD /libapps/kokoro/build
