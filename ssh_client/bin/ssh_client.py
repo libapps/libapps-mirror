@@ -146,30 +146,46 @@ def parse_metadata(metadata):
 class ToolchainInfo:
     """Information about the active toolchain environment."""
 
-    def __init__(self, env):
+    def __init__(self, target: str, env: dict) -> None:
         """Initialize."""
         self._env = env
         self._cbuild = None
         self._chost = self._env.get("CHOST")
-        if "SYSROOT" in self._env:
+        self.targetname = target
+
+        # Not used with build tools.
+        if self.targetname != "build":
             self.sysroot = Path(self._env["SYSROOT"])
             self.libdir = self.sysroot / "lib"
             self.incdir = self.sysroot / "include"
+            multitarget = self._env.get("MULTITARGET")
+            if multitarget:
+                self.libdir /= multitarget
+                self.incdir /= multitarget
             self.pkgconfdir = self.libdir / "pkgconfig"
+        else:
+            # This isn't strictly correct, but our build tool usage is pretty
+            # minimal, so should suffice for now.
+            self.sysroot = Path("/")
+            self.incdir = self.sysroot / "usr" / "include"
+            self.libdir = self.sysroot / "usr" / "lib"
+
         self.ar = self._env.get("AR")
 
     @classmethod
     def from_id(cls, name):
         """Figure out what environment should be used."""
-        if name == "wasm":
-            return cls(_toolchain_wasm_env())
+        if name == "wasm" or name.startswith("wasi"):
+            env = _toolchain_wasm_env(name)
+            return cls(env["MULTITARGET"], env)
 
         assert name == "build"
         return cls(
+            "build",
             {
                 "CC": "gcc",
                 "CXX": "g++",
-            }
+            },
         )
 
     def activate(self):
@@ -212,19 +228,40 @@ class ToolchainInfo:
             self._cbuild = result.stdout.strip().decode("utf-8")
         return self._cbuild
 
+    @property
+    def relincdir(self) -> Path:
+        """Relative include dir path.
 
-def _toolchain_wasm_env():
+        Set the include dir when building packages under sysrots.
+        """
+        return self.incdir.relative_to(self.sysroot)
+
+    @property
+    def rellibdir(self) -> Path:
+        """Relative library dir path.
+
+        Set the library dir when building packages under sysrots.
+        """
+        return self.libdir.relative_to(self.sysroot)
+
+
+def _toolchain_wasm_env(target: str) -> dict:
     """Get custom env to build using WASM toolchain."""
     sdk_root = OUTPUT / "wasi-sdk"
 
+    # We currently support the WASI preview1 ABI.
+    if target == "wasm":
+        target = "wasm32-wasip1"
+    elif target.startswith("wasi"):
+        # We only really care about 32-bit atm.
+        target = f"wasm32-{target}"
+
     bin_dir = sdk_root / "bin"
     sysroot = sdk_root / "share" / "wasi-sysroot"
-    libdir = sysroot / "lib"
-    incdir = sysroot / "include"
+    libdir = sysroot / "lib" / target
+    incdir = sysroot / "include" / target
     pcdir = libdir / "pkgconfig"
 
-    # We currently support the WASI preview1 ABI.
-    target = "wasm32-wasip1"
     return {
         # Only use single core here due to known bug in 89 release:
         # https://github.com/WebAssembly/binaryen/issues/2273
@@ -241,6 +278,7 @@ def _toolchain_wasm_env():
         "PKG_CONFIG_SYSROOT_DIR": str(sysroot),
         "PKG_CONFIG_LIBDIR": str(pcdir),
         "SYSROOT": str(sysroot),
+        "MULTITARGET": target,
         "CPPFLAGS": " ".join(
             (
                 f'-isystem {incdir / "wassh-libc-sup"}',
@@ -311,7 +349,14 @@ def get_parser(desc, default_toolchain):
     parser = libdot.ArgumentParser(description=desc)
     parser.add_argument(
         "--toolchain",
-        choices=("build", "wasm"),
+        choices=(
+            "build",
+            "wasm",
+            "wasip1",
+            "wasip1-threads",
+            "wasip2",
+            "wasip2-threads",
+        ),
         default=default_toolchain,
         help="Which toolchain to use (default: %(default)s).",
     )

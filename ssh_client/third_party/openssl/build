@@ -42,6 +42,15 @@ def src_configure(metadata):
             logging.info("Makefile exists; skipping ./configure step")
             return
 
+    for f in metadata["S"].glob("**/Makefile*"):
+        data = f.read_text()
+        new_data = data.replace(
+            "$(INSTALL_PREFIX)$(INSTALLTOP)/include/openssl",
+            f"$(INSTALL_PREFIX)$(INSTALLTOP)/{tc.relincdir}/openssl",
+        )
+        if data != new_data:
+            f.write_text(new_data)
+
     env = os.environ.copy()
     env.update(
         {
@@ -55,6 +64,7 @@ def src_configure(metadata):
         [
             "./config",
             "--prefix=/",
+            f"--libdir=/{tc.rellibdir}",
             "no-asm",
             "no-deprecated",
             "no-dso",

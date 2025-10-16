@@ -37,20 +37,27 @@ def src_configure(metadata):
         "-DHAVE_STRUCT_SOCKADDR_IN6",
     ]
 
+    # The ldns configure logic is quite poor and searches the filesystem instead
+    # of querying the compiler.  Force it to our sysroot.
+    ssldir = metadata["workdir"] / "ssl"
+    ssldir.mkdir(parents=True, exist_ok=True)
+    (ssldir / "lib").symlink_to(tc.libdir)
+    (ssldir / "include").symlink_to(tc.incdir)
+
     cmd = [
         "./configure",
         f"--build={tc.cbuild}",
         f"--host={tc.chost}",
         # The prefix path matches what is used at runtime.
         "--prefix=/",
+        f"--includedir=/{tc.relincdir}",
+        f"--libdir=/{tc.rellibdir}",
         "--cache-file=../config.cache",
         f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
         "--with-drill",
         "--disable-dane-verify",
         "--disable-gost",
-        # The ldns configure logic is quite poor and searches the filesystem
-        # instead of querying the compiler.  Force it to our sysroot.
-        f"--with-ssl={tc.sysroot}",
+        f"--with-ssl={ssldir}",
     ]
     ssh_client.run(cmd)
 
