@@ -218,16 +218,20 @@ export class Background extends Base {
    *   argv: !Array<string>,
    *   environ: !Object<string, string>,
    *   handler: !SyscallHandler,
+   *   sabSize: number,
    * }} param1
    */
-  constructor(workerUri, {executable, argv, environ, handler}) {
+  constructor(workerUri, {
+    executable, argv, environ, handler,
+    sabSize = 64 * 1024,
+  }) {
     super({executable, argv, environ});
 
     this.resolve_ = null;
     this.workerUri = workerUri;
     this.worker = null;
     this.handler = handler;
-    this.sab = new SharedArrayBuffer(64 * 1024);
+    this.sab = new SharedArrayBuffer(sabSize);
     this.lock = new SyscallLock(this.sab);
 
     handler.setProcess(this);

@@ -320,6 +320,9 @@ export class Plugin {
         unixSocketsOpen: (address, port) => this.openUnixSocket_(address, port),
         secureInput: this.secureInput_,
       }),
+      // NB: Max buffer to support in a single syscall; OpenSSH is known to call
+      // read() on 256KiB data, so use a bit bigger for locking overhead.
+      sabSize: 257 * 1024,
     };
     await settings.handler.init();
 
