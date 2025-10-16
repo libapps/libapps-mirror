@@ -629,7 +629,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
         switch (type) {
           case WASI.filetype.SOCKET_STREAM:
           case WASI.filetype.SOCKET_DGRAM:
-            handle = Sockets.UnixSocket(
+            handle = new Sockets.UnixSocket(
                 domain, type, protocol, this.unixSocketsOpen_);
             break;
           default:
