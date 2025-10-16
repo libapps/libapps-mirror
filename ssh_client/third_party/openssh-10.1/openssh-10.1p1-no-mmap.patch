@@ -1,0 +1,77 @@
+We don't have mmap(), but it's only used for shared lib loading, which we
+also don't have, so disable it.
+
+--- a/misc.c
++++ b/misc.c
+@@ -22,7 +22,6 @@
+ 
+ #include <sys/types.h>
+ #include <sys/ioctl.h>
+-#include <sys/mman.h>
+ #include <sys/socket.h>
+ #include <sys/stat.h>
+ #include <sys/time.h>
+@@ -2937,7 +2936,7 @@ ptimeout_isset(struct timespec *pt)
+  out:
+ 	free(nl[0].n_name);
+ 	return ret;
+-#else /* HAVE_NLIST */
++#elif 0
+ 	int fd, ret = -1;
+ 	struct stat st;
+ 	void *m = NULL;
+@@ -3004,6 +3005,7 @@ lib_contains_symbol(const char *path, const char *s)
+ 	close(fd);
+ 	return ret;
+ #endif /* HAVE_NLIST */
++   return 0;
+ }
+ 
+ int
+
+We don't need to worry about secure memory like this.
+https://github.com/openssh/openssh-portable/pull/597
+
+--- a/sshkey.c
++++ b/sshkey.c
+@@ -28,7 +28,9 @@
+ #include "includes.h"
+ 
+ #include <sys/types.h>
++#ifdef HAVE_SYS_MMAN_H
+ #include <sys/mman.h>
++#endif
+ #include <netinet/in.h>
+ 
+ #ifdef WITH_OPENSSL
+@@ -723,6 +725,7 @@ sshkey_sk_cleanup(struct sshkey *k)
+ static int
+ sshkey_prekey_alloc(u_char **prekeyp, size_t len)
+ {
++#ifdef HAVE_SYS_MMAN_H
+ 	u_char *prekey;
+ 
+ 	*prekeyp = NULL;
+@@ -733,15 +736,22 @@ sshkey_prekey_alloc(u_char **prekeyp, size_t len)
+ 	(void)madvise(prekey, len, MADV_DONTDUMP);
+ #endif
+ 	*prekeyp = prekey;
++#else
++	*prekeyp = malloc(len);
++#endif
+ 	return 0;
+ }
+ 
+ static void
+ sshkey_prekey_free(void *prekey, size_t len)
+ {
++#ifdef HAVE_SYS_MMAN_H
+ 	if (prekey == NULL)
+ 		return;
+ 	munmap(prekey, len);
++#else
++	free(prekey);
++#endif
+ }
+ 
+ static void

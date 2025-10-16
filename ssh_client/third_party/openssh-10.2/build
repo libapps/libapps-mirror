@@ -1,0 +1,145 @@
+#!/usr/bin/env python3
+# Copyright 2020 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build openssh package."""
+
+import glob
+import logging
+import os
+from pathlib import Path
+import sys
+
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+ARCHIVES = ("%(p)s.tar.gz",)
+PATCHES = (
+    "%(p)s.patch",
+    "%(p)s-no-mmap.patch",
+    "%(p)s-bsd-misc-includes.patch",
+)
+
+
+def src_configure(metadata):
+    """Configure the source."""
+    if os.path.exists("Makefile"):
+        logging.info("Makefile exists; skipping ./configure step")
+        return
+
+    tc = metadata["toolchain"]
+
+    EXTRA_LIBS = ["-lcrypto"]
+    EXTRA_CFLAGS = [
+        "-DHAVE_SIGACTION",
+        "-DHAVE_TRUNCATE",
+        "-DHAVE_SETSID",
+        "-DHAVE_GETNAMEINFO",
+        "-DHAVE_GETADDRINFO",
+        "-DHAVE_GETCWD",
+        "-DHAVE_STATVFS",
+        "-DHAVE_FSTATVFS",
+        "-DHAVE_ENDGRENT",
+        "-DHAVE_FD_MASK",
+        "-include",
+        "sys/cdefs.h",
+    ]
+
+    EXTRA_CONFIGURE_FLAGS = [
+        # Log related settings.
+        "--disable-lastlog",
+        "--disable-utmp",
+        "--disable-utmpx",
+        "--disable-wtmp",
+        "--disable-wtmpx",
+        "--disable-pututline",
+        "--disable-pututxline",
+        # Various toolchain settings.
+        "--without-rpath",
+        "--without-Werror",
+        # Features we don't use.
+        "--without-audit",
+        "--without-libedit",
+        "--without-pam",
+        "--without-sandbox",
+        "--without-selinux",
+        "--without-shadow",
+        "--without-ssl-engine",
+        "--without-zlib-version-check",
+        # Features we want.
+        # OpenSSL is needed for DSA/RSA key support.
+        "--with-openssl",
+        "--with-ldns",
+        "--with-zlib",
+        # These don't work with our runtime.
+        "--without-stackprotect",
+        "--without-hardening",
+        "--without-retpoline",
+        # We provide this API ourselves.
+        "ac_cv_func_readpassphrase=yes",
+        # Disable inet funcs we don't rely upon.
+        "ac_cv_func_inet_aton=no",
+        "ac_cv_func_inet_ntoa=no",
+        "ac_cv_func_inet_ntop=no",
+        # We set these to yes because openssh doesn't use them, so we want to
+        # disable the fallback implementations.  If it starts needing them, we
+        # will notice with link errors.
+        "ac_cv_func_bindresvport_sa=yes",
+        "ac_cv_func_getgrouplist=yes",
+        "ac_cv_func_rresvport_af=yes",
+    ]
+
+    cmd = [
+        "./configure",
+        f"--build={tc.cbuild}",
+        f"--host={tc.chost}",
+        # The prefix path matches what is used at runtime.
+        "--prefix=/",
+        "--sysconfdir=/etc/ssh",
+        "--cache-file=../config.cache",
+        f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
+        f"LIBS={' '.join(EXTRA_LIBS)}",
+    ]
+    ssh_client.run(cmd + EXTRA_CONFIGURE_FLAGS)
+
+    # Build the html man pages.  Since we're hooking the Makefile, we need can
+    # do this only after we've run configure.
+    cmd = " ".join(ssh_client.get_mandoc_cmd(metadata["p"]))
+    with open("Makefile", "ab") as f:
+        f.writelines(
+            [
+                b"html: $(MANPAGES_IN:%=%.html)\n",
+                b"%.html: %\n",
+                f"\t{cmd} $< >$@.tmp\n".encode("utf-8"),
+                b"\tmv $@.tmp $@\n",
+            ]
+        )
+
+
+def src_compile(_metadata):
+    """Compile the source."""
+    targets = [
+        "scp",
+        "sftp",
+        "ssh",
+        "ssh-keygen",
+        # The documentation we'll ship later on.
+        "html",
+    ]
+
+    ssh_client.emake(*targets)
+
+
+def src_install(_metadata):
+    """Install the package."""
+    plugin_docs = ssh_client.OUTPUT / "plugin" / "docs"
+    plugin_docs.mkdir(parents=True, exist_ok=True)
+    for path in glob.glob("*.[0-9].html"):
+        ssh_client.copy(path, plugin_docs / path)
+
+
+ssh_client.build_package(sys.modules[__name__], "wasm")
