@@ -108,7 +108,7 @@ for version in "${SSH_VERSIONS[@]}"; do
     (
       echo "all: ${dir}/${prog}.wasm"
       echo "${dir}/${prog}.wasm:" \
-        build/wasm/openssh-${version}*/work/openssh-*/${prog}
+        build/wasm32-wasip1/openssh-${version}*/work/openssh-*/${prog}
       printf '\t$(WASM_OPT) ${WASM_OPTS} $< -o $@\n'
     ) >>Makefile.wasm-opt
   done

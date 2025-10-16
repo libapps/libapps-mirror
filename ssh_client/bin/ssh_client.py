@@ -423,8 +423,12 @@ def build_package(module, default_toolchain):
         }
     )
 
+    toolchain = ToolchainInfo.from_id(opts.toolchain)
+    toolchain.activate()
+    metadata["toolchain"] = toolchain
+
     # All package-specific build state is under this directory.
-    basedir = BUILDDIR / opts.toolchain / metadata["p"]
+    basedir = BUILDDIR / toolchain.targetname / metadata["p"]
     workdir = basedir / "work"
     # Package-specific source directory with all the source.
     sourcedir = getattr(module, "S", os.path.join(workdir, metadata["p"]))
@@ -450,10 +454,6 @@ def build_package(module, default_toolchain):
 
     for path in (tempdir, workdir, BUILD_BINDIR, HOME):
         os.makedirs(path, exist_ok=True)
-
-    toolchain = ToolchainInfo.from_id(opts.toolchain)
-    toolchain.activate()
-    metadata["toolchain"] = toolchain
 
     os.environ["HOME"] = str(HOME)
     os.environ["PATH"] = os.pathsep.join(
