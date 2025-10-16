@@ -52,12 +52,22 @@ pkgs=(
   openssl
   ldns
   $(printf 'openssh-%s ' "${SSH_VERSIONS[@]}")
-  ncurses
 )
 
-./wassh-libc-sup/build
+./wassh-libc-sup/build --toolchain wasip1
 for pkg in "${pkgs[@]}"; do
-  ./third_party/${pkg}/build --toolchain wasm
+  ./third_party/${pkg}/build --toolchain wasip1
+done
+
+# Packages for mosh.
+mosh_pkgs=(
+  zlib
+  openssl
+  ncurses
+)
+./wassh-libc-sup/build --toolchain wasip1-threads
+for pkg in "${mosh_pkgs[@]}"; do
+  ./third_party/${pkg}/build --toolchain wasip1-threads
 done
 
 # Install the WASM programs.
