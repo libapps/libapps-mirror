@@ -262,7 +262,7 @@ def _toolchain_wasm_env(target: str) -> dict:
     incdir = sysroot / "include" / target
     pcdir = libdir / "pkgconfig"
 
-    return {
+    ret = {
         # Only use single core here due to known bug in 89 release:
         # https://github.com/WebAssembly/binaryen/issues/2273
         "BINARYEN_CORES": "1",
@@ -302,6 +302,16 @@ def _toolchain_wasm_env(target: str) -> dict:
             )
         ),
     }
+
+    if target.endswith("-threads"):
+        ret.update(
+            {
+                "CFLAGS": "-O2 -g0 -pipe -pthread",
+                "CXXFLAGS": "-O2 -g0 -pipe -pthread",
+            }
+        )
+
+    return ret
 
 
 def default_src_unpack(metadata):
