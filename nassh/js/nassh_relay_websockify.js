@@ -44,7 +44,7 @@ export class Websockify extends Relay {
   loadState(state) {}
 
   /** @inheritDoc */
-  openSocket(fd, host, port, streams, onOpen) {
+  openSocket(host, port, streams, onOpen) {
     const settings = {
       relayHost: this.proxyHost,
       relayPort: this.proxyPort,
@@ -52,7 +52,7 @@ export class Websockify extends Relay {
       port: port,
       protocol: this.useSecure ? 'wss' : 'ws',
     };
-    return streams.openStream(RelayWebsockifyStream, fd, settings, onOpen);
+    return streams.openStream(RelayWebsockifyStream, settings, onOpen);
   }
 }
 

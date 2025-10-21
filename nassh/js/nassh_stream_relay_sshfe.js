@@ -23,12 +23,11 @@ import {Stream} from './nassh_stream.js';
  *
  * Resuming of connections is not supported.
  *
- * @param {number} fd
  * @constructor
  * @extends {Stream}
  */
-export function RelaySshfeWsStream(fd) {
-  Stream.call(this, fd);
+export function RelaySshfeWsStream() {
+  Stream.call(this);
 
   // The relay connection settings.
   this.io_ = null;

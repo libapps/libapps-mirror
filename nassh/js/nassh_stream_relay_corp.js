@@ -18,12 +18,11 @@ import {Stream} from './nassh_stream.js';
  * This class implements session initialization and back-off logic common for
  * both types of streams.
  *
- * @param {number} fd
  * @constructor
  * @extends {Stream}
  */
-export function RelayCorpStream(fd) {
-  Stream.apply(this, [fd]);
+export function RelayCorpStream() {
+  Stream.apply(this, []);
 
   this.io_ = null;
   this.host_ = null;
@@ -213,12 +212,11 @@ RelayCorpStream.prototype.requestError_ = function(isRead) {
  * This class manages the read and write XML http requests used to communicate
  * with the Google relay server.
  *
- * @param {number} fd
  * @constructor
  * @extends {RelayCorpStream}
  */
-export function RelayCorpXhrStream(fd) {
-  RelayCorpStream.apply(this, [fd]);
+export function RelayCorpXhrStream() {
+  RelayCorpStream.apply(this, []);
 
   this.writeRequest_ = new XMLHttpRequest();
   this.writeRequest_.ontimeout = this.writeRequest_.onabort =
@@ -385,12 +383,11 @@ RelayCorpXhrStream.prototype.isRequestBusy_ = function(r) {
  * This class manages the read and write through WebSocket to communicate
  * with the Google relay server.
  *
- * @param {number} fd
  * @constructor
  * @extends {RelayCorpStream}
  */
-export function RelayCorpWsStream(fd) {
-  RelayCorpStream.apply(this, [fd]);
+export function RelayCorpWsStream() {
+  RelayCorpStream.apply(this, []);
 
   this.socket_ = null;
 

@@ -8,35 +8,21 @@ import {Stream} from './nassh_stream.js';
  * A set of open streams for a command instance.
  */
 export class StreamSet {
-  constructor() {
-    /**
-     * Collection of currently open stream instances.
-     *
-     * @private {!Object<number, !Stream>}
-     * @const
-     */
-    this.openStreams_ = {};
-  }
+  constructor() {}
 
   /**
    * Open a new stream instance of a given class.
    *
-   * @param {function(new:Stream, number, ?)} streamClass
-   * @param {number} fd
+   * @param {function(new:Stream)} streamClass
    * @param {!Object} arg
    * @param {function(boolean, ?string=)} onOpen
    * @return {!Stream}
    */
-  openStream(streamClass, fd, arg, onOpen) {
-    if (this.openStreams_[fd]) {
-      throw Stream.ERR_FD_IN_USE;
-    }
-
-    const stream = new streamClass(fd, arg);
+  openStream(streamClass, arg, onOpen) {
+    const stream = new streamClass();
 
     stream.asyncOpen(arg, (success, errorMessage) => {
       if (success) {
-        this.openStreams_[fd] = stream;
         stream.open = true;
       }
 

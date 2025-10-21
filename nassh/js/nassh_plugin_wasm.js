@@ -409,7 +409,7 @@ export class Plugin {
     const streams = new StreamSet();
     let stream;
     await new Promise((resolve) => {
-      stream = this.relay_.openSocket(9, address, port, streams, resolve);
+      stream = this.relay_.openSocket(address, port, streams, resolve);
     });
     return stream;
   }
@@ -431,10 +431,10 @@ export class Plugin {
       // TODO(crbug.com/1303495): Delete this old hack.
       if (this.authAgent_) {
         args = {authAgent: this.authAgent_};
-        stream = new SshAgentStream(0, args);
+        stream = new SshAgentStream(args);
       } else {
         args = {authAgentAppID: this.authAgentAppID_};
-        stream = new SshAgentRelayStream(0);
+        stream = new SshAgentRelayStream();
       }
     }
     // TODO(vapier): Implement path-based lookups.

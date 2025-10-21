@@ -10,12 +10,11 @@ import {Stream} from './nassh_stream.js';
 /**
  * Relay ssh-agent messages to another app.
  *
- * @param {number} fd
  * @constructor
  * @extends {Stream}
  */
-export function SshAgentRelayStream(fd) {
-  Stream.apply(this, [fd]);
+export function SshAgentRelayStream() {
+  Stream.call(this);
 
   this.authAgentAppID_ = null;
   this.port_ = null;

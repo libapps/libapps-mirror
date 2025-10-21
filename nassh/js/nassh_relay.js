@@ -84,14 +84,13 @@ export class Relay {
    * Return a Stream object that will handle the socket stream for this relay.
    *
    * @abstract
-   * @param {number} fd
    * @param {string} host
    * @param {number} port
    * @param {!StreamSet} streams
    * @param {function(boolean, ?string=)} onOpen
    * @return {!Stream}
    */
-  openSocket(fd, host, port, streams, onOpen) {}
+  openSocket(host, port, streams, onOpen) {}
 
   /**
    * Save all the relevant state after a relay has finished initializing.

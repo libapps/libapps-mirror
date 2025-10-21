@@ -150,7 +150,7 @@ it('RelayCorpv4WS basic', (done) => {
   }
 
   // Initialize state.
-  const stream = new RelayCorpv4WsStream(100);
+  const stream = new RelayCorpv4WsStream();
   /** @this {RelayCorpv4WsStream} */
   stream.connect_ = function() {
     this.socket_ = new WebSocketMock();
@@ -241,7 +241,7 @@ it('RelayCorpv4WS basic', (done) => {
  */
 it('RelayCorpv4WS error in connect', () => {
   // Initialize state.
-  const stream = new RelayCorpv4WsStream(100);
+  const stream = new RelayCorpv4WsStream();
   stream.connect_ = () => {};
   let closeReason;
   stream.close_ = (reason) => {
@@ -259,7 +259,7 @@ it('RelayCorpv4WS error in connect', () => {
  */
 it('RelayCorpv4WS reconnect on dirty close', () => {
   // Initialize state.
-  const stream = new RelayCorpv4WsStream(100);
+  const stream = new RelayCorpv4WsStream();
   stream.connect_ = () => {};
   let closeReason;
   stream.close_ = (reason) => {

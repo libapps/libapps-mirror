@@ -10,12 +10,10 @@
 /**
  * Base class for streams required by the plugin.
  *
- * @param {number} fd
  * @param {string=} path
  * @constructor
  */
-export function Stream(fd, path) {
-  this.fd_ = fd;
+export function Stream(path) {
   this.path = path;
   this.open = false;
 }
@@ -25,7 +23,6 @@ export function Stream(fd, path) {
  */
 Stream.ERR_STREAM_CLOSED = 'Stream closed';
 Stream.ERR_STREAM_OPENED = 'Stream opened';
-Stream.ERR_FD_IN_USE = 'File descriptor in use';
 Stream.ERR_NOT_IMPLEMENTED = 'Not implemented';
 Stream.ERR_STREAM_CANT_READ = 'Stream has no read permission';
 Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';

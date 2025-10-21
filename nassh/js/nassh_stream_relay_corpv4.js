@@ -135,12 +135,11 @@ export class ClientAckPacket {
  * This class manages the read and write through WebSocket to communicate
  * with the Corp v4 relay server.
  *
- * @param {number} fd
  * @constructor
  * @extends {Stream}
  */
-export function RelayCorpv4WsStream(fd) {
-  Stream.call(this, fd);
+export function RelayCorpv4WsStream() {
+  Stream.call(this);
 
   // The relay connection settings.
   this.io_ = null;

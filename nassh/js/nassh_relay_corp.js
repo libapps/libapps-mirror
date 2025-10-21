@@ -157,14 +157,14 @@ export class Corp extends Relay {
   /**
    * Return Stream class to use.
    *
-   * @return {function(new:Stream, number, ?)}
+   * @return {function(new:Stream)}
    */
   getStreamClass() {
     return this.useWebsocket ? RelayCorpWsStream : RelayCorpXhrStream;
   }
 
   /** @inheritDoc */
-  openSocket(fd, host, port, streams, onOpen) {
+  openSocket(host, port, streams, onOpen) {
     const options = {
       io: this.io_,
       relayServer: this.relayServer,
@@ -178,7 +178,7 @@ export class Corp extends Relay {
       localPrefs: this.localPrefs,
       egressDomain: this.egressDomain,
     };
-    return streams.openStream(this.getStreamClass(), fd, options, onOpen);
+    return streams.openStream(this.getStreamClass(), options, onOpen);
   }
 
   /**

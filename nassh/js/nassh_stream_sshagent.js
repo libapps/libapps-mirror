@@ -16,13 +16,12 @@ import {Stream} from './nassh_stream.js';
 /**
  * Relay ssh-agent messages to an Agent instance.
  *
- * @param {number} fd
  * @param {{authAgent: !Agent}} args
  * @constructor
  * @extends {Stream}
  */
-export function SshAgentStream(fd, args) {
-  Stream.apply(this, [fd]);
+export function SshAgentStream(args) {
+  Stream.call(this);
 
   this.authAgent_ = args.authAgent;
   this.pendingMessageSize_ = null;

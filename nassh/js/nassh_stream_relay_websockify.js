@@ -20,11 +20,8 @@ import {Stream} from './nassh_stream.js';
  * Resuming of connections is not supported.
  */
 export class RelayWebsockifyStream extends Stream {
-  /**
-   * @param {number} fd
-   */
-  constructor(fd) {
-    super(fd);
+  constructor() {
+    super();
 
     // The relay connection settings.
     this.relayHost_ = null;

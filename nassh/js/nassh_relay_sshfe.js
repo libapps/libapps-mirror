@@ -40,7 +40,7 @@ export class Sshfe extends Relay {
   loadState(state) {}
 
   /** @inheritDoc */
-  openSocket(fd, host, port, streams, onOpen) {
+  openSocket(host, port, streams, onOpen) {
     const settings = {
       io: this.io_,
       relayHost: this.proxyHost,
@@ -50,6 +50,6 @@ export class Sshfe extends Relay {
       port: port,
       sshAgent: this.sshAgent_,
     };
-    return streams.openStream(RelaySshfeWsStream, fd, settings, onOpen);
+    return streams.openStream(RelaySshfeWsStream, settings, onOpen);
   }
 }
