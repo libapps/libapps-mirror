@@ -45,35 +45,4 @@ export class StreamSet {
 
     return stream;
   }
-
-  /**
-   * Closes a stream instance.
-   *
-   * @param {number} fd
-   */
-  closeStream(fd) {
-    const stream = this.openStreams_[fd];
-    stream.close();
-    stream.open = false;
-    delete this.openStreams_[fd];
-  }
-
-  /**
-   * Closes all stream instances.
-   */
-  closeAllStreams() {
-    for (const fd in this.openStreams_) {
-      this.closeStream(Number(fd));
-    }
-  }
-
-  /**
-   * Returns a stream instance.
-   *
-   * @param {number} fd
-   * @return {!Stream}
-   */
-  getStreamByFd(fd) {
-    return this.openStreams_[fd];
-  }
 }
