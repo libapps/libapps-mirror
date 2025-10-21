@@ -61,24 +61,6 @@ Stream.prototype.asyncOpen = async function(settings, onOpen) {
 };
 
 /**
- * Read from a stream, calling back with the result.
- *
- * The default implementation does not actually send data to the client, but
- * assumes that it is instead pushed to the client using the
- * onDataAvailable event.
- *
- * @param {number} size
- * @param {function(!ArrayBuffer)} onRead
- */
-Stream.prototype.asyncRead = function(size, onRead) {
-  if (this.onDataAvailable === undefined) {
-    throw Stream.ERR_NOT_IMPLEMENTED;
-  }
-
-  setTimeout(() => onRead(new ArrayBuffer(0)), 0);
-};
-
-/**
  * Write to a stream.
  *
  * @param {!ArrayBuffer} data
