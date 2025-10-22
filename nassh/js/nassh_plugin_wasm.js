@@ -402,11 +402,7 @@ export class Plugin {
    * @return {!Promise<!Stream>} The new relay socket stream.
    */
   async openTcpSocket_(address, port) {
-    let stream;
-    await new Promise((resolve) => {
-      stream = this.relay_.openSocket(address, port, resolve);
-    });
-    return stream;
+    return this.relay_.openSocket(address, port);
   }
 
   /**

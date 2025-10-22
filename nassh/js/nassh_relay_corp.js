@@ -164,7 +164,7 @@ export class Corp extends Relay {
   }
 
   /** @inheritDoc */
-  openSocket(host, port, onOpen) {
+  async openSocket(host, port) {
     const options = {
       io: this.io_,
       relayServer: this.relayServer,
@@ -180,7 +180,7 @@ export class Corp extends Relay {
     };
     const streamClass = this.getStreamClass();
     const stream = new streamClass();
-    stream.asyncOpen(options, onOpen);
+    await new Promise((resolve) => stream.asyncOpen(options, resolve));
     return stream;
   }
 

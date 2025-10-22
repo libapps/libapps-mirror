@@ -85,10 +85,9 @@ export class Relay {
    * @abstract
    * @param {string} host
    * @param {number} port
-   * @param {function(boolean, ?string=)} onOpen
-   * @return {!Stream}
+   * @return {!Promise<!Stream>}
    */
-  openSocket(host, port, onOpen) {}
+  async openSocket(host, port) {}
 
   /**
    * Save all the relevant state after a relay has finished initializing.
