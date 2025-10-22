@@ -233,7 +233,6 @@ The vast majority of the code here lives under [js/].
 * Stream (I/O) related code
   * [nassh_stream.js]: Basic class for implementing all `nassh.Stream` streams.
   * [nassh_stream_relay_corp.js]: Stream for [Corp Relay] connections.
-  * [nassh_stream_set.js]:
   * [nassh_stream_sshagent.js]:
     SSH agent implementation using nassh.agent.Agent to relay requests to
     backends.
@@ -438,7 +437,6 @@ Here's a random list of documents which would be useful to people.
 [nassh_sftp_status.js]: ../js/nassh_sftp_status.js
 [nassh_stream_relay_corp.js]: ../js/nassh_stream_relay_corp.js
 [nassh_stream.js]: ../js/nassh_stream.js
-[nassh_stream_set.js]: ../js/nassh_stream_set.js
 [nassh_stream_sshagent.js]: ../js/nassh_stream_sshagent.js
 [nassh_stream_sshagent_relay.js]: ../js/nassh_stream_sshagent_relay.js
 [nassh_test.js]: ../js/nassh_test.js

@@ -17,7 +17,6 @@ import {Agent} from './nassh_agent.js';
 import {getIndexeddbFileSystem} from './nassh_fs.js';
 import {Relay} from './nassh_relay.js';
 import {Stream} from './nassh_stream.js';
-import {StreamSet} from './nassh_stream_set.js';
 import {SshAgentStream} from './nassh_stream_sshagent.js';
 import {SshAgentRelayStream} from './nassh_stream_sshagent_relay.js';
 
@@ -403,13 +402,9 @@ export class Plugin {
    * @return {!Promise<!Stream>} The new relay socket stream.
    */
   async openTcpSocket_(address, port) {
-    // We're only ever going to have one relay, so construct the stream set &
-    // use a fake fd below in it.  After we turn down the NaCl code, we can
-    // refactor the stream APIs entirely to avoid this.
-    const streams = new StreamSet();
     let stream;
     await new Promise((resolve) => {
-      stream = this.relay_.openSocket(address, port, streams, resolve);
+      stream = this.relay_.openSocket(address, port, resolve);
     });
     return stream;
   }

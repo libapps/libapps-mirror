@@ -164,7 +164,7 @@ export class Corp extends Relay {
   }
 
   /** @inheritDoc */
-  openSocket(host, port, streams, onOpen) {
+  openSocket(host, port, onOpen) {
     const options = {
       io: this.io_,
       relayServer: this.relayServer,
@@ -178,7 +178,10 @@ export class Corp extends Relay {
       localPrefs: this.localPrefs,
       egressDomain: this.egressDomain,
     };
-    return streams.openStream(this.getStreamClass(), options, onOpen);
+    const streamClass = this.getStreamClass();
+    const stream = new streamClass();
+    stream.asyncOpen(options, onOpen);
+    return stream;
   }
 
   /**

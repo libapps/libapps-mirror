@@ -10,7 +10,6 @@ import {hterm} from '../../hterm/index.js';
 
 import {LocalPreferenceManager} from './nassh_preference_manager.js';
 import {Stream} from './nassh_stream.js';
-import {StreamSet} from './nassh_stream_set.js';
 
 /**
  * Interface that all relays must implement.
@@ -86,11 +85,10 @@ export class Relay {
    * @abstract
    * @param {string} host
    * @param {number} port
-   * @param {!StreamSet} streams
    * @param {function(boolean, ?string=)} onOpen
    * @return {!Stream}
    */
-  openSocket(host, port, streams, onOpen) {}
+  openSocket(host, port, onOpen) {}
 
   /**
    * Save all the relevant state after a relay has finished initializing.
