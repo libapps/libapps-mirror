@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+# Copyright 2025 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build libssh package."""
+
+from pathlib import Path
+import sys
+
+FILESDIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+ARCHIVES = ("%(p)s.tar.xz",)
+PATCHES = (
+    "%(p)s-tty.patch",
+    "%(p)s-openssl-evp.patch",
+    "%(p)s-nonblock.patch",
+)
+
+
+def src_configure(metadata):
+    """Configure the source."""
+    build_dir = metadata["workdir"] / "build"
+    build_dir.mkdir(exist_ok=True)
+
+    tc = metadata["toolchain"]
+    toolchain_file = build_dir / "toolchain.cmake"
+    tc.write_cmake_toolchain_file(toolchain_file)
+
+    ssh_client.run(
+        [
+            "cmake",
+            "-S",
+            metadata["S"],
+            "-B",
+            build_dir,
+            "-DCMAKE_INSTALL_PREFIX=/",
+            f"-DCMAKE_TOOLCHAIN_FILE={toolchain_file}",
+            "-DCMAKE_VERBOSE_MAKEFILE=ON",
+            "-DBUILD_SHARED_LIBS=OFF",
+            "-DWITH_ZLIB=ON",
+            "-DZLIB_LIBRARY=-lz",
+            f"-DZLIB_INCLUDE_DIR={tc.incdir}",
+            f"-DOPENSSL_CRYPTO_LIBRARY={tc.libdir}/libcrypto.a",
+            f"-DOPENSSL_INCLUDE_DIR={tc.incdir}",
+            "-DWITH_SERVER=ON",
+            "-DWITH_EXAMPLES=OFF",
+            "-DWITH_SFTP=OFF",
+        ]
+    )
+
+
+def src_compile(metadata):
+    """Compile the source."""
+    build_dir = metadata["workdir"] / "build"
+    ssh_client.emake(cwd=build_dir)
+
+
+def src_install(metadata):
+    """Install the package."""
+    build_dir = metadata["workdir"] / "build"
+    tc = metadata["toolchain"]
+    incdir = tc.incdir / "libssh"
+    for header in (build_dir / "include" / "libssh").glob("*.h"):
+        ssh_client.copy(header, incdir / header.name)
+    for header in (
+        "callbacks.h",
+        "legacy.h",
+        "libssh.h",
+        "server.h",
+        "ssh2.h",
+        "libsshpp.hpp",
+    ):
+        ssh_client.copy(
+            metadata["S"] / "include" / "libssh" / header, incdir / header
+        )
+    ssh_client.copy(build_dir / "src" / "libssh.a", tc.libdir / "libssh.a")
+
+
+ssh_client.build_package(sys.modules[__name__], "wasm")

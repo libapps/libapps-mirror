@@ -1,0 +1,102 @@
+Merged upstream post 0.11.3 release.
+
+From ed31e21155fe7c97c120a745f9a36cb70b72dc5a Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@chromium.org>
+Date: Thu, 23 Oct 2025 01:47:05 -0400
+Subject: [PATCH] ttyopts: make non-POSIX defines optional
+
+This file uses a bunch of defines that, while common, are not in POSIX.
+https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/termios.h.html
+
+Add more ifdef checks around them to fix building on platforms that omit
+them.
+
+Signed-off-by: Mike Frysinger <vapier@chromium.org>
+---
+ src/ttyopts.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/src/ttyopts.c b/src/ttyopts.c
+index a1ab31f0c701..251a988bb758 100644
+--- a/src/ttyopts.c
++++ b/src/ttyopts.c
+@@ -172,12 +172,18 @@ baud2speed(int baudrate)
+         return 19200;
+     case B38400:
+         return 38400;
++#ifdef B57600
+     case B57600:
+         return 57600;
++#endif
++#ifdef B115200
+     case B115200:
+         return 115200;
++#endif
++#ifdef B230400
+     case B230400:
+         return 230400;
++#endif
+     }
+ }
+ 
+@@ -222,7 +228,9 @@ encode_termios_opts(struct termios *attr, unsigned char *buf, size_t buflen)
+     SSH_ENCODE_INPUT_OPT(IXON)
+     SSH_ENCODE_INPUT_OPT(IXANY)
+     SSH_ENCODE_INPUT_OPT(IXOFF)
++#ifdef IMAXBEL
+     SSH_ENCODE_INPUT_OPT(IMAXBEL)
++#endif
+ #ifdef IUTF8
+     SSH_ENCODE_INPUT_OPT(IUTF8)
+ #endif
+@@ -262,8 +270,12 @@ encode_termios_opts(struct termios *attr, unsigned char *buf, size_t buflen)
+     SSH_ENCODE_LOCAL_OPT(NOFLSH)
+     SSH_ENCODE_LOCAL_OPT(TOSTOP)
+     SSH_ENCODE_LOCAL_OPT(IEXTEN)
++#ifdef ECHOCTL
+     SSH_ENCODE_LOCAL_OPT(ECHOCTL)
++#endif
++#ifdef ECHOKE
+     SSH_ENCODE_LOCAL_OPT(ECHOKE)
++#endif
+ #ifdef PENDIN
+     SSH_ENCODE_LOCAL_OPT(PENDIN)
+ #endif
+@@ -276,16 +288,24 @@ encode_termios_opts(struct termios *attr, unsigned char *buf, size_t buflen)
+     SSH_ENCODE_CC_OPT(VKILL)
+     SSH_ENCODE_CC_OPT(VEOF)
+     SSH_ENCODE_CC_OPT(VEOL)
++#ifdef VEOL2
+     SSH_ENCODE_CC_OPT(VEOL2)
++#endif
+     SSH_ENCODE_CC_OPT(VSTART)
+     SSH_ENCODE_CC_OPT(VSTOP)
+     SSH_ENCODE_CC_OPT(VSUSP)
+ #ifdef VDSUSP
+     SSH_ENCODE_CC_OPT(VDSUSP)
+ #endif
++#ifdef VREPRINT
+     SSH_ENCODE_CC_OPT(VREPRINT)
++#endif
++#ifdef VWERASE
+     SSH_ENCODE_CC_OPT(VWERASE)
++#endif
++#ifdef VLNEXT
+     SSH_ENCODE_CC_OPT(VLNEXT)
++#endif
+ #ifdef VFLUSH
+     SSH_ENCODE_CC_OPT(VFLUSH)
+ #endif
+@@ -295,7 +315,9 @@ encode_termios_opts(struct termios *attr, unsigned char *buf, size_t buflen)
+ #ifdef VSTATUS
+     SSH_ENCODE_CC_OPT(VSTATUS)
+ #endif
++#ifdef VDISCARD
+     SSH_ENCODE_CC_OPT(VDISCARD)
++#endif
+ #undef SSH_ENCODE_CC_OPT
+ 
+     SSH_ENCODE_OPT(TTY_OP_ISPEED, baud2speed(cfgetispeed(attr)))
+-- 
+2.39.5
+

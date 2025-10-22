@@ -1,0 +1,14 @@
+name: "libssh"
+description: "C library implementing the SSHv2 protocol on client and server side"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://www.libssh.org/"
+  }
+  version: "0.11.3"
+  last_upgrade_date { year: 2025 month: 9 day: 9 }
+
+  local_modifications:
+      "See the patches in this directory for more details."
+}

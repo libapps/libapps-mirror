@@ -1,0 +1,40 @@
+From 2bfb20f41a91af26860a097c9a5e5c2949f0fa6d Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@chromium.org>
+Date: Sat, 8 Nov 2025 23:13:35 -0500
+Subject: [PATCH] use standard O_NONBLOCK naming
+
+Systems define O_NONBLOCK & O_NDELAY as the same thing.  POSIX however
+only defines O_NONBLOCK.  Rename the current define to be portable.
+
+Signed-off-by: Mike Frysinger <vapier@chromium.org>
+---
+ src/getpass.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/getpass.c b/src/getpass.c
+index 0683dd2241ce..821e0e193508 100644
+--- a/src/getpass.c
++++ b/src/getpass.c
+@@ -257,8 +257,8 @@ int ssh_getpass(const char *prompt,
+     }
+ 
+     /* disable nonblocking I/O */
+-    if (fd & O_NDELAY) {
+-        ok = fcntl(0, F_SETFL, fd & ~O_NDELAY);
++    if (fd & O_NONBLOCK) {
++        ok = fcntl(0, F_SETFL, fd & ~O_NONBLOCK);
+         if (ok < 0) {
+             perror("fcntl");
+             return -1;
+@@ -273,7 +273,7 @@ int ssh_getpass(const char *prompt,
+     }
+ 
+     /* close fd */
+-    if (fd & O_NDELAY) {
++    if (fd & O_NONBLOCK) {
+         ok = fcntl(0, F_SETFL, fd);
+         if (ok < 0) {
+             perror("fcntl");
+-- 
+2.39.5
+

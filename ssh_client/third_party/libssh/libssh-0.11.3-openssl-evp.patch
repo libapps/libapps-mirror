@@ -1,0 +1,32 @@
+Merged upstream post 0.11.3 release.
+
+From 7cb922d4a1c82770fafbe696c80fb0339a2441b9 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@chromium.org>
+Date: Thu, 23 Oct 2025 01:37:37 -0400
+Subject: [PATCH] libcrypto: update EVP API usage
+
+The EVP_CIPHER_CTX_init API is deprecated and doesn't exist in some
+OpenSSL versions.  Switch to EVP_CIPHER_CTX_reset which works with
+1.1.x which is the min version libssh requires.
+
+Signed-off-by: Mike Frysinger <vapier@chromium.org>
+---
+ src/libcrypto.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/libcrypto.c b/src/libcrypto.c
+index e3b2f53cb26d..393f5ed8a674 100644
+--- a/src/libcrypto.c
++++ b/src/libcrypto.c
+@@ -406,7 +406,7 @@ static void evp_cipher_init(struct ssh_cipher_struct *cipher)
+     if (cipher->ctx == NULL) {
+         cipher->ctx = EVP_CIPHER_CTX_new();
+     } else {
+-        EVP_CIPHER_CTX_init(cipher->ctx);
++        EVP_CIPHER_CTX_reset(cipher->ctx);
+     }
+ 
+     switch(cipher->ciphertype){
+-- 
+2.39.5
+

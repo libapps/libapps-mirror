@@ -244,6 +244,22 @@ class ToolchainInfo:
         """
         return self.libdir.relative_to(self.sysroot)
 
+    def write_cmake_toolchain_file(self, path: Path) -> None:
+        """Write a cmake toolchain file."""
+        path.write_text(
+            f"""
+set(CMAKE_SYSTEM_NAME  Generic)
+set(CMAKE_C_COMPILER   {os.environ["CC"]} {self._env["CPPFLAGS"]})
+set(CMAKE_CXX_COMPILER {os.environ["CXX"]} {self._env["CPPFLAGS"]})
+set(CMAKE_AR {os.environ["AR"]})
+set(CMAKE_RANLIB {os.environ["RANLIB"]})
+set(CMAKE_FIND_ROOT_PATH {self.sysroot})
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+"""
+        )
+
 
 def _toolchain_wasm_env(target: str) -> dict:
     """Get custom env to build using WASM toolchain."""
