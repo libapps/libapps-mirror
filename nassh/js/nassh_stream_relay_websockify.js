@@ -45,10 +45,9 @@ export class RelayWebsockifyStream extends Stream {
    * Open a relay socket.
    *
    * @param {!Object} settings
-   * @param {function(boolean, string=)} onComplete
    * @override
    */
-  async asyncOpen(settings, onComplete) {
+  async asyncOpen(settings) {
     this.relayHost_ = settings.relayHost;
     this.relayPort_ = settings.relayPort;
     this.host_ = settings.host;
@@ -56,7 +55,6 @@ export class RelayWebsockifyStream extends Stream {
     this.protocol_ = settings.protocol;
 
     this.connect_();
-    onComplete(true);
   }
 
   /**

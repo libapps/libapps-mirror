@@ -151,7 +151,8 @@ export function RelayCorpv4WsStream() {
   this.port_ = null;
 
   // The ssh-agent we talk to for the SSH-FE challenge.
-  this.openCallback_ = null;
+  this.openCallbackResolve_ = null;
+  this.openCallbackReject_ = null;
 
   // All the data we've queued but not yet sent out.
   this.writeBuffer_ = newBuffer();
@@ -227,10 +228,23 @@ RelayCorpv4WsStream.constructor = RelayCorpv4WsStream;
  * Open a relay socket. Setup metrics reporter.
  *
  * @param {!Object} settings
- * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-RelayCorpv4WsStream.prototype.asyncOpen = async function(settings, onComplete) {
+RelayCorpv4WsStream.prototype.asyncOpen = async function(settings) {
+  return new Promise((resolve, reject) => {
+    this.asyncOpen_(settings, resolve, reject);
+  });
+};
+
+/**
+ * Open a relay socket. Setup metrics reporter.
+ *
+ * @param {!Object} settings
+ * @param {function()} resolve
+ * @param {function(string)} reject
+ */
+RelayCorpv4WsStream.prototype.asyncOpen_ = async function(
+    settings, resolve, reject) {
   this.io_ = settings.io;
   this.relayServerSocket_ = settings.relayServerSocket;
   this.relayUser_ = settings.relayUser;
@@ -254,7 +268,8 @@ RelayCorpv4WsStream.prototype.asyncOpen = async function(settings, onComplete) {
     }
   }
 
-  this.openCallback_ = onComplete;
+  this.openCallbackResolve_ = resolve;
+  this.openCallbackReject_ = reject;
   this.connect_();
 };
 
@@ -367,9 +382,9 @@ RelayCorpv4WsStream.prototype.close_ = function(reason) {
     return;
   }
 
-  if (this.openCallback_) {
-    this.openCallback_(false, reason);
-    this.openCallback_ = null;
+  if (this.openCallbackReject_) {
+    this.openCallbackReject_(reason);
+    this.openCallbackResolve_ = this.openCallbackReject_ = null;
   }
 
   if (this.io_) {
@@ -387,10 +402,8 @@ RelayCorpv4WsStream.prototype.close_ = function(reason) {
  * @param {!Event} e The event details.
  */
 RelayCorpv4WsStream.prototype.onSocketOpen_ = function(e) {
-  if (this.openCallback_) {
-    this.openCallback_(true);
-    this.openCallback_ = null;
-  }
+  this.openCallbackResolve_();
+  this.openCallbackResolve_ = this.openCallbackReject_ = null;
 
   // If we had any pending writes, kick them off.  We can't call sendWrite
   // directly as the socket isn't in the correct state until after this handler

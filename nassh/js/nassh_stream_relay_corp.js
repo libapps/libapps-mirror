@@ -59,10 +59,22 @@ RelayCorpStream.constructor = RelayCorpStream;
  * hanging GET.
  *
  * @param {!Object} settings
- * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-RelayCorpStream.prototype.asyncOpen = async function(settings, onComplete) {
+RelayCorpStream.prototype.asyncOpen = async function(settings) {
+  return new Promise((resolve, reject) => {
+    this.asyncOpen_(settings, resolve, reject);
+  });
+};
+
+/**
+ * Open a relay socket.
+ *
+ * @param {!Object} settings
+ * @param {function()} resolve
+ * @param {function(string)} reject
+ */
+RelayCorpStream.prototype.asyncOpen_ = function(settings, resolve, reject) {
   this.io_ = settings.io;
   this.relayServer_ = settings.relayServer;
   this.relayServerSocket_ = settings.relayServerSocket;
@@ -76,7 +88,7 @@ RelayCorpStream.prototype.asyncOpen = async function(settings, onComplete) {
 
   const onError = () => {
     console.error('Failed to get session id:', sessionRequest);
-    onComplete(false, `${sessionRequest.status}: ${sessionRequest.statusText}`);
+    reject(`${sessionRequest.status}: ${sessionRequest.statusText}`);
   };
 
   const onReady = () => {
@@ -90,7 +102,7 @@ RelayCorpStream.prototype.asyncOpen = async function(settings, onComplete) {
 
     this.sessionID_ = sessionRequest.responseText;
     this.resumeRead_();
-    onComplete(true);
+    resolve();
   };
 
   sessionRequest.open(

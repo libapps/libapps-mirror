@@ -68,10 +68,9 @@ RelaySshfeWsStream.constructor = RelaySshfeWsStream;
  * Open a relay socket.
  *
  * @param {!Object} settings
- * @param {function(boolean, string=)} onComplete
  * @override
  */
-RelaySshfeWsStream.prototype.asyncOpen = async function(settings, onComplete) {
+RelaySshfeWsStream.prototype.asyncOpen = async function(settings) {
   this.io_ = settings.io;
   this.relayHost_ = settings.relayHost;
   this.relayPort_ = settings.relayPort;
@@ -84,10 +83,7 @@ RelaySshfeWsStream.prototype.asyncOpen = async function(settings, onComplete) {
   let sshFeChallenge = null;
   let sshFeSignature = null;
 
-  // Use Promise.resolve to put all of getChallenge into a promise in case any
-  // of its setup logic throws an exception (for our catch below).
-  Promise.resolve()
-    .then(() => this.getChallenge_())
+  return this.getChallenge_()
     .then((challenge) => {
       sshFeChallenge = challenge;
       return this.signChallenge_(challenge);
@@ -95,9 +91,7 @@ RelaySshfeWsStream.prototype.asyncOpen = async function(settings, onComplete) {
     .then((signature) => {
       sshFeSignature = base64ToBase64Url(signature);
       this.connect_(sshFeChallenge, sshFeSignature);
-      onComplete(true);
-    })
-    .catch((e) => onComplete(false, `${e.message}\r\n${lib.f.getStack()}`));
+    });
 };
 
 /**

@@ -9,6 +9,26 @@
 import {ClientAckPacket, ClientDataPacket, RelayCorpv4WsStream,
         ServerPacket} from './nassh_stream_relay_corpv4.js';
 
+/**
+ * @extends {WebSocket}
+ */
+class WebSocketMock {
+  constructor() {
+    this.readyState = WebSocket.CONNECTING;
+    this.socketData = [];
+  }
+
+  /** @override */
+  send(data) {
+    this.socketData.push(data);
+  }
+
+  /** @override */
+  close() {
+    this.readyState = WebSocket.CLOSED;
+  }
+}
+
 describe('nassh_stream_relay_corpv4_tests.js', () => {
 
 /**
@@ -133,22 +153,7 @@ it('ClientAckPacket', () => {
 /**
  * Connect, send some data, disconnect.
  */
-it('RelayCorpv4WS basic', (done) => {
-  const socketData = [];
-  class WebSocketMock {
-    constructor() {
-      this.readyState = WebSocket.CONNECTING;
-    }
-
-    send(data) {
-      socketData.push(data);
-    }
-
-    close() {
-      this.readyState = WebSocket.CLOSED;
-    }
-  }
-
+it('RelayCorpv4WS basic', async () => {
   // Initialize state.
   const stream = new RelayCorpv4WsStream();
   /** @this {RelayCorpv4WsStream} */
@@ -174,10 +179,8 @@ it('RelayCorpv4WS basic', (done) => {
   assert.isUndefined(writeCount);
 
   // Start the connection.
-  let openCallbackRet;
-  stream.asyncOpen({}, (result) => {
-    openCallbackRet = result;
-  });
+  const open = stream.asyncOpen({});
+  const socketData = /** @type {!WebSocketMock} */ (stream.socket_).socketData;
 
   // Writes should still be queued.
   stream.asyncWrite(new Uint8Array([0xa1]).buffer, onWriteSuccess);
@@ -186,9 +189,10 @@ it('RelayCorpv4WS basic', (done) => {
 
   // The connection is opened.
   stream.socket_.readyState = WebSocket.OPEN;
-  assert.isNotTrue(openCallbackRet);
   stream.onSocketOpen_(new Event('open'));
-  assert.isTrue(openCallbackRet);
+
+  // Wait for the open to finish now that it's "connected".
+  await open;
 
   // We queued a write, but didn't call it.
   assert.equal(0, stream.writeCount_);
@@ -219,48 +223,50 @@ it('RelayCorpv4WS basic', (done) => {
   ]), new Uint8Array(socketData[0]));
 
   // Reschedule ourselves to allow the stream to attempt some writes.
-  setTimeout(() => {
-    assert.deepStrictEqual(new Uint8Array([
-      0x00, 0x04,
-      0x00, 0x00, 0x00, 0x02,
-      0xa0, 0xa1,
-    ]), new Uint8Array(socketData[1]));
-    assert.equal(2, writeCount);
+  await new Promise((resolve) => setTimeout(resolve, 10));
 
-    // Close the socket.
-    assert.isNotTrue(streamClosed);
-    stream.onSocketClose_(new CloseEvent('close', {code: 1006, reason: ''}));
-    assert.isTrue(streamClosed);
+  assert.deepStrictEqual(new Uint8Array([
+    0x00, 0x04,
+    0x00, 0x00, 0x00, 0x02,
+    0xa0, 0xa1,
+  ]), new Uint8Array(socketData[1]));
+  assert.equal(2, writeCount);
 
-    done();
-  }, 10);
+  // Close the socket.
+  assert.isNotTrue(streamClosed);
+  stream.onSocketClose_(new CloseEvent('close', {code: 1006, reason: ''}));
+  assert.isTrue(streamClosed);
 });
 
 /**
  * Receive onSocketError() before completing connect.
  */
-it('RelayCorpv4WS error in connect', () => {
+it('RelayCorpv4WS error in connect', async () => {
   // Initialize state.
   const stream = new RelayCorpv4WsStream();
-  stream.connect_ = () => {};
-  let closeReason;
-  stream.close_ = (reason) => {
-    closeReason = reason;
+  /** @this {RelayCorpv4WsStream} */
+  stream.connect_ = function() {
+    this.socket_ = new WebSocketMock();
+    this.onSocketError_(/** @type {!Event} */ ({}));
   };
 
   // Start the connection, then get server error.
-  stream.asyncOpen({}, (result) => {});
-  stream.onSocketError_(/** @type {!Event} */ ({}));
-  assert.equal('server sent an error', closeReason);
+  await stream.asyncOpen({}).catch((e) => {
+    assert.equal('server sent an error', e);
+  });
 });
 
 /**
  * Reconnect on dirty close.
  */
-it('RelayCorpv4WS reconnect on dirty close', () => {
+it('RelayCorpv4WS reconnect on dirty close', async () => {
   // Initialize state.
   const stream = new RelayCorpv4WsStream();
-  stream.connect_ = () => {};
+  /** @this {RelayCorpv4WsStream} */
+  stream.connect_ = function() {
+    this.socket_ = new WebSocketMock();
+    this.onSocketOpen_(new Event('open'));
+  };
   let closeReason;
   stream.close_ = (reason) => {
     closeReason = reason;
@@ -272,7 +278,7 @@ it('RelayCorpv4WS reconnect on dirty close', () => {
   };
 
   // Start the connection.
-  stream.asyncOpen({}, (result) => {});
+  await stream.asyncOpen({});
 
   // Clean close - closes with no reconnect.
   const e = /** @type {!CloseEvent} */(

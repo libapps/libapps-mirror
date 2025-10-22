@@ -36,15 +36,14 @@ SshAgentStream.constructor = SshAgentStream;
  * Open a connection to the agent and let it initialize its backends.
  *
  * @param {!Object} settings
- * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-SshAgentStream.prototype.asyncOpen = async function(settings, onComplete) {
+SshAgentStream.prototype.asyncOpen = async function(settings) {
   try {
-    this.authAgent_.ping().then(() => onComplete(true));
+    return this.authAgent_.ping();
   } catch (e) {
     console.log(e);
-    onComplete(false, e.toString());
+    throw e;
   }
 };
 

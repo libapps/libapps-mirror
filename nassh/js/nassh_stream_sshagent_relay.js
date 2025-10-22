@@ -34,10 +34,22 @@ SshAgentRelayStream.constructor = SshAgentRelayStream;
  * Open a connection to agent.
  *
  * @param {!Object} settings
- * @param {function(boolean, ?string=)} onComplete
  * @override
  */
-SshAgentRelayStream.prototype.asyncOpen = async function(settings, onComplete) {
+SshAgentRelayStream.prototype.asyncOpen = async function(settings) {
+  return new Promise((resolve, reject) => {
+    this.asyncOpen_(settings, resolve, reject);
+  });
+};
+
+/**
+ * Open a connection to agent.
+ *
+ * @param {!Object} settings
+ * @param {function()} resolve
+ * @param {function(?string)} reject
+ */
+SshAgentRelayStream.prototype.asyncOpen_ = function(settings, resolve, reject) {
   this.authAgentAppID_ = settings.authAgentAppID;
   this.port_ = chrome.runtime.connect(this.authAgentAppID_);
 
@@ -77,17 +89,13 @@ SshAgentRelayStream.prototype.asyncOpen = async function(settings, onComplete) {
     this.port_.onDisconnect.removeListener(initialDisconnect);
     this.port_.onMessage.addListener(normalOnMessage);
     this.port_.onDisconnect.addListener(normalDisconnect);
-    if (onComplete) {
-      onComplete(true);
-    }
+    resolve();
   };
 
   const initialDisconnect = () => {
     this.port_.onMessage.removeListener(initialOnMessage);
     this.port_.onDisconnect.removeListener(initialDisconnect);
-    if (onComplete) {
-      onComplete(false, lib.f.lastError());
-    }
+    reject(lib.f.lastError());
   };
 
   this.port_.onMessage.addListener(initialOnMessage);
