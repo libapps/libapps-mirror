@@ -15,7 +15,6 @@
  */
 export function Stream(path) {
   this.path = path;
-  this.open = false;
 }
 
 /**

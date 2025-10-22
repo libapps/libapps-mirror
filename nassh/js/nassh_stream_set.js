@@ -21,13 +21,7 @@ export class StreamSet {
   openStream(streamClass, arg, onOpen) {
     const stream = new streamClass();
 
-    stream.asyncOpen(arg, (success, errorMessage) => {
-      if (success) {
-        stream.open = true;
-      }
-
-      onOpen(success, errorMessage);
-    });
+    stream.asyncOpen(arg, onOpen);
 
     return stream;
   }

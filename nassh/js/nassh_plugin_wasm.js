@@ -442,11 +442,7 @@ export class Plugin {
     if (stream) {
       // We handle this above, but closure compiler can't.
       lib.notUndefined(args);
-      await stream.asyncOpen(args, (success, errorMessage) => {
-        if (success) {
-          stream.open = true;
-        }
-      });
+      await stream.asyncOpen(args, (success, errorMessage) => {});
     }
 
     return stream;
