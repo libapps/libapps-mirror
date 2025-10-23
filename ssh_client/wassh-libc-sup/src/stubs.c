@@ -83,14 +83,22 @@ int openpty(int* amaster, int* aslave, char* name, const struct termios* termp,
 
 struct passwd* getpwuid(uid_t uid) {  // NOLINT(runtime/threadsafe_fn)
   static struct passwd pwd;
-  pwd.pw_name = (char*)"";
-  pwd.pw_passwd = (char*)"";
-  pwd.pw_uid = 0;
-  pwd.pw_gid = 0;
-  pwd.pw_dir = (char*)"";
-  pwd.pw_shell = (char*)"";
-  return &pwd;
+  struct passwd* result;
+  getpwuid_r(uid, &pwd, NULL, 0, &result);
+  return result;
 }
+int getpwuid_r(uid_t uid, struct passwd* pwd, char* buffer, size_t buflen,
+               struct passwd** result) {
+  pwd->pw_name = (char*)"";
+  pwd->pw_passwd = (char*)"";
+  pwd->pw_uid = 0;
+  pwd->pw_gid = 0;
+  pwd->pw_dir = (char*)"";
+  pwd->pw_shell = (char*)"";
+  *result = pwd;
+  return 0;
+}
+
 mode_t umask(mode_t mask) {
   STUB_RETURN(0, "mask=%o", mask);
 }

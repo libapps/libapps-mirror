@@ -27,6 +27,7 @@ struct passwd {
 
 struct passwd* getpwnam(const char*);  // NOLINT(runtime/threadsafe_fn)
 struct passwd* getpwuid(uid_t);  // NOLINT(runtime/threadsafe_fn)
+int getpwuid_r(uid_t, struct passwd*, char*, size_t, struct passwd**);
 
 #define setpwent()
 #define endpwent()
