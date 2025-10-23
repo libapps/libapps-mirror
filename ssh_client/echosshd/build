@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+# Copyright 2025 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Build echosshd testing package."""
+
+import os
+import sys
+
+FILESDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(FILESDIR, "..", "bin"))
+
+import ssh_client  # pylint: disable=wrong-import-position
+
+
+S = "%(workdir)s"
+
+
+def src_compile(metadata):
+    """Compile the source."""
+    ssh_client.emake(
+        "PKG_CONFIG=true",
+        "PC_LIBS=-lssh -lcrypto -lz",
+        f"OUTPUT={metadata['workdir']}",
+        cwd=FILESDIR,
+    )
+
+
+ssh_client.build_package(sys.modules[__name__], "wasm")

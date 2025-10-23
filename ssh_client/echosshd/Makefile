@@ -20,12 +20,30 @@ CXXFLAGS += $(WFLAGS) -std=gnu++17
 CPPFLAGS += $(PC_CFLAGS)
 LDLIBS += $(PC_LIBS)
 
-all: echosshd host_key.rsa host_key.ecdsa
+.SUFFIXES:
+
+SRCDIR := $(CURDIR)
+OUTPUT ?= $(SRCDIR)
+
+CXX_SOURCES = echosshd.cc
+CXX_OBJECTS := $(patsubst %.cc,$(OUTPUT)/%.o,$(CXX_SOURCES))
+OBJECTS = $(CXX_OBJECTS)
+
+#vpath %.c $(SRCDIR)
+vpath %.cc $(SRCDIR)
+
+all: $(OUTPUT)/echosshd $(OUTPUT)/host_key.rsa $(OUTPUT)/host_key.ecdsa
 
 host_key.%:
-	ssh-keygen -q -N '' -C '' -t $(@:host_key.%=%) -f $@
+	ssh-keygen -q -N '' -C '' -t $(@F:host_key.%=%) -f $@
+
+$(OUTPUT)/echosshd: $(OBJECTS)
+	$(CXX) -o $@ $< $(CXXFLAGS) $(LDFLAGS) $(LDLIBS)
+
+$(CXX_OBJECTS): $(OUTPUT)/%.o: %.cc
+	$(CXX) -o $@ -c $< $(CXXFLAGS) $(CPPFLAGS)
 
 clean:
-	rm -f echosshd
+	rm -f echosshd *.wasm *.o
 
 .PHONY: all clean

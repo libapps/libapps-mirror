@@ -1,0 +1,6 @@
+name: "echosshd"
+description: "Local ssh server for testing"
+
+third_party {
+  version: "0.1"
+}
