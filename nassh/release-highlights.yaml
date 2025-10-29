@@ -10,5 +10,8 @@ last_version: "0.69"
 
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
+#
+# NB: To use escape sequences, quote the string and use \uXXXX syntax:
+#     - "\u001b]8;;https://example.com\u0007Example Link\u001b]8;;\u0007."
 notes:
   - NaCl support removed; only WASM is supported.

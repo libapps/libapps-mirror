@@ -243,7 +243,7 @@ CommandInstance.prototype.run = async function() {
 
     // Show some release highlights the first couple of runs with a new version.
     // We'll reset the counter when the release notes change.
-    const notes = RELEASE_NOTES.map((n) => `\r\n \u00A4 ${n}`);
+    const notes = RELEASE_NOTES.map((n) => ` \u00A4 ${n}`);
     if (this.prefs_.getNumber('welcome/notes-version') != notes.length) {
       // They upgraded, so reset the counters.
       this.prefs_.set('welcome/show-count', 0);
@@ -254,9 +254,10 @@ CommandInstance.prototype.run = async function() {
     if (notesShowCount < 10) {
       // For new runs, show the highlights directly.
       this.io.println('');
-      this.io.print(localize('WELCOME_RELEASE_HIGHLIGHTS',
-                             [RELEASE_LAST_VERSION]));
-      this.io.println(notes);
+
+      this.io.println(localize('WELCOME_RELEASE_HIGHLIGHTS',
+                               [RELEASE_LAST_VERSION]));
+      notes.map((x) => this.io.println(x));
       this.prefs_.set('welcome/show-count', notesShowCount + 1);
 
       this.io.println(localize(
