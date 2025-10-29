@@ -15,3 +15,4 @@ last_version: "0.69"
 #     - "\u001b]8;;https://example.com\u0007Example Link\u001b]8;;\u0007."
 notes:
   - NaCl support removed; only WASM is supported.
+  - "\u001b]8;;https://www.openssh.com/txt/release-9.3\u0007OpenSSH upgraded to 9.3p1\u001b]8;;\u0007."

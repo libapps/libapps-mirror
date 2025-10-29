@@ -1,3 +1,38 @@
+# 0.70, 2025-11-03, NaCl removal & OpenSSH 9.3 upgrade.
+
+* release: Fix release notes display.
+* relay: Refactor openSocket into async/promises.
+* command: Refactor commonProfileSetup_ as async.
+* streamset: Drop unused API.
+* stream: Drop unused open state.
+* streams: Drop unused fd tracking.
+* streamset: Drop unused APIs.
+* stream: Drop unused asyncRead API.
+* ssh_client: Use -pthread with WASI threading targets.
+* ssh_client: Build libs for wasip1-threads for mosh usage.
+* ssh_client: Rework workdirs into ABI-specific dirs.
+* ssh_client: Rework library installs into ABI-specific dirs.
+* stream: Drop sftp & tty support.
+* wassh-libc-sup: Add openpty stub.
+* openssh: Fix missing ioctl header.
+* wassh: sockets: Fix UnixSocket construction.
+* wassh: Increase syscall buffer size to 256KiB.
+* openssh: Update to 8.9, 9.0, 9.1, 9.2, and 9.3.
+* openssh: Stop building custom libssh.
+* openssh: Drop NaCl support.
+* ssh_client: Drop NaCl support.
+* nassh: Drop NaCl support.
+* fs: Drop DOM<->indexeddb migration/sync.
+* wassh-libc-sup: Temporary fork wasi-libc poll.
+* openssh: Disable zlib version check.
+* zlib: Update to 1.3.1.
+* wassh-libc-sup: Stub out closefrom.
+* wassh-libc-sup: Stub out execve too.
+* nassh: api: Drop mount & unmount messages.
+* ske: Drop gnubby & gsce support.
+* plugin: Update to 0.69.
+* ldns: Update to 1.8.4.
+
 # 0.69, 2025-10-14, WASI update & Initial SSH policy support.
 
 * ssh_client: openssl: Update to 1.0.2u.
