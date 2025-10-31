@@ -1099,7 +1099,7 @@ export class RelaySocket extends StreamSocket {
  *
  * @see https://wicg.github.io/direct-sockets/
  */
- export class WebTcpSocket extends StreamSocket {
+export class WebTcpSocket extends StreamSocket {
   /** @override */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
@@ -1460,6 +1460,11 @@ export class WebTcpServerSocket extends StreamSocket {
     this.socket_ = null;
     this.address = null;
     this.port = null;
+  }
+
+  /** @override */
+  static isSupported() {
+    return window?.TCPServerSocket !== undefined;
   }
 }
 

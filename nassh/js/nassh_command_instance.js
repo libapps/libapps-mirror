@@ -1017,6 +1017,14 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     setDefaultBackend(/** @type {string} */ (options['--field-trial-buffer']));
   }
 
+  if (options['--field-trial-direct-sockets']) {
+    // Force disable Chrome Sockets usage so we fallback to Direct Sockets.
+    delete window?.chrome?.sockets?.tcp;
+    delete window?.chrome?.sockets?.tcpServer;
+    // TODO: Implement WebUDPSocket.
+    // deleted window?.chrome?.sockets?.udp;
+  }
+
   // If the user has requested a proxy relay, load it up.
   if (options['--proxy-mode'] === 'websockify') {
     this.relay_ = new RelayWebsockify(this.io, options, this.terminalLocation,
