@@ -635,6 +635,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
           default:
             return WASI.errno.EPROTONOSUPPORT;
         }
+        break;
 
       default:
         return WASI.errno.EAFNOSUPPORT;

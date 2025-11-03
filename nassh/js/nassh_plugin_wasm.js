@@ -418,7 +418,16 @@ export class Plugin {
     let stream = null;
     let args;
 
-    if (address === '127.1.2.3') {
+    // This path convention matches the init() function.
+    if (address.startsWith('/AF_UNIX/agent/')) {
+      if (this.authAgent_) {
+        args = {authAgent: this.authAgent_};
+        stream = new SshAgentStream(args);
+      } else {
+        args = {authAgentAppID: address.split('/')[3]};
+        stream = new SshAgentRelayStream();
+      }
+    } else if (address === '127.1.2.3') {
       // TODO(crbug.com/1303495): Delete this old hack.
       if (this.authAgent_) {
         args = {authAgent: this.authAgent_};
@@ -428,7 +437,6 @@ export class Plugin {
         stream = new SshAgentRelayStream();
       }
     }
-    // TODO(vapier): Implement path-based lookups.
 
     if (stream) {
       // We handle this above, but closure compiler can't.
