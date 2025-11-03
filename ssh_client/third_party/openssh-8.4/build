@@ -19,7 +19,6 @@ import ssh_client  # pylint: disable=wrong-import-position
 
 ARCHIVES = ("%(p)s.tar.gz",)
 PATCHES = (
-    "%(p)s.patch",
     "%(p)s-openssl-bn.patch",
     "%(p)s-bsd-misc-includes.patch",
 )
