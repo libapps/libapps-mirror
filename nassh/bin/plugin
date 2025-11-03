@@ -14,10 +14,10 @@ import libdot
 
 # The sha256sum hash of the plugin archive that we maintain.
 # Allow a long line for easy automated updating.
-PLUGIN_HASH = "8c4e3045915d3e5f1fa2eb290c7aefcb5d0f0f03c9c7d039be424aafba18df64"
+PLUGIN_HASH = "1c2d0a2fc517e0c388b3ae5e500521b326af96b9dd6bf587e5c4d530bbf6a395"
 
 # Bucket maintained by us.
-PLUGIN_VERSION = "0.69"
+PLUGIN_VERSION = "0.70"
 PLUGIN_GS_FRAGMENT = "chromeos-localmirror/secureshell/releases"
 PLUGIN_BASE_URI = f"https://storage.googleapis.com/{PLUGIN_GS_FRAGMENT}"
 
