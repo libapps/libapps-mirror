@@ -345,6 +345,9 @@ it('isSafeUriNasshOption', () => {
     '--welcome1',
     // Unknown option.
     '--foooo',
+    // Field trials can do all sorts of stuff.
+    '--field-trial',
+    '--field-trial-foo',
   ];
 
   safeOptions.forEach((option) => {
@@ -365,6 +368,7 @@ it('isSafeUriSshOption', () => {
   // sensitive security aspect, we prefer to have this extra layer.
   const safeOptions = [
     '-4', '-6', '-a', '-A', '-C', '-q', '-Q', '-v', '-V',
+    '-oEnableEscapeCommandline=yes',
   ];
 
   const unsafeOptions = [

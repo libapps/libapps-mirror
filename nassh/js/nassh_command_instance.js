@@ -1302,6 +1302,8 @@ export function isSafeUriNasshOption(option) {
  */
 const safeUriSshOptions = new Set([
   '-4', '-6', '-a', '-A', '-C', '-q', '-Q', '-v', '-V',
+  // TODO(vapier): Try to generalize -o more.
+  '-oEnableEscapeCommandline=yes',
 ]);
 
 /**
