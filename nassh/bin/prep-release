@@ -75,7 +75,7 @@ def update_changelog(ver: str) -> None:
     now = datetime.datetime.now()
     lines = (
         [
-            f"# {ver}, {now.year}-{now.month:02}-{now.day}, TBD",
+            f"# {ver}, {now.year}-{now.month:02}-{now.day:02}, TBD",
             "",
         ]
         + [f"* {x}" for x in entries]

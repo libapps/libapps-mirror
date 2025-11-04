@@ -1,3 +1,7 @@
+# 0.71, 2025-11-04, Minor hotfix for URI.
+
+* uri: Allow -oEnableEscapeCommandline=yes.
+
 # 0.70, 2025-11-03, NaCl removal & OpenSSH 9.3 upgrade.
 
 * release: Fix release notes display.
