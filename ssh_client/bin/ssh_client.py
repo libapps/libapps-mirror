@@ -299,6 +299,13 @@ def _toolchain_wasm_env(target: str) -> dict:
                     f"{libdir / 'wassh-libc-sup.imports'}"
                 ),
                 "-Wl,--export=__wassh_signal_deliver",
+                # Move the stack in the memory layout to help catch stack
+                # overflows better.
+                # https://github.com/llvm/llvm-project/issues/151015
+                "-Wl,--stack-first",
+                # The default stack size in WASM is 64KiB.  This is much smaller
+                # than your standard POSIX platform, and OpenSSH 10.0 blows it.
+                f"-Wl,-z,stack-size={128 * 1024}",
             )
         ),
     }
