@@ -16,6 +16,7 @@
 #include <string.h>
 #include <syslog.h>
 
+#include <net/if.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 
@@ -53,6 +54,15 @@ struct servent* getservbyport(int port, const char* proto) {
 int gethostname(char* name, size_t len) {
   strncpy(name, "localhost", len);
   return 0;
+}
+
+// Chrome APIs don't currently support network interfaces which can show up in
+// IPv6 link-local addresses.
+char* if_indextoname(unsigned ifindex, char* ifname) {
+  STUB_ENOSYS(NULL, "ifindex=%i ifname=%p", ifindex, ifname);
+}
+unsigned if_nametoindex(const char* ifname) {
+  STUB_RETURN(1, "ifname={%s}", ifname);
 }
 
 void openlog(const char* ident, int option, int facility) {}
