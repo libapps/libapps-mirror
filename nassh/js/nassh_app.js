@@ -47,12 +47,6 @@ App.prototype.installContextMenus = function() {
     },
     {
       'type': 'normal',
-      'id': 'mosh',
-      'title': localize('MOSH_NAME'),
-      'contexts': ['action'],
-    },
-    {
-      'type': 'normal',
       'id': 'feedback',
       'title': localize('SEND_FEEDBACK_LABEL'),
       'contexts': ['action'],
@@ -73,12 +67,6 @@ App.prototype.onContextMenu_ = function(info, tab = undefined) {
       lib.f.openWindow(lib.f.getURL('/html/nassh_connect_dialog.html'), '',
                        'chrome=no,close=yes,resize=yes,minimizable=yes,' +
                        'scrollbars=yes,width=900,height=600');
-      break;
-    case 'mosh':
-      lib.f.openWindow(
-          lib.f.getURL('/plugin/mosh/mosh_client.html'), '',
-          'chrome=no,close=yes,resize=yes,minimizable=yes,' +
-          'scrollbars=yes,width=900,height=600');
       break;
     case 'feedback':
       sendFeedback();

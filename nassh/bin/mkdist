@@ -51,7 +51,6 @@ EXCLUDE_PATTERNS_CROSH = (
     "manifest.json",
     "html/nassh_background.html",
     "js/nassh_background_main.js",
-    "plugin/mosh*",
     "plugin/wasm-*",
     "plugin/wasm/scp*",
     "plugin/wasm/sftp*",

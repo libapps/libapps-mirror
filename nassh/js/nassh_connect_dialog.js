@@ -67,7 +67,6 @@ function ConnectDialog() {
 
   // Cached DOM nodes.
   this.form_ = lib.notNull(document.querySelector('form'));
-  this.moshAppButton_ = lib.notNull(document.querySelector('#mosh-app'));
   this.mountButton_ = lib.notNull(document.querySelector('#mount'));
   this.unmountButton_ = lib.notNull(document.querySelector('#unmount'));
   this.sftpClientButton_ = lib.notNull(document.querySelector('#sftp-client'));
@@ -227,8 +226,6 @@ ConnectDialog.prototype.installHandlers_ = function() {
   this.deleteButton_.addEventListener('keypress',
                                       this.onButtonKeypress_.bind(this));
 
-  this.moshAppButton_.addEventListener('click',
-                                       this.onMoshAppClick_.bind(this));
   this.mountButton_.addEventListener('click',
                                      this.onMountClick_.bind(this));
   this.unmountButton_.addEventListener('click',
@@ -488,13 +485,6 @@ ConnectDialog.prototype.startup_ = function(proto) {
   } else {
     this.form_.reportValidity();
   }
-};
-
-/**
- * Switch to old NaCl mosh app.
- */
-ConnectDialog.prototype.moshApp = function() {
-  this.location_.replace('/plugin/mosh/mosh_client.html');
 };
 
 /**
@@ -1064,13 +1054,6 @@ ConnectDialog.prototype.onButtonKeypress_ = function(e) {
   if (e.charCode == 13 || e.charCode == 32) {
     e.srcElement.click();
   }
-};
-
-/**
- * Someone clicked on the mosh app button.
- */
-ConnectDialog.prototype.onMoshAppClick_ = function() {
-  this.moshApp();
 };
 
 /**

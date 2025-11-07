@@ -88,12 +88,7 @@ popup.prototype.openLink_ = function(id, openMode) {
     case 'feedback':
       sendFeedback();
       return;
-    case 'mosh':
-      url = lib.f.getURL('/plugin/mosh/mosh_client.html');
     default: {
-      if (id != 'mosh') {
-        profile = this.localPrefs_.getProfile(id);
-      }
       let openas = '';
       if (openMode === openModes.WINDOW) {
         const state = profile ? profile.get('win/state') : '';
@@ -288,7 +283,6 @@ popup.prototype.populateList_ = function() {
   // Create a copy since we're going to modify it in place below.
   const ids = this.prefs_.get('profile-ids').slice();
   ids.unshift('connect-dialog');
-  ids.push('mosh');
   ids.push('options');
   ids.push('feedback');
 
@@ -312,11 +306,6 @@ popup.prototype.populateList_ = function() {
         link.textContent = localize('CONNECTION_DIALOG_NAME');
         link.style.textAlign = 'center';
         link.style.borderBottom = 'dashed 1px';
-        break;
-      case 'mosh':
-        link.textContent = localize('MOSH_NAME');
-        link.style.textAlign = 'center';
-        link.style.borderTop = 'dashed 1px';
         break;
       case 'options':
         link.textContent = localize('HTERM_OPTIONS_BUTTON_LABEL');
