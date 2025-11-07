@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 // Network resolver logic.
-// https://pubs.opengroup.org/onlinepubs/9699919799/functions/freeaddrinfo.html
-// https://pubs.opengroup.org/onlinepubs/9699919799/functions/getnameinfo.html
+// https://pubs.opengroup.org/onlinepubs/9799919799/functions/freeaddrinfo.html
+// https://pubs.opengroup.org/onlinepubs/9799919799/functions/getnameinfo.html
 
 #include <netdb.h>
 #include <stdbool.h>

@@ -118,7 +118,7 @@ abort in many cases.  We'll probably add more as we find more OpenSSH usage.
 [0.0.0.0/32]: https://www.rfc-editor.org/rfc/rfc791.html#section-3.2
 [100::/64]: https://www.rfc-editor.org/rfc/rfc6666.html
 [DoH]: https://en.wikipedia.org/wiki/DNS_over_HTTPS
-[getaddrinfo]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/freeaddrinfo.html
+[getaddrinfo]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/freeaddrinfo.html
 [POSIX socket APIs]: https://en.wikipedia.org/wiki/Berkeley_sockets
 [relay servers]: /nassh/docs/relay-protocol.md
 [wassh-libc-sup]: /ssh_client/wassh-libc-sup/

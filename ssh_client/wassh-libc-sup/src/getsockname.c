@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 // Implementation for getpeername() & getsockname().
-// https://pubs.opengroup.org/onlinepubs/9699919799/functions/getpeername.html
-// https://pubs.opengroup.org/onlinepubs/9699919799/functions/getsockname.html
+// https://pubs.opengroup.org/onlinepubs/9799919799/functions/getpeername.html
+// https://pubs.opengroup.org/onlinepubs/9799919799/functions/getsockname.html
 
 #include <errno.h>
 #include <string.h>

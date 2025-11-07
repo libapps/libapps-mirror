@@ -1,7 +1,7 @@
 # WASSH Signal Emulation
 
 POSIX defines an
-[asynchronous signal system](https://pubs.opengroup.org/onlinepubs/9699919799/functions/V2_chap02.html#tag_15_04).
+[asynchronous signal system](https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04).
 This document explains how wassh implements this.
 
 [TOC]
@@ -78,7 +78,7 @@ they're basically stubs.
 ## Implementation
 
 We take a page from
-[POSIX thread cancellation](https://pubs.opengroup.org/onlinepubs/9699919799/functions/V2_chap02.html#tag_15_09_05).
+[POSIX thread cancellation](https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_09_05).
 Fundamentally, instead of delivering signals at any point in time, we process
 signals when system call handlers are executing.
 This isn't really incompatible with POSIX either -- signals are queued, and then

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/signal.h.html
+// https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/signal.h.html
 
 #ifndef WASSH_SIGNAL_H
 #define WASSH_SIGNAL_H

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/syslog.h.html
+// https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/syslog.h.html
 
 // We don't currently implement these functions.  OpenSSH wants this header and
 // its settings in order to compile, so satisfy it.  Might be useful to support

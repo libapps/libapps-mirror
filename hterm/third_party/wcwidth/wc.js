@@ -17,10 +17,10 @@ import {hterm} from '../../index.js';
  * The following explanation comes from the original C implementation:
  *
  * This is an implementation of wcwidth() and wcswidth() (defined in
- * IEEE Std 1002.1-2001) for Unicode.
+ * IEEE Std 1003.1-2001) for Unicode.
  *
- * https://www.opengroup.org/onlinepubs/007904975/functions/wcwidth.html
- * https://www.opengroup.org/onlinepubs/007904975/functions/wcswidth.html
+ * https://pubs.opengroup.org/onlinepubs/9799919799/functions/wcwidth.html
+ * https://pubs.opengroup.org/onlinepubs/9799919799/functions/wcswidth.html
  *
  * In fixed-width output devices, Latin characters all occupy a single
  * "cell" position of equal width, whereas ideographic CJK characters
