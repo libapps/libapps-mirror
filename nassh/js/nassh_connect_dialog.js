@@ -15,7 +15,7 @@ import {cleanupChromeSockets} from '../wassh/js/sockets.js';
 
 import {
   getSyncStorage, loadWebFonts, localize, openOptionsPage,
-  registerProtocolHandler, runtimeSendMessage, sendFeedback, setupForWebApp,
+  registerProtocolHandler, sendFeedback, setupForWebApp,
 } from './nassh.js';
 import {ColumnList} from './nassh_column_list.js';
 import {
@@ -67,9 +67,6 @@ function ConnectDialog() {
 
   // Cached DOM nodes.
   this.form_ = lib.notNull(document.querySelector('form'));
-  this.mountButton_ = lib.notNull(document.querySelector('#mount'));
-  this.unmountButton_ = lib.notNull(document.querySelector('#unmount'));
-  this.sftpClientButton_ = lib.notNull(document.querySelector('#sftp-client'));
   this.connectButton_ = lib.notNull(document.querySelector('#connect'));
   this.deleteButton_ = lib.notNull(document.querySelector('#delete'));
   this.optionsButton_ = lib.notNull(document.querySelector('#options'));
@@ -226,20 +223,19 @@ ConnectDialog.prototype.installHandlers_ = function() {
   this.deleteButton_.addEventListener('keypress',
                                       this.onButtonKeypress_.bind(this));
 
-  this.mountButton_.addEventListener('click',
-                                     this.onMountClick_.bind(this));
-  this.unmountButton_.addEventListener('click',
-                                     this.onUnmountClick_.bind(this));
   this.connectButton_.addEventListener('click',
                                        this.onConnectClick_.bind(this));
-  this.sftpClientButton_.addEventListener('click',
-                                          this.onSftpClientClick_.bind(this));
   this.deleteButton_.addEventListener('click',
                                       this.onDeleteClick_.bind(this));
   this.optionsButton_.addEventListener('click',
                                        this.onOptionsClick_.bind(this));
   this.feedbackButton_.addEventListener('click',
                                         this.onFeedbackClick_.bind(this));
+
+  // Switching apps can change which settings are displayed.
+  addListeners(lib.notNull(document.querySelector('#field-app')), ['change'],
+               this.maybeDirty_.bind(this, 'app'),
+               this.syncButtons_.bind(this));
 
   // These fields interact with each-other's placeholder text.
   ['description', 'username', 'hostname', 'port',
@@ -266,7 +262,7 @@ ConnectDialog.prototype.installHandlers_ = function() {
                    this.maybeDirty_.bind(this, name));
     });
 
-  ['description', 'username', 'hostname', 'port', 'nassh-options',
+  ['app', 'description', 'username', 'hostname', 'port', 'nassh-options',
    'identity', 'argstr', 'terminal-profile', 'mount-path',
   ].forEach((name) => {
       addListeners(/** @type {!Element} */ (this.$f(name)), ['focus', 'blur'],
@@ -380,23 +376,6 @@ ConnectDialog.prototype.displayMountButton_ = function(state) {
       lib.notNull(document.querySelector('#mount-path')),
       state,
       'revert');
-  if (!state) {
-    this.displayButton_(this.mountButton_, false);
-    this.displayButton_(this.unmountButton_, false);
-    return;
-  }
-
-  chrome.fileSystemProvider.getAll((fileSystems) => {
-    for (const fs of fileSystems) {
-      if (fs.fileSystemId == this.currentProfileRecord_.id) {
-        this.displayButton_(this.mountButton_, false);
-        this.displayButton_(this.unmountButton_, true);
-        return;
-      }
-    }
-    this.displayButton_(this.mountButton_, true);
-    this.displayButton_(this.unmountButton_, false);
-  });
 };
 
 /**
@@ -412,7 +391,7 @@ ConnectDialog.prototype.save = function() {
 
   let prefs = this.currentProfileRecord_.prefs;
 
-  ['description', 'username', 'hostname', 'port', 'nassh-options',
+  ['app', 'description', 'username', 'hostname', 'port', 'nassh-options',
    'identity', 'argstr', 'terminal-profile', 'mount-path',
   ].forEach((name) => {
        let value = this.$f(name).value;
@@ -465,16 +444,32 @@ ConnectDialog.prototype.save = function() {
 };
 
 /**
- * Helper for starting a connection.
- *
- * @param {string} proto The URI schema to try and register.
+ * Connect to the selected profile.
  */
-ConnectDialog.prototype.startup_ = function(proto) {
+ConnectDialog.prototype.connect = function() {
   this.maybeCopyPlaceholders_();
   this.save();
 
+  let proto;
+  switch (this.currentProfileRecord_.prefs.get('app')) {
+    case 'ssh':
+      proto = 'ssh';
+      break;
+    case 'nasftp':
+    case 'sftp':
+      proto = 'sftp';
+      this.sessionStorage_.setItem('nassh.isSftp', 'true');
+      break;
+    case 'mount':
+      this.sessionStorage_.setItem('nassh.isMount', 'true');
+      this.sessionStorage_.setItem('nassh.isSftp', 'true');
+      break;
+  }
+
   // Since the user has initiated this connection, register the protocol.
-  registerProtocolHandler(proto);
+  if (proto) {
+    registerProtocolHandler(proto);
+  }
 
   const id = this.currentProfileRecord_.id;
   this.localPrefs_.set('connectDialog/lastProfileId', id);
@@ -485,46 +480,6 @@ ConnectDialog.prototype.startup_ = function(proto) {
   } else {
     this.form_.reportValidity();
   }
-};
-
-/**
- * Mount the selected profile.
- */
-ConnectDialog.prototype.mount = function() {
-  this.sessionStorage_.setItem('nassh.isMount', 'true');
-  this.sessionStorage_.setItem('nassh.isSftp', 'true');
-  this.startup_('ssh');
-};
-
-/**
- * Unmount the SFTP connection.
- */
-ConnectDialog.prototype.unmount = function() {
-  runtimeSendMessage({
-    command: 'unmount', fileSystemId: this.currentProfileRecord_.id,
-  })
-    .then(({error, message}) => {
-      if (error) {
-        console.warn(message);
-      }
-      // Always refresh button display if internal state changed.
-      this.displayMountButton_(true);
-    });
-};
-
-/**
- * Start a SFTP session with the selected profile.
- */
-ConnectDialog.prototype.sftpConnect = function() {
-  this.sessionStorage_.setItem('nassh.isSftp', 'true');
-  this.startup_('sftp');
-};
-
-/**
- * Connect to the selected profile.
- */
-ConnectDialog.prototype.connect = function() {
-  this.startup_('ssh');
 };
 
 /**
@@ -674,8 +629,8 @@ ConnectDialog.prototype.updateDescriptionPlaceholder_ = function() {
  * Sync the form with the current profile record.
  */
 ConnectDialog.prototype.syncForm_ = function() {
-  ['description', 'username', 'hostname', 'port', 'argstr', 'nassh-options',
-   'identity', 'terminal-profile', 'mount-path',
+  ['app', 'description', 'username', 'hostname', 'port', 'argstr',
+   'nassh-options', 'identity', 'terminal-profile', 'mount-path',
   ].forEach((n) => {
       const emptyValue = '';
 
@@ -683,7 +638,15 @@ ConnectDialog.prototype.syncForm_ = function() {
         this.$f(n).value =
             this.currentProfileRecord_.prefs.get(n) || emptyValue;
       } else {
-        this.$f(n).value = emptyValue;
+        // Would be nice if we could reuse the preference defaults.
+        switch (n) {
+          case 'app':
+            this.$f(n).value = 'ssh';
+            break;
+          default:
+            this.$f(n).value = emptyValue;
+            break;
+        }
       }
     });
 
@@ -714,7 +677,8 @@ ConnectDialog.prototype.syncButtons_ = function() {
       this.deleteButton_,
       this.shortcutList_.activeIndex != 0);
 
-  this.displayMountButton_(this.checkMountable_());
+  this.displayMountButton_(this.checkMountable_() &&
+                           this.$f('app').value === 'mount');
 };
 
 /**
@@ -1057,20 +1021,6 @@ ConnectDialog.prototype.onButtonKeypress_ = function(e) {
 };
 
 /**
- * Someone clicked on the mount button.
- */
-ConnectDialog.prototype.onMountClick_ = function() {
-  this.mount();
-};
-
-/**
- * Someone clicked on the unmount button.
- */
-ConnectDialog.prototype.onUnmountClick_ = function() {
-  this.unmount();
-};
-
-/**
  * Someone clicked on the connect button.
  */
 ConnectDialog.prototype.onConnectClick_ = function() {
@@ -1079,19 +1029,6 @@ ConnectDialog.prototype.onConnectClick_ = function() {
   }
 
   this.connect();
-};
-
-/**
- * Someone clicked on the sftp client button.
- *
- * @param {!Event} e
- */
-ConnectDialog.prototype.onSftpClientClick_ = function(e) {
-  if (this.sftpClientButton_.getAttribute('disabled')) {
-    return;
-  }
-
-  this.sftpConnect();
 };
 
 /**

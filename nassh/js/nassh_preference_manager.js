@@ -103,6 +103,11 @@ export class ProfilePreferenceManager extends lib.PreferenceManager {
       ['description', ''],
 
       /**
+       * The application to run.
+       */
+      ['app', 'ssh'],
+
+      /**
        * The username.
        */
       ['username', ''],

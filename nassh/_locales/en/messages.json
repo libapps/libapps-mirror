@@ -2087,6 +2087,10 @@
 		"description": "Status message shown to the user before we check the expiration time (how 'fresh' they are) of the user's SSH certificates (credentials). A status message will be appended after this message. Everything here may be translated as makes sense.",
 		"message": "Checking SSH certificate freshness..."
 	},
+	"SSH_CLIENT_BUTTON_LABEL": {
+		"description": "The label for the SSH client button. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
+		"message": "SSH"
+	},
 	"STREAM_OPEN_ERROR": {
 		"description": "Error message displayed when opening a stream (e.g. a file or a network connection) fails. The stream will be a short internal identifier code (always lower case), while the error message will be an error message from the operating system itself (whose translation will be left to the OS if available). Everything may be translated.",
 		"message": "Opening stream $ID$ failed: $ERROR$",

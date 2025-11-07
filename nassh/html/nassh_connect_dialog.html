@@ -26,9 +26,19 @@
         <input x-box x-flex='1' id='field-description'
                type='text' spellcheck=false
                i18n='{"aria-label": "$id", "title": "=aria-label"}' required>
+        <select id='field-app'
+                type='text' spellcheck=false
+                aria-labelledby='label-app'>
+          <option value='ssh' selected
+                  i18n='{"_": "SSH_CLIENT_BUTTON_LABEL"}'>SSH</option>
+          <option value='nasftp'
+                  i18n='{"_": "SFTP_CLIENT_BUTTON_LABEL"}'>SFTP</option>
+          <option value='mount' id='field-app-mount'
+                  i18n='{"_": "MOUNT_BUTTON_LABEL"}'>Mount</option>
+        </select>
       </x-hbox>
+      <br>
       <x-vbox>
-        <br>
         <x-hbox>
           <input x-box id='field-username'
                  type='text' spellcheck=false
@@ -131,15 +141,6 @@
           ><span class='label' i18n='{"_": "SEND_FEEDBACK_LABEL"}'
               ></span></div>
       <div x-box x-flex='1'></div>
-      <div x-box id='mount' role='button' tabindex='0'
-           ><span class='label' i18n='{"_": "MOUNT_BUTTON_LABEL"}'
-              >MOUNT</span></div>
-      <div x-box id='unmount' role='button' tabindex='0'
-           ><span class='label' i18n='{"_": "UNMOUNT_BUTTON_LABEL"}'
-              >UNMOUNT</span></div>
-      <div x-box id='sftp-client' role='button' tabindex='0'
-           ><span class='label' i18n='{"_": "SFTP_CLIENT_BUTTON_LABEL"}'
-              >SFTP CLIENT</span></div>
       <div x-box id='connect' role='button' tabindex='0'
            ><span class='key' i18n='{"_": "ENTER_KEYCAP"}'>[ENTER]</span>&nbsp;
         <span class='label' i18n='{"_": "CONNECT_BUTTON_LABEL"}'
