@@ -381,30 +381,27 @@ CommandInstance.prototype.navigate_ = function(hash) {
 };
 
 /** @param {string} argstr */
-CommandInstance.prototype.connectToArgString = function(argstr) {
-  const isMount = (this.sessionStorage.getItem('nassh.isMount') == 'true');
-  const isSftp = (this.sessionStorage.getItem('nassh.isSftp') == 'true');
-  this.sessionStorage.removeItem('nassh.isMount');
-  this.sessionStorage.removeItem('nassh.isSftp');
-
+CommandInstance.prototype.connectToArgString = async function(argstr) {
   // Handle profile-id:XXX forms.  These are bookmarkable.
   const ary = argstr.match(/^profile-id:([a-z0-9]+)(\?.*)?/i);
   if (ary) {
-    if (isMount) {
-      this.mountProfile(ary[1]);
-    } else if (isSftp) {
-      this.sftpConnectToProfile(ary[1]);
-    } else {
-      this.connectToProfile(ary[1]);
+    const profileId = ary[1];
+    const prefs = await this.commonProfileSetup_(profileId);
+    switch (prefs.get('app')) {
+      case 'mount':
+        this.mountProfile(prefs);
+        break;
+      case 'nasftp':
+      case 'sftp':
+        this.sftpConnectToProfile(prefs);
+        break;
+      case 'ssh':
+      default:
+        this.connectToProfile(prefs);
+        break;
     }
   } else {
-    if (isMount) {
-      this.mountDestination(argstr);
-    } else if (isSftp) {
-      this.sftpConnectToDestination(argstr);
-    } else {
-      this.connectToDestination(argstr);
-    }
+    this.connectToDestination(argstr);
   }
 };
 
@@ -460,9 +457,9 @@ CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
  * Mount a remote host given a profile id. Creates a new SFTP CommandInstance
  * that runs in the background page.
  *
- * @param {string} profileID Terminal preference profile name.
+ * @param {!ProfilePreferenceManager} prefs Connection preferences.
  */
-CommandInstance.prototype.mountProfile = async function(profileID) {
+CommandInstance.prototype.mountProfile = async function(prefs) {
   const port = chrome.runtime.connect({name: 'mount'});
 
   // The main event loop -- process messages from the bg page.
@@ -545,9 +542,6 @@ CommandInstance.prototype.mountProfile = async function(profileID) {
     port.postMessage({command: 'write', data: string});
   };
 
-  // Once we've loaded prefs from storage, kick off the mount in the bg.
-  const prefs = await this.commonProfileSetup_(profileID);
-
   this.isMount = true;
   this.isSftp = true;
   const params = this.prefsToConnectParams_(prefs);
@@ -578,11 +572,9 @@ CommandInstance.prototype.mountProfile = async function(profileID) {
 /**
  * Creates a new SFTP CommandInstance that runs in the background page.
  *
- * @param {string} profileID Terminal preference profile name.
+ * @param {!ProfilePreferenceManager} prefs Connection preferences.
  */
-CommandInstance.prototype.sftpConnectToProfile = async function(profileID) {
-  const prefs = await this.commonProfileSetup_(profileID);
-
+CommandInstance.prototype.sftpConnectToProfile = async function(prefs) {
   this.isSftp = true;
   this.sftpClient = new sftpClient();
 
@@ -592,11 +584,9 @@ CommandInstance.prototype.sftpConnectToProfile = async function(profileID) {
 /**
  * Initiate a connection to a remote host given a profile id.
  *
- * @param {string} profileID Terminal preference profile name.
+ * @param {!ProfilePreferenceManager} prefs Connection preferences.
  */
-CommandInstance.prototype.connectToProfile = async function(profileID) {
-  const prefs = await this.commonProfileSetup_(profileID);
-
+CommandInstance.prototype.connectToProfile = async function(prefs) {
   this.connectTo(this.prefsToConnectParams_(prefs));
 };
 
@@ -809,18 +799,6 @@ CommandInstance.prototype.connectToDestination = function(destination) {
   this.navigate_(destination);
 
   this.connectTo(rv);
-};
-
-/**
- * Mount a remote host given a destination string.
- *
- * @param {string} destination A string of the form username@host[:port].
- */
-CommandInstance.prototype.mountDestination = function(destination) {
-  // This code path should currently be unreachable.  If that ever changes,
-  // we can look at merging with the mountProfile code.
-  this.io.println('Not implemented; please file a bug.');
-  this.exit(EXIT_INTERNAL_ERROR, true);
 };
 
 /**
@@ -1078,10 +1056,6 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
       // A false return value means we have to redirect to complete
       // initialization.  Bail out of the connect for now.  We'll resume it
       // when the relay is done with its redirect.
-
-      // If we're trying to mount the connection, remember it.
-      this.sessionStorage.setItem('nassh.isMount', this.isMount);
-      this.sessionStorage.setItem('nassh.isSftp', this.isSftp);
 
       if (!this.relay_.redirect()) {
         this.exit(EXIT_INTERNAL_ERROR, true);

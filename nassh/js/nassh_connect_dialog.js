@@ -458,11 +458,6 @@ ConnectDialog.prototype.connect = function() {
     case 'nasftp':
     case 'sftp':
       proto = 'sftp';
-      this.sessionStorage_.setItem('nassh.isSftp', 'true');
-      break;
-    case 'mount':
-      this.sessionStorage_.setItem('nassh.isMount', 'true');
-      this.sessionStorage_.setItem('nassh.isSftp', 'true');
       break;
   }
 
