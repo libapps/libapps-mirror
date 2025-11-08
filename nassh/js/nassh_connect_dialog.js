@@ -57,7 +57,7 @@ function ConnectDialog() {
   // The 'new' profile is special in that it doesn't have a real id or
   // prefs object until it is saved for the first time.
   this.emptyProfileRecord_ = new ConnectDialog.ProfileRecord(
-      'new', null, '[New Connection]');
+      'new', null, localize('FIELD_NEW_CONNECTION'));
 
   // Map of id->ConnectDialog.ProfileRecord.
   this.profileMap_ = {};

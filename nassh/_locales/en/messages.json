@@ -171,6 +171,10 @@
 		"description": "Placeholder for command line options to the SSH relay server. The relay server is like a web proxy for connections. 'SSH' refers to the protocol and probably should not be translated if the language does not have a common replacement.",
 		"message": "SSH relay server options"
 	},
+	"FIELD_NEW_CONNECTION": {
+		"description": "Placeholder for a new connection profile. It may be reformatted & translated however makes sense. The [brackets] are meant to make it visually distinct from other connection names.",
+		"message": "[New Connection]"
+	},
 	"FIELD_PORT_ARIA_LABEL": {
 		"description": "Label for the network port. This text will be used by Assistive Technology to provide more information to the user (e.g. it will be spoken aloud). It may be translated in whatever way makes sense for that use.",
 		"message": "port"
