@@ -302,10 +302,6 @@ export class Plugin {
       this.argv_.push('sftp');
     }
 
-    this.terminal_.io.print(
-        ' «««This is in beta -- see https://issuetracker.google.com/40220462 ' +
-        'for KIs»»»');
-
     const settings = {
       executable: this.executable_,
       argv: [this.executable_, ...this.argv_],
