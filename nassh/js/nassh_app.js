@@ -4,7 +4,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {browserAction, localize, sendFeedback} from './nassh.js';
+import {localize, sendFeedback} from './nassh.js';
 
 /**
  * The singleton app instance for the nassh packaged app, created by the
@@ -63,26 +63,4 @@ App.prototype.onContextMenu_ = function(info, tab = undefined) {
       console.error('Unknown menu item', info);
       break;
   }
-};
-
-/**
- * Bind our callbacks to the browser action button (for extensions).
- */
-App.prototype.installBrowserAction = function() {
-  if (!browserAction) {
-    return;
-  }
-
-  browserAction.onClicked.addListener(this.onLaunched.bind(this));
-};
-
-/**
- * Called on app launch.
- */
-App.prototype.onLaunched = function() {
-  const width = 900;
-  const height = 600;
-  lib.f.openWindow(lib.f.getURL('/html/nassh_connect_dialog.html'), '',
-                   'chrome=no,close=yes,resize=yes,scrollbars=yes,' +
-                   `minimizable=yes,width=${width},height=${height}`);
 };

@@ -12,19 +12,11 @@ import {hterm} from '../../hterm/index.js';
 import {browserAction, getSyncStorage, runtimeSendMessage} from './nassh.js';
 import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';
+import {BrowserActionHandler} from './nassh_browser_action.js';
 import {ExternalApi} from './nassh_external_api.js';
 import {probeExtensions} from './nassh_google.js';
 import {OmniboxHandler} from './nassh_omnibox.js';
 import {SftpFsp} from './nassh_sftp_fsp.js';
-
-let didLaunch = false;
-
-/**
- * Mark the app as having been launched by the user before we were ready.
- */
-function onLaunched() {
-  didLaunch = true;
-}
 
 let omniboxHandler = null;
 if (globalThis.chrome?.omnibox) {
@@ -44,8 +36,10 @@ externalApi_.addListeners();
 
 // Used to watch for launch events that occur before we're ready to handle
 // them.  We'll clean this up below during init.
-if (browserAction) {
-  browserAction.onClicked.addListener(onLaunched);
+let browserActionHandler = null;
+if (browserAction !== null) {
+  browserActionHandler = new BrowserActionHandler({browserAction});
+  browserActionHandler.earlyInstall();
 }
 
 /**
@@ -75,14 +69,8 @@ function init() {
   fsp.addListeners();
 
   // If we're running as an extension, finish setup.
-  if (browserAction) {
-    browserAction.onClicked.removeListener(onLaunched);
-    app.installBrowserAction();
-  }
-
-  // If the user tried to run us while we were initializing, run it now.
-  if (didLaunch) {
-    app.onLaunched();
+  if (browserActionHandler) {
+    browserActionHandler.install();
   }
 
   // Help with live debugging.
