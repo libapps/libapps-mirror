@@ -14,6 +14,7 @@ import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';
 import {ExternalApi} from './nassh_external_api.js';
 import {probeExtensions} from './nassh_google.js';
+import {OmniboxHandler} from './nassh_omnibox.js';
 import {SftpFsp} from './nassh_sftp_fsp.js';
 
 let didLaunch = false;
@@ -25,16 +26,15 @@ function onLaunched() {
   didLaunch = true;
 }
 
-let omniboxEarlyData = null;
+let omniboxHandler = null;
+if (globalThis.chrome?.omnibox) {
+  omniboxHandler = new OmniboxHandler({
+    omnibox: chrome.omnibox,
+    storage: getSyncStorage(),
+  });
 
-/**
- * Remember omnibox input before we were ready.
- *
- * @param {string} text The text to operate on.
- * @param {string} disposition Mode the user wants us to open as.
- */
-function omniboxOnInputEntered(text, disposition) {
-  omniboxEarlyData = {text, disposition};
+  // Set up basic listeners so we don't miss events before we're ready.
+  omniboxHandler.earlyInstall();
 }
 
 // We have to turn on listeners here so we can handle messages when first
@@ -48,12 +48,6 @@ if (browserAction) {
   browserAction.onClicked.addListener(onLaunched);
 }
 
-// We have to listen for entered event so we don't miss it.  We'll clean this
-// up below during init.
-if (globalThis.chrome?.omnibox) {
-  chrome.omnibox.onInputEntered.addListener(omniboxOnInputEntered);
-}
-
 /**
  * Perform any required async initialization, then create our app instance.
  *
@@ -64,16 +58,14 @@ function init() {
   const fsp = new SftpFsp();
   externalApi_.init(fsp);
 
-  const storage = getSyncStorage();
-  const app = new App(storage);
+  const app = new App();
 
   // Register our context menus.
   app.installContextMenus();
 
   // If omnibox is enabled, set it up.
-  if (globalThis.chrome?.omnibox) {
-    app.installOmnibox(chrome.omnibox);
-    chrome.omnibox.onInputEntered.removeListener(omniboxOnInputEntered);
+  if (omniboxHandler) {
+    omniboxHandler.install();
   }
 
   // Probe Google extensions.
@@ -91,13 +83,6 @@ function init() {
   // If the user tried to run us while we were initializing, run it now.
   if (didLaunch) {
     app.onLaunched();
-  }
-
-  // If the user triggered omnibox while we were sleeping, run it now.
-  if (omniboxEarlyData !== null) {
-    app.omniboxOnInputEntered_(
-        omniboxEarlyData.text, omniboxEarlyData.disposition);
-    omniboxEarlyData = null;
   }
 
   // Help with live debugging.
