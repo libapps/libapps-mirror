@@ -64,30 +64,6 @@ function init() {
 }
 
 /**
- * Migrate from localStorage to chrome.storage.local.
- */
-function migrateLocalPreferences() {
-  if (globalThis.localStorage === undefined ||
-      globalThis.chrome?.storage?.local === undefined) {
-    // Migration only works when we have access to both APIs.
-    return;
-  }
-
-  const prefs = {};
-  for (const key in globalThis.localStorage) {
-    if (!key.startsWith('/nassh/')) {
-      continue;
-    }
-
-    try {
-      prefs[key] = JSON.parse(globalThis.localStorage[key]);
-    } catch (e) { /**/ }
-    globalThis.localStorage.removeItem(key);
-  }
-  chrome.storage.local.set(prefs);
-}
-
-/**
  * Sync prefs between versions automatically.
  *
  * This helps when installing the dev version the first time, or migrating from
@@ -95,8 +71,6 @@ function migrateLocalPreferences() {
  */
 chrome.runtime.onInstalled.addListener((details) => {
   console.log(`onInstalled fired due to "${details.reason}"`);
-
-  migrateLocalPreferences();
 
   // Only sync prefs when installed the first time.
   if (details.reason != 'install') {
