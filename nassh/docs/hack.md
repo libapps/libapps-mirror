@@ -220,7 +220,6 @@ The vast majority of the code here lives under [js/].
 
 * Main Secure Shell code
   * [nassh.js]: Main `nassh` object setup and glue code to Chrome runtime.
-  * [nassh_app.js]: Main `nassh.App` code.
   * [nassh_command_instance.js]: Main `CommandInstance` launching code.
   * [nassh_preference_manager.js]: Logic holding user preferences.
 * Relay code.
@@ -418,7 +417,6 @@ Here's a random list of documents which would be useful to people.
 [nassh_agent_backend_gsc.js]: ../js/nassh_agent_backend_gsc.js
 [nassh_agent_message.js]: ../js/nassh_agent_message.js
 [nassh_agent_message_types.js]: ../js/nassh_agent_message_types.js
-[nassh_app.js]: ../js/nassh_app.js
 [nassh_background.js]: ../js/nassh_background.js
 [nassh_background_main.js]: ../js/nassh_background_main.js
 [nassh_column_list.js]: ../js/nassh_column_list.js

@@ -10,8 +10,8 @@
 import {hterm} from '../../hterm/index.js';
 
 import {getSyncStorage, runtimeSendMessage} from './nassh.js';
-import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';
+import {ContextMenusHandler} from './nassh_context_menus.js';
 import {ExternalApi} from './nassh_external_api.js';
 import {probeExtensions} from './nassh_google.js';
 import {OmniboxHandler} from './nassh_omnibox.js';
@@ -43,10 +43,11 @@ function init() {
   const fsp = new SftpFsp();
   externalApi_.init(fsp);
 
-  const app = new App();
-
   // Register our context menus.
-  app.installContextMenus();
+  const contextMenusHandler = new ContextMenusHandler({
+    contextMenus: chrome.contextMenus,
+  });
+  contextMenusHandler.install();
 
   // If omnibox is enabled, set it up.
   if (omniboxHandler) {
@@ -58,9 +59,6 @@ function init() {
 
   // Bind the FSP APIs.
   fsp.addListeners();
-
-  // Help with live debugging.
-  globalThis.app_ = app;
 }
 
 /**
