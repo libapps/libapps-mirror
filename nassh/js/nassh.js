@@ -6,15 +6,6 @@ import {lib} from '../../libdot/index.js';
 
 import {hterm} from '../../hterm/index.js';
 
-/**
- * Non-null if nassh is running as an extension.
- */
-export const browserAction =
-    globalThis.browser?.browserAction ? browser.browserAction :
-    globalThis.chrome?.browserAction ? chrome.browserAction :
-    globalThis.chrome?.action ? chrome.action :
-    null;
-
 hterm.initPromise.then(() => {
   // Since our translation process only preserves \n (and discards \r), we
   // have to manually insert them ourselves.

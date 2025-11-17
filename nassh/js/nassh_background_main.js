@@ -9,10 +9,9 @@
 
 import {hterm} from '../../hterm/index.js';
 
-import {browserAction, getSyncStorage, runtimeSendMessage} from './nassh.js';
+import {getSyncStorage, runtimeSendMessage} from './nassh.js';
 import {App} from './nassh_app.js';
 import {importPreferences} from './nassh_background.js';
-import {BrowserActionHandler} from './nassh_browser_action.js';
 import {ExternalApi} from './nassh_external_api.js';
 import {probeExtensions} from './nassh_google.js';
 import {OmniboxHandler} from './nassh_omnibox.js';
@@ -33,14 +32,6 @@ if (globalThis.chrome?.omnibox) {
 // launched.
 const externalApi_ = new ExternalApi();
 externalApi_.addListeners();
-
-// Used to watch for launch events that occur before we're ready to handle
-// them.  We'll clean this up below during init.
-let browserActionHandler = null;
-if (browserAction !== null) {
-  browserActionHandler = new BrowserActionHandler({browserAction});
-  browserActionHandler.earlyInstall();
-}
 
 /**
  * Perform any required async initialization, then create our app instance.
@@ -67,11 +58,6 @@ function init() {
 
   // Bind the FSP APIs.
   fsp.addListeners();
-
-  // If we're running as an extension, finish setup.
-  if (browserActionHandler) {
-    browserActionHandler.install();
-  }
 
   // Help with live debugging.
   globalThis.app_ = app;
