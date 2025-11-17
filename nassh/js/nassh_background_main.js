@@ -66,8 +66,7 @@ function init() {
 /**
  * Sync prefs between versions automatically.
  *
- * This helps when installing the dev version the first time, or migrating from
- * the Chrome App variant to the standard extension.
+ * This helps when installing the dev version the first time.
  */
 chrome.runtime.onInstalled.addListener((details) => {
   console.log(`onInstalled fired due to "${details.reason}"`);
@@ -87,8 +86,6 @@ chrome.runtime.onInstalled.addListener((details) => {
       return;
     }
 
-    const appStableId = 'pnhechapfaindjhompbnflcldabbghjo';
-    const appDevId = 'okddffdblfhhnmhodogpojmfkjmhinfp';
     const extStableId = 'iodihamcpbpeioajjeobimgagajmlibd';
     const extDevId = 'algkcnfjnajfhgimadimbjhmpaeohhln';
 
@@ -109,19 +106,9 @@ chrome.runtime.onInstalled.addListener((details) => {
     };
 
     switch (chrome.runtime.id) {
-      case appDevId:
-      case extStableId:
-        // Sync from stable app.
-        migrate(appStableId);
-        break;
-
       case extDevId:
-        // Sync from stable ext then stable app then dev app.
-        migrate(extStableId, () => {
-          migrate(appStableId, () => {
-            migrate(appDevId);
-          });
-        });
+        // Sync from stable ext.
+        migrate(extStableId);
         break;
     }
   });
