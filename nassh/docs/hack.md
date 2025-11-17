@@ -266,7 +266,7 @@ Secure Shell logic.
   * [nassh_column_list.js]: Utility code for showing things in columns.
   * [nassh_connect_dialog.js]: The main connection dialog page.
 * Extension popup specific code (i.e. [nassh_popup.html]).
-  * [nassh_extension_popup.js]: The extension popup startup logic.
+  * [nassh_extension_popup_main.js]: The extension popup startup logic.
 * Redirection page specific code
   * [nassh_google_relay_html.js]
 * Options page specific code
@@ -422,7 +422,7 @@ Here's a random list of documents which would be useful to people.
 [nassh_column_list.js]: ../js/nassh_column_list.js
 [nassh_command_instance.js]: ../js/nassh_command_instance.js
 [nassh_connect_dialog.js]: ../js/nassh_connect_dialog.js
-[nassh_extension_popup.js]: ../js/nassh_extension_popup.js
+[nassh_extension_popup_main.js]: ../js/nassh_extension_popup_main.js
 [nassh_google_relay_html.js]: ../js/nassh_google_relay_html.js
 [nassh_main.js]: ../js/nassh_main.js
 [nassh_preference_manager.js]: ../js/nassh_preference_manager.js
