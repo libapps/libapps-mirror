@@ -268,7 +268,7 @@ Secure Shell logic.
 * Extension popup specific code (i.e. [nassh_popup.html]).
   * [nassh_extension_popup_main.js]: The extension popup startup logic.
 * Redirection page specific code
-  * [nassh_google_relay_html.js]
+  * [nassh_google_relay_main.js]
 * Options page specific code
   * [nassh_preferences_editor.js]
 * [SFTP specific code](#SFTP)
@@ -423,7 +423,7 @@ Here's a random list of documents which would be useful to people.
 [nassh_command_instance.js]: ../js/nassh_command_instance.js
 [nassh_connect_dialog.js]: ../js/nassh_connect_dialog.js
 [nassh_extension_popup_main.js]: ../js/nassh_extension_popup_main.js
-[nassh_google_relay_html.js]: ../js/nassh_google_relay_html.js
+[nassh_google_relay_main.js]: ../js/nassh_google_relay_html.js
 [nassh_main.js]: ../js/nassh_main.js
 [nassh_preference_manager.js]: ../js/nassh_preference_manager.js
 [nassh_preferences_editor.js]: ../js/nassh_preferences_editor.js
