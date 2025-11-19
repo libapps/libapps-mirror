@@ -7,7 +7,7 @@
   <link rel='stylesheet' href='../css/licenses.css'/>
   <link rel='stylesheet' href='../css/chrome-bootstrap-darkmode.css'/>
 
-  <script type='module' src='../js/licenses.js'></script>
+  <script type='module' src='../js/licenses_main.js'></script>
 </head>
 <body class='chrome-bootstrap'>
 <h1 i18n='{"_": "LICENSES_TITLE"}'></h1>
