@@ -92,12 +92,6 @@ function Crosh({commandName, terminal, args}) {
 }
 
 /**
- * The extension id of "crosh_builtin", the version of crosh that ships with
- * the ChromiumOS system image.
- */
-Crosh.croshBuiltinId = 'nkoccljplnhpfnfiajclkommnmllphnl';
-
-/**
  * Return a formatted message in the current locale.
  *
  * @param {string} name The name of the message to return.
