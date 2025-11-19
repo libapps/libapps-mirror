@@ -155,14 +155,6 @@ export function CommandInstance(argv) {
 }
 
 /**
- * The name of this command used in messages to the user.
- *
- * Perhaps this will also be used by the user to invoke this command if we
- * build a command line shell.
- */
-CommandInstance.prototype.commandName = 'nassh';
-
-/**
  * When the command exit is from nassh instead of ssh_client.  The ssh module
  * can only ever exit with positive values, so negative values are reserved.
  */
