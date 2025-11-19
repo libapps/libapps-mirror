@@ -58,7 +58,7 @@ import {SshPolicy} from './ssh_policy.js';
  *   connectPage: (string|undefined),
  * }}
  */
-export let CommandInstanceArgv;
+let CommandInstanceArgv;
 
 /**
  * The ssh terminal command.
