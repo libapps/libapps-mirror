@@ -328,9 +328,9 @@ class MemoryFileHandler extends FileHandler {
 }
 
 /**
- * Plugin message handlers.
+ * A WASM program.
  */
-export class Plugin {
+export class WasmSubproc {
   /**
    * @param {{
    *   executable: string,
@@ -361,14 +361,14 @@ export class Plugin {
     this.sftpClient_ = sftpClient;
     this.secureInput_ = secureInput;
     this.syncStorage_ = syncStorage;
-    this.plugin_ = null;
+    this.process_ = null;
     this.sftpStdin_ = null;
     this.sftpStdout_ = null;
     this.knownHosts_ = knownHosts;
   }
 
   /**
-   * @return {!Promise<void>} When the plugin has been initialized.
+   * @return {!Promise<void>} When the process has been initialized.
    * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
    */
   async init() {
@@ -435,41 +435,41 @@ export class Plugin {
       }
     }
 
-    this.plugin_ = new WasshProcess.Background(
+    this.process_ = new WasshProcess.Background(
         sanitizeScriptUrl(`../wassh/js/worker.js?trace=${this.trace_}`),
         settings);
   }
 
   /**
-   * Run the plugin.
+   * Run the program.
    *
    * @return {!Promise<number>} The exit status of the program.
    */
   async run() {
-    return this.plugin_.run();
+    return this.process_.run();
   }
 
   /**
-   * Remove the plugin from the page.
+   * Shutdown the program.
    */
-  remove() {
+  terminate() {
     // TODO(vapier): Should close all streams upon exit.
-    this.plugin_.terminate();
-    this.plugin_ = null;
-    // TODO(vapier): This should be automatic in the plugin termination.
+    this.process_.terminate();
+    this.process_ = null;
+    // TODO(vapier): This should be automatic in the process termination.
     cleanupChromeSockets();
   }
 
   /**
-   * Write data to the plugin.
+   * Write data to the process.
    *
    * @param {number} fd The file handle to write to.
    * @param {!ArrayBuffer} data The content to write.
    */
   async writeTo(fd, data) {
-    const ret = await this.plugin_.writeTo(fd, data);
+    const ret = await this.process_.writeTo(fd, data);
     if (typeof ret === 'number') {
-      console.error(`Unable to write to plugin fd ${fd}: ${ret}`);
+      console.error(`Unable to write to fd ${fd}: ${ret}`);
     }
   }
 

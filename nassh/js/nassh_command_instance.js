@@ -25,7 +25,7 @@ import {
   fetchSshPolicy, getGoogleSshAgentExtension, probeExtensions,
   refreshGoogleSshCert,
 } from './nassh_google.js';
-import {Plugin as WasmPlugin} from './nassh_plugin_wasm.js';
+import {WasmSubproc} from './nassh_subproc_wasm.js';
 import {
   LocalPreferenceManager, PreferenceManager, ProfilePreferenceManager,
 } from './nassh_preference_manager.js';
@@ -64,11 +64,8 @@ let CommandInstanceArgv;
  * The ssh terminal command.
  *
  * This class defines a command that can be run in an hterm.Terminal instance.
- * This command creates an instance of the ssh plugin and uses it to communicate
- * with an ssh daemon.
- *
- * If you want to use something other than this plugin to connect to a remote
- * host (like a shellinaboxd, etc), you'll want to create a brand new command.
+ * This command creates an instance of the ssh program and uses it to
+ * communicate with an ssh daemon.
  *
  * @param {!CommandInstanceArgv} argv The command line arguments.
  * @constructor
@@ -133,9 +130,9 @@ export function CommandInstance(argv) {
   this.connectPage = argv.connectPage || '/html/nassh_connect_dialog.html';
 
   /**
-   * @type {(?WasmPlugin)} The current plugin (WASM/etc...).
+   * @type {(?WasmSubproc)} The current program.
    */
-  this.plugin_ = null;
+  this.program_ = null;
 
   /**
    * @type {?string} The current connection profile.
@@ -312,7 +309,7 @@ CommandInstance.prototype.reconnect = function(argstr) {
   // Terminal reset.
   this.io.print('\x1b[!p');
 
-  this.removePlugin_();
+  this.terminateProgram_();
 
   this.stdoutAcknowledgeCount_ = 0;
   this.stderrAcknowledgeCount_ = 0;
@@ -1195,16 +1192,16 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   }
 
   this.sshPolicy_ = await fetchSshPolicy();
-  await this.initPlugin_(argv);
+  await this.initProgram_(argv);
   this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
   this.io.println(localize('CONNECTING',
                            [`${params.username}@${disp_hostname}`]));
 
-  lib.notNull(this.plugin_);
+  lib.notNull(this.program_);
   if (this.isSftp) {
     try {
-      await this.sftpClient.initConnection(this.plugin_);
+      await this.sftpClient.initConnection(this.program_);
       this.onSftpInitialised();
     } catch (e) {
       this.io.println(localize('NASFTP_ERROR_MESSAGE', [e]));
@@ -1424,10 +1421,10 @@ CommandInstance.prototype.dispatchMessage_ = function(desc, handlers, msg) {
  * @param {!Object=} options
  * @return {!Promise<void>}
  */
-CommandInstance.prototype.initWasmPlugin_ =
+CommandInstance.prototype.initWasmSubproc_ =
     async function(argv, environ, {trace = false} = {}) {
 
-  this.plugin_ = new WasmPlugin({
+  this.program_ = new WasmSubproc({
     executable: `../../plugin/${this.sshClientVersion_}/ssh.wasm`,
     argv: argv,
     environ: environ,
@@ -1442,32 +1439,32 @@ CommandInstance.prototype.initWasmPlugin_ =
     syncStorage: this.syncStorage,
     knownHosts: this.sshPolicy_.getSshKnownHosts(),
   });
-  return this.plugin_.init();
+  return this.program_.init();
 };
 
 /**
- * @param {!Object} argv Plugin arguments.
+ * @param {!Object} argv Program arguments.
  * @return {!Promise<void>}
  */
-CommandInstance.prototype.initPlugin_ = async function(argv) {
+CommandInstance.prototype.initProgram_ = async function(argv) {
   this.io.print(localize('PLUGIN_LOADING', [this.sshClientVersion_]));
-  await this.initWasmPlugin_(argv.arguments, argv.environment, {
+  await this.initWasmSubproc_(argv.arguments, argv.environment, {
     trace: argv.debugTrace,
   });
   this.io.println(localize('PLUGIN_LOADING_COMPLETE'));
-  this.plugin_.run().then(async (code) => {
+  this.program_.run().then(async (code) => {
     await this.onPluginExit(code);
     this.exit(code, /* noReconnect= */ false);
   });
 };
 
 /**
- * Remove the plugin from the runtime.
+ * Terminate the program.
  */
-CommandInstance.prototype.removePlugin_ = function() {
-  if (this.plugin_) {
-    this.plugin_.remove();
-    this.plugin_ = null;
+CommandInstance.prototype.terminateProgram_ = function() {
+  if (this.program_) {
+    this.program_.terminate();
+    this.program_ = null;
   }
 };
 
@@ -1486,8 +1483,7 @@ CommandInstance.prototype.exit = function(code, noReconnect) {
 
   this.terminalWindow.removeEventListener('beforeunload', this.onBeforeUnload_);
 
-  // Hard destroy the plugin object.
-  this.removePlugin_();
+  this.terminateProgram_();
 
   if (this.isMount) {
     if (this.fsp) {
@@ -1702,7 +1698,7 @@ CommandInstance.prototype.secureInput = function(prompt, buf_len, echo) {
 };
 
 /**
- * A user should override this if they want to get notified when the ssh plugin
+ * A user should override this if they want to get notified when the ssh program
  * exits.
  *
  * @param {number} code The exit code.
