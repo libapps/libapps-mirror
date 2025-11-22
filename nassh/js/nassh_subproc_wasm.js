@@ -28,150 +28,6 @@ import * as WasshSyscallHandler from '../wassh/js/syscall_handler.js';
 import {FileHandle, FileHandler} from '../wassh/js/vfs.js';
 
 /**
- * A write-only pipe.
- *
- * WASM writes to this handle, and the handle writes to our SFTP client which
- * processes the packets.
- *
- * TODO(vapier): Generalize this and move to wassh.vfs?
- */
-class SftpPipeWriteHandle extends FileHandle {
-  constructor(path, client) {
-    // TODO(vapier): This should really be FIFO, but WASI doesn't define that?
-    super(path, WASI.filetype.CHARACTER_DEVICE);
-    this.client_ = client;
-  }
-
-  /**
-   * @param {!TypedArray} buf
-   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
-   * @override
-   */
-  write(buf) {
-    this.client_.writeStreamData(buf);
-    return {nwritten: buf.length};
-  }
-
-  /**
-   * @param {!TypedArray} buf
-   * @param {number|bigint} offset
-   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
-   * @override
-   */
-  async pwrite(buf, offset) {
-    return WASI.errno.ESPIPE;
-  }
-
-  /**
-   * @param {number} length
-   * @return {!Promise<!WASI_t.errno|
-   *                   {buf: !Uint8Array, nread: number}|
-   *                   {buf: !Uint8Array}|
-   *                   {nread: number}>}
-   * @override
-   */
-  async read(length) {
-    return WASI.errno.ESPIPE;
-  }
-
-  /**
-   * @param {number} length
-   * @param {number|bigint} offset
-   * @return {!Promise<!WASI_t.errno|
-   *                   {buf: !Uint8Array, nread: number}|
-   *                   {buf: !Uint8Array}|
-   *                   {nread: number}>}
-   * @override
-   */
-  async pread(length, offset) {
-    return WASI.errno.ESPIPE;
-  }
-
-  /**
-   * @return {!WASI_t.errno|{offset: (number|bigint)}}
-   */
-  tell() {
-    return WASI.errno.ESPIPE;
-  }
-}
-
-/**
- * A read-only pipe.
- *
- * Our SFTP client queues packets (via write() calls) for WASM to read.
- *
- * TODO(vapier): Generalize this and move to wassh.vfs?
- */
-class SftpPipeReadHandle extends FileHandle {
-  constructor(path, handler) {
-    // TODO(vapier): This should really be FIFO, but WASI doesn't define that?
-    super(path, WASI.filetype.CHARACTER_DEVICE);
-    this.handler = handler;
-  }
-
-  /**
-   * @param {!TypedArray} buf
-   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
-   * @override
-   */
-  write(buf) {
-    buf = new Uint8Array(buf);
-    const data = new Uint8Array(this.data.length + buf.length);
-    data.set(this.data);
-    data.set(buf, this.data.length);
-    this.data = data;
-    if (this.handler.notify_) {
-      this.handler.notify_();
-    }
-    return {nwritten: buf.length};
-  }
-
-  /**
-   * @param {!TypedArray} buf
-   * @param {number|bigint} offset
-   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
-   * @override
-   */
-  async pwrite(buf, offset) {
-    return WASI.errno.ESPIPE;
-  }
-
-  /**
-   * @param {number} length
-   * @return {!Promise<!WASI_t.errno|
-   *                   {buf: !Uint8Array, nread: number}|
-   *                   {buf: !Uint8Array}|
-   *                   {nread: number}>}
-   * @override
-   */
-  async read(length) {
-    const buf = this.data.slice(0, length);
-    this.data = this.data.subarray(length);
-    return {buf};
-  }
-
-  /**
-   * @param {number} length
-   * @param {number|bigint} offset
-   * @return {!Promise<!WASI_t.errno|
-   *                   {buf: !Uint8Array, nread: number}|
-   *                   {buf: !Uint8Array}|
-   *                   {nread: number}>}
-   * @override
-   */
-  async pread(length, offset) {
-    return WASI.errno.ESPIPE;
-  }
-
-  /**
-   * @return {!WASI_t.errno|{offset: (number|bigint)}}
-   */
-  tell() {
-    return WASI.errno.ESPIPE;
-  }
-}
-
-/**
  * A path backed by a key in a specific lib.Storage.
  *
  * This is how we sync files.
@@ -225,7 +81,7 @@ class StorageFileHandle extends FileHandle {
  *
  * TODO(vapier): Generalize this and move to wassh.vfs?
  */
-class StorageFileHandler extends FileHandler {
+export class StorageFileHandler extends FileHandler {
   /**
    * @param {string} path The absolute path in the filesystem for this handler.
    * @param {!lib.Storage} storage The backing storage for file content.
@@ -300,7 +156,7 @@ class MemoryFileHandle extends FileHandle {
  * A path in which we temporarily sync content of the file, but not store the
  * file.
  */
-class MemoryFileHandler extends FileHandler {
+export class MemoryFileHandler extends FileHandler {
   /**
    * @param {string} path The absolute path in the filesystem for this handler.
    * @param {string} content The content which we want to sync temporarily.
@@ -341,14 +197,11 @@ export class WasmSubproc {
    *   authAgent: ?Agent,
    *   authAgentAppID: string,
    *   relay: ?Relay,
-   *   isSftp: (boolean|undefined),
-   *   sftpClient: (?Object|undefined),
    *   secureInput: function(string, number, boolean),
    * }} opts
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
-               authAgentAppID, relay, isSftp, sftpClient, secureInput,
-               syncStorage, knownHosts}) {
+               authAgentAppID, relay, secureInput}) {
     this.executable_ = executable;
     this.argv_ = argv;
     this.environ_ = environ;
@@ -357,14 +210,8 @@ export class WasmSubproc {
     this.authAgent_ = authAgent;
     this.authAgentAppID_ = authAgentAppID;
     this.relay_ = relay;
-    this.isSftp_ = isSftp;
-    this.sftpClient_ = sftpClient;
     this.secureInput_ = secureInput;
-    this.syncStorage_ = syncStorage;
     this.process_ = null;
-    this.sftpStdin_ = null;
-    this.sftpStdout_ = null;
-    this.knownHosts_ = knownHosts;
   }
 
   /**
@@ -377,12 +224,6 @@ export class WasmSubproc {
       // forever, so use that.  Also allows people to set IdentityAgent via the
       // ssh_config file.
       this.environ_['SSH_AUTH_SOCK'] = `/AF_UNIX/agent/${this.authAgentAppID_}`;
-    }
-
-    // Tell OpenSSH to use the sftp subsystem instead of an interactive session.
-    if (this.isSftp_) {
-      this.argv_.push('-s');
-      this.argv_.push('sftp');
     }
 
     const settings = {
@@ -404,41 +245,17 @@ export class WasmSubproc {
     };
     await settings.handler.init();
 
-    const vfs = settings.handler.vfs;
-    vfs.addHandler(new StorageFileHandler(
-        '/etc/ssh/ssh_config', this.syncStorage_, '/nassh/etc/ssh/ssh_config'));
-    vfs.addHandler(new StorageFileHandler(
-        '/etc/ssh/ssh_known_hosts', this.syncStorage_,
-        '/nassh/etc/ssh/ssh_known_hosts'));
-    // The OpenSSH client defaults to reading from both /etc/ssh/ssh_known_hosts
-    // and /etc/ssh/ssh_known_hosts2 for the global known hosts. We use the
-    // second file to inject host keys provided by enterprise policy.
-    vfs.addHandler(new MemoryFileHandler(
-      '/etc/ssh/ssh_known_hosts2', this.knownHosts_ ?? ''));
-
-    // If this is an SFTP connection, rebind stdin/stdout to our custom pipes
-    // which connect to our JS SFTP client.
-    if (this.isSftp_) {
-
-      this.sftpStdin_ = new SftpPipeReadHandle('sftp-in', settings.handler);
-      let fd = vfs.openHandle(this.sftpStdin_);
-      if (fd != 0) {
-        vfs.fds_.dup2(fd, 0);
-        vfs.close(fd);
-      }
-
-      this.sftpStdout_ = new SftpPipeWriteHandle('sftp-out', this.sftpClient_);
-      fd = vfs.openHandle(this.sftpStdout_);
-      if (fd != 1) {
-        vfs.fds_.dup2(fd, 1);
-        vfs.close(fd);
-      }
-    }
+    await this.initHandler_(settings.handler);
 
     this.process_ = new WasshProcess.Background(
         sanitizeScriptUrl(`../wassh/js/worker.js?trace=${this.trace_}`),
         settings);
   }
+
+  /**
+   * @param {!Object} handler The syscall handler.
+   */
+  async initHandler_(handler) {}
 
   /**
    * Run the program.

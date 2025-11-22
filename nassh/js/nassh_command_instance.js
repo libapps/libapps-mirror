@@ -25,6 +25,7 @@ import {
   fetchSshPolicy, getGoogleSshAgentExtension, probeExtensions,
   refreshGoogleSshCert,
 } from './nassh_google.js';
+import {SshSubproc} from './nassh_subproc_ssh.js';
 import {WasmSubproc} from './nassh_subproc_wasm.js';
 import {
   LocalPreferenceManager, PreferenceManager, ProfilePreferenceManager,
@@ -1424,7 +1425,7 @@ CommandInstance.prototype.dispatchMessage_ = function(desc, handlers, msg) {
 CommandInstance.prototype.initWasmSubproc_ =
     async function(argv, environ, {trace = false} = {}) {
 
-  this.program_ = new WasmSubproc({
+  this.program_ = new SshSubproc({
     executable: `../../plugin/${this.sshClientVersion_}/ssh.wasm`,
     argv: argv,
     environ: environ,
