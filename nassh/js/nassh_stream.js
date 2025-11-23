@@ -59,9 +59,8 @@ Stream.prototype.open = async function(settings) {
  * Write to a stream.
  *
  * @param {!ArrayBuffer} data
- * @param {function(number)} onSuccess
  */
-Stream.prototype.asyncWrite = function(data, onSuccess) {
+Stream.prototype.asyncWrite = function(data) {
   throw Stream.ERR_NOT_IMPLEMENTED;
 };
 

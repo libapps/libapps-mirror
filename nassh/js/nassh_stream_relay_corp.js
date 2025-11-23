@@ -40,7 +40,6 @@ export function RelayCorpStream() {
   this.writeBuffer_ = newBuffer();
   // The total byte count we've written during this session.
   this.writeCount_ = 0;
-  this.onWriteSuccess_ = null;
 
   this.readCount_ = 0;
 }
@@ -125,16 +124,14 @@ RelayCorpStream.prototype.resumeRead_ = function() {
  * Queue up some data to write.
  *
  * @param {!ArrayBuffer} data
- * @param {function(number)} onSuccess
  * @override
  */
-RelayCorpStream.prototype.asyncWrite = function(data, onSuccess) {
+RelayCorpStream.prototype.asyncWrite = function(data) {
   if (!data.byteLength) {
     return;
   }
 
   this.writeBuffer_.write(data);
-  this.onWriteSuccess_ = onSuccess;
 
   if (!this.backoffTimeout_) {
     this.sendWrite_();
@@ -367,10 +364,6 @@ RelayCorpXhrStream.prototype.onWriteDone_ = function(e) {
   this.writeCount_ += this.lastWriteSize_;
 
   this.requestSuccess_(false);
-
-  if (this.onWriteSuccess_) {
-    this.onWriteSuccess_(this.writeCount_);
-  }
 };
 
 /** @param {!Event} e */
@@ -596,11 +589,6 @@ RelayCorpWsStream.prototype.sendWrite_ = function() {
   // Track ack latency.
   this.ackTime_ = Date.now();
   this.expectedAck_ = (this.writeCount_ + this.sentCount_) & 0xffffff;
-
-  if (this.onWriteSuccess_) {
-    // Notify nassh that we are ready to consume more data.
-    this.onWriteSuccess_(this.writeCount_ + this.sentCount_);
-  }
 
   if (!this.writeBuffer_.isEmpty()) {
     // We have more data to send but due to message limit we didn't send it.

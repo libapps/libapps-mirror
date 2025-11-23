@@ -87,10 +87,9 @@ SshAgentStream.prototype.trySendPacket_ = function() {
  * Append data to write buffer.
  *
  * @param {!ArrayBuffer} data The bytes to append to the current stream.
- * @param {function(number)} onSuccess Callback once the data is queued.
  * @override
  */
-SshAgentStream.prototype.asyncWrite = function(data, onSuccess) {
+SshAgentStream.prototype.asyncWrite = function(data) {
   if (!data.byteLength) {
     return;
   }
@@ -98,9 +97,4 @@ SshAgentStream.prototype.asyncWrite = function(data, onSuccess) {
   this.writeBuffer_ = concatTyped(this.writeBuffer_, new Uint8Array(data));
 
   setTimeout(this.trySendPacket_.bind(this), 0);
-
-  // Note: report binary length written.
-  if (onSuccess) {
-    onSuccess(data.byteLength);
-  }
 };

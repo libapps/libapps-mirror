@@ -156,8 +156,6 @@ export function RelayCorpv4WsStream() {
 
   // All the data we've queued but not yet sent out.
   this.writeBuffer_ = newBuffer();
-  // Callback function when asyncWrite is used.
-  this.onWriteSuccess_ = null;
 
   /**
    * The total byte count we've written during this session.
@@ -512,16 +510,14 @@ RelayCorpv4WsStream.prototype.onSocketData_ = function(e) {
  * Queue up some data to write asynchronously.
  *
  * @param {!ArrayBuffer} data The data to send out.
- * @param {function(number)=} onSuccess Optional callback.
  * @override
  */
-RelayCorpv4WsStream.prototype.asyncWrite = function(data, onSuccess) {
+RelayCorpv4WsStream.prototype.asyncWrite = function(data) {
   if (!data.byteLength) {
     return;
   }
 
   this.writeBuffer_.write(data);
-  this.onWriteSuccess_ = onSuccess;
   this.sendWrite_();
 };
 
@@ -553,11 +549,6 @@ RelayCorpv4WsStream.prototype.sendWrite_ = function() {
   // Start ack latency measurement.
   if (this.googMetricsReporter_) {
     this.timeSent_ = Date.now();
-  }
-
-  if (this.onWriteSuccess_) {
-    // Notify nassh that we are ready to consume more data.
-    this.onWriteSuccess_(this.writeCount_);
   }
 
   if (!this.writeBuffer_.isEmpty()) {

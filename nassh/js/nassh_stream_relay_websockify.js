@@ -34,8 +34,6 @@ export class RelayWebsockifyStream extends Stream {
 
     // All the data we've queued but not yet sent out.
     this.writeBuffer_ = newBuffer();
-    // Callback function when asyncWrite is used.
-    this.onWriteSuccess_ = null;
 
     // The actual WebSocket connected to the ssh server.
     this.socket_ = null;
@@ -143,16 +141,14 @@ export class RelayWebsockifyStream extends Stream {
    * Queue up some data to write asynchronously.
    *
    * @param {!ArrayBuffer} data The SSH data.
-   * @param {function(number)=} onSuccess Optional callback.
    * @override
    */
-  asyncWrite(data, onSuccess) {
+  asyncWrite(data) {
     if (!data.byteLength) {
       return;
     }
 
     this.writeBuffer_.write(data);
-    this.onWriteSuccess_ = onSuccess;
     this.sendWrite_();
   }
 
@@ -178,11 +174,6 @@ export class RelayWebsockifyStream extends Stream {
     const size = buf.length;
     this.socket_.send(buf);
     this.writeBuffer_.ack(size);
-
-    if (this.onWriteSuccess_) {
-      // Notify nassh that we are ready to consume more data.
-      this.onWriteSuccess_(size);
-    }
 
     if (!this.writeBuffer_.isEmpty()) {
       // We have more data to send but due to message limit we didn't send it.

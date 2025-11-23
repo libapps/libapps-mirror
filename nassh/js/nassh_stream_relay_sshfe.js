@@ -44,11 +44,6 @@ export function RelaySshfeWsStream() {
 
   // All the data we've queued but not yet sent out.
   this.writeBuffer_ = newBuffer();
-  // Callback function when asyncWrite is used.
-  this.onWriteSuccess_ = null;
-
-  // The total byte count we've written during this session.
-  this.writeCount_ = 0;
 
   // Data we've read so we can ack it to the server.
   this.readCount_ = 0;
@@ -351,16 +346,14 @@ RelaySshfeWsStream.prototype.onSocketData_ = function(e) {
  * Queue up some data to write asynchronously.
  *
  * @param {!ArrayBuffer} data A base64 encoded string.
- * @param {function(number)=} onSuccess Optional callback.
  * @override
  */
-RelaySshfeWsStream.prototype.asyncWrite = function(data, onSuccess) {
+RelaySshfeWsStream.prototype.asyncWrite = function(data) {
   if (!data.byteLength) {
     return;
   }
 
   this.writeBuffer_.write(data);
-  this.onWriteSuccess_ = onSuccess;
   this.sendWrite_();
 };
 
@@ -395,12 +388,6 @@ RelaySshfeWsStream.prototype.sendWrite_ = function() {
 
   this.socket_.send(buf);
   this.writeBuffer_.ack(size);
-  this.writeCount_ += size;
-
-  if (this.onWriteSuccess_) {
-    // Notify nassh that we are ready to consume more data.
-    this.onWriteSuccess_(this.writeCount_);
-  }
 
   if (!this.writeBuffer_.isEmpty()) {
     // We have more data to send but due to message limit we didn't send it.
