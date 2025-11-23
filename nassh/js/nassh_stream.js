@@ -9,10 +9,51 @@
 
 /**
  * Base class for streams required by the plugin.
- *
- * @constructor
  */
-export function Stream() {}
+export class Stream {
+  constructor() {}
+
+  /**
+   * Open a stream.
+   *
+   * @param {!Object} settings Each subclass of Stream defines its own set of
+   *     properties to be included in settings.
+   * @return {!Promise<void>} Resolve when open completes.
+   */
+  async open(settings) {
+    throw Stream.ERR_NOT_IMPLEMENTED;
+  }
+
+  /**
+   * Write to a stream.
+   *
+   * @param {!ArrayBuffer} data
+   */
+  async write(data) {
+    throw Stream.ERR_NOT_IMPLEMENTED;
+  }
+
+  /**
+   * Close a stream.
+   */
+  close() {
+    this.onClose();
+  }
+
+  /**
+   * Notification interface for when the stream is closed.
+   */
+  onClose() {}
+
+  /**
+   * Notification interface for when data is available for reading.
+   *
+   * @param {!ArrayBuffer|!ArrayBufferView} data
+   */
+  onDataAvailable(data) {
+    throw Stream.ERR_NOT_IMPLEMENTED;
+  }
+}
 
 /**
  * Errors we may raise.
@@ -41,44 +82,3 @@ Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
  * to send/drain the data, us queuing more won't really help either.
  */
 Stream.prototype.maxWebSocketBufferLength = 64 * 1024;
-
-/**
- * Open a stream.
- *
- * @param {!Object} settings Each subclass of Stream defines its own set of
- *     properties to be included in settings.
- * @return {!Promise<void>} Resolve when open completes.
- */
-Stream.prototype.open = async function(settings) {
-  throw Stream.ERR_NOT_IMPLEMENTED;
-};
-
-/**
- * Write to a stream.
- *
- * @param {!ArrayBuffer} data
- */
-Stream.prototype.write = async function(data) {
-  throw Stream.ERR_NOT_IMPLEMENTED;
-};
-
-/**
- * Close a stream.
- */
-Stream.prototype.close = function() {
-  this.onClose();
-};
-
-/**
- * Notification interface for when the stream is closed.
- */
-Stream.prototype.onClose = function() {};
-
-/**
- * Notification interface for when data is available for reading.
- *
- * @param {!ArrayBuffer|!ArrayBufferView} data
- */
-Stream.prototype.onDataAvailable = function(data) {
-  throw Stream.ERR_NOT_IMPLEMENTED;
-};
