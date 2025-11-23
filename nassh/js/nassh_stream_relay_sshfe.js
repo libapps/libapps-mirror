@@ -348,7 +348,7 @@ RelaySshfeWsStream.prototype.onSocketData_ = function(e) {
  * @param {!ArrayBuffer} data A base64 encoded string.
  * @override
  */
-RelaySshfeWsStream.prototype.asyncWrite = function(data) {
+RelaySshfeWsStream.prototype.asyncWrite = async function(data) {
   if (!data.byteLength) {
     return;
   }

@@ -512,7 +512,7 @@ RelayCorpv4WsStream.prototype.onSocketData_ = function(e) {
  * @param {!ArrayBuffer} data The data to send out.
  * @override
  */
-RelayCorpv4WsStream.prototype.asyncWrite = function(data) {
+RelayCorpv4WsStream.prototype.asyncWrite = async function(data) {
   if (!data.byteLength) {
     return;
   }

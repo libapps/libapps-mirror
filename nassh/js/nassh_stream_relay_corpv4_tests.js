@@ -170,7 +170,7 @@ it('RelayCorpv4WS basic', async () => {
   };
 
   // A write should be queued.
-  stream.asyncWrite(new Uint8Array([0xa0]).buffer);
+  await stream.asyncWrite(new Uint8Array([0xa0]).buffer);
   assert.equal(0, stream.writeCount_);
 
   // Start the connection.
@@ -178,7 +178,7 @@ it('RelayCorpv4WS basic', async () => {
   const socketData = /** @type {!WebSocketMock} */ (stream.socket_).socketData;
 
   // Writes should still be queued.
-  stream.asyncWrite(new Uint8Array([0xa1]).buffer);
+  await stream.asyncWrite(new Uint8Array([0xa1]).buffer);
   assert.equal(0, stream.writeCount_);
 
   // The connection is opened.

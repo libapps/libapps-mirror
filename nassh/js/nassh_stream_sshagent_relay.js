@@ -157,7 +157,7 @@ SshAgentRelayStream.prototype.trySendPacket_ = function() {
  * @param {!ArrayBuffer} data
  * @override
  */
-SshAgentRelayStream.prototype.asyncWrite = function(data) {
+SshAgentRelayStream.prototype.asyncWrite = async function(data) {
   if (!data.byteLength) {
     return;
   }
