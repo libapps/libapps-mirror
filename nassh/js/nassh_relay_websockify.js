@@ -53,7 +53,7 @@ export class Websockify extends Relay {
       protocol: this.useSecure ? 'wss' : 'ws',
     };
     const stream = new RelayWebsockifyStream();
-    await stream.asyncOpen(settings);
+    await stream.open(settings);
     return stream;
   }
 }

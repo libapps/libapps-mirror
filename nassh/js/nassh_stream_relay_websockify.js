@@ -47,7 +47,7 @@ export class RelayWebsockifyStream extends Stream {
    * @param {!Object} settings
    * @override
    */
-  async asyncOpen(settings) {
+  async open(settings) {
     this.relayHost_ = settings.relayHost;
     this.relayPort_ = settings.relayPort;
     this.host_ = settings.host;

@@ -230,9 +230,9 @@ RelayCorpv4WsStream.constructor = RelayCorpv4WsStream;
  * @param {!Object} settings
  * @override
  */
-RelayCorpv4WsStream.prototype.asyncOpen = async function(settings) {
+RelayCorpv4WsStream.prototype.open = async function(settings) {
   return new Promise((resolve, reject) => {
-    this.asyncOpen_(settings, resolve, reject);
+    this.open_(settings, resolve, reject);
   });
 };
 
@@ -243,7 +243,7 @@ RelayCorpv4WsStream.prototype.asyncOpen = async function(settings) {
  * @param {function()} resolve
  * @param {function(string)} reject
  */
-RelayCorpv4WsStream.prototype.asyncOpen_ = async function(
+RelayCorpv4WsStream.prototype.open_ = async function(
     settings, resolve, reject) {
   this.io_ = settings.io;
   this.relayServerSocket_ = settings.relayServerSocket;

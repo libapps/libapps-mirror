@@ -36,9 +36,9 @@ SshAgentRelayStream.constructor = SshAgentRelayStream;
  * @param {!Object} settings
  * @override
  */
-SshAgentRelayStream.prototype.asyncOpen = async function(settings) {
+SshAgentRelayStream.prototype.open = async function(settings) {
   return new Promise((resolve, reject) => {
-    this.asyncOpen_(settings, resolve, reject);
+    this.open_(settings, resolve, reject);
   });
 };
 
@@ -49,7 +49,7 @@ SshAgentRelayStream.prototype.asyncOpen = async function(settings) {
  * @param {function()} resolve
  * @param {function(?string)} reject
  */
-SshAgentRelayStream.prototype.asyncOpen_ = function(settings, resolve, reject) {
+SshAgentRelayStream.prototype.open_ = function(settings, resolve, reject) {
   this.authAgentAppID_ = settings.authAgentAppID;
   this.port_ = chrome.runtime.connect(this.authAgentAppID_);
 

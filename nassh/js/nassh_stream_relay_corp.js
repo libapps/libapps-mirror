@@ -61,9 +61,9 @@ RelayCorpStream.constructor = RelayCorpStream;
  * @param {!Object} settings
  * @override
  */
-RelayCorpStream.prototype.asyncOpen = async function(settings) {
+RelayCorpStream.prototype.open = async function(settings) {
   return new Promise((resolve, reject) => {
-    this.asyncOpen_(settings, resolve, reject);
+    this.open_(settings, resolve, reject);
   });
 };
 
@@ -74,7 +74,7 @@ RelayCorpStream.prototype.asyncOpen = async function(settings) {
  * @param {function()} resolve
  * @param {function(string)} reject
  */
-RelayCorpStream.prototype.asyncOpen_ = function(settings, resolve, reject) {
+RelayCorpStream.prototype.open_ = function(settings, resolve, reject) {
   this.io_ = settings.io;
   this.relayServer_ = settings.relayServer;
   this.relayServerSocket_ = settings.relayServerSocket;

@@ -38,7 +38,7 @@ SshAgentStream.constructor = SshAgentStream;
  * @param {!Object} settings
  * @override
  */
-SshAgentStream.prototype.asyncOpen = async function(settings) {
+SshAgentStream.prototype.open = async function(settings) {
   try {
     return this.authAgent_.ping();
   } catch (e) {

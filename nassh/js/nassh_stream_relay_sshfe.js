@@ -70,7 +70,7 @@ RelaySshfeWsStream.constructor = RelaySshfeWsStream;
  * @param {!Object} settings
  * @override
  */
-RelaySshfeWsStream.prototype.asyncOpen = async function(settings) {
+RelaySshfeWsStream.prototype.open = async function(settings) {
   this.io_ = settings.io;
   this.relayHost_ = settings.relayHost;
   this.relayPort_ = settings.relayPort;

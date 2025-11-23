@@ -180,7 +180,7 @@ export class Corp extends Relay {
     };
     const streamClass = this.getStreamClass();
     const stream = new streamClass();
-    await stream.asyncOpen(options);
+    await stream.open(options);
     return stream;
   }
 

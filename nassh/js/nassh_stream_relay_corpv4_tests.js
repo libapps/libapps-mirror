@@ -179,7 +179,7 @@ it('RelayCorpv4WS basic', async () => {
   assert.isUndefined(writeCount);
 
   // Start the connection.
-  const open = stream.asyncOpen({});
+  const open = stream.open({});
   const socketData = /** @type {!WebSocketMock} */ (stream.socket_).socketData;
 
   // Writes should still be queued.
@@ -251,7 +251,7 @@ it('RelayCorpv4WS error in connect', async () => {
   };
 
   // Start the connection, then get server error.
-  await stream.asyncOpen({}).catch((e) => {
+  await stream.open({}).catch((e) => {
     assert.equal('server sent an error', e);
   });
 });
@@ -278,7 +278,7 @@ it('RelayCorpv4WS reconnect on dirty close', async () => {
   };
 
   // Start the connection.
-  await stream.asyncOpen({});
+  await stream.open({});
 
   // Clean close - closes with no reconnect.
   const e = /** @type {!CloseEvent} */(

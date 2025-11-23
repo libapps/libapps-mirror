@@ -51,7 +51,7 @@ export class Sshfe extends Relay {
       sshAgent: this.sshAgent_,
     };
     const stream = new RelaySshfeWsStream();
-    await stream.asyncOpen(settings);
+    await stream.open(settings);
     return stream;
   }
 }

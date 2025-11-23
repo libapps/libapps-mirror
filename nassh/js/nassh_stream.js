@@ -51,7 +51,7 @@ Stream.prototype.maxWebSocketBufferLength = 64 * 1024;
  * @param {!Object} settings Each subclass of Stream defines its own set of
  *     properties to be included in settings.
  */
-Stream.prototype.asyncOpen = async function(settings) {
+Stream.prototype.open = async function(settings) {
   throw Stream.ERR_NOT_IMPLEMENTED;
 };
 
