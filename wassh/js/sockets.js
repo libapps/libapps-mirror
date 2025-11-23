@@ -991,7 +991,7 @@ export class RelaySocket extends StreamSocket {
     if (!this.callback_) {
       return WASI.errno.ECONNRESET;
     }
-    await this.callback_.asyncWrite(buf);
+    await this.callback_.write(buf);
     return {nwritten: buf.length};
   }
 
@@ -1483,7 +1483,7 @@ export class UnixSocket extends StreamSocket {
     this.open_ = open;
     /**
      * @type {?{
-     *   asyncWrite: function(!TypedArray),
+     *   write: function(!TypedArray),
      *   close: function(),
      * }}
      */
@@ -1525,7 +1525,7 @@ export class UnixSocket extends StreamSocket {
 
   /** @override */
   async write(buf) {
-    await this.callback_.asyncWrite(buf);
+    await this.callback_.write(buf);
     return {nwritten: buf.length};
   }
 }

@@ -143,7 +143,7 @@ export class RelayWebsockifyStream extends Stream {
    * @param {!ArrayBuffer} data The SSH data.
    * @override
    */
-  async asyncWrite(data) {
+  async write(data) {
     if (!data.byteLength) {
       return;
     }

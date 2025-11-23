@@ -126,7 +126,7 @@ RelayCorpStream.prototype.resumeRead_ = function() {
  * @param {!ArrayBuffer} data
  * @override
  */
-RelayCorpStream.prototype.asyncWrite = async function(data) {
+RelayCorpStream.prototype.write = async function(data) {
   if (!data.byteLength) {
     return;
   }

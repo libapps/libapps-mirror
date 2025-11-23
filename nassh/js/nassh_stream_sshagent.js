@@ -89,7 +89,7 @@ SshAgentStream.prototype.trySendPacket_ = function() {
  * @param {!ArrayBuffer} data The bytes to append to the current stream.
  * @override
  */
-SshAgentStream.prototype.asyncWrite = async function(data) {
+SshAgentStream.prototype.write = async function(data) {
   if (!data.byteLength) {
     return;
   }
