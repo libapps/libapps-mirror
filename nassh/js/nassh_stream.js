@@ -10,12 +10,9 @@
 /**
  * Base class for streams required by the plugin.
  *
- * @param {string=} path
  * @constructor
  */
-export function Stream(path) {
-  this.path = path;
-}
+export function Stream() {}
 
 /**
  * Errors we may raise.
