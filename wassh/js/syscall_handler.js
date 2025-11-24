@@ -24,7 +24,6 @@ class Tty extends VFS.FileHandle {
     this.term = term;
     this.handler = handler;
     // TODO(vapier): Make this into a stream.
-    this.data = new Uint8Array();
     this.term.io.onVTKeystroke = this.term.io.sendString =
         this.onData_.bind(this);
   }
