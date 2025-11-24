@@ -14,6 +14,7 @@ import {hterm} from '../../hterm/index.js';
 
 import {sanitizeScriptUrl} from './nassh.js';
 import {Agent} from './nassh_agent.js';
+import {newBuffer} from './nassh_buffer.js';
 import {getIndexeddbFileSystem} from './nassh_fs.js';
 import {Relay} from './nassh_relay.js';
 import {Stream} from './nassh_stream.js';
@@ -184,6 +185,79 @@ export class MemoryFileHandler extends FileHandler {
 }
 
 /**
+ * A write-only pipe logger.
+ *
+ * Capture all the output written while passing it along.
+ *
+ * TODO(vapier): Generalize this and move to wassh.vfs?
+ */
+class LogPipeWriteHandle extends FileHandle {
+  /**
+   * @param {string} path The absolute path in the filesystem for this handler.
+   * @param {!FileHandle} handle The handle to wrap.
+   */
+  constructor(path, handle) {
+    // TODO(vapier): This should really be FIFO, but WASI doesn't define that?
+    super(path, WASI.filetype.CHARACTER_DEVICE);
+    this.handle_ = handle;
+    this.log_ = newBuffer(/* autoack= */ true);
+  }
+
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
+  write(buf) {
+    this.log_.write(buf);
+    return this.handle_.write(buf);
+  }
+
+  /**
+   * @param {!TypedArray} buf
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
+  async pwrite(buf, offset) {
+    return WASI.errno.ESPIPE;
+  }
+
+  /**
+   * @param {number} length
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
+  async read(length) {
+    return WASI.errno.ESPIPE;
+  }
+
+  /**
+   * @param {number} length
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
+  async pread(length, offset) {
+    return WASI.errno.ESPIPE;
+  }
+
+  /**
+   * @return {!WASI_t.errno|{offset: (number|bigint)}}
+   * @override
+   */
+  tell() {
+    return WASI.errno.ESPIPE;
+  }
+}
+
+/**
  * A WASM program.
  */
 export class WasmSubproc {
@@ -198,10 +272,11 @@ export class WasmSubproc {
    *   authAgentAppID: string,
    *   relay: ?Relay,
    *   secureInput: function(string, number, boolean),
+   *   captureStdout: (boolean|undefined),
    * }} opts
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
-               authAgentAppID, relay, secureInput}) {
+               authAgentAppID, relay, secureInput, captureStdout}) {
     this.executable_ = executable;
     this.argv_ = argv;
     this.environ_ = environ;
@@ -212,6 +287,7 @@ export class WasmSubproc {
     this.relay_ = relay;
     this.secureInput_ = secureInput;
     this.process_ = null;
+    this.captureStdout_ = captureStdout;
   }
 
   /**
@@ -255,7 +331,14 @@ export class WasmSubproc {
   /**
    * @param {!Object} handler The syscall handler.
    */
-  async initHandler_(handler) {}
+  async initHandler_(handler) {
+    if (this.captureStdout_) {
+      // Wrap stdout in a logger which will save the output & pass it thru.
+      const origStdout = handler.vfs.fds_.get(1);
+      const logStdout = new LogPipeWriteHandle('/dev/stdout/log', origStdout);
+      handler.vfs.fds_.set(1, logStdout);
+    }
+  }
 
   /**
    * Run the program.
