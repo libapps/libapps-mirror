@@ -406,9 +406,15 @@ export async function cleanupChromeSockets() {
       });
     });
   };
-  await cleanup(chrome.sockets.tcp);
-  await cleanup(chrome.sockets.tcpServer);
-  await cleanup(chrome.sockets.udp);
+  if (ChromeTcpSocket.isSupported()) {
+    await cleanup(chrome.sockets.tcp);
+  }
+  if (ChromeTcpListenSocket.isSupported()) {
+    await cleanup(chrome.sockets.tcpServer);
+  }
+  if (ChromeUdpSocket.isSupported()) {
+    await cleanup(chrome.sockets.udp);
+  }
   await Promise.all(promises);
 }
 
