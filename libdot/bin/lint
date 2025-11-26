@@ -308,13 +308,13 @@ def main(
 
     TEXT_FILENAMES = {
         ".clang-format",
-        ".eslintrc.js",
         ".gitignore",
         ".markdownlintrc",
         ".npmrc",
         ".pylintrc",
         "DIR_METADATA",
         "Dockerfile",
+        "eslint.config.js",
         "LICENSE",
         "Makefile",
         "METADATA",

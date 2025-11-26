@@ -17,7 +17,7 @@ def _get_default_paths(basedir: Path) -> list[Path]:
     kokoro_files = sorted(libdot.lint.get_known_sources(basedir))
 
     # Our JS linters don't handle this atm.
-    IGNORE_FILES = {".eslintrc.js"}
+    IGNORE_FILES = {"eslint.config.js"}
 
     # Include files in the root dir as they have no other home.
     topdir = kokoro.LIBAPPS_DIR

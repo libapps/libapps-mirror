@@ -62,8 +62,8 @@ You can use [eslint](https://eslint.org/) to quickly check code, or
 
 The [bin/lint](./libdot/bin/lint) helper script will run both for you.
 
-The [.eslintrc.js](./.eslintrc.js) was based on the
-[Chromium project](https://chromium.googlesource.com/chromium/src/+/HEAD/.eslintrc.js).
+The [eslint.config.js](./eslint.config.js) was based on the
+[Chromium project](https://chromium.googlesource.com/chromium/src/+/HEAD/tools/web_dev_style/eslint.config.mjs).
 
 For build tools written in Python, you can use [bin/pylint](./libdot/bin/pylint)
 to run [pylint](https://www.pylint.org/) with the right settings.

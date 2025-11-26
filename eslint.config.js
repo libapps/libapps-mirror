@@ -2,27 +2,28 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-module.exports = {
-  'root': true,
-  'env': {
-    'browser': true,
-    // This allows the runtime environment (i.e. objects).
-    'es6': true,
-  },
-  'parserOptions': {
+/**
+ * @fileoverview
+ * @suppress {moduleLoad} Closure-compiler can't handle the node import.
+ */
+
+import jsdoc from 'eslint-plugin-jsdoc';
+
+export default [{
+  languageOptions: {
     // This sets the syntax parsing level.
-    'ecmaVersion': 2020,
-    'sourceType': 'module',
+    ecmaVersion: 2020,
+    sourceType: 'module',
   },
 
-  'plugins': [
-    'jsdoc',
-  ],
+  files: ['**/*.js'],
+
+  plugins: {jsdoc},
 
   // See https://eslint.org/docs/rules/ for details.
   // These rules were picked based on the existing codebase.  If you find one
   // to be too onerous and not required by the styleguide, feel free to discuss.
-  'rules': {
+  rules: {
     'array-bracket-spacing': 'error',
     'arrow-parens': ['error', 'always'],
     'arrow-spacing': ['error', {'before': true, 'after': true}],
@@ -224,7 +225,7 @@ module.exports = {
     'jsdoc/valid-types': 'off',
   },
 
-  'settings': {
+  settings: {
     // https://github.com/gajus/eslint-plugin-jsdoc#eslint-plugin-jsdoc
     'jsdoc': {
       'mode': 'closure',
@@ -252,4 +253,4 @@ module.exports = {
       },
     },
   },
-};
+}];
