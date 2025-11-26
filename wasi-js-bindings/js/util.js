@@ -85,3 +85,27 @@ export function strerror(errno) {
   }
   return `E???[${errno}]`;
 }
+
+/**
+ * Helper to encodeInto shared array buffers.
+ *
+ * TODO(crbug.com/1012656): Workaround Chrome's limitation :(.
+ *
+ * @param {!TextEncoder} encoder The text encoder to use.
+ * @param {string} str The string to encode.
+ * @param {!Uint8Array} buf The buffer to write to.
+ * @return {number} The number of bytes written to the buffer.
+ */
+export function encodeIntoSab(encoder, str, buf) {
+  try {
+    return encoder.encodeInto(str, buf).written;
+  } catch (e) {
+    if (e instanceof TypeError) {
+      const bytes = encoder.encode(str);
+      buf.set(bytes);
+      return bytes.length;
+    }
+
+    throw e;
+  }
+}

@@ -8,7 +8,7 @@
  * @suppress {checkTypes} module$__$wasi_js_bindings$js naming confusion.
  */
 
-import {SyscallEntry, WASI} from '../../wasi-js-bindings/index.js';
+import {SyscallEntry, util, WASI} from '../../wasi-js-bindings/index.js';
 import * as Constants from './constants.js';
 
 /**
@@ -457,7 +457,7 @@ export class WasshExperimental extends SyscallEntry.Base {
 
     const buf = this.getMem_(buf_ptr, buf_ptr + buf_len);
     const te = new TextEncoder();
-    const written = te.encodeInto(ret.pass, buf).written;
+    const written = util.encodeIntoSab(te, ret.pass, buf);
     buf[written] = 0;
     return WASI.errno.ESUCCESS;
   }

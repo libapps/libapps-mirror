@@ -7,6 +7,8 @@
  * between webworkers.
  */
 
+import * as util from './util.js';
+
 /**
  * A magic string to mark bigints serialized in JSON as a string.
  */
@@ -137,14 +139,11 @@ export class SyscallLock {
           return value;
       }
     });
-    // TODO(crbug.com/1012656): Chrome's encodeInto doesn't support shared array
-    // buffers yet.
-    const bytes = te.encode(str);
-    this.sabDataArr.set(bytes);
-    this.sabArr[this.dataLengthIndex] = bytes.length;
+    const written = util.encodeIntoSab(te, str, this.sabDataArr);
+    this.sabArr[this.dataLengthIndex] = written;
     if (ab !== null) {
       // closure-compiler is missing the null check here for some reason.
-      this.sabDataArr.set(/** @type {!ArrayBufferView} */ (ab), bytes.length);
+      this.sabDataArr.set(/** @type {!ArrayBufferView} */ (ab), written);
       this.sabArr[this.arrLengthIndex] = ab.length;
     }
   }

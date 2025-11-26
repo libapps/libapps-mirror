@@ -258,7 +258,7 @@ export class WasiPreview1 extends Base {
       let length;
       const arg = ret.argv[i];
       if (typeof arg === 'string') {
-        length = te.encodeInto(arg, buf).written;
+        length = util.encodeIntoSab(te, arg, buf);
       } else {
         buf.set(arg);
         length = arg.length;
@@ -331,7 +331,7 @@ export class WasiPreview1 extends Base {
       let length;
       const arg = env[i];
       if (typeof arg === 'string') {
-        length = te.encodeInto(arg, buf).written;
+        length = util.encodeIntoSab(te, arg, buf);
       } else {
         buf.set(arg);
         length = arg.length;
@@ -468,7 +468,7 @@ export class WasiPreview1 extends Base {
 
     const buf = this.getMem_(path_ptr, path_ptr + path_len);
     const te = new TextEncoder();
-    te.encodeInto(ret.path, buf);
+    util.encodeIntoSab(te, ret.path, buf);
     return WASI.errno.ESUCCESS;
   }
 
