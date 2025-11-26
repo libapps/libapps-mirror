@@ -55,7 +55,7 @@ servicing the syscall requests.
 As [WASI] is still under development, we often require current browser runtimes.
 No attempt is made to provide backwards compatibility or transpiling.
 
-* [WASI SDK] 25.0
+* [WASI SDK] 29.0
 * [ECMAScript] 2024
 * [Module workers](https://web.dev/module-workers/)
   * Chrome 80+

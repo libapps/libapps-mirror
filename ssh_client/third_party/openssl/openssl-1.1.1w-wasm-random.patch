@@ -1,6 +1,11 @@
 WASI can use getentropy().  This has been fixed in upstream OpenSSL-3.2.0+.
 https://github.com/openssl/openssl/commit/d88a0f5f3944535dd83d55bedc4d239544c5678d
 
+The use of weak attributes is not safe with static linking.  The linker won't
+pull in objects when the only reference is a weak symbol.  So if nothing else
+uses the symbol, it'll always be weak and not defined, and OpenSSL fallsback
+to other implementations.
+
 --- a/crypto/rand/rand_unix.c
 +++ b/crypto/rand/rand_unix.c
 @@ -369,7 +369,7 @@
@@ -9,6 +14,7 @@ https://github.com/openssl/openssl/commit/d88a0f5f3944535dd83d55bedc4d239544c567
       */
 -#  if defined(__GNUC__) && __GNUC__>=2 && defined(__ELF__) && !defined(__hpux)
 +#  if defined(__GNUC__) && __GNUC__>=2 && defined(__ELF__) && !defined(__hpux) || defined(__wasi__)
-     extern int getentropy(void *buffer, size_t length) __attribute__((weak));
+-    extern int getentropy(void *buffer, size_t length) __attribute__((weak));
++    extern int getentropy(void *buffer, size_t length);
  
      if (getentropy != NULL) {
