@@ -2,6 +2,7 @@
   "name": "hterm",
   "version": "1.92.1",
   "description": "A reasonably correct & fast terminal emulator.",
+  "type": "module",
   "main": "dist/js/hterm_all.js",
   "unpkg": "dist/js/hterm_all.min.js",
   "repository": {

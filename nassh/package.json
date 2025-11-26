@@ -2,6 +2,7 @@
   "name": "nassh",
   "version": "0.71.0",
   "description": "Terminal emulator and SSH and SFTP client",
+  "type": "module",
   "main": "js/nassh.js",
   "repository": {
     "type": "git",

@@ -2,6 +2,7 @@
   "name": "libapps",
   "version": "1.0.0",
   "description": "Grab bag of js, including hterm and its support library.",
+  "type": "module",
   "main": "libdot/js/lib.js",
   "repository": {
     "type": "git",

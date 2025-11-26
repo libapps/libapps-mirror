@@ -2,6 +2,7 @@
   "name": "libdot",
   "version": "9.0.0",
   "description": "Grab bag of JS utility libraries",
+  "type": "module",
   "main": "dist/js/libdot.js",
   "unpkg": "dist/js/libdot.min.js",
   "repository": {
