@@ -7,7 +7,7 @@
  * @suppress {moduleLoad}
  */
 
-import * as WASI from '../../wasi-js-bindings/js/wasi.js';
+import {WASI} from '../../wasi-js-bindings/index.js';
 import * as NetErrorList from './chrome_net_error_list.js';
 import * as Constants from './constants.js';
 import * as VFS from './vfs.js';
