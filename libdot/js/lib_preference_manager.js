@@ -820,10 +820,6 @@ lib.PreferenceManager = class {
   }
 };
 
-// Suppress linter for bug
-// https://github.com/gajus/eslint-plugin-jsdoc/issues/932
-//
-// eslint-disable-next-line jsdoc/require-returns-check
 /**
  * Generate a random, 4-digit hex identifier.
  *

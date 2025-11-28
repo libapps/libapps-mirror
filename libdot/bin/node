@@ -16,7 +16,7 @@ import libdot
 # The hash of the node_modules that we maintain.
 # Allow a long line for easy automated updating.
 NODE_MODULES_HASH = (
-    "d912c44b461ca55a25327e58058cd2114a408d0b07eb8f77670fb7d9b1e8a2f5"
+    "bc6efb3c037ae3b362147fadb96dd7e200dec71f68e191646f744c0ea4624d52"
 )
 
 # In sync with Chromium's DEPS file because it's easier to use something that

@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "chai": "~5",
-    "eslint": "~8",
+    "eslint": "~9",
     "mocha": "~11",
     "mocha-headless-chrome": "~4",
     "terser": "~5"

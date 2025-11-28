@@ -6,8 +6,6 @@
  * @fileoverview Chrome net_error_list constants.
  */
 
-/* eslint-disable max-len */
-
 export const SUCCESS = 0;
 export const IO_PENDING = -1;
 export const FAILED = -2;
