@@ -6,6 +6,7 @@
 """Lint our source files."""
 
 import fnmatch
+import itertools
 import logging
 import os
 from pathlib import Path
@@ -149,9 +150,10 @@ def _get_default_paths(basedir: Path) -> list[Path]:
     # Use relpath for nicer default output.
     # Sort to ensure lib.js comes before lib_array.js, etc.
     js_files = sorted(
-        list((libdot.DIR / "html").glob("*.html"))
-        + [libdot.DIR / "index.js"]
-        + list((libdot.DIR / "js").glob("*.js"))
+        itertools.chain(
+            [libdot.DIR / "index.js"],
+            (libdot.DIR / "js").glob("*.js"),
+        )
     )
 
     return [os.path.relpath(x) for x in most_files + js_files]
@@ -261,7 +263,7 @@ def main(
     tolint_paths -= set(js_files)
     if js_files and opts.js:
         js_kwargs = {"paths": js_files, **kwargs}
-        html_js_kwargs = {"paths": html_files + js_files, **kwargs}
+        html_js_kwargs = {"paths": js_files, **kwargs}
         checks += [
             libdot.eslint.perform(argv=ESLINT_ARGS, **html_js_kwargs),
             libdot.closure_compiler.perform(argv=closure_args, **js_kwargs),

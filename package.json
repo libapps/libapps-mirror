@@ -39,7 +39,6 @@
     "csso": ">=5",
     "csso-cli": ">=4",
     "eslint": "~8",
-    "eslint-plugin-html": "~7",
     "eslint-plugin-jsdoc": "~46",
     "file-loader": "~6",
     "firebase-tools": "~13",
