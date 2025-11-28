@@ -13,6 +13,16 @@ from typing import Optional
 import libdot
 
 
+def process_html_files(
+    paths: list[Path], fix: bool, gerrit_comments_file: bool
+) -> bool:
+    """Process HTML files."""
+    del gerrit_comments_file
+    cmd = ["prettier", "-w" if fix else "-c"] + paths
+    result = libdot.node.run(cmd, check=False)
+    return result.returncode == 0
+
+
 def get_parser() -> libdot.ArgumentParser:
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
@@ -33,7 +43,8 @@ def get_parser() -> libdot.ArgumentParser:
         "File selection/filtering",
         description="All files are checked by default",
     )
-    group.add_argument("--cpp", action="store_true", help="Lint C/C++ files.")
+    group.add_argument("--cpp", action="store_true", help="Check C/C++ files.")
+    group.add_argument("--html", action="store_true", help="Check HTML files.")
     group.add_argument("--py", action="store_true", help="Check Python files.")
 
     parser.add_argument("paths", nargs="*", help="Paths to check.")
@@ -68,7 +79,7 @@ def main(
             print("No files to check.")
             return 0
 
-    check_groups = {"cpp", "py"}
+    check_groups = {"cpp", "html", "py"}
     check_all = all(not getattr(opts, x) for x in check_groups)
     for group in check_groups:
         setattr(opts, group, check_all or getattr(opts, group))
@@ -80,11 +91,19 @@ def main(
     }
     checks = []
 
+    html_files = [
+        x for x in opts.paths if x.endswith(".html") or x.endswith(".html.in")
+    ]
+
     cpp_files = libdot.cpplint.filter_known_files(opts.paths)
     tocheck_paths -= set(cpp_files)
     if cpp_files and opts.cpp:
         cpp_kwargs = {"paths": cpp_files, **kwargs}
         checks += [libdot.clang_format.perform(**cpp_kwargs)]
+
+    tocheck_paths -= set(html_files)
+    if html_files and opts.html:
+        checks += [process_html_files(html_files, **kwargs)]
 
     py_files = libdot.pylint.filter_known_files(opts.paths)
     tocheck_paths -= set(py_files)

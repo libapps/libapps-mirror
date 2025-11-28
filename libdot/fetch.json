@@ -32,10 +32,10 @@
   "node/modules": {
     "crosh": true,
     "hashes": {
-      "sha256": "bc6efb3c037ae3b362147fadb96dd7e200dec71f68e191646f744c0ea4624d52"
+      "sha256": "68c9bac624f418597fb6e2ea1819d3e44b23d013bad33f8d72090940f0727a30"
     },
-    "size": "41156028",
-    "url": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/node_modules-bc6efb3c037ae3b362147fadb96dd7e200dec71f68e191646f744c0ea4624d52.tar.xz"
+    "size": "43367996",
+    "url": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/node_modules-68c9bac624f418597fb6e2ea1819d3e44b23d013bad33f8d72090940f0727a30.tar.xz"
   },
   "node/win": {
     "hashes": {

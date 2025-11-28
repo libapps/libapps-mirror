@@ -55,6 +55,7 @@
     "mocha-headless-chrome": "~4",
     "npm": "~11",
     "pkijs": "~2.1",
+    "prettier": "~3",
     "punycode": "~2",
     "raw-loader": "~4",
     "regex-extract-loader": "~1",
