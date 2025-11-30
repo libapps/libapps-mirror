@@ -48,7 +48,6 @@ chai.assert.equal =
 chai.assert.include =
 chai.assert.instanceOf =
 chai.assert.notInclude =
-chai.assert.isAbove =
 chai.assert.lengthOf =
 chai.assert.notEqual =
 chai.assert.notStrictEqual =
