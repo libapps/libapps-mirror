@@ -54,7 +54,7 @@ def main(argv):
     libdot_files = [os.path.relpath(libdot.DIR / "index.js")] + sorted(
         os.path.relpath(x)
         for x in libdot.DIR.glob("js/*.js")
-        if "_test" not in x.name and x.name.startswith("lib")
+        if "_tests" not in x.name and x.name.startswith("lib")
     )
 
     hterm_files = [

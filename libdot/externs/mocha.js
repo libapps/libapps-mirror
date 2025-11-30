@@ -21,7 +21,12 @@ var mocha = {};
 
 mocha.checkLeaks = mocha.run = function() {};
 
-/** @param {string|{globals:!Array<string>}} opts */
+/**
+ * @param {string|{
+ *   ui: string,
+ *   globals: (!Array<string>|undefined),
+ * }} opts
+ */
 mocha.setup = function(opts) {};
 
 /** @param {function(function())} fn */
