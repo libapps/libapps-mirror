@@ -304,7 +304,6 @@ export class WasiPreview1 extends Base {
    * @param {!WASI_t.pointer} resolution_ptr
    * @return {!WASI_t.errno}
    * @override
-   * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
   sys_clock_res_get(clockid, resolution_ptr) {
     const ret = this.handle_clock_res_get(clockid);
@@ -323,7 +322,6 @@ export class WasiPreview1 extends Base {
    * @param {!WASI_t.pointer} time_ptr
    * @return {!WASI_t.errno}
    * @override
-   * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
   sys_clock_time_get(clockid, precision, time_ptr) {
     // TODO: Figure out what to do with precision.
@@ -710,7 +708,6 @@ export class WasiPreview1 extends Base {
    * @param {!WASI_t.pointer} newoffset_ptr
    * @return {!WASI_t.errno}
    * @override
-   * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
   sys_fd_seek(fd, offset, whence, newoffset_ptr) {
     if (whence < 0 || whence > 2) {
@@ -741,7 +738,6 @@ export class WasiPreview1 extends Base {
    * @param {!WASI_t.pointer} offset_ptr
    * @return {!WASI_t.errno}
    * @override
-   * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
   sys_fd_tell(fd, offset_ptr) {
     const ret = this.handle_fd_tell(fd);

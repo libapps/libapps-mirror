@@ -17,7 +17,7 @@ import libdot
 
 # The version we currently run.  Pinned to make sure everyone gets consistent
 # behavior all the time.
-VERSION = "v20201102"
+VERSION = "v20240317"
 
 # Full path to Google's closure compiler.
 URI = (
@@ -35,7 +35,7 @@ EXTERNS_DIR = libdot.DIR / "externs"
 
 # The version of externs that we pull in from closure.  We normally pin to the
 # closure version for stability, but this can be updated independently.
-EXTERNS_VERSION = "f1151cc0995b455f664e64de6798dfc46eb8f306"
+EXTERNS_VERSION = "22994a075cc37a630ca158bbb197efa8fc208eb0"
 
 # The version of Chrome externs that we pull from Chromium directly.
 CHROME_EXTERNS_VERSION = "8f892bcb37b3fe5fe7dff5c0150bc3875ea59ac2"

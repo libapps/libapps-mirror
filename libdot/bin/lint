@@ -15,8 +15,8 @@ import sys
 import libdot
 
 
-# All checks except strictMissingRequire.
-DEFAULT_CLOSURE_ARGS = ("--jscomp_error=*", "--jscomp_off=strictMissingRequire")
+# All checks.
+DEFAULT_CLOSURE_ARGS = ("--jscomp_error=*",)
 
 
 # Options passed when invoking eslint.

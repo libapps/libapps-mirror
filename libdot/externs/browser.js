@@ -69,6 +69,3 @@ Intl.Segmenter.prototype.segment = function(s) {};
  * }}
  */
 Intl.Segmenter.Segment;
-
-/** @param {function()} task */
-window.queueMicrotask = function(task) {};
