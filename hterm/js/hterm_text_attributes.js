@@ -61,6 +61,7 @@ hterm.TextAttributes = function(document) {
   this.faint = false;
   this.italic = false;
   this.blink = false;
+  /** @type {boolean|string} */
   this.underline = false;
   this.strikethrough = false;
   this.inverse = false;
@@ -240,12 +241,13 @@ hterm.TextAttributes.prototype.createContainer = function(textContent = '') {
 
   let textDecorationLine = '';
   span.underline = this.underline;
-  if (this.underline) {
+  if (typeof this.underline === 'string') {
     textDecorationLine += ' underline';
     style.textDecorationStyle = this.underline;
   }
   if (this.underlineColor != this.DEFAULT_COLOR) {
-    style.textDecorationColor = this.underlineColor;
+    // The only symbol we use is DEFAULT_COLOR, otherwise it's always a string.
+    style.textDecorationColor = /** @type {string} */ (this.underlineColor);
   }
   if (this.strikethrough) {
     textDecorationLine += ' line-through';
