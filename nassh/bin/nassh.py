@@ -20,6 +20,9 @@ sys.path.insert(0, str(LIBAPPS_DIR / "libdot" / "bin"))
 import libdot  # pylint: disable=wrong-import-position
 
 
+HTERM_DIR = libdot.LIBAPPS_DIR / "hterm"
+
+
 # Wrappers around nassh/bin/ programs for other tools to access directly.
 class HelperProgram(libdot.HelperProgram):
     """Avoid copying & pasting BIN_DIR setting."""

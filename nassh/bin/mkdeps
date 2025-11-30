@@ -120,6 +120,7 @@ def concat_local_deps():
     """Concatenate all licenses of third_party/ bundles."""
     ret = {}
     ret.update(concat_third_party_dir(nassh.DIR / "third_party"))
+    ret.update(concat_third_party_dir(nassh.HTERM_DIR / "third_party"))
     ret.update(
         concat_third_party_dir(
             libdot.LIBAPPS_DIR / "ssh_client" / "third_party"
