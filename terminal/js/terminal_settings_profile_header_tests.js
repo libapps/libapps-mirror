@@ -9,7 +9,6 @@ import {ProfileType, getProfileIds, setProfileIds}
 import {TerminalSettingsProfileHeader}
   from './terminal_settings_profile_header.js';
 
-describe('terminal_settings_profile_header.js', function() {
   beforeEach(async function() {
     window.storage = new lib.Storage.Memory();
     await setProfileIds(ProfileType.HTERM, ['default']);
@@ -39,4 +38,3 @@ describe('terminal_settings_profile_header.js', function() {
     assert.deepEqual(
         ['default', 'red'], await getProfileIds(ProfileType.HTERM));
   });
-});

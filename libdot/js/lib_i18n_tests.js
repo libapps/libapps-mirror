@@ -8,8 +8,6 @@
 
 import {lib} from '../index.js';
 
-describe('lib_i18n_tests.js', () => {
-
 /**
  * Basic smoke test.  Hard to validate real values here.
  */
@@ -79,6 +77,4 @@ it('resolveLanguage', () => {
   ].forEach(([input, exp]) => {
     assert.deepEqual(exp, lib.i18n.resolveLanguage(input));
   });
-});
-
 });

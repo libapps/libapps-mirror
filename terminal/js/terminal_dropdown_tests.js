@@ -12,7 +12,6 @@ import {hterm} from '../../hterm/index.js';
 import {listenForPrefChange} from './terminal_test_util.js';
 import {TerminalSettingsDropdownElement} from './terminal_dropdown.js';
 
-describe('terminal_dropdown_tests.js', () => {
   const preference = 'terminal_dropdown_tests_preference';
   /** @return {!Array<!Object>} */
   const createOptions = () => [
@@ -472,4 +471,3 @@ describe('terminal_dropdown_tests.js', () => {
     assert.strictEqual(this.el.value, '2');  // This is still a string.
     assert.strictEqual(this.button.innerText, '2');
   });
-});

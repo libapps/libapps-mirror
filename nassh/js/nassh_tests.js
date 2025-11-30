@@ -11,8 +11,6 @@ import {
   sgrText,
 } from './nassh.js';
 
-describe('nassh_tests.js', () => {
-
 /**
  * Test that basic message lookup works.
  */
@@ -84,6 +82,4 @@ it('nassh.OSC-8-link', () => {
                osc8Link('https://example.com'));
   assert.equal('\x1b]8;;https://example.com\x07foo\x1b]8;;\x07',
                osc8Link('https://example.com', 'foo'));
-});
-
 });

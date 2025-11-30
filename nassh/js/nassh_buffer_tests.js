@@ -9,8 +9,6 @@
 import {newBuffer, setDefaultBackend} from './nassh_buffer.js';
 import {ScatGatBuffer} from './nassh_buffer_scatgat.js';
 
-describe('nassh_buffer_tests.js', () => {
-
 /**
  * Check creating data packets.
  */
@@ -26,6 +24,4 @@ it('new', () => {
 
   // Restore good state.
   setDefaultBackend('scatgat');
-});
-
 });

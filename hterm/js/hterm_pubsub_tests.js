@@ -8,8 +8,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_pubsub_tests.js', () => {
-
 /**
  * Test that the appropriate methods are added to a hterm.PubSub target object.
  */
@@ -123,5 +121,3 @@ it('exception', function(done) {
     };
     check();
   });
-
-});

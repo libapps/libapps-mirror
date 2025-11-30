@@ -32,8 +32,6 @@ class WebSocketMock {
   }
 }
 
-describe('nassh_stream_relay_corpv4_tests.js', () => {
-
 /**
  * Check parsing of "empty" packets.
  */
@@ -289,6 +287,4 @@ it('RelayCorpv4WS reconnect on dirty close', async () => {
   stream.onSocketClose_(e);
   assert.isTrue(reconnectCalled);
   assert.isNull(closeReason);
-});
-
 });

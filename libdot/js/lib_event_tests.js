@@ -9,8 +9,6 @@
 
 import {lib} from '../index.js';
 
-describe('lib_event_tests.js', () => {
-
 it('complete', () => {
   const event = new lib.Event();
 
@@ -73,6 +71,4 @@ it('remove unknown listeners', () => {
   assert.deepEqual(event.observers, [callback]);
   event.removeListener(callback);
   assert.deepEqual(event.observers, []);
-});
-
 });

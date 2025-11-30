@@ -8,8 +8,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_notifications_tests.js', () => {
-
 beforeEach(function() {
   this.div = document.createElement('div');
 });
@@ -56,6 +54,4 @@ it('show-forever', function(done) {
     assert.equal(this.div.textContent, '');
     done();
   }, 10);
-});
-
 });

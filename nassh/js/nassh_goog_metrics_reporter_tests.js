@@ -22,7 +22,6 @@ beforeEach(function() {
   this.localPrefs = new LocalPreferenceManager();
 });
 
-describe('nassh_goog_metrics_reporter_tests.js', () => {
   describe('GoogMetricsReporter.reportLatency', () => {
     let reporter;
 
@@ -247,4 +246,3 @@ describe('nassh_goog_metrics_reporter_tests.js', () => {
       assert.equal(7, distribution.findInsertionIndex_(172));
     });
   });
-});

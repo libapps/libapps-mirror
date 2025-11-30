@@ -10,7 +10,6 @@ import {
   TerminalSettingsCategorySelectorElement,
 } from './terminal_settings_category_selector.js';
 
-describe('terminal_settings_category_selector_tests.js', () => {
   const categories = [
     {id: 'cat1', titleId: 'title1'},
     {id: 'cat2', titleId: 'title2'},
@@ -92,4 +91,3 @@ describe('terminal_settings_category_selector_tests.js', () => {
     assertQueriedElementIs('[active]',
         document.getElementById(categories[2].titleId));
   });
-});

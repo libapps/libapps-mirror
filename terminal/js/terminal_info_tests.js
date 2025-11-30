@@ -16,7 +16,6 @@ const DEFAULT_CONTAINER = {
   containerName: DEFAULT_CONTAINER_NAME,
 };
 
-describe('terminal_info_tests.js', () => {
   describe('resolveLaunchInfo for home', function() {
     it('follows url', function() {
       const parentLaunchInfo = /** @type {!LaunchInfo} */({
@@ -415,4 +414,3 @@ describe('terminal_info_tests.js', () => {
       });
     });
   });
-});

@@ -10,8 +10,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_keyboard_tests.js', () => {
-
 /**
  * Mock terminal, set up keyMap.
  */
@@ -42,6 +40,4 @@ it('user-bindings-override-defaults', function() {
   this.keyboard.onKeyDown_(ctrlShiftK);
   assert.isFalse(this.terminal.wipeContentsCalled);
   assert.equal('x', this.terminal.key);
-});
-
 });

@@ -10,8 +10,6 @@ import {lib} from '../../libdot/index.js';
 
 import {keyBlobToAuthorizedKeysFormat} from './nassh_agent.js';
 
-describe('nassh_agent_tests.js', () => {
-
 it('keyBlobToAuthorizedKeysFormat', () => {
   const asciiToBinary = (str) => {
     return lib.codec.stringToCodeUnitArray(atob(str));
@@ -26,6 +24,4 @@ it('keyBlobToAuthorizedKeysFormat', () => {
                'ssh-rsa ' + keyTypeRsa);
   assert.equal(keyBlobToAuthorizedKeysFormat(asciiToBinary(keyTypeEd25519)),
                'ssh-ed25519 ' + keyTypeEd25519);
-});
-
 });

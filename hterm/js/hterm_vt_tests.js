@@ -16,8 +16,6 @@ import {hterm} from '../index.js';
 import {MockNotification} from './hterm_mock_notification.js';
 import {MockTerminalMouseEvent} from './hterm_mock_terminal_mouseevent.js';
 
-describe('hterm_vt_tests.js', () => {
-
 before(function() {
   this.visibleColumnCount = 15;
   this.visibleRowCount = 6;
@@ -3594,6 +3592,4 @@ it('dcs-tmux', function() {
   assert.deepEqual(lines, ['hello\rworld', 'abc', 'def', null]);
   assert.equal(0, terminal.getCursorRow());
   assert.equal('other data', terminal.getRowText(0));
-});
-
 });

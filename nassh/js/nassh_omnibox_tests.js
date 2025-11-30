@@ -15,8 +15,6 @@ function EventMock() {
   this.addListener = (func) => { this.func = func; };
 }
 
-describe('nassh_omnibox_tests.js', () => {
-
 /**
  * Create a stub app to test against.
  */
@@ -207,6 +205,4 @@ it('input-cancelled-profile-default', function() {
 
   assert.deepEqual([], this.handler.matches_);
   assert.isNull(this.handler.default_);
-});
-
 });

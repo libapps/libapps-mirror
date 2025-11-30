@@ -9,8 +9,6 @@
 import {hterm} from '../index.js';
 import {MockRowProvider} from './hterm_mock_row_provider.js';
 
-describe('hterm_scrollport_tests.js', () => {
-
 describe('scrollport', () => {
 
 /**
@@ -969,8 +967,6 @@ it('drag-drop-unusable', function() {
   // Neither should empty text.
   e.dataTransfer.setData('text/plain', '');
   this.scrollPort.onDragAndDrop_(e);
-});
-
 });
 
 });

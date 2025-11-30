@@ -14,8 +14,6 @@ import {
   ValidExtension, VersionPacket,
 } from './nassh_sftp_packet_types.js';
 
-describe('nassh_sftp_packet_types_tests.js', () => {
-
 /**
  * Verify StatusPacket deserialization.
  */
@@ -514,6 +512,4 @@ it('sftpEpochToLocal', () => {
   data.forEach(([expected, seconds]) => {
     assert.equal(expected, epochToLocal(seconds).toUTCString());
   });
-});
-
 });

@@ -10,8 +10,6 @@ import {lib} from '../../libdot/index.js';
 
 import {Packet} from './nassh_sftp_packet.js';
 
-describe('nassh_sftp_packet_tests.js', () => {
-
 /**
  * Packet constructor & basic API test.
  */
@@ -296,6 +294,4 @@ it('sftpPacketGetData', () => {
 
   assert.deepStrictEqual(new Uint8Array(0), packet.getData());
   assert.isTrue(packet.eod());
-});
-
 });

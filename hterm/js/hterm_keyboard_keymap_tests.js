@@ -10,8 +10,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_keyboard_keymap_tests.js', () => {
-
   /**
    * Mock window.open, set up keyMap.
    */
@@ -103,4 +101,3 @@ describe('hterm_keyboard_keymap_tests.js', () => {
       assert.equal(action('control', def, true), t[8], `${desc}ctrl+shift`);
     }
   });
-});

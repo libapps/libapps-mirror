@@ -8,8 +8,6 @@
 
 import {lib} from '../index.js';
 
-describe('lib_codec_tests.js', () => {
-
 /**
  * Test code unit array conversions to strings.
  */
@@ -41,6 +39,4 @@ it('stringToCodeUnitArray', () => {
   ret = lib.codec.stringToCodeUnitArray(s, new Uint16Array(s.length));
   assert.deepStrictEqual(new Uint16Array([55358, 57052]), ret);
   assert.isTrue(ArrayBuffer.isView(ret));
-});
-
 });

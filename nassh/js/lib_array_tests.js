@@ -8,8 +8,6 @@
 
 import {concatTyped, compare} from './lib_array.js';
 
-describe('lib_array_tests.js', () => {
-
 it('concatTyped', () => {
   const subtests = [
     [[new Uint8Array([]), new Uint8Array([])], new Uint8Array([]), 'empty'],
@@ -65,6 +63,4 @@ it('compare', () => {
   subtests.forEach((data) => {
     assert.equal(compare(data[0][0], data[0][1]), data[1], data[2]);
   });
-});
-
 });

@@ -4,8 +4,6 @@
 
 import {hterm} from '../../index.js';
 
-describe('3pp_wc_tests.js', () => {
-
 it('strWidth-test', () => {
   const asciiOnechar = 'a';
   const asciiString = 'an ascii string';
@@ -190,6 +188,4 @@ it('substring-test', () => {
                hterm.wc.substring(asciiString, 0, 0));
   assert.equal(asciiString.substring(2, 15),
                hterm.wc.substring(asciiString, 2, 15));
-});
-
 });

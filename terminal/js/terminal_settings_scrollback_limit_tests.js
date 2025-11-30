@@ -13,7 +13,6 @@ import {listenForPrefChange} from './terminal_test_util.js';
 import {TerminalSettingsScrollbackLimit}
     from './terminal_settings_scrollback_limit.js';
 
-describe('terminal_settings_scrollback_limit.js', () => {
   const preference = 'scrollback-limit';
 
   beforeEach(async function() {
@@ -76,4 +75,3 @@ describe('terminal_settings_scrollback_limit.js', () => {
     assert.equal(window.preferenceManager.get(preference), -1);
     assert.equal(this.textfield.value, '');
   });
-});

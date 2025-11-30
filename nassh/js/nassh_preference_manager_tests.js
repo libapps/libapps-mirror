@@ -11,8 +11,6 @@ import {lib} from '../../libdot/index.js';
 import {LocalPreferenceManager,
         PreferenceManager} from './nassh_preference_manager.js';
 
-describe('nassh_preference_manager_tests.js', () => {
-
 /**
  * Check basic init/empty behavior.
  */
@@ -106,6 +104,4 @@ it('local-pref-manager-profiles', () => {
   localPrefs.createProfile('asdfasdf');
   localPrefs.syncProfiles(remotePrefs);
   assert.deepEqual([rprof2.id], localPrefs.get('profile-ids'));
-});
-
 });

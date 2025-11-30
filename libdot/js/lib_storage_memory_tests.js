@@ -9,8 +9,6 @@
 import {lib} from '../index.js';
 import {storageApiTest} from './lib_storage_test_util.js';
 
-describe('lib_storage_memory_tests.js', () => {
-
 /**
  * Initialize the storage fakes & APIs.
  */
@@ -19,5 +17,3 @@ beforeEach(function() {
 });
 
 storageApiTest();
-
-});

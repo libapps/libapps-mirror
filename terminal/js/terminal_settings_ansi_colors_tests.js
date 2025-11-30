@@ -13,7 +13,6 @@ import {TerminalSettingsAnsiColorsElement} from
     './terminal_settings_ansi_colors.js';
 import {DEFAULT_ANSI_COLORS} from './terminal_common.js';
 
-describe('terminal_settings_ansi_colors.js', () => {
   const preference = 'terminal_settings_ansi_colors';
   const orange = 'hsl(39, 100%, 50%)';
 
@@ -60,4 +59,3 @@ describe('terminal_settings_ansi_colors.js', () => {
     assert.deepEqual(prefs, this.el.value);
     assert.deepEqual(window.preferenceManager.get(preference), prefs);
   });
-});

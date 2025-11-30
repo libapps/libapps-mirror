@@ -8,7 +8,6 @@
 
 import './terminal_settings_hue_slider.js';
 
-describe('hue_slider_tests.js', () => {
   const PERCENTAGE_ERROR = 0.01;
 
   beforeEach(async function() {
@@ -49,4 +48,3 @@ describe('hue_slider_tests.js', () => {
     this.innerSlider.dispatchEvent(new Event('change'));
     assert.equal(listenerInvocations, 1);
   });
-});

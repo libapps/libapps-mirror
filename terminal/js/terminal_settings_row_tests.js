@@ -8,8 +8,6 @@
 
 import './terminal_settings_row.js';
 
-
-describe('terminal_settings_row_tests.js', () => {
   beforeEach(async function() {
     this.expandableRow = document.createElement('terminal-settings-row');
     this.expandableRow.setAttribute('expandable', '');
@@ -46,4 +44,3 @@ describe('terminal_settings_row_tests.js', () => {
     assert.equal(this.expandEvents.length, 2);
     assert.equal(this.expandEvents[1].detail, false);
   });
-});

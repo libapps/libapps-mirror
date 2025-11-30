@@ -6,8 +6,6 @@
  * @fileoverview Internationalization functions test suite.
  */
 
-describe('intl-segmenter_tests.js', () => {
-
 /**
  * Check handling of ascii characters.
  */
@@ -69,6 +67,4 @@ it('control', () => {
   assert.equal('a', segments[3].segment);
   assert.equal('\u{5}', segments[4].segment);
   assert.equal('b', segments[5].segment);
-});
-
 });

@@ -8,8 +8,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_vt_character_map_tests.js', () => {
-
 /**
  * Verify null maps work.
  */
@@ -240,6 +238,4 @@ it('overrides', () => {
   assert.isUndefined(maps.getMap('X'));
   assert.isDefined(maps.getMap('0'));
   assert.strictEqual(hterm.VT.CharacterMaps.DefaultMaps['0'], maps.getMap('0'));
-});
-
 });

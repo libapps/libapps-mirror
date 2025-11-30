@@ -53,7 +53,6 @@ class MockChromeRuntime {
   }
 }
 
-describe('nassh_google.js', function() {
   describe('fetchSshPolicy', function() {
     const sshPolicyResponse = 'get_ssh_policy_response';
 
@@ -136,4 +135,3 @@ describe('nassh_google.js', function() {
         assert.equal(response.getSshConfig(), '');
       });
   });
-});

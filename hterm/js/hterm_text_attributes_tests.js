@@ -8,8 +8,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_text_attributes_tests.js', () => {
-
 /**
  * Make sure isDefault works reasonably.
  */
@@ -313,6 +311,4 @@ it('splitWidecharString-ccs', () => {
   const actual = hterm.TextAttributes.splitWidecharString(text);
   assert.equal(actual.length, 1, 'Failed to split combining sequences.');
   assert.equal(actual[0].str, text);
-});
-
 });

@@ -10,8 +10,6 @@
 import {MessageNumbers, decodeCurveOidWithVendorFixes, decodeOid,
         writeMessage} from './nassh_agent_message_types.js';
 
-describe('nassh_agent_message_types_tests.js', () => {
-
 // clang-format off
 it('write_identitiesAnswer', /** @suppress {visibility} msg.data_ */ () => {
   const identitiesAnswerMsg = writeMessage(
@@ -93,6 +91,4 @@ it('decodeCurveOidWithVendorFixes', () => {
       RAW_OID_ED25519_YK_2, 'Yubico YubiKey 42'), OID_ED25519);
   assert.strictEqual(decodeCurveOidWithVendorFixes(
       RAW_OID_ED25519_YK_3, 'Yubico YubiKey 42'), OID_ED25519);
-});
-
 });

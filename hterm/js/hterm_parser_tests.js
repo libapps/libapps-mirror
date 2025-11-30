@@ -8,8 +8,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_parser_tests.js', () => {
-
 /**
  * Helper to check parseKeySequence failing behavior.
  *
@@ -156,6 +154,4 @@ it('actions', () => {
   checkResult('DEFAULT', hterm.Keyboard.KeyActions.DEFAULT);
 
   checkResult('"123"', '123');
-});
-
 });

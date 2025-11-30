@@ -10,8 +10,6 @@
 import {hterm} from '../index.js';
 import {MockNotification} from './hterm_mock_notification.js';
 
-describe('hterm_tests.js', () => {
-
 /**
  * Mock out notifications.
  *
@@ -91,6 +89,4 @@ xit('copy-execCommand', (done) => {
   delete navigator.clipboard.writeText;
 
   hterm.copySelectionToClipboard(doc, 'copypasta!');
-});
-
 });

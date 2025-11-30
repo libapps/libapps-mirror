@@ -8,8 +8,6 @@
 
 import {lib} from '../index.js';
 
-describe('lib_message_manager_tests.js', () => {
-
 /**
  * Run processI18nAttribute through tests.
  * Note: This relies on no message ids actually matching.
@@ -92,6 +90,4 @@ it('get-local', () => {
   assert.equal('text', mm.get('SOME_ID', [], 'not used'));
   assert.equal('foo', mm.get('UNKNOWN', [], 'foo'));
   assert.equal('foo X bar Y', mm.get('ID_REPLACE', ['X', 'Y']));
-});
-
 });

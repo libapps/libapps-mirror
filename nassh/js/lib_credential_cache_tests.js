@@ -10,8 +10,6 @@ import {lib} from '../../libdot/index.js';
 
 import {CredentialCache} from './lib_credential_cache.js';
 
-describe('lib_credential_cache_tests.js', () => {
-
 /**
  * Verify that the cache remains enabled after being enabled once.
  */
@@ -62,6 +60,4 @@ it('workflow', async () => {
   assert.deepStrictEqual(
       Array.from(lib.notNull(await cache.retrieve('reader_1' + keyId2))),
       [1, 5, 25]);
-});
-
 });

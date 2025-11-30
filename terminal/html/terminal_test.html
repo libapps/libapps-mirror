@@ -11,46 +11,6 @@
     <!-- Initialize the test framework first. -->
     <script type='module' src='../js/terminal_test_main.js'></script>
 
-    <!-- All the unittests go below here. -->
-    <script type='module'>
-      // This needs to be the first test file. Otherwise, the test
-      // "installEscKHandler()" is not able to test the case before installing the
-      // handler. See `XtermInternal.installEscKHandler()`.
-      import '../js/terminal_xterm_internal_tests.js';
-
-      import '../js/terminal_tests.js';
-      import '../js/terminal_common_tests.js';
-      import '../js/terminal_dialog_tests.js';
-      import '../js/terminal_dropdown_tests.js';
-      import '../js/terminal_emulator_tests.js';
-      import '../js/terminal_file_editor_tests.js';
-      import '../js/terminal_find_bar_tests.js';
-      import '../js/terminal_home_app_tests.js';
-      import '../js/terminal_info_tests.js';
-      import '../js/terminal_linux_dialog_tests.js';
-      import '../js/terminal_profiles_tests.js';
-      import '../js/terminal_textfield_tests.js';
-      import '../js/terminal_settings_ansi_colors_tests.js';
-      import '../js/terminal_settings_app_tests.js';
-      import '../js/terminal_settings_background_image_tests.js';
-      import '../js/terminal_settings_category_selector_tests.js';
-      import '../js/terminal_settings_checkbox_tests.js';
-      import '../js/terminal_settings_colorpicker_tests.js';
-      import '../js/terminal_settings_fonts_tests.js';
-      import '../js/terminal_settings_hue_slider_tests.js';
-      import '../js/terminal_settings_profile_header_tests.js';
-      import '../js/terminal_settings_profile_item_tests.js';
-      import '../js/terminal_settings_row_tests.js';
-      import '../js/terminal_settings_saturation_value_picker_tests.js';
-      import '../js/terminal_settings_scrollback_limit_tests.js';
-      import '../js/terminal_settings_theme_tests.js';
-      import '../js/terminal_settings_transparency_slider_tests.js';
-      import '../js/terminal_slider_tests.js';
-      import '../js/terminal_ssh_dialog_tests.js';
-      import '../js/terminal_tmux_tests.js';
-      import '../js/tmux_tests.js';
-    </script>
-
     <link href='../../node_modules/mocha/mocha.css' rel='stylesheet'/>
     <link href='../../libdot/css/mocha-dark-theme.css' rel='stylesheet'/>
   </head>

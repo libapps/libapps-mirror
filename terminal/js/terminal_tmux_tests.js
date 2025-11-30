@@ -17,8 +17,6 @@ import * as tmux from './tmux.js';
 
 const document = window.document;
 
-describe('terminal_tmux.js', function() {
-
   describe('PseudoTmuxCommand', function() {
 
     beforeEach(function() {
@@ -172,5 +170,3 @@ describe('terminal_tmux.js', function() {
     });
 
   });
-
-});

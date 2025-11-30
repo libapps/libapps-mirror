@@ -5,7 +5,3 @@
 /**
  * @fileoverview Unit tests for lib_polyfill.js.
  */
-
-describe('lib_polyfill_tests.js', () => {
-
-});

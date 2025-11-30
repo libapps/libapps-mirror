@@ -8,7 +8,6 @@
 
 import './terminal_dialog.js';
 
-describe('terminal_dialog.js', () => {
   beforeEach(async function() {
     this.el = document.createElement('terminal-dialog');
     document.body.appendChild(this.el);
@@ -61,4 +60,3 @@ describe('terminal_dialog.js', () => {
       action(this.el);
     });
   }));
-});

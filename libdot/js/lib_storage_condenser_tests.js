@@ -9,8 +9,6 @@
 import {lib} from '../index.js';
 import {storageApiTest} from './lib_storage_test_util.js';
 
-describe('lib_storage_condenser_tests.js', () => {
-
 /**
  * Initialize the storage fakes & APIs.
  */
@@ -55,6 +53,4 @@ it('backing-storage-clear', async function() {
   await new Promise((resolve) => setTimeout(resolve));
   data = await this.backingStorage.getItems(null);
   assert.deepStrictEqual(Object.keys(data), ['foo']);
-});
-
 });

@@ -65,8 +65,6 @@ import {hterm} from '../index.js';
  * ignored.
  */
 
-describe('hterm_vt_canned_tests.js', () => {
-
 before(function() {
   this.visibleColumnCount = 80;
   this.visibleRowCount = 25;
@@ -194,6 +192,4 @@ const testData = async function(terminal, name) {
     this.timeout(5000);
     await testData(this.terminal, name);
   });
-});
-
 });

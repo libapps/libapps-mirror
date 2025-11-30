@@ -8,7 +8,6 @@
 
 import {ARROW_KEY_OFFSET} from './terminal_slider.js';
 
-describe('terminal_slider.js', () => {
   const ERROR = 0.001;
 
   /**
@@ -111,4 +110,3 @@ describe('terminal_slider.js', () => {
     assertKnobPositionCloseTo(el, newValue);
     assert.equal(listenerInvocations, 1);
   }));
-});

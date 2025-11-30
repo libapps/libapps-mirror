@@ -8,7 +8,6 @@
 
 import './terminal_textfield.js';
 
-describe('terminal_textfield_tests.js', () => {
   beforeEach(async function() {
     this.el = document.createElement('terminal-textfield');
     this.el.fitContent = true;
@@ -66,5 +65,3 @@ describe('terminal_textfield_tests.js', () => {
     await this.el.updateComplete;
     assert.equal(this.el.style.maxWidth, `${this.rulers[1].offsetWidth}px`);
   });
-
-});

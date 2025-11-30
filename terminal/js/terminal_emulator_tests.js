@@ -15,7 +15,6 @@ import {A11yButtons, Modifier, XtermTerminal, XtermTerminalTestParams,
 import {MockFunction, MockObject} from './terminal_test_mocks.js';
 import {Terminal} from './xterm.js';
 
-describe('terminal_emulator_tests.js', function() {
   describe('XtermTerminal', function() {
     beforeEach(async function() {
       this.mocks = {
@@ -321,4 +320,3 @@ describe('terminal_emulator_tests.js', function() {
           [['0% scrolled,\nhello\nworld\n0\n1\n2']]);
     });
   });
-});

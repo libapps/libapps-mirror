@@ -7,7 +7,6 @@ import {lib} from '../../libdot/index.js';
 import {TerminalSSHDialog, parseCommand, parseSSHDestination}
     from './terminal_ssh_dialog.js';
 
-describe('terminal_ssh_dialog.js', function() {
   it('parseCommand', function() {
     const check = (argString, expectation) => {
       assert.deepEqual(parseCommand(argString), expectation);
@@ -155,4 +154,3 @@ describe('terminal_ssh_dialog.js', function() {
       assert.isFalse(this.el.dialogRef_.value.open);
     });
   });
-});

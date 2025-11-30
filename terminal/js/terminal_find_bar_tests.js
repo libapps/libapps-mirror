@@ -22,7 +22,6 @@ import {MockFunction} from './terminal_test_mocks.js';
  */
 let TestContext;
 
-describe('terminal_find_bar_tests.js', function() {
   beforeEach(async function() {
     this.findBar = document.createElement('terminal-find-bar');
     document.body.appendChild(this.findBar);
@@ -139,4 +138,3 @@ describe('terminal_find_bar_tests.js', function() {
     await sleep(0);
     assert.deepEqual(scheduleFindNextEventMock.getHistory(), [[]]);
   });
-});

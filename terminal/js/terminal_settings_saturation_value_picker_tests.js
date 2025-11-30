@@ -9,7 +9,6 @@
 import {SaturationValuePickerElement, ARROW_KEY_OFFSET} from
     './terminal_settings_saturation_value_picker.js';
 
-describe('saturation_value_picker.js', () => {
   const ERROR = 1;
   /**
    * @param {number} saturation
@@ -153,5 +152,3 @@ describe('saturation_value_picker.js', () => {
         assertPickerPositionCloseTo(el, newSaturation, newValue);
         assert.equal(listenerInvocations, 1);
       }));
-
-});

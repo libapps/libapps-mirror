@@ -80,7 +80,6 @@ const parseWindowLayoutTestData = [{
 }];
 
 
-describe('tmux.js', function() {
   parseWindowLayoutTestData.forEach(({str, layout}, i) => it(
       `parseWindowLayout${i}`,
       async function() {
@@ -405,4 +404,3 @@ describe('tmux.js', function() {
     assert.deepEqual(parseTmuxVersion('3.3-rc'), {major: 3.3, minor: ''});
     assert.deepEqual(parseTmuxVersion('next-3.3'), {major: 3.3, minor: ''});
   });
-});

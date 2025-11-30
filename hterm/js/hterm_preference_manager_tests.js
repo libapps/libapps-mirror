@@ -15,8 +15,6 @@ import {hterm} from '../index.js';
  */
 const nasshMessagesPromise = fetch('../../nassh/_locales/en/messages.json');
 
-describe('hterm_preference_manager_tests.js', () => {
-
 /**
  * Make sure hterm translations are kept in sync with nassh.
  */
@@ -149,6 +147,4 @@ it('parse-defaults', () => {
             assert.fail(`invalid pref ${key} unknown type: ${pref.type}`);
         }
       });
-});
-
 });

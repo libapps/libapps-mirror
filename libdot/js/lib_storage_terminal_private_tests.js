@@ -9,8 +9,6 @@
 import {lib} from '../index.js';
 import {storageApiTest} from './lib_storage_test_util.js';
 
-describe('lib_storage_terminal_private_tests.js', () => {
-
 /**
  * Fake for Chrome storage APIs.
  */
@@ -122,6 +120,4 @@ it('recursive-writes', function(done) {
     }
   };
   check();
-});
-
 });

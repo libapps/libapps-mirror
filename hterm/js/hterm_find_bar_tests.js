@@ -10,8 +10,6 @@ import {lib} from '../../libdot/index.js';
 
 import {hterm} from '../index.js';
 
-describe('hterm_find_bar_tests.js', () => {
-
 /**
  * Ensure fresh terminal is used for every test case.
  */
@@ -635,6 +633,4 @@ it('selects-previous-to-cursor-if-selected-result-is-unknown', function(done) {
   });
   callbacks.push(() => expectPrevious(2, '         ', 1, 1, 1));
   callbacks.push(done);
-});
-
 });

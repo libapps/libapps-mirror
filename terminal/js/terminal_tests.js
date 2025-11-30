@@ -13,8 +13,6 @@ import {MockTabsController, MockTerminalPrivate}
  * @fileoverview chrome-untrusted://terminal unit tests.
  */
 
-describe('terminal_tests.js', () => {
-
 let mockTerminalPrivate;
 let mockTerminalPrivateController;
 let mockTabsController;
@@ -116,5 +114,4 @@ it('does-not-exit-on-first-output', async function() {
   await mockTerminalPrivate.onProcessOutput.dispatch(pid, 'exit',
       encoder.encode('text').buffer);
   assert.isTrue(exitCalled);
-});
 });

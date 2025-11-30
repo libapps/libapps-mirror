@@ -8,8 +8,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_contextmenu_tests.js', () => {
-
 /**
  * Verify we can show/hide an empty menu.
  */
@@ -54,6 +52,4 @@ it('contextmenu-separator', () => {
   // Show/hide this menu.
   menu.show(/** @type {!Event} */ ({clientX: 0, clientY: 0}));
   menu.hide();
-});
-
 });

@@ -12,7 +12,6 @@ import {hterm} from '../../hterm/index.js';
 import {listenForPrefChange} from './terminal_test_util.js';
 import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
 
-describe('terminal_settings_checkbox_tests.js', () => {
   const preference = 'terminal_settings_checkbox_tests_preference';
 
   beforeEach(function() {
@@ -77,4 +76,3 @@ describe('terminal_settings_checkbox_tests.js', () => {
     assert.isTrue(element.converter.fromChecked(true));
     assert.isFalse(element.converter.fromChecked(false));
   });
-});

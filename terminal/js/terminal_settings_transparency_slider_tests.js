@@ -8,7 +8,6 @@
 
 import './terminal_settings_hue_slider.js';
 
-describe('transparency_slider_tests.js', () => {
   const PERCENTAGE_ERROR = 0.01;
 
   beforeEach(async function() {
@@ -67,4 +66,3 @@ describe('transparency_slider_tests.js', () => {
         this.el.shadowRoot.querySelector('terminal-knob').getAttribute('style'),
         'background-color: rgba(12, 34, 56, 0.5);');
   });
-});

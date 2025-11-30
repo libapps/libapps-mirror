@@ -12,7 +12,6 @@ import {hterm} from '../../hterm/index.js';
 import {TerminalSettingsColorpickerElement, TOO_WHITE_BOX_SHADOW,
   FOCUS_BOX_SHADOW} from './terminal_settings_colorpicker.js';
 
-describe('terminal_settings_colorpicker.js', () => {
   const preference = 'terminal_settings_colorpicker';
 
   /**
@@ -322,4 +321,3 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.isTrue(extractInlineStyle(swatchDisplay, 'box-shadow').includes(
         FOCUS_BOX_SHADOW));
   });
-});

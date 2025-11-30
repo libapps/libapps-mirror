@@ -13,7 +13,6 @@ import {SUPPORTED_FONT_FAMILIES, DEFAULT_FONT_FAMILY}
     from './terminal_common.js';
 import './terminal_settings_fonts.js';
 
-describe('terminal_settings_fonts_tests.js', () => {
   beforeEach(async function() {
     window.preferenceManager =
         new hterm.PreferenceManager(new lib.Storage.Memory());
@@ -86,4 +85,3 @@ describe('terminal_settings_fonts_tests.js', () => {
       assert.equal(disabled, label === fonts[1]);
     });
   });
-});

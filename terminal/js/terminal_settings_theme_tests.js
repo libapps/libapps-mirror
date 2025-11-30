@@ -14,7 +14,6 @@ import {TerminalSettingsThemeElement} from './terminal_settings_theme.js';
 import {DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR, DEFAULT_CURSOR_COLOR,
     DEFAULT_FOREGROUND_COLOR} from './terminal_common.js';
 
-describe('terminal_settings_theme_tests.js', () => {
   beforeEach(function() {
     window.preferenceManager =
         new hterm.PreferenceManager(new lib.Storage.Memory());
@@ -215,4 +214,3 @@ describe('terminal_settings_theme_tests.js', () => {
           DEFAULT_BACKGROUND_COLOR);
     });
   });
-});

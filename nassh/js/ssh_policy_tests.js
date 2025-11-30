@@ -54,7 +54,6 @@ const parseProtoFields = (content) => {
   return fields;
 };
 
-describe('ssh_policy', () => {
   // Before running the tests, fetch the .proto and .js file contents.
   before(async function() {
     // Set a timeout for the fetch operations.
@@ -114,4 +113,3 @@ describe('ssh_policy', () => {
         `JS content should include ${camelCaseName}`);
     }
   });
-});

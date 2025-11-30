@@ -14,7 +14,6 @@ import {ProfileType, setProfileIds} from './terminal_profiles.js';
 import {BELL_SOUND_CONVERTER, TerminalSettingsApp}
   from './terminal_settings_app.js';
 
-describe('terminal_settings_app.js', function() {
   beforeEach(async function() {
     window.storage = new lib.Storage.Memory();
     await setProfileIds(ProfileType.HTERM, ['default', 'red', 'green']);
@@ -108,4 +107,3 @@ describe('terminal_settings_app.js', function() {
     assert.deepEqual(this.el.settingsProfiles_, ['default']);
     assert.equal(this.el.activeSettingsProfile_, 'default');
   });
-});

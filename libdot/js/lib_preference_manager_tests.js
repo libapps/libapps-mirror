@@ -8,8 +8,6 @@
 
 import {lib} from '../index.js';
 
-describe('lib_preference_manager_tests.js', () => {
-
 /**
  * If another window changes a preference to the default it will delete the
  * localStorage entry. Here we mock the deleting of a localStorage entry so we
@@ -283,5 +281,4 @@ it('set-array-or-object-detects-default', async () => {
   manager.set('array', ['default', 'array']);
   assert.isUndefined(await storage.getItem('/object'));
   assert.isUndefined(await storage.getItem('/array'));
-});
 });

@@ -14,8 +14,6 @@ import {
   File, FileAttrs, OpenFlags, StatusPacket,
 } from './nassh_sftp_packet_types.js';
 
-describe('nassh_sftp_fsp_tests.js', () => {
-
 /**
  * Reset any FSP state.
  */
@@ -802,6 +800,4 @@ it('fsp-onUnmount-exit', function() {
       assert.fail,
       assert.fail);
   assert.equal(0, exitStatus);
-});
-
 });

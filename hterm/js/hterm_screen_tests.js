@@ -8,8 +8,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_screen_tests.js', () => {
-
 /**
  * Clear out the current document and create a new hterm.Screen object for
  * testing.
@@ -621,6 +619,4 @@ it('expand-selection', function() {
   assert.equal('https://www.google.com/', selection.toString());
 
   document.body.removeChild(row);
-});
-
 });

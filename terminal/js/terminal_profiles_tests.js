@@ -9,7 +9,6 @@ import {ProfileType, cleanupVshSyncPrefs, deleteProfile, getProfileIds,
   setProfileIds, setProfileValues, setVshProfiles}
   from './terminal_profiles.js';
 
-describe('terminal_profiles.js', function() {
   beforeEach(async function() {
     window.storage = new lib.Storage.Memory();
   });
@@ -102,4 +101,3 @@ describe('terminal_profiles.js', function() {
     await cleanupVshSyncPrefs();
     assert.deepEqual(await window.storage.getItems(), {});
   });
-});

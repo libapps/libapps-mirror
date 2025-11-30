@@ -12,8 +12,6 @@ import {hterm} from '../index.js';
 import {MockNotification} from './hterm_mock_notification.js';
 import {MockTerminalMouseEvent} from './hterm_mock_terminal_mouseevent.js';
 
-describe('hterm_terminal_tests.js', () => {
-
 before(function() {
   this.visibleColumnCount = 80;
   this.visibleRowCount = 24;
@@ -1007,6 +1005,4 @@ it('set-profile', async function() {
   });
   assert.equal(prefs, this.terminal.getPrefs());
   assert.equal('/hterm/profiles/not-default/', prefs.prefix);
-});
-
 });

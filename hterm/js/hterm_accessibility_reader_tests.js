@@ -8,8 +8,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_accessibility_reader_tests.js', () => {
-
 /**
  * Set up state for all the tests in this suite.
  */
@@ -555,6 +553,4 @@ it('a11y-selection-space', function() {
   this.accessibilityReader.announce(' ');
   this.accessibilityReader.afterCursorChange('abc ', 0, 4);
   assert.equal(this.assertiveLiveElement.innerText, '');
-});
-
 });

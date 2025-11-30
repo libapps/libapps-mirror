@@ -12,7 +12,6 @@ import {DEFAULT_BACKGROUND_COLOR, delayedScheduler, definePrefs,
   fontFamilyToCSS, normalizeCSSFontFamily, normalizePrefsInPlace}
     from './terminal_common.js';
 
-describe('terminal_common_tests.js', () => {
   beforeEach(function() {
     this.preferenceManager = new lib.PreferenceManager(
         new lib.Storage.Memory());
@@ -61,5 +60,3 @@ describe('terminal_common_tests.js', () => {
     await promise;
     assert.equal(counter, 1);
   });
-
-});

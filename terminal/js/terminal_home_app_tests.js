@@ -10,7 +10,6 @@ import {lib} from '../../libdot/index.js';
 
 import './terminal_home_app.js';
 
-describe('terminal_home_app_tests.js', () => {
   beforeEach(function() {
     window.storage = new lib.Storage.Memory();
     this.el = /** @type {!Element} */ (
@@ -136,4 +135,3 @@ describe('terminal_home_app_tests.js', () => {
     assert.equal('TERMINAL_HOME_SET_UP', buttons[0].innerText.trim());
     assert.equal('TERMINAL_HOME_ADD_SSH', buttons[1].innerText.trim());
   });
-});

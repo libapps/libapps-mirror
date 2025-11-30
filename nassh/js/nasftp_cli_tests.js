@@ -16,8 +16,6 @@ import {MockSftpClient} from './nassh_sftp_fsp_test_util.js';
 import {FileAttrs, StatusCodes} from './nassh_sftp_packet_types.js';
 import {StatusError} from './nassh_sftp_status.js';
 
-describe('nasftp_cli_tests.js', () => {
-
 /**
  * A mock object for nasftp.Cli usage.
  *
@@ -1265,6 +1263,4 @@ describe('nasftp-complete-symlink-command', async function() {
     // Complete files -- should auto include a trailing space.
     ['symlink .vim', 'symlink .vimrc '],
   ]);
-});
-
 });

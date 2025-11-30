@@ -10,8 +10,6 @@
 import {Message} from './nassh_agent_message.js';
 import {MessageNumbers} from './nassh_agent_message_types.js';
 
-describe('nassh_agent_message_tests.js', () => {
-
 it('rawMessage', () => {
   const msg = new Message(
       MessageNumbers.AGENT_SUCCESS,
@@ -133,5 +131,3 @@ it('fromRawMessage_signRequest', () => {
       'flags (SSH_AGENTC_SIGN_REQUEST)');
 });
 // clang-format on
-
-});

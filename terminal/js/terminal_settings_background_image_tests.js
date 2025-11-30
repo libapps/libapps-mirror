@@ -14,7 +14,6 @@ import {TerminalSettingsBackgroundImageElement}
 
 const key = 'background-image-test';
 
-describe('terminal_settings_background_image_tests.js', () => {
   const svgDataUrl = 'data:image/svg+xml;base64,' +
       'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLz4=';
 
@@ -86,4 +85,3 @@ describe('terminal_settings_background_image_tests.js', () => {
     assert.equal(svgDataUrl, window.localStorage.getItem(key));
     assert.equal(svgDataUrl, this.el.imagePreviewSrc_);
   });
-});

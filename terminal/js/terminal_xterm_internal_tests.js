@@ -12,7 +12,6 @@ import {XtermInternal} from './terminal_xterm_internal.js';
 const COLS = 80;
 const ROWS = 24;
 
-describe('terminal_xterm_internal.js', function() {
   beforeEach(function() {
     this.elem = document.createElement('div');
     this.elem.style.height = '500px';
@@ -195,4 +194,3 @@ describe('terminal_xterm_internal.js', function() {
     assert.isTrue(this.xtermInternal.setScrollbarVisible(true));
     assert.isTrue(this.xtermInternal.setScrollbarVisible(false));
   });
-});

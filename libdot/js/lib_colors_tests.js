@@ -10,8 +10,6 @@
 
 import {lib} from '../index.js';
 
-describe('lib_color_tests.js', () => {
-
 it('rgbToX11', () => {
   const data = [
     // Some bad data first.
@@ -365,6 +363,4 @@ it('hsvxArrayToHslaArray', () => {
     assert.lengthOf(result, hsl.length);
     result.forEach((value, i) => assert.closeTo(value, hsl[i], 1));
   });
-});
-
 });

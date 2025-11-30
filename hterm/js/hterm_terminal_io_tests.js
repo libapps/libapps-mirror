@@ -8,8 +8,6 @@
 
 import {hterm} from '../index.js';
 
-describe('hterm_terminal_io_tests.js', () => {
-
 /**
  * Simple mock Terminal object for an IO object's needs.
  *
@@ -182,6 +180,4 @@ it('buffer-background', function() {
   // And we should resume OK.
   this.io.print('Done');
   assert.equal('ForeBackDone', this.mockTerm.buffer);
-});
-
 });

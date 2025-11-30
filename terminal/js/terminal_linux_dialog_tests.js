@@ -9,7 +9,6 @@ import {TerminalLinuxDialog} from './terminal_linux_dialog.js';
 import {ProfileType, setProfileIds, setVshProfiles}
   from './terminal_profiles.js';
 
-describe('terminal_linux_dialog.js', function() {
   beforeEach(async function() {
     window.storage = new lib.Storage.Memory();
     this.el = /** @type {!TerminalLinuxDialog} */(
@@ -36,4 +35,3 @@ describe('terminal_linux_dialog.js', function() {
     assert.equal(2, this.dropdown.options.length);
     assert.equal(this.dropdown.value, 'red');
   });
-});

@@ -11,8 +11,6 @@ import {
   postProcessOptions, splitCommandLine, tokenizeOptions,
 } from './nassh_command_instance.js';
 
-describe('nassh_command_instance_tests.js', () => {
-
 /**
  * Verify parsing of command lines.
  */
@@ -553,6 +551,4 @@ describe('default-ssh-agent', () => {
       assert.equal(rv['auth-agent-forward'], expected);
     });
   });
-});
-
 });

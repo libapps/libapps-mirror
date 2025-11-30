@@ -9,8 +9,6 @@
 import {BufferApiTest, BufferInspector} from './nassh_buffer_test_util.js';
 import {ScatGatBuffer} from './nassh_buffer_scatgat.js';
 
-describe('nassh_buffer_scatgat_tests.js', () => {
-
 /**
  * Internal buffer inspector.
  */
@@ -39,5 +37,3 @@ class Inspector extends BufferInspector {
 }
 
 BufferApiTest('scatgat', Inspector);
-
-});

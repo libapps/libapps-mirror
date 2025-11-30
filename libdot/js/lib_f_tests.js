@@ -8,8 +8,6 @@
 
 import {lib} from '../index.js';
 
-describe('lib_f_tests.js', () => {
-
 it('replaceVars', () => {
   let input;
 
@@ -186,6 +184,4 @@ it('openWindow', () => {
     assert.isNull(win.opener);
     win.close();
   }
-});
-
 });
