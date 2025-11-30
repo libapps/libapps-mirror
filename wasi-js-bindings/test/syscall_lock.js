@@ -12,6 +12,8 @@ describe('syscall_lock.js', () => {
 
 /**
  * If running on a web page, SharedArrayBuffers might not work.
+ *
+ * @suppress {missingProperties} https://github.com/google/closure-compiler/issues/4170
  */
 before(function() {
   if (window.SharedArrayBuffer === undefined) {

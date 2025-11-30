@@ -72,6 +72,8 @@ async function run(prog, argv) {
 
 /**
  * Load some common state that all tests in here want.
+ *
+ * @suppress {missingProperties} https://github.com/google/closure-compiler/issues/4170
  */
 before(async function() {
   /**

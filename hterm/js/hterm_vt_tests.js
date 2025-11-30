@@ -799,14 +799,14 @@ it('device-attributes', function() {
 /**
  * TODO(rginda): Test the clear tabstops on this line command.
  */
-it.skip('clear-line-tabstops', function() {
+xit('clear-line-tabstops', function() {
     // '[0g';
   });
 
 /**
  * TODO(rginda): Test the clear all tabstops command.
  */
-it.skip('clear-all-tabstops', function() {
+xit('clear-all-tabstops', function() {
     // '[3g';
   });
 
@@ -1493,7 +1493,7 @@ it('underline-sgr', function() {
 /**
  * TODO(rginda): Test origin mode.
  */
-it.skip('origin-mode', function() {
+xit('origin-mode', function() {
   });
 
 /**
