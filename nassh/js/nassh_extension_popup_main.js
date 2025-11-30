@@ -310,6 +310,7 @@ popup.prototype.populateList_ = function() {
       case 'options':
         link.textContent = localize('HTERM_OPTIONS_BUTTON_LABEL');
         link.style.textAlign = 'center';
+        link.style.borderTop = 'dashed 1px';
         break;
       case 'feedback':
         link.textContent = localize('SEND_FEEDBACK_LABEL');
