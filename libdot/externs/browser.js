@@ -70,14 +70,5 @@ Intl.Segmenter.prototype.segment = function(s) {};
  */
 Intl.Segmenter.Segment;
 
-/**
- * @constructor
- * @extends {Element}
- */
-function SVGSVGElement() {}
-
-/** @type {number} */
-SVGSVGElement.prototype.currentScale;
-
 /** @param {function()} task */
 window.queueMicrotask = function(task) {};
