@@ -19,31 +19,31 @@ import {RelayWebsockifyStream} from './nassh_stream_relay_websockify.js';
  * @see https://github.com/novnc/websockify
  */
 export class Websockify extends Relay {
-  /** @inheritDoc */
+  /** @override */
   constructor(io, options, location, storage, localPrefs) {
     super(io, options, location, storage, localPrefs);
     this.useSecure = options['--use-ssl'];
   }
 
-  /** @inheritDoc */
+  /** @override */
   redirect() {
     // This shouldn't be called in the first place.
     throw new Error('websockify does not redirect');
   }
 
-  /** @inheritDoc */
+  /** @override */
   async init() {
     // No init required.
     return true;
   }
 
-  /** @inheritDoc */
+  /** @override */
   saveState() { return {}; }
 
-  /** @inheritDoc */
+  /** @override */
   loadState(state) {}
 
-  /** @inheritDoc */
+  /** @override */
   async openSocket(host, port) {
     const settings = {
       relayHost: this.proxyHost,

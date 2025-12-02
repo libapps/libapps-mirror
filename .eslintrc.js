@@ -249,6 +249,11 @@ module.exports = {
         'returns': 'return',
         'yields': 'yield',
 
+        // Closure compiler deprecated inheritDoc in favor of override since the
+        // latter behaves the same by default.
+        // https://github.com/google/closure-compiler/wiki/Annotating-JavaScript-for-the-Closure-Compiler#inheritdoc
+        'inheritDoc': 'override',
+
         // Stub out closure-specific tags so they get ignored.
         // TODO(vapier): Delete this after upgrade to newer jsdoc.
         'closurePrimitive': '',

@@ -18,7 +18,7 @@ import {RelayCorpWsStream,
  * Corp Relay implementation.
  */
 export class Corp extends Relay {
-  /** @inheritDoc */
+  /** @override */
   constructor(io, options, location, storage, localPrefs) {
     super(io, options, location, storage, localPrefs);
     this.proxyHostFallback = options['--proxy-host-fallback'];
@@ -51,7 +51,7 @@ export class Corp extends Relay {
     return template;
   }
 
-  /** @inheritDoc */
+  /** @override */
   redirect() {
     const resumePath = this.location.href.substr(this.location.origin.length);
 
@@ -85,7 +85,7 @@ export class Corp extends Relay {
     return true;
   }
 
-  /** @inheritDoc */
+  /** @override */
   async init() {
     if (this.relayMethod === 'direct') {
       return this.authenticateDirect();
@@ -140,7 +140,7 @@ export class Corp extends Relay {
     return false;
   }
 
-  /** @inheritDoc */
+  /** @override */
   saveState() {
     return {
       relayServer: this.relayServer,
@@ -148,7 +148,7 @@ export class Corp extends Relay {
     };
   }
 
-  /** @inheritDoc */
+  /** @override */
   loadState(state) {
     this.relayServer = state.relayServer;
     this.relayServerSocket = state.relayServerSocket;
@@ -163,7 +163,7 @@ export class Corp extends Relay {
     return this.useWebsocket ? RelayCorpWsStream : RelayCorpXhrStream;
   }
 
-  /** @inheritDoc */
+  /** @override */
   async openSocket(host, port) {
     const options = {
       io: this.io_,

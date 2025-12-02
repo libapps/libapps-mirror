@@ -15,7 +15,7 @@ describe('nassh_buffer_concat_tests.js', () => {
  * Internal buffer inspector.
  */
 class Inspector extends BufferInspector {
-  /** @inheritDoc */
+  /** @override */
   getUnackedCount() {
     const buffer = /** @type {!ConcatBuffer} */ (this.buffer);
     return buffer.buffer_.length;

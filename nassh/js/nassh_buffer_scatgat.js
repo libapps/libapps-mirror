@@ -16,7 +16,7 @@ import {BufferInterface} from './nassh_buffer_interface.js';
  * we avoid creating new temporary buffers on the fly, and unnecessary memcpys.
  */
 export class ScatGatBuffer extends BufferInterface {
-  /** @inheritDoc */
+  /** @override */
   constructor(autoack = false) {
     super(autoack);
 
@@ -67,7 +67,7 @@ export class ScatGatBuffer extends BufferInterface {
     this.ackOffset_ = 0;
   }
 
-  /** @inheritDoc */
+  /** @override */
   write(buffer) {
     const u8 = new Uint8Array(buffer);
     // Since writePos_ is a number, this is limited to 2^53 which is ~9 peta
@@ -78,7 +78,7 @@ export class ScatGatBuffer extends BufferInterface {
     this.unreadCount_ += u8.length;
   }
 
-  /** @inheritDoc */
+  /** @override */
   read(length) {
     let written = 0;
     // We allocate the max requested size initially, but we'll shrink it down
@@ -120,7 +120,7 @@ export class ScatGatBuffer extends BufferInterface {
     return ret.subarray(0, written);
   }
 
-  /** @inheritDoc */
+  /** @override */
   ack(length) {
     let acked = 0;
     while (acked < length) {

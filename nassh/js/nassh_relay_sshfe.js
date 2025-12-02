@@ -14,32 +14,32 @@ import {RelaySshfeWsStream} from './nassh_stream_relay_sshfe.js';
  * SSH-FE relay implementation.
  */
 export class Sshfe extends Relay {
-  /** @inheritDoc */
+  /** @override */
   constructor(io, options, location, storage, localPrefs) {
     super(io, options, location, storage, localPrefs);
     this.sshAgent_ = options['--ssh-agent'] || getGoogleSshAgentExtension();
     this.relayServer = `wss://${this.proxyHost}:${this.proxyPort}`;
   }
 
-  /** @inheritDoc */
+  /** @override */
   redirect() {
     // This shouldn't be called in the first place.
     throw new Error('ssh-fe does not redirect');
   }
 
-  /** @inheritDoc */
+  /** @override */
   async init() {
     // Most init happens in the stream below.
     return true;
   }
 
-  /** @inheritDoc */
+  /** @override */
   saveState() { return {}; }
 
-  /** @inheritDoc */
+  /** @override */
   loadState(state) {}
 
-  /** @inheritDoc */
+  /** @override */
   async openSocket(host, port) {
     const settings = {
       io: this.io_,

@@ -15,7 +15,7 @@ describe('nassh_buffer_scatgat_tests.js', () => {
  * Internal buffer inspector.
  */
 class Inspector extends BufferInspector {
-  /** @inheritDoc */
+  /** @override */
   getUnackedCount() {
     const buffer = /** @type {!ScatGatBuffer} */ (this.buffer);
     let ret = buffer.getUnreadCount();

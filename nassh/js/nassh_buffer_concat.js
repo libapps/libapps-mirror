@@ -13,21 +13,21 @@ import {BufferInterface} from './nassh_buffer_interface.js';
  * A very simple buffer that concats inputs together.
  */
 export class ConcatBuffer extends BufferInterface {
-  /** @inheritDoc */
+  /** @override */
   constructor(autoack = false) {
     super(autoack);
     this.buffer_ = new Uint8Array(0);
     this.readPos_ = 0;
   }
 
-  /** @inheritDoc */
+  /** @override */
   write(buffer) {
     const u8 = new Uint8Array(buffer);
     this.buffer_ = concatTyped(this.buffer_, u8);
     this.unreadCount_ += u8.length;
   }
 
-  /** @inheritDoc */
+  /** @override */
   read(length) {
     const ret = this.buffer_.subarray(this.readPos_, this.readPos_ + length);
     this.readPos_ += ret.length;
@@ -38,7 +38,7 @@ export class ConcatBuffer extends BufferInterface {
     return ret;
   }
 
-  /** @inheritDoc */
+  /** @override */
   ack(length) {
     this.buffer_ = this.buffer_.subarray(length);
     this.readPos_ -= length;

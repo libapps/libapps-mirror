@@ -13,7 +13,7 @@ import {RelayCorpv4WsStream} from './nassh_stream_relay_corpv4.js';
  * Corp v4 relay implementation.
  */
 export class Corpv4 extends Corp {
-  /** @inheritDoc */
+  /** @override */
   getStreamClass() {
     return RelayCorpv4WsStream;
   }
