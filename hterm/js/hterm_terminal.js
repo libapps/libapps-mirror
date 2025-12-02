@@ -3347,6 +3347,7 @@ hterm.Terminal.prototype.hideOverlay = function() {
  * permission.  In other environments, this might always fail as the browser
  * frequently blocks access for security reasons.
  *
+ * @suppress {deprecated} execCommand
  * @return {?boolean} If nagivator.clipboard.readText is available, the return
  *     value is always null. Otherwise, this function uses legacy pasting and
  *     returns a boolean indicating whether it is successful.

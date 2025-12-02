@@ -4,6 +4,7 @@
 
 /**
  * @fileoverview hterm unit tests.  Specifically for core/high-level functions.
+ * @suppress {deprecated} execCommand
  */
 
 import {hterm} from '../index.js';

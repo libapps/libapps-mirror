@@ -129,6 +129,7 @@ hterm.sanitizeHtml = function(html) {
  * @param {!Document} document The document with the selection to copy.
  * @param {string} str The string data to copy out.
  * @return {!Promise<void>}
+ * @suppress {deprecated} execCommand
  */
 hterm.copySelectionToClipboard = function(document, str) {
   // Request permission if need be.
