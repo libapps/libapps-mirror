@@ -115,11 +115,11 @@ export function Agent(backendIDs, term, isForwarded) {
 /**
  * Initialize all backends by calling their ping function.
  *
- * @return {!Promise<!Array<undefined>>} A resolving promise if all backends
+ * @return {!Promise<void>} A resolving promise if all backends
  *     initialized successfully; a rejecting promise otherwise.
  */
-Agent.prototype.ping = function() {
-  return Promise.all(this.backends_.map((backend) => backend.ping()));
+Agent.prototype.ping = async function() {
+  await Promise.all(this.backends_.map((backend) => backend.ping()));
 };
 
 /**

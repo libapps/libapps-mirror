@@ -15,7 +15,10 @@ import './terminal_slider.js';
 export class HueSliderElement extends LitElement {
   static get is() { return 'hue-slider'; }
 
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       hue: {
@@ -25,7 +28,10 @@ export class HueSliderElement extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -48,7 +54,10 @@ export class HueSliderElement extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
         <terminal-slider value=${this.hue / 360} @change="${this.onChange_}">
@@ -68,8 +77,11 @@ export class HueSliderElement extends LitElement {
     this.slider_;
   }
 
-  /** @override */
-  firstUpdated() {
+  /**
+   * @param {!Map<string,*>} changedProperties
+   * @override
+   */
+  firstUpdated(changedProperties) {
     this.slider_ = this.shadowRoot.querySelector('terminal-slider');
   }
 

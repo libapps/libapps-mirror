@@ -6,7 +6,13 @@
  * @fileoverview Implementation for websockify proxies.
  */
 
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from '../../hterm/index.js';
+
+import {LocalPreferenceManager} from './nassh_preference_manager.js';
 import {Relay} from './nassh_relay.js';
+import {Stream} from './nassh_stream.js';
 import {RelayWebsockifyStream} from './nassh_stream_relay_websockify.js';
 
 /**
@@ -19,7 +25,14 @@ import {RelayWebsockifyStream} from './nassh_stream_relay_websockify.js';
  * @see https://github.com/novnc/websockify
  */
 export class Websockify extends Relay {
-  /** @override */
+  /**
+   * @param {!hterm.Terminal.IO} io
+   * @param {!Object} options
+   * @param {!Location} location
+   * @param {!lib.Storage} storage
+   * @param {!LocalPreferenceManager} localPrefs
+   * @override
+   */
   constructor(io, options, location, storage, localPrefs) {
     super(io, options, location, storage, localPrefs);
     this.useSecure = options['--use-ssl'];
@@ -31,19 +44,33 @@ export class Websockify extends Relay {
     throw new Error('websockify does not redirect');
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<boolean>}
+   * @override
+   */
   async init() {
     // No init required.
     return true;
   }
 
-  /** @override */
+  /**
+   * @return {!Object}
+   * @override
+   */
   saveState() { return {}; }
 
-  /** @override */
+  /**
+   * @param {!Object} state
+   * @override
+   */
   loadState(state) {}
 
-  /** @override */
+  /**
+   * @param {string} host
+   * @param {number} port
+   * @return {!Promise<!Stream>}
+   * @override
+   */
   async openSocket(host, port) {
     const settings = {
       relayHost: this.proxyHost,

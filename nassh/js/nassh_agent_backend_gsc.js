@@ -117,7 +117,10 @@ GSC.APIContext = null;
  * @see https://tools.ietf.org/html/draft-ietf-curdle-rsa-sha2-00#section-2
  *
  * @readonly
- * @enum {{name:string, identifier:!Uint8Array, signaturePrefix:!Uint8Array}}
+ * @type {!Object<
+ *   string,
+ *   {name:string, identifier:!Uint8Array, signaturePrefix:!Uint8Array}
+ * >}
  */
 const HashAlgorithms = {
   SHA1: {

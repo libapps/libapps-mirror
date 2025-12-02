@@ -6,15 +6,28 @@
  * @fileoverview Implementation for the ssh-fe@google.com proxy.
  */
 
+import {lib} from '../../libdot/index.js';
+
+import {hterm} from '../../hterm/index.js';
+
 import {getGoogleSshAgentExtension} from './nassh_google.js';
+import {LocalPreferenceManager} from './nassh_preference_manager.js';
 import {Relay} from './nassh_relay.js';
+import {Stream} from './nassh_stream.js';
 import {RelaySshfeWsStream} from './nassh_stream_relay_sshfe.js';
 
 /**
  * SSH-FE relay implementation.
  */
 export class Sshfe extends Relay {
-  /** @override */
+  /**
+   * @param {!hterm.Terminal.IO} io
+   * @param {!Object} options
+   * @param {!Location} location
+   * @param {!lib.Storage} storage
+   * @param {!LocalPreferenceManager} localPrefs
+   * @override
+   */
   constructor(io, options, location, storage, localPrefs) {
     super(io, options, location, storage, localPrefs);
     this.sshAgent_ = options['--ssh-agent'] || getGoogleSshAgentExtension();
@@ -27,19 +40,33 @@ export class Sshfe extends Relay {
     throw new Error('ssh-fe does not redirect');
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<boolean>}
+   * @override
+   */
   async init() {
     // Most init happens in the stream below.
     return true;
   }
 
-  /** @override */
+  /**
+   * @return {!Object}
+   * @override
+   */
   saveState() { return {}; }
 
-  /** @override */
+  /**
+   * @param {!Object} state
+   * @override
+   */
   loadState(state) {}
 
-  /** @override */
+  /**
+   * @param {string} host
+   * @param {number} port
+   * @return {!Promise<!Stream>}
+   * @override
+   */
   async openSocket(host, port) {
     const settings = {
       io: this.io_,

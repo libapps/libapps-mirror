@@ -31,8 +31,7 @@ lib.Storage.Chrome = class extends lib.Storage {
   }
 
   /**
-   * Delete everything in this storage.
-   *
+   * @return {!Promise<void>}
    * @override
    */
   async clear() {
@@ -42,9 +41,8 @@ lib.Storage.Chrome = class extends lib.Storage {
   }
 
   /**
-   * Fetch the values of multiple storage items.
-   *
-   * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
+   * @param {?Array<string>} keys
+   * @return {!Promise<!Object<string, *>>}
    * @override
    */
   async getItems(keys) {
@@ -54,11 +52,9 @@ lib.Storage.Chrome = class extends lib.Storage {
   }
 
   /**
-   * Set a value in storage.
-   *
-   * @param {string} key The key for the value to be stored.
-   * @param {*} value The value to be stored.  Anything that can be serialized
-   *     with JSON is acceptable.
+   * @param {string} key
+   * @param {*} value
+   * @return {!Promise<void>}
    * @override
    */
   async setItem(key, value) {
@@ -86,9 +82,8 @@ lib.Storage.Chrome = class extends lib.Storage {
   }
 
   /**
-   * Set multiple values in storage.
-   *
-   * @param {!Object} obj A map of key/values to set in storage.
+   * @param {!Object} obj
+   * @return {!Promise<void>}
    * @override
    */
   async setItems(obj) {
@@ -98,9 +93,8 @@ lib.Storage.Chrome = class extends lib.Storage {
   }
 
   /**
-   * Remove multiple items from storage.
-   *
-   * @param {!Array<string>} keys The keys to be removed.
+   * @param {!Array<string>} keys
+   * @return {!Promise<void>}
    * @override
    */
   async removeItems(keys) {

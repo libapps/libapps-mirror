@@ -9,7 +9,10 @@ import {TerminalSettingsElement} from './terminal_settings_element.js';
 
 
 export class TerminalSettingsScrollbackLimit extends TerminalSettingsElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       value: {
@@ -18,7 +21,10 @@ export class TerminalSettingsScrollbackLimit extends TerminalSettingsElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       :host {
@@ -33,7 +39,10 @@ export class TerminalSettingsScrollbackLimit extends TerminalSettingsElement {
     this.preference = 'scrollback-limit';
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
 

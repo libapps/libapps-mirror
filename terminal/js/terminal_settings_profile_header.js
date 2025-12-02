@@ -18,14 +18,20 @@ import {ProfileType, getProfileIds, setProfileIds}
 import './terminal_textfield.js';
 
 export class TerminalSettingsProfileHeader extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       confirmDeleteMsg_: {state: true},
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       :host {
@@ -56,7 +62,10 @@ export class TerminalSettingsProfileHeader extends LitElement {
     this.newProfileDialogRef_ = createRef();
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
     const title = msg('TERMINAL_SETTINGS_PROFILE_CREATE_DIALOG_TITLE');

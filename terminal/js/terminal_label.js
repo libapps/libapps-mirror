@@ -13,7 +13,10 @@ import {LitElement, css, html} from './lit.js';
  * style.
  */
 export class TerminalLabelElement extends LitElement {
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       :host > div {
@@ -35,7 +38,10 @@ export class TerminalLabelElement extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
       <div><slot></slot></div>

@@ -16,7 +16,10 @@ import {delayedScheduler} from './terminal_common.js';
 // The find bar UI element. The user interact with it by calling the public
 // methods and listening to "find-bar" events.
 export class TerminalFindBar extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       counter_: {
@@ -39,7 +42,10 @@ export class TerminalFindBar extends LitElement {
     }, 300);
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -111,7 +117,10 @@ export class TerminalFindBar extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
     const searchButtonDisabled = this.inputIsEmpty_ ? 'true' : undefined;

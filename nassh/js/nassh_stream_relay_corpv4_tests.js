@@ -18,7 +18,10 @@ class WebSocketMock {
     this.socketData = [];
   }
 
-  /** @override */
+  /**
+   * @param {!ArrayBuffer|!ArrayBufferView|!Blob|string} data
+   * @override
+   */
   send(data) {
     this.socketData.push(data);
   }

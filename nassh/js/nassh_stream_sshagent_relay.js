@@ -24,6 +24,7 @@ export class SshAgentRelayStream extends Stream {
    * Open a connection to agent.
    *
    * @param {!Object} settings
+   * @return {!Promise<void>}
    * @override
    */
   async open(settings) {
@@ -93,9 +94,7 @@ export class SshAgentRelayStream extends Stream {
     this.port_.postMessage({'type': 'auth-agent@openssh.com', 'data': [0]});
   }
 
-  /**
-   * @override
-   */
+  /** @override */
   close() {
     if (this.port_) {
       this.port_.disconnect();

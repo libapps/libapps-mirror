@@ -19,7 +19,10 @@ const DEFAULT_CONVERTER = {
 export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
   static get is() { return 'terminal-settings-checkbox'; }
 
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       preference: {
@@ -53,7 +56,10 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
     this.ariaLabel = undefined;
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         #checkbox {
@@ -110,7 +116,10 @@ export class TerminalSettingsCheckboxElement extends TerminalSettingsElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
         <input id="checkbox" type="checkbox" @change="${this.onUiChanged_}"

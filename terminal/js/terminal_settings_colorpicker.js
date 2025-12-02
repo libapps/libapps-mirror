@@ -72,7 +72,10 @@ function swatchStyle(color, showFocusRing) {
 export class TerminalColorpickerElement extends LitElement {
   static get is() { return 'terminal-colorpicker'; }
 
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       value: {
@@ -109,7 +112,10 @@ export class TerminalColorpickerElement extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         #smallview {
@@ -173,7 +179,10 @@ export class TerminalColorpickerElement extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const transparency = this.disableTransparency ? '' : html`
         <transparency-slider color="${this.value}"
@@ -378,7 +387,10 @@ export class TerminalSettingsColorpickerElement extends
     TerminalSettingsElement {
   static get is() { return 'terminal-settings-colorpicker'; }
 
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       preference: {
@@ -397,7 +409,10 @@ export class TerminalSettingsColorpickerElement extends
     };
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
         <terminal-colorpicker @change="${this.scheduleUpdate_}"

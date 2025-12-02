@@ -17,7 +17,10 @@ import {backgroundImageLocalStorageKey} from './terminal_common.js';
 export class TerminalSettingsBackgroundImageElement extends LitElement {
   static get is() { return 'terminal-settings-background-image'; }
 
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       imagePreviewSrc_: {
@@ -29,7 +32,10 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       :host {
@@ -80,7 +86,10 @@ export class TerminalSettingsBackgroundImageElement extends LitElement {
     this.imagePreviewSrc_ = window.localStorage.getItem(this.key_) || '';
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
 

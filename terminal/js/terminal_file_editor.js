@@ -13,7 +13,10 @@ import {LitElement, createRef, css, html, ref} from './lit.js';
  * `fileSystemPromise` and `path` must be set.
  */
 class TerminalFileEditor extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       fileSystemPromise: {
@@ -25,7 +28,10 @@ class TerminalFileEditor extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -55,7 +61,10 @@ class TerminalFileEditor extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!Object}
+   * @override
+   */
   static get shadowRootOptions() {
     return {
       ...super.shadowRootOptions,
@@ -71,7 +80,10 @@ class TerminalFileEditor extends LitElement {
     this.textareaRef_ = createRef();
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
         <textarea ${ref(this.textareaRef_)}

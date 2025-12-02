@@ -226,6 +226,7 @@ RelayCorpv4WsStream.constructor = RelayCorpv4WsStream;
  * Open a relay socket. Setup metrics reporter.
  *
  * @param {!Object} settings
+ * @return {!Promise<void>}
  * @override
  */
 RelayCorpv4WsStream.prototype.open = async function(settings) {

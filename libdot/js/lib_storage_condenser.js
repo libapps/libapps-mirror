@@ -98,10 +98,7 @@ lib.Storage.Condenser = class extends lib.Storage {
   }
 
   /**
-   * Register a function to observe storage changes.
-   *
-   * @param {function(!Object<string, !StorageChange>)} callback The function to
-   *     invoke when the storage changes.
+   * @param {function(!Object<string, !StorageChange>)} callback
    * @override
    */
   addObserver(callback) {
@@ -109,10 +106,7 @@ lib.Storage.Condenser = class extends lib.Storage {
   }
 
   /**
-   * Unregister a change observer.
-   *
-   * @param {function(!Object<string, !StorageChange>)} callback A previously
-   *     registered callback.
+   * @param {function(!Object<string, !StorageChange>)} callback
    * @override
    */
   removeObserver(callback) {
@@ -120,8 +114,7 @@ lib.Storage.Condenser = class extends lib.Storage {
   }
 
   /**
-   * Delete everything in this storage.
-   *
+   * @return {!Promise<void>}
    * @override
    */
   async clear() {
@@ -134,9 +127,8 @@ lib.Storage.Condenser = class extends lib.Storage {
   }
 
   /**
-   * Fetch the values of multiple storage items.
-   *
-   * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
+   * @param {?Array<string>} keys
+   * @return {!Promise<!Object<string, *>>}
    * @override
    */
   async getItems(keys) {
@@ -145,9 +137,8 @@ lib.Storage.Condenser = class extends lib.Storage {
   }
 
   /**
-   * Set multiple values in storage.
-   *
-   * @param {!Object} obj A map of key/values to set in storage.
+   * @param {!Object} obj
+   * @return {!Promise<void>}
    * @override
    */
   async setItems(obj) {
@@ -157,9 +148,8 @@ lib.Storage.Condenser = class extends lib.Storage {
   }
 
   /**
-   * Remove multiple items from storage.
-   *
-   * @param {!Array<string>} keys The keys to be removed.
+   * @param {!Array<string>} keys
+   * @return {!Promise<void>}
    * @override
    */
   async removeItems(keys) {

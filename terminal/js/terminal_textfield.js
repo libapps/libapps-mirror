@@ -12,7 +12,10 @@ import {redispatchEvent} from './terminal_common.js';
 import './terminal_label.js';
 
 export class TerminalTextfieldElement extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       label: {
@@ -60,7 +63,10 @@ export class TerminalTextfieldElement extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!Object}
+   * @override
+   */
   static get shadowRootOptions() {
     return {
       ...super.shadowRootOptions,
@@ -68,7 +74,10 @@ export class TerminalTextfieldElement extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       :host {
@@ -189,7 +198,11 @@ export class TerminalTextfieldElement extends LitElement {
     this.addEventListener('blur', () => this.focused_ = false);
   }
 
-  /** @override */
+  /**
+   * @param {!Map<string,*>} changedProperties
+   * @return {boolean}
+   * @override
+   */
   shouldUpdate(changedProperties) {
     if (changedProperties.size === 1 && changedProperties.has('value')) {
       return this.value !== this.inputRef_.value?.value;
@@ -197,7 +210,10 @@ export class TerminalTextfieldElement extends LitElement {
     return true;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     let label;
     if (this.label) {
@@ -244,7 +260,10 @@ export class TerminalTextfieldElement extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @param {!Map<string,*>} changedProperties
+   * @override
+   */
   updated(changedProperties) {
     if (changedProperties.has('value')) {
       this.maybeFitContent_();

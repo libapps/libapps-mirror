@@ -36,7 +36,10 @@ export class Base {
     this.namespace = '';
   }
 
-  /** @override */
+  /**
+   * @param {!Process} process
+   * @override
+   */
   setProcess(process) {
     this.process_ = process;
   }
@@ -202,7 +205,10 @@ export class Base {
       .filter((/** @type {string} */ key) => key.startsWith('sys_'));
   }
 
-  /** @override */
+  /**
+   * @return {!Object<string, !Array<string>>}
+   * @override
+   */
   getImports() {
     const entries = {};
     this.getSyscalls_().forEach((key) => {
@@ -242,7 +248,12 @@ export class WasiPreview1 extends Base {
     return ret;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.pointer} argv
+   * @param {!WASI_t.pointer} argv_buf
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_args_get(argv, argv_buf) {
     const ret = this.handle_args_get();
     if (typeof ret === 'number') {
@@ -269,7 +280,12 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.pointer} argc
+   * @param {!WASI_t.pointer} argv_size
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_args_sizes_get(argc, argv_size) {
     const ret = this.handle_args_sizes_get();
     if (typeof ret === 'number') {
@@ -284,6 +300,9 @@ export class WasiPreview1 extends Base {
   }
 
   /**
+   * @param {!WASI_t.clockid} clockid
+   * @param {!WASI_t.pointer} resolution_ptr
+   * @return {!WASI_t.errno}
    * @override
    * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
@@ -299,6 +318,10 @@ export class WasiPreview1 extends Base {
   }
 
   /**
+   * @param {!WASI_t.clockid} clockid
+   * @param {!WASI_t.timestamp} precision
+   * @param {!WASI_t.pointer} time_ptr
+   * @return {!WASI_t.errno}
    * @override
    * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
@@ -314,7 +337,12 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.pointer} envp
+   * @param {!WASI_t.pointer} env_buf
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_environ_get(envp, env_buf) {
     const ret = this.handle_environ_get();
     if (typeof ret === 'number') {
@@ -344,7 +372,12 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.pointer} env_size
+   * @param {!WASI_t.pointer} env_buf
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_environ_sizes_get(env_size, env_buf) {
     const ret = this.handle_environ_sizes_get();
     if (typeof ret === 'number') {
@@ -360,27 +393,53 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.filesize} offset
+   * @param {!WASI_t.filesize} len
+   * @param {!WASI_t.advice} advice
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_advise(fd, offset, len, advice) {
     return this.handle_fd_advise(fd, offset, len, advice);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.filesize} offset
+   * @param {!WASI_t.filesize} len
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_allocate(fd, offset, len) {
     return this.handle_fd_allocate(fd, offset, len);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_close(fd) {
     return this.handle_fd_close(fd);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_datasync(fd) {
     return this.handle_fd_datasync(fd);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} buf
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_fdstat_get(fd, buf) {
     const ret = this.handle_fd_fdstat_get(fd);
     if (typeof ret === 'number') {
@@ -392,18 +451,34 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.fdflags} fdflags
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_fdstat_set_flags(fd, fdflags) {
     return this.handle_fd_fdstat_set_flags(fd, fdflags);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.rights} fs_rights_base
+   * @param {!WASI_t.rights} fs_rights_inheriting
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_fdstat_set_rights(fd, fs_rights_base, fs_rights_inheriting) {
     return this.handle_fd_fdstat_set_rights(
         fd, fs_rights_base, fs_rights_inheriting);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} filestat_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_filestat_get(fd, filestat_ptr) {
     const ret = this.handle_fd_filestat_get(fd);
     if (typeof ret === 'number') {
@@ -415,17 +490,37 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.filesize} size
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_filestat_set_size(fd, size) {
     return this.handle_fd_filestat_set_size(fd, size);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.timestamp} atim
+   * @param {!WASI_t.timestamp} mtim
+   * @param {!WASI_t.fstflags} fst_flags
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_filestat_set_times(fd, atim, mtim, fst_flags) {
     return this.handle_fd_filestat_set_times(fd, atim, mtim, fst_flags);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} iovs_ptr
+   * @param {!WASI_t.size} iovs_len
+   * @param {!WASI_t.filesize} offset
+   * @param {!WASI_t.pointer} nread_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_pread(fd, iovs_ptr, iovs_len, offset, nread_ptr) {
     const dvIovs = this.getView_(iovs_ptr);
     let nread = 0;
@@ -459,7 +554,13 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} path_ptr
+   * @param {!WASI_t.size} path_len
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_prestat_dir_name(fd, path_ptr, path_len) {
     const ret = this.handle_fd_prestat_dir_name(fd);
     if (typeof ret === 'number') {
@@ -472,7 +573,12 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} buf
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_prestat_get(fd, buf) {
     const ret = this.handle_fd_prestat_get(fd);
     if (typeof ret === 'number') {
@@ -487,7 +593,15 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} iovs_ptr
+   * @param {!WASI_t.size} iovs_len
+   * @param {!WASI_t.filesize} offset
+   * @param {!WASI_t.pointer} nwritten_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_pwrite(fd, iovs_ptr, iovs_len, offset, nwritten_ptr) {
     const dvIovs = this.getView_(iovs_ptr);
     let nwritten = 0;
@@ -514,7 +628,14 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} iovs_ptr
+   * @param {!WASI_t.size} iovs_len
+   * @param {!WASI_t.pointer} nread_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_read(fd, iovs_ptr, iovs_len, nread_ptr) {
     const dvIovs = this.getView_(iovs_ptr);
     let nread = 0;
@@ -551,7 +672,15 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} buf_ptr
+   * @param {!WASI_t.size} buf_len
+   * @param {!WASI_t.dircookie} cookie
+   * @param {!WASI_t.pointer} size_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_readdir(fd, buf_ptr, buf_len, cookie, size_ptr) {
     const buf = this.getMem_(buf_ptr, buf_ptr + buf_len);
     const ret = this.handle_fd_readdir(fd, buf, cookie);
@@ -564,12 +693,22 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.fd} to
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_renumber(fd, to) {
     return this.handle_fd_renumber(fd, to);
   }
 
   /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.filedelta} offset
+   * @param {!WASI_t.whence} whence
+   * @param {!WASI_t.pointer} newoffset_ptr
+   * @return {!WASI_t.errno}
    * @override
    * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
@@ -588,12 +727,19 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_sync(fd) {
     return this.handle_fd_sync(fd);
   }
 
   /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} offset_ptr
+   * @return {!WASI_t.errno}
    * @override
    * @suppress {checkTypes} https://github.com/google/closure-compiler/commit/ee80bed57fe1ee93876fee66ad77e025a345c7a7
    */
@@ -608,7 +754,14 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} iovs_ptr
+   * @param {!WASI_t.size} iovs_len
+   * @param {!WASI_t.pointer} nwritten_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_fd_write(fd, iovs_ptr, iovs_len, nwritten_ptr) {
     const dvIovs = this.getView_(iovs_ptr);
     let nwritten = 0;
@@ -634,7 +787,13 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} path_ptr
+   * @param {!WASI_t.size} path_len
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_create_directory(fd, path_ptr, path_len) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (typeof path === 'number') {
@@ -644,7 +803,15 @@ export class WasiPreview1 extends Base {
     return this.handle_path_create_directory(fd, path);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.lookupflags} lookupflags
+   * @param {!WASI_t.pointer} path_ptr
+   * @param {!WASI_t.size} path_len
+   * @param {!WASI_t.pointer} filestat_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_filestat_get(fd, lookupflags, path_ptr, path_len, filestat_ptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (typeof path === 'number') {
@@ -661,7 +828,17 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.lookupflags} flags
+   * @param {!WASI_t.pointer} path_ptr
+   * @param {!WASI_t.size} path_len
+   * @param {!WASI_t.timestamp} atim
+   * @param {!WASI_t.timestamp} mtim
+   * @param {!WASI_t.fstflags} fst_flags
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_filestat_set_times(fd, flags, path_ptr, path_len, atim, mtim,
                               fst_flags) {
     const path = this.get_nullable_path_(path_ptr, path_len);
@@ -673,7 +850,17 @@ export class WasiPreview1 extends Base {
         fd, flags, path, atim, mtim, fst_flags);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} old_fd
+   * @param {!WASI_t.lookupflags} old_flags
+   * @param {!WASI_t.pointer} old_path_ptr
+   * @param {!WASI_t.size} old_path_len
+   * @param {!WASI_t.fd} new_fd
+   * @param {!WASI_t.pointer} new_path_ptr
+   * @param {!WASI_t.size} new_path_len
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_link(old_fd, old_flags, old_path_ptr, old_path_len, new_fd,
                 new_path_ptr, new_path_len) {
     const old_path = this.get_nullable_path_(old_path_ptr, old_path_len);
@@ -689,7 +876,19 @@ export class WasiPreview1 extends Base {
     return this.handle_path_link(old_fd, old_flags, old_path, new_fd, new_path);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} dirfd
+   * @param {!WASI_t.lookupflags} dirflags
+   * @param {!WASI_t.pointer} path_ptr
+   * @param {!WASI_t.size} path_len
+   * @param {!WASI_t.oflags} o_flags
+   * @param {!WASI_t.rights} fs_rights_base
+   * @param {!WASI_t.rights} fs_rights_inheriting
+   * @param {!WASI_t.fdflags} fdflags
+   * @param {!WASI_t.pointer} fd_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_open(dirfd, dirflags, path_ptr, path_len, o_flags, fs_rights_base,
                 fs_rights_inheriting, fdflags, fd_ptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
@@ -710,7 +909,16 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} path_ptr
+   * @param {!WASI_t.size} path_len
+   * @param {!WASI_t.pointer} buf_ptr
+   * @param {!WASI_t.size} buf_len
+   * @param {!WASI_t.pointer} bufused_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_readlink(fd, path_ptr, path_len, buf_ptr, buf_len, bufused_ptr) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (typeof path === 'number') {
@@ -728,7 +936,13 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} path_ptr
+   * @param {!WASI_t.size} path_len
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_remove_directory(fd, path_ptr, path_len) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (typeof path === 'number') {
@@ -738,7 +952,16 @@ export class WasiPreview1 extends Base {
     return this.handle_path_remove_directory(fd, path);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} old_path_ptr
+   * @param {!WASI_t.size} old_path_len
+   * @param {!WASI_t.fd} new_fd
+   * @param {!WASI_t.pointer} new_path_ptr
+   * @param {!WASI_t.size} new_path_len
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_rename(fd, old_path_ptr, old_path_len, new_fd, new_path_ptr,
                   new_path_len) {
     const old_path = this.get_nullable_path_(old_path_ptr, old_path_len);
@@ -754,7 +977,15 @@ export class WasiPreview1 extends Base {
     return this.handle_path_rename(fd, old_path, new_fd, new_path);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.pointer} old_path_ptr
+   * @param {!WASI_t.size} old_path_len
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} new_path_ptr
+   * @param {!WASI_t.size} new_path_len
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_symlink(old_path_ptr, old_path_len, fd, new_path_ptr, new_path_len) {
     const old_path = this.get_nullable_path_(old_path_ptr, old_path_len);
     if (typeof old_path === 'number') {
@@ -769,7 +1000,13 @@ export class WasiPreview1 extends Base {
     return this.handle_path_symlink(old_path, fd, new_path);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} path_ptr
+   * @param {!WASI_t.size} path_len
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_path_unlink_file(fd, path_ptr, path_len) {
     const path = this.get_nullable_path_(path_ptr, path_len);
     if (typeof path === 'number') {
@@ -779,7 +1016,14 @@ export class WasiPreview1 extends Base {
     return this.handle_path_unlink_file(fd, path);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.pointer} subscriptions_ptr
+   * @param {!WASI_t.pointer} events_ptr
+   * @param {!WASI_t.size} nsubscriptions
+   * @param {!WASI_t.pointer} nevents_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_poll_oneoff(subscriptions_ptr, events_ptr, nsubscriptions, nevents_ptr) {
     const dvNevents = this.getView_(nevents_ptr);
     if (nsubscriptions <= 0) {
@@ -828,7 +1072,11 @@ export class WasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.exitcode} status
+   * @throws {!util.CompletedProcessError}
+   * @override
+   */
   sys_proc_exit(status) {
     this.handle_proc_exit(status);
 
@@ -836,7 +1084,11 @@ export class WasiPreview1 extends Base {
     throw new util.CompletedProcessError({status});
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.signal} signal
+   * @throws {!util.CompletedProcessError}
+   * @override
+   */
   sys_proc_raise(signal) {
     this.handle_proc_raise(signal);
 
@@ -844,18 +1096,35 @@ export class WasiPreview1 extends Base {
     throw new util.CompletedProcessError({signal});
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.pointer} buf
+   * @param {!WASI_t.size} buf_len
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_random_get(buf, buf_len) {
     const bytes = this.getMem_(buf, buf + buf_len);
     return this.handle_random_get(bytes);
   }
 
-  /** @override */
+  /**
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_sched_yield() {
     return this.handle_sched_yield();
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} ri_data_ptr
+   * @param {!WASI_t.size} ri_data_len
+   * @param {!WASI_t.u16} ri_flags
+   * @param {!WASI_t.pointer} ro_datalen_ptr
+   * @param {!WASI_t.pointer} ro_flags_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_sock_recv(fd, ri_data_ptr, ri_data_len, ri_flags, ro_datalen_ptr,
                 ro_flags_ptr) {
     if (ri_flags !== 0) {
@@ -864,7 +1133,15 @@ export class WasiPreview1 extends Base {
     return this.sys_fd_read(fd, ri_data_ptr, ri_data_len, ro_datalen_ptr);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.pointer} si_data_ptr
+   * @param {!WASI_t.size} si_data_len
+   * @param {!WASI_t.u16} si_flags
+   * @param {!WASI_t.pointer} so_datalen_ptr
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_sock_send(fd, si_data_ptr, si_data_len, si_flags, so_datalen_ptr) {
     if (si_flags !== 0) {
       return WASI.errno.ENOTSUP;
@@ -872,7 +1149,12 @@ export class WasiPreview1 extends Base {
     return this.sys_fd_write(fd, si_data_ptr, si_data_len, so_datalen_ptr);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.u32} how
+   * @return {!WASI_t.errno}
+   * @override
+   */
   sys_sock_shutdown(fd, how) {
     return this.handle_sock_shutdown(fd, how);
   }

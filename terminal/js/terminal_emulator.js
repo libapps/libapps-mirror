@@ -144,32 +144,50 @@ function ctl(ch) {
  * xterm.
  */
 class XtermTerminalIO extends hterm.Terminal.IO {
-  /** @override */
+  /**
+   * @param {!ArrayBuffer|!Array<number>} buffer
+   * @override
+   */
   writeUTF8(buffer) {
     this.terminal_.write(new Uint8Array(buffer));
   }
 
-  /** @override */
+  /**
+   * @param {!ArrayBuffer|!Array<number>} buffer
+   * @override
+   */
   writelnUTF8(buffer) {
     this.terminal_.writeln(new Uint8Array(buffer));
   }
 
-  /** @override */
+  /**
+   * @param {string} string
+   * @override
+   */
   print(string) {
     this.terminal_.write(string);
   }
 
-  /** @override */
+  /**
+   * @param {string} string
+   * @override
+   */
   writeUTF16(string) {
     this.print(string);
   }
 
-  /** @override */
+  /**
+   * @param {string} string
+   * @override
+   */
   println(string) {
     this.terminal_.writeln(string);
   }
 
-  /** @override */
+  /**
+   * @param {string} string
+   * @override
+   */
   writelnUTF16(string) {
     this.println(string);
   }
@@ -586,7 +604,10 @@ export class XtermTerminal {
     }
   }
 
-  /** @override */
+  /**
+   * @param {string} title
+   * @override
+   */
   setWindowTitle(title) {
     document.title = title;
   }
@@ -596,7 +617,10 @@ export class XtermTerminal {
     this.bell_.ring();
   }
 
-  /** @override */
+  /**
+   * @param {string} str
+   * @override
+   */
   print(str) {
     this.xtermInternal_.print(str);
   }
@@ -626,12 +650,19 @@ export class XtermTerminal {
     this.xtermInternal_.eraseInBufferLine(cursorY, 0, this.term.cols);
   }
 
-  /** @override */
+  /**
+   * @param {number} row
+   * @param {number} column
+   * @override
+   */
   setCursorPosition(row, column) {
     this.xtermInternal_.setCursor(column, row);
   }
 
-  /** @override */
+  /**
+   * @param {number} column
+   * @override
+   */
   setCursorColumn(column) {
     this.xtermInternal_.setCursor(column, this.term.buffer.active.cursorY);
   }
@@ -641,12 +672,18 @@ export class XtermTerminal {
     this.xtermInternal_.newLine();
   }
 
-  /** @override */
+  /**
+   * @param {number} number
+   * @override
+   */
   cursorLeft(number) {
     this.xtermInternal_.moveCursor(-(number ?? 1), 0);
   }
 
-  /** @override */
+  /**
+   * @param {boolean} enabled
+   * @override
+   */
   setAccessibilityEnabled(enabled) {
     if (enabled === this.a11yEnabled_) {
       return;
@@ -664,11 +701,15 @@ export class XtermTerminal {
     }
   }
 
+  /** @return {boolean} */
   hasBackgroundImage() {
     return !!this.container_.style.backgroundImage;
   }
 
-  /** @override */
+  /**
+   * @param {string=} image
+   * @override
+   */
   setBackgroundImage(image) {
     this.container_.style.backgroundImage = image || '';
     this.updateBackgroundColor_(this.prefs_.getString('background-color'));
@@ -796,6 +837,7 @@ export class XtermTerminal {
   installKeyboard() {}
 
   /**
+   * @param {!Element} elem
    * @override
    */
   decorate(elem) {
@@ -856,7 +898,11 @@ export class XtermTerminal {
     })();
   }
 
-  /** @override */
+  /**
+   * @param {string|!Node} msg
+   * @param {?number=} timeout
+   * @override
+   */
   showOverlay(msg, timeout = 1500) {
     this.notificationCenter_?.show(msg, {timeout});
   }
@@ -866,12 +912,18 @@ export class XtermTerminal {
     this.notificationCenter_?.hide();
   }
 
-  /** @override */
+  /**
+   * @return {!hterm.PreferenceManager}
+   * @override
+   */
   getPrefs() {
     return this.prefs_;
   }
 
-  /** @override */
+  /**
+   * @return {!Document}
+   * @override
+   */
   getDocument() {
     return window.document;
   }
@@ -881,12 +933,19 @@ export class XtermTerminal {
     this.term.reset();
   }
 
-  /** @override */
+  /**
+   * @param {string} profileId
+   * @param {function()=} callback
+   * @override
+   */
   setProfile(profileId, callback = undefined) {
     this.prefs_.setProfile(profileId).then(callback);
   }
 
-  /** @override */
+  /**
+   * @param {string} string
+   * @override
+   */
   interpret(string) {
     this.term.write(string);
   }
@@ -1624,7 +1683,10 @@ export class XtermTerminal {
 }
 
 class HtermTerminal extends hterm.Terminal {
-  /** @override */
+  /**
+   * @param {!Element} div
+   * @override
+   */
   decorate(div) {
     super.decorate(div);
 
@@ -1774,7 +1836,10 @@ export async function createEmulator({storage, profileId}) {
 }
 
 class TerminalCopyNotice extends LitElement {
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -1798,7 +1863,10 @@ class TerminalCopyNotice extends LitElement {
     }
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
        ${ICON_COPY}

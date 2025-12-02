@@ -155,7 +155,10 @@ export function parseSSHDestination(destination) {
  * ones. Use method `show()` to set the nassh profile id and show the dialog.
  */
 export class TerminalSSHDialog extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       nasshProfileId_: {state: true},
@@ -167,7 +170,10 @@ export class TerminalSSHDialog extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -251,7 +257,10 @@ export class TerminalSSHDialog extends LitElement {
     return hterm.messageManager.get('TERMINAL_HOME_NEW_SSH_CONNECTION');
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = (id) => hterm.messageManager.get(id);
 

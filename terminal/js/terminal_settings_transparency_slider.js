@@ -20,7 +20,10 @@ const setAlpha = lib.colors.setAlpha;
 export class TransparencySliderElement extends LitElement {
   static get is() { return 'transparency-slider'; }
 
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       color: {
@@ -33,7 +36,10 @@ export class TransparencySliderElement extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -66,7 +72,10 @@ export class TransparencySliderElement extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const color = lib.notNull(lib.colors.normalizeCSS(
         this.color || 'rgb(0, 0, 0)'));
@@ -93,8 +102,11 @@ export class TransparencySliderElement extends LitElement {
     this.slider_;
   }
 
-  /** @override */
-  firstUpdated() {
+  /**
+   * @param {!Map<string,*>} changedProperties
+   * @override
+   */
+  firstUpdated(changedProperties) {
     this.slider_ = this.shadowRoot.querySelector('terminal-slider');
   }
 

@@ -18,7 +18,10 @@ export const ARROW_KEY_OFFSET = 0.01;
 /** A slider element. It dispatches "change" event when the value changes. The
  * `value` ranges from 0 to 1. */
 export class TerminalSlider extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       value: {
@@ -33,7 +36,10 @@ export class TerminalSlider extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -53,7 +59,10 @@ export class TerminalSlider extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
         <slot></slot>

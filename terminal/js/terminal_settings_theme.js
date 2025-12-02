@@ -270,7 +270,10 @@ export class TerminalSettingsThemeElement extends LitElement {
     });
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       #themes {
@@ -377,7 +380,10 @@ export class TerminalSettingsThemeElement extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
     const span = (color, text) => {

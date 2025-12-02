@@ -32,6 +32,7 @@ export class SshAgentStream extends Stream {
    * Open a connection to the agent and let it initialize its backends.
    *
    * @param {!Object} settings
+   * @return {!Promise<void>}
    * @override
    */
   async open(settings) {

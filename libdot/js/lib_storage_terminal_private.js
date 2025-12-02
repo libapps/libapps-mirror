@@ -155,8 +155,7 @@ lib.Storage.TerminalPrivate = class extends lib.Storage {
   }
 
   /**
-   * Delete everything in this storage.
-   *
+   * @return {!Promise<void>}
    * @override
    */
   async clear() {
@@ -165,9 +164,8 @@ lib.Storage.TerminalPrivate = class extends lib.Storage {
   }
 
   /**
-   * Fetch the values of multiple storage items.
-   *
-   * @param {?Array<string>} keys The keys to look up.  Pass null for all keys.
+   * @param {?Array<string>} keys
+   * @return {!Promise<!Object<string, *>>}
    * @override
    */
   async getItems(keys) {
@@ -188,9 +186,8 @@ lib.Storage.TerminalPrivate = class extends lib.Storage {
   }
 
   /**
-   * Set multiple values in storage.
-   *
-   * @param {!Object} obj A map of key/values to set in storage.
+   * @param {!Object} obj
+   * @return {!Promise<void>}
    * @override
    */
   async setItems(obj) {
@@ -199,9 +196,8 @@ lib.Storage.TerminalPrivate = class extends lib.Storage {
   }
 
   /**
-   * Remove multiple items from storage.
-   *
-   * @param {!Array<string>} keys The keys to be removed.
+   * @param {!Array<string>} keys
+   * @return {!Promise<void>}
    * @override
    */
   async removeItems(keys) {

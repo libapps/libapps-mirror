@@ -21,7 +21,12 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
     this.td = new TextDecoder();
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!TypedArray} buf
+   * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
+   * @override
+   */
   handle_fd_write(fd, buf) {
     switch (fd) {
       case 1:

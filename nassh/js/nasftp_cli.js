@@ -209,7 +209,10 @@ class FileWriter {
    */
   async init(resume) {}
 
-  /** @param {!ArrayBuffer} chunk */
+  /**
+   * @param {!ArrayBuffer} chunk
+   * @return {!Promise<void>}
+   */
   async write(chunk) {}
 
   /** @return {!Promise<void>} */
@@ -225,7 +228,14 @@ class FileWriter {
  *     Chrome to basically OOM the system.
  */
 class AnchorTagFileWriter extends FileWriter {
-  /** @override */
+  /**
+   * @param {string} name
+   * @param {{
+   *   document: (!Document|undefined),
+   *   size: number,
+   * }=} options
+   * @override
+   */
   constructor(name, {size, document}) {
     super(name, {size});
     this.document = document;
@@ -233,7 +243,11 @@ class AnchorTagFileWriter extends FileWriter {
     this.a = null;
   }
 
-  /** @override */
+  /**
+   * @param {boolean} resume
+   * @return {!Promise<number>}
+   * @override
+   */
   async init(resume) {
     if (resume) {
       return Promise.reject('unimplemented');
@@ -248,12 +262,19 @@ class AnchorTagFileWriter extends FileWriter {
     return 0;
   }
 
-  /** @override */
+  /**
+   * @param {!ArrayBuffer} chunk
+   * @return {!Promise<void>}
+   * @override
+   */
   async write(chunk) {
     this.chunks.push(new Blob([chunk]));
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<void>}
+   * @override
+   */
   async close() {
     // Create a base64 encoded URI.
     const blob = new Blob(this.chunks);
@@ -276,15 +297,28 @@ class AnchorTagFileWriter extends FileWriter {
  *      in silent clobbering.  Not all browsers support this (yet?).
  */
 class FileSystemApiFileWriter extends FileWriter {
-  /** @override */
+  /**
+   * @param {string} name
+   * @param {{
+   *   window: (!Window|undefined),
+   *   size: number,
+   *   cli: (!Cli|undefined),
+   * }=} options
+   * @override
+   */
   constructor(name, {size, window, cli}) {
     super(name, {size});
     this.window = window;
     this.cli = cli;
+    /** @type {?FileSystemWritableFileStream} */
     this.stream = null;
   }
 
-  /** @override */
+  /**
+   * @param {boolean} resume
+   * @return {!Promise<number>}
+   * @override
+   */
   async init(resume) {
     if (this.cli.lcwd === null) {
       await this.cli.dispatchCommand_(['lcd']);
@@ -335,12 +369,19 @@ class FileSystemApiFileWriter extends FileWriter {
     }
   }
 
-  /** @override */
+  /**
+   * @param {!ArrayBuffer} chunk
+   * @return {!Promise<void>}
+   * @override
+   */
   async write(chunk) {
     return this.stream.write(chunk);
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<void>}
+   * @override
+   */
   async close() {
     if (this.stream !== null) {
       return this.stream.close();
@@ -352,7 +393,13 @@ class FileSystemApiFileWriter extends FileWriter {
  * Get an appropriate FileWriter object for the file to transfer.
  *
  * @param {string} name The local filename to use.
- * @param {!Object} options Options to pass to the file writer.
+ * @param {{
+ *   document: (!Document|undefined),
+ *   window: (!Window|undefined),
+ *   size: number,
+ *   cli: (!Cli|undefined),
+ *   prefs: !LocalPreferenceManager,
+ * }} options Options to pass to the file writer.
  * @return {!FileWriter} The file writer.
  */
 function getFileWriter(name, options) {

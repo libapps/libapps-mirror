@@ -68,7 +68,12 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
     this.fd = {};
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!TypedArray} buf
+   * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
+   * @override
+   */
   handle_fd_write(fd, buf) {
     if (fd < 0) {
       return WASI.errno.EBADF;
@@ -97,7 +102,13 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
     }
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!TypedArray} buf
+   * @param {!WASI_t.filesize} offset
+   * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
+   * @override
+   */
   handle_fd_pwrite(fd, buf, offset) {
     if (fd < 0) {
       return WASI.errno.EBADF;
@@ -120,7 +131,15 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
     }
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.size} length
+   * @return {!WASI_t.errno|
+   *          {buf: !Uint8Array, nread: !WASI_t.size}|
+   *          {buf: !Uint8Array}|
+   *          {nread: !WASI_t.size}}
+   * @override
+   */
   handle_fd_read(fd, length) {
     if (fd < 0) {
       return WASI.errno.EBADF;
@@ -148,7 +167,16 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
     }
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.size} length
+   * @param {!WASI_t.filesize} offset
+   * @return {!WASI_t.errno|
+   *          {buf: !Uint8Array, nread: !WASI_t.size}|
+   *          {buf: !Uint8Array}|
+   *          {nread: !WASI_t.size}}
+   * @override
+   */
   handle_fd_pread(fd, length, offset) {
     if (fd < 0) {
       return WASI.errno.EBADF;

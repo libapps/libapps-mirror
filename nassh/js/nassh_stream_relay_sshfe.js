@@ -63,6 +63,7 @@ RelaySshfeWsStream.constructor = RelaySshfeWsStream;
  * Open a relay socket.
  *
  * @param {!Object} settings
+ * @return {!Promise<void>}
  * @override
  */
 RelaySshfeWsStream.prototype.open = async function(settings) {

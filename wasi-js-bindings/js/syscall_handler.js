@@ -22,7 +22,10 @@ export class Base {
     this.process_ = null;
   }
 
-  /** @override */
+  /**
+   * @param {!Process} process
+   * @override
+   */
   setProcess(process) {
     this.process_ = process;
   }
@@ -82,13 +85,21 @@ export class ProxyWasiPreview1 extends Base {
     }
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.exitcode} status
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_proc_exit(status) {
     this.worker.postMessage('exit', status);
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.signal} signal
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_proc_raise(signal) {
     this.worker.postMessage('signal', signal);
     return WASI.errno.ESUCCESS;
@@ -104,12 +115,18 @@ const kNanosecToMillisec = 1000000;
  * This handler implements syscalls directly.
  */
 export class DirectWasiPreview1 extends Base {
-  /** @override */
+  /**
+   * @return {!WASI_t.errno|{argv: !Array<string|!ArrayBufferView>}}
+   * @override
+   */
   handle_args_get() {
     return {argv: this.process_.argv};
   }
 
-  /** @override */
+  /**
+   * @return {!WASI_t.errno|{argc: !WASI_t.size, argv_size: !WASI_t.size}}
+   * @override
+   */
   handle_args_sizes_get() {
     const te = new TextEncoder();
     const argv = this.process_.argv;
@@ -119,7 +136,11 @@ export class DirectWasiPreview1 extends Base {
     };
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.clockid} clockid
+   * @return {!WASI_t.errno|{res: bigint}}
+   * @override
+   */
   handle_clock_res_get(clockid) {
     switch (clockid) {
       case WASI.clock.REALTIME:
@@ -136,7 +157,11 @@ export class DirectWasiPreview1 extends Base {
     }
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.clockid} clockid
+   * @return {!WASI_t.errno|{now: bigint}}
+   * @override
+   */
   handle_clock_time_get(clockid) {
     switch (clockid) {
       case WASI.clock.REALTIME: {
@@ -161,12 +186,18 @@ export class DirectWasiPreview1 extends Base {
     return ret;
   }
 
-  /** @override */
+  /**
+   * @return {!WASI_t.errno|{env: !Array<string|!ArrayBufferView>}}
+   * @override
+   */
   handle_environ_get() {
     return {env: this.flattenEnviron_()};
   }
 
-  /** @override */
+  /**
+   * @return {!WASI_t.errno|{length: !WASI_t.size, size: !WASI_t.size}}
+   * @override
+   */
   handle_environ_sizes_get() {
     const te = new TextEncoder();
     const env = this.flattenEnviron_();
@@ -176,23 +207,41 @@ export class DirectWasiPreview1 extends Base {
     };
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_fd_datasync(fd) {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_fd_sync(fd) {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.exitcode} status
+   * @throws {!util.CompletedProcessError}
+   * @override
+   */
   handle_proc_exit(status) {
     this.process_.exit(status);
     throw new util.CompletedProcessError({status});
   }
 
-  /** @override */
+  /**
+   * @param {!Array<!WASI_t.subscription>} subscriptions
+   * @return {!WASI_t.errno|
+   *          {events: !Array<!WASI_t.event>,
+   *           signals: (undefined|!Array<number>)}}
+   * @override
+   */
   handle_poll_oneoff(subscriptions) {
     // We can handle clock events only.
     const events = [];
@@ -248,12 +297,20 @@ export class DirectWasiPreview1 extends Base {
     return {events};
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.signal} signal
+   * @throws {!util.CompletedProcessError}
+   * @override
+   */
   handle_proc_raise(signal) {
     throw new util.CompletedProcessError({signal});
   }
 
-  /** @override */
+  /**
+   * @param {!Uint8Array|!ArrayBuffer|!SharedArrayBuffer} buf
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_random_get(buf) {
     // The crypto calls cannot operate on shared memory, so an additional copy
     // to a non-shared type is required. Other types of syscall will be able to
@@ -271,7 +328,10 @@ export class DirectWasiPreview1 extends Base {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_sched_yield() {
     return WASI.errno.ESUCCESS;
   }

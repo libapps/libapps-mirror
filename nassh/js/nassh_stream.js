@@ -43,10 +43,11 @@ Stream.ERR_STREAM_CANT_WRITE = 'Stream has no write permission';
 Stream.prototype.maxWebSocketBufferLength = 64 * 1024;
 
 /**
- * Open a stream, calling back when complete.
+ * Open a stream.
  *
  * @param {!Object} settings Each subclass of Stream defines its own set of
  *     properties to be included in settings.
+ * @return {!Promise<void>} Resolve when open completes.
  */
 Stream.prototype.open = async function(settings) {
   throw Stream.ERR_NOT_IMPLEMENTED;

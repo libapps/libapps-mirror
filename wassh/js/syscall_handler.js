@@ -29,7 +29,10 @@ class Tty extends VFS.FileHandle {
         this.onData_.bind(this);
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<!WASI_t.errno|!WASI_t.fdstat>}
+   * @override
+   */
   stat() {
     return {
       fs_filetype: this.filetype,
@@ -37,20 +40,33 @@ class Tty extends VFS.FileHandle {
     };
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   write(buf) {
     this.term.io.writeUTF8(buf);
     return {nwritten: buf.length};
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async read(length) {
     const buf = Array.from(this.data.slice(0, length));
     this.data = this.data.subarray(length);
     return {buf};
   }
 
-  /** @override */
+  /**
+   * @param {string} str
+   */
   onData_(str) {
     const te = new TextEncoder();
     const data = te.encode(str);
@@ -111,12 +127,22 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     };
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_fd_close(fd) {
     return this.vfs.close(fd);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.lookupflags} lookupflags
+   * @param {?string} path
+   * @return {!WASI_t.errno|!WASI_t.filestat}
+   * @override
+   */
   async handle_path_filestat_get(fd, lookupflags, path) {
     const stat = await this.vfs.statat(fd, path);
     if (typeof stat === 'number') {
@@ -136,7 +162,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     });
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno|!WASI_t.filestat}
+   * @override
+   */
   async handle_fd_filestat_get(fd) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -161,7 +191,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     });
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno|!WASI_t.fdstat}
+   * @override
+   */
   async handle_fd_fdstat_get(fd) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -178,7 +212,12 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     });
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.fdflags} fdflags
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_fd_fdstat_set_flags(fd, fdflags) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -194,7 +233,16 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return fdflags ? WASI.errno.EINVAL : WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.size} length
+   * @param {!WASI_t.filesize} offset
+   * @return {!WASI_t.errno|
+   *          {buf: !Uint8Array, nread: !WASI_t.size}|
+   *          {buf: !Uint8Array}|
+   *          {nread: !WASI_t.size}}
+   * @override
+   */
   async handle_fd_pread(fd, length, offset) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -204,7 +252,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return fh.pread(length, offset);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno|{path: string}}
+   * @override
+   */
   handle_fd_prestat_dir_name(fd) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -219,7 +271,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return {path: fh.path};
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno|{path: string}}
+   * @override
+   */
   handle_fd_prestat_get(fd) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -234,7 +290,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return {path: fh.path};
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!TypedArray} buf
+   * @param {!WASI_t.filesize} offset
+   * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
+   * @override
+   */
   async handle_fd_pwrite(fd, buf, offset) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -244,22 +306,42 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return fh.pwrite(buf, offset);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} oldfd
+   * @return {!WASI_t.errno}
+   */
   handle_fd_dup(oldfd) {
     return this.vfs.dup(oldfd);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} oldfd
+   * @param {!WASI_t.fd} newfd
+   * @return {!WASI_t.errno}
+   */
   handle_fd_dup2(oldfd, newfd) {
     return this.vfs.dup(oldfd, newfd);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.fd} to
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_fd_renumber(fd, to) {
     return this.vfs.dup2(fd, to);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.size} length
+   * @return {!WASI_t.errno|
+   *          {buf: !Uint8Array, nread: !WASI_t.size}|
+   *          {buf: !Uint8Array}|
+   *          {nread: !WASI_t.size}}
+   * @override
+   */
   async handle_fd_read(fd, length) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -269,7 +351,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return fh.read(length);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.filedelta} offset
+   * @param {!WASI_t.whence} whence
+   * @return {!WASI_t.errno|{newoffset: !WASI_t.filesize}}
+   * @override
+   */
   handle_fd_seek(fd, offset, whence) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -279,7 +367,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return fh.seek(offset, whence);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @return {!WASI_t.errno|{offset: !WASI_t.filesize}}
+   * @override
+   */
   handle_fd_tell(fd) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -289,7 +381,12 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return fh.tell();
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!TypedArray} buf
+   * @return {!WASI_t.errno|{nwritten: !WASI_t.size}}
+   * @override
+   */
   async handle_fd_write(fd, buf) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
@@ -299,33 +396,74 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     return fh.write(buf);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {?string} path
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_path_create_directory(fd, path) {
     return this.vfs.mkdirat(fd, path);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} old_fd
+   * @param {!WASI_t.lookupflags} old_flags
+   * @param {?string} old_path
+   * @param {!WASI_t.fd} new_fd
+   * @param {?string} new_path
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_path_link(old_fd, old_flags, old_path, new_fd, new_path) {
     return this.vfs.linkat(old_fd, old_flags, old_path, new_fd, new_path);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} dirfd
+   * @param {!WASI_t.lookupflags} dirflags
+   * @param {?string} path
+   * @param {!WASI_t.oflags} o_flags
+   * @param {!WASI_t.rights} fs_rights_base
+   * @param {!WASI_t.rights} fs_rights_inheriting
+   * @param {!WASI_t.fdflags} fdflags
+   * @return {!WASI_t.errno|{fd: !WASI_t.fd}}
+   * @override
+   */
   handle_path_open(dirfd, dirflags, path, o_flags, fs_rights_base,
                    fs_rights_inheriting, fdflags) {
     return this.vfs.openat(dirfd, dirflags, path, fdflags, o_flags);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {?string} old_path
+   * @param {!WASI_t.fd} new_fd
+   * @param {?string} new_path
+   * @return {!WASI_t.errno}
+   * @override
+   */
   handle_path_rename(fd, old_path, new_fd, new_path) {
     return this.vfs.renameat(fd, old_path, new_fd, new_path);
   }
 
-  /** @override */
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {?string} path
+   * @return {!WASI_t.errno}
+   * @override
+   */
   async handle_path_unlink_file(fd, path) {
     return this.vfs.unlinkat(fd, path);
   }
 
-  /** @override */
+  /**
+   * @param {!Array<!WASI_t.subscription>} subscriptions
+   * @return {!WASI_t.errno|
+   *          {events: !Array<!WASI_t.event>,
+   *           signals: (undefined|!Array<number>)}}
+   * @override
+   */
   async handle_poll_oneoff(subscriptions) {
     const now = BigInt(Date.now());
 

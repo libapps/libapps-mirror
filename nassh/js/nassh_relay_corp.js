@@ -8,7 +8,10 @@
 
 import {lib} from '../../libdot/index.js';
 
+import {hterm} from '../../hterm/index.js';
+
 import {localize} from './nassh.js';
+import {LocalPreferenceManager} from './nassh_preference_manager.js';
 import {Relay} from './nassh_relay.js';
 import {Stream} from './nassh_stream.js';
 import {RelayCorpWsStream,
@@ -18,7 +21,14 @@ import {RelayCorpWsStream,
  * Corp Relay implementation.
  */
 export class Corp extends Relay {
-  /** @override */
+  /**
+   * @param {!hterm.Terminal.IO} io
+   * @param {!Object} options
+   * @param {!Location} location
+   * @param {!lib.Storage} storage
+   * @param {!LocalPreferenceManager} localPrefs
+   * @override
+   */
   constructor(io, options, location, storage, localPrefs) {
     super(io, options, location, storage, localPrefs);
     this.proxyHostFallback = options['--proxy-host-fallback'];
@@ -51,7 +61,10 @@ export class Corp extends Relay {
     return template;
   }
 
-  /** @override */
+  /**
+   * @return {boolean}
+   * @override
+   */
   redirect() {
     const resumePath = this.location.href.substr(this.location.origin.length);
 
@@ -85,7 +98,10 @@ export class Corp extends Relay {
     return true;
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<boolean>}
+   * @override
+   */
   async init() {
     if (this.relayMethod === 'direct') {
       return this.authenticateDirect();
@@ -141,7 +157,10 @@ export class Corp extends Relay {
     return false;
   }
 
-  /** @override */
+  /**
+   * @return {!Object}
+   * @override
+   */
   saveState() {
     return {
       relayServer: this.relayServer,
@@ -149,7 +168,10 @@ export class Corp extends Relay {
     };
   }
 
-  /** @override */
+  /**
+   * @param {!Object} state
+   * @override
+   */
   loadState(state) {
     this.relayServer = state.relayServer;
     this.relayServerSocket = state.relayServerSocket;
@@ -164,7 +186,12 @@ export class Corp extends Relay {
     return this.useWebsocket ? RelayCorpWsStream : RelayCorpXhrStream;
   }
 
-  /** @override */
+  /**
+   * @param {string} host
+   * @param {number} port
+   * @return {!Promise<!Stream>}
+   * @override
+   */
   async openSocket(host, port) {
     const options = {
       io: this.io_,
@@ -360,8 +387,8 @@ export class Corp extends Relay {
 }
 
 /**
- * @override
  * @type {number}
+ * @override
  */
 Corp.prototype.defaultProxyPort = 8022;
 

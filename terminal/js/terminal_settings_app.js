@@ -40,7 +40,10 @@ export const BELL_SOUND_CONVERTER = {
 };
 
 export class TerminalSettingsApp extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       activeCategory_: {type: String},
@@ -63,7 +66,10 @@ export class TerminalSettingsApp extends LitElement {
     this.sshConfigEditorRef_ = createRef();
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       :host {
@@ -198,7 +204,10 @@ export class TerminalSettingsApp extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
 

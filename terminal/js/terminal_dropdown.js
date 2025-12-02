@@ -33,7 +33,10 @@ let OptionType;
 // user is responsible for actually deleting it and updating the `options`
 // property.
 export class TerminalDropdownElement extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       ariaLabel: {
@@ -57,7 +60,10 @@ export class TerminalDropdownElement extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -173,7 +179,10 @@ export class TerminalDropdownElement extends LitElement {
     this.ulFocusedTaskScheduled_ = false;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const selectedIndex = this.findSelectedIndex_();
     const hasDeletable = this.options.some((option) => option.deletable);
@@ -253,7 +262,10 @@ export class TerminalDropdownElement extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @param {!Map<string,*>} changedProperties
+   * @override
+   */
   updated(changedProperties) {
     if (changedProperties.has('expanded') && this.expanded) {
       // Focus the <ul> when it is expaned. We use `setTimeout()` here.
@@ -445,7 +457,10 @@ customElements.define('terminal-dropdown', TerminalDropdownElement);
 // we should extract the logic to a mixin and replace `TerminalSettingsElement`
 // with it.
 export class TerminalSettingsDropdownElement extends TerminalDropdownElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       preference: {
@@ -483,7 +498,10 @@ export class TerminalSettingsDropdownElement extends TerminalDropdownElement {
         this.onPrefChanged_);
   }
 
-  /** @override */
+  /**
+   * @param {!Map<string,*>} changedProperties
+   * @override
+   */
   updated(changedProperties) {
     super.updated(changedProperties);
 

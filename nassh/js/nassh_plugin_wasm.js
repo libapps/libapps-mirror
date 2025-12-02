@@ -42,27 +42,54 @@ class SftpPipeWriteHandle extends FileHandle {
     this.client_ = client;
   }
 
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   write(buf) {
     this.client_.writeStreamData(buf);
     return {nwritten: buf.length};
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async pwrite(buf, offset) {
     return WASI.errno.ESPIPE;
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async read(length) {
     return WASI.errno.ESPIPE;
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async pread(length, offset) {
     return WASI.errno.ESPIPE;
   }
 
-  /** @override */
+  /**
+   * @return {!WASI_t.errno|{offset: (number|bigint)}}
+   */
   tell() {
     return WASI.errno.ESPIPE;
   }
@@ -82,7 +109,11 @@ class SftpPipeReadHandle extends FileHandle {
     this.handler = handler;
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   write(buf) {
     buf = new Uint8Array(buf);
     const data = new Uint8Array(this.data.length + buf.length);
@@ -95,24 +126,46 @@ class SftpPipeReadHandle extends FileHandle {
     return {nwritten: buf.length};
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async pwrite(buf, offset) {
     return WASI.errno.ESPIPE;
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async read(length) {
     const buf = this.data.slice(0, length);
     this.data = this.data.subarray(length);
     return {buf};
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async pread(length, offset) {
     return WASI.errno.ESPIPE;
   }
 
-  /** @override */
+  /**
+   * @return {!WASI_t.errno|{offset: (number|bigint)}}
+   */
   tell() {
     return WASI.errno.ESPIPE;
   }
@@ -145,12 +198,21 @@ class StorageFileHandle extends FileHandle {
     this.data = lib.codec.stringToCodeUnitArray(data);
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async write(buf) {
     return WASI.errno.EROFS;
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async pwrite(buf, offset) {
     return WASI.errno.EROFS;
   }
@@ -176,7 +238,13 @@ class StorageFileHandler extends FileHandler {
     this.key_ = key;
   }
 
-  /** @override */
+  /**
+   * @param {string} path
+   * @param {!WASI_t.fdflags} fdflags
+   * @param {!WASI_t.oflags} o_flags
+   * @return {!Promise<!WASI_t.errno|!PathHandle>}
+   * @override
+   */
   async open(path, fdflags, o_flags) {
     if (path !== this.path) {
       return WASI.errno.ENOTDIR;
@@ -208,12 +276,21 @@ class MemoryFileHandle extends FileHandle {
     this.data = lib.codec.stringToCodeUnitArray(this.content_);
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async write(buf) {
     return WASI.errno.EROFS;
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async pwrite(buf, offset) {
     return WASI.errno.EROFS;
   }
@@ -233,7 +310,13 @@ class MemoryFileHandler extends FileHandler {
     this.content_ = content;
   }
 
-  /** @override */
+  /**
+   * @param {string} path
+   * @param {!WASI_t.fdflags} fdflags
+   * @param {!WASI_t.oflags} o_flags
+   * @return {!Promise<!WASI_t.errno|!PathHandle>}
+   * @override
+   */
   async open(path, fdflags, o_flags) {
     if (path !== this.path) {
       return WASI.errno.ENOTDIR;

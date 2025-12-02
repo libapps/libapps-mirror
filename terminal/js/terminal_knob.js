@@ -11,7 +11,10 @@
 import {LitElement, css} from './lit.js';
 
 export class TerminalKnob extends LitElement {
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {

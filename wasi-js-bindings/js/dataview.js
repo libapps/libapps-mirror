@@ -48,97 +48,182 @@ export class WasiView extends DataView {
     }
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {boolean=} littleEndian
+   * @return {!WASI_t.dirent}
+   * @override
+   */
   getDirent(byteOffset, littleEndian = false) {
     return /** @type {!WASI_t.dirent} */ (
         this.get_(WasiView.dirent_t, byteOffset, littleEndian));
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {!WASI_t.dirent} value
+   * @param {boolean=} littleEndian
+   * @override
+   */
   setDirent(byteOffset, value, littleEndian = false) {
     this.set_(WasiView.dirent_t, byteOffset, value, littleEndian);
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {boolean=} littleEndian
+   * @return {!WASI_t.event}
+   * @override
+   */
   getEvent(byteOffset, littleEndian = false) {
     return /** @type {!WASI_t.event} */ (
         this.get_(WasiView.event_t, byteOffset, littleEndian));
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {!WASI_t.event} value
+   * @param {boolean=} littleEndian
+   * @override
+   */
   setEvent(byteOffset, value, littleEndian = false) {
     this.set_(WasiView.event_t, byteOffset, value, littleEndian);
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {boolean=} littleEndian
+   * @return {!WASI_t.event_fd_readwrite}
+   * @override
+   */
   getEventFdReadWrite(byteOffset, littleEndian = false) {
     return /** @type {!WASI_t.event_fd_readwrite} */ (
         this.get_(WasiView.event_fd_readwrite_t, byteOffset, littleEndian));
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {!WASI_t.event_fd_readwrite} value
+   * @param {boolean=} littleEndian
+   * @override
+   */
   setEventFdReadWrite(byteOffset, value, littleEndian = false) {
     this.set_(WasiView.event_fd_readwrite_t, byteOffset, value, littleEndian);
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {boolean=} littleEndian
+   * @return {!WASI_t.fdstat}
+   * @override
+   */
   getFdstat(byteOffset, littleEndian = false) {
     return /** @type {!WASI_t.fdstat} */ (
         this.get_(WasiView.fdstat_t, byteOffset, littleEndian));
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {!WASI_t.fdstat} value
+   * @param {boolean=} littleEndian
+   * @override
+   */
   setFdstat(byteOffset, value, littleEndian = false) {
     this.set_(WasiView.fdstat_t, byteOffset, value, littleEndian);
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {boolean=} littleEndian
+   * @return {!WASI_t.filestat}
+   * @override
+   */
   getFilestat(byteOffset, littleEndian = false) {
     return /** @type {!WASI_t.filestat} */ (
         this.get_(WasiView.filestat_t, byteOffset, littleEndian));
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {!WASI_t.filestat} value
+   * @param {boolean=} littleEndian
+   * @override
+   */
   setFilestat(byteOffset, value, littleEndian = false) {
     this.set_(WasiView.filestat_t, byteOffset, value, littleEndian);
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {boolean=} littleEndian
+   * @return {!WASI_t.iovec}
+   * @override
+   */
   getIovec(byteOffset, littleEndian = false) {
     return /** @type {!WASI_t.iovec} */ (
         this.get_(WasiView.iovec_t, byteOffset, littleEndian));
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {!WASI_t.iovec} value
+   * @param {boolean=} littleEndian
+   * @override
+   */
   setIovec(byteOffset, value, littleEndian = false) {
     this.set_(WasiView.iovec_t, byteOffset, value, littleEndian);
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {boolean=} littleEndian
+   * @return {!WASI_t.subscription_clock}
+   * @override
+   */
   getSubscriptionClock(byteOffset, littleEndian = false) {
     return /** @type {!WASI_t.subscription_clock} */ (
         this.get_(WasiView.subscription_clock_t, byteOffset, littleEndian));
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {!WASI_t.subscription_clock} value
+   * @param {boolean=} littleEndian
+   * @override
+   */
   setSubscriptionClock(byteOffset, value, littleEndian = false) {
     this.set_(WasiView.subscription_clock_t, byteOffset, value, littleEndian);
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {boolean=} littleEndian
+   * @return {!WASI_t.subscription_fd_readwrite}
+   * @override
+   */
   getSubscriptionFdReadWrite(byteOffset, littleEndian = false) {
     return /** @type {!WASI_t.subscription_fd_readwrite} */ (
         this.get_(WasiView.subscription_fd_readwrite_t, byteOffset,
                   littleEndian));
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {!WASI_t.subscription_fd_readwrite} value
+   * @param {boolean=} littleEndian
+   * @override
+   */
   setSubscriptionFdReadWrite(byteOffset, value, littleEndian = false) {
     this.set_(WasiView.subscription_fd_readwrite_t, byteOffset, value,
               littleEndian);
   }
 
-  /** @override */
+  /**
+   * @param {number} byteOffset
+   * @param {boolean=} littleEndian
+   * @return {!WASI_t.subscription}
+   * @override
+   */
   getSubscription(byteOffset, littleEndian = false) {
     const ret = {
       userdata: this.getBigUint64(byteOffset, littleEndian),

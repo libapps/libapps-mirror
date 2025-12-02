@@ -12,7 +12,10 @@ import {css, LitElement, html} from './lit.js';
 export class TerminalSettingsCategorySelectorElement extends LitElement {
   static get is() { return 'terminal-settings-category-selector'; }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       ::slotted(*) {
@@ -71,12 +74,18 @@ export class TerminalSettingsCategorySelectorElement extends LitElement {
     this.activeElement_ = null;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`<slot></slot>`;
   }
 
-  /** @override */
+  /**
+   * @param {!Map<string,*>} changedProperties
+   * @override
+   */
   firstUpdated(changedProperties) {
     this.addEventListener('click', (e) => {
       if (e.target.parentElement !== this) {

@@ -13,7 +13,10 @@ import {ICON_EXPAND_LESS, ICON_EXPAND_MORE} from './terminal_icons.js';
  * An expandable row element designed to work within <terminal-settings-app>.
  */
 class TerminalSettingsRow extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       title: {
@@ -31,7 +34,10 @@ class TerminalSettingsRow extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -68,7 +74,10 @@ class TerminalSettingsRow extends LitElement {
     this.expanded_ = false;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
       <div title="${this.title}">

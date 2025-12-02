@@ -69,7 +69,10 @@ function containerLabel(container) {
 }
 
 export class TerminalHomeApp extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       sshConnections: {state: true},
@@ -81,7 +84,10 @@ export class TerminalHomeApp extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       :host {
@@ -376,7 +382,10 @@ export class TerminalHomeApp extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
     return html`

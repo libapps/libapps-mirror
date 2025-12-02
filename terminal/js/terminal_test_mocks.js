@@ -307,17 +307,29 @@ class MockLocation {
   /** @param {!URL} url */
   constructor(url) { this.url = url; }
 
-  /** @override */
+  /**
+   * @return {string}
+   * @override
+   */
   get hash() { return this.url.hash; }
 
-  /** @override */
+  /**
+   * @param {string} hash
+   * @override
+   */
   set hash(hash) { this.url.hash = hash; }
 
-  /** @override */
+  /**
+   * @return {string}
+   * @override
+   */
   get href() { return this.url.href; }
 }
 
-/** @override */
+/**
+ * @param {(!URL|string)} url
+ * @override
+ */
 MockLocation.prototype.replace = function(url) {
   this.url = new URL(`${url}`, this.url);
 };

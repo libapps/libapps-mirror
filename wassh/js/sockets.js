@@ -133,7 +133,10 @@ export class Socket extends VFS.PathHandle {
     this.reader_ = null;
   }
 
-  /** @override */
+  /**
+   * @return {string}
+   * @override
+   */
   toString() {
     return `${this.constructor.name}(${this.address}:${this.port}, ` +
         `domain=${this.domain}, protocol=${this.protocol})`;
@@ -159,7 +162,10 @@ export class Socket extends VFS.PathHandle {
     throw new Error('onData(): unimplemented');
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<!WASI_t.errno|!WASI_t.fdstat>}
+   * @override
+   */
   async stat() {
     return /** @type {!WASI_t.fdstat} */ ({
       fs_filetype: this.filetype,
@@ -250,7 +256,12 @@ export class Socket extends VFS.PathHandle {
  * Base class for all stream socket types.
  */
 export class StreamSocket extends Socket {
-  /** @override */
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @override
+   */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
@@ -258,7 +269,10 @@ export class StreamSocket extends Socket {
     this.data = new Uint8Array(0);
   }
 
-  /** @override */
+  /**
+   * @param {!ArrayBuffer} data
+   * @override
+   */
   onRecv(data) {
     const u8 = new Uint8Array(data);
     const newData = new Uint8Array(this.data.length + u8.length);
@@ -277,7 +291,15 @@ export class StreamSocket extends Socket {
     }
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @param {boolean=} block
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async read(length, block = true) {
     if (this.data.length === 0) {
       if (!block) {
@@ -296,14 +318,22 @@ export class StreamSocket extends Socket {
  * Base class for all datagram (packet) socket types.
  */
 export class DatagramSocket extends Socket {
-  /** @override */
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @override
+   */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
     this.data = [];
   }
 
-  /** @override */
+  /**
+   * @param {!ArrayBuffer} data
+   * @override
+   */
   onRecv(data) {
     this.data.push(new Uint8Array(data));
 
@@ -318,7 +348,15 @@ export class DatagramSocket extends Socket {
     }
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @param {boolean=} block
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async read(length, block = true) {
     if (this.data.length === 0) {
       if (!block) {
@@ -422,7 +460,12 @@ export async function cleanupChromeSockets() {
  * A TCP/IP based socket backed by the chrome.sockets.tcp API.
  */
 export class ChromeTcpSocket extends StreamSocket {
-  /** @override */
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @override
+   */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
@@ -433,7 +476,10 @@ export class ChromeTcpSocket extends StreamSocket {
     this.tcpNoDelay_ = false;
   }
 
-  /** @override */
+  /**
+   * @param {number=} socketId
+   * @override
+   */
   async init(socketId = undefined) {
     if (socketId === undefined) {
       const info = await new Promise(async (resolve) => {
@@ -455,7 +501,12 @@ export class ChromeTcpSocket extends StreamSocket {
     ChromeTcpSocket.eventRouter_.register(this.socketId_, this);
   }
 
-  /** @override */
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async connect(address, port) {
     this.debug(`connect(${address}, ${port})`);
 
@@ -515,7 +566,11 @@ export class ChromeTcpSocket extends StreamSocket {
     this.port = null;
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async write(buf) {
     const {resultCode, bytesSent} = await new Promise((resolve) => {
       // TODO(vapier): Double check whether send accepts TypedArrays directly.
@@ -541,7 +596,12 @@ export class ChromeTcpSocket extends StreamSocket {
     });
   }
 
-  /** @override */
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   * @override
+   */
   async bind(address, port) {
     const handle = new ChromeTcpListenSocket(
         this.domain, this.filetype, this.protocol);
@@ -554,7 +614,12 @@ export class ChromeTcpSocket extends StreamSocket {
     return handle;
   }
 
-  /** @override */
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @return {!Promise<!WASI_t.errno|{option: number}>}
+   * @override
+   */
   async getSocketOption(level, name) {
     switch (level) {
       case SOL_SOCKET: {
@@ -582,7 +647,13 @@ export class ChromeTcpSocket extends StreamSocket {
     return WASI.errno.ENOPROTOOPT;
   }
 
-  /** @override */
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async setSocketOption(level, name, value) {
     switch (level) {
       case SOL_SOCKET: {
@@ -652,7 +723,10 @@ export class ChromeTcpSocket extends StreamSocket {
     return WASI.errno.ENOPROTOOPT;
   }
 
-  /** @override */
+  /**
+   * @return {boolean}
+   * @override
+   */
   static isSupported() {
     return window?.chrome?.sockets?.tcp !== undefined;
   }
@@ -669,7 +743,12 @@ ChromeTcpSocket.eventRouter_ = null;
  * A TCP/IP based listening socket backed by the chrome.sockets.tcpServer API.
  */
 export class ChromeTcpListenSocket extends StreamSocket {
-  /** @override */
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @override
+   */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
@@ -735,7 +814,10 @@ export class ChromeTcpListenSocket extends StreamSocket {
     });
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   * @override
+   */
   async accept() {
     const result = this.clients_.shift();
     if (result !== undefined) {
@@ -772,7 +854,12 @@ export class ChromeTcpListenSocket extends StreamSocket {
     }
   }
 
-  /** @override */
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   * @override
+   */
   async bind(address, port) {
     if (this.address !== null) {
       return WASI.errno.EADDRINUSE;
@@ -783,7 +870,11 @@ export class ChromeTcpListenSocket extends StreamSocket {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {number} backlog
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async listen(backlog) {
     const result = await new Promise((resolve) => {
       // If the caller hasn't called bind(), then POSIX tries to bind a random
@@ -803,7 +894,10 @@ export class ChromeTcpListenSocket extends StreamSocket {
     return netErrorToErrno(result);
   }
 
-  /** @override */
+  /**
+   * @return {boolean}
+   * @override
+   */
   static isSupported() {
     return window?.chrome?.sockets?.tcpServer !== undefined;
   }
@@ -820,7 +914,12 @@ ChromeTcpListenSocket.eventRouter_ = null;
  * A UDP/IP based socket backed by the chrome.sockets.udp API.
  */
 export class ChromeUdpSocket extends DatagramSocket {
-  /** @override */
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @override
+   */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
@@ -828,7 +927,10 @@ export class ChromeUdpSocket extends DatagramSocket {
     this.socketId_ = -1;
   }
 
-  /** @override */
+  /**
+   * @param {number=} socketId
+   * @override
+   */
   async init(socketId = undefined) {
     if (socketId === undefined) {
       const info = await new Promise(async (resolve) => {
@@ -866,7 +968,13 @@ export class ChromeUdpSocket extends DatagramSocket {
     this.port = null;
   }
 
-  /** @override */
+  /**
+   * @param {!ArrayBuffer} buf
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async sendto(buf, address, port) {
     // Chrome APIs require us to bind the socket locally first.
     if (this.address === null) {
@@ -889,7 +997,12 @@ export class ChromeUdpSocket extends DatagramSocket {
     return {nwritten: bytesSent};
   }
 
-  /** @override */
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   * @override
+   */
   async bind(address, port) {
     if (this.address !== null) {
       return WASI.errno.EADDRINUSE;
@@ -919,7 +1032,10 @@ export class ChromeUdpSocket extends DatagramSocket {
     });
   }
 
-  /** @override */
+  /**
+   * @return {boolean}
+   * @override
+   */
   static isSupported() {
     return window?.chrome?.sockets?.udp !== undefined;
   }
@@ -941,6 +1057,7 @@ export class RelaySocket extends StreamSocket {
    * @param {number} type
    * @param {number} protocol
    * @param {function(string, number)} open
+   * @override
    */
   constructor(domain, type, protocol, open) {
     super(domain, type, protocol);
@@ -953,7 +1070,12 @@ export class RelaySocket extends StreamSocket {
     this.tcpNoDelay_ = false;
   }
 
-  /** @override */
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async connect(address, port) {
     this.debug(`connect(${address}, ${port})`);
 
@@ -992,7 +1114,11 @@ export class RelaySocket extends StreamSocket {
     this.port = null;
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async write(buf) {
     if (!this.callback_) {
       return WASI.errno.ECONNRESET;
@@ -1019,7 +1145,12 @@ export class RelaySocket extends StreamSocket {
     });
   }
 
-  /** @override */
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @return {!Promise<!WASI_t.errno|{option: number}>}
+   * @override
+   */
   async getSocketOption(level, name) {
     switch (level) {
       case SOL_SOCKET: {
@@ -1047,7 +1178,13 @@ export class RelaySocket extends StreamSocket {
     return WASI.errno.ENOPROTOOPT;
   }
 
-  /** @override */
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async setSocketOption(level, name, value) {
     switch (level) {
       case SOL_SOCKET: {
@@ -1106,7 +1243,12 @@ export class RelaySocket extends StreamSocket {
  * @see https://wicg.github.io/direct-sockets/
  */
 export class WebTcpSocket extends StreamSocket {
-  /** @override */
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @override
+   */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
@@ -1139,7 +1281,12 @@ export class WebTcpSocket extends StreamSocket {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async connect(address, port) {
     this.debug(`connect(${address}, ${port})`);
 
@@ -1161,7 +1308,12 @@ export class WebTcpSocket extends StreamSocket {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   * @override
+   */
   async bind(address, port) {
     const handle = new WebTcpServerSocket(
         this.domain, this.filetype, this.protocol);
@@ -1214,7 +1366,11 @@ export class WebTcpSocket extends StreamSocket {
     this.port = null;
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async write(buf) {
     try {
       await this.directSocketsWriter_.ready;
@@ -1250,7 +1406,12 @@ export class WebTcpSocket extends StreamSocket {
     });
   }
 
-  /** @override */
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @return {!Promise<!WASI_t.errno|{option: number}>}
+   * @override
+   */
   async getSocketOption(level, name) {
     switch (level) {
       case SOL_SOCKET: {
@@ -1278,7 +1439,13 @@ export class WebTcpSocket extends StreamSocket {
     return WASI.errno.ENOPROTOOPT;
   }
 
-  /** @override */
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async setSocketOption(level, name, value) {
     switch (level) {
       case SOL_SOCKET: {
@@ -1330,7 +1497,10 @@ export class WebTcpSocket extends StreamSocket {
     return WASI.errno.ENOPROTOOPT;
   }
 
-  /** @override */
+  /**
+   * @return {boolean}
+   * @override
+   */
   static isSupported() {
     return window?.TCPSocket !== undefined;
   }
@@ -1340,7 +1510,12 @@ export class WebTcpSocket extends StreamSocket {
  * A TCP/IP based server socket backed by the Direct Sockets API.
  */
 export class WebTcpServerSocket extends StreamSocket {
-  /** @override */
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @override
+   */
   constructor(domain, type, protocol) {
     super(domain, type, protocol);
 
@@ -1352,14 +1527,23 @@ export class WebTcpServerSocket extends StreamSocket {
     this.callback_ = null;
   }
 
-  /** @override */
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   * @override
+   */
   async bind(address, port) {
     this.address = address;
     this.port = port;
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @param {number} backlog
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async listen(backlog) {
     if (this.address == null || this.port == null) {
       return WASI.errno.EINVAL;
@@ -1409,7 +1593,10 @@ export class WebTcpServerSocket extends StreamSocket {
     }
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   * @override
+   */
   async accept() {
     const result = this.clients_.shift();
     if (result !== undefined) {
@@ -1468,7 +1655,10 @@ export class WebTcpServerSocket extends StreamSocket {
     this.port = null;
   }
 
-  /** @override */
+  /**
+   * @return {boolean}
+   * @override
+   */
   static isSupported() {
     return window?.TCPServerSocket !== undefined;
   }
@@ -1483,6 +1673,7 @@ export class UnixSocket extends StreamSocket {
    * @param {number} type
    * @param {number} protocol
    * @param {function(string, number)} open
+   * @override
    */
   constructor(domain, type, protocol, open) {
     super(domain, type, protocol);
@@ -1496,7 +1687,12 @@ export class UnixSocket extends StreamSocket {
     this.callback_ = null;
   }
 
-  /** @override */
+  /**
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async connect(address, port) {
     this.debug(`connect(${address}, ${port})`);
 
@@ -1529,7 +1725,11 @@ export class UnixSocket extends StreamSocket {
     this.callback_ = null;
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async write(buf) {
     await this.callback_.write(buf);
     return {nwritten: buf.length};

@@ -13,7 +13,10 @@ import {positionElementWithinWindow} from './terminal_common.js';
  * A context menu that can be positioned any where in the window.
  */
 export class TerminalContextMenu extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       label: {attribute: false},
@@ -38,7 +41,10 @@ export class TerminalContextMenu extends LitElement {
     this.hideBound_ = this.hide.bind(this);
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -137,7 +143,10 @@ export class TerminalContextMenu extends LitElement {
     this.renderRoot.querySelectorAll('li')[this.selected_].focus();
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
       <ul tabindex="0" role="menu" aria-label="${this.label}"

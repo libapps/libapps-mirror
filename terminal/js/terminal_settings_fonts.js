@@ -16,7 +16,10 @@ import {SUPPORTED_FONT_FAMILIES, fontFamilyToCSS, fontManager}
 import './terminal_dropdown.js';
 
 export class TerminalSettingsFonts extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       loadedFonts_: {
@@ -51,7 +54,10 @@ export class TerminalSettingsFonts extends LitElement {
     }
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const options = SUPPORTED_FONT_FAMILIES.map(
         (font) => ({

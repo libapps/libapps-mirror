@@ -18,7 +18,10 @@ export const ARROW_KEY_OFFSET = 1;
 export class SaturationValuePickerElement extends LitElement {
   static get is() { return 'saturation-value-picker'; }
 
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       hue: {
@@ -35,7 +38,10 @@ export class SaturationValuePickerElement extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -70,7 +76,10 @@ export class SaturationValuePickerElement extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const whiteToPureStyle = `background: linear-gradient(to right, ` +
         `#ffffff 0%, hsl(${this.hue}, 100%, 50%) 100%);`;

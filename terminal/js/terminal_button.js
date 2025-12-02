@@ -11,7 +11,10 @@
 import {LitElement, css, html, ifDefined} from './lit.js';
 
 export class TerminalButtonElement extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       ariaLabel: {
@@ -23,7 +26,10 @@ export class TerminalButtonElement extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     // The styling follows chrome's <cr-button>
     return css`
@@ -97,7 +103,10 @@ export class TerminalButtonElement extends LitElement {
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!Object}
+   * @override
+   */
   static get shadowRootOptions() {
     return {
       ...super.shadowRootOptions,
@@ -111,7 +120,10 @@ export class TerminalButtonElement extends LitElement {
     this.disabled = false;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
       <button aria-label="${ifDefined(this.ariaLabel)}">
@@ -119,8 +131,11 @@ export class TerminalButtonElement extends LitElement {
       </button>`;
   }
 
-  /** @override */
-  updated() {
+  /**
+   * @param {!Map<string,*>} changedProperties
+   * @override
+   */
+  updated(changedProperties) {
     this.setAttribute('aria-disabled', `${this.disabled}`);
   }
 }

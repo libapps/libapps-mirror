@@ -56,7 +56,10 @@ class Base {
     this.enableDebug_ = debug;
   }
 
-  /** @override */
+  /**
+   * @param {...*} args
+   * @override
+   */
   debug(...args) {
     if (!this.enableDebug_) {
       return;
@@ -65,17 +68,26 @@ class Base {
     console.log(...args);
   }
 
-  /** @override */
+  /**
+   * @param {...*} args
+   * @override
+   */
   logGroup(...args) {
     console.group(...args);
   }
 
-  /** @override */
+  /**
+   * @param {...*} args
+   * @override
+   */
   logError(...args) {
     console.error(...args);
   }
 
-  /** @override */
+  /**
+   * @param {number} status
+   * @override
+   */
   exit(status) {
     this.exit_status = status;
     this.onExit(status);
@@ -156,7 +168,10 @@ export class Foreground extends Base {
     });
   }
 
-  /** @override */
+  /**
+   * @param {number} status
+   * @override
+   */
   onExit(status) {
     if (this.process_finish_) {
       this.process_finish_(status);
@@ -186,13 +201,21 @@ export class Foreground extends Base {
     }, {});
   }
 
-  /** @override */
+  /**
+   * @param {number} base
+   * @param {number=} end
+   * @return {!Uint8Array}
+   * @override
+   */
   getMem(base, end = undefined) {
     return new Uint8Array(this.instance_.exports.memory.buffer)
         .subarray(base, end);
   }
 
   /**
+   * @param {number} base
+   * @param {number=} length
+   * @return {!WasiView}
    * @override
    * @suppress {checkTypes} WasiView$$module$js$dataview naming confusion.
    */

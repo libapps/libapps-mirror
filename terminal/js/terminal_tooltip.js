@@ -13,7 +13,10 @@ import {positionElementWithinWindow} from './terminal_common.js';
  * A tooltip element that looks like the native tooltip.
  */
 export class TerminalTooltip extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       content_: {
@@ -28,7 +31,10 @@ export class TerminalTooltip extends LitElement {
     this.content_ = '';
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -68,7 +74,10 @@ export class TerminalTooltip extends LitElement {
     this.style.visibility = 'hidden';
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`${this.content_}`;
   }

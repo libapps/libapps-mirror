@@ -17,7 +17,10 @@ import {ProfileType, deleteProfile, resetTerminalProfileToDefault}
   from './terminal_profiles.js';
 
 export class TerminalSettingsProfileItem extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       profile: {type: String},
@@ -25,7 +28,10 @@ export class TerminalSettingsProfileItem extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
       :host {
@@ -75,7 +81,10 @@ export class TerminalSettingsProfileItem extends LitElement {
     this.deleteProfileDialogRef_ = createRef();
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
     const title = msg(

@@ -45,7 +45,11 @@ class StorageAreaFake {
     this.storage_ = newStorage;
   }
 
-  /** @override */
+  /**
+   * @param {string|?Object=} keys
+   * @param {function(!Object)=} callback
+   * @override
+   */
   get(keys, callback) {
     assert.equal(arguments.length, 2);
     assert.equal('function', typeof callback);
@@ -76,7 +80,11 @@ class StorageAreaFake {
     setTimeout(() => callback(values));
   }
 
-  /** @override */
+  /**
+   * @param {!Object<string>} items
+   * @param {function(!Object)=} callback
+   * @override
+   */
   set(items, callback = () => {}) {
     assert.isAtLeast(arguments.length, 1);
     assert.isAtMost(arguments.length, 2);
@@ -87,7 +95,11 @@ class StorageAreaFake {
     setTimeout(callback);
   }
 
-  /** @override */
+  /**
+   * @param {string|?Object} keys
+   * @param {function(!Object)=} callback
+   * @override
+   */
   remove(keys, callback = () => {}) {
     assert.isAtLeast(arguments.length, 1);
     assert.isAtMost(arguments.length, 2);
@@ -102,7 +114,10 @@ class StorageAreaFake {
     setTimeout(callback);
   }
 
-  /** @override */
+  /**
+   * @param {function(!Object)=} callback
+   * @override
+   */
   clear(callback = () => {}) {
     assert.isAtMost(arguments.length, 1);
     assert.equal('function', typeof callback);

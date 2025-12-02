@@ -792,7 +792,11 @@ export class ClientWindow {
     this.serverWindowRpc_.requestLayoutUpdate(windowId);
   }
 
-  /** @override */
+  /**
+   * @param {string} paneId
+   * @param {string} data
+   * @override
+   */
   onPaneOutput(paneId, data) {
     if (paneId !== this.layout_?.paneId) {
       console.warn(`Unexpected paneId ${paneId}`);
@@ -803,7 +807,10 @@ export class ClientWindow {
     }
   }
 
-  /** @override */
+  /**
+   * @param {string} paneId
+   * @override
+   */
   onPaneSyncStart(paneId) {
     if (paneId !== this.layout_?.paneId) {
       console.error(`Unexpected paneId ${paneId}`);
@@ -813,7 +820,10 @@ export class ClientWindow {
     this.paneSyncStarted_ = true;
   }
 
-  /** @override */
+  /**
+   * @param {!tmux.Layout} layout
+   * @override
+   */
   onLayoutUpdate(layout) {
     const isFirstLayoutUpdate = this.isFirstLayoutUpdate_;
     this.isFirstLayoutUpdate_ = false;

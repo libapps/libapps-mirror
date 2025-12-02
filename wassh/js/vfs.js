@@ -28,7 +28,10 @@ export class PathHandler {
     this.handleCls = handleCls;
   }
 
-  /** @override */
+  /**
+   * @return {string}
+   * @override
+   */
   toString() {
     return `${this.constructor.name}(${this.path}, type=${this.filetype})`;
   }
@@ -68,7 +71,7 @@ export class PathHandler {
 
   /**
    * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#filestat
-   * @return {!Promise<!WASI_t.filestat>}
+   * @return {!Promise<!WASI_t.errno|!WASI_t.filestat>}
    */
   async stat() {
     return /** @type {!WASI_t.filestat} */ ({
@@ -95,7 +98,10 @@ export class PathHandle {
     this.filetype = filetype;
   }
 
-  /** @override */
+  /**
+   * @return {string}
+   * @override
+   */
   toString() {
     return `${this.constructor.name}(${this.path}, type=${this.filetype}, ` +
         `pos=${this.pos})`;
@@ -163,7 +169,7 @@ export class PathHandle {
 
   /**
    * @see https://github.com/WebAssembly/WASI/blob/HEAD/phases/snapshot/docs.md#fdstat
-   * @return {!Promise<!WASI_t.fdstat>}
+   * @return {!Promise<!WASI_t.errno|!WASI_t.fdstat>}
    */
   async stat() {
     return /** @type {!WASI_t.fdstat} */ ({
@@ -181,7 +187,11 @@ export class FileHandle extends PathHandle {
     this.data = new Uint8Array(0);
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async write(buf) {
     buf = new Uint8Array(buf);
     const ret = this.pwrite(buf, this.pos);
@@ -189,7 +199,12 @@ export class FileHandle extends PathHandle {
     return ret;
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async pwrite(buf, offset) {
     buf = new Uint8Array(buf);
     offset = Number(offset);
@@ -202,26 +217,49 @@ export class FileHandle extends PathHandle {
     return {nwritten: buf.length};
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async read(length) {
     const ret = await this.pread(length, this.pos);
     this.pos += BigInt(ret.buf.length);
     return ret;
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async pread(length, offset) {
     length = Number(length);
     offset = Number(offset);
     return {buf: this.data.subarray(offset, offset + length)};
   }
 
-  /** @override */
+  /**
+   * @return {!WASI_t.errno|{offset: (number|bigint)}}
+   * @override
+   */
   tell() {
     return {offset: this.pos};
   }
 
-  /** @override */
+  /**
+   * @param {number|bigint} offset
+   * @param {!WASI_t.whence} whence
+   * @return {!WASI_t.errno|{newoffset: bigint}}
+   * @override
+   */
   seek(offset, whence) {
     let newoffset;
     switch (whence) {
@@ -261,7 +299,13 @@ export class DirectoryHandler extends PathHandler {
     super(path, type, handleCls);
   }
 
-  /** @override */
+  /**
+   * @param {string} path
+   * @param {!WASI_t.fdflags} fdflags
+   * @param {!WASI_t.oflags} o_flags
+   * @return {!Promise<!WASI_t.errno|!PathHandle>}
+   * @override
+   */
   async open(path, fdflags, o_flags) {
     if (path !== this.path) {
       const ret = new FileHandle(path);
@@ -277,17 +321,33 @@ export class DirectoryHandle extends PathHandle {
     super(path, WASI.filetype.DIRECTORY);
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async write(buf) {
     return WASI.errno.EISDIR;
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async pwrite(buf, offset) {
     return WASI.errno.EISDIR;
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async read(length) {
     return WASI.errno.EISDIR;
   }
@@ -307,7 +367,12 @@ export class IndexeddbFsDirectoryHandler extends DirectoryHandler {
     this.fs_ = fileSystem;
   }
 
-  /** @override */
+  /**
+   * @param {string} oldPath
+   * @param {string} newPath
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async link(oldPath, newPath) {
     // This isn't an actual link, but it works well enough for what OpenSSH
     // needs -- a basic copy.
@@ -319,7 +384,13 @@ export class IndexeddbFsDirectoryHandler extends DirectoryHandler {
     }
   }
 
-  /** @override */
+  /**
+   * @param {string} path
+   * @param {!WASI_t.fdflags} fdflags
+   * @param {!WASI_t.oflags} o_flags
+   * @return {!Promise<!WASI_t.errno|!PathHandle>}
+   * @override
+   */
   async open(path, fdflags, o_flags) {
     if (path !== this.path) {
       let details = null;
@@ -377,7 +448,12 @@ export class IndexeddbFsDirectoryHandler extends DirectoryHandler {
     return PathHandler.prototype.open.call(this, path, fdflags, o_flags);
   }
 
-  /** @override */
+  /**
+   * @param {string} oldPath
+   * @param {string} newPath
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async rename(oldPath, newPath) {
     // This is atomic enough because JS is single threaded.  It's fine even
     // between multiple instances since it'll behave like multiple ssh runs.
@@ -408,7 +484,10 @@ export class IndexeddbFsDirectoryHandler extends DirectoryHandler {
     return WASI.errno.ESUCCESS;
   }
 
-  /** @override */
+  /**
+   * @return {!Promise<!WASI_t.errno|!WASI_t.filestat>}
+   * @override
+   */
   async stat() {
     let details = null;
     try {
@@ -444,7 +523,11 @@ export class IndexeddbFsDirectoryHandler extends DirectoryHandler {
     });
   }
 
-  /** @override */
+  /**
+   * @param {string} path
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
   async unlink(path) {
     try {
       await this.fs_.removeFile(path);
@@ -493,6 +576,9 @@ export class IndexeddbFsFileHandle extends FileHandle {
 }
 
 export class CwdHandler extends DirectoryHandler {
+  /**
+   * @param {string} target
+   */
   constructor(target) {
     // NB: This has to be '.' so the WASI layers can find the cwd node.
     // TODO(vapier): Check this is true and document properly.
@@ -502,8 +588,12 @@ export class CwdHandler extends DirectoryHandler {
   }
 
   /**
-   * @suppress {checkTypes}
+   * @param {string} path
+   * @param {!WASI_t.fdflags} fdflags
+   * @param {!WASI_t.oflags} o_flags
+   * @return {!Promise<!WASI_t.errno|!PathHandle>}
    * @override
+   * @suppress {checkTypes} ret.target hack
    */
   async open(path, fdflags, o_flags) {
     const ret = await DirectoryHandler.prototype.open.call(
@@ -521,27 +611,56 @@ export class DevNullHandler extends PathHandler {
 }
 
 export class DevNullHandle extends PathHandle {
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async write(buf) {
     return {nwritten: buf.length};
   }
 
-  /** @override */
+  /**
+   * @param {!TypedArray} buf
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
   async pwrite(buf, offset) {
     return {nwritten: buf.length};
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async read(length) {
     return {nread: 0};
   }
 
-  /** @override */
+  /**
+   * @param {number} length
+   * @param {number|bigint} offset
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
   async pread(length, offset) {
     return {nread: 0};
   }
 
-  /** @override */
+  /**
+   * @param {number|bigint} offset
+   * @param {!WASI_t.whence} whence
+   * @return {!WASI_t.errno|{newoffset: bigint}}
+   * @override
+   */
   seek(offset, whence) {
     return {newoffset: 0n};
   }
@@ -981,7 +1100,7 @@ export class VFS {
 
   /**
    * @param {string} path
-   * @return {!Promise<!WASI_t.errno|{fd: number}>}
+   * @return {!Promise<!WASI_t.errno>}
    */
   async unlink(path) {
     this.debug(`unlink(${path})`);

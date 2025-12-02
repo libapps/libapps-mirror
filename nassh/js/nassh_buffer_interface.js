@@ -78,7 +78,10 @@ export class BufferInterface {
    */
   ack(length) {}
 
-  /** @override */
+  /**
+   * @return {string}
+   * @override
+   */
   toString() {
     return `[buffer: ${this.getUnreadCount()} unread]`;
   }

@@ -17,7 +17,10 @@ import './terminal_button.js';
 // dialog is closed and a "close" event is sent with detail `{accept:
 // trueIffAcceptIsClicked}`. Esc key is handled as if cancel button is clicked.
 export class TerminalDialog extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       acceptText: {
@@ -33,7 +36,10 @@ export class TerminalDialog extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         dialog {
@@ -75,7 +81,10 @@ export class TerminalDialog extends LitElement {
     this.open = false;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     return html`
         <dialog @close=${this.onNativeClose_}>

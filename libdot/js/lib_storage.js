@@ -42,6 +42,8 @@ lib.Storage = class {
 
   /**
    * Delete everything in this storage.
+   *
+   * @return {!Promise<void>} When the operation has completed.
    */
   async clear() {}
 
@@ -73,6 +75,7 @@ lib.Storage = class {
    * @param {string} key The key for the value to be stored.
    * @param {*} value The value to be stored.  Anything that can be serialized
    *     with JSON is acceptable.
+   * @return {!Promise<void>} When the operation has completed.
    */
   async setItem(key, value) {
     await this.setItems({[key]: value});
@@ -85,6 +88,7 @@ lib.Storage = class {
    * since the local cache is updated synchronously.
    *
    * @param {!Object} obj A map of key/values to set in storage.
+   * @return {!Promise<void>} When the operation has completed.
    */
   async setItems(obj) {}
 
@@ -92,6 +96,7 @@ lib.Storage = class {
    * Remove an item from storage.
    *
    * @param {string} key The key to be removed.
+   * @return {!Promise<void>} When the operation has completed.
    */
   async removeItem(key) {
     await this.removeItems([key]);
@@ -101,6 +106,7 @@ lib.Storage = class {
    * Remove multiple items from storage.
    *
    * @param {!Array<string>} keys The keys to be removed.
+   * @return {!Promise<void>} When the operation has completed.
    */
   async removeItems(keys) {}
 };

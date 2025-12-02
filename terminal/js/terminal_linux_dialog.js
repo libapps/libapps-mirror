@@ -17,7 +17,10 @@ import {ProfileType, getProfileIds, getVshProfiles, setVshProfiles}
 import './terminal_textfield.js';
 
 export class TerminalLinuxDialog extends LitElement {
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       vshProfileId_: {state: true},
@@ -26,7 +29,10 @@ export class TerminalLinuxDialog extends LitElement {
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         :host {
@@ -62,7 +68,10 @@ export class TerminalLinuxDialog extends LitElement {
     return hterm.messageManager.get('TERMINAL_HOME_NEW_LINUX');
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = (id) => hterm.messageManager.get(id);
 

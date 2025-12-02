@@ -28,7 +28,11 @@ const MockTerminalForIO = function() {
   this.io = new hterm.Terminal.IO(this);
 };
 
-/** @override */
+/**
+ * @param {string|!Node} message
+ * @param {?number=} timeout
+ * @override
+ */
 MockTerminalForIO.prototype.showOverlay = function(message, timeout) {
   this.showCount++;
   // For timeouts, we'll track the final state (i.e. after the timeout).
@@ -41,12 +45,18 @@ MockTerminalForIO.prototype.hideOverlay = function() {
   this.overlayVisible = false;
 };
 
-/** @override */
+/**
+ * @param {string} profileName
+ * @override
+ */
 MockTerminalForIO.prototype.setProfile = function(profileName) {
   this.profileName = profileName;
 };
 
-/** @override */
+/**
+ * @param {string} str
+ * @override
+ */
 MockTerminalForIO.prototype.interpret = function(str) {
   this.buffer += str;
 };

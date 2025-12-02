@@ -58,6 +58,7 @@ RelayCorpStream.constructor = RelayCorpStream;
  * hanging GET.
  *
  * @param {!Object} settings
+ * @return {!Promise<void>}
  * @override
  */
 RelayCorpStream.prototype.open = async function(settings) {

@@ -20,7 +20,10 @@ export class TerminalSettingsAnsiColorsElement extends
     TerminalSettingsElement {
   static get is() { return 'terminal-settings-ansi-colors'; }
 
-  /** @override */
+  /**
+   * @return {!Object<string, !PropertyDeclaration>}
+   * @override
+   */
   static get properties() {
     return {
       preference: {
@@ -32,7 +35,10 @@ export class TerminalSettingsAnsiColorsElement extends
     };
   }
 
-  /** @override */
+  /**
+   * @return {!CSSResult|!Array<!CSSResult>}
+   * @override
+   */
   static get styles() {
     return css`
         .color-row {
@@ -42,7 +48,10 @@ export class TerminalSettingsAnsiColorsElement extends
     `;
   }
 
-  /** @override */
+  /**
+   * @return {!TemplateResult}
+   * @override
+   */
   render() {
     const msg = hterm.messageManager.get.bind(hterm.messageManager);
     return html`${rows.map((row) => html`
@@ -53,7 +62,10 @@ export class TerminalSettingsAnsiColorsElement extends
         </div>`)}`;
   }
 
-  /** @override */
+  /**
+   * @param {*} value
+   * @override
+   */
   preferenceChanged_(value) {
     if (!value) {
       this.value = DEFAULT_ANSI_COLORS;
