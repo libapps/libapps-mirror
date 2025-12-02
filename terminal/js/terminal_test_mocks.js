@@ -448,7 +448,7 @@ export class MockObject {
    * (Manually) record a call to a method.
    *
    * @param {string} methodName
-   * @param {!Array} args
+   * @param {...*} args
    */
   methodCalled(methodName, ...args) {
     const methodData = this.getMethodData_(methodName);
@@ -549,7 +549,7 @@ export class MockFunction {
   /**
    * (Manually) record a call.
    *
-   * @param {!Array} args
+   * @param {...*} args
    */
   called(...args) {
     this.mockObject_.methodCalled(this.name_, ...args);

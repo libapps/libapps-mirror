@@ -329,7 +329,7 @@ export function loadWebFonts(document) {
 /**
  * A Promise wrapper for the chrome.runtime.sendMessage API.
  *
- * @param {*} args The arguments to sendMessage.
+ * @param {...*} args The arguments to sendMessage.
  * @return {!Promise<*>} A promise to resolve with the remote's response.
  */
 export function runtimeSendMessage(...args) {

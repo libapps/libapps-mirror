@@ -49,7 +49,7 @@ let earlyError = null;
 /**
  * Catch any errors.
  *
- * @param {*} args Whatever arguments are passed in.
+ * @param {...*} args Whatever arguments are passed in.
  */
 window.onerror = function(...args) {
   earlyError = Array.from(args);

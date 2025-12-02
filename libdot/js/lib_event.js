@@ -22,7 +22,7 @@ lib.Event = class {
   /**
    * Call all registered listeners.
    *
-   * @param {*} args The arguments to pass to the callbacks.
+   * @param {...*} args The arguments to pass to the callbacks.
    */
   emit(...args) {
     this.observers.forEach((callback) => callback.apply(null, args));

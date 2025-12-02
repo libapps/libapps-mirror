@@ -31,7 +31,7 @@ export function setDefaultBackend(backend) {
  *
  * This respects the dynamic backend selection.
  *
- * @param {*} args
+ * @param {...*} args
  * @return {!BufferInterface}
  */
 export function newBuffer(...args) {

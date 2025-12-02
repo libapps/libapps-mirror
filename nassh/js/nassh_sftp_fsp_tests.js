@@ -38,7 +38,7 @@ export class MockSftpClient extends sftpClient {
    * Mock helper for stubbing out calls.
    *
    * @param {string} method
-   * @param {!Array} args
+   * @param {...*} args
    * @return {!Promise}
    */
   automock_(method, ...args) {
