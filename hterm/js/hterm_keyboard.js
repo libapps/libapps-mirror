@@ -175,7 +175,7 @@ hterm.Keyboard = function(terminal) {
 /**
  * Special handling for keyCodes in a keyboard layout.
  *
- * @enum {symbol}
+ * @enum {string}
  * @const
  */
 hterm.Keyboard.KeyActions = {
@@ -183,7 +183,7 @@ hterm.Keyboard.KeyActions = {
    * Call preventDefault and stopPropagation for this key event and nothing
    * else.
    */
-  CANCEL: Symbol('CANCEL'),
+  CANCEL: 'CANCEL',
 
   /**
    * This performs the default terminal action for the key.  If used in the
@@ -209,13 +209,13 @@ hterm.Keyboard.KeyActions = {
    *  - If meta is down and configured to send an escape, '\x1b' will be sent
    *    before the normal action is performed.
    */
-  DEFAULT: Symbol('DEFAULT'),
+  DEFAULT: 'DEFAULT',
 
   /**
    * Causes the terminal to opt out of handling the key event, instead letting
    * the browser deal with it.
    */
-  PASS: Symbol('PASS'),
+  PASS: 'PASS',
 
   /**
    * Insert the first or second character of the keyCap, based on e.shiftKey.
@@ -225,7 +225,7 @@ hterm.Keyboard.KeyActions = {
    * It is useful for a modified key action, where it essentially strips the
    * modifier while preventing the browser from reacting to the key.
    */
-  STRIP: Symbol('STRIP'),
+  STRIP: 'STRIP',
 };
 
 /** @typedef {string|!hterm.Keyboard.KeyActions} */

@@ -508,7 +508,7 @@ hterm.Keyboard.KeyMap.prototype.reset = function() {
  * Either allow the paste or send a key sequence.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onKeyInsert_ = function(e) {
   if (this.keyboard.shiftInsertPaste && e.shiftKey) {
@@ -522,7 +522,7 @@ hterm.Keyboard.KeyMap.prototype.onKeyInsert_ = function(e) {
  * Either scroll the scrollback buffer or send a key sequence.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onKeyHome_ = function(e) {
   if (this.keyboard.homeKeysScroll === e.shiftKey) {
@@ -542,7 +542,7 @@ hterm.Keyboard.KeyMap.prototype.onKeyHome_ = function(e) {
  * Either scroll the scrollback buffer or send a key sequence.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onKeyEnd_ = function(e) {
   if (this.keyboard.homeKeysScroll === e.shiftKey) {
@@ -562,7 +562,7 @@ hterm.Keyboard.KeyMap.prototype.onKeyEnd_ = function(e) {
  * Either scroll the scrollback buffer or send a key sequence.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onKeyPageUp_ = function(e) {
   if (this.keyboard.pageKeysScroll === e.shiftKey) {
@@ -582,7 +582,7 @@ hterm.Keyboard.KeyMap.prototype.onKeyPageUp_ = function(e) {
  * in meta-backspace in this case.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onKeyDel_ = function(e) {
   if (this.keyboard.altBackspaceIsMetaBackspace &&
@@ -596,7 +596,7 @@ hterm.Keyboard.KeyMap.prototype.onKeyDel_ = function(e) {
  * Either scroll the scrollback buffer or send a key sequence.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onKeyPageDown_ = function(e) {
   if (this.keyboard.pageKeysScroll === e.shiftKey) {
@@ -611,7 +611,7 @@ hterm.Keyboard.KeyMap.prototype.onKeyPageDown_ = function(e) {
  * Either scroll the scrollback buffer or send a key sequence.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onKeyArrowUp_ = function(e) {
   if (!this.keyboard.applicationCursor && e.shiftKey) {
@@ -627,7 +627,7 @@ hterm.Keyboard.KeyMap.prototype.onKeyArrowUp_ = function(e) {
  * Either scroll the scrollback buffer or send a key sequence.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onKeyArrowDown_ = function(e) {
   if (!this.keyboard.applicationCursor && e.shiftKey) {
@@ -643,7 +643,7 @@ hterm.Keyboard.KeyMap.prototype.onKeyArrowDown_ = function(e) {
  * Clear the primary/alternate screens and the scrollback buffer.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onClear_ = function(e) {
   this.keyboard.terminal.wipeContents();
@@ -658,7 +658,7 @@ hterm.Keyboard.KeyMap.prototype.onClear_ = function(e) {
  * the browser handle F11 directly though, we still get to capture Escape.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onF11_ = function(e) {
   if (hterm.windowType !== 'popup' && hterm.windowType !== 'app' &&
@@ -678,7 +678,7 @@ hterm.Keyboard.KeyMap.prototype.onF11_ = function(e) {
  *
  * @param {!KeyboardEvent} e The event to process.
  * @param {!hterm.Keyboard.KeyDef} keyDef Key definition.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onCtrlNum_ = function(e, keyDef) {
   // Compute a control character for a given character.
@@ -706,7 +706,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlNum_ = function(e, keyDef) {
  * Either pass Alt+1..9 to the browser or send them to the host.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onAltNum_ = function(e) {
   if (this.keyboard.terminal.passAltNumber && !e.shiftKey) {
@@ -720,7 +720,7 @@ hterm.Keyboard.KeyMap.prototype.onAltNum_ = function(e) {
  * Either pass Meta+1..9 to the browser or send them to the host.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onMetaNum_ = function(e) {
   if (this.keyboard.terminal.passMetaNumber && !e.shiftKey) {
@@ -734,7 +734,7 @@ hterm.Keyboard.KeyMap.prototype.onMetaNum_ = function(e) {
  * Either pass ctrl+[shift]+tab to the browser or strip.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onCtrlTab_ = function(e) {
   if (this.keyboard.terminal.passCtrlTab) {
@@ -748,7 +748,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlTab_ = function(e) {
  * the host.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onCtrlW_ = function(e) {
   if (this.keyboard.terminal.passCtrlW) {
@@ -762,7 +762,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlW_ = function(e) {
  * host.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onCtrlT_ = function(e) {
   if (this.keyboard.terminal.passCtrlT) {
@@ -777,7 +777,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlT_ = function(e) {
  * key binding for 'Ctrl+Shift+A' if desired.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyActions} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onCtrlShiftA_ = function(e) {
   this.keyboard.terminal.getScrollPort().selectAll();
@@ -788,7 +788,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlShiftA_ = function(e) {
  * Display the find bar.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyActions} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onCtrlShiftF_ = function(e) {
   this.keyboard.terminal.findBar.display();
@@ -799,7 +799,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlShiftF_ = function(e) {
  * Either send a ^C or interpret the keystroke as a copy command.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onCtrlC_ = function(e) {
   const selection = this.keyboard.terminal.getDocument().getSelection();
@@ -835,7 +835,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlC_ = function(e) {
  * Either send a ^N or open a new window to the same location.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onCtrlN_ = function(e) {
   if (this.keyboard.terminal.passCtrlN) {
@@ -858,7 +858,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlN_ = function(e) {
  * 'ctrl-v-paste' preference.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onCtrlV_ = function(e) {
   if ((!e.shiftKey && this.keyboard.ctrlVPaste) ||
@@ -881,7 +881,7 @@ hterm.Keyboard.KeyMap.prototype.onCtrlV_ = function(e) {
  * Either the default action or open a new window to the same location.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyActions} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onMetaN_ = function(e) {
   if (e.shiftKey) {
@@ -905,7 +905,7 @@ hterm.Keyboard.KeyMap.prototype.onMetaN_ = function(e) {
  *
  * @param {!KeyboardEvent} e The event to process.
  * @param {!hterm.Keyboard.KeyDef} keyDef Key definition.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onMetaC_ = function(e, keyDef) {
   const document = this.keyboard.terminal.getDocument();
@@ -930,7 +930,7 @@ hterm.Keyboard.KeyMap.prototype.onMetaC_ = function(e, keyDef) {
  * a paste command.
  *
  * @param {!KeyboardEvent} e The event to process.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onMetaV_ = function(e) {
   if (e.shiftKey) {
@@ -947,7 +947,7 @@ hterm.Keyboard.KeyMap.prototype.onMetaV_ = function(e) {
  *
  * @param {!KeyboardEvent} e The event to process.
  * @param {!hterm.Keyboard.KeyDef} keyDef Key definition.
- * @return {symbol|string} Key action or sequence.
+ * @return {!hterm.Keyboard.KeyAction} Key action or sequence.
  */
 hterm.Keyboard.KeyMap.prototype.onZoom_ = function(e, keyDef) {
   if (this.keyboard.ctrlPlusMinusZeroZoom === e.shiftKey) {
