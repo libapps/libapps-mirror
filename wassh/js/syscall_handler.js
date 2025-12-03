@@ -235,13 +235,13 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   }
 
   /** @override */
-  async handle_fd_pwrite(fd, offset, buf) {
+  async handle_fd_pwrite(fd, buf, offset) {
     const fh = this.vfs.getFileHandle(fd);
     if (fh === undefined) {
       return WASI.errno.EBADF;
     }
 
-    return fh.pwrite(offset, buf);
+    return fh.pwrite(buf, offset);
   }
 
   /** @override */
