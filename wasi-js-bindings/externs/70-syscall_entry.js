@@ -348,13 +348,13 @@ class SyscallEntry {
 
   /**
    * @param {!WASI_t.exitcode} status
-   * @return {!WASI_t.errno}
+   * @throws {util.CompletedProcessError}
    */
   sys_proc_exit(status) {}
 
   /**
    * @param {!WASI_t.signal} signal
-   * @return {!WASI_t.errno}
+   * @throws {util.CompletedProcessError}
    */
   sys_proc_raise(signal) {}
 
