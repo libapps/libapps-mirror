@@ -13,7 +13,7 @@ import * as ERRNO from './wasi/errno.js';
  * Generator to return all properties on an object.
  *
  * @param {?Object} obj The object whose names to enumerate.
- * @return {!Iterable<string>} The property names.
+ * @return {!Generator<string>} The property names.
  */
 export function* getAllPropertyNames(obj) {
   while (obj) {
