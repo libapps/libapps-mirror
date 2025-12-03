@@ -302,7 +302,7 @@ class SyscallHandler {
   handle_proc_raise(signal) {}
 
   /**
-   * @param {!TypedArray|!ArrayBuffer|!SharedArrayBuffer} buf
+   * @param {!Uint8Array|!ArrayBuffer|!SharedArrayBuffer} buf
    * @return {!WASI_t.errno}
    */
   handle_random_get(buf) {}
