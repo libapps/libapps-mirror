@@ -44,11 +44,11 @@ export class PathHandler {
 
   /**
    * @param {string} path
-   * @param {!WASI_t.fdflags} fs_flags
+   * @param {!WASI_t.fdflags} fdflags
    * @param {!WASI_t.oflags} o_flags
    * @return {!Promise<!WASI_t.errno|!PathHandle>}
    */
-  async open(path, fs_flags, o_flags) {
+  async open(path, fdflags, o_flags) {
     if (path !== this.path) {
       return WASI.errno.ENOTDIR;
     }
@@ -262,13 +262,13 @@ export class DirectoryHandler extends PathHandler {
   }
 
   /** @override */
-  async open(path, fs_flags, o_flags) {
+  async open(path, fdflags, o_flags) {
     if (path !== this.path) {
       const ret = new FileHandle(path);
       await ret.init();
       return ret;
     }
-    return PathHandler.prototype.open.call(this, path, fs_flags, o_flags);
+    return PathHandler.prototype.open.call(this, path, fdflags, o_flags);
   }
 }
 
@@ -320,7 +320,7 @@ export class IndexeddbFsDirectoryHandler extends DirectoryHandler {
   }
 
   /** @override */
-  async open(path, fs_flags, o_flags) {
+  async open(path, fdflags, o_flags) {
     if (path !== this.path) {
       let details = null;
       try {
@@ -369,12 +369,12 @@ export class IndexeddbFsDirectoryHandler extends DirectoryHandler {
 
       const ret = new IndexeddbFsFileHandle(path, this.fs_);
       await ret.init();
-      if (fs_flags & WASI.fdflags.APPEND) {
+      if (fdflags & WASI.fdflags.APPEND) {
         ret.seek(0, WASI.whence.END);
       }
       return ret;
     }
-    return PathHandler.prototype.open.call(this, path, fs_flags, o_flags);
+    return PathHandler.prototype.open.call(this, path, fdflags, o_flags);
   }
 
   /** @override */
@@ -505,9 +505,9 @@ export class CwdHandler extends DirectoryHandler {
    * @suppress {checkTypes}
    * @override
    */
-  async open(path, fs_flags, o_flags) {
+  async open(path, fdflags, o_flags) {
     const ret = await DirectoryHandler.prototype.open.call(
-        this, path, fs_flags, o_flags);
+        this, path, fdflags, o_flags);
     ret.target = this.target;
     return ret;
   }
@@ -767,19 +767,19 @@ export class VFS {
 
   /**
    * @param {string} path
-   * @param {!WASI_t.fdflags} fs_flags
+   * @param {!WASI_t.fdflags} fdflags
    * @param {!WASI_t.oflags} o_flags
    * @return {!Promise<!WASI_t.errno|{fd: number}>}
    */
-  async open(path, fs_flags, o_flags) {
-    this.debug(`open(${path}, ${fs_flags}, ${o_flags})`);
+  async open(path, fdflags, o_flags) {
+    this.debug(`open(${path}, ${fdflags}, ${o_flags})`);
 
     const handler = this.findHandler_(path);
     if (typeof handler === 'number') {
       return handler;
     }
 
-    const handle = await handler.open(path, fs_flags, o_flags);
+    const handle = await handler.open(path, fdflags, o_flags);
     if (typeof handle === 'number') {
       return handle;
     }
@@ -796,19 +796,19 @@ export class VFS {
    * @param {!WASI_t.fd} dfd
    * @param {!WASI_t.lookupflags} dirflags
    * @param {string} path
-   * @param {!WASI_t.fdflags} fs_flags
+   * @param {!WASI_t.fdflags} fdflags
    * @param {!WASI_t.oflags} o_flags
    * @return {!Promise<!WASI_t.errno|{fd: number}>}
    */
-  async openat(dfd, dirflags, path, fs_flags, o_flags) {
-    this.debug(`openat(${dfd}, ${dirflags}, ${path}, ${fs_flags}, ${o_flags})`);
+  async openat(dfd, dirflags, path, fdflags, o_flags) {
+    this.debug(`openat(${dfd}, ${dirflags}, ${path}, ${fdflags}, ${o_flags})`);
 
     // NB: dirflags currently only involves symlinks which we don't support.
     const resolvedPath = this.resolvePath_(dfd, path);
     if (typeof resolvedPath === 'number') {
       return resolvedPath;
     }
-    return this.open(resolvedPath, fs_flags, o_flags);
+    return this.open(resolvedPath, fdflags, o_flags);
   }
 
   close(fd) {

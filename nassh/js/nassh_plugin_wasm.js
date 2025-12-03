@@ -177,7 +177,7 @@ class StorageFileHandler extends FileHandler {
   }
 
   /** @override */
-  async open(path, fs_flags, o_flags) {
+  async open(path, fdflags, o_flags) {
     if (path !== this.path) {
       return WASI.errno.ENOTDIR;
     }
@@ -234,7 +234,7 @@ class MemoryFileHandler extends FileHandler {
   }
 
   /** @override */
-  async open(path, fs_flags, o_flags) {
+  async open(path, fdflags, o_flags) {
     if (path !== this.path) {
       return WASI.errno.ENOTDIR;
     }
