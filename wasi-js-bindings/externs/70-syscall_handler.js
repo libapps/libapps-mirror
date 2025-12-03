@@ -22,13 +22,13 @@ class SyscallHandler {
 
   /**
    * @param {!WASI_t.clockid} clockid
-   * @return {!WASI_t.errno|{res: (number|bigint)}}
+   * @return {!WASI_t.errno|{res: bigint}}
    */
   handle_clock_res_get(clockid) {}
 
   /**
    * @param {!WASI_t.clockid} clockid
-   * @return {!WASI_t.errno|{now: (number|bigint)}}
+   * @return {!WASI_t.errno|{now: bigint}}
    */
   handle_clock_time_get(clockid) {}
 
