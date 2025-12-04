@@ -352,18 +352,15 @@ class FileSystemApiFileWriter extends FileWriter {
  * Get an appropriate FileWriter object for the file to transfer.
  *
  * @param {string} name The local filename to use.
- * @param {!File|!FileAttrs} attrs The remote file attributes.
  * @param {!Object} options Options to pass to the file writer.
  * @return {!FileWriter} The file writer.
  */
-function getFileWriter(name, attrs, options) {
+function getFileWriter(name, options) {
   if (globalThis.showDirectoryPicker === undefined ||
       options.prefs.get('downloadMode') === 'a') {
-    return new AnchorTagFileWriter(
-        name, {size: attrs.size, document: options.document});
+    return new AnchorTagFileWriter(name, options);
   } else {
-    return new FileSystemApiFileWriter(
-        name, {size: attrs.size, window: options.window, cli: options.cli});
+    return new FileSystemApiFileWriter(name, options);
   }
 }
 
@@ -2128,9 +2125,10 @@ Cli.commandGet_ = async function(args, opts) {
   return this.client.fileStatus(this.makePath_(src))
     .then(async (attrs) => {
       spinner = new ProgressBar(this.terminal, attrs.size);
-      writer = getFileWriter(dst, attrs, {
+      writer = getFileWriter(dst, {
         document: this.terminal.getDocument(),
         window: globalThis,
+        size: lib.notUndefined(attrs.size),
         cli: this,
         prefs: this.localPrefs_,
       });
