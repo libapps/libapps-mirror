@@ -25,7 +25,7 @@ class LitElement$$module$js$lit{
   }
 
   /**
-   * @return {!Object<string, PropertyDeclaration>}
+   * @return {!Object<string, !PropertyDeclaration>}
    * @protected
    */
   static get properties() {};
@@ -37,7 +37,7 @@ class LitElement$$module$js$lit{
   static get shadowRootOptions() {};
 
   /**
-   * @return {!CSSResult|!Array<CSSResult>}
+   * @return {!CSSResult|!Array<!CSSResult>}
    * @protected
    */
   static get styles() {};
