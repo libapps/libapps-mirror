@@ -254,18 +254,18 @@ export class DirectWasiPreview1 extends Base {
   }
 
   /** @override */
-  handle_random_get(bytes) {
+  handle_random_get(buf) {
     // The crypto calls cannot operate on shared memory, so an additional copy
     // to a non-shared type is required. Other types of syscall will be able to
     // operate directly on the memory supplied.
     // https://github.com/w3c/webcrypto/issues/213
-    if (bytes instanceof SharedArrayBuffer) {
-      const u8 = new Uint8Array(bytes);
+    if (buf instanceof SharedArrayBuffer) {
+      const u8 = new Uint8Array(buf);
       const temp = new Uint8Array(u8.length);
       crypto.getRandomValues(temp);
       u8.set(temp);
     } else {
-      const temp = bytes instanceof ArrayBuffer ? new Uint8Array(bytes) : bytes;
+      const temp = buf instanceof ArrayBuffer ? new Uint8Array(buf) : buf;
       crypto.getRandomValues(temp);
     }
     return WASI.errno.ESUCCESS;

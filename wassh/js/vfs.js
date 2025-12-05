@@ -896,24 +896,24 @@ export class VFS {
   }
 
   /**
-   * @param {string} old_path
-   * @param {string} new_path
+   * @param {string} oldPath
+   * @param {string} newPath
    * @return {!Promise<!WASI_t.errno>}
    */
-  async link(old_path, new_path) {
-    this.debug(`link(${old_path}, ${new_path})`);
+  async link(oldPath, newPath) {
+    this.debug(`link(${oldPath}, ${newPath})`);
 
-    const oldHandler = this.findHandler_(old_path);
+    const oldHandler = this.findHandler_(oldPath);
     if (typeof oldHandler === 'number') {
       return oldHandler;
     }
-    const newHandler = this.findHandler_(new_path);
+    const newHandler = this.findHandler_(newPath);
     if (typeof newHandler === 'number') {
       return newHandler;
     }
 
     if (oldHandler === newHandler) {
-      return oldHandler.link(old_path, new_path);
+      return oldHandler.link(oldPath, newPath);
     } else {
       return WASI.errno.EXDEV;
     }
@@ -942,24 +942,24 @@ export class VFS {
   }
 
   /**
-   * @param {string} old_path
-   * @param {string} new_path
+   * @param {string} oldPath
+   * @param {string} newPath
    * @return {!Promise<!WASI_t.errno>}
    */
-  async rename(old_path, new_path) {
-    this.debug(`rename(${old_path}, ${new_path})`);
+  async rename(oldPath, newPath) {
+    this.debug(`rename(${oldPath}, ${newPath})`);
 
-    const oldHandler = this.findHandler_(old_path);
+    const oldHandler = this.findHandler_(oldPath);
     if (typeof oldHandler === 'number') {
       return oldHandler;
     }
-    const newHandler = this.findHandler_(new_path);
+    const newHandler = this.findHandler_(newPath);
     if (typeof newHandler === 'number') {
       return newHandler;
     }
 
     if (oldHandler === newHandler) {
-      return oldHandler.rename(old_path, new_path);
+      return oldHandler.rename(oldPath, newPath);
     } else {
       return WASI.errno.EXDEV;
     }

@@ -38,9 +38,9 @@ class Tty extends VFS.FileHandle {
   }
 
   /** @override */
-  write(data) {
-    this.term.io.writeUTF8(data);
-    return {nwritten: data.length};
+  write(buf) {
+    this.term.io.writeUTF8(buf);
+    return {nwritten: buf.length};
   }
 
   /** @override */
