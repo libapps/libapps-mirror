@@ -8,6 +8,8 @@ BasedOnStyle: Chromium
 
 # Please keep all directives after this one sorted alphabetically.
 
+InsertNewlineAtEOF: true
+
 # C++ settings.
 ---
 Language: Cpp
@@ -15,12 +17,33 @@ Language: Cpp
 # This is permitted by the Google and Chromium style guides.
 AllowAllParametersOfDeclarationOnNextLine: true
 
+# NOLINT(reason) is used heavily by existing code.
+CommentPragmas: 'NOLINT:.*'
+
+# Group includes into four distinct groups and sort them case insensitively.
+IncludeBlocks: Regroup
+IncludeIsMainRegex: '([-_](test|unittest))?$'
+SortIncludes: CaseInsensitive
+IncludeCategories:
+  # C system includes
+  - Regex:           '^<((arpa|linux|net|netinet|sys)\/([0-9a-z_-]+\/)?)?[0-9a-z_-]+\.h>$'
+    Priority:        1
+  # C++ system includes
+  - Regex:           '^<[0-9a-z_-]+>$'
+    Priority:        2
+  # Other system libraries
+  - Regex:           '^<.*'
+    Priority:        3
+  # Other includes
+  - Regex:           '.*'
+    Priority:        4
+
 # JavaScript settings.
 ---
 Language: JavaScript
 
 # A few tweaks where the guides permit.
 AlignOperands: true
-AllowShortFunctionsOnASingleLine: Inline
+AllowShortFunctionsOnASingleLine: Empty
 BinPackArguments: false
 MaxEmptyLinesToKeep: 1
