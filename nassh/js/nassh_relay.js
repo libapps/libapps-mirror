@@ -6,6 +6,8 @@
  * @fileoverview Common relay logic.
  */
 
+import {lib} from '../../libdot/index.js';
+
 import {hterm} from '../../hterm/index.js';
 
 import {LocalPreferenceManager} from './nassh_preference_manager.js';
@@ -22,7 +24,7 @@ export class Relay {
    *     via print or overlays is utilized.
    * @param {!Object} options Command line options controlling proxy behavior.
    * @param {!Location} location Interface for redirecting to auth pages.
-   * @param {!Storage} storage Temporary storage for relays when redirecting.
+   * @param {!lib.Storage} storage Temporary storage for when redirecting.
    *     Should be sessionStorage or equiv lifespan & isolation.
    * @param {!LocalPreferenceManager} localPrefs Manager of nassh preferences
    *     that are not synced between systems.
@@ -49,7 +51,7 @@ export class Relay {
     this.resumeConnection = !!options['--resume-connection'];
     /** @type {!Location} */
     this.location = location;
-    /** @type {!Storage} */
+    /** @type {!lib.Storage} */
     this.storage = storage;
     /** @type {!LocalPreferenceManager} */
     this.localPrefs = localPrefs;

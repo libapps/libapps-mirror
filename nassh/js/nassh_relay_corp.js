@@ -95,12 +95,13 @@ export class Corp extends Relay {
 
     // This session storage item is created by /html/nassh_google_relay.html
     // if we succeed at finding a relay host.
-    const relayHost = this.storage.getItem('googleRelay.relayHost');
-    const relayPort = this.storage.getItem('googleRelay.relayPort') ||
+    const relayHost = await this.storage.getItem('googleRelay.relayHost');
+    const relayPort = await this.storage.getItem('googleRelay.relayPort') ||
         this.proxyPort;
 
     if (relayHost) {
-      const expectedResumePath = this.storage.getItem('googleRelay.resumePath');
+      const expectedResumePath = await this.storage.getItem(
+          'googleRelay.resumePath');
       if (expectedResumePath === resumePath) {
         const pattern = this.relayServerPattern;
         this.relayServer = lib.f.replaceVars(pattern, {

@@ -117,7 +117,8 @@ export function CommandInstance(argv) {
   this.mountOptions = argv.mountOptions || null;
 
   // Session storage (can accept another hterm tab's sessionStorage).
-  this.sessionStorage = argv.sessionStorage || globalThis.sessionStorage;
+  this.sessionStorage = argv.sessionStorage || /** @type {!lib.Storage} */ (
+      globalThis.sessionStorage);
 
   // Sync storage is where synced prefs are saved.
   this.syncStorage = argv.syncStorage;
