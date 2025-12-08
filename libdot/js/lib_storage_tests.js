@@ -9,13 +9,6 @@
 import {lib} from '../index.js';
 
 /**
- * Testsuite for the generic storage API.
- *
- * Each implementation should call this to verify functionality.
- */
-export function storageApiTest() {
-
-/**
  * @param {!Object} storage The storage object under test.
  * @return {boolean} Whether the storage type supports event testing.
  */
@@ -27,9 +20,21 @@ function storageSupportsEventTests(storage) {
 }
 
 /**
- * Verify single get/set APIs.
+ * This is mocha.Context with extra stuff attached.
+ *
+ * @typedef {{
+ *   skip: function(),
+ *   storage: !lib.Storage,
+ * }}
  */
-it('get-set', async function() {
+let StorageContext;
+
+/**
+ * Verify single get/set APIs.
+ *
+ * @this {!StorageContext}
+ */
+async function testGetSet() {
   const storage = this.storage;
 
   // Make sure we can set an item and read it back out.
@@ -46,12 +51,14 @@ it('get-set', async function() {
   assert.equal(value, 2);
   value = await storage.getItem('foo');
   assert.equal(value, 1);
-});
+}
 
 /**
  * Verify multiple get/set APIs.
+ *
+ * @this {!StorageContext}
  */
-it('gets-sets', async function() {
+async function testGetsSets() {
   const storage = this.storage;
 
   let value = await storage.getItems(null);
@@ -76,12 +83,14 @@ it('gets-sets', async function() {
   await storage.setItems({'cow': 4});
   value = await storage.getItems(null);
   assert.deepEqual(value, {'foo': 1, 'bar': 2, 'cow': 4});
-});
+}
 
 /**
  * Verify remove API.
+ *
+ * @this {!StorageContext}
  */
-it('remove', async function() {
+async function testRemove() {
   const storage = this.storage;
 
   // Add some items.
@@ -97,12 +106,14 @@ it('remove', async function() {
   // Make sure it's gone.
   value = await storage.getItems(null);
   assert.deepEqual(value, {'bar': 2});
-});
+}
 
 /**
  * Verify remove API with missing values.
+ *
+ * @this {!StorageContext}
  */
-it('remove-missing', async function() {
+async function testRemoveMissing() {
   const storage = this.storage;
 
   // Add some items.
@@ -118,12 +129,14 @@ it('remove-missing', async function() {
   // Make sure nothing is changed.
   value = await storage.getItems(null);
   assert.deepEqual(value, {'foo': 1, 'bar': 2});
-});
+}
 
 /**
  * Verify removes API.
+ *
+ * @this {!StorageContext}
  */
-it('removes', async function() {
+async function testRemoves() {
   const storage = this.storage;
 
   // Add some items.
@@ -139,12 +152,14 @@ it('removes', async function() {
   // Make sure it's gone.
   value = await storage.getItems(null);
   assert.deepEqual(value, {'cow': 3});
-});
+}
 
 /**
  * Verify clear API.
+ *
+ * @this {!StorageContext}
  */
-it('clear', async function() {
+async function testClear() {
   const storage = this.storage;
 
   // Add some items.
@@ -160,12 +175,14 @@ it('clear', async function() {
   // Make sure it's gone.
   value = await storage.getItems(null);
   assert.deepEqual(value, {});
-});
+}
 
 /**
  * Verify add/removing observers.
+ *
+ * @this {!StorageContext}
  */
-it('observe-add-remove', async function() {
+async function testObserveAddRemove() {
   const storage = this.storage;
 
   if (!storageSupportsEventTests(storage)) {
@@ -208,12 +225,15 @@ it('observe-add-remove', async function() {
     {'k': {newValue: 'v'}},
     {'k': {oldValue: 'v'}},
   ]);
-});
+}
 
 /**
  * Verify observer notifications.
+ *
+ * @param {function(): void} done
+ * @this {!StorageContext}
  */
-it('observe', function(done) {
+function testObserve(done) {
   const storage = this.storage;
 
   if (!storageSupportsEventTests(storage)) {
@@ -246,6 +266,20 @@ it('observe', function(done) {
     }
   };
   check();
-});
+}
 
+/**
+ * Testsuite for the generic storage API.
+ *
+ * Each implementation should call this to verify functionality.
+ */
+export function storageApiTest() {
+  it('get_set', testGetSet);
+  it('gets-sets', testGetsSets);
+  it('remove', testRemove);
+  it('remove-missing', testRemoveMissing);
+  it('removes', testRemoves);
+  it('clear', testClear);
+  it('observe-add-remove', testObserveAddRemove);
+  it('observe', testObserve);
 }
