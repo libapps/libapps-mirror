@@ -51,11 +51,16 @@ def run(cmd, **kwargs):
     This assumes |cmd| is a node program.  Different OS's might need to invoke
     node differently, so wrap the calls here.
     """
+    extra_env = kwargs.setdefault("extra_env", {})
+
     # We need the node bin dir to be at the start of the $PATH as some packages
     # will try to run other npm packages directly.
-    extra_env = kwargs.setdefault("extra_env", {})
     assert "PATH" not in extra_env
     extra_env["PATH"] = os.pathsep.join((str(NODE_BIN_DIR), os.getenv("PATH")))
+
+    # We'll manage this ourselves to keep node_modules size small.
+    extra_env["PUPPETEER_SKIP_DOWNLOAD"] = "true"
+
     return libdot.run(
         cmd[1:],
         cmd_prefix=[NODE, NODE_BIN_DIR / cmd[0]],
