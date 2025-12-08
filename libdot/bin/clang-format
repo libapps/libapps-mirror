@@ -1,0 +1,115 @@
+#!/usr/bin/env python3
+# Copyright 2025 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Run clang-format with the right settings."""
+
+import functools
+from pathlib import Path
+import platform
+import subprocess
+import sys
+from typing import Iterable
+
+import libdot
+
+
+@functools.cache
+def get_manifest_name() -> str:
+    """The path on the server for this program."""
+    osname = platform.system()
+    try:
+        shortname = {
+            "Linux": "linux",
+            "Darwin": "mac",
+            "Windows": "win",
+        }[osname]
+    except KeyError as e:
+        raise RuntimeError(f"Unknown OS {osname}") from e
+    return f"clang-format/{shortname}"
+
+
+@functools.cache
+def get_manifest_spec() -> libdot.Artifact:
+    """Get the manifest entry for this file."""
+    return libdot.fetch_manifest_lookup(
+        libdot.DIR / "fetch.json", get_manifest_name()
+    )
+
+
+@functools.cache
+def binary_path() -> Path:
+    """Get path to the local binary."""
+    spec = get_manifest_spec()
+    objname = spec.url.rsplit("/", 1)[-1]
+    sfx = ".exe" if platform.system() == "Windows" else ""
+    return libdot.BIN_DIR / f".clang-format.{objname}{sfx}"
+
+
+def setup() -> None:
+    """Download & update our copy."""
+    path = binary_path()
+    if path.exists():
+        return
+
+    for p in libdot.BIN_DIR.glob(".clang-format.*"):
+        p.unlink()
+
+    # Download & unpack the archive.
+    libdot.fetch_manifest_spec(get_manifest_spec(), path)
+    path.chmod(0o755)
+
+
+def run(argv: Iterable[str] = (), **kwargs) -> subprocess.CompletedProcess:
+    """Run the tool directly."""
+    setup()
+
+    cmd = [binary_path()] + list(argv)
+    return libdot.run(cmd, **kwargs)
+
+
+def perform(
+    argv: Iterable[str] = (),
+    paths: Iterable[str] = (),
+    fix: bool = False,
+    gerrit_comments_file: bool = None,
+) -> None:
+    """Run high level tool logic."""
+    del gerrit_comments_file
+
+    argv = list(argv)
+    paths = list(paths)
+
+    argv += ["-style=file"]
+    if fix:
+        argv += ["-i"]
+    else:
+        argv += ["--dry-run"]
+
+    # TODO(vapier): Add support for Gerrit comments.
+
+    result = run(argv + paths, check=False)
+    return result.returncode == 0
+
+
+def get_parser() -> libdot.ArgumentParser:
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__, short_options=False)
+    parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Fix formatting issues.",
+    )
+    return parser
+
+
+def main(argv: list[str]) -> int:
+    """The main func!"""
+    parser = get_parser()
+    opts, args = parser.parse_known_args(argv)
+    return 0 if perform(args, fix=opts.fix) else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

@@ -1,4 +1,5 @@
 # Cached scripts
+/.clang-format.*
 /.png.crusher.*
 /.closure-compiler*
 /.cpplint.*

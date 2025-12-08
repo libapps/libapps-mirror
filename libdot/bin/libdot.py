@@ -717,6 +717,7 @@ class HelperProgram:
 # Wrappers around libdot/bin/ programs for other tools to access directly.
 # keep-sorted start
 black = HelperProgram("black")
+clang_format = HelperProgram("clang-format")
 closure_compiler = HelperProgram("closure-compiler")
 cpplint = HelperProgram("cpplint")
 eslint = HelperProgram("eslint")

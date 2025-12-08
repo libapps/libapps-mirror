@@ -7,6 +7,13 @@
     "size": "93034736",
     "url": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/google-chrome-stable_108.0.5359.71-1_amd64.deb"
   },
+  "clang-format/linux": {
+    "hashes": {
+      "sha256": "889266a51681d55bd4b9e02c9a104fa6ee22ecdfa7e8253532e5ea47e2e4cb4a"
+    },
+    "size": "3899440",
+    "url": "https://storage.googleapis.com/chromium-clang-format/79a7b4e5336339c17b828de10d80611ff0f85961"
+  },
   "node/linux": {
     "crosh": true,
     "hashes": {
