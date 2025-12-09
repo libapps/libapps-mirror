@@ -869,12 +869,15 @@ a shortcut for it. Unfortunately, Chrome does not provide a great flow for this.
 Trying to pin the icon for an open window will instead open the extension
 options window: https://crbug.com/1151809.
 
+You can follow the Google Chrome Help [Create shortcuts for websites in
+Chrome article](https://support.google.com/chrome/answer/15085120).
+
 1.  Click the extension icon in the upper right of Chrome.
 1.  Hold Ctrl while clicking "Connection Dialog" to open it in a tab.
 1.  *(Optional)* Connect to a destination first to have the shortcut autoconnect
     instead of showing the connection dialog.  It does not need to succeed.
 1.  Open Chrome's ⋮ menu in the upper right (Alt+F shortcut).
-1.  Expand the "More tools" submenu.
+1.  Expand the "Cast, save, and share" submenu.
 1.  Select the "Create shortcut..." option.
 1.  Check the "Open as window" option to automatically open it as a window.
 1.  Click the "Create" button.
