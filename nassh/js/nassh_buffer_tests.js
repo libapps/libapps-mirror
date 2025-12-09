@@ -33,22 +33,23 @@ export class BufferInspector {
 }
 
 /**
- * Testsuite for the generic buffer API.
+ * This is mocha.Context with extra stuff attached.
  *
- * Each implementation should call this to verify functionality.
- *
- * @param {string} backend The name of the backend to instantiate.
- * @param {!typeof BufferInspector} inspectClass Class for inspecting the
- *     buffer internals while testing.
- * @suppress {checkTypes} Closure can't figure out abstract class.
+ * @typedef {{
+ *   skip: function(),
+ *   backend: string,
+ *   inspectClass: !typeof BufferInspector,
+ * }}
  */
-export function BufferApiTest(backend, inspectClass) {
+let BufferContext;
 
 /**
  * Check behavior of empty buffers.
+ *
+ * @this {!BufferContext}
  */
-it('buffer-empty', () => {
-  setDefaultBackend(backend);
+function testBufferEmpty() {
+  setDefaultBackend(this.backend);
   const buffer = newBuffer();
 
   // No data available.
@@ -63,15 +64,18 @@ it('buffer-empty', () => {
   // Acking data that doesn't exist shouldn't confuse it.
   buffer.ack(10);
   assert.equal(0, buffer.getUnreadCount());
-});
+}
 
 /**
  * Check autoacking behavior.
+ *
+ * @this {!BufferContext}
+ * @suppress {checkTypes} Closure can't figure out abstract class.
  */
-it('buffer-autoack', () => {
-  setDefaultBackend(backend);
+function testBufferAutoack() {
+  setDefaultBackend(this.backend);
   const buffer = newBuffer(/* autoack= */ true);
-  const inspector = new inspectClass(buffer);
+  const inspector = new this.inspectClass(buffer);
 
   // Write some data to the buffer.
   buffer.write(new Uint8Array([1, 2]));
@@ -91,15 +95,18 @@ it('buffer-autoack', () => {
   assert.deepStrictEqual(new Uint8Array([2, 3]), data);
   assert.equal(0, buffer.getUnreadCount());
   assert.equal(0, inspector.getUnackedCount());
-});
+}
 
 /**
  * Check manual acking behavior.
+ *
+ * @this {!BufferContext}
+ * @suppress {checkTypes} Closure can't figure out abstract class.
  */
-it('buffer-manual-ack', () => {
-  setDefaultBackend(backend);
+function testBufferManualAck() {
+  setDefaultBackend(this.backend);
   const buffer = newBuffer();
-  const inspector = new inspectClass(buffer);
+  const inspector = new this.inspectClass(buffer);
 
   // Write some data to the buffer.
   buffer.write(new Uint8Array([5, 6, 7]));
@@ -120,15 +127,18 @@ it('buffer-manual-ack', () => {
   assert.equal(2, inspector.getUnackedCount());
   buffer.ack(2);
   assert.equal(0, inspector.getUnackedCount());
-});
+}
 
 /**
  * Check automatic buffer growing.
+ *
+ * @this {!BufferContext}
+ * @suppress {checkTypes} Closure can't figure out abstract class.
  */
-it('buffer-grow', () => {
-  setDefaultBackend(backend);
+function testBufferGrow() {
+  setDefaultBackend(this.backend);
   const buffer = newBuffer();
-  const inspector = new inspectClass(buffer);
+  const inspector = new this.inspectClass(buffer);
   const basesize = 1024;
 
   // Fill the buffer.
@@ -157,8 +167,26 @@ it('buffer-grow', () => {
   assert.equal(basesize + 1027, inspector.getUnackedCount());
   buffer.ack(basesize + 1027);
   assert.equal(0, inspector.getUnackedCount());
-});
+}
 
+/**
+ * Testsuite for the generic buffer API.
+ *
+ * Each implementation should call this to verify functionality.
+ *
+ * @param {string} backend The name of the backend to instantiate.
+ * @param {!typeof BufferInspector} inspectClass Class for inspecting the
+ *     buffer internals while testing.
+ */
+export function BufferApiTest(backend, inspectClass) {
+  before(function() {
+    this.backend = backend;
+    this.inspectClass = inspectClass;
+  });
+  it('buffer-empty', testBufferEmpty);
+  it('buffer-autoack', testBufferAutoack);
+  it('buffer-manual-ack', testBufferManualAck);
+  it('buffer-grow', testBufferGrow);
 }
 
 describe('nassh_buffer_tests.js', () => {
