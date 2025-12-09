@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Test framework setup when run inside the browser.
+ * @fileoverview Various test helpers meant to be reused by other modules.
  */
 
 import {lib} from '../../libdot/index.js';

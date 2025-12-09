@@ -9,7 +9,7 @@
 import {lib} from '../../libdot/index.js';
 import {hterm} from '../../hterm/index.js';
 
-import {listenForPrefChange} from './terminal_test.js';
+import {listenForPrefChange} from './terminal_test_util.js';
 import {TerminalSettingsCheckboxElement} from './terminal_settings_checkbox.js';
 
 describe('terminal_settings_checkbox_tests.js', () => {

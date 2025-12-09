@@ -9,7 +9,7 @@
 import {lib} from '../../libdot/index.js';
 import {hterm} from '../../hterm/index.js';
 
-import {listenForPrefChange} from './terminal_test.js';
+import {listenForPrefChange} from './terminal_test_util.js';
 import {TerminalSettingsThemeElement} from './terminal_settings_theme.js';
 import {DEFAULT_ANSI_COLORS, DEFAULT_BACKGROUND_COLOR, DEFAULT_CURSOR_COLOR,
     DEFAULT_FOREGROUND_COLOR} from './terminal_common.js';
