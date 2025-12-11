@@ -6,7 +6,6 @@
 """Update our nassh fonts bundle. See ../docs/fonts.md."""
 
 import logging
-import os
 import sys
 
 import nassh  # pylint: disable=wrong-import-order
@@ -24,24 +23,32 @@ def main(argv):
     parser = get_parser()
     _opts = parser.parse_args(argv)
 
-    tar = nassh.LIBAPPS_DIR / "fonts.tar.xz"
-
+    tar = nassh.DIR / "fonts.tar.xz"
     libdot.pack(tar, ["fonts"], exclude=["fonts/.hash"], cwd=nassh.DIR)
 
     new_hash = libdot.sha256(tar)
-    final_tar = nassh.LIBAPPS_DIR / f"fonts-{new_hash}.tar.xz"
-    os.rename(tar, final_tar)
+    final_tar = nassh.DIR / f"fonts-{new_hash}.tar.xz"
+    tar.rename(final_tar)
+
+    manifest_path = nassh.DIR / "fetch.json"
+    manifest = libdot.ArtifactManifest.from_file(manifest_path)
+    artifact = manifest.files.get("fonts", libdot.Artifact())
+    artifact.size = final_tar.stat().st_size
+    artifact.url = "/".join(
+        (
+            "https://storage.googleapis.com",
+            "chromeos-localmirror/secureshell/distfiles",
+            final_tar.name,
+        )
+    )
+    artifact.hashes = {"sha256": new_hash}
+    manifest_path.write_text(manifest.toJSON(), encoding="utf-8")
+    (nassh.DIR / "fonts" / ".hash").write_text(new_hash, encoding="utf-8")
 
     logging.info(
-        "To update the hash, run:\n"
-        "sed -i \"/^FONTS_HASH *=/s:=.*:= '%s':\" '%s/fonts'",
-        new_hash,
-        nassh.BIN_DIR,
-    )
-    logging.info(
-        "To upload the new fonts:\ngsutil cp -a public-read %s %s/",
+        "To upload the new fonts:\ngsutil cp -a public-read %s %s",
         final_tar,
-        nassh.fonts.FONTS_GS_URI,
+        "gs://chromeos-localmirror/secureshell/distfiles/",
     )
 
 

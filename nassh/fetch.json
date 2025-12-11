@@ -1,5 +1,13 @@
 {
   "_version": "0",
+  "fonts": {
+    "crosh": true,
+    "hashes": {
+      "sha256": "d6dc5eaf459abd058cd3aef1e25963fde893f9d87f5f55f340431697ce4b3506"
+    },
+    "size": "620240",
+    "url": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/fonts-d6dc5eaf459abd058cd3aef1e25963fde893f9d87f5f55f340431697ce4b3506.tar.xz"
+  },
   "plugin": {
     "crosh": true,
     "hashes": {

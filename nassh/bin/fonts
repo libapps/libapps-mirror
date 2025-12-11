@@ -11,25 +11,16 @@ import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 
-# The hash of the fonts that we maintain.
-# Allow a long line for easy automated updating.
-# pylint: disable=line-too-long
-FONTS_HASH = "d6dc5eaf459abd058cd3aef1e25963fde893f9d87f5f55f340431697ce4b3506"
-# pylint: enable=line-too-long
-
-# Bucket maintained by us.
-FONTS_GS_FRAGMENT = "chromeos-localmirror/secureshell/distfiles"
-FONTS_GS_URI = f"gs://{FONTS_GS_FRAGMENT}"
-FONTS_BASE_URI = f"https://storage.googleapis.com/{FONTS_GS_FRAGMENT}"
-
 # The nassh fonts path.
 FONTS_DIR = nassh.DIR / "fonts"
 
 
 def fonts_update():
     """Download & update our copy of fonts."""
-    libdot.download_tarball(
-        f"fonts-{FONTS_HASH}.tar.xz", FONTS_BASE_URI, FONTS_DIR, FONTS_HASH
+    libdot.download_tarball_manifest(
+        nassh.DIR / "fetch.json",
+        "fonts",
+        FONTS_DIR,
     )
 
 
