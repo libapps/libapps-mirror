@@ -6,7 +6,6 @@
 """Update our pinned copy of node to match Chromium."""
 
 import logging
-import re
 import sys
 
 import libdot
@@ -19,38 +18,11 @@ URI_BASE = "https://chromium.googlesource.com/chromium/src/+/HEAD"
 # https://chromium.googlesource.com/chromium/src/+/HEAD/DEPS
 URI_VER = f"{URI_BASE}/DEPS"
 
-# File which records the node settings.
-NODE_SCRIPT = libdot.BIN_DIR / "node"
 
-
-def update_file(var, value):
-    """Update |var| in |path| with the new |value|."""
-    # Read the current file.
-    lines = NODE_SCRIPT.read_text(encoding="utf-8").splitlines()
-
-    # Try to update the variable in the file.
-    matcher = re.compile(rf'{var} = "(.*)"')
-    for i, line in enumerate(lines):
-        match = matcher.match(line)
-        if match:
-            old_value = match.group(1)
-            if value != old_value:
-                logging.info("  Old value was %s", old_value)
-                lines[i] = f'{var} = "{value}"'
-                break
-            else:
-                logging.info("  Value up-to-date already")
-                return
-    else:
-        logging.error("Unable to locate %s setting in %s", var, NODE_SCRIPT)
-        sys.exit(1)
-
-    # Write out the new file content.
-    NODE_SCRIPT.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
-def update_hash(var: str, deps: dict) -> None:
-    """Update |var| in our tree with the |new_hash|."""
+def update_hash(
+    manifest: libdot.ArtifactManifest, var: str, deps: dict
+) -> None:
+    """Update |var| in |manifest| with data from |deps|."""
     # The structure expected is:
     # {
     #   ...
@@ -64,16 +36,26 @@ def update_hash(var: str, deps: dict) -> None:
     #     'output_file': 'node-linux-x64.tar.gz',
     #   } ]
     # }
-    if deps["dep_type"] != "gcs" or deps["bucket"] != "chromium-nodejs":
+    if deps["dep_type"] != "gcs":
         logging.error("Unknown dep type: %s", deps)
         return
     objects = deps["objects"]
     if len(objects) != 1:
         logging.error("Too many objects: %s", objects)
         return
-    new_hash = objects[0]["object_name"]
-    logging.info("Updating %s with hash %s", var, new_hash)
-    update_file(var, new_hash)
+
+    obj = objects[0]
+    artifact = manifest.files.get(var, libdot.Artifact())
+    artifact.size = obj["size_bytes"]
+    artifact.url = "/".join(
+        (
+            "https://storage.googleapis.com",
+            deps["bucket"],
+            obj["object_name"],
+        )
+    )
+    artifact.hashes = {"sha256": obj["sha256sum"]}
+    logging.info("Updating %s with hash %s", var, obj["object_name"])
 
 
 def fetch_deps(uri: str) -> dict:
@@ -106,9 +88,20 @@ def main(argv):
     _opts = parser.parse_args(argv)
 
     deps = fetch_deps(URI_VER)
-    update_hash("NODE_LINUX_HASH", deps["src/third_party/node/linux"])
-    update_hash("NODE_MAC_HASH", deps["src/third_party/node/mac"])
-    update_hash("NODE_WIN_HASH", deps["src/third_party/node/win"])
+    manifest_path = libdot.DIR / "fetch.json"
+    manifest = libdot.ArtifactManifest.from_file(manifest_path)
+    old_data = manifest.toJSON()
+
+    update_hash(manifest, "node/linux", deps["src/third_party/node/linux"])
+    update_hash(manifest, "node/mac", deps["src/third_party/node/mac"])
+    update_hash(manifest, "node/win", deps["src/third_party/node/win"])
+
+    new_data = manifest.toJSON()
+    if old_data != new_data:
+        logging.info("%s: saving updates", manifest_path)
+        manifest_path.write_text(new_data, encoding="utf-8")
+    else:
+        logging.info("%s: already up-to-date", manifest_path)
 
 
 if __name__ == "__main__":

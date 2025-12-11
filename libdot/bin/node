@@ -19,17 +19,6 @@ NODE_MODULES_HASH = (
     "bc6efb3c037ae3b362147fadb96dd7e200dec71f68e191646f744c0ea4624d52"
 )
 
-# In sync with Chromium's DEPS file because it's easier to use something that
-# already exists than maintain our own.
-# Run `./node_sync_with_chromium` to update these settings.
-NODE_LINUX_HASH = "fa98c6432de572206bc5519f85e9c96bd518b039"
-NODE_MAC_HASH = "4c8952a65a1ce7a2e4cff6db68f9b7454c46349f"
-NODE_WIN_HASH = "907d7e104e7389dc74cec7d32527c1db704b7f96"
-
-# Bucket maintained by Chromium.
-# gsutil ls gs://chromium-nodejs/
-NODE_BASE_URI = "https://storage.googleapis.com/chromium-nodejs"
-
 # Bucket maintained by us.
 NODE_MODULES_GS_FRAGMENT = "chromeos-localmirror/secureshell/distfiles"
 NODE_MODULES_GS_URI = f"gs://{NODE_MODULES_GS_FRAGMENT}"
@@ -73,16 +62,17 @@ def update():
     """Download & update our copy of node."""
     osname = platform.system()
     if osname == "Linux":
-        node_hash = NODE_LINUX_HASH
+        item = "node/linux"
     elif osname == "Darwin":
-        node_hash = NODE_MAC_HASH
+        item = "node/mac"
     elif osname == "Windows":
-        node_hash = NODE_WIN_HASH
+        item = "node/win"
     else:
         raise RuntimeError(f"Unknown OS {osname}")
 
     # In case of an upgrade, nuke existing dir.
-    hash_file = NODE_DIR / node_hash
+    spec = libdot.fetch_manifest_lookup(libdot.DIR / "fetch.json", item)
+    hash_file = NODE_DIR / spec.hashes["sha256"]
     if not hash_file.exists():
         shutil.rmtree(NODE_DIR, ignore_errors=True)
 
@@ -94,9 +84,8 @@ def update():
         os.makedirs(NODE_DIR, exist_ok=True)
 
         # Download & unpack the archive.
-        uri = "/".join((NODE_BASE_URI, node_hash))
-        output = NODE_DIR / node_hash
-        libdot.fetch(uri, output)
+        output = NODE_DIR / "node.tmp"
+        libdot.fetch_manifest_spec(spec, output)
         if osname == "Windows":
             libdot.unlink(node)
             output.rename(node)
