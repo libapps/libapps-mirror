@@ -5,6 +5,7 @@
 
 """Simpler helper to download files."""
 
+import logging
 from pathlib import Path
 import sys
 
@@ -18,6 +19,9 @@ def get_parser():
         "--base64", action="store_true", help="Decode file using base64."
     )
     parser.add_argument(
+        "--manifest", type=Path, help="Lookup sources in a manifest."
+    )
+    parser.add_argument(
         "-o", "--output", type=Path, help="Alternative path to save to."
     )
     parser.add_argument("args", nargs="+", help="URIs or files to download.")
@@ -29,11 +33,28 @@ def main(argv):
     parser = get_parser()
     opts = parser.parse_args(argv)
 
-    for uri in opts.args:
+    if opts.manifest:
+        manifest = libdot.ArtifactManifest.from_file(opts.manifest)
+    else:
+        manifest = None
+
+    for arg in opts.args:
         output = opts.output
-        if not output:
-            output = uri.rsplit("/", 1)[-1]
-        libdot.fetch(uri, output, b64=opts.base64)
+
+        if manifest:
+            artifact = manifest[arg]
+            if not artifact:
+                logging.error("%s: Unable to locate '%s'", opts.manifest, arg)
+                return 1
+            if not output:
+                output = artifact.url.rsplit("/", 1)[-1]
+            libdot.fetch_manifest(opts.manifest, arg, output)
+        else:
+            if not output:
+                output = arg.rsplit("/", 1)[-1]
+            libdot.fetch(arg, output, b64=opts.base64)
+
+    return 0
 
 
 if __name__ == "__main__":

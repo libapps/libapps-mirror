@@ -7,9 +7,11 @@
 
 import argparse
 import base64
+import dataclasses
 import hashlib
 import importlib.machinery
 import io
+import json
 import logging
 import logging.handlers
 import os
@@ -241,6 +243,131 @@ def sha256(path: Union[Path, str]) -> str:
     return m.hexdigest()
 
 
+class Hasher:
+    """Helper for checking hashes."""
+
+    def __init__(self, hashes: dict[str, str]) -> None:
+        self._hashes = hashes
+        self._hashers = {}
+        for algo in hashes:
+            self._hashers[algo] = hashlib.new(algo)
+
+    def update(self, data: bytes) -> None:
+        """Update hashes with |data|."""
+        for hasher in self._hashers.values():
+            hasher.update(data)
+
+    def check(self) -> bool:
+        """Verify all the hashes match."""
+        for algo, hasher in self._hashers.items():
+            new_hash = hasher.hexdigest()
+            if self._hashes[algo] != new_hash:
+                logging.error(
+                    "Hash mismatch: expected %s but found %s",
+                    self._hashes[algo],
+                    new_hash,
+                )
+                return False
+            else:
+                logging.debug("Hash %s matches: %s", algo, new_hash)
+        return True
+
+
+@dataclasses.dataclass()
+class Artifact:
+    """Single file to download."""
+
+    # Size of the file.  Stored as a string to avoid JSON int limits.
+    size: int = 0
+
+    # URL to fetch the file.
+    url: str = ""
+
+    # Known hashes.
+    hashes: dict[str, str] = dataclasses.field(default_factory=dict)
+
+    # Whether the file is base64 encoded.
+    base64: bool = False
+
+    # Whether the artifact is used in CrOS for crosh/Terminal.
+    crosh: bool = False
+
+    @classmethod
+    def from_dict(cls, spec: dict) -> "Artifact":
+        """Convert a dict into the object."""
+        return Artifact(
+            size=int(spec["size"]),
+            url=spec["url"],
+            hashes=spec["hashes"].copy(),
+            base64=spec.get("base64", False),
+            crosh=spec.get("crosh", False),
+        )
+
+    def asdict(self) -> dict:
+        """Return a minimized dict of this object."""
+        ret = {
+            "size": str(self.size),
+            "url": self.url,
+            "hashes": self.hashes,
+        }
+        if self.base64:
+            ret["base64"] = True
+        if self.crosh:
+            ret["crosh"] = True
+        return ret
+
+
+@dataclasses.dataclass()
+class ArtifactManifest:
+    """Manifest for downloading & verifying files."""
+
+    # The format version.  Not really used by us.
+    version: int = 0
+
+    # List of files to download.
+    files: dict[str, Artifact] = dataclasses.field(default_factory=dict)
+
+    @classmethod
+    def from_dict(cls, manifest: dict) -> "ArtifactManifest":
+        """Convert a dict into the object."""
+        return cls(
+            version=manifest.get("_version"),
+            files=dict(
+                (k, Artifact.from_dict(v))
+                for k, v in manifest.items()
+                if k not in {"_version"}
+            ),
+        )
+
+    @classmethod
+    def from_file(cls, path: Path) -> "ArtifactManifest":
+        """Read a manifest from a file."""
+        with path.open("rb") as fp:
+            return cls.from_dict(json.load(fp))
+
+    def __getitem__(self, key: str) -> Artifact | None:
+        return self.files.get(key)
+
+    def asdict(self) -> dict:
+        """Return a minimized dict of this object."""
+        return {
+            "_version": self.version,
+            **dict((k, v.asdict()) for k, v in self.files.items()),
+        }
+
+    def toJSON(self) -> str:
+        """Return a JSON string of this object."""
+        return (
+            json.dumps(
+                self.asdict(),
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        )
+
+
 def unpack(
     archive: Union[Path, str],
     cwd: Optional[Path] = None,
@@ -335,7 +462,14 @@ def pack(
     run(["xz", "-f", "-T0", "-9", tar], cwd=cwd)
 
 
-def fetch_data(uri: str, output=None, verbose: bool = False, b64: bool = False):
+def fetch_data(
+    uri: str,
+    output=None,
+    verbose: bool = False,
+    b64: bool = False,
+    size: int = 0,
+    hashes: Optional[dict[str, str]] = None,
+):
     """Fetch |uri| and write the results to |output| (or return BytesIO)."""
     # This is the timeout used on each blocking operation, not the entire
     # life of the connection.  So it's used for initial urlopen and for each
@@ -344,11 +478,17 @@ def fetch_data(uri: str, output=None, verbose: bool = False, b64: bool = False):
 
     if output is None:
         output = io.BytesIO()
+    hasher = Hasher(hashes or {})
 
     try:
         with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
             mb = 0
             length = infp.length
+            if size and length != size:
+                logging.error(
+                    "Size mismatch: expected %s but found %s", size, length
+                )
+                sys.exit(1)
             while True:
                 data = infp.read(1024 * 1024)
                 if not data:
@@ -363,15 +503,25 @@ def fetch_data(uri: str, output=None, verbose: bool = False, b64: bool = False):
                     print("\r", end="", flush=True)
                 if b64:
                     data = base64.b64decode(data)
+                hasher.update(data)
                 output.write(data)
     except urllib.error.HTTPError as e:
         logging.error("%s: %s", uri, e)
         sys.exit(1)
 
+    if not hasher.check():
+        sys.exit(1)
+
     return output
 
 
-def fetch(uri, output, b64=False):
+def fetch(
+    uri: str,
+    output: Path | str,
+    b64: bool = False,
+    size: int = 0,
+    hashes: Optional[dict[str, str]] = None,
+) -> None:
     """Download |uri| and save it to |output|."""
     output = os.path.abspath(output)
     distdir, name = os.path.split(output)
@@ -401,7 +551,14 @@ def fetch(uri, output, b64=False):
     for _ in range(0, 5):
         try:
             with open(tmpfile, "wb") as outfp:
-                fetch_data(uri, outfp, verbose=verbose, b64=b64)
+                fetch_data(
+                    uri,
+                    outfp,
+                    verbose=verbose,
+                    b64=b64,
+                    size=size,
+                    hashes=hashes,
+                )
             break
         except ConnectionError as e:
             time.sleep(1)
@@ -416,6 +573,29 @@ def fetch(uri, output, b64=False):
         print("\r\x1b[K", end="")
 
     os.rename(tmpfile, output)
+
+
+def fetch_manifest_spec(spec: Artifact, output: str) -> None:
+    """Download an artifact by |spec| and save to |output|."""
+    fetch(
+        spec.url,
+        output,
+        b64=spec.base64,
+        size=int(spec.size),
+        hashes=spec.hashes,
+    )
+
+
+def fetch_manifest_lookup(path: Path, item: str) -> dict:
+    """Lookup the settings for |item| in |manifest|."""
+    manifest = ArtifactManifest.from_file(path)
+    return manifest[item]
+
+
+def fetch_manifest(path: Path, item: str, output: str) -> None:
+    """Download |item| defined in |manifest| and save to |output|."""
+    spec = fetch_manifest_lookup(path, item)
+    fetch_manifest_spec(spec, output)
 
 
 def download_tarball(tar: str, base_uri: str, tar_dir: Path, latest_hash: str):
