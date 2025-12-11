@@ -13,18 +13,9 @@ import sys
 import libdot
 
 
-# The hash of the node_modules that we maintain.
-# Allow a long line for easy automated updating.
-NODE_MODULES_HASH = (
-    "bc6efb3c037ae3b362147fadb96dd7e200dec71f68e191646f744c0ea4624d52"
-)
-
 # Bucket maintained by us.
 NODE_MODULES_GS_FRAGMENT = "chromeos-localmirror/secureshell/distfiles"
 NODE_MODULES_GS_URI = f"gs://{NODE_MODULES_GS_FRAGMENT}"
-NODE_MODULES_BASE_URI = (
-    f"https://storage.googleapis.com/{NODE_MODULES_GS_FRAGMENT}"
-)
 
 # The node_modules & node paths.
 NODE_MODULES_DIR = libdot.LIBAPPS_DIR / "node_modules"
@@ -103,11 +94,10 @@ def update():
 
 def modules_update():
     """Download & update our copy of node_modules."""
-    libdot.download_tarball(
-        f"node_modules-{NODE_MODULES_HASH}.tar.xz",
-        NODE_MODULES_BASE_URI,
+    libdot.download_tarball_manifest(
+        libdot.DIR / "fetch.json",
+        "node/modules",
         NODE_MODULES_DIR,
-        NODE_MODULES_HASH,
     )
 
 

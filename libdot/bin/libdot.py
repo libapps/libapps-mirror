@@ -599,7 +599,14 @@ def fetch_manifest(path: Path, item: str, output: str) -> None:
     fetch_manifest_spec(spec, output)
 
 
-def download_tarball(tar: str, base_uri: str, tar_dir: Path, latest_hash: str):
+def download_tarball(
+    tar: str,
+    base_uri: str,
+    tar_dir: Path,
+    latest_hash: str,
+    size: int = 0,
+    hashes: Optional[dict[str, str]] = None,
+):
     """Download & update our copy of a tarball.
 
     Args:
@@ -624,12 +631,27 @@ def download_tarball(tar: str, base_uri: str, tar_dir: Path, latest_hash: str):
         # Download & unpack the archive.
         uri = "/".join((base_uri, tar))
         output = tar_dir.parent / tar
-        fetch(uri, output)
+        fetch(uri, output, size=size, hashes=hashes)
         unpack(output, cwd=tar_dir.parent, files=[tar_dir.name])
         unlink(output)
 
         # Mark the hash of this checkout.
         hash_file.write_text(latest_hash, encoding="utf-8")
+
+
+def download_tarball_manifest(path: Path, item: str, output: Path) -> None:
+    """Download & update the tarball |item| defined in |path|."""
+    spec = fetch_manifest_lookup(path, item)
+    base_uri, tar = spec.url.rsplit("/", 1)
+    hashes = spec.hashes
+    download_tarball(
+        tar,
+        base_uri,
+        output,
+        hashes["sha256"],
+        size=spec.size,
+        hashes=hashes,
+    )
 
 
 def node_and_npm_setup():

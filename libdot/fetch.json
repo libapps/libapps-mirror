@@ -22,6 +22,14 @@
     "size": "45672893",
     "url": "https://storage.googleapis.com/chromium-nodejs/4c8952a65a1ce7a2e4cff6db68f9b7454c46349f"
   },
+  "node/modules": {
+    "crosh": true,
+    "hashes": {
+      "sha256": "bc6efb3c037ae3b362147fadb96dd7e200dec71f68e191646f744c0ea4624d52"
+    },
+    "size": "41156028",
+    "url": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/node_modules-bc6efb3c037ae3b362147fadb96dd7e200dec71f68e191646f744c0ea4624d52.tar.xz"
+  },
   "node/win": {
     "hashes": {
       "sha256": "7447c4ece014aa41fb2ff866c993c708e5a8213a00913cc2ac5049ea3ffc230d"
