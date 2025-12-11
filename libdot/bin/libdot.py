@@ -413,7 +413,7 @@ def fetch(uri, output, b64=False):
 
     # Clear the progress bar.
     if verbose:
-        print(" " * 80, end="\r")
+        print("\r\x1b[K", end="")
 
     os.rename(tmpfile, output)
 
