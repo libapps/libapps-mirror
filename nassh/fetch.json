@@ -1,0 +1,11 @@
+{
+  "_version": "0",
+  "plugin": {
+    "crosh": true,
+    "hashes": {
+      "sha256": "1c2d0a2fc517e0c388b3ae5e500521b326af96b9dd6bf587e5c4d530bbf6a395"
+    },
+    "size": "1066728",
+    "url": "https://storage.googleapis.com/chromeos-localmirror/secureshell/releases/0.70.tar.xz"
+  }
+}

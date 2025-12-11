@@ -12,15 +12,6 @@ import nassh  # pylint: disable=wrong-import-order
 import libdot
 
 
-# The sha256sum hash of the plugin archive that we maintain.
-# Allow a long line for easy automated updating.
-PLUGIN_HASH = "1c2d0a2fc517e0c388b3ae5e500521b326af96b9dd6bf587e5c4d530bbf6a395"
-
-# Bucket maintained by us.
-PLUGIN_VERSION = "0.70"
-PLUGIN_GS_FRAGMENT = "chromeos-localmirror/secureshell/releases"
-PLUGIN_BASE_URI = f"https://storage.googleapis.com/{PLUGIN_GS_FRAGMENT}"
-
 # The nassh plugin path.
 PLUGIN_DIR = nassh.DIR / "plugin"
 
@@ -30,8 +21,10 @@ def plugin_update():
     # TODO(joelhockey): It would be nicer if plugin files had a prefix such as
     # plugin-0.47.tar.xz rather than just the version 0.47.tar.xz.
     if not os.path.exists(PLUGIN_DIR):
-        libdot.download_tarball(
-            f"{PLUGIN_VERSION}.tar.xz", PLUGIN_BASE_URI, PLUGIN_DIR, PLUGIN_HASH
+        libdot.download_tarball_manifest(
+            nassh.DIR / "fetch.json",
+            "plugin",
+            PLUGIN_DIR,
         )
 
 
