@@ -1,5 +1,12 @@
 {
   "_version": "0",
+  "chrome/linux": {
+    "hashes": {
+      "sha256": "c2ec49284f6a5288b686dc950d1b3342b8881a3e640db0ed5b5e0d2de7cd2724"
+    },
+    "size": "93034736",
+    "url": "https://storage.googleapis.com/chromeos-localmirror/secureshell/distfiles/google-chrome-stable_108.0.5359.71-1_amd64.deb"
+  },
   "node/linux": {
     "crosh": true,
     "hashes": {

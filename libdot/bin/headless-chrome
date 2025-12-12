@@ -23,14 +23,19 @@ import sys
 import libdot
 
 
-CHROME_VERSION = "google-chrome-stable_108.0.5359.71-1"
-
-
 def chrome_setup():
     """Download our copy of Chrome for headless testing."""
+    spec = libdot.fetch_manifest_lookup(
+        libdot.DIR / "fetch.json", "chrome/linux"
+    )
+    name = spec.url.rsplit("/", 1)[-1]
+    if not name.endswith("_amd64.deb"):
+        raise RuntimeError(f"Need to update naming logic: {name}")
+    name = name[:-10]
+
     puppeteer = libdot.node.NODE_MODULES_DIR / "puppeteer"
     download_dir = puppeteer / ".local-chromium"
-    chrome_dir = download_dir / CHROME_VERSION
+    chrome_dir = download_dir / name
     chrome_bin = chrome_dir / "opt" / "google" / "chrome" / "chrome"
     if chrome_bin.exists():
         return chrome_bin
@@ -42,8 +47,7 @@ def chrome_setup():
 
     # Get the snapshot deb archive.
     chrome_deb = tmpdir / "deb"
-    uri = f"{libdot.node.NODE_MODULES_BASE_URI}/{CHROME_VERSION}_amd64.deb"
-    libdot.fetch(uri, chrome_deb)
+    libdot.fetch_manifest_spec(spec, chrome_deb)
 
     # Unpack the deb archive, then clean it all up.
     libdot.run(["ar", "x", "deb", "data.tar.xz"], cwd=tmpdir)
