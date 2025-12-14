@@ -536,7 +536,8 @@ def fetch(
     for envvar in ("KOKORO_GFILE_DIR", "DISTDIR"):
         cache_dir = os.getenv(envvar)
         if cache_dir:
-            cache_file = os.path.join(cache_dir, name)
+            cache_name = uri.rsplit("/", 1)[-1]
+            cache_file = os.path.join(cache_dir, cache_name)
             if os.path.exists(cache_file):
                 logging.info("  Cache hit via %s", envvar)
                 symlink(cache_file, output)
