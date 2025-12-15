@@ -6,7 +6,7 @@
  * @fileoverview ConcatBuffer tests.
  */
 
-import {BufferApiTest, BufferInspector} from './nassh_buffer_tests.js';
+import {BufferApiTest, BufferInspector} from './nassh_buffer_test_util.js';
 import {ConcatBuffer} from './nassh_buffer_concat.js';
 
 describe('nassh_buffer_concat_tests.js', () => {

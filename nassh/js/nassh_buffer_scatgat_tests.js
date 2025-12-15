@@ -6,7 +6,7 @@
  * @fileoverview ScatGatBuffer tests.
  */
 
-import {BufferApiTest, BufferInspector} from './nassh_buffer_tests.js';
+import {BufferApiTest, BufferInspector} from './nassh_buffer_test_util.js';
 import {ScatGatBuffer} from './nassh_buffer_scatgat.js';
 
 describe('nassh_buffer_scatgat_tests.js', () => {
