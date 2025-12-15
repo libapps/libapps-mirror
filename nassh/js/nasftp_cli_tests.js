@@ -12,7 +12,7 @@ import {hterm} from '../../hterm/index.js';
 
 import {Cli, defaultColorMap, ProgressBar} from './nasftp_cli.js';
 import {CommandInstance} from './nassh_command_instance.js';
-import {MockSftpClient} from './nassh_sftp_fsp_tests.js';
+import {MockSftpClient} from './nassh_sftp_fsp_test_util.js';
 import {FileAttrs, StatusCodes} from './nassh_sftp_packet_types.js';
 import {StatusError} from './nassh_sftp_status.js';
 
