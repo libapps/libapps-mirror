@@ -7,7 +7,7 @@
  */
 
 import {lib} from '../index.js';
-import {storageApiTest} from './lib_storage_tests.js';
+import {storageApiTest} from './lib_storage_test_util.js';
 
 describe('lib_storage_condenser_tests.js', () => {
 
