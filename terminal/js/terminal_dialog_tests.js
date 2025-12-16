@@ -19,6 +19,10 @@ describe('terminal_dialog.js', () => {
     document.body.removeChild(this.el);
   });
 
+  /**
+   * @param {!HTMLElement} el
+   * @param {string} classAttr
+   */
   function clickButton(el, classAttr) {
     el.shadowRoot.querySelector(
         `terminal-button.${classAttr}`).click();

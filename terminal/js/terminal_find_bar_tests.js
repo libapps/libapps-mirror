@@ -10,6 +10,18 @@ import {sleep} from './terminal_common.js';
 import './terminal_find_bar.js';
 import {MockFunction} from './terminal_test_mocks.js';
 
+/**
+ * This is mocha.Context with extra stuff attached.
+ *
+ * @typedef {{
+ *   skip: function(),
+ *   nextButton: !HTMLElement,
+ *   previousButton: !HTMLElement,
+ *   keyDownOnInput: function(!Object),
+ * }}
+ */
+let TestContext;
+
 describe('terminal_find_bar_tests.js', function() {
   beforeEach(async function() {
     this.findBar = document.createElement('terminal-find-bar');
@@ -77,17 +89,21 @@ describe('terminal_find_bar_tests.js', function() {
 
   // Parameterized tests for actions that trigger "find" events.
   [{
+    /** @this {!TestContext} */
     action: function() { this.nextButton.click(); },
     backward: false,
   }, {
+    /** @this {!TestContext} */
     action: function() { this.previousButton.click(); },
     backward: true,
   }, {
+    /** @this {!TestContext} */
     action: function() {
       this.keyDownOnInput({key: 'Enter', shiftKey: false});
     },
     backward: false,
   }, {
+    /** @this {!TestContext} */
     action: function() {
       this.keyDownOnInput({key: 'Enter', shiftKey: true});
     },

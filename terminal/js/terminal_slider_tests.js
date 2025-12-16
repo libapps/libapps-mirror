@@ -11,15 +11,27 @@ import {ARROW_KEY_OFFSET} from './terminal_slider.js';
 describe('terminal_slider.js', () => {
   const ERROR = 0.001;
 
+  /**
+   * @param {number} value
+   * @return {!Element}
+   */
   const createElement = (value) => {
     const el = document.createElement('terminal-slider');
     el.setAttribute('value', value);
     return el;
   };
 
+  /**
+   * @param {!Element} el
+   * @return {!HTMLElement}
+   */
   const getKnob =
       (el) => el.shadowRoot.getElementById('knob-container');
 
+  /**
+   * @param {!Element} el
+   * @param {number} value
+   */
   const assertKnobPositionCloseTo = (el, value) => {
     assert.closeTo(parseFloat(getKnob(el).style.left) / 100, value, ERROR);
   };

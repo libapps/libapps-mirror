@@ -15,20 +15,39 @@ import {TerminalSettingsColorpickerElement, TOO_WHITE_BOX_SHADOW,
 describe('terminal_settings_colorpicker.js', () => {
   const preference = 'terminal_settings_colorpicker';
 
+  /**
+   * @param {!Array<number>} hsvx
+   * @return {string}}
+   */
   function hsvxToCSS(hsvx) {
     return lib.colors.arrayToHSLA(lib.colors.hsvxArrayToHslaArray(hsvx));
   }
 
   const orange = hsvxToCSS([39, 100, 100]);
 
-  // Extract css setting from the style attribute of an element. Unlike
-  // element.style.name, which normalizes the value, this function preserves the
-  // original value.
+  /**
+   * Extract css setting from the style attribute of an element.
+   *
+   * Unlike element.style.name, which normalizes the value, this function
+   * preserves the original value.
+   *
+   * @param {!HTMLElement} element
+   * @param {string} name
+   * @return {string}
+   */
   function extractInlineStyle(element, name) {
     const re = new RegExp(`${name}:([^;]*)`);
     return element.getAttribute('style').match(re)[1].trim();
   }
 
+  /**
+   * @param {!HTMLElement} el
+   * @param {string} hex
+   * @param {number} hue
+   * @param {number} saturation
+   * @param {number} value
+   * @param {number} transparency
+   */
   function assertInternals(el, hex, hue, saturation, value, transparency) {
     assert.equal(lib.colors.rgbToHex(
         lib.notNull(lib.colors.normalizeCSS(el.value))).toUpperCase(), hex);
@@ -50,11 +69,20 @@ describe('terminal_settings_colorpicker.js', () => {
     assert.closeTo(+ts.getAttribute('transparency'), transparency, error);
   }
 
+  /**
+   * @param {!Element} el
+   * @param {string} tagName
+   * @return {!HTMLElement}
+   */
   function getElement(el, tagName) {
     const tc = el.shadowRoot.querySelector('terminal-colorpicker');
     return tc.shadowRoot.querySelector(tagName);
   }
 
+  /**
+   * @param {!Element} el
+   * @return {!Promise<!Array<void>>}
+   */
   async function allUpdatesComplete(el) {
     if (el.pendingUpdate_) {
       await el.pendingUpdate_;

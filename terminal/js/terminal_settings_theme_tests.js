@@ -43,19 +43,36 @@ describe('terminal_settings_theme_tests.js', () => {
     delete window.preferenceManager;
   });
 
+  /**
+   * @param {!Element} rootElement
+   * @param {string} theme
+   * @return {!Element}
+   */
   function getThemeInner(rootElement, theme) {
     return rootElement.shadowRoot.querySelector(`#${theme} > div.theme-inner`);
   }
 
+  /**
+   * @param {!Element} rootElement
+   * @param {string} theme
+   */
   function clickTheme(rootElement, theme) {
     getThemeInner(rootElement, theme).click();
   }
 
+  /**
+   * @param {!Element} rootElement
+   * @param {string} theme
+   */
   function enterOnTheme(rootElement, theme) {
     getThemeInner(rootElement, theme).dispatchEvent(
         new KeyboardEvent('keydown', {code: 'Enter'}));
   }
 
+  /**
+   * @param {!Element} rootElement
+   * @param {string} theme
+   */
   function spaceOnTheme(rootElement, theme) {
     getThemeInner(rootElement, theme).dispatchEvent(
         new KeyboardEvent('keydown', {code: 'Enter'}));

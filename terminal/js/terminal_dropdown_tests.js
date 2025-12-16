@@ -14,6 +14,7 @@ import {TerminalSettingsDropdownElement} from './terminal_dropdown.js';
 
 describe('terminal_dropdown_tests.js', () => {
   const preference = 'terminal_dropdown_tests_preference';
+  /** @return {!Array<!Object>} */
   const createOptions = () => [
     {value: 'opt1'},
     {value: 'opt2', deletable: true},

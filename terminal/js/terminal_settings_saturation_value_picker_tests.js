@@ -11,6 +11,11 @@ import {SaturationValuePickerElement, ARROW_KEY_OFFSET} from
 
 describe('saturation_value_picker.js', () => {
   const ERROR = 1;
+  /**
+   * @param {number} saturation
+   * @param {number} value
+   * @return {!Element}
+   */
   const createElement = (saturation, value) => {
     const el = document.createElement(SaturationValuePickerElement.is);
     el.setAttribute('saturation', saturation);
@@ -18,8 +23,17 @@ describe('saturation_value_picker.js', () => {
     return el;
   };
 
+  /**
+   * @param {!Element} el
+   * @return {!Element}
+   */
   const getPicker = (el) => el.shadowRoot.getElementById('picker');
 
+  /**
+   * @param {!Element} el
+   * @param {number} saturation
+   * @param {number} value
+   */
   const assertPickerPositionCloseTo = (el, saturation, value) => {
     assert.closeTo(parseFloat(getPicker(el).style.left), saturation, ERROR);
     assert.closeTo(100 - parseFloat(getPicker(el).style.top), value, ERROR);
@@ -102,10 +116,10 @@ describe('saturation_value_picker.js', () => {
     // Manually call handler, as you can't set offsetX/offsetY on a custom
     // pointer event, and the event handlers may throw an error for a fake
     // pointerId.
-    el.onPointerEvent_({
+    el.onPointerEvent_(/** @type {!Event} */ ({
       offsetX: el.clientWidth * newSaturation / 100,
       offsetY: el.clientHeight * (100 - newValue) / 100,
-    });
+    }));
     await el.updateComplete;
     assertPickerPositionCloseTo(el, newSaturation, newValue);
     assert.equal(listenerInvocations, 1);

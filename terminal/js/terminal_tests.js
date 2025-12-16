@@ -20,6 +20,7 @@ let mockTerminalPrivateController;
 let mockTabsController;
 let div;
 
+/** @return {!Object} */
 const newFakeLaunchInfo = () => ({
   vsh: {
     args: [],
@@ -30,6 +31,7 @@ const newFakeLaunchInfo = () => ({
 
 const encoder = new TextEncoder();
 
+/** @param {string} prefName */
 const waitForPrefLoaded = async function(prefName) {
   while (true) {
     const args = await mockTerminalPrivateController.on('getPrefs');
