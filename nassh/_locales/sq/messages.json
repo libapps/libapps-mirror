@@ -80,6 +80,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Opsionet e serverit të ridrejtimit SSH"
 	},
+	"field_new_connection": {
+		"message": "[Lidhje e re]"
+	},
 	"field_port_aria_label": {
 		"message": "porta"
 	},
@@ -408,7 +411,7 @@
 		"message": "Ngjyra e sfondit për tekstin pa asnjë atribut tjetër të ngjyrës."
 	},
 	"hterm_pref_background_image": {
-		"message": "Vlera CSS e imazhit në sfond. Lëre bosh kur nuk ka imazh.\n\nPër shembull:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Vlera CSS e imazhit në sfond. Lëre bosh kur nuk ka imazh.\n\nPër shembull:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Vlera CSS e pozicionit të imazhit në sfond.\n\nPër shembull:\n  10% 10%\n  në qendër"

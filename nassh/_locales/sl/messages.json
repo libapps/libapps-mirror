@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Možnosti strežnika za posredovanje SSH"
 	},
+	"field_new_connection": {
+		"message": "[Nova povezava]"
+	},
 	"field_port_aria_label": {
 		"message": "vrata"
 	},
@@ -417,7 +420,7 @@
 		"message": "Barva ozadja za besedilo brez drugih barvnih atributov."
 	},
 	"hterm_pref_background_image": {
-		"message": "Vrednost CSS slike ozadja. Pustite prazno, če ni slike.\n\nPrimer:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Vrednost CSS slike ozadja. Pustite prazno, če ni slike.\n\nPrimer:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Vrednost CSS položaja slike ozadja.\n\nNa primer:\n  10% 10%\n  center"
@@ -1089,7 +1092,7 @@
 		"message": "Vnesite kodo PIN za odklepanje ključa $1 v bralniku »$2 ($3)« (še toliko poskusov: $4):"
 	},
 	"restore_prefs": {
-		"message": "Obnovitev varnostne kopije"
+		"message": "Obnovitev iz varnostne kopije"
 	},
 	"save_label": {
 		"message": "Shrani"

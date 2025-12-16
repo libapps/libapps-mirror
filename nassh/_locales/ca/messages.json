@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Opcions del servidor de retransmissió SSH"
 	},
+	"field_new_connection": {
+		"message": "[Connexió nova]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},

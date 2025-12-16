@@ -17,6 +17,9 @@
 	"faq_menu_label": {
 		"message": "FAQs"
 	},
+	"field_new_connection": {
+		"message": "[New connection]"
+	},
 	"hterm_loading_resource_start": {
 		"message": "Loading $1…"
 	},

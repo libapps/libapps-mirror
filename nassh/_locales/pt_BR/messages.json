@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Opções de servidor de redirecionamento SSH"
 	},
+	"field_new_connection": {
+		"message": "[Nova conexão]"
+	},
 	"field_port_aria_label": {
 		"message": "porta"
 	},
@@ -135,7 +138,7 @@
 		"message": "Localizar"
 	},
 	"hterm_button_next": {
-		"message": "Próxima"
+		"message": "Avançar"
 	},
 	"hterm_button_page_down": {
 		"message": "Página abaixo"
@@ -417,7 +420,7 @@
 		"message": "A cor de fundo do texto sem outros atributos de cor."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valor de CSS da imagem de plano de fundo. Deixe em branco para não adicionar uma imagem.\n\nPor exemplo:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valor de CSS da imagem de plano de fundo. Deixe em branco para não adicionar uma imagem.\n\nPor exemplo:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valor de CSS da posição de imagem de plano de fundo.\n\nPor exemplo:\n  10% 10%\n  center"

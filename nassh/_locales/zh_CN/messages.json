@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH 中继服务器选项"
 	},
+	"field_new_connection": {
+		"message": "[新连接]"
+	},
 	"field_port_aria_label": {
 		"message": "端口"
 	},
@@ -417,7 +420,7 @@
 		"message": "没有任何其他颜色属性的文本的背景颜色。"
 	},
 	"hterm_pref_background_image": {
-		"message": "背景图片的 CSS 值。留空表示无图片。\n\n例如：\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "背景图片的 CSS 值。留空表示无图片。\n\n例如：\n  url(https://hterm.org/x/example/bg-img)\nlinear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "背景图片位置的 CSS 值。\n\n例如：\n  10% 10%\n  center"

@@ -80,6 +80,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH ریلے سرور کے اختیارات"
 	},
+	"field_new_connection": {
+		"message": "[نیا کنکنش]"
+	},
 	"field_port_aria_label": {
 		"message": "پورٹ"
 	},
@@ -1401,7 +1404,7 @@
 		"message": "OSC-52 کا استعمال کر کے emacs/vim/etc... سے اپنے کلپ بورڈ میں کاپی کریں: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org کے ذریعے hterm/محفوظ شیل صارفین کے ساتھ چیٹ کریں: https://hterm.org/x/contact"
+		"message": "‫chromium-hterm@chromium.org کے ذریعے ساتھی hterm/محفوظ شیل صارفین کے ساتھ چیٹ کریں: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "بَگ ملا؟  ایک نئی خصوصیت کی درخواست دیں؟  ہمیں بتائیں: https://hterm.org/x/ssh/newbug"

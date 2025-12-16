@@ -83,6 +83,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Izinketho zeseva yokudlulisela ye-SSH"
 	},
+	"field_new_connection": {
+		"message": "[Ukuxhuma Okusha]"
+	},
 	"field_port_aria_label": {
 		"message": "mbobo"
 	},
@@ -411,7 +414,7 @@
 		"message": "Umbala wangemuva wombhalo ongenazo ezinye izibaluli zombala."
 	},
 	"hterm_pref_background_image": {
-		"message": "Inani le-CSS lomfanekiso ongemuva Kuyeke kungenaso isithombe.\n\nNgokwesibonelo:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Inani le-CSS lomfanekiso ongemuva Kuyeke kungenaso isithombe.\n\nNgokwesibonelo:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Inani le-CSS lokuma komfanekiso wangemuva.\n\nNgokwesibonelo:\n  10% 10%\n  center"
@@ -1395,7 +1398,7 @@
 		"message": "Kopishela ebhodini lakho lokunamathisela kusuka ku-emacs/vim/etc... usebenzisa i-OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Xoxa nabasebenzisi be-hterm/Secure Shell users nge-chromium-hterm@chromium.org: https://hterm.org/x/contact"
+		"message": "Xoxa nabanye abasebenzisi hterm/beSecure Shell usebenzisa okuthi chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Uthole isiphazamisi?  Cela isakhi esisha?  Sazise: https://hterm.org/x/ssh/newbug"

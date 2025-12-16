@@ -83,6 +83,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Opcije SSH relejnog poslužitelja"
 	},
+	"field_new_connection": {
+		"message": "[Nova veza]"
+	},
 	"field_port_aria_label": {
 		"message": "priključak"
 	},

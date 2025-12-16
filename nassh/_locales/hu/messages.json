@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH-továbbítószerver beállításai"
 	},
+	"field_new_connection": {
+		"message": "[Új kapcsolat]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
@@ -420,7 +423,7 @@
 		"message": "A szöveg hátterének színe más színattribútum nélkül."
 	},
 	"hterm_pref_background_image": {
-		"message": "A háttérkép CSS-értéke. Ha nincs kép, hagyja üresen.\n\nPéldául:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "A háttérkép CSS-értéke. Ha nincs kép, hagyja üresen.\n\nPéldául:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "A háttérkép pozíciójának CSS-értéke.\n\nPéldául:\n  10% 10%\n  center"
@@ -1362,7 +1365,7 @@
 		"message": "A vágólap tartalmának másolása az emacs/vim/etc… elérési útról OSC-52 használatával: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Csevegés hterm/Secure Shell-felhasználókkal a chromium-hterm@chromium.org fórumon: https://hterm.org/x/contact"
+		"message": "Cseveghet hterm/Secure Shell-felhasználókkal a chromium-hterm@chromium.org fórumon: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Programhibát talált?  Új funkciót szeretne?  Ossza meg velünk: https://hterm.org/x/ssh/newbug."

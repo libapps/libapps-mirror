@@ -86,6 +86,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Mga opsyon ng SSH relay server"
 	},
+	"field_new_connection": {
+		"message": "[Bagong Koneksyon]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
@@ -408,7 +411,7 @@
 		"message": "Ang kulay ng background para sa text na walang ibang attribute ng kulay."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS value ng larawan sa background. Hayaang blangko kung walang larawan.\n\nHalimbawa:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS value ng imahe sa background. Hayaan itong blangko kung walang larawan.\n\nHalimbawa:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS value ng posisyon ng imahe sa background.\n\nHalimbawa:\n  10% 10%\n  gitna"

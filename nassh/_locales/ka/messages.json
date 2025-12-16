@@ -80,6 +80,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH რეტრანსლაციის სერვერის ვარიანტები"
 	},
+	"field_new_connection": {
+		"message": "[ახალი კავშირი]"
+	},
 	"field_port_aria_label": {
 		"message": "პორტი"
 	},
@@ -408,7 +411,7 @@
 		"message": "იმ ტექსტის უკანა პლანის ფერი, რომელსაც ფერთა ატრიბუტები არ აქვს."
 	},
 	"hterm_pref_background_image": {
-		"message": "ფონის სურათის CSS-მნიშვნელობა. დატოვეთ ცარიელი, თუ არ გსურთ სურათის გამოყენება.\n\nმაგალითად:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ფონური სურათის CSS-მნიშვნელობა. დატოვეთ ცარიელი, თუ არ გსურთ სურათის გამოყენება.\n\nმაგალითად:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ფონის სურათის მდებარეობის CSS-მნიშვნელობა.\n\nმაგალითად:\n  10% 10%\n  center"

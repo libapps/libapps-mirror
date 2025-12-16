@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "אפשרויות של שרת ממסר SSH"
 	},
+	"field_new_connection": {
+		"message": "[חיבור חדש]"
+	},
 	"field_port_aria_label": {
 		"message": "יציאה"
 	},
@@ -420,7 +423,7 @@
 		"message": "צבע הרקע של טקסט ללא מאפייני צבע אחרים."
 	},
 	"hterm_pref_background_image": {
-		"message": "ערך CSS של תמונת הרקע. יש להשאיר אותו ריק כדי לא להציג תמונה.\n\nלדוגמה:\n  url(https://hterm.org/x/example/bg-img)‎\n  linear-gradient(top bottom, blue, red)‎"
+		"message": "ערך CSS של תמונת הרקע. צריך להשאיר אותו ריק כדי לא להציג תמונה.\n\nלדוגמה:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ערך CSS של מיקום תמונת הרקע.\n\nלדוגמה:\n  10% 10%\n  center"
@@ -1362,7 +1365,7 @@
 		"message": "ניתן להעתיק אל הלוח מ-emacs, מ-vim וכו' בעזרת OSC-52:‏ https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "אפשר לשוחח בצ'אט עם משתמשי hterm/Secure Shell אחרים דרך chromium-hterm@chromium.org:‏ https://hterm.org/x/contact"
+		"message": "אפשר לשוחח בצ'אט עם משתמשי hterm/Secure Shell אחרים דרך chromium-hterm@chromium.org: ‏ https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "מצאת באג?  רוצה לבקש תכונה חדשה?  אפשר להודיע לנו בכתובת: https://hterm.org/x/ssh/newbug"

@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Options du serveur de relais SSH"
 	},
+	"field_new_connection": {
+		"message": "[Nouvelle connexion]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
@@ -417,7 +420,7 @@
 		"message": "Couleur d'arrière-plan du texte sans aucun autre attribut de couleur."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valeur CSS de l'image de fond. N'indiquez rien s'il n'y a pas d'image.\n\nPar exemple :\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valeur CSS de l'image de fond. N'indiquez rien s'il n'y a pas d'image.\n\nPar exemple :\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valeur CSS de la position de l'image de fond.\n\nPar exemple :\n  10% 10%\n  center"
@@ -1365,7 +1368,7 @@
 		"message": "Copiez du contenu dans votre presse-papiers à partir d'emacs, de vim, etc. à l'aide d'OSC-52 : https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Communiquez avec les autres utilisateurs de hterm ou de Secure Shell via l'adresse chromium-hterm@chromium.org (https://hterm.org/x/contact)"
+		"message": "Communiquez avec les autres utilisateurs de hterm ou de Secure Shell via chromium-hterm@chromium.org (https://hterm.org/x/contact)"
 	},
 	"tip_9": {
 		"message": "Vous avez trouvé un bug ?  Vous voulez demander une nouvelle fonctionnalité ?  Contactez-nous : https://hterm.org/x/ssh/newbug."

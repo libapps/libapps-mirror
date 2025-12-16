@@ -86,6 +86,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH ರಿಲೇ ಸರ್ವರ್ ಆಯ್ಕೆಗಳು"
 	},
+	"field_new_connection": {
+		"message": "[ಹೊಸ ಕನೆಕ್ಷನ್]"
+	},
 	"field_port_aria_label": {
 		"message": "ಪೋರ್ಟ್"
 	},
@@ -381,7 +384,7 @@
 		"message": "ಸ್ವಯಂಚಾಲಿತ ಆಯ್ಕೆ ನಿಲುಗಡೆ (ಬಲಕ್ಕೆ)"
 	},
 	"hterm_notify_copy": {
-		"message": "ನಕಲಿಸಲಾಗಿದೆ"
+		"message": "ಕಾಪಿ ಮಾಡಲಾಗಿದೆ"
 	},
 	"hterm_options_button_label": {
 		"message": "ಆಯ್ಕೆಗಳು"
@@ -414,7 +417,7 @@
 		"message": "ಬೇರೆ ಯಾವುದೇ ಬಣ್ಣದ ಗುಣಲಕ್ಷಣಗಳನ್ನು ಹೊಂದಿಲ್ಲದ ಪಠ್ಯಕ್ಕಾಗಿ ಹಿನ್ನೆಲೆ ಬಣ್ಣ."
 	},
 	"hterm_pref_background_image": {
-		"message": "ಹಿನ್ನೆಲೆಯ ಚಿತ್ರದ CSS ಮೌಲ್ಯ. ಚಿತ್ರ ಬೇಡದಿದ್ದರೆ ಅದನ್ನು ಖಾಲಿ ಬಿಡಿ.\n\nಉದಾಹರಣೆಗೆ:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ಹಿನ್ನೆಲೆಯ ಚಿತ್ರದ CSS ಮೌಲ್ಯ. ಚಿತ್ರ ಬೇಡದಿದ್ದರೆ ಅದನ್ನು ಖಾಲಿ ಬಿಡಿ.\n\nಉದಾಹರಣೆಗೆ:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ಹಿನ್ನೆಲೆಯ ಚಿತ್ರದ ಸ್ಥಾನದ CSS ಮೌಲ್ಯ.\n\nಉದಾಹರಣೆಗೆ:\n  10% 10%\n  ಕೇಂದ್ರ"
@@ -723,7 +726,7 @@
 		"message": "ಫೈಲ್ ಒಂದನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಿ (ಡೀಫಾಲ್ಟ್: ಪ್ರಾರಂಭದಿಂದ 10MiB)"
 	},
 	"nasftp_cmd_clip_summary": {
-		"message": "$1 ಬೈಟ್‌ಗಳನ್ನು ಕ್ಲಿಪ್‍‍ಬೋರ್ಡ್‍ಗೆ ನಕಲಿಸಲಾಗಿದೆ"
+		"message": "$1 ಬೈಟ್‌ಗಳನ್ನು ಕ್ಲಿಪ್‍‍ಬೋರ್ಡ್‍ಗೆ ಕಾಪಿ ಮಾಡಲಾಗಿದೆ"
 	},
 	"nasftp_cmd_color": {
 		"message": "ಬಣ್ಣ"
@@ -735,7 +738,7 @@
 		"message": "ನಕಲಿಸಿ"
 	},
 	"nasftp_cmd_copy_help": {
-		"message": "ರಿಮೋಟ್ ಪಾಥ್ ಒಂದನ್ನು ಬೇರೊಂದು ರಿಮೋಟ್ ಪಾಥ್‌ಗೆ ನಕಲಿಸಿ"
+		"message": "ರಿಮೋಟ್ ಪಾಥ್ ಒಂದನ್ನು ಬೇರೊಂದು ರಿಮೋಟ್ ಪಾಥ್‌ಗೆ ಕಾಪಿ ಮಾಡಿ"
 	},
 	"nasftp_cmd_del_help": {
 		"message": "ಫೈಲ್‌ಗಳನ್ನು ಅಳಿಸಿ"
@@ -1419,10 +1422,10 @@
 		"message": "16 ಪ್ರಾಥಮಿಕ ಬಣ್ಣಗಳು ಮತ್ತು 256 ಬಣ್ಣಗಳು ಹಾಗೂ ಸಂಪೂರ್ಣ 24-ಬಿಟ್‌ ಬಣ್ಣಗಳನ್ನು ಬಳಸಿಕೊಂಡು ನಿಮ್ಮ ಔಟ್‌ಪುಟ್/ಪ್ರಾಂಪ್ಟ್‌ಗೆ ಬಣ್ಣ ತುಂಬಿ: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html"
 	},
 	"tip_7": {
-		"message": "OSC-52 ಬಳಸಿಕೊಂಡು emacs/vim/etc... ನಿಂದ ನಿಮ್ಮ ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಿ: https://hterm.org/x/faq/osc52"
+		"message": "OSC-52 ಬಳಸಿಕೊಂಡು emacs/vim/etc... ನಿಂದ ನಿಮ್ಮ ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ಕಾಪಿ ಮಾಡಿ: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org: https://hterm.org/x/contact ಮೂಲಕ ಸಹಭಾಗಿ hterm/Secure Shell ಬಳಕೆದಾರರೊಂದಿಗೆ ಚಾಟ್ ಮಾಡಿ"
+		"message": "chromium-hterm@chromium.org ಮೂಲಕ ಸಹ hterm/Secure Shell ಬಳಕೆದಾರರೊಂದಿಗೆ ಚಾಟ್ ಮಾಡಿ: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "ಬಗ್ ಕಂಡುಬಂದಿತೇ?  ಹೊಸ ಫೀಚರ್‌ಗಾಗಿ ವಿನಂತಿಸಬೇಕೇ?  ನಮಗೆ ತಿಳಿಸಿ: https://hterm.org/x/ssh/newbug"

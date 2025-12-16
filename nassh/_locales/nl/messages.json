@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Opties voor SSH-relayserver"
 	},
+	"field_new_connection": {
+		"message": "[Nieuwe verbinding]"
+	},
 	"field_port_aria_label": {
 		"message": "poort"
 	},

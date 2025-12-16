@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH-välityspalvelinvalinnat"
 	},
+	"field_new_connection": {
+		"message": "[Uusi yhteys]"
+	},
 	"field_port_aria_label": {
 		"message": "portti"
 	},
@@ -417,7 +420,7 @@
 		"message": "Tekstin taustaväri, jos muita väriattribuutteja ei ole"
 	},
 	"hterm_pref_background_image": {
-		"message": "Taustakuvan CSS-arvo Jätä se tyhjäksi, jos kuvaa ei ole.\n\nEsimerkiksi:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Taustakuvan CSS-arvo. Jätä tämä tyhjäksi, jos kuvaa ei ole.\n\nEsimerkki:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Taustakuvan sijainnin CSS-arvo\n\nEsimerkki:\n  10% 10%\n  center"
@@ -1359,7 +1362,7 @@
 		"message": "Kopioi sisältöä leikepöydälle emacs/vim/etc… ‑sijainnista tai vastaavasta OSC-52:lla: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Keskustele muiden htermin ja Secure Shellin käyttäjien kanssa chromium-hterm@chromium.org-ryhmässä: https://hterm.org/x/contact"
+		"message": "Keskustele muiden hterm- ja Secure Shell -käyttäjien kanssa chromium-hterm@chromium.org-ryhmässä: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Löysitkö virheen?  Haluatko pyytää uutta ominaisuutta?  Kerro meille: https://hterm.org/x/ssh/newbug"

@@ -86,6 +86,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH pārraides servera opcijas"
 	},
+	"field_new_connection": {
+		"message": "[Jauns savienojums]"
+	},
 	"field_port_aria_label": {
 		"message": "ports"
 	},
@@ -417,7 +420,7 @@
 		"message": "Fona krāsa tekstam bez citiem krāsu atribūtiem"
 	},
 	"hterm_pref_background_image": {
-		"message": "Fona attēla CSS vērtība. Ja nav attēla, atstājiet lauku tukšu.\n\nPiemērs:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Fona attēla CSS vērtība. Ja nav attēla, atstājiet lauku tukšu.\n\nPiemērs:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Fona attēla pozīcijas CSS vērtība.\n\nPiemērs:\n  10% 10%\n  center"
@@ -1359,7 +1362,7 @@
 		"message": "Kopējiet saturu starpliktuvē no emacs/vim/etc..., izmantojot OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Tērzējiet ar citiem hterm/Secure Shell lietotājiem, izmantojot chromium-hterm@chromium.org: https://hterm.org/x/contact."
+		"message": "Tērzējiet ar citiem hterm/Secure Shell lietotājiem, izmantojot chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Vai atradāt kļūdu?  Vai vēlaties pieprasīt jaunu funkciju?  Informējiet mūs: https://hterm.org/x/ssh/newbug"

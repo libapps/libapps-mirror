@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Опције SSH сервера за прослеђивање"
 	},
+	"field_new_connection": {
+		"message": "[нова веза]"
+	},
 	"field_port_aria_label": {
 		"message": "порт"
 	},
@@ -1359,7 +1362,7 @@
 		"message": "Копирајте у привремену меморију из уређивача текста emacs/vim/итд. помоћу OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Ћаскајте са другим корисницима hterm-а/Secure Shell-а путем chromium-hterm@chromium.org: https://hterm.org/x/contact"
+		"message": "Четујте са другим корисницима hterm-а/Secure Shell-а путем chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Пронашли сте грешку?  Желите да затражите нову функцију?  Обавестите нас: https://hterm.org/x/ssh/newbug"

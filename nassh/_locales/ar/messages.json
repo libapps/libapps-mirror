@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "خيارات خادم إرسال SSH"
 	},
+	"field_new_connection": {
+		"message": "[اتصال جديد]"
+	},
 	"field_port_aria_label": {
 		"message": "منفذ"
 	},
@@ -417,7 +420,7 @@
 		"message": "لون الخلفية للنص بدون سمات لون أخرى"
 	},
 	"hterm_pref_background_image": {
-		"message": "قيمة CSS لصورة الخلفية: يمكنك ترك هذا الحقل فارغًا إذا كنت لا تريد صورة.\n\nعلى سبيل المثال:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "قيمة CSS لصورة الخلفية: يمكنك ترك هذا الحقل فارغًا إذا كنت لا تريد صورة.\n\nعلى سبيل المثال:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "قيمة CSS لموضع صورة الخلفية.\n\nعلى سبيل المثال:\n  10% 10%\n  وسط"
@@ -1371,7 +1374,7 @@
 		"message": "للنسخ إلى الحافظة من emacs/vim/etc...‎ باستخدام OSC-52، يُرجى الاطّلاع على الرابط https://hterm.org/x/faq/osc52."
 	},
 	"tip_8": {
-		"message": "الدردشة مع الزملاء من مستخدمي hterm/Secure Shell على chromium-hterm@chromium.org: https://hterm.org/x/contact"
+		"message": "يمكنك الدردشة مع مستخدمِي hterm أو \"بروتوكول النقل الآمن\" على chromium-hterm@chromium.org:‏ https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "هل عثرت على خطأ؟  هل تريد طلب ميزة جديدة؟  يُرجى إعلامنا بذلك من خلال الرابط https://hterm.org/x/ssh/newbug."

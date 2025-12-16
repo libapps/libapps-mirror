@@ -86,6 +86,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Параметры сервера ретрансляции SSH"
 	},
+	"field_new_connection": {
+		"message": "[Новое подключение]"
+	},
 	"field_port_aria_label": {
 		"message": "порт"
 	},
@@ -417,7 +420,7 @@
 		"message": "Цвет фона для текста без других атрибутов цвета."
 	},
 	"hterm_pref_background_image": {
-		"message": "Значение CSS для фонового изображения. Оставьте пустым, чтобы не использовать фоновое изображение.\n\nНапример:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Значение CSS для фонового изображения. Оставьте пустым, чтобы не использовать фоновое изображение.\n\nНапример:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)."
 	},
 	"hterm_pref_background_position": {
 		"message": "Значение CSS для положения фонового изображения.\n\nНапример:\n  10% 10%\n  center"
@@ -1350,7 +1353,7 @@
 		"message": "Копируйте данные в буфер обмена из emacs/vim/etc… с помощью OSC-52. Подробнее: https://hterm.org/x/faq/osc52."
 	},
 	"tip_8": {
-		"message": "Общайтесь с другими пользователями hterm/Secure Shell на форуме chromium-hterm@chromium.org (https://hterm.org/x/contact)."
+		"message": "Общайтесь с другими пользователями hterm/Secure Shell на форуме chromium-hterm@chromium.org (https://hterm.org/x/contact)"
 	},
 	"tip_9": {
 		"message": "Нашли ошибку?  Хотите запросить новую функцию?  Свяжитесь с нами: https://hterm.org/x/ssh/newbug."

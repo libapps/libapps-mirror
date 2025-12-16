@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH 릴레이 서버 옵션"
 	},
+	"field_new_connection": {
+		"message": "[새 연결]"
+	},
 	"field_port_aria_label": {
 		"message": "포트"
 	},
@@ -417,7 +420,7 @@
 		"message": "다른 색상 속성이 없는 텍스트의 배경색입니다."
 	},
 	"hterm_pref_background_image": {
-		"message": "배경 이미지의 CSS 값입니다. 이미지가 없으면 비워 둡니다.\n\n예:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "배경 이미지의 CSS 값입니다. 이미지가 없으면 비워 둡니다.\n\n예:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "배경 이미지 위치의 CSS 값입니다.\n\n예:\n  10% 10%\n  center"
@@ -1353,7 +1356,7 @@
 		"message": "다음 링크에서 OSC-52를 사용하여 emacs/vim/etc 등의 내용을 클립보드에 복사하세요. https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org를 통해 다른 hterm/Secure Shell 사용자와 채팅하세요(참고: https://hterm.org/x/contact)."
+		"message": "chromium-hterm@chromium.org를 통해 다른 hterm/시큐어 셸 사용자와 채팅하세요(참고: https://hterm.org/x/contact)."
 	},
 	"tip_9": {
 		"message": "버그를 발견하셨나요?  새 기능을 요청하시나요?  다음 링크에서 의견을 보내 주세요. https://hterm.org/x/ssh/newbug"

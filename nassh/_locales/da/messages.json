@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Indstillinger for SSH-relæserver"
 	},
+	"field_new_connection": {
+		"message": "[Ny forbindelse]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
@@ -213,7 +216,7 @@
 		"message": "Markørblink"
 	},
 	"hterm_name_pref_cursor_blink_cycle": {
-		"message": "Markørens blinkhastighed"
+		"message": "Markørens blinkrate"
 	},
 	"hterm_name_pref_cursor_color": {
 		"message": "Tekstmarkørens farve"
@@ -414,7 +417,7 @@
 		"message": "Baggrundsfarven for tekst uden andre farveattributter."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS-værdi for baggrundsbilledet. Lad feltet stå tomt, hvis der ikke er noget billede.\n\nEksempel:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS-værdi for baggrundsbilledet. Lad feltet stå tomt, hvis der ikke er noget billede.\n\nEksempel:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS-værdi for baggrundsbilledets position.\n\nEksempel:\n  10% 10%\n  center"
@@ -453,7 +456,7 @@
 		"message": "Angiv, om tekstmarkøren skal blinke som standard. Denne kan slås til/fra på kørselstidspunktet via terminalens escape-sekvenser."
 	},
 	"hterm_pref_cursor_blink_cycle": {
-		"message": "Tekstmarkørens blinkhastighed i millisekunder.\n\nEn matrix med to elementer, hvoraf det første angiver, hvor længe tekstmarkøren skal være synlig, og det andet angiver, hvor længe den skal være usynlig."
+		"message": "Tekstmarkørens blinkrate i millisekunder.\n\nEn matrix med to elementer, hvoraf det første angiver, hvor længe tekstmarkøren skal være synlig, og det andet angiver, hvor længe den skal være usynlig."
 	},
 	"hterm_pref_cursor_color": {
 		"message": "Farven på tekstmarkøren, når den er synlig."
@@ -1056,7 +1059,7 @@
 		"message": "Registrer protokolhandlere"
 	},
 	"protocol_register_explain": {
-		"message": "Knappen nedenfor forsøger at registrere handlere for alle de protokoller, vi understøtter. Dermed kan vi f.eks. håndtere links af typen ssh:// direkte. Der vises en meddelelse i browseren for hver protokol. Du skal derfor bekræfte/acceptere hver meddelelse, når den vises. Hvis der ikke vises nogen meddelelser, kan du se tip til fejlfinding i den næste sektion."
+		"message": "Knappen nedenfor forsøger at registrere handlere for alle de protokoller, vi understøtter. Dermed kan vi f.eks. håndtere links af typen ssh:// direkte. Der vises en meddelelse i browseren for hver protokol. Du skal derfor bekræfte/acceptere hver meddelelse, når den vises. Hvis der ikke vises nogen meddelelser, kan du se tips til fejlfinding i den næste sektion."
 	},
 	"protocol_register_explain_settings": {
 		"message": "Hvis vi allerede har registreret handlere, eller tidligere forsøg på registrering blev afvist, vises der ikke flere meddelelser. Åbn dialogboksen nedenfor, og tjek derefter indstillingerne for den registrerede handler i sektionerne med SSH, SFTP osv. Hvis programmet er blokeret, kan du slette indstillingerne, hvilket giver dig mulighed for at prøve registrering igen. Hvis programmet allerede er registreret, men ikke er angivet som din standardhandler, kan du også ændre standardhandleren."
@@ -1440,7 +1443,7 @@
 		"message": "Kopiér til udklipsholderen fra emacs/vim/etc… ved hjælp af OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Chat med andre hterm-/Secure Shell-brugere via chromium-hterm@chromium.org: https://hterm.org/x/contact"
+		"message": "Chat med andre hterm/Secure Shell-brugere via chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Har du fundet en fejl?  Vil du anmode om en ny funktion?  Kontakt os: https://hterm.org/x/ssh/newbug"

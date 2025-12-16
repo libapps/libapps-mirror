@@ -83,6 +83,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "ជម្រើសម៉ាស៊ីនមេបញ្ជូនបន្ត SSH"
 	},
+	"field_new_connection": {
+		"message": "[ការតភ្ជាប់ថ្មី]"
+	},
 	"field_port_aria_label": {
 		"message": "ច្រក"
 	},
@@ -405,7 +408,7 @@
 		"message": "ពណ៌ផ្ទៃខាងក្រោយសម្រាប់អក្សរ ដែលគ្មានលក្ខណៈពណ៌ផ្សេងទៀត។"
 	},
 	"hterm_pref_background_image": {
-		"message": "តម្លៃ CSS នៃរូបភាពផ្ទៃខាងក្រោយ។ ទុកឱ្យទទេ ដើម្បីបញ្ជាក់ថាគ្មានរូបភាព។\n\nឧទាហរណ៍៖\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "តម្លៃ CSS នៃរូបភាព​ផ្ទៃ​ខាង​ក្រោយ។ ទុកឱ្យទទេ ដើម្បីបញ្ជាក់ថាគ្មានរូបភាព។\n\nឧទាហរណ៍៖\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "តម្លៃ CSS នៃទីតាំងរូបភាព​ផ្ទៃ​ខាង​ក្រោយ។\n\nឧទាហរណ៍៖\n  10% 10%\n  កណ្ដាល"
@@ -1365,7 +1368,7 @@
 		"message": "ចម្លងទៅឃ្លីបបតរបស់អ្នកពី emacs/vim/etc... ដោយប្រើ OSC-52៖ https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "ជជែកជាមួយអ្នកប្រើប្រាស់ hterm/Secure Shell ដូចគ្នាតាមរយៈ chromium-hterm@chromium.org៖ https://hterm.org/x/contact"
+		"message": "ជជែកជាមួយអ្នកប្រើប្រាស់ hterm/Secure Shell ផ្សេងទៀតតាមរយៈ chromium-hterm@chromium.org៖ https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "រកឃើញបញ្ហាមែនទេ?  ស្នើសុំមុខងារថ្មីមែនទេ?  សូម​ប្រាប់ឱ្យយើង​ដឹង៖ https://hterm.org/x/ssh/newbug"

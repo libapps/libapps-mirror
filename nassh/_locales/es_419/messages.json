@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Opciones del servidor SSH de retransmisión"
 	},
+	"field_new_connection": {
+		"message": "[Nueva conexión]"
+	},
 	"field_port_aria_label": {
 		"message": "puerto"
 	},
@@ -417,7 +420,7 @@
 		"message": "El color de fondo para el texto sin otros atributos de colores."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valor de CSS para la imagen de fondo. Déjalo en blanco si no deseas mostrar una imagen.\n\nPor ejemplo:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valor de CSS para la imagen de fondo. Déjalo en blanco si no deseas mostrar una imagen.\n\nPor ejemplo:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valor de CSS para la posición de la imagen de fondo.\n\nPor ejemplo:\n  10% 10%\n  center"

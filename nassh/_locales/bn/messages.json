@@ -86,6 +86,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH রিলে সার্ভার বিকল্প"
 	},
+	"field_new_connection": {
+		"message": "[নতুন কানেকশন]"
+	},
 	"field_port_aria_label": {
 		"message": "পোর্ট"
 	},
@@ -414,7 +417,7 @@
 		"message": "রঙের অন্য অ্যাট্রিবিউট ছাড়া টেক্সট ব্যাকগ্রাউন্ডের রঙ।"
 	},
 	"hterm_pref_background_image": {
-		"message": "ব্যাকগ্রাউন্ড ছবির CSS মান। কোনও ছবি না থাকলে এটি ফাঁকা রাখুন।\n\nযেমন:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ব্যাকগ্রাউন্ড ছবির CSS মান। কোনও ছবি না থাকলে এটি ফাঁকা রাখুন।\n\nযেমন:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ব্যাকগ্রাউন্ড ছবির পজিশনের CSS মান।\n\nযেমন:\n  10% 10%\n  center"

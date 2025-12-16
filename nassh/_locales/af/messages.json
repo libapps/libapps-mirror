@@ -80,6 +80,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Opsies vir SSH-herleidingbediener"
 	},
+	"field_new_connection": {
+		"message": "[Nuwe verbinding]"
+	},
 	"field_port_aria_label": {
 		"message": "poort"
 	},
@@ -297,7 +300,7 @@
 		"message": "Blaai op-/af-sleutel se rolgedrag"
 	},
 	"hterm_name_pref_pass_alt_number": {
-		"message": "Alt+1..9 \"wissel oortjie/program\"-gedrag"
+		"message": "Alt+1..9 \"wissel oortjie/app\"-gedrag"
 	},
 	"hterm_name_pref_pass_ctrl_n": {
 		"message": "Ctrl+N \"nuwe venster\"-gedrag"
@@ -405,7 +408,7 @@
 		"message": "Die agtergrondkleur vir teks sonder enige ander kleurkenmerke."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS-waarde van die agtergrondprent. Los dit leeg as daar geen prent is nie.\n\nByvoorbeeld:\n  url(https://hterm.org/x/example/bg-img)\n  lineêre gradiënt(bo, onder, blou, rooi)"
+		"message": "CSS-waarde van die agtergrondprent. Los dit leeg as daar geen prent is nie.\n\nByvoorbeeld:\n  url(https://hterm.org/x/example/bg-img)\n lineêre gradiënt (bo, onder, blou, rooi)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS-waarde van die agtergrondprent se posisie.\n\nByvoorbeeld:\n  10% 10%\n  center"
@@ -537,7 +540,7 @@
 		"message": "Indien waar, beheer Blaai op/Blaai af die terminaal se rolbalk en Shift+Blaai op/Shift+Blaai af word na die afstandgasheer gestuur. Indien vals, word Page Up/Page Down na die afstandgasheer gestuur en Shift+Home/Shift+End rollees."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Of Alt+1..9 na die blaaier aangestuur word.\n\nDit is handig wanneer hterm in 'n blaaieroortjie laat loop word sodat jy nie Chrome se \"wissel na oortjie/program\"-sleutelbordkortpaaie verloor nie. Wanneer dit nie in 'n oortjie laat loop word nie, is dit beter om hierdie sleutels na die gasheer te stuur sodat hulle in vim of emacs gebruik kan word.\n\nIndien waar, sal Alt+1..9 deur die blaaier hanteer word. Indien vals, sal Alt+1..9 na die gasheer gestuur word. Indien \"null\", is outobespeur gegrond op blaaierplatform en venstertipe."
+		"message": "Of Alt+1..9 na die blaaier aangestuur word.\n\nDit is handig wanneer hterm in 'n blaaieroortjie laat loop word sodat jy nie Chrome se \"wissel na oortjie/app\"-sleutelbordkortpaaie verloor nie. Wanneer dit nie in 'n oortjie laat loop word nie, is dit beter om hierdie sleutels na die gasheer te stuur sodat hulle in vim of emacs gebruik kan word.\n\nIndien waar, sal Alt+1..9 deur die blaaier hanteer word. Indien vals, sal Alt+1..9 na die gasheer gestuur word. Indien \"null\", is outobespeur gegrond op blaaierplatform en venstertipe."
 	},
 	"hterm_pref_pass_ctrl_n": {
 		"message": "Of Ctrl+N na die blaaier aangestuur word.\n\nIndien waar, sal Ctrl+N deur die blaaier as die \"nuwe venster\"-sleutelbordkortpad hanteer word. Indien vals, sal Ctrl+N na die gasheer gestuur word."
@@ -678,7 +681,7 @@
 		"message": "Ontbrekende parameter: $1"
 	},
 	"mosh_name": {
-		"message": "Mosh-program"
+		"message": "Mosh-app"
 	},
 	"mount_button_label": {
 		"message": "SFTP-montering"
@@ -1047,7 +1050,7 @@
 		"message": "gestoorde verbindings"
 	},
 	"smart_card_connector_not_installed": {
-		"message": "Installeer asseblief die Smart Card Connector-program: $1"
+		"message": "Installeer asseblief die Smart Card Connector-app: $1"
 	},
 	"ssh_argstr_label": {
 		"message": "SSH-argumente"
@@ -1380,7 +1383,7 @@
 		"message": "Koppel van die omniboks af deur 'ssh<Tab><profile name>': https://hterm.org/x/ssh/faq/omnibox in te tik"
 	},
 	"tip_4": {
-		"message": "ChromeOS kan lêerstelsels via SFTP monteer en via die Lêers-program deurblaai. Gebruik \"SFTP-monteer\" pleks van \"Koppel\"."
+		"message": "ChromeOS kan lêerstelsels via SFTP monteer en via die Lêers-app deurblaai. Gebruik \"SFTP-monteer\" pleks van \"Koppel\"."
 	},
 	"tip_5": {
 		"message": "Koppel deur ssh://-skakels in webblaaie te gebruik, of stoor ’n boekmerk: https://hterm.org/x/ssh/faq/bookmarks"

@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Các tùy chọn dành cho máy chủ chuyển tiếp SSH"
 	},
+	"field_new_connection": {
+		"message": "[Kết nối mới]"
+	},
 	"field_port_aria_label": {
 		"message": "cổng"
 	},
@@ -417,7 +420,7 @@
 		"message": "Màu nền của văn bản không có các thuộc tính màu khác."
 	},
 	"hterm_pref_background_image": {
-		"message": "Giá trị biểu định kiểu xếp chồng (CSS) của hình nền. Để trống giá trị này nếu bạn không muốn hiển thị hình nền.\n\nVí dụ:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Giá trị biểu định kiểu xếp chồng (CSS) của hình nền. Để trống giá trị này nếu bạn không muốn hiển thị hình nền.\n\nVí dụ:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Giá trị CSS của vị trí hình nền.\n\nVí dụ:\n  10% 10%\n  center"

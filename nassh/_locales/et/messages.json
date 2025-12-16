@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH-vaheserveri valikud"
 	},
+	"field_new_connection": {
+		"message": "[Uus ühendus]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
@@ -417,7 +420,7 @@
 		"message": "Muude värviatribuutideta teksti taustavärv."
 	},
 	"hterm_pref_background_image": {
-		"message": "Taustakujutise CSS-väärtus. Kui kujutist ei ole, jätke see tühjaks.\n\nNäide:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Taustkujutise CSS-väärtus. Kui kujutist ei ole, jätke see tühjaks.\n\nNäide:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Taustakujutise asendi CSS-väärtus.\n\nNäide:\n  10% 10%\n  center"
@@ -1338,7 +1341,7 @@
 		"message": "Tekstiredaktorist emacs/vim/jms lõikelauale kopeerimine, kasutades funktsiooni OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Vestelge teiste htermi / Secure Shelli kasutajatega: chromium-hterm@chromium.org – https://hterm.org/x/contact"
+		"message": "Vestelge teiste htermi / Secure Shelli kasutajatega: chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Kas leidsite vea?  Soovite uut funktsiooni?  Andke meile sellest teada: https://hterm.org/x/ssh/newbug"

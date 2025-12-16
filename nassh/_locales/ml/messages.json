@@ -86,6 +86,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH റിലേ സെർവർ ഓപ്ഷനുകൾ"
 	},
+	"field_new_connection": {
+		"message": "[പുതിയ കണക്ഷൻ]"
+	},
 	"field_port_aria_label": {
 		"message": "പോർട്ട്"
 	},
@@ -414,7 +417,7 @@
 		"message": "മറ്റ് വർണ്ണ ആട്രിബ്യൂട്ടുകൾ ഇല്ലാത്ത ടെക്‌സ്റ്റിനായുള്ള പശ്ചാത്തല വർണ്ണം."
 	},
 	"hterm_pref_background_image": {
-		"message": "പശ്ചാത്തല ചിത്രത്തിന്റെ CSS മൂല്യം. ചിത്രം ഇല്ലാത്തതിന് സ്ട്രിംഗിൽ ഒന്നും നൽകാതെ വിടുക.\n\nഉദാഹരണത്തിന്:\n  url(https://hterm.org/x/example/bg-img)\n  ലീനിയർ-ഗ്രേഡിയന്റ്(മുകളിൽ താഴെ, നീല, ചുവപ്പ്)"
+		"message": "പശ്ചാത്തല ചിത്രത്തിന്റെ CSS മൂല്യം. ചിത്രം ഇല്ലെങ്കിൽ ഒന്നും നൽകേണ്ടതില്ല.\n\nഉദാഹരണത്തിന്:\n  url(https://hterm.org/x/example/bg-img)\n ലീനിയർ-ഗ്രേഡിയന്റ്(മുകളിൽ നിന്ന് താഴേക്ക്, നീല, ചുവപ്പ്)"
 	},
 	"hterm_pref_background_position": {
 		"message": "പശ്ചാത്തല ചിത്ര സ്ഥാനത്തിന്റെ CSS മൂല്യം.\n\nഉദാഹരണത്തിന്:\n  10% 10%\n  മധ്യം"
@@ -1347,7 +1350,7 @@
 		"message": "OSC-52 ഉപയോഗിച്ച് emacs/vim/etc... -ൽ നിന്ന് നിങ്ങളുടെ ക്ലിപ്പ്‌ബോർഡിലേക്ക് പകർത്തുക: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org: https://hterm.org/x/contact വഴി സഹ hterm/Secure Shell ഉപയോക്താക്കളുമായി ചാറ്റ് ചെയ്യുക"
+		"message": "സഹ hterm/Secure Shell ഉപയോക്താക്കളുമായി chromium-hterm@chromium.org: https://hterm.org/x/contact വഴി ചാറ്റ് ചെയ്യുക"
 	},
 	"tip_9": {
 		"message": "ബഗ് കണ്ടെത്തിയോ?  പുതിയ ഫീച്ചർ അഭ്യർത്ഥിക്കണോ?  ഞങ്ങളെ അറിയിക്കുക: https://hterm.org/x/ssh/newbug"

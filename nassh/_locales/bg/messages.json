@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Опции за препредаващия сървър за SSH"
 	},
+	"field_new_connection": {
+		"message": "[Нова връзка]"
+	},
 	"field_port_aria_label": {
 		"message": "порт"
 	},

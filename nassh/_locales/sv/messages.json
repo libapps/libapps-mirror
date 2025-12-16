@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Alternativ för SSH-reläserver"
 	},
+	"field_new_connection": {
+		"message": "[Ny anslutning]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
@@ -417,7 +420,7 @@
 		"message": "Bakgrundsfärg för text utan andra färgattribut."
 	},
 	"hterm_pref_background_image": {
-		"message": "CSS-värde för bakgrundsbilden. En tom sträng ger ingen bild.\n\nExempel:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "CSS-värde för bakgrundsbilden. En tom sträng ger ingen bild.\n\nExempel:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "CSS-värde för bakgrundsbildens position.\n\nExempel:\n  10% 10%\n  center"

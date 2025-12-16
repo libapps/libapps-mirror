@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Επιλογές διακομιστή αναμετάδοσης SSH"
 	},
+	"field_new_connection": {
+		"message": "[Νέα σύνδεση]"
+	},
 	"field_port_aria_label": {
 		"message": "θύρα"
 	},
@@ -417,7 +420,7 @@
 		"message": "Το χρώμα φόντου για το κείμενο χωρίς άλλα χαρακτηριστικά χρωμάτων."
 	},
 	"hterm_pref_background_image": {
-		"message": "Η τιμή CSS για την εικόνα φόντου. Αφήστε την κενή εάν δεν υπάρχει εικόνα.\n\nΓια παράδειγμα:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Η τιμή CSS για την εικόνα φόντου. Αφήστε την κενή, εάν δεν υπάρχει εικόνα.\n\nΓια παράδειγμα:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Η τιμή CSS για τη θέση της εικόνας φόντου.\n\nΓια παράδειγμα:\n  10% 10%\n  center"
@@ -1365,7 +1368,7 @@
 		"message": "Κάντε αντιγραφή στο πρόχειρό σας από emacs/vim/κ.λπ.… χρησιμοποιώντας το OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Συζητήστε με άλλους hterm/Ασφαλείς χρήστες κελύφους μέσω του chromium-hterm@chromium.org: https://hterm.org/x/contact"
+		"message": "Συζητήστε με άλλους χρήστες hterm/Ασφαλούς κελύφους μέσω του chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Εντοπίσατε κάποιο σφάλμα;  Θέλετε να ζητήσετε κάποια νέα λειτουργία;  Ενημερώστε μας: https://hterm.org/x/ssh/newbug"

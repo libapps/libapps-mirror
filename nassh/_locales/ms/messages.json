@@ -86,6 +86,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Pilihan pelayan geganti SSH"
 	},
+	"field_new_connection": {
+		"message": "[Sambungan Baharu]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
@@ -414,7 +417,7 @@
 		"message": "Warna latar belakang untuk teks yang tiada atribut warna yang lain."
 	},
 	"hterm_pref_background_image": {
-		"message": "Nilai CSS imej latar belakang. Biarkan kosong jika tiada imej.\n\nContohnya:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Nilai CSS imej latar belakang. Biarkan kosong jika tiada imej.\n\nContohnya:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Nilai CSS kedudukan imej latar belakang.\n\nContohnya:\n  10% 10%\n  center"

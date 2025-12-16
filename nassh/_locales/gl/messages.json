@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Opcións do servidor de transmisión SSH"
 	},
+	"field_new_connection": {
+		"message": "[Nova conexión]"
+	},
 	"field_port_aria_label": {
 		"message": "porto"
 	},
@@ -417,7 +420,7 @@
 		"message": "A cor de fondo do texto sen outros atributos de cor."
 	},
 	"hterm_pref_background_image": {
-		"message": "Valor CSS da imaxe de fondo. Débese deixar en branco en caso de non mostrar ningunha imaxe.\n\nPor exemplo:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Valor CSS da imaxe de fondo. Débese deixar en branco se non hai ningunha imaxe.\n\nPor exemplo:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Valor CSS da posición da imaxe de fondo.\n\nPor exemplo:\n  10% 10%\n  center"
@@ -1353,7 +1356,7 @@
 		"message": "Copia contido no portapapeis desde Emacs, Vim ou outros editores de texto con OSC-52: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "Chatea con outros usuarios de hterm ou Secure Shell a través de chromium-hterm@chromium.org: https://hterm.org/x/contact"
+		"message": "Chatea con outros usuarios de hterm/Secure Shell a través de chromium-hterm@chromium.org: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "Atopaches un erro?  Queres solicitar unha nova función?  Infórmanos: https://hterm.org/x/ssh/newbug"

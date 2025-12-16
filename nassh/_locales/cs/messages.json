@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Možnosti přenosového serveru SSH"
 	},
+	"field_new_connection": {
+		"message": "[Nové připojení]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
@@ -417,7 +420,7 @@
 		"message": "Barva pozadí textu bez dalších atributů barev."
 	},
 	"hterm_pref_background_image": {
-		"message": "Hodnota CSS obrázku na pozadí. Pokud na pozadí žádný obrázek zobrazovat nechcete, ponechte tuto hodnotu prázdnou.\n\nPříklad:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Hodnota CSS obrázku na pozadí. Pokud na pozadí žádný obrázek zobrazovat nechcete, ponechte tuto hodnotu prázdnou.\n\nPříklad:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Hodnota CSS pozice obrázku na pozadí.\n\nPříklady:\n  10% 10%\n  center"

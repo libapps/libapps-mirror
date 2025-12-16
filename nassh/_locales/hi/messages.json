@@ -417,7 +417,7 @@
 		"message": "उस टेक्स्ट के लिए बैकग्राउंड रंग जिसकी कोई दूसरी रंग विशेषता नहीं है."
 	},
 	"hterm_pref_background_image": {
-		"message": "बैकग्राउंड की इमेज का सीएसएस मान. इमेज न होने पर खाली छोड़ दें.\n\nउदाहरण के लिए:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "बैकग्राउंड इमेज की सीएसएस वैल्यू. इमेज न होने पर खाली छोड़ दें.\n\nउदाहरण के लिए:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "बैकग्राउंड की इमेज की स्थिति का सीएसएस मान.\n\nउदाहरण के लिए:\n  10% 10%\n  बीच में"
@@ -1416,7 +1416,7 @@
 		"message": "OSC-52 का इस्तेमाल करके emacs/vim/वगैरह... से अपने क्लिपबोर्ड पर कॉपी करें: https://hterm.org/x/faq/osc52"
 	},
 	"tip_8": {
-		"message": "chromium-hterm@chromium.org पर hterm/सुरक्षित शेल के दूसरे उपयोगकर्ताओं से चैट करें: https://hterm.org/x/contact"
+		"message": "chromium-hterm@chromium.org पर hterm/सिक्योर शेल के दूसरे उपयोगकर्ताओं से चैट करें: https://hterm.org/x/contact"
 	},
 	"tip_9": {
 		"message": "क्या आपको कोई गड़बड़ी मिली?  नई सुविधा का अनुरोध करना है?  हमें बताएं: https://hterm.org/x/ssh/newbug"

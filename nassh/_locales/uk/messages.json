@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Параметри сервера-ретранслятора SSH"
 	},
+	"field_new_connection": {
+		"message": "[Нове з’єднання]"
+	},
 	"field_port_aria_label": {
 		"message": "порт"
 	},
@@ -417,7 +420,7 @@
 		"message": "Колір фону для тексту без інших атрибутів кольору."
 	},
 	"hterm_pref_background_image": {
-		"message": "Значення фонового зображення в CSS. Якщо рядок порожній, зображення немає.\n\nНаприклад:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Значення CSS фонового зображення. Щоб не показувати зображення, залиште рядок порожнім.\n\nНаприклад:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Значення CSS позиції фонового зображення.\n\nНаприклад:\n  10% 10%\n  центр"

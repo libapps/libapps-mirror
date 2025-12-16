@@ -86,6 +86,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "ตัวเลือกรีเลย์เซิร์ฟเวอร์ SSH"
 	},
+	"field_new_connection": {
+		"message": "[การเชื่อมต่อใหม่]"
+	},
 	"field_port_aria_label": {
 		"message": "พอร์ต"
 	},
@@ -414,7 +417,7 @@
 		"message": "สีพื้นหลังสำหรับข้อความที่ไม่มีแอตทริบิวต์ของสีอื่น"
 	},
 	"hterm_pref_background_image": {
-		"message": "ค่า CSS ของภาพพื้นหลัง ปล่อยว่างไว้หากไม่มีรูปภาพ\n\nตัวอย่างเช่น\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "ค่า CSS ของภาพพื้นหลัง ปล่อยว่างไว้หากไม่มีรูปภาพ\n\nตัวอย่างเช่น\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "ค่า CSS ของตำแหน่งรูปภาพพื้นหลัง\n\nตัวอย่างเช่น\n  10% 10%\n  center"

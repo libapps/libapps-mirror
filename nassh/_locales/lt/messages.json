@@ -86,6 +86,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSH perdavimo serverio parinktys"
 	},
+	"field_new_connection": {
+		"message": "[Naujas ryšys]"
+	},
 	"field_port_aria_label": {
 		"message": "prievadas"
 	},

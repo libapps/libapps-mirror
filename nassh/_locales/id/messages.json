@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "Opsi server relai SSH"
 	},
+	"field_new_connection": {
+		"message": "[Koneksi Baru]"
+	},
 	"field_port_aria_label": {
 		"message": "port"
 	},
@@ -414,7 +417,7 @@
 		"message": "Warna latar belakang untuk teks tanpa atribut warna lainnya."
 	},
 	"hterm_pref_background_image": {
-		"message": "Nilai CSS gambar latar. Biarkan kosong jika tidak ada gambar.\n\nMisalnya:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Nilai CSS gambar latar. Biarkan kosong jika tidak ada gambar.\n\nMisalnya:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Nilai CSS posisi gambar latar.\n\nMisalnya:\n  10% 10%\n  tengah"

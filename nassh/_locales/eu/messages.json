@@ -89,6 +89,9 @@
 	"field_nassh_options_placeholder": {
 		"message": "SSHren birtransmisio-zerbitzariaren aukerak"
 	},
+	"field_new_connection": {
+		"message": "[Konexio berria]"
+	},
 	"field_port_aria_label": {
 		"message": "ataka"
 	},
@@ -417,7 +420,7 @@
 		"message": "Beste kolore-atributurik ez duen testuaren atzeko planoaren kolorea."
 	},
 	"hterm_pref_background_image": {
-		"message": "Atzeko planoko irudiaren CSS balioa. Ez idatzi ezer irudirik ez badago.\n\nAdibidez:\n  url(https://hterm.org/x/example/bg-img)\n  linear-gradient(top bottom, blue, red)"
+		"message": "Atzeko planoko irudiaren CSS balioa. Ez idatzi ezer irudirik ez badago.\n\nAdibidez:\n  url(https://hterm.org/x/example/bg-img)\n linear-gradient(top bottom, blue, red)"
 	},
 	"hterm_pref_background_position": {
 		"message": "Atzeko planoko irudiaren kokapenaren CSS balioa.\n\nAdibidez:\n  10% 10%\n  center"
