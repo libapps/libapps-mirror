@@ -449,6 +449,7 @@ it('display-img-prompt', function() {
  * Check simple image display handling.
  */
 it('display-img-normal', function(done) {
+  this.timeout(DISPLAY_IMAGE_TIMEOUT);
   this.terminal.allowImagesInline = true;
 
   // Callback when loading finishes.
@@ -471,12 +472,13 @@ it('display-img-normal', function(done) {
     align: 'center',
     uri: `data:application/octet-stream;base64,${this.imageBase64}`,
   }, onLoad, assert.fail);
-}).timeout(DISPLAY_IMAGE_TIMEOUT);
+});
 
 /**
  * Check simple image display handling via ArrayBuffer.
  */
 it('display-img-array-buffer', function(done) {
+  this.timeout(DISPLAY_IMAGE_TIMEOUT);
   this.terminal.allowImagesInline = true;
 
   // Callback when loading finishes.
@@ -499,12 +501,13 @@ it('display-img-array-buffer', function(done) {
     align: 'center',
     buffer: this.imageArrayBuffer,
   }, onLoad, assert.fail);
-}).timeout(DISPLAY_IMAGE_TIMEOUT);
+});
 
 /**
  * Check simple image display handling via Blob.
  */
 it('display-img-blob', function(done) {
+  this.timeout(DISPLAY_IMAGE_TIMEOUT);
   this.terminal.allowImagesInline = true;
 
   // Callback when loading finishes.
@@ -527,12 +530,13 @@ it('display-img-blob', function(done) {
     align: 'center',
     buffer: this.imageBlob,
   }, onLoad, assert.fail);
-}).timeout(DISPLAY_IMAGE_TIMEOUT);
+});
 
 /**
  * Check handling of image dimensions.
  */
 it('display-img-dimensions', function(done) {
+  this.timeout(DISPLAY_IMAGE_TIMEOUT);
   this.terminal.allowImagesInline = true;
 
   // Callback when loading finishes.
@@ -561,12 +565,13 @@ it('display-img-dimensions', function(done) {
     inline: true,
     uri: `data:application/octet-stream;base64,${this.imageBase64}`,
   }, onLoad, assert.fail);
-}).timeout(DISPLAY_IMAGE_TIMEOUT);
+});
 
 /**
  * Check handling of max image dimensions.
  */
 it('display-img-max-dimensions', function(done) {
+  this.timeout(DISPLAY_IMAGE_TIMEOUT);
   this.terminal.allowImagesInline = true;
 
   // Callback when loading finishes.
@@ -592,12 +597,13 @@ it('display-img-max-dimensions', function(done) {
     inline: true,
     uri: `data:application/octet-stream;base64,${this.imageBase64}`,
   }, onLoad, assert.fail);
-}).timeout(DISPLAY_IMAGE_TIMEOUT);
+});
 
 /**
  * Check loading of invalid images doesn't wedge the terminal.
  */
 it('display-img-invalid', function(done) {
+  this.timeout(DISPLAY_IMAGE_TIMEOUT);
   this.terminal.allowImagesInline = true;
 
   // Callback when loading finishes (i.e. failure triggers).
@@ -617,7 +623,7 @@ it('display-img-invalid', function(done) {
      // TODO(vapier): Should figure this out.
      setTimeout(onError, 0);
   });
-}).timeout(DISPLAY_IMAGE_TIMEOUT);
+});
 
 /**
  * Verify turning text blink on/off works.

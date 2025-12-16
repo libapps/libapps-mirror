@@ -191,8 +191,9 @@ const testData = async function(terminal, name) {
   'charsets',
 ].forEach((name) => {
   it(name, async function() {
+    this.timeout(5000);
     await testData(this.terminal, name);
-  }).timeout(5000);
+  });
 });
 
 });
