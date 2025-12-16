@@ -57,13 +57,21 @@ afterEach(function() {
   globalThis.document.body.removeChild(this.div);
 });
 
+/**
+ * @param {string} value
+ * @param {!HTMLInputElement} inputElement
+ */
 function setInputElementValue(value, inputElement) {
   inputElement.value = value;
-  inputElement.dispatchEvent(new Event('input'), {
+  inputElement.dispatchEvent(new Event('input', {
     bubbles: true,
-  });
+  }));
 }
 
+/**
+ * @param {!HTMLElement} ele
+ * @return {!Array<string>}
+ */
 const classes = (ele) => Array.from(ele.classList.values());
 
 /**
@@ -127,6 +135,10 @@ it('handles-findbar-input', function() {
   assert.equal(this.document.activeElement, this.inputElement);
 });
 
+/**
+ * @param {!Object} results
+ * @return {!Object}
+ */
 const extractIndexes = (results) => {
   return Object.fromEntries(Object.entries(results).map(
       ([rowNum, v]) => [rowNum, v.rowResult.map((row) => row.index)]));
@@ -223,6 +235,11 @@ it('clears-results-and-restarts-when-input-changes', function(done) {
   setInputElementValue('fInDbAr', this.inputElement);
 });
 
+/**
+ * @param {!HTMLElement} element1
+ * @param {!HTMLElement} element2
+ * @return {!Object}
+ */
 const getDiffBoundingClientRect = (element1, element2) => {
   const rect1 = element1.getBoundingClientRect();
   const rect2 = element2.getBoundingClientRect();
