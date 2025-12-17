@@ -1,3 +1,59 @@
+# 0.72, 2026-01-05, OpenSSH 9.9 upgrade & lots of internal rework.
+
+* command: Display nassh build info rather than hterm.
+* wasi-js-bindings: Use JSPI in Program.run when available.
+* Increase standards version to ES2021.
+* wassh: vfs: Delay handle closing with duped file descriptors.
+* l10n: Update translations.
+* command: Use lib.Storage API consistently for sessionStorage.
+* nasftp: Pass getFileWriter size via options.
+* wassh: vfs: Rename fs_flags to fdflags to match WASI.
+* wasi-js-bindings: handle_random_get: Fix typed array type.
+* wasi-js-bindings: proc_{exit,raise}: Switch return typing to throw.
+* wassh: handle_fd_pwrite: Fix buf/offset naming swap.
+* wasi-js-bindings: Fix generator type.
+* wasi-js-bindings: clock_{res,time}_get: Drop number return support.
+* popup: Restore border after profiles.
+* licenses: Include hterm 3rd party code too.
+* wasi-js-bindings: Add helper for encoding into SharedArrayBuffers.
+* sshagent relay stream: Rewrite as ES6 class.
+* sshagent stream: Rewrite as ES6 class.
+* sockets: Fix cleanup crash when APIs are unavailable.
+* streams: Drop unused path property.
+* streams: Rename asyncWrite to plain write.
+* streams: Change asyncWrite into async.
+* streams: Drop asyncWrite callback.
+* streams: Rename asyncOpen to plain open.
+* streams: Refactor asyncOpen into async/promises.
+* licenses: Rename to include "_main" suffix.
+* relay: Rename to include "_main" suffix.
+* crosh: Rename to include "_main" suffix.
+* popup: Rename to include "_main" suffix.
+* wasi-js-bindings: Switch Program.run to async.
+* command: Stop exporting CommandInstanceArgv.
+* command: Drop unused commandName.
+* crosh: Drop unused croshBuiltinId constant.
+* contextMenus: Refactor logic into its own class.
+* background: Drop app->ext settings migrations.
+* background: Drop localStorage migration.
+* browserAction: Drop all usage.
+* browserAction: Refactor logic into its own class.
+* omnibox: Refactor logic into its own class.
+* openssh: Update to 9.4, 9.5, 9.6, 9.7, 9.8, and 9.9.
+* wasm: Drop beta notice.
+* mosh: Initial wasm version of client.
+* protobuf: Import 3.8.0 for mosh.
+* ssh_client: Increase stacksize significantly.
+* connect: Localize the [New Connection] label.
+* mosh: Drop NaCl integration.
+* wassh-libc-sup: Stub out iface helpers.
+* openssl: Update to 1.1.1w.
+* wabt: Update to 1.0.37.
+* openssh: Switch ssh-agent back to UNIX socket.
+* wassh-libc-sup: Add getpwuid_r stub.
+* wassh: Handle path-based AF_UNIX requests.
+* sockets: Add --field-trial-direct-sockets to force Direct Sockets.
+
 # 0.71, 2025-11-04, Minor hotfix for URI.
 
 * uri: Allow -oEnableEscapeCommandline=yes.
