@@ -14,74 +14,74 @@ import {TerminalSettingsBackgroundImageElement}
 
 const key = 'background-image-test';
 
-  const svgDataUrl = 'data:image/svg+xml;base64,' +
-      'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLz4=';
+const svgDataUrl = 'data:image/svg+xml;base64,' +
+    'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLz4=';
 
-  beforeEach(function() {
-    window.preferenceManager = new hterm.PreferenceManager(
-        new lib.Storage.Memory(), 'test');
-    window.localStorage.removeItem(key);
+beforeEach(function() {
+  window.preferenceManager = new hterm.PreferenceManager(
+      new lib.Storage.Memory(), 'test');
+  window.localStorage.removeItem(key);
 
-    this.el = null;
-    this.createElement = async function() {
-      if (this.el) {
-        document.body.removeChild(this.el);
-      }
-      this.el = /** @type {!TerminalSettingsBackgroundImageElement} */ (
-          document.createElement('terminal-settings-background-image'));
-      document.body.appendChild(this.el);
-
-      // The element renders asynchronously.
-      return this.el.updateComplete;
-    };
-  });
-
-  afterEach(function() {
+  this.el = null;
+  this.createElement = async function() {
     if (this.el) {
       document.body.removeChild(this.el);
     }
-    window.localStorage.removeItem(key);
-  });
+    this.el = /** @type {!TerminalSettingsBackgroundImageElement} */ (
+        document.createElement('terminal-settings-background-image'));
+    document.body.appendChild(this.el);
 
-  it('shows-preview-local-storage-if-exists', async function() {
-    await this.createElement();
-    assert.equal(this.el.imagePreviewSrc_, '');
+    // The element renders asynchronously.
+    return this.el.updateComplete;
+  };
+});
 
-    window.localStorage.setItem(key, svgDataUrl);
-    await this.createElement();
-    assert.equal(this.el.imagePreviewSrc_, svgDataUrl);
-  });
+afterEach(function() {
+  if (this.el) {
+    document.body.removeChild(this.el);
+  }
+  window.localStorage.removeItem(key);
+});
 
-  it('clears-storage-and-preview-on-remove-click', async function() {
-    window.localStorage.setItem(key, svgDataUrl);
-    await this.createElement();
+it('shows-preview-local-storage-if-exists', async function() {
+  await this.createElement();
+  assert.equal(this.el.imagePreviewSrc_, '');
 
-    this.el.shadowRoot.querySelector('#bg-remove').click();
+  window.localStorage.setItem(key, svgDataUrl);
+  await this.createElement();
+  assert.equal(this.el.imagePreviewSrc_, svgDataUrl);
+});
 
-    await this.el.updateComplete;
-    assert.isNull(window.localStorage.getItem(key));
-    assert.equal('', this.el.imagePreviewSrc_);
-  });
+it('clears-storage-and-preview-on-remove-click', async function() {
+  window.localStorage.setItem(key, svgDataUrl);
+  await this.createElement();
 
-  it('shows-correct-elements', async function() {
-    // No image is set.
-    await this.createElement();
-    assert.isNotNull(this.el.shadowRoot.querySelector('#bg-select'));
-    assert.isNull(this.el.shadowRoot.querySelector('img'));
-    assert.isNull(this.el.shadowRoot.querySelector('#bg-remove'));
+  this.el.shadowRoot.querySelector('#bg-remove').click();
 
-    // Image from local storage.
-    window.localStorage.setItem(key, svgDataUrl);
-    await this.createElement();
+  await this.el.updateComplete;
+  assert.isNull(window.localStorage.getItem(key));
+  assert.equal('', this.el.imagePreviewSrc_);
+});
 
-    assert.isNull(this.el.shadowRoot.querySelector('#bg-select'));
-    assert.isNotNull(this.el.shadowRoot.querySelector('img'));
-    assert.isNotNull(this.el.shadowRoot.querySelector('#bg-remove'));
-  });
+it('shows-correct-elements', async function() {
+  // No image is set.
+  await this.createElement();
+  assert.isNotNull(this.el.shadowRoot.querySelector('#bg-select'));
+  assert.isNull(this.el.shadowRoot.querySelector('img'));
+  assert.isNull(this.el.shadowRoot.querySelector('#bg-remove'));
 
-  it('updates-preview-and-local-storage-when-file-selected', async function() {
-    await this.createElement();
-    this.el.onFileLoad_(svgDataUrl);
-    assert.equal(svgDataUrl, window.localStorage.getItem(key));
-    assert.equal(svgDataUrl, this.el.imagePreviewSrc_);
-  });
+  // Image from local storage.
+  window.localStorage.setItem(key, svgDataUrl);
+  await this.createElement();
+
+  assert.isNull(this.el.shadowRoot.querySelector('#bg-select'));
+  assert.isNotNull(this.el.shadowRoot.querySelector('img'));
+  assert.isNotNull(this.el.shadowRoot.querySelector('#bg-remove'));
+});
+
+it('updates-preview-and-local-storage-when-file-selected', async function() {
+  await this.createElement();
+  this.el.onFileLoad_(svgDataUrl);
+  assert.equal(svgDataUrl, window.localStorage.getItem(key));
+  assert.equal(svgDataUrl, this.el.imagePreviewSrc_);
+});

@@ -8,43 +8,43 @@
 
 import './terminal_settings_hue_slider.js';
 
-  const PERCENTAGE_ERROR = 0.01;
+const PERCENTAGE_ERROR = 0.01;
 
-  beforeEach(async function() {
-    this.el = document.createElement('hue-slider');
-    this.el.setAttribute('hue', 100);
-    document.body.appendChild(this.el);
-    await this.el.updateComplete;
-    this.innerSlider = this.el.shadowRoot.querySelector('terminal-slider');
+beforeEach(async function() {
+  this.el = document.createElement('hue-slider');
+  this.el.setAttribute('hue', 100);
+  document.body.appendChild(this.el);
+  await this.el.updateComplete;
+  this.innerSlider = this.el.shadowRoot.querySelector('terminal-slider');
 
-    this.assertInternals = function(hue) {
-      assert.closeTo(hue, this.el.hue, 360 * PERCENTAGE_ERROR);
-      assert.closeTo(hue / 360, this.innerSlider.value, PERCENTAGE_ERROR);
-    };
-  });
+  this.assertInternals = function(hue) {
+    assert.closeTo(hue, this.el.hue, 360 * PERCENTAGE_ERROR);
+    assert.closeTo(hue / 360, this.innerSlider.value, PERCENTAGE_ERROR);
+  };
+});
 
-  afterEach(function() {
-    document.body.removeChild(this.el);
-  });
+afterEach(function() {
+  document.body.removeChild(this.el);
+});
 
-  it('update-slider-on-hue-changed', async function() {
-    this.assertInternals(100);
+it('update-slider-on-hue-changed', async function() {
+  this.assertInternals(100);
 
-    this.el.setAttribute('hue', 200);
-    await this.el.updateComplete;
+  this.el.setAttribute('hue', 200);
+  await this.el.updateComplete;
+  this.assertInternals(200);
+});
+
+it('updates-hue-and-pass-through-event-on-slider-change', async function() {
+  this.assertInternals(100);
+
+  let listenerInvocations = 0;
+  this.el.addEventListener('change', () => {
     this.assertInternals(200);
+    ++listenerInvocations;
   });
 
-  it('updates-hue-and-pass-through-event-on-slider-change', async function() {
-    this.assertInternals(100);
-
-    let listenerInvocations = 0;
-    this.el.addEventListener('change', () => {
-      this.assertInternals(200);
-      ++listenerInvocations;
-    });
-
-    this.innerSlider.value = 200 / 360;
-    this.innerSlider.dispatchEvent(new Event('change'));
-    assert.equal(listenerInvocations, 1);
-  });
+  this.innerSlider.value = 200 / 360;
+  this.innerSlider.dispatchEvent(new Event('change'));
+  assert.equal(listenerInvocations, 1);
+});

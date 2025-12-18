@@ -8,39 +8,39 @@
 
 import './terminal_settings_row.js';
 
-  beforeEach(async function() {
-    this.expandableRow = document.createElement('terminal-settings-row');
-    this.expandableRow.setAttribute('expandable', '');
-    document.body.appendChild(this.expandableRow);
+beforeEach(async function() {
+  this.expandableRow = document.createElement('terminal-settings-row');
+  this.expandableRow.setAttribute('expandable', '');
+  document.body.appendChild(this.expandableRow);
 
-    this.expandEvents = [];
-    this.expandableRow.addEventListener('expand', (e) => {
-      this.expandEvents.push(e);
-    });
-
-    await this.expandableRow.updateComplete;
+  this.expandEvents = [];
+  this.expandableRow.addEventListener('expand', (e) => {
+    this.expandEvents.push(e);
   });
 
-  afterEach(function() {
-    document.body.removeChild(this.expandableRow);
-  });
+  await this.expandableRow.updateComplete;
+});
 
-  it('toggle expand state when clicked', async function() {
-    const main = this.expandableRow.shadowRoot.querySelector('#main');
+afterEach(function() {
+  document.body.removeChild(this.expandableRow);
+});
 
-    assert.isFalse(this.expandableRow.expanded_);
+it('toggle expand state when clicked', async function() {
+  const main = this.expandableRow.shadowRoot.querySelector('#main');
 
-    main.click();
-    await this.expandableRow.updateComplete;
+  assert.isFalse(this.expandableRow.expanded_);
 
-    assert.isTrue(this.expandableRow.expanded_);
-    assert.equal(this.expandEvents.length, 1);
-    assert.equal(this.expandEvents[0].detail, true);
+  main.click();
+  await this.expandableRow.updateComplete;
 
-    main.click();
-    await this.expandableRow.updateComplete;
+  assert.isTrue(this.expandableRow.expanded_);
+  assert.equal(this.expandEvents.length, 1);
+  assert.equal(this.expandEvents[0].detail, true);
 
-    assert.isFalse(this.expandableRow.expanded_);
-    assert.equal(this.expandEvents.length, 2);
-    assert.equal(this.expandEvents[1].detail, false);
-  });
+  main.click();
+  await this.expandableRow.updateComplete;
+
+  assert.isFalse(this.expandableRow.expanded_);
+  assert.equal(this.expandEvents.length, 2);
+  assert.equal(this.expandEvents[1].detail, false);
+});

@@ -9,32 +9,32 @@ import {ProfileType, getProfileIds, setProfileIds}
 import {TerminalSettingsProfileItem}
   from './terminal_settings_profile_item.js';
 
-  beforeEach(async function() {
-    window.storage = new lib.Storage.Memory();
-    await setProfileIds(ProfileType.HTERM, ['default', 'red', 'green']);
-    this.el = /** @type {!TerminalSettingsProfileItem} */ (
-        document.createElement('terminal-settings-profile-item'));
-    this.el.profile = 'red';
-    document.body.appendChild(this.el);
-    await this.el.updateComplete;
-    this.button = this.el.shadowRoot.querySelector('mwc-icon-button');
-    this.dialog = this.el.shadowRoot.querySelector('terminal-dialog');
-  });
+beforeEach(async function() {
+  window.storage = new lib.Storage.Memory();
+  await setProfileIds(ProfileType.HTERM, ['default', 'red', 'green']);
+  this.el = /** @type {!TerminalSettingsProfileItem} */ (
+      document.createElement('terminal-settings-profile-item'));
+  this.el.profile = 'red';
+  document.body.appendChild(this.el);
+  await this.el.updateComplete;
+  this.button = this.el.shadowRoot.querySelector('mwc-icon-button');
+  this.dialog = this.el.shadowRoot.querySelector('terminal-dialog');
+});
 
-  afterEach(function() {
-    document.body.removeChild(this.el);
-    delete window.storage;
-  });
+afterEach(function() {
+  document.body.removeChild(this.el);
+  delete window.storage;
+});
 
-  it('deletes-profile-and-dispatches-delete-event', async function() {
-    const eventFired = new Promise((resolve) => {
-      this.el.addEventListener('settings-profile-delete', resolve);
-    });
-    assert.isFalse(this.dialog.open);
-    this.button.click();
-    assert.isTrue(this.dialog.open);
-    this.dialog.accept();
-    await eventFired;
-    assert.deepEqual(
-        ['default', 'green'], await getProfileIds(ProfileType.HTERM));
+it('deletes-profile-and-dispatches-delete-event', async function() {
+  const eventFired = new Promise((resolve) => {
+    this.el.addEventListener('settings-profile-delete', resolve);
   });
+  assert.isFalse(this.dialog.open);
+  this.button.click();
+  assert.isTrue(this.dialog.open);
+  this.dialog.accept();
+  await eventFired;
+  assert.deepEqual(
+      ['default', 'green'], await getProfileIds(ProfileType.HTERM));
+});

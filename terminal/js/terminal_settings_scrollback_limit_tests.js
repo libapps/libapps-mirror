@@ -13,65 +13,65 @@ import {listenForPrefChange} from './terminal_test_util.js';
 import {TerminalSettingsScrollbackLimit}
     from './terminal_settings_scrollback_limit.js';
 
-  const preference = 'scrollback-limit';
+const preference = 'scrollback-limit';
 
-  beforeEach(async function() {
-    window.preferenceManager =
-        new hterm.PreferenceManager(new lib.Storage.Memory());
-    window.preferenceManager.definePreference(preference, 10000);
+beforeEach(async function() {
+  window.preferenceManager =
+      new hterm.PreferenceManager(new lib.Storage.Memory());
+  window.preferenceManager.definePreference(preference, 10000);
 
-    this.el = /** @type {!TerminalSettingsScrollbackLimit} */ (
-        document.createElement('terminal-settings-scrollback-limit'));
-    document.body.appendChild(this.el);
+  this.el = /** @type {!TerminalSettingsScrollbackLimit} */ (
+      document.createElement('terminal-settings-scrollback-limit'));
+  document.body.appendChild(this.el);
 
-    await this.el.updateComplete;
-    this.textfield = this.el.shadowRoot.querySelector('terminal-textfield');
-    this.setTextfield = (value) => {
-      this.textfield.value = value;
-      this.textfield.dispatchEvent(new Event('change'));
-    };
-  });
+  await this.el.updateComplete;
+  this.textfield = this.el.shadowRoot.querySelector('terminal-textfield');
+  this.setTextfield = (value) => {
+    this.textfield.value = value;
+    this.textfield.dispatchEvent(new Event('change'));
+  };
+});
 
-  afterEach(function() {
-    document.body.removeChild(this.el);
+afterEach(function() {
+  document.body.removeChild(this.el);
 
-    delete window.preferenceManager;
-  });
+  delete window.preferenceManager;
+});
 
-  it('updates-ui-when-preference-changes', async function() {
-    assert.equal(this.textfield.value, '10000');
+it('updates-ui-when-preference-changes', async function() {
+  assert.equal(this.textfield.value, '10000');
 
-    await window.preferenceManager.set(preference, 0);
-    assert.equal(this.textfield.value, '0');
+  await window.preferenceManager.set(preference, 0);
+  assert.equal(this.textfield.value, '0');
 
-    await window.preferenceManager.set(preference, null);
-    assert.equal(this.textfield.value, '');
-  });
+  await window.preferenceManager.set(preference, null);
+  assert.equal(this.textfield.value, '');
+});
 
-  it('updates-preference-when-ui-changes', async function() {
-    const prefChanged = listenForPrefChange(
-        window.preferenceManager, preference);
+it('updates-preference-when-ui-changes', async function() {
+  const prefChanged = listenForPrefChange(
+      window.preferenceManager, preference);
 
-    this.setTextfield('5000');
-    await prefChanged;
-    assert.equal(window.preferenceManager.get(preference), 5000);
+  this.setTextfield('5000');
+  await prefChanged;
+  assert.equal(window.preferenceManager.get(preference), 5000);
 
-    this.setTextfield('0');
-    await prefChanged;
-    assert.equal(window.preferenceManager.get(preference), 0);
+  this.setTextfield('0');
+  await prefChanged;
+  assert.equal(window.preferenceManager.get(preference), 0);
 
-    this.setTextfield('-100');
-    await prefChanged;
-    assert.equal(window.preferenceManager.get(preference), -1);
-    assert.equal(this.textfield.value, '', 'input should be clear');
+  this.setTextfield('-100');
+  await prefChanged;
+  assert.equal(window.preferenceManager.get(preference), -1);
+  assert.equal(this.textfield.value, '', 'input should be clear');
 
-    this.setTextfield('-200');
-    await prefChanged;
-    assert.equal(window.preferenceManager.get(preference), -1);
-    assert.equal(this.textfield.value, '', 'input should be clear');
+  this.setTextfield('-200');
+  await prefChanged;
+  assert.equal(window.preferenceManager.get(preference), -1);
+  assert.equal(this.textfield.value, '', 'input should be clear');
 
-    this.setTextfield('');
-    await prefChanged;
-    assert.equal(window.preferenceManager.get(preference), -1);
-    assert.equal(this.textfield.value, '');
-  });
+  this.setTextfield('');
+  await prefChanged;
+  assert.equal(window.preferenceManager.get(preference), -1);
+  assert.equal(this.textfield.value, '');
+});

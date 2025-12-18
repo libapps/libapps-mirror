@@ -85,43 +85,43 @@ const DISPLAY_IMAGE_TIMEOUT = 5000;
  * values that the Terminal was constructed with.
  */
 it('dimensions', function() {
-    const divSize = this.div.getBoundingClientRect();
-    const scrollPort = this.terminal.scrollPort_;
-    const rightPadding = Math.max(
-        scrollPort.screenPaddingSize, scrollPort.currentScrollbarWidthPx);
-    const innerWidth = divSize.width -
-                       scrollPort.screenPaddingSize - rightPadding -
-                       (2 * this.terminal.screenBorderSize_);
-    const innerHeight = divSize.height -
-                        (2 * scrollPort.screenPaddingSize) -
-                        (2 * this.terminal.screenBorderSize_);
+  const divSize = this.div.getBoundingClientRect();
+  const scrollPort = this.terminal.scrollPort_;
+  const rightPadding = Math.max(
+      scrollPort.screenPaddingSize, scrollPort.currentScrollbarWidthPx);
+  const innerWidth = divSize.width -
+                     scrollPort.screenPaddingSize - rightPadding -
+                     (2 * this.terminal.screenBorderSize_);
+  const innerHeight = divSize.height -
+                      (2 * scrollPort.screenPaddingSize) -
+                      (2 * this.terminal.screenBorderSize_);
 
-    assert.equal(innerWidth, Math.round(scrollPort.getScreenWidth()));
-    assert.equal(Math.round(innerHeight),
-                 Math.round(scrollPort.getScreenHeight()));
+  assert.equal(innerWidth, Math.round(scrollPort.getScreenWidth()));
+  assert.equal(Math.round(innerHeight),
+               Math.round(scrollPort.getScreenHeight()));
 
-    assert.equal(Math.floor(innerWidth / scrollPort.characterSize.width),
-                 this.visibleColumnCount);
-    assert.equal(
-        Math.round(innerHeight / scrollPort.characterSize.height),
-        this.visibleRowCount);
+  assert.equal(Math.floor(innerWidth / scrollPort.characterSize.width),
+               this.visibleColumnCount);
+  assert.equal(
+      Math.round(innerHeight / scrollPort.characterSize.height),
+      this.visibleRowCount);
 
-    assert.equal(this.terminal.screen_.getWidth(), this.visibleColumnCount);
-    assert.equal(this.terminal.screen_.getHeight(), this.visibleRowCount);
-  });
+  assert.equal(this.terminal.screen_.getWidth(), this.visibleColumnCount);
+  assert.equal(this.terminal.screen_.getHeight(), this.visibleRowCount);
+});
 
 /**
  * Fill the screen with 'X' characters one character at a time, in a way
  * that should stress the cursor positioning code.
  */
 it('plaintext-stress-cursor-ltr', function() {
-    for (let col = 0; col < this.visibleColumnCount; col++) {
-      for (let row = 0; row < this.visibleRowCount; row++) {
-        this.terminal.screen_.setCursorPosition(row, col);
-        this.terminal.screen_.insertString('X');
-      }
+  for (let col = 0; col < this.visibleColumnCount; col++) {
+    for (let row = 0; row < this.visibleRowCount; row++) {
+      this.terminal.screen_.setCursorPosition(row, col);
+      this.terminal.screen_.insertString('X');
     }
-  });
+  }
+});
 
 /**
  * Fill the screen with 'X' characters one character at a time, in a way
@@ -129,13 +129,13 @@ it('plaintext-stress-cursor-ltr', function() {
  * code.
  */
 it('plaintext-stress-cursor-rtl', function() {
-    for (let col = this.visibleColumnCount - 1; col >= 0; col--) {
-      for (let row = 0; row < this.visibleRowCount; row++) {
-        this.terminal.screen_.setCursorPosition(row, col);
-        this.terminal.screen_.overwriteString('X');
-      }
+  for (let col = this.visibleColumnCount - 1; col >= 0; col--) {
+    for (let row = 0; row < this.visibleRowCount; row++) {
+      this.terminal.screen_.setCursorPosition(row, col);
+      this.terminal.screen_.overwriteString('X');
     }
-  });
+  }
+});
 
 /**
  * Fill the terminal with a lot of text as quickly as possible.
@@ -144,73 +144,73 @@ it('plaintext-stress-cursor-rtl', function() {
  * log is useful.
  */
 it('plaintext-stress-insert', function(done) {
-    const chunkSize = 1000;
-    const testCount = 10;
+  const chunkSize = 1000;
+  const testCount = 10;
 
-    const test = (count) => {
-      for (let i = count * chunkSize; i < (count + 1) * chunkSize; i++) {
-        if (i != 0) {
-          this.terminal.newLine();
-        }
-        this.terminal.screen_.insertString(
-            'line ' + i + ': All work and no play makes jack a dull boy.');
+  const test = (count) => {
+    for (let i = count * chunkSize; i < (count + 1) * chunkSize; i++) {
+      if (i != 0) {
+        this.terminal.newLine();
       }
+      this.terminal.screen_.insertString(
+          'line ' + i + ': All work and no play makes jack a dull boy.');
+    }
 
-      if (count + 1 >= testCount) {
-        done();
-      } else {
-        setTimeout(test, 0, count + 1);
-      }
-    };
+    if (count + 1 >= testCount) {
+      done();
+    } else {
+      setTimeout(test, 0, count + 1);
+    }
+  };
 
-    test(0);
-  });
+  test(0);
+});
 
 /**
  * Test that accounting of desktop notifications works, and that they are
  * closed under the right circumstances.
  */
 it('desktop-notification-bell-test', function() {
-    this.terminal.desktopNotificationBell_ = true;
+  this.terminal.desktopNotificationBell_ = true;
 
-    // If we have focus, then no notifications should show.
-    this.terminal.document_.hasFocus = function() { return true; };
+  // If we have focus, then no notifications should show.
+  this.terminal.document_.hasFocus = function() { return true; };
 
-    // Ring the bell, but nothing shows up.
-    assert.equal(0, this.terminal.bellNotificationList_.length);
-    assert.equal(0, Notification.count);
-    this.terminal.ringBell();
-    this.terminal.ringBell();
-    this.terminal.ringBell();
-    this.terminal.ringBell();
-    assert.equal(0, this.terminal.bellNotificationList_.length);
-    assert.equal(0, Notification.count);
+  // Ring the bell, but nothing shows up.
+  assert.equal(0, this.terminal.bellNotificationList_.length);
+  assert.equal(0, Notification.count);
+  this.terminal.ringBell();
+  this.terminal.ringBell();
+  this.terminal.ringBell();
+  this.terminal.ringBell();
+  assert.equal(0, this.terminal.bellNotificationList_.length);
+  assert.equal(0, Notification.count);
 
-    // If we don't have focus, then notifications should show.
-    this.terminal.document_.hasFocus = function() { return false; };
+  // If we don't have focus, then notifications should show.
+  this.terminal.document_.hasFocus = function() { return false; };
 
-    // Gaining focus closes all desktop notifications.
-    assert.equal(0, this.terminal.bellNotificationList_.length);
-    assert.equal(0, Notification.count);
-    this.terminal.ringBell();
-    assert.equal(1, this.terminal.bellNotificationList_.length);
-    assert.equal(1, Notification.count);
-    this.terminal.ringBell();
-    assert.equal(2, this.terminal.bellNotificationList_.length);
-    assert.equal(2, Notification.count);
-    this.terminal.onFocusChange_(true);
-    assert.equal(0, this.terminal.bellNotificationList_.length);
-    assert.equal(0, Notification.count);
+  // Gaining focus closes all desktop notifications.
+  assert.equal(0, this.terminal.bellNotificationList_.length);
+  assert.equal(0, Notification.count);
+  this.terminal.ringBell();
+  assert.equal(1, this.terminal.bellNotificationList_.length);
+  assert.equal(1, Notification.count);
+  this.terminal.ringBell();
+  assert.equal(2, this.terminal.bellNotificationList_.length);
+  assert.equal(2, Notification.count);
+  this.terminal.onFocusChange_(true);
+  assert.equal(0, this.terminal.bellNotificationList_.length);
+  assert.equal(0, Notification.count);
 
-    // A user click closes all desktop notifications.
-    this.terminal.ringBell();
-    this.terminal.ringBell();
-    assert.equal(2, this.terminal.bellNotificationList_.length);
-    assert.equal(2, Notification.count);
-    this.terminal.bellNotificationList_[0].onclick(null);
-    assert.equal(0, this.terminal.bellNotificationList_.length);
-    assert.equal(0, Notification.count);
-  });
+  // A user click closes all desktop notifications.
+  this.terminal.ringBell();
+  this.terminal.ringBell();
+  assert.equal(2, this.terminal.bellNotificationList_.length);
+  assert.equal(2, Notification.count);
+  this.terminal.bellNotificationList_[0].onclick(null);
+  assert.equal(0, this.terminal.bellNotificationList_.length);
+  assert.equal(0, Notification.count);
+});
 
 /**
  * Verify showing an overlay will also announce the message.

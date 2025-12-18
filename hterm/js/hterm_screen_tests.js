@@ -23,476 +23,476 @@ beforeEach(function() {
  * Test the push and pop functionality of the hterm.Screen.
  */
 it('push-pop', function() {
-    // Push one at a time.
-    const ary = [];
-    for (let i = 0; i < 10; i++) {
-      ary[i] = document.createElement('div');
-      ary[i].textContent = i;
-      this.screen.pushRow(ary[i]);
-    }
+  // Push one at a time.
+  const ary = [];
+  for (let i = 0; i < 10; i++) {
+    ary[i] = document.createElement('div');
+    ary[i].textContent = i;
+    this.screen.pushRow(ary[i]);
+  }
 
-    assert.equal(ary.length, this.screen.getHeight());
+  assert.equal(ary.length, this.screen.getHeight());
 
-    // Pop one at a time.
-    for (let i = ary.length - 1; i >= 0; i--) {
-      assert.equal(ary[i], this.screen.popRow(), 'i:' + i);
-    }
+  // Pop one at a time.
+  for (let i = ary.length - 1; i >= 0; i--) {
+    assert.equal(ary[i], this.screen.popRow(), 'i:' + i);
+  }
 
-    // Bulk push.
-    this.screen.pushRows(ary);
-    assert.equal(ary.length, this.screen.rowsArray.length);
+  // Bulk push.
+  this.screen.pushRows(ary);
+  assert.equal(ary.length, this.screen.rowsArray.length);
 
-    // Bulk pop.
-    let popary = this.screen.popRows(ary.length);
+  // Bulk pop.
+  let popary = this.screen.popRows(ary.length);
 
-    assert.equal(ary.length, popary.length);
+  assert.equal(ary.length, popary.length);
 
-    for (let i = ary.length - 1; i >= 0; i--) {
-      assert.equal(ary[i], popary[i], 'i:' + i);
-    }
+  for (let i = ary.length - 1; i >= 0; i--) {
+    assert.equal(ary[i], popary[i], 'i:' + i);
+  }
 
-    // Reset, then partial bulk pop.
-    this.screen.pushRows(ary);
-    assert.equal(ary.length, this.screen.rowsArray.length);
+  // Reset, then partial bulk pop.
+  this.screen.pushRows(ary);
+  assert.equal(ary.length, this.screen.rowsArray.length);
 
-    popary = this.screen.popRows(5);
-    for (let i = 0; i < 5; i++) {
-      assert.equal(ary[i + 5], popary[i], 'i:' + i);
-    }
-  });
+  popary = this.screen.popRows(5);
+  for (let i = 0; i < 5; i++) {
+    assert.equal(ary[i + 5], popary[i], 'i:' + i);
+  }
+});
 
 /**
  * Test the unshift and shift functionality of the hterm.Screen.
  */
 it('unshift-shift', function() {
-    // Unshift one at a time.
-    const ary = [];
-    for (let i = 0; i < 10; i++) {
-      ary[i] = document.createElement('div');
-      ary[i].textContent = i;
-      this.screen.unshiftRow(ary[i]);
-    }
+  // Unshift one at a time.
+  const ary = [];
+  for (let i = 0; i < 10; i++) {
+    ary[i] = document.createElement('div');
+    ary[i].textContent = i;
+    this.screen.unshiftRow(ary[i]);
+  }
 
-    assert.equal(ary.length, this.screen.rowsArray.length);
+  assert.equal(ary.length, this.screen.rowsArray.length);
 
-    // Shift one at a time.
-    for (let i = ary.length - 1; i >= 0; i--) {
-      assert.equal(ary[i], this.screen.shiftRow(), 'i:' + i);
-    }
+  // Shift one at a time.
+  for (let i = ary.length - 1; i >= 0; i--) {
+    assert.equal(ary[i], this.screen.shiftRow(), 'i:' + i);
+  }
 
-    // Bulk unshift.
-    this.screen.unshiftRows(ary);
-    assert.equal(ary.length, this.screen.rowsArray.length);
+  // Bulk unshift.
+  this.screen.unshiftRows(ary);
+  assert.equal(ary.length, this.screen.rowsArray.length);
 
-    // Bulk shift.
-    let shiftary = this.screen.shiftRows(ary.length);
+  // Bulk shift.
+  let shiftary = this.screen.shiftRows(ary.length);
 
-    assert.equal(ary.length, shiftary.length);
+  assert.equal(ary.length, shiftary.length);
 
-    for (let i = ary.length - 1; i >= 0; i--) {
-      assert.equal(ary[i], shiftary[i], 'i:' + i);
-    }
+  for (let i = ary.length - 1; i >= 0; i--) {
+    assert.equal(ary[i], shiftary[i], 'i:' + i);
+  }
 
-    // Reset, then partial bulk shift.
-    this.screen.unshiftRows(ary);
-    assert.equal(ary.length, this.screen.rowsArray.length);
+  // Reset, then partial bulk shift.
+  this.screen.unshiftRows(ary);
+  assert.equal(ary.length, this.screen.rowsArray.length);
 
-    shiftary = this.screen.shiftRows(5);
-    for (let i = 0; i < 5; i++) {
-      assert.equal(ary[i], shiftary[i], 'i:' + i);
-    }
-  });
+  shiftary = this.screen.shiftRows(5);
+  for (let i = 0; i < 5; i++) {
+    assert.equal(ary[i], shiftary[i], 'i:' + i);
+  }
+});
 
 /**
  * Test cursor positioning functionality.
  */
 it('cursor-movement', function() {
-    const ary = [];
+  const ary = [];
 
-    for (let i = 0; i < 3; i++) {
-      ary[i] = document.createElement('div');
-      ary[i].textContent = i;
-      this.screen.pushRow(ary[i]);
-    }
+  for (let i = 0; i < 3; i++) {
+    ary[i] = document.createElement('div');
+    ary[i].textContent = i;
+    this.screen.pushRow(ary[i]);
+  }
 
-    this.screen.setCursorPosition(0, 0);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[0]);
-    assert.strictEqual(this.screen.cursorNode_, ary[0].firstChild);
-    assert.equal(this.screen.cursorOffset_, 0);
+  this.screen.setCursorPosition(0, 0);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[0]);
+  assert.strictEqual(this.screen.cursorNode_, ary[0].firstChild);
+  assert.equal(this.screen.cursorOffset_, 0);
 
-    this.screen.setCursorPosition(1, 0);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[1]);
-    assert.strictEqual(this.screen.cursorNode_, ary[1].firstChild);
-    assert.equal(this.screen.cursorOffset_, 0);
+  this.screen.setCursorPosition(1, 0);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[1]);
+  assert.strictEqual(this.screen.cursorNode_, ary[1].firstChild);
+  assert.equal(this.screen.cursorOffset_, 0);
 
-    this.screen.setCursorPosition(1, 10);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[1]);
-    assert.strictEqual(this.screen.cursorNode_, ary[1].firstChild);
-    assert.equal(this.screen.cursorOffset_, 10);
+  this.screen.setCursorPosition(1, 10);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[1]);
+  assert.strictEqual(this.screen.cursorNode_, ary[1].firstChild);
+  assert.equal(this.screen.cursorOffset_, 10);
 
-    this.screen.setCursorPosition(1, 5);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[1]);
-    assert.strictEqual(this.screen.cursorNode_, ary[1].firstChild);
-    assert.equal(this.screen.cursorOffset_, 5);
+  this.screen.setCursorPosition(1, 5);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[1]);
+  assert.strictEqual(this.screen.cursorNode_, ary[1].firstChild);
+  assert.equal(this.screen.cursorOffset_, 5);
 
-    this.screen.setCursorPosition(1, 10);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[1]);
-    assert.strictEqual(this.screen.cursorNode_, ary[1].firstChild);
-    assert.equal(this.screen.cursorOffset_, 10);
+  this.screen.setCursorPosition(1, 10);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[1]);
+  assert.strictEqual(this.screen.cursorNode_, ary[1].firstChild);
+  assert.equal(this.screen.cursorOffset_, 10);
 
-    ary[2].innerHTML = '01<div>23</div>45<div>67</div>89';
+  ary[2].innerHTML = '01<div>23</div>45<div>67</div>89';
 
-    this.screen.setCursorPosition(2, 0);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].firstChild);
-    assert.equal(this.screen.cursorOffset_, 0);
+  this.screen.setCursorPosition(2, 0);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].firstChild);
+  assert.equal(this.screen.cursorOffset_, 0);
 
-    this.screen.setCursorPosition(2, 1);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].firstChild);
-    assert.equal(this.screen.cursorOffset_, 1);
+  this.screen.setCursorPosition(2, 1);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].firstChild);
+  assert.equal(this.screen.cursorOffset_, 1);
 
-    this.screen.setCursorPosition(2, 2);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[1]);
-    assert.equal(this.screen.cursorOffset_, 0);
+  this.screen.setCursorPosition(2, 2);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[1]);
+  assert.equal(this.screen.cursorOffset_, 0);
 
-    this.screen.setCursorPosition(2, 3);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[1]);
-    assert.equal(this.screen.cursorOffset_, 1);
+  this.screen.setCursorPosition(2, 3);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[1]);
+  assert.equal(this.screen.cursorOffset_, 1);
 
-    this.screen.setCursorPosition(2, 4);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[2]);
-    assert.equal(this.screen.cursorOffset_, 0);
+  this.screen.setCursorPosition(2, 4);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[2]);
+  assert.equal(this.screen.cursorOffset_, 0);
 
-    this.screen.setCursorPosition(2, 5);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[2]);
-    assert.equal(this.screen.cursorOffset_, 1);
+  this.screen.setCursorPosition(2, 5);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[2]);
+  assert.equal(this.screen.cursorOffset_, 1);
 
-    this.screen.setCursorPosition(2, 6);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[3]);
-    assert.equal(this.screen.cursorOffset_, 0);
+  this.screen.setCursorPosition(2, 6);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[3]);
+  assert.equal(this.screen.cursorOffset_, 0);
 
-    this.screen.setCursorPosition(2, 7);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[3]);
-    assert.equal(this.screen.cursorOffset_, 1);
+  this.screen.setCursorPosition(2, 7);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[3]);
+  assert.equal(this.screen.cursorOffset_, 1);
 
-    this.screen.setCursorPosition(2, 8);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[4]);
-    assert.equal(this.screen.cursorOffset_, 0);
+  this.screen.setCursorPosition(2, 8);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[4]);
+  assert.equal(this.screen.cursorOffset_, 0);
 
-    this.screen.setCursorPosition(2, 9);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[4]);
-    assert.equal(this.screen.cursorOffset_, 1);
+  this.screen.setCursorPosition(2, 9);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[4]);
+  assert.equal(this.screen.cursorOffset_, 1);
 
-    this.screen.setCursorPosition(2, 18);
-    assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
-    assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[4]);
-    assert.equal(this.screen.cursorOffset_, 10);
-  });
+  this.screen.setCursorPosition(2, 18);
+  assert.strictEqual(this.screen.cursorRowNode_, ary[2]);
+  assert.strictEqual(this.screen.cursorNode_, ary[2].childNodes[4]);
+  assert.equal(this.screen.cursorOffset_, 10);
+});
 
 /**
  * Test character removal.
  */
 it('delete-chars', function() {
-    const row = document.createElement('div');
-    row.innerHTML = 'hello<div id="1"> </div><div id="2">world</div>';
-    this.screen.pushRow(row);
+  const row = document.createElement('div');
+  row.innerHTML = 'hello<div id="1"> </div><div id="2">world</div>';
+  this.screen.pushRow(row);
 
-    this.screen.setCursorPosition(0, 3);
-    this.screen.deleteChars(5);
+  this.screen.setCursorPosition(0, 3);
+  this.screen.deleteChars(5);
 
-    assert.equal(row.innerHTML, 'hel<div id="2">rld</div>');
+  assert.equal(row.innerHTML, 'hel<div id="2">rld</div>');
 
-    const createWidecharNode = function(c) {
-      const span = document.createElement('span');
-      span.textContent = c;
-      span.className = 'wc-node';
-      span.wcNode = true;
-      span.asciiNode = false;
-      return span;
-    };
+  const createWidecharNode = function(c) {
+    const span = document.createElement('span');
+    span.textContent = c;
+    span.className = 'wc-node';
+    span.wcNode = true;
+    span.asciiNode = false;
+    return span;
+  };
 
-    const wc_row = document.createElement('div');
-    wc_row.appendChild(createWidecharNode('\u4E2D'));
-    wc_row.appendChild(createWidecharNode('\u6587'));
-    wc_row.appendChild(createWidecharNode('\u5B57'));
-    wc_row.appendChild(createWidecharNode('\u4E32'));
-    this.screen.pushRow(wc_row);
+  const wc_row = document.createElement('div');
+  wc_row.appendChild(createWidecharNode('\u4E2D'));
+  wc_row.appendChild(createWidecharNode('\u6587'));
+  wc_row.appendChild(createWidecharNode('\u5B57'));
+  wc_row.appendChild(createWidecharNode('\u4E32'));
+  this.screen.pushRow(wc_row);
 
-    this.screen.setCursorPosition(1, 2);
-    this.screen.deleteChars(2);
+  this.screen.setCursorPosition(1, 2);
+  this.screen.deleteChars(2);
 
-    assert.equal(wc_row.innerHTML,
-                 '<span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u5B57</span>' +
-                 '<span class="wc-node">\u4E32</span>');
+  assert.equal(wc_row.innerHTML,
+               '<span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u5B57</span>' +
+               '<span class="wc-node">\u4E32</span>');
 
-    this.screen.setCursorPosition(1, 0);
-    this.screen.deleteChars(6);
+  this.screen.setCursorPosition(1, 0);
+  this.screen.deleteChars(6);
 
-    assert.equal(wc_row.innerHTML, '');
-  });
+  assert.equal(wc_row.innerHTML, '');
+});
 
 /**
  * Test replacing the start of a wide character with a narrow char.
  * https://crbug.com/577691
  */
 it('wide-to-narrow-char-start', function() {
-    const row = document.createElement('div');
-    this.screen.pushRow(row);
+  const row = document.createElement('div');
+  this.screen.pushRow(row);
 
-    this.screen.setCursorPosition(0, 0);
-    this.screen.overwriteString('abcdef');
-    assert.equal('abcdef', row.textContent);
+  this.screen.setCursorPosition(0, 0);
+  this.screen.overwriteString('abcdef');
+  assert.equal('abcdef', row.textContent);
 
-    this.screen.setCursorPosition(0, 2);
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    this.screen.overwriteString('\u{30c0}');
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    assert.equal('ab\u{30c0}ef', row.textContent);
+  this.screen.setCursorPosition(0, 2);
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  this.screen.overwriteString('\u{30c0}');
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  assert.equal('ab\u{30c0}ef', row.textContent);
 
-    this.screen.setCursorPosition(0, 2);
-    this.screen.overwriteString('x');
-    assert.equal('abx ef', row.textContent);
-  });
+  this.screen.setCursorPosition(0, 2);
+  this.screen.overwriteString('x');
+  assert.equal('abx ef', row.textContent);
+});
 
 /**
  * Test replacing the end of a wide character with a narrow char.
  * https://crbug.com/577691
  */
 it('wide-to-narrow-char-end', function() {
-    const row = document.createElement('div');
-    this.screen.pushRow(row);
+  const row = document.createElement('div');
+  this.screen.pushRow(row);
 
-    this.screen.setCursorPosition(0, 0);
-    this.screen.overwriteString('abcdef');
-    assert.equal('abcdef', row.textContent);
+  this.screen.setCursorPosition(0, 0);
+  this.screen.overwriteString('abcdef');
+  assert.equal('abcdef', row.textContent);
 
-    this.screen.setCursorPosition(0, 2);
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    this.screen.overwriteString('\u{30c0}');
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    assert.equal('ab\u{30c0}ef', row.textContent);
+  this.screen.setCursorPosition(0, 2);
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  this.screen.overwriteString('\u{30c0}');
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  assert.equal('ab\u{30c0}ef', row.textContent);
 
-    this.screen.setCursorPosition(0, 3);
-    this.screen.overwriteString('x');
-    assert.equal('ab xef', row.textContent);
-  });
+  this.screen.setCursorPosition(0, 3);
+  this.screen.overwriteString('x');
+  assert.equal('ab xef', row.textContent);
+});
 
 /**
  * Test the ability to insert text in a line.
  */
 it('insert', function() {
-    // Sample rows.  Row 0 is a simple, empty row.  Row 1 simulates rows with
-    // mixed text attributes.
-    const ary = [document.createElement('div'), document.createElement('div'),
-                 document.createElement('div')];
-    ary[1].innerHTML = 'hello<div id="1"> </div><div id="2">world</div>';
-    this.screen.pushRows(ary);
+  // Sample rows.  Row 0 is a simple, empty row.  Row 1 simulates rows with
+  // mixed text attributes.
+  const ary = [document.createElement('div'), document.createElement('div'),
+               document.createElement('div')];
+  ary[1].innerHTML = 'hello<div id="1"> </div><div id="2">world</div>';
+  this.screen.pushRows(ary);
 
-    // Basic insert.
-    this.screen.setCursorPosition(0, 0);
-    this.screen.insertString('XXXXX');
-    assert.equal(ary[0].innerHTML, 'XXXXX');
+  // Basic insert.
+  this.screen.setCursorPosition(0, 0);
+  this.screen.insertString('XXXXX');
+  assert.equal(ary[0].innerHTML, 'XXXXX');
 
-    // Test that positioning the cursor beyond the end of the current text does
-    // not cause spaces to be printed.
-    this.screen.clearCursorRow();
-    this.screen.setCursorPosition(0, 3);
-    assert.equal(ary[0].innerHTML, '');
+  // Test that positioning the cursor beyond the end of the current text does
+  // not cause spaces to be printed.
+  this.screen.clearCursorRow();
+  this.screen.setCursorPosition(0, 3);
+  assert.equal(ary[0].innerHTML, '');
 
-    // Print some text at this cursor position and make sure the spaces show up.
-    this.screen.insertString('XXXXX');
-    assert.equal(ary[0].innerHTML, '   XXXXX');
+  // Print some text at this cursor position and make sure the spaces show up.
+  this.screen.insertString('XXXXX');
+  assert.equal(ary[0].innerHTML, '   XXXXX');
 
-    // Fetch enough whitespace to ensure that the row is full.
-    const ws = ' '.repeat(this.screen.getWidth());
+  // Fetch enough whitespace to ensure that the row is full.
+  const ws = ' '.repeat(this.screen.getWidth());
 
-    // Check text clipping and cursor clamping.
-    this.screen.clearCursorRow();
-    this.screen.insertString('XXXX');
-    this.screen.setCursorPosition(0, 2);
-    this.screen.insertString(ws);
-    this.screen.maybeClipCurrentRow();
-    assert.equal(ary[0].innerHTML, 'XX' + ws.substr(2));
-    assert.equal(this.screen.cursorPosition.column, 79);
+  // Check text clipping and cursor clamping.
+  this.screen.clearCursorRow();
+  this.screen.insertString('XXXX');
+  this.screen.setCursorPosition(0, 2);
+  this.screen.insertString(ws);
+  this.screen.maybeClipCurrentRow();
+  assert.equal(ary[0].innerHTML, 'XX' + ws.substr(2));
+  assert.equal(this.screen.cursorPosition.column, 79);
 
-    // Insert into a more complicated row.
-    this.screen.setCursorPosition(1, 3);
-    this.screen.insertString('XXXXX');
-    assert.equal(ary[1].innerHTML,
-                 'helXXXXXlo<div id="1"> </div>' +
-                 '<div id="2">world</div>');
+  // Insert into a more complicated row.
+  this.screen.setCursorPosition(1, 3);
+  this.screen.insertString('XXXXX');
+  assert.equal(ary[1].innerHTML,
+               'helXXXXXlo<div id="1"> </div>' +
+               '<div id="2">world</div>');
 
-    // Test inserting widechar string.
-    const wideCharString = '\u4E2D\u6587\u5B57\u4E32';
-    this.screen.setCursorPosition(2, 0);
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    for (let i = 0; i < wideCharString.length; i++) {
-      this.screen.insertString(wideCharString.charAt(i));
-    }
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    assert.equal(ary[2].innerHTML,
-                 '<span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u6587</span>' +
-                 '<span class="wc-node">\u5B57</span>' +
-                 '<span class="wc-node">\u4E32</span>');
+  // Test inserting widechar string.
+  const wideCharString = '\u4E2D\u6587\u5B57\u4E32';
+  this.screen.setCursorPosition(2, 0);
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  for (let i = 0; i < wideCharString.length; i++) {
+    this.screen.insertString(wideCharString.charAt(i));
+  }
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  assert.equal(ary[2].innerHTML,
+               '<span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u6587</span>' +
+               '<span class="wc-node">\u5B57</span>' +
+               '<span class="wc-node">\u4E32</span>');
 
-    this.screen.clearCursorRow();
-    this.screen.setCursorPosition(2, 3);
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    for (let i = 0; i < wideCharString.length; i++) {
-      this.screen.insertString(wideCharString.charAt(i));
-    }
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    assert.equal(ary[2].innerHTML,
-                 '   <span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u6587</span>' +
-                 '<span class="wc-node">\u5B57</span>' +
-                 '<span class="wc-node">\u4E32</span>');
+  this.screen.clearCursorRow();
+  this.screen.setCursorPosition(2, 3);
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  for (let i = 0; i < wideCharString.length; i++) {
+    this.screen.insertString(wideCharString.charAt(i));
+  }
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  assert.equal(ary[2].innerHTML,
+               '   <span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u6587</span>' +
+               '<span class="wc-node">\u5B57</span>' +
+               '<span class="wc-node">\u4E32</span>');
 
-    this.screen.setCursorPosition(2, 7);
-    this.screen.insertString('XXXXX');
-    assert.equal(ary[2].innerHTML,
-                 '   <span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u6587</span>' +
-                 'XXXXX' +
-                 '<span class="wc-node">\u5B57</span>' +
-                 '<span class="wc-node">\u4E32</span>');
+  this.screen.setCursorPosition(2, 7);
+  this.screen.insertString('XXXXX');
+  assert.equal(ary[2].innerHTML,
+               '   <span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u6587</span>' +
+               'XXXXX' +
+               '<span class="wc-node">\u5B57</span>' +
+               '<span class="wc-node">\u4E32</span>');
 
-    this.screen.clearCursorRow();
-    this.screen.insertString('XXXXX');
-    this.screen.setCursorPosition(2, 3);
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    for (let i = 0; i < wideCharString.length; i++) {
-      this.screen.insertString(wideCharString.charAt(i));
-    }
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    assert.equal(ary[2].innerHTML,
-                 'XXX<span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u6587</span>' +
-                 '<span class="wc-node">\u5B57</span>' +
-                 '<span class="wc-node">\u4E32</span>XX');
-  });
+  this.screen.clearCursorRow();
+  this.screen.insertString('XXXXX');
+  this.screen.setCursorPosition(2, 3);
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  for (let i = 0; i < wideCharString.length; i++) {
+    this.screen.insertString(wideCharString.charAt(i));
+  }
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  assert.equal(ary[2].innerHTML,
+               'XXX<span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u6587</span>' +
+               '<span class="wc-node">\u5B57</span>' +
+               '<span class="wc-node">\u4E32</span>XX');
+});
 
 /**
  * Test the ability to overwrite test.
  */
 it('overwrite', function() {
-    const ary = [];
-    ary[0] = document.createElement('div');
-    ary[0].innerHTML = 'hello<div id="1"> </div><div id="2">world</div>';
-    ary[1] = document.createElement('div');
-    ary[2] = document.createElement('div');
-    this.screen.pushRows(ary);
+  const ary = [];
+  ary[0] = document.createElement('div');
+  ary[0].innerHTML = 'hello<div id="1"> </div><div id="2">world</div>';
+  ary[1] = document.createElement('div');
+  ary[2] = document.createElement('div');
+  this.screen.pushRows(ary);
 
-    this.screen.setCursorPosition(0, 3);
-    this.screen.overwriteString('XXXXX');
+  this.screen.setCursorPosition(0, 3);
+  this.screen.overwriteString('XXXXX');
 
-    assert.equal(ary[0].innerHTML, 'helXXXXX<div id="2">rld</div>');
+  assert.equal(ary[0].innerHTML, 'helXXXXX<div id="2">rld</div>');
 
-    this.screen.setCursorPosition(1, 0);
-    this.screen.overwriteString('XXXXX');
+  this.screen.setCursorPosition(1, 0);
+  this.screen.overwriteString('XXXXX');
 
-    assert.equal(ary[1].innerHTML, 'XXXXX');
+  assert.equal(ary[1].innerHTML, 'XXXXX');
 
-    // Test overwriting widechar string.
-    const wideCharString = '\u4E2D\u6587\u5B57\u4E32';
-    this.screen.setCursorPosition(2, 0);
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    for (let i = 0; i < wideCharString.length; i++) {
-      this.screen.overwriteString(wideCharString.charAt(i));
-    }
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    assert.equal(ary[2].innerHTML,
-                 '<span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u6587</span>' +
-                 '<span class="wc-node">\u5B57</span>' +
-                 '<span class="wc-node">\u4E32</span>');
+  // Test overwriting widechar string.
+  const wideCharString = '\u4E2D\u6587\u5B57\u4E32';
+  this.screen.setCursorPosition(2, 0);
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  for (let i = 0; i < wideCharString.length; i++) {
+    this.screen.overwriteString(wideCharString.charAt(i));
+  }
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  assert.equal(ary[2].innerHTML,
+               '<span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u6587</span>' +
+               '<span class="wc-node">\u5B57</span>' +
+               '<span class="wc-node">\u4E32</span>');
 
-    this.screen.clearCursorRow();
-    this.screen.insertString('XXXXX');
-    this.screen.setCursorPosition(2, 3);
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    for (let i = 0; i < wideCharString.length; i++) {
-      this.screen.overwriteString(wideCharString.charAt(i));
-    }
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    assert.equal(ary[2].innerHTML,
-                 'XXX<span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u6587</span>' +
-                 '<span class="wc-node">\u5B57</span>' +
-                 '<span class="wc-node">\u4E32</span>');
+  this.screen.clearCursorRow();
+  this.screen.insertString('XXXXX');
+  this.screen.setCursorPosition(2, 3);
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  for (let i = 0; i < wideCharString.length; i++) {
+    this.screen.overwriteString(wideCharString.charAt(i));
+  }
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  assert.equal(ary[2].innerHTML,
+               'XXX<span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u6587</span>' +
+               '<span class="wc-node">\u5B57</span>' +
+               '<span class="wc-node">\u4E32</span>');
 
-    this.screen.setCursorPosition(2, 7);
-    this.screen.overwriteString('OO');
-    assert.equal(ary[2].innerHTML,
-                 'XXX<span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u6587</span>' +
-                 'OO' +
-                 '<span class="wc-node">\u4E32</span>');
+  this.screen.setCursorPosition(2, 7);
+  this.screen.overwriteString('OO');
+  assert.equal(ary[2].innerHTML,
+               'XXX<span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u6587</span>' +
+               'OO' +
+               '<span class="wc-node">\u4E32</span>');
 
-    this.screen.clearCursorRow();
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    for (let i = 0; i < wideCharString.length; i++) {
-      this.screen.insertString(wideCharString.charAt(i));
-    }
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    this.screen.setCursorPosition(2, 4);
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    for (let i = 0; i < wideCharString.length; i++) {
-      this.screen.overwriteString(wideCharString.charAt(i));
-    }
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    assert.equal(ary[2].innerHTML,
-                 '<span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u6587</span>' +
-                 '<span class="wc-node">\u4E2D</span>' +
-                 '<span class="wc-node">\u6587</span>' +
-                 '<span class="wc-node">\u5B57</span>' +
-                 '<span class="wc-node">\u4E32</span>');
+  this.screen.clearCursorRow();
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  for (let i = 0; i < wideCharString.length; i++) {
+    this.screen.insertString(wideCharString.charAt(i));
+  }
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  this.screen.setCursorPosition(2, 4);
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  for (let i = 0; i < wideCharString.length; i++) {
+    this.screen.overwriteString(wideCharString.charAt(i));
+  }
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  assert.equal(ary[2].innerHTML,
+               '<span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u6587</span>' +
+               '<span class="wc-node">\u4E2D</span>' +
+               '<span class="wc-node">\u6587</span>' +
+               '<span class="wc-node">\u5B57</span>' +
+               '<span class="wc-node">\u4E32</span>');
 
-    this.screen.clearCursorRow();
-    this.screen.textAttributes.wcNode = true;
-    this.screen.textAttributes.asciiNode = false;
-    for (let i = 0; i < wideCharString.length; i++) {
-      this.screen.insertString(wideCharString.charAt(i));
-    }
-    this.screen.textAttributes.wcNode = false;
-    this.screen.textAttributes.asciiNode = true;
-    this.screen.setCursorPosition(2, 0);
-    this.screen.overwriteString('    ');
-    assert.equal(ary[2].innerHTML,
-                 '    ' +
-                 '<span class="wc-node">\u5B57</span>' +
-                 '<span class="wc-node">\u4E32</span>');
-  });
+  this.screen.clearCursorRow();
+  this.screen.textAttributes.wcNode = true;
+  this.screen.textAttributes.asciiNode = false;
+  for (let i = 0; i < wideCharString.length; i++) {
+    this.screen.insertString(wideCharString.charAt(i));
+  }
+  this.screen.textAttributes.wcNode = false;
+  this.screen.textAttributes.asciiNode = true;
+  this.screen.setCursorPosition(2, 0);
+  this.screen.overwriteString('    ');
+  assert.equal(ary[2].innerHTML,
+               '    ' +
+               '<span class="wc-node">\u5B57</span>' +
+               '<span class="wc-node">\u4E32</span>');
+});
 
 /**
  * Check whitespace insertion handling.

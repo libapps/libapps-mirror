@@ -9,29 +9,29 @@ import {TerminalLinuxDialog} from './terminal_linux_dialog.js';
 import {ProfileType, setProfileIds, setVshProfiles}
   from './terminal_profiles.js';
 
-  beforeEach(async function() {
-    window.storage = new lib.Storage.Memory();
-    this.el = /** @type {!TerminalLinuxDialog} */(
-        document.createElement('terminal-linux-dialog'));
-    document.body.append(this.el);
-    await this.el.updateComplete;
-  });
+beforeEach(async function() {
+  window.storage = new lib.Storage.Memory();
+  this.el = /** @type {!TerminalLinuxDialog} */(
+      document.createElement('terminal-linux-dialog'));
+  document.body.append(this.el);
+  await this.el.updateComplete;
+});
 
-  afterEach(function() {
-    document.body.removeChild(this.el);
-    delete window.storage;
-  });
+afterEach(function() {
+  document.body.removeChild(this.el);
+  delete window.storage;
+});
 
-  it('shows-vsh-profile', async function() {
-    await setProfileIds(ProfileType.HTERM, ['default', 'red']);
-    setVshProfiles({'termina:penguin': {'terminal-profile': 'red'}});
-    this.el.show('termina:penguin', 'penguin');
-    await new Promise((resolve) => this.el.shadowRoot.querySelector(
-        'terminal-dialog').addEventListener('open', resolve));
-    await this.el.updateComplete;
-    this.label = this.el.shadowRoot.querySelector('div[slot="title"]');
-    assert.equal(this.label.innerText, 'penguin');
-    this.dropdown = this.el.shadowRoot.querySelector('terminal-dropdown');
-    assert.equal(2, this.dropdown.options.length);
-    assert.equal(this.dropdown.value, 'red');
-  });
+it('shows-vsh-profile', async function() {
+  await setProfileIds(ProfileType.HTERM, ['default', 'red']);
+  setVshProfiles({'termina:penguin': {'terminal-profile': 'red'}});
+  this.el.show('termina:penguin', 'penguin');
+  await new Promise((resolve) => this.el.shadowRoot.querySelector(
+      'terminal-dialog').addEventListener('open', resolve));
+  await this.el.updateComplete;
+  this.label = this.el.shadowRoot.querySelector('div[slot="title"]');
+  assert.equal(this.label.innerText, 'penguin');
+  this.dropdown = this.el.shadowRoot.querySelector('terminal-dropdown');
+  assert.equal(2, this.dropdown.options.length);
+  assert.equal(this.dropdown.value, 'red');
+});

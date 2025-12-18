@@ -53,85 +53,85 @@ class MockChromeRuntime {
   }
 }
 
-  describe('fetchSshPolicy', function() {
-    const sshPolicyResponse = 'get_ssh_policy_response';
+describe('fetchSshPolicy', function() {
+  const sshPolicyResponse = 'get_ssh_policy_response';
 
-    beforeEach(function() {
-      this.mockRuntime = new MockChromeRuntime();
-      this.mockRuntime.start();
-      this.createSuccessData = (sshKnownHosts = '', sshConfig = '') => {
-        this.mockRuntime.setResponseData({
-          'type': sshPolicyResponse,
-          'data': {
-            sshKnownHosts,
-            sshConfig,
-          },
-        });
-      };
-    });
+  beforeEach(function() {
+    this.mockRuntime = new MockChromeRuntime();
+    this.mockRuntime.start();
+    this.createSuccessData = (sshKnownHosts = '', sshConfig = '') => {
+      this.mockRuntime.setResponseData({
+        'type': sshPolicyResponse,
+        'data': {
+          sshKnownHosts,
+          sshConfig,
+        },
+      });
+    };
+  });
 
-    afterEach(function() {
-      this.mockRuntime.stop();
-    });
+  afterEach(function() {
+    this.mockRuntime.stop();
+  });
 
-    it('returns sshPolicy in the correct shape', async function() {
-      const sshKnownHosts = 'sshKnownHosts';
-      const sshConfig = 'sshConfig';
-      this.createSuccessData(sshKnownHosts, sshConfig);
+  it('returns sshPolicy in the correct shape', async function() {
+    const sshKnownHosts = 'sshKnownHosts';
+    const sshConfig = 'sshConfig';
+    this.createSuccessData(sshKnownHosts, sshConfig);
+
+    const response = await fetchSshPolicy();
+
+    assert.equal(response.getSshKnownHosts(), sshKnownHosts);
+    assert.equal(response.getSshConfig(), sshConfig);
+  });
+
+  it('returns sshPolicy with empty data if the data returned from SKE is ' +
+    'empty', async function() {
+      this.createSuccessData();
 
       const response = await fetchSshPolicy();
 
-      assert.equal(response.getSshKnownHosts(), sshKnownHosts);
-      assert.equal(response.getSshConfig(), sshConfig);
+      assert.equal(response.getSshKnownHosts(), '');
+      assert.equal(response.getSshConfig(), '');
     });
 
-    it('returns sshPolicy with empty data if the data returned from SKE is ' +
-      'empty', async function() {
-        this.createSuccessData();
+  it('returns sshPolicy with empty data if the data returned from SKE does ' +
+    'not include the required key', async function() {
+      this.createSuccessData();
 
-        const response = await fetchSshPolicy();
+      const response = await fetchSshPolicy();
 
-        assert.equal(response.getSshKnownHosts(), '');
-        assert.equal(response.getSshConfig(), '');
+      assert.equal(response.getSshKnownHosts(), '');
+      assert.equal(response.getSshConfig(), '');
+    });
+
+  it('returns sshPolicy with empty data if the data returned from SKE ' +
+    'includes malformed key', async function() {
+      this.mockRuntime.setResponseData({
+        'type': sshPolicyResponse,
+        'data': {
+          'unknown_key': 'random_key',
+        },
       });
 
-    it('returns sshPolicy with empty data if the data returned from SKE does ' +
-      'not include the required key', async function() {
-        this.createSuccessData();
+      const response = await fetchSshPolicy();
 
-        const response = await fetchSshPolicy();
+      assert.equal(response.getSshKnownHosts(), '');
+      assert.equal(response.getSshConfig(), '');
+    });
 
-        assert.equal(response.getSshKnownHosts(), '');
-        assert.equal(response.getSshConfig(), '');
+  it('returns sshPolicy with empty data if the SKE returns ' +
+    'error', async function() {
+      this.mockRuntime.setResponseData({
+        'type': 'error_response',
+        'errorDetail': 'test',
+        'errorReason': 'other error',
+        'requestId': 1847507321,
       });
 
-    it('returns sshPolicy with empty data if the data returned from SKE ' +
-      'includes malformed key', async function() {
-        this.mockRuntime.setResponseData({
-          'type': sshPolicyResponse,
-          'data': {
-            'unknown_key': 'random_key',
-          },
-        });
+      const response = await fetchSshPolicy();
 
-        const response = await fetchSshPolicy();
-
-        assert.equal(response.getSshKnownHosts(), '');
-        assert.equal(response.getSshConfig(), '');
-      });
-
-    it('returns sshPolicy with empty data if the SKE returns ' +
-      'error', async function() {
-        this.mockRuntime.setResponseData({
-          'type': 'error_response',
-          'errorDetail': 'test',
-          'errorReason': 'other error',
-          'requestId': 1847507321,
-        });
-
-        const response = await fetchSshPolicy();
-
-        assert.equal(response.getSshKnownHosts(), '');
-        assert.equal(response.getSshConfig(), '');
-      });
-  });
+      assert.equal(response.getSshKnownHosts(), '');
+      assert.equal(response.getSshConfig(), '');
+    });
+});

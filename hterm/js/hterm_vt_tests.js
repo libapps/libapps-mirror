@@ -69,14 +69,14 @@ afterEach(function() {
  * on the screen and scrolls into the scrollback buffer correctly.
  */
 it('smoke', function() {
-    this.terminal.interpret('0\r\n1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n' +
-                            '7\r\n8\r\n9\r\n10\r\n11\r\n12');
+  this.terminal.interpret('0\r\n1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n' +
+                          '7\r\n8\r\n9\r\n10\r\n11\r\n12');
 
-    const text = this.terminal.getRowsText(0, 13);
-    assert.equal(text, '0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12');
+  const text = this.terminal.getRowsText(0, 13);
+  assert.equal(text, '0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12');
 
-    assert.equal(this.terminal.scrollbackRows_.length, 7);
-  });
+  assert.equal(this.terminal.scrollbackRows_.length, 7);
+});
 
 /**
  * Test that we parse UTF-8 properly. Parser state should persist
@@ -161,10 +161,10 @@ it('utf8-arraybuffer', function() {
  * producing something like "âc".
  */
 it('utf8-combining', function() {
-    this.terminal.interpret('abc\b\b\u{302}\n');
-    const text = this.terminal.getRowsText(0, 1);
-    assert.equal(text, 'a\u{302}bc');
-  });
+  this.terminal.interpret('abc\b\b\u{302}\n');
+  const text = this.terminal.getRowsText(0, 1);
+  assert.equal(text, 'a\u{302}bc');
+});
 
 /**
  * Basic cursor positioning tests.
@@ -172,818 +172,818 @@ it('utf8-combining', function() {
  * TODO(rginda): Test the VT52 variants too.
  */
 it('cursor-relative', function() {
-    this.terminal.interpret('line 1\r\nline 2\r\nline 3');
-    this.terminal.interpret('\x1b[A\x1b[Dtwo' +
-                            '\x1b[3D' +
-                            '\x1b[Aone' +
-                            '\x1b[4D' +
-                            '\x1b[2B' +
-                            '\x1b[Cthree');
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text, 'line one\nline two\nline three');
-  });
+  this.terminal.interpret('line 1\r\nline 2\r\nline 3');
+  this.terminal.interpret('\x1b[A\x1b[Dtwo' +
+                          '\x1b[3D' +
+                          '\x1b[Aone' +
+                          '\x1b[4D' +
+                          '\x1b[2B' +
+                          '\x1b[Cthree');
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text, 'line one\nline two\nline three');
+});
 
 /**
  * Test absolute cursor positioning.
  */
 it('cursor-absolute', function() {
-    this.terminal.interpret('line 1\r\nline 2\r\nline 3');
+  this.terminal.interpret('line 1\r\nline 2\r\nline 3');
 
-    this.terminal.interpret('\x1b[1Gline three' +
-                            '\x1b[2;6Htwo' +
-                            '\x1b[1;5f one');
+  this.terminal.interpret('\x1b[1Gline three' +
+                          '\x1b[2;6Htwo' +
+                          '\x1b[1;5f one');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text, 'line one\nline two\nline three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text, 'line one\nline two\nline three');
+});
 
 /**
  * Test line positioning.
  */
 it('line-position', function() {
-    this.terminal.interpret('line 1\r\nline 2\r\nline 3');
+  this.terminal.interpret('line 1\r\nline 2\r\nline 3');
 
-    this.terminal.interpret('\x1b[Fline two' +
-                            '\x1b[Fline one' +
-                            '\x1b[E\x1b[Eline three');
+  this.terminal.interpret('\x1b[Fline two' +
+                          '\x1b[Fline one' +
+                          '\x1b[E\x1b[Eline three');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text, 'line one\nline two\nline three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text, 'line one\nline two\nline three');
+});
 
 /**
  * Test that a partial sequence is buffered until the entire sequence is
  * received.
  */
 it('partial-sequence', function() {
-    this.terminal.interpret('line 1\r\nline 2\r\nline three');
+  this.terminal.interpret('line 1\r\nline 2\r\nline three');
 
-    this.terminal.interpret('\x1b');
-    this.terminal.interpret('[');
-    this.terminal.interpret('5');
-    this.terminal.interpret('D');
-    this.terminal.interpret('\x1b[');
-    this.terminal.interpret('Atwo\x1b[3');
-    this.terminal.interpret('D\x1b[Aone');
+  this.terminal.interpret('\x1b');
+  this.terminal.interpret('[');
+  this.terminal.interpret('5');
+  this.terminal.interpret('D');
+  this.terminal.interpret('\x1b[');
+  this.terminal.interpret('Atwo\x1b[3');
+  this.terminal.interpret('D\x1b[Aone');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text, 'line one\nline two\nline three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text, 'line one\nline two\nline three');
+});
 
 /**
  * Test that two ESC characters in a row are handled properly.
  */
 it('double-sequence', function() {
-    this.terminal.interpret('line one\r\nline two\r\nline 3');
+  this.terminal.interpret('line one\r\nline two\r\nline 3');
 
-    this.terminal.interpret('\x1b[\x1b[Dthree');
+  this.terminal.interpret('\x1b[\x1b[Dthree');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text, 'line one\nline two\nline three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text, 'line one\nline two\nline three');
+});
 
 /**
  * Test that 8-bit control characters are properly ignored.
  */
 it('8-bit-control', function() {
-    let title = null;
-    this.terminal.setWindowTitle = function(t) {
-      // Set a default title so we can catch the potential for this function
-      // to be called on accident with no parameter.
-      title = t || 'XXX';
-    };
+  let title = null;
+  this.terminal.setWindowTitle = function(t) {
+    // Set a default title so we can catch the potential for this function
+    // to be called on accident with no parameter.
+    title = t || 'XXX';
+  };
 
-    // This test checks 8-bit handling in ISO-2022 mode.
-    this.terminal.vt.setEncoding('iso-2022');
+  // This test checks 8-bit handling in ISO-2022 mode.
+  this.terminal.vt.setEncoding('iso-2022');
 
-    assert.isFalse(this.terminal.vt.enable8BitControl);
+  assert.isFalse(this.terminal.vt.enable8BitControl);
 
-    // Send a "set window title" command using a disabled 8-bit
-    // control. It's a C1 control, so we interpret it after UTF-8
-    // decoding.
-    this.terminal.interpret('\u{9d}0;test title\x07!!');
+  // Send a "set window title" command using a disabled 8-bit
+  // control. It's a C1 control, so we interpret it after UTF-8
+  // decoding.
+  this.terminal.interpret('\u{9d}0;test title\x07!!');
 
-    assert.isNull(title);
-    assert.equal(this.terminal.getRowsText(0, 1), '0;test title!!');
+  assert.isNull(title);
+  assert.equal(this.terminal.getRowsText(0, 1), '0;test title!!');
 
-    // Try again with the two-byte version of the code.
-    title = null;
-    this.terminal.reset();
-    this.terminal.interpret('\x1b]0;test title\x07!!');
-    assert.equal(title, 'test title');
-    assert.equal(this.terminal.getRowsText(0, 1), '!!');
+  // Try again with the two-byte version of the code.
+  title = null;
+  this.terminal.reset();
+  this.terminal.interpret('\x1b]0;test title\x07!!');
+  assert.equal(title, 'test title');
+  assert.equal(this.terminal.getRowsText(0, 1), '!!');
 
-    // Now enable 8-bit control and see how it goes.
-    title = null;
-    this.terminal.reset();
-    this.terminal.vt.enable8BitControl = true;
-    this.terminal.interpret('\u{9d}0;test title\x07!!');
-    assert.equal(title, 'test title');
-    assert.equal(this.terminal.getRowsText(0, 1), '!!');
-  });
+  // Now enable 8-bit control and see how it goes.
+  title = null;
+  this.terminal.reset();
+  this.terminal.vt.enable8BitControl = true;
+  this.terminal.interpret('\u{9d}0;test title\x07!!');
+  assert.equal(title, 'test title');
+  assert.equal(this.terminal.getRowsText(0, 1), '!!');
+});
 
 /**
  * If we see embedded escape sequences, we should reject them.
  */
 it('embedded-escape-sequence', function() {
-    let title = null;
-    this.terminal.setWindowTitle = function(t) {
-      // Set a default title so we can catch the potential for this function
-      // to be called on accident with no parameter.
-      title = t || 'XXX';
-    };
+  let title = null;
+  this.terminal.setWindowTitle = function(t) {
+    // Set a default title so we can catch the potential for this function
+    // to be called on accident with no parameter.
+    title = t || 'XXX';
+  };
 
-    // We know we're going to cause chokes, so silence the warnings.
-    this.terminal.vt.warnUnimplemented = false;
+  // We know we're going to cause chokes, so silence the warnings.
+  this.terminal.vt.warnUnimplemented = false;
 
-    ['\x07', '\x1b\\'].forEach((seq) => {
-      // We get all the data at once with a terminated sequence.
-      this.terminal.reset();
-      this.terminal.interpret('\x1b]0;asdf\x1b x ' + seq);
-      assert.isNull(title);
+  ['\x07', '\x1b\\'].forEach((seq) => {
+    // We get all the data at once with a terminated sequence.
+    this.terminal.reset();
+    this.terminal.interpret('\x1b]0;asdf\x1b x ' + seq);
+    assert.isNull(title);
 
-      // We get the data in pieces w/a terminated sequence.
-      this.terminal.reset();
-      this.terminal.interpret('\x1b]0;asdf');
-      this.terminal.interpret('\x1b');
-      this.terminal.interpret(' x ' + seq);
-      assert.isNull(title);
-    });
-
-    // We get the data in pieces but no terminating sequence.
+    // We get the data in pieces w/a terminated sequence.
     this.terminal.reset();
     this.terminal.interpret('\x1b]0;asdf');
     this.terminal.interpret('\x1b');
-    this.terminal.interpret(' ');
+    this.terminal.interpret(' x ' + seq);
     assert.isNull(title);
   });
+
+  // We get the data in pieces but no terminating sequence.
+  this.terminal.reset();
+  this.terminal.interpret('\x1b]0;asdf');
+  this.terminal.interpret('\x1b');
+  this.terminal.interpret(' ');
+  assert.isNull(title);
+});
 
 /**
  * Verify that split ST sequences are buffered/handled correctly.
  */
 it('split-ST-sequence', function() {
-    let title = null;
-    this.terminal.setWindowTitle = function(t) {
-      // Set a default title so we can catch the potential for this function
-      // to be called on accident with no parameter.
-      title = t || 'XXX';
-    };
+  let title = null;
+  this.terminal.setWindowTitle = function(t) {
+    // Set a default title so we can catch the potential for this function
+    // to be called on accident with no parameter.
+    title = t || 'XXX';
+  };
 
-    // We get the first half of the ST with the base.
-    this.terminal.interpret('\x1b]0;asdf\x1b');
-    this.terminal.interpret('\\');
-    assert.equal(title, 'asdf');
+  // We get the first half of the ST with the base.
+  this.terminal.interpret('\x1b]0;asdf\x1b');
+  this.terminal.interpret('\\');
+  assert.equal(title, 'asdf');
 
-    // We get the first half of the ST one byte at a time.
-    title = null;
-    this.terminal.reset();
-    this.terminal.interpret('\x1b]0;asdf');
-    this.terminal.interpret('\x1b');
-    this.terminal.interpret('\\');
-    assert.equal(title, 'asdf');
-  });
+  // We get the first half of the ST one byte at a time.
+  title = null;
+  this.terminal.reset();
+  this.terminal.interpret('\x1b]0;asdf');
+  this.terminal.interpret('\x1b');
+  this.terminal.interpret('\\');
+  assert.equal(title, 'asdf');
+});
 
 it('dec-screen-test', function() {
-    this.terminal.interpret('\x1b#8');
+  this.terminal.interpret('\x1b#8');
 
-    const text = this.terminal.getRowsText(0, 6);
-    assert.equal(text,
-                 'EEEEEEEEEEEEEEE\n' +
-                 'EEEEEEEEEEEEEEE\n' +
-                 'EEEEEEEEEEEEEEE\n' +
-                 'EEEEEEEEEEEEEEE\n' +
-                 'EEEEEEEEEEEEEEE\n' +
-                 'EEEEEEEEEEEEEEE');
-  });
+  const text = this.terminal.getRowsText(0, 6);
+  assert.equal(text,
+               'EEEEEEEEEEEEEEE\n' +
+               'EEEEEEEEEEEEEEE\n' +
+               'EEEEEEEEEEEEEEE\n' +
+               'EEEEEEEEEEEEEEE\n' +
+               'EEEEEEEEEEEEEEE\n' +
+               'EEEEEEEEEEEEEEE');
+});
 
 it('newlines-1', function() {
-    // Should be off by default.
-    assert.isFalse(this.terminal.options_.autoCarriageReturn);
+  // Should be off by default.
+  assert.isFalse(this.terminal.options_.autoCarriageReturn);
 
-    // 0d: newline, 0b: vertical tab, 0c: form feed.
-    this.terminal.interpret('newline\x0dvtab\x0bff\x0cbye');
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'vtabine\n' +
-                 '    ff\n' +
-                 '      bye');
-  });
+  // 0d: newline, 0b: vertical tab, 0c: form feed.
+  this.terminal.interpret('newline\x0dvtab\x0bff\x0cbye');
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'vtabine\n' +
+               '    ff\n' +
+               '      bye');
+});
 
 it('newlines-2', function() {
-    this.terminal.interpret('\x1b[20h');
-    assert.isTrue(this.terminal.options_.autoCarriageReturn);
+  this.terminal.interpret('\x1b[20h');
+  assert.isTrue(this.terminal.options_.autoCarriageReturn);
 
-    this.terminal.interpret('newline\x0dvtab\x0bff\x0cbye');
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'vtabine\n' +
-                 'ff\n' +
-                 'bye');
-  });
+  this.terminal.interpret('newline\x0dvtab\x0bff\x0cbye');
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'vtabine\n' +
+               'ff\n' +
+               'bye');
+});
 
 /**
  * Test the default tab stops.
  */
 it('tabs', function() {
-    this.terminal.interpret('123456789012345\r\n');
-    this.terminal.interpret('1\t2\ta\r\n');
-    this.terminal.interpret('1\t2\tb\r\n');
-    this.terminal.interpret('1\t2\tc\r\n');
-    this.terminal.interpret('1\t2\td\r\n');
-    this.terminal.interpret('1\t2\te');
-    const text = this.terminal.getRowsText(0, 6);
-    assert.equal(text,
-                 '123456789012345\n' +
-                 '1       2     a\n' +
-                 '1       2     b\n' +
-                 '1       2     c\n' +
-                 '1       2     d\n' +
-                 '1       2     e');
-  });
+  this.terminal.interpret('123456789012345\r\n');
+  this.terminal.interpret('1\t2\ta\r\n');
+  this.terminal.interpret('1\t2\tb\r\n');
+  this.terminal.interpret('1\t2\tc\r\n');
+  this.terminal.interpret('1\t2\td\r\n');
+  this.terminal.interpret('1\t2\te');
+  const text = this.terminal.getRowsText(0, 6);
+  assert.equal(text,
+               '123456789012345\n' +
+               '1       2     a\n' +
+               '1       2     b\n' +
+               '1       2     c\n' +
+               '1       2     d\n' +
+               '1       2     e');
+});
 
 /**
  * Test terminal reset.
  */
 it('reset', function() {
-    this.terminal.interpret(
-        // Switch to alternate screen and set some attributes.
-        '\x1b[?47h\x1b[1;33;44m' +
-        // Switch back to primary screen.
-        '\x1b[?47l' +
-        // Set some text attributes.
-        '\x1b[1;33;44m' +
-        // Clear all tab stops.
-        '\x1b[3g' +
-        // Set a scroll region.
-        '\x1b[2;4r' +
-        // Set cursor position.
-        '\x1b[5;6H');
+  this.terminal.interpret(
+      // Switch to alternate screen and set some attributes.
+      '\x1b[?47h\x1b[1;33;44m' +
+      // Switch back to primary screen.
+      '\x1b[?47l' +
+      // Set some text attributes.
+      '\x1b[1;33;44m' +
+      // Clear all tab stops.
+      '\x1b[3g' +
+      // Set a scroll region.
+      '\x1b[2;4r' +
+      // Set cursor position.
+      '\x1b[5;6H');
 
-    let ta;
+  let ta;
 
-    assert.equal(this.terminal.tabStops_.length, 0);
+  assert.equal(this.terminal.tabStops_.length, 0);
 
-    ta = this.terminal.primaryScreen_.textAttributes;
-    assert.notStrictEqual(ta.foreground, ta.DEFAULT_COLOR);
-    assert.notStrictEqual(ta.background, ta.DEFAULT_COLOR);
+  ta = this.terminal.primaryScreen_.textAttributes;
+  assert.notStrictEqual(ta.foreground, ta.DEFAULT_COLOR);
+  assert.notStrictEqual(ta.background, ta.DEFAULT_COLOR);
 
-    ta = this.terminal.alternateScreen_.textAttributes;
-    assert.notStrictEqual(ta.foreground, ta.DEFAULT_COLOR);
-    assert.notStrictEqual(ta.background, ta.DEFAULT_COLOR);
+  ta = this.terminal.alternateScreen_.textAttributes;
+  assert.notStrictEqual(ta.foreground, ta.DEFAULT_COLOR);
+  assert.notStrictEqual(ta.background, ta.DEFAULT_COLOR);
 
-    assert.isTrue(ta.bold);
+  assert.isTrue(ta.bold);
 
-    assert.equal(this.terminal.vtScrollTop_, 1);
-    assert.equal(this.terminal.vtScrollBottom_, 3);
-    assert.equal(this.terminal.screen_.cursorPosition.row, 4);
-    assert.equal(this.terminal.screen_.cursorPosition.column, 5);
+  assert.equal(this.terminal.vtScrollTop_, 1);
+  assert.equal(this.terminal.vtScrollBottom_, 3);
+  assert.equal(this.terminal.screen_.cursorPosition.row, 4);
+  assert.equal(this.terminal.screen_.cursorPosition.column, 5);
 
-    // Reset.
-    this.terminal.interpret('\x1bc');
+  // Reset.
+  this.terminal.interpret('\x1bc');
 
-    assert.equal(this.terminal.tabStops_.length, 1);
+  assert.equal(this.terminal.tabStops_.length, 1);
 
-    ta = this.terminal.primaryScreen_.textAttributes;
-    assert.strictEqual(ta.foreground, ta.DEFAULT_COLOR);
-    assert.strictEqual(ta.background, ta.DEFAULT_COLOR);
+  ta = this.terminal.primaryScreen_.textAttributes;
+  assert.strictEqual(ta.foreground, ta.DEFAULT_COLOR);
+  assert.strictEqual(ta.background, ta.DEFAULT_COLOR);
 
-    ta = this.terminal.alternateScreen_.textAttributes;
-    assert.strictEqual(ta.foreground, ta.DEFAULT_COLOR);
-    assert.strictEqual(ta.background, ta.DEFAULT_COLOR);
+  ta = this.terminal.alternateScreen_.textAttributes;
+  assert.strictEqual(ta.foreground, ta.DEFAULT_COLOR);
+  assert.strictEqual(ta.background, ta.DEFAULT_COLOR);
 
-    assert.isFalse(ta.bold);
+  assert.isFalse(ta.bold);
 
-    assert.isNull(this.terminal.vtScrollTop_);
-    assert.isNull(this.terminal.vtScrollBottom_);
-    assert.equal(this.terminal.screen_.cursorPosition.row, 0);
-    assert.equal(this.terminal.screen_.cursorPosition.column, 0);
-  });
+  assert.isNull(this.terminal.vtScrollTop_);
+  assert.isNull(this.terminal.vtScrollBottom_);
+  assert.equal(this.terminal.screen_.cursorPosition.row, 0);
+  assert.equal(this.terminal.screen_.cursorPosition.column, 0);
+});
 
 /**
  * Test the erase left command.
  */
 it('erase-left', function() {
-    this.terminal.interpret('line one\r\noooooooo\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[A' +
-                            '\x1b[1Ktw');
+  this.terminal.interpret('line one\r\noooooooo\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[A' +
+                          '\x1b[1Ktw');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 '     two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               '     two\n' +
+               'line three');
+});
 
 /**
  * Test the erase left command with widechar string.
  */
 it('erase-left-widechar', function() {
-    this.terminal.interpret('第一行\r\n第二行\r\n第三行');
-    this.terminal.interpret('\x1b[5D' +
-                            '\x1b[A' +
-                            '\x1b[1KOO');
+  this.terminal.interpret('第一行\r\n第二行\r\n第三行');
+  this.terminal.interpret('\x1b[5D' +
+                          '\x1b[A' +
+                          '\x1b[1KOO');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal('\u7b2c\u4e00\u884c\n' +
-                 ' OO \u884c\n' +
-                 '\u7b2c\u4e09\u884c',
-                 text);
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal('\u7b2c\u4e00\u884c\n' +
+               ' OO \u884c\n' +
+               '\u7b2c\u4e09\u884c',
+               text);
+});
 
 /**
  * Test the erase right command.
  */
 it('erase-right', function() {
-    this.terminal.interpret('line one\r\nline XXXX\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[A' +
-                            '\x1b[0Ktwo');
+  this.terminal.interpret('line one\r\nline XXXX\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[A' +
+                          '\x1b[0Ktwo');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test the erase right command with widechar string.
  */
 it('erase-right-widechar', function() {
-    this.terminal.interpret('第一行\r\n第二行\r\n第三行');
-    this.terminal.interpret('\x1b[5D\x1b[A' +
-                            '\x1b[0KOO');
+  this.terminal.interpret('第一行\r\n第二行\r\n第三行');
+  this.terminal.interpret('\x1b[5D\x1b[A' +
+                          '\x1b[0KOO');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal('\u7b2c\u4e00\u884c\n' +
-                 ' OO\n' +
-                 '\u7b2c\u4e09\u884c',
-                 text);
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal('\u7b2c\u4e00\u884c\n' +
+               ' OO\n' +
+               '\u7b2c\u4e09\u884c',
+               text);
+});
 
 /**
  * Test the erase line command.
  */
 it('erase-line', function() {
-    this.terminal.interpret('line one\r\nline twoo\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[A' +
-                            '\x1b[2Ktwo');
+  this.terminal.interpret('line one\r\nline twoo\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[A' +
+                          '\x1b[2Ktwo');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 '     two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               '     two\n' +
+               'line three');
+});
 
 /**
  * Test the erase above command.
  */
 it('erase-above', function() {
-    this.terminal.interpret('line one\r\noooooooo\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[A' +
-                            '\x1b[1Jtw');
+  this.terminal.interpret('line one\r\noooooooo\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[A' +
+                          '\x1b[1Jtw');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 '\n' +
-                 '     two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               '\n' +
+               '     two\n' +
+               'line three');
+});
 
 /**
  * Test the erase all command.
  */
 it('erase-all', function() {
-    this.terminal.interpret('line one\r\nline XXXX\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[A' +
-                            '\x1b[2Jtwo');
+  this.terminal.interpret('line one\r\nline XXXX\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[A' +
+                          '\x1b[2Jtwo');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 '\n' +
-                 '     two\n');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               '\n' +
+               '     two\n');
+});
 
 /**
  * Test the erase below command.
  */
 it('erase-below', function() {
-    this.terminal.interpret('line one\r\nline XXXX\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[A' +
-                            '\x1b[0Jtwo');
+  this.terminal.interpret('line one\r\nline XXXX\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[A' +
+                          '\x1b[0Jtwo');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n');
+});
 
 /**
  * Test the erase character command.
  */
 it('erase-char', function() {
-    this.terminal.interpret('line one\r\nline XXXX\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[A' +
-                            '\x1b[4Xtwo');
+  this.terminal.interpret('line one\r\nline XXXX\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[A' +
+                          '\x1b[4Xtwo');
 
-    let text = this.terminal.getRowsText(0, 3);
-    // See TODO in hterm.Terminal.prototype.eraseToRight for the extra space.
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
+  let text = this.terminal.getRowsText(0, 3);
+  // See TODO in hterm.Terminal.prototype.eraseToRight for the extra space.
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
 
-    this.terminal.interpret('\x1b[3D' +
-                            '\x1b[X');
-    text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line  wo\n' +
-                 'line three');
-  });
+  this.terminal.interpret('\x1b[3D' +
+                          '\x1b[X');
+  text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line  wo\n' +
+               'line three');
+});
 
 /**
  * Test the insert line command.
  */
 it('insert-line', function() {
-    this.terminal.interpret('line two\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[2A\x1b[L' +
-                            'line one');
+  this.terminal.interpret('line two\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[2A\x1b[L' +
+                          'line one');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test the insert line command with an argument.
  */
 it('insert-lines', function() {
-    this.terminal.interpret('line three\r\n\r\n');
-    this.terminal.interpret('\x1b[5D\x1b[2A\x1b[2L' +
-                            'line one\r\nline two');
+  this.terminal.interpret('line three\r\n\r\n');
+  this.terminal.interpret('\x1b[5D\x1b[2A\x1b[2L' +
+                          'line one\r\nline two');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test that the insert line command handles overflow properly.
  */
 it('insert-toomany-lines', function() {
-    this.terminal.interpret('XXXXX');
-    this.terminal.interpret('\x1b[6L' +
-                            'line one\r\nline two\r\nline three');
+  this.terminal.interpret('XXXXX');
+  this.terminal.interpret('\x1b[6L' +
+                          'line one\r\nline two\r\nline three');
 
-    const text = this.terminal.getRowsText(0, 5);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three\n' +
-                 '\n');
-  });
+  const text = this.terminal.getRowsText(0, 5);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three\n' +
+               '\n');
+});
 
 /**
  * Test the delete line command.
  */
 it('delete-line', function() {
-    this.terminal.interpret('line one\r\nline two\r\n' +
-                            'XXXXXXXX\r\n' +
-                            'line XXXXX');
-    this.terminal.interpret('\x1b[5D\x1b[A\x1b[Mthree');
+  this.terminal.interpret('line one\r\nline two\r\n' +
+                          'XXXXXXXX\r\n' +
+                          'line XXXXX');
+  this.terminal.interpret('\x1b[5D\x1b[A\x1b[Mthree');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test the delete line command with an argument.
  */
 it('delete-lines', function() {
-    this.terminal.interpret('line one\r\nline two\r\n' +
-                            'XXXXXXXX\r\nXXXXXXXX\r\n' +
-                            'line XXXXX');
-    this.terminal.interpret('\x1b[5D\x1b[2A\x1b[2Mthree');
+  this.terminal.interpret('line one\r\nline two\r\n' +
+                          'XXXXXXXX\r\nXXXXXXXX\r\n' +
+                          'line XXXXX');
+  this.terminal.interpret('\x1b[5D\x1b[2A\x1b[2Mthree');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test the insert space command.
  */
 it('insert-space', function() {
-    this.terminal.interpret('line one\r\nlinetwo\r\nline three');
-    this.terminal.interpret('\x1b[6D\x1b[A\x1b[@');
+  this.terminal.interpret('line one\r\nlinetwo\r\nline three');
+  this.terminal.interpret('\x1b[6D\x1b[A\x1b[@');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test the insert space command with an argument.
  */
 it('insert-spaces', function() {
-    this.terminal.interpret('line one\r\nlinetwo\r\nline three');
-    this.terminal.interpret('\x1b[6D\x1b[A\x1b[3@');
+  this.terminal.interpret('line one\r\nlinetwo\r\nline three');
+  this.terminal.interpret('\x1b[6D\x1b[A\x1b[3@');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line   two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line   two\n' +
+               'line three');
+});
 
 /**
  * Test the delete characters command.
  */
 it('delete-chars', function() {
-    this.terminal.interpret('line one\r\nline XXXX\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[A\x1b[4Ptwo');
+  this.terminal.interpret('line one\r\nline XXXX\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[A\x1b[4Ptwo');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test that the delete characters command handles overflow properly.
  */
 it('delete-toomany', function() {
-    this.terminal.interpret('line one\r\nline XXXX\r\nline three');
-    this.terminal.interpret('\x1b[5D\x1b[A\x1b[20Ptwo');
+  this.terminal.interpret('line one\r\nline XXXX\r\nline three');
+  this.terminal.interpret('\x1b[5D\x1b[A\x1b[20Ptwo');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test the scroll up command.
  */
 it('scroll-up', function() {
-    this.terminal.interpret('\r\n\r\nline one\r\nline two\r\nline XXXXX');
-    this.terminal.interpret('\x1b[5D\x1b[2A\x1b[2Sthree');
+  this.terminal.interpret('\r\n\r\nline one\r\nline two\r\nline XXXXX');
+  this.terminal.interpret('\x1b[5D\x1b[2A\x1b[2Sthree');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test the scroll down command.
  */
 it('scroll-down', function() {
-    this.terminal.interpret('line one\r\nline two\r\nline XXXXX\r\n');
-    this.terminal.interpret('     \x1b[Tthree');
+  this.terminal.interpret('line one\r\nline two\r\nline XXXXX\r\n');
+  this.terminal.interpret('     \x1b[Tthree');
 
-    const text = this.terminal.getRowsText(0, 5);
-    assert.equal(text,
-                 '\n' +
-                 'line one\n' +
-                 'line two\n' +
-                 'line three\n' +
-                 '     ');
-  });
+  const text = this.terminal.getRowsText(0, 5);
+  assert.equal(text,
+               '\n' +
+               'line one\n' +
+               'line two\n' +
+               'line three\n' +
+               '     ');
+});
 
 /**
  * Test the absolute line positioning command.
  */
 it('line-position-absolute', function() {
-    this.terminal.interpret('line XXX\r\nline YYY\r\nline ZZZZZ\r\n');
-    this.terminal.interpret('     \x1b[3dthree\x1b[5D');
-    this.terminal.interpret('\x1b[2dtwo\x1b[3D');
-    this.terminal.interpret('\x1b[1done');
+  this.terminal.interpret('line XXX\r\nline YYY\r\nline ZZZZZ\r\n');
+  this.terminal.interpret('     \x1b[3dthree\x1b[5D');
+  this.terminal.interpret('\x1b[2dtwo\x1b[3D');
+  this.terminal.interpret('\x1b[1done');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test the device attributes command.
  */
 it('device-attributes', function() {
-    let resultString;
-    this.terminal.io.sendString = (str) => resultString = str;
+  let resultString;
+  this.terminal.io.sendString = (str) => resultString = str;
 
-    this.terminal.interpret('\x1b[c');
+  this.terminal.interpret('\x1b[c');
 
-    assert.equal(resultString, '\x1b[?1;2c');
-  });
+  assert.equal(resultString, '\x1b[?1;2c');
+});
 
 /**
  * TODO(rginda): Test the clear tabstops on this line command.
  */
 xit('clear-line-tabstops', function() {
-    // '[0g';
-  });
+  // '[0g';
+});
 
 /**
  * TODO(rginda): Test the clear all tabstops command.
  */
 xit('clear-all-tabstops', function() {
-    // '[3g';
-  });
+  // '[3g';
+});
 
 /**
  * TODO(rginda): Test text attributes.
  */
 it('color-change', function() {
-    this.terminal.interpret('[mplain....... [0;36mHi\r\n' +
-                            '[mitalic...... [3;36mHi\r\n' +
-                            '[mbright...... [0;96mHi\r\n' +
-                            '[mbold........ [1;36mHi\r\n' +
-                            '[mbold-bright. [1;96mHi\r\n' +
-                            '[mbright-bold. [96;1mHi');
+  this.terminal.interpret('[mplain....... [0;36mHi\r\n' +
+                          '[mitalic...... [3;36mHi\r\n' +
+                          '[mbright...... [0;96mHi\r\n' +
+                          '[mbold........ [1;36mHi\r\n' +
+                          '[mbold-bright. [1;96mHi\r\n' +
+                          '[mbright-bold. [96;1mHi');
 
-    const text = this.terminal.getRowsText(0, 6);
-    assert.equal(text,
-                 'plain....... Hi\n' +
-                 'italic...... Hi\n' +
-                 'bright...... Hi\n' +
-                 'bold........ Hi\n' +
-                 'bold-bright. Hi\n' +
-                 'bright-bold. Hi');
+  const text = this.terminal.getRowsText(0, 6);
+  assert.equal(text,
+               'plain....... Hi\n' +
+               'italic...... Hi\n' +
+               'bright...... Hi\n' +
+               'bold........ Hi\n' +
+               'bold-bright. Hi\n' +
+               'bright-bold. Hi');
 
-    for (let i = 0; i < 6; i++) {
-      const row = this.terminal.getRowNode(i);
-      assert.equal(row.childNodes.length, 2, 'i: ' + i);
-      assert.equal(row.childNodes[0].nodeType, Node.TEXT_NODE, 'i: ' + i);
-      assert.equal(row.childNodes[0].length, 13, 'i: ' + i);
-      assert.equal(row.childNodes[1].nodeName, 'SPAN', 'i: ' + i);
-      assert.isTrue(!!row.childNodes[1].style.color, 'i: ' + i);
-      assert.isTrue(!!row.childNodes[1].style.fontWeight == (i > 2), 'i: ' + i);
-      assert.equal(
-          row.childNodes[1].style.fontStyle, (i == 1 ? 'italic' : ''),
-          'i: ' + i);
-    }
-  });
+  for (let i = 0; i < 6; i++) {
+    const row = this.terminal.getRowNode(i);
+    assert.equal(row.childNodes.length, 2, 'i: ' + i);
+    assert.equal(row.childNodes[0].nodeType, Node.TEXT_NODE, 'i: ' + i);
+    assert.equal(row.childNodes[0].length, 13, 'i: ' + i);
+    assert.equal(row.childNodes[1].nodeName, 'SPAN', 'i: ' + i);
+    assert.isTrue(!!row.childNodes[1].style.color, 'i: ' + i);
+    assert.isTrue(!!row.childNodes[1].style.fontWeight == (i > 2), 'i: ' + i);
+    assert.equal(
+        row.childNodes[1].style.fontStyle, (i == 1 ? 'italic' : ''),
+        'i: ' + i);
+  }
+});
 
 it('color-change-wc', function() {
-    this.terminal.io.print('[mplain....... [0;36m中\r\n' +
-                           '[mitalic...... [3;36m中\r\n' +
-                           '[mbright...... [0;96m中\r\n' +
-                           '[mbold........ [1;36m中\r\n' +
-                           '[mbold-bright. [1;96m中\r\n' +
-                           '[mbright-bold. [96;1m中');
+  this.terminal.io.print('[mplain....... [0;36m中\r\n' +
+                         '[mitalic...... [3;36m中\r\n' +
+                         '[mbright...... [0;96m中\r\n' +
+                         '[mbold........ [1;36m中\r\n' +
+                         '[mbold-bright. [1;96m中\r\n' +
+                         '[mbright-bold. [96;1m中');
 
-    const text = this.terminal.getRowsText(0, 6);
-    assert.equal(text,
-                 'plain....... \u4E2D\n' +
-                 'italic...... \u4E2D\n' +
-                 'bright...... \u4E2D\n' +
-                 'bold........ \u4E2D\n' +
-                 'bold-bright. \u4E2D\n' +
-                 'bright-bold. \u4E2D');
+  const text = this.terminal.getRowsText(0, 6);
+  assert.equal(text,
+               'plain....... \u4E2D\n' +
+               'italic...... \u4E2D\n' +
+               'bright...... \u4E2D\n' +
+               'bold........ \u4E2D\n' +
+               'bold-bright. \u4E2D\n' +
+               'bright-bold. \u4E2D');
 
-    for (let i = 0; i < 6; i++) {
-      const row = this.terminal.getRowNode(i);
-      assert.equal(row.childNodes.length, 2, 'i: ' + i);
-      assert.equal(row.childNodes[0].nodeType, Node.TEXT_NODE, 'i: ' + i);
-      assert.equal(row.childNodes[0].length, 13, 'i: ' + i);
-      assert.equal(row.childNodes[1].nodeName, 'SPAN', 'i: ' + i);
-      assert.isTrue(!!row.childNodes[1].style.color, 'i: ' + i);
-      assert.isTrue(!!row.childNodes[1].style.fontWeight == (i > 2), 'i: ' + i);
-      assert.equal(
-          row.childNodes[1].style.fontStyle, (i == 1 ? 'italic' : ''),
-          'i: ' + i);
-    }
-  });
+  for (let i = 0; i < 6; i++) {
+    const row = this.terminal.getRowNode(i);
+    assert.equal(row.childNodes.length, 2, 'i: ' + i);
+    assert.equal(row.childNodes[0].nodeType, Node.TEXT_NODE, 'i: ' + i);
+    assert.equal(row.childNodes[0].length, 13, 'i: ' + i);
+    assert.equal(row.childNodes[1].nodeName, 'SPAN', 'i: ' + i);
+    assert.isTrue(!!row.childNodes[1].style.color, 'i: ' + i);
+    assert.isTrue(!!row.childNodes[1].style.fontWeight == (i > 2), 'i: ' + i);
+    assert.equal(
+        row.childNodes[1].style.fontStyle, (i == 1 ? 'italic' : ''),
+        'i: ' + i);
+  }
+});
 
 it('bold-as-bright', function() {
-    const attrs = this.terminal.primaryScreen_.textAttributes;
-    const alt_attrs = this.terminal.alternateScreen_.textAttributes;
-    attrs.enableBoldAsBright = true;
-    alt_attrs.enableBoldAsBright = true;
+  const attrs = this.terminal.primaryScreen_.textAttributes;
+  const alt_attrs = this.terminal.alternateScreen_.textAttributes;
+  attrs.enableBoldAsBright = true;
+  alt_attrs.enableBoldAsBright = true;
 
-    this.terminal.interpret('[mplain....... [0;36mHi\r\n' +
-                            '[mbright...... [0;96mHi\r\n' +
-                            '[mbold........ [1;36mHi\r\n' +
-                            '[mbold-bright. [1;96mHi\r\n' +
-                            '[mbright-bold. [96;1mHi');
+  this.terminal.interpret('[mplain....... [0;36mHi\r\n' +
+                          '[mbright...... [0;96mHi\r\n' +
+                          '[mbold........ [1;36mHi\r\n' +
+                          '[mbold-bright. [1;96mHi\r\n' +
+                          '[mbright-bold. [96;1mHi');
 
-    const text = this.terminal.getRowsText(0, 5);
-    assert.equal(text,
-                 'plain....... Hi\n' +
-                 'bright...... Hi\n' +
-                 'bold........ Hi\n' +
-                 'bold-bright. Hi\n' +
-                 'bright-bold. Hi');
+  const text = this.terminal.getRowsText(0, 5);
+  assert.equal(text,
+               'plain....... Hi\n' +
+               'bright...... Hi\n' +
+               'bold........ Hi\n' +
+               'bold-bright. Hi\n' +
+               'bright-bold. Hi');
 
-    const fg = 'rgb(var(--hterm-color-6))';
-    const fg_bright = 'rgb(var(--hterm-color-14))';
+  const fg = 'rgb(var(--hterm-color-6))';
+  const fg_bright = 'rgb(var(--hterm-color-14))';
 
-    const row_plain = this.terminal.getRowNode(0);
-    assert.equal(row_plain.childNodes[1].style.color, fg,
-                 'plain color');
+  const row_plain = this.terminal.getRowNode(0);
+  assert.equal(row_plain.childNodes[1].style.color, fg,
+               'plain color');
 
-    const row_bright = this.terminal.getRowNode(1);
-    assert.equal(row_bright.childNodes[1].style.color, fg_bright,
-                 'bright color');
+  const row_bright = this.terminal.getRowNode(1);
+  assert.equal(row_bright.childNodes[1].style.color, fg_bright,
+               'bright color');
 
-    const row_bold = this.terminal.getRowNode(2);
-    assert.equal(row_bold.childNodes[1].style.color, fg_bright,
-                 'bold color');
+  const row_bold = this.terminal.getRowNode(2);
+  assert.equal(row_bold.childNodes[1].style.color, fg_bright,
+               'bold color');
 
-    const row_bold_bright = this.terminal.getRowNode(3);
-    assert.equal(row_bold_bright.childNodes[1].style.color, fg_bright,
-                 'bold bright color');
+  const row_bold_bright = this.terminal.getRowNode(3);
+  assert.equal(row_bold_bright.childNodes[1].style.color, fg_bright,
+               'bold bright color');
 
-    const row_bright_bold = this.terminal.getRowNode(4);
-    assert.equal(row_bright_bold.childNodes[1].style.color, fg_bright,
-                 'bright bold color');
-  });
+  const row_bright_bold = this.terminal.getRowNode(4);
+  assert.equal(row_bright_bold.childNodes[1].style.color, fg_bright,
+               'bright bold color');
+});
 
 it('disable-bold-as-bright', function() {
-    const attrs = this.terminal.primaryScreen_.textAttributes;
-    const alt_attrs = this.terminal.alternateScreen_.textAttributes;
-    attrs.enableBoldAsBright = false;
-    alt_attrs.enableBoldAsBright = false;
+  const attrs = this.terminal.primaryScreen_.textAttributes;
+  const alt_attrs = this.terminal.alternateScreen_.textAttributes;
+  attrs.enableBoldAsBright = false;
+  alt_attrs.enableBoldAsBright = false;
 
-    this.terminal.interpret('[mplain....... [0;36mHi\r\n' +
-                            '[mbright...... [0;96mHi\r\n' +
-                            '[mbold........ [1;36mHi\r\n' +
-                            '[mbold-bright. [1;96mHi\r\n' +
-                            '[mbright-bold. [96;1mHi');
+  this.terminal.interpret('[mplain....... [0;36mHi\r\n' +
+                          '[mbright...... [0;96mHi\r\n' +
+                          '[mbold........ [1;36mHi\r\n' +
+                          '[mbold-bright. [1;96mHi\r\n' +
+                          '[mbright-bold. [96;1mHi');
 
-    const text = this.terminal.getRowsText(0, 5);
-    assert.equal(text,
-                 'plain....... Hi\n' +
-                 'bright...... Hi\n' +
-                 'bold........ Hi\n' +
-                 'bold-bright. Hi\n' +
-                 'bright-bold. Hi');
+  const text = this.terminal.getRowsText(0, 5);
+  assert.equal(text,
+               'plain....... Hi\n' +
+               'bright...... Hi\n' +
+               'bold........ Hi\n' +
+               'bold-bright. Hi\n' +
+               'bright-bold. Hi');
 
-    const fg = 'rgb(var(--hterm-color-6))';
-    const fg_bright = 'rgb(var(--hterm-color-14))';
+  const fg = 'rgb(var(--hterm-color-6))';
+  const fg_bright = 'rgb(var(--hterm-color-14))';
 
-    const row_plain = this.terminal.getRowNode(0);
-    assert.equal(row_plain.childNodes[1].style.color, fg,
-                 'plain color');
+  const row_plain = this.terminal.getRowNode(0);
+  assert.equal(row_plain.childNodes[1].style.color, fg,
+               'plain color');
 
-    const row_bright = this.terminal.getRowNode(1);
-    assert.equal(row_bright.childNodes[1].style.color, fg_bright,
-                 'bright color');
+  const row_bright = this.terminal.getRowNode(1);
+  assert.equal(row_bright.childNodes[1].style.color, fg_bright,
+               'bright color');
 
-    const row_bold = this.terminal.getRowNode(2);
-    assert.equal(row_bold.childNodes[1].style.color, fg,
-                 'bold color');
+  const row_bold = this.terminal.getRowNode(2);
+  assert.equal(row_bold.childNodes[1].style.color, fg,
+               'bold color');
 
-    const row_bold_bright = this.terminal.getRowNode(3);
-    assert.equal(row_bold_bright.childNodes[1].style.color, fg_bright,
-                 'bold bright color');
+  const row_bold_bright = this.terminal.getRowNode(3);
+  assert.equal(row_bold_bright.childNodes[1].style.color, fg_bright,
+               'bold bright color');
 
-    const row_bright_bold = this.terminal.getRowNode(4);
-    assert.equal(row_bright_bold.childNodes[1].style.color, fg_bright,
-                 'bright bold color');
-  });
+  const row_bright_bold = this.terminal.getRowNode(4);
+  assert.equal(row_bright_bold.childNodes[1].style.color, fg_bright,
+               'bright bold color');
+});
 
 /**
  * Test the status report command.
  */
 it('status-report', function() {
-    let resultString;
-    this.terminal.io.sendString = (str) => resultString = str;
+  let resultString;
+  this.terminal.io.sendString = (str) => resultString = str;
 
-    this.terminal.interpret('\x1b[5n');
-    assert.equal(resultString, '\x1b0n');
+  this.terminal.interpret('\x1b[5n');
+  assert.equal(resultString, '\x1b0n');
 
-    resultString = '';
+  resultString = '';
 
-    this.terminal.interpret('line one\r\nline two\r\nline three');
-    // Reposition the cursor and ask for a position report.
-    this.terminal.interpret('\x1b[5D\x1b[A\x1b[6n');
-    assert.equal(resultString, '\x1b[2;6R');
+  this.terminal.interpret('line one\r\nline two\r\nline three');
+  // Reposition the cursor and ask for a position report.
+  this.terminal.interpret('\x1b[5D\x1b[A\x1b[6n');
+  assert.equal(resultString, '\x1b[2;6R');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test that various mode commands correctly change the state of the terminal.
@@ -991,124 +991,124 @@ it('status-report', function() {
  * Most of these should have more in-depth testing below.
  */
 it('mode-bits', function() {
-    this.terminal.interpret('\x1b[?1h');
-    assert.isTrue(this.terminal.keyboard.applicationCursor);
+  this.terminal.interpret('\x1b[?1h');
+  assert.isTrue(this.terminal.keyboard.applicationCursor);
 
-    this.terminal.interpret('\x1b[?1l');
-    assert.isFalse(this.terminal.keyboard.applicationCursor);
+  this.terminal.interpret('\x1b[?1l');
+  assert.isFalse(this.terminal.keyboard.applicationCursor);
 
-    const assertColor = (name, value) => {
-      const p = this.terminal.getCssVar(`${name}-color`);
-      assert.equal(`rgb(${p.replace(/,/g, ', ')})`, value);
-    };
-    const fg = this.terminal.prefs_.get('foreground-color');
-    const bg = this.terminal.prefs_.get('background-color');
+  const assertColor = (name, value) => {
+    const p = this.terminal.getCssVar(`${name}-color`);
+    assert.equal(`rgb(${p.replace(/,/g, ', ')})`, value);
+  };
+  const fg = this.terminal.prefs_.get('foreground-color');
+  const bg = this.terminal.prefs_.get('background-color');
 
-    this.terminal.interpret('\x1b[?5h');
-    assertColor('foreground', bg);
-    assertColor('background', fg);
+  this.terminal.interpret('\x1b[?5h');
+  assertColor('foreground', bg);
+  assertColor('background', fg);
 
-    this.terminal.interpret('\x1b[?5l');
-    assertColor('foreground', fg);
-    assertColor('background', bg);
+  this.terminal.interpret('\x1b[?5l');
+  assertColor('foreground', fg);
+  assertColor('background', bg);
 
-    this.terminal.interpret('\x1b[?5l');
-    assertColor('foreground', fg);
-    assertColor('background', bg);
+  this.terminal.interpret('\x1b[?5l');
+  assertColor('foreground', fg);
+  assertColor('background', bg);
 
-    this.terminal.interpret('\x1b[?6h');
-    assert.isTrue(this.terminal.options_.originMode);
+  this.terminal.interpret('\x1b[?6h');
+  assert.isTrue(this.terminal.options_.originMode);
 
-    this.terminal.interpret('\x1b[?6l');
-    assert.isFalse(this.terminal.options_.originMode);
+  this.terminal.interpret('\x1b[?6l');
+  assert.isFalse(this.terminal.options_.originMode);
 
-    this.terminal.interpret('\x1b[4h');
-    assert.isTrue(this.terminal.options_.insertMode);
+  this.terminal.interpret('\x1b[4h');
+  assert.isTrue(this.terminal.options_.insertMode);
 
-    this.terminal.interpret('\x1b[4l');
-    assert.isFalse(this.terminal.options_.insertMode);
+  this.terminal.interpret('\x1b[4l');
+  assert.isFalse(this.terminal.options_.insertMode);
 
-    this.terminal.interpret('\x1b[?7h');
-    assert.isTrue(this.terminal.options_.wraparound);
+  this.terminal.interpret('\x1b[?7h');
+  assert.isTrue(this.terminal.options_.wraparound);
 
-    this.terminal.interpret('\x1b[?7l');
-    assert.isFalse(this.terminal.options_.wraparound);
+  this.terminal.interpret('\x1b[?7l');
+  assert.isFalse(this.terminal.options_.wraparound);
 
-    // DEC mode 12 is disabled by default.
-    this.terminal.vt.enableDec12 = true;
+  // DEC mode 12 is disabled by default.
+  this.terminal.vt.enableDec12 = true;
 
-    this.terminal.interpret('\x1b[?12h');
-    assert.isTrue(this.terminal.options_.cursorBlink);
-    assert.property(this.terminal.timeouts_, 'cursorBlink');
+  this.terminal.interpret('\x1b[?12h');
+  assert.isTrue(this.terminal.options_.cursorBlink);
+  assert.property(this.terminal.timeouts_, 'cursorBlink');
 
-    this.terminal.interpret('\x1b[?12l');
-    assert.isFalse(this.terminal.options_.cursorBlink);
-    assert.notProperty(this.terminal.timeouts_, 'cursorBlink');
+  this.terminal.interpret('\x1b[?12l');
+  assert.isFalse(this.terminal.options_.cursorBlink);
+  assert.notProperty(this.terminal.timeouts_, 'cursorBlink');
 
-    // Make sure that enableDec12 is respected.
-    this.terminal.vt.enableDec12 = false;
+  // Make sure that enableDec12 is respected.
+  this.terminal.vt.enableDec12 = false;
 
-    this.terminal.interpret('\x1b[?12h');
-    assert.isFalse(this.terminal.options_.cursorBlink);
-    assert.notProperty(this.terminal.timeouts_, 'cursorBlink');
+  this.terminal.interpret('\x1b[?12h');
+  assert.isFalse(this.terminal.options_.cursorBlink);
+  assert.notProperty(this.terminal.timeouts_, 'cursorBlink');
 
-    this.terminal.interpret('\x1b[?25l');
-    assert.isFalse(this.terminal.options_.cursorVisible);
-    assert.equal(this.terminal.cursorNode_.getAttribute('visible'), 'false');
+  this.terminal.interpret('\x1b[?25l');
+  assert.isFalse(this.terminal.options_.cursorVisible);
+  assert.equal(this.terminal.cursorNode_.getAttribute('visible'), 'false');
 
-    this.terminal.interpret('\x1b[?25h');
-    assert.isTrue(this.terminal.options_.cursorVisible);
+  this.terminal.interpret('\x1b[?25h');
+  assert.isTrue(this.terminal.options_.cursorVisible);
 
-    // Turn off blink so we know the cursor should be on.
-    this.terminal.interpret('\x1b[?12l');
-    assert.equal(this.terminal.cursorNode_.getAttribute('visible'), 'true');
+  // Turn off blink so we know the cursor should be on.
+  this.terminal.interpret('\x1b[?12l');
+  assert.equal(this.terminal.cursorNode_.getAttribute('visible'), 'true');
 
-    this.terminal.interpret('\x1b[?45h');
-    assert.isTrue(this.terminal.options_.reverseWraparound);
+  this.terminal.interpret('\x1b[?45h');
+  assert.isTrue(this.terminal.options_.reverseWraparound);
 
-    this.terminal.interpret('\x1b[?45l');
-    assert.isFalse(this.terminal.options_.reverseWraparound);
+  this.terminal.interpret('\x1b[?45l');
+  assert.isFalse(this.terminal.options_.reverseWraparound);
 
-    this.terminal.interpret('\x1b[?67h');
-    assert.isTrue(this.terminal.keyboard.backspaceSendsBackspace);
+  this.terminal.interpret('\x1b[?67h');
+  assert.isTrue(this.terminal.keyboard.backspaceSendsBackspace);
 
-    this.terminal.interpret('\x1b[?67l');
-    assert.isFalse(this.terminal.keyboard.backspaceSendsBackspace);
+  this.terminal.interpret('\x1b[?67l');
+  assert.isFalse(this.terminal.keyboard.backspaceSendsBackspace);
 
-    this.terminal.interpret('\x1b[?1004h]');
-    assert.isTrue(this.terminal.reportFocus);
+  this.terminal.interpret('\x1b[?1004h]');
+  assert.isTrue(this.terminal.reportFocus);
 
-    this.terminal.interpret('\x1b[?1004l]');
-    assert.isFalse(this.terminal.reportFocus);
+  this.terminal.interpret('\x1b[?1004l]');
+  assert.isFalse(this.terminal.reportFocus);
 
-    this.terminal.interpret('\x1b[?1036h');
-    assert.isTrue(this.terminal.keyboard.metaSendsEscape);
+  this.terminal.interpret('\x1b[?1036h');
+  assert.isTrue(this.terminal.keyboard.metaSendsEscape);
 
-    this.terminal.interpret('\x1b[?1036l');
-    assert.isFalse(this.terminal.keyboard.metaSendsEscape);
+  this.terminal.interpret('\x1b[?1036l');
+  assert.isFalse(this.terminal.keyboard.metaSendsEscape);
 
-    // Save the altSendsWhat setting and change the current setting to something
-    // other than 'escape'.
-    const previousAltSendsWhat = this.terminal.keyboard.altSendsWhat;
-    this.terminal.keyboard.altSendsWhat = '8-bit';
+  // Save the altSendsWhat setting and change the current setting to something
+  // other than 'escape'.
+  const previousAltSendsWhat = this.terminal.keyboard.altSendsWhat;
+  this.terminal.keyboard.altSendsWhat = '8-bit';
 
-    this.terminal.interpret('\x1b[?1039h');
-    assert.equal(this.terminal.keyboard.altSendsWhat, 'escape');
+  this.terminal.interpret('\x1b[?1039h');
+  assert.equal(this.terminal.keyboard.altSendsWhat, 'escape');
 
-    this.terminal.interpret('\x1b[?1039l');
-    assert.equal(this.terminal.keyboard.altSendsWhat, '8-bit');
+  this.terminal.interpret('\x1b[?1039l');
+  assert.equal(this.terminal.keyboard.altSendsWhat, '8-bit');
 
-    // Restore the previous altSendsWhat setting.
-    this.terminal.keyboard.altSendsWhat = previousAltSendsWhat;
+  // Restore the previous altSendsWhat setting.
+  this.terminal.keyboard.altSendsWhat = previousAltSendsWhat;
 
-    assert(this.terminal.screen_ === this.terminal.primaryScreen_);
+  assert(this.terminal.screen_ === this.terminal.primaryScreen_);
 
-    this.terminal.interpret('\x1b[?1049h');
-    assert(this.terminal.screen_ === this.terminal.alternateScreen_);
+  this.terminal.interpret('\x1b[?1049h');
+  assert(this.terminal.screen_ === this.terminal.alternateScreen_);
 
-    this.terminal.interpret('\x1b[?1049l');
-    assert(this.terminal.screen_ === this.terminal.primaryScreen_);
-  });
+  this.terminal.interpret('\x1b[?1049l');
+  assert(this.terminal.screen_ === this.terminal.primaryScreen_);
+});
 
 /**
  * Check parseInt behavior.
@@ -1330,45 +1330,45 @@ it('256-color-colon', function() {
  * Test setting of true color mode on text
  */
 it('true-color-mode', function() {
-    function getEscape(row, fg) {
-      return '\x1b[' + (fg == true ? 38 : 48) + ';2;' + row[1] + ';' +
-             row[2] + ';' + row[3] + 'm';
+  function getEscape(row, fg) {
+    return '\x1b[' + (fg == true ? 38 : 48) + ';2;' + row[1] + ';' +
+           row[2] + ';' + row[3] + 'm';
+  }
+
+  function getRGB(row) {
+    return 'rgb(' + row[1] + ', ' + row[2] + ', ' + row[3] + ')';
+  }
+
+  this.terminal.setWidth(80);
+
+  const colors = [
+    ['Aero', 124, 185, 232],
+    ['Amber', 255, 191, 0],
+    ['Bitter Lime', 191, 255, 0],
+    ['Coffee', 111, 78, 55],
+    ['Electric Crimson', 255, 0, 63],
+    ['French Rose', 246, 74, 138],
+  ];
+
+  for (let i = 0; i < 6; i++) {
+    const fg = getRGB(colors[i]);
+    for (let j = 0; j < 6; j++) {
+      this.terminal.interpret('[mTrue Color Test ' +
+                              getEscape(colors[i], true) +
+                              getEscape(colors[j], false) + colors[i][0] +
+                              ' and ' + colors[j][0] + '\r\n');
+
+      const text = this.terminal.getRowText(6 * i + j, 1);
+      assert.equal(text, 'True Color Test ' + colors[i][0] + ' and ' +
+                   colors[j][0]);
+
+      const bg = getRGB(colors[j]);
+      const style = this.terminal.getRowNode(6 * i + j).childNodes[1].style;
+      assert.equal(style.color, fg);
+      assert.equal(style.backgroundColor, bg);
     }
-
-    function getRGB(row) {
-      return 'rgb(' + row[1] + ', ' + row[2] + ', ' + row[3] + ')';
-    }
-
-    this.terminal.setWidth(80);
-
-    const colors = [
-      ['Aero', 124, 185, 232],
-      ['Amber', 255, 191, 0],
-      ['Bitter Lime', 191, 255, 0],
-      ['Coffee', 111, 78, 55],
-      ['Electric Crimson', 255, 0, 63],
-      ['French Rose', 246, 74, 138],
-    ];
-
-    for (let i = 0; i < 6; i++) {
-      const fg = getRGB(colors[i]);
-      for (let j = 0; j < 6; j++) {
-        this.terminal.interpret('[mTrue Color Test ' +
-                                getEscape(colors[i], true) +
-                                getEscape(colors[j], false) + colors[i][0] +
-                                ' and ' + colors[j][0] + '\r\n');
-
-        const text = this.terminal.getRowText(6 * i + j, 1);
-        assert.equal(text, 'True Color Test ' + colors[i][0] + ' and ' +
-                     colors[j][0]);
-
-        const bg = getRGB(colors[j]);
-        const style = this.terminal.getRowNode(6 * i + j).childNodes[1].style;
-        assert.equal(style.color, fg);
-        assert.equal(style.backgroundColor, bg);
-      }
-    }
-  });
+  }
+});
 
 /**
  * Check chained SGR sequences.
@@ -1492,253 +1492,253 @@ it('underline-sgr', function() {
  * TODO(rginda): Test origin mode.
  */
 xit('origin-mode', function() {
-  });
+});
 
 /**
  * Test insert/overwrite mode.
  */
 it('insert-mode', function() {
-    // Should be off by default.
-    assert.isFalse(this.terminal.options_.insertMode);
+  // Should be off by default.
+  assert.isFalse(this.terminal.options_.insertMode);
 
-    this.terminal.interpret('\x1b[4h');
-    this.terminal.interpret(' one\x1b[4Dline\r\n');
+  this.terminal.interpret('\x1b[4h');
+  this.terminal.interpret(' one\x1b[4Dline\r\n');
 
-    this.terminal.interpret('\x1b[4l');
-    this.terminal.interpret('XXXXXXXX\x1b[8Dline two\r\n');
+  this.terminal.interpret('\x1b[4l');
+  this.terminal.interpret('XXXXXXXX\x1b[8Dline two\r\n');
 
-    this.terminal.interpret('\x1b[4h');
-    this.terminal.interpret(' three\x1b[6Dline');
+  this.terminal.interpret('\x1b[4h');
+  this.terminal.interpret(' three\x1b[6Dline');
 
-    const text = this.terminal.getRowsText(0, 3);
-    assert.equal(text,
-                 'line one\n' +
-                 'line two\n' +
-                 'line three');
-  });
+  const text = this.terminal.getRowsText(0, 3);
+  assert.equal(text,
+               'line one\n' +
+               'line two\n' +
+               'line three');
+});
 
 /**
  * Test wraparound mode.
  */
 it('wraparound-mode-on', function() {
-    // Should be on by default.
-    assert.isTrue(this.terminal.options_.wraparound);
+  // Should be on by default.
+  assert.isTrue(this.terminal.options_.wraparound);
 
-    this.terminal.interpret('-----  1  ----a');
-    this.terminal.interpret('-----  2  ----b');
-    this.terminal.interpret('-----  3  ----c');
-    this.terminal.interpret('-----  4  ----d');
-    this.terminal.interpret('-----  5  ----e');
-    this.terminal.interpret('-----  6  ----f');
+  this.terminal.interpret('-----  1  ----a');
+  this.terminal.interpret('-----  2  ----b');
+  this.terminal.interpret('-----  3  ----c');
+  this.terminal.interpret('-----  4  ----d');
+  this.terminal.interpret('-----  5  ----e');
+  this.terminal.interpret('-----  6  ----f');
 
-    const text = this.terminal.getRowsText(0, 6);
-    assert.equal(text,
-                 '-----  1  ----a' +
-                 '-----  2  ----b' +
-                 '-----  3  ----c' +
-                 '-----  4  ----d' +
-                 '-----  5  ----e' +
-                 '-----  6  ----f');
+  const text = this.terminal.getRowsText(0, 6);
+  assert.equal(text,
+               '-----  1  ----a' +
+               '-----  2  ----b' +
+               '-----  3  ----c' +
+               '-----  4  ----d' +
+               '-----  5  ----e' +
+               '-----  6  ----f');
 
-    assert.equal(this.terminal.getCursorRow(), 5);
-    assert.equal(this.terminal.getCursorColumn(), 14);
-  });
+  assert.equal(this.terminal.getCursorRow(), 5);
+  assert.equal(this.terminal.getCursorColumn(), 14);
+});
 
 it('wraparound-mode-off', function() {
-    this.terminal.interpret('\x1b[?7l');
-    assert.isFalse(this.terminal.options_.wraparound);
+  this.terminal.interpret('\x1b[?7l');
+  assert.isFalse(this.terminal.options_.wraparound);
 
-    this.terminal.interpret('-----  1  ----a');
-    this.terminal.interpret('-----  2  ----b');
-    this.terminal.interpret('-----  3  ----c');
-    this.terminal.interpret('-----  4  ----d');
-    this.terminal.interpret('-----  5  ----e');
-    this.terminal.interpret('-----  6  ----f');
+  this.terminal.interpret('-----  1  ----a');
+  this.terminal.interpret('-----  2  ----b');
+  this.terminal.interpret('-----  3  ----c');
+  this.terminal.interpret('-----  4  ----d');
+  this.terminal.interpret('-----  5  ----e');
+  this.terminal.interpret('-----  6  ----f');
 
-    const text = this.terminal.getRowsText(0, 6);
-    assert.equal(text,
-                 '-----  1  ----f\n' +
-                 '\n' +
-                 '\n' +
-                 '\n' +
-                 '\n');
+  const text = this.terminal.getRowsText(0, 6);
+  assert.equal(text,
+               '-----  1  ----f\n' +
+               '\n' +
+               '\n' +
+               '\n' +
+               '\n');
 
-    assert.equal(this.terminal.getCursorRow(), 0);
-    assert.equal(this.terminal.getCursorColumn(), 14);
-  });
+  assert.equal(this.terminal.getCursorRow(), 0);
+  assert.equal(this.terminal.getCursorColumn(), 14);
+});
 
 /**
  * Test the interactions between insert and wraparound modes.
  */
 it('insert-wrap', function() {
-    // Should be on by default.
-    assert.isTrue(this.terminal.options_.wraparound);
+  // Should be on by default.
+  assert.isTrue(this.terminal.options_.wraparound);
 
-    this.terminal.interpret('' + // Insert off, wrap on (default).
-                            '[15GAAAA[1GXX\r\n' +
-                            '[4h[?7l' +  // Insert on, wrap off.
-                            '[15GAAAA[1GXX\r\n' +
-                            '[4h[?7h' +  // Insert on, wrap on.
-                            '[15GAAAA[1GXX\r\n' +
-                            '[4l[?7l' +  // Insert off, wrap off.
-                            '[15GAAAA[1GXX');
+  this.terminal.interpret('' + // Insert off, wrap on (default).
+                          '[15GAAAA[1GXX\r\n' +
+                          '[4h[?7l' +  // Insert on, wrap off.
+                          '[15GAAAA[1GXX\r\n' +
+                          '[4h[?7h' +  // Insert on, wrap on.
+                          '[15GAAAA[1GXX\r\n' +
+                          '[4l[?7l' +  // Insert off, wrap off.
+                          '[15GAAAA[1GXX');
 
-    assert.equal(this.terminal.getRowText(0), '              A');
-    assert.equal(this.terminal.getRowText(1), 'XXA');
-    assert.equal(this.terminal.getRowText(2), 'XX             ');
-    assert.equal(this.terminal.getRowText(3), '              A');
-    assert.equal(this.terminal.getRowText(4), 'XXAAA');
-    assert.equal(this.terminal.getRowText(5), 'XX            A');
-  });
+  assert.equal(this.terminal.getRowText(0), '              A');
+  assert.equal(this.terminal.getRowText(1), 'XXA');
+  assert.equal(this.terminal.getRowText(2), 'XX             ');
+  assert.equal(this.terminal.getRowText(3), '              A');
+  assert.equal(this.terminal.getRowText(4), 'XXAAA');
+  assert.equal(this.terminal.getRowText(5), 'XX            A');
+});
 
 /**
  * Test a line that is long enough to need to be wrapped more than once.
  */
 it('long-wrap', function() {
-    let str = '';
-    for (let i = 0; i < this.visibleColumnCount * 3; i++) {
-      str += 'X';
-    }
+  let str = '';
+  for (let i = 0; i < this.visibleColumnCount * 3; i++) {
+    str += 'X';
+  }
 
-    this.terminal.interpret(str);
+  this.terminal.interpret(str);
 
-    assert.equal(this.terminal.getRowText(0), 'XXXXXXXXXXXXXXX');
-    assert.equal(this.terminal.getRowText(1), 'XXXXXXXXXXXXXXX');
-    assert.equal(this.terminal.getRowText(2), 'XXXXXXXXXXXXXXX');
-  });
+  assert.equal(this.terminal.getRowText(0), 'XXXXXXXXXXXXXXX');
+  assert.equal(this.terminal.getRowText(1), 'XXXXXXXXXXXXXXX');
+  assert.equal(this.terminal.getRowText(2), 'XXXXXXXXXXXXXXX');
+});
 
 /**
  * Test reverse wraparound.
  */
 it('reverse-wrap', function() {
-    // A line ending with a hard CRLF.
-    let str = 'AAAA\r\n';
+  // A line ending with a hard CRLF.
+  let str = 'AAAA\r\n';
 
-    // Enough X's to wrap once and leave the cursor in the overflow state at
-    // the end of the third row.
-    for (let i = 0; i < this.visibleColumnCount * 2; i++) {
-      str += 'X';
-    }
+  // Enough X's to wrap once and leave the cursor in the overflow state at
+  // the end of the third row.
+  for (let i = 0; i < this.visibleColumnCount * 2; i++) {
+    str += 'X';
+  }
 
-    // CR to put us at col 0, backspace to put us at the last column of the
-    // previous row, if reverse wraparound is enabled.
-    str += '\r\bBB';
+  // CR to put us at col 0, backspace to put us at the last column of the
+  // previous row, if reverse wraparound is enabled.
+  str += '\r\bBB';
 
-    // Without reverse wraparound, we should get stuck at column 0 of the third
-    // row.
-    this.terminal.interpret(str);
+  // Without reverse wraparound, we should get stuck at column 0 of the third
+  // row.
+  this.terminal.interpret(str);
 
-    assert.equal(this.terminal.getRowText(0), 'AAAA');
-    assert.equal(this.terminal.getRowText(1), 'XXXXXXXXXXXXXXX');
-    assert.equal(this.terminal.getRowText(2), 'BBXXXXXXXXXXXXX');
+  assert.equal(this.terminal.getRowText(0), 'AAAA');
+  assert.equal(this.terminal.getRowText(1), 'XXXXXXXXXXXXXXX');
+  assert.equal(this.terminal.getRowText(2), 'BBXXXXXXXXXXXXX');
 
-    // With reverse wraparound, we'll back up to the previous row.
-    this.terminal.clearHome();
-    this.terminal.interpret('\x1b[?45h' + str);
+  // With reverse wraparound, we'll back up to the previous row.
+  this.terminal.clearHome();
+  this.terminal.interpret('\x1b[?45h' + str);
 
-    assert.equal(this.terminal.getRowText(0), 'AAAA');
-    assert.equal(this.terminal.getRowText(1), 'XXXXXXXXXXXXXXB');
-    assert.equal(this.terminal.getRowText(2), 'BXXXXXXXXXXXXXX');
+  assert.equal(this.terminal.getRowText(0), 'AAAA');
+  assert.equal(this.terminal.getRowText(1), 'XXXXXXXXXXXXXXB');
+  assert.equal(this.terminal.getRowText(2), 'BXXXXXXXXXXXXXX');
 
-    // Reverse wrapping should always go the the final column of the previous
-    // row, even if that row was not full of text.
-    this.terminal.interpret('\r\b\r\bCC');
+  // Reverse wrapping should always go the the final column of the previous
+  // row, even if that row was not full of text.
+  this.terminal.interpret('\r\b\r\bCC');
 
-    assert.equal(this.terminal.getRowText(0), 'AAAA          C');
-    assert.equal(this.terminal.getRowText(1), 'CXXXXXXXXXXXXXB');
-    assert.equal(this.terminal.getRowText(2), 'BXXXXXXXXXXXXXX');
+  assert.equal(this.terminal.getRowText(0), 'AAAA          C');
+  assert.equal(this.terminal.getRowText(1), 'CXXXXXXXXXXXXXB');
+  assert.equal(this.terminal.getRowText(2), 'BXXXXXXXXXXXXXX');
 
-    // Reverse wrapping past the first row should put us at the last row.
-    this.terminal.interpret('\r\b\r\bX');
-    assert.equal(this.terminal.getRowText(0), 'AAAA          C');
-    assert.equal(this.terminal.getRowText(1), 'CXXXXXXXXXXXXXB');
-    assert.equal(this.terminal.getRowText(2), 'BXXXXXXXXXXXXXX');
-    assert.equal(this.terminal.getRowText(3), '');
-    assert.equal(this.terminal.getRowText(4), '');
-    assert.equal(this.terminal.getRowText(5), '              X');
-  });
+  // Reverse wrapping past the first row should put us at the last row.
+  this.terminal.interpret('\r\b\r\bX');
+  assert.equal(this.terminal.getRowText(0), 'AAAA          C');
+  assert.equal(this.terminal.getRowText(1), 'CXXXXXXXXXXXXXB');
+  assert.equal(this.terminal.getRowText(2), 'BXXXXXXXXXXXXXX');
+  assert.equal(this.terminal.getRowText(3), '');
+  assert.equal(this.terminal.getRowText(4), '');
+  assert.equal(this.terminal.getRowText(5), '              X');
+});
 
 /**
  * Test interactions between the cursor overflow bit and various
  * escape sequences.
  */
 it('cursor-overflow', function() {
-    // Should be on by default.
-    assert.isTrue(this.terminal.options_.wraparound);
+  // Should be on by default.
+  assert.isTrue(this.terminal.options_.wraparound);
 
-    // Fill a row with the last hyphen wrong, then run a command that
-    // modifies the screen, then add a hyphen. The wrap bit should be
-    // cleared, so the extra hyphen can fix the row.
+  // Fill a row with the last hyphen wrong, then run a command that
+  // modifies the screen, then add a hyphen. The wrap bit should be
+  // cleared, so the extra hyphen can fix the row.
 
-    // We expect the EL in the presence of cursor overflow to be ignored.
-    // See hterm.Terminal.prototype.eraseToRight.
-    this.terminal.interpret('-----  1  ----X');
-    this.terminal.interpret('\x1b[K-');  // EL
+  // We expect the EL in the presence of cursor overflow to be ignored.
+  // See hterm.Terminal.prototype.eraseToRight.
+  this.terminal.interpret('-----  1  ----X');
+  this.terminal.interpret('\x1b[K-');  // EL
 
-    this.terminal.interpret('----  2  ----X');
-    this.terminal.interpret('\x1b[J-');  // ED
+  this.terminal.interpret('----  2  ----X');
+  this.terminal.interpret('\x1b[J-');  // ED
 
-    this.terminal.interpret('-----  3  ----X');
-    this.terminal.interpret('\x1b[@-');  // ICH
+  this.terminal.interpret('-----  3  ----X');
+  this.terminal.interpret('\x1b[@-');  // ICH
 
-    this.terminal.interpret('-----  4  ----X');
-    this.terminal.interpret('\x1b[P-');  // DCH
+  this.terminal.interpret('-----  4  ----X');
+  this.terminal.interpret('\x1b[P-');  // DCH
 
-    // ECH is also ignored in the presence of cursor overflow.
-    this.terminal.interpret('-----  5  ----X');
-    this.terminal.interpret('\x1b[X-');  // ECH
+  // ECH is also ignored in the presence of cursor overflow.
+  this.terminal.interpret('-----  5  ----X');
+  this.terminal.interpret('\x1b[X-');  // ECH
 
-    // DL will delete the entire line but clear the wrap bit, so we
-    // expect a hyphen at the end and nothing else.
-    this.terminal.interpret('XXXXXXXXXXXXXX');
-    this.terminal.interpret('\x1b[M-');  // DL
+  // DL will delete the entire line but clear the wrap bit, so we
+  // expect a hyphen at the end and nothing else.
+  this.terminal.interpret('XXXXXXXXXXXXXX');
+  this.terminal.interpret('\x1b[M-');  // DL
 
-    const text = this.terminal.getRowsText(0, 6);
-    assert.equal(text,
-                 '-----  1  ----X' +
-                 '-----  2  -----' +
-                 '-----  3  -----' +
-                 '-----  4  -----' +
-                 '-----  5  ----X' +
-                 '              -');
+  const text = this.terminal.getRowsText(0, 6);
+  assert.equal(text,
+               '-----  1  ----X' +
+               '-----  2  -----' +
+               '-----  3  -----' +
+               '-----  4  -----' +
+               '-----  5  ----X' +
+               '              -');
 
-    assert.equal(this.terminal.getCursorRow(), 5);
-    assert.equal(this.terminal.getCursorColumn(), 14);
-  });
+  assert.equal(this.terminal.getCursorRow(), 5);
+  assert.equal(this.terminal.getCursorColumn(), 14);
+});
 
 it('alternate-screen', function() {
-    this.terminal.interpret('1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10');
-    this.terminal.interpret('\x1b[3;3f');  // Leave the cursor at (3,3)
-    let text = this.terminal.getRowsText(0, 10);
-    assert.equal(text, '1\n2\n3\n4\n5\n6\n7\n8\n9\n10');
+  this.terminal.interpret('1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10');
+  this.terminal.interpret('\x1b[3;3f');  // Leave the cursor at (3,3)
+  let text = this.terminal.getRowsText(0, 10);
+  assert.equal(text, '1\n2\n3\n4\n5\n6\n7\n8\n9\n10');
 
-    // Switch to alternate screen.
-    this.terminal.interpret('\x1b[?1049h');
-    text = this.terminal.getRowsText(0, 10);
-    assert.equal(text, '1\n2\n3\n4\n\n\n\n\n\n');
+  // Switch to alternate screen.
+  this.terminal.interpret('\x1b[?1049h');
+  text = this.terminal.getRowsText(0, 10);
+  assert.equal(text, '1\n2\n3\n4\n\n\n\n\n\n');
 
-    this.terminal.interpret('\r\nhi');
-    text = this.terminal.getRowsText(0, 10);
-    assert.equal(text, '1\n2\n3\n4\n\n\n\nhi\n\n');
+  this.terminal.interpret('\r\nhi');
+  text = this.terminal.getRowsText(0, 10);
+  assert.equal(text, '1\n2\n3\n4\n\n\n\nhi\n\n');
 
-    // Switch back to primary screen.
-    this.terminal.interpret('\x1b[?1049l');
-    text = this.terminal.getRowsText(0, 10);
-    assert.equal(text, '1\n2\n3\n4\n5\n6\n7\n8\n9\n10');
+  // Switch back to primary screen.
+  this.terminal.interpret('\x1b[?1049l');
+  text = this.terminal.getRowsText(0, 10);
+  assert.equal(text, '1\n2\n3\n4\n5\n6\n7\n8\n9\n10');
 
-    this.terminal.interpret('XX');
-    text = this.terminal.getRowsText(0, 10);
-    assert.equal(text, '1\n2\n3\n4\n5\n6\n7 XX\n8\n9\n10');
+  this.terminal.interpret('XX');
+  text = this.terminal.getRowsText(0, 10);
+  assert.equal(text, '1\n2\n3\n4\n5\n6\n7 XX\n8\n9\n10');
 
-    // And back to alternate screen.
-    this.terminal.interpret('\x1b[?1049h');
-    text = this.terminal.getRowsText(0, 10);
-    assert.equal(text, '1\n2\n3\n4\n\n\n\n\n\n');
+  // And back to alternate screen.
+  this.terminal.interpret('\x1b[?1049h');
+  text = this.terminal.getRowsText(0, 10);
+  assert.equal(text, '1\n2\n3\n4\n\n\n\n\n\n');
 
-    this.terminal.interpret('XX');
-    text = this.terminal.getRowsText(0, 10);
-    assert.equal(text, '1\n2\n3\n4\n\n\n    XX\n\n\n');
-  });
+  this.terminal.interpret('XX');
+  text = this.terminal.getRowsText(0, 10);
+  assert.equal(text, '1\n2\n3\n4\n\n\n    XX\n\n\n');
+});
 
 /**
  * Test basic hyperlinks.
@@ -1822,123 +1822,123 @@ it('OSC-8-switch-uri', function() {
  * Test iTerm2 growl notifications.
  */
 it('OSC-9', function() {
-    assert.equal(0, Notification.count);
+  assert.equal(0, Notification.count);
 
-    // We don't test the title as it's generated, and the iTerm2 API doesn't
-    // support changing it.
+  // We don't test the title as it's generated, and the iTerm2 API doesn't
+  // support changing it.
 
-    // An empty notification.
-    this.terminal.interpret('\x1b]9;\x07');
-    assert.equal(1, Notification.count);
-    assert.equal('', Notification.lastCall.body);
+  // An empty notification.
+  this.terminal.interpret('\x1b]9;\x07');
+  assert.equal(1, Notification.count);
+  assert.equal('', Notification.lastCall.body);
 
-    // A random notification.
-    this.terminal.interpret('\x1b]9;this is a title\x07');
-    assert.equal(2, Notification.count);
-    assert.equal('this is a title', Notification.lastCall.body);
-  });
+  // A random notification.
+  this.terminal.interpret('\x1b]9;this is a title\x07');
+  assert.equal(2, Notification.count);
+  assert.equal('this is a title', Notification.lastCall.body);
+});
 
 /**
  * Verify setting text foreground color.
  */
 it('OSC-10', function() {
-    // Make sure other colors aren't changed by accident.
-    const backColor = this.terminal.getBackgroundColor();
-    const cursorColor = this.terminal.getCursorColor();
+  // Make sure other colors aren't changed by accident.
+  const backColor = this.terminal.getBackgroundColor();
+  const cursorColor = this.terminal.getCursorColor();
 
-    this.terminal.interpret('\x1b]10;red\x07');
-    assert.equal('rgb(255, 0, 0)', this.terminal.getForegroundColor());
+  this.terminal.interpret('\x1b]10;red\x07');
+  assert.equal('rgb(255, 0, 0)', this.terminal.getForegroundColor());
 
-    this.terminal.interpret('\x1b]10;white\x07');
-    assert.equal('rgb(255, 255, 255)', this.terminal.getForegroundColor());
+  this.terminal.interpret('\x1b]10;white\x07');
+  assert.equal('rgb(255, 255, 255)', this.terminal.getForegroundColor());
 
-    // Make sure other colors aren't changed by accident.
-    assert.equal(backColor, this.terminal.getBackgroundColor());
-    assert.equal(cursorColor, this.terminal.getCursorColor());
-  });
+  // Make sure other colors aren't changed by accident.
+  assert.equal(backColor, this.terminal.getBackgroundColor());
+  assert.equal(cursorColor, this.terminal.getCursorColor());
+});
 
 /**
  * Verify setting text background color.
  */
 it('OSC-11', function() {
-    // Make sure other colors aren't changed by accident.
-    const foreColor = this.terminal.getForegroundColor();
-    const cursorColor = this.terminal.getCursorColor();
+  // Make sure other colors aren't changed by accident.
+  const foreColor = this.terminal.getForegroundColor();
+  const cursorColor = this.terminal.getCursorColor();
 
-    this.terminal.interpret('\x1b]11;red\x07');
-    assert.equal('rgb(255, 0, 0)', this.terminal.getBackgroundColor());
+  this.terminal.interpret('\x1b]11;red\x07');
+  assert.equal('rgb(255, 0, 0)', this.terminal.getBackgroundColor());
 
-    this.terminal.interpret('\x1b]11;white\x07');
-    assert.equal('rgb(255, 255, 255)', this.terminal.getBackgroundColor());
+  this.terminal.interpret('\x1b]11;white\x07');
+  assert.equal('rgb(255, 255, 255)', this.terminal.getBackgroundColor());
 
-    // Make sure other colors aren't changed by accident.
-    assert.equal(foreColor, this.terminal.getForegroundColor());
-    assert.equal(cursorColor, this.terminal.getCursorColor());
-  });
+  // Make sure other colors aren't changed by accident.
+  assert.equal(foreColor, this.terminal.getForegroundColor());
+  assert.equal(cursorColor, this.terminal.getCursorColor());
+});
 
 /**
  * Verify setting text cursor color (not the mouse cursor).
  */
 it('OSC-12', function() {
-    // Make sure other colors aren't changed by accident.
-    const foreColor = this.terminal.getForegroundColor();
-    const backColor = this.terminal.getBackgroundColor();
+  // Make sure other colors aren't changed by accident.
+  const foreColor = this.terminal.getForegroundColor();
+  const backColor = this.terminal.getBackgroundColor();
 
-    // Start with known color -- black.
-    this.terminal.setCursorColor('rgb(0, 0, 0)');
+  // Start with known color -- black.
+  this.terminal.setCursorColor('rgb(0, 0, 0)');
 
-    this.terminal.interpret('\x1b]12;red\x07');
-    assert.equal('rgb(255, 0, 0)', this.terminal.getCursorColor());
+  this.terminal.interpret('\x1b]12;red\x07');
+  assert.equal('rgb(255, 0, 0)', this.terminal.getCursorColor());
 
-    this.terminal.interpret('\x1b]12;white\x07');
-    assert.equal('rgb(255, 255, 255)', this.terminal.getCursorColor());
+  this.terminal.interpret('\x1b]12;white\x07');
+  assert.equal('rgb(255, 255, 255)', this.terminal.getCursorColor());
 
-    // Check alpha channel is preserved.
-    this.terminal.setCursorColor('rgba(1, 1, 1, 0.5)');
-    this.terminal.interpret('\x1b]12;black\x07');
-    assert.equal('rgba(0, 0, 0, 0.5)', this.terminal.getCursorColor());
+  // Check alpha channel is preserved.
+  this.terminal.setCursorColor('rgba(1, 1, 1, 0.5)');
+  this.terminal.interpret('\x1b]12;black\x07');
+  assert.equal('rgba(0, 0, 0, 0.5)', this.terminal.getCursorColor());
 
-    // Make sure other colors aren't changed by accident.
-    assert.equal(foreColor, this.terminal.getForegroundColor());
-    assert.equal(backColor, this.terminal.getBackgroundColor());
-  });
+  // Make sure other colors aren't changed by accident.
+  assert.equal(foreColor, this.terminal.getForegroundColor());
+  assert.equal(backColor, this.terminal.getBackgroundColor());
+});
 
 /**
  * Verify chaining color change requests.
  */
 it('OSC-10-11-12', function() {
-    // Start with known color -- black.
-    this.terminal.setCursorColor('rgb(0, 0, 0)');
+  // Start with known color -- black.
+  this.terminal.setCursorColor('rgb(0, 0, 0)');
 
-    // Set 10-11-12 at once.
-    this.terminal.interpret('\x1b]10;red;green;blue\x07');
-    assert.equal('rgb(255, 0, 0)', this.terminal.getForegroundColor());
-    assert.equal('rgb(0, 255, 0)', this.terminal.getBackgroundColor());
-    assert.equal('rgb(0, 0, 255)', this.terminal.getCursorColor());
+  // Set 10-11-12 at once.
+  this.terminal.interpret('\x1b]10;red;green;blue\x07');
+  assert.equal('rgb(255, 0, 0)', this.terminal.getForegroundColor());
+  assert.equal('rgb(0, 255, 0)', this.terminal.getBackgroundColor());
+  assert.equal('rgb(0, 0, 255)', this.terminal.getCursorColor());
 
-    // Set 11-12 at once (and 10 stays the same).
-    this.terminal.interpret('\x1b]11;white;black\x07');
-    assert.equal('rgb(255, 0, 0)', this.terminal.getForegroundColor());
-    assert.equal('rgb(255, 255, 255)', this.terminal.getBackgroundColor());
-    assert.equal('rgb(0, 0, 0)', this.terminal.getCursorColor());
-  });
+  // Set 11-12 at once (and 10 stays the same).
+  this.terminal.interpret('\x1b]11;white;black\x07');
+  assert.equal('rgb(255, 0, 0)', this.terminal.getForegroundColor());
+  assert.equal('rgb(255, 255, 255)', this.terminal.getBackgroundColor());
+  assert.equal('rgb(0, 0, 0)', this.terminal.getCursorColor());
+});
 
 /**
  * Test that we can use OSC 52 to copy to the system clipboard.
  */
 it('OSC-52', function(done) {
-    // Mock this out since we can't document.execCommand from the
-    // test harness.
-    const old_cCSTC = hterm.copySelectionToClipboard;
-    hterm.copySelectionToClipboard = function(document, str) {
-      hterm.copySelectionToClipboard = old_cCSTC;
-      assert.equal(str, 'copypasta!');
-      done();
-      return Promise.resolve();
-    };
+  // Mock this out since we can't document.execCommand from the
+  // test harness.
+  const old_cCSTC = hterm.copySelectionToClipboard;
+  hterm.copySelectionToClipboard = function(document, str) {
+    hterm.copySelectionToClipboard = old_cCSTC;
+    assert.equal(str, 'copypasta!');
+    done();
+    return Promise.resolve();
+  };
 
-    this.terminal.interpret('\x1b]52;c;Y29weXBhc3RhIQ==\x07');
-  });
+  this.terminal.interpret('\x1b]52;c;Y29weXBhc3RhIQ==\x07');
+});
 
 /**
  * Verify invalid OSC 52 content is ignored.
@@ -1963,81 +1963,81 @@ it('OSC-52-invalid', function() {
  * calls.
  */
 it('OSC-52-big', function(done) {
-    // Mock this out since we can't document.execCommand from the
-    // test harness.
-    const old_cCSTC = hterm.copySelectionToClipboard;
-    hterm.copySelectionToClipboard = function(document, str) {
-      hterm.copySelectionToClipboard = old_cCSTC;
-      assert.equal(str, expect);
-      done();
-      return Promise.resolve();
-    };
+  // Mock this out since we can't document.execCommand from the
+  // test harness.
+  const old_cCSTC = hterm.copySelectionToClipboard;
+  hterm.copySelectionToClipboard = function(document, str) {
+    hterm.copySelectionToClipboard = old_cCSTC;
+    assert.equal(str, expect);
+    done();
+    return Promise.resolve();
+  };
 
-    let expect = '';
-    for (let i = 0; i < 996; i++) {
-      expect += 'x';
-    }
+  let expect = '';
+  for (let i = 0; i < 996; i++) {
+    expect += 'x';
+  }
 
-    let encode = '';
-    for (let i = 0; i < expect.length / 6; i++) {
-      encode += 'eHh4';
-    }
+  let encode = '';
+  for (let i = 0; i < expect.length / 6; i++) {
+    encode += 'eHh4';
+  }
 
-    this.terminal.interpret('\x1b]52;c;');
-    this.terminal.interpret(encode);
-    this.terminal.interpret(encode);
-    this.terminal.interpret('\x07');
-  });
+  this.terminal.interpret('\x1b]52;c;');
+  this.terminal.interpret(encode);
+  this.terminal.interpret(encode);
+  this.terminal.interpret('\x07');
+});
 
 it('OSC-4', function() {
-    let resultString;
+  let resultString;
 
-    this.terminal.io.sendString = (str) => resultString = str;
-    // Change the terminal palette, then read it back.
-    this.terminal.interpret('\x1b]4;1;rgb:0100/0100/0100;' +
-                            '2;rgb:beef/beef/beef\x07');
-    this.terminal.interpret('\x1b]4;1;?;2;?\x07');
-    // The values go through some normalization, so what we read isn't
-    // *exactly* what went in.
-    assert.equal(resultString, '\x1b]4;1;rgb:0101/0101/0101;' +
-                               '2;rgb:bebe/bebe/bebe\x07');
+  this.terminal.io.sendString = (str) => resultString = str;
+  // Change the terminal palette, then read it back.
+  this.terminal.interpret('\x1b]4;1;rgb:0100/0100/0100;' +
+                          '2;rgb:beef/beef/beef\x07');
+  this.terminal.interpret('\x1b]4;1;?;2;?\x07');
+  // The values go through some normalization, so what we read isn't
+  // *exactly* what went in.
+  assert.equal(resultString, '\x1b]4;1;rgb:0101/0101/0101;' +
+                             '2;rgb:bebe/bebe/bebe\x07');
 
-    // Round trip the normalized values, to check that the normalization is
-    // idempotent.
-    this.terminal.interpret('\x1b]4;1;rgb:0101/0101/0101;2;' +
-                            'rgb:bebe/bebe/bebe\x07');
-    assert.equal(resultString, '\x1b]4;1;rgb:0101/0101/0101;' +
-                               '2;rgb:bebe/bebe/bebe\x07');
-  });
+  // Round trip the normalized values, to check that the normalization is
+  // idempotent.
+  this.terminal.interpret('\x1b]4;1;rgb:0101/0101/0101;2;' +
+                          'rgb:bebe/bebe/bebe\x07');
+  assert.equal(resultString, '\x1b]4;1;rgb:0101/0101/0101;' +
+                             '2;rgb:bebe/bebe/bebe\x07');
+});
 
 /**
  * Test the cursor shape changes using OSC 50.
  */
 it('OSC-50, cursor shapes', function() {
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.BLOCK);
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.BLOCK);
 
-    this.terminal.interpret('\x1b]50;CursorShape=1\x07');
-    this.terminal.syncCursorPosition_();
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.BEAM);
+  this.terminal.interpret('\x1b]50;CursorShape=1\x07');
+  this.terminal.syncCursorPosition_();
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.BEAM);
 
-    this.terminal.interpret('\x1b]50;CursorShape=0\x07');
-    this.terminal.syncCursorPosition_();
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.BLOCK);
+  this.terminal.interpret('\x1b]50;CursorShape=0\x07');
+  this.terminal.syncCursorPosition_();
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.BLOCK);
 
-    this.terminal.interpret('\x1b]50;CursorShape=2\x07');
-    this.terminal.syncCursorPosition_();
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.UNDERLINE);
+  this.terminal.interpret('\x1b]50;CursorShape=2\x07');
+  this.terminal.syncCursorPosition_();
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.UNDERLINE);
 
-    // Invalid shape, should be set cursor to block
-    this.terminal.interpret('\x1b]50;CursorShape=a\x07');
-    this.terminal.syncCursorPosition_();
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.BLOCK);
-  });
+  // Invalid shape, should be set cursor to block
+  this.terminal.interpret('\x1b]50;CursorShape=a\x07');
+  this.terminal.syncCursorPosition_();
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.BLOCK);
+});
 
 /**
  * Verify resetting the color palette.
@@ -2126,38 +2126,38 @@ it('OSC-112', function() {
  * Test URxvt notify module.
  */
 it('OSC-777-notify', function() {
-    assert.equal(0, Notification.count);
+  assert.equal(0, Notification.count);
 
-    // An empty notification.  We don't test the title as it's generated.
-    this.terminal.interpret('\x1b]777;notify\x07');
-    assert.equal(1, Notification.count);
-    assert.notEqual(Notification.lastCall.title, '');
-    assert.isUndefined(Notification.lastCall.body);
+  // An empty notification.  We don't test the title as it's generated.
+  this.terminal.interpret('\x1b]777;notify\x07');
+  assert.equal(1, Notification.count);
+  assert.notEqual(Notification.lastCall.title, '');
+  assert.isUndefined(Notification.lastCall.body);
 
-    // Same as above, but covers slightly different parsing.
-    this.terminal.interpret('\x1b]777;notify;\x07');
-    assert.equal(2, Notification.count);
-    assert.notEqual(Notification.lastCall.title, '');
-    assert.isUndefined(Notification.lastCall.body);
+  // Same as above, but covers slightly different parsing.
+  this.terminal.interpret('\x1b]777;notify;\x07');
+  assert.equal(2, Notification.count);
+  assert.notEqual(Notification.lastCall.title, '');
+  assert.isUndefined(Notification.lastCall.body);
 
-    // A notification with a title.
-    this.terminal.interpret('\x1b]777;notify;my title\x07');
-    assert.equal(3, Notification.count);
-    assert.include(Notification.lastCall.title, 'my title');
-    assert.isUndefined(Notification.lastCall.body);
+  // A notification with a title.
+  this.terminal.interpret('\x1b]777;notify;my title\x07');
+  assert.equal(3, Notification.count);
+  assert.include(Notification.lastCall.title, 'my title');
+  assert.isUndefined(Notification.lastCall.body);
 
-    // A notification with a title & body.
-    this.terminal.interpret('\x1b]777;notify;my title;my body\x07');
-    assert.equal(4, Notification.count);
-    assert.include(Notification.lastCall.title, 'my title');
-    assert.include(Notification.lastCall.body, 'my body');
+  // A notification with a title & body.
+  this.terminal.interpret('\x1b]777;notify;my title;my body\x07');
+  assert.equal(4, Notification.count);
+  assert.include(Notification.lastCall.title, 'my title');
+  assert.include(Notification.lastCall.body, 'my body');
 
-    // A notification with a title & body, covering more parsing.
-    this.terminal.interpret('\x1b]777;notify;my title;my body;and a semi\x07');
-    assert.equal(5, Notification.count);
-    assert.include(Notification.lastCall.title, 'my title');
-    assert.include(Notification.lastCall.body, 'my body;and a semi');
-  });
+  // A notification with a title & body, covering more parsing.
+  this.terminal.interpret('\x1b]777;notify;my title;my body;and a semi\x07');
+  assert.equal(5, Notification.count);
+  assert.include(Notification.lastCall.title, 'my title');
+  assert.include(Notification.lastCall.body, 'my body;and a semi');
+});
 
 /**
  * Test iTerm2 1337 non-file transfers.
@@ -2283,59 +2283,59 @@ it('OSC-1337-file-queue', function(done) {
  * Test the cursor shape changes using DECSCUSR.
  */
 it('DECSCUSR, cursor shapes', function() {
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.BLOCK);
-    assert.isFalse(this.terminal.options_.cursorBlink);
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.BLOCK);
+  assert.isFalse(this.terminal.options_.cursorBlink);
 
-    this.terminal.interpret('\x1b[ 3q');
-    this.terminal.syncCursorPosition_();
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.UNDERLINE);
-    assert.isTrue(this.terminal.options_.cursorBlink);
+  this.terminal.interpret('\x1b[ 3q');
+  this.terminal.syncCursorPosition_();
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.UNDERLINE);
+  assert.isTrue(this.terminal.options_.cursorBlink);
 
-    this.terminal.interpret('\x1b[ 0q');
-    this.terminal.syncCursorPosition_();
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.BLOCK);
-    assert.isTrue(this.terminal.options_.cursorBlink);
+  this.terminal.interpret('\x1b[ 0q');
+  this.terminal.syncCursorPosition_();
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.BLOCK);
+  assert.isTrue(this.terminal.options_.cursorBlink);
 
-    this.terminal.interpret('\x1b[ 1q');
-    this.terminal.syncCursorPosition_();
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.BLOCK);
-    assert.isTrue(this.terminal.options_.cursorBlink);
+  this.terminal.interpret('\x1b[ 1q');
+  this.terminal.syncCursorPosition_();
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.BLOCK);
+  assert.isTrue(this.terminal.options_.cursorBlink);
 
-    this.terminal.interpret('\x1b[ 4q');
-    this.terminal.syncCursorPosition_();
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.UNDERLINE);
-    assert.isFalse(this.terminal.options_.cursorBlink);
+  this.terminal.interpret('\x1b[ 4q');
+  this.terminal.syncCursorPosition_();
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.UNDERLINE);
+  assert.isFalse(this.terminal.options_.cursorBlink);
 
-    this.terminal.interpret('\x1b[ 2q');
-    this.terminal.syncCursorPosition_();
-    assert.strictEqual(this.terminal.getCursorShape(),
-                       hterm.Terminal.cursorShape.BLOCK);
-    assert.isFalse(this.terminal.options_.cursorBlink);
-  });
+  this.terminal.interpret('\x1b[ 2q');
+  this.terminal.syncCursorPosition_();
+  assert.strictEqual(this.terminal.getCursorShape(),
+                     hterm.Terminal.cursorShape.BLOCK);
+  assert.isFalse(this.terminal.options_.cursorBlink);
+});
 
 it('bracketed-paste', function() {
-    let resultString;
-    this.terminal.io.sendString = (str) => resultString = str;
+  let resultString;
+  this.terminal.io.sendString = (str) => resultString = str;
 
-    assert.isFalse(this.terminal.options_.bracketedPaste);
+  assert.isFalse(this.terminal.options_.bracketedPaste);
 
-    this.terminal.interpret('\x1b[?2004h');
-    assert.isTrue(this.terminal.options_.bracketedPaste);
+  this.terminal.interpret('\x1b[?2004h');
+  assert.isTrue(this.terminal.options_.bracketedPaste);
 
-    this.terminal.onPaste_({text: 'hello world'});
-    assert.equal(resultString, '\x1b[200~hello world\x1b[201~');
+  this.terminal.onPaste_({text: 'hello world'});
+  assert.equal(resultString, '\x1b[200~hello world\x1b[201~');
 
-    this.terminal.interpret('\x1b[?2004l');
-    assert.isFalse(this.terminal.options_.bracketedPaste);
+  this.terminal.interpret('\x1b[?2004l');
+  assert.isFalse(this.terminal.options_.bracketedPaste);
 
-    this.terminal.onPaste_({text: 'hello world'});
-    assert.equal(resultString, 'hello world');
-  });
+  this.terminal.onPaste_({text: 'hello world'});
+  assert.equal(resultString, 'hello world');
+});
 
 it('fullscreen', function(done) {
   this.div.style.height = '100%';
@@ -2360,37 +2360,37 @@ it('fullscreen', function(done) {
  * Verify switching character maps works.
  */
 it('character-maps', function() {
-    // This test checks graphics handling in ISO-2022 mode.
-    this.terminal.vt.setEncoding('iso-2022');
+  // This test checks graphics handling in ISO-2022 mode.
+  this.terminal.vt.setEncoding('iso-2022');
 
-    // Create a line with all the printable characters.
-    let line = '';
-    for (let i = 0x20; i < 0x7f; ++i) {
-      line += String.fromCharCode(i);
+  // Create a line with all the printable characters.
+  let line = '';
+  for (let i = 0x20; i < 0x7f; ++i) {
+    line += String.fromCharCode(i);
+  }
+
+  this.terminal.setWidth(line.length);
+
+  // Start with smoke check -- no translations are active.
+  this.terminal.clearHome();
+  this.terminal.interpret(line);
+  assert.equal(this.terminal.getRowText(0), line);
+
+  // Loop through all the maps.
+  let map, gl;
+  for (map in hterm.VT.CharacterMaps.DefaultMaps) {
+    // If this map doesn't do any translations, skip it.
+    gl = hterm.VT.CharacterMaps.DefaultMaps[map].GL;
+    if (!gl) {
+      continue;
     }
 
-    this.terminal.setWidth(line.length);
-
-    // Start with smoke check -- no translations are active.
+    // Point G0 to the specified map (and assume GL points to G0).
     this.terminal.clearHome();
-    this.terminal.interpret(line);
-    assert.equal(this.terminal.getRowText(0), line);
-
-    // Loop through all the maps.
-    let map, gl;
-    for (map in hterm.VT.CharacterMaps.DefaultMaps) {
-      // If this map doesn't do any translations, skip it.
-      gl = hterm.VT.CharacterMaps.DefaultMaps[map].GL;
-      if (!gl) {
-        continue;
-      }
-
-      // Point G0 to the specified map (and assume GL points to G0).
-      this.terminal.clearHome();
-      this.terminal.interpret('\x1b(' + map + line);
-      assert.equal(this.terminal.getRowText(0), gl(line));
-    }
-  });
+    this.terminal.interpret('\x1b(' + map + line);
+    assert.equal(this.terminal.getRowText(0), gl(line));
+  }
+});
 
 /**
  * Test that a broken command to switch character maps is correctly ignored:
@@ -2399,118 +2399,118 @@ it('character-maps', function() {
  * hello  (is echoed)
  */
 it('escape-during-scs', function() {
-    this.terminal.interpret('\x1b/\x1b[1mhello');
-    assert.equal(this.terminal.getRowText(0), 'hello');
-  });
+  this.terminal.interpret('\x1b/\x1b[1mhello');
+  assert.equal(this.terminal.getRowText(0), 'hello');
+});
 
 /**
  * Verify DOCS (encoding) switching behavior.
  */
 it('docs', function() {
-    // This test checks graphics handling in ISO-2022 mode.
-    this.terminal.vt.setEncoding('iso-2022');
+  // This test checks graphics handling in ISO-2022 mode.
+  this.terminal.vt.setEncoding('iso-2022');
 
-    // Create a line with all the printable characters.
-    let line = '';
-    for (let i = 0x20; i < 0x7f; ++i) {
-      line += String.fromCharCode(i);
-    }
-    const graphicsLine = hterm.VT.CharacterMaps.DefaultMaps['0'].GL(line);
+  // Create a line with all the printable characters.
+  let line = '';
+  for (let i = 0x20; i < 0x7f; ++i) {
+    line += String.fromCharCode(i);
+  }
+  const graphicsLine = hterm.VT.CharacterMaps.DefaultMaps['0'].GL(line);
 
-    this.terminal.setWidth(line.length);
+  this.terminal.setWidth(line.length);
 
-    // Check the default encoding (ECMA-35).
-    assert.isFalse(this.terminal.vt.codingSystemUtf8_);
-    assert.isFalse(this.terminal.vt.codingSystemLocked_);
-    this.terminal.clearHome();
-    this.terminal.interpret(line);
-    assert.equal(this.terminal.getRowText(0), line);
+  // Check the default encoding (ECMA-35).
+  assert.isFalse(this.terminal.vt.codingSystemUtf8_);
+  assert.isFalse(this.terminal.vt.codingSystemLocked_);
+  this.terminal.clearHome();
+  this.terminal.interpret(line);
+  assert.equal(this.terminal.getRowText(0), line);
 
-    // Switch to the graphics map and make sure it translates.
-    this.terminal.clearHome();
-    this.terminal.interpret('\x1b(0' + line);
-    assert.equal(this.terminal.getRowText(0), graphicsLine);
+  // Switch to the graphics map and make sure it translates.
+  this.terminal.clearHome();
+  this.terminal.interpret('\x1b(0' + line);
+  assert.equal(this.terminal.getRowText(0), graphicsLine);
 
-    // Switch to UTF-8 encoding.  The graphics map should not translate.
-    this.terminal.clearHome();
-    this.terminal.interpret('\x1b%G' + line);
-    assert.isTrue(this.terminal.vt.codingSystemUtf8_);
-    assert.isFalse(this.terminal.vt.codingSystemLocked_);
-    assert.equal(this.terminal.getRowText(0), line);
+  // Switch to UTF-8 encoding.  The graphics map should not translate.
+  this.terminal.clearHome();
+  this.terminal.interpret('\x1b%G' + line);
+  assert.isTrue(this.terminal.vt.codingSystemUtf8_);
+  assert.isFalse(this.terminal.vt.codingSystemLocked_);
+  assert.equal(this.terminal.getRowText(0), line);
 
-    // Switch to ECMA-35 encoding.  The graphics map should translate.
-    this.terminal.clearHome();
-    this.terminal.interpret('\x1b%@' + line);
-    assert.isFalse(this.terminal.vt.codingSystemUtf8_);
-    assert.isFalse(this.terminal.vt.codingSystemLocked_);
-    assert.equal(this.terminal.getRowText(0), graphicsLine);
+  // Switch to ECMA-35 encoding.  The graphics map should translate.
+  this.terminal.clearHome();
+  this.terminal.interpret('\x1b%@' + line);
+  assert.isFalse(this.terminal.vt.codingSystemUtf8_);
+  assert.isFalse(this.terminal.vt.codingSystemLocked_);
+  assert.equal(this.terminal.getRowText(0), graphicsLine);
 
-    // Switch to UTF-8 encoding (and lock).
-    this.terminal.clearHome();
-    this.terminal.interpret('\x1b%/G' + line);
-    assert.isTrue(this.terminal.vt.codingSystemUtf8_);
-    assert.isTrue(this.terminal.vt.codingSystemLocked_);
-    assert.equal(this.terminal.getRowText(0), line);
+  // Switch to UTF-8 encoding (and lock).
+  this.terminal.clearHome();
+  this.terminal.interpret('\x1b%/G' + line);
+  assert.isTrue(this.terminal.vt.codingSystemUtf8_);
+  assert.isTrue(this.terminal.vt.codingSystemLocked_);
+  assert.equal(this.terminal.getRowText(0), line);
 
-    // Switching back to ECMA-35 should not work now.
-    this.terminal.clearHome();
-    this.terminal.interpret('\x1b%@' + line);
-    assert.isTrue(this.terminal.vt.codingSystemUtf8_);
-    assert.isTrue(this.terminal.vt.codingSystemLocked_);
-    assert.equal(this.terminal.getRowText(0), line);
+  // Switching back to ECMA-35 should not work now.
+  this.terminal.clearHome();
+  this.terminal.interpret('\x1b%@' + line);
+  assert.isTrue(this.terminal.vt.codingSystemUtf8_);
+  assert.isTrue(this.terminal.vt.codingSystemLocked_);
+  assert.equal(this.terminal.getRowText(0), line);
 
-    // Try other UTF-8 modes (although they're the same as /G).
-    this.terminal.clearHome();
-    this.terminal.interpret('\x1b%/H' + line);
-    assert.isTrue(this.terminal.vt.codingSystemUtf8_);
-    assert.isTrue(this.terminal.vt.codingSystemLocked_);
-    assert.equal(this.terminal.getRowText(0), line);
+  // Try other UTF-8 modes (although they're the same as /G).
+  this.terminal.clearHome();
+  this.terminal.interpret('\x1b%/H' + line);
+  assert.isTrue(this.terminal.vt.codingSystemUtf8_);
+  assert.isTrue(this.terminal.vt.codingSystemLocked_);
+  assert.equal(this.terminal.getRowText(0), line);
 
-    this.terminal.clearHome();
-    this.terminal.interpret('\x1b%/I' + line);
-    assert.isTrue(this.terminal.vt.codingSystemUtf8_);
-    assert.isTrue(this.terminal.vt.codingSystemLocked_);
-    assert.equal(this.terminal.getRowText(0), line);
-  });
+  this.terminal.clearHome();
+  this.terminal.interpret('\x1b%/I' + line);
+  assert.isTrue(this.terminal.vt.codingSystemUtf8_);
+  assert.isTrue(this.terminal.vt.codingSystemLocked_);
+  assert.equal(this.terminal.getRowText(0), line);
+});
 
 /**
  * Verify DOCS (encoding) invalid escapes don't mess things up.
  */
 it('docs-invalid', function() {
-    // This test checks graphics handling in ISO-2022 mode.
-    this.terminal.vt.setEncoding('iso-2022');
+  // This test checks graphics handling in ISO-2022 mode.
+  this.terminal.vt.setEncoding('iso-2022');
 
-    // Check the default encoding (ECMA-35).
+  // Check the default encoding (ECMA-35).
+  assert.isFalse(this.terminal.vt.codingSystemUtf8_);
+  assert.isFalse(this.terminal.vt.codingSystemLocked_);
+
+  // Try switching to a random set of invalid escapes.
+  ['a', '9', 'X', '(', '}'].forEach((ch) => {
+    // First in ECMA-35 encoding.
+    this.terminal.interpret('\x1b%@');
+    this.terminal.interpret('\x1b%' + ch);
     assert.isFalse(this.terminal.vt.codingSystemUtf8_);
     assert.isFalse(this.terminal.vt.codingSystemLocked_);
+    assert.equal(this.terminal.getRowText(0), '');
 
-    // Try switching to a random set of invalid escapes.
-    ['a', '9', 'X', '(', '}'].forEach((ch) => {
-      // First in ECMA-35 encoding.
-      this.terminal.interpret('\x1b%@');
-      this.terminal.interpret('\x1b%' + ch);
-      assert.isFalse(this.terminal.vt.codingSystemUtf8_);
-      assert.isFalse(this.terminal.vt.codingSystemLocked_);
-      assert.equal(this.terminal.getRowText(0), '');
+    this.terminal.interpret('\x1b%/' + ch);
+    assert.isFalse(this.terminal.vt.codingSystemUtf8_);
+    assert.isFalse(this.terminal.vt.codingSystemLocked_);
+    assert.equal(this.terminal.getRowText(0), '');
 
-      this.terminal.interpret('\x1b%/' + ch);
-      assert.isFalse(this.terminal.vt.codingSystemUtf8_);
-      assert.isFalse(this.terminal.vt.codingSystemLocked_);
-      assert.equal(this.terminal.getRowText(0), '');
+    // Then in UTF-8 encoding.
+    this.terminal.interpret('\x1b%G');
+    this.terminal.interpret('\x1b%' + ch);
+    assert.isTrue(this.terminal.vt.codingSystemUtf8_);
+    assert.isFalse(this.terminal.vt.codingSystemLocked_);
+    assert.equal(this.terminal.getRowText(0), '');
 
-      // Then in UTF-8 encoding.
-      this.terminal.interpret('\x1b%G');
-      this.terminal.interpret('\x1b%' + ch);
-      assert.isTrue(this.terminal.vt.codingSystemUtf8_);
-      assert.isFalse(this.terminal.vt.codingSystemLocked_);
-      assert.equal(this.terminal.getRowText(0), '');
-
-      this.terminal.interpret('\x1b%/' + ch);
-      assert.isTrue(this.terminal.vt.codingSystemUtf8_);
-      assert.isFalse(this.terminal.vt.codingSystemLocked_);
-      assert.equal(this.terminal.getRowText(0), '');
-    });
+    this.terminal.interpret('\x1b%/' + ch);
+    assert.isTrue(this.terminal.vt.codingSystemUtf8_);
+    assert.isFalse(this.terminal.vt.codingSystemLocked_);
+    assert.equal(this.terminal.getRowText(0), '');
   });
+});
 
 /**
  * Check cursor save/restore behavior.
