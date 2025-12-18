@@ -6,13 +6,13 @@
  * @fileoverview Sauration Value Picker unit tests
  */
 
-import {SaturationValuePickerElement as Element, ARROW_KEY_OFFSET} from
+import {SaturationValuePickerElement, ARROW_KEY_OFFSET} from
     './terminal_settings_saturation_value_picker.js';
 
 describe('saturation_value_picker.js', () => {
   const ERROR = 1;
   const createElement = (saturation, value) => {
-    const el = document.createElement(Element.is);
+    const el = document.createElement(SaturationValuePickerElement.is);
     el.setAttribute('saturation', saturation);
     el.setAttribute('value', value);
     return el;
@@ -26,7 +26,8 @@ describe('saturation_value_picker.js', () => {
   };
 
   afterEach(function() {
-    document.querySelectorAll(Element.is).forEach((el) => el.remove());
+    document.querySelectorAll(SaturationValuePickerElement.is).forEach(
+        (el) => el.remove());
   });
 
   it('initialises-the-picker-to-the-correct-coordinates', async function() {

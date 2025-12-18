@@ -9,7 +9,7 @@
 import {lib} from '../../libdot/index.js';
 import {hterm} from '../../hterm/index.js';
 
-import {TerminalSettingsAnsiColorsElement as Element} from
+import {TerminalSettingsAnsiColorsElement} from
     './terminal_settings_ansi_colors.js';
 import {DEFAULT_ANSI_COLORS} from './terminal_common.js';
 
@@ -22,7 +22,8 @@ describe('terminal_settings_ansi_colors.js', () => {
         new hterm.PreferenceManager(new lib.Storage.Memory());
     window.preferenceManager.definePreference(preference, null);
 
-    this.el = /** @type {!Element} */ (document.createElement(Element.is));
+    this.el = /** @type {!TerminalSettingsAnsiColorsElement} */ (
+        document.createElement(TerminalSettingsAnsiColorsElement.is));
     this.el.setAttribute('preference', preference);
     document.body.appendChild(this.el);
 
