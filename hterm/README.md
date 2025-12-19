@@ -20,7 +20,7 @@ This will route to the right people.
 
 # Requirements
 
-We require ECMAScript 2020.  If you're using an older runtime, then sorry,
+We require ECMAScript 2021.  If you're using an older runtime, then sorry,
 you're not supported.  Fortunately, all modern browsers today should support it.
 
 We might use some newer features as we deem useful, but only ones that can be

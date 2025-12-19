@@ -56,7 +56,7 @@ As [WASI] is still under development, we often require current browser runtimes.
 No attempt is made to provide backwards compatibility or transpiling.
 
 * [WASI SDK] 12.0
-* [ES2020]
+* [ECMAScript] 2021
 * [Module workers](https://web.dev/module-workers/)
   * Chrome 80+
 * [WebAssembly BigInt Integration](https://www.chromestatus.com/feature/5648655109324800)
@@ -186,8 +186,8 @@ See the common [libapps HACK.md](../HACK.md) for details.
 
 
 [DataView]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView
+[ECMAScript]: https://tc39.es/ecma262/
 [emscripten]: https://emscripten.org/
-[ES2020]: https://tc39.es/ecma262/
 [WASI]: https://wasi.dev/
 [WASI API]: https://github.com/WebAssembly/WASI/blob/a206794fea66118945a520f6e0af3754cc51860b/phases/snapshot/docs.md
 [WASI C library]: https://github.com/WebAssembly/wasi-libc

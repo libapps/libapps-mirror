@@ -36,6 +36,6 @@ This will route to the right people.
 This has only been tested with Chrome.  We know the following is needed:
 
 * WebAssembly (WASM)
-* ECMAScript 2020
+* ECMAScript 2021
 
 [chromium-hterm mailing list]: https://groups.google.com/a/chromium.org/forum/?fromgroups#!forum/chromium-hterm

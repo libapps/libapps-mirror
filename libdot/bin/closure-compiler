@@ -199,7 +199,7 @@ def perform(argv=(), paths=(), fix=False, gerrit_comments_file=None):
 
     # Set the language first so projects can override it.
     argv = (
-        ["--language_in=ECMASCRIPT_2020"] + argv + ["--checks-only"] + externs
+        ["--language_in=ECMASCRIPT_2021"] + argv + ["--checks-only"] + externs
     )
     result = run(argv + paths, check=False)
     if result.returncode:
