@@ -11,17 +11,21 @@
 #include "bh-syscalls.h"
 #include "debug.h"
 
-ssize_t recvfrom(int sockfd, void* buf, size_t len, int flags,
-                 struct sockaddr* addr, socklen_t* addrlen) {
-  _ENTER("sockfd=%i buf=%p len=%zu flags=%x addr=%p addrlen=%p",
-         sockfd, buf, len, flags, addr, addrlen);
+ssize_t recvfrom(int sockfd,
+                 void* buf,
+                 size_t len,
+                 int flags,
+                 struct sockaddr* addr,
+                 socklen_t* addrlen) {
+  _ENTER("sockfd=%i buf=%p len=%zu flags=%x addr=%p addrlen=%p", sockfd, buf,
+         len, flags, addr, addrlen);
 
   int domain;
   uint8_t s_addr[16];
   uint16_t port;
   size_t written;
-  int ret = sock_recvfrom(
-      sockfd, buf, len, &written, flags, &domain, s_addr, &port);
+  int ret =
+      sock_recvfrom(sockfd, buf, len, &written, flags, &domain, s_addr, &port);
   if (ret != 0 || addr == NULL) {
     goto done;
   }
@@ -33,43 +37,43 @@ ssize_t recvfrom(int sockfd, void* buf, size_t len, int flags,
 
   // TODO(vapier) Verify this code works :).
   switch (domain) {
-  case AF_INET: {
-    struct sockaddr_in* sin = (void*)addr;
-    if (*addrlen < sizeof(*sin)) {
+    case AF_INET: {
+      struct sockaddr_in* sin = (void*)addr;
+      if (*addrlen < sizeof(*sin)) {
+        errno = EINVAL;
+        goto done;
+      }
+      *addrlen = sizeof(*sin);
+      sin->sin_port = htons(port);
+      memcpy(&sin->sin_addr.s_addr, s_addr, sizeof(sin->sin_addr.s_addr));
+      _MID("IPv4 addr=%p port=%i", addr, port);
+      break;
+    }
+
+    case AF_INET6: {
+      struct sockaddr_in6* sin6 = (void*)addr;
+      if (*addrlen < sizeof(*sin6)) {
+        errno = EINVAL;
+        goto done;
+      }
+      *addrlen = sizeof(*sin6);
+      sin6->sin6_flowinfo = 0;
+      // This would be nice to support.
+      sin6->sin6_scope_id = 0;
+      sin6->sin6_port = htons(port);
+      memcpy(&sin6->sin6_addr.s6_addr, s_addr, sizeof(sin6->sin6_addr.s6_addr));
+      _MID("IPv6 addr=%p port=%i", addr, port);
+      break;
+    }
+
+    default:
+      _EXIT("|sa_family| unknown");
       errno = EINVAL;
       goto done;
-    }
-    *addrlen = sizeof(*sin);
-    sin->sin_port = htons(port);
-    memcpy(&sin->sin_addr.s_addr, s_addr, sizeof(sin->sin_addr.s_addr));
-    _MID("IPv4 addr=%p port=%i", addr, port);
-    break;
-  }
-
-  case AF_INET6: {
-    struct sockaddr_in6* sin6 = (void*)addr;
-    if (*addrlen < sizeof(*sin6)) {
-      errno = EINVAL;
-      goto done;
-    }
-    *addrlen = sizeof(*sin6);
-    sin6->sin6_flowinfo = 0;
-    // This would be nice to support.
-    sin6->sin6_scope_id = 0;
-    sin6->sin6_port = htons(port);
-    memcpy(&sin6->sin6_addr.s6_addr, s_addr, sizeof(sin6->sin6_addr.s6_addr));
-    _MID("IPv6 addr=%p port=%i", addr, port);
-    break;
-  }
-
-  default:
-    _EXIT("|sa_family| unknown");
-    errno = EINVAL;
-    goto done;
   }
   addr->sa_family = domain;
 
- done:
+done:
   _EXIT_ERRNO(ret, " written=%zu", written);
   return ret ? ret : written;
 }
@@ -86,11 +90,6 @@ ssize_t recvmsg(int sockfd, struct msghdr* msg, int flags) {
     return -1;
   }
 
-  return recvfrom(
-      sockfd,
-      msg->msg_iov->iov_base,
-      msg->msg_iov->iov_len,
-      flags,
-      msg->msg_name,
-      &msg->msg_namelen);
+  return recvfrom(sockfd, msg->msg_iov->iov_base, msg->msg_iov->iov_len, flags,
+                  msg->msg_name, &msg->msg_namelen);
 }

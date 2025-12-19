@@ -5,8 +5,8 @@
 // Implementation for accept().
 
 #include <errno.h>
-#include <string.h>
 #include <netinet/in.h>
+#include <string.h>
 #include <sys/socket.h>
 
 #include "bh-syscalls.h"
@@ -27,7 +27,7 @@ int accept(int sockfd, struct sockaddr* addr, socklen_t* addrlen) {
     *addrlen = 0;
   }
 
- done:
+done:
   _EXIT_ERRNO(ret, "");
   return ret;
 }

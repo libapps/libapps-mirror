@@ -45,8 +45,8 @@ char* readpassphrase(const char* prompt, char* buf, size_t buf_len, int flags) {
     prompt = new_prompt;
   }
 
-  char* ret = wassh_readpassphrase(prompt, buf, buf_len,
-                                   !!(flags & RPP_ECHO_ON));
+  char* ret =
+      wassh_readpassphrase(prompt, buf, buf_len, !!(flags & RPP_ECHO_ON));
   if (ret && flags & RPP_ECHO_ON) {
     write(2, ret, strlen(ret));
   }

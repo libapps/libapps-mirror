@@ -18,37 +18,36 @@ static char buf[1024 * 1024];
 static ssize_t ret;
 static struct iovec iov[10];
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   if (argc < 2) {
-    fprintf(
-        stderr,
-        "Usage: read-write <action> [action...]\n"
-        "\n"
-        "Read actions:\n"
-        "  read     <fd> <length>\n"
-        "  # <length> will be repeated <count> times.\n"
-        "  readv    <fd> <count> [<length>]\n"
-        "  pread    <fd> <length> <offset>\n"
-        "  # <length> will be repeated <count> times.\n"
-        "  preadv   <fd> <offset> <count> [<length>]\n"
-        "\n"
-        "Write actions (buffer is accessed via 'read' actions):\n"
-        "  write    <fd> <string>\n"
-        "  # <string> will be repeated <count> times.\n"
-        "  writev   <fd> <count> [<string>]\n"
-        "  pwrite   <fd> <string> <offset>\n"
-        "  # <string> will be repeated <count> times.\n"
-        "  pwritev  <fd> <offset> <count> [<string>]\n"
-        "\n"
-        "Assert actions:\n"
-        "  # Assert the return value.\n"
-        "  ret      <number>\n"
-        "  errno    <number>\n"
-        "  string   <string>\n"
-        "  lstring  <length> <string>\n"
-        "\n"
-        "Misc actions:\n"
-        "  clear-errno\n");
+    fprintf(stderr,
+            "Usage: read-write <action> [action...]\n"
+            "\n"
+            "Read actions:\n"
+            "  read     <fd> <length>\n"
+            "  # <length> will be repeated <count> times.\n"
+            "  readv    <fd> <count> [<length>]\n"
+            "  pread    <fd> <length> <offset>\n"
+            "  # <length> will be repeated <count> times.\n"
+            "  preadv   <fd> <offset> <count> [<length>]\n"
+            "\n"
+            "Write actions (buffer is accessed via 'read' actions):\n"
+            "  write    <fd> <string>\n"
+            "  # <string> will be repeated <count> times.\n"
+            "  writev   <fd> <count> [<string>]\n"
+            "  pwrite   <fd> <string> <offset>\n"
+            "  # <string> will be repeated <count> times.\n"
+            "  pwritev  <fd> <offset> <count> [<string>]\n"
+            "\n"
+            "Assert actions:\n"
+            "  # Assert the return value.\n"
+            "  ret      <number>\n"
+            "  errno    <number>\n"
+            "  string   <string>\n"
+            "  lstring  <length> <string>\n"
+            "\n"
+            "Misc actions:\n"
+            "  clear-errno\n");
     abort();
   }
 
@@ -67,8 +66,8 @@ int main(int argc, char *argv[]) {
       int fd = atoi(argv[++i]);
       int len = atoi(argv[++i]);
       ret = read(fd, buf, len);
-      printf("read(%i, %p, %i) = %zi  errno=%i(%s)\n",
-             fd, buf, len, ret, errno, strerror(errno));
+      printf("read(%i, %p, %i) = %zi  errno=%i(%s)\n", fd, buf, len, ret, errno,
+             strerror(errno));
     } else if (streq(mode, "readv")) {
       int fd = atoi(argv[++i]);
       int count = atoi(argv[++i]);
@@ -98,14 +97,14 @@ int main(int argc, char *argv[]) {
       }
       ret = preadv(fd, iov, count, off);
 
-    // Writes.
+      // Writes.
     } else if (streq(mode, "write")) {
       int fd = atoi(argv[++i]);
       const char* str = argv[++i];
       size_t len = strlen(str);
       ret = write(fd, str, len);
-      printf("write(%i, %p, %zu) = %zi  errno=%i(%s)\n",
-             fd, str, len, ret, errno, strerror(errno));
+      printf("write(%i, %p, %zu) = %zi  errno=%i(%s)\n", fd, str, len, ret,
+             errno, strerror(errno));
     } else if (streq(mode, "writev")) {
       int fd = atoi(argv[++i]);
       int count = atoi(argv[++i]);
@@ -134,7 +133,7 @@ int main(int argc, char *argv[]) {
       }
       ret = pwritev(fd, iov, count, off);
 
-    // Asserts.
+      // Asserts.
     } else if (streq(mode, "ret")) {
       int exp = atoi(argv[++i]);
       printf("ret=%zi exp=%i\n", ret, exp);
@@ -152,11 +151,11 @@ int main(int argc, char *argv[]) {
       const char* exp = argv[++i];
       assert(!memcmp(buf, exp, len));
 
-    // Misc
+      // Misc
     } else if (streq(mode, "clear-errno")) {
       errno = 0;
 
-    // Unknown.
+      // Unknown.
     } else {
       fprintf(stderr, "argc=%i unknown mode '%s'\n", i, mode);
       abort();

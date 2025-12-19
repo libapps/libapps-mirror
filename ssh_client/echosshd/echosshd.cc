@@ -4,18 +4,17 @@
 
 // Simple SSH daemon with inline shell for quick testing.
 
-#include <cctype>
-#include <map>
-#include <string>
-#include <vector>
-
 #include <err.h>
 #include <signal.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
-#include <sys/wait.h>
+#include <cctype>
+#include <map>
+#include <string>
+#include <vector>
 
 #include <libssh/callbacks.h>
 #include <libssh/libssh.h>
@@ -35,10 +34,7 @@ class Options {
 };
 
 Options::Options()
-  : user("anon"),
-    host("localhost"),
-    port("22222"),
-    verbosity(0) {}
+    : user("anon"), host("localhost"), port("22222"), verbosity(0) {}
 
 // Data passed to various SSH callbacks.
 class Userdata {

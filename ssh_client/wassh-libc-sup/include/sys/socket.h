@@ -7,7 +7,9 @@
 #ifndef WASSH_SYS_SOCKET_H
 #define WASSH_SYS_SOCKET_H
 
+// clang-format off
 #include_next <sys/socket.h>
+// clang-format on
 
 #include <sys/cdefs.h>
 
@@ -15,14 +17,14 @@ __BEGIN_DECLS
 
 // These are the same defines that sys/socket.h has disabled.
 #define SO_REUSEADDR 2
-#define SO_ERROR     4
+#define SO_ERROR 4
 #define SO_KEEPALIVE 9
 
-#define PF_UNSPEC    0
-#define PF_LOCAL     1
-#define PF_UNIX      PF_LOCAL
+#define PF_UNSPEC 0
+#define PF_LOCAL 1
+#define PF_UNIX PF_LOCAL
 
-#define MSG_DONTWAIT  0x0040
+#define MSG_DONTWAIT 0x0040
 
 struct cmsghdr {
   socklen_t cmsg_len;
@@ -30,10 +32,10 @@ struct cmsghdr {
   int cmsg_type;
 };
 
-#define CMSG_DATA(cmsg) ((unsigned char *) ((struct cmsghdr *)(cmsg) + 1))
-#define CMSG_FIRSTHDR(mhdr) ((struct cmsghdr *) (mhdr)->msg_control)
+#define CMSG_DATA(cmsg) ((unsigned char*)((struct cmsghdr*)(cmsg) + 1))
+#define CMSG_FIRSTHDR(mhdr) ((struct cmsghdr*)(mhdr)->msg_control)
 
-#define SCM_RIGHTS      0x01
+#define SCM_RIGHTS 0x01
 #define SCM_CREDENTIALS 0x02
 
 int accept(int, struct sockaddr*, socklen_t*);
@@ -45,8 +47,8 @@ int shutdown(int, int);
 int socket(int, int, int);
 
 ssize_t send(int, const void*, size_t, int);
-ssize_t sendto(int, const void*, size_t, int, const struct sockaddr*,
-               socklen_t);
+ssize_t sendto(
+    int, const void*, size_t, int, const struct sockaddr*, socklen_t);
 ssize_t recv(int, void*, size_t, int);
 ssize_t recvfrom(int, void*, size_t, int, struct sockaddr*, socklen_t*);
 

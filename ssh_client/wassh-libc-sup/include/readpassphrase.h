@@ -9,8 +9,8 @@
 
 #include <sys/cdefs.h>
 
-#define RPP_ECHO_OFF    0x00
-#define RPP_ECHO_ON     0x01
+#define RPP_ECHO_OFF 0x00
+#define RPP_ECHO_ON 0x01
 #define RPP_REQUIRE_TTY 0x02
 
 __BEGIN_DECLS

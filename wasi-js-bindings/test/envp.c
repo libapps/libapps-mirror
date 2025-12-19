@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
   printf("{\n");
 
   int envc = 0;
-  char **envp = environ;
+  char** envp = environ;
   while (envp[envc++])
     continue;
   printf("  \"envc\": %i,\n", envc);

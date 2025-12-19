@@ -20,8 +20,8 @@ static void dump_clock(const char* name, clockid_t clk_id) {
   ret = clock_getres(clk_id, &ts);
   assert(ret == 0);
   // Print the numbers as strings to avoid JSON->JS issues with large values.
-  printf("  \"getres\": [\"%lli\", \"%lli\"],\n",
-         (long long)ts.tv_sec, (long long)ts.tv_nsec);
+  printf("  \"getres\": [\"%lli\", \"%lli\"],\n", (long long)ts.tv_sec,
+         (long long)ts.tv_nsec);
 
   // Sample it a few times to observe its behavior.
   printf("  \"gettime\": [\n");
@@ -32,14 +32,13 @@ static void dump_clock(const char* name, clockid_t clk_id) {
 
     ret = clock_gettime(clk_id, &ts);
     assert(ret == 0);
-    printf("    [\"%lli\", \"%lli\"]%s\n",
-           (long long)ts.tv_sec, (long long)ts.tv_nsec,
-           i == kIters - 1 ? "" : ",");
+    printf("    [\"%lli\", \"%lli\"]%s\n", (long long)ts.tv_sec,
+           (long long)ts.tv_nsec, i == kIters - 1 ? "" : ",");
   }
   printf("  ]\n");
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   if (argc != 2) {
     fprintf(stderr, "Usage: clock <source>\n");
     abort();

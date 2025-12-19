@@ -13,7 +13,9 @@
 #define __NEED_uid_t
 #include <bits/alltypes.h>
 
+// clang-format off
 #include_next <signal.h>
+// clang-format on
 
 #include <sys/cdefs.h>
 
@@ -23,12 +25,12 @@ __BEGIN_DECLS
 
 // Flags for sa_flags.
 #define SA_NOCLDSTOP 0x0001
-#define SA_ONSTACK   0x0002
+#define SA_ONSTACK 0x0002
 #define SA_RESETHAND 0x0004
-#define SA_RESTART   0x0008
-#define SA_SIGINFO   0x0010
+#define SA_RESTART 0x0008
+#define SA_SIGINFO 0x0010
 #define SA_NOCLDWAIT 0x0020
-#define SA_NODEFER   0x0040
+#define SA_NODEFER 0x0040
 
 typedef void (*sighandler_t)(int);
 sighandler_t signal(int signum, sighandler_t handler);

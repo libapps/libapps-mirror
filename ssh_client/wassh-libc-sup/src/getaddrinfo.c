@@ -6,31 +6,30 @@
 // https://pubs.opengroup.org/onlinepubs/9799919799/functions/freeaddrinfo.html
 // https://pubs.opengroup.org/onlinepubs/9799919799/functions/getnameinfo.html
 
+#include <arpa/inet.h>
 #include <netdb.h>
+#include <netinet/in.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include <arpa/inet.h>
-#include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 
 #include "bh-syscalls.h"
 #include "debug.h"
 
-static const char *const gai_errors[] = {
-  "Unknown error",
-  "The name could not be resolved at this time",
-  "The flags had an invalid value",
-  "A non-recoverable error occurred",
-  "The address family was not recognized",
-  "Memory allocation failure",
-  "The name does not resolve",
-  "The service is not recognized",
-  "The intended socket type was not recognized",
-  "A system error occurred",
-  "An argument buffer overflowed",
+static const char* const gai_errors[] = {
+    "Unknown error",
+    "The name could not be resolved at this time",
+    "The flags had an invalid value",
+    "A non-recoverable error occurred",
+    "The address family was not recognized",
+    "Memory allocation failure",
+    "The name does not resolve",
+    "The service is not recognized",
+    "The intended socket type was not recognized",
+    "A system error occurred",
+    "An argument buffer overflowed",
 };
 
 // Look up the network error code and convert it to a readable string.
@@ -81,8 +80,10 @@ static struct in6_addr* next_fake_addr6(const char* node) {
 }
 
 // Allocate a new addrinfo structure.
-static struct addrinfo* new_addrinfo(int ai_family, int ai_socktype,
-                                     int ai_protocol, long sin_port,
+static struct addrinfo* new_addrinfo(int ai_family,
+                                     int ai_socktype,
+                                     int ai_protocol,
+                                     long sin_port,
                                      void* s_addr) {
   struct addrinfo* ret = malloc(sizeof(*ret));
   memset(ret, 0, sizeof(*ret));
@@ -121,8 +122,10 @@ static struct addrinfo* new_addrinfo(int ai_family, int ai_socktype,
 // We don't implement AI_ADDRCONFIG or AI_V4MAPPED as nothing uses them atm.
 //
 // TODO(vapier): Implement support for AI_PASSIVE.
-int getaddrinfo(const char* node, const char* service,
-                const struct addrinfo* hints, struct addrinfo** res) {
+int getaddrinfo(const char* node,
+                const char* service,
+                const struct addrinfo* hints,
+                struct addrinfo** res) {
   _ENTER("node={%s} service={%s} hints=%p res=%p", node, service, hints, res);
 
   int ai_protocol = 0;
@@ -222,8 +225,8 @@ int getaddrinfo(const char* node, const char* service,
   struct addrinfo* ret4;
   if (ai_family == AF_INET6 || ai_family == AF_UNSPEC) {
     _MID("adding AF_INET6 result");
-    ret6 = new_addrinfo(AF_INET6, ai_socktype, ai_protocol, sin_port,
-                        &sin6_addr);
+    ret6 =
+        new_addrinfo(AF_INET6, ai_socktype, ai_protocol, sin_port, &sin6_addr);
     if (ai_family == AF_INET6) {
       *res = ret6;
       goto done;
@@ -247,7 +250,7 @@ int getaddrinfo(const char* node, const char* service,
   }
   ret6->ai_next = ret4;
   *res = ret6;
- done:
+done:
   _EXIT("return 0");
   return 0;
 }
@@ -268,9 +271,12 @@ void freeaddrinfo(struct addrinfo* ai) {
 // Translate a socket address to a hostname (if resolvable) & port.
 //
 // This stub always returns IP addresses and doesn't attempt reverse lookups.
-int getnameinfo(const struct sockaddr* sa, socklen_t salen,
-                char* node, socklen_t nodelen,
-                char* service, socklen_t servicelen,
+int getnameinfo(const struct sockaddr* sa,
+                socklen_t salen,
+                char* node,
+                socklen_t nodelen,
+                char* service,
+                socklen_t servicelen,
                 int flags) {
   _ENTER("sa=%p salen=%u node=%p nodelen=%u service=%p servicelen=%u flags=%x",
          sa, salen, node, nodelen, service, servicelen, flags);
@@ -293,6 +299,6 @@ int getnameinfo(const struct sockaddr* sa, socklen_t salen,
   if (service)
     snprintf(service, servicelen, "%d", ntohs(sin->sin_port));
 
-  _EXIT("node={%s} service={%s}", node ? : "", service ? : "");
+  _EXIT("node={%s} service={%s}", node ?: "", service ?: "");
   return 0;
 }

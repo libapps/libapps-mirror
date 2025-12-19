@@ -34,14 +34,14 @@ int socket(int domain, int c_type, int protocol) {
 
   // Only support UNIX sockets (ssh-agent), IPv4, and IPv6.
   switch (domain) {
-  case AF_UNIX:
-  case AF_INET:
-  case AF_INET6:
-    break;
-  default:
-    _EXIT("|domain| unknown");
-    errno = EINVAL;
-    return -1;
+    case AF_UNIX:
+    case AF_INET:
+    case AF_INET6:
+      break;
+    default:
+      _EXIT("|domain| unknown");
+      errno = EINVAL;
+      return -1;
   }
 
   // Maybe add these if anyone wants them.
@@ -54,14 +54,14 @@ int socket(int domain, int c_type, int protocol) {
   // Only support TCP & UDP protocols.
   int sys_type;
   switch (c_type) {
-  case SOCK_DGRAM:
-  case SOCK_STREAM:
-    sys_type = c_type;
-    break;
-  default:
-    _EXIT("|type| unknown");
-    errno = EINVAL;
-    return -1;
+    case SOCK_DGRAM:
+    case SOCK_STREAM:
+      sys_type = c_type;
+      break;
+    default:
+      _EXIT("|type| unknown");
+      errno = EINVAL;
+      return -1;
   }
 
   int ret = sock_create(domain, sys_type, protocol);

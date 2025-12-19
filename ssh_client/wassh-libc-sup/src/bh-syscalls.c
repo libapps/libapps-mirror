@@ -11,14 +11,14 @@
 // one return value (the error).  We define a nicer C library interface which
 // returns the new socket directly and translates the error into errno.
 
+#include "bh-syscalls.h"
+
 #include <errno.h>
 #include <stdint.h>
 #include <string.h>
 #include <unistd.h>
 
 #include <wasi/api.h>
-
-#include "bh-syscalls.h"
 
 // Create a prototype for the underlying syscall import.
 //
@@ -30,11 +30,10 @@
 // convention we've adopted for namespacing reasons.
 //
 // NB: We'll use "wassh_experimental" until we've got this working.
-#define SYSCALL(name) \
-    __attribute__((__import_module__("wassh_experimental"), \
-                   __import_name__(#name))) \
-    __attribute__((__warn_unused_result__)) \
-    __wasi_errno_t __wassh_##name
+#define SYSCALL(name)                                     \
+  __attribute__((__import_module__("wassh_experimental"), \
+                 __import_name__(#name)))                 \
+  __attribute__((__warn_unused_result__)) __wasi_errno_t __wassh_##name
 
 SYSCALL(fd_dup)(__wasi_fd_t oldfd, __wasi_fd_t* newfd);
 __wasi_fd_t fd_dup(__wasi_fd_t oldfd) {
@@ -57,12 +56,17 @@ __wasi_fd_t fd_dup2(__wasi_fd_t oldfd, __wasi_fd_t newfd) {
   return newfd;
 }
 
-SYSCALL(readpassphrase)(const char* prompt, __wasi_size_t prompt_len,
-                        char* buf, __wasi_size_t buf_len, int echo);
-char* wassh_readpassphrase(const char* prompt, char* buf, size_t buf_len,
+SYSCALL(readpassphrase)(const char* prompt,
+                        __wasi_size_t prompt_len,
+                        char* buf,
+                        __wasi_size_t buf_len,
+                        int echo);
+char* wassh_readpassphrase(const char* prompt,
+                           char* buf,
+                           size_t buf_len,
                            bool echo) {
-  __wasi_errno_t error = __wassh_readpassphrase(prompt, strlen(prompt), buf,
-                                                buf_len, echo);
+  __wasi_errno_t error =
+      __wassh_readpassphrase(prompt, strlen(prompt), buf, buf_len, echo);
   if (error != 0) {
     errno = error;
     return NULL;
@@ -80,9 +84,13 @@ int sock_accept(__wasi_fd_t sock, __wasi_fd_t* newsock) {
   return 0;
 }
 
-SYSCALL(sock_bind)(__wasi_fd_t sock, int domain, const uint8_t* addr,
+SYSCALL(sock_bind)(__wasi_fd_t sock,
+                   int domain,
+                   const uint8_t* addr,
                    uint16_t port);
-int sock_bind(__wasi_fd_t sock, int domain, const uint8_t* addr,
+int sock_bind(__wasi_fd_t sock,
+              int domain,
+              const uint8_t* addr,
               uint16_t port) {
   __wasi_errno_t error = __wassh_sock_bind(sock, domain, addr, port);
   if (error != 0) {
@@ -121,9 +129,13 @@ __wasi_fd_t sock_create(int domain, int type, int protocol) {
   return ret;
 }
 
-SYSCALL(sock_connect)(__wasi_fd_t sock, int domain, const uint8_t* addr,
+SYSCALL(sock_connect)(__wasi_fd_t sock,
+                      int domain,
+                      const uint8_t* addr,
                       uint16_t port);
-int sock_connect(__wasi_fd_t sock, int domain, const uint8_t* addr,
+int sock_connect(__wasi_fd_t sock,
+                 int domain,
+                 const uint8_t* addr,
                  uint16_t port) {
   __wasi_errno_t error = __wassh_sock_connect(sock, domain, addr, port);
   if (error != 0) {
@@ -133,12 +145,12 @@ int sock_connect(__wasi_fd_t sock, int domain, const uint8_t* addr,
   return 0;
 }
 
-SYSCALL(sock_get_name)(__wasi_fd_t sock, int* family, uint16_t* port,
-                       uint8_t* addr, int remote);
-int sock_get_name(__wasi_fd_t sock, int* family, uint16_t* port, uint8_t* addr,
-                  bool remote) {
-  __wasi_errno_t error = __wassh_sock_get_name(
-      sock, family, port, addr, !!remote);
+SYSCALL(sock_get_name)(
+    __wasi_fd_t sock, int* family, uint16_t* port, uint8_t* addr, int remote);
+int sock_get_name(
+    __wasi_fd_t sock, int* family, uint16_t* port, uint8_t* addr, bool remote) {
+  __wasi_errno_t error =
+      __wassh_sock_get_name(sock, family, port, addr, !!remote);
   if (error != 0) {
     errno = error;
     return -1;
@@ -166,12 +178,24 @@ int sock_set_opt(__wasi_fd_t sock, int level, int optname, int optvalue) {
   return 0;
 }
 
-SYSCALL(sock_recvfrom)(__wasi_fd_t sock, void* buf, size_t len, size_t* written,
-                       int flags, int* domain, uint8_t* addr, uint16_t* port);
-int sock_recvfrom(__wasi_fd_t sock, void* buf, size_t len, size_t* written,
-                  int flags, int* domain, uint8_t* addr, uint16_t* port) {
-  __wasi_errno_t error = __wassh_sock_recvfrom(
-      sock, buf, len, written, flags, domain, addr, port);
+SYSCALL(sock_recvfrom)(__wasi_fd_t sock,
+                       void* buf,
+                       size_t len,
+                       size_t* written,
+                       int flags,
+                       int* domain,
+                       uint8_t* addr,
+                       uint16_t* port);
+int sock_recvfrom(__wasi_fd_t sock,
+                  void* buf,
+                  size_t len,
+                  size_t* written,
+                  int flags,
+                  int* domain,
+                  uint8_t* addr,
+                  uint16_t* port) {
+  __wasi_errno_t error =
+      __wassh_sock_recvfrom(sock, buf, len, written, flags, domain, addr, port);
   if (error != 0) {
     errno = error;
     return -1;
@@ -179,13 +203,24 @@ int sock_recvfrom(__wasi_fd_t sock, void* buf, size_t len, size_t* written,
   return 0;
 }
 
-SYSCALL(sock_sendto)(__wasi_fd_t sock, const void* buf, size_t len,
-                     size_t* written, int flags, int domain,
-                     const uint8_t* addr, uint16_t port);
-int sock_sendto(__wasi_fd_t sock, const void* buf, size_t len, size_t* written,
-                int flags, int domain, const uint8_t* addr, uint16_t port) {
-  __wasi_errno_t error = __wassh_sock_sendto(
-      sock, buf, len, written, flags, domain, addr, port);
+SYSCALL(sock_sendto)(__wasi_fd_t sock,
+                     const void* buf,
+                     size_t len,
+                     size_t* written,
+                     int flags,
+                     int domain,
+                     const uint8_t* addr,
+                     uint16_t port);
+int sock_sendto(__wasi_fd_t sock,
+                const void* buf,
+                size_t len,
+                size_t* written,
+                int flags,
+                int domain,
+                const uint8_t* addr,
+                uint16_t port) {
+  __wasi_errno_t error =
+      __wassh_sock_sendto(sock, buf, len, written, flags, domain, addr, port);
   if (error != 0) {
     errno = error;
     return -1;

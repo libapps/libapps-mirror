@@ -7,9 +7,8 @@
 #ifndef WASSH_NETDB_H
 #define WASSH_NETDB_H
 
-#include <sys/socket.h>
-
 #include <sys/cdefs.h>
+#include <sys/socket.h>
 
 __BEGIN_DECLS
 
@@ -56,39 +55,41 @@ struct addrinfo {
 // The new API.
 const char* gai_strerror(int);
 void freeaddrinfo(struct addrinfo*);
-int getaddrinfo(const char*, const char*, const struct addrinfo*,
+int getaddrinfo(const char*,
+                const char*,
+                const struct addrinfo*,
                 struct addrinfo**);
-int getnameinfo(const struct sockaddr*, socklen_t, char*, socklen_t, char*,
-                socklen_t, int);
+int getnameinfo(
+    const struct sockaddr*, socklen_t, char*, socklen_t, char*, socklen_t, int);
 
 // Flags for ai_flags.
-#define AI_PASSIVE     0x00000001
-#define AI_CANONNAME   0x00000002
+#define AI_PASSIVE 0x00000001
+#define AI_CANONNAME 0x00000002
 #define AI_NUMERICHOST 0x00000004
 #define AI_NUMERICSERV 0x00000008
-#define AI_V4MAPPED    0x00000010
-#define AI_ALL         0x00000020
-#define AI_ADDRCONFIG  0x00000040
+#define AI_V4MAPPED 0x00000010
+#define AI_ALL 0x00000020
+#define AI_ADDRCONFIG 0x00000040
 
 // Errors.
-#define EAI_AGAIN    -1
+#define EAI_AGAIN -1
 #define EAI_BADFLAGS -2
-#define EAI_FAIL     -3
-#define EAI_FAMILY   -4
-#define EAI_MEMORY   -5
-#define EAI_NONAME   -6
-#define EAI_SERVICE  -7
+#define EAI_FAIL -3
+#define EAI_FAMILY -4
+#define EAI_MEMORY -5
+#define EAI_NONAME -6
+#define EAI_SERVICE -7
 #define EAI_SOCKTYPE -8
-#define EAI_SYSTEM   -9
+#define EAI_SYSTEM -9
 #define EAI_OVERFLOW -10
 
 // Flags for getnameinfo.
-#define NI_NOFQDN       0x0001
-#define NI_NUMERICHOST  0x0002
-#define NI_NAMEREQD     0x0004
-#define NI_NUMERICSERV  0x0008
+#define NI_NOFQDN 0x0001
+#define NI_NUMERICHOST 0x0002
+#define NI_NAMEREQD 0x0004
+#define NI_NUMERICSERV 0x0008
 #define NI_NUMERICSCOPE 0x0010
-#define NI_DGRAM        0x0020
+#define NI_DGRAM 0x0020
 
 // Non-standard defines, but OpenSSL currently wants it.
 #define NI_MAXHOST 1025

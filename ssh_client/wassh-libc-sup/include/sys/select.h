@@ -7,7 +7,9 @@
 #ifndef WASSH_SYS_SELECT_H
 #define WASSH_SYS_SELECT_H
 
+// clang-format off
 #include_next <sys/select.h>
+// clang-format on
 
 typedef unsigned long fd_mask;
 

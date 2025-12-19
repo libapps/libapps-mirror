@@ -7,7 +7,9 @@
 #ifndef WASSH_SYS_RESOURCE_H
 #define WASSH_SYS_RESOURCE_H
 
+// clang-format off
 #include_next <sys/resource.h>
+// clang-format on
 
 #include <sys/cdefs.h>
 

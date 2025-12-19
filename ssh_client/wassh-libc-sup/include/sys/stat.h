@@ -7,7 +7,9 @@
 #ifndef WASSH_SYS_STAT_H
 #define WASSH_SYS_STAT_H
 
+// clang-format off
 #include_next <sys/stat.h>
+// clang-format on
 
 #include <sys/cdefs.h>
 

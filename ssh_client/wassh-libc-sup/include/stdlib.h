@@ -7,7 +7,9 @@
 #ifndef WASSH_STDLIB_H
 #define WASSH_STDLIB_H
 
+// clang-format off
 #include_next <stdlib.h>
+// clang-format on
 
 #include <sys/cdefs.h>
 

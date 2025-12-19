@@ -6,8 +6,8 @@
 
 #include <err.h>
 #include <stdarg.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 // No header defines this unfortunately.
 extern const char* __progname;

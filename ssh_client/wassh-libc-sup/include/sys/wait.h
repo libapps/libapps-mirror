@@ -13,17 +13,17 @@
 __BEGIN_DECLS
 
 // Bit flags for waitpid.
-#define WNOHANG    1
-#define WUNTRACED  2
+#define WNOHANG 1
+#define WUNTRACED 2
 #define WCONTINUED 4
 
 // The low status byte is the exit status/signal.
-#define WTERMSIG(w)    ((w) & 0x7f)
+#define WTERMSIG(w) ((w) & 0x7f)
 #define WEXITSTATUS(w) ((w) & 0x7f)
 // The high status byte tells us the event type.
-#define WIFEXITED(w)   ((w) & 0x100)
+#define WIFEXITED(w) ((w) & 0x100)
 #define WIFSIGNALED(w) ((w) & 0x200)
-#define WIFSTOPPED(w)  ((w) & 0x400)
+#define WIFSTOPPED(w) ((w) & 0x400)
 
 pid_t waitpid(pid_t, int*, int);
 

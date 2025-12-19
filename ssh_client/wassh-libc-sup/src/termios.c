@@ -11,24 +11,23 @@
 #include "debug.h"
 
 static struct termios tio = {
-  .c_iflag = ICRNL | IXON | IXOFF | IUTF8,
-  .c_oflag = OPOST | ONLCR,
-  .c_cflag = CREAD | 077,
-  .c_lflag =
-      ISIG | ICANON | ECHO | ECHOE | ECHOK | IEXTEN,
-  .c_ispeed = B38400,
-  .c_ospeed = B38400,
-  .c_cc[VINTR] = 3,
-  .c_cc[VQUIT] = 28,
-  .c_cc[VERASE] = 127,
-  .c_cc[VKILL] = 21,
-  .c_cc[VEOF] = 4,
-  .c_cc[VTIME] = 0,
-  .c_cc[VMIN] = 1,
-  .c_cc[VSTART] = 17,
-  .c_cc[VSTOP] = 19,
-  .c_cc[VSUSP] = 26,
-  .c_cc[VEOL] = 0,
+    .c_iflag = ICRNL | IXON | IXOFF | IUTF8,
+    .c_oflag = OPOST | ONLCR,
+    .c_cflag = CREAD | 077,
+    .c_lflag = ISIG | ICANON | ECHO | ECHOE | ECHOK | IEXTEN,
+    .c_ispeed = B38400,
+    .c_ospeed = B38400,
+    .c_cc[VINTR] = 3,
+    .c_cc[VQUIT] = 28,
+    .c_cc[VERASE] = 127,
+    .c_cc[VKILL] = 21,
+    .c_cc[VEOF] = 4,
+    .c_cc[VTIME] = 0,
+    .c_cc[VMIN] = 1,
+    .c_cc[VSTART] = 17,
+    .c_cc[VSTOP] = 19,
+    .c_cc[VSUSP] = 26,
+    .c_cc[VEOL] = 0,
 };
 
 speed_t cfgetispeed(const struct termios* termios_p) {
@@ -80,10 +79,9 @@ int tcsetattr(int fd, int optional_actions, const struct termios* termios_p) {
       _MID("actions=???");
       break;
   }
-  _MID("c_iflag=%#x c_oflag=%#x c_cflag=%#x c_lflag=%#x",
-       termios_p->c_iflag, termios_p->c_oflag, termios_p->c_cflag,
-       termios_p->c_lflag);
-#define LOG_FLAG(flag) _MID(" %s" #flag, termios_p->c_lflag & flag ? "" : "-")
+  _MID("c_iflag=%#x c_oflag=%#x c_cflag=%#x c_lflag=%#x", termios_p->c_iflag,
+       termios_p->c_oflag, termios_p->c_cflag, termios_p->c_lflag);
+#define LOG_FLAG(flag) _MID(" %s" #flag, termios_p->c_lflag& flag ? "" : "-")
   LOG_FLAG(ICANON);
   LOG_FLAG(ISIG);
   LOG_FLAG(ECHO);

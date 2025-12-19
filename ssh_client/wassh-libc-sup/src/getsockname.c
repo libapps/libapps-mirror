@@ -6,17 +6,19 @@
 // https://pubs.opengroup.org/onlinepubs/9799919799/functions/getpeername.html
 // https://pubs.opengroup.org/onlinepubs/9799919799/functions/getsockname.html
 
-#include <errno.h>
-#include <string.h>
 #include <arpa/inet.h>
+#include <errno.h>
 #include <netinet/in.h>
+#include <string.h>
 #include <sys/socket.h>
 
-#include "debug.h"
 #include "bh-syscalls.h"
+#include "debug.h"
 
-static int get_socket_info(
-    int sockfd, struct sockaddr* addr, socklen_t* addrlen, bool remote) {
+static int get_socket_info(int sockfd,
+                           struct sockaddr* addr,
+                           socklen_t* addrlen,
+                           bool remote) {
   socklen_t caller_addrlen = *addrlen;
   int family;
   uint16_t port;
@@ -34,9 +36,9 @@ static int get_socket_info(
   switch (family) {
     case AF_INET: {
       struct sockaddr_in sin = {
-        .sin_family = family,
-        .sin_port = htons(port),
-        .sin_addr = in_addr.in,
+          .sin_family = family,
+          .sin_port = htons(port),
+          .sin_addr = in_addr.in,
       };
       *addrlen = sizeof(sin);
 
@@ -52,9 +54,9 @@ static int get_socket_info(
 
     case AF_INET6: {
       struct sockaddr_in6 sin = {
-        .sin6_family = family,
-        .sin6_port = htons(port),
-        .sin6_addr = in_addr.in6,
+          .sin6_family = family,
+          .sin6_port = htons(port),
+          .sin6_addr = in_addr.in6,
       };
       *addrlen = sizeof(sin);
 
@@ -74,8 +76,7 @@ static int get_socket_info(
       goto done;
   }
 
-
- done:
+done:
   _EXIT_ERRNO(ret, "");
   return ret;
 }

@@ -5,7 +5,9 @@
 #ifndef WASSH_SYS_IOCTL_H
 #define WASSH_SYS_IOCTL_H
 
+// clang-format off
 #include_next <sys/ioctl.h>
+// clang-format on
 
 #define TIOCGPGRP 0x540F
 #define TIOCGWINSZ 0x5413

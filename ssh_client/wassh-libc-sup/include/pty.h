@@ -7,12 +7,15 @@
 #ifndef WASSH_PTY_H
 #define WASSH_PTY_H
 
-#include <termios.h>
 #include <sys/ioctl.h>
+#include <termios.h>
 
 __BEGIN_DECLS
 
-int openpty(int* amaster, int* aslave, char* name, const struct termios* termp,
+int openpty(int* amaster,
+            int* aslave,
+            char* name,
+            const struct termios* termp,
             const struct winsize* winp);
 
 __END_DECLS

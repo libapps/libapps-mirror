@@ -14,9 +14,9 @@ __BEGIN_DECLS
 
 struct group {
   // POSIX required fields.
-  char* gr_name;    // The name of the group.
-  gid_t gr_gid;     // Numerical group ID.
-  char** gr_mem;    // Member names.
+  char* gr_name;  // The name of the group.
+  gid_t gr_gid;   // Numerical group ID.
+  char** gr_mem;  // Member names.
 };
 
 #define getgrnam(name) NULL

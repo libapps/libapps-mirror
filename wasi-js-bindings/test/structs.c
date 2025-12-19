@@ -8,27 +8,30 @@
 
 #include <wasi/api.h>
 
-#define START(name) \
-  fields = 0; \
-  if (types++) printf(",\n"); \
-  printf("  \"%s\": {\n" \
-         "    \"struct_size\": %zu,\n" \
-         "    \"fields\": {\n", \
-         name, sizeof(TYPE))
-#define FIELD(field) \
-  if (fields++) printf(",\n"); \
-  printf("      \"%s\": {\n" \
-         "        \"offset\": %zu,\n" \
-         "        \"size\": %zu\n" \
-         "      }\n", \
-         #field, \
-         offsetof(TYPE, field), \
-         sizeof(((TYPE *)(NULL))->field))
-#define END() \
-  printf("    }\n" \
-         "  }\n")
+#define START(name)                 \
+  fields = 0;                       \
+  if (types++)                      \
+    printf(",\n");                  \
+  printf(                           \
+      "  \"%s\": {\n"               \
+      "    \"struct_size\": %zu,\n" \
+      "    \"fields\": {\n",        \
+      name, sizeof(TYPE))
+#define FIELD(field)               \
+  if (fields++)                    \
+    printf(",\n");                 \
+  printf(                          \
+      "      \"%s\": {\n"          \
+      "        \"offset\": %zu,\n" \
+      "        \"size\": %zu\n"    \
+      "      }\n",                 \
+      #field, offsetof(TYPE, field), sizeof(((TYPE*)(NULL))->field))
+#define END()   \
+  printf(       \
+      "    }\n" \
+      "  }\n")
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   // Output in JSON format for easier test runner parsing.
   printf("{\n");
 

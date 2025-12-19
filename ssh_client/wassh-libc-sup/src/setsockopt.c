@@ -11,10 +11,10 @@
 #include "bh-syscalls.h"
 #include "debug.h"
 
-int setsockopt(int sockfd, int level, int optname, const void* optval,
-               socklen_t optlen) {
-  _ENTER("sockfd=%i level=%#x optname=%i optval=%p optlen=%i",
-         sockfd, level, optname, optval, optlen);
+int setsockopt(
+    int sockfd, int level, int optname, const void* optval, socklen_t optlen) {
+  _ENTER("sockfd=%i level=%#x optname=%i optval=%p optlen=%i", sockfd, level,
+         optname, optval, optlen);
 
   if (optlen != 4) {
     _MID("bad option length");

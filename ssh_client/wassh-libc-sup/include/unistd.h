@@ -7,7 +7,9 @@
 #ifndef WASSH_UNISTD_H
 #define WASSH_UNISTD_H
 
+// clang-format off
 #include_next <unistd.h>
+// clang-format on
 
 #include <sys/cdefs.h>
 
@@ -33,9 +35,9 @@ pid_t getpgrp(void);
 
 int execl(const char*, const char*, ...);
 int execlp(const char*, const char*, ...);
-int execv(const char*, char *const[]);
-int execve(const char*, char *const[], char *const[]);
-int execvp(const char*, char *const[]);
+int execv(const char*, char* const[]);
+int execve(const char*, char* const[], char* const[]);
+int execvp(const char*, char* const[]);
 int system(const char*);
 
 int closefrom(int);

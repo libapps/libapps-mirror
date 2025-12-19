@@ -10,7 +10,7 @@
 
 #include "test-utils.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   // Output in JSON format for easier test runner parsing.
   printf("{\n");
 

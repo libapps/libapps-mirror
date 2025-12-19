@@ -9,12 +9,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 #include <sys/random.h>
+#include <unistd.h>
 
 #include "test-utils.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   if (argc != 2) {
     fprintf(stderr, "Usage: random <mode>\n");
     return 1;
@@ -33,9 +33,9 @@ int main(int argc, char *argv[]) {
     assert(ret == 0);
   } else if (streq(mode, "arc4random")) {
     for (size_t i = 0; i < 12; ++i) {
-        if (i)
-          printf(", ");
-        printf("%u", arc4random());
+      if (i)
+        printf(", ");
+      printf("%u", arc4random());
     }
     printf("]\n");
     return 0;

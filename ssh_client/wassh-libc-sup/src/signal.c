@@ -43,7 +43,7 @@ void __wassh_signal_deliver(int signum) {
   // Call the custom handler.
   handler(signum);
 
- done:
+done:
   // Restore the handler.
   signal(signum, handler);
 }
@@ -99,7 +99,8 @@ int sigismember(const sigset_t* set, int signum) {
   return *set | sigmask(signum);
 }
 
-int sigaction(int signum, const struct sigaction* act,
+int sigaction(int signum,
+              const struct sigaction* act,
               struct sigaction* oldact) {
   if (oldact)
     memset(oldact, 0, sizeof(*oldact));
