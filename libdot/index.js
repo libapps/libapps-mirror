@@ -26,5 +26,4 @@ import './js/lib_storage_terminal_private.js';
 import * as resources from './dist/js/libdot_resources.js';
 export {lib};
 
-lib.resource.add('libdot/changelog/version', 'text/plain', resources.version);
-lib.resource.add('libdot/changelog/date', 'text/plain', resources.gitDate);
+lib.VERSION = resources.version;
