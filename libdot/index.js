@@ -16,7 +16,6 @@ import './js/lib_f.js';
 import './js/lib_i18n.js';
 import './js/lib_message_manager.js';
 import './js/lib_preference_manager.js';
-import './js/lib_resource.js';
 import './js/lib_storage.js';
 import './js/lib_storage_chrome.js';
 import './js/lib_storage_condenser.js';
