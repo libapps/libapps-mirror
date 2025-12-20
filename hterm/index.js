@@ -8,7 +8,7 @@
  */
 
 import {hterm} from './js/hterm.js';
-import './dist/js/hterm_resources.js';
+import * as resources from './dist/js/hterm_resources.js';
 import './js/hterm_accessibility_reader.js';
 import './js/hterm_contextmenu.js';
 import './js/hterm_find_bar.js';
@@ -32,3 +32,6 @@ import './js/hterm_vt_character_map.js';
 import './third_party/intl-segmenter/intl-segmenter.js';
 import './third_party/wcwidth/wc.js';
 export {hterm};
+
+hterm.VERSION = resources.VERSION;
+hterm.resources = resources;

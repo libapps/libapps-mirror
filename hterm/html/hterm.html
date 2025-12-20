@@ -35,9 +35,7 @@ import {lib} from '../../libdot/index.js';
 import {hterm} from '../index.js';
 
 function initContent(io) {
-  const ver = lib.resource.getData('hterm/changelog/version');
-  const date = lib.resource.getData('hterm/changelog/date');
-  const pkg = `hterm ${ver} (${date})`;
+  const pkg = `hterm ${hterm.VERSION} (${hterm.resources.GIT_DATE})`;
   /* eslint-disable quotes */
   io.println("\r\n\
                             .--~~~~~~~~~~~~~------.\r\n\

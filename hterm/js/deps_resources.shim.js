@@ -19,7 +19,7 @@ import imgCopy from '../images/copy.svg';
 import icon96 from '../images/icon-96.png';
 import imgKeyboardArrowDown from '../images/keyboard_arrow_down.svg';
 import imgKeyboardArrowUp from '../images/keyboard_arrow_up.svg';
-import pkg from '../package.json';
+import {gitCommitHash, gitDate, version} from '../package.json';
 
 /**
  * Add a data uri as a resource.
@@ -63,7 +63,8 @@ addHtml('hterm/html/find_bar', htmlFindBar);
 addHtml('hterm/html/find_screen', htmlFindScreen);
 addResource('hterm/images/icon-96', icon96);
 
-lib.resource.add('hterm/concat/date', 'text/plain', pkg.gitDate);
-lib.resource.add('hterm/changelog/version', 'text/plain', pkg.version);
-lib.resource.add('hterm/changelog/date', 'text/plain', pkg.gitDate);
-lib.resource.add('hterm/git/HEAD', 'text/plain', pkg.gitCommitHash);
+export {
+  gitCommitHash as GIT_COMMIT,
+  gitDate as GIT_DATE,
+  version as VERSION,
+};

@@ -266,13 +266,12 @@ CommandInstance.prototype.run = async function() {
 
     if (this.isDevVersion()) {
       // If we're a development version, show build details.
-      const htermVer = lib.resource.getData('hterm/changelog/version');
       const vcsAgeMinutes =
           Math.round((new Date().getTime() - new Date(GIT_DATE).getTime()) /
                      1000 / 60);
 
       this.io.println('');
-      this.io.println(`[dev] hterm v${htermVer} (git ${GIT_COMMIT})`);
+      this.io.println(`[dev] hterm v${hterm.VERSION} (git ${GIT_COMMIT})`);
       this.io.println(`[dev] built on ${GIT_DATE} ` +
                       `(${vcsAgeMinutes} minutes ago)`);
     }
