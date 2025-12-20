@@ -62,6 +62,7 @@ def main(argv):
 
     hterm_files = [
         os.path.relpath(HTERM_DIR / "index.js"),
+        os.path.relpath(HTERM_DIR / "js" / "deps_resources.shim.js"),
         os.path.relpath(HTERM_DIR / "third_party" / "wcwidth" / "wc.js"),
     ] + sorted(
         os.path.relpath(x)

@@ -269,8 +269,7 @@ class Bell {
    * @param {boolean} value
    */
   set playAudio(value) {
-    this.audio_ = value ?
-        new Audio(lib.resource.getDataUrl('hterm/audio/bell')) : null;
+    this.audio_ = value ? new Audio(hterm.resources.AU_BELL) : null;
   }
 
   ring() {

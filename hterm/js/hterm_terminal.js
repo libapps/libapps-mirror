@@ -333,12 +333,12 @@ hterm.Terminal.prototype.setProfile = function(
       const ary = v.match(/^lib-resource:(\S+)/);
       if (ary) {
         const name = ary[1];
-        if (lib.resource.get(name) === undefined) {
+        if (name !== 'hterm/audio/bell') {
           console.warn(`Invalid resource name '${name}'`);
           this.prefs_.reset('audible-bell-sound');
           return;
         }
-        this.bellAudio_.setAttribute('src', lib.resource.getDataUrl(name));
+        this.bellAudio_.setAttribute('src', hterm.resources.AU_BELL);
       } else {
         this.bellAudio_.setAttribute('src', v);
       }
@@ -3381,7 +3381,7 @@ hterm.Terminal.prototype.copyStringToClipboard = function(str) {
     if (!this.clipboardNotice_) {
       this.clipboardNotice_ = this.document_.createElement('div');
       this.clipboardNotice_.style.textAlign = 'center';
-      const copyImage = lib.resource.getData('hterm/images/copy');
+      const copyImage = hterm.resources.IMG_COPY;
       this.clipboardNotice_.innerHTML = hterm.sanitizeHtml(
           `${copyImage}<div>${hterm.msg('NOTIFY_COPY')}</div>`);
     }
