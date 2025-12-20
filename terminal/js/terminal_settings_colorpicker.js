@@ -48,9 +48,9 @@ function swatchStyle(color, showFocusRing) {
   const boxShadows = [];
 
   if (color) {
-    const c = lib.colors;
-    const contrastRatio = c.contrastRatio(1, c.luminance(
-        ...lib.notNull(c.crackRGB(lib.notNull(c.normalizeCSS(color))))));
+    const contrastRatio = lib.colors.contrastRatio(1, lib.colors.luminance(
+        ...lib.notNull(lib.colors.crackRGB(
+        lib.notNull(lib.colors.normalizeCSS(color))))));
     const darkMode = window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (!darkMode && contrastRatio < 1.25) {
