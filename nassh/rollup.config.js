@@ -12,6 +12,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 import yaml from '@rollup/plugin-yaml';
+import gitInfo from 'rollup-plugin-git-info';
 
 const plugins = [
   resolve({
@@ -22,6 +23,7 @@ const plugins = [
   commonjs(),
   image(),
   yaml(),
+  gitInfo(),
 ];
 
 // Common output settings.

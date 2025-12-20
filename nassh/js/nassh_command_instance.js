@@ -12,8 +12,8 @@ import {lib} from '../../libdot/index.js';
 import {hterm} from '../../hterm/index.js';
 import {punycode} from './deps_punycode.rollup.js';
 import {
-  IMG_VISIBILITY_URI, IMG_VISIBILITY_OFF_URI, RELEASE_LAST_VERSION,
-  RELEASE_NOTES,
+  GIT_COMMIT, GIT_DATE, IMG_VISIBILITY_URI, IMG_VISIBILITY_OFF_URI,
+  RELEASE_LAST_VERSION, RELEASE_NOTES,
 } from './deps_resources.rollup.js';
 
 import {
@@ -265,18 +265,16 @@ CommandInstance.prototype.run = async function() {
                               [num, localize(`TIP_${num}`)]));
 
     if (this.isDevVersion()) {
-      // If we're a development version, show hterm details.
-      const htermDate = lib.resource.getData('hterm/concat/date');
+      // If we're a development version, show build details.
       const htermVer = lib.resource.getData('hterm/changelog/version');
-      const htermRev = lib.resource.getData('hterm/git/HEAD');
-      const htermAgeMinutes =
-          Math.round((new Date().getTime() - new Date(htermDate).getTime()) /
+      const vcsAgeMinutes =
+          Math.round((new Date().getTime() - new Date(GIT_DATE).getTime()) /
                      1000 / 60);
 
       this.io.println('');
-      this.io.println(`[dev] hterm v${htermVer} (git ${htermRev})`);
-      this.io.println(`[dev] built on ${htermDate} ` +
-                      `(${htermAgeMinutes} minutes ago)`);
+      this.io.println(`[dev] hterm v${htermVer} (git ${GIT_COMMIT})`);
+      this.io.println(`[dev] built on ${GIT_DATE} ` +
+                      `(${vcsAgeMinutes} minutes ago)`);
     }
 
     this.io.println('');
