@@ -581,28 +581,6 @@ lib.colors.setAlpha = function(rgb, alpha) {
 };
 
 /**
- * Mix a percentage of a tint color into a base color.
- *
- * @param  {string} base The normalized CSS base color spec.
- * @param  {string} tint The normalized CSS color to tint with.
- * @param  {number} percent The percentage of the tinting.
- * @return {string} The new tinted CSS color spec.
- */
-lib.colors.mix = function(base, tint, percent) {
-  const ary1 = lib.colors.crackRGB(base);
-  const ary2 = lib.colors.crackRGB(tint);
-
-  for (let i = 0; i < 4; ++i) {
-    const basecol = parseInt(ary1[i], 10);
-    const tintcol = parseInt(ary2[i], 10);
-    const diff = tintcol - basecol;
-    ary1[i] = Math.round(base + diff * percent).toString();
-  }
-
-  return lib.colors.arrayToRGBA(ary1);
-};
-
-/**
  * Split an rgb/rgba color into an array of its components.
  *
  * On success, a 4 element array will be returned.  For rgb values, the alpha
