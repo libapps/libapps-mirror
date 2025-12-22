@@ -33,7 +33,7 @@ def get_parser() -> libdot.ArgumentParser:
         "File selection/filtering",
         description="All files are checked by default",
     )
-    del group
+    group.add_argument("--py", action="store_true", help="Check Python files.")
 
     parser.add_argument("paths", nargs="*", help="Paths to check.")
 
@@ -67,7 +67,7 @@ def main(
             print("No files to check.")
             return 0
 
-    check_groups = {}
+    check_groups = {"py"}
     check_all = all(not getattr(opts, x) for x in check_groups)
     for group in check_groups:
         setattr(opts, group, check_all or getattr(opts, group))
@@ -79,7 +79,11 @@ def main(
     }
     checks = []
 
-    del kwargs
+    py_files = libdot.pylint.filter_known_files(opts.paths)
+    tocheck_paths -= set(py_files)
+    if py_files and opts.py:
+        py_kwargs = {"paths": py_files, **kwargs}
+        checks += [libdot.black.perform(**py_kwargs)]
 
     if tocheck_paths:
         logging.warning(
