@@ -33,7 +33,7 @@ lib.colors = {};
  *
  * Instead, we stoop to this .replace() trick.
  */
-lib.colors.re_ = {
+const re_ = {
   // CSS hex color, #RGB or RGBA.
   hex16: /^#([a-f0-9])([a-f0-9])([a-f0-9])([a-f0-9])?$/i,
 
@@ -104,7 +104,7 @@ lib.colors.rgbToX11 = function(value) {
     return lib.f.zpad(v, 4);
   }
 
-  const ary = value.match(lib.colors.re_.rgbx);
+  const ary = value.match(re_.rgbx);
   if (!ary) {
     return null;
   }
@@ -204,7 +204,7 @@ lib.colors.x11ToCSS = function(v) {
     return Math.round(parseInt(v, 16) / 257);
   }
 
-  const ary = v.match(lib.colors.re_.x11rgb);
+  const ary = v.match(re_.x11rgb);
   if (!ary) {
     // Handle the legacy format.
     if (v.startsWith('#')) {
@@ -229,8 +229,8 @@ lib.colors.x11ToCSS = function(v) {
  * @return {?string} The converted value.
  */
 lib.colors.hexToRGB = function(hex) {
-  const hex16 = lib.colors.re_.hex16;
-  const hex24 = lib.colors.re_.hex24;
+  const hex16 = re_.hex16;
+  const hex24 = re_.hex24;
 
   if (hex16.test(hex)) {
     // Convert from RGB to RRGGBB and from RGBA to RRGGBBAA.
@@ -287,13 +287,13 @@ lib.colors.rgbToHex = function(rgb) {
  */
 lib.colors.crackHSL = function(color) {
   if (color.startsWith('hsla')) {
-    const ary = color.match(lib.colors.re_.hsla);
+    const ary = color.match(re_.hsla);
     if (ary) {
       ary.shift();
       return Array.from(ary);
     }
   } else {
-    const ary = color.match(lib.colors.re_.hsl);
+    const ary = color.match(re_.hsl);
     if (ary) {
       ary.shift();
       ary.push('1');
@@ -510,11 +510,11 @@ lib.colors.normalizeCSS = function(def) {
     return lib.colors.hexToRGB(def);
   }
 
-  if (lib.colors.re_.rgbx.test(def)) {
+  if (re_.rgbx.test(def)) {
     return def;
   }
 
-  if (lib.colors.re_.hslx.test(def)) {
+  if (re_.hslx.test(def)) {
     return lib.colors.hslToRGB(def);
   }
 
@@ -528,7 +528,7 @@ lib.colors.normalizeCSS = function(def) {
  * @return {?string} The converted value.
  */
 lib.colors.normalizeCSSToHSL = function(def) {
-  if (lib.colors.re_.hslx.test(def)) {
+  if (re_.hslx.test(def)) {
     return def;
   }
 
@@ -591,13 +591,13 @@ lib.colors.setAlpha = function(rgb, alpha) {
  */
 lib.colors.crackRGB = function(color) {
   if (color.startsWith('rgba')) {
-    const ary = color.match(lib.colors.re_.rgba);
+    const ary = color.match(re_.rgba);
     if (ary) {
       ary.shift();
       return Array.from(ary);
     }
   } else {
-    const ary = color.match(lib.colors.re_.rgb);
+    const ary = color.match(re_.rgb);
     if (ary) {
       ary.shift();
       ary.push('1');
@@ -622,18 +622,18 @@ lib.colors.crackRGB = function(color) {
  * @return {?string} The corresponding CSS rgb(...) value.
  */
 lib.colors.nameToRGB = function(name) {
-  if (name in lib.colors.colorNames) {
-    return lib.colors.colorNames[name];
+  if (name in x11ColorNames) {
+    return x11ColorNames[name];
   }
 
   name = name.toLowerCase();
-  if (name in lib.colors.colorNames) {
-    return lib.colors.colorNames[name];
+  if (name in x11ColorNames) {
+    return x11ColorNames[name];
   }
 
   name = name.replace(/\s+/g, '');
-  if (name in lib.colors.colorNames) {
-    return lib.colors.colorNames[name];
+  if (name in x11ColorNames) {
+    return x11ColorNames[name];
   }
 
   return null;
@@ -738,7 +738,7 @@ lib.colors.stockPalette = [
 /**
  * Named colors according to the stock X11 rgb.txt file.
  */
-lib.colors.colorNames = {
+const x11ColorNames = {
   'aliceblue': 'rgb(240, 248, 255)',
   'antiquewhite': 'rgb(250, 235, 215)',
   'antiquewhite1': 'rgb(255, 239, 219)',

@@ -16,7 +16,7 @@ lib.i18n = {};
 /**
  * Convenience shortcut to the browser i18n object.
  */
-lib.i18n.browser_ =
+const browser_ =
     globalThis.browser?.i18n ? browser.i18n :
     globalThis.chrome?.i18n ? chrome.i18n :
     null;
@@ -27,7 +27,7 @@ lib.i18n.browser_ =
  * @return {boolean} True if browser.i18n or chrome.i18n exists.
  */
 lib.i18n.browserSupported = function() {
-  return lib.i18n.browser_ !== null;
+  return browser_ !== null;
 };
 
 /**
@@ -54,8 +54,8 @@ lib.i18n.getAcceptLanguages = function() {
  */
 lib.i18n.getMessage = function(msgname, substitutions = [], fallback = '') {
   // First let the native browser APIs handle everything for us.
-  if (lib.i18n.browser_) {
-    const message = lib.i18n.browser_.getMessage(msgname, substitutions);
+  if (browser_) {
+    const message = browser_.getMessage(msgname, substitutions);
     if (message) {
       return message;
     }
