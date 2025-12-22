@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+# Copyright 2025 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Format our source files."""
+
+from pathlib import Path
+import sys
+
+import kokoro
+import libdot  # pylint: disable=wrong-import-order
+
+
+def _get_default_paths(basedir: Path) -> list[Path]:
+    """Get list of paths to check by default."""
+    kokoro_files = sorted(libdot.lint.get_known_sources(basedir))
+
+    # Include files in the root dir as they have no other home.
+    topdir = kokoro.LIBAPPS_DIR
+    top_paths = (
+        libdot.run(
+            ["git", "ls-tree", "--name-only", "-z", "HEAD"],
+            cwd=topdir,
+            capture_output=True,
+            encoding="utf-8",
+        )
+        .stdout[:-1]
+        .split("\0")
+    )
+    top_files = [
+        topdir / x
+        for x in top_paths
+        if (topdir / x).exists() and (topdir / x).is_file()
+    ]
+
+    return top_files + kokoro_files
+
+
+def main(argv: list[str]) -> int:
+    """The main func!"""
+    return libdot.format_tool.main(
+        argv, basedir=kokoro.DIR, get_default_paths=_get_default_paths
+    )
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

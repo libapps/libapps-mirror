@@ -176,11 +176,25 @@ def build():
     build_archive()
 
 
-def _run_linter(cmd, cwd):
-    """Run the linter taking into account presubmit bot state."""
+_SUBDIRS_TO_ANALYZE = (
+    # go/keep-sorted start
+    "hterm",
+    "kokoro",
+    "libdot",
+    "nassh",
+    "ssh_client",
+    "terminal",
+    "wasi-js-bindings",
+    "wassh",
+    # go/keep-sorted end
+)
+
+
+def _run_analyzer(cmd: list[str], cwd: Path) -> bool:
+    """Run the tool taking into account presubmit bot state."""
     result = libdot.run(cmd, check=False, cwd=cwd)
     if result.returncode:
-        msg = f"{cmd[0]} linter exited {result.returncode}"
+        msg = f"{cmd[0]} analyzer exited {result.returncode}"
         if is_presubmit():
             logging.error(msg)
             return False
@@ -189,22 +203,36 @@ def _run_linter(cmd, cwd):
     return True
 
 
+def test_format() -> list[tuple[str, str]]:
+    """Format all our files."""
+    # Log versions of tools since we pull some from the container.
+    libdot.run([kokoro.DIR / "format", "--version"])
+
+    ret = []
+    for pkg in _SUBDIRS_TO_ANALYZE:
+        pkg_dir = kokoro.LIBAPPS_DIR / pkg
+        tool = pkg_dir / "format"
+        if not tool.exists():
+            tool = pkg_dir / "bin" / "format"
+        cmd = [
+            tool,
+            "--gerrit-comments-file",
+            os.path.join(
+                GERRIT_COMMENTS_DIR, pkg, "%(tool)", GERRIT_COMMENTS_NAME
+            ),
+        ]
+        if not _run_analyzer(cmd, pkg_dir):
+            ret.append(("format", pkg))
+    return ret
+
+
 def test_lint():
     """Lint all our files."""
     # Log versions of linter tools since we pull some from the container.
     libdot.run([kokoro.DIR / "lint", "--version"])
 
     ret = []
-    for pkg in (
-        "kokoro",
-        "libdot",
-        "hterm",
-        "nassh",
-        "ssh_client",
-        "terminal",
-        "wasi-js-bindings",
-        "wassh",
-    ):
+    for pkg in _SUBDIRS_TO_ANALYZE:
         pkg_dir = kokoro.LIBAPPS_DIR / pkg
         linter = pkg_dir / "lint"
         if not linter.exists():
@@ -216,7 +244,7 @@ def test_lint():
                 GERRIT_COMMENTS_DIR, pkg, "%(tool)", GERRIT_COMMENTS_NAME
             ),
         ]
-        if not _run_linter(cmd, pkg_dir):
+        if not _run_analyzer(cmd, pkg_dir):
             ret.append(("lint", pkg))
     return ret
 
@@ -282,7 +310,7 @@ def test_unittests():
 def test():
     """Test the various components."""
     # Run all the tests before aborting.
-    failures = test_lint() + test_unittests()
+    failures = test_format() + test_lint() + test_unittests()
     if failures:
         logging.error("Some tests failed!  See above for details.")
         for step, pkg in failures:

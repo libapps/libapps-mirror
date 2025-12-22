@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+# Copyright 2025 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Format our source files."""
+
+import logging
+from pathlib import Path
+import sys
+from typing import Optional
+
+import libdot
+
+
+def get_parser() -> libdot.ArgumentParser:
+    """Get a command line parser."""
+    parser = libdot.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--version", action="store_true", help="Show tool versions."
+    )
+    parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Run tools with --fix setting if possible.",
+    )
+    parser.add_argument(
+        "--gerrit-comments-file",
+        help="Save errors for posting files to Gerrit.",
+    )
+
+    group = parser.add_argument_group(
+        "File selection/filtering",
+        description="All files are checked by default",
+    )
+    del group
+
+    parser.add_argument("paths", nargs="*", help="Paths to check.")
+
+    return parser
+
+
+def main(
+    argv: list[str],
+    get_default_paths=libdot.lint.get_known_sources,
+    basedir: Optional[Path] = None,
+) -> int:
+    """The main func!
+
+    Args:
+      argv: The command line to process.
+      get_default_paths: Function to find files to check.
+      basedir: The base source tree to search for default set of files.
+    """
+    parser = get_parser()
+    opts = parser.parse_args(argv)
+    libdot.node_and_npm_setup()
+
+    if opts.version:
+        for func in (libdot.black.run,):
+            func(["--version"])
+        return 0
+
+    if not opts.paths:
+        opts.paths = [str(x) for x in get_default_paths(basedir)]
+        if not opts.paths:
+            print("No files to check.")
+            return 0
+
+    check_groups = {}
+    check_all = all(not getattr(opts, x) for x in check_groups)
+    for group in check_groups:
+        setattr(opts, group, check_all or getattr(opts, group))
+
+    tocheck_paths = set(opts.paths)
+    kwargs = {
+        "fix": opts.fix,
+        "gerrit_comments_file": opts.gerrit_comments_file,
+    }
+    checks = []
+
+    del kwargs
+
+    if tocheck_paths:
+        logging.warning(
+            "Formatting skipped:\n%s", " ".join(sorted(tocheck_paths))
+        )
+
+    return 0 if all(checks) else 1
+
+
+if __name__ == "__main__":
+    sys.exit(
+        main(
+            sys.argv[1:],
+            basedir=libdot.DIR,
+        )
+    )
