@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {lib} from '../index.js';
+import {lib} from './lib.js';
 
 /**
  * window.localStorage based class with an async interface that is

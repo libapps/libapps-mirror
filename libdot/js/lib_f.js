@@ -6,7 +6,7 @@
  * @fileoverview Grab bag of utility functions.
  */
 
-import {lib} from '../index.js';
+import {lib} from './lib.js';
 
 /** @const */
 lib.f = {};

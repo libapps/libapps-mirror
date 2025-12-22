@@ -6,7 +6,7 @@
  * @fileoverview Color utilities.
  */
 
-import {lib} from '../index.js';
+import {lib} from './lib.js';
 
 /** @const */
 lib.colors = {};

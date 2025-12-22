@@ -8,7 +8,7 @@
  * Arguably some of these functions should be l10n, but oh well.
  */
 
-import {lib} from '../index.js';
+import {lib} from './lib.js';
 
 /** @const */
 lib.i18n = {};
