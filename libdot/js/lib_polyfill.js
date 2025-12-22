@@ -6,8 +6,3 @@
  * @fileoverview Polyfills for ES2021+ features we want to use.
  * @suppress {duplicate} This file redefines many functions.
  */
-
-import {lib} from './lib.js';
-
-/** @const */
-lib.polyfill = {};
