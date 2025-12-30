@@ -69,7 +69,7 @@ class StorageAreaFake {
       for (const [key, defaultValue] of Object.entries(this.storage_)) {
         assert.typeOf(key, 'string');
         // This is for closure-compiler as it can't handle the typeOf above.
-        lib.assert(typeof key === 'string');
+        assert(typeof key === 'string');
         const value = this.storage_[key];
         values[key] = value === undefined ? defaultValue : value;
       }

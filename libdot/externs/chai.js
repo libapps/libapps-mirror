@@ -22,6 +22,7 @@ chai.config;
 /**
  * @param {*} expression
  * @param {string=} message
+ * @closurePrimitive {asserts.truthy}
  */
 chai.assert = function(expression, message) {};
 
