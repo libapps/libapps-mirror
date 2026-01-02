@@ -222,167 +222,161 @@ RelayCorpStream.prototype.requestError_ = function(isRead) {
  *
  * This class manages the read and write XML http requests used to communicate
  * with the Google relay server.
- *
- * @constructor
- * @extends {RelayCorpStream}
  */
-export function RelayCorpXhrStream() {
-  RelayCorpStream.apply(this, []);
+export class RelayCorpXhrStream extends RelayCorpStream {
+  constructor() {
+    super();
 
-  this.writeRequest_ = new XMLHttpRequest();
-  this.writeRequest_.ontimeout = this.writeRequest_.onabort =
-      this.writeRequest_.onerror = this.onRequestError_.bind(this);
-  this.writeRequest_.onloadend = this.onWriteDone_.bind(this);
+    this.writeRequest_ = new XMLHttpRequest();
+    this.writeRequest_.ontimeout = this.writeRequest_.onabort =
+        this.writeRequest_.onerror = this.onRequestError_.bind(this);
+    this.writeRequest_.onloadend = this.onWriteDone_.bind(this);
 
-  this.readRequest_ = new XMLHttpRequest();
-  this.readRequest_.ontimeout = this.readRequest_.onabort =
-      this.readRequest_.onerror = this.onRequestError_.bind(this);
-  this.readRequest_.onloadend = this.onReadReady_.bind(this);
+    this.readRequest_ = new XMLHttpRequest();
+    this.readRequest_.ontimeout = this.readRequest_.onabort =
+        this.readRequest_.onerror = this.onRequestError_.bind(this);
+    this.readRequest_.onloadend = this.onReadReady_.bind(this);
 
-  this.lastWriteSize_ = 0;
+    this.lastWriteSize_ = 0;
+  }
+
+  /**
+   * Resume read.
+   *
+   * @override
+   */
+  resumeRead_() {
+    if (this.isRequestBusy_(this.readRequest_)) {
+      // Read request is in progress.
+      return;
+    }
+
+    if (this.backoffTimeout_) {
+      console.warn('Attempt to read while backing off.');
+      return;
+    }
+
+    this.readRequest_.open(
+        'GET',
+        `${this.relayServer_}read?sid=${this.sessionID_}` +
+        `&rcnt=${this.readCount_}`,
+        true);
+    this.readRequest_.send();
+  }
+
+  /**
+   * Send the next pending write.
+   *
+   * @override
+   */
+  sendWrite_() {
+    if (this.writeBuffer_.isEmpty() ||
+        this.isRequestBusy_(this.writeRequest_)) {
+      // Nothing to write, or a write is in progress.
+      return;
+    }
+
+    if (this.backoffTimeout_) {
+      console.warn('Attempt to write while backing off.');
+      return;
+    }
+
+    const dataBuffer = this.writeBuffer_.read(this.maxMessageLength);
+    const data = base64ToBase64Url(btoa(
+        lib.codec.codeUnitArrayToString(dataBuffer)));
+    this.writeRequest_.open(
+        'GET',
+        `${this.relayServer_}write?sid=${this.sessionID_}&wcnt=${
+            this.writeCount_}&data=${data}`,
+        true);
+    this.writeRequest_.send();
+    this.lastWriteSize_ = dataBuffer.length;
+  }
+
+  /**
+   * Called when the readRequest_ has finished loading.
+   *
+   * This indicates that the response entity has the data for us to send to the
+   * terminal.
+   *
+   * @param {!Event} e
+   */
+  onReadReady_(e) {
+    if (this.readRequest_.readyState != XMLHttpRequest.DONE) {
+      return;
+    }
+
+    if (this.readRequest_.status == 410) {
+      // HTTP 410 Gone indicates that the relay has dropped our ssh session.
+      this.close();
+      this.sessionID_ = null;
+      return;
+    }
+
+    if (this.readRequest_.status != 200) {
+      this.onRequestError_(e);
+      return;
+    }
+
+    this.readCount_ += Math.floor(
+        this.readRequest_.responseText.length * 3 / 4);
+    const data = base64UrlToBase64(this.readRequest_.responseText);
+    this.onDataAvailable(lib.codec.stringToCodeUnitArray(data));
+
+    this.requestSuccess_(true);
+  }
+
+  /**
+   * Called when the writeRequest_ has finished loading.
+   *
+   * This indicates that data we wrote has either been successfully written, or
+   * failed somewhere along the way.
+   *
+   * @param {!Event} e
+   */
+  onWriteDone_(e) {
+    if (this.writeRequest_.readyState != XMLHttpRequest.DONE) {
+      return;
+    }
+
+    if (this.writeRequest_.status == 410) {
+      // HTTP 410 Gone indicates that the relay has dropped our ssh session.
+      this.close();
+      return;
+    }
+
+    if (this.writeRequest_.status != 200) {
+      this.onRequestError_(e);
+      return;
+    }
+
+    this.writeBuffer_.ack(this.lastWriteSize_);
+    this.writeCount_ += this.lastWriteSize_;
+
+    this.requestSuccess_(false);
+  }
+
+  /** @param {!Event} e */
+  onRequestError_(e) {
+    this.requestError_(e.target == this.readRequest_);
+  }
+
+  /**
+   * Returns true if the given XHR is busy.
+   *
+   * @param {!XMLHttpRequest} r
+   * @return {boolean}
+   */
+  isRequestBusy_(r) {
+    return (r.readyState != XMLHttpRequest.DONE &&
+            r.readyState != XMLHttpRequest.UNSENT);
+  }
 }
-
-/**
- * We are a subclass of RelayCorpStream.
- */
-RelayCorpXhrStream.prototype = Object.create(RelayCorpStream.prototype);
-/** @override */
-RelayCorpXhrStream.constructor = RelayCorpXhrStream;
 
 /**
  * Maximum length of message that can be sent to avoid request limits.
  */
 RelayCorpXhrStream.prototype.maxMessageLength = 1024;
-
-/**
- * Resume read.
- *
- * @override
- */
-RelayCorpXhrStream.prototype.resumeRead_ = function() {
-  if (this.isRequestBusy_(this.readRequest_)) {
-    // Read request is in progress.
-    return;
-  }
-
-  if (this.backoffTimeout_) {
-    console.warn('Attempt to read while backing off.');
-    return;
-  }
-
-  this.readRequest_.open(
-      'GET',
-      `${this.relayServer_}read?sid=${this.sessionID_}&rcnt=${this.readCount_}`,
-      true);
-  this.readRequest_.send();
-};
-
-/**
- * Send the next pending write.
- *
- * @override
- */
-RelayCorpXhrStream.prototype.sendWrite_ = function() {
-  if (this.writeBuffer_.isEmpty() || this.isRequestBusy_(this.writeRequest_)) {
-    // Nothing to write, or a write is in progress.
-    return;
-  }
-
-  if (this.backoffTimeout_) {
-    console.warn('Attempt to write while backing off.');
-    return;
-  }
-
-  const dataBuffer = this.writeBuffer_.read(this.maxMessageLength);
-  const data = base64ToBase64Url(btoa(
-      lib.codec.codeUnitArrayToString(dataBuffer)));
-  this.writeRequest_.open(
-      'GET',
-      `${this.relayServer_}write?sid=${this.sessionID_}&wcnt=${
-          this.writeCount_}&data=${data}`,
-      true);
-  this.writeRequest_.send();
-  this.lastWriteSize_ = dataBuffer.length;
-};
-
-/**
- * Called when the readRequest_ has finished loading.
- *
- * This indicates that the response entity has the data for us to send to the
- * terminal.
- *
- * @param {!Event} e
- */
-RelayCorpXhrStream.prototype.onReadReady_ = function(e) {
-  if (this.readRequest_.readyState != XMLHttpRequest.DONE) {
-    return;
-  }
-
-  if (this.readRequest_.status == 410) {
-    // HTTP 410 Gone indicates that the relay has dropped our ssh session.
-    this.close();
-    this.sessionID_ = null;
-    return;
-  }
-
-  if (this.readRequest_.status != 200) {
-    this.onRequestError_(e);
-    return;
-  }
-
-  this.readCount_ += Math.floor(
-      this.readRequest_.responseText.length * 3 / 4);
-  const data = base64UrlToBase64(this.readRequest_.responseText);
-  this.onDataAvailable(lib.codec.stringToCodeUnitArray(data));
-
-  this.requestSuccess_(true);
-};
-
-/**
- * Called when the writeRequest_ has finished loading.
- *
- * This indicates that data we wrote has either been successfully written, or
- * failed somewhere along the way.
- *
- * @param {!Event} e
- */
-RelayCorpXhrStream.prototype.onWriteDone_ = function(e) {
-  if (this.writeRequest_.readyState != XMLHttpRequest.DONE) {
-    return;
-  }
-
-  if (this.writeRequest_.status == 410) {
-    // HTTP 410 Gone indicates that the relay has dropped our ssh session.
-    this.close();
-    return;
-  }
-
-  if (this.writeRequest_.status != 200) {
-    this.onRequestError_(e);
-    return;
-  }
-
-  this.writeBuffer_.ack(this.lastWriteSize_);
-  this.writeCount_ += this.lastWriteSize_;
-
-  this.requestSuccess_(false);
-};
-
-/** @param {!Event} e */
-RelayCorpXhrStream.prototype.onRequestError_ = function(e) {
-  this.requestError_(e.target == this.readRequest_);
-};
-
-/**
- * Returns true if the given XHR is busy.
- *
- * @param {!XMLHttpRequest} r
- * @return {boolean}
- */
-RelayCorpXhrStream.prototype.isRequestBusy_ = function(r) {
-  return (r.readyState != XMLHttpRequest.DONE &&
-          r.readyState != XMLHttpRequest.UNSENT);
-};
 
 /**
  * WebSocket backed stream.
