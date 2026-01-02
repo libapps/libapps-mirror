@@ -869,36 +869,38 @@ DataObject.prototype.lookup = function(tag) {
 
 /**
  * Representation of status bytes as returned by smart card commands.
- *
- * @param {!Uint8Array} bytes The raw status bytes.
- * @constructor
  */
-function StatusBytes(bytes) {
+class StatusBytes {
   /**
-   * The raw status bytes.
-   *
-   * @member {!Uint8Array}
-   * @readonly
+   * @param {!Uint8Array} bytes The raw status bytes.
    */
-  this.bytes = bytes;
+  constructor(bytes) {
+    /**
+     * The raw status bytes.
+     *
+     * @member {!Uint8Array}
+     * @readonly
+     */
+    this.bytes = bytes;
+  }
+
+  /**
+   * Calculates the 16-bit value represented by the status bytes.
+   *
+   * @return {number} The 16-bit value represented by the status bytes.
+   */
+  value() {
+    return (this.bytes[0] << 8) + this.bytes[1];
+  }
+
+  /**
+   * @return {string}
+   * @override
+   */
+  toString() {
+    return `(0x${this.bytes[0].toString(16)} 0x${this.bytes[1].toString(16)})`;
+  }
 }
-
-/**
- * Calculates the 16-bit value represented by the status bytes.
- *
- * @return {number} The 16-bit value represented by the status bytes.
- */
-StatusBytes.prototype.value = function() {
-  return (this.bytes[0] << 8) + this.bytes[1];
-};
-
-/**
- * @return {string}
- * @override
- */
-StatusBytes.prototype.toString = function() {
-  return `(0x${this.bytes[0].toString(16)} 0x${this.bytes[1].toString(16)})`;
-};
 
 /**
  * A lifecycle and communication manager for smart cards with convenience
