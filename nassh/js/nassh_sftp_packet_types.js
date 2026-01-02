@@ -60,79 +60,95 @@ export const StatusCodes = {
  * SFTP Status Packet containing the request id, status codes, status message
  * and language.
  *
- * @param {!Packet} packet
- * @constructor
- * @extends {Packet}
  */
-export function StatusPacket(packet) {
-  this.requestId = packet.getUint32();
-  this.code = packet.getUint32();
-  this.message = packet.getString();
-  this.lang = packet.getString();
+export class StatusPacket extends Packet {
+  /**
+   * @param {!Packet} packet
+   */
+  constructor(packet) {
+    super();
+
+    this.requestId = packet.getUint32();
+    this.code = packet.getUint32();
+    this.message = packet.getString();
+    this.lang = packet.getString();
+  }
 }
 
 /**
  * SFTP Data Packet containing the request id and associated data.
- *
- * @param {!Packet} packet
- * @constructor
- * @extends {Packet}
  */
-export function DataPacket(packet) {
-  this.requestId = packet.getUint32();
-  this.length = packet.getUint32();
-  this.data = packet.getData(this.length);
+export class DataPacket extends Packet {
+  /**
+   * @param {!Packet} packet
+   */
+  constructor(packet) {
+    super();
+
+    this.requestId = packet.getUint32();
+    this.length = packet.getUint32();
+    this.data = packet.getData(this.length);
+  }
 }
 
 /**
  * SFTP Handle Packet containing the request id and a file handle.
- *
- * @param {!Packet} packet
- * @constructor
- * @extends {Packet}
  */
-export function HandlePacket(packet) {
-  this.requestId = packet.getUint32();
-  this.handle = packet.getString();
+export class HandlePacket extends Packet {
+  /**
+   * @param {!Packet} packet
+   */
+  constructor(packet) {
+    super();
+
+    this.requestId = packet.getUint32();
+    this.handle = packet.getString();
+  }
 }
 
 /**
  * SFTP Name Packet containing the request id, file count and an array of file
  * attributes.
- *
- * @param {!Packet} packet
- * @constructor
- * @extends {Packet}
  */
-export function NamePacket(packet) {
-  this.requestId = packet.getUint32();
-  this.fileCount = packet.getUint32();
-  /* @type {!Array<!File|!FileAttrs>} */
-  this.files = [];
+export class NamePacket extends Packet {
+  /**
+   * @param {!Packet} packet
+   */
+  constructor(packet) {
+    super();
 
-  for (let i = 0; i < this.fileCount; i++) {
-    const fileName = packet.getUtf8String();
-    const longFileName = packet.getUtf8String();
+    this.requestId = packet.getUint32();
+    this.fileCount = packet.getUint32();
+    /* @type {!Array<!File|!FileAttrs>} */
+    this.files = [];
 
-    const fileData = getFileAttrs(packet);
+    for (let i = 0; i < this.fileCount; i++) {
+      const fileName = packet.getUtf8String();
+      const longFileName = packet.getUtf8String();
 
-    fileData.filename = fileName;
-    fileData.longFilename = longFileName;
+      const fileData = getFileAttrs(packet);
 
-    this.files.push(fileData);
+      fileData.filename = fileName;
+      fileData.longFilename = longFileName;
+
+      this.files.push(fileData);
+    }
   }
 }
 
 /**
  * SFTP Attrs Packet containing the request id and a file's attributes.
- *
- * @param {!Packet} packet
- * @constructor
- * @extends {Packet}
  */
-export function AttrsPacket(packet) {
-  this.requestId = packet.getUint32();
-  this.attrs = getFileAttrs(packet);
+export class AttrsPacket extends Packet {
+  /**
+   * @param {!Packet} packet
+   */
+  constructor(packet) {
+    super();
+
+    this.requestId = packet.getUint32();
+    this.attrs = getFileAttrs(packet);
+  }
 }
 
 /**
@@ -140,57 +156,66 @@ export function AttrsPacket(packet) {
  *
  * Since extended replies need specific parsers, we just save a reference to the
  * original packet and delay parsing to whatever call made the extended request.
- *
- * @param {!Packet} packet The source packet to read from.
- * @constructor
- * @extends {Packet}
  */
-export function ExtendedReplyPacket(packet) {
-  this.requestId = packet.getUint32();
-  this.rawPacket = packet;
+export class ExtendedReplyPacket extends Packet {
+  /**
+   * @param {!Packet} packet
+   */
+  constructor(packet) {
+    super();
+
+    this.requestId = packet.getUint32();
+    this.rawPacket = packet;
+  }
 }
 
 /**
  * SFTP response to statvfs@openssh.com packets.
- *
- * @param {!ExtendedReplyPacket} packet The extended reply.
- * @constructor
- * @extends {Packet}
  */
-export function DiskFreePacket(packet) {
-  const p = packet.rawPacket;
-  this.requestId = packet.requestId;
-  this.bsize = p.getUint64();
-  this.frsize = p.getUint64();
-  this.blocks = p.getUint64();
-  this.bfree = p.getUint64();
-  this.bavail = p.getUint64();
-  this.files = p.getUint64();
-  this.ffree = p.getUint64();
-  this.favail = p.getUint64();
-  this.fsid_hi = p.getUint32();
-  this.fsid_lo = p.getUint32();
-  this.flag = p.getUint64();
-  this.namemax = p.getUint64();
+export class DiskFreePacket extends Packet {
+  /**
+   * @param {!ExtendedReplyPacket} packet
+   */
+  constructor(packet) {
+    super();
 
-  this.st_rdonly = !!(this.flag & 0x1);
-  this.st_nosuid = !!(this.flag & 0x2);
+    const p = packet.rawPacket;
+    this.requestId = packet.requestId;
+    this.bsize = p.getUint64();
+    this.frsize = p.getUint64();
+    this.blocks = p.getUint64();
+    this.bfree = p.getUint64();
+    this.bavail = p.getUint64();
+    this.files = p.getUint64();
+    this.ffree = p.getUint64();
+    this.favail = p.getUint64();
+    this.fsid_hi = p.getUint32();
+    this.fsid_lo = p.getUint32();
+    this.flag = p.getUint64();
+    this.namemax = p.getUint64();
+
+    this.st_rdonly = !!(this.flag & 0x1);
+    this.st_nosuid = !!(this.flag & 0x2);
+  }
 }
 
 /**
  * SFTP response to limits@openssh.com packets.
- *
- * @param {!ExtendedReplyPacket} packet The extended reply.
- * @constructor
- * @extends {Packet}
  */
-export function LimitsPacket(packet) {
-  const p = packet.rawPacket;
-  this.requestId = packet.requestId;
-  this.maxPacketLength = p.getUint64();
-  this.maxReadLength = p.getUint64();
-  this.maxWriteLength = p.getUint64();
-  this.maxOpenHandles = p.getUint64();
+export class LimitsPacket extends Packet {
+  /**
+   * @param {!ExtendedReplyPacket} packet
+   */
+  constructor(packet) {
+    super();
+
+    const p = packet.rawPacket;
+    this.requestId = packet.requestId;
+    this.maxPacketLength = p.getUint64();
+    this.maxReadLength = p.getUint64();
+    this.maxWriteLength = p.getUint64();
+    this.maxOpenHandles = p.getUint64();
+  }
 }
 
 /**
@@ -244,23 +269,26 @@ export function ValidExtension(ext) {
 
 /**
  * SFTP Version Packet containing the version and possible extensions.
- *
- * @param {!Packet} packet
- * @constructor
- * @extends {Packet}
  */
-export function VersionPacket(packet) {
-  this.requestId = 'init';
-  this.version = packet.getUint32();
+export class VersionPacket extends Packet {
+  /**
+   * @param {!Packet} packet
+   */
+  constructor(packet) {
+    super();
 
-  // Pull out all the extensions that might exist.
-  this.extensions = {};
-  while (!packet.eod()) {
-    const name = packet.getString();
-    const data = packet.getString();
-    // The SFTP RFC says we should silently ignore unknown/invalid entries.
-    if (ValidExtension(name)) {
-      this.extensions[name] = data;
+    this.requestId = 'init';
+    this.version = packet.getUint32();
+
+    // Pull out all the extensions that might exist.
+    this.extensions = {};
+    while (!packet.eod()) {
+      const name = packet.getString();
+      const data = packet.getString();
+      // The SFTP RFC says we should silently ignore unknown/invalid entries.
+      if (ValidExtension(name)) {
+        this.extensions[name] = data;
+      }
     }
   }
 }
@@ -268,14 +296,17 @@ export function VersionPacket(packet) {
 /**
  * Unknown Packet containing the request id (potentially garbage) and associated
  * data (also potentially garbage).
- *
- * @param {!Packet} packet
- * @constructor
- * @extends {Packet}
  */
-export function UnknownPacket(packet) {
-  this.requestId = packet.getUint32();
-  this.data = packet.getData();
+export class UnknownPacket extends Packet {
+  /**
+   * @param {!Packet} packet
+   */
+  constructor(packet) {
+    super();
+
+    this.requestId = packet.getUint32();
+    this.data = packet.getData();
+  }
 }
 
 /**
