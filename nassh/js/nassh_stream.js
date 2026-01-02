@@ -66,10 +66,13 @@ Stream.prototype.write = async function(data) {
  * Close a stream.
  */
 Stream.prototype.close = function() {
-  if (this.onClose) {
-    this.onClose();
-  }
+  this.onClose();
 };
+
+/**
+ * Notification interface for when the stream is closed.
+ */
+Stream.prototype.onClose = function() {};
 
 /**
  * Notification interface for when data is available for reading.
