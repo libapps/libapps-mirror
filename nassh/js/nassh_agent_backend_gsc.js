@@ -542,105 +542,108 @@ function arrayToHexString(array) {
 /**
  * A command APDU as defined in ISO/IEC 7816-4, consisting of a header and
  * optional command data.
- *
- * @param {number} cla The CLA byte.
- * @param {number} ins The INS byte.
- * @param {number} p1 The P1 byte.
- * @param {number} p2 The P2 byte.
- * @param {!Uint8Array=} [data]
- * @param {boolean=} expectResponse If true, expect a response from the
- *     smart card.
- * @constructor
  */
-function CommandAPDU(
-    cla, ins, p1, p2, data = new Uint8Array([]), expectResponse = true) {
+class CommandAPDU {
   /**
-   * The header of an APDU, consisting of the CLA, INS, P1 and P2 byte in order.
-   *
-   * @private {!Uint8Array}
-   * @const
+   * @param {number} cla The CLA byte.
+   * @param {number} ins The INS byte.
+   * @param {number} p1 The P1 byte.
+   * @param {number} p2 The P2 byte.
+   * @param {!Uint8Array=} data
+   * @param {boolean=} expectResponse If true, expect a response from the
+   *     smart card.
    */
-  this.header_ = new Uint8Array([cla, ins, p1, p2]);
+  constructor(cla, ins, p1, p2, data = new Uint8Array([]),
+              expectResponse = true) {
+    /**
+     * The header of an APDU, consisting of the CLA, INS, P1 and P2 byte in
+     * order.
+     *
+     * @private {!Uint8Array}
+     * @const
+     */
+    this.header_ = new Uint8Array([cla, ins, p1, p2]);
+
+    /**
+     * The data to be sent in the body of the APDU.
+     *
+     * @private {!Uint8Array}
+     * @const
+     */
+    this.data_ = data;
+
+    /**
+     * If true, a response from the smart card will be expected.
+     *
+     * @private {boolean}
+     * @const
+     */
+    this.expectResponse_ = expectResponse;
+  }
 
   /**
-   * The data to be sent in the body of the APDU.
+   * Get the raw commands.
    *
-   * @private {!Uint8Array}
-   * @const
-   */
-  this.data_ = data;
-
-  /**
-   * If true, a response from the smart card will be expected.
+   * In order to simplify the command logic, we always expect the maximum amount
+   * of bytes in the response (256 for normal length, 65536 for extended
+   * length).
    *
-   * @private {boolean}
-   * @const
+   * @param {boolean} supportsChaining Set to true if command chaining can be
+   *     used with the card.
+   * @param {boolean} supportsExtendedLength Set to true if extended lengths
+   *     (Lc and Le) can be used with the card.
+   * @return {!Array<!Uint8Array>} The raw response.
    */
-  this.expectResponse_ = expectResponse;
-}
+  commands(supportsChaining, supportsExtendedLength) {
+    const MAX_LC = 255;
+    const MAX_EXTENDED_LC = 65535;
 
-/**
- * Get the raw commands.
- *
- * In order to simplify the command logic, we always expect the maximum amount
- * of bytes in the response (256 for normal length, 65536 for extended length).
- *
- * @param {boolean} supportsChaining Set to true if command chaining can be
- *     used with the card.
- * @param {boolean} supportsExtendedLength Set to true if extended lengths
- *     (Lc and Le) can be used with the card.
- * @return {!Array<!Uint8Array>} The raw response.
- */
-CommandAPDU.prototype.commands = function(
-    supportsChaining, supportsExtendedLength) {
-  const MAX_LC = 255;
-  const MAX_EXTENDED_LC = 65535;
-
-  if (this.data_.length === 0 && supportsExtendedLength) {
-    const extendedLe = this.expectResponse_ ?
-        new Uint8Array([0x00, 0x00, 0x00]) :
-        new Uint8Array([]);
-    return [concatTyped(this.header_, extendedLe)];
-  }
-  if (this.data_.length === 0) {
-    const le =
-        this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
-    return [concatTyped(this.header_, le)];
-  }
-  if (this.data_.length <= MAX_EXTENDED_LC && supportsExtendedLength) {
-    const extendedLc = new Uint8Array(
-        [0x00, this.data_.length >> 8, this.data_.length & 0xFF]);
-    const extendedLe = this.expectResponse_ ? new Uint8Array([0x00, 0x00]) :
-                                              new Uint8Array([]);
-    return [concatTyped(this.header_, extendedLc, this.data_, extendedLe)];
-  }
-  if (this.data_.length <= MAX_LC || supportsChaining) {
-    const commands = [];
-    let remainingBytes = this.data_.length;
-    while (remainingBytes > MAX_LC) {
-      const header = new Uint8Array(this.header_);
-      // Set continuation bit in CLA byte.
-      header[0] |= 1 << 4;
-      const lc = new Uint8Array([MAX_LC]);
-      const data = this.data_.subarray(
-          this.data_.length - remainingBytes,
-          this.data_.length - remainingBytes + MAX_LC);
+    if (this.data_.length === 0 && supportsExtendedLength) {
+      const extendedLe = this.expectResponse_ ?
+          new Uint8Array([0x00, 0x00, 0x00]) :
+          new Uint8Array([]);
+      return [concatTyped(this.header_, extendedLe)];
+    }
+    if (this.data_.length === 0) {
       const le =
           this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
-      commands.push(concatTyped(header, lc, data, le));
-      remainingBytes -= MAX_LC;
+      return [concatTyped(this.header_, le)];
     }
-    const lc = new Uint8Array([remainingBytes]);
-    const data = this.data_.subarray(this.data_.length - remainingBytes);
-    const le =
-        this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
-    commands.push(concatTyped(this.header_, lc, data, le));
-    return commands;
+    if (this.data_.length <= MAX_EXTENDED_LC && supportsExtendedLength) {
+      const extendedLc = new Uint8Array(
+          [0x00, this.data_.length >> 8, this.data_.length & 0xFF]);
+      const extendedLe = this.expectResponse_ ? new Uint8Array([0x00, 0x00]) :
+                                                new Uint8Array([]);
+      return [concatTyped(this.header_, extendedLc, this.data_, extendedLe)];
+    }
+    if (this.data_.length <= MAX_LC || supportsChaining) {
+      const commands = [];
+      let remainingBytes = this.data_.length;
+      while (remainingBytes > MAX_LC) {
+        const header = new Uint8Array(this.header_);
+        // Set continuation bit in CLA byte.
+        header[0] |= 1 << 4;
+        const lc = new Uint8Array([MAX_LC]);
+        const data = this.data_.subarray(
+            this.data_.length - remainingBytes,
+            this.data_.length - remainingBytes + MAX_LC);
+        const le =
+            this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
+        commands.push(concatTyped(header, lc, data, le));
+        remainingBytes -= MAX_LC;
+      }
+      const lc = new Uint8Array([remainingBytes]);
+      const data = this.data_.subarray(this.data_.length - remainingBytes);
+      const le =
+          this.expectResponse_ ? new Uint8Array([0x00]) : new Uint8Array([]);
+      commands.push(concatTyped(this.header_, lc, data, le));
+      return commands;
+    }
+    throw new Error(
+        `CommandAPDU.commands: data field too long (${this.data_.length} ` +
+        ` > ${MAX_LC}) and no support for chaining`);
   }
-  throw new Error(
-      `CommandAPDU.commands: data field too long (${this.data_.length} ` +
-      ` > ${MAX_LC}) and no support for chaining`);
-};
+}
 
 /**
  * Human-readable descriptions of common data object tags for OpenPGP cards.
