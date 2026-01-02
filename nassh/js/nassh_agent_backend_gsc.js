@@ -33,41 +33,347 @@ import {
 /**
  * An SSH agent backend that uses the Google Smart Card Connector library to
  * perform SSH authentication using private keys stored on smart cards.
- *
- * @param {!UserIO} userIO Reference to object with terminal IO functions.
- * @param {boolean} isForwarded Whether the agent is being forwarded to the
- *     server.
- * @constructor
- * @extends {Backend}
  */
-export function GSC(userIO, isForwarded) {
-  Backend.apply(this, [userIO]);
+export class GSC extends Backend {
+  /**
+   * @param {!UserIO} userIO Reference to object with terminal IO functions.
+   * @param {boolean} isForwarded Whether the agent is being forwarded to the
+   *     server.
+   */
+  constructor(userIO, isForwarded) {
+    super(userIO);
+
+    /**
+     * Map a string representation of an identity's key blob to the reader that
+     * provides it.
+     *
+     * @member {!Object<string, {reader: string, readerKeyId: !Uint8Array,
+     *     applet: !SmartCardManager.CardApplets}>}
+     * @private
+     */
+    this.keyBlobToReader_ = {};
+
+    /**
+     * The cache used to offer smart card PIN caching to the user.
+     *
+     * @private {!CredentialCache}
+     * @const
+     */
+    this.pinCache_ = new CredentialCache();
+    if (!isForwarded) {
+      this.pinCache_.setEnabled(false);
+    }
+  }
 
   /**
-   * Map a string representation of an identity's key blob to the reader that
-   * provides it.
+   * Initialize the Google Smart Card Connector library context on first use.
    *
-   * @member {!Object<string, {reader: string, readerKeyId: !Uint8Array,
-   *     applet: !SmartCardManager.CardApplets}>}
+   * @return {!Promise<void>} A resolving Promise if the
+   *     initialization succeeded; a rejecting Promise otherwise.
+   * @override
+   */
+  async ping() {
+    try {
+      await GSC.initializeAPIContext();
+    } catch (e) {
+      this.showMessage(localize(
+          'SMART_CARD_CONNECTOR_NOT_INSTALLED',
+          ['https://chrome.google.com/webstore/detail/' +
+           'khpfeaanjngmcnplbdlpegiifgpfgdco']));
+      throw e;
+    }
+  }
+
+  /**
+   * Retrieve a list of SSH identities from a connected reader.
+   *
+   * If the backend fails to retrieve the identities from the reader, this
+   * reader will be skipped without interrupting the identity retrieval from
+   * other readers. Blocked devices will also be skipped. The backend remembers
+   * which key blobs were obtained from which reader.
+   *
+   * @param {!Object<string, {
+   *       reader: string, readerKeyId: !Uint8Array,
+   *       applet: !SmartCardManager.CardApplets}>
+   *     } keyBlobToReader Maps SSH identities to the readers and applets they
+   *     have been retrieved from for later use by signRequest.
+   * @param {string} reader The name of the reader to connect to.
+   * @return {!Promise<!Array<!Identity>>} A Promise resolving to a list of SSH
+   *     identities.
+   */
+  async requestReaderIdentities_(keyBlobToReader, reader) {
+    const manager = new SmartCardManager();
+    const identities = [];
+    try {
+      await manager.establishContext();
+      for (const applet
+               of [SmartCardManager.CardApplets.OPENPGP,
+                   SmartCardManager.CardApplets.PIV]) {
+        // Force reconnect to change applet.
+        await manager.disconnect();
+        await manager.connect(reader);
+        try {
+          await manager.selectApplet(applet);
+          // Exclude blocked readers.
+          if (await manager.fetchPINVerificationTriesRemaining() === 0) {
+            console.error(
+                `GSC.requestIdentities: skipping blocked reader ${reader}`);
+            return [];
+          }
+          const readerKeyBlob = await manager.fetchPublicKeyBlob();
+          const readerKeyId = await manager.fetchAuthenticationPublicKeyId();
+          const readerKeyBlobStr = new TextDecoder().decode(readerKeyBlob);
+          keyBlobToReader[readerKeyBlobStr] = {reader, readerKeyId, applet};
+          identities.push({
+            keyBlob: readerKeyBlob,
+            comment: new Uint8Array([]),
+          });
+        } catch (e) {
+          // Skip non-supported or uninitialized applets instead of raising an
+          // exception.
+          continue;
+        }
+      }
+      return identities;
+    } catch (e) {
+      console.error(e);
+      console.error(
+          `GSC.requestIdentities: failed to get public key ID from ` +
+          `reader ${reader}, skipping`);
+      return [];
+    } finally {
+      await manager.disconnect();
+      await manager.releaseContext();
+    }
+  }
+
+  /**
+   * Retrieve the SSH identities from all connected readers and all applets.
+   *
+   * If the backend fails to retrieve the identities from a reader, this reader
+   * will be skipped without interrupting the identity retrieval from other
+   * readers. Blocked devices will also be skipped. The backend remembers which
+   * key blobs were obtained from which reader.
+   *
+   * @return {!Promise<!Array<!Identity>>} A Promise resolving to a list of SSH
+   *     identities; a rejecting Promise if the connected readers could not be
+   *     listed or some other error occurred.
+   * @override
+   */
+  async requestIdentities() {
+    // Written to this.keyBlobToReader_ in the end to prevent asynchronous
+    // overwrites from leaving it in an inconsistent state.
+    const keyBlobToReader = {};
+
+    const manager = new SmartCardManager();
+    let readers;
+    try {
+      await manager.establishContext();
+      readers = await manager.listReaders();
+    } finally {
+      await manager.releaseContext();
+    }
+    const identityArrays = await Promise.all(
+        readers.map(this.requestReaderIdentities_.bind(this, keyBlobToReader)));
+
+    this.keyBlobToReader_ = keyBlobToReader;
+    return [].concat(...identityArrays);
+  }
+
+  /**
+   * Request a smart card PIN from the user.
+   *
+   * This uses hterm's subcommand support to temporarily take over control of
+   * the terminal.
+   *
+   * @param {string} reader The name of the reader for which the user will be
+   *     asked to provide the PIN.
+   * @param {!Uint8Array} readerKeyId The ID of the key for which the user will
+   *     be asked to provide the PIN.
+   * @param {string} appletName The name of the applet on the card (OpenPGP or
+   *     PIV) that provides the key.
+   * @param {number} numTries The number of PIN attempts the user has left.
+   * @return {!Promise<string>} A promise resolving to the PIN
+   *     entered by the user; a rejecting promise if the user cancelled the PIN
+   *     entry.
+   */
+  async requestPIN(reader, readerKeyId, appletName, numTries) {
+    // Show 8 hex character (4 byte) fingerprint to the user.
+    const shortFingerprint = arrayToHexString(readerKeyId.slice(-4));
+    return this.promptUser(localize(
+        'REQUEST_PIN_PROMPT',
+        [shortFingerprint, reader, appletName, numTries]));
+  }
+
+  /**
+   * Unlock a key on a connected smart card reader and request the PIN from
+   * the user (or the cache).
+   *
+   * @param {!SmartCardManager} manager A SmartCardManager object connected to
+   *     the reader on which the specified key resides.
+   * @param {!Uint8Array} keyId The fingerprint of the key to unlock.
+   * @return {!Promise.<void>} A resolving promise if the key has been unlocked;
+   *     a rejecting promise if an error occurred.
    * @private
    */
-  this.keyBlobToReader_ = {};
+  async unlockKey_(manager, keyId) {
+    let pinBytes;
+    let triedCache = false;
+    do {
+      pinBytes = null;
+      const currentKeyId = await manager.fetchAuthenticationPublicKeyId();
+      if (!compare(keyId, currentKeyId)) {
+        throw new Error(
+            `GSC.unlockKey_: key ID changed for reader ${manager.reader}`);
+      }
+      const numTries = await manager.fetchPINVerificationTriesRemaining();
+      // Only try once and only if there is no chance we block the smart card.
+      if (this.pinCache_.isEnabled() && !triedCache && numTries > 1) {
+        triedCache = true;
+        pinBytes = await this.pinCache_.retrieve(
+            `${manager.reader()}|${new TextDecoder('utf-8').decode(keyId)}`);
+      }
+      if (!pinBytes) {
+        try {
+          const pin = await this.requestPIN(
+              lib.notNull(manager.readerShort()),
+              keyId,
+              manager.appletName(),
+              numTries);
+          pinBytes = new TextEncoder('utf-8').encode(pin);
+        } catch (e) {
+          throw new Error('GSC.signRequest: authentication canceled by user');
+        }
+      }
+    } while (!await manager.verifyPIN(pinBytes));
+
+    if (this.pinCache_.isEnabled() === null) {
+      const reply = await this.promptUser(localize('CACHE_PIN_PROMPT'));
+      this.pinCache_.setEnabled(reply.toLowerCase() === 'y');
+    }
+    if (this.pinCache_.isEnabled()) {
+      await this.pinCache_.store(
+          `${manager.reader()}|${new TextDecoder('utf-8').decode(keyId)}`,
+          pinBytes);
+    }
+
+    pinBytes.fill(0);
+  }
 
   /**
-   * The cache used to offer smart card PIN caching to the user.
+   * Compute a signature of a challenge on the smart card.
    *
-   * @private {!CredentialCache}
-   * @const
+   * Before the private key operation can be performed, the smart card PIN is
+   * requested from the user.
+   *
+   * @param {!Uint8Array} keyBlob The blob of the key which should be used to
+   *    sign the challenge.
+   * @param {!Uint8Array} data The raw challenge data.
+   * @param {number} flags The signature flags.
+   * @return {!Promise<!Uint8Array>|!Promise<!Error>} A Promise resolving
+   *     to the computed signature; a rejecting promise if unsupported signature
+   *     flags are provided, there is no reader corresponding to the requested
+   *     key, the key on the reader has changed since requestIdentities has been
+   *     called or the user cancels the PIN entry.
+   * @override
    */
-  this.pinCache_ = new CredentialCache();
-  if (!isForwarded) {
-    this.pinCache_.setEnabled(false);
+  async signRequest(keyBlob, data, flags) {
+    const keyBlobStr = new TextDecoder('utf-8').decode(keyBlob);
+    if (!this.keyBlobToReader_.hasOwnProperty(keyBlobStr)) {
+      throw new Error(
+          `GSC.signRequest: no reader found for key "${keyBlobStr}"`);
+    }
+
+    const {reader, readerKeyId, applet} = this.keyBlobToReader_[keyBlobStr];
+    const manager = new SmartCardManager();
+    try {
+      await manager.establishContext();
+      await manager.connect(reader);
+      await manager.selectApplet(applet);
+
+      let dataToSign;
+      let rsaHashConstants;
+      const keyInfo = await manager.fetchKeyInfo();
+      switch (keyInfo.type) {
+        case KeyTypes.RSA: {
+          if (flags === 0) {
+            rsaHashConstants = HashAlgorithms.SHA1;
+          } else if (flags & 0b100) {
+            rsaHashConstants = HashAlgorithms.SHA512;
+          } else if (flags & 0b10) {
+            rsaHashConstants = HashAlgorithms.SHA256;
+          } else {
+            throw new Error(
+                `GSC.signRequest: unsupported flag value for RSA: ` +
+                `0x${flags.toString(16)}`);
+          }
+          const hash = await globalThis.crypto.subtle.digest(
+              rsaHashConstants.name, data);
+          dataToSign = concatTyped(
+              rsaHashConstants.identifier, new Uint8Array(hash));
+          break;
+        }
+        case KeyTypes.ECDSA: {
+          if (flags !== 0) {
+            throw new Error(
+                `GSC.signRequest: unsupported flag value for ECDSA: ` +
+                `0x${flags.toString(16)}`);
+          }
+          const hashAlgorithm =
+              OidToCurveInfo[lib.notNull(keyInfo.curveOid)].hashAlgorithm;
+          dataToSign = new Uint8Array(
+              await globalThis.crypto.subtle.digest(hashAlgorithm, data));
+          break;
+        }
+        case KeyTypes.EDDSA:
+          if (flags !== 0) {
+            throw new Error(
+                `GSC.signRequest: unsupported flag value for EdDSA: ` +
+                `0x${flags.toString(16)}`);
+          }
+          dataToSign = data;
+          break;
+        default:
+          throw new Error(
+              `GSC.signRequest: unsupported key type: ` +
+              `${JSON.stringify(keyInfo)}`);
+      }
+
+      await this.unlockKey_(manager, readerKeyId);
+      const rawSignature = await manager.authenticate(dataToSign);
+
+      let prefix;
+      const curveOid = lib.notNull(keyInfo.curveOid);
+      switch (keyInfo.type) {
+        case KeyTypes.RSA:
+          return concatTyped(
+              encodeAsWireString(rsaHashConstants.signaturePrefix),
+              encodeAsWireString(rawSignature));
+        case KeyTypes.ECDSA: {
+          const rRaw = rawSignature.subarray(0, rawSignature.length / 2);
+          const sRaw = rawSignature.subarray(rawSignature.length / 2);
+          const rMpint = encodeAsWireMpint(rRaw);
+          const sMpint = encodeAsWireMpint(sRaw);
+          const signatureBlob = concatTyped(rMpint, sMpint);
+          prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
+          const identifier =
+              new TextEncoder().encode(OidToCurveInfo[curveOid].identifier);
+          return concatTyped(
+              encodeAsWireString(concatTyped(prefix, identifier)),
+              encodeAsWireString(signatureBlob));
+        }
+        case KeyTypes.EDDSA:
+          prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
+          return concatTyped(
+              encodeAsWireString(prefix),
+              encodeAsWireString(rawSignature));
+      }
+    } finally {
+      await manager.disconnect();
+      await manager.releaseContext();
+    }
   }
 }
-
-GSC.prototype = Object.create(Backend.prototype);
-/** @override */
-GSC.constructor = GSC;
 
 /**
  * The unique ID of the backend.
@@ -157,315 +463,6 @@ const HashAlgorithms = {
   },
 };
 // clang-format on
-
-/**
- * Initialize the Google Smart Card Connector library context on first use.
- *
- * @return {!Promise<void>} A resolving Promise if the
- *     initialization succeeded; a rejecting Promise otherwise.
- * @override
- */
-GSC.prototype.ping = async function() {
-  try {
-    await GSC.initializeAPIContext();
-  } catch (e) {
-    this.showMessage(localize(
-        'SMART_CARD_CONNECTOR_NOT_INSTALLED',
-        ['https://chrome.google.com/webstore/detail/' +
-         'khpfeaanjngmcnplbdlpegiifgpfgdco']));
-    throw e;
-  }
-};
-
-/**
- * Retrieve a list of SSH identities from a connected reader.
- *
- * If the backend fails to retrieve the identities from the reader, this reader
- * will be skipped without interrupting the identity retrieval from other
- * readers. Blocked devices will also be skipped. The backend remembers which
- * key blobs were obtained from which reader.
- *
- * @param {!Object<string, {
- *       reader: string, readerKeyId: !Uint8Array,
- *       applet: !SmartCardManager.CardApplets}>
- *     } keyBlobToReader Maps SSH identities to the readers and applets they
- *     have been retrieved from for later use by signRequest.
- * @param {string} reader The name of the reader to connect to.
- * @return {!Promise<!Array<!Identity>>} A Promise resolving to a list of SSH
- *     identities.
- */
-GSC.prototype.requestReaderIdentities_ =
-    async function(keyBlobToReader, reader) {
-  const manager = new SmartCardManager();
-  const identities = [];
-  try {
-    await manager.establishContext();
-    for (const applet
-             of [SmartCardManager.CardApplets.OPENPGP,
-                 SmartCardManager.CardApplets.PIV]) {
-      // Force reconnect to change applet.
-      await manager.disconnect();
-      await manager.connect(reader);
-      try {
-        await manager.selectApplet(applet);
-        // Exclude blocked readers.
-        if (await manager.fetchPINVerificationTriesRemaining() === 0) {
-          console.error(
-              `GSC.requestIdentities: skipping blocked reader ${reader}`);
-          return [];
-        }
-        const readerKeyBlob = await manager.fetchPublicKeyBlob();
-        const readerKeyId = await manager.fetchAuthenticationPublicKeyId();
-        const readerKeyBlobStr = new TextDecoder().decode(readerKeyBlob);
-        keyBlobToReader[readerKeyBlobStr] = {reader, readerKeyId, applet};
-        identities.push({
-          keyBlob: readerKeyBlob,
-          comment: new Uint8Array([]),
-        });
-      } catch (e) {
-        // Skip non-supported or uninitialized applets instead of raising an
-        // exception.
-        continue;
-      }
-    }
-    return identities;
-  } catch (e) {
-    console.error(e);
-    console.error(
-        `GSC.requestIdentities: failed to get public key ID from ` +
-        `reader ${reader}, skipping`);
-    return [];
-  } finally {
-    await manager.disconnect();
-    await manager.releaseContext();
-  }
-};
-
-/**
- * Retrieve a list of SSH identities from all connected readers and all applets.
- *
- * If the backend fails to retrieve the identities from a reader, this reader
- * will be skipped without interrupting the identity retrieval from other
- * readers. Blocked devices will also be skipped. The backend remembers which
- * key blobs were obtained from which reader.
- *
- * @return {!Promise<!Array<!Identity>>} A Promise resolving to a list of SSH
- *     identities; a rejecting Promise if the connected readers could not be
- *     listed or some other error occurred.
- * @override
- */
-GSC.prototype.requestIdentities = async function() {
-  // Written to this.keyBlobToReader_ in the end to prevent asynchronous
-  // overwrites from leaving it in an inconsistent state.
-  const keyBlobToReader = {};
-
-  const manager = new SmartCardManager();
-  let readers;
-  try {
-    await manager.establishContext();
-    readers = await manager.listReaders();
-  } finally {
-    await manager.releaseContext();
-  }
-  const identityArrays = await Promise.all(
-      readers.map(this.requestReaderIdentities_.bind(this, keyBlobToReader)));
-
-  this.keyBlobToReader_ = keyBlobToReader;
-  return [].concat(...identityArrays);
-};
-
-/**
- * Request a smart card PIN from the user.
- *
- * This uses hterm's subcommand support to temporarily take over control of the
- * terminal.
- *
- * @param {string} reader The name of the reader for which the user will be
- *     asked to provide the PIN.
- * @param {!Uint8Array} readerKeyId The ID of the key for which the user will
- *     be asked to provide the PIN.
- * @param {string} appletName The name of the applet on the card (OpenPGP or
- *     PIV) that provides the key.
- * @param {number} numTries The number of PIN attempts the user has left.
- * @return {!Promise<string>} A promise resolving to the PIN
- *     entered by the user; a rejecting promise if the user cancelled the PIN
- *     entry.
- */
-GSC.prototype.requestPIN = async function(
-    reader, readerKeyId, appletName, numTries) {
-  // Show 8 hex character (4 byte) fingerprint to the user.
-  const shortFingerprint = arrayToHexString(readerKeyId.slice(-4));
-  return this.promptUser(localize(
-      'REQUEST_PIN_PROMPT', [shortFingerprint, reader, appletName, numTries]));
-};
-
-/**
- * Unlock a key on a connected smart card reader and request the PIN from
- * the user (or the cache).
- *
- * @param {!SmartCardManager} manager A SmartCardManager object connected to the
- *     reader on which the specified key resides.
- * @param {!Uint8Array} keyId The fingerprint of the key to unlock.
- * @return {!Promise.<void>} A resolving promise if the key has been unlocked;
- *     a rejecting promise if an error occurred.
- * @private
- */
-GSC.prototype.unlockKey_ = async function(manager, keyId) {
-  let pinBytes;
-  let triedCache = false;
-  do {
-    pinBytes = null;
-    const currentKeyId = await manager.fetchAuthenticationPublicKeyId();
-    if (!compare(keyId, currentKeyId)) {
-      throw new Error(
-          `GSC.unlockKey_: key ID changed for reader ${manager.reader}`);
-    }
-    const numTries = await manager.fetchPINVerificationTriesRemaining();
-    // Only try once and only if there is no chance we block the smart card.
-    if (this.pinCache_.isEnabled() && !triedCache && numTries > 1) {
-      triedCache = true;
-      pinBytes = await this.pinCache_.retrieve(
-          `${manager.reader()}|${new TextDecoder('utf-8').decode(keyId)}`);
-    }
-    if (!pinBytes) {
-      try {
-        const pin = await this.requestPIN(
-            lib.notNull(manager.readerShort()),
-            keyId,
-            manager.appletName(),
-            numTries);
-        pinBytes = new TextEncoder('utf-8').encode(pin);
-      } catch (e) {
-        throw new Error('GSC.signRequest: authentication canceled by user');
-      }
-    }
-  } while (!await manager.verifyPIN(pinBytes));
-
-  if (this.pinCache_.isEnabled() === null) {
-    const reply = await this.promptUser(localize('CACHE_PIN_PROMPT'));
-    this.pinCache_.setEnabled(reply.toLowerCase() === 'y');
-  }
-  if (this.pinCache_.isEnabled()) {
-    await this.pinCache_.store(
-        `${manager.reader()}|${new TextDecoder('utf-8').decode(keyId)}`,
-        pinBytes);
-  }
-
-  pinBytes.fill(0);
-};
-
-/**
- * Compute a signature of a challenge on the smart card.
- *
- * Before the private key operation can be performed, the smart card PIN is
- * requested from the user.
- *
- * @param {!Uint8Array} keyBlob The blob of the key which should be used to
- *    sign the challenge.
- * @param {!Uint8Array} data The raw challenge data.
- * @param {number} flags The signature flags.
- * @return {!Promise<!Uint8Array>|!Promise<!Error>} A Promise resolving
- *     to the computed signature; a rejecting promise if unsupported signature
- *     flags are provided, there is no reader corresponding to the requested
- *     key, the key on the reader has changed since requestIdentities has been
- *     called or the user cancels the PIN entry.
- * @override
- */
-GSC.prototype.signRequest = async function(keyBlob, data, flags) {
-  const keyBlobStr = new TextDecoder('utf-8').decode(keyBlob);
-  if (!this.keyBlobToReader_.hasOwnProperty(keyBlobStr)) {
-    throw new Error(`GSC.signRequest: no reader found for key "${keyBlobStr}"`);
-  }
-
-  const {reader, readerKeyId, applet} = this.keyBlobToReader_[keyBlobStr];
-  const manager = new SmartCardManager();
-  try {
-    await manager.establishContext();
-    await manager.connect(reader);
-    await manager.selectApplet(applet);
-
-    let dataToSign;
-    let rsaHashConstants;
-    const keyInfo = await manager.fetchKeyInfo();
-    switch (keyInfo.type) {
-      case KeyTypes.RSA: {
-        if (flags === 0) {
-          rsaHashConstants = HashAlgorithms.SHA1;
-        } else if (flags & 0b100) {
-          rsaHashConstants = HashAlgorithms.SHA512;
-        } else if (flags & 0b10) {
-          rsaHashConstants = HashAlgorithms.SHA256;
-        } else {
-          throw new Error(
-              `GSC.signRequest: unsupported flag value for RSA: ` +
-              `0x${flags.toString(16)}`);
-        }
-        const hash =
-            await globalThis.crypto.subtle.digest(rsaHashConstants.name, data);
-        dataToSign = concatTyped(
-            rsaHashConstants.identifier, new Uint8Array(hash));
-        break;
-      }
-      case KeyTypes.ECDSA: {
-        if (flags !== 0) {
-          throw new Error(
-              `GSC.signRequest: unsupported flag value for ECDSA: ` +
-              `0x${flags.toString(16)}`);
-        }
-        const hashAlgorithm =
-            OidToCurveInfo[lib.notNull(keyInfo.curveOid)].hashAlgorithm;
-        dataToSign = new Uint8Array(
-            await globalThis.crypto.subtle.digest(hashAlgorithm, data));
-        break;
-      }
-      case KeyTypes.EDDSA:
-        if (flags !== 0) {
-          throw new Error(
-              `GSC.signRequest: unsupported flag value for EdDSA: ` +
-              `0x${flags.toString(16)}`);
-        }
-        dataToSign = data;
-        break;
-      default:
-        throw new Error(
-            `GSC.signRequest: unsupported key type: ` +
-            `${JSON.stringify(keyInfo)}`);
-    }
-
-    await this.unlockKey_(manager, readerKeyId);
-    const rawSignature = await manager.authenticate(dataToSign);
-
-    let prefix;
-    const curveOid = lib.notNull(keyInfo.curveOid);
-    switch (keyInfo.type) {
-      case KeyTypes.RSA:
-        return concatTyped(
-            encodeAsWireString(rsaHashConstants.signaturePrefix),
-            encodeAsWireString(rawSignature));
-      case KeyTypes.ECDSA: {
-        const rRaw = rawSignature.subarray(0, rawSignature.length / 2);
-        const sRaw = rawSignature.subarray(rawSignature.length / 2);
-        const rMpint = encodeAsWireMpint(rRaw);
-        const sMpint = encodeAsWireMpint(sRaw);
-        const signatureBlob = concatTyped(rMpint, sMpint);
-        prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
-        const identifier =
-            new TextEncoder().encode(OidToCurveInfo[curveOid].identifier);
-        return concatTyped(
-            encodeAsWireString(concatTyped(prefix, identifier)),
-            encodeAsWireString(signatureBlob));
-      }
-      case KeyTypes.EDDSA:
-        prefix = new TextEncoder().encode(OidToCurveInfo[curveOid].prefix);
-        return concatTyped(
-            encodeAsWireString(prefix),
-            encodeAsWireString(rawSignature));
-    }
-  } finally {
-    await manager.disconnect();
-    await manager.releaseContext();
-  }
-};
 
 /**
  * Handler for the apiContextDisposed event.
