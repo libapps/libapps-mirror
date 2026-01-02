@@ -76,5 +76,9 @@ Stream.prototype.onClose = function() {};
 
 /**
  * Notification interface for when data is available for reading.
+ *
+ * @param {!ArrayBuffer|!ArrayBufferView} data
  */
-Stream.prototype.onDataAvailable = undefined;
+Stream.prototype.onDataAvailable = function(data) {
+  throw Stream.ERR_NOT_IMPLEMENTED;
+};

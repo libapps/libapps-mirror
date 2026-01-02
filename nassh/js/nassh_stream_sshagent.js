@@ -7,8 +7,6 @@
  *     backends.
  */
 
-import {lib} from '../../libdot/index.js';
-
 import {concatTyped} from './lib_array.js';
 import {Agent} from './nassh_agent.js';
 import {Stream} from './nassh_stream.js';
@@ -76,9 +74,7 @@ export class SshAgentStream extends Stream {
     this.pendingMessageSize_ = null;
 
     this.authAgent_.handleRequest(reqData)
-        .then(
-            (response) => this.onDataAvailable(
-                btoa(lib.codec.codeUnitArrayToString(response.rawMessage()))));
+        .then((response) => this.onDataAvailable(response.rawMessage()));
   }
 
   /**

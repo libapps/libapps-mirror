@@ -332,7 +332,7 @@ RelayCorpXhrStream.prototype.onReadReady_ = function(e) {
   this.readCount_ += Math.floor(
       this.readRequest_.responseText.length * 3 / 4);
   const data = base64UrlToBase64(this.readRequest_.responseText);
-  this.onDataAvailable(data);
+  this.onDataAvailable(lib.codec.stringToCodeUnitArray(data));
 
   this.requestSuccess_(true);
 };
