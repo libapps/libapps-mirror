@@ -17,205 +17,198 @@ import {Stream} from './nassh_stream.js';
  *
  * This class implements session initialization and back-off logic common for
  * both types of streams.
- *
- * @constructor
- * @extends {Stream}
  */
-export function RelayCorpStream() {
-  Stream.apply(this, []);
+export class RelayCorpStream extends Stream {
+  constructor() {
+    super();
 
-  this.io_ = null;
-  this.host_ = null;
-  this.port_ = null;
-  this.relayServer_ = null;
-  this.relayServerSocket_ = null;
-  this.reportConnectAttempts_ = false;
-  this.reportAckLatency_ = false;
+    this.io_ = null;
+    this.host_ = null;
+    this.port_ = null;
+    this.relayServer_ = null;
+    this.relayServerSocket_ = null;
+    this.reportConnectAttempts_ = false;
+    this.reportAckLatency_ = false;
 
-  this.sessionID_ = null;
-  this.resume_ = false;
+    this.sessionID_ = null;
+    this.resume_ = false;
 
-  this.backoffMS_ = 0;
-  this.backoffTimeout_ = null;
+    this.backoffMS_ = 0;
+    this.backoffTimeout_ = null;
 
-  this.writeBuffer_ = newBuffer();
-  // The total byte count we've written during this session.
-  this.writeCount_ = 0;
+    this.writeBuffer_ = newBuffer();
+    // The total byte count we've written during this session.
+    this.writeCount_ = 0;
 
-  this.readCount_ = 0;
-}
+    this.readCount_ = 0;
+  }
 
-/**
- * We are a subclass of Stream.
- */
-RelayCorpStream.prototype = Object.create(Stream.prototype);
-/** @override */
-RelayCorpStream.constructor = RelayCorpStream;
+  /**
+   * Open a relay socket.
+   *
+   * This fires off the /proxy request, and if it succeeds starts the /read
+   * hanging GET.
+   *
+   * @param {!Object} settings
+   * @return {!Promise<void>}
+   * @override
+   */
+  async open(settings) {
+    return new Promise((resolve, reject) => {
+      this.open_(settings, resolve, reject);
+    });
+  }
 
-/**
- * Open a relay socket.
- *
- * This fires off the /proxy request, and if it succeeds starts the /read
- * hanging GET.
- *
- * @param {!Object} settings
- * @return {!Promise<void>}
- * @override
- */
-RelayCorpStream.prototype.open = async function(settings) {
-  return new Promise((resolve, reject) => {
-    this.open_(settings, resolve, reject);
-  });
-};
+  /**
+   * Open a relay socket.
+   *
+   * @param {!Object} settings
+   * @param {function()} resolve
+   * @param {function(string)} reject
+   */
+  open_(settings, resolve, reject) {
+    this.io_ = settings.io;
+    this.relayServer_ = settings.relayServer;
+    this.relayServerSocket_ = settings.relayServerSocket;
+    this.reportConnectAttempts_ = settings.reportConnectAttempts;
+    this.reportAckLatency_ = settings.reportAckLatency;
+    this.host_ = settings.host;
+    this.port_ = settings.port;
+    this.resume_ = settings.resume;
 
-/**
- * Open a relay socket.
- *
- * @param {!Object} settings
- * @param {function()} resolve
- * @param {function(string)} reject
- */
-RelayCorpStream.prototype.open_ = function(settings, resolve, reject) {
-  this.io_ = settings.io;
-  this.relayServer_ = settings.relayServer;
-  this.relayServerSocket_ = settings.relayServerSocket;
-  this.reportConnectAttempts_ = settings.reportConnectAttempts;
-  this.reportAckLatency_ = settings.reportAckLatency;
-  this.host_ = settings.host;
-  this.port_ = settings.port;
-  this.resume_ = settings.resume;
+    const sessionRequest = new XMLHttpRequest();
 
-  const sessionRequest = new XMLHttpRequest();
+    const onError = () => {
+      console.error('Failed to get session id:', sessionRequest);
+      reject(`${sessionRequest.status}: ${sessionRequest.statusText}`);
+    };
 
-  const onError = () => {
-    console.error('Failed to get session id:', sessionRequest);
-    reject(`${sessionRequest.status}: ${sessionRequest.statusText}`);
-  };
+    const onReady = () => {
+      if (sessionRequest.readyState != XMLHttpRequest.DONE) {
+        return;
+      }
 
-  const onReady = () => {
-    if (sessionRequest.readyState != XMLHttpRequest.DONE) {
+      if (sessionRequest.status != 200) {
+        return onError();
+      }
+
+      this.sessionID_ = sessionRequest.responseText;
+      this.resumeRead_();
+      resolve();
+    };
+
+    sessionRequest.open(
+        'GET',
+        `${this.relayServer_}proxy?host=${this.host_}&port=${this.port_}`,
+        true);
+    // We need to see cookies for /proxy.
+    sessionRequest.withCredentials = true;
+    sessionRequest.onabort = sessionRequest.ontimeout =
+        sessionRequest.onerror = onError;
+    sessionRequest.onloadend = onReady;
+    sessionRequest.send();
+  }
+
+  /** Resume read. */
+  resumeRead_() {
+    throw Stream.ERR_NOT_IMPLEMENTED;
+  }
+
+  /**
+   * Queue up some data to write.
+   *
+   * @param {!ArrayBuffer} data
+   * @override
+   */
+  async write(data) {
+    if (!data.byteLength) {
       return;
     }
 
-    if (sessionRequest.status != 200) {
-      return onError();
-    }
+    this.writeBuffer_.write(data);
 
-    this.sessionID_ = sessionRequest.responseText;
-    this.resumeRead_();
-    resolve();
-  };
-
-  sessionRequest.open(
-      'GET',
-      `${this.relayServer_}proxy?host=${this.host_}&port=${this.port_}`,
-      true);
-  sessionRequest.withCredentials = true;  // We need to see cookies for /proxy.
-  sessionRequest.onabort = sessionRequest.ontimeout =
-      sessionRequest.onerror = onError;
-  sessionRequest.onloadend = onReady;
-  sessionRequest.send();
-};
-
-/** Resume read. */
-RelayCorpStream.prototype.resumeRead_ = function() {
-  throw Stream.ERR_NOT_IMPLEMENTED;
-};
-
-/**
- * Queue up some data to write.
- *
- * @param {!ArrayBuffer} data
- * @override
- */
-RelayCorpStream.prototype.write = async function(data) {
-  if (!data.byteLength) {
-    return;
-  }
-
-  this.writeBuffer_.write(data);
-
-  if (!this.backoffTimeout_) {
-    this.sendWrite_();
-  }
-};
-
-/**
- * Send the next pending write.
- */
-RelayCorpStream.prototype.sendWrite_ = function() {
-  throw Stream.ERR_NOT_IMPLEMENTED;
-};
-
-/**
- * Indicates that the backoff timer has expired and we can try again.
- *
- * This does not guarantee that communications have been restored, only
- * that we can try again.
- */
-RelayCorpStream.prototype.onBackoffExpired_ = function() {
-  this.backoffTimeout_ = null;
-  this.resumeRead_();
-  this.sendWrite_();
-};
-
-/**
- * Called after a successful read or write to indicate that communication
- * is working as expected.
- *
- * @param {boolean} isRead
- */
-RelayCorpStream.prototype.requestSuccess_ = function(isRead) {
-  this.backoffMS_ = 0;
-
-  if (this.backoffTimeout_) {
-    // Sometimes we end up clearing the backoff before the timeout actually
-    // expires.  This is the case if a read and write request are in progress
-    // and one fails while the other succeeds.  If the success completes *after*
-    // the failure, we end up here.
-    //
-    // We assume we're free to clear the backoff and continue as normal.
-    clearTimeout(this.backoffTimeout_);
-    this.onBackoffExpired_();
-  } else {
-    if (isRead) {
-      this.resumeRead_();
-    } else {
+    if (!this.backoffTimeout_) {
       this.sendWrite_();
     }
   }
-};
 
-/** @param {boolean} isRead */
-RelayCorpStream.prototype.requestError_ = function(isRead) {
-  if (!this.sessionID_ || this.backoffTimeout_) {
-    return;
+  /**
+   * Send the next pending write.
+   */
+  sendWrite_() {
+    throw Stream.ERR_NOT_IMPLEMENTED;
   }
 
-  if (!this.backoffMS_) {
-    this.backoffMS_ = 1;
-  } else {
-    this.backoffMS_ = this.backoffMS_ * 2 + 13;
-    if (this.backoffMS_ > 10000) {
-      this.backoffMS_ = 10000 - (this.backoffMS_ % 9000);
+  /**
+   * Indicates that the backoff timer has expired and we can try again.
+   *
+   * This does not guarantee that communications have been restored, only
+   * that we can try again.
+   */
+  onBackoffExpired_() {
+    this.backoffTimeout_ = null;
+    this.resumeRead_();
+    this.sendWrite_();
+  }
+
+  /**
+   * Called after a successful read or write to indicate that communication
+   * is working as expected.
+   *
+   * @param {boolean} isRead
+   */
+  requestSuccess_(isRead) {
+    this.backoffMS_ = 0;
+
+    if (this.backoffTimeout_) {
+      // Sometimes we end up clearing the backoff before the timeout actually
+      // expires.  This is the case if a read and write request are in progress
+      // and one fails while the other succeeds.  If the success completes
+      // *after* the failure, we end up here.
+      //
+      // We assume we're free to clear the backoff and continue as normal.
+      clearTimeout(this.backoffTimeout_);
+      this.onBackoffExpired_();
+    } else {
+      if (isRead) {
+        this.resumeRead_();
+      } else {
+        this.sendWrite_();
+      }
     }
   }
 
-  const requestType = isRead ? 'read' : 'write';
-  console.log('Error during ' + requestType +
-              ', backing off: ' + this.backoffMS_ + 'ms');
+  /** @param {boolean} isRead */
+  requestError_(isRead) {
+    if (!this.sessionID_ || this.backoffTimeout_) {
+      return;
+    }
 
-  if (this.backoffMS_ >= 1000) {
-    // Browser timeouts tend to have a wide margin for error.  We want to reduce
-    // the risk that a failed retry will redisplay this message just as its
-    // fading away.  So we show the retry message for a little longer than we
-    // expect to back off.
-    this.io_.showOverlay(localize('RELAY_RETRY'), this.backoffMS_ + 500);
+    if (!this.backoffMS_) {
+      this.backoffMS_ = 1;
+    } else {
+      this.backoffMS_ = this.backoffMS_ * 2 + 13;
+      if (this.backoffMS_ > 10000) {
+        this.backoffMS_ = 10000 - (this.backoffMS_ % 9000);
+      }
+    }
+
+    const requestType = isRead ? 'read' : 'write';
+    console.log('Error during ' + requestType +
+                ', backing off: ' + this.backoffMS_ + 'ms');
+
+    if (this.backoffMS_ >= 1000) {
+      // Browser timeouts tend to have a wide margin for error.  We want to
+      // reduce the risk that a failed retry will redisplay this message just as
+      // its fading away.  So we show the retry message for a little longer than
+      // we expect to back off.
+      this.io_.showOverlay(localize('RELAY_RETRY'), this.backoffMS_ + 500);
+    }
+
+    this.backoffTimeout_ =
+        setTimeout(this.onBackoffExpired_.bind(this), this.backoffMS_);
   }
-
-  this.backoffTimeout_ =
-      setTimeout(this.onBackoffExpired_.bind(this), this.backoffMS_);
-};
+}
 
 /**
  * XHR backed stream.
