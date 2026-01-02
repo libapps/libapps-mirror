@@ -389,212 +389,204 @@ RelayCorpXhrStream.prototype.isRequestBusy_ = function(r) {
  *
  * This class manages the read and write through WebSocket to communicate
  * with the Google relay server.
- *
- * @constructor
- * @extends {RelayCorpStream}
  */
-export function RelayCorpWsStream() {
-  RelayCorpStream.apply(this, []);
+export class RelayCorpWsStream extends RelayCorpStream {
+  constructor() {
+    super();
 
-  this.socket_ = null;
+    this.socket_ = null;
 
-  // Amount of data in buffer that were sent but not acknowledged yet.
-  this.sentCount_ = 0;
+    // Amount of data in buffer that were sent but not acknowledged yet.
+    this.sentCount_ = 0;
 
-  // Time when data was sent most recently.
-  this.ackTime_ = 0;
+    // Time when data was sent most recently.
+    this.ackTime_ = 0;
 
-  // Ack related to most recently sent data.
-  this.expectedAck_ = 0;
+    // Ack related to most recently sent data.
+    this.expectedAck_ = 0;
 
-  // Circular list of recently observed ack times.
-  this.ackTimes_ = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    // Circular list of recently observed ack times.
+    this.ackTimes_ = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  // Slot to record next ack time in.
-  this.ackTimesIndex_ = 0;
+    // Slot to record next ack time in.
+    this.ackTimesIndex_ = 0;
 
-  // Number of connect attempts made.
-  this.connectCount_ = 0;
+    // Number of connect attempts made.
+    this.connectCount_ = 0;
+  }
+
+  /**
+   * Resume read.
+   *
+   * @override
+   */
+  resumeRead_() {
+    if (this.backoffTimeout_) {
+      console.warn('Attempt to read while backing off.');
+      return;
+    }
+
+    if (this.sessionID_ && !this.socket_) {
+      let uri = `${this.relayServerSocket_}connect?sid=${this.sessionID_}&ack=${
+          this.readCount_ & 0xffffff}&pos=${this.writeCount_ & 0xffffff}`;
+      if (this.reportConnectAttempts_) {
+        uri += '&try=' + ++this.connectCount_;
+      }
+      this.socket_ = new WebSocket(uri);
+      this.socket_.binaryType = 'arraybuffer';
+      this.socket_.onopen = this.onSocketOpen_.bind(this);
+      this.socket_.onmessage = this.onSocketData_.bind(this);
+      this.socket_.onclose = this.socket_.onerror =
+          this.onSocketError_.bind(this);
+
+      this.sentCount_ = 0;
+    }
+  }
+
+  /** @param {!Event} e */
+  onSocketOpen_(e) {
+    if (e.target !== this.socket_) {
+      return;
+    }
+
+    this.connectCount_ = 0;
+    this.requestSuccess_(false);
+  }
+
+  /** @param {number} deltaTime */
+  recordAckTime_(deltaTime) {
+    this.ackTimes_[this.ackTimesIndex_] = deltaTime;
+    this.ackTimesIndex_ = (this.ackTimesIndex_ + 1) % this.ackTimes_.length;
+
+    if (this.ackTimesIndex_ == 0) {
+      // Filled the circular buffer; compute average.
+      let average = 0;
+      for (let i = 0; i < this.ackTimes_.length; ++i) {
+        average += this.ackTimes_[i];
+      }
+      average /= this.ackTimes_.length;
+
+      if (this.reportAckLatency_) {
+        // Report observed average to relay.
+        // Send this meta-data as string vs. the normal binary payloads.
+        const msg = 'A:' + Math.round(average);
+        this.socket_.send(msg);
+      }
+    }
+  }
+
+  /** @param {!Event} e */
+  onSocketData_(e) {
+    if (e.target !== this.socket_) {
+      return;
+    }
+
+    const dv = new DataView(e.data);
+    const ack = dv.getUint32(0);
+
+    // Acks are unsigned 24 bits. Negative means error.
+    if (ack > 0xffffff) {
+      this.close();
+      this.sessionID_ = null;
+      return;
+    }
+
+    // Track ack latency.
+    if (this.ackTime_ != 0 && ack == this.expectedAck_) {
+      this.recordAckTime_(Date.now() - this.ackTime_);
+      this.ackTime_ = 0;
+    }
+
+    // Unsigned 24 bits wrap-around delta.
+    const delta = ((ack & 0xffffff) - (this.writeCount_ & 0xffffff)) & 0xffffff;
+    this.writeBuffer_.ack(delta);
+    this.sentCount_ -= delta;
+    this.writeCount_ += delta;
+
+    // This creates a copy of the ArrayBuffer, but there doesn't seem to be an
+    // alternative -- PPAPI doesn't accept views like Uint8Array.  And if it
+    // did, it would probably still serialize the entire underlying ArrayBuffer
+    // (which in this case wouldn't be a big deal as it's only 4 extra bytes).
+    const data = e.data.slice(4);
+    if (data.byteLength) {
+      this.onDataAvailable(data);
+      this.readCount_ += data.byteLength;
+    }
+
+    // isRead == false since for WebSocket we don't need to send another read
+    // request, we will get new data as soon as it comes.
+    this.requestSuccess_(false);
+  }
+
+  /** @param {!Event} e */
+  onSocketError_(e) {
+    if (e.target !== this.socket_) {
+      return;
+    }
+
+    this.socket_.close();
+    this.socket_ = null;
+    if (this.resume_) {
+      this.requestError_(true);
+    } else {
+      super.close();
+    }
+  }
+
+  /**
+   * Send write.
+   *
+   * @override
+   */
+  sendWrite_() {
+    if (!this.socket_ || this.socket_.readyState != 1 ||
+        this.writeBuffer_.isEmpty()) {
+      // Nothing to write or socket is not ready.
+      return;
+    }
+
+    if (this.backoffTimeout_) {
+      console.warn('Attempt to write while backing off.');
+      return;
+    }
+
+    // If we've queued too much already, go back to sleep.
+    // NB: This check is fuzzy at best, so we don't need to include the size of
+    // the data we're about to write below into the calculation.
+    if (this.socket_.bufferedAmount >= this.maxWebSocketBufferLength) {
+      setTimeout(this.sendWrite_.bind(this));
+      return;
+    }
+
+    const dataBuffer = this.writeBuffer_.read(this.maxMessageLength);
+    const buf = new ArrayBuffer(dataBuffer.length + 4);
+    const u8 = new Uint8Array(buf, 4);
+    const dv = new DataView(buf);
+
+    // Every ws.send() maps to a Websocket frame on wire.
+    // Use first 4 bytes to send ack.
+    dv.setUint32(0, this.readCount_ & 0xffffff);
+
+    // Copy over the buffer.
+    u8.set(dataBuffer);
+
+    this.socket_.send(buf);
+    this.sentCount_ += dataBuffer.length;
+
+    // Track ack latency.
+    this.ackTime_ = Date.now();
+    this.expectedAck_ = (this.writeCount_ + this.sentCount_) & 0xffffff;
+
+    if (!this.writeBuffer_.isEmpty()) {
+      // We have more data to send but due to message limit we didn't send it.
+      // We don't know when data was sent so just send new portion async.
+      setTimeout(this.sendWrite_.bind(this), 0);
+    }
+  }
 }
-
-/**
- * We are a subclass of RelayCorpStream.
- */
-RelayCorpWsStream.prototype = Object.create(RelayCorpStream.prototype);
-/** @override */
-RelayCorpWsStream.constructor = RelayCorpWsStream;
 
 /**
  * Maximum length of message that can be sent to avoid request limits.
  * -4 for 32-bit ack that is sent before payload.
  */
 RelayCorpWsStream.prototype.maxMessageLength = 32 * 1024 - 4;
-
-/**
- * Resume read.
- *
- * @override
- */
-RelayCorpWsStream.prototype.resumeRead_ = function() {
-  if (this.backoffTimeout_) {
-    console.warn('Attempt to read while backing off.');
-    return;
-  }
-
-  if (this.sessionID_ && !this.socket_) {
-    let uri = `${this.relayServerSocket_}connect?sid=${this.sessionID_}&ack=${
-        this.readCount_ & 0xffffff}&pos=${this.writeCount_ & 0xffffff}`;
-    if (this.reportConnectAttempts_) {
-      uri += '&try=' + ++this.connectCount_;
-    }
-    this.socket_ = new WebSocket(uri);
-    this.socket_.binaryType = 'arraybuffer';
-    this.socket_.onopen = this.onSocketOpen_.bind(this);
-    this.socket_.onmessage = this.onSocketData_.bind(this);
-    this.socket_.onclose = this.socket_.onerror =
-        this.onSocketError_.bind(this);
-
-    this.sentCount_ = 0;
-  }
-};
-
-/** @param {!Event} e */
-RelayCorpWsStream.prototype.onSocketOpen_ = function(e) {
-  if (e.target !== this.socket_) {
-    return;
-  }
-
-  this.connectCount_ = 0;
-  this.requestSuccess_(false);
-};
-
-/** @param {number} deltaTime */
-RelayCorpWsStream.prototype.recordAckTime_ = function(deltaTime) {
-  this.ackTimes_[this.ackTimesIndex_] = deltaTime;
-  this.ackTimesIndex_ = (this.ackTimesIndex_ + 1) % this.ackTimes_.length;
-
-  if (this.ackTimesIndex_ == 0) {
-    // Filled the circular buffer; compute average.
-    let average = 0;
-    for (let i = 0; i < this.ackTimes_.length; ++i) {
-      average += this.ackTimes_[i];
-    }
-    average /= this.ackTimes_.length;
-
-    if (this.reportAckLatency_) {
-      // Report observed average to relay.
-      // Send this meta-data as string vs. the normal binary payloads.
-      const msg = 'A:' + Math.round(average);
-      this.socket_.send(msg);
-    }
-  }
-};
-
-/** @param {!Event} e */
-RelayCorpWsStream.prototype.onSocketData_ = function(e) {
-  if (e.target !== this.socket_) {
-    return;
-  }
-
-  const dv = new DataView(e.data);
-  const ack = dv.getUint32(0);
-
-  // Acks are unsigned 24 bits. Negative means error.
-  if (ack > 0xffffff) {
-    this.close();
-    this.sessionID_ = null;
-    return;
-  }
-
-  // Track ack latency.
-  if (this.ackTime_ != 0 && ack == this.expectedAck_) {
-    this.recordAckTime_(Date.now() - this.ackTime_);
-    this.ackTime_ = 0;
-  }
-
-  // Unsigned 24 bits wrap-around delta.
-  const delta = ((ack & 0xffffff) - (this.writeCount_ & 0xffffff)) & 0xffffff;
-  this.writeBuffer_.ack(delta);
-  this.sentCount_ -= delta;
-  this.writeCount_ += delta;
-
-  // This creates a copy of the ArrayBuffer, but there doesn't seem to be an
-  // alternative -- PPAPI doesn't accept views like Uint8Array.  And if it did,
-  // it would probably still serialize the entire underlying ArrayBuffer (which
-  // in this case wouldn't be a big deal as it's only 4 extra bytes).
-  const data = e.data.slice(4);
-  if (data.byteLength) {
-    this.onDataAvailable(data);
-    this.readCount_ += data.byteLength;
-  }
-
-  // isRead == false since for WebSocket we don't need to send another read
-  // request, we will get new data as soon as it comes.
-  this.requestSuccess_(false);
-};
-
-/** @param {!Event} e */
-RelayCorpWsStream.prototype.onSocketError_ = function(e) {
-  if (e.target !== this.socket_) {
-    return;
-  }
-
-  this.socket_.close();
-  this.socket_ = null;
-  if (this.resume_) {
-    this.requestError_(true);
-  } else {
-    Stream.prototype.close.call(this);
-  }
-};
-
-/**
- * Send write.
- *
- * @override
- */
-RelayCorpWsStream.prototype.sendWrite_ = function() {
-  if (!this.socket_ || this.socket_.readyState != 1 ||
-      this.writeBuffer_.isEmpty()) {
-    // Nothing to write or socket is not ready.
-    return;
-  }
-
-  if (this.backoffTimeout_) {
-    console.warn('Attempt to write while backing off.');
-    return;
-  }
-
-  // If we've queued too much already, go back to sleep.
-  // NB: This check is fuzzy at best, so we don't need to include the size of
-  // the data we're about to write below into the calculation.
-  if (this.socket_.bufferedAmount >= this.maxWebSocketBufferLength) {
-    setTimeout(this.sendWrite_.bind(this));
-    return;
-  }
-
-  const dataBuffer = this.writeBuffer_.read(this.maxMessageLength);
-  const buf = new ArrayBuffer(dataBuffer.length + 4);
-  const u8 = new Uint8Array(buf, 4);
-  const dv = new DataView(buf);
-
-  // Every ws.send() maps to a Websocket frame on wire.
-  // Use first 4 bytes to send ack.
-  dv.setUint32(0, this.readCount_ & 0xffffff);
-
-  // Copy over the buffer.
-  u8.set(dataBuffer);
-
-  this.socket_.send(buf);
-  this.sentCount_ += dataBuffer.length;
-
-  // Track ack latency.
-  this.ackTime_ = Date.now();
-  this.expectedAck_ = (this.writeCount_ + this.sentCount_) & 0xffffff;
-
-  if (!this.writeBuffer_.isEmpty()) {
-    // We have more data to send but due to message limit we didn't send it.
-    // We don't know when data was sent so just send new portion async.
-    setTimeout(this.sendWrite_.bind(this), 0);
-  }
-};
