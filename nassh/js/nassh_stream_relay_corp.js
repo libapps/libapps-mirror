@@ -33,6 +33,7 @@ export function RelayCorpStream() {
   this.reportAckLatency_ = false;
 
   this.sessionID_ = null;
+  this.resume_ = false;
 
   this.backoffMS_ = 0;
   this.backoffTimeout_ = null;

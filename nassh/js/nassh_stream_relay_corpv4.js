@@ -145,6 +145,7 @@ export function RelayCorpv4WsStream() {
   this.io_ = null;
   this.relayServerSocket_ = null;
   this.relayUser_ = null;
+  this.egressDomain_ = null;
 
   // The remote ssh server settings.
   this.host_ = null;
@@ -191,6 +192,9 @@ export function RelayCorpv4WsStream() {
    * @type {?string}
    */
   this.sid_ = null;
+
+  // Whether to attempt a reconnect.
+  this.resume_ = false;
 
   // Current count of failed reconnect attempts.
   this.reconnectCount_ = 0;
