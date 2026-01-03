@@ -306,6 +306,18 @@ lib.colors.crackHSL = function(color) {
 };
 
 /**
+ * Wrapper to normalize user strings or numbers inputs to numbers.
+ *
+ * The parseInt function only accepts strings, so return numbers directly.
+ *
+ * @param {string|number} v
+ * @return {number}
+ */
+function maybeParseInt(v) {
+  return typeof v === 'number' ? v : parseInt(v, 10);
+}
+
+/**
  * Converts hslx array to rgba array.
  *
  * The returned alpha component defaults to 1 if it isn't present in the input.
@@ -317,9 +329,9 @@ lib.colors.crackHSL = function(color) {
  * @return {!Array<number>} The RGBA values.
  */
 lib.colors.hslxArrayToRgbaArray = function(hslx) {
-  const hue = parseInt(hslx[0], 10) / 60;
-  const sat = parseInt(hslx[1], 10) / 100;
-  const light = parseInt(hslx[2], 10) / 100;
+  const hue = maybeParseInt(hslx[0]) / 60;
+  const sat = maybeParseInt(hslx[1]) / 100;
+  const light = maybeParseInt(hslx[2]) / 100;
 
   // The following algorithm has been adapted from:
   //     https://www.w3.org/TR/css-color-4/#hsl-to-rgb
@@ -439,9 +451,9 @@ lib.colors.hslToRGB = function(hsl) {
  * @return {!Array<number>} The HSLA values.
  */
 lib.colors.rgbxArrayToHslaArray = function(rgbx) {
-  const r = parseInt(rgbx[0], 10) / 255;
-  const g = parseInt(rgbx[1], 10) / 255;
-  const b = parseInt(rgbx[2], 10) / 255;
+  const r = maybeParseInt(rgbx[0]) / 255;
+  const g = maybeParseInt(rgbx[1]) / 255;
+  const b = maybeParseInt(rgbx[2]) / 255;
 
   const min = Math.min(r, g, b);
   const max = Math.max(r, g, b);
@@ -555,7 +567,7 @@ lib.colors.arrayToRGBA = function(ary) {
 /**
  * Convert a 3 or 4 element array into an hsla(...) string.
  *
- * @param {?Array<string|number>} ary The HSL or HSLA elements to convert.
+ * @param {?Array<number>} ary The HSL or HSLA elements to convert.
  * @return {string} The normalized CSS color spec.
  */
 lib.colors.arrayToHSLA = function(ary) {
