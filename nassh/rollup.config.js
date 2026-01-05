@@ -74,6 +74,14 @@ let targets = [
     ],
     plugins: plugins,
   },
+  {
+    input: '../wasi-js-bindings/index.js',
+    output: {
+      ...output,
+      file: 'dist/wjb.js',
+    },
+    plugins: plugins,
+  },
 
   nassh_dep('indexeddb-fs'),
   nassh_dep('lit'),
