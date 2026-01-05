@@ -27,10 +27,14 @@ def _get_default_paths(basedir):
     # All files in js/*.js.
     # Use relpath for nicer default output.
     # Sort to ensure consistent order.
-    js_files = sorted(
+    js_files = terminal.nassh_files() + sorted(
         x
         for x in terminal.JS_DIR.glob("*.js")
-        if not (x.name.startswith("deps_") or x.name == "terminal_import.js")
+        if not (
+            x.name.startswith("deps_")
+            or x.name == "terminal_import.js"
+            or x.is_symlink()
+        )
     )
 
     return [os.path.relpath(x) for x in most_files + js_files]
@@ -90,5 +94,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    with terminal.SymlinkNasshFiles():
-        sys.exit(main(sys.argv[1:]))
+    sys.exit(main(sys.argv[1:]))

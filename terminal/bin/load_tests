@@ -23,5 +23,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    with terminal.SymlinkNasshFiles():
-        sys.exit(main(sys.argv[1:]))
+    sys.exit(main(sys.argv[1:]))
