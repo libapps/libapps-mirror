@@ -22,7 +22,7 @@ def _get_common_obj() -> dict:
 
 
 def check_obj(file: Path, obj: dict) -> bool:
-    """Check whether the package.json obj is up-to-date."""
+    """Sync the package.json obj with the common one."""
     common_obj = _get_common_obj()
     common_pkgs = common_obj["dependencies"]
 
@@ -44,11 +44,11 @@ def check_obj(file: Path, obj: dict) -> bool:
                 ret = False
         return ret
 
-    return _check_deps("dependencies") | _check_deps("devDependencies")
+    return _check_deps("dependencies") & _check_deps("devDependencies")
 
 
 def format_data(file: Path, data: str) -> str:
-    """Check whether the package.json data is up-to-date."""
+    """Format & Check whether the package.json data is up-to-date."""
     obj = json.loads(data)
     check_obj(file, obj)
     return json.dumps(obj, ensure_ascii=False, indent="  ")
@@ -56,17 +56,15 @@ def format_data(file: Path, data: str) -> str:
 
 def check_file(file: Path, fix: bool = False) -> bool:
     """Check whether the package.json is up-to-date."""
-    old_data = file.read_bytes()
-    new_data = format_data(file, old_data)
-    if fix and old_data != new_data:
-        with file.open("w", encoding="utf-8") as fp:
-            fp.write(new_data)
-            fp.write("\n")
-        return False
-    return True
+    old_data = file.read_text(encoding="utf-8")
+    new_data = format_data(file, old_data) + "\n"
+    if fix:
+        file.write_text(new_data, encoding="utf-8")
+        return True
+    return old_data == new_data
 
 
-def get_parser():
+def get_parser() -> libdot.ArgumentParser:
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -92,7 +90,7 @@ def main(argv):
 
     # Run all the tests all the time to get full feedback.  Don't exit on the
     # first error as that makes it more difficult to iterate in the CQ.
-    return 1 if sum(check_file(x, opts.fix) for x in files) else 0
+    return 0 if sum(check_file(x, opts.fix) for x in files) == len(files) else 1
 
 
 if __name__ == "__main__":
