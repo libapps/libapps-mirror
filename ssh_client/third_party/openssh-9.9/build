@@ -76,6 +76,7 @@ def src_configure(metadata):
         "--with-openssl",
         "--with-ldns",
         "--with-zlib",
+        "--enable-dsa-keys",
         # These don't work with our runtime.
         "--without-stackprotect",
         "--without-hardening",
