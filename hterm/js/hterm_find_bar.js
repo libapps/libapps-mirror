@@ -6,7 +6,7 @@
  * @fileoverview Find bar handling.
  */
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * Manage the find bar.

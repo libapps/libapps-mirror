@@ -4,7 +4,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * Constructor for the Terminal class.

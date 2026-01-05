@@ -4,7 +4,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * The RowProvider should return rows rooted by the custom tag name 'x-row'.

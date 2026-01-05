@@ -8,7 +8,7 @@
  *     output.  This makes it hard for the remote to spoof the user.
  */
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * Class that controls everything about the notification center.

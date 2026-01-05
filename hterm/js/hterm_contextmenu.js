@@ -6,7 +6,7 @@
  * @fileoverview Context menu handling.
  */
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * Manage the context menu usually shown when right clicking.

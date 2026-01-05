@@ -9,7 +9,7 @@
  * https://npmjs.org/package/wcwidth.js
  */
 
-import {hterm} from '../../index.js';
+import {hterm} from '../../js/hterm.js';
 
 /**
  * JavaScript porting of Markus Kuhn's wcwidth() implementation

@@ -12,7 +12,7 @@
  * Original code by Cory Maccarrone.
  */
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * Constructor for the hterm.Options class, optionally acting as a copy

@@ -11,7 +11,7 @@ import {punycode} from './deps_punycode.rollup.js';
 
 import {lib} from '../../libdot/index.js';
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * Constructor for TextAttribute objects.

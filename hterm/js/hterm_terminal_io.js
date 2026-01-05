@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * Input/Output interface used by commands to communicate with the terminal.

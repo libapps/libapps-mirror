@@ -34,7 +34,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * Create a new screen instance.

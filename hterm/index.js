@@ -7,7 +7,6 @@
  * @suppress {moduleLoad} Don't try and load dist/js/hterm_resources.js.
  */
 
-import {hterm} from './js/hterm.js';
 import * as resources from './dist/js/hterm_resources.js';
 import './js/hterm_accessibility_reader.js';
 import './js/hterm_contextmenu.js';
@@ -31,6 +30,7 @@ import './js/hterm_vt.js';
 import './js/hterm_vt_character_map.js';
 import './third_party/intl-segmenter/intl-segmenter.js';
 import './third_party/wcwidth/wc.js';
+import {hterm} from './js/hterm.js';
 export {hterm};
 
 hterm.VERSION = resources.VERSION;

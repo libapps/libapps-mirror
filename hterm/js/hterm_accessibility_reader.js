@@ -4,7 +4,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {hterm} from '../index.js';
+import {hterm} from './hterm.js';
 
 /**
  * AccessibilityReader responsible for rendering command output for AT.
