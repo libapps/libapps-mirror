@@ -87,7 +87,7 @@ def main(argv):
     if not files:
         files = [
             libdot.LIBAPPS_DIR / x / "package.json"
-            for x in ("libdot", "hterm", "nassh")
+            for x in ("libdot", "hterm", "nassh", "wasi-js-bindings")
         ]
 
     # Run all the tests all the time to get full feedback.  Don't exit on the
