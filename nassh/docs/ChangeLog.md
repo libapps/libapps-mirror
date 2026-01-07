@@ -1,3 +1,11 @@
+# 0.73, 2026-01-12, Re-enable old DSA keys & fix GSC ssh-agent.
+
+* streams: Fix onDataAvailable callback.
+* plugin: Update to 0.72.
+* ssh_client: openssh: Enable DSA keys in older releases.
+* nassh: streams: Define onClose on the base class.
+* wassh: tty: Drop redundant data init.
+
 # 0.72, 2026-01-05, OpenSSH 9.9 upgrade & lots of internal rework.
 
 * command: Display nassh build info rather than hterm.
