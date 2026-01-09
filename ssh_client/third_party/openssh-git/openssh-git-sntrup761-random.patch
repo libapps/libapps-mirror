@@ -1,0 +1,60 @@
+https://github.com/openssh/openssh-portable/pull/621
+
+From a06e67d6bd44c110bd8ded16ac0751598335d6e6 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@chromium.org>
+Date: Tue, 13 Jan 2026 19:00:08 -0500
+Subject: [PATCH] optimize random calls
+
+randombytes is implemented on top of arc4random_buf which, depending
+on the system, might involve a syscall to get bytes.  Linux can often
+optimize this with a vsyscall to lessen the pain.
+
+The urandom32 function will grab 4 bytes and then manually convert
+them to a 32-bit number instead of just writing directly.
+
+The Short_random & Small_random both call urandom32 p times (where
+p is defined as 761) to fill another buffer.  This means 1500+ calls
+to get 4 random bytes at a time.  Both functions can simply fill the
+buffer in one go which means 2 calls to get 4*761 bytes each, and
+then drop the unoptimized urandom32 function entirely.
+---
+ sntrup761.c | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
+
+diff --git a/sntrup761.c b/sntrup761.c
+index 123d01381c61..9c734f221657 100644
+--- a/sntrup761.c
++++ b/sntrup761.c
+@@ -1961,25 +1961,17 @@ static void Hash_prefix(unsigned char *out, int b, const unsigned char *in, int
+   for (i = 0; i < 32; ++i) out[i] = h[i];
+ }
+ 
+-static uint32_t urandom32(void) {
+-  unsigned char c[4];
+-  uint32_t result = 0;
+-  int i;
+-  randombytes(c, 4);
+-  for (i = 0; i < 4; ++i) result += ((uint32_t)c[i]) << (8 * i);
+-  return result;
+-}
+-
+ static void Short_random(small *out) {
+   uint32_t L[p];
+-  int i;
+-  for (i = 0; i < p; ++i) L[i] = urandom32();
++  randombytes(L, sizeof(L));
+   Short_fromlist(out, L);
+ }
+ 
+ static void Small_random(small *out) {
+   int i;
+-  for (i = 0; i < p; ++i) out[i] = (((urandom32() & 0x3fffffff) * 3) >> 30) - 1;
++  uint32_t L[p];
++  randombytes(L, sizeof(L));
++  for (i = 0; i < p; ++i) out[i] = (((L[i] & 0x3fffffff) * 3) >> 30) - 1;
+ }
+ 
+ static void KeyGen(Fq *h, small *f, small *ginv) {
+-- 
+2.39.5
+

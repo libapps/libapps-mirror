@@ -1,0 +1,13 @@
+name: "OpenSSH"
+description: "SSH and SFTP client"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://www.openssh.com/"
+  }
+  version: "git"
+
+  local_modifications:
+      "See the patches in this directory for more details."
+}

@@ -35,6 +35,27 @@ downloading the SDK and building all the required dependencies.
 When it's finished, the `output/` directory will hold all the compiled objects,
 and the `output/plugin/` directory can be copied over to [nassh].
 
+## OpenSSH Upstream Git
+
+The `openssh-git` package allows for quickly testing upstream OpenSSH git.
+
+```
+# Initialize all the projects.
+$ ./build.sh
+
+# Clone upstream git & build it.
+$ ./third_party/openssh-git/build
+
+# Copy it for local testing.
+$ cp output/build/wasm32-wasip1/openssh-git/work/openssh-git/ssh \
+  ../nassh/plugin/wasm/ssh.wasm
+
+# Make changes and rebuild quickly.
+$ cd output/build/wasm32-wasip1/openssh-git/work/openssh-git/
+<make changes>
+$ make ssh
+```
+
 # Source Layout
 
 If you're hacking on the source, here are the files you most likely care about:
