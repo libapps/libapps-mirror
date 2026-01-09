@@ -40,20 +40,26 @@ and the `output/plugin/` directory can be copied over to [nassh].
 If you're hacking on the source, here are the files you most likely care about:
 
 * [bin/]: Tools for building/testing ssh_client.
-  * [pylint]: Helper tool for linting various Python code.
+  * [lint]: Helper tool for linting various code.
   * [ssh_client.py]: Utility library for Python build code.
 * [build.sh]: The main compile script.  Takes care of downloading & compiling
   OpenSSH, and any other software.  Run it and forget!
 * `output/`: All download & compiled objects are saved here.
   * `bin/`: Various helper tools used at build time.
-  * `build/`: All subprojects get an individual build directory.
+  * `build/`: All subprojects get an individual build directory under an ABI
+    specific directory.
+    * `build/`: Projects needed to build other projects (e.g. toolchains).
+    * `wasm32-wasip1/`: Projects compiled for WASM using the WASI ABI.
+    * `wasm32-wasip1-threads/`: Projects compiled for WASM using the WASI ABI
+      with threading enabled.
   * `distfiles/`: All downloaded archives are cached here.
   * `home/`: Scratch dir used as $HOME when building projects.
   * `plugin/`: The final output of the build process for [nassh].
-  * `sysroot/`: Headers & libs for building the plugin & ssh code.
+  * `wasi-sdk/`: The WASI SDK which contains the toolchain and all headers &
+    libs for building WASM programs.
 * [third_party/]: All third party projects have a unique subdir.
-  Do not try to run these directly as they rely on settings in [build.sh].
-  * [glibc-compat/]: Various C library shims (mostly network/resolver).
+  You can run their `build` script directly to compile them, but dependencies
+  are not checked.  Use [build.sh] to handle ordering.
   * [ldns/]: DNS library supporting DNSSEC and such.
   * [mandoc/]: Tools to generate html from man pages.
   * `openssh-*/`: Code to download & build [OpenSSH].
@@ -87,7 +93,6 @@ Here's a random list of documents which would be useful to people.
 [pylint]: ./bin/pylint
 [ssh_client.py]: ./bin/ssh_client.py
 
-[glibc-compat/]: ./third_party/glibc-compat/
 [ldns/]: ./third_party/ldns/
 [mandoc/]: ./third_party/mandoc/
 [openssl/]: ./third_party/openssl/
