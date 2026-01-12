@@ -1,0 +1,16 @@
+Hack up libs output.
+
+Partially covered by:
+https://github.com/NLnetLabs/ldns/pull/291
+
+--- a/packaging/ldns-config.in
++++ b/packaging/ldns-config.in
+@@ -26,7 +26,7 @@ do
+     fi
+     if [ $arg = "--libs" ]
+     then
+-        echo "${LDFLAGS} -L${LIBDIR} ${LIBS} -lldns"
++        echo "-lldns ${LIBS}"
+     fi
+     if [ $arg = "--python-libs" ]
+     then
