@@ -36,16 +36,8 @@ def src_configure(metadata):
 
     EXTRA_LIBS = ["-lcrypto"]
     EXTRA_CFLAGS = [
-        "-DHAVE_SIGACTION",
-        "-DHAVE_TRUNCATE",
         "-DHAVE_SETSID",
-        "-DHAVE_GETNAMEINFO",
-        "-DHAVE_GETADDRINFO",
-        "-DHAVE_GETCWD",
-        "-DHAVE_STATVFS",
-        "-DHAVE_FSTATVFS",
         "-DHAVE_ENDGRENT",
-        "-DHAVE_FD_MASK",
         "-include",
         "sys/cdefs.h",
     ]
