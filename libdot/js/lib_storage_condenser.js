@@ -25,8 +25,12 @@ lib.Storage.Condenser = class extends lib.Storage {
     this.memStorage_ = new lib.Storage.Memory();
     /** @type {?number} */
     this.syncCallback_ = null;
-    /** @type {number} Delay (in msec) before we write to storage. */
-    this.syncDelay_ = 500;
+    /**
+     * Delay (in msec) before we write to storage.  Using 0 will still delay
+     * until the end of the current task execution.
+     * @type {number}
+     */
+    this.syncDelay_ = 0;
   }
 
   /**
