@@ -34,7 +34,6 @@ def src_configure(metadata):
 
     tc = metadata["toolchain"]
 
-    EXTRA_LIBS = ["-lcrypto"]
     EXTRA_CFLAGS = [
         # Since WASI doesn't support signals, it doesn't try to support POLLPRI
         # yet.  Stub it out to avoid build errors.
@@ -66,6 +65,7 @@ def src_configure(metadata):
         # OpenSSL is needed for DSA/RSA key support.
         "--with-openssl",
         "--with-ldns",
+        f"LDNSCONFIG={tc.sysroot}/bin/ldns-config",
         "--with-zlib",
         # These don't work with our runtime.
         "--without-stackprotect",
@@ -98,7 +98,6 @@ def src_configure(metadata):
         "--sysconfdir=/etc/ssh",
         "--cache-file=../config.cache",
         f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
-        f"LIBS={' '.join(EXTRA_LIBS)}",
     ]
     ssh_client.run(cmd + EXTRA_CONFIGURE_FLAGS)
 

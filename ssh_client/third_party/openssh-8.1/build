@@ -33,7 +33,6 @@ def src_configure(metadata):
 
     tc = metadata["toolchain"]
 
-    EXTRA_LIBS = ["-lcrypto"]
     EXTRA_CFLAGS = []
 
     EXTRA_CONFIGURE_FLAGS = [
@@ -61,6 +60,7 @@ def src_configure(metadata):
         # OpenSSL is needed for DSA/RSA key support.
         "--with-openssl",
         "--with-ldns",
+        f"LDNSCONFIG={tc.sysroot}/bin/ldns-config",
         "--with-zlib",
         # These don't work with our runtime.
         "--without-stackprotect",
@@ -93,7 +93,6 @@ def src_configure(metadata):
         "--sysconfdir=/etc/ssh",
         "--cache-file=../config.cache",
         f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
-        f"LIBS={' '.join(EXTRA_LIBS)}",
     ]
     ssh_client.run(cmd + EXTRA_CONFIGURE_FLAGS)
 
