@@ -19,7 +19,6 @@ import ssh_client  # pylint: disable=wrong-import-position
 
 ARCHIVES = ("%(p)s.tar.gz",)
 PATCHES = (
-    "%(p)s.patch",
     "%(p)s-openssl-bn.patch",
     "%(p)s-bsd-misc-includes.patch",
 )
@@ -45,6 +44,9 @@ def src_configure(metadata):
         "-DHAVE_FSTATVFS",
         "-DHAVE_ENDGRENT",
         "-DHAVE_FD_MASK",
+        # Since WASI doesn't support signals, it doesn't try to support POLLPRI
+        # yet.  Stub it out to avoid build errors.
+        "-DPOLLPRI=0",
         "-include",
         "sys/cdefs.h",
     ]
