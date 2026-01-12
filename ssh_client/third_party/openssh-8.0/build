@@ -38,8 +38,6 @@ def src_configure(metadata):
     EXTRA_CFLAGS = [
         "-DHAVE_SETSID",
         "-DHAVE_ENDGRENT",
-        "-include",
-        "sys/cdefs.h",
     ]
 
     EXTRA_CONFIGURE_FLAGS = [

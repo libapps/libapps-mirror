@@ -41,8 +41,6 @@ def src_configure(metadata):
         # Since WASI doesn't support signals, it doesn't try to support POLLPRI
         # yet.  Stub it out to avoid build errors.
         "-DPOLLPRI=0",
-        "-include",
-        "sys/cdefs.h",
     ]
 
     EXTRA_CONFIGURE_FLAGS = [
