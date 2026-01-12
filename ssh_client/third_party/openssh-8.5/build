@@ -34,10 +34,7 @@ def src_configure(metadata):
     tc = metadata["toolchain"]
 
     EXTRA_LIBS = ["-lcrypto"]
-    EXTRA_CFLAGS = [
-        "-DHAVE_SETSID",
-        "-DHAVE_ENDGRENT",
-    ]
+    EXTRA_CFLAGS = []
 
     EXTRA_CONFIGURE_FLAGS = [
         # Log related settings.
@@ -74,6 +71,10 @@ def src_configure(metadata):
         "ac_cv_func_inet_aton=no",
         "ac_cv_func_inet_ntoa=no",
         "ac_cv_func_inet_ntop=no",
+        # We provide these as #define stbus which configure is unable to probe
+        # as it ignores defines in headers.
+        "ac_cv_func_endgrent=yes",
+        "ac_cv_func_setsid=yes",
         # We set these to yes because openssh doesn't use them, so we want to
         # disable the fallback implementations.  If it starts needing them, we
         # will notice with link errors.
