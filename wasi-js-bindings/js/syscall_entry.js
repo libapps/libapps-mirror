@@ -12,6 +12,11 @@ import * as util from './util.js';
 import * as WASI from './wasi.js';
 
 /**
+ * While the runtime has a Function builtin, there isn't one for async.
+ */
+const AsyncFunction = (async () => {}).constructor;
+
+/**
  * Base class for creating syscall entries.
  *
  * @unrestricted https://github.com/google/closure-compiler/issues/1737
@@ -183,6 +188,9 @@ export class Base {
       for (i = 0; i < handlers.length; ++i) {
         const handler = handlers[i];
         if (method in handler) {
+          if (handler[method] instanceof AsyncFunction) {
+            throw new util.ApiViolation(`${method} must not be async`);
+          }
           this[method] = this.createTracer_(
               handler[method].bind(handler), `handler: ${method}`);
           break;
@@ -212,6 +220,9 @@ export class Base {
   getImports() {
     const entries = {};
     this.getSyscalls_().forEach((key) => {
+      if (this[key] instanceof AsyncFunction) {
+        throw new util.ApiViolation(`${key} must not be async`);
+      }
       entries[key.slice(4)] = this.createTracer_(
           this.unhandledExceptionWrapper_.bind(this, this[key].bind(this)),
           `entry: ${key}`);
