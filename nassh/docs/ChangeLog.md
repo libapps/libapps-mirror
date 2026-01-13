@@ -1,3 +1,53 @@
+# 0.74, 2026-02-02, OpenSSH 10.2 upgrade & alpha WASM Mosh & various rework.
+
+* prefs: Inline setup function.
+* prefs: Display help text all the time.
+* nasftp: Convert ProgressBar to class.
+* fsp: Add foreground mount support.
+* mosh: Integrate new WASM client.
+* connect: Move app setup to command instance.
+* connect: Rework app UI selection.
+* sockets: Enable direct sockets in the dev version.
+* subproc: Add support for capturing stdout.
+* command: Enable automatic newlines.
+* gsc: Convert StatusBytes to ES6 class.
+* subproc: Split ssh-specific logic out.
+* gsc: Convert CommandAPDU to ES6 class.
+* wassh-libc-sup: getaddrinfo: Include ai_hints in log output too.
+* mosh: Hack exceptions to log+abort.
+* agent: Rewrite as ES6 class.
+* subproc: Rename "plugin" to "subproc".
+* wasm: Increase default max memory significantly.
+* wassh: sockets: Add UDPSockets implementation.
+* wassh-libc-sup: Run preopens before creating sockets.
+* wassh: sockets: Stub out IP_MTU_DISCOVER for UDP sockets.
+* mosh: Fix random reading.
+* gsc: Convert to ES6 class.
+* stream: Rewrite as ES6 class.
+* corpv4: Fix crash on reconnect.
+* openssh: Switch to ldns-config.
+* corp: Convert to ES6 class.
+* openssh: Adjust endgrent & setsid overrides.
+* corp xhr: Convert to ES6 class.
+* background: Rewrite sync logic with lib.Storage APIs.
+* runtime: Simplify sendMessage API.
+* openssh: Drop force sys/cdefs.h include.
+* corp ws: Convert to ES6 class.
+* openssh: Drop redundant -DHAVE_xxx defines.
+* corpv4: Convert to ES6 class.
+* openssh: Optimize sntrup761 a bit.
+* openssh: Move POLLPRI stub to configure.
+* sshfe: Convert to ES6 class.
+* binaryen: Upgrade to v125.
+* Revert "ssh_client: wassh-libc-sup: Temporary fork wasi-libc poll".
+* wasi-sdk: Update to 29.0 release.
+* nassh: plugin: Update to 0.73.
+* ldns: Fix up ldns-config --libs.
+* nassh: dist: Rollup wasi-js-bindings for release.
+* wasi-js-bindings: Add npm & rollup support.
+* Reland "wassh: Drop IP ssh agent hack".
+* openssh: Update to 10.0, 10.1, and 10.2.
+
 # 0.73, 2026-01-12, Re-enable old DSA keys & fix GSC ssh-agent.
 
 * streams: Fix onDataAvailable callback.

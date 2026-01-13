@@ -6,7 +6,7 @@
 # Only features added since then should be documented in this file.
 # When a new version has gone stable, update the version,
 # and delete all the old release notes below.
-last_version: "0.70"
+last_version: "0.73"
 
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
@@ -15,4 +15,5 @@ last_version: "0.70"
 #     - "\u001b]8;;https://example.com\u0007Example Link\u001b]8;;\u0007."
 notes:
   - NaCl support removed; only WASM is supported.
-  - "\u001b]8;;https://www.openssh.com/txt/release-9.9\u0007OpenSSH upgraded to 9.9p2\u001b]8;;\u0007."
+  - "\u001b]8;;https://www.openssh.com/txt/release-10.2\u0007OpenSSH upgraded to 10.2p1\u001b]8;;\u0007."
+  - "Initial WASM \u001b]8;;https://mosh.org/\u0007Mosh (Mobile shell)\u001b]8;;\u0007 build."
