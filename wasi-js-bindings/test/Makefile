@@ -15,7 +15,7 @@ CFLAGS ?= -O2 -g
 CXXFLAGS ?= -O2 -g
 COMMON_FLAGS = --sysroot $(SYSROOT) -Wall -Werror
 CFLAGS += $(COMMON_FLAGS) -std=gnu17
-CXXFLAGS += $(COMMON_FLAGS) -std=gnu++17
+CXXFLAGS += $(COMMON_FLAGS) -std=gnu++23
 CPPFLAGS += -D_GNU_SOURCE
 LDFLAGS += -L$(SYSROOT)/lib
 
