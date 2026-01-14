@@ -5,8 +5,6 @@
 // Simple SSH daemon with inline shell for quick testing.
 
 #include <cctype>
-#include <codecvt>
-#include <locale>
 #include <map>
 #include <string>
 #include <vector>
@@ -92,10 +90,36 @@ int ssh_channel_write_str(ssh_channel channel, const std::string& str) {
   return ssh_channel_write(channel, str.c_str(), str.length());
 }
 
-// Convert a Unicode codepoint to a string.
-const std::string codepointToUtf8(unsigned long codepoint) {
-  std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
-  return converter.to_bytes(codepoint);
+// Helper to write a Unicode codepoint.
+int ssh_channel_write_codepoint(ssh_channel channel, uint32_t codepoint) {
+  unsigned char bytes[4] = {};
+  unsigned int num_bytes = 0;
+
+  if (codepoint <= 0x7F) {
+    // 1 byte UTF-8.
+    num_bytes = 1;
+    bytes[0] = codepoint;
+  } else if (codepoint <= 0x7FF) {
+    // 2 byte UTF-8.
+    num_bytes = 2;
+    bytes[0] = 0xc0 | (codepoint >> 6);
+    bytes[1] = 0x80 | (codepoint & 0x3f);
+  } else if (codepoint <= 0xFFFF) {
+    // 3 byte UTF-8.
+    num_bytes = 3;
+    bytes[0] = 0xe0 | (codepoint >> 12);
+    bytes[1] = 0x80 | ((codepoint >> 6) & 0x3f);
+    bytes[2] = 0x80 | (codepoint & 0x3f);
+  } else if (codepoint <= 0x10FFFF) {
+    // 4 byte UTF-8.
+    num_bytes = 4;
+    bytes[0] = 0xf0 | (codepoint >> 18);
+    bytes[1] = 0x80 | ((codepoint >> 12) & 0x3f);
+    bytes[2] = 0x80 | ((codepoint >> 6) & 0x3f);
+    bytes[3] = 0x80 | (codepoint & 0x3f);
+  }
+
+  return ssh_channel_write(channel, bytes, num_bytes);
 }
 
 // Callback when processing a NONE authorization request.
@@ -323,7 +347,7 @@ int cmd_print(ssh_channel chan, const std::vector<std::string>& argv) {
               ssh_channel_write_str(chan,
                                     "\n\rprint: Unicode codepoint too big\n\r");
             } else {
-              ssh_channel_write_str(chan, codepointToUtf8(hex));
+              ssh_channel_write_codepoint(chan, hex);
             }
             i += consumed;
             break;
