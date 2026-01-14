@@ -21,6 +21,7 @@ ARCHIVES = ("%(p)s.tar.gz",)
 PATCHES = (
     "%(p)s-no-mmap.patch",
     "%(p)s-bsd-misc-includes.patch",
+    "%(p)s-sntrup761-random.patch",
 )
 
 
