@@ -22,6 +22,9 @@ class StorageAreaFake {
     /** @const @private {!Array<function(!Object)>} */
     this.listeners_ = [];
 
+    // Whether to throw quota write error.
+    this.quotaWriteError = false;
+
     /**
      * @type {!ChromeEvent}
      * @suppress {checkTypes} The mock is not an exact match.
@@ -41,6 +44,18 @@ class StorageAreaFake {
         this.storage_, newStorage);
     this.listeners_.forEach((listener) => listener(changes));
     this.storage_ = newStorage;
+  }
+
+  /**
+   * Raise a quota write error if requested.
+   */
+  maybeFakeQuotaWriteError_() {
+    if (this.quotaWriteError) {
+      this.quotaWriteError = false;
+      // NB: This string matches what Chrome throws, and what our code checks.
+      throw new Error(
+          'This request exceeds the MAX_WRITE_OPERATIONS_PER_MINUTE quota.');
+    }
   }
 
   /**
@@ -86,6 +101,8 @@ class StorageAreaFake {
     assert.equal(arguments.length, 1);
     assert.equal('object', typeof items);
 
+    this.maybeFakeQuotaWriteError_();
+
     this.update_(Object.assign({}, this.storage_, items));
   }
 
@@ -120,8 +137,22 @@ class StorageAreaFake {
  * Initialize the storage fakes & APIs.
  */
 beforeEach(function() {
-  const fake = new StorageAreaFake();
-  this.storage = new lib.Storage.Chrome(fake);
+  this.fake = new StorageAreaFake();
+  this.storage = new lib.Storage.Chrome(this.fake);
+  this.storage.quotaRetryDelay_ = 0;
 });
 
 storageApiTest();
+
+/**
+ * Verify setItem quota writes are retried.
+ */
+it('quota-write-retry setItem', async function() {
+  await this.storage.setItem('foo', 1);
+  assert.equal(await this.storage.getItem('foo'), 1);
+
+  this.fake.quotaWriteError = true;
+  await this.storage.setItem('foo', 2);
+  assert.isFalse(this.fake.quotaWriteError);
+  assert.equal(await this.storage.getItem('foo'), 2);
+});
