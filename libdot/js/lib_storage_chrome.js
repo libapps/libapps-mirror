@@ -79,9 +79,7 @@ lib.Storage.Chrome = class extends lib.Storage {
    * @override
    */
   async setItem(key, value) {
-    return retryQuotaErrors(
-        () => this.setItems({[key]: value}),
-        this.quotaRetryDelay_);
+    return this.setItems({[key]: value});
   }
 
   /**
@@ -90,7 +88,9 @@ lib.Storage.Chrome = class extends lib.Storage {
    * @override
    */
   async setItems(obj) {
-    return this.storage_.set(obj);
+    return retryQuotaErrors(
+        () => this.storage_.set(obj),
+        this.quotaRetryDelay_);
   }
 
   /**

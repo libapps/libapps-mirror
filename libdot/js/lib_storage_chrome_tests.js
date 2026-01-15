@@ -156,3 +156,16 @@ it('quota-write-retry setItem', async function() {
   assert.isFalse(this.fake.quotaWriteError);
   assert.equal(await this.storage.getItem('foo'), 2);
 });
+
+/**
+ * Verify setItems quota writes are retried.
+ */
+it('quota-write-retry setItems', async function() {
+  await this.storage.setItem('foo', 1);
+  assert.equal(await this.storage.getItem('foo'), 1);
+
+  this.fake.quotaWriteError = true;
+  await this.storage.setItems({'foo': 3});
+  assert.isFalse(this.fake.quotaWriteError);
+  assert.equal(await this.storage.getItem('foo'), 3);
+});
