@@ -47,14 +47,24 @@ EXCLUDE_PATTERNS = (
 
 # List of additionall files to be excluded when building crosh archive.
 EXCLUDE_PATTERNS_CROSH = (
-    "manifest.json",
+    # go/keep-sorted start
+    "css/nassh_popup.css",
+    "css/nassh_preferences_editor.css",
+    "html/changelog.html",
     "html/nassh_background.html",
+    "html/nassh_popup.html",
+    "html/nassh_preferences_editor.html",
+    "images/*/icon-fullsize.png",
+    "images/mosh*",
     "js/nassh_background_main.js",
+    "js/nassh_extension_popup_main.js",
+    "manifest.json",
     "plugin/wasm-*",
+    "plugin/wasm/mosh-client*",
     "plugin/wasm/scp*",
     "plugin/wasm/sftp*",
     "plugin/wasm/ssh-keygen*",
-    "images/*/icon-fullsize.png",
+    # go/keep-sorted end
 )
 
 
