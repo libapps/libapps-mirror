@@ -66,6 +66,14 @@ def update_closure_externs():
         "chrome_extensions",
     )
 
+    # Delete content we've forked locally.  Keep sorted.
+    DELETE_LINES = {
+        "chrome_extensions": (
+            # StorageArea API.
+            (8945, 9010),
+        ),
+    }
+
     for i, name in enumerate(EXTERNS, start=CLOSURE_ORDER_BASE):
         uri = URI_TEMPLATE % {"name": name}
         path = EXTERNS_DIR / f"{i}-closure-{name}-v{EXTERNS_VERSION}.js"
@@ -75,6 +83,13 @@ def update_closure_externs():
         for oldpath in EXTERNS_DIR.glob(f"*closure-{name}-v*.js"):
             oldpath.unlink()
         libdot.fetch(uri, path)
+
+        deletes = DELETE_LINES.get(name)
+        if deletes:
+            lines = path.read_text(encoding="utf-8").splitlines()
+            for start, end in deletes:
+                del lines[start : end + 1]
+            path.write_text("\n".join(lines), encoding="utf-8")
 
 
 def update_chrome_externs():
