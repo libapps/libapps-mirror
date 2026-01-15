@@ -332,19 +332,8 @@ export function loadWebFonts(document) {
  * @param {...*} args The arguments to sendMessage.
  * @return {!Promise<*>} A promise to resolve with the remote's response.
  */
-export function runtimeSendMessage(...args) {
-  return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage(...args, (response) => {
-      // If the remote side doesn't exist (which is normal), Chrome complains
-      // if we don't read the lastError.  Clear that here.
-      const err = lib.f.lastError();
-      if (err) {
-        reject(err);
-      } else {
-        resolve(response);
-      }
-    });
-  });
+export async function runtimeSendMessage(...args) {
+  return chrome.runtime.sendMessage(...args);
 }
 
 /**
