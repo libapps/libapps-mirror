@@ -11,23 +11,20 @@ import {lib} from './lib.js';
  * @param {number=} delay How long (in msec) to sleep after quota error.
  */
 async function retryQuotaErrors(callback, delay = 1000) {
-  const checkError = async () => {
-    const err = lib.f.lastError();
-    if (err) {
+  while (1) {
+    try {
+      await callback();
+      break;
+    } catch (e) {
       // Doesn't seem to be any better way of handling this.
       // https://crbug.com/764759
-      if (err.indexOf('MAX_WRITE_OPERATIONS')) {
-          console.warn(`Will retry write after exceeding quota:`, err);
-          return false;
+      if (e.message.indexOf('MAX_WRITE_OPERATIONS')) {
+        console.warn(`Will retry write after exceeding quota:`, e);
+        await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
-        console.error(`Unknown runtime error: ${err}`);
+        throw e;
       }
     }
-    return true;
-  };
-
-  while (!await callback().then(checkError)) {
-    await new Promise((resolve) => setTimeout(resolve, delay));
   }
 }
 
@@ -62,9 +59,7 @@ lib.Storage.Chrome = class extends lib.Storage {
    * @override
    */
   async clear() {
-    return new Promise((resolve) => {
-      this.storage_.clear(resolve);
-    });
+    return this.storage_.clear();
   }
 
   /**
@@ -73,9 +68,7 @@ lib.Storage.Chrome = class extends lib.Storage {
    * @override
    */
   async getItems(keys) {
-    return new Promise((resolve) => {
-      this.storage_.get(keys, resolve);
-    });
+    return this.storage_.get(keys);
   }
 
   /**
@@ -94,9 +87,7 @@ lib.Storage.Chrome = class extends lib.Storage {
    * @override
    */
   async setItems(obj) {
-    return new Promise((resolve) => {
-      this.storage_.set(obj, resolve);
-    });
+    return this.storage_.set(obj);
   }
 
   /**
@@ -105,8 +96,6 @@ lib.Storage.Chrome = class extends lib.Storage {
    * @override
    */
   async removeItems(keys) {
-    return new Promise((resolve) => {
-      this.storage_.remove(keys, resolve);
-    });
+    return this.storage_.remove(keys);
   }
 };

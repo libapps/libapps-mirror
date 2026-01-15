@@ -45,12 +45,11 @@ class StorageAreaFake {
 
   /**
    * @param {string|?Object=} keys
-   * @param {function(!Object)=} callback
+   * @return {!Promise<!Object<string, *>>}
    * @override
    */
-  get(keys, callback) {
-    assert.equal(arguments.length, 2);
-    assert.equal('function', typeof callback);
+  async get(keys) {
+    assert.equal(arguments.length, 1);
 
     const values = {};
 
@@ -75,33 +74,28 @@ class StorageAreaFake {
       }
     }
 
-    setTimeout(() => callback(values));
+    return values;
   }
 
   /**
    * @param {!Object<string>} items
-   * @param {function(!Object)=} callback
+   * @return {!Promise<void>}
    * @override
    */
-  set(items, callback = () => {}) {
-    assert.isAtLeast(arguments.length, 1);
-    assert.isAtMost(arguments.length, 2);
-    assert.equal('function', typeof callback);
+  async set(items) {
+    assert.equal(arguments.length, 1);
     assert.equal('object', typeof items);
 
     this.update_(Object.assign({}, this.storage_, items));
-    setTimeout(callback);
   }
 
   /**
    * @param {string|?Object} keys
-   * @param {function(!Object)=} callback
+   * @return {!Promise<void>}
    * @override
    */
-  remove(keys, callback = () => {}) {
-    assert.isAtLeast(arguments.length, 1);
-    assert.isAtMost(arguments.length, 2);
-    assert.equal('function', typeof callback);
+  async remove(keys) {
+    assert.equal(arguments.length, 1);
 
     if (!Array.isArray(keys)) {
       keys = [keys];
@@ -109,19 +103,16 @@ class StorageAreaFake {
     const newStorage = Object.assign({}, this.storage_);
     keys.forEach((key) => delete newStorage[key]);
     this.update_(newStorage);
-    setTimeout(callback);
   }
 
   /**
-   * @param {function(!Object)=} callback
+   * @return {!Promise<void>}
    * @override
    */
-  clear(callback = () => {}) {
-    assert.isAtMost(arguments.length, 1);
-    assert.equal('function', typeof callback);
+  async clear() {
+    assert.equal(arguments.length, 0);
 
     this.update_({});
-    setTimeout(callback);
   }
 }
 
