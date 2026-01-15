@@ -99,6 +99,8 @@ lib.Storage.Chrome = class extends lib.Storage {
    * @override
    */
   async removeItems(keys) {
-    return this.storage_.remove(keys);
+    return retryQuotaErrors(
+        () => this.storage_.remove(keys),
+        this.quotaRetryDelay_);
   }
 };

@@ -114,6 +114,8 @@ class StorageAreaFake {
   async remove(keys) {
     assert.equal(arguments.length, 1);
 
+    this.maybeFakeQuotaWriteError_();
+
     if (!Array.isArray(keys)) {
       keys = [keys];
     }
@@ -168,4 +170,30 @@ it('quota-write-retry setItems', async function() {
   await this.storage.setItems({'foo': 3});
   assert.isFalse(this.fake.quotaWriteError);
   assert.equal(await this.storage.getItem('foo'), 3);
+});
+
+/**
+ * Verify removeItem quota writes are retried.
+ */
+it('quota-write-retry removeItem', async function() {
+  await this.storage.setItem('foo', 1);
+  assert.equal(await this.storage.getItem('foo'), 1);
+
+  this.fake.quotaWriteError = true;
+  await this.storage.removeItem('foo');
+  assert.isFalse(this.fake.quotaWriteError);
+  assert.isUndefined(await this.storage.getItem('foo'));
+});
+
+/**
+ * Verify removeItems quota writes are retried.
+ */
+it('quota-write-retry removeItems', async function() {
+  await this.storage.setItem('foo', 1);
+  assert.equal(await this.storage.getItem('foo'), 1);
+
+  this.fake.quotaWriteError = true;
+  await this.storage.removeItems(['foo']);
+  assert.isFalse(this.fake.quotaWriteError);
+  assert.isUndefined(await this.storage.getItem('foo'));
 });
