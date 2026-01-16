@@ -66,7 +66,7 @@ function init() {
  *
  * This helps when installing the dev version the first time.
  */
-chrome.runtime.onInstalled.addListener((details) => {
+chrome.runtime.onInstalled.addListener(async (details) => {
   console.log(`onInstalled fired due to "${details.reason}"`);
 
   // Only sync prefs when installed the first time.
@@ -74,42 +74,41 @@ chrome.runtime.onInstalled.addListener((details) => {
     return;
   }
 
+  const storage = getSyncStorage();
+
   // We'll get called when logging into a new device for the first time when we
   // get installed automatically as part of the overall sync.  We'll have prefs
   // in that case already, so no need to sync.
-  const commonPref = '/nassh/profile-ids';
-  chrome.storage.sync.get([commonPref], (items) => {
+  if (await storage.getItem('/nassh/profile-ids') !== undefined) {
     // Prefs exist, so exit early.
-    if (commonPref in items) {
-      return;
-    }
+    return;
+  }
 
-    const extStableId = 'iodihamcpbpeioajjeobimgagajmlibd';
-    const extDevId = 'algkcnfjnajfhgimadimbjhmpaeohhln';
+  const extStableId = 'iodihamcpbpeioajjeobimgagajmlibd';
+  const extDevId = 'algkcnfjnajfhgimadimbjhmpaeohhln';
 
-    /**
-     * Try to import prefs from another install into our own.
-     *
-     * @param {string} srcId The extension to import from.
-     * @param {function()=} onError Callback if extension doesn't exist.
-     */
-    const migrate = (srcId, onError = () => {}) => {
-      console.log(`Trying to sync prefs from ${srcId}`);
-      runtimeSendMessage(srcId, {command: 'prefsExport'})
-        .then((response) => {
-          const {prefs} = response;
-          return importPreferences(prefs);
-        })
-        .catch(onError);
-    };
+  /**
+   * Try to import prefs from another install into our own.
+   *
+   * @param {string} srcId The extension to import from.
+   * @param {function()=} onError Callback if extension doesn't exist.
+   */
+  const migrate = (srcId, onError = () => {}) => {
+    console.log(`Trying to sync prefs from ${srcId}`);
+    runtimeSendMessage(srcId, {command: 'prefsExport'})
+      .then((response) => {
+        const {prefs} = response;
+        return importPreferences(prefs);
+      })
+      .catch(onError);
+  };
 
-    switch (chrome.runtime.id) {
-      case extDevId:
-        // Sync from stable ext.
-        migrate(extStableId);
-        break;
-    }
-  });
+  switch (chrome.runtime.id) {
+    case extDevId:
+      // Sync from stable ext.
+      migrate(extStableId);
+      break;
+  }
 });
 
 // Initialize the page!
