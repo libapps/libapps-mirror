@@ -121,24 +121,13 @@ lib.MessageManager.prototype.findAndLoadMessages = async function(pattern) {
  * @param {string} url The URL to load the messages from.
  * @return {!Promise<void>}
  */
-lib.MessageManager.prototype.loadMessages = function(url) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = () => {
-      try {
-        this.addMessages(/** @type {!lib.MessageManager.Messages} */ (
-            JSON.parse(xhr.responseText)));
-        resolve();
-      } catch (e) {
-        // Error parsing JSON.
-        reject(e);
-      }
-    };
-    xhr.onerror = () => reject(xhr);
-
-    xhr.open('GET', url);
-    xhr.send();
-  });
+lib.MessageManager.prototype.loadMessages = async function(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw Error(`fetch failed: ${response.statusText}`, {cause: response});
+  }
+  this.addMessages(/** @type {!lib.MessageManager.Messages} */ (
+      await response.json()));
 };
 
 /**

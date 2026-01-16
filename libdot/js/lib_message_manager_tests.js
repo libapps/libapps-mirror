@@ -91,3 +91,39 @@ it('get-local', () => {
   assert.equal('foo', mm.get('UNKNOWN', [], 'foo'));
   assert.equal('foo X bar Y', mm.get('ID_REPLACE', ['X', 'Y']));
 });
+
+/**
+ * Check loading works.
+ */
+it('load', async function() {
+  const mm = new lib.MessageManager([]);
+
+  // Skip if nassh is unavailable.
+  try {
+    await mm.loadMessages('../../nassh/_locales/en/messages.json');
+  } catch (e) {
+    assert.equal(e?.cause?.status, 404);
+    this.skip();
+    return;
+  }
+
+  assert.equal(mm.get('OK_BUTTON_LABEL'), 'OK');
+});
+
+/**
+ * Check finding & loading works.
+ */
+it('find-and-load', async function() {
+  const mm = new lib.MessageManager(['en']);
+
+  // Skip if nassh is unavailable.
+  try {
+    await mm.findAndLoadMessages('../../nassh/_locales/$1//messages.json');
+  } catch (e) {
+    assert.equal(e?.cause?.status, 404);
+    this.skip();
+    return;
+  }
+
+  assert.equal(mm.get('OK_BUTTON_LABEL'), 'OK');
+});
