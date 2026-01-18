@@ -371,8 +371,12 @@ export class RelayCorpv4WsStream extends Stream {
    * @param {!Event} e The event details.
    */
   onSocketOpen_(e) {
-    this.openCallbackResolve_();
-    this.openCallbackResolve_ = this.openCallbackReject_ = null;
+    // These callbacks are only on initial connect.  Reconnecting is transparent
+    // to the caller, so there's no callbacks.
+    if (this.openCallbackResolve_) {
+      this.openCallbackResolve_();
+      this.openCallbackResolve_ = this.openCallbackReject_ = null;
+    }
 
     // If we had any pending writes, kick them off.  We can't call sendWrite
     // directly as the socket isn't in the correct state until after this
