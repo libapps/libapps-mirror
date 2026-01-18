@@ -18,10 +18,9 @@ JS_DIR = DIR / "js"
 
 
 sys.path.insert(0, str(LIBAPPS_DIR / "libdot" / "bin"))
-sys.path.insert(0, str(LIBAPPS_DIR / "nassh" / "bin"))
 
-# pylint: disable=unused-import
-import libdot  # pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-position
+import libdot  # pylint: disable=unused-import
 
 
 class SymlinkNasshFiles:
