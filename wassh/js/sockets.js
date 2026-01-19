@@ -20,6 +20,7 @@ const SO_KEEPALIVE = 9;
 const IPPROTO_IP = 0;
 const IPPROTO_IPV6 = 41;
 const IP_TOS = 1;
+const IP_MTU_DISCOVER = 10;
 const IPPROTO_TCP = 6;
 const TCP_NODELAY = 1;
 const IPV6_TCLASS = 67;
@@ -1030,6 +1031,30 @@ export class ChromeUdpSocket extends DatagramSocket {
     return new Promise((resolve) => {
       chrome.sockets.udp.getInfo(this.socketId_, resolve);
     });
+  }
+
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
+  async setSocketOption(level, name, value) {
+    switch (level) {
+      case IPPROTO_IP: {
+        switch (name) {
+          case IP_MTU_DISCOVER: {
+            // TODO(vapier): Would be nice to support this.
+            console.warn(`Ignoring IP_MTU_DISCOVER=${value}`);
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+    }
+
+    return WASI.errno.ENOPROTOOPT;
   }
 
   /**
