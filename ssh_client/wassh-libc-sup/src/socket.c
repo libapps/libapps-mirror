@@ -8,11 +8,18 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 
+#include <wasi/libc.h>
+
 #include "bh-syscalls.h"
 #include "debug.h"
 
 int socket(int domain, int c_type, int protocol) {
   _ENTER("domain=%i type=%i protocol=%i", domain, c_type, protocol);
+
+  // Make sure preopens have processed before we create a socket as that will
+  // update the file descriptor table, and preopen logic will fail when it hits
+  // a non-preopen fd.
+  __wasilibc_populate_preopens();
 
   // We don't support much here currently.
   // 0: The default for most things.
