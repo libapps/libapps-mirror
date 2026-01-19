@@ -322,6 +322,15 @@ def _toolchain_wasm_env(target: str) -> dict:
                 # The default stack size in WASM is 64KiB.  This is much smaller
                 # than your standard POSIX platform, and OpenSSH 10.0 blows it.
                 f"-Wl,-z,stack-size={128 * 1024}",
+                # The default max memory size is set to the size of the WASM
+                # program (rounded up to 64KiB page size).  This is then grown
+                # at runtime by the allocator as more memory is needed.  Under
+                # C++, this logic involves exceptions which we don't support, so
+                # the programs fail almost immediately.  Our current program
+                # sizes are all under 5MiB, so setting the default max memory
+                # size much larger should "just work".  Since it's using virtual
+                # memory, it shouldn't cost us anything when not actually used.
+                f"-Wl,--max-memory={64 * 1024 * 1024}",
             )
         ),
     }
