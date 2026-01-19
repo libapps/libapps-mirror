@@ -316,7 +316,11 @@ export class DirectWasiPreview1 extends Base {
     // to a non-shared type is required. Other types of syscall will be able to
     // operate directly on the memory supplied.
     // https://github.com/w3c/webcrypto/issues/213
-    if (buf instanceof SharedArrayBuffer) {
+    if (ArrayBuffer.isView(buf) && buf.buffer instanceof SharedArrayBuffer) {
+      const temp = new Uint8Array(buf.length);
+      crypto.getRandomValues(temp);
+      buf.set(temp);
+    } else if (buf instanceof SharedArrayBuffer) {
       const u8 = new Uint8Array(buf);
       const temp = new Uint8Array(u8.length);
       crypto.getRandomValues(temp);
