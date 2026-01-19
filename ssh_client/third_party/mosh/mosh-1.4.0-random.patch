@@ -1,0 +1,65 @@
+From 20cfdec4aab28fa1696ec4237fc53a0f7502e9ab Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@chromium.org>
+Date: Sun, 18 Jan 2026 23:29:00 -0500
+Subject: [PATCH] prng: simplify random data read
+
+Use syscalls to get random data instead of /dev/urandom pseudo file.
+
+If we wanted to make this portable, we could use a configure check, and also
+support getrandom().
+---
+ src/crypto/prng.h | 18 ++++--------------
+ 1 file changed, 4 insertions(+), 14 deletions(-)
+
+diff --git a/src/crypto/prng.h b/src/crypto/prng.h
+index efcddf0f88c8..f2f296ecca22 100644
+--- a/src/crypto/prng.h
++++ b/src/crypto/prng.h
+@@ -33,40 +33,30 @@
+ #ifndef PRNG_HPP
+ #define PRNG_HPP
+ 
+-#include <string>
++#include <stdlib.h>
+ #include <stdint.h>
+-#include <fstream>
+ 
+ #include "crypto.h"
+ 
+-/* Read random bytes from /dev/urandom.
+-
+-   We rely on stdio buffering for efficiency. */
+-
+-static const char rdev[] = "/dev/urandom";
++/* Read random bytes. */
+ 
+ using namespace Crypto;
+ 
+ class PRNG {
+  private:
+-  std::ifstream randfile;
+-
+   /* unimplemented to satisfy -Weffc++ */
+   PRNG( const PRNG & );
+   PRNG & operator=( const PRNG & );
+ 
+  public:
+-  PRNG() : randfile( rdev, std::ifstream::in | std::ifstream::binary ) {}
++  PRNG() {}
+ 
+   void fill( void *dest, size_t size ) {
+     if ( 0 == size ) {
+       return;
+     }
+ 
+-    randfile.read( static_cast<char *>( dest ), size );
+-    if ( !randfile ) {
+-      throw CryptoException( "Could not read from " + std::string( rdev ) );
+-    }
++    arc4random_buf(dest, size);
+   }
+ 
+   uint8_t uint8() {
+-- 
+2.39.5
+
