@@ -1690,6 +1690,209 @@ export class WebTcpServerSocket extends StreamSocket {
 }
 
 /**
+ * A UDP/IP based socket backed by the Direct Sockets API.
+ */
+export class WebUdpSocket extends DatagramSocket {
+  /**
+   * @param {number} domain
+   * @param {number} type
+   * @param {number} protocol
+   * @override
+   */
+  constructor(domain, type, protocol) {
+    super(domain, type, protocol);
+
+    this.socket_ = null;
+    this.directSocketsReader_ = null;
+    this.directSocketsWriter_ = null;
+  }
+
+  /**
+   * @param {!UDPSocket} socket
+   * @return {!Promise<!WASI_t.errno>}
+   */
+  async setSocket_(socket) {
+    this.socket_ = socket;
+    try {
+      const {readable, writable, localAddress, localPort} =
+          await this.socket_.opened;
+      this.directSocketsReader_ = readable.getReader();
+      this.directSocketsWriter_ = writable.getWriter();
+      this.address = localAddress;
+      this.port = localPort;
+    } catch (e) {
+      this.socket_ = null;
+      console.warn('setSocket_ failed.', e);
+      return WASI.errno.ENETUNREACH;
+    }
+    return WASI.errno.ESUCCESS;
+  }
+
+  /** @override */
+  async close() {
+    // In the *NIX world, close must never fail.  That's why we don't return
+    // any errors here.
+
+    if (this.socket_ === null) {
+      return;
+    }
+
+    if (this.directSocketsReader_) {
+      await this.directSocketsReader_.cancel('closing');
+      this.directSocketsReader_.releaseLock();
+      this.directSocketsReader_ = null;
+    }
+
+    if (this.directSocketsWriter_) {
+      await this.directSocketsWriter_.abort('closing');
+      this.directSocketsWriter_.releaseLock();
+      this.directSocketsWriter_ = null;
+    }
+
+    try {
+      await this.socket_.close();
+    } catch (e) {
+      console.warn('Error with closing socket.', e);
+    }
+
+    this.socket_ = null;
+    this.address = null;
+    this.port = null;
+  }
+
+  /**
+   * @param {!ArrayBuffer} buf
+   * @param {string} address
+   * @param {number} port
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
+  async sendto(buf, address, port) {
+    // Web APIs require us to bind the socket locally first.
+    if (this.address === null) {
+      const bindRet = await this.bind('0.0.0.0');
+      if (typeof bindRet === 'number' && bindRet !== WASI.errno.ESUCCESS) {
+        return bindRet;
+      }
+    }
+
+    // Direct Sockets can't handle shared array buffers currently.
+    // https://github.com/WICG/direct-sockets/issues/82
+    if (ArrayBuffer.isView(buf) && buf.buffer instanceof SharedArrayBuffer) {
+      const u8 = new Uint8Array(buf.length);
+      u8.set(new Uint8Array(buf));
+      buf = u8.buffer;
+    } else if (buf instanceof SharedArrayBuffer) {
+      const u8 = new Uint8Array(buf.byteLength);
+      u8.set(new Uint8Array(buf));
+      buf = u8.buffer;
+    }
+
+    try {
+      await this.directSocketsWriter_.ready;
+      await this.directSocketsWriter_.write({
+        data: buf,
+        remoteAddress: address,
+        remotePort: port,
+      });
+      return {nwritten: buf.byteLength};
+    } catch (e) {
+      console.warn('Chunk error:', e);
+      return WASI.errno.EIO;
+    }
+  }
+
+  /**
+   * @param {string} address
+   * @param {number=} port
+   * @return {!Promise<!WASI_t.errno|!Socket>}
+   * @override
+   */
+  async bind(address, port) {
+    if (this.address !== null) {
+      return WASI.errno.EADDRINUSE;
+    }
+
+    await this.setSocket_(new UDPSocket({
+      localAddress: address,
+      localPort: port,
+    }));
+    this.pollData_();
+
+    return WASI.errno.ESUCCESS;
+  }
+
+  /**
+   * Wait for data from the reader, then notify the socket upon receiving data.
+   */
+  async pollData_() {
+    while (true) {
+      const {value, done} = await this.directSocketsReader_.read();
+      if (done) {
+        break;
+      }
+      this.onRecv(value.data);
+    }
+  }
+
+  /**
+   * @return {!Promise<!chrome.socket.SocketInfo>}
+   */
+  async getSocketInfo() {
+    // Return a stub socketInfo.
+    if (this.socket_ === null) {
+      return /** @type {!chrome.socket.SocketInfo} */ ({
+        connected: false,
+        socketType: 'udp',
+      });
+    }
+
+    const info = await this.socket_.opened;
+
+    return /** @type {!chrome.socket.SocketInfo} **/ ({
+      connected: true,
+      localAddress: info.localAddress,
+      localPort: info.localPort,
+      peerAddress: info.remoteAddress,
+      peerPort: info.remotePort,
+      socketType: 'udp',
+    });
+  }
+
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
+  async setSocketOption(level, name, value) {
+    switch (level) {
+      case IPPROTO_IP: {
+        switch (name) {
+          case IP_MTU_DISCOVER: {
+            // TODO(vapier): Would be nice to support this.
+            console.warn(`Ignoring IP_MTU_DISCOVER=${value}`);
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+    }
+
+    return WASI.errno.ENOPROTOOPT;
+  }
+
+  /**
+   * @return {boolean}
+   * @override
+   */
+  static isSupported() {
+    return window?.UDPSocket !== undefined;
+  }
+}
+
+/**
  * A local/UNIX socket.
  */
 export class UnixSocket extends StreamSocket {

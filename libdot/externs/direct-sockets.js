@@ -8,6 +8,9 @@
  * @externs
  */
 
+/**
+ * @see https://wicg.github.io/direct-sockets/#tcpsocket-interface
+ */
 class TCPSocket {
   /**
    * @param {string} remoteAddress
@@ -47,6 +50,58 @@ TCPSocket.TCPSocketOpenInfo;
  */
 TCPSocket.TcpSocketOptions;
 
+/**
+ * @see https://wicg.github.io/direct-sockets/#udpsocket-interface
+ */
+class UDPSocket {
+  /**
+   * @param {!UDPSocket.UDPSocketOptions} options
+   */
+  constructor(options) {
+    /** @type {Promise<UDPSocket.UDPSocketOpenInfo>} */
+    this.opened;
+
+    /** @type {Promise<void>} */
+    this.closed;
+  }
+
+  close() {}
+}
+
+/**
+ * @typedef {{
+ *   remoteAddress: (string|undefined),
+ *   remotePort: (number|undefined),
+ *   localAddress: (string|undefined),
+ *   localPort: (number|undefined),
+ * }}
+ */
+UDPSocket.UDPSocketOptions;
+
+/**
+ * @typedef {{
+ *   readable: ReadableStream<UDPSocket.UDPMessage>,
+ *   writable: WritableStream<UDPSocket.UDPMessage>,
+ *   remoteAddress: string,
+ *   remotePort: number,
+ *   localAddress: string,
+ *   localPort: number,
+ * }}
+ */
+UDPSocket.UDPSocketOpenInfo;
+
+/**
+ * @typedef {{
+ *   data: ArrayBuffer,
+ *   remoteAddress: string,
+ *   remotePort: number,
+ * }}
+ */
+UDPSocket.UDPMessage;
+
+/**
+ * @see https://wicg.github.io/direct-sockets/#tcpserversocket-interface
+ */
 class TCPServerSocket {
   /**
    * @param {string} localAddress

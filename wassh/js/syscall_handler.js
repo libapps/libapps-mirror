@@ -753,6 +753,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
           case WASI.filetype.SOCKET_DGRAM:
             if (Sockets.ChromeUdpSocket.isSupported()) {
               handle = new Sockets.ChromeUdpSocket(domain, type, protocol);
+            } else if (Sockets.WebUdpSocket.isSupported()) {
+              handle = new Sockets.WebUdpSocket(domain, type, protocol);
             } else {
               return WASI.errno.EPROTONOSUPPORT;
             }

@@ -1011,8 +1011,7 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     // Force disable Chrome Sockets usage so we fallback to Direct Sockets.
     delete window?.chrome?.sockets?.tcp;
     delete window?.chrome?.sockets?.tcpServer;
-    // TODO: Implement WebUDPSocket.
-    // deleted window?.chrome?.sockets?.udp;
+    delete window?.chrome?.sockets?.udp;
   }
 
   // If the user has requested a proxy relay, load it up.
