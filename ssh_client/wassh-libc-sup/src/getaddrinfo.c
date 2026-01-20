@@ -135,6 +135,8 @@ int getaddrinfo(const char* node, const char* service,
     ai_family = hints->ai_family;
     ai_flags = hints->ai_flags;
     ai_socktype = hints->ai_socktype;
+    _MID("hints={ai_family=%#x ai_flags=%#x ai_socktype=%#x}", ai_family,
+         ai_flags, ai_socktype);
     if (ai_family != AF_UNSPEC && ai_family != AF_INET &&
         ai_family != AF_INET6) {
       _EXIT("EAI_FAMILY: bad hints->ai_family");
