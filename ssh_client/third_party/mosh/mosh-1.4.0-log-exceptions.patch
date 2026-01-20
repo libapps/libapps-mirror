@@ -1,0 +1,502 @@
+From 47e6ba00ef73fe7a21754ad52c726c291c721921 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@chromium.org>
+Date: Mon, 19 Jan 2026 22:29:13 -0500
+Subject: [PATCH] hack C++ throws to abort
+
+Since WASI doesn't support C++ exceptions currently, we can't throw
+any without killing the program immediately.  We can't even get the
+error message out of the exception as all processing is disabled.
+That means we need to manually convert every throw to printing the
+error message & then aborting.
+---
+ src/crypto/crypto.cc                | 30 ++++++++++++-------------
+ src/crypto/ocb_internal.cc          | 18 +++++++--------
+ src/frontend/mosh-server.cc         |  4 ++--
+ src/network/network.cc              | 34 ++++++++++++++---------------
+ src/network/networktransport-impl.h |  2 +-
+ src/terminal/terminaldisplayinit.cc | 13 ++++++-----
+ src/util/dos_assert.h               |  5 ++---
+ src/util/fatal_assert.h             |  8 ++++++-
+ 8 files changed, 60 insertions(+), 54 deletions(-)
+
+diff --git a/src/crypto/crypto.cc b/src/crypto/crypto.cc
+index 005cfcca6e4f..1bcbd86977d4 100644
+--- a/src/crypto/crypto.cc
++++ b/src/crypto/crypto.cc
+@@ -55,7 +55,7 @@ long int myatoi( const char *str )
+ 
+   if ( ( errno != 0 )
+        || ( end != str + strlen( str ) ) ) {
+-    throw CryptoException( "Bad integer." );
++    throw_abort("Bad integer.");
+   }
+ 
+   return ret;
+@@ -66,7 +66,7 @@ uint64_t Crypto::unique( void )
+   static uint64_t counter = 0;
+   uint64_t rv = counter++;
+   if ( counter == 0 ) {
+-    throw CryptoException( "Counter wrapped", true );
++    throw_abort("Counter wrapped");
+   }
+   return rv;
+ }
+@@ -78,7 +78,7 @@ AlignedBuffer::AlignedBuffer( size_t len, const char *data )
+ #if defined(HAVE_POSIX_MEMALIGN)
+   if ( ( 0 != posix_memalign( &m_allocated, 16, alloc_len ) )
+       || ( m_allocated == NULL ) ) {
+-    throw std::bad_alloc();
++    throw_abort("posix_memalign failed");
+   }
+   m_data = (char *) m_allocated;
+ 
+@@ -87,7 +87,7 @@ AlignedBuffer::AlignedBuffer( size_t len, const char *data )
+      the aligned offset within. */
+   m_allocated = malloc( 15 + alloc_len );
+   if ( m_allocated == NULL ) {
+-    throw std::bad_alloc();
++    throw_abort("malloc(%zu) failed", 15 + alloc_len);
+   }
+ 
+   uintptr_t iptr = (uintptr_t) m_allocated;
+@@ -110,23 +110,23 @@ AlignedBuffer::AlignedBuffer( size_t len, const char *data )
+ Base64Key::Base64Key( string printable_key )
+ {
+   if ( printable_key.length() != 22 ) {
+-    throw CryptoException( "Key must be 22 letters long." );
++    throw_abort("Key must be 22 letters long.");
+   }
+ 
+   string base64 = printable_key + "==";
+ 
+   size_t len = 16;
+   if ( !base64_decode( base64.data(), 24, key, &len ) ) {
+-    throw CryptoException( "Key must be well-formed base64." );
++    throw_abort("Key must be well-formed base64.");
+   }
+ 
+   if ( len != 16 ) {
+-    throw CryptoException( "Key must represent 16 octets." );
++    throw_abort("Key must represent 16 octets.");
+   }
+ 
+   /* to catch changes after the first 128 bits */
+   if ( printable_key != this->printable_key() ) {
+-    throw CryptoException( "Base64 key was not encoded 128-bit key." );
++    throw_abort("Base64 key was not encoded 128-bit key.");
+   }
+ }
+ 
+@@ -148,7 +148,7 @@ string Base64Key::printable_key( void ) const
+ 
+   if ( (base64[ 23 ] != '=')
+        || (base64[ 22 ] != '=') ) {
+-    throw CryptoException( string( "Unexpected output from base64_encode: " ) + string( base64, 24 ) );
++    throw_abort("Unexpected output from base64_encode: %s", string(base64, 24).c_str());
+   }
+ 
+   base64[ 22 ] = 0;
+@@ -163,7 +163,7 @@ Session::Session( Base64Key s_key )
+     nonce_buffer( Nonce::NONCE_LEN )
+ {
+   if ( AE_SUCCESS != ae_init( ctx, key.data(), 16, 12, 16 ) ) {
+-    throw CryptoException( "Could not initialize AES-OCB context." );
++    throw_abort("Could not initialize AES-OCB context.");
+   }
+ }
+ 
+@@ -190,7 +190,7 @@ uint64_t Nonce::val( void ) const
+ Nonce::Nonce( const char *s_bytes, size_t len )
+ {
+   if ( len != 8 ) {
+-    throw CryptoException( "Nonce representation must be 8 octets long." );
++    throw_abort("Nonce representation must be 8 octets long.");
+   }
+ 
+   memset( bytes, 0, 4 );
+@@ -217,7 +217,7 @@ const string Session::encrypt( const Message & plaintext )
+ 				     ciphertext_buffer.data(),                /* ct */
+ 				     NULL,                                    /* tag */
+ 				     AE_FINALIZE ) ) {                        /* final */
+-    throw CryptoException( "ae_encrypt() returned error." );
++    throw_abort("ae_encrypt() returned error.");
+   }
+ 
+   blocks_encrypted += pt_len >> 4;
+@@ -239,7 +239,7 @@ const string Session::encrypt( const Message & plaintext )
+      client use the same key, so we actually need to die after 2^47 blocks.
+   */
+   if ( blocks_encrypted >> 47 ) {
+-    throw CryptoException( "Encrypted 2^47 blocks.", true );
++    throw_abort("Encrypted 2^47 blocks.");
+   }
+ 
+   string text( ciphertext_buffer.data(), ciphertext_len );
+@@ -250,7 +250,7 @@ const string Session::encrypt( const Message & plaintext )
+ const Message Session::decrypt( const char *str, size_t len )
+ {
+   if ( len < 24 ) {
+-    throw CryptoException( "Ciphertext must contain nonce and tag." );
++    throw_abort("Ciphertext must contain nonce and tag.");
+   }
+ 
+   int body_len = len - 8;
+@@ -277,7 +277,7 @@ const Message Session::decrypt( const char *str, size_t len )
+ 			     plaintext_buffer.data(),  /* pt */
+ 			     NULL,                     /* tag */
+ 			     AE_FINALIZE ) ) {         /* final */
+-    throw CryptoException( "Packet failed integrity check." );
++    throw_abort("Packet failed integrity check.");
+   }
+ 
+   const Message ret( nonce, string( plaintext_buffer.data(), pt_len ) );
+diff --git a/src/crypto/ocb_internal.cc b/src/crypto/ocb_internal.cc
+index bec5c08f73fd..16830b5feaf7 100644
+--- a/src/crypto/ocb_internal.cc
++++ b/src/crypto/ocb_internal.cc
+@@ -373,7 +373,7 @@ enum { BLOCK_SIZE = 16 };
+ static KEY *KEY_new() {
+ 	KEY *key = EVP_CIPHER_CTX_new();
+ 	if (key == NULL) {
+-		throw std::bad_alloc();
++		throw_abort("EVP_CIPHER_CTX_new failed");
+ 	}
+ 	return key;
+ }
+@@ -396,7 +396,7 @@ static void set_encrypt_key(const unsigned char *user_key, int bits, KEY *key) {
+ 	fatal_assert(bits == 128);
+ 	if (EVP_EncryptInit_ex(key, EVP_aes_128_ecb(), /*impl=*/NULL, user_key, /*iv=*/NULL) != 1 ||
+ 			EVP_CIPHER_CTX_set_padding(key, false) != 1) {
+-		throw Crypto::CryptoException("Could not initialize AES encryption context.");
++		throw_abort("Could not initialize AES encryption context.");
+ 	}
+ }
+ 
+@@ -405,7 +405,7 @@ static void set_decrypt_key(const unsigned char *user_key, int bits, KEY *key) {
+ 	fatal_assert(bits == 128);
+ 	if (EVP_DecryptInit_ex(key, EVP_aes_128_ecb(), /*impl=*/NULL, user_key, /*iv=*/NULL) != 1 ||
+ 			EVP_CIPHER_CTX_set_padding(key, false) != 1) {
+-		throw Crypto::CryptoException("Could not initialize AES decryption context.");
++		throw_abort("Could not initialize AES decryption context.");
+ 	}
+ }
+ 
+@@ -416,17 +416,17 @@ static void encrypt(const unsigned char *in, unsigned char *out, KEY *key) {
+ 	// every parameter to this function can be NULL (which OpenSSL
+ 	// interprets as "don't change this").
+ 	if (EVP_EncryptInit_ex(key, /*type=*/NULL, /*impl=*/NULL, /*key=*/NULL, /*iv=*/NULL) != 1) {
+-		throw Crypto::CryptoException("Could not start AES encryption operation.");
++		throw_abort("Could not start AES encryption operation.");
+ 	}
+ 
+ 	int len;
+ 	if (EVP_EncryptUpdate(key, out, &len, in, BLOCK_SIZE) != 1) {
+-		throw Crypto::CryptoException("Could not AES-encrypt block.");
++		throw_abort("Could not AES-encrypt block.");
+ 	}
+ 
+ 	int total_len = len;
+ 	if (EVP_EncryptFinal_ex(key, out + total_len, &len) != 1) {
+-		throw Crypto::CryptoException("Could not finish AES encryption operation.");
++		throw_abort("Could not finish AES encryption operation.");
+ 	}
+ 	total_len += len;
+ 	fatal_assert(total_len == BLOCK_SIZE);
+@@ -436,17 +436,17 @@ static void decrypt(const unsigned char *in, unsigned char *out, KEY *key) {
+ 	// See notes in encrypt about EncryptInit and EncryptFinal; the same
+ 	// notes apply to DecryptInit and DecryptFinal here.
+ 	if (EVP_DecryptInit_ex(key, /*type=*/NULL, /*impl=*/NULL, /*key=*/NULL, /*iv=*/NULL) != 1) {
+-		throw Crypto::CryptoException("Could not start AES decryption operation.");
++		throw_abort("Could not start AES decryption operation.");
+ 	}
+ 
+ 	int len;
+ 	if (EVP_DecryptUpdate(key, out, &len, in, BLOCK_SIZE) != 1) {
+-		throw Crypto::CryptoException("Could not AES-decrypt block.");
++		throw_abort("Could not AES-decrypt block.");
+ 	}
+ 
+ 	int total_len = len;
+ 	if (EVP_DecryptFinal_ex(key, out + total_len, &len) != 1) {
+-		throw Crypto::CryptoException("Could not finish AES decryption operation.");
++		throw_abort("Could not finish AES decryption operation.");
+ 	}
+ 	total_len += len;
+ 	fatal_assert(total_len == BLOCK_SIZE);
+diff --git a/src/frontend/mosh-server.cc b/src/frontend/mosh-server.cc
+index f6d2ff3bc1fd..d5737b35c245 100644
+--- a/src/frontend/mosh-server.cc
++++ b/src/frontend/mosh-server.cc
+@@ -670,7 +670,7 @@ static void serve( int host_fd, Terminal::Complete &terminal, ServerConnection &
+   #ifdef HAVE_SYSLOG
+   struct passwd *pw = getpwuid( getuid() );
+   if (pw == NULL) {
+-    throw NetworkException( std::string( "serve: getpwuid: " ) + strerror( errno ), 0 );
++    throw_abort("serve: getpwuid: %s", strerror(errno));
+   }
+   syslog(LOG_INFO, "user %s session begin", pw->pw_name);
+   #endif
+@@ -801,7 +801,7 @@ static void serve( int host_fd, Terminal::Complete &terminal, ServerConnection &
+ 				       host, sizeof( host ), NULL, 0,
+ 				       NI_NUMERICHOST );
+ 	    if ( errcode != 0 ) {
+-	      throw NetworkException( std::string( "serve: getnameinfo: " ) + gai_strerror( errcode ), 0 );
++	      throw_abort("serve: getnameinfo: %s", gai_strerror(errcode));
+ 	    }
+ 
+ 	    #ifdef HAVE_UTEMPTER
+diff --git a/src/network/network.cc b/src/network/network.cc
+index bb05986be17c..0990ddd6690b 100644
+--- a/src/network/network.cc
++++ b/src/network/network.cc
+@@ -152,14 +152,14 @@ Connection::Socket::Socket( int family )
+   : _fd( socket( family, SOCK_DGRAM, 0 ) )
+ {
+   if ( _fd < 0 ) {
+-    throw NetworkException( "socket", errno );
++    throw_abort("socket: %s", strerror(errno));
+   }
+ 
+   /* Disable path MTU discovery */
+ #ifdef HAVE_IP_MTU_DISCOVER
+   int flag = IP_PMTUDISC_DONT;
+   if ( setsockopt( _fd, IPPROTO_IP, IP_MTU_DISCOVER, &flag, sizeof flag ) < 0 ) {
+-    throw NetworkException( "setsockopt", errno );
++    throw_abort("setsockopt: %s", strerror(errno));
+   }
+ #endif
+ 
+@@ -207,7 +207,7 @@ void Connection::set_MTU( int family )
+     MTU = DEFAULT_IPV6_MTU - IPV6_HEADER_LEN;
+     break;
+   default:
+-    throw NetworkException( "Unknown address family", 0 );
++    throw_abort("Unknown address family");
+   }
+ }
+ 
+@@ -219,7 +219,7 @@ public:
+     res( NULL ) {
+     int errcode = getaddrinfo( node, service, hints, &res );
+     if ( errcode != 0 ) {
+-      throw NetworkException( std::string( "Bad IP address (" ) + (node != NULL ? node : "(null)") + "): " + gai_strerror( errcode ), 0 );
++      throw_abort("Bad IP address (%s): %s", node != NULL ? node : "(null)", gai_strerror(errcode));
+     }
+   }
+   ~AddrInfo() { freeaddrinfo(res); }
+@@ -262,7 +262,7 @@ Connection::Connection( const char *desired_ip, const char *desired_port ) /* se
+   int desired_port_high = -1;
+ 
+   if ( desired_port && !parse_portrange( desired_port, desired_port_low, desired_port_high ) ) {
+-    throw NetworkException("Invalid port range", 0);
++    throw_abort("Invalid port range");
+   }
+ 
+   /* try to bind to desired IP first */
+@@ -285,7 +285,7 @@ Connection::Connection( const char *desired_ip, const char *desired_port ) /* se
+     throw; /* this time it's fatal */
+   }
+ 
+-  throw NetworkException( "Could not bind", errno );
++  throw_abort("Could not bind: %s", strerror(errno));
+ }
+ 
+ bool Connection::try_bind( const char *addr, int port_low, int port_high )
+@@ -320,7 +320,7 @@ bool Connection::try_bind( const char *addr, int port_low, int port_high )
+       local_addr.sin6.sin6_port = htons( i );
+       break;
+     default:
+-      throw NetworkException( "Unknown address family", 0 );
++      throw_abort("Unknown address family");
+     }
+ 
+     if ( local_addr.sa.sa_family == AF_INET6
+@@ -343,11 +343,11 @@ bool Connection::try_bind( const char *addr, int port_low, int port_high )
+ 			     host, sizeof( host ), serv, sizeof( serv ),
+ 			     NI_DGRAM | NI_NUMERICHOST | NI_NUMERICSERV );
+   if ( errcode != 0 ) {
+-    throw NetworkException( std::string( "bind: getnameinfo: " ) + gai_strerror( errcode ), 0 );
++    throw_abort("bind: getnameinfo: %s", gai_strerror(errcode));
+   }
+   fprintf( stderr, "Failed binding to %s:%s\n",
+ 	   host, serv );
+-  throw NetworkException( "bind", saved_errno );
++  throw_abort("bind: %s", strerror(saved_errno));
+ }
+ 
+ Connection::Connection( const char *key_str, const char *ip, const char *port ) /* client */
+@@ -450,7 +450,7 @@ string Connection::recv( void )
+     prune_sockets();
+     return payload;
+   }
+-  throw NetworkException( "No packet received" );
++  throw_abort("No packet received");
+ }
+ 
+ string Connection::recv_one( int sock_to_recv )
+@@ -483,11 +483,11 @@ string Connection::recv_one( int sock_to_recv )
+   ssize_t received_len = recvmsg( sock_to_recv, &header, MSG_DONTWAIT );
+ 
+   if ( received_len < 0 ) {
+-    throw NetworkException( "recvmsg", errno );
++    throw_abort("recvmsg: %s", strerror(errno));
+   }
+ 
+   if ( header.msg_flags & MSG_TRUNC ) {
+-    throw NetworkException( "Received oversize datagram", errno );
++    throw_abort("Received oversize datagram: %s", strerror(errno));
+   }
+ 
+   /* receive ECN */
+@@ -565,7 +565,7 @@ string Connection::recv_one( int sock_to_recv )
+ 			       host, sizeof( host ), serv, sizeof( serv ),
+ 			       NI_DGRAM | NI_NUMERICHOST | NI_NUMERICSERV );
+     if ( errcode != 0 ) {
+-      throw NetworkException( std::string( "recv_one: getnameinfo: " ) + gai_strerror( errcode ), 0 );
++      throw_abort("recv_one: getnameinfo: %s", gai_strerror(errcode));
+     }
+     fprintf( stderr, "Server now attached to client at %s:%s\n",
+ 	     host, serv );
+@@ -579,7 +579,7 @@ std::string Connection::port( void ) const
+   socklen_t addrlen = sizeof( local_addr );
+ 
+   if ( getsockname( sock(), &local_addr.sa, &addrlen ) < 0 ) {
+-    throw NetworkException( "getsockname", errno );
++    throw_abort("getsockname: %s", strerror(errno));
+   }
+ 
+   char serv[ NI_MAXSERV ];
+@@ -587,7 +587,7 @@ std::string Connection::port( void ) const
+ 			     NULL, 0, serv, sizeof( serv ),
+ 			     NI_DGRAM | NI_NUMERICSERV );
+   if ( errcode != 0 ) {
+-    throw NetworkException( std::string( "port: getnameinfo: " ) + gai_strerror( errcode ), 0 );
++    throw_abort("port: getnameinfo: %s", gai_strerror(errcode));
+   }
+ 
+   return std::string( serv );
+@@ -640,14 +640,14 @@ Connection::Socket::Socket( const Socket & other )
+   : _fd( dup( other._fd ) )
+ {
+   if ( _fd < 0 ) {
+-    throw NetworkException( "socket", errno );
++    throw_abort("socket: %s", strerror(errno));
+   }
+ }
+ 
+ Connection::Socket & Connection::Socket::operator=( const Socket & other )
+ {
+   if ( dup2( other._fd, _fd ) < 0 ) {
+-    throw NetworkException( "socket", errno );
++    throw_abort("socket: %s", strerror(errno));
+   }
+ 
+   return *this;
+diff --git a/src/network/networktransport-impl.h b/src/network/networktransport-impl.h
+index e6325093fcad..97a005d77c9a 100644
+--- a/src/network/networktransport-impl.h
++++ b/src/network/networktransport-impl.h
+@@ -77,7 +77,7 @@ void Transport<MyState, RemoteState>::recv( void )
+     Instruction inst = fragments.get_assembly();
+ 
+     if ( inst.protocol_version() != MOSH_PROTOCOL_VERSION ) {
+-      throw NetworkException( "mosh protocol version mismatch", 0 );
++      throw_abort("mosh protocol version mismatch");
+     }
+ 
+     sender.process_acknowledgment_through( inst.ack_num() );
+diff --git a/src/terminal/terminaldisplayinit.cc b/src/terminal/terminaldisplayinit.cc
+index 6dffc510e0e0..813103bcd2f9 100644
+--- a/src/terminal/terminaldisplayinit.cc
++++ b/src/terminal/terminaldisplayinit.cc
+@@ -35,6 +35,7 @@
+ 
+ #include "config.h"
+ #include "terminaldisplay.h"
++#include "fatal_assert.h"
+ 
+ #include <string>
+ #include <stdexcept>
+@@ -66,7 +67,7 @@ static bool ti_flag( const char *capname )
+ {
+   int val = tigetflag( const_cast<char *>( capname ) );
+   if ( val == -1 ) {
+-    throw std::invalid_argument( std::string( "Invalid terminfo boolean capability " ) + capname );
++    throw_abort("Invalid terminfo boolean capability: %s", capname);
+   }
+   return val;
+ }
+@@ -75,7 +76,7 @@ static const char *ti_str( const char *capname )
+ {
+   const char *val = tigetstr( const_cast<char *>( capname ) );
+   if ( val == (const char *)-1 ) {
+-    throw std::invalid_argument( std::string( "Invalid terminfo string capability " ) + capname );
++    throw_abort("Invalid terminfo string capability: %s", capname);
+   }
+   return val;
+ }
+@@ -90,16 +91,16 @@ Display::Display( bool use_environment )
+     if ( ret != OK ) {
+       switch ( errret ) {
+       case 1:
+-	throw std::runtime_error( "Terminal is hardcopy and cannot be used by curses applications." );
++	throw_abort("Terminal is hardcopy and cannot be used by curses applications.");
+ 	break;
+       case 0:
+-	throw std::runtime_error( "Unknown terminal type." );
++	throw_abort("Unknown terminal type.");
+ 	break;
+       case -1:
+-	throw std::runtime_error( "Terminfo database could not be found." );
++	throw_abort("Terminfo database could not be found.");
+ 	break;
+       default:
+-	throw std::runtime_error( "Unknown terminfo error." );
++	throw_abort("Unknown terminfo error.");
+ 	break;
+       } 
+     }
+diff --git a/src/util/dos_assert.h b/src/util/dos_assert.h
+index a1a0599b9607..3bfb12a06256 100644
+--- a/src/util/dos_assert.h
++++ b/src/util/dos_assert.h
+@@ -40,10 +40,9 @@
+ 
+ static void dos_detected( const char *expression, const char *file, int line, const char *function )
+ {
+-  char buffer[ 2048 ];
+-  snprintf( buffer, 2048, "Illegal counterparty input (possible denial of service) in function %s at %s:%d, failed test: %s\n",
++  fprintf(stderr, "Illegal counterparty input (possible denial of service) in function %s at %s:%d, failed test: %s\n",
+ 	    function, file, line, expression );
+-  throw Crypto::CryptoException( buffer );
++  abort();
+ }
+ 
+ #define dos_assert(expr)						\
+diff --git a/src/util/fatal_assert.h b/src/util/fatal_assert.h
+index 9827f73864fe..cc7fb284455d 100644
+--- a/src/util/fatal_assert.h
++++ b/src/util/fatal_assert.h
+@@ -36,7 +36,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-static void fatal_error( const char *expression, const char *file, int line, const char *function )
++static inline void fatal_error( const char *expression, const char *file, int line, const char *function )
+ {
+   fprintf( stderr, "Fatal assertion failure in function %s at %s:%d\nFailed test: %s\n",
+            function, file, line, expression );
+@@ -48,4 +48,10 @@ static void fatal_error( const char *expression, const char *file, int line, con
+    ? (void)0								\
+    : fatal_error (#expr, __FILE__, __LINE__, __func__ ))
+ 
++#define throw_abort(msg, args...) \
++do { \
++  fprintf(stderr, "\r\n\n%s:%s():%i: " msg "\r\n", __FILE__, __func__, __LINE__, ## args); \
++  abort(); \
++} while (0)
++
+ #endif
+-- 
+2.39.5
+

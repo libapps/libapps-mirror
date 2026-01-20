@@ -17,7 +17,10 @@ import ssh_client  # pylint: disable=wrong-import-position
 
 
 ARCHIVES = ("%(p)s.tar.gz",)
-PATCHES = ("%(p)s-random.patch",)
+PATCHES = (
+    "%(p)s-random.patch",
+    "%(p)s-log-exceptions.patch",
+)
 
 
 def src_configure(metadata):
