@@ -5,6 +5,7 @@
 /**
  * @fileoverview
  * @suppress {moduleLoad}
+ * @suppress {checkTypes} module$wassh$js$sockets
  */
 
 import {lib} from '../../libdot/index.js';
@@ -15,6 +16,8 @@ import {
   GIT_COMMIT, GIT_DATE, IMG_VISIBILITY_URI, IMG_VISIBILITY_OFF_URI,
   RELEASE_LAST_VERSION, RELEASE_NOTES,
 } from './deps_resources.rollup.js';
+
+import * as WasshSockets from '../wassh/js/sockets.js';
 
 import {
   getManifest, isCrOSSystemApp, localize, osc8Link, sgrText,
@@ -981,6 +984,13 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
       postProcessOptions(options, params.hostname, params.username,
                          this.isMount);
 
+  // Enable some trials in the dev version for early testing.
+  if (this.isDevVersion()) {
+    options = Object.assign({
+      '--field-trial-direct-sockets': true,
+    }, options);
+  }
+
   // Merge ssh options from the ssh:// URI that we believe are safe.
   params.userSshArgs = [];
   const userSshOptionsList = splitCommandLine(params.nasshUserSshOptions).args;
@@ -1007,9 +1017,21 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
 
   if (options['--field-trial-direct-sockets']) {
     // Force disable Chrome Sockets usage so we fallback to Direct Sockets.
-    delete window?.chrome?.sockets?.tcp;
-    delete window?.chrome?.sockets?.tcpServer;
-    delete window?.chrome?.sockets?.udp;
+    this.io.println(
+        'Using Direct Sockets.  If you encounter problems, try ' +
+        '--no-field-trial-direct-sockets and file a bug.\n');
+    if (WasshSockets.ChromeTcpSocket.isSupported() &&
+        WasshSockets.WebTcpSocket.isSupported()) {
+      delete chrome.sockets?.tcp;
+    }
+    if (WasshSockets.ChromeTcpListenSocket.isSupported() &&
+        WasshSockets.WebTcpServerSocket.isSupported()) {
+      delete chrome.sockets?.tcpServer;
+    }
+    if (WasshSockets.ChromeUdpSocket.isSupported() &&
+        WasshSockets.WebUdpSocket.isSupported()) {
+      delete chrome.sockets?.udp;
+    }
   }
 
   // If the user has requested a proxy relay, load it up.
