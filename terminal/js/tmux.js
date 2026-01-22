@@ -476,6 +476,25 @@ export class Controller {
   }
 
   /**
+   * Resize a window.
+   *
+   * @param {string} windowId
+   * @param {number} width
+   * @param {number} height
+   */
+  resizeWindow(windowId, width, height) {
+    if (this.checkTmuxMinVersion_({major: 3.4, minor: ''})) {
+      this.queueCommand(`refresh-client -C ${windowId}:${width}x${height}`);
+    } else {
+      this.queueCommand(
+          `resize-window -t ${windowId} -x ${width} -y ${height}`);
+    }
+    // Activate the current window. Otherwise, tmux might not actually resize
+    // it.
+    this.queueCommand(`select-window -t ${windowId}`);
+  }
+
+  /**
    * Create a tmux window.
    */
   newWindow() {

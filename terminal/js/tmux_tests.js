@@ -393,6 +393,32 @@ describe('controller', function() {
     assert.equal(errorHistory.length, 1);
     assert.isTrue(errorHistory[0][0].includes('unknown command'));
   });
+
+  it('resizeWindow() with older tmux', async function() {
+    await this.setup();
+
+    // Default version is 3.2a (setup in beforeEach).
+    this.controller.resizeWindow('@3', 100, 50);
+    await this.inputMock.whenCalled();
+    const history = this.inputMock.getHistory();
+    // It queues 2 commands.
+    assert.deepEqual(history, [[
+      'resize-window -t @3 -x 100 -y 50\rselect-window -t @3\r',
+    ]]);
+  });
+
+  it('resizeWindow() with newer tmux', async function() {
+    await this.setup();
+
+    // Test with newer version.
+    this.controller.tmuxVersion_ = {major: 3.4, minor: ''};
+    this.controller.resizeWindow('@3', 100, 50);
+    await this.inputMock.whenCalled();
+    const history = this.inputMock.getHistory();
+    assert.deepEqual(history, [[
+      'refresh-client -C @3:100x50\rselect-window -t @3\r',
+    ]]);
+  });
 });
 
 it('parseTmuxVersion()', function() {

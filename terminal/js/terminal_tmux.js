@@ -883,7 +883,7 @@ export class ClientWindow {
    * Resize the tmux window to match the terminal window if necessary.
    */
   reconcileTmuxWindowSize_() {
-    if (this.layout_ === null) {
+    if (this.layout_ === null || this.windowId_ === null) {
       return;
     }
 
@@ -892,15 +892,7 @@ export class ClientWindow {
       return;
     }
 
-    // TODO(1252271): Calling resize-window causes the window-size option to be
-    // set to manual, and then the regular tmux client will not resize the
-    // window automatically any more. Maybe we should use something like
-    // `refresh-client -C` or just reset the window option afterwards.
-    this.controllerRpc_.queueCommand(
-        `resize-window -t ${this.windowId_} -x ${width} -y ${height}`);
-    // Activate the current window. Otherwise, tmux might not actually resize
-    // it.
-    this.controllerRpc_.queueCommand(`select-window -t ${this.windowId_}`);
+    this.controllerRpc_.resizeWindow(this.windowId_, width, height);
   }
 
   /**
