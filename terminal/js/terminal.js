@@ -14,8 +14,7 @@ import {cleanupChromeSockets} from '../../wassh/js/sockets.js';
 import {composeTmuxUrl, getOSInfo, watchColors} from './terminal_common.js';
 import {createEmulator} from './terminal_emulator.js';
 import {terminalImport} from './terminal_import.js';
-import {LaunchInfo, SSHLaunchInfo, getTerminalInfoTracker}
-    from './terminal_info.js';
+import {LaunchInfo, SSHLaunchInfo} from './terminal_info.js';
 import {ClientWindow as TmuxClientWindow, TmuxControllerDriver}
     from './terminal_tmux.js';
 
@@ -371,14 +370,10 @@ async function runNassh(term, storage, ssh, tmuxControllerDriver) {
     basePath: ssh.mountPath,
     fsp,
     mountOptions,
-    onExit: async (code) => {
+    onExit: (code) => {
       term.uninstallKeyboard();
       if (!ssh.isMount && term.getPrefs().get('close-on-exit')) {
-        // We are not able to use `window.close()` here because 1) nassh
-        // redirect the page and 2) blink forbids `window.close()` when the
-        // history length > 1. See
-        // http://osscs/chromium/chromium/src/+/main:third_party/blink/renderer/core/frame/dom_window.cc;l=405;drc=9e5ff859e6b26ac78137c41178631fac938cf751
-        chrome.tabs.remove((await getTerminalInfoTracker()).tabId);
+        window.close();
       }
     },
     connectPage: '/html/terminal.html#home',
