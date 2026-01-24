@@ -389,7 +389,7 @@ CommandInstance.prototype.connectToArgString = async function(argstr) {
     const prefs = await this.commonProfileSetup_(profileId);
     switch (prefs.get('app')) {
       case 'mount':
-        this.mountProfile(prefs);
+        this.mountForegroundProfile(prefs);
         break;
       case 'nasftp':
       case 'sftp':
@@ -461,7 +461,7 @@ CommandInstance.prototype.prefsToConnectParams_ = function(prefs) {
  *
  * @param {!ProfilePreferenceManager} prefs Connection preferences.
  */
-CommandInstance.prototype.mountProfile = async function(prefs) {
+CommandInstance.prototype.mountBackgroundProfile = async function(prefs) {
   const port = chrome.runtime.connect({name: 'mount'});
 
   // The main event loop -- process messages from the bg page.
@@ -569,6 +569,51 @@ CommandInstance.prototype.mountProfile = async function(prefs) {
       connectOptions: params,
     });
   });
+};
+
+/**
+ * Mount a remote host given a profile id. Creates a new SFTP CommandInstance
+ * that runs in the current page and cannot be closed.
+ *
+ * @param {!ProfilePreferenceManager} prefs Connection preferences.
+ */
+CommandInstance.prototype.mountForegroundProfile = async function(prefs) {
+  this.isMount = true;
+  this.isSftp = true;
+  this.sftpClient = new sftpClient();
+  this.fsp = new SftpFsp();
+  this.fsp.addListeners();
+  this.basePath = prefs.get('mount-path');
+  // Mount options are passed directly to Chrome's FSP mount(),
+  // so don't add fields here that would otherwise collide.
+  this.mountOptions = {
+    fileSystemId: prefs.id,
+    displayName: prefs.get('description'),
+    writable: true,
+  };
+
+  this.sftpStartupCallback = (success, message) => {
+    if (!success) {
+      // Hack so this.exit will not unmount things in case another session is
+      // managing the mount.
+      this.isMount = false;
+      this.io.println(message);
+      this.terminateProgram_();
+    } else {
+      const mountedMsg = document.createElement('div');
+      mountedMsg.innerHTML = `
+        <h3>${localize('MOUNTED_MESSAGE')}</h3>
+        ${localize('TERMINAL_HOME_MOUNTED_TAB_CLOSE_MESSAGE')}
+        <p>`;
+      document.body.appendChild(mountedMsg);
+      this.io.showOverlay(mountedMsg, null);
+      window.addEventListener('beforeunload', () => {
+        this.fsp.unmount(prefs.id);
+      });
+    }
+  };
+
+  this.connectTo(this.prefsToConnectParams_(prefs));
 };
 
 /**
