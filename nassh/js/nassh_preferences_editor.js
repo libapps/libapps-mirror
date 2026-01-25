@@ -23,100 +23,96 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
     ele.addEventListener('click', PreferencesEditor.onSettingsPageClick);
   });
 
-  function setupPreferences() {
-    const manifest = getManifest();
-    const storage = getSyncStorage();
+  const manifest = getManifest();
+  const storage = getSyncStorage();
 
-    const params = new URLSearchParams(globalThis.location.search);
-    const profileId = params.get('profileId') ??
-        localize('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
+  const params = new URLSearchParams(globalThis.location.search);
+  const profileId = params.get('profileId') ??
+      localize('FIELD_TERMINAL_PROFILE_PLACEHOLDER');
 
-    // Create a local hterm instance so people can see their changes live.
-    const term = new hterm.Terminal({profileId, storage});
-    term.onTerminalReady = function() {
-        loadWebFonts(term.getDocument());
-        const io = term.io.push();
-        io.onVTKeystroke = io.print;
-        io.sendString = io.print;
-        io.println('# ' + localize('WELCOME_VERSION',
-                                    [manifest.name, manifest.version]));
-        io.print('$ ./configure && make && make install');
-        term.setCursorVisible(true);
-      };
-    term.decorate(lib.notNull(document.querySelector('#terminal')));
-    term.installKeyboard();
-    term.contextMenu.setItems([
-      {name: localize('TERMINAL_CLEAR_MENU_LABEL'),
-       action: function() { term.wipeContents(); }},
-      {name: localize('TERMINAL_RESET_MENU_LABEL'),
-       action: function() { term.reset(); }},
-    ]);
+  // Create a local hterm instance so people can see their changes live.
+  const term = new hterm.Terminal({profileId, storage});
+  term.onTerminalReady = function() {
+      loadWebFonts(term.getDocument());
+      const io = term.io.push();
+      io.onVTKeystroke = io.print;
+      io.sendString = io.print;
+      io.println('# ' + localize('WELCOME_VERSION',
+                                  [manifest.name, manifest.version]));
+      io.print('$ ./configure && make && make install');
+      term.setCursorVisible(true);
+    };
+  term.decorate(lib.notNull(document.querySelector('#terminal')));
+  term.installKeyboard();
+  term.contextMenu.setItems([
+    {name: localize('TERMINAL_CLEAR_MENU_LABEL'),
+     action: function() { term.wipeContents(); }},
+    {name: localize('TERMINAL_RESET_MENU_LABEL'),
+     action: function() { term.reset(); }},
+  ]);
 
-    // Useful for console debugging.
-    globalThis.term_ = term;
+  // Useful for console debugging.
+  globalThis.term_ = term;
 
-    const prefsEditor = new PreferencesEditor(storage, profileId);
+  const prefsEditor = new PreferencesEditor(storage, profileId);
 
-    let a = document.querySelector('#backup');
-    a.download = localize('PREF_BACKUP_FILENAME');
-    a.onclick = prefsEditor.onBackupClick.bind(prefsEditor);
-    prefsEditor.updateBackupLink();
+  let a = document.querySelector('#backup');
+  a.download = localize('PREF_BACKUP_FILENAME');
+  a.onclick = prefsEditor.onBackupClick.bind(prefsEditor);
+  prefsEditor.updateBackupLink();
 
-    a = document.querySelector('#restore');
-    a.onclick = prefsEditor.onRestoreClick.bind(prefsEditor);
+  a = document.querySelector('#restore');
+  a.onclick = prefsEditor.onRestoreClick.bind(prefsEditor);
 
-    a = document.querySelector('#feedback');
-    a.onclick = prefsEditor.onFeedbackClick.bind(prefsEditor);
+  a = document.querySelector('#feedback');
+  a.onclick = prefsEditor.onFeedbackClick.bind(prefsEditor);
 
-    // Set up labels.
-    document.querySelector('#manifest-name').textContent = manifest.name;
-    hterm.messageManager.processI18nAttributes(document);
+  // Set up labels.
+  document.querySelector('#manifest-name').textContent = manifest.name;
+  hterm.messageManager.processI18nAttributes(document);
 
-    // Set up icon on the left side.
-    // Start with 128px, but if it's not available, scale the highest available.
-    const icon = document.getElementById('icon');
-    let size = '128';
-    icon.style.width = `${size}px`;
-    if (!manifest.icons.hasOwnProperty(size)) {
-      // Sort the keys in descending numeric order.
-      const keys = Object.keys(manifest.icons).map((x) => parseInt(x, 10)).sort(
-          (a, b) => a < b ? 1 : -1);
-      size = keys[0];
-    }
-    icon.src = lib.f.getURL(`${manifest.icons[size]}`);
-
-    // Set up reset button.
-    document.getElementById('reset').onclick = function() {
-        prefsEditor.resetAll();
-      };
-
-    // Set up profile selection field.
-    const profile = lib.notNull(document.getElementById('profile'));
-    profile.oninput = function() {
-        PreferencesEditor.debounce(profile, function(input) {
-            prefsEditor.notify(localize('LOADING_LABEL'), 500);
-            if (input.value.length) {
-              prefsEditor.selectProfile(input.value);
-            }
-          });
-      };
-    profile.value = profileId;
-
-    // Allow people to reset individual fields by pressing escape.
-    document.onkeyup = function(e) {
-        if (document.activeElement.name == 'settings' && e.keyCode == 27) {
-          prefsEditor.reset(document.activeElement);
-        }
-      };
-
-    // If the user wants a specific page, navigate to it now.
-    const page = globalThis.location.hash;
-    if (page) {
-      PreferencesEditor.switchSettingsPage(page.substr(1));
-    }
+  // Set up icon on the left side.
+  // Start with 128px, but if it's not available, scale the highest available.
+  const icon = document.getElementById('icon');
+  let size = '128';
+  icon.style.width = `${size}px`;
+  if (!manifest.icons.hasOwnProperty(size)) {
+    // Sort the keys in descending numeric order.
+    const keys = Object.keys(manifest.icons).map((x) => parseInt(x, 10)).sort(
+        (a, b) => a < b ? 1 : -1);
+    size = keys[0];
   }
+  icon.src = lib.f.getURL(`${manifest.icons[size]}`);
 
-  setupPreferences();
+  // Set up reset button.
+  document.getElementById('reset').onclick = function() {
+      prefsEditor.resetAll();
+    };
+
+  // Set up profile selection field.
+  const profile = lib.notNull(document.getElementById('profile'));
+  profile.oninput = function() {
+      PreferencesEditor.debounce(profile, function(input) {
+          prefsEditor.notify(localize('LOADING_LABEL'), 500);
+          if (input.value.length) {
+            prefsEditor.selectProfile(input.value);
+          }
+        });
+    };
+  profile.value = profileId;
+
+  // Allow people to reset individual fields by pressing escape.
+  document.onkeyup = function(e) {
+      if (document.activeElement.name == 'settings' && e.keyCode == 27) {
+        prefsEditor.reset(document.activeElement);
+      }
+    };
+
+  // If the user wants a specific page, navigate to it now.
+  const page = globalThis.location.hash;
+  if (page) {
+    PreferencesEditor.switchSettingsPage(page.substr(1));
+  }
 });
 
 /**
