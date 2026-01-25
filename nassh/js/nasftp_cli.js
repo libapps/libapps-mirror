@@ -25,32 +25,94 @@ import {StatusError} from './nassh_sftp_status.js';
 
 /**
  * Progress bar helper.
- *
- * @param {!hterm.Terminal} terminal The terminal to display to.
- * @param {number=} max The highest byte count we expect.
- * @constructor
  */
-export function ProgressBar(terminal, max) {
-  this.terminal_ = terminal;
-  this.io_ = terminal.io;
+export class ProgressBar {
+  /**
+   * @param {!hterm.Terminal} terminal The terminal to display to.
+   * @param {number=} max The highest byte count we expect.
+   */
+  constructor(terminal, max) {
+    this.terminal_ = terminal;
+    this.io_ = terminal.io;
 
-  this.startTime_ = performance.now();
-  this.endTime_ = this.startTime_;
-  this.lastUpdate_ = this.startTime_;
+    this.startTime_ = performance.now();
+    this.endTime_ = this.startTime_;
+    this.lastUpdate_ = this.startTime_;
 
-  if (max === undefined) {
-    this.mode_ = this.RANDOM;
-    // Unicode 6-dot block range.
-    this.min_ = 0x2801;
-    this.max_ = 0x283F;
-    this.pos_ = this.min_;
-  } else {
-    this.mode_ = this.PERCENTAGE;
-    this.min_ = 0;
-    this.max_ = max;
-    this.pos_ = 0;
+    if (max === undefined) {
+      this.mode_ = this.RANDOM;
+      // Unicode 6-dot block range.
+      this.min_ = 0x2801;
+      this.max_ = 0x283F;
+      this.pos_ = this.min_;
+    } else {
+      this.mode_ = this.PERCENTAGE;
+      this.min_ = 0;
+      this.max_ = max;
+      this.pos_ = 0;
+    }
+    this.maxFormat_ = Cli.format_(this.max_);
   }
-  this.maxFormat_ = Cli.format_(this.max_);
+
+  /**
+   * Display the next step in the progress bar.
+   *
+   * @param {number=} pos The new byte count.
+   */
+  update(pos = 0) {
+    const now = performance.now();
+
+    if (this.mode_ == this.RANDOM) {
+      this.io_.print(`${String.fromCodePoint(this.pos_)}\r`);
+      // Pick a new random code point.
+      this.pos_ =
+          Math.floor(Math.random() * (this.max_ - this.min_ + 1)) + this.min_;
+    } else {
+      // Rate limit how often we update.  Updating too often can slow us down.
+      // 250ms seems to be a decent balance between user feedback and not being
+      // too much slower.
+      if (now - this.lastUpdate_ < 250) {
+        return;
+      }
+
+      const percent = Math.round(pos / this.max_ * 100);
+      this.pos_ = pos;
+      this.io_.print(`\r${pos} / ${this.maxFormat_} (${percent}%)`);
+    }
+
+    this.lastUpdate_ = now;
+  }
+
+  /**
+   * Cleans up the progress bar output.
+   *
+   * @param {boolean=} summarize Whether to display a statistics summary.
+   */
+  finish(summarize = false) {
+    this.endTime_ = performance.now();
+    this.terminal_.eraseLine();
+    this.terminal_.setCursorColumn(0);
+
+    if (summarize) {
+      this.summarize();
+    }
+  }
+
+  /**
+   * Display final transfer statistics.
+   *
+   * @param {number=} max The final byte count.
+   */
+  summarize(max) {
+    if (max === undefined) {
+      max = this.max_;
+    }
+    const delta = this.endTime_ - this.startTime_;
+    const secs = Math.round(delta) / 1000;
+    const rate = Math.round(max / delta * 1000);
+    this.io_.println(localize(
+        'NASFTP_PROGRESS_SUMMARY', [max, secs, Cli.format_(rate)]));
+  }
 }
 
 /**
@@ -62,66 +124,6 @@ ProgressBar.prototype.RANDOM = Symbol('Random');
  * Progress is tracked as a percentage output.
  */
 ProgressBar.prototype.PERCENTAGE = Symbol('Percentage');
-
-/**
- * Display the next step in the progress bar.
- *
- * @param {number=} pos The new byte count.
- */
-ProgressBar.prototype.update = function(pos = 0) {
-  const now = performance.now();
-
-  if (this.mode_ == this.RANDOM) {
-    this.io_.print(`${String.fromCodePoint(this.pos_)}\r`);
-    // Pick a new random code point.
-    this.pos_ =
-        Math.floor(Math.random() * (this.max_ - this.min_ + 1)) + this.min_;
-  } else {
-    // Rate limit how often we update.  Updating too often can slow us down.
-    // 250ms seems to be a decent balance between user feedback and not being
-    // too much slower.
-    if (now - this.lastUpdate_ < 250) {
-      return;
-    }
-
-    const percent = Math.round(pos / this.max_ * 100);
-    this.pos_ = pos;
-    this.io_.print(`\r${pos} / ${this.maxFormat_} (${percent}%)`);
-  }
-
-  this.lastUpdate_ = now;
-};
-
-/**
- * Cleans up the progress bar output.
- *
- * @param {boolean=} summarize Whether to display a statistics summary.
- */
-ProgressBar.prototype.finish = function(summarize = false) {
-  this.endTime_ = performance.now();
-  this.terminal_.eraseLine();
-  this.terminal_.setCursorColumn(0);
-
-  if (summarize) {
-    this.summarize();
-  }
-};
-
-/**
- * Display final transfer statistics.
- *
- * @param {number=} max The final byte count.
- */
-ProgressBar.prototype.summarize = function(max) {
-  if (max === undefined) {
-    max = this.max_;
-  }
-  const delta = this.endTime_ - this.startTime_;
-  const secs = Math.round(delta) / 1000;
-  const rate = Math.round(max / delta * 1000);
-  this.io_.println(localize(
-      'NASFTP_PROGRESS_SUMMARY', [max, secs, Cli.format_(rate)]));
-};
 
 /**
  * Global nasftp preferences.
