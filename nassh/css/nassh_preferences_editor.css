@@ -59,6 +59,18 @@ body {
 }
 
 /*
+ * Per-option help text.
+ */
+.setting-help {
+  border-left: solid 6px #4e5764;
+  cursor: text;
+  font-style: italic;
+  margin-left: 3em;
+  padding: 0.5em;
+  white-space: pre-wrap;
+}
+
+/*
  * The pane to the right of the navigation pane.
  */
 #options {

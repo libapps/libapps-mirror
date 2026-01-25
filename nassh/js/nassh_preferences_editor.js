@@ -601,19 +601,22 @@ PreferencesEditor.prototype.addInputRow = function(key, parent) {
   const label = document.createElement('label');
   const span_text = document.createElement('span');
   const span_input = document.createElement('span');
+  const help_text = document.createElement('div');
 
-  label.title = this.getPreferenceDescription(key);
   label.setAttribute('tabindex', '0');
   label.className = 'hflex';
   div.className = 'setting-container ' + input.type;
   span_text.className = 'setting-label';
   span_text.innerText = this.getPreferenceName(key);
   span_input.className = 'setting-ui';
+  help_text.innerText = this.getPreferenceDescription(key);
+  help_text.className = 'setting-help';
 
   div.appendChild(label);
   span_input.appendChild(input);
   label.appendChild(span_text);
   label.appendChild(span_input);
+  div.appendChild(help_text);
   parent.appendChild(div);
 
   if (input.type == 'color') {
