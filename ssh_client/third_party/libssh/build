@@ -30,6 +30,8 @@ def src_configure(metadata):
     tc = metadata["toolchain"]
     toolchain_file = build_dir / "toolchain.cmake"
     tc.write_cmake_toolchain_file(toolchain_file)
+    # Disable use of threads for now.
+    ssh_client.touch(metadata["S"] / "cmake/Modules/FindThreads.cmake")
 
     ssh_client.run(
         [
