@@ -1,152 +1,202 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'/>
+    <meta charset="utf-8" />
     <title i18n='{"_": "CONNECTION_DIALOG_NAME"}'></title>
 
     <!-- These are used when creating shortcuts akin to PWAs. -->
-    <link rel='icon' type='image/png' href='../images/dev/icon-16.png' sizes='16x16'/>
-    <link rel='icon' type='image/png' href='../images/dev/icon-24.png' sizes='24x24'/>
-    <link rel='icon' type='image/png' href='../images/dev/icon-32.png' sizes='32x32'/>
-    <link rel='icon' type='image/png' href='../images/dev/icon-48.png' sizes='48x48'/>
-    <link rel='icon' type='image/png' href='../images/dev/icon-128.png' sizes='128x128'/>
+    <link rel="icon" type="image/png" href="../images/dev/icon-16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../images/dev/icon-24.png" sizes="24x24" />
+    <link rel="icon" type="image/png" href="../images/dev/icon-32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="../images/dev/icon-48.png" sizes="48x48" />
+    <link rel="icon" type="image/png" href="../images/dev/icon-128.png" sizes="128x128" />
 
-    <script type='module' src='../js/nassh_connect_dialog.js'></script>
+    <script type="module" src="../js/nassh_connect_dialog.js"></script>
 
-    <link rel='stylesheet' href='../css/nassh_styles.css'/>
-    <link rel='stylesheet' href='../css/nassh_box.css'/>
-    <link rel='stylesheet' href='../css/nassh_connect_dialog.css'/>
+    <link rel="stylesheet" href="../css/nassh_styles.css" />
+    <link rel="stylesheet" href="../css/nassh_box.css" />
+    <link rel="stylesheet" href="../css/nassh_connect_dialog.css" />
   </head>
-  <body x-vbox class='dialog-body'>
-    <x-hbox class='dialog-road column-list' id='shortcut-list' x-flex='1'
-            i18n='{"aria-label": "$id"}'> </x-hbox>
+  <body x-vbox class="dialog-body">
+    <x-hbox
+      class="dialog-road column-list"
+      id="shortcut-list"
+      x-flex="1"
+      i18n='{"aria-label": "$id"}'
+    >
+    </x-hbox>
 
-    <form x-vbox class='dialog-billboard'>
+    <form x-vbox class="dialog-billboard">
       <x-hbox>
-        <input x-box x-flex='1' id='field-description'
-               type='text' spellcheck=false
-               i18n='{"aria-label": "$id", "title": "=aria-label"}' required>
-        <select id='field-app'
-                type='text' spellcheck=false
-                aria-labelledby='label-app'>
-          <option value='ssh' selected
-                  i18n='{"_": "SSH_CLIENT_BUTTON_LABEL"}'>SSH</option>
-          <option value='nasftp'
-                  i18n='{"_": "SFTP_CLIENT_BUTTON_LABEL"}'>SFTP</option>
-          <option value='mount' id='field-app-mount'
-                  i18n='{"_": "MOUNT_BUTTON_LABEL"}'>Mount</option>
-          <option value='mosh'
-                  i18n='{"_": "MOSH_NAME"}'>Mosh</option>
+        <input
+          x-box
+          x-flex="1"
+          id="field-description"
+          type="text"
+          spellcheck="false"
+          i18n='{"aria-label": "$id", "title": "=aria-label"}'
+          required
+        />
+        <select id="field-app" type="text" spellcheck="false" aria-labelledby="label-app">
+          <option value="ssh" selected i18n='{"_": "SSH_CLIENT_BUTTON_LABEL"}'>SSH</option>
+          <option value="nasftp" i18n='{"_": "SFTP_CLIENT_BUTTON_LABEL"}'>SFTP</option>
+          <option value="mount" id="field-app-mount" i18n='{"_": "MOUNT_BUTTON_LABEL"}'>
+            Mount
+          </option>
+          <option value="mosh" i18n='{"_": "MOSH_NAME"}'>Mosh</option>
         </select>
       </x-hbox>
-      <br>
+      <br />
       <x-vbox>
         <x-hbox>
-          <input x-box id='field-username'
-                 type='text' spellcheck=false
-                 i18n='{"aria-label": "$id", "title": "=aria-label"}'
-                 required pattern='^.+$'>
-          <input x-box x-flex='1' id='field-hostname'
-                 type='text' spellcheck=false
-                 i18n='{"aria-label": "$id", "title": "=aria-label"}'
-                 required pattern='^(>crosh|[A-Za-z0-9\-.:\u0080-\uffff]+)$'>
-          <input x-box id='field-port' type='number' min='1' max='65535'
-                 i18n='{"aria-label": "$id", "title": "=aria-label"}'
-                 min='1' max='65535'>
+          <input
+            x-box
+            id="field-username"
+            type="text"
+            spellcheck="false"
+            i18n='{"aria-label": "$id", "title": "=aria-label"}'
+            required
+            pattern="^.+$"
+          />
+          <input
+            x-box
+            x-flex="1"
+            id="field-hostname"
+            type="text"
+            spellcheck="false"
+            i18n='{"aria-label": "$id", "title": "=aria-label"}'
+            required
+            pattern="^(>crosh|[A-Za-z0-9\-.:\u0080-\uffff]+)$"
+          />
+          <input
+            x-box
+            id="field-port"
+            type="number"
+            min="1"
+            max="65535"
+            i18n='{"aria-label": "$id", "title": "=aria-label"}'
+            min="1"
+            max="65535"
+          />
         </x-hbox>
         <x-hbox>
-          <input x-box id='field-nassh-options' x-flex='1'
-                 type='text' spellcheck=false
-                 i18n='{"aria-label": "$id", "title": "=aria-label", "placeholder": "$id"}'
-                 pattern='^\s*(--(no-)?(config|debug-[a-z\-]+|field-trial-[a-z\-]+|proxy-host|proxy-host-fallback|proxy-mode|proxy-port|proxy-remote-host|proxy-user|relay-method|relay-protocol|report-ack-latency|report-connect-attempts|resume-connection|ssh-client-version|ssh-agent|use-ssl|use-xhr|welcome|egress-domain)(=[^\s]+)?(\s+|$))*$'>
+          <input
+            x-box
+            id="field-nassh-options"
+            x-flex="1"
+            type="text"
+            spellcheck="false"
+            i18n='{"aria-label": "$id", "title": "=aria-label", "placeholder": "$id"}'
+            pattern="^\s*(--(no-)?(config|debug-[a-z\-]+|field-trial-[a-z\-]+|proxy-host|proxy-host-fallback|proxy-mode|proxy-port|proxy-remote-host|proxy-user|relay-method|relay-protocol|report-ack-latency|report-connect-attempts|resume-connection|ssh-client-version|ssh-agent|use-ssl|use-xhr|welcome|egress-domain)(=[^\s]+)?(\s+|$))*$"
+          />
         </x-hbox>
-        <br>
-        <x-hbox x-align='baseline'>
-          <table id='aligned-dialog-fields'>
+        <br />
+        <x-hbox x-align="baseline">
+          <table id="aligned-dialog-fields">
             <tr>
-              <td class='aligned-dialog-labels'>
-                <a id='label-identity'
-                   href='../plugin/docs/ssh_config.5.html#IdentityFile'
-                   target='_blank'
-                   i18n='{"_": "IDENTITY_LABEL"}'
-                   >IDENTITY</a>
+              <td class="aligned-dialog-labels">
+                <a
+                  id="label-identity"
+                  href="../plugin/docs/ssh_config.5.html#IdentityFile"
+                  target="_blank"
+                  i18n='{"_": "IDENTITY_LABEL"}'
+                  >IDENTITY</a
+                >
               </td>
               <td>
-                <select id='field-identity'
-                        type='text' spellcheck=false
-                        aria-labelledby='label-identity'>
+                <select
+                  id="field-identity"
+                  type="text"
+                  spellcheck="false"
+                  aria-labelledby="label-identity"
+                >
                   <option i18n='{"_": "LOADING_LABEL"}'>LOADING...</option>
                 </select>
-                <a id='import-link' tabindex='0' href='go:import'
-                   i18n='{"aria-label": "$id", "_": "IMPORT_LINK_LABEL"}'
-                   >IMPORT...</a>
-                <input type="file" multiple id='import-file-input' tabindex="-1">
+                <a
+                  id="import-link"
+                  tabindex="0"
+                  href="go:import"
+                  i18n='{"aria-label": "$id", "_": "IMPORT_LINK_LABEL"}'
+                  >IMPORT...</a
+                >
+                <input type="file" multiple id="import-file-input" tabindex="-1" />
               </td>
             </tr>
             <tr>
-              <td class='aligned-dialog-labels'>
-                <a id='label-argstr'
-                   href='../plugin/docs/ssh.1.html' target='_blank'
-                   i18n='{"_": "SSH_ARGSTR_LABEL"}'
-                   >SSH ARGUMENTS</a>
+              <td class="aligned-dialog-labels">
+                <a
+                  id="label-argstr"
+                  href="../plugin/docs/ssh.1.html"
+                  target="_blank"
+                  i18n='{"_": "SSH_ARGSTR_LABEL"}'
+                  >SSH ARGUMENTS</a
+                >
               </td>
               <td>
-                <input id='field-argstr' class='aligned-dialog-fullwidth'
-                       type='text' spellcheck=false
-                       aria-labelledby='label-argstr'
-                       i18n='{"placeholder": "$id"}'>
+                <input
+                  id="field-argstr"
+                  class="aligned-dialog-fullwidth"
+                  type="text"
+                  spellcheck="false"
+                  aria-labelledby="label-argstr"
+                  i18n='{"placeholder": "$id"}'
+                />
               </td>
             </tr>
             <tr>
-              <td class='aligned-dialog-labels'>
-                <div id='label-terminal-profile'
-                     i18n='{"_": "TERMINAL_PROFILE_LABEL"}'
-                     >TERMINAL PROFILE</div>
+              <td class="aligned-dialog-labels">
+                <div id="label-terminal-profile" i18n='{"_": "TERMINAL_PROFILE_LABEL"}'>
+                  TERMINAL PROFILE
+                </div>
               </td>
               <td>
-                <input id='field-terminal-profile'
-                       type='text' spellcheck=false
-                       aria-labelledby='label-terminal-profile'
-                       i18n='{"placeholder": "$id"}'>
+                <input
+                  id="field-terminal-profile"
+                  type="text"
+                  spellcheck="false"
+                  aria-labelledby="label-terminal-profile"
+                  i18n='{"placeholder": "$id"}'
+                />
               </td>
             </tr>
-            <tr id='mount-path'>
-              <td class='aligned-dialog-labels'>
-                <span id='label-mount-path'
-                      i18n='{"_": "MOUNT_PATH_LABEL"}'
-                      >MOUNT PATH</span>
+            <tr id="mount-path">
+              <td class="aligned-dialog-labels">
+                <span id="label-mount-path" i18n='{"_": "MOUNT_PATH_LABEL"}'>MOUNT PATH</span>
               </td>
               <td>
-                <input id='field-mount-path' class='aligned-dialog-fullwidth'
-                       type='text' spellcheck=false
-                       aria-labelledby='label-mount-path'
-                       i18n='{"placeholder": "$id"}'>
+                <input
+                  id="field-mount-path"
+                  class="aligned-dialog-fullwidth"
+                  type="text"
+                  spellcheck="false"
+                  aria-labelledby="label-mount-path"
+                  i18n='{"placeholder": "$id"}'
+                />
               </td>
             </tr>
           </table>
         </x-hbox>
       </x-vbox>
-    </form> <!-- .dialog-billboard -->
+    </form>
+    <!-- .dialog-billboard -->
 
-    <x-hbox class='dialog-buttons' x-pack='end'>
-      <div x-box id='delete'
-           role='button' tabindex='0'
-           ><span class='key' i18n='{"_": "DEL_KEYCAP"}'>[DEL]</span>&nbsp;
-        <span class='label' i18n='{"_": "DELETE_BUTTON_LABEL"}'
-              >DELETE</span></div>
-      <div x-box id='options'
-          role='button' tabindex='0'
-          ><span class='label' i18n='{"_": "HTERM_OPTIONS_BUTTON_LABEL"}'
-              >OPTIONS</span></div>
-      <div x-box id='feedback'
-          role='button' tabindex='0'
-          ><span class='label' i18n='{"_": "SEND_FEEDBACK_LABEL"}'
-              ></span></div>
-      <div x-box x-flex='1'></div>
-      <div x-box id='connect' role='button' tabindex='0'
-           ><span class='key' i18n='{"_": "ENTER_KEYCAP"}'>[ENTER]</span>&nbsp;
-        <span class='label' i18n='{"_": "CONNECT_BUTTON_LABEL"}'
-              >CONNECT</span></div>
-    </x-hbox> <!-- .dialog-buttons -->
+    <x-hbox class="dialog-buttons" x-pack="end">
+      <div x-box id="delete" role="button" tabindex="0">
+        <span class="key" i18n='{"_": "DEL_KEYCAP"}'>[DEL]</span>&nbsp;
+        <span class="label" i18n='{"_": "DELETE_BUTTON_LABEL"}'>DELETE</span>
+      </div>
+      <div x-box id="options" role="button" tabindex="0">
+        <span class="label" i18n='{"_": "HTERM_OPTIONS_BUTTON_LABEL"}'>OPTIONS</span>
+      </div>
+      <div x-box id="feedback" role="button" tabindex="0">
+        <span class="label" i18n='{"_": "SEND_FEEDBACK_LABEL"}'></span>
+      </div>
+      <div x-box x-flex="1"></div>
+      <div x-box id="connect" role="button" tabindex="0">
+        <span class="key" i18n='{"_": "ENTER_KEYCAP"}'>[ENTER]</span>&nbsp;
+        <span class="label" i18n='{"_": "CONNECT_BUTTON_LABEL"}'>CONNECT</span>
+      </div>
+    </x-hbox>
+    <!-- .dialog-buttons -->
   </body>
 </html>

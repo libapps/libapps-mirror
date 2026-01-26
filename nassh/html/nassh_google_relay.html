@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <!--
      When using a Google relay, the cookie server will redirect to this page
@@ -8,7 +8,7 @@
      details.
     -->
   <head>
-    <meta charset='utf-8'/>
+    <meta charset="utf-8" />
 
     <style>
       body {
@@ -25,26 +25,21 @@
         border-bottom: 1px solid white;
       }
     </style>
-    <script type='module' src='../js/nassh_google_relay_main.js'></script>
+    <script type="module" src="../js/nassh_google_relay_main.js"></script>
   </head>
   <body>
-
-    <message-container id='nassh'>
-      <span class='header' id='nassh-header'>
-        Internal Secure Shell error.
-      </span>
-      <div id='nassh-message'></div>
+    <message-container id="nassh">
+      <span class="header" id="nassh-header"> Internal Secure Shell error. </span>
+      <div id="nassh-message"></div>
     </message-container>
 
-    <br>
+    <br />
 
-    <message-container id='relay'>
-      <span class='header' id='relay-header'>
-        Relay server error.
-        Please contact your relay server administrator for assistance.
+    <message-container id="relay">
+      <span class="header" id="relay-header">
+        Relay server error. Please contact your relay server administrator for assistance.
       </span>
-      <div id='relay-message'></div>
+      <div id="relay-message"></div>
     </message-container>
-
   </body>
 </html>

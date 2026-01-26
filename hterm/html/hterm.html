@@ -1,43 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<title>hterm test page</title>
-<meta charset='utf-8'/>
+  <head>
+    <title>hterm test page</title>
+    <meta charset="utf-8" />
 
-<style>
-html {
-  height: 100%;
-}
-body {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  margin: 0px;
-  padding: 0px;
-}
-#terminal {
-  display: block;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
-}
-</style>
-</head>
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        margin: 0px;
+        padding: 0px;
+      }
+      #terminal {
+        display: block;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
 
-<body>
-<div id='terminal'></div>
-<script type="module">
-import {lib} from '../../libdot/index.js';
+  <body>
+    <div id="terminal"></div>
+    <script type="module">
+      import { lib } from "../../libdot/index.js";
 
-import {hterm} from '../index.js';
+      import { hterm } from "../index.js";
 
-function initContent(io) {
-  const pkg = `hterm ${hterm.VERSION} (${hterm.resources.GIT_DATE})`;
-  /* eslint-disable quotes */
-  io.println("\r\n\
+      function initContent(io) {
+        const pkg = `hterm ${hterm.VERSION} (${hterm.resources.GIT_DATE})`;
+        /* eslint-disable quotes */
+        io.println(
+          "\r\n\
                             .--~~~~~~~~~~~~~------.\r\n\
                            /--===============------\\\r\n\
                            | |```````````````|     |\r\n\
@@ -54,86 +55,97 @@ function initContent(io) {
 \r\n\
                                Welcome to hterm!\r\n\
                 Press F11 to go fullscreen to use all shortcuts.\r\n\
-                       Running " + pkg + ".\r\n\
-");
-  /* eslint-enable quotes */
-}
-
-// Load translations if available.
-hterm.initPromise.then(async () => {
-  // Try to load the messages database from nassh.  This isn't strictly needed
-  // (so if it fails, it should be fine), but does help when testing locally.
-  // $1 here means we search the user's language.  Change it to 'en' or another
-  // specific language to test those specifically.
-  const lang = '$1';
-  await hterm.messageManager.findAndLoadMessages(
-      lib.f.getURL(`../../nassh/_locales/${lang}/messages.json`));
-});
-
-function setupHterm() {
-  const term = new hterm.Terminal();
-
-  term.onTerminalReady = function() {
-    const io = this.io.push();
-    function printPrompt() {
-      io.print(
-          '\x1b[38:2:51:105:232mh' +
-          '\x1b[38:2:213:15:37mt' +
-          '\x1b[38:2:238:178:17me' +
-          '\x1b[38:2:51:105:232mr' +
-          '\x1b[38:2:0:153:37mm' +
-          '\x1b[38:2:213:15:37m>' +
-          '\x1b[0m ');
-    }
-
-    io.onVTKeystroke = (string) => {
-      switch (string) {
-        case '\r':
-          io.println('');
-          printPrompt();
-          break;
-        case '\x7f':
-          // \x08 = backspace, \x1b[K = 'Erase in line'.
-          io.print('\x08\x1b[K');
-          break;
-        default:
-          io.print(string);
-          break;
+                       Running " +
+            pkg +
+            ".\r\n\
+",
+        );
+        /* eslint-enable quotes */
       }
-    };
-    io.sendString = io.print;
-    initContent(io);
-    printPrompt();
-    this.setCursorVisible(true);
 
-    this.keyboard.bindings.addBinding('F11', 'PASS');
-    this.keyboard.bindings.addBinding('Ctrl+R', 'PASS');
-  };
-  term.decorate(document.querySelector('#terminal'));
-  term.installKeyboard();
+      // Load translations if available.
+      hterm.initPromise.then(async () => {
+        // Try to load the messages database from nassh.  This isn't strictly needed
+        // (so if it fails, it should be fine), but does help when testing locally.
+        // $1 here means we search the user's language.  Change it to 'en' or another
+        // specific language to test those specifically.
+        const lang = "$1";
+        await hterm.messageManager.findAndLoadMessages(
+          lib.f.getURL(`../../nassh/_locales/${lang}/messages.json`),
+        );
+      });
 
-  term.contextMenu.setItems([
-    {name: 'Terminal Reset', action: () => term.reset()},
-    {name: 'Terminal Clear', action: () => term.clear()},
-    {name: hterm.ContextMenu.SEPARATOR},
-    {name: 'Homepage', action: function() {
-        lib.f.openWindow(
-            'https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/README.md',
-            '_blank');
-      }},
-    {name: 'FAQ', action: function() {
-        lib.f.openWindow('https://hterm.org/x/ssh/faq', '_blank');
-      }},
-  ]);
+      function setupHterm() {
+        const term = new hterm.Terminal();
 
-  // Useful for console debugging.
-  globalThis.term_ = term;
-}
+        term.onTerminalReady = function () {
+          const io = this.io.push();
+          function printPrompt() {
+            io.print(
+              "\x1b[38:2:51:105:232mh" +
+                "\x1b[38:2:213:15:37mt" +
+                "\x1b[38:2:238:178:17me" +
+                "\x1b[38:2:51:105:232mr" +
+                "\x1b[38:2:0:153:37mm" +
+                "\x1b[38:2:213:15:37m>" +
+                "\x1b[0m ",
+            );
+          }
 
-globalThis.onload = function() {
-  setupHterm();
-};
-</script>
+          io.onVTKeystroke = (string) => {
+            switch (string) {
+              case "\r":
+                io.println("");
+                printPrompt();
+                break;
+              case "\x7f":
+                // \x08 = backspace, \x1b[K = 'Erase in line'.
+                io.print("\x08\x1b[K");
+                break;
+              default:
+                io.print(string);
+                break;
+            }
+          };
+          io.sendString = io.print;
+          initContent(io);
+          printPrompt();
+          this.setCursorVisible(true);
 
-</body>
+          this.keyboard.bindings.addBinding("F11", "PASS");
+          this.keyboard.bindings.addBinding("Ctrl+R", "PASS");
+        };
+        term.decorate(document.querySelector("#terminal"));
+        term.installKeyboard();
+
+        term.contextMenu.setItems([
+          { name: "Terminal Reset", action: () => term.reset() },
+          { name: "Terminal Clear", action: () => term.clear() },
+          { name: hterm.ContextMenu.SEPARATOR },
+          {
+            name: "Homepage",
+            action: function () {
+              lib.f.openWindow(
+                "https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/README.md",
+                "_blank",
+              );
+            },
+          },
+          {
+            name: "FAQ",
+            action: function () {
+              lib.f.openWindow("https://hterm.org/x/ssh/faq", "_blank");
+            },
+          },
+        ]);
+
+        // Useful for console debugging.
+        globalThis.term_ = term;
+      }
+
+      globalThis.onload = function () {
+        setupHterm();
+      };
+    </script>
+  </body>
 </html>

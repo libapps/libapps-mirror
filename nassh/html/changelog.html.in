@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8'/>
-  <title>ChangeLog Since %%TAG%%</title>
-  <link rel='stylesheet' href='../third_party/chrome-bootstrap/chrome-bootstrap.css'/>
-  <link rel='stylesheet' href='../css/chrome-bootstrap-darkmode.css'/>
+  <head>
+    <meta charset="utf-8" />
+    <title>ChangeLog Since %%TAG%%</title>
+    <link rel="stylesheet" href="../third_party/chrome-bootstrap/chrome-bootstrap.css" />
+    <link rel="stylesheet" href="../css/chrome-bootstrap-darkmode.css" />
 
-  <style>
-    body {
-      padding: 1em;
-    }
-  </style>
-</head>
-<body class='chrome-bootstrap'>
+    <style>
+      body {
+        padding: 1em;
+      }
+    </style>
+  </head>
+  <body class="chrome-bootstrap">
+    <h1>Online ChangeLogs</h1>
+    <ul>
+      <li><a href="https://chromium.googlesource.com/apps/libapps/+log">Full `git log`</a></li>
+      <li>
+        <a href="https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot/docs/ChangeLog.md"
+          >libdot ChangeLog.md</a
+        >
+      </li>
+      <li>
+        <a href="https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ChangeLog.md"
+          >hterm ChangeLog.md</a
+        >
+      </li>
+      <li>
+        <a href="https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/ChangeLog.md"
+          >nassh ChangeLog.md</a
+        >
+      </li>
+    </ul>
 
-<h1>Online ChangeLogs</h1>
-<ul>
-  <li><a href='https://chromium.googlesource.com/apps/libapps/+log'>Full `git log`</a></li>
-  <li><a href='https://chromium.googlesource.com/apps/libapps/+/HEAD/libdot/docs/ChangeLog.md'>libdot ChangeLog.md</a></li>
-  <li><a href='https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm/docs/ChangeLog.md'>hterm ChangeLog.md</a></li>
-  <li><a href='https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/ChangeLog.md'>nassh ChangeLog.md</a></li>
-</ul>
-
-<h1>ChangeLog (since %%TAG%%)</h1>
-%%COMMITS%%
-</body>
+    <h1>ChangeLog (since %%TAG%%)</h1>
+    %%COMMITS%%
+  </body>
 </html>

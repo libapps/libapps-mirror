@@ -1,172 +1,194 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset='utf-8'/>
+  <head>
+    <meta charset="utf-8" />
 
-  <script type='module' src='../js/nassh_preferences_editor.js'></script>
-  <script type='module' src='../js/nassh_preferences_protocol_register.js'></script>
-  <script type='module' src='../js/nassh_preferences_ssh_files.js'></script>
+    <script type="module" src="../js/nassh_preferences_editor.js"></script>
+    <script type="module" src="../js/nassh_preferences_protocol_register.js"></script>
+    <script type="module" src="../js/nassh_preferences_ssh_files.js"></script>
 
-  <link rel='stylesheet' href='../third_party/chrome-bootstrap/chrome-bootstrap.css'/>
-  <link rel='stylesheet' href='../css/nassh_preferences_editor.css'/>
-  <link rel='stylesheet' href='../css/chrome-bootstrap-darkmode.css'/>
-</head>
+    <link rel="stylesheet" href="../third_party/chrome-bootstrap/chrome-bootstrap.css" />
+    <link rel="stylesheet" href="../css/nassh_preferences_editor.css" />
+    <link rel="stylesheet" href="../css/chrome-bootstrap-darkmode.css" />
+  </head>
 
-<body class='chrome-bootstrap'>
-  <div class='frame'>
+  <body class="chrome-bootstrap">
+    <div class="frame">
+      <div class="navigation">
+        <h1 id="manifest-name"></h1>
+        <ul class="menu">
+          <li class="selected">
+            <a href="#options" i18n='{"_": "PREFERENCES_HEADER_TERMINAL"}'></a>
+            <ul id="options-settings-menu"></ul>
+          </li>
+          <li>
+            <a href="#ssh-files" i18n='{"_": "PREFERENCES_HEADER_SSH_FILES"}'></a>
+          </li>
+          <li>
+            <a href="#handlers" i18n='{"_": "PREFERENCES_HEADER_URI"}'></a>
+          </li>
+        </ul>
+        <ul style="margin-left: 1em">
+          <li><img id="icon" /></li>
+          <li><a id="backup" href="#backup" i18n='{"_": "BACKUP_PREFS"}'></a></li>
+          <li><a id="restore" href="#restore" i18n='{"_": "RESTORE_PREFS"}'></a></li>
+          <li>
+            <a id="licenses" href="licenses.html" i18n='{"_": "LICENSES"}' target="_blank"></a>
+          </li>
+          <li>
+            <a id="changelog" href="changelog.html" i18n='{"_": "CHANGELOG"}' target="_blank"></a>
+          </li>
+          <li>
+            <a
+              id="feedback"
+              href="#feedback"
+              i18n='{"_": "SEND_FEEDBACK_LABEL"}'
+              target="_blank"
+            ></a>
+          </li>
+        </ul>
+        <input class="restore" type="file" />
+      </div>
 
-    <div class='navigation'>
-      <h1 id='manifest-name'></h1>
-      <ul class='menu'>
-        <li class='selected'>
-          <a href='#options' i18n='{"_": "PREFERENCES_HEADER_TERMINAL"}'></a>
-          <ul id='options-settings-menu'></ul>
-        </li>
-        <li>
-          <a href='#ssh-files' i18n='{"_": "PREFERENCES_HEADER_SSH_FILES"}'></a>
-        </li>
-        <li>
-          <a href='#handlers' i18n='{"_": "PREFERENCES_HEADER_URI"}'></a>
-        </li>
-      </ul>
-      <ul style='margin-left: 1em'>
-        <li><img id='icon'/></li>
-        <li><a id='backup' href='#backup' i18n='{"_": "BACKUP_PREFS"}'
-               ></a></li>
-        <li><a id='restore' href='#restore' i18n='{"_": "RESTORE_PREFS"}'
-               ></a></li>
-        <li><a id='licenses' href='licenses.html' i18n='{"_": "LICENSES"}'
-               target='_blank'></a></li>
-        <li><a id='changelog' href='changelog.html' i18n='{"_": "CHANGELOG"}'
-               target='_blank'></a></li>
-        <li><a id='feedback' href='#feedback'
-               i18n='{"_": "SEND_FEEDBACK_LABEL"}' target='_blank'></a></li>
-      </ul>
-      <input class='restore' type='file'>
-    </div>
+      <div class="mainview view">
+        <div id="options" class="selected">
+          <header>
+            <h1 i18n='{"_": "PREFERENCES_HEADER_TERMINAL"}'></h1>
 
-    <div class='mainview view'>
-      <div id='options' class='selected'>
-        <header>
-          <h1 i18n='{"_": "PREFERENCES_HEADER_TERMINAL"}'></h1>
-
-          <div id='terminal-container'>
-            <h3 i18n='{"_": "TERMINAL_PREVIEW_LABEL"}'></h3>
-            <div id='terminal'></div>
-          </div>
-        </header>
-
-        <div id='options-settings-section' class='content vflex'>
-          <div>
-            <h3 i18n='{"_": "TERMINAL_PROFILE_LABEL"}'></h3>
-            <div id='current-profile'>
-              <input type='text' id='profile'/>
-              <button type='reset' id='reset'
-                      i18n='{"_": "TERMINAL_SETTINGS_RESET_LABEL"}'></button>
-              <span id='label_status'>&nbsp;</span>
+            <div id="terminal-container">
+              <h3 i18n='{"_": "TERMINAL_PREVIEW_LABEL"}'></h3>
+              <div id="terminal"></div>
             </div>
+          </header>
+
+          <div id="options-settings-section" class="content vflex">
+            <div>
+              <h3 i18n='{"_": "TERMINAL_PROFILE_LABEL"}'></h3>
+              <div id="current-profile">
+                <input type="text" id="profile" />
+                <button
+                  type="reset"
+                  id="reset"
+                  i18n='{"_": "TERMINAL_SETTINGS_RESET_LABEL"}'
+                ></button>
+                <span id="label_status">&nbsp;</span>
+              </div>
+            </div>
+
+            <div id="settings"></div>
           </div>
-
-          <div id='settings'></div>
         </div>
-      </div>
 
-      <div id='ssh-files'>
-        <header>
-          <h1 i18n='{"_": "PREFERENCES_HEADER_SSH_FILES"}'></h1>
-        </header>
+        <div id="ssh-files">
+          <header>
+            <h1 i18n='{"_": "PREFERENCES_HEADER_SSH_FILES"}'></h1>
+          </header>
 
-        <div class='content vflex'>
-          <section>
-            <h3>
-              <a href='../plugin/docs/sshd.8.html#SSH_KNOWN_HOSTS_FILE_FORMAT'
-                 target='_blank'>/etc/ssh/ssh_known_hosts</a>
-              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_SYNCED"}'></span>
-            </h3>
+          <div class="content vflex">
+            <section>
+              <h3>
+                <a href="../plugin/docs/sshd.8.html#SSH_KNOWN_HOSTS_FILE_FORMAT" target="_blank"
+                  >/etc/ssh/ssh_known_hosts</a
+                >
+                <span class="float-right" i18n='{"_": "PREFERENCES_KEY_IS_SYNCED"}'></span>
+              </h3>
 
-            <textarea id='ssh-files-etc-ssh-known-hosts' rows=5 autocomplete=off
-                      spellcheck=false></textarea>
-            <br/>
-            <button id='ssh-files-etc-ssh-known-hosts-save'
-                    i18n='{"_": "SAVE_LABEL"}'></button>
-          </section>
+              <textarea
+                id="ssh-files-etc-ssh-known-hosts"
+                rows="5"
+                autocomplete="off"
+                spellcheck="false"
+              ></textarea>
+              <br />
+              <button id="ssh-files-etc-ssh-known-hosts-save" i18n='{"_": "SAVE_LABEL"}'></button>
+            </section>
 
-          <section>
-            <h3>
-              <a href='../plugin/docs/sshd.8.html#SSH_KNOWN_HOSTS_FILE_FORMAT'
-                 target='_blank'>~/.ssh/known_hosts</a>
-              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_LOCAL"}'></span>
-            </h3>
+            <section>
+              <h3>
+                <a href="../plugin/docs/sshd.8.html#SSH_KNOWN_HOSTS_FILE_FORMAT" target="_blank"
+                  >~/.ssh/known_hosts</a
+                >
+                <span class="float-right" i18n='{"_": "PREFERENCES_KEY_IS_LOCAL"}'></span>
+              </h3>
 
-            <textarea id='ssh-files-known-hosts' rows=5 autocomplete=off
-                      spellcheck=false></textarea>
-            <br/>
-            <button id='ssh-files-known-hosts-clear'
-                    i18n='{"_": "CLEAR_LABEL"}'></button>
-            <button id='ssh-files-known-hosts-save'
-                    i18n='{"_": "SAVE_LABEL"}'></button>
-          </section>
+              <textarea
+                id="ssh-files-known-hosts"
+                rows="5"
+                autocomplete="off"
+                spellcheck="false"
+              ></textarea>
+              <br />
+              <button id="ssh-files-known-hosts-clear" i18n='{"_": "CLEAR_LABEL"}'></button>
+              <button id="ssh-files-known-hosts-save" i18n='{"_": "SAVE_LABEL"}'></button>
+            </section>
 
-          <section>
-            <h3>
-              <a href='../plugin/docs/ssh_config.5.html'
-                 target='_blank'>/etc/ssh/ssh_config</a>
-              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_SYNCED"}'></span>
-            </h3>
+            <section>
+              <h3>
+                <a href="../plugin/docs/ssh_config.5.html" target="_blank">/etc/ssh/ssh_config</a>
+                <span class="float-right" i18n='{"_": "PREFERENCES_KEY_IS_SYNCED"}'></span>
+              </h3>
 
-            <textarea id='ssh-files-etc-ssh-config' rows=10 autocomplete=off
-                      spellcheck=false></textarea>
-            <button id='ssh-files-etc-ssh-config-save'
-                    i18n='{"_": "SAVE_LABEL"}'></button>
-          </section>
+              <textarea
+                id="ssh-files-etc-ssh-config"
+                rows="10"
+                autocomplete="off"
+                spellcheck="false"
+              ></textarea>
+              <button id="ssh-files-etc-ssh-config-save" i18n='{"_": "SAVE_LABEL"}'></button>
+            </section>
 
-          <section>
-            <h3>
-              <a href='../plugin/docs/ssh_config.5.html'
-                 target='_blank'>~/.ssh/config</a>
-              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_LOCAL"}'></span>
-            </h3>
+            <section>
+              <h3>
+                <a href="../plugin/docs/ssh_config.5.html" target="_blank">~/.ssh/config</a>
+                <span class="float-right" i18n='{"_": "PREFERENCES_KEY_IS_LOCAL"}'></span>
+              </h3>
 
-            <textarea id='ssh-files-config' rows=10 autocomplete=off
-                      spellcheck=false></textarea>
-            <br/>
-            <button id='ssh-files-config-save'
-                    i18n='{"_": "SAVE_LABEL"}'></button>
-          </section>
+              <textarea
+                id="ssh-files-config"
+                rows="10"
+                autocomplete="off"
+                spellcheck="false"
+              ></textarea>
+              <br />
+              <button id="ssh-files-config-save" i18n='{"_": "SAVE_LABEL"}'></button>
+            </section>
 
-          <section>
-            <h3>
-              <a href='../plugin/docs/ssh_config.5.html#IdentityFile'
-                 target='_blank' i18n='{"_": "IDENTITY_LABEL"}'></a>
-              <span class='float-right' i18n='{"_": "PREFERENCES_KEY_IS_LOCAL"}'></span>
-            </h3>
+            <section>
+              <h3>
+                <a
+                  href="../plugin/docs/ssh_config.5.html#IdentityFile"
+                  target="_blank"
+                  i18n='{"_": "IDENTITY_LABEL"}'
+                ></a>
+                <span class="float-right" i18n='{"_": "PREFERENCES_KEY_IS_LOCAL"}'></span>
+              </h3>
 
-            <ul id='ssh-files-identities'></ul>
-          </section>
+              <ul id="ssh-files-identities"></ul>
+            </section>
+          </div>
         </div>
-      </div>
 
-      <div id='handlers'>
-        <header>
-          <h1 i18n='{"_": "PROTOCOL_REGISTER_TITLE"}'></h1>
-        </header>
+        <div id="handlers">
+          <header>
+            <h1 i18n='{"_": "PROTOCOL_REGISTER_TITLE"}'></h1>
+          </header>
 
-        <div id='handlers-settings-section' class='content vflex'>
-          <section>
-            <p i18n='{"_": "PROTOCOL_REGISTER_EXPLAIN"}'></p>
-            <button id='proto-register'
-                    i18n='{"_": "PROTOCOL_REGISTER_BUTTON"}'></button>
-          </section>
+          <div id="handlers-settings-section" class="content vflex">
+            <section>
+              <p i18n='{"_": "PROTOCOL_REGISTER_EXPLAIN"}'></p>
+              <button id="proto-register" i18n='{"_": "PROTOCOL_REGISTER_BUTTON"}'></button>
+            </section>
 
-          <section>
-            <p i18n='{"_": "PROTOCOL_REGISTER_EXPLAIN_SETTINGS"}'></p>
-            <button id='proto-open-settings'
-                    i18n='{"_": "PROTOCOL_REGISTER_SETTINGS_BUTTON"}'></button>
-          </section>
+            <section>
+              <p i18n='{"_": "PROTOCOL_REGISTER_EXPLAIN_SETTINGS"}'></p>
+              <button
+                id="proto-open-settings"
+                i18n='{"_": "PROTOCOL_REGISTER_SETTINGS_BUTTON"}'
+              ></button>
+            </section>
+          </div>
         </div>
       </div>
     </div>
-
-  </div>
-</body>
+  </body>
 </html>
