@@ -64,7 +64,11 @@ def check_generic(path: Path, fix: bool = False) -> bool:
 
     # We use 2 space tab indents for most files, and we do not require keys be
     # sorted so they can be logically grouped.
-    data = json.loads(old_data, object_pairs_hook=collections.OrderedDict)
+    try:
+        data = json.loads(old_data, object_pairs_hook=collections.OrderedDict)
+    except json.decoder.JSONDecodeError as e:
+        logging.error("%s: %s", path, e)
+        return False
     new_data = json.dumps(data, ensure_ascii=False, indent=2, sort_keys=False)
 
     return check_common(path, old_data, new_data, fix=fix)
@@ -77,7 +81,11 @@ def check_messages(path: Path, fix: bool = False) -> bool:
 
     # We use tabs for messages.json to save a little on disk, and keep the keys
     # sorted as this content is mostly machine managed.
-    data = json.loads(old_data)
+    try:
+        data = json.loads(old_data)
+    except json.decoder.JSONDecodeError as e:
+        logging.error("%s: %s", path, e)
+        return False
     new_data = json.dumps(data, ensure_ascii=False, indent="\t", sort_keys=True)
 
     return check_common(path, old_data, new_data, fix=fix)

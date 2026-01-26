@@ -10,6 +10,7 @@ import itertools
 import logging
 import os
 from pathlib import Path
+import re
 import sys
 
 import libdot
@@ -119,13 +120,13 @@ def lint_html_files(paths: list[Path]) -> bool:
     logging.info("Linting HTML files %s", libdot.cmdstr(paths))
     ret = True
 
-    META_CHARSET_TAG = "<meta charset='utf-8'/>"
+    META_CHARSET_TAG = re.compile(r"""<meta charset=['"]utf-8['"] */>""")
 
     for path in paths:
         with open(path, mode="r", encoding="utf-8") as fp:
             data = fp.read()
 
-        if META_CHARSET_TAG not in data:
+        if not META_CHARSET_TAG.search(data):
             ret = False
             logging.error("%s: <head>: missing %s tag", path, META_CHARSET_TAG)
 

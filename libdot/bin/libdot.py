@@ -343,7 +343,11 @@ class ArtifactManifest:
     def from_file(cls, path: Path) -> "ArtifactManifest":
         """Read a manifest from a file."""
         with path.open("rb") as fp:
-            return cls.from_dict(json.load(fp))
+            try:
+                return cls.from_dict(json.load(fp))
+            except json.decoder.JSONDecodeError as e:
+                logging.error("%s: %s", path, e)
+                raise
 
     def __getitem__(self, key: str) -> Artifact | None:
         return self.files.get(key)
