@@ -1,0 +1,77 @@
+mosh signals transient network errors for retrying via exceptions.  Since WASI
+doesn't support them currently, rework the recv_one function to use optional
+returns instead to signal transient errors.
+
+Upstream updated to C++17 after the 1.4.0 release too.
+
+--- a/configure
++++ b/configure
+@@ -5148,7 +5148,7 @@ esac
+ # Protobuf 3.6+ requires C++11.
+ 
+ if pkg-config --atleast-version 3.6.0 protobuf; then :
+-    ax_cxx_compile_alternatives="11 0x"    ax_cxx_compile_cxx11_required=true
++    ax_cxx_compile_alternatives="17 11 0x"    ax_cxx_compile_cxx11_required=true
+   ac_ext=cpp
+ ac_cpp='$CXXCPP $CPPFLAGS'
+ ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+--- a/src/network/network.cc
++++ b/src/network/network.cc
+@@ -434,9 +434,12 @@ string Connection::recv( void )
+   for ( std::deque< Socket >::const_iterator it = socks.begin();
+ 	it != socks.end();
+ 	it++ ) {
+-    string payload;
++    std::optional<string> payload;
+     try {
+       payload = recv_one( it->fd());
++      if (!payload.has_value()) {
++        continue;
++      }
+     } catch ( NetworkException & e ) {
+       if ( (e.the_errno == EAGAIN)
+ 	   || (e.the_errno == EWOULDBLOCK) ) {
+@@ -448,12 +451,12 @@ string Connection::recv( void )
+ 
+     /* succeeded */
+     prune_sockets();
+-    return payload;
++    return payload.value();
+   }
+   throw_abort("No packet received");
+ }
+ 
+-string Connection::recv_one( int sock_to_recv )
++std::optional<string> Connection::recv_one( int sock_to_recv )
+ {
+   /* receive source address, ECN, and payload in msghdr structure */
+   Addr packet_remote_addr;
+@@ -483,6 +486,9 @@ string Connection::recv_one( int sock_to_recv )
+   ssize_t received_len = recvmsg( sock_to_recv, &header, MSG_DONTWAIT );
+ 
+   if ( received_len < 0 ) {
++    if (errno == EAGAIN || errno == EWOULDBLOCK) {
++      return std::nullopt;
++    }
+     throw_abort("recvmsg: %s", strerror(errno));
+   }
+ 
+--- a/src/network/network.h
++++ b/src/network/network.h
+@@ -42,6 +42,7 @@
+ #include <vector>
+ #include <assert.h>
+ #include <exception>
++#include <optional>
+ #include <string.h>
+ 
+ #include "crypto.h"
+@@ -198,7 +199,7 @@ namespace Network {
+ 
+     void prune_sockets( void );
+ 
+-    string recv_one( int sock_to_recv );
++    std::optional<string> recv_one( int sock_to_recv );
+ 
+     void set_MTU( int family );
+ 

@@ -20,6 +20,7 @@ ARCHIVES = ("%(p)s.tar.gz",)
 PATCHES = (
     "%(p)s-random.patch",
     "%(p)s-log-exceptions.patch",
+    "%(p)s-retry-network.patch",
 )
 
 
