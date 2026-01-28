@@ -1382,6 +1382,7 @@ export function postProcessOptions(options, hostname, username, isMount) {
     // This list of agent hosts matches the internal gLinux ssh_config.
     const forwardAgent = [
       '.corp.google.com', '.corp', '.cloud.googlecorp.com', '.c.googlers.com',
+      '.mandiant-aws-prod.s.off.goog',
     ].reduce((ret, host) => ret || hostname.endsWith(host), false);
 
     // This list of proxy hosts matches the internal gLinux ssh_config.
