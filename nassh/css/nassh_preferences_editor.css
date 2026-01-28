@@ -40,6 +40,7 @@ body {
  * The left navigation pane.
  */
 .navigation {
+  background-color: var(--nassh-dm-bg-color);
   height: 100%;
   width: 155px;
   min-width: 155px;
