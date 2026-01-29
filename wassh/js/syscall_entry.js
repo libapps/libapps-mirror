@@ -66,10 +66,10 @@ export class WasshExperimental extends SyscallEntry.Base {
           // integer to look up the real host later.
           address = bytes[15];
         } else {
-          // TODO(vapier): Check endianness; might need DataView via getView_().
-          const u16 = new Uint16Array(bytes.buffer, bytes.bytesOffset, 8);
-          address = Array.from(u16).map(
-              (b) => b.toString(16).padStart(4, '0')).join(':');
+          const dv = this.getView_(addr_ptr, 16);
+          address = [...Array(8).keys()].map(
+              (i) => dv.getUint16(i << 1, false).toString(16).padStart(4, '0'),
+          ).join(':');
         }
         break;
       }
@@ -164,10 +164,10 @@ export class WasshExperimental extends SyscallEntry.Base {
           // integer to look up the real host later.
           address = bytes[15];
         } else {
-          // TODO(vapier): Check endianness; might need DataView via getView_().
-          const u16 = new Uint16Array(bytes.buffer, bytes.bytesOffset, 8);
-          address = Array.from(u16).map(
-              (b) => b.toString(16).padStart(4, '0')).join(':');
+          const dv = this.getView_(addr_ptr, 16);
+          address = [...Array(8).keys()].map(
+              (i) => dv.getUint16(i << 1, false).toString(16).padStart(4, '0'),
+          ).join(':');
         }
         break;
       }
@@ -342,10 +342,10 @@ export class WasshExperimental extends SyscallEntry.Base {
           // integer to look up the real host later.
           address = bytes[15];
         } else {
-          // TODO(vapier): Check endianness; might need DataView via getView_().
-          const u16 = new Uint16Array(bytes.buffer, bytes.bytesOffset, 8);
-          address = Array.from(u16).map(
-              (b) => b.toString(16).padStart(4, '0')).join(':');
+          const dv = this.getView_(addr_ptr, 16);
+          address = [...Array(8).keys()].map(
+              (i) => dv.getUint16(i << 1, false).toString(16).padStart(4, '0'),
+          ).join(':');
         }
         break;
       }
