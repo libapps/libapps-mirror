@@ -68,6 +68,22 @@ function clearLastError() {
   globalThis.chrome?.runtime?.lastError;
 }
 
+// The IPv4 wildcard address.
+const inAddrAny = '0.0.0.0';
+
+// The IPv6 wildcard address.
+const in6AddrAny = '::';
+
+/**
+ * Find matching wildcard address.
+ *
+ * @param {number} domain The socket domain (family).
+ * @return {string} The wildcard address.
+ */
+function getInAddrAny(domain) {
+  return domain === Constants.AF_INET6 ? in6AddrAny : inAddrAny;
+}
+
 /**
  * Convert string IP address to bytes.
  *
@@ -979,7 +995,7 @@ export class ChromeUdpSocket extends DatagramSocket {
   async sendto(buf, address, port) {
     // Chrome APIs require us to bind the socket locally first.
     if (this.address === null) {
-      const bindRet = await this.bind('0.0.0.0', 0);
+      const bindRet = await this.bind();
       if (typeof bindRet === 'number' && bindRet !== WASI.errno.ESUCCESS) {
         return bindRet;
       }
@@ -999,8 +1015,8 @@ export class ChromeUdpSocket extends DatagramSocket {
   }
 
   /**
-   * @param {string} address
-   * @param {number} port
+   * @param {string=} address
+   * @param {number=} port
    * @return {!Promise<!WASI_t.errno|!Socket>}
    * @override
    */
@@ -1009,8 +1025,13 @@ export class ChromeUdpSocket extends DatagramSocket {
       return WASI.errno.EADDRINUSE;
     }
 
+    address ??= getInAddrAny(this.domain);
+    port ??= 0;
+
     const result = await new Promise((resolve) => {
-      chrome.sockets.udp.bind(this.socketId_, address, port, resolve);
+      // The ?? is to workaround closure-compiler checks.
+      chrome.sockets.udp.bind(
+          this.socketId_, address ?? '', port ?? 0, resolve);
     });
 
     const ret = netErrorToErrno(result);
@@ -1770,7 +1791,7 @@ export class WebUdpSocket extends DatagramSocket {
   async sendto(buf, address, port) {
     // Web APIs require us to bind the socket locally first.
     if (this.address === null) {
-      const bindRet = await this.bind('0.0.0.0');
+      const bindRet = await this.bind();
       if (typeof bindRet === 'number' && bindRet !== WASI.errno.ESUCCESS) {
         return bindRet;
       }
@@ -1803,7 +1824,8 @@ export class WebUdpSocket extends DatagramSocket {
   }
 
   /**
-   * @param {string} address
+   * @param {string=} address The local address to bind to.  Defaults to the
+   *     wildcard address for this socket family.
    * @param {number=} port
    * @return {!Promise<!WASI_t.errno|!Socket>}
    * @override
@@ -1813,6 +1835,7 @@ export class WebUdpSocket extends DatagramSocket {
       return WASI.errno.EADDRINUSE;
     }
 
+    address ??= getInAddrAny(this.domain);
     await this.setSocket_(new UDPSocket({
       localAddress: address,
       localPort: port,

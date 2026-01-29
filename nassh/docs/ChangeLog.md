@@ -1,5 +1,6 @@
 # 0.74, 2026-02-02, OpenSSH 10.2 upgrade & alpha WASM Mosh & various rework.
 
+* wassh: udp: Fix automatic binding for IPv6.
 * wassh: sockets: Fix IPv6 address loading.
 * google: Route more through SUP SSH Relay.
 * mosh: Handle network retries w/out exceptions.
