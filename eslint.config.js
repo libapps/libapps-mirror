@@ -12,7 +12,7 @@ import jsdoc from 'eslint-plugin-jsdoc';
 export default [{
   languageOptions: {
     // This sets the syntax parsing level.
-    ecmaVersion: 2020,
+    ecmaVersion: 2021,
     sourceType: 'module',
   },
 
