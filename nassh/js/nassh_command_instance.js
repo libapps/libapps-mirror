@@ -1519,10 +1519,13 @@ CommandInstance.prototype.initProgram_ = async function(argv) {
     // Assume the ssh connection includes the $SSH_CONNECTION variable so we
     // can extract the remote host IP address -- the mosh-client program only
     // accepts IP addresses, not hostnames.
+    //
+    // Specify -s to handle multi-home clients.  We assume $SSH_CONNECTION
+    // is what we also will use for mosh.
     const remoteCommand =
         `sh -c '` +
         `printf "\nMOSH SSH_CONNECTION %s\n" "$SSH_CONNECTION"; ` +
-        `exec mosh-server new` +
+        `exec mosh-server new -s` +
         `'`;
     subproc = await this.initWasmSubproc_(
         [...argv.arguments, remoteCommand],
