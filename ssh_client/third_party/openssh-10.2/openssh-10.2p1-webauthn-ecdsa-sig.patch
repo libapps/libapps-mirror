@@ -1,0 +1,147 @@
+From 9266b44dae23de7344ff409c33342a112ebe98e1 Mon Sep 17 00:00:00 2001
+From: James Zhang <yzhangad@google.com>
+Date: Thu, 29 Jan 2026 14:19:23 -0800
+
+Fix the webauthn ecdsa-sk signature type's support in OpenSSH 10.2.
+https://bugzilla.mindrot.org/show_bug.cgi?id=3748.
+
+The same fix is being upstreamed in
+https://github.com/openssh/openssh-portable/pull/624
+and https://github.com/openssh/openssh-portable/pull/625.
+
+---
+ authfd.c       |  2 +-
+ myproposal.h   |  3 +++
+ ssh-ecdsa-sk.c | 16 +++++++++++++++-
+ sshconnect2.c  |  3 ++-
+ sshkey.c       | 13 +++++++++++++
+ 5 files changed, 34 insertions(+), 3 deletions(-)
+
+diff --git a/authfd.c b/authfd.c
+index 2bbe646..8131b47 100644
+--- a/authfd.c
++++ b/authfd.c
+@@ -438,7 +438,7 @@ ssh_agent_sign(int sock, const struct sshkey *key,
+ 	if ((r = sshbuf_get_string(msg, &sig, &len)) != 0)
+ 		goto out;
+ 	/* Check what we actually got back from the agent. */
+-	if ((r = sshkey_check_sigtype(sig, len, alg)) != 0)
++	if (!sshkey_is_sk(key) && (r = sshkey_check_sigtype(sig, len, alg)) != 0)
+ 		goto out;
+ 	/* success */
+ 	*sigp = sig;
+diff --git a/myproposal.h b/myproposal.h
+index 8fe9276..2301963 100644
+--- a/myproposal.h
++++ b/myproposal.h
+@@ -47,6 +47,7 @@
+ 	"ecdsa-sha2-nistp521-cert-v01@openssh.com," \
+ 	"sk-ssh-ed25519-cert-v01@openssh.com," \
+ 	"sk-ecdsa-sha2-nistp256-cert-v01@openssh.com," \
++	"webauthn-sk-ecdsa-sha2-nistp256-cert-v01@openssh.com," \
+ 	"rsa-sha2-512-cert-v01@openssh.com," \
+ 	"rsa-sha2-256-cert-v01@openssh.com," \
+ 	"ssh-ed25519," \
+@@ -55,6 +56,7 @@
+ 	"ecdsa-sha2-nistp521," \
+ 	"sk-ssh-ed25519@openssh.com," \
+ 	"sk-ecdsa-sha2-nistp256@openssh.com," \
++	"webauthn-sk-ecdsa-sha2-nistp256@openssh.com," \
+ 	"rsa-sha2-512," \
+ 	"rsa-sha2-256"
+ 
+@@ -87,6 +89,7 @@
+ 	"ecdsa-sha2-nistp521," \
+ 	"sk-ssh-ed25519@openssh.com," \
+ 	"sk-ecdsa-sha2-nistp256@openssh.com," \
++	"webauthn-sk-ecdsa-sha2-nistp256@openssh.com," \
+ 	"rsa-sha2-512," \
+ 	"rsa-sha2-256"
+ 
+diff --git a/ssh-ecdsa-sk.c b/ssh-ecdsa-sk.c
+index 3588b11..f5f2dd6 100644
+--- a/ssh-ecdsa-sk.c
++++ b/ssh-ecdsa-sk.c
+@@ -273,7 +273,9 @@ ssh_ecdsa_sk_verify(const struct sshkey *key,
+ 		ret = SSH_ERR_INVALID_FORMAT;
+ 		goto out;
+ 	}
+-	if (strcmp(ktype, "webauthn-sk-ecdsa-sha2-nistp256@openssh.com") == 0)
++	if (strcmp(ktype, "webauthn-sk-ecdsa-sha2-nistp256@openssh.com") == 0 ||
++	    strcmp(ktype, "webauthn-sk-ecdsa-sha2-nistp256-cert-v01@openssh.com")
++	      == 0)
+ 		is_webauthn = 1;
+ 	else if (strcmp(ktype, "sk-ecdsa-sha2-nistp256@openssh.com") != 0) {
+ 		ret = SSH_ERR_INVALID_FORMAT;
+@@ -489,4 +491,16 @@ const struct sshkey_impl sshkey_ecdsa_sk_webauthn_impl = {
+ 	/* .funcs = */		&sshkey_ecdsa_sk_funcs,
+ };
+ 
++const struct sshkey_impl sshkey_ecdsa_sk_webauthn_cert_impl = {
++	/* .name = */		"webauthn-sk-ecdsa-sha2-nistp256-cert-v01@openssh.com",
++	/* .shortname = */	"ECDSA-SK-CERT",
++	/* .sigalg = */		NULL,
++	/* .type = */		KEY_ECDSA_SK_CERT,
++	/* .nid = */		NID_X9_62_prime256v1,
++	/* .cert = */		0,
++	/* .sigonly = */	1,
++	/* .keybits = */	256,
++	/* .funcs = */		&sshkey_ecdsa_sk_funcs,
++};
++
+ #endif /* OPENSSL_HAS_ECC */
+diff --git a/sshconnect2.c b/sshconnect2.c
+index b3679c9..2d27988 100644
+--- a/sshconnect2.c
++++ b/sshconnect2.c
+@@ -1273,7 +1273,8 @@ identity_sign(struct identity *id, u_char **sigp, size_t *lenp,
+ 	 * PKCS#11 tokens may not support all signature algorithms,
+ 	 * so check what we get back.
+ 	 */
+-	if ((r = sshkey_check_sigtype(*sigp, *lenp, alg)) != 0) {
++	if (!sshkey_is_sk(sign_key) &&
++		(r = sshkey_check_sigtype(*sigp, *lenp, alg)) != 0) {
+ 		debug_fr(r, "sshkey_check_sigtype");
+ 		goto out;
+ 	}
+diff --git a/sshkey.c b/sshkey.c
+index afd7822..d6422c1 100644
+--- a/sshkey.c
++++ b/sshkey.c
+@@ -96,6 +96,7 @@ extern const struct sshkey_impl sshkey_ed25519_sk_cert_impl;
+ extern const struct sshkey_impl sshkey_ecdsa_sk_impl;
+ extern const struct sshkey_impl sshkey_ecdsa_sk_cert_impl;
+ extern const struct sshkey_impl sshkey_ecdsa_sk_webauthn_impl;
++extern const struct sshkey_impl sshkey_ecdsa_sk_webauthn_cert_impl;
+ #  endif /* ENABLE_SK */
+ extern const struct sshkey_impl sshkey_ecdsa_nistp256_impl;
+ extern const struct sshkey_impl sshkey_ecdsa_nistp256_cert_impl;
+@@ -135,6 +136,7 @@ const struct sshkey_impl * const keyimpls[] = {
+ 	&sshkey_ecdsa_sk_impl,
+ 	&sshkey_ecdsa_sk_cert_impl,
+ 	&sshkey_ecdsa_sk_webauthn_impl,
++	&sshkey_ecdsa_sk_webauthn_cert_impl,
+ #  endif /* ENABLE_SK */
+ # endif /* OPENSSL_HAS_ECC */
+ 	&sshkey_rsa_impl,
+@@ -300,6 +302,17 @@ sshkey_match_keyname_to_sigalgs(const char *keyname, const char *sigalgs)
+ 		    sigalgs, 0) == 1 ||
+ 		    match_pattern_list("rsa-sha2-512-cert-v01@openssh.com",
+ 		    sigalgs, 0) == 1;
++	} else if (ktype == KEY_ECDSA_SK) {
++		return match_pattern_list("sk-ecdsa-sha2-nistp256@openssh.com",
++		    sigalgs, 0) == 1 || match_pattern_list(
++		    "webauthn-sk-ecdsa-sha2-nistp256@openssh.com",
++		    sigalgs, 0) == 1;
++	} else if (ktype == KEY_ECDSA_SK_CERT) {
++		return match_pattern_list(
++		    "sk-ecdsa-sha2-nistp256-cert-v01@openssh.com",
++		    sigalgs, 0) == 1 || match_pattern_list(
++		    "webauthn-sk-ecdsa-sha2-nistp256-cert-v01@openssh.com",
++		    sigalgs, 0) == 1;
+ 	} else
+ 		return match_pattern_list(keyname, sigalgs, 0) == 1;
+ }
+-- 
+2.53.0.rc2.204.g2597b5adb4-goog
+

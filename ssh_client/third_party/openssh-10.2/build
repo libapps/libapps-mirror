@@ -22,6 +22,7 @@ PATCHES = (
     "%(p)s-no-mmap.patch",
     "%(p)s-bsd-misc-includes.patch",
     "%(p)s-sntrup761-random.patch",
+    "%(p)s-webauthn-ecdsa-sig.patch",
 )
 
 
