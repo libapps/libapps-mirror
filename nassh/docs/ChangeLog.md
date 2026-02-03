@@ -1,3 +1,12 @@
+# 0.75, 2026-02-09, Fix localhost port listening & terminal init.
+
+* Revert "nassh: command: Enable automatic newlines".
+* openssh: Fix webauthn sk ecdsa signature support in openssh-10.2.
+* wassh: Drop more IP ssh agent.
+* plugin: Update to 0.74.
+* wassh-libc-sup: getaddrinfo: Return IPv6 & IPv4 results for localhost.
+* wassh: sockets: Plumb IPV6_V6ONLY support through direct sockets.
+
 # 0.74, 2026-02-02, OpenSSH 10.2 upgrade & alpha WASM Mosh & various rework.
 
 * wassh: udp: Fix automatic binding for IPv6.
