@@ -43,7 +43,11 @@ const char* gai_strerror(int errcode) {
 }
 
 // Determine whether the host is the "localhost".
+// https://datatracker.ietf.org/doc/html/draft-west-let-localhost-be-localhost-06
 static bool is_localhost(const char* node) {
+  // https://pubs.opengroup.org/onlinepubs/9799919799/functions/getaddrinfo.html
+  //   If nodename is not null, ...; otherwise, the requested service location
+  //   is local to the caller.
   if (node == NULL)
     return true;
 
@@ -56,6 +60,7 @@ static bool is_localhost(const char* node) {
       !strcmp(node + len - sizeof(localdomain) + 1, localdomain))
     return true;
 
+  // https://datatracker.ietf.org/doc/html/rfc6761#section-6.3
   static const char localhost[] = ".localhost";
   if (len >= sizeof(localhost) &&
       !strcmp(node + len - sizeof(localhost) + 1, localhost))
@@ -187,8 +192,9 @@ int getaddrinfo(const char* node,
   // clearly differentiate between the two modes.
   if (ai_family == AF_INET6 || ai_family == AF_UNSPEC) {
     if (is_localhost(node)) {
+      // NB: Do not set ai_family since we resolved "localhost" which supports
+      // multiple families.
       memcpy(&sin6_addr, &in6addr_loopback, sizeof(in6addr_loopback));
-      ai_family = AF_INET6;
     } else if (inet_pton(AF_INET6, node, &sin6_addr) == 1) {
       ai_family = AF_INET6;
     } else {
@@ -204,8 +210,9 @@ int getaddrinfo(const char* node,
   }
   if (ai_family == AF_INET || ai_family == AF_UNSPEC) {
     if (is_localhost(node)) {
-      s_addr = htonl(0x7f000001);
-      ai_family = AF_INET;
+      // NB: Do not set ai_family since we resolved "localhost" which supports
+      // multiple families.
+      s_addr = htonl(INADDR_LOOPBACK);
     } else if (inet_pton(AF_INET, node, &s_addr) == 1) {
       ai_family = AF_INET;
     } else {
