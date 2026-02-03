@@ -23,6 +23,7 @@ const IP_TOS = 1;
 const IP_MTU_DISCOVER = 10;
 const IPPROTO_TCP = 6;
 const TCP_NODELAY = 1;
+const IPV6_V6ONLY = 26;
 const IPV6_TCLASS = 67;
 // Time (seconds) for default keep alive intervals.  This matches Linux.
 const TCP_KEEPALIVE_INTVL = 75;
@@ -475,6 +476,8 @@ export async function cleanupChromeSockets() {
 
 /**
  * A TCP/IP based socket backed by the chrome.sockets.tcp API.
+ *
+ * @see https://developer.chrome.com/docs/apps/reference/sockets/tcp
  */
 export class ChromeTcpSocket extends StreamSocket {
   /**
@@ -758,6 +761,8 @@ ChromeTcpSocket.eventRouter_ = null;
 
 /**
  * A TCP/IP based listening socket backed by the chrome.sockets.tcpServer API.
+ *
+ * @see https://developer.chrome.com/docs/apps/reference/sockets/tcpServer
  */
 export class ChromeTcpListenSocket extends StreamSocket {
   /**
@@ -929,6 +934,8 @@ ChromeTcpListenSocket.eventRouter_ = null;
 
 /**
  * A UDP/IP based socket backed by the chrome.sockets.udp API.
+ *
+ * @see https://developer.chrome.com/docs/apps/reference/sockets/udp
  */
 export class ChromeUdpSocket extends DatagramSocket {
   /**
@@ -1286,7 +1293,7 @@ export class RelaySocket extends StreamSocket {
 /**
  * A TCP/IP based socket backed by the Direct Sockets API.
  *
- * @see https://wicg.github.io/direct-sockets/
+ * @see https://wicg.github.io/direct-sockets/#tcpsocket-interface
  */
 export class WebTcpSocket extends StreamSocket {
   /**
@@ -1304,6 +1311,7 @@ export class WebTcpSocket extends StreamSocket {
 
     this.tcpKeepAlive_ = false;
     this.tcpNoDelay_ = false;
+    this.ipv6Only_ = false;
   }
 
   /**
@@ -1342,6 +1350,7 @@ export class WebTcpSocket extends StreamSocket {
 
     const options = {
       noDelay: this.tcpNoDelay_,
+      ipv6Only: this.ipv6Only_,
     };
     // Keep alive is disabled by default, so don't specify it if it's disabled.
     if (this.tcpKeepAlive_) {
@@ -1480,6 +1489,15 @@ export class WebTcpSocket extends StreamSocket {
         }
         break;
       }
+
+      case IPPROTO_IPV6: {
+        switch (name) {
+          case IPV6_V6ONLY: {
+            return {option: this.ipv6Only_ ? 1 : 0};
+          }
+        }
+        break;
+      }
     }
 
     return WASI.errno.ENOPROTOOPT;
@@ -1525,6 +1543,11 @@ export class WebTcpSocket extends StreamSocket {
             console.warn(`Ignoring IPV6_TCLASS=${value}`);
             return WASI.errno.ESUCCESS;
           }
+
+          case IPV6_V6ONLY: {
+            this.ipv6Only_ = value;
+            return WASI.errno.ESUCCESS;
+          }
         }
         break;
       }
@@ -1554,6 +1577,8 @@ export class WebTcpSocket extends StreamSocket {
 
 /**
  * A TCP/IP based server socket backed by the Direct Sockets API.
+ *
+ * @see https://wicg.github.io/direct-sockets/#tcpserversocket-interface
  */
 export class WebTcpServerSocket extends StreamSocket {
   /**
@@ -1566,6 +1591,8 @@ export class WebTcpServerSocket extends StreamSocket {
     super(domain, type, protocol);
 
     this.socket_ = null;
+
+    this.ipv6Only_ = false;
 
     this.incomingConnectionReader_ = null;
 
@@ -1702,6 +1729,50 @@ export class WebTcpServerSocket extends StreamSocket {
   }
 
   /**
+   * @param {number} level
+   * @param {number} name
+   * @return {!Promise<!WASI_t.errno|{option: number}>}
+   * @override
+   */
+  async getSocketOption(level, name) {
+    switch (level) {
+      case IPPROTO_IPV6: {
+        switch (name) {
+          case IPV6_V6ONLY: {
+            return {option: this.ipv6Only_ ? 1 : 0};
+          }
+        }
+        break;
+      }
+    }
+
+    return WASI.errno.ENOPROTOOPT;
+  }
+
+  /**
+   * @param {number} level
+   * @param {number} name
+   * @param {number} value
+   * @return {!Promise<!WASI_t.errno>}
+   * @override
+   */
+  async setSocketOption(level, name, value) {
+    switch (level) {
+      case IPPROTO_IPV6: {
+        switch (name) {
+          case IPV6_V6ONLY: {
+            this.ipv6Only_ = value;
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+    }
+
+    return WASI.errno.ENOPROTOOPT;
+  }
+
+  /**
    * @return {boolean}
    * @override
    */
@@ -1712,6 +1783,8 @@ export class WebTcpServerSocket extends StreamSocket {
 
 /**
  * A UDP/IP based socket backed by the Direct Sockets API.
+ *
+ * @see https://wicg.github.io/direct-sockets/#udpsocket-interface
  */
 export class WebUdpSocket extends DatagramSocket {
   /**
@@ -1726,6 +1799,8 @@ export class WebUdpSocket extends DatagramSocket {
     this.socket_ = null;
     this.directSocketsReader_ = null;
     this.directSocketsWriter_ = null;
+
+    this.ipv6Only_ = false;
   }
 
   /**
@@ -1839,6 +1914,7 @@ export class WebUdpSocket extends DatagramSocket {
     await this.setSocket_(new UDPSocket({
       localAddress: address,
       localPort: port,
+      ipv6only: this.ipv6Only_,
     }));
     this.pollData_();
 
@@ -1885,6 +1961,27 @@ export class WebUdpSocket extends DatagramSocket {
   /**
    * @param {number} level
    * @param {number} name
+   * @return {!Promise<!WASI_t.errno|{option: number}>}
+   * @override
+   */
+  async getSocketOption(level, name) {
+    switch (level) {
+      case IPPROTO_IPV6: {
+        switch (name) {
+          case IPV6_V6ONLY: {
+            return {option: this.ipv6Only_ ? 1 : 0};
+          }
+        }
+        break;
+      }
+    }
+
+    return WASI.errno.ENOPROTOOPT;
+  }
+
+  /**
+   * @param {number} level
+   * @param {number} name
    * @param {number} value
    * @return {!Promise<!WASI_t.errno>}
    * @override
@@ -1896,6 +1993,16 @@ export class WebUdpSocket extends DatagramSocket {
           case IP_MTU_DISCOVER: {
             // TODO(vapier): Would be nice to support this.
             console.warn(`Ignoring IP_MTU_DISCOVER=${value}`);
+            return WASI.errno.ESUCCESS;
+          }
+        }
+        break;
+      }
+
+      case IPPROTO_IPV6: {
+        switch (name) {
+          case IPV6_V6ONLY: {
+            this.ipv6Only_ = value;
             return WASI.errno.ESUCCESS;
           }
         }
