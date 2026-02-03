@@ -11,9 +11,9 @@
   "plugin": {
     "crosh": true,
     "hashes": {
-      "sha256": "1a7414a6100e30c625ff7b1b4925fe7827a9d56048b16cff1ccb4fe361f84c90"
+      "sha256": "e86e40e391dd0609bf3f1c66b27c3a69e8c599f4c047343f4af2cdeb423a0aa5"
     },
-    "size": "1852560",
-    "url": "https://storage.googleapis.com/chromeos-localmirror/secureshell/releases/0.73.tar.xz"
+    "size": "1839212",
+    "url": "https://storage.googleapis.com/chromeos-localmirror/secureshell/releases/0.74.tar.xz"
   }
 }
