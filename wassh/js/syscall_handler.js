@@ -822,19 +822,6 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       }
     }
 
-    // TODO(crbug.com/1303495): Delete this hack.  The old NaCl plugin uses a
-    // hardcoded IP to connect to the agent instead of using UNIX sockets.  Need
-    // to cleanup the OpenSSH patches first.
-    if (address === '127.1.2.3') {
-      const unixHandle = new Sockets.UnixSocket(
-          handle.domain, handle.filetype, handle.protocol,
-          this.unixSocketsOpen_);
-      unixHandle.receiveListener_ = handle.receiveListener_;
-      handle.close();
-      this.vfs.fds_.set(socket, unixHandle);
-      return unixHandle.connect(address, port);
-    }
-
     return handle.connect(address, port);
   }
 
