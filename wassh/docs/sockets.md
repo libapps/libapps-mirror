@@ -31,17 +31,17 @@ We utilize different APIs depending on their availability.
     *   Only used with [relay servers].
     *   Does not support port forwarding.
 *   Chrome Sockets (
-    [TCP](https://developer.chrome.com/docs/extensions/reference/sockets_tcp/) &
-    [TCP server](https://developer.chrome.com/docs/extensions/reference/sockets_tcpServer/) &
-    [UDP](https://developer.chrome.com/docs/extensions/reference/sockets_udp/)
+    [TCP](https://developer.chrome.com/docs/apps/reference/sockets/tcp) &
+    [TCP server](https://developer.chrome.com/docs/apps/reference/sockets/tcpServer) &
+    [UDP](https://developer.chrome.com/docs/apps/reference/sockets/udp)
     )
     *   Only works in Chrome.
     *   Supports connecting to standard SSH servers.
     *   Supports port forwarding.
-*   [Direct Sockets](https://wicg.github.io/direct-sockets/)
-    *   Not currently available in any released browser or configuration.
+*   [Direct Sockets]
+    *   Limited browser support.
     *   Supports connecting to standard SSH servers.
-    *   Does not support port forwarding.
+    *   Supports port forwarding.
 
 ## Relays
 
@@ -70,8 +70,8 @@ The [POSIX socket APIs] work by:
 
 The [Web APIs] work by:
 
-*   Create a [socket](https://developer.chrome.com/docs/extensions/reference/sockets_tcp/#method-create)
-*   [Connect](https://developer.chrome.com/docs/extensions/reference/sockets_tcp/#method-connect)
+*   Create a [socket](https://developer.chrome.com/docs/apps/reference/sockets/tcp#method-create)
+*   [Connect](https://developer.chrome.com/docs/apps/reference/sockets/tcp#method-connect)
     the socket using the hostname
     *   Chrome will take care of address resolution for us
 
@@ -96,27 +96,46 @@ Then, when the connect call is made, wassh looks to see if the requested address
 is one of the fake ones previously registered.  If so, we swap in that hostname
 when calling the [Web APIs].
 
+### Side Channels
+
+It's possible to abuse some [Web APIs] to indirectly translate names, but it's
+unreliable and doesn't provide a clear signal as to the records returned or
+control over timeouts.  Ideally we'd want to query specific records beyond the
+standard `A` (IPv4) & `AAAA` (IPv6) like `SSHFP` for SSH fingerprints, and be
+able to see any [DNSSEC] results in order to trust them.
+
+For example, [Direct Sockets] can create a `UDPSocket` with a hostname in the
+`remoteAddress` field and `dnsQueryType` (for `A` vs `AAAA`), and once the
+socket is created, read `UDPSocketOpenInfo` from the `opened` property to see
+what `remoteAddress` resolved to.
+
 ## Socket Options
 
 When possible, we try to implement socket options.  Unfortunately, most of them
-we can't currently handle, so we have to ignore them.  If we don't, OpenSSH will
-abort in many cases.  We'll probably add more as we find more OpenSSH usage.
+we can't currently handle, so we have to ignore them.  If we don't, some tools
+(e.g. OpenSSH & mosh) will abort in many cases -- they assume if the option is
+defined by the headers (provided by WASI-SDK), then it must be supported by the
+runtime (wassh).  We'll probably add more as we find more usage.
 
 *   `SOL_SOCKET`: [Socket-level options](https://man7.org/linux/man-pages/man7/socket.7.html)
-    *   `SO_ERROR`
-    *   `SO_KEEPALIVE`
-    *   `SO_REUSEADDR`
+    *   `SO_ERROR`:
+    *   `SO_KEEPALIVE`: Mostly supported.
+    *   `SO_REUSEADDR`: Ignored.
 *   `IPPROTO_IP`: [IP-level options](https://man7.org/linux/man-pages/man7/ip.7.html)
-    *   `IP_TOS`
+    *   `IP_MTU_DISCOVER`: Ignored.
+    *   `IP_TOS`: Ignored.
 *   `IPPROTO_IPV6`: [IPv6-level options](https://man7.org/linux/man-pages/man7/ipv6.7.html)
-    *   `IPV6_TCLASS`
+    *   `IPV6_TCLASS`: Ignored.
+    *   `IPV6_V6ONLY`: Mostly supported.
 *   `IPPROTO_TCP`: [TCP-level options](https://man7.org/linux/man-pages/man7/tcp.7.html)
-    *   `TCP_NODELAY`
+    *   `TCP_NODELAY`: Mostly supported.
 
 
 [0.0.0.0/8]: https://www.rfc-editor.org/rfc/rfc791.html#section-3.2
 [0.0.0.0/32]: https://www.rfc-editor.org/rfc/rfc791.html#section-3.2
 [100::/64]: https://www.rfc-editor.org/rfc/rfc6666.html
+[Direct Sockets]: https://wicg.github.io/direct-sockets/
+[DNSSEC]: https://en.wikipedia.org/wiki/Domain_Name_System_Security_Extensions
 [DoH]: https://en.wikipedia.org/wiki/DNS_over_HTTPS
 [getaddrinfo]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/freeaddrinfo.html
 [POSIX socket APIs]: https://en.wikipedia.org/wiki/Berkeley_sockets
