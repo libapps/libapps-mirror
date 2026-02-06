@@ -117,7 +117,6 @@ globalThis.addEventListener('DOMContentLoaded', async (event) => {
     // TODO(crbug.com/1063219) We need this to not prompt the user for clipboard
     // permission.
     terminal.alwaysUseLegacyPasting = true;
-    terminal.setAutoCarriageReturn(true);
     terminal.decorate(lib.notNull(document.querySelector('#terminal')));
     terminal.installKeyboard();
     const runNassh = function() {

@@ -310,8 +310,8 @@ CommandInstance.prototype.isDevVersion = function() {
  * @param {string} argstr The connection ArgString.
  */
 CommandInstance.prototype.reconnect = function(argstr) {
-  // Terminal reset + enable automatic newline.
-  this.io.print('\x1b[!p\x1b[20;1h');
+  // Terminal reset.
+  this.io.print('\x1b[!p');
 
   this.terminateProgram_();
 
