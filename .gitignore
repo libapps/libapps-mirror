@@ -10,6 +10,13 @@ __pycache__/
 *.wasm
 *.wasm.dbg
 
+# Bazel outputs.
+bazel-bin
+bazel-genfiles
+bazel-out
+bazel-testlogs
+MODULE.bazel.lock
+
 # Stuff we build for distribution
 /artifacts/
 /depot_tools/
