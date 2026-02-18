@@ -1389,6 +1389,7 @@ export function postProcessOptions(options, hostname, username, isMount) {
     // Hosts in these spaces should go through a different relay.
     const useSupSshRelay = [
       '.c.googlers.com', '.internal.gcpnode.com', '.proxy.gcpnode.com',
+      '.mandiant-aws-prod.s.off.goog',
     ].reduce((ret, host) => ret || hostname.endsWith(host), false);
     const proxyHost = useSupSshRelay ?
         'ssh-relay-router.corp.google.com' : 'ssh-relay.corp.google.com';
