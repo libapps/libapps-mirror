@@ -1,0 +1,2 @@
+# The use of $i18n{} produces invalid syntax with prettier can't handle.
+/css/terminal.css

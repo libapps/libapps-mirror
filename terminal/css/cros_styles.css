@@ -74,10 +74,16 @@ html:not(body) {
   --cros-highlight-color: var(--google-blue-50);
 
   --cros-highlight-color-hover-light-rgb: var(--google-grey-700-rgb);
-  --cros-highlight-color-hover-light: rgba(var(--cros-highlight-color-hover-light-rgb), 0.2);
+  --cros-highlight-color-hover-light: rgba(
+    var(--cros-highlight-color-hover-light-rgb),
+    0.2
+  );
 
   --cros-highlight-color-hover-dark-rgb: 255, 255, 255;
-  --cros-highlight-color-hover-dark: rgba(var(--cros-highlight-color-hover-dark-rgb), 0.2);
+  --cros-highlight-color-hover-dark: rgba(
+    var(--cros-highlight-color-hover-dark-rgb),
+    0.2
+  );
 
   --cros-highlight-color-hover-rgb: var(--cros-highlight-color-hover-light-rgb);
   --cros-highlight-color-hover: var(--cros-highlight-color-hover-light);
@@ -95,15 +101,27 @@ html:not(body) {
   --cros-button-background-color-primary: var(--cros-color-prominent);
 
   --cros-button-label-color-primary-rgb: 255, 255, 255;
-  --cros-button-label-color-primary: rgb(var(--cros-button-label-color-primary-rgb));
+  --cros-button-label-color-primary: rgb(
+    var(--cros-button-label-color-primary-rgb)
+  );
 
-  --cros-button-active-shadow-color-ambient-primary-rgb: var(--google-blue-500-rgb);
-  --cros-button-active-shadow-color-ambient-primary: rgba(var(--cros-button-active-shadow-color-ambient-primary-rgb), 0.15);
+  --cros-button-active-shadow-color-ambient-primary-rgb: var(
+    --google-blue-500-rgb
+  );
+  --cros-button-active-shadow-color-ambient-primary: rgba(
+    var(--cros-button-active-shadow-color-ambient-primary-rgb),
+    0.15
+  );
 
   --cros-button-active-shadow-color-key-primary-rgb: var(--google-blue-500-rgb);
-  --cros-button-active-shadow-color-key-primary: rgba(var(--cros-button-active-shadow-color-key-primary-rgb), 0.3);
+  --cros-button-active-shadow-color-key-primary: rgba(
+    var(--cros-button-active-shadow-color-key-primary-rgb),
+    0.3
+  );
 
-  --cros-button-background-color-primary-disabled-rgb: var(--google-grey-100-rgb);
+  --cros-button-background-color-primary-disabled-rgb: var(
+    --google-grey-100-rgb
+  );
   --cros-button-background-color-primary-disabled: var(--google-grey-100);
 
   --cros-button-label-color-primary-disabled-rgb: var(--google-grey-600-rgb);
@@ -115,8 +133,13 @@ html:not(body) {
   --cros-button-stroke-color-secondary-rgb: var(--google-grey-300-rgb);
   --cros-button-stroke-color-secondary: var(--google-grey-300);
 
-  --cros-button-background-color-secondary-hover-rgb: var(--google-blue-500-rgb);
-  --cros-button-background-color-secondary-hover: rgba(var(--cros-button-background-color-secondary-hover-rgb), 0.04);
+  --cros-button-background-color-secondary-hover-rgb: var(
+    --google-blue-500-rgb
+  );
+  --cros-button-background-color-secondary-hover: rgba(
+    var(--cros-button-background-color-secondary-hover-rgb),
+    0.04
+  );
 
   --cros-button-label-color-secondary-disabled-rgb: var(--google-grey-600-rgb);
   --cros-button-label-color-secondary-disabled: var(--google-grey-600);
@@ -134,21 +157,33 @@ html:not(body) {
   --cros-slider-color-inactive: var(--cros-color-secondary);
 
   --cros-slider-track-color-active-rgb: var(--cros-slider-color-active-rgb);
-  --cros-slider-track-color-active: rgba(var(--cros-slider-track-color-active-rgb), var(--cros-second-tone-opacity));
+  --cros-slider-track-color-active: rgba(
+    var(--cros-slider-track-color-active-rgb),
+    var(--cros-second-tone-opacity)
+  );
 
   --cros-slider-track-color-inactive-rgb: var(--cros-slider-color-inactive-rgb);
-  --cros-slider-track-color-inactive: rgba(var(--cros-slider-track-color-inactive-rgb), var(--cros-second-tone-opacity));
+  --cros-slider-track-color-inactive: rgba(
+    var(--cros-slider-track-color-inactive-rgb),
+    var(--cros-second-tone-opacity)
+  );
 
   --cros-switch-knob-color-active-rgb: var(--cros-color-prominent-rgb);
   --cros-switch-knob-color-active: var(--cros-color-prominent);
 
   --cros-switch-knob-color-inactive-rgb: 255, 255, 255;
-  --cros-switch-knob-color-inactive: rgb(var(--cros-switch-knob-color-inactive-rgb));
+  --cros-switch-knob-color-inactive: rgb(
+    var(--cros-switch-knob-color-inactive-rgb)
+  );
 
-  --cros-switch-track-color-active-rgb: var(--cros-slider-track-color-active-rgb);
+  --cros-switch-track-color-active-rgb: var(
+    --cros-slider-track-color-active-rgb
+  );
   --cros-switch-track-color-active: var(--cros-slider-track-color-active);
 
-  --cros-switch-track-color-inactive-rgb: var(--cros-slider-track-color-inactive-rgb);
+  --cros-switch-track-color-inactive-rgb: var(
+    --cros-slider-track-color-inactive-rgb
+  );
   --cros-switch-track-color-inactive: var(--cros-slider-track-color-inactive);
 
   --cros-textfield-background-color-rgb: var(--google-grey-100-rgb);
@@ -213,89 +248,121 @@ html:not(body) {
 
 html {
   /* font families */
-  --cros-font-family-roboto: Roboto, 'Roboto', 'Noto Sans', sans-serif;
+  --cros-font-family-roboto: Roboto, "Roboto", "Noto Sans", sans-serif;
 
   --cros-body-1-font-family: var(--cros-font-family-roboto);
 }
 
 @media (prefers-color-scheme: dark) {
-html:not(body) {
-  --cros-color-primary-rgb: var(--cros-color-primary-dark-rgb);
-  --cros-color-primary: var(--cros-color-primary-dark);
+  html:not(body) {
+    --cros-color-primary-rgb: var(--cros-color-primary-dark-rgb);
+    --cros-color-primary: var(--cros-color-primary-dark);
 
-  --cros-color-secondary-rgb: var(--cros-color-secondary-dark-rgb);
-  --cros-color-secondary: var(--cros-color-secondary-dark);
+    --cros-color-secondary-rgb: var(--cros-color-secondary-dark-rgb);
+    --cros-color-secondary: var(--cros-color-secondary-dark);
 
-  --cros-color-prominent-rgb: var(--cros-color-prominent-dark-rgb);
-  --cros-color-prominent: var(--cros-color-prominent-dark);
+    --cros-color-prominent-rgb: var(--cros-color-prominent-dark-rgb);
+    --cros-color-prominent: var(--cros-color-prominent-dark);
 
-  --cros-color-alert-rgb: var(--cros-color-alert-dark-rgb);
-  --cros-color-alert: var(--cros-color-alert-dark);
+    --cros-color-alert-rgb: var(--cros-color-alert-dark-rgb);
+    --cros-color-alert: var(--cros-color-alert-dark);
 
-  --cros-bg-color-rgb: var(--cros-bg-color-dark-rgb);
-  --cros-bg-color: var(--cros-bg-color-dark);
+    --cros-bg-color-rgb: var(--cros-bg-color-dark-rgb);
+    --cros-bg-color: var(--cros-bg-color-dark);
 
-  --cros-app-shield-color-rgb: 0, 0, 0;
-  --cros-app-shield-color: rgb(var(--cros-app-shield-color-rgb));
+    --cros-app-shield-color-rgb: 0, 0, 0;
+    --cros-app-shield-color: rgb(var(--cros-app-shield-color-rgb));
 
-  --cros-separator-color-rgb: 255, 255, 255;
-  --cros-separator-color: rgba(var(--cros-separator-color-rgb), 0.14);
+    --cros-separator-color-rgb: 255, 255, 255;
+    --cros-separator-color: rgba(var(--cros-separator-color-rgb), 0.14);
 
-  --cros-shadow-color-key-rgb: 0, 0, 0;
-  --cros-shadow-color-key: rgba(var(--cros-shadow-color-key-rgb), 0.3);
+    --cros-shadow-color-key-rgb: 0, 0, 0;
+    --cros-shadow-color-key: rgba(var(--cros-shadow-color-key-rgb), 0.3);
 
-  --cros-shadow-color-ambient-rgb: 0, 0, 0;
-  --cros-shadow-color-ambient: rgba(var(--cros-shadow-color-ambient-rgb), 0.15);
+    --cros-shadow-color-ambient-rgb: 0, 0, 0;
+    --cros-shadow-color-ambient: rgba(
+      var(--cros-shadow-color-ambient-rgb),
+      0.15
+    );
 
-  --cros-highlight-color-rgb: var(--google-blue-300-rgb);
-  --cros-highlight-color: rgba(var(--cros-highlight-color-rgb), 0.3);
+    --cros-highlight-color-rgb: var(--google-blue-300-rgb);
+    --cros-highlight-color: rgba(var(--cros-highlight-color-rgb), 0.3);
 
-  --cros-highlight-color-hover-rgb: var(--cros-highlight-color-hover-dark-rgb);
-  --cros-highlight-color-hover: var(--cros-highlight-color-hover-dark);
+    --cros-highlight-color-hover-rgb: var(
+      --cros-highlight-color-hover-dark-rgb
+    );
+    --cros-highlight-color-hover: var(--cros-highlight-color-hover-dark);
 
-  --cros-ripple-color-rgb: var(--cros-ripple-color-dark-rgb);
-  --cros-ripple-color: var(--cros-ripple-color-dark);
+    --cros-ripple-color-rgb: var(--cros-ripple-color-dark-rgb);
+    --cros-ripple-color: var(--cros-ripple-color-dark);
 
-  --cros-button-label-color-primary-rgb: var(--google-grey-900-rgb);
-  --cros-button-label-color-primary: var(--google-grey-900);
+    --cros-button-label-color-primary-rgb: var(--google-grey-900-rgb);
+    --cros-button-label-color-primary: var(--google-grey-900);
 
-  --cros-button-active-shadow-color-ambient-primary-rgb: var(--google-blue-400-rgb);
-  --cros-button-active-shadow-color-ambient-primary: rgba(var(--cros-button-active-shadow-color-ambient-primary-rgb), 0.15);
+    --cros-button-active-shadow-color-ambient-primary-rgb: var(
+      --google-blue-400-rgb
+    );
+    --cros-button-active-shadow-color-ambient-primary: rgba(
+      var(--cros-button-active-shadow-color-ambient-primary-rgb),
+      0.15
+    );
 
-  --cros-button-active-shadow-color-key-primary-rgb: var(--google-blue-400-rgb);
-  --cros-button-active-shadow-color-key-primary: rgba(var(--cros-button-active-shadow-color-key-primary-rgb), 0.3);
+    --cros-button-active-shadow-color-key-primary-rgb: var(
+      --google-blue-400-rgb
+    );
+    --cros-button-active-shadow-color-key-primary: rgba(
+      var(--cros-button-active-shadow-color-key-primary-rgb),
+      0.3
+    );
 
-  --cros-button-background-color-primary-disabled-rgb: var(--google-grey-800-rgb);
-  --cros-button-background-color-primary-disabled: var(--google-grey-800);
+    --cros-button-background-color-primary-disabled-rgb: var(
+      --google-grey-800-rgb
+    );
+    --cros-button-background-color-primary-disabled: var(--google-grey-800);
 
-  --cros-button-label-color-primary-disabled-rgb: var(--google-grey-500-rgb);
-  --cros-button-label-color-primary-disabled: var(--google-grey-500);
+    --cros-button-label-color-primary-disabled-rgb: var(--google-grey-500-rgb);
+    --cros-button-label-color-primary-disabled: var(--google-grey-500);
 
-  --cros-button-stroke-color-secondary-rgb: var(--google-grey-700-rgb);
-  --cros-button-stroke-color-secondary: var(--google-grey-700);
+    --cros-button-stroke-color-secondary-rgb: var(--google-grey-700-rgb);
+    --cros-button-stroke-color-secondary: var(--google-grey-700);
 
-  --cros-button-background-color-secondary-hover-rgb: var(--google-blue-300-rgb);
-  --cros-button-background-color-secondary-hover: rgba(var(--cros-button-background-color-secondary-hover-rgb), 0.08);
+    --cros-button-background-color-secondary-hover-rgb: var(
+      --google-blue-300-rgb
+    );
+    --cros-button-background-color-secondary-hover: rgba(
+      var(--cros-button-background-color-secondary-hover-rgb),
+      0.08
+    );
 
-  --cros-button-label-color-secondary-disabled-rgb: var(--google-grey-500-rgb);
-  --cros-button-label-color-secondary-disabled: var(--google-grey-500);
+    --cros-button-label-color-secondary-disabled-rgb: var(
+      --google-grey-500-rgb
+    );
+    --cros-button-label-color-secondary-disabled: var(--google-grey-500);
 
-  --cros-button-stroke-color-secondary-disabled-rgb: var(--google-grey-800-rgb);
-  --cros-button-stroke-color-secondary-disabled: var(--google-grey-800);
+    --cros-button-stroke-color-secondary-disabled-rgb: var(
+      --google-grey-800-rgb
+    );
+    --cros-button-stroke-color-secondary-disabled: var(--google-grey-800);
 
-  --cros-menu-label-color-rgb: var(--google-grey-200-rgb);
-  --cros-menu-label-color: var(--google-grey-200);
+    --cros-menu-label-color-rgb: var(--google-grey-200-rgb);
+    --cros-menu-label-color: var(--google-grey-200);
 
-  --cros-switch-knob-color-inactive-rgb: var(--google-grey-400-rgb);
-  --cros-switch-knob-color-inactive: var(--google-grey-400);
+    --cros-switch-knob-color-inactive-rgb: var(--google-grey-400-rgb);
+    --cros-switch-knob-color-inactive: var(--google-grey-400);
 
-  --cros-textfield-background-color-rgb: 0, 0, 0;
-  --cros-textfield-background-color: rgba(var(--cros-textfield-background-color-rgb), 0.3);
+    --cros-textfield-background-color-rgb: 0, 0, 0;
+    --cros-textfield-background-color: rgba(
+      var(--cros-textfield-background-color-rgb),
+      0.3
+    );
 
-  --cros-textfield-label-color-rgb: 255, 255, 255;
-  --cros-textfield-label-color: rgba(var(--cros-textfield-label-color-rgb), 0.6);
+    --cros-textfield-label-color-rgb: 255, 255, 255;
+    --cros-textfield-label-color: rgba(
+      var(--cros-textfield-label-color-rgb),
+      0.6
+    );
 
-  --cros-selection-outline-rgb: 255, 255, 255;
-  --cros-selection-outline: rgba(var(--cros-selection-outline-rgb), 0.12);
-}
+    --cros-selection-outline-rgb: 255, 255, 255;
+    --cros-selection-outline: rgba(var(--cros-selection-outline-rgb), 0.12);
+  }
 }

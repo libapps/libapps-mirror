@@ -17,7 +17,8 @@ body {
   font-size: smaller;
 }
 
-input, select {
+input,
+select {
   border: 1px solid;
   padding: 3px;
   line-height: 1.2;

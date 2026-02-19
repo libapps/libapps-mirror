@@ -139,7 +139,7 @@ body {
 #options header::after {
   -webkit-margin-end: 20px;
   background-color: #eee;
-  content: ' ';
+  content: " ";
   display: block;
   height: 1px;
   position: relative;
@@ -184,13 +184,13 @@ body {
   vertical-align: middle;
 }
 
-#settings span.setting-ui input[type='checkbox'] {
+#settings span.setting-ui input[type="checkbox"] {
   top: 3px;
 }
 
-#settings span.setting-ui input[type='text'],
-#settings span.setting-ui input[type='url'],
-#settings span.setting-ui input[type='number'] {
+#settings span.setting-ui input[type="text"],
+#settings span.setting-ui input[type="url"],
+#settings span.setting-ui input[type="number"] {
   width: 100%;
 }
 

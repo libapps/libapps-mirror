@@ -28,7 +28,8 @@ body {
   box-sizing: border-box;
 }
 
-input, select {
+input,
+select {
   border: 1px solid;
   padding: 3px;
   line-height: 1.2;

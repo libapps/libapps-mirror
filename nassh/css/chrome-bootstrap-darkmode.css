@@ -19,7 +19,10 @@
     color: var(--nassh-dm-fg-color);
   }
   .chrome-bootstrap header {
-    background-image: linear-gradient(var(--nassh-dm-bg-color), var(--nassh-dm-bg-color));
+    background-image: linear-gradient(
+      var(--nassh-dm-bg-color),
+      var(--nassh-dm-bg-color)
+    );
   }
   .chrome-bootstrap {
     color: var(--nassh-dm-fg-color);
@@ -33,7 +36,8 @@
   .chrome-bootstrap a {
     color: rgb(138, 180, 248);
   }
-  input, textarea {
+  input,
+  textarea {
     background-color: rgba(0, 0, 0, 0.3);
     color: var(--nassh-dm-fg-color) !important;
   }

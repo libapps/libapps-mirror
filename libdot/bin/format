@@ -44,7 +44,9 @@ def get_parser() -> libdot.ArgumentParser:
         description="All files are checked by default",
     )
     group.add_argument("--cpp", action="store_true", help="Check C/C++ files.")
-    group.add_argument("--html", action="store_true", help="Check HTML files.")
+    group.add_argument(
+        "--html", action="store_true", help="Check HTML/CSS files."
+    )
     group.add_argument("--py", action="store_true", help="Check Python files.")
 
     parser.add_argument("paths", nargs="*", help="Paths to check.")
@@ -92,7 +94,9 @@ def main(
     checks = []
 
     html_files = [
-        x for x in opts.paths if x.endswith(".html") or x.endswith(".html.in")
+        x
+        for x in opts.paths
+        if x.endswith(".css") or x.endswith(".html") or x.endswith(".html.in")
     ]
 
     cpp_files = libdot.cpplint.filter_known_files(opts.paths)

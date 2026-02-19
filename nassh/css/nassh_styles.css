@@ -17,10 +17,10 @@
   --nassh-cursor-color-rgb: 51, 103, 209;
   --nassh-cursor-color: rgb(var(--nassh-cursor-color-rgb));
 
-  --nassh-fg-color-20: rgba(var(--nassh-fg-color-rgb), 0.20);
+  --nassh-fg-color-20: rgba(var(--nassh-fg-color-rgb), 0.2);
   --nassh-fg-color-75: rgba(var(--nassh-fg-color-rgb), 0.75);
 
-  --nassh-font-family: 'DejaVu Sans', 'Noto Sans', sans-serif;
+  --nassh-font-family: "DejaVu Sans", "Noto Sans", sans-serif;
 }
 
 @media (prefers-color-scheme: light) {

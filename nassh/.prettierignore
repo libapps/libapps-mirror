@@ -1,0 +1,2 @@
+# Ignore imported 3rd party packages.
+/third_party/chrome-bootstrap/chrome-bootstrap.css
