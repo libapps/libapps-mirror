@@ -35,6 +35,8 @@ def src_configure(metadata):
         "--prefix=/",
         f"--includedir=/{tc.relincdir}",
         f"--libdir=/{tc.rellibdir}",
+        "--enable-static",
+        "--disable-shared",
         "--cache-file=../config.cache",
     ]
     ssh_client.run(cmd)
