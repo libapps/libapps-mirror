@@ -6,6 +6,6 @@ third_party {
     type: HOMEPAGE
     value: "https://github.com/protocolbuffers/protobuf"
   }
-  version: "3.8.0"
-  last_upgrade_date { year: 2019 month: 5 day: 24 }
+  version: "3.20.3"
+  last_upgrade_date { year: 2022 month: 9 day: 29 }
 }

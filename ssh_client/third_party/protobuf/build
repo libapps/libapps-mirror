@@ -29,6 +29,7 @@ def src_configure(metadata):
     tc = metadata["toolchain"]
     cmd = [
         "./configure",
+        "--disable-silent-rules",
         f"--build={tc.cbuild}",
         f"--host={tc.chost}",
         # The prefix path matches what is used at runtime.
