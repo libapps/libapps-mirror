@@ -21,7 +21,7 @@ import subprocess
 import sys
 import time
 import types
-from typing import Optional, Union
+from typing import BinaryIO, Optional, Union
 import urllib.error
 import urllib.request
 
@@ -468,12 +468,12 @@ def pack(
 
 def fetch_data(
     uri: str,
-    output=None,
+    output: Optional[BinaryIO] = None,
     verbose: bool = False,
     b64: bool = False,
     size: int = 0,
     hashes: Optional[dict[str, str]] = None,
-):
+) -> BinaryIO:
     """Fetch |uri| and write the results to |output| (or return BytesIO)."""
     # This is the timeout used on each blocking operation, not the entire
     # life of the connection.  So it's used for initial urlopen and for each
@@ -484,34 +484,30 @@ def fetch_data(
         output = io.BytesIO()
     hasher = Hasher(hashes or {})
 
-    try:
-        with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
-            mb = 0
-            length = infp.length
-            if size and length != size:
-                logging.error(
-                    "Size mismatch: expected %s but found %s", size, length
-                )
-                sys.exit(1)
-            while True:
-                data = infp.read(1024 * 1024)
-                if not data:
-                    break
-                # Show a simple progress bar if the user is interactive.
-                if verbose:
-                    mb += 1
-                    print(f"~{mb} MiB downloaded", end="")
-                    if length:
-                        percent = mb * 1024 * 1024 * 100 / length
-                        print(f" ({percent:.2f}%)", end="")
-                    print("\r", end="", flush=True)
-                if b64:
-                    data = base64.b64decode(data)
-                hasher.update(data)
-                output.write(data)
-    except urllib.error.HTTPError as e:
-        logging.error("%s: %s", uri, e)
-        sys.exit(1)
+    with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
+        mb = 0
+        length = infp.length
+        if size and length != size:
+            logging.error(
+                "Size mismatch: expected %s but found %s", size, length
+            )
+            sys.exit(1)
+        while True:
+            data = infp.read(1024 * 1024)
+            if not data:
+                break
+            # Show a simple progress bar if the user is interactive.
+            if verbose:
+                mb += 1
+                print(f"~{mb} MiB downloaded", end="")
+                if length:
+                    percent = mb * 1024 * 1024 * 100 / length
+                    print(f" ({percent:.2f}%)", end="")
+                print("\r", end="", flush=True)
+            if b64:
+                data = base64.b64decode(data)
+            hasher.update(data)
+            output.write(data)
 
     if not hasher.check():
         sys.exit(1)
@@ -553,7 +549,8 @@ def fetch(
     # We use urllib rather than wget or curl to avoid external utils & libs.
     # This seems to be good enough for our needs.
     tmpfile = output + ".tmp"
-    for _ in range(0, 5):
+    backoff = 1
+    for attempt in range(0, 5):
         try:
             with open(tmpfile, "wb") as outfp:
                 fetch_data(
@@ -565,9 +562,28 @@ def fetch(
                     hashes=hashes,
                 )
             break
-        except ConnectionError as e:
-            time.sleep(1)
-            logging.warning("Download failed; retrying: %s", e)
+        except (
+            ConnectionError,
+            urllib.error.HTTPError,
+            urllib.error.URLError,
+        ) as e:
+            if isinstance(e, urllib.error.HTTPError):
+                # Retry server errors.  Sometimes server return client errors
+                # even when it's the server failing (e.g. 403).  Abort for all
+                # others.
+                if e.code < 400 or e.code >= 600:
+                    logging.error("Download failed (unknown reason): %s", e)
+                    sys.exit(1)
+                elif e.code == 404:
+                    # Don't retry 404 errors as that means file not found.
+                    logging.error("Download failed (not found): %s", e)
+                    sys.exit(1)
+
+            logging.warning("Download failed: %s", e)
+            if attempt < 4:
+                logging.warning("Will retry after sleeping %s seconds", backoff)
+                time.sleep(backoff)
+                backoff *= 2
     else:
         logging.error("Unabled to download; giving up")
         unlink(tmpfile)
