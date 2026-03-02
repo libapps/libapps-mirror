@@ -525,9 +525,18 @@ def fetch(
     """Download |uri| and save it to |output|."""
     output = os.path.abspath(output)
     distdir, name = os.path.split(output)
-    if os.path.exists(output):
+    stream = False
+    if os.path.isdir(output):
+        distdir = output
+        name = uri.rsplit("/", 1)[-1]
+        output = os.path.join(distdir, name)
+        logging.info("Saving to directory: %s", output)
+    elif os.path.isfile(output):
         logging.info("Using existing download: %s", name)
         return
+    elif os.path.exists(output):
+        logging.info("Streaming to output: %s", output)
+        stream = True
 
     logging.info("Downloading %s to %s", uri, output)
     os.makedirs(distdir, exist_ok=True)
@@ -548,7 +557,7 @@ def fetch(
 
     # We use urllib rather than wget or curl to avoid external utils & libs.
     # This seems to be good enough for our needs.
-    tmpfile = output + ".tmp"
+    tmpfile = output if stream else output + ".tmp"
     backoff = 1
     for attempt in range(0, 5):
         try:
@@ -586,14 +595,16 @@ def fetch(
                 backoff *= 2
     else:
         logging.error("Unabled to download; giving up")
-        unlink(tmpfile)
+        if not stream:
+            unlink(tmpfile)
         sys.exit(1)
 
     # Clear the progress bar.
     if verbose:
         print("\r\x1b[K", end="")
 
-    os.rename(tmpfile, output)
+    if not stream:
+        os.rename(tmpfile, output)
 
 
 def fetch_manifest_spec(spec: Artifact, output: str) -> None:
