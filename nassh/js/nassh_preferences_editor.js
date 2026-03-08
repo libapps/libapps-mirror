@@ -399,7 +399,6 @@ PreferencesEditor.prototype.save = function(input) {
  *     object.  By appending ':alpha' to the key name, we can also locate
  *     the range input object.
  * @param {string} pref The preference object to get the current state from.
- * @return {?string} The rgba color information.
  */
 PreferencesEditor.prototype.colorSync = function(key, pref) {
   const cinput = lib.notNull(document.getElementById(key));
@@ -409,15 +408,17 @@ PreferencesEditor.prototype.colorSync = function(key, pref) {
 
   if (rgba) {
     const ary = lib.colors.crackRGB(rgba);
-    cinput.value = lib.colors.rgbToHex(lib.colors.arrayToRGBA(ary.slice(0, 3)));
-    ainput.value = parseFloat(ary[3]) * 100;
-  } else {
-    // If pref could not be normalized, then reset.
-    this.reset(cinput);
-    this.reset(ainput);
+    if (ary !== null) {
+      cinput.value = lib.colors.rgbToHex(lib.colors.arrayToRGBA(
+          ary.slice(0, 3)));
+      ainput.value = parseFloat(ary[3]) * 100;
+      return;
+    }
   }
 
-  return rgba;
+  // If pref could not be normalized, then reset.
+  this.reset(cinput);
+  this.reset(ainput);
 };
 
 /**
