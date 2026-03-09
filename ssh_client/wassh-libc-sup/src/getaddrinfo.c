@@ -51,7 +51,7 @@ static bool is_localhost(const char* node) {
   if (node == NULL)
     return true;
 
-  if (!strcmp(node, "localhost"))
+  if (!strcmp(node, "localhost") || !strcmp(node, "localhost."))
     return true;
 
   // https://datatracker.ietf.org/doc/html/rfc6761#section-6.3
@@ -59,6 +59,10 @@ static bool is_localhost(const char* node) {
   static const char localhost[] = ".localhost";
   if (len >= sizeof(localhost) &&
       !strcmp(node + len - sizeof(localhost) + 1, localhost))
+    return true;
+  static const char localhostDot[] = ".localhost.";
+  if (len >= sizeof(localhostDot) &&
+      !strcmp(node + len - sizeof(localhostDot) + 1, localhostDot))
     return true;
 
   return false;
