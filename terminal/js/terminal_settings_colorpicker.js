@@ -280,9 +280,9 @@ export class TerminalColorpickerElement extends LitElement {
     if (value !== undefined) {
       this.value = value;
     } else {
-      const hslaArray = lib.colors.hsvxArrayToHslaArray([this.hue_,
+      const hslaArray = lib.colors.hsvxArrayToHslArray([this.hue_,
           this.saturation_, this.hsvValue_, this.transparency_]);
-      this.value = lib.colors.arrayToHSLA(hslaArray);
+      this.value = lib.colors.arrayToHSL(hslaArray);
     }
     this.dispatchEvent(new CustomEvent('change'));
   }
@@ -297,7 +297,7 @@ export class TerminalColorpickerElement extends LitElement {
     const hsl = lib.notNull(lib.colors.normalizeCSSToHSL(value));
     const hslaArray = lib.notNull(lib.colors.crackHSL(hsl)).map(
         Number.parseFloat);
-    const [h, s, v, a] = lib.colors.hslxArrayToHsvaArray(hslaArray);
+    const [h, s, v, a] = lib.colors.hslArrayToHsvaArray(hslaArray);
     // Only update the preferences if they have changed noticably, as minor
     // updates due to rounding can move the picker around by small perceptible
     // amounts when clicking the same spot.

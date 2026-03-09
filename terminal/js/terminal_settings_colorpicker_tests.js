@@ -19,7 +19,7 @@ const preference = 'terminal_settings_colorpicker';
  * @return {string}}
  */
 function hsvxToCSS(hsvx) {
-  return lib.colors.arrayToHSLA(lib.colors.hsvxArrayToHslaArray(hsvx));
+  return lib.colors.arrayToHSL(lib.colors.hsvxArrayToHslArray(hsvx));
 }
 
 const orange = hsvxToCSS([39, 100, 100]);

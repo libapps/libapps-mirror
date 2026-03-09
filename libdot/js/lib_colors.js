@@ -49,21 +49,10 @@ const re_ = {
        '(?:,/s*(/d+(?:/./d+)?)/s*)?/)/s*$'
        ).replace(/\//g, '\\'), 'i'),
 
-  // CSS hsl color, hsl(hhh,sss%,lll%).
+  // CSS hsl color, hsl(hhh,sss%,lll%[,aaa]).
+  // hsla() is an alias for hsl().
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl
   hsl: new RegExp(
-      ('^/s*hsl/s*' +
-       '/(/s*(/d{1,3})/s*,/s*(/d{1,3})/s*%/s*,/s*(/d{1,3})/s*%/s*/)/s*$'
-       ).replace(/\//g, '\\'), 'i'),
-
-  // CSS hsl color, hsla(hhh,sss%,lll%,aaa).
-  hsla: new RegExp(
-      ('^/s*hsla/s*' +
-       '/(/s*(/d{1,3})/s*,/s*(/d{1,3})/s*%/s*,/s*(/d{1,3})/s*%/s*' +
-       '(?:,/s*(/d+(?:/./d+)?)/s*)/)/s*$'
-       ).replace(/\//g, '\\'), 'i'),
-
-  // Either HSL or HSLA.
-  hslx: new RegExp(
       ('^/s*hsla?/s*' +
        '/(/s*(/d{1,3})/s*,/s*(/d{1,3})/s*%/s*,/s*(/d{1,3})/s*%/s*' +
        '(?:,/s*(/d+(?:/./d+)?)/s*)?/)/s*$'
@@ -259,28 +248,20 @@ lib.colors.rgbToHex = function(rgb) {
 };
 
 /**
- * Split an hsl/hsla color into an array of its components.
+ * Split an HSL color into an array of its components.
  *
  * On success, a 4 element array will be returned.  For hsl values, the alpha
  * will be set to 1.
  *
- * @param {string} color The HSL/HSLA CSS color spec.
- * @return {?Array<string>} The HSL/HSLA values split out.
+ * @param {string} color The HSL CSS color spec.
+ * @return {?Array<string>} The HSL values split out.
  */
 lib.colors.crackHSL = function(color) {
-  if (color.startsWith('hsla')) {
-    const ary = color.match(re_.hsla);
-    if (ary) {
-      ary.shift();
-      return Array.from(ary);
-    }
-  } else {
-    const ary = color.match(re_.hsl);
-    if (ary) {
-      ary.shift();
-      ary.push('1');
-      return Array.from(ary);
-    }
+  const ary = color.match(re_.hsl);
+  if (ary) {
+    ary.shift();
+    ary[3] ??= '1';
+    return Array.from(ary);
   }
 
   console.error(`Couldn't crack: ${color}`);
@@ -300,20 +281,20 @@ function maybeParseInt(v) {
 }
 
 /**
- * Converts hslx array to RGB array.
+ * Converts HSL array to RGB array.
  *
  * The returned alpha component defaults to 1 if it isn't present in the input.
  *
  * The returned values are not rounded to preserve precision for computations,
  * so should be rounded before they are used in CSS strings.
  *
- * @param {?Array<string|number>} hslx The HSL or HSLA elements to convert.
+ * @param {?Array<string|number>} hsl The HSL elements to convert.
  * @return {!Array<number>} The RGB values.
  */
-lib.colors.hslxArrayToRgbArray = function(hslx) {
-  const hue = maybeParseInt(hslx[0]) / 60;
-  const sat = maybeParseInt(hslx[1]) / 100;
-  const light = maybeParseInt(hslx[2]) / 100;
+lib.colors.hslArrayToRgbArray = function(hsl) {
+  const hue = maybeParseInt(hsl[0]) / 60;
+  const sat = maybeParseInt(hsl[1]) / 100;
+  const light = maybeParseInt(hsl[2]) / 100;
 
   // The following algorithm has been adapted from:
   //     https://www.w3.org/TR/css-color-4/#hsl-to-rgb
@@ -343,12 +324,12 @@ lib.colors.hslxArrayToRgbArray = function(hslx) {
     255 * hueToRgb(t1, t2, hue + 2),
     255 * hueToRgb(t1, t2, hue),
     255 * hueToRgb(t1, t2, hue - 2),
-    hslx[3] !== undefined ? +hslx[3] : 1,
+    hsl[3] !== undefined ? +hsl[3] : 1,
   ];
 };
 
 /**
- * Converts a hsvx array to a hsla array. The hsvx array is an array of [hue
+ * Converts a hsvx array to a HSL array. The hsvx array is an array of [hue
  * (>=0, <=360), saturation (>=0, <=100), value (>=0, <=100), alpha] (alpha can
  * be missing).
  *
@@ -358,9 +339,9 @@ lib.colors.hslxArrayToRgbArray = function(hslx) {
  * so should be rounded before they are used in CSS strings.
  *
  * @param {?Array<string|number>} hsvx The hsv or hsva array.
- * @return {!Array<number>} The hsla array.
+ * @return {!Array<number>} The HSL array.
  */
-lib.colors.hsvxArrayToHslaArray = function(hsvx) {
+lib.colors.hsvxArrayToHslArray = function(hsvx) {
   const clamp = (x) => lib.f.clamp(x, 0, 100);
   const [hue, saturation, value] = hsvx.map(parseFloat);
   const hslLightness = clamp(value * (100 - saturation / 2) / 100);
@@ -378,30 +359,30 @@ lib.colors.hsvxArrayToHslaArray = function(hsvx) {
 };
 
 /**
- * Converts a hslx array to a hsva array. The hsva array is an array of [hue
+ * Converts a HSL array to a hsva array. The hsva array is an array of [hue
  * (>=0, <=360), saturation (>=0, <=100), value (>=0, <=100), alpha].
  *
  * The returned alpha component defaults to 1 if it isn't present in the input.
  *
- * @param {?Array<string|number>} hslx The hsl or hsla array.
+ * @param {?Array<string|number>} hsl The HSL array.
  * @return {!Array<number>} The hsva array.
  */
-lib.colors.hslxArrayToHsvaArray = function(hslx) {
+lib.colors.hslArrayToHsvaArray = function(hsl) {
   const clamp = (x) => lib.f.clamp(x, 0, 100);
-  const [hue, saturation, lightness] = hslx.map(parseFloat);
+  const [hue, saturation, lightness] = hsl.map(parseFloat);
   const hsvValue = clamp(
       lightness + saturation * Math.min(lightness, 100 - lightness) / 100);
   let hsvSaturation = 0;
   if (hsvValue !== 0) {
     hsvSaturation = clamp(200 * (1 - lightness / hsvValue));
   }
-  return [hue, hsvSaturation, hsvValue, hslx.length === 4 ? +hslx[3] : 1];
+  return [hue, hsvSaturation, hsvValue, hsl.length === 4 ? +hsl[3] : 1];
 };
 
 /**
- * Converts a CSS hsl(...) or hsla(...) form into their rgb(...) color values.
+ * Converts a CSS hsl(...) form into its rgb(...) color values.
  *
- * @param {string} hsl A single hsl(...) or hsla(...) value to convert.
+ * @param {string} hsl A single hsl(...) value to convert.
  * @return {?string} The converted value.
  */
 lib.colors.hslToRGB = function(hsl) {
@@ -410,7 +391,7 @@ lib.colors.hslToRGB = function(hsl) {
     return null;
   }
 
-  const [r, g, b, a] = lib.colors.hslxArrayToRgbArray(ary);
+  const [r, g, b, a] = lib.colors.hslArrayToRgbArray(ary);
 
   const rgb = [r, g, b].map(Math.round).join(', ');
 
@@ -418,7 +399,7 @@ lib.colors.hslToRGB = function(hsl) {
 };
 
 /**
- * Converts rgb array to hsla array.
+ * Converts rgb array to hsl array.
  *
  * The returned alpha component defaults to 1 if it isn't present in the input.
  *
@@ -426,9 +407,9 @@ lib.colors.hslToRGB = function(hsl) {
  * so should be rounded before they are used in CSS strings.
  *
  * @param {?Array<string|number>} rgb The RGB elements to convert.
- * @return {!Array<number>} The HSLA values.
+ * @return {!Array<number>} The HSL values.
  */
-lib.colors.rgbArrayToHslaArray = function(rgb) {
+lib.colors.rgbArrayToHslArray = function(rgb) {
   const r = maybeParseInt(rgb[0]) / 255;
   const g = maybeParseInt(rgb[1]) / 255;
   const b = maybeParseInt(rgb[2]) / 255;
@@ -463,7 +444,7 @@ lib.colors.rgbArrayToHslaArray = function(rgb) {
 };
 
 /**
- * Converts a CSS rgb(...) form into their hsl(...) or hsla(...) color values.
+ * Converts a CSS rgb(...) form into their hsl(...) color values.
  *
  * @param {string} rgb A single rgb(...) value to convert.
  * @return {?string} The converted value.
@@ -476,12 +457,12 @@ lib.colors.rgbToHsl = function(rgb) {
 
   /* eslint-disable id-denylist */
   // eslint-disable-next-line prefer-const
-  let [h, s, l, a] = lib.colors.rgbArrayToHslaArray(ary);
+  let [h, s, l, a] = lib.colors.rgbArrayToHslArray(ary);
   h = Math.round(h);
   s = Math.round(s);
   l = Math.round(l);
 
-  return a === 1 ? `hsl(${h}, ${s}%, ${l}%)` : `hsla(${h}, ${s}%, ${l}%, ${a})`;
+  return a === 1 ? `hsl(${h}, ${s}%, ${l}%)` : `hsl(${h}, ${s}%, ${l}%, ${a})`;
   /* eslint-enable id-denylist */
 };
 
@@ -500,7 +481,7 @@ lib.colors.normalizeCSS = function(def) {
     return def;
   }
 
-  if (re_.hslx.test(def)) {
+  if (re_.hsl.test(def)) {
     return lib.colors.hslToRGB(def);
   }
 
@@ -508,13 +489,13 @@ lib.colors.normalizeCSS = function(def) {
 };
 
 /**
- * Take any valid CSS color definition and turn it into an hsl or hsla value.
+ * Take any valid CSS color definition and turn it into an HSL value.
  *
  * @param {string} def The CSS color spec to normalize.
  * @return {?string} The converted value.
  */
 lib.colors.normalizeCSSToHSL = function(def) {
-  if (re_.hslx.test(def)) {
+  if (re_.hsl.test(def)) {
     return def;
   }
 
@@ -539,14 +520,14 @@ lib.colors.arrayToRGB = function(ary) {
 };
 
 /**
- * Convert a 3 or 4 element array into an hsla(...) string.
+ * Convert a 3 or 4 element array into an hsl(...) string.
  *
- * @param {?Array<number>} ary The HSL or HSLA elements to convert.
+ * @param {?Array<number>} ary The HSL elements to convert.
  * @return {string} The normalized CSS color spec.
  */
-lib.colors.arrayToHSLA = function(ary) {
+lib.colors.arrayToHSL = function(ary) {
   const alpha = (ary.length > 3) ? ary[3] : 1;
-  return `hsla(${Math.round(ary[0])}, ${Math.round(ary[1])}%, ` +
+  return `hsl(${Math.round(ary[0])}, ${Math.round(ary[1])}%, ` +
       `${Math.round(ary[2])}%, ${alpha})`;
 };
 

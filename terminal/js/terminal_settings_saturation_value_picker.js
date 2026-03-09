@@ -83,8 +83,8 @@ export class SaturationValuePickerElement extends LitElement {
   render() {
     const whiteToPureStyle = `background: linear-gradient(to right, ` +
         `#ffffff 0%, hsl(${this.hue}, 100%, 50%) 100%);`;
-    const color = lib.colors.arrayToHSLA(
-        lib.colors.hsvxArrayToHslaArray(
+    const color = lib.colors.arrayToHSL(
+        lib.colors.hsvxArrayToHslArray(
             [this.hue, this.saturation, this.value]));
     const pickerStyle = `left: ${this.saturation}%; ` +
         `top: ${100 - this.value}%; background-color: ${color};`;

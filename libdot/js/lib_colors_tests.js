@@ -161,7 +161,7 @@ it('normalizeCSSToHSL', () => {
     ['#a1d2e3', 'hsl(195, 54%, 76%)'],
     ['white', 'hsl(0, 0%, 100%)'],
     ['rgb(1,2,3)', 'hsl(210, 50%, 1%)'],
-    ['rgba(1,2,3, 0.5)', 'hsla(210, 50%, 1%, 0.5)'],
+    ['rgba(1,2,3, 0.5)', 'hsl(210, 50%, 1%, 0.5)'],
     ['rgb(255, 100, 0)', 'hsl(24, 100%, 50%)'],
     ['hsl(24, 100%, 70%)', 'hsl(24, 100%, 70%)'],
     ['hsl(24, 100%, 70%, 0.5)', 'hsl(24, 100%, 70%, 0.5)'],
@@ -187,13 +187,13 @@ it('arrayToRGB', () => {
 
 it('arrayToHSLA', () => {
   const data = [
-    [[1, 2, 3], 'hsla(1, 2%, 3%, 1)'],
-    [[10, 200, 3, 0], 'hsla(10, 200%, 3%, 0)'],
-    [['0', '30', '50', '1'], 'hsla(0, 30%, 50%, 1)'],
+    [[1, 2, 3], 'hsl(1, 2%, 3%, 1)'],
+    [[10, 200, 3, 0], 'hsl(10, 200%, 3%, 0)'],
+    [['0', '30', '50', '1'], 'hsl(0, 30%, 50%, 1)'],
   ];
 
   data.forEach((ele) => {
-    assert.strictEqual(lib.colors.arrayToHSLA(ele[0]), ele[1], ele[0]);
+    assert.strictEqual(lib.colors.arrayToHSL(ele[0]), ele[1], ele[0]);
   });
 });
 
@@ -262,9 +262,9 @@ it('rgbToHsl', () => {
     // Then some reasonable data.
     ['rgb(0,0,0)', 'hsl(0, 0%, 0%)'],
     ['rgb(10, 100, 255)', 'hsl(218, 100%, 52%)'],
-    ['rgba(10, 100, 255, 0)', 'hsla(218, 100%, 52%, 0)'],
-    ['rgba(10, 100, 255, 0.8)', 'hsla(218, 100%, 52%, 0.8)'],
-    ['rgba(100, 100, 100, 0.8)', 'hsla(0, 0%, 39%, 0.8)'],
+    ['rgba(10, 100, 255, 0)', 'hsl(218, 100%, 52%, 0)'],
+    ['rgba(10, 100, 255, 0.8)', 'hsl(218, 100%, 52%, 0.8)'],
+    ['rgba(100, 100, 100, 0.8)', 'hsl(0, 0%, 39%, 0.8)'],
     ['rgba(10, 100, 255, 1)', 'hsl(218, 100%, 52%)'],
   ];
 
@@ -334,7 +334,7 @@ it('contrastRatio', () => {
   });
 });
 
-it('hslxArrayToHsvaArray', () => {
+it('hslArrayToHsvaArray', () => {
   const data = [
       [[0, 0, 0], [0, 0, 0, 1]],
       [[277, 0, 100], [277, 0, 100, 1]],
@@ -344,7 +344,7 @@ it('hslxArrayToHsvaArray', () => {
   ];
 
   data.forEach(([hsl, hsv]) => {
-    const result = lib.colors.hslxArrayToHsvaArray(hsl);
+    const result = lib.colors.hslArrayToHsvaArray(hsl);
     assert.lengthOf(result, hsv.length);
     result.forEach((value, i) => assert.closeTo(value, hsv[i], 1));
   });
@@ -360,7 +360,7 @@ it('hsvxArrayToHslaArray', () => {
   ];
 
   data.forEach(([hsv, hsl]) => {
-    const result = lib.colors.hsvxArrayToHslaArray(hsv);
+    const result = lib.colors.hsvxArrayToHslArray(hsv);
     assert.lengthOf(result, hsl.length);
     result.forEach((value, i) => assert.closeTo(value, hsl[i], 1));
   });
