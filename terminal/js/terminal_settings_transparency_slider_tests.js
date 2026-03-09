@@ -51,7 +51,7 @@ it('updates-transparency-and-pass-through-event-on-slider-change',
     });
 
 it('background-color', async function() {
-  this.el.setAttribute('color', 'rgba(12, 34, 56, 78)');
+  this.el.setAttribute('color', 'rgb(12, 34, 56, 78)');
   this.el.setAttribute('transparency', 0.5);
   await this.el.updateComplete;
 
@@ -64,5 +64,5 @@ it('background-color', async function() {
   // knob has the current transparency.
   assert.equal(
       this.el.shadowRoot.querySelector('terminal-knob').getAttribute('style'),
-      'background-color: rgba(12, 34, 56, 0.5);');
+      'background-color: rgb(12, 34, 56, 0.5);');
 });

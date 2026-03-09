@@ -409,7 +409,7 @@ PreferencesEditor.prototype.colorSync = function(key, pref) {
   if (rgba) {
     const ary = lib.colors.crackRGB(rgba);
     if (ary !== null) {
-      cinput.value = lib.colors.rgbToHex(lib.colors.arrayToRGBA(
+      cinput.value = lib.colors.rgbToHex(lib.colors.arrayToRGB(
           ary.slice(0, 3)));
       ainput.value = parseFloat(ary[3]) * 100;
       return;

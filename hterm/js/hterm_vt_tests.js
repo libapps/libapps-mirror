@@ -1186,7 +1186,7 @@ it('sgr-extended-colors-parser', function() {
     [1, '4;38:2:10:20:30', 0, 'rgb(10, 20, 30)'],
     // Fully colon delimited matching ISO 8613-6.
     [0, '38:0', 0, undefined],
-    [0, '38:1', 0, 'rgba(0, 0, 0, 0)'],
+    [0, '38:1', 0, 'rgb(0, 0, 0, 0)'],
     [0, '38:2::10:20:30', 0, 'rgb(10, 20, 30)'],
     [0, '38:2::10:20:30:', 0, 'rgb(10, 20, 30)'],
     [0, '38:2::10:20:30::', 0, 'rgb(10, 20, 30)'],
@@ -1894,9 +1894,9 @@ it('OSC-12', function() {
   assert.equal('rgb(255, 255, 255)', this.terminal.getCursorColor());
 
   // Check alpha channel is preserved.
-  this.terminal.setCursorColor('rgba(1, 1, 1, 0.5)');
+  this.terminal.setCursorColor('rgb(1, 1, 1, 0.5)');
   this.terminal.interpret('\x1b]12;black\x07');
-  assert.equal('rgba(0, 0, 0, 0.5)', this.terminal.getCursorColor());
+  assert.equal('rgb(0, 0, 0, 0.5)', this.terminal.getCursorColor());
 
   // Make sure other colors aren't changed by accident.
   assert.equal(foreColor, this.terminal.getForegroundColor());

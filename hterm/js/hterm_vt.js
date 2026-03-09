@@ -2877,7 +2877,7 @@ hterm.VT.prototype.parseSgrExtendedColors = function(parseState, i, attrs) {
       }
 
       return {
-        color: 'rgba(0, 0, 0, 0)',
+        color: 'rgb(0, 0, 0, 0)',
         skipCount: 0,
       };
     }
