@@ -1,3 +1,14 @@
+# 0.76, 2026-03-23, Minor updates.
+
+* wassh: GAI: Handle trailing dot in localhost checks.
+* wassh: GAI: Drop localdomain hardcoding.
+* wassh: GAI: Return stub addresses for fake ones.
+* prefs: Handle invalid colors.
+* protobuf: Skip shared libs.
+* google: Route `.mandiant-aws-prod.s.off.goog` to use SUP SSH Relay.
+* prefs: Make side panel opaque.
+* plugin: Update to 0.75.
+
 # 0.75, 2026-02-09, Fix localhost port listening & terminal init.
 
 * Revert "nassh: command: Enable automatic newlines".
