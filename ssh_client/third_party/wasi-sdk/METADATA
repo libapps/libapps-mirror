@@ -6,5 +6,6 @@ third_party {
     type: HOMEPAGE
     value: "https://github.com/WebAssembly/wasi-sdk"
   }
-  version: "29.0"
+  version: "32.0"
+  last_upgrade_date { year: 2026 month: 3 day: 16 }
 }
