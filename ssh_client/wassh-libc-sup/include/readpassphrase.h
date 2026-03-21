@@ -7,6 +7,7 @@
 #ifndef WASSH_READPASSPHRASE_H
 #define WASSH_READPASSPHRASE_H
 
+#include <stddef.h>
 #include <sys/cdefs.h>
 
 #define RPP_ECHO_OFF 0x00
