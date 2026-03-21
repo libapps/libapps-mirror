@@ -15,7 +15,7 @@ sys.path.insert(0, str(FILESDIR.parent.parent / "bin"))
 import ssh_client  # pylint: disable=wrong-import-position
 
 
-ARCHIVES = ("%(P)s.tar.gz",)
+ARCHIVES = ("%(P)s.tar.xz",)
 
 
 def src_configure(_metadata):

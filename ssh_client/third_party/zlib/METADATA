@@ -6,6 +6,6 @@ third_party {
     type: HOMEPAGE
     value: "https://zlib.net/"
   }
-  version: "1.3.1"
-  last_upgrade_date { year: 2024 month: 1 day: 22 }
+  version: "1.3.2"
+  last_upgrade_date { year: 2026 month: 2 day: 17 }
 }
