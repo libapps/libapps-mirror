@@ -484,14 +484,11 @@ def fetch_data(
         output = io.BytesIO()
     hasher = Hasher(hashes or {})
 
+    length = 0
     with urllib.request.urlopen(uri, timeout=TIMEOUT) as infp:
         mb = 0
-        length = infp.length
-        if size and length != size:
-            logging.error(
-                "Size mismatch: expected %s but found %s", size, length
-            )
-            sys.exit(1)
+        # The server might not respond with the Content-Length header.
+        header_length = infp.length
         while True:
             data = infp.read(1024 * 1024)
             if not data:
@@ -500,14 +497,19 @@ def fetch_data(
             if verbose:
                 mb += 1
                 print(f"~{mb} MiB downloaded", end="")
-                if length:
-                    percent = mb * 1024 * 1024 * 100 / length
+                if header_length:
+                    percent = mb * 1024 * 1024 * 100 / header_length
                     print(f" ({percent:.2f}%)", end="")
                 print("\r", end="", flush=True)
             if b64:
                 data = base64.b64decode(data)
+            length += len(data)
             hasher.update(data)
             output.write(data)
+
+    if size and length != size:
+        logging.error("Size mismatch: expected %s but found %s", size, length)
+        sys.exit(1)
 
     if not hasher.check():
         sys.exit(1)
