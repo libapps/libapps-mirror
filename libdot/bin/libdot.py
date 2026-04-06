@@ -561,7 +561,8 @@ def fetch(
     # This seems to be good enough for our needs.
     tmpfile = output if stream else output + ".tmp"
     backoff = 1
-    for attempt in range(0, 5):
+    MAX_ATTEMPTS = 8
+    for attempt in range(1, MAX_ATTEMPTS + 1):
         try:
             with open(tmpfile, "wb") as outfp:
                 fetch_data(
@@ -591,12 +592,14 @@ def fetch(
                     sys.exit(1)
 
             logging.warning("Download failed: %s", e)
-            if attempt < 4:
+            if attempt < MAX_ATTEMPTS:
                 logging.warning("Will retry after sleeping %s seconds", backoff)
                 time.sleep(backoff)
                 backoff *= 2
     else:
-        logging.error("Unabled to download; giving up")
+        logging.error(
+            "Unabled to download after %i attempts; giving up", MAX_ATTEMPTS
+        )
         if not stream:
             unlink(tmpfile)
         sys.exit(1)
