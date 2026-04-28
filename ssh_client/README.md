@@ -22,7 +22,7 @@ can be used to contact other users and developers for questions.
 You'll need some extra packages to compile.  Adjust these for your distro.
 ```
 $ sudo apt-get install \
-    gcc g++ libstdc++6:i386 libglib2.0-0:i386 git make cmake lbzip2 \
+    gcc g++ git make cmake lbzip2 \
     python-is-python3 python3 pylint3 python3-requests \
     curl zlib1g-dev zip unzip rsync pkg-config xz-utils patch
 ```
