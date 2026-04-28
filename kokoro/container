@@ -18,6 +18,7 @@ The current tree state (even if it's dirty) is used.
 
 Actions:
   all: Run build+test steps.
+  load: Load container into docker.
   build: Build the container using the Dockerfile.
          Also archives & loads it into docker.
          This must be run before any other step.
