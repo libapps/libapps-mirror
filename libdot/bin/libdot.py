@@ -21,7 +21,7 @@ import subprocess
 import sys
 import time
 import types
-from typing import BinaryIO, Optional, Union
+from typing import BinaryIO, Optional
 import urllib.error
 import urllib.request
 
@@ -30,8 +30,8 @@ import urllib.request
 # NB: We cannot require newer versions than CrOS itself supports.
 assert sys.version_info >= (
     3,
-    9,
-), f"Python 3.9 or newer is required; found {sys.version}"
+    11,
+), f"Python 3.11 or newer is required; found {sys.version}"
 
 
 BIN_DIR = Path(__file__).resolve().parent
@@ -233,7 +233,7 @@ def run(
     return result
 
 
-def sha256(path: Union[Path, str]) -> str:
+def sha256(path: Path | str) -> str:
     """Return sha256 hex digest of |path|."""
     # The file shouldn't be too big to load into memory, so be lazy.
     with open(path, "rb") as fp:
@@ -373,9 +373,9 @@ class ArtifactManifest:
 
 
 def unpack(
-    archive: Union[Path, str],
+    archive: Path | str,
     cwd: Optional[Path] = None,
-    files: Optional[list[Union[Path, str]]] = (),
+    files: Optional[list[Path | str]] = (),
 ):
     """Unpack |archive| into |cwd|."""
     archive = Path(archive)
@@ -405,10 +405,10 @@ def unpack(
 
 
 def pack(
-    archive: Union[Path, str],
-    paths: list[Union[Path, str]],
+    archive: Path | str,
+    paths: list[Path | str],
     cwd: Optional[Path] = None,
-    exclude: Optional[list[Union[Path, str]]] = (),
+    exclude: Optional[list[Path | str]] = (),
 ):
     """Create an |archive| with |paths| in |cwd|.
 
