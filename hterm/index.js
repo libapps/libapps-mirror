@@ -28,7 +28,6 @@ import './js/hterm_terminal_io.js';
 import './js/hterm_text_attributes.js';
 import './js/hterm_vt.js';
 import './js/hterm_vt_character_map.js';
-import './third_party/intl-segmenter/intl-segmenter.js';
 import './third_party/wcwidth/wc.js';
 import {hterm} from './js/hterm.js';
 export {hterm};

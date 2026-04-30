@@ -12,7 +12,6 @@ libTest.main({
   base: '../../hterm/js',
   files: [
     // go/keep-sorted start
-    '../third_party/intl-segmenter/intl-segmenter_tests.js',
     '../third_party/wcwidth/wc_tests.js',
     'hterm_accessibility_reader_tests.js',
     'hterm_contextmenu_tests.js',
