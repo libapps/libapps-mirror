@@ -1016,13 +1016,6 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
       postProcessOptions(options, params.hostname, params.username,
                          this.isMount);
 
-  // Enable some trials in the dev version for early testing.
-  if (this.isDevVersion()) {
-    options = Object.assign({
-      '--field-trial-direct-sockets': true,
-    }, options);
-  }
-
   // Merge ssh options from the ssh:// URI that we believe are safe.
   params.userSshArgs = [];
   const userSshOptionsList = splitCommandLine(params.nasshUserSshOptions).args;
@@ -1047,11 +1040,8 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     setDefaultBackend(/** @type {string} */ (options['--field-trial-buffer']));
   }
 
-  if (options['--field-trial-direct-sockets']) {
+  if (options['--field-trial-direct-sockets'] !== false) {
     // Force disable Chrome Sockets usage so we fallback to Direct Sockets.
-    this.io.println(
-        'Using Direct Sockets.  If you encounter problems, try ' +
-        '--no-field-trial-direct-sockets and file a bug.\n');
     if (WasshSockets.ChromeTcpSocket.isSupported() &&
         WasshSockets.WebTcpSocket.isSupported()) {
       delete chrome.sockets?.tcp;
