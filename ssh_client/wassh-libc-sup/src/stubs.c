@@ -168,6 +168,7 @@ int closefrom(int fd) {
   STUB_RETURN(0, "fd=%i", fd);
 }
 
+#ifndef __WASM_EXCEPTIONS__
 // C++ exceptions are fatal and never caught.  Which is OK if the codebase only
 // throws exceptions to abort rather than dynamic recovery.
 void* __cxa_allocate_exception(size_t thrown_size) {
@@ -178,3 +179,4 @@ void __cxa_throw(void* thrown_exception, void* tinfo, void (*dest)(void*)) {
   fprintf(stderr, "\r\nC++ (throw) exceptions are disabled.\r\n");
   abort();
 }
+#endif
