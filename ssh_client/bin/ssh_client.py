@@ -336,12 +336,19 @@ def _toolchain_wasm_env(target: str) -> dict:
     }
 
     if target.endswith("-threads"):
+        # These are gleaned from WASI-SDK GH issues.  Ideally the standard flags
+        # would suffice (e.g. -fexceptions), but sadly they do not as of 2026.
+        common_flags = (
+            "-O2 -g0 -pipe -pthread "
+            "-fwasm-exceptions -mllvm -wasm-use-legacy-eh=false"
+        )
         ret.update(
             {
-                "CFLAGS": "-O2 -g0 -pipe -pthread",
-                "CXXFLAGS": "-O2 -g0 -pipe -pthread",
+                "CFLAGS": common_flags,
+                "CXXFLAGS": common_flags,
             }
         )
+        ret["LDFLAGS"] += " -fwasm-exceptions -lunwind"
 
     return ret
 
