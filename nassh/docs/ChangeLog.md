@@ -1,3 +1,16 @@
+# 0.77, 2026-05-11, OpenSSH 10.3 upgrade & support lib updates.
+
+* mosh: Drop C++ exceptions workarounds.
+* ssh_client: Enable C++ exceptions for threaded targets.
+* wassh-libc-sup: Dynamically disable C++ exception fallbacks.
+* wasi-sdk: Upgrade to 33.0.
+* libdot: Raise min Python version to 3.11.
+* openssh: Upgrade to 10.3.
+* wasi-sdk: Upgrade to 32.0.
+* plugin: Update to 0.76.
+* protobuf: Upgrade to 3.20.3.
+* zlib: Update to 1.3.2.
+
 # 0.76, 2026-03-23, Minor updates.
 
 * wassh: GAI: Handle trailing dot in localhost checks.
