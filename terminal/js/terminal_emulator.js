@@ -470,6 +470,8 @@ export class XtermTerminal {
       console.warn('Webgl2 is not supported. Fall back to canvas renderer');
       this.renderAddonType_ = CanvasAddon;
     }
+    // TODO(b/500797550): disable webgl until chrome is fixed.
+    this.renderAddonType_ = CanvasAddon;
 
     /** @type {?Element} */
     this.container_;
