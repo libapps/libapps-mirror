@@ -1489,7 +1489,7 @@ CommandInstance.prototype.initWasmSubproc_ =
     secureInput: (...args) => this.secureInput(...args),
     captureStdout: captureStdout,
     syncStorage: this.syncStorage,
-    knownHosts: this.sshPolicy_.getSshKnownHosts(),
+    sshPolicy: this.sshPolicy_,
   });
   await ret.init();
   return ret;

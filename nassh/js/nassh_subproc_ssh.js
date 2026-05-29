@@ -15,6 +15,7 @@ import {
 import {WASI} from '../../wasi-js-bindings/index.js';
 
 import {FileHandle} from '../wassh/js/vfs.js';
+import {SshPolicy} from './ssh_policy.js';
 
 /**
  * A write-only pipe.
@@ -179,18 +180,18 @@ export class SshSubproc extends WasmSubproc {
    *   isSftp: (boolean|undefined),
    *   sftpClient: (?Object|undefined),
    *   syncStorage: !lib.Storage,
-   *   knownHosts: ?string,
+   *   sshPolicy: ?SshPolicy,
    * }} opts
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
                authAgentAppID, relay, secureInput, captureStdout,
-               isSftp, sftpClient, syncStorage, knownHosts}) {
+    isSftp, sftpClient, syncStorage, sshPolicy}) {
     super({executable, argv, environ, terminal, trace, authAgent,
            authAgentAppID, relay, secureInput, captureStdout});
 
     this.isSftp_ = isSftp;
     this.sftpClient_ = sftpClient;
-    this.knownHosts_ = knownHosts;
+    this.sshPolicy_ = sshPolicy;
     this.syncStorage_ = syncStorage;
 
     // Tell OpenSSH to use the sftp subsystem instead of an interactive session.
@@ -209,15 +210,30 @@ export class SshSubproc extends WasmSubproc {
 
     const vfs = handler.vfs;
     vfs.addHandler(new StorageFileHandler(
-        '/etc/ssh/ssh_config', this.syncStorage_, '/nassh/etc/ssh/ssh_config'));
-    vfs.addHandler(new StorageFileHandler(
         '/etc/ssh/ssh_known_hosts', this.syncStorage_,
         '/nassh/etc/ssh/ssh_known_hosts'));
     // The OpenSSH client defaults to reading from both /etc/ssh/ssh_known_hosts
     // and /etc/ssh/ssh_known_hosts2 for the global known hosts. We use the
     // second file to inject host keys provided by enterprise policy.
     vfs.addHandler(new MemoryFileHandler(
-        '/etc/ssh/ssh_known_hosts2', this.knownHosts_ ?? ''));
+        '/etc/ssh/ssh_known_hosts2',
+        this.sshPolicy_?.getSshKnownHosts() ?? ''));
+
+    // Set up /etc/ssh/ssh_config to include all configs in
+    // /etc/ssh/ssh_config.d/. Enterprise policy config is injected at
+    // 00-policy.conf, and user sync storage config is mounted at
+    // 50-user-sync.conf. This ensures line numbers in error messages
+    // match what the user sees in their preferences editor.
+    vfs.addHandler(new MemoryFileHandler(
+        '/etc/ssh/ssh_config',
+        'Include /etc/ssh/ssh_config.d/00-policy.conf\n' +
+        'Include /etc/ssh/ssh_config.d/50-user-sync.conf\n'));
+    vfs.addHandler(new StorageFileHandler(
+        '/etc/ssh/ssh_config.d/50-user-sync.conf', this.syncStorage_,
+        '/nassh/etc/ssh/ssh_config'));
+    vfs.addHandler(new MemoryFileHandler(
+        '/etc/ssh/ssh_config.d/00-policy.conf',
+        this.sshPolicy_?.getSshConfig() ?? ''));
 
     // If this is an SFTP connection, rebind stdin/stdout to our custom pipes
     // which connect to our JS SFTP client.
