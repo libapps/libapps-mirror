@@ -1,3 +1,8 @@
+# 0.78, 2026-06-04, Switch to Direct Sockets by default.
+
+* nassh: sockets: Enable direct sockets in the stable version.
+* nassh: plugin: Update to 0.77.
+
 # 0.77, 2026-05-11, OpenSSH 10.3 upgrade & support lib updates.
 
 * mosh: Drop C++ exceptions workarounds.
