@@ -308,6 +308,7 @@ def main(
         ".gitignore",
         ".markdownlintrc",
         ".npmrc",
+        ".prettierignore",
         ".pylintrc",
         "DIR_METADATA",
         "Dockerfile",
