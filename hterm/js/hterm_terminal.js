@@ -1748,6 +1748,8 @@ hterm.Terminal.prototype.setupScrollPort_ = function() {
       this.prefs_.getNumber('scroll-wheel-move-multiplier'));
 
   this.document_ = this.scrollPort_.getDocument();
+  this.setBackgroundColor();
+  this.setForegroundColor();
   this.accessibilityReader_.decorate(this.document_);
   this.findBar.decorate(this.document_);
   this.notifications_ = new hterm.NotificationCenter(

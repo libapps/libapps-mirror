@@ -537,7 +537,8 @@ hterm.ScrollPort.prototype.decorate = function(div, callback) {
       'border: 0;' +
       'height: 100%;' +
       'position: absolute;' +
-      'width: 100%');
+      'width: 100%;' +
+      'background-color: transparent;');
 
   div.appendChild(this.iframe_);
 
@@ -576,7 +577,8 @@ hterm.ScrollPort.prototype.paintIframeContents_ = function() {
       'width: 100%;' +
       'overflow: hidden;' +
       'cursor: var(--hterm-mouse-cursor-style);' +
-      'user-select: none;');
+      'user-select: none;' +
+      'background-color: transparent;');
 
   const metaCharset = doc.createElement('meta');
   metaCharset.setAttribute('charset', 'utf-8');
