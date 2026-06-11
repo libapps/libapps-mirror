@@ -44,7 +44,9 @@ beforeEach(function(done) {
 
     this.terminal.setWidth(width);
     this.terminal.setHeight(height);
-    setTimeout(() => done());
+
+    this.scrollPort.resize();
+    done();
   };
 });
 
