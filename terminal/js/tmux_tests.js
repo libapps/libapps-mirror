@@ -420,6 +420,176 @@ describe('controller', function() {
       'refresh-client -C @3:100x50\rselect-window -t @3\r',
     ]]);
   });
+
+  describe('sendPaneInput', function() {
+    it('sends command with hex encoded chars', async function() {
+      await this.setup();
+      this.controller.panes_.get('%1').needResetMode = false;
+
+      this.controller.sendPaneInput('%1', 'foo');
+
+      await this.inputMock.whenCalled();
+      assert.deepEqual(this.inputMock.getHistory(), [
+        ['send-keys -H -t %1 66 6f 6f\r'],
+      ]);
+    });
+
+    it('sends command with max 9500 hex encoded bytes', async function() {
+      await this.setup();
+      this.controller.panes_.get('%1').needResetMode = false;
+
+      const input = 'a'.repeat(10000);
+      this.controller.sendPaneInput('%1', input);
+      await this.inputMock.whenCalled();
+
+      assert.deepEqual(this.inputMock.getHistory(), [
+        [
+          'send-keys -H -t %1' +
+            ' 61'.repeat(9500) +
+            '\r' +
+            'send-keys -H -t %1' +
+            ' 61'.repeat(500) +
+            '\r',
+        ],
+      ]);
+    });
+
+    it('splits send-keys on Unicode code point boundaries', async function() {
+      // a 4-byte utf-8 character : 'grinning face'
+      const smiley = '\u{0001F600}';
+      // Hex-encoded UTF-8 code units for smiley character
+      const spacePrefixedSmileyBytes = ' f0 9f 98 80';
+
+      await this.setup();
+      this.controller.panes_.get('%1').needResetMode = false;
+
+      // Input is:
+      // * A single 1-byte UTF-8 character 'a'.
+      // * 2375 4-byte UTF-8 characters (9500 bytes).
+      // Total UTF-8 encoded length 9501 bytes.
+      const input = 'a' + smiley.repeat(2375);
+      this.controller.sendPaneInput('%1', input);
+      await this.inputMock.whenCalled();
+
+      // Split will occur on byte 8997, so there will be 2 send-keys commands
+      // containing hex values for:
+      // 'a' + (2374 x 4-byte smiley characters) = 8997 bytes
+      // a single 4-byte smiley character = 4 bytes.
+      assert.deepEqual(this.inputMock.getHistory(), [
+        [
+          'send-keys -H -t %1 ' +
+            '61' + // 'a'
+            spacePrefixedSmileyBytes.repeat(2374) +
+            '\r' +
+            'send-keys -H -t %1' +
+            spacePrefixedSmileyBytes +
+            '\r',
+        ],
+      ]);
+    });
+  });
+
+  describe('splitUtf8BytesByCharacters_', function() {
+    const textEncoder = new TextEncoder();
+    // A 4-byte utf-8 character : 'grinning face'
+    const smiley = '\u{0001F600}';
+
+    it('Does not split strings of maxBytes or less', function() {
+      const str = 'a'.repeat(100);
+
+      const chunks = Controller.splitUtf8BytesByCharacters_(
+        textEncoder.encode(str),
+        100,
+      );
+
+      assert.equal(chunks.length, 1);
+      // Note that Uint8Arrays are not deep-comparable,
+      // so compare the string representations.
+      assert.equal(chunks[0].toString(), textEncoder.encode(str).toString());
+    });
+
+    it('Splits strings larger than maxBytes', function() {
+      const str = 'a'.repeat(100);
+
+      const chunks = Controller.splitUtf8BytesByCharacters_(
+        textEncoder.encode(str),
+        30,
+      );
+
+      assert.equal(chunks.length, 4);
+      assert.equal(
+        chunks[0].toString(),
+        textEncoder.encode('a'.repeat(30)).toString(),
+      );
+      assert.equal(
+        chunks[1].toString(),
+        textEncoder.encode('a'.repeat(30)).toString(),
+      );
+      assert.equal(
+        chunks[2].toString(),
+        textEncoder.encode('a'.repeat(30)).toString(),
+      );
+      assert.equal(
+        chunks[3].toString(),
+        textEncoder.encode('a'.repeat(10)).toString(),
+      );
+    });
+
+    it('splits strings on Unicode character boundaries', function() {
+      // Input is:
+      // * 8 x (1 code unit - 1 byte characters)
+      // * 5 x (2 UTF-16 code unit - 4 byte characters)
+      // string length = 18 UTF-16 code units
+      // UTF-8 encoded length = 28 bytes.
+      const input = '12345678' + smiley.repeat(5);
+
+      // First Smiley appears at UTF-16 code unit 8-9, or UTF-8 bytes 8-12
+      // Request a split on 10 bytes, which would be in the 'middle' of
+      // the first smiley.
+      const chunks = Controller.splitUtf8BytesByCharacters_(
+        textEncoder.encode(input),
+        10,
+      );
+
+      // result should be 4 chunks to avoid splitting in the middle of the
+      // utf-8 encoded characters:
+      //
+      assert.equal(chunks.length, 4);
+      // 8 1-byte characters
+      assert.equal(
+        chunks[0].toString(),
+        textEncoder.encode('12345678').toString(),
+      );
+      // 2 x 4-byte characters
+      assert.equal(
+        chunks[1].toString(),
+        textEncoder.encode(smiley.repeat(2)).toString(),
+      );
+      // 2 x 4-byte characters
+      assert.equal(
+        chunks[2].toString(),
+        textEncoder.encode(smiley.repeat(2)).toString(),
+      );
+      // remaining 1 x 4-byte characters
+      assert.equal(chunks[3].toString(), textEncoder.encode(smiley).toString());
+    });
+  });
+
+  it('Handles arrays of invalid unicode', function() {
+    // 0x80 is a UTF-8 continuation byte. Create an Uint8Array containing a
+    // sequence of them.
+    const bytes = new Uint8Array(new Array(15).fill(0x80));
+
+    const chunks = Controller.splitUtf8BytesByCharacters_(
+      bytes,
+      10,
+    );
+
+    assert.equal(chunks.length, 2);
+    assert.equal(chunks[0].toString(), bytes.subarray(0, 10).toString());
+    assert.equal(chunks[1].toString(), bytes.subarray(10, 15).toString());
+  });
+
 });
 
 it('parseTmuxVersion()', function() {
