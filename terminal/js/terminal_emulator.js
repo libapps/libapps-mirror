@@ -1613,8 +1613,8 @@ export class XtermTerminal {
     /** @param {!KeyboardEvent} ev */
     const newTab = (ev) => {
       ev.preventDefault();
-      chrome.terminalPrivate.openWindow(
-          {asTab: true, url: '/html/terminal.html'});
+      const url = new URL('/html/terminal.html', ORIGINAL_URL);
+      chrome.terminalPrivate.openWindow({asTab: true, url: url.toString()});
     };
     set(Modifier.Ctrl | Modifier.Shift, keyCodes.T, newTab);
     if (this.prefs_.get('pass-ctrl-t')) {
@@ -1794,8 +1794,8 @@ class HtermTerminal extends hterm.Terminal {
   static onCtrlT_(e, k) {
     if (this.keyboard.terminal.passCtrlT) {
       return function(e, k) {
-        chrome.terminalPrivate.openWindow(
-            {asTab: true, url: '/html/terminal.html'});
+        const url = new URL('/html/terminal.html', ORIGINAL_URL);
+        chrome.terminalPrivate.openWindow({asTab: true, url: url.toString()});
         return hterm.Keyboard.KeyActions.CANCEL;
       };
     }
