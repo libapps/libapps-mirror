@@ -595,7 +595,13 @@ export class Controller {
    * Send an detach command to tmux.
    */
   detach() {
-    this.queueCommand('detach');
+    if (this.hasError_) {
+      // In error state, we cannot send commands, so try sending
+      // newline which should force-detach the tmux server.
+      this.input_('\r');
+    } else {
+      this.queueCommand('detach');
+    }
   }
 
   /**
