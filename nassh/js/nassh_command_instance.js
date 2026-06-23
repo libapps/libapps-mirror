@@ -1382,7 +1382,7 @@ export function postProcessOptions(options, hostname, username, isMount) {
       '.mandiant-aws-prod.s.off.goog',
     ].reduce((ret, host) => ret || hostname.endsWith(host), false);
     const proxyHost = useSupSshRelay ?
-        'ssh-relay-router.corp.google.com' : 'ssh-relay.corp.google.com';
+        'ssh-relay-router.corp.google.com' : 'sup-ssh-relay.corp.google.com';
     const proxyMode = useSupSshRelay ?
         'corp-relay-v4@google.com' : 'corp-relay@google.com';
     const proxyHostFallback = useSupSshRelay ?

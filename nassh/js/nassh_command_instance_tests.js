@@ -435,7 +435,7 @@ describe('default-proxy-host', () => {
      undefined, undefined, modeOld, undefined, undefined],
 
     // Default Google settings.
-    ['--config=google', 'example.com', '443', 'ssh-relay.corp.google.com',
+    ['--config=google', 'example.com', '443', 'sup-ssh-relay.corp.google.com',
      'root', 'ssh-relay-fallback.corp.google.com',
      'example.com', modeOld, false, undefined],
 
@@ -468,7 +468,7 @@ describe('default-proxy-host', () => {
 
     // Proxy fallback settings.
     ['--config=google --proxy-host-fallback=fallback.com', 'example.com',
-     '443', 'ssh-relay.corp.google.com', 'root',
+     '443', 'sup-ssh-relay.corp.google.com', 'root',
      'fallback.com', 'example.com', modeOld, false, undefined],
     ['--config=google --proxy-host-fallback=fallback.com',
      'example.c.googlers.com', '443', 'ssh-relay-router.corp.google.com',
@@ -477,7 +477,7 @@ describe('default-proxy-host', () => {
 
     // Remote host settings.
     ['--config=google --proxy-remote-host=remote.com', 'example.com',
-     '443', 'ssh-relay.corp.google.com', 'root',
+     '443', 'sup-ssh-relay.corp.google.com', 'root',
      'ssh-relay-fallback.corp.google.com', 'remote.com',
      modeOld, false, undefined],
     ['--config=google --proxy-remote-host=remote.com', 'example.c.googlers.com',
@@ -486,7 +486,7 @@ describe('default-proxy-host', () => {
 
     // Mode settings.
     ['--config=google --proxy-mode=foo', 'example.com',
-     '443', 'ssh-relay.corp.google.com', 'root',
+     '443', 'sup-ssh-relay.corp.google.com', 'root',
      'ssh-relay-fallback.corp.google.com', 'example.com',
       'foo', false, undefined],
     ['--config=google --proxy-mode=foo', 'example.internal.gcpnode.com',
@@ -496,7 +496,7 @@ describe('default-proxy-host', () => {
 
     // Resume settings.
     ['--config=google --resume-connection', 'example.com',
-     '443', 'ssh-relay.corp.google.com', 'root',
+     '443', 'sup-ssh-relay.corp.google.com', 'root',
      'ssh-relay-fallback.corp.google.com', 'example.com',
      modeOld, true, undefined],
     ['--config=google --no-resume-connection', 'example.internal.gcpnode.com',
