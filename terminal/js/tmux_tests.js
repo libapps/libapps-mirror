@@ -392,6 +392,7 @@ describe('controller', function() {
     const errorHistory = this.onErrorMock.getHistory();
     assert.equal(errorHistory.length, 1);
     assert.isTrue(errorHistory[0][0].includes('unknown command'));
+    assert.isEmpty(this.controller.commands_);
   });
 
   it('resizeWindow() with older tmux', async function() {

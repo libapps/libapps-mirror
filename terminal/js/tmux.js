@@ -354,8 +354,13 @@ export class Controller {
     const currentCommand = this.commands_[0];
     if (tag === '%end' || tag === '%error') {
       if (args === currentCommand?.beginArgs) {
-        currentCommand.finish(tag === '%end');
+        // Remove it from the command stack before processing
+        // so that even if finish() throws, the command is still
+        // removed.
+        // This allows other lines (such as "%exit") to be processed after
+        // a %error, ensuring that the tmux controller shuts down.
         this.commands_.shift();
+        currentCommand.finish(tag === '%end');
         return;
       }
 
@@ -999,12 +1004,14 @@ class Command {
    * @param {boolean} success
    */
   finish(success) {
-    const callback = success ? this.callback_ : this.errorCallback_;
-    callback(/** @type {!Array<string>} */(this.buffer_));
-
-    this.buffer_ = null;
-    this.callback_ = null;
-    this.errorCallback_ = null;
+    try {
+      const callback = success ? this.callback_ : this.errorCallback_;
+      callback(/** @type {!Array<string>} */(this.buffer_));
+    } finally {
+      this.buffer_ = null;
+      this.callback_ = null;
+      this.errorCallback_ = null;
+    }
   }
 }
 
