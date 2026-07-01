@@ -1136,11 +1136,10 @@ export class RelaySocket extends StreamSocket {
       return WASI.errno.EISCONN;
     }
 
-    this.callback_ = await this.open_(address, port);
-
-    if (!this.callback_) {
-      console.error('Unable to connect to relay server.');
-      return WASI.errno.EIO;
+    try {
+      this.callback_ = await this.open_(address, port);
+    } catch (e) {
+      return WASI.errno.ENETUNREACH;
     }
 
     this.callback_.onDataAvailable = (data) => this.onRecv(data);
@@ -1357,10 +1356,12 @@ export class WebTcpSocket extends StreamSocket {
       options.keepAliveDelay = TCP_KEEPALIVE_INTVL * 1000;
     }
 
-    await this.setTcpSocket_(new TCPSocket(address, port, options));
-    this.pollData_();
+    const ret = await this.setTcpSocket_(new TCPSocket(address, port, options));
+    if (ret === WASI.errno.ESUCCESS) {
+      this.pollData_();
+    }
 
-    return WASI.errno.ESUCCESS;
+    return ret;
   }
 
   /**
@@ -1427,6 +1428,10 @@ export class WebTcpSocket extends StreamSocket {
    * @override
    */
   async write(buf) {
+    if (this.socket_ === null) {
+      return WASI.errno.EPIPE;
+    }
+
     try {
       await this.directSocketsWriter_.ready;
       await this.directSocketsWriter_.write(buf.buffer);
@@ -1911,14 +1916,16 @@ export class WebUdpSocket extends DatagramSocket {
     }
 
     address ??= getInAddrAny(this.domain);
-    await this.setSocket_(new UDPSocket({
+    const ret = await this.setSocket_(new UDPSocket({
       localAddress: address,
       localPort: port,
       ipv6only: this.ipv6Only_,
     }));
-    this.pollData_();
+    if (ret === WASI.errno.ESUCCESS) {
+      this.pollData_();
+    }
 
-    return WASI.errno.ESUCCESS;
+    return ret;
   }
 
   /**
