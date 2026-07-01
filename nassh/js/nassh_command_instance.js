@@ -1383,8 +1383,7 @@ export function postProcessOptions(options, hostname, username, isMount) {
     ].reduce((ret, host) => ret || hostname.endsWith(host), false);
     const proxyHost = useSupSshRelay ?
         'ssh-relay-router.corp.google.com' : 'sup-ssh-relay.corp.google.com';
-    const proxyMode = useSupSshRelay ?
-        'corp-relay-v4@google.com' : 'corp-relay@google.com';
+    const proxyMode = 'corp-relay-v4@google.com';
     const proxyHostFallback = useSupSshRelay ?
         'sup-ssh-relay.corp.google.com' : 'ssh-relay-fallback.corp.google.com';
 
