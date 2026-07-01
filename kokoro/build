@@ -392,6 +392,11 @@ def setup():
             ["git", "clone", "--depth=1", DEPOT_TOOLS_URI, DEPOT_TOOLS_DIR],
             check=True,
         )
+        subprocess.run(
+            ["git", "log", "-1", "--oneline"],
+            cwd=DEPOT_TOOLS_DIR,
+            check=True,
+        )
     os.environ["PATH"] = f"{DEPOT_TOOLS_DIR}{os.pathsep}" + os.environ["PATH"]
 
 
