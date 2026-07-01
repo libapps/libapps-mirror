@@ -13,6 +13,11 @@ import {OmniboxHandler} from './nassh_omnibox.js';
 /** @constructor */
 function EventMock() {
   this.addListener = (func) => { this.func = func; };
+  this.removeListener = (func) => {
+    if (func === this.func) {
+      this.func = undefined;
+    }
+  };
 }
 
 /**
@@ -35,7 +40,20 @@ beforeEach(function() {
 });
 
 /**
- * Smoke test for installOmnibox handler.
+ * Smoke test for earlyInstall handler.
+ */
+it('install-early', async function() {
+  await this.handler.earlyInstall();
+
+  const omnibox = this.omnibox;
+  assert.isDefined(omnibox.onInputStarted.func);
+  // assert.isDefined(omnibox.onInputChanged.func);
+  assert.isDefined(omnibox.onInputEntered.func);
+  assert.isDefined(omnibox.onInputCancelled.func);
+});
+
+/**
+ * Smoke test for install handler.
  */
 it('install', async function() {
   await this.handler.install();
@@ -46,6 +64,87 @@ it('install', async function() {
   assert.isDefined(omnibox.onInputChanged.func);
   assert.isDefined(omnibox.onInputEntered.func);
   assert.isDefined(omnibox.onInputCancelled.func);
+});
+
+/**
+ * Smoke test for install handler w/early integration.
+ */
+it('install-full', async function() {
+  await this.handler.earlyInstall();
+  await this.handler.install();
+
+  const omnibox = this.omnibox;
+  assert.isNull(this.handler.earlyHandler_);
+  assert.isDefined(omnibox.onInputStarted.func);
+  assert.isDefined(omnibox.onInputChanged.func);
+  assert.isDefined(omnibox.onInputEntered.func);
+  assert.isDefined(omnibox.onInputCancelled.func);
+});
+
+/**
+ * Verify early start events are relayed.
+ */
+it('relay-early', async function() {
+  const omnibox = this.omnibox;
+
+  // Setup early handlers & make some calls.
+  await this.handler.earlyInstall();
+  omnibox.onInputStarted.func();
+  let started = false;
+  this.handler.onInputStarted_ = () => {
+    started = true;
+  };
+
+  // Verify things were relayed.
+  await this.handler.install();
+  assert.isTrue(started);
+});
+
+/**
+ * Verify early cancelled events are not relayed.
+ */
+it('relay-early-cancelled', async function() {
+  const omnibox = this.omnibox;
+
+  // Setup early handlers, start input, then cancel it.
+  await this.handler.earlyInstall();
+  omnibox.onInputStarted.func();
+  omnibox.onInputCancelled.func();
+  let started = false;
+  this.handler.onInputStarted_ = () => {
+    started = true;
+  };
+
+  // Verify things were not relayed.
+  await this.handler.install();
+  assert.isFalse(started);
+});
+
+/**
+ * Verify early entered  events are relayed.
+ */
+it('relay-early-entered', async function() {
+  const omnibox = this.omnibox;
+
+  // Setup early handlers & make some calls.
+  await this.handler.earlyInstall();
+  omnibox.onInputStarted.func();
+  omnibox.onInputEntered.func('foo', 'disp');
+  let started = false;
+  this.handler.onInputStarted_ = () => {
+    started = true;
+  };
+  let seenText, seenDisposition;
+  this.handler.onInputEntered_ = (text, disposition) => {
+    seenText = text;
+    seenDisposition = disposition;
+  };
+
+  // Verify things were relayed.
+  await this.handler.install();
+  assert.isTrue(started);
+  assert.equal('foo', seenText);
+  assert.equal('disp', seenDisposition);
 });
 
 /**

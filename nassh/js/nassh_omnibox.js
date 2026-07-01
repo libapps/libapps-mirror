@@ -14,6 +14,99 @@ import {
 } from './nassh_preference_manager.js';
 
 /**
+ * Handle omnibox events before we've finished initializing our full handler.
+ *
+ * Basically this remembers basic event information so it can be replayed.
+ */
+class EarlyOmniboxHandler {
+  /**
+   * @param {!typeof chrome.omnibox} omnibox The instance to bind to.
+   */
+  constructor(omnibox) {
+    this.omnibox_ = omnibox;
+
+    // Whether the omnibox lifecycle has started.
+    this.started_ = false;
+    // If completed, the data we saved.
+    this.data_ = null;
+
+    // The minimal set of listeners needed to monitor overall state.
+    this.startedListener_ = null;
+    this.enteredListener_ = null;
+    this.cancelledListener_ = null;
+  }
+
+  /**
+   * Bind callbacks early on synchronously.
+   */
+  install() {
+    this.startedListener_ = this.onInputStarted_.bind(this);
+    this.omnibox_.onInputStarted.addListener(this.startedListener_);
+    this.enteredListener_ = this.onInputEntered_.bind(this);
+    this.omnibox_.onInputEntered.addListener(this.enteredListener_);
+    this.cancelledListener_ = this.onInputCancelled_.bind(this);
+    this.omnibox_.onInputCancelled.addListener(this.cancelledListener_);
+  }
+
+  /**
+   * Remove all our listeners.
+   */
+  uninstall() {
+    if (this.startedListener_ !== null) {
+      this.omnibox_.onInputStarted.removeListener(this.startedListener_);
+      this.startedListener_ = null;
+    }
+    if (this.enteredListener_ !== null) {
+      this.omnibox_.onInputEntered.removeListener(this.enteredListener_);
+      this.enteredListener_ = null;
+    }
+    if (this.cancelledListener_ !== null) {
+      this.omnibox_.onInputCancelled.removeListener(this.cancelledListener_);
+      this.cancelledListener_ = null;
+    }
+  }
+
+  /**
+   * Relay any interesting data.
+   *
+   * @param {function(): void} onInputStarted
+   * @param {function(string, string): void} onInputEntered
+   */
+  relayEvents(onInputStarted, onInputEntered) {
+    if (this.started_) {
+      onInputStarted();
+      if (this.data_ !== null) {
+        onInputEntered(this.data_.text, this.data_.disposition);
+      }
+    }
+  }
+
+  /**
+   * Remember omnibox input started before we were ready.
+   */
+  onInputStarted_() {
+    this.started_ = true;
+  }
+
+  /**
+   * Remember omnibox input before we were ready.
+   *
+   * @param {string} text The text to operate on.
+   * @param {string} disposition Mode the user wants us to open as.
+   */
+  onInputEntered_(text, disposition) {
+    this.data_ = {text, disposition};
+  }
+
+  /**
+   * Remember omnibox input stopped before we were ready.
+   */
+  onInputCancelled_() {
+    this.started_ = false;
+  }
+}
+
+/**
  * Handler for custom omnibox integration.
  *
  * @see https://developer.chrome.com/docs/extensions/reference/api/omnibox
@@ -29,8 +122,7 @@ export class OmniboxHandler {
   constructor({omnibox, storage} = {}) {
     this.omnibox_ = omnibox;
 
-    this.earlyData_ = null;
-    this.earlyListener_ = null;
+    this.earlyHandler_ = null;
     this.initialized_ = false;
 
     this.prefs_ = new PreferenceManager(storage);
@@ -47,18 +139,8 @@ export class OmniboxHandler {
    * up later on during the full install.
    */
   earlyInstall() {
-    this.earlyListener_ = this.earlyOnInputEntered_.bind(this);
-    this.omnibox_.onInputEntered.addListener(this.earlyListener_);
-  }
-
-  /**
-   * Remember omnibox input before we were ready.
-   *
-   * @param {string} text The text to operate on.
-   * @param {string} disposition Mode the user wants us to open as.
-   */
-  earlyOnInputEntered_(text, disposition) {
-    this.earlyData_ = {text, disposition};
+    this.earlyHandler_ = new EarlyOmniboxHandler(this.omnibox_);
+    this.earlyHandler_.install();
   }
 
   /**
@@ -73,20 +155,19 @@ export class OmniboxHandler {
     await this.localPrefs_.readStorage();
 
     this.setDefault_();
-    this.omnibox_.onInputStarted.addListener(this.onInputStarted_.bind(this));
+    const onInputStarted = this.onInputStarted_.bind(this);
+    this.omnibox_.onInputStarted.addListener(onInputStarted);
     this.omnibox_.onInputChanged.addListener(this.onInputChanged_.bind(this));
-    this.omnibox_.onInputEntered.addListener(this.onInputEntered_.bind(this));
+    const onInputEntered = this.onInputEntered_.bind(this);
+    this.omnibox_.onInputEntered.addListener(onInputEntered);
     this.omnibox_.onInputCancelled.addListener(
         this.onInputCancelled_.bind(this));
 
     // If the user triggered omnibox while we were sleeping, run it now.
-    if (this.earlyListener_ !== null) {
-      this.omnibox_.onInputEntered.removeListener(this.earlyListener_);
-      this.earlyListener_ = null;
-    }
-    if (this.earlyData_ !== null) {
-      this.onInputEntered_(this.earlyData_.text, this.earlyData_.disposition);
-      this.earlyData_ = null;
+    if (this.earlyHandler_ !== null) {
+      this.earlyHandler_.uninstall();
+      this.earlyHandler_.relayEvents(onInputStarted, onInputEntered);
+      this.earlyHandler_ = null;
     }
 
     this.initialized_ = true;
