@@ -1409,9 +1409,21 @@ export class WebTcpSocket extends StreamSocket {
    * Wait for data from the reader, then notify the socket upon receiving data.
    */
   async pollData_() {
+    const read = async () => {
+      try {
+        const ret = await this.directSocketsReader_.read();
+        return {value: ret.value, done: ret.done};
+      } catch (e) {
+        this.error = WASI.errno.ECONNRESET;
+        return {value: null, done: true};
+      }
+    };
+
     while (true) {
-      const {value, done} = await this.directSocketsReader_.read();
+      const {value, done} = await read();
       if (done) {
+        await this.close();
+        this.receiveListener_();
         break;
       }
       this.onRecv(value);
@@ -1425,13 +1437,21 @@ export class WebTcpSocket extends StreamSocket {
     }
 
     if (this.directSocketsReader_) {
-      await this.directSocketsReader_.cancel('closing');
+      try {
+        await this.directSocketsReader_.cancel('closing');
+      } catch (e) {
+        console.warn('Error with closing socket.', e);
+      }
       this.directSocketsReader_.releaseLock();
       this.directSocketsReader_ = null;
     }
 
     if (this.directSocketsWriter_) {
-      await this.directSocketsWriter_.abort('closing');
+      try {
+        await this.directSocketsWriter_.abort('closing');
+      } catch (e) {
+        console.warn('Error with closing socket.', e);
+      }
       this.directSocketsWriter_.releaseLock();
       this.directSocketsWriter_ = null;
     }
@@ -1690,10 +1710,21 @@ export class WebTcpServerSocket extends StreamSocket {
    * Adds created connection to clients_.
    */
   async pollConnection_() {
+    const read = async () => {
+      try {
+        const ret = await this.incomingConnectionReader_.read();
+        return {value: ret.value, done: ret.done};
+      } catch (e) {
+        this.error = WASI.errno.ECONNRESET;
+        return {value: null, done: true};
+      }
+    };
+
     while (true) {
-      const {value:acceptedSocket, done} =
-          await this.incomingConnectionReader_.read();
+      const {value:acceptedSocket, done} = await read();
       if (done) {
+        await this.close();
+        this.receiveListener_();
         break;
       }
       if (acceptedSocket !== undefined) {
@@ -1758,7 +1789,11 @@ export class WebTcpServerSocket extends StreamSocket {
     }
 
     if (this.incomingConnectionReader_) {
-      await this.incomingConnectionReader_.cancel('closing');
+      try {
+        await this.incomingConnectionReader_.cancel('closing');
+      } catch (e) {
+        console.warn('Error with closing socket.', e);
+      }
       this.incomingConnectionReader_.releaseLock();
       this.incomingConnectionReader_ = null;
     }
@@ -1885,13 +1920,21 @@ export class WebUdpSocket extends DatagramSocket {
     }
 
     if (this.directSocketsReader_) {
-      await this.directSocketsReader_.cancel('closing');
+      try {
+        await this.directSocketsReader_.cancel('closing');
+      } catch (e) {
+        console.warn('Error with closing socket.', e);
+      }
       this.directSocketsReader_.releaseLock();
       this.directSocketsReader_ = null;
     }
 
     if (this.directSocketsWriter_) {
-      await this.directSocketsWriter_.abort('closing');
+      try {
+        await this.directSocketsWriter_.abort('closing');
+      } catch (e) {
+        console.warn('Error with closing socket.', e);
+      }
       this.directSocketsWriter_.releaseLock();
       this.directSocketsWriter_ = null;
     }
@@ -1978,12 +2021,24 @@ export class WebUdpSocket extends DatagramSocket {
    * Wait for data from the reader, then notify the socket upon receiving data.
    */
   async pollData_() {
+    const read = async () => {
+      try {
+        const ret = await this.directSocketsReader_.read();
+        return {value: ret.value.data, done: ret.done};
+      } catch (e) {
+        this.error = WASI.errno.ECONNRESET;
+        return {value: null, done: true};
+      }
+    };
+
     while (true) {
-      const {value, done} = await this.directSocketsReader_.read();
+      const {value, done} = await read();
       if (done) {
+        await this.close();
+        this.receiveListener_();
         break;
       }
-      this.onRecv(value.data);
+      this.onRecv(value);
     }
   }
 
