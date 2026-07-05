@@ -733,10 +733,11 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
    */
   async handle_sock_create(domain, type, protocol) {
     let handle;
+    const stype = type & ~(Constants.SOCK_NONBLOCK | Constants.SOCK_CLOEXEC);
     switch (domain) {
       case Constants.AF_INET:
       case Constants.AF_INET6:
-        switch (type) {
+        switch (stype) {
           case Constants.SOCK_STREAM:
             if (this.tcpSocketsOpen_ && this.firstConnection_) {
               handle = new Sockets.RelaySocket(
@@ -765,7 +766,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
         break;
 
       case Constants.AF_UNIX:
-        switch (type) {
+        switch (stype) {
           case Constants.SOCK_STREAM:
           case Constants.SOCK_DGRAM:
             handle = new Sockets.UnixSocket(

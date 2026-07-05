@@ -9,6 +9,8 @@
 
 export const SOCK_DGRAM = 5;
 export const SOCK_STREAM = 6;
+export const SOCK_NONBLOCK = 0x4000;
+export const SOCK_CLOEXEC = 0x2000;
 
 // const AF_UNSPEC = 0;
 export const AF_INET = 1;

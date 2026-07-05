@@ -135,7 +135,7 @@ export class Socket extends VFS.PathHandle {
    * @param {number} protocol
    */
   constructor(domain, type, protocol) {
-    super('socket', type);
+    super('socket', type & ~(Constants.SOCK_NONBLOCK | Constants.SOCK_CLOEXEC));
     /** @const {number} */
     this.domain = domain;
     /** @const {number} */
@@ -144,6 +144,8 @@ export class Socket extends VFS.PathHandle {
     this.address = null;
     /** @type {?number} */
     this.port = null;
+    /** @type {boolean} */
+    this.blocking_ = !(type & Constants.SOCK_NONBLOCK);
     /** @type {?function()} */
     this.receiveListener_ = null;
 
@@ -320,7 +322,7 @@ export class StreamSocket extends Socket {
    */
   async read(length, block = true) {
     if (this.data.length === 0) {
-      if (!block) {
+      if (!block || !this.blocking_) {
         return WASI.errno.EAGAIN;
       }
       await new Promise((resolve) => this.reader_ = resolve);
@@ -377,7 +379,7 @@ export class DatagramSocket extends Socket {
    */
   async read(length, block = true) {
     if (this.data.length === 0) {
-      if (!block) {
+      if (!block || !this.blocking_) {
         return WASI.errno.EAGAIN;
       }
       await new Promise((resolve) => this.reader_ = resolve);
