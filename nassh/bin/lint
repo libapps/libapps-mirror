@@ -78,9 +78,15 @@ def main(argv):
         + hterm_files
         + [
             # Let closure compiler itself do the expansion.
-            WJB_DIR / "js" / "**.js",
-            WASSH_DIR / "js" / "**.js",
+            WJB_DIR
+            / "js"
+            / "**.js",
         ]
+        + sorted(
+            os.path.relpath(x)
+            for x in (WASSH_DIR / "js").glob("**.js")
+            if "test" not in x.name
+        )
         + [
             f"--externs={os.path.relpath(x)}"
             for x in sorted(wasi_externs.glob("*.js"))

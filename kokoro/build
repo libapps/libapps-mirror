@@ -249,11 +249,23 @@ def test_lint():
     return ret
 
 
+_SUBDIRS_TO_TEST = (
+    # go/keep-sorted start
+    "hterm",
+    "libdot",
+    "nassh",
+    "terminal",
+    "wasi-js-bindings",
+    "wassh",
+    # go/keep-sorted end
+)
+
+
 def test_unittests():
     """Run all the unittests."""
     ret = []
     test_args = ["--no-sandbox", "--reporter", "xunit"]
-    for pkg in ("libdot", "hterm", "nassh", "terminal", "wasi-js-bindings"):
+    for pkg in _SUBDIRS_TO_TEST:
         pkg_dir = os.path.join(kokoro.LIBAPPS_DIR, pkg)
         if os.path.exists(os.path.join(pkg_dir, "package.json")):
             cmd = ["test", "--"] + test_args

@@ -42,6 +42,12 @@ def main(argv):
             argv[i] = os.path.relpath(path.resolve(), wassh.DIR)
     os.chdir(wassh.DIR)
 
+    libdot_files = [os.path.relpath(libdot.DIR / "index.js")] + sorted(
+        os.path.relpath(x)
+        for x in libdot.DIR.glob("js/*.js")
+        if "_tests" not in x.name and x.name.startswith("lib")
+    )
+
     wasi_externs = WJB_DIR / "externs"
     closure_args = (
         list(libdot.lint.DEFAULT_CLOSURE_ARGS)
@@ -53,6 +59,7 @@ def main(argv):
             # Let closure compiler itself do the expansion.
             wassh.DIR.parent / "wasi-js-bindings" / "js" / "**.js",
         ]
+        + libdot_files
         + [
             f"--externs={os.path.relpath(x)}"
             for x in sorted(wasi_externs.glob("*.js"))
