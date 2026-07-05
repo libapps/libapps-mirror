@@ -737,7 +737,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       case Constants.AF_INET:
       case Constants.AF_INET6:
         switch (type) {
-          case WASI.filetype.SOCKET_STREAM:
+          case Constants.SOCK_STREAM:
             if (this.tcpSocketsOpen_ && this.firstConnection_) {
               handle = new Sockets.RelaySocket(
                   domain, type, protocol, this.tcpSocketsOpen_);
@@ -750,7 +750,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
               return WASI.errno.EPROTONOSUPPORT;
             }
             break;
-          case WASI.filetype.SOCKET_DGRAM:
+          case Constants.SOCK_DGRAM:
             if (Sockets.ChromeUdpSocket.isSupported()) {
               handle = new Sockets.ChromeUdpSocket(domain, type, protocol);
             } else if (Sockets.WebUdpSocket.isSupported()) {
@@ -766,8 +766,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
 
       case Constants.AF_UNIX:
         switch (type) {
-          case WASI.filetype.SOCKET_STREAM:
-          case WASI.filetype.SOCKET_DGRAM:
+          case Constants.SOCK_STREAM:
+          case Constants.SOCK_DGRAM:
             handle = new Sockets.UnixSocket(
                 domain, type, protocol, this.unixSocketsOpen_);
             break;

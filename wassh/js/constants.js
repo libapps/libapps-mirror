@@ -7,6 +7,9 @@
  * common module to avoid excess imports otherwise.
  */
 
+export const SOCK_DGRAM = 5;
+export const SOCK_STREAM = 6;
+
 // const AF_UNSPEC = 0;
 export const AF_INET = 1;
 export const AF_INET6 = 2;
