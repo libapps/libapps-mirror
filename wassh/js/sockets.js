@@ -406,6 +406,15 @@ export class DatagramSocket extends Socket {
 
     return {buf: this.data.shift()};
   }
+
+  /**
+   * @param {!TypedArray} buf
+   * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
+   * @override
+   */
+  async write(buf) {
+    return WASI.errno.EDESTADDRREQ;
+  }
 }
 
 /**
@@ -1439,6 +1448,22 @@ export class WebTcpSocket extends StreamSocket {
   }
 
   /**
+   * @param {number} length
+   * @param {boolean=} block
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
+  async read(length, block = true) {
+    if (this.socket_ === null) {
+      return WASI.errno.ENOTCONN;
+    }
+    return super.read(length, block);
+  }
+
+  /**
    * @param {!TypedArray} buf
    * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
    * @override
@@ -2117,11 +2142,30 @@ export class UnixSocket extends StreamSocket {
   }
 
   /**
+   * @param {number} length
+   * @param {boolean=} block
+   * @return {!Promise<!WASI_t.errno|
+   *                   {buf: !Uint8Array, nread: number}|
+   *                   {buf: !Uint8Array}|
+   *                   {nread: number}>}
+   * @override
+   */
+  async read(length, block = true) {
+    if (this.address === null) {
+      return WASI.errno.EINVAL;
+    }
+    return super.read(length, block);
+  }
+
+  /**
    * @param {!TypedArray} buf
    * @return {!Promise<!WASI_t.errno|{nwritten: number}>}
    * @override
    */
   async write(buf) {
+    if (this.address === null) {
+      return WASI.errno.ENOTCONN;
+    }
     await this.callback_.write(buf);
     return {nwritten: buf.length};
   }
