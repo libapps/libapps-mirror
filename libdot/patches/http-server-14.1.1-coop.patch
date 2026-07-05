@@ -1,0 +1,129 @@
+https://github.com/http-party/http-server/commit/09c4e4ddba391c45a2addfef0afc16e48eb321fb
+
+From 09c4e4ddba391c45a2addfef0afc16e48eb321fb Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@gmail.com>
+Date: Fri, 28 Nov 2025 19:58:15 -0500
+Subject: [PATCH] add --coop option to enable cross-origin isolated (#806)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+In order to utilize some web features like SharedArrayBuffer via
+localhost, COOP & COEP headers have to be set.  Add an --coop
+option to let people easily opt-in to them.  These are important
+for things like WebAssembly testing.
+
+More information can be found at:
+https://web.dev/cross-origin-isolation-guide/
+
+Co-authored-by: Eric Dubé <7225168+KernelDeimos@users.noreply.github.com>
+---
+ README.md              |   3 ++
+ bin/http-server        |  10 ++++
+ doc/http-server.1      |   6 +++
+ lib/core/aliases.json  |   1 +
+ lib/core/defaults.json |   1 +
+ lib/core/opts.js       |   8 +++
+ lib/http-server.js     |   5 ++
+ test/coop.test.js      | 118 +++++++++++++++++++++++++++++++++++++++++
+ test/main.test.js      |   3 ++
+ 9 files changed, 155 insertions(+)
+ create mode 100644 test/coop.test.js
+
+diff --git a/bin/http-server b/bin/http-server
+index 92800226023d..61b113ada583 100755
+--- a/http-server/bin/http-server
++++ b/http-server/bin/http-server
+@@ -45,6 +45,8 @@ if (argv.h || argv.help) {
+     '',
+     '  -e --ext     Default file extension if none supplied [none]',
+     '  -s --silent  Suppress log messages from output',
++    '  --coop[=mode]   Enable COOP via the "Cross-Origin-Opener-Policy" header',
++    '                  Optionally provide COOP mode.',
+     '  --cors[=headers]   Enable CORS via the "Access-Control-Allow-Origin" header',
+     '                     When enabled, sets Access-Control-Allow-Origin to "*"',
+     '  -o [path]    Open browser window after starting the server.',
+@@ -192,6 +194,13 @@ function listen(port) {
+     password: argv.password || process.env.NODE_HTTP_SERVER_PASSWORD
+   };
+ 
++  if (argv.coop) {
++    options.coop = true;
++    if (typeof argv.coop === 'string') {
++      options.coopHeader = argv.coop;
++    }
++  }
++
+   if (argv.cors) {
+     options.cors = true;
+     if (typeof argv.cors === 'string') {
+@@ -272,6 +281,7 @@ function listen(port) {
+ 
+     logger.info([
+       chalk.yellow('\nhttp-server settings: '),
++      ([chalk.yellow('COOP: '), argv.coop ? chalk.cyan(argv.coop) : chalk.red('disabled')].join('')),
+       ([chalk.yellow('CORS: '), argv.cors ? chalk.cyan(argv.cors) : chalk.red('disabled')].join('')),
+       ([chalk.yellow('Cache: '), argv.c ? (argv.c === '-1' ? chalk.red('disabled') : chalk.cyan(argv.c + ' seconds')) : chalk.cyan('3600 seconds')].join('')),
+       ([chalk.yellow('Connection Timeout: '), argv.t === '0' ? chalk.red('disabled') : (argv.t ? chalk.cyan(argv.t + ' seconds') : chalk.cyan('120 seconds'))].join('')),
+diff --git a/lib/core/aliases.json b/lib/core/aliases.json
+index 5867807d6345..fe4118c72713 100644
+--- a/http-server/lib/core/aliases.json
++++ b/http-server/lib/core/aliases.json
+@@ -13,6 +13,7 @@
+   "hidePermissions": ["hidePermissions", "hidepermissions", "hide-permissions"],
+   "si": [ "si", "index" ],
+   "handleError": [ "handleError", "handleerror" ],
++  "coop": [ "coop", "COOP" ],
+   "cors": [ "cors", "CORS" ],
+   "headers": [ "H", "header", "headers" ],
+   "contentType": [ "contentType", "contenttype", "content-type" ],
+diff --git a/lib/core/defaults.json b/lib/core/defaults.json
+index b563ab64cf93..4b4027eaf2ab 100644
+--- a/http-server/lib/core/defaults.json
++++ b/http-server/lib/core/defaults.json
+@@ -7,6 +7,7 @@
+   "hidePermissions": false,
+   "si": false,
+   "cache": "max-age=3600",
++  "coop": false,
+   "cors": false,
+   "gzip": true,
+   "brotli": false,
+diff --git a/lib/core/opts.js b/lib/core/opts.js
+index 84f9db7c9f5d..d98418311f0c 100644
+--- a/http-server/lib/core/opts.js
++++ b/http-server/lib/core/opts.js
+@@ -144,6 +144,14 @@ module.exports = (opts) => {
+       return false;
+     });
+ 
++    aliases.coop.forEach((k) => {
++      if (isDeclared(k) && opts[k]) {
++        handleOptionsMethod = true;
++        headers['Cross-Origin-Opener-Policy'] = 'same-origin';
++        headers['Cross-Origin-Embedder-Policy'] = 'require-corp';
++      }
++    });
++
+     aliases.cors.forEach((k) => {
+       if (isDeclared(k) && opts[k]) {
+         handleOptionsMethod = true;
+diff --git a/lib/http-server.js b/lib/http-server.js
+index 5a04cfdd0e9a..0d9230e22d17 100644
+--- a/http-server/lib/http-server.js
++++ b/http-server/lib/http-server.js
+@@ -115,6 +115,11 @@ function HttpServer(options) {
+     });
+   }
+ 
++  if (options.coop) {
++    this.headers['Cross-Origin-Opener-Policy'] = options.coopHeader || 'same-origin';
++    this.headers['Cross-Origin-Embedder-Policy'] = 'require-corp';
++  }
++
+   if (options.cors) {
+     this.headers['Access-Control-Allow-Origin'] = '*';
+     this.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Range';
+-- 
+2.47.3
+

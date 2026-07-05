@@ -5,6 +5,7 @@
 
 """Run node with the right settings."""
 
+import logging
 import os
 import platform
 import shutil
@@ -99,6 +100,19 @@ def modules_update():
         "node/modules",
         NODE_MODULES_DIR,
     )
+
+    PATCHES = (
+        "http-server-14.1.1-darkmode.patch",
+        "http-server-14.1.1-coop.patch",
+    )
+    PATCHES_DIR = libdot.DIR / "patches"
+    for patch in PATCHES:
+        stamp = NODE_MODULES_DIR / f".stamp.{patch}"
+        if not stamp.exists():
+            logging.info("Applying patch %s", patch)
+            with (PATCHES_DIR / patch).open("rb") as fp:
+                libdot.run(["patch", "-p1"], stdin=fp, cwd=NODE_MODULES_DIR)
+            stamp.write_bytes(b"")
 
 
 def main(argv):

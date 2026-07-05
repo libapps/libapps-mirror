@@ -1,0 +1,37 @@
+https://github.com/http-party/http-server/commit/1d8972fe7439dec70d396cdcbc7ebe8521784d71
+
+From 1d8972fe7439dec70d396cdcbc7ebe8521784d71 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier@gmail.com>
+Date: Mon, 22 Sep 2025 14:45:22 -0400
+Subject: [PATCH] feat: add darkmode support (#827)
+
+Adds a media query for `prefers-color-scheme` to make directory listings more consistent with the color scheme of the environment.
+---
+ lib/core/show-dir/styles.js | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/lib/core/show-dir/styles.js b/lib/core/show-dir/styles.js
+index 85f6259a59e0..4d653fb3355f 100644
+--- a/http-server/lib/core/show-dir/styles.js
++++ b/http-server/lib/core/show-dir/styles.js
+@@ -9,6 +9,17 @@ css += 'table tr { white-space: nowrap; }\n';
+ css += 'td.perms {}\n';
+ css += 'td.file-size { text-align: right; padding-left: 1em; }\n';
+ css += 'td.display-name { padding-left: 1em; }\n';
++css += `
++@media (prefers-color-scheme: dark) {
++  body {
++    background-color: #303030;
++    color: #efefef;
++  }
++  a {
++    color: #ffff11;
++  }
++}
++`;
+ 
+ Object.keys(icons).forEach((key) => {
+   css += `i.icon-${key} {\n`;
+-- 
+2.47.3
+
