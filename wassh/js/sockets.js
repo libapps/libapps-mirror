@@ -148,7 +148,8 @@ export class Socket extends VFS.PathHandle {
     this.blocking_ = !(type & Constants.SOCK_NONBLOCK);
     /** @type {?function()} */
     this.receiveListener_ = null;
-
+    // Asynchronous errors for SO_ERROR.
+    this.error = WASI.errno.ESUCCESS;
     // Callback when the read is blocking.
     this.reader_ = null;
   }
@@ -249,6 +250,19 @@ export class Socket extends VFS.PathHandle {
    * @return {!Promise<!WASI_t.errno|{option: number}>}
    */
   async getSocketOption(level, name) {
+    switch (level) {
+      case SOL_SOCKET: {
+        switch (name) {
+          case SO_ERROR: {
+            const option = this.error;
+            this.error = WASI.errno.ESUCCESS;
+            return {option};
+          }
+        }
+        break;
+      }
+    }
+
     return WASI.errno.ENOPROTOOPT;
   }
 
@@ -643,14 +657,14 @@ export class ChromeTcpSocket extends StreamSocket {
    * @override
    */
   async getSocketOption(level, name) {
+    const superRet = await super.getSocketOption(level, name);
+    if (typeof superRet !== 'number' || superRet !== WASI.errno.ENOPROTOOPT) {
+      return superRet;
+    }
+
     switch (level) {
       case SOL_SOCKET: {
         switch (name) {
-          case SO_ERROR: {
-            // TODO(vapier): This should return current connection state.
-            return {option: 0};
-          }
-
           case SO_KEEPALIVE:
             return {option: this.tcpKeepAlive_ ? 1 : 0};
         }
@@ -1206,14 +1220,14 @@ export class RelaySocket extends StreamSocket {
    * @override
    */
   async getSocketOption(level, name) {
+    const superRet = await super.getSocketOption(level, name);
+    if (typeof superRet !== 'number' || superRet !== WASI.errno.ENOPROTOOPT) {
+      return superRet;
+    }
+
     switch (level) {
       case SOL_SOCKET: {
         switch (name) {
-          case SO_ERROR: {
-            // TODO(vapier): This should return current connection state.
-            return {option: 0};
-          }
-
           case SO_KEEPALIVE:
             return {option: this.tcpKeepAlive_ ? 1 : 0};
         }
@@ -1475,14 +1489,14 @@ export class WebTcpSocket extends StreamSocket {
    * @override
    */
   async getSocketOption(level, name) {
+    const superRet = await super.getSocketOption(level, name);
+    if (typeof superRet !== 'number' || superRet !== WASI.errno.ENOPROTOOPT) {
+      return superRet;
+    }
+
     switch (level) {
       case SOL_SOCKET: {
         switch (name) {
-          case SO_ERROR: {
-            // TODO(vapier): This should return current connection state.
-            return {option: 0};
-          }
-
           case SO_KEEPALIVE:
             return {option: this.tcpKeepAlive_ ? 1 : 0};
         }
@@ -1742,6 +1756,11 @@ export class WebTcpServerSocket extends StreamSocket {
    * @override
    */
   async getSocketOption(level, name) {
+    const superRet = await super.getSocketOption(level, name);
+    if (typeof superRet !== 'number' || superRet !== WASI.errno.ENOPROTOOPT) {
+      return superRet;
+    }
+
     switch (level) {
       case IPPROTO_IPV6: {
         switch (name) {
@@ -1974,6 +1993,11 @@ export class WebUdpSocket extends DatagramSocket {
    * @override
    */
   async getSocketOption(level, name) {
+    const superRet = await super.getSocketOption(level, name);
+    if (typeof superRet !== 'number' || superRet !== WASI.errno.ENOPROTOOPT) {
+      return superRet;
+    }
+
     switch (level) {
       case IPPROTO_IPV6: {
         switch (name) {
