@@ -388,11 +388,11 @@ def setup():
 
     # Make sure depot_tools is available for vpython.
     if not DEPOT_TOOLS_DIR.exists():
-        subprocess.run(
+        libdot.run(
             ["git", "clone", "--depth=1", DEPOT_TOOLS_URI, DEPOT_TOOLS_DIR],
             check=True,
         )
-        subprocess.run(
+        libdot.run(
             ["git", "log", "-1", "--oneline"],
             cwd=DEPOT_TOOLS_DIR,
             check=True,
