@@ -125,6 +125,7 @@ def test_runner_main(argv, path, serve=False, mkdeps=None):
                 libdot.node.NODE,
                 os.path.join(libdot.node.NODE_BIN_DIR, "http-server"),
                 "--cors",
+                "--coop",
                 "-a",
                 "localhost",
                 "-c-1",

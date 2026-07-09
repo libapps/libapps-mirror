@@ -26,7 +26,7 @@
   "homepage": "https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh",
   "scripts": {
     "prepare": "./bin/mkdeps",
-    "start": "http-server --cors -a localhost -c-1 ..",
+    "start": "http-server --cors --coop -a localhost -c-1 ..",
     "test": "./bin/load_tests"
   },
   "devDependencies": {
