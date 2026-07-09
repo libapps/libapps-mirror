@@ -6,3 +6,19 @@
  * @fileoverview Polyfills for ES2021+ features we want to use.
  * @suppress {duplicate} This file redefines many functions.
  */
+
+import {lib} from './lib.js';
+
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/fromBase64
+ * @param {string} string
+ * @return {!Uint8Array}
+ */
+export function fromBase64(string) {
+  return /** @type {!Uint8Array} */ (
+      lib.codec.stringToCodeUnitArray(atob(string)));
+}
+
+if (Uint8Array.fromBase64 === undefined) {
+  Uint8Array.fromBase64 = fromBase64;
+}
