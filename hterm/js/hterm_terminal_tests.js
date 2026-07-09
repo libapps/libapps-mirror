@@ -19,8 +19,7 @@ before(function() {
   // This is a 16px x 8px gif.
   this.imageBase64 = 'R0lGODdhCAAQAIAAAP///wAAACwAAAAACAAQAAACFkSAhpfMC1uMT1' +
                      'mabHWZy6t1U/htQAEAOw==';
-  this.imageArrayBuffer = lib.codec.stringToCodeUnitArray(
-      atob(this.imageBase64)).buffer;
+  this.imageArrayBuffer = Uint8Array.fromBase64(this.imageBase64).buffer;
   this.imageBlob = new Blob([this.imageArrayBuffer]);
 });
 

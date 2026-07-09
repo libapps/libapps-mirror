@@ -746,15 +746,14 @@ export class XtermTerminal {
         return true;
       }
 
-      let data;
+      let bytes;
       try {
-        data = window.atob(parsedArgs[1]);
+        bytes = Uint8Array.fromBase64(parsedArgs[1]);
       } catch (e) {
         // If the user sent us invalid base64 content, silently ignore it.
         return true;
       }
       const decoder = new TextDecoder();
-      const bytes = lib.codec.stringToCodeUnitArray(data);
       this.copyString_(decoder.decode(bytes));
 
       return true;

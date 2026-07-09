@@ -2230,16 +2230,15 @@ hterm.VT.OSC['52'] = function(parseState) {
     return;
   }
 
-  let data;
+  let bytes;
   try {
-    data = globalThis.atob(args[1]);
+    bytes = Uint8Array.fromBase64(args[1]);
   } catch (e) {
     // If the user sent us invalid base64 content, silently ignore it.
     return;
   }
   const decoder = new TextDecoder();
-  const bytes = lib.codec.stringToCodeUnitArray(data);
-  data = decoder.decode(bytes);
+  const data = decoder.decode(bytes);
   if (data) {
     this.terminal.copyStringToClipboard(data);
   }
@@ -2322,7 +2321,7 @@ hterm.VT.OSC['1337'] = function(parseState) {
     height: 'auto',
     align: 'left',
     type: '',
-    buffer: lib.codec.stringToCodeUnitArray(atob(args[2])).buffer,
+    buffer: Uint8Array.fromBase64(args[2]).buffer,
   };
   // Walk the "key=value;" sets.
   args[1].split(';').forEach((ele) => {
