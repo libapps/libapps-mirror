@@ -22,3 +22,16 @@ export function fromBase64(string) {
 if (Uint8Array.fromBase64 === undefined) {
   Uint8Array.fromBase64 = fromBase64;
 }
+
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64
+ * @this {Uint8Array}
+ * @return {string}
+ */
+export function toBase64() {
+  return btoa(lib.codec.codeUnitArrayToString(this));
+}
+
+if (Uint8Array.prototype.toBase64 === undefined) {
+  Uint8Array.prototype.toBase64 = toBase64;
+}
