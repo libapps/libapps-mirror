@@ -197,7 +197,7 @@ export class RelaySshfeWsStream extends Stream {
         }
 
         // Return the signed challenge.
-        return btoa(lib.codec.codeUnitArrayToString(result.data.slice(5)));
+        return new Uint8Array(result.data.slice(5)).toBase64();
       });
     });
   }

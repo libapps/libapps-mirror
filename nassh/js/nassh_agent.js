@@ -177,7 +177,7 @@ Agent.prototype.handleRequest_ = function(request) {
  * @return {string}
  */
 export function keyBlobToAuthorizedKeysFormat(keyBlob) {
-  const keyBlobBase64 = btoa(lib.codec.codeUnitArrayToString(keyBlob));
+  const keyBlobBase64 = keyBlob.toBase64();
   // Extract and prepend key type prefix.
   const dv = new DataView(keyBlob.buffer, keyBlob.byteOffset);
   const prefixLength = dv.getUint32(0);

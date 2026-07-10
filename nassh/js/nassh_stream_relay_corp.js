@@ -275,8 +275,7 @@ export class RelayCorpXhrStream extends RelayCorpStream {
     }
 
     const dataBuffer = this.writeBuffer_.read(this.maxMessageLength);
-    const data = base64ToBase64Url(btoa(
-        lib.codec.codeUnitArrayToString(dataBuffer)));
+    const data = base64ToBase64Url(dataBuffer.toBase64());
     this.writeRequest_.open(
         'GET',
         `${this.relayServer_}write?sid=${this.sessionID_}&wcnt=${
