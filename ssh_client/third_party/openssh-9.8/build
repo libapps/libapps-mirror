@@ -33,8 +33,6 @@ def src_configure(metadata):
 
     tc = metadata["toolchain"]
 
-    EXTRA_CFLAGS = []
-
     EXTRA_CONFIGURE_FLAGS = [
         # Log related settings.
         "--disable-lastlog",
@@ -93,7 +91,6 @@ def src_configure(metadata):
         "--prefix=/",
         "--sysconfdir=/etc/ssh",
         "--cache-file=../config.cache",
-        f"CFLAGS={' '.join(EXTRA_CFLAGS)}",
     ]
     ssh_client.run(cmd + EXTRA_CONFIGURE_FLAGS)
 
