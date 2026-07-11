@@ -164,8 +164,9 @@ int chown(const char* path, uid_t uid, gid_t gid) {
 //
 // For example, basic ssh breaks pretty quickly if it sanitizes on startup.
 // https://crbug.com/1312165
-int closefrom(int fd) {
-  STUB_RETURN(0, "fd=%i", fd);
+void closefrom(int fd) {
+  _ENTER("STUB fd=%i", fd);
+  _EXIT("return");
 }
 
 #ifndef __WASM_EXCEPTIONS__
