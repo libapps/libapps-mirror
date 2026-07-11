@@ -105,7 +105,7 @@ chai.assert.property = function(object, property, message) {};
 
 /**
  * @param {Function} fn
- * @param {string|Error|RegExp=} errMsgMatcher
+ * @param {string|Error|typeof Error|RegExp=} errMsgMatcher
  */
 chai.assert.throws = function(fn, errMsgMatcher) {};
 
