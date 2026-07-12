@@ -331,6 +331,11 @@ def _toolchain_wasm_env(target: str) -> dict:
                 # size much larger should "just work".  Since it's using virtual
                 # memory, it shouldn't cost us anything when not actually used.
                 f"-Wl,--max-memory={64 * 1024 * 1024}",
+                # Clang will automatically run wasm-opt if it's found via $PATH,
+                # and if optimization levels are high.  We already run wasm-opt
+                # ourselves with tuned settings, especially to workaround bugs
+                # in the tool we run into.
+                "--no-wasm-opt",
             )
         ),
     }
