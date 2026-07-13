@@ -65,8 +65,7 @@ export class ProgressBar {
     if (this.mode_ == this.RANDOM) {
       this.io_.print(`${String.fromCodePoint(this.pos_)}\r`);
       // Pick a new random code point.
-      this.pos_ =
-          Math.floor(Math.random() * (this.max_ - this.min_ + 1)) + this.min_;
+      this.pos_ = lib.f.randomInt(this.min_, this.max_);
     } else {
       // Rate limit how often we update.  Updating too often can slow us down.
       // 250ms seems to be a decent balance between user feedback and not being
