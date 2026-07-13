@@ -6,6 +6,7 @@
  * @fileoverview Test framework setup when run inside the browser.
  */
 
+import {lib} from '../index.js';
 import * as libTest from './lib_test_util.js';
 
 libTest.main({
@@ -28,3 +29,6 @@ libTest.main({
     // go/keep-sorted end
   ],
 });
+
+// Export for debugging in the JS console.
+globalThis['lib'] = lib;
