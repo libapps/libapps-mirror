@@ -295,6 +295,7 @@ def _toolchain_wasm_env(target: str) -> dict:
         "PKG_CONFIG_LIBDIR": str(pcdir),
         "SYSROOT": str(sysroot),
         "MULTITARGET": target,
+        "CFLAGS": "-O2 -g0 -pipe",
         "CPPFLAGS": " ".join(
             (
                 f'-isystem {incdir / "wassh-libc-sup"}',
