@@ -9,7 +9,7 @@
 
 import {lib} from '../../libdot/index.js';
 
-import {assert} from '../../node_modules/chai/chai.js';
+import * as chai from '../../node_modules/chai/chai.js';
 
 /**
  * Run the main test page.
@@ -28,8 +28,10 @@ export function main({globals, base = '', files = []} = {}) {
   mocha.setup({ui: 'bdd', globals});
   mocha.checkLeaks();
 
-  // Add a global shortcut to the assert API.
-  globalThis['assert'] = assert;
+  // Add a global shortcut to the assert API.  We export chai too as some code
+  // uses that to detect whether we're running unittests or production code.
+  globalThis['assert'] = chai.assert;
+  globalThis['chai'] = chai;
 
   // Catch any random errors before the test runner runs.
   let earlyError = null;
