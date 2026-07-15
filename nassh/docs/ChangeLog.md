@@ -1,3 +1,27 @@
+# 0.79, 2026-07-20, OpenSSH 10.4 upgrade & improve socket stability.
+
+* nasftp: Use lib.f.randomInt helper.
+* ssh_client: wassh-libc-sup: Fix closefrom return.
+* wassh: sockets: Handle async read failures gracefully.
+* nassh: Convert to Uint8Array.toBase64.
+* nassh: Convert to Uint8Array.fromBase64.
+* wassh: sockets: Handle disconnected read/write better.
+* sftp_client: Convert to ES6 classes.
+* ssh_client: openssh: Upgrade to 10.4.
+* credential_cache: Convert to ES6 classes.
+* wassh: sockets: Fill out SO_ERROR handling.
+* sftp: Convert Packet helpers to ES6 classes.
+* wassh: sockets: Support SOCK_{NONBLOCK,CLOEXEC}.
+* ssh_client: wassh-libc-sup: Drop socket() argument validation.
+* wassh: sockets: Create dedicated type constants.
+* ssh_client: openssh: Drop POLLPRI stub.
+* ssh_client: wassh-libc-sup: Add our own ppoll emulation.
+* omnibox: Fix early calls again.
+* wassh: sockets: Add more graceful error handling.
+* nassh: google: Use v4/Websocket for SUP SSH Relay.
+* google: Route SUP SSH Relay from ssh-relay.corp.google.com to sup-ssh-relay.corp.google.com.
+* ssh_config: Support policy content.
+
 # 0.78, 2026-06-04, Switch to Direct Sockets by default.
 
 * nassh: sockets: Enable direct sockets in the stable version.
