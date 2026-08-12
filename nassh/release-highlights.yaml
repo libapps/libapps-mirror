@@ -14,5 +14,5 @@ last_version: "0.77"
 # NB: To use escape sequences, quote the string and use \uXXXX syntax:
 #     - "\u001b]8;;https://example.com\u0007Example Link\u001b]8;;\u0007."
 notes:
-  - "\u001b]8;;https://www.openssh.com/txt/release-10.4\u0007OpenSSH upgraded to 10.4p1\u001b]8;;\u0007."
+  - "\u001b]8;;https://www.openssh.com/txt/release-10.5\u0007OpenSSH upgraded to 10.5p1\u001b]8;;\u0007."
   - "Direct Sockets enabled by default (--field-trial-direct-sockets)."
