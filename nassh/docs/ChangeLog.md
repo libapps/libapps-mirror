@@ -1,3 +1,8 @@
+# 0.80, 2026-08-24, OpenSSH 10.5 upgrade.
+
+* ssh_client: openssh: Upgrade to 10.5.
+* nassh: plugin: Update to 0.79.
+
 # 0.79, 2026-07-20, OpenSSH 10.4 upgrade & improve socket stability.
 
 * nasftp: Use lib.f.randomInt helper.
