@@ -6,8 +6,7 @@ These are the various extensions we've made to the syscall API.
 This document is only meant as a reference for the syscalls.
 Please see the [wassh] documentation for higher level designs.
 
-Note: The symbols are using `wassh_experimental` for imports.
-We'll change this to `wassh` once things are working.
+Note: The symbols are using `wassh` for imports.
 
 [TOC]
 

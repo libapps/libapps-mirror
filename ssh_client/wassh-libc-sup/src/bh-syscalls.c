@@ -28,10 +28,8 @@
 //
 // There's no hard requirement between these symbol names.  This is purely the
 // convention we've adopted for namespacing reasons.
-//
-// NB: We'll use "wassh_experimental" until we've got this working.
 #define SYSCALL(name)                                     \
-  __attribute__((__import_module__("wassh_experimental"), \
+  __attribute__((__import_module__("wassh"), \
                  __import_name__(#name)))                 \
   __attribute__((__warn_unused_result__)) __wasi_errno_t __wassh_##name
 

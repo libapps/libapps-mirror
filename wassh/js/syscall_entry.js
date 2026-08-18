@@ -14,10 +14,22 @@ import * as Constants from './constants.js';
 /**
  * WASSH syscall extensions.
  */
-export class WasshExperimental extends SyscallEntry.Base {
+export class Wassh extends SyscallEntry.Base {
   constructor(runtime) {
     super(runtime);
-    this.namespace = 'wassh_experimental';
+    this.namespace = 'wassh';
+  }
+
+  /**
+   * Backwards compat support until we get new binaries out.
+   *
+   * @return {!Object<string, !Array<string>>}
+   * @override
+   */
+  getImports() {
+    const ret = super.getImports();
+    ret['wassh_experimental'] = ret['wassh'];
+    return ret;
   }
 
   /**
