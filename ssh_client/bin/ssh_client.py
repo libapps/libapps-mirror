@@ -315,7 +315,6 @@ def _toolchain_wasm_env(target: str) -> dict:
                     "-Wl,--allow-undefined-file="
                     f"{libdir / 'wassh-libc-sup.imports'}"
                 ),
-                "-Wl,--export=__wassh_signal_deliver",
                 # Move the stack in the memory layout to help catch stack
                 # overflows better.
                 # https://github.com/llvm/llvm-project/issues/151015

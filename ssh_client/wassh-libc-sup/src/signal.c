@@ -15,6 +15,7 @@
 //
 // NB: The signal number uses musl ABI, not WASI ABI, and many signal numbers
 // are different between the two!
+__attribute__((__export_name__("__wassh_signal_deliver")))
 void __wassh_signal_deliver(int signum) {
   if (signum < 0 || signum >= NSIG)
     return;
