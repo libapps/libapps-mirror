@@ -23,6 +23,24 @@ import {Stream} from './nassh_stream.js';
 let AgentResponse;
 
 /**
+ * @typedef {{
+ *     type: string,
+ *     response: {
+ *       responseData: {
+ *         id: string,
+ *         response: {
+ *           clientDataJSON: string,
+ *           authenticatorData: string,
+ *           signature: string,
+ *         },
+ *       },
+ *     },
+ *     errorDetail: (string|undefined),
+ * }}
+ */
+let SkeResponse;
+
+/**
  * WebSocket backed stream.
  *
  * This class manages the read and write through WebSocket to communicate
@@ -73,18 +91,23 @@ export class RelaySshfeWsStream extends Stream {
     this.port_ = settings.port;
     this.sshAgent_ = settings.sshAgent;
 
-    // The SSH-FE challenge details.
-    let sshFeChallenge = null;
-    let sshFeSignature = null;
-
     return this.getChallenge_()
-      .then((challenge) => {
-        sshFeChallenge = challenge;
-        return this.signChallenge_(challenge);
-      })
-      .then((signature) => {
-        sshFeSignature = base64ToBase64Url(signature);
-        this.connect_(sshFeChallenge, sshFeSignature);
+      .then(({challenge: sshFeChallenge, allowCredentials}) => {
+        // Attempt CR52 signing first. If CR52 is unavailable/fails and FIDO2
+        // credentials exist in the challenge, fallback to WebAuthn.
+        return this.signChallenge_(sshFeChallenge)
+          .then((signature) => {
+            this.connect_(sshFeChallenge, base64ToBase64Url(signature), null);
+          })
+          .catch((signErr) => {
+            if (allowCredentials && allowCredentials.length > 0) {
+              return this.webauthnSign_(sshFeChallenge, allowCredentials)
+                .then((assertion) => {
+                  this.connect_(sshFeChallenge, null, assertion);
+                });
+            }
+            throw signErr;
+          });
       });
   }
 
@@ -122,7 +145,10 @@ export class RelaySshfeWsStream extends Stream {
 
         // Pull out the challenge from the response.
         const obj = JSON.parse(result.slice(5));
-        return obj.challenge;
+        return {
+          challenge: obj.challenge,
+          allowCredentials: obj.allowCredentials,
+        };
       });
   }
 
@@ -203,28 +229,93 @@ export class RelaySshfeWsStream extends Stream {
   }
 
   /**
+   * Sign the challenge using WebAuthn.
+   *
+   * @param {string} challenge The server challenge.
+   * @param {!Array<string>} allowCredentials List of allowed credential IDs.
+   * @return {!Promise<string>} A promise resolving to the assertion.
+   */
+  webauthnSign_(challenge, allowCredentials) {
+    const creds = allowCredentials.map((cred) => {
+      return {
+        type: 'public-key',
+        id: cred,
+      };
+    });
+
+    const getAssertionRequest = {
+      type: 'get',
+      requestData: {
+        // The source of truth for rpId is RPID in:
+        // http://google3/security/authcontroller/assembly/ssh_fe/constants.go;l=40;rcl=970732265
+        rpId: 'upld.corp.google.com',
+        challenge: challenge,
+        allowCredentials: creds,
+        userVerification: 'required',
+      },
+    };
+
+    const skeRequest = {
+      type: 'webauthn_request',
+      data: getAssertionRequest,
+    };
+
+    return /** @type {!Promise<!SkeResponse>} */ (
+        runtimeSendMessage(this.sshAgent_, skeRequest))
+          .then((response = {}) => {
+            if (response?.type === 'webauthn_response' &&
+                response?.response?.responseData) {
+              const assertion = response.response.responseData;
+              const upldResp = {
+                'clientDataJSON': assertion.response.clientDataJSON,
+                'authenticatorData': assertion.response.authenticatorData,
+                'signature': assertion.response.signature,
+                'credentialId': assertion.id,
+              };
+
+              return base64ToBase64Url(btoa(JSON.stringify(upldResp)));
+            } else {
+              let errorDetail = 'Failed to get WebAuthn assertion';
+              if (response?.type === 'error_response') {
+                errorDetail = response.errorDetail;
+              }
+              throw new Error(errorDetail);
+            }
+          });
+  }
+
+
+  /**
    * Start a new connection to the proxy server.
    *
    * @param {string} challenge
-   * @param {string} signature
+   * @param {?string} signature
+   * @param {?string=} webauthnAssertion
    */
-  connect_(challenge, signature) {
+  connect_(challenge, signature, webauthnAssertion = null) {
     if (this.socket_) {
       throw new Error('stream already connected');
     }
 
-    const uri = lib.f.replaceVars(this.connectTemplate_, {
+    let uri = lib.f.replaceVars(this.connectTemplate_, {
       protocol: 'wss',
       relayHost: this.relayHost_,
       relayPort: this.relayPort_,
-      relayUser: this.relayUser_,
       challenge: challenge,
-      signature: signature,
       host: this.host_,
       port: this.port_,
+      user: this.relayUser_,
       readCount: this.readCount_,
       writeCount: 0,
     });
+
+    if (signature) {
+      uri += `&ssh-fe-signature=${encodeURIComponent(signature)}`;
+    }
+    if (webauthnAssertion) {
+      uri += '&ssh-fe-webauthn-assertion-response=' +
+             encodeURIComponent(webauthnAssertion);
+    }
 
     this.socket_ = new WebSocket(uri);
     this.socket_.binaryType = 'arraybuffer';
@@ -381,9 +472,8 @@ RelaySshfeWsStream.prototype.maxMessageLength = 64 * 1024;
 RelaySshfeWsStream.prototype.connectTemplate_ =
     `%(protocol)://%(relayHost):%(relayPort)/connect` +
     `?ssh-fe-challenge=%encodeURIComponent(challenge)` +
-    `&ssh-fe-signature=%encodeURIComponent(signature)` +
     `&host=%encodeURIComponent(host)` +
     `&port=%encodeURIComponent(port)` +
-    `&user=%encodeURIComponent(relayUser)` +
+    `&user=%encodeURIComponent(user)` +
     `&ack=%(readCount)` +
     `&pos=%(writeCount)`;
