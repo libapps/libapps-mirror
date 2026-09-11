@@ -1,3 +1,9 @@
+# 0.81, 2026-09-16, Fix ssh known_hosts corruption on update.
+
+* wassh-libc-sup: Move signal export to source file.
+* wassh: Drop "experimental" from wasm namespace.
+* nassh: plugin: Update to 0.80.
+
 # 0.80, 2026-08-24, OpenSSH 10.5 upgrade.
 
 * ssh_client: openssh: Upgrade to 10.5.
