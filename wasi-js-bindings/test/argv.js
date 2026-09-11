@@ -73,6 +73,7 @@ async function run(prog, argv) {
   });
   const ret = await proc.run();
   assert.equal(handler.stderr, '');
+  assert.equal(ret, 0);
   return {
     returncode: ret,
     stdout: handler.stdout,
@@ -162,6 +163,7 @@ it('not array', async function() {
     /** @suppress {checkTypes} We call run() incorrectly on purpose. */
     const run_ = async () => { await run(this.prog, {}); };
     await run_();
+    assert.fail('Should have thrown an error');
   } catch (e) {
     // assert.throws doesn't work with promises.
     assert.instanceOf(e, util.ApiViolation);
@@ -174,6 +176,7 @@ it('not array', async function() {
 it('not string', async function() {
   try {
     await run(this.prog, ['ok', 123]);
+    assert.fail('Should have thrown an error');
   } catch (e) {
     // assert.throws doesn't work with promises.
     assert.instanceOf(e, util.ApiViolation);

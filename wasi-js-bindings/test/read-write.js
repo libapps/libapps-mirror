@@ -64,6 +64,7 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
     super(...args);
     this.stdout = '';
     this.stderr = '';
+    this.passlog = '';
     this.td = new TextDecoder();
     this.fd = {};
   }
@@ -89,6 +90,10 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
 
       case 2:
         this.stderr += this.td.decode(buf, {stream: true});
+        return WASI.errno.ESUCCESS;
+
+      case 99:
+        this.passlog = this.td.decode(buf);
         return WASI.errno.ESUCCESS;
 
       default: {
@@ -118,6 +123,7 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
       case 0:
       case 1:
       case 2:
+      case 99:
         return WASI.errno.EINVAL;
 
       default: {
@@ -151,6 +157,7 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
 
       case 1:
       case 2:
+      case 99:
         return WASI.errno.EINVAL;
 
       default: {
@@ -188,6 +195,7 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
 
       case 1:
       case 2:
+      case 99:
         return WASI.errno.EINVAL;
 
       default: {
@@ -223,12 +231,14 @@ async function run(prog, argv) {
       new SyscallEntry.WasiPreview1({sys_handlers}),
     ],
   });
-  let ret;
-  try {
-    ret = await proc.run();
-  } catch (e) {
-    assert.fail(`${handler.stdout}\n${handler.stderr}\n${e}`);
-  }
+  const ret = await proc.run();
+  const msg =
+    `exit: ${ret}\n` +
+    `stderr:\n${handler.stderr}\n` +
+    `stdout:\n${handler.stdout}\n`;
+  assert.equal(ret, 0, msg);
+  assert.equal(handler.stderr, '', msg);
+  assert.equal(handler.passlog, 'PASS', msg);
   return {
     returncode: ret,
     stdout: handler.stdout,

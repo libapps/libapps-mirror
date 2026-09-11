@@ -162,5 +162,8 @@ int main(int argc, char* argv[]) {
     }
   }
 
+  ret = write(99, "PASS", 4);
+  assert(ret == 4);
+
   return 0;
 }
