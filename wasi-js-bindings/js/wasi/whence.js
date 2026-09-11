@@ -6,6 +6,6 @@
  * @fileoverview WASI whence API constants from wasi/api.h.
  */
 
-export const CUR = 0;
-export const END = 1;
-export const SET = 2;
+export const SET = 0;
+export const CUR = 1;
+export const END = 2;

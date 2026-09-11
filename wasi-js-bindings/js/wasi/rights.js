@@ -35,3 +35,4 @@ export const PATH_REMOVE_DIRECTORY = 33554432n;
 export const PATH_UNLINK_FILE = 67108864n;
 export const POLL_FD_READWRITE = 134217728n;
 export const SOCK_SHUTDOWN = 268435456n;
+export const SOCK_ACCEPT = 536870912n;
