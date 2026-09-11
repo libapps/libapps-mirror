@@ -17,18 +17,12 @@ describe('read-write.js', () => {
 class FileHandle {
   constructor() {
     this.buf = new Uint8Array(0);
-    // NB: This is not how a standard file handle behaves -- it only has one
-    // file offset pointer, and it moves based on reads & writes.  We maintain
-    // separate ones here purely for ease of testing: it allows us to write to
-    // a fd then quickly read the data back out.  To support a single offset,
-    // we'd have to implement & include lseek usage in our testing.
-    this.write_pos = 0;
-    this.read_pos = 0;
+    this.pos = 0;
   }
 
   write(buf) {
-    const ret = this.pwrite(buf, this.write_pos);
-    this.write_pos += ret;
+    const ret = this.pwrite(buf, this.pos);
+    this.pos += ret;
     return ret;
   }
 
@@ -44,8 +38,8 @@ class FileHandle {
   }
 
   read(length) {
-    const buf = this.pread(length, this.read_pos);
-    this.read_pos += buf.length;
+    const buf = this.pread(length, this.pos);
+    this.pos += buf.length;
     return buf;
   }
 
@@ -211,6 +205,41 @@ class TestSyscallHandler extends SyscallHandler.DirectWasiPreview1 {
       }
     }
   }
+
+  /**
+   * @param {!WASI_t.fd} fd
+   * @param {!WASI_t.filedelta} offset
+   * @param {!WASI_t.whence} whence
+   * @return {!WASI_t.errno|{newoffset: !WASI_t.filesize}}
+   * @override
+   */
+  handle_fd_seek(fd, offset, whence) {
+    const fh = this.fd[fd];
+    if (fh === undefined) {
+      return WASI.errno.EBADF;
+    }
+
+    let pos = fh.pos;
+    switch (whence) {
+      case WASI.whence.SET:
+        pos = Number(offset);
+        break;
+      case WASI.whence.CUR:
+        pos += Number(offset);
+        break;
+      case WASI.whence.END:
+        pos = fh.buf.length + Number(offset);
+        break;
+      default:
+        return WASI.errno.EINVAL;
+    }
+    if (pos < 0 || pos > fh.buf.length) {
+      return WASI.errno.EINVAL;
+    }
+    fh.pos = pos;
+
+    return {newoffset: BigInt(fh.pos)};
+  }
 }
 
 /**
@@ -273,6 +302,47 @@ it('asserts', async function() {
 });
 
 /**
+ * Verify lseek() works.
+ */
+it('lseek', async function() {
+  await run(this.prog, [
+    'clear-errno',
+    'write', '3', '',
+    'lseek', '3', '0', 'CUR',
+    'errno', '0',
+    'ret', '0',
+
+    // Write 3 bytes.
+    'write', '3', 'abc',
+    // Seek with current position, but don't adjust position.
+    'lseek', '3', '0', 'CUR',
+    'errno', '0',
+    'ret', '3',
+    // Seek forward 1 byte past end of file -> error.
+    'lseek', '3', '1', 'CUR',
+    'errno', `${WASI.errno.EINVAL}`,
+    'clear-errno',
+    'ret', '-1',
+    // Seek to start of file.
+    'lseek', '3', '0', 'SET',
+    'errno', '0',
+    'ret', '0',
+    // Seek to 2nd byte.
+    'lseek', '3', '1', 'SET',
+    'ret', '1',
+    // Seek to end of file.
+    'lseek', '3', '0', 'END',
+    'ret', '3',
+    // Seek to just before end of file.
+    'lseek', '3', '-1', 'END',
+    'ret', '2',
+
+    'read', '3', '1',
+    'string', 'c',
+  ]);
+});
+
+/**
  * Verify read() works.
  */
 it('read', async function() {
@@ -286,6 +356,7 @@ it('read', async function() {
     // Write to an fd and then read the data back out.
     'clear-errno',
     'write', '3', 'abcde',
+    'lseek', '3', '0', 'SET',
     'read', '3', '5',
     'ret', '5',
     'errno', '0',
@@ -307,6 +378,7 @@ it('readv', async function() {
     // Write to an fd and then read the data back out.
     'clear-errno',
     'write', '3', 'abcde',
+    'lseek', '3', '0', 'SET',
     'readv', '3', '4', '2', '0', '2', '1',
     'ret', '5',
     'errno', '0',
@@ -376,6 +448,7 @@ it('write', async function() {
     'write', '3', 'abcde',
     'ret', '5',
     'errno', '0',
+    'lseek', '3', '0', 'SET',
     'read', '3', '5',
     'string', 'abcde',
   ]);
@@ -397,6 +470,7 @@ it('writev', async function() {
     'writev', '3', '3', 'a', 'bcd', 'e',
     'ret', '5',
     'errno', '0',
+    'lseek', '3', '0', 'SET',
     'read', '3', '5',
     'string', 'abcde',
   ]);

@@ -133,6 +133,25 @@ int main(int argc, char* argv[]) {
       }
       ret = pwritev(fd, iov, count, off);
 
+      // Seeks.
+    } else if (streq(mode, "lseek")) {
+      int fd = atoi(argv[++i]);
+      int off = atoi(argv[++i]);
+      int whence;
+      const char *swhence = argv[++i];
+      if (streq(swhence, "SET")) {
+        whence = SEEK_SET;
+      } else if (streq(swhence, "CUR")) {
+        whence = SEEK_CUR;
+      } else if (streq(swhence, "END")) {
+        whence = SEEK_END;
+      } else {
+        abort();
+      }
+      ret = lseek(fd, off, whence);
+      printf("lseek(%i, %i, %i) = %zi  errno=%i(%s)\n", fd, off, whence, ret,
+             errno, strerror(errno));
+
       // Asserts.
     } else if (streq(mode, "ret")) {
       int exp = atoi(argv[++i]);
@@ -154,6 +173,8 @@ int main(int argc, char* argv[]) {
       // Misc
     } else if (streq(mode, "clear-errno")) {
       errno = 0;
+    } else if (streq(mode, "break")) {
+      break;
 
       // Unknown.
     } else {
