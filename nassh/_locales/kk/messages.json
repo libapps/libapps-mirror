@@ -678,7 +678,7 @@
 		"message": "Ашық кодты бағдарлама лицензиялары"
 	},
 	"loading_label": {
-		"message": "Жүктелуде…"
+		"message": "Жүктеліп жатыр…"
 	},
 	"missing_param": {
 		"message": "$1 параметрі жоқ."
@@ -792,7 +792,7 @@
 		"message": "Сұрау жолын қосу"
 	},
 	"nasftp_cmd_put_help": {
-		"message": "Файлдарды жүктеп салу"
+		"message": "Файлдар жүктеп салу"
 	},
 	"nasftp_cmd_put_upload_file": {
 		"message": "Жүктеп салынатын файл: $1 – $2 ($3)"

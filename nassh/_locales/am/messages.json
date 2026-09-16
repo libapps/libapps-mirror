@@ -1055,6 +1055,9 @@
 	"ssh_cert_check_start": {
 		"message": "የ SSH የእውቅና ማረጋገጫ እድሳት..."
 	},
+	"ssh_client_button_label": {
+		"message": "ኤስኤስኤች"
+	},
 	"stream_open_error": {
 		"message": "ዥረት $1ን መክፈት አልተሳካም፦ $2"
 	},

@@ -120,7 +120,7 @@
 		"message": "$1٪ پیمایش شده است،"
 	},
 	"hterm_button_allow_always": {
-		"message": "همیشه مجاز"
+		"message": "همیشه اجازه دادن"
 	},
 	"hterm_button_allow_session": {
 		"message": "اجازه دادن به این جلسه"
@@ -738,7 +738,7 @@
 		"message": "تغییر وضعیت استفاده از رنگ"
 	},
 	"nasftp_cmd_copy": {
-		"message": "کپی"
+		"message": "کپی کردن"
 	},
 	"nasftp_cmd_copy_help": {
 		"message": "کپی کردن مسیر راه‌دور در مسیر راه‌دور دیگر"
@@ -753,7 +753,7 @@
 		"message": "  مسیر: $1\n  fsid: $2\n مجموع: $3\n  استفاده‌شده: $4 ($5%)\n سند اطلاعاتی: $6 (کاربران لغوامتیازشده)\n $7 (ریشه‌یابی)"
 	},
 	"nasftp_cmd_exit": {
-		"message": "خروج"
+		"message": "خارج شدن"
 	},
 	"nasftp_cmd_exit_help": {
 		"message": "قطع اتصال"
@@ -843,7 +843,7 @@
 		"message": "فهرست راهنمای کار ازراه‌دور: $1"
 	},
 	"nasftp_cmd_quit": {
-		"message": "خروج"
+		"message": "رها کردن"
 	},
 	"nasftp_cmd_readlink": {
 		"message": "پیوندخوانی"
@@ -1338,7 +1338,7 @@
 		"message": "رنگ ۹: قرمز روشن"
 	},
 	"terminal_title_pref_appearance": {
-		"message": "شکل ظاهری"
+		"message": "ظاهر"
 	},
 	"terminal_title_pref_background": {
 		"message": "پس‌زمینه"
@@ -1407,7 +1407,7 @@
 		"message": "با‌استفاده از hterm-notify، اعلان‌ها را در مرورگر نمایش دهید: https://hterm.org/x/faq/notify-sh"
 	},
 	"tip_3": {
-		"message": "با تایپ کردن «ssh<Tab><profile name>» از omnibox متصل شوید: https://hterm.org/x/ssh/faq/omnibox"
+		"message": "با تایپ کردن «ssh<Tab><profile name>» از «جعبه چندمنظوره» متصل شوید: https://hterm.org/x/ssh/faq/omnibox"
 	},
 	"tip_4": {
 		"message": "ChromeOS می‌تواند سیستم‌های فایل را ازطریق SFTP بنشاند و ازطریق برنامه Files مرور کند. به‌جای «اتصال» از «پایه SFTP» استفاده کنید."

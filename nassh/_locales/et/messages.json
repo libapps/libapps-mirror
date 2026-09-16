@@ -1302,7 +1302,7 @@
 		"message": "Ettelugemiseks on liiga palju teksti. Lugemiseks liikuge ridadele käsitsi."
 	},
 	"terminal_try_again_with_internet": {
-		"message": "Looge ühendus internetiga ja proovige uuesti."
+		"message": "Looge internetiühendus ja proovige uuesti."
 	},
 	"tip_1": {
 		"message": "Linkide avamiseks hoidke nendel klõpsamisel all klahvi Ctrl (Mac OS-is klahvi Cmd)."

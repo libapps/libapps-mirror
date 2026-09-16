@@ -921,7 +921,7 @@
 		"message": "$1 प्रोग्राम लोड हुँदै छ..."
 	},
 	"plugin_loading_complete": {
-		"message": " सम्पन्न भयो।"
+		"message": " भयो।"
 	},
 	"plugin_loading_failed": {
 		"message": " लोड गर्न सकिएन! :("

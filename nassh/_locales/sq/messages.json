@@ -1034,6 +1034,9 @@
 	"ssh_cert_check_start": {
 		"message": "Po kontrollohet rifreskimi i certifikatës SSH..."
 	},
+	"ssh_client_button_label": {
+		"message": "SSH-ja"
+	},
 	"stream_open_error": {
 		"message": "Hapja e transmetimit $1 dështoi: $2"
 	},

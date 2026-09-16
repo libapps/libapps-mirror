@@ -924,7 +924,7 @@
 		"message": "<url><match>user@hostname[:port]</match></url> Connettiti a un profilo salvato o a un nuovo sistema ssh"
 	},
 	"open_as_window_tip": {
-		"message": "[Suggerimento avanzato] Utilizza \"Apri in una finestra\" o \"Schermo intero\" per evitare che Ctrl + W chiuda il terminale.\n[Suggerimento avanzato] Visita la pagina $1 per ulteriori informazioni."
+		"message": "[Consiglio da pro] Utilizza \"Apri in una finestra\" o \"Schermo intero\" per evitare che Ctrl + W chiuda il terminale.\n[Consiglio da pro] Visita la pagina $1 per ulteriori informazioni."
 	},
 	"plugin_loading": {
 		"message": "Caricamento del programma $1 in corso…"
@@ -1377,7 +1377,7 @@
 		"message": "Modifiche importanti dalla versione $1:"
 	},
 	"welcome_tip_of_day": {
-		"message": "Suggerimento avanzato casuale n. $1: $2"
+		"message": "Consiglio da pro casuale n. $1: $2"
 	},
 	"welcome_version": {
 		"message": "Ti diamo il benvenuto in $1 versione $2."

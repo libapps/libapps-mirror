@@ -270,7 +270,7 @@
 		"message": "Markeringsfärg för valt sökresultat"
 	},
 	"hterm_name_pref_font_family": {
-		"message": "Textens teckensnittsfamilj"
+		"message": "Textens fontfamilj"
 	},
 	"hterm_name_pref_font_size": {
 		"message": "Textens teckenstorlek"
@@ -510,13 +510,13 @@
 		"message": "Bakgrundsfärg som markerar det sökresultat som just nu är valt."
 	},
 	"hterm_pref_font_family": {
-		"message": "Teckensnittsfamilj som ska användas som standard för text i terminalfönstret."
+		"message": "Fontfamilj som ska användas som standard för text i terminalfönstret."
 	},
 	"hterm_pref_font_size": {
-		"message": "Teckensnittets standardstorlek i pixlar."
+		"message": "Fontens standardstorlek i pixlar."
 	},
 	"hterm_pref_font_smoothing": {
-		"message": "CSS-egenskap för teckensnittsutjämning"
+		"message": "CSS-egenskap för fontutjämning"
 	},
 	"hterm_pref_foreground_color": {
 		"message": "Förgrundsfärg för text utan andra färgattribut."
@@ -630,7 +630,7 @@
 		"message": "Blanksteg"
 	},
 	"hterm_title_pref_appearance": {
-		"message": "Utseende (teckensnitt, färger, bilder)"
+		"message": "Utseende (font, färger, bilder)"
 	},
 	"hterm_title_pref_copypaste": {
 		"message": "Kopiera och klistra in"

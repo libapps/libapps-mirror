@@ -1085,6 +1085,9 @@
 	"ssh_cert_check_start": {
 		"message": "SSH प्रमाणपत्र की मंज़ूरी खत्म होने के समय का पता लगाया जा रहा है..."
 	},
+	"ssh_client_button_label": {
+		"message": "एसएसएच"
+	},
 	"stream_open_error": {
 		"message": "स्ट्रीम $1 को खोला नहीं जा सका: $2"
 	},

@@ -1046,6 +1046,9 @@
 	"ssh_cert_check_start": {
 		"message": "جارٍ التحقق من صلاحية شهادة SSH..."
 	},
+	"ssh_client_button_label": {
+		"message": "بروتوكول النقل الآمن (SSH)"
+	},
 	"stream_open_error": {
 		"message": "تعذّر فتح البث $1: $2."
 	},

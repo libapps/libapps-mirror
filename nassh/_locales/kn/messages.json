@@ -1074,7 +1074,7 @@
 		"message": "ಪ್ರತಿಕ್ರಿಯೆ ಕಳುಹಿಸಿ"
 	},
 	"shortcut_list_aria_label": {
-		"message": "ಉಳಿಸಿದ ಕನೆಕ್ಷನ್‌ಗಳು"
+		"message": "ಸೇವ್ ಮಾಡಿದ ಕನೆಕ್ಷನ್‌ಗಳು"
 	},
 	"smart_card_connector_not_installed": {
 		"message": "ಸ್ಮಾರ್ಟ್‌ ಕಾರ್ಡ್‌ ಕನೆಕ್ಟರ್‌ ಆ್ಯಪ್‌ ಅನ್ನು ಇನ್‌ಸ್ಟಾಲ್‌ ಮಾಡಿ: $1"
@@ -1125,7 +1125,7 @@
 		"message": "SSH ಎಡಿಟ್ ಮಾಡಿ"
 	},
 	"terminal_home_import_identity": {
-		"message": "ಆಮದು ಮಾಡಿ"
+		"message": "ಇಂಪೋರ್ಟ್ ಮಾಡಿ"
 	},
 	"terminal_home_linux_not_enabled": {
 		"message": "Linux ಅನ್ನು ನಿರ್ವಹಿಸಲು, ಡೆವಲಪರ್ ಆಯ್ಕೆಗಳಿಗೆ ಭೇಟಿ ನೀಡಿ."

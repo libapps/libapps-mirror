@@ -336,7 +336,7 @@
 		"message": "Verhalten von Meta + V beim Einfügen"
 	},
 	"hterm_name_pref_paste_on_drop": {
-		"message": "Einfügen per Drag-and-drop zulassen"
+		"message": "Einfügen per Drag and Drop zulassen"
 	},
 	"hterm_name_pref_screen_border_color": {
 		"message": "Bildschirmrandfarbe"
@@ -576,7 +576,7 @@
 		"message": "Legt fest, ob Meta + V an den Browser übergeben wird.\n\nAuf manchen Systemen werden auf diese Weise Inhalte eingefügt."
 	},
 	"hterm_pref_paste_on_drop": {
-		"message": "Wenn \"true\" festgelegt ist, wird Text per Drag-and-drop im Terminal eingefügt.\nBei \"false\" wird per \"Drop\" abgelegter Text ignoriert."
+		"message": "Wenn \"true\" festgelegt ist, wird Text per Drag and Drop im Terminal eingefügt.\nBei \"false\" wird per \"Drop\" abgelegter Text ignoriert."
 	},
 	"hterm_pref_screen_border_color": {
 		"message": "Die Farbe für den Rand um den Terminal-Bildschirm.\n\nLegt die Farbe des Rands um den Terminal-Bildschirm fest. So kann eine sichtbare Linie an den Bildschirmrändern erzeugt werden."
@@ -975,7 +975,7 @@
 		"message": "Protokoll-Handler registrieren"
 	},
 	"protocol_register_explain": {
-		"message": "Über die Schaltfläche unten wird versucht, für alle unterstützten Protokolle Handler zu registrieren. Dadurch können beispielsweise ssh://-Links direkt verarbeitet werden. Im Browser wird für jedes Protokoll eine Aufforderung angezeigt, die jeweils bestätigt bzw. akzeptiert werden muss. Wenn keine Aufforderungen angezeigt werden, gibt es im nächsten Abschnitt Tipps zur Fehlerbehebung."
+		"message": "Über den Button unten wird versucht, für alle unterstützten Protokolle Handler zu registrieren. Dadurch können beispielsweise ssh://-Links direkt verarbeitet werden. Im Browser wird für jedes Protokoll eine Aufforderung angezeigt, die jeweils bestätigt bzw. akzeptiert werden muss. Wenn keine Aufforderungen angezeigt werden, gibt es im nächsten Abschnitt Tipps zur Fehlerbehebung."
 	},
 	"protocol_register_explain_settings": {
 		"message": "Wenn Handler schon registriert sind oder vorherige Registrierungsversuche abgelehnt wurden, werden keine weiteren Aufforderungen angezeigt. Öffne das Dialogfeld unten und prüfe die Einstellungen für registrierte Handler in den Abschnitten \"ssh/sftp/etc\". Wenn das Programm blockiert ist, können solche Einstellungen gelöscht werden, mit denen ein weiterer Registrierungsversuch vorgenommen werden kann. Ist das Programm bereits registriert, aber noch nicht als Standard-Handler festgelegt, kann auch diese Einstellung geändert werden."

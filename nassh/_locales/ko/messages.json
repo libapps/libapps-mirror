@@ -552,25 +552,25 @@
 		"message": "True인 경우 Page Up/Page Down 키를 사용해 터미널 스크롤바를 제어하고 Shift 키와 Page Up/Page Down 키를 함께 누르면 원격 호스트에 전송됩니다. False인 경우 Page Up/Page Down 키를 누르면 원격 호스트로 전송되고 Shift 키와 Page Up/Page Down 키를 함께 누르면 스크롤됩니다."
 	},
 	"hterm_pref_pass_alt_number": {
-		"message": "Alt + 1~9 키를 브라우저로 전달할지 설정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭/앱으로 전환' 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\nTrue인 경우 브라우저에서 Alt + 1~9 키를 처리합니다. False인 경우 Alt + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지합니다."
+		"message": "Alt + 1~9 키를 브라우저로 전달할지 설정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭/앱으로 전환' 키보드 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\nTrue인 경우 브라우저에서 Alt + 1~9 키를 처리합니다. False인 경우 Alt + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지합니다."
 	},
 	"hterm_pref_pass_ctrl_n": {
-		"message": "Ctrl + N 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + N 키는 브라우저에서 '새 창' 단축키로 처리됩니다. false인 경우 Ctrl + N 키는 호스트로 전송됩니다."
+		"message": "Ctrl + N 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + N 키는 브라우저에서 '새 창' 키보드 단축키로 처리됩니다. false인 경우 Ctrl + N 키는 호스트로 전송됩니다."
 	},
 	"hterm_pref_pass_ctrl_number": {
-		"message": "Ctrl + 1~9 키를 브라우저로 전달할지 결정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭으로 전환' 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\ntrue인 경우 브라우저에서 Ctrl + 1~9 키를 처리합니다. false인 경우 Ctrl + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지합니다."
+		"message": "Ctrl + 1~9 키를 브라우저로 전달할지 결정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭으로 전환' 키보드 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\ntrue인 경우 브라우저에서 Ctrl + 1~9 키를 처리합니다. false인 경우 Ctrl + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지합니다."
 	},
 	"hterm_pref_pass_ctrl_t": {
-		"message": "Ctrl + T 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + T 키는 브라우저에서 '새 탭' 단축키로 처리됩니다. false인 경우 Ctrl + T 키는 호스트로 전송됩니다."
+		"message": "Ctrl + T 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + T 키는 브라우저에서 '새 탭' 키보드 단축키로 처리됩니다. false인 경우 Ctrl + T 키는 호스트로 전송됩니다."
 	},
 	"hterm_pref_pass_ctrl_tab": {
-		"message": "Ctrl + Tab 키와 Ctrl + Shift + Tab 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + Tab 키와 Ctrl + Shift + Tab 키는 브라우저에서 '다음/이전 탭' 단축키로 처리됩니다. false인 경우 Tab 키는 Ctrl 또는 Shift 없이 호스트로 전송됩니다."
+		"message": "Ctrl + Tab 키와 Ctrl + Shift + Tab 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + Tab 키와 Ctrl + Shift + Tab 키는 브라우저에서 '다음/이전 탭' 키보드 단축키로 처리됩니다. false인 경우 Tab 키는 Ctrl 또는 Shift 없이 호스트로 전송됩니다."
 	},
 	"hterm_pref_pass_ctrl_w": {
-		"message": "Ctrl + W 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + W 키는 브라우저에서 '탭 닫기' 단축키로 처리됩니다. false인 경우 Ctrl + W 키는 호스트로 전송됩니다."
+		"message": "Ctrl + W 키를 브라우저로 전달할지 결정합니다.\n\ntrue인 경우 Ctrl + W 키는 브라우저에서 '탭 닫기' 키보드 단축키로 처리됩니다. false인 경우 Ctrl + W 키는 호스트로 전송됩니다."
 	},
 	"hterm_pref_pass_meta_number": {
-		"message": "메타 + 1~9 키를 브라우저로 전달할지 결정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭으로 전환' 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\ntrue인 경우 브라우저에서 메타 + 1~9 키를 처리합니다. false인 경우 메타 + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지됩니다."
+		"message": "메타 + 1~9 키를 브라우저로 전달할지 결정합니다.\n\n브라우저 탭에서 hterm을 실행할 때 Chrome의 '탭으로 전환' 키보드 단축키를 계속 사용할 수 있으므로 유용합니다. 탭에서 실행하지 않는 경우에는 이러한 키를 호스트로 전송하여 vim 또는 emacs에서 사용되도록 하는 것이 좋습니다.\n\ntrue인 경우 브라우저에서 메타 + 1~9 키를 처리합니다. false인 경우 메타 + 1~9 키가 호스트로 전송됩니다. null인 경우에는 브라우저 플랫폼 및 창 유형에 따라 자동으로 감지됩니다."
 	},
 	"hterm_pref_pass_meta_v": {
 		"message": "메타 + V 키를 브라우저로 전달할지 결정합니다.\n\n일부 시스템에서는 콘텐츠를 붙여넣기할 때 사용됩니다."

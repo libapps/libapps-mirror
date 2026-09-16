@@ -708,13 +708,13 @@
 		"message": "Cambiar o directorio de traballo remoto"
 	},
 	"nasftp_cmd_chgrp_help": {
-		"message": "Cambiar grupo de rutas"
+		"message": "Cambiar o grupo de rutas"
 	},
 	"nasftp_cmd_chmod_help": {
 		"message": "Cambiar os permisos nas rutas"
 	},
 	"nasftp_cmd_chown_help": {
-		"message": "Cambiar propietario das rutas"
+		"message": "Cambiar o propietario das rutas"
 	},
 	"nasftp_cmd_clear_help": {
 		"message": "Borrar a pantalla actual do terminal"
@@ -726,16 +726,16 @@
 		"message": "Copiáronse $1 bytes no portapapeis"
 	},
 	"nasftp_cmd_color_help": {
-		"message": "Activar/desactivar uso de cor"
+		"message": "Activar/desactivar o uso de cor"
 	},
 	"nasftp_cmd_copy_help": {
 		"message": "Copiar unha ruta remota noutra ruta remota diferente"
 	},
 	"nasftp_cmd_del_help": {
-		"message": "Eliminar ficheiros"
+		"message": "Eliminar os ficheiros"
 	},
 	"nasftp_cmd_df_help": {
-		"message": "Mostrar estatísticas de disco"
+		"message": "Mostrar as estatísticas de disco"
 	},
 	"nasftp_cmd_df_summary": {
 		"message": "  Ruta: $1\n  Código de identificación de sistema de ficheiros: $2\n Total: $3\n  Usado: $4 ($5%)\n Disp: $6 (para usuarios sen privilexios)\n $7 (para o acceso raíz)"
@@ -759,7 +759,7 @@
 		"message": "Cambiar o directorio de traballo local"
 	},
 	"nasftp_cmd_list_help": {
-		"message": "Mostrar detalles do directorio"
+		"message": "Mostrar os detalles do directorio"
 	},
 	"nasftp_cmd_llist_help": {
 		"message": "Mostrar os detalles dos directorios locais"
@@ -777,7 +777,7 @@
 		"message": "Descargar varios ficheiros"
 	},
 	"nasftp_cmd_mkdir_help": {
-		"message": "Crear directorios"
+		"message": "Crear os directorios"
 	},
 	"nasftp_cmd_move_help": {
 		"message": "Cambiar de nome un ficheiro"
@@ -801,7 +801,7 @@
 		"message": "Definir a cadea de solicitude"
 	},
 	"nasftp_cmd_put_help": {
-		"message": "Cargar ficheiros"
+		"message": "Cargar os ficheiros"
 	},
 	"nasftp_cmd_put_upload_file": {
 		"message": "Cargando ficheiro: $1 como $2 ($3)"
@@ -816,7 +816,7 @@
 		"message": "Ler as ligazóns simbólicas"
 	},
 	"nasftp_cmd_realpath_help": {
-		"message": "Canonicalizar rutas"
+		"message": "Canonicalizar as rutas"
 	},
 	"nasftp_cmd_reget_help": {
 		"message": "Retomar a descarga dun ficheiro"
@@ -825,19 +825,19 @@
 		"message": "Retomar a carga de ficheiros"
 	},
 	"nasftp_cmd_rm_help": {
-		"message": "Quitar ficheiros"
+		"message": "Quitar os ficheiros"
 	},
 	"nasftp_cmd_rmdir_help": {
-		"message": "Eliminar directorios baleiros"
+		"message": "Eliminar os directorios baleiros"
 	},
 	"nasftp_cmd_show_help": {
-		"message": "Mostrar ficheiros inseridos"
+		"message": "Mostrar os ficheiros inseridos"
 	},
 	"nasftp_cmd_stat_extensions_header": {
 		"message": "Extensións:"
 	},
 	"nasftp_cmd_stat_help": {
-		"message": "Mostrar estado do ficheiro"
+		"message": "Mostrar o estado do ficheiro"
 	},
 	"nasftp_cmd_stat_summary": {
 		"message": "  Ficheiro: $1\n  Tamaño: $2 bytes\n   ID de usuario: $3\n   ID de grupo: $4\nAcceso: $5\n Hora de acceso: $6\n Hora de modificación: $7"
@@ -852,13 +852,13 @@
 		"message": "Actualizar o acceso e as horas de modificación dos ficheiros"
 	},
 	"nasftp_cmd_truncate_help": {
-		"message": "Truncar rutas a 0 bytes"
+		"message": "Truncar as rutas a 0 bytes"
 	},
 	"nasftp_cmd_version_extensions_header": {
 		"message": "  extensións do servidor:"
 	},
 	"nasftp_cmd_version_help": {
-		"message": "Mostrar versión actual do protocolo"
+		"message": "Mostrar a versión actual do protocolo"
 	},
 	"nasftp_cmd_version_summary": {
 		"message": "Información da versión do protocolo SFTP:\n  local: $1\n  servidor: $2"

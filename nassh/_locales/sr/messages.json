@@ -138,7 +138,7 @@
 		"message": "Пронађи"
 	},
 	"hterm_button_next": {
-		"message": "Следеће"
+		"message": "Даље"
 	},
 	"hterm_button_page_down": {
 		"message": "Страница надоле"
@@ -147,7 +147,7 @@
 		"message": "Страница нагоре"
 	},
 	"hterm_button_previous": {
-		"message": "Претходно"
+		"message": "Назад"
 	},
 	"hterm_find_result_count": {
 		"message": "Подударања: $1"
