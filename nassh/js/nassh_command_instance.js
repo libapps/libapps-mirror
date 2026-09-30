@@ -58,6 +58,7 @@ import {SshPolicy} from './ssh_policy.js';
  *   sessionStorage: (!lib.Storage|undefined),
  *   syncStorage: (!lib.Storage),
  *   terminalLocation: (!Location|undefined),
+ *   terminalHistory: (!History|undefined),
  *   terminalWindow: (!Object|undefined),
  *   connectPage: (string|undefined),
  * }}
@@ -126,6 +127,9 @@ export function CommandInstance(argv) {
 
   // Terminal Location reference (can accept another hterm tab's location).
   this.terminalLocation = argv.terminalLocation || globalThis.location;
+
+  // Terminal History reference (can accept another hterm tab's history).
+  this.terminalHistory = argv.terminalHistory || globalThis.history;
 
   // Terminal Window reference (can accept another hterm tab's window).
   this.terminalWindow = argv.terminalWindow || globalThis;
@@ -378,6 +382,36 @@ CommandInstance.prototype.navigate_ = function(hash) {
   const url = new URL(this.terminalLocation.href);
   url.hash = hash;
   this.terminalLocation.replace(url.toString());
+};
+
+/**
+ * The query parameter that exposes the host we're connected to.
+ *
+ * This is output, not input: we never read it.  The user-facing contract is
+ * documented in the "canonicalized-hostname" section of docs/FAQ.md.
+ */
+const CANONICALIZED_HOSTNAME_PARAM = 'canonicalized-hostname';
+
+/**
+ * Record the remote hostname in the URL query string without navigating.
+ *
+ * Tools keyed off the page URL (e.g. enterprise clipboard controls) use this
+ * to tell which host a tab is connected to; see docs/FAQ.md for details.
+ * This can't go through navigate_: location.replace() is only a same-document
+ * navigation when just the `#hash` changes, and a query string change would
+ * reload the page (and kill the session).  history.replaceState() updates the
+ * current entry in place instead: no reload and no new history entry.
+ *
+ * @param {string=} hostname The remote hostname, or empty to clear it.
+ */
+CommandInstance.prototype.setHostnameParam_ = function(hostname) {
+  const url = new URL(this.terminalLocation.href);
+  if (hostname) {
+    url.searchParams.set(CANONICALIZED_HOSTNAME_PARAM, hostname);
+  } else {
+    url.searchParams.delete(CANONICALIZED_HOSTNAME_PARAM);
+  }
+  this.terminalHistory.replaceState(null, '', url.toString());
 };
 
 /** @param {string} argstr */
@@ -947,6 +981,10 @@ CommandInstance.prototype.connectTo = async function(params, finalize) {
     return;
   }
 
+  // Expose the host we're about to connect to in the URL.  The connect attempt
+  // hook below refines this once ssh has applied its config.
+  this.setHostnameParam_(params.hostname);
+
   // If no username was specified, prompt the user for one.
   if (params.username === undefined) {
     const io = this.io.push();
@@ -1499,6 +1537,7 @@ CommandInstance.prototype.initWasmSubproc_ =
     sftpClient: this.sftpClient,
     secureInput: (...args) => this.secureInput(...args),
     captureStdout: captureStdout,
+    onConnectAttempt: (hostname, port) => this.setHostnameParam_(hostname),
     syncStorage: this.syncStorage,
     sshPolicy: this.sshPolicy_,
   });

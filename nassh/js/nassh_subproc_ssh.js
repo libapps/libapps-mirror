@@ -177,6 +177,7 @@ export class SshSubproc extends WasmSubproc {
    *   relay: ?Relay,
    *   secureInput: function(string, number, boolean),
    *   captureStdout: (boolean|undefined),
+   *   onConnectAttempt: ((function(string, number))|undefined),
    *   isSftp: (boolean|undefined),
    *   sftpClient: (?Object|undefined),
    *   syncStorage: !lib.Storage,
@@ -185,9 +186,10 @@ export class SshSubproc extends WasmSubproc {
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
                authAgentAppID, relay, secureInput, captureStdout,
-    isSftp, sftpClient, syncStorage, sshPolicy}) {
+               onConnectAttempt, isSftp, sftpClient, syncStorage, sshPolicy}) {
     super({executable, argv, environ, terminal, trace, authAgent,
-           authAgentAppID, relay, secureInput, captureStdout});
+           authAgentAppID, relay, secureInput, captureStdout,
+           onConnectAttempt});
 
     this.isSftp_ = isSftp;
     this.sftpClient_ = sftpClient;

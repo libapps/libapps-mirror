@@ -87,7 +87,7 @@ class Tty extends VFS.FileHandle {
  */
 export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
   constructor({term, tcpSocketsOpen, unixSocketsOpen, secureInput,
-               fileSystem} = {}) {
+               fileSystem, onConnectAttempt} = {}) {
     super();
     this.term_ = term;
     this.tcpSocketsOpen_ = tcpSocketsOpen;
@@ -95,6 +95,7 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
     this.secureInput_ = secureInput;
     this.notify_ = null;
     this.fileSystem_ = fileSystem;
+    this.onConnectAttempt_ = onConnectAttempt;
     this.vfs = new VFS.VFS({stdio: false});
     this.socketUdpRecv_ = null;
     this.fakeAddrMap_ = new Map();
@@ -802,7 +803,8 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
 
   /**
    * @param {number} socket
-   * @param {string} address
+   * @param {string|number} address The address, or for fake addresses
+   *     registered via getaddrinfo, the integer index to look up.
    * @param {number} port
    * @return {!WASI_t.errno}
    */
@@ -820,6 +822,25 @@ export class RemoteReceiverWasiPreview1 extends SyscallHandler.Base {
       address = this.fakeAddrMap_.get(address);
       if (address === undefined) {
         return WASI.errno.EFAULT;
+      }
+    }
+
+    // Report the first remote IP endpoint the program tries to reach.  This
+    // runs after the fake address lookup above, so it sees the hostname (or IP
+    // literal) that ssh settled on after applying ssh_config, and before the
+    // connect itself, so it fires regardless of whether the connect succeeds.
+    // Unix sockets (e.g. the ssh-agent) are not remote endpoints and are
+    // skipped.
+    if (this.onConnectAttempt_ &&
+        (handle.domain === Constants.AF_INET ||
+         handle.domain === Constants.AF_INET6)) {
+      const callback = this.onConnectAttempt_;
+      this.onConnectAttempt_ = null;
+      // Purely informational: never let it affect the connect itself.
+      try {
+        callback(address, port);
+      } catch (e) {
+        console.error('onConnectAttempt callback failed', e);
       }
     }
 

@@ -273,10 +273,12 @@ export class WasmSubproc {
    *   relay: ?Relay,
    *   secureInput: function(string, number, boolean),
    *   captureStdout: (boolean|undefined),
+   *   onConnectAttempt: ((function(string, number))|undefined),
    * }} opts
    */
   constructor({executable, argv, environ, terminal, trace, authAgent,
-               authAgentAppID, relay, secureInput, captureStdout}) {
+               authAgentAppID, relay, secureInput, captureStdout,
+               onConnectAttempt}) {
     this.executable_ = executable;
     this.argv_ = argv;
     this.environ_ = environ;
@@ -288,6 +290,7 @@ export class WasmSubproc {
     this.secureInput_ = secureInput;
     this.process_ = null;
     this.captureStdout_ = captureStdout;
+    this.onConnectAttempt_ = onConnectAttempt;
   }
 
   /**
@@ -314,6 +317,7 @@ export class WasmSubproc {
             : null,
         unixSocketsOpen: (address, port) => this.openUnixSocket_(address, port),
         secureInput: this.secureInput_,
+        onConnectAttempt: this.onConnectAttempt_,
       }),
       // NB: Max buffer to support in a single syscall; OpenSSH is known to call
       // read() on 256KiB data, so use a bit bigger for locking overhead.

@@ -458,6 +458,58 @@ the selection (Allow or Block), or you want to change the default handler to a
 different app, visit the chrome://settings/handlers page.
 ***
 
+#### The `canonicalized-hostname` parameter {#canonicalized-hostname}
+
+  Once a connection starts, Secure Shell adds a `canonicalized-hostname` query
+  parameter to the URL (before the `#`).  For example:
+
+  `chrome-extension://[ID]/html/nassh.html?canonicalized-hostname=cowfarm.example.com#profile-id:ID`
+
+  This is output, not input.  Secure Shell never reads it, and it will be
+  overwritten if you put it in a bookmark.  It exists so that tools which key
+  off the page URL (for example, enterprise clipboard or data controls) can
+  tell which host a tab is connected to.
+
+  The value is set in two steps:
+
+  1. When the connection starts, it is the host from the profile or link,
+     exactly as it was entered.
+  2. When ssh first tries to reach the server, it is updated to the host that
+     ssh itself connects to.  This reflects any `HostName` rewrites from your
+     `~/.ssh/config` (see above), and it will be an IP address if that is what
+     the config specified.
+
+  Some details to keep in mind if you match against it:
+
+  * It is the name the ssh program uses, not what the network resolves it to.
+    If the name is a CNAME for a different domain, that is not followed.
+  * It is best effort, not a guarantee.  In particular, when connecting
+    through a relay, the relay resolves the name on its end, so the value is
+    what ssh asked for rather than the server that was ultimately reached.
+  * Internationalized domain names (IDNs) are handed to ssh in punycode, so
+    after step 2 the value is the `xn--` form (for example
+    `xn--wgv71a119e.example.com` rather than `日本語.example.com`), even though
+    step 1 shows the name as it was entered (percent-encoded, as any query
+    parameter would be).
+  * IPv6 addresses are written out in full after step 2: eight groups of four
+    hex digits, no brackets, and no zone id, regardless of how they were
+    entered.  So `::1` and `0:00:000:0000::1` both become
+    `0000:0000:0000:0000:0000:0000:0000:0001`.  IPv4 addresses use the usual
+    dotted form.
+  * Treat the URL as a URL, not as a string.  The parameter is not always
+    first (`?foo=bar&canonicalized-hostname=...&moo=cow`), and the literal
+    text `canonicalized-hostname` could appear elsewhere in the URL, such as
+    in the `#user@host` part.  Parse the query string and read the parameter
+    by name.
+  * If you are writing a rule that matches on it, double check the spelling
+    of `canonicalized`.
+
+  The update happens in place: the page is not reloaded, no history entry is
+  added, and the `#profile-id:ID` or `#user@host` part is left untouched.
+  Internal destinations such as crosh do not set it.  The same parameter is
+  added to the ChromeOS Terminal's
+  `chrome-untrusted://terminal/html/terminal_ssh.html` URL.
+
 
 ### Can I create links in webpages to autoconnect?
 

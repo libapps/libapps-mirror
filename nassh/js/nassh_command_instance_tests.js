@@ -6,9 +6,12 @@
  * @fileoverview nassh command instance tests.
  */
 
+import {lib} from '../../libdot/index.js';
+import {hterm} from '../../hterm/index.js';
+
 import {
-  isSafeUriNasshOption, isSafeUriSshOption, parseDestination, parseURI,
-  postProcessOptions, splitCommandLine, tokenizeOptions,
+  CommandInstance, isSafeUriNasshOption, isSafeUriSshOption, parseDestination,
+  parseURI, postProcessOptions, splitCommandLine, tokenizeOptions,
 } from './nassh_command_instance.js';
 
 /**
@@ -550,5 +553,140 @@ describe('default-ssh-agent', () => {
       rv = postProcessOptions(rv, host, '', false);
       assert.equal(rv['auth-agent-forward'], expected);
     });
+  });
+});
+
+/**
+ * Mock Location that records navigations instead of performing them.
+ *
+ * @extends {Location}
+ */
+class MockLocation {
+  /** @param {string} href The URL the tab starts at. */
+  constructor(href) {
+    /** @override */
+    this.href = href;
+  }
+
+  /**
+   * @param {!URL|string} url
+   * @override
+   */
+  replace(url) {
+    this.href = `${url}`;
+  }
+}
+
+/**
+ * Mock History that applies state changes to a MockLocation.
+ *
+ * @extends {History}
+ */
+class MockHistory {
+  /** @param {!MockLocation} location The location to update. */
+  constructor(location) {
+    this.location_ = location;
+    /** @type {!Array<string>} URLs passed to replaceState, in order. */
+    this.replaced = [];
+  }
+
+  /**
+   * @param {*} data
+   * @param {string} title
+   * @param {!URL|string=} url
+   * @override
+   */
+  replaceState(data, title, url) {
+    this.replaced.push(`${url}`);
+    this.location_.href = `${url}`;
+  }
+}
+
+/**
+ * Tests for the canonicalized-hostname URL parameter.
+ */
+describe('url-updates', () => {
+  // The user-visible query parameter name; see docs/FAQ.md.
+  const PARAM = 'canonicalized-hostname';
+
+  /**
+   * Create an instance backed by mock Location & History objects.
+   *
+   * @param {string} href The URL the tab starts at.
+   * @return {{instance: !CommandInstance, location: !MockLocation,
+   *     history: !MockHistory}}
+   */
+  const setup = (href) => {
+    const location = new MockLocation(href);
+    const history = new MockHistory(location);
+    const instance = new CommandInstance({
+      io: new hterm.Terminal.IO(/** @type {!hterm.Terminal} */ ({})),
+      syncStorage: new lib.Storage.Memory(),
+      terminalLocation: location,
+      terminalHistory: history,
+    });
+    return {instance, location, history};
+  };
+
+  it('setHostnameParam_ sets the param and keeps the hash', () => {
+    const {instance, location, history} =
+        setup('chrome-extension://id/html/nassh.html#profile-id:6966');
+    instance.setHostnameParam_('example.c.googlers.com');
+    const url = new URL(location.href);
+    assert.equal(url.searchParams.get(PARAM), 'example.c.googlers.com');
+    assert.equal(url.hash, '#profile-id:6966');
+    assert.equal(history.replaced.length, 1);
+  });
+
+  it('setHostnameParam_ keeps unrelated query params', () => {
+    const {instance, location} = setup(
+        'chrome-untrusted://terminal/html/terminal_ssh.html' +
+        '?settings_profile=default#profile-id:6966');
+    instance.setHostnameParam_('10.0.0.1');
+    const url = new URL(location.href);
+    assert.equal(url.searchParams.get('settings_profile'), 'default');
+    assert.equal(url.searchParams.get(PARAM), '10.0.0.1');
+    assert.equal(url.hash, '#profile-id:6966');
+  });
+
+  it('setHostnameParam_ clears the param', () => {
+    const {instance, location} = setup(
+        `chrome-extension://id/html/nassh.html?${PARAM}=stale#profile-id:6966`);
+    instance.setHostnameParam_(undefined);
+    assert.isFalse(new URL(location.href).searchParams.has(PARAM));
+  });
+
+  it('connectTo records the typed host, then the connect attempt refines it',
+     async () => {
+    const {instance, location, history} =
+        setup('chrome-extension://id/html/nassh.html#profile-id:6966');
+
+    // Up to the point ssh starts, the URL carries what the user entered.
+    let finalized = false;
+    await instance.connectTo(
+        {username: 'u', hostname: 'alias-host', port: 22},
+        async () => {
+          finalized = true;
+        });
+    assert.isTrue(finalized);
+    assert.equal(new URL(location.href).searchParams.get(PARAM), 'alias-host');
+    assert.equal(new URL(location.href).hash, '#profile-id:6966');
+
+    // Once ssh applies ssh_config (Host alias-host -> HostName ...), the
+    // connect attempt hook rewrites it in place.
+    instance.setHostnameParam_('example.c.googlers.com');
+    const url = new URL(location.href);
+    assert.equal(url.searchParams.get(PARAM), 'example.c.googlers.com');
+    assert.equal(url.hash, '#profile-id:6966');
+    assert.deepStrictEqual(
+        history.replaced.map((u) => new URL(u).searchParams.get(PARAM)),
+        ['alias-host', 'example.c.googlers.com']);
+  });
+
+  it('connectTo does not record internal destinations', async () => {
+    const {instance, history} =
+        setup('chrome-extension://id/html/nassh.html#profile-id:6966');
+    await instance.connectTo({hostname: '>connections'});
+    assert.deepStrictEqual(history.replaced, []);
   });
 });
