@@ -47,17 +47,11 @@
 	"connection_dialog_name": {
 		"message": "कनेक्शन डायलॉग"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "हटवा"
 	},
 	"disconnect_message": {
 		"message": "$1 या स्टेटस कोडसह प्रोग्राममधून बाहेर पडण्यात आले आहे."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "वारंवार विचारले जाणारे प्रश्न (FAQ)"

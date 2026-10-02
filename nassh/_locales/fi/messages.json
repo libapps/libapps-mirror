@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Yhteyden valintaikkuna"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Poista"
 	},
 	"disconnect_message": {
 		"message": "Ohjelmasta poistuttu. Statuskoodi: $1"
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Usein kysyttyä"
@@ -139,12 +133,6 @@
 	},
 	"hterm_button_next": {
 		"message": "Seuraava"
-	},
-	"hterm_button_page_down": {
-		"message": "Page down"
-	},
-	"hterm_button_page_up": {
-		"message": "Page up"
 	},
 	"hterm_button_previous": {
 		"message": "Edellinen"
@@ -919,9 +907,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Uusi ikkuna"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>käyttäjä@isäntä[:portti]</match></url> Muodosta yhteys tallennettuun profiiliin tai uuteen ssh-järjestelmään."

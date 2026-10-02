@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Caixa de diálogo de conexão"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Excluir"
 	},
 	"disconnect_message": {
 		"message": "O programa foi fechado com o código de status $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Perguntas frequentes"
@@ -916,9 +910,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Nova janela"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>usuário@nomedohost[:porta]</match></url> Conectar a um perfil salvo ou a um novo sistema ssh"

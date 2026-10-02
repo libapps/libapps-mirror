@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Hộp thoại kết nối"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Xóa"
 	},
 	"disconnect_message": {
 		"message": "Đã thoát khỏi chương trình với mã trạng thái $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Câu hỏi thường gặp"
@@ -913,9 +907,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Cửa sổ mới"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>người dùng@tên máy chủ[:port]</match></url> Kết nối với một hồ sơ đã lưu hoặc hệ thống SSH mới"

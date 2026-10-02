@@ -47,17 +47,11 @@
 	"connection_dialog_name": {
 		"message": "Kidirisha cha Kuunganisha"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Futa"
 	},
 	"disconnect_message": {
 		"message": "Programu imejifunga ikiwa na namba ya kuonyesha hali $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Maswali Yanayoulizwa Sana"
@@ -136,12 +130,6 @@
 	},
 	"hterm_button_next": {
 		"message": "Yanayofuata"
-	},
-	"hterm_button_page_down": {
-		"message": "Page down"
-	},
-	"hterm_button_page_up": {
-		"message": "Page up"
 	},
 	"hterm_button_previous": {
 		"message": "Yaliyotangulia"

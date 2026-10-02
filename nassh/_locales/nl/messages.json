@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Dialoogvenster Verbinding"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Verwijderen"
 	},
 	"disconnect_message": {
 		"message": "Programma gesloten met statuscode $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Veelgestelde vragen"
@@ -910,9 +904,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Nieuw venster"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Verbinding maken met een opgeslagen profiel of een nieuw SSH-systeem"

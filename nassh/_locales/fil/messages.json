@@ -47,20 +47,11 @@
 	"connection_dialog_name": {
 		"message": "Dialog ng Koneksyon"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "I-delete"
 	},
 	"disconnect_message": {
 		"message": "Lumabas sa program gamit ang status code $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
-	},
-	"faq_menu_label": {
-		"message": "FAQ"
 	},
 	"field_argstr_placeholder": {
 		"message": "mga karagdagang argument ng command line"
@@ -70,12 +61,6 @@
 	},
 	"field_description_placeholder": {
 		"message": "username@hostname o free form text"
-	},
-	"field_hostname_aria_label": {
-		"message": "hostname"
-	},
-	"field_hostname_placeholder": {
-		"message": "hostname"
 	},
 	"field_mount_path_placeholder": {
 		"message": "ang default na path ay ang home directory ng user"
@@ -88,21 +73,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Bagong Koneksyon]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
-	},
-	"field_terminal_profile_placeholder": {
-		"message": "default"
-	},
-	"field_username_aria_label": {
-		"message": "username"
-	},
-	"field_username_placeholder": {
-		"message": "username"
 	},
 	"found_relay": {
 		"message": "Nakitang relay server: $1"
@@ -133,12 +103,6 @@
 	},
 	"hterm_button_next": {
 		"message": "Susunod"
-	},
-	"hterm_button_page_down": {
-		"message": "Page down"
-	},
-	"hterm_button_page_up": {
-		"message": "Page up"
 	},
 	"hterm_button_previous": {
 		"message": "Nakaraan"
@@ -617,9 +581,6 @@
 	"hterm_pref_word_break_match_right": {
 		"message": "Karaniwang expression para ihinto ang pagtugma hanggang sa kanan (dulo) ng isang seleksyon.\n\nKaraniwan ay isa itong character class para hindi tanggapin ang mga partikular na character."
 	},
-	"hterm_space_character": {
-		"message": "Space"
-	},
 	"hterm_title_pref_appearance": {
 		"message": "Hitsura (mga font, kulay, larawan)"
 	},
@@ -631,9 +592,6 @@
 	},
 	"hterm_title_pref_extensions": {
 		"message": "Mga Extension"
-	},
-	"hterm_title_pref_keyboard": {
-		"message": "Keyboard"
 	},
 	"hterm_title_pref_miscellaneous": {
 		"message": "Iba Pa"
@@ -955,9 +913,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Bagong Window"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Kumonekta sa isang naka-save na profile o sa isang bagong ssh system"

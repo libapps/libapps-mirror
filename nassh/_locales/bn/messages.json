@@ -47,17 +47,11 @@
 	"connection_dialog_name": {
 		"message": "কানেকশন ডায়ালগ"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "মুছে দিন"
 	},
 	"disconnect_message": {
 		"message": "স্ট্যাটাস কোড$1-এর মাধ্যমে প্রোগ্রাম বন্ধ হয়েছে।"
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "প্রায়শই জিজ্ঞাসিত প্রশ্ন দেখুন"

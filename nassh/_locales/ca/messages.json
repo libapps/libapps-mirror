@@ -92,12 +92,6 @@
 	"field_new_connection": {
 		"message": "[Connexió nova]"
 	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
-	},
 	"field_terminal_profile_placeholder": {
 		"message": "opció predeterminada"
 	},
@@ -637,9 +631,6 @@
 	},
 	"hterm_title_pref_encoding": {
 		"message": "Codificació"
-	},
-	"hterm_title_pref_extensions": {
-		"message": "Extensions"
 	},
 	"hterm_title_pref_keyboard": {
 		"message": "Teclat"

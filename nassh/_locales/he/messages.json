@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "תיבת דו-שיח לחיבור"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "מחיקה"
 	},
 	"disconnect_message": {
 		"message": "בוצעה יציאה מהתוכנית עם קוד הסטטוס $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "שאלות נפוצות"

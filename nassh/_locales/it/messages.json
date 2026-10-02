@@ -917,9 +917,6 @@
 	"new_window_menu_label": {
 		"message": "Nuova finestra"
 	},
-	"ok_button_label": {
-		"message": "OK"
-	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Connettiti a un profilo salvato o a un nuovo sistema ssh"
 	},

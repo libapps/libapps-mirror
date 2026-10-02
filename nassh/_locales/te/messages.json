@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "కనెక్షన్ డైలాగ్"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "తొలగించండి"
 	},
 	"disconnect_message": {
 		"message": "$1 స్టేటస్ కోడ్‌తో ప్రోగ్రామ్ ఎగ్జిట్ అయింది."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "తరచుగా అడిగే ప్రశ్నలు"

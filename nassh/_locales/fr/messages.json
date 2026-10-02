@@ -68,9 +68,6 @@
 	"field_argstr_placeholder": {
 		"message": "arguments de ligne de commande supplémentaires"
 	},
-	"field_description_aria_label": {
-		"message": "description"
-	},
 	"field_description_placeholder": {
 		"message": "nomdutilisateur@nomdhôte ou texte libre"
 	},
@@ -91,12 +88,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Nouvelle connexion]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "par défaut"
@@ -389,9 +380,6 @@
 	"hterm_notify_copy": {
 		"message": "Copié"
 	},
-	"hterm_options_button_label": {
-		"message": "Options"
-	},
 	"hterm_popup_inline_image": {
 		"message": "Images intégrées"
 	},
@@ -637,9 +625,6 @@
 	},
 	"hterm_title_pref_encoding": {
 		"message": "Encodage"
-	},
-	"hterm_title_pref_extensions": {
-		"message": "Extensions"
 	},
 	"hterm_title_pref_keyboard": {
 		"message": "Clavier"
@@ -937,9 +922,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Nouvelle fenêtre"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Connectez-vous à un profil enregistré ou à un nouveau système SSH"

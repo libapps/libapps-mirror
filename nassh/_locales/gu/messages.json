@@ -47,17 +47,11 @@
 	"connection_dialog_name": {
 		"message": "કનેક્શન સંવાદ"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "ડિલીટ કરો"
 	},
 	"disconnect_message": {
 		"message": "$1 સ્ટેટસ કોડ સાથે પ્રોગ્રામ બંધ થઈ ગયો."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "સામાન્ય પ્રશ્નો"

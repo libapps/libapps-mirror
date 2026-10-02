@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "接続ダイアログ"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "削除"
 	},
 	"disconnect_message": {
 		"message": "プログラムが $1 のステータス コードで終了しました。"
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "よくある質問"
@@ -914,9 +908,6 @@
 	"new_window_menu_label": {
 		"message": "新規ウインドウ"
 	},
-	"ok_button_label": {
-		"message": "OK"
-	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> 保存されているプロファイルまたは新しい SSH システムに接続します"
 	},
@@ -934,9 +925,6 @@
 	},
 	"popup_connect_tooltip": {
 		"message": "新しいタブで開くには、Ctrl キーを長押しします。"
-	},
-	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header_ssh_files": {
 		"message": "SSH ファイル"

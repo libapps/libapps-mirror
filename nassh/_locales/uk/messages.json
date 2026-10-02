@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Діалогове вікно з'єднання"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Видалити"
 	},
 	"disconnect_message": {
 		"message": "Програма завершила роботу з кодом статусу $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Поширені запитання"
@@ -983,9 +977,6 @@
 	"new_window_menu_label": {
 		"message": "Нове вікно"
 	},
-	"ok_button_label": {
-		"message": "ОК"
-	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Підключіться до збереженого профілю чи нової системи SSH"
 	},
@@ -1003,9 +994,6 @@
 	},
 	"popup_connect_tooltip": {
 		"message": "Утримуйте клавішу Ctrl, щоб відкрити посилання в новій вкладці."
-	},
-	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header_ssh_files": {
 		"message": "Файли SSH"

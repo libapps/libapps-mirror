@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Pogovorno okno za povezovanje"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Izbriši"
 	},
 	"disconnect_message": {
 		"message": "Program se je končal s kodo statusa: $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Pogosta vprašanja"

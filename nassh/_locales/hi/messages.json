@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "कनेक्शन डायलॉग"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "मिटाएं"
 	},
 	"disconnect_message": {
 		"message": "प्रोग्राम, स्टेटस कोड $1 के साथ बंद हो गया."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "अक्सर पूछे जाने वाले सवाल"

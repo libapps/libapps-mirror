@@ -50,9 +50,6 @@
 	"connection_dialog_name": {
 		"message": "Anslutningsdialogruta"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Radera"
 	},
@@ -91,12 +88,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Ny anslutning]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
@@ -916,9 +907,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Nytt fönster"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Anslut till en sparad profil eller ett nytt ssh-system"

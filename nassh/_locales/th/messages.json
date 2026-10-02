@@ -56,9 +56,6 @@
 	"disconnect_message": {
 		"message": "ออกจากโปรแกรมแล้วโดยมีรหัสสถานะ $1"
 	},
-	"enter_keycap": {
-		"message": "[ENTER]"
-	},
 	"faq_menu_label": {
 		"message": "คำถามที่พบบ่อย"
 	},

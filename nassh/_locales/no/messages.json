@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Tilkoblingsdialogboks"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Slett"
 	},
 	"disconnect_message": {
 		"message": "Programmet ble avsluttet med statuskoden $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Vanlige spørsmål"
@@ -91,12 +85,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Ny tilkobling]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
@@ -913,9 +901,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Nytt vindu"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Koble til en lagret profil eller et nytt SSH-system"

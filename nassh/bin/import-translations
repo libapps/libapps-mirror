@@ -131,8 +131,12 @@ def main(argv):
                 new.pop(msgid)
                 continue
 
+            # If the message hasn't been translated, delete it the app will
+            # fallback to English automatically.
             if normalize(baseline[msgid]) == normalize(msg):
-                if msgid in old:
+                if msgid in old and normalize(baseline[msgid]) != normalize(
+                    old[msgid]
+                ):
                     new[msgid] = old[msgid]
                 else:
                     new.pop(msgid)

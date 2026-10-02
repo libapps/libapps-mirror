@@ -47,17 +47,11 @@
 	"connection_dialog_name": {
 		"message": "Dialog de conectare"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Ștergeți"
 	},
 	"disconnect_message": {
 		"message": "Programul s-a închis cu codul de stare $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Întrebări frecvente"
@@ -88,12 +82,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Conexiune nouă]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "prestabilit"
@@ -916,9 +904,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Fereastră nouă"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Conectați-vă la un profil salvat sau la un nou sistem SSH"

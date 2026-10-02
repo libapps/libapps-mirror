@@ -47,20 +47,11 @@
 	"connection_dialog_name": {
 		"message": "ಕನೆಕ್ಷನ್ ಡೈಲಾಗ್"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "ಅಳಿಸಿ"
 	},
 	"disconnect_message": {
 		"message": "$1 ಸ್ಥಿತಿ ಕೋಡ್‌ನೊಂದಿಗೆ ಪ್ರೋಗ್ರಾಂನಿಂದ ನಿರ್ಗಮಿಸಲಾಗಿದೆ."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
-	},
-	"faq_menu_label": {
-		"message": "FAQ"
 	},
 	"field_argstr_placeholder": {
 		"message": "ಹೆಚ್ಚುವರಿ ಕಮಾಂಡ್ ಲೈನ್ ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳು"

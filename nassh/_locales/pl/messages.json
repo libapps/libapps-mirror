@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Okno połączenia"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Usuń"
 	},
 	"disconnect_message": {
 		"message": "Program został zamknięty z kodem stanu $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Najczęstsze pytania"
@@ -91,12 +85,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Nowe połączenie]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "domyślny"
@@ -922,9 +910,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Nowe okno"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Połącz się z zapisanym profilem lub nowym systemem ssh"

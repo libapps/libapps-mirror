@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Παράθυρο διαλόγου σύνδεσης"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Διαγραφή"
 	},
 	"disconnect_message": {
 		"message": "Το πρόγραμμα έκλεισε με κωδικό κατάστασης $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Συνήθεις ερωτήσεις"
@@ -946,9 +940,6 @@
 	},
 	"popup_connect_tooltip": {
 		"message": "Πατήστε παρατεταμένα το Ctrl για άνοιγμα σε νέα καρτέλα."
-	},
-	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header_ssh_files": {
 		"message": "Αρχεία SSH"

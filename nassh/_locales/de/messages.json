@@ -929,9 +929,6 @@
 	"new_window_menu_label": {
 		"message": "Neues Fenster"
 	},
-	"ok_button_label": {
-		"message": "Ok"
-	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Verbindung zu einem gespeicherten Profil oder einem neuen SSH-System herstellen"
 	},

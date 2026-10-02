@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "مربع حوار الاتصال"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "حذف"
 	},
 	"disconnect_message": {
 		"message": "تم الخروج من البرنامج برمز الحالة $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "الأسئلة الشائعة"

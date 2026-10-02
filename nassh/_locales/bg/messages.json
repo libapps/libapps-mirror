@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Диалогов прозорец за връзка"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Изтриване"
 	},
 	"disconnect_message": {
 		"message": "Програмата се затвори с код на състоянието $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "ЧЗВ"
@@ -919,9 +913,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Нов прозорец"
-	},
-	"ok_button_label": {
-		"message": "ОК"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Свържете се със запазен потребителски профил или нова SSH система"

@@ -47,17 +47,11 @@
 	"connection_dialog_name": {
 		"message": "Bağlantı İletişim Kutusu"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Sil"
 	},
 	"disconnect_message": {
 		"message": "Programdan $1 koduyla çıkıldı."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "SSS"

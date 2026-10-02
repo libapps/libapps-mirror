@@ -47,17 +47,11 @@
 	"connection_dialog_name": {
 		"message": "Dialog Sambungan"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Padam"
 	},
 	"disconnect_message": {
 		"message": "Atur cara keluar dengan kod status $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Soalan Lazim"
@@ -88,12 +82,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Sambungan Baharu]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "lalai"
@@ -139,9 +127,6 @@
 	},
 	"hterm_button_page_down": {
 		"message": "Ke bahagian bawah halaman"
-	},
-	"hterm_button_page_up": {
-		"message": "Page up"
 	},
 	"hterm_button_previous": {
 		"message": "Sebelumnya"
@@ -656,9 +641,6 @@
 	"import_link_aria_label": {
 		"message": "import fail"
 	},
-	"import_link_label": {
-		"message": "Import..."
-	},
 	"initializing_relay": {
 		"message": "Mencari pelayan geganti menggunakan: $1"
 	},
@@ -923,9 +905,6 @@
 	"new_window_menu_label": {
 		"message": "Tetingkap Baharu"
 	},
-	"ok_button_label": {
-		"message": "OK"
-	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Sambung ke profil yang disimpan atau sistem ssh baharu"
 	},
@@ -943,9 +922,6 @@
 	},
 	"popup_connect_tooltip": {
 		"message": "Tahan Ctrl untuk membuka pautan dalam tab baharu."
-	},
-	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header_ssh_files": {
 		"message": "Fail SSH"

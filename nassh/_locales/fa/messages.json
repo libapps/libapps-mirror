@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "کادر گفتگوی اتصال"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "حذف"
 	},
 	"disconnect_message": {
 		"message": "برنامه با رمز وضعیت $1 خارج شد."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "پرسشگان"

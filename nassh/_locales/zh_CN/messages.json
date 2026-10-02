@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "连接对话框"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "删除"
 	},
 	"disconnect_message": {
 		"message": "已退出程序，状态代码为 $1。"
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "常见问题解答"

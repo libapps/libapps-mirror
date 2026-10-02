@@ -47,17 +47,11 @@
 	"connection_dialog_name": {
 		"message": "കണക്ഷൻ ഡയലോഗ്"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "ഇല്ലാതാക്കുക"
 	},
 	"disconnect_message": {
 		"message": "$1 എന്ന സ്റ്റാറ്റസ് കോഡോടെ പ്രോഗ്രാമിൽ നിന്ന് പുറത്തുകടന്നു."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "പതിവ് ചോദ്യങ്ങൾ"

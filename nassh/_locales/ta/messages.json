@@ -1001,9 +1001,6 @@
 	"popup_connect_tooltip": {
 		"message": "புதிய தாவலைத் திறக்க Ctrl விசையைப் பிடித்திருக்கவும்."
 	},
-	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
-	},
 	"preferences_header_ssh_files": {
 		"message": "SSH ஃபைல்கள் "
 	},

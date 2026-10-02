@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Kapcsolódási párbeszédablak"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Törlés"
 	},
 	"disconnect_message": {
 		"message": "A program kilépett a következő állapotkóddal: $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "GYIK"
@@ -91,12 +85,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Új kapcsolat]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "alapértelmezett"
@@ -922,9 +910,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Új ablak"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Csatlakozás mentett profilhoz vagy új SSH-rendszerhez"

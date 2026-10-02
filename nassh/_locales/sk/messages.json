@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Dialógové okno pripojenia"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Odstrániť"
 	},
 	"disconnect_message": {
 		"message": "Program bol ukončený so stavovým kódom $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Časté otázky"
@@ -91,12 +85,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Nové pripojenie]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "predvolené"
@@ -919,9 +907,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Nové okno"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Pripojte sa k uloženému profilu alebo novému systému ssh"

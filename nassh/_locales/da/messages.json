@@ -59,9 +59,6 @@
 	"disconnect_message": {
 		"message": "Programmet blev afsluttet med statuskoden $1."
 	},
-	"enter_keycap": {
-		"message": "[ENTER]"
-	},
 	"faq_menu_label": {
 		"message": "Ofte stillede spørgsmål"
 	},
@@ -74,12 +71,6 @@
 	"field_description_placeholder": {
 		"message": "brugernavn@hostname eller tekst i frit format"
 	},
-	"field_hostname_aria_label": {
-		"message": "hostname"
-	},
-	"field_hostname_placeholder": {
-		"message": "hostname"
-	},
 	"field_mount_path_placeholder": {
 		"message": "standardstien er brugerens hjemmeindeks"
 	},
@@ -91,12 +82,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Ny forbindelse]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
 	},
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
@@ -139,9 +124,6 @@
 	},
 	"hterm_button_page_down": {
 		"message": "Page Down"
-	},
-	"hterm_button_page_up": {
-		"message": "Page Up"
 	},
 	"hterm_button_previous": {
 		"message": "Forrige"
@@ -1012,9 +994,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Nyt vindue"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Opret forbindelse til en gemt profil eller et nyt SSH-system"

@@ -47,9 +47,6 @@
 	"connection_dialog_name": {
 		"message": "Диалоговое окно подключения"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Удалить"
 	},
@@ -934,9 +931,6 @@
 	},
 	"popup_connect_tooltip": {
 		"message": "Чтобы открыть в новой вкладке, удерживайте клавишу Ctrl"
-	},
-	"pref_backup_filename": {
-		"message": "Secure Shell Preferences Backup.json"
 	},
 	"preferences_header_ssh_files": {
 		"message": "Файлы конфигурации SSH"

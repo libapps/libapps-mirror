@@ -50,20 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Dialog Koneksi"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Hapus"
 	},
 	"disconnect_message": {
 		"message": "Program ditutup dengan kode status $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
-	},
-	"faq_menu_label": {
-		"message": "FAQ"
 	},
 	"field_argstr_placeholder": {
 		"message": "argumen command line tambahan"
@@ -73,12 +64,6 @@
 	},
 	"field_description_placeholder": {
 		"message": "namapengguna@hostname atau teks bebas"
-	},
-	"field_hostname_aria_label": {
-		"message": "hostname"
-	},
-	"field_hostname_placeholder": {
-		"message": "hostname"
 	},
 	"field_mount_path_placeholder": {
 		"message": "jalur defaultnya adalah direktori beranda pengguna"
@@ -91,15 +76,6 @@
 	},
 	"field_new_connection": {
 		"message": "[Koneksi Baru]"
-	},
-	"field_port_aria_label": {
-		"message": "port"
-	},
-	"field_port_placeholder": {
-		"message": "port"
-	},
-	"field_terminal_profile_placeholder": {
-		"message": "default"
 	},
 	"field_username_aria_label": {
 		"message": "nama pengguna"
@@ -632,14 +608,8 @@
 	"hterm_title_pref_copypaste": {
 		"message": "Salin & Tempel"
 	},
-	"hterm_title_pref_encoding": {
-		"message": "Encoding"
-	},
 	"hterm_title_pref_extensions": {
 		"message": "Ekstensi"
-	},
-	"hterm_title_pref_keyboard": {
-		"message": "Keyboard"
 	},
 	"hterm_title_pref_miscellaneous": {
 		"message": "Lain-lain"

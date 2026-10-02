@@ -50,17 +50,11 @@
 	"connection_dialog_name": {
 		"message": "Caixa de diálogo de ligação"
 	},
-	"del_keycap": {
-		"message": "[DEL]"
-	},
 	"delete_button_label": {
 		"message": "Eliminar"
 	},
 	"disconnect_message": {
 		"message": "O programa saiu com o código de estado $1."
-	},
-	"enter_keycap": {
-		"message": "[ENTER]"
 	},
 	"faq_menu_label": {
 		"message": "Perguntas frequentes"
@@ -922,9 +916,6 @@
 	},
 	"new_window_menu_label": {
 		"message": "Nova janela"
-	},
-	"ok_button_label": {
-		"message": "OK"
 	},
 	"omnibox_default": {
 		"message": "<url><match>user@hostname[:port]</match></url> Estabeleça ligação a um perfil guardado ou a um novo sistema SSH"
