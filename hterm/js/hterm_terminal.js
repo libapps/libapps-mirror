@@ -3649,14 +3649,16 @@ hterm.Terminal.prototype.getSelectionText = function() {
     return null;
   }
 
-  // Start offset measures from the beginning of the line.
-  let startOffset = selection.startOffset;
   let node = selection.startNode;
 
   // If an x-row isn't selected, |node| will be null.
   if (!node) {
     return null;
   }
+
+  // Start offset measures from the beginning of the line.
+  let startOffset =
+      hterm.wc.strWidth(node.textContent.slice(0, selection.startOffset));
 
   if (node.nodeName != 'X-ROW') {
     // If the selection doesn't start on an x-row node, then it must be
@@ -3674,11 +3676,12 @@ hterm.Terminal.prototype.getSelectionText = function() {
     }
   }
 
+  node = lib.notNull(selection.endNode);
+
   // End offset measures from the end of the line.
   let endOffset =
-      hterm.TextAttributes.nodeWidth(lib.notNull(selection.endNode)) -
-      selection.endOffset;
-  node = selection.endNode;
+      hterm.TextAttributes.nodeWidth(node) -
+      hterm.wc.strWidth(node.textContent.slice(0, selection.endOffset));
 
   if (node.nodeName != 'X-ROW') {
     // If the selection doesn't end on an x-row node, then it must be

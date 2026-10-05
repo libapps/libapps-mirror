@@ -618,5 +618,13 @@ it('expand-selection', function() {
 
   assert.equal('https://www.google.com/', selection.toString());
 
+  // Test selection expansion when preceded by wide characters.
+  row.innerText = 'start \u4E2D\u6587 https://www.google.com/ end';
+  this.screen.setRange_(row, 13, 15, range);
+  selection.removeAllRanges();
+  selection.addRange(range);
+  this.screen.expandSelectionForUrl(selection);
+  assert.equal('https://www.google.com/', selection.toString());
+
   document.body.removeChild(row);
 });

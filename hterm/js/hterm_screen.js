@@ -841,7 +841,8 @@ hterm.Screen.prototype.getPositionWithinRow_ = function(row, node, offset) {
   for (let i = 0; i < row.childNodes.length; i++) {
     const currentNode = row.childNodes[i];
     if (currentNode == node) {
-      return position + offset;
+      return position +
+          hterm.wc.strWidth(currentNode.textContent.slice(0, offset));
     }
     position += hterm.TextAttributes.nodeWidth(currentNode);
   }
@@ -885,7 +886,10 @@ hterm.Screen.prototype.getNodeAndOffsetWithinRow_ = function(row, position) {
         // Drill down to node contained by SPAN.
         return this.getNodeAndOffsetWithinRow_(node, position);
       } else {
-        return [node, position];
+        return [
+          node,
+          hterm.TextAttributes.nodeSubstr(node, 0, position).length,
+        ];
       }
     }
     position -= nodeTextWidth;
@@ -958,8 +962,13 @@ hterm.Screen.prototype.expandSelectionWithWordBreakMatches_ =
   const rowText = this.getLineText_(row);
   const lineUpToRange = hterm.wc.substring(rowText, 0, endPosition);
   const leftRegularExpression = new RegExp(leftMatch + insideMatch + '$');
-  const expandedStart = lineUpToRange.search(leftRegularExpression);
-  if (expandedStart == -1 || expandedStart > startPosition) {
+  const leftStart = lineUpToRange.search(leftRegularExpression);
+  if (leftStart == -1) {
+    return;
+  }
+  const expandedStart =
+      hterm.wc.strWidth(lineUpToRange.substring(0, leftStart));
+  if (expandedStart > startPosition) {
     return;
   }
 

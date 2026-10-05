@@ -1005,3 +1005,19 @@ it('set-profile', async function() {
   assert.equal(prefs, this.terminal.getPrefs());
   assert.equal('/hterm/profiles/not-default/', prefs.prefix);
 });
+
+/**
+ * Check getSelectionText with wide characters.
+ */
+it('get-selection-text-widechar', function() {
+  this.terminal.interpret('start \u4E2D\u6587 end');
+  const row = this.terminal.getRowNode(0);
+  const selection = this.terminal.document_.getSelection();
+  const range = this.terminal.document_.createRange();
+  // Select '\u4E2D\u6587' which occupies columns 6 to 10.
+  this.terminal.screen_.setRange_(row, 6, 10, range);
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  assert.equal('\u4E2D\u6587', this.terminal.getSelectionText());
+});
