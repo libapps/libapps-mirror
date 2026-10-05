@@ -626,5 +626,21 @@ it('expand-selection', function() {
   this.screen.expandSelectionForUrl(selection);
   assert.equal('https://www.google.com/', selection.toString());
 
+  // Test URL selection with Japanese/CJK brackets.
+  const bracketPairs = [
+    ['\u{300c}', '\u{300d}'],
+    ['\u{300e}', '\u{300f}'],
+    ['\u{3010}', '\u{3011}'],
+    ['\u{ff08}', '\u{ff09}'],
+  ];
+  for (const [openBracket, closeBracket] of bracketPairs) {
+    row.innerText = `start ${openBracket}https://www.google.com/${closeBracket}end`;
+    this.screen.setRange_(row, 9, 11, range);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    this.screen.expandSelectionForUrl(selection);
+    assert.equal('https://www.google.com/', selection.toString());
+  }
+
   document.body.removeChild(row);
 });

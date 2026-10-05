@@ -645,7 +645,9 @@ hterm.PreferenceManager.defaultPreferences = {
       'Automatic selection halting (to the left)',
       hterm.PreferenceManager.Categories.CopyPaste,
       // TODO(vapier): Switch \u back to ‘“‹« once builders are fixed.
-      '[^\\s[\\](){}<>"\'^!@#$%&*,;:`\u{2018}\u{201c}\u{2039}\u{ab}]', 'string',
+      '[^\\s[\\](){}<>"\'^!@#$%&*,;:`\u{2018}\u{201c}\u{2039}\u{ab}' +
+      '\u{300c}\u{300d}\u{300e}\u{300f}\u{3010}\u{3011}\u{ff08}\u{ff09}]',
+      'string',
       `Regular expression to halt matching to the left (start) of a ` +
       `selection.\n` +
       `\n` +
@@ -657,7 +659,8 @@ hterm.PreferenceManager.defaultPreferences = {
       'Automatic selection halting (to the right)',
       hterm.PreferenceManager.Categories.CopyPaste,
       // TODO(vapier): Switch \u back to ’”›» once builders are fixed.
-      '[^\\s[\\](){}<>"\'^!@#$%&*,;:~.`\u{2019}\u{201d}\u{203a}\u{bb}]',
+      '[^\\s[\\](){}<>"\'^!@#$%&*,;:~.`\u{2019}\u{201d}\u{203a}\u{bb}' +
+      '\u{300c}\u{300d}\u{300e}\u{300f}\u{3010}\u{3011}\u{ff08}\u{ff09}]',
       'string',
       `Regular expression to halt matching to the right (end) of a ` +
       `selection.\n` +
@@ -668,7 +671,9 @@ hterm.PreferenceManager.defaultPreferences = {
   'word-break-match-middle': hterm.PreferenceManager.definePref_(
       'Word break characters',
       hterm.PreferenceManager.Categories.CopyPaste,
-      '[^\\s[\\](){}<>"\'^]*', 'string',
+      '[^\\s[\\](){}<>"\'^\u{300c}\u{300d}\u{300e}\u{300f}\u{3010}\u{3011}' +
+      '\u{ff08}\u{ff09}]*',
+      'string',
       `Regular expression to match all the characters in the middle.\n` +
       `\n` +
       `Normally this is a character class to reject specific characters.\n` +

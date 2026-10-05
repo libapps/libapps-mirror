@@ -1021,3 +1021,41 @@ it('get-selection-text-widechar', function() {
 
   assert.equal('\u4E2D\u6587', this.terminal.getSelectionText());
 });
+
+/**
+ * Check opening URLs enclosed in Japanese/CJK brackets.
+ */
+it('open-selected-url-cjk-brackets', function() {
+  const oldOpenUrl = hterm.openUrl;
+  let openedUrl = null;
+  hterm.openUrl = (url) => {
+    openedUrl = url;
+  };
+
+  try {
+    const bracketPairs = [
+      ['\u{300c}', '\u{300d}'],
+      ['\u{300e}', '\u{300f}'],
+      ['\u{3010}', '\u{3011}'],
+      ['\u{ff08}', '\u{ff09}'],
+    ];
+    for (const [openBracket, closeBracket] of bracketPairs) {
+      openedUrl = null;
+      this.terminal.screen_.clearCursorRow();
+      this.terminal.setCursorPosition(0, 0);
+      this.terminal.interpret(
+          `start ${openBracket}https://www.google.com/${closeBracket}end`);
+      const row = this.terminal.getRowNode(0);
+      const selection = this.terminal.document_.getSelection();
+      const range = this.terminal.document_.createRange();
+      this.terminal.screen_.setRange_(row, 10, 10, range);
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      this.terminal.openSelectedUrl_();
+      assert.equal('https://www.google.com/', openedUrl);
+    }
+  } finally {
+    hterm.openUrl = oldOpenUrl;
+  }
+});
