@@ -1,3 +1,10 @@
+# 0.82, 2026-10-12, OpenSSH 10.6 upgrade.
+
+* ssh_client: openssh: Upgrade to 10.6.
+* sshfe: Implement WebAuthn support.
+* l10n: Update translations.
+* plugin: Update to 0.81.
+
 # 0.81, 2026-09-16, Fix ssh known_hosts corruption on update.
 
 * wassh-libc-sup: Move signal export to source file.
