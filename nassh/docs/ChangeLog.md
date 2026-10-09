@@ -1,5 +1,6 @@
 # 0.82, 2026-10-12, OpenSSH 10.6 upgrade.
 
+* command: Log an error if plugin loading failed.
 * ssh_client: openssh: Upgrade to 10.6.
 * sshfe: Implement WebAuthn support.
 * l10n: Update translations.

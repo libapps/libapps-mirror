@@ -1234,7 +1234,19 @@ CommandInstance.prototype.connectToFinalize_ = async function(params, options) {
   }
 
   this.sshPolicy_ = await fetchSshPolicy();
-  await this.initProgram_(argv);
+  try {
+    await this.initProgram_(argv);
+  } catch (e) {
+    this.io.println(localize('PLUGIN_LOADING_FAILED'));
+    if (e.stack) {
+      const lines = e.stack.split(/[\r\n]/);
+      lines.forEach((line) => this.io.println(line));
+    } else {
+      this.io.println(e);
+    }
+    this.exit(EXIT_INTERNAL_ERROR);
+    return;
+  }
   this.terminalWindow.addEventListener('beforeunload', this.onBeforeUnload_);
 
   this.io.println(localize('CONNECTING',
