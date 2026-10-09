@@ -30,7 +30,7 @@ hterm.initWindowType_ = async function() {
     const tab = await new Promise((resolve) => {
       chrome.tabs.getCurrent(resolve);
     });
-    if (tab && globalThis.chrome?.windows?.get) {
+    if (tab && tab.windowId >= 0 && globalThis.chrome?.windows?.get) {
       const win = await new Promise((resolve) => {
         chrome.windows.get(tab.windowId, null, resolve);
       });
