@@ -36,7 +36,7 @@ def load_proplist():
         if not line:
             continue
 
-        codepoint, prop = line.split(";")
+        codepoint, prop = [x.strip() for x in line.split(";")]
         if ".." in codepoint:
             first, last = codepoint.split("..")
         else:
@@ -100,7 +100,7 @@ def load_unicode_data():
         if not line:
             continue
 
-        eles = line.split(";")
+        eles = [x.strip() for x in line.split(";")]
         codepoint = eles[0]
         cat = eles[2]
 
@@ -129,13 +129,13 @@ def load_east_asian():
 
     data = Path("EastAsianWidth.txt").read_text(encoding="utf-8")
 
-    for line in data.splitlines():
+    for i, line in enumerate(data.splitlines(), start=1):
         line = line.split("#", 1)[0].strip()
         if not line:
             continue
 
-        codepoint, width = line.split(";")
-        assert width in db, f"Missing classification: {width}"
+        codepoint, width = [x.strip() for x in line.split(";")]
+        assert width in db, f"line {i}: Missing classification: {width}"
 
         if ".." in codepoint:
             first, last = codepoint.split("..")
@@ -379,7 +379,10 @@ def get_parser():
     parser.add_argument(
         "--version",
         default="latest",
-        help="The Unicode version to use (%(default)s)",
+        help=(
+            "The Unicode version to use, usually in X.Y.Z format "
+            "(default: %(default)s)"
+        ),
     )
     parser.add_argument("--js", type=Path, help="JavaScript file to update")
     parser.add_argument(
