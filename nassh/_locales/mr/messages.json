@@ -617,9 +617,6 @@
 	"hterm_pref_word_break_match_right": {
 		"message": "निवडीच्या उजवीकडील (शेवट) जुळणी थांबवण्यासाठी रेग्युलर एक्स्प्रेशन.\n\nसामान्यतः विशिष्ट वर्ण नाकारण्यासाठी हा एक वर्ण वर्ग आहे."
 	},
-	"hterm_space_character": {
-		"message": "मोकळी जागा"
-	},
 	"hterm_title_pref_appearance": {
 		"message": "स्वरूप (फाँट, रंग, इमेज)"
 	},

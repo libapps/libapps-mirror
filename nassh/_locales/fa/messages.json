@@ -750,7 +750,7 @@
 		"message": "خارج شدن"
 	},
 	"nasftp_cmd_exit_help": {
-		"message": "قطع اتصال"
+		"message": "قطع کردن اتصال"
 	},
 	"nasftp_cmd_get": {
 		"message": "دریافت"
@@ -1137,7 +1137,7 @@
 		"message": "اتصال «پوسته ایمن» جدید"
 	},
 	"terminal_home_set_up": {
-		"message": "راه‌اندازی"
+		"message": "تنظیم کردن"
 	},
 	"terminal_home_ssh_command": {
 		"message": "فرمان"

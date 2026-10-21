@@ -59,9 +59,6 @@
 	"disconnect_message": {
 		"message": "ፕሮግራሙ በሁኔታ ኮድ $1 ወጥቷል።"
 	},
-	"enter_keycap": {
-		"message": "[አስገባ]"
-	},
 	"faq_menu_label": {
 		"message": "ተደጋጋሚ ጥያቄዎች"
 	},

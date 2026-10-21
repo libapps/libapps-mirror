@@ -617,9 +617,6 @@
 	"hterm_pref_word_break_match_right": {
 		"message": "રેગ્યુલર એક્સપ્રેશન પસંદગીની જમણી બાજુ (અંત) સાથે મેળાવવાનું અટકાવે છે.\n\nસામાન્ય રીતે આ એક વિશિષ્ટ અક્ષરોને નકારતો અક્ષરનો પ્રકાર છે."
 	},
-	"hterm_space_character": {
-		"message": "સ્પેસ"
-	},
 	"hterm_title_pref_appearance": {
 		"message": "દેખાવ (ફોન્ટ, રંગ, છબીઓ)"
 	},

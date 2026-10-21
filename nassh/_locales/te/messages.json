@@ -17,9 +17,6 @@
 	"cancel_button_label": {
 		"message": "రద్దు చేయండి"
 	},
-	"changelog": {
-		"message": "మార్పు లాగ్"
-	},
 	"clear_known_hosts_menu_label": {
 		"message": "SSHకి తెలిసిన హోస్ట్‌లను క్లియర్ చేయండి"
 	},

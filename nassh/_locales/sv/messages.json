@@ -92,12 +92,6 @@
 	"field_terminal_profile_placeholder": {
 		"message": "standard"
 	},
-	"field_username_aria_label": {
-		"message": "användarnamn"
-	},
-	"field_username_placeholder": {
-		"message": "användarnamn"
-	},
 	"file_label": {
 		"message": "Fil"
 	},
@@ -1105,9 +1099,6 @@
 	},
 	"terminal_name_pref_color": {
 		"message": "Färg"
-	},
-	"terminal_name_pref_font": {
-		"message": "Teckensnitt"
 	},
 	"terminal_name_pref_image": {
 		"message": "Bild"

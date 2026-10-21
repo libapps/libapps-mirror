@@ -1124,9 +1124,6 @@
 	"terminal_preview_label": {
 		"message": "I-preview"
 	},
-	"terminal_profile_label": {
-		"message": "Kasalukuyang profile"
-	},
 	"terminal_profile_name_label": {
 		"message": "Pangalan sa profile"
 	},
