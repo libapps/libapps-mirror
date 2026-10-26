@@ -35,3 +35,16 @@ export function toBase64() {
 if (Uint8Array.prototype.toBase64 === undefined) {
   Uint8Array.prototype.toBase64 = toBase64;
 }
+
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sumPrecise
+ * @param {!Iterable<number>} numbers
+ * @return {number}
+ */
+export function sumPrecise(numbers) {
+  return [...numbers].reduce((a, b) => a + b, 0);
+}
+
+if (Math.sumPrecise === undefined) {
+  Math.sumPrecise = sumPrecise;
+}
