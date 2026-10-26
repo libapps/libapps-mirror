@@ -105,6 +105,7 @@ before(async function() {
  */
 function looksRandom(buf) {
   // Check all values are not zero.
+  // TODO: Convert to Math.sumPrecise.
   const sum = buf.reduce((a, b) => a + b);
   assert.notEqual(sum, 0);
 

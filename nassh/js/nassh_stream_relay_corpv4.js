@@ -545,9 +545,7 @@ export class RelayCorpv4WsStream extends Stream {
 
     if (this.ackTimesIndex_ === 0) {
       // Filled the circular buffer, compute average.
-      const ackTimeSum = this.ackTimes_.reduce(
-          (sum, ackTime) => sum + ackTime, 0);
-      const average = ackTimeSum / this.ackTimes_.length;
+      const average = Math.sumPrecise(this.ackTimes_) / this.ackTimes_.length;
 
       // TODO: Report observed average to relay.
       this.googMetricsReporter_.reportLatency(average);

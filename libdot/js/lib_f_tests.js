@@ -110,7 +110,7 @@ it('randomInt', () => {
     seen[ret] = 1;
   }
 
-  assert.equal((max - min + 1), seen.reduce((sum, value) => sum + value));
+  assert.equal((max - min + 1), Math.sumPrecise(seen));
 });
 
 /**

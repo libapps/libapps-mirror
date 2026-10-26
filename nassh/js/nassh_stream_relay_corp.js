@@ -446,11 +446,7 @@ export class RelayCorpWsStream extends RelayCorpStream {
 
     if (this.ackTimesIndex_ == 0) {
       // Filled the circular buffer; compute average.
-      let average = 0;
-      for (let i = 0; i < this.ackTimes_.length; ++i) {
-        average += this.ackTimes_[i];
-      }
-      average /= this.ackTimes_.length;
+      const average = Math.sumPrecise(this.ackTimes_) / this.ackTimes_.length;
 
       if (this.reportAckLatency_) {
         // Report observed average to relay.
