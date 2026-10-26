@@ -5,6 +5,7 @@
 
 """Update our pinned copy of node to match Chromium."""
 
+import difflib
 import logging
 import sys
 
@@ -79,13 +80,19 @@ def fetch_data(uri):
 def get_parser():
     """Get a command line parser."""
     parser = libdot.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "-n",
+        "--dry-run",
+        action="store_true",
+        help="Do not update any files.",
+    )
     return parser
 
 
 def main(argv):
     """The main func!"""
     parser = get_parser()
-    _opts = parser.parse_args(argv)
+    opts = parser.parse_args(argv)
 
     deps = fetch_deps(URI_VER)
     manifest_path = libdot.DIR / "fetch.json"
@@ -98,8 +105,21 @@ def main(argv):
 
     new_data = manifest.toJSON()
     if old_data != new_data:
-        logging.info("%s: saving updates", manifest_path)
-        manifest_path.write_text(new_data, encoding="utf-8")
+        if opts.dry_run:
+            diff = difflib.unified_diff(
+                old_data.splitlines(), new_data.splitlines(), n=3, lineterm=""
+            )
+            # Skip the --- & +++ lines.
+            next(diff)
+            next(diff)
+            logging.info(
+                "%s: (dry-run) skipping updates:\n%s",
+                manifest_path,
+                "\n".join(diff),
+            )
+        else:
+            logging.info("%s: saving updates", manifest_path)
+            manifest_path.write_text(new_data, encoding="utf-8")
     else:
         logging.info("%s: already up-to-date", manifest_path)
 
