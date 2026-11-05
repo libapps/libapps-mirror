@@ -6,8 +6,8 @@ third_party {
     type: HOMEPAGE
     value: "https://www.openssh.com/"
   }
-  version: "10.6p1"
-  last_upgrade_date { year: 2026 month: 10 day: 6 }
+  version: "10.6p2"
+  last_upgrade_date { year: 2026 month: 11 day: 5 }
 
   local_modifications:
       "See the patches in this directory for more details."

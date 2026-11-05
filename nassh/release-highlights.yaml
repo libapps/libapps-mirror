@@ -6,7 +6,7 @@
 # Only features added since then should be documented in this file.
 # When a new version has gone stable, update the version,
 # and delete all the old release notes below.
-last_version: "0.77"
+last_version: "0.82"
 
 # Only list significant changes that matter to the user.
 # The more lines that we have here, the more cluttered the output.
@@ -14,5 +14,4 @@ last_version: "0.77"
 # NB: To use escape sequences, quote the string and use \uXXXX syntax:
 #     - "\u001b]8;;https://example.com\u0007Example Link\u001b]8;;\u0007."
 notes:
-  - "\u001b]8;;https://www.openssh.com/txt/release-10.6\u0007OpenSSH upgraded to 10.6p1\u001b]8;;\u0007."
-  - "Direct Sockets enabled by default (--field-trial-direct-sockets)."
+  - "\u001b]8;;https://www.openssh.com/txt/release-10.6\u0007OpenSSH upgraded to 10.6p2\u001b]8;;\u0007."
