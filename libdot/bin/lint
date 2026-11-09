@@ -121,10 +121,19 @@ def lint_html_files(paths: list[Path]) -> bool:
     ret = True
 
     META_CHARSET_TAG = re.compile(r"""<meta charset=['"]utf-8['"] */>""")
+    URL = "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode"  # pylint: disable=line-too-long
 
     for path in paths:
         with open(path, mode="r", encoding="utf-8") as fp:
             data = fp.read()
+
+        if "<html>" in data and not data.startswith("<!doctype html>"):
+            ret = False
+            logging.error(
+                "%s: first line must be <!doctype html> for standards mode: %s",
+                path,
+                URL,
+            )
 
         if not META_CHARSET_TAG.search(data):
             ret = False
